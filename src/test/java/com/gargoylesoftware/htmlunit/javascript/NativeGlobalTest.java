@@ -35,7 +35,7 @@ public class NativeGlobalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "NaN", "Infinity" })
+    @Alerts({"undefined", "NaN", "Infinity"})
     public void assignConst() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -55,7 +55,7 @@ public class NativeGlobalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "undefined", "NaN", "Infinity" })
+    @Alerts({"true", "undefined", "NaN", "Infinity"})
     public void redeclareConst() throws Exception {
         final String html
             = "<html><body><script>\n"

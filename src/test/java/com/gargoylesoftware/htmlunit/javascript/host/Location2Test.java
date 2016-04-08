@@ -120,9 +120,9 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "", "about:blank", "blank", "", "about:", "" },
-            FF = { "", "about:blank", "", "", "about:", "" },
-            IE = { "", "about:blank", "/blank", "", "about:", "" })
+    @Alerts(CHROME = {"", "about:blank", "blank", "", "about:", ""},
+            FF = { "", "about:blank", "", "", "about:", ""},
+            IE = {"", "about:blank", "/blank", "", "about:", ""})
     public void about_blank_attributes() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -144,12 +144,12 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" },
+    @Alerts(DEFAULT = {"#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"},
             FF38 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#% ^[]|\"<>{}\\" },
+                    "#% ^[]|\"<>{}\\"},
             FF45 = { "#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
+                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"})
     public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
@@ -174,8 +174,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
-            FF38 = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
+    @Alerts(DEFAULT = {"#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"},
+            FF38 = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"})
     @NotYetImplemented(FF45)
     public void hashEncoding2() throws Exception {
         final String html = "<html><body><script>\n"
@@ -191,9 +191,9 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "#üöä", "§§URL§§#üöä" },
-            FF38 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
-            FF45 = { "#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
+    @Alerts(DEFAULT = {"#üöä", "§§URL§§#üöä"},
+            FF38 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4"},
+            FF45 = { "#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4"})
     public void hashEncoding3() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'üöä';\n"
@@ -250,7 +250,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "#hello", "#hi" })
+    @Alerts({"#hello", "#hi"})
     public void setHash2() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -541,7 +541,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2", "3" })
+    @Alerts({"1", "2", "3"})
     public void href_postponed() throws Exception {
         final String firstHtml =
             "<html><head><script>\n"
@@ -566,8 +566,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
-            CHROME = {"", "foo2.html" })
+    @Alerts(DEFAULT = {"", "foo3.html", "foo2.html"},
+            CHROME = {"", "foo2.html"})
     public void onlick_set_location_WithHref() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -587,7 +587,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "foo3.html" })
+    @Alerts({"", "foo3.html"})
     public void onlick_set_location_WithoutHref() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -607,8 +607,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
-            IE = { "supported", "onhashchange undefined  undefined" })
+    @Alerts(DEFAULT = {"supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/"},
+            IE = {"supported", "onhashchange undefined  undefined"})
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"
@@ -656,8 +656,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "supported", "onhashchange §§URL§§#1  §§URL§§" },
-            IE = { "supported", "onhashchange undefined  undefined" })
+    @Alerts(DEFAULT = {"supported", "onhashchange §§URL§§#1  §§URL§§"},
+            IE = {"supported", "onhashchange undefined  undefined"})
     public void onHashChangeJS() throws Exception {
         final String html =
             "<html><head>\n"

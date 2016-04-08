@@ -65,9 +65,9 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "", "true", "true", "" },
-            FF = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
-            CHROME = { "[object BeforeUnloadEvent]", "beforeunload", "false", "true", "" },
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "", "true", "true", ""},
+            FF = { "[object BeforeUnloadEvent]", "", "false", "false", ""},
+            CHROME = {"[object BeforeUnloadEvent]", "beforeunload", "false", "true", ""},
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -89,7 +89,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "beforeunload", "true", "false", "" },
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", ""},
             IE = "exception")
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -112,7 +112,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "beforeunload", "true", "false", "" },
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", ""},
             IE = "exception")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -136,8 +136,8 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "beforeunload", "true", "false", "undefined" },
-            CHROME = { "[object Event]", "beforeunload", "true", "false", "true" })
+    @Alerts(DEFAULT = {"[object Event]", "beforeunload", "true", "false", "undefined"},
+            CHROME = {"[object Event]", "beforeunload", "true", "false", "true"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

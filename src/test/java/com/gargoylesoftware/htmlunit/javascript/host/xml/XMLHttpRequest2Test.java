@@ -188,8 +188,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
-            IE = { "1", "exception", "exception", "pass", "pass" })
+    @Alerts(DEFAULT = {"5", "pass", "pass", "pass", "pass"},
+            IE = {"1", "exception", "exception", "pass", "pass"})
     @NotYetImplemented(IE)
     // real IE11 invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
@@ -221,7 +221,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" })
+    @Alerts({"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1"})
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
         testResponseXML("text/xml");
@@ -394,7 +394,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "in timeout", "hello" })
+    @Alerts({"in timeout", "hello"})
     @NotYetImplemented
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
@@ -420,7 +420,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "hello", "in timeout" })
+    @Alerts({"hello", "in timeout"})
     @BuggyWebDriver(IE)
     // IEDriver catches "in timeout", "hello" but real IE11 gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
@@ -610,7 +610,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({ "ok", "4" })
+    @Alerts({"ok", "4"})
     public void sameOriginCorsSimple() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

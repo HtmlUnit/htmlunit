@@ -46,8 +46,8 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
-                   "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" })
+            IE = {"myTarget,myData,7", "myTarget,myData", "abcdefghij",
+                   "<?myTarget myData?>", "<![CDATA[abcdefghij]]>"})
     public void createProcessingInstruction() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -122,7 +122,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "a", "null", "b" })
+            IE = {"a", "null", "b"})
     public void documentElementCaching() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -166,7 +166,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "content", "content" })
+            IE = {"content", "content"})
     public void text() throws Exception {
         final String html = ""
             + "  function test() {\n"

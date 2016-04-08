@@ -76,7 +76,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "5", "exception" })
+    @Alerts({"5", "exception"})
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -98,9 +98,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "string 0", "string item", "string length", "string namedItem" },
-            CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
-            IE = { "string item", "string length", "string myForm", "string namedItem" })
+    @Alerts(DEFAULT = {"string 0", "string item", "string length", "string namedItem"},
+            CHROME = {"string 0", "string item", "string length", "string myForm", "string namedItem"},
+            IE = {"string item", "string length", "string myForm", "string namedItem"})
     @NotYetImplemented({ IE })
     public void for_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -126,15 +126,15 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-            "string item", "string length", "string namedItem" },
-            CHROME = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+    @Alerts(DEFAULT = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+            "string item", "string length", "string namedItem"},
+            CHROME = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                  "string action", "string first_submit", "string id1", "string input_disabled",
                  "string item", "string length", "string namedItem", "string second_submit",
-                 "string val1", "string val2" },
-            IE = { "string 1", "string action", "string first_submit", "string item",
+                 "string val1", "string val2"},
+            IE = {"string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
-                "string val2" })
+                "string val2"})
     @NotYetImplemented({ IE })
     public void for_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -169,8 +169,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false" },
-            IE = {"true", "true" })
+    @Alerts(DEFAULT = {"false", "false"},
+            IE = {"true", "true"})
     public void tags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -189,8 +189,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
-            IE = { "null", "null", "undefined", "undefined" })
+    @Alerts(DEFAULT = {"null", "null", "undefined", "exception"},
+            IE = {"null", "null", "undefined", "undefined"})
     public void outOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -212,7 +212,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "undefined", "undefined" })
+    @Alerts({"undefined", "undefined", "undefined"})
     public void inexistentProperties() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -230,7 +230,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "#text", "5" })
+    @Alerts({"3", "#text", "5"})
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -271,7 +271,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLHeadingElement]", "undefined" })
+    @Alerts({"[object HTMLHeadingElement]", "undefined"})
     public void getElementWithDollarSign() throws Exception {
         final String html
             = "<h3 id='$h'>h</h3><script>\n"
@@ -286,7 +286,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function", "function", "function", "function" })
+    @Alerts({"function", "function", "function", "function"})
     public void array_prototype() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -307,7 +307,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function", "function", "function", "function" })
+    @Alerts({"function", "function", "function", "function"})
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"

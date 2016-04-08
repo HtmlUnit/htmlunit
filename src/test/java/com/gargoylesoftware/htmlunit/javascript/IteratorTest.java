@@ -34,7 +34,7 @@ public class IteratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Iterator not available",
-            FF = { "first,1", "second,2" })
+            FF = { "first,1", "second,2"})
     public void simple() throws Exception {
         final String html
             = "<html>\n"

@@ -209,8 +209,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<foo/>", "<foo/>" },
-            IE = { "<foo />", "<foo />" })
+    @Alerts(DEFAULT = {"<foo/>", "<foo/>"},
+            IE = {"<foo />", "<foo />"})
     public void document() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -229,8 +229,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" },
-            IE = { "<img />", "", "<?myTarget myData?>" })
+    @Alerts(DEFAULT = {"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"},
+            IE = {"<img />", "", "<?myTarget myData?>"})
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -304,14 +304,14 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
+    @Alerts({"<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />" })
+                    "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void noClosingTag() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -369,16 +369,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
+    @Alerts(DEFAULT = {"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>" },
-            IE = { "<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"},
+            IE = {"<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />" })
+                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void otherTags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

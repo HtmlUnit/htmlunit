@@ -52,7 +52,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "hi", "%28%29" })
+    @Alerts({"hi", "%28%29"})
     public void href_js_escaping() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -75,7 +75,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "(*%a", "%28%A" })
+    @Alerts({"(*%a", "%28%A"})
     public void href_js_escaping2() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -366,7 +366,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "My Link", "", "abcd" })
+    @Alerts({"My Link", "", "abcd"})
     public void getText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -389,7 +389,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" })
+    @Alerts({"My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0"})
     public void setText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -491,7 +491,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "#anchor", "#!bang" })
+    @Alerts({"", "#anchor", "#!bang"})
     public void dontReloadHashBang() throws Exception {
         final String html
             = "<html>\n"
@@ -530,7 +530,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "#!board/WebDev", "#!article/WebDev/35", "#!article/WebDev/35" })
+    @Alerts({"#!board/WebDev", "#!article/WebDev/35", "#!article/WebDev/35"})
     public void dontReloadHashBang2() throws Exception {
         final String html
             = "<html>\n"
@@ -597,8 +597,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "§§URL§§bug.html?h%F6=G%FCnter", "h\ufffd", "G\ufffdnter" },
-            IE = { "§§URL§§bug.html?h\u00F6=G\u00FCnter", "h\ufffd", "G\ufffdnter" })
+    @Alerts(DEFAULT = {"§§URL§§bug.html?h%F6=G%FCnter", "h\ufffd", "G\ufffdnter"},
+            IE = {"§§URL§§bug.html?h\u00F6=G\u00FCnter", "h\ufffd", "G\ufffdnter"})
     public void encoding() throws Exception {
         final String html =
             "<html>\n"

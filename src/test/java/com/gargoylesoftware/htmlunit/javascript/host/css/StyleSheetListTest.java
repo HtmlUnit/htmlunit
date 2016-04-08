@@ -67,7 +67,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "rgb(255, 0, 0)", "rgb(255, 0, 0)" })
+    @Alerts({"rgb(255, 0, 0)", "rgb(255, 0, 0)"})
     public void getComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"
@@ -100,8 +100,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "undefined", "undefined", "undefined" },
-            IE = { "0", "undefined", "undefined", "undefined" })
+    @Alerts(DEFAULT = {"0", "undefined", "undefined", "undefined"},
+            IE = {"0", "undefined", "undefined", "undefined"})
     public void arrayIndexOutOfBoundAccess() throws Exception {
         final String html =
               "<html>\n"
@@ -145,7 +145,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" })
+    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]"})
     public void nonExistentStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -171,7 +171,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" })
+    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]"})
     public void emptyGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -204,7 +204,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" })
+    @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]"})
     public void brokenGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -235,8 +235,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2" },
-            CHROME = { "1", "1" })
+    @Alerts(DEFAULT = {"1", "2"},
+            CHROME = {"1", "1"})
     @NotYetImplemented(CHROME)
     public void dynamicAddedStyleSheet() throws Exception {
         final String html =

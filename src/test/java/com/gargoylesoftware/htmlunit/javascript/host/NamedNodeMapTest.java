@@ -44,9 +44,9 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented({ FF, IE })
-    @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f" },
-            CHROME = { "name=f", "id=f", "foo=bar", "baz=blah" },
-            IE = { "name=f", "id=f", "baz=blah", "foo=bar" })
+    @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f"},
+            CHROME = {"name=f", "id=f", "foo=bar", "baz=blah"},
+            IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
     public void attributes() throws Exception {
         final String html =
               "<html>\n"
@@ -76,7 +76,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "name", "f", "name", "f", "name", "f", "name", "f", "null" })
+    @Alerts({"name", "f", "name", "f", "name", "f", "name", "f", "null"})
     public void getNamedItem_HTML() throws Exception {
         final String html =
               "<html>\n"
@@ -115,8 +115,8 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" },
-            FF45 = { "myattr", "myattr2", "myattr", "myattr2", "myattr2" })
+    @Alerts(DEFAULT = {"myAttr", "myattr2", "myAttr", "myattr2", "myattr2"},
+            FF45 = { "myattr", "myattr2", "myattr", "myattr2", "myattr2"})
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -154,7 +154,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "name", "y", "name", "y", "null", "undefined", "null" })
+    @Alerts({"name", "y", "name", "y", "null", "undefined", "null"})
     public void getNamedItem_XML() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -232,7 +232,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "true", "[object Attr]", "true", "[object Attr]" })
+    @Alerts({"true", "[object Attr]", "true", "[object Attr]"})
     public void has() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html ng-app><body>\n"
             + "<script>\n"
@@ -251,7 +251,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "div1", "" })
+    @Alerts({"div1", ""})
     public void removeNamedItem() throws Exception {
         final String html =
               "<html>\n"
@@ -273,7 +273,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "undefined", "undefined" })
+    @Alerts({"undefined", "undefined", "undefined"})
     public void unspecifiedAttributes() throws Exception {
         final String html =
               "<html>\n"

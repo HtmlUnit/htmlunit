@@ -37,7 +37,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "768", "768" })
+    @Alerts({"768", "768"})
     public void availHeight() throws Exception {
         testNumericProperty("availHeight");
     }
@@ -46,8 +46,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE = { "undefined", "1234" })
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = {"undefined", "1234"})
     public void availLeft() throws Exception {
         testNumericProperty("availLeft");
     }
@@ -56,8 +56,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE = { "undefined", "1234" })
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = {"undefined", "1234"})
     public void availTop() throws Exception {
         testNumericProperty("availTop");
     }
@@ -66,7 +66,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "1024", "1024" })
+    @Alerts({"1024", "1024"})
     public void availWidth() throws Exception {
         testNumericProperty("availWidth");
     }
@@ -75,8 +75,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "0", "0" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"0", "0"})
     public void bufferDepth() throws Exception {
         testNumericProperty("bufferDepth");
     }
@@ -85,7 +85,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "24", "24" })
+    @Alerts({"24", "24"})
     public void colorDepth() throws Exception {
         testNumericProperty("colorDepth");
     }
@@ -94,8 +94,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void deviceXDPI() throws Exception {
         testNumericProperty("deviceXDPI");
     }
@@ -104,8 +104,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void deviceYDPI() throws Exception {
         testNumericProperty("deviceYDPI");
     }
@@ -114,8 +114,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "false" },
-            IE = { "true", "true" })
+    @Alerts(DEFAULT = {"undefined", "false"},
+            IE = {"true", "true"})
     public void fontSmoothingEnabled() throws Exception {
         testBooleanProperty("fontSmoothingEnabled");
     }
@@ -124,7 +124,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "768", "768" })
+    @Alerts({"768", "768"})
     public void height() throws Exception {
         testNumericProperty("height");
     }
@@ -133,8 +133,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            FF = { "0", "0" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            FF = { "0", "0"})
     public void left() throws Exception {
         testNumericProperty("left");
     }
@@ -143,8 +143,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            FF = { "0", "0" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            FF = { "0", "0"})
     public void top() throws Exception {
         testNumericProperty("top");
     }
@@ -153,8 +153,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void logicalXDPI() throws Exception {
         testNumericProperty("logicalXDPI");
     }
@@ -163,8 +163,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void logicalYDPI() throws Exception {
         testNumericProperty("logicalYDPI");
     }
@@ -173,7 +173,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "24", "24" })
+    @Alerts({"24", "24"})
     public void pixelDepth() throws Exception {
         testNumericProperty("pixelDepth");
     }
@@ -182,8 +182,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void systemXDPI() throws Exception {
         testNumericProperty("systemXDPI");
     }
@@ -192,8 +192,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void systemYDPI() throws Exception {
         testNumericProperty("systemYDPI");
     }
@@ -202,7 +202,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "undefined", "1234" })
+    @Alerts({"undefined", "1234"})
     public void updateInterval() throws Exception {
         testNumericProperty("updateInterval");
     }
@@ -211,7 +211,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "1024", "1024" })
+    @Alerts({"1024", "1024"})
     public void width() throws Exception {
         testNumericProperty("width");
     }

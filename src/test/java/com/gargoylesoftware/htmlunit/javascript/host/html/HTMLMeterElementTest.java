@@ -50,7 +50,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "number200", "number500", "number200", "number500", "number350", "number350" },
+    @Alerts(DEFAULT = {"number200", "number500", "number200", "number500", "number350", "number350"},
             IE = { })
     public void properties() throws Exception {
         final String html = "<html><body>\n"
@@ -73,8 +73,8 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            CHROME = { "0", "2", "1", "2", "1", "1" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            CHROME = {"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"

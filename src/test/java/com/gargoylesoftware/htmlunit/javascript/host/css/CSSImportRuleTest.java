@@ -40,11 +40,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
-                "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
-            IE = { "[object CSSImportRule]", "§§URL§§second/",
-                "all", "0", "[object CSSStyleSheet]" })
+    @Alerts(DEFAULT = {"[object CSSImportRule]", "§§URL§§second/",
+                "[object MediaList]", "0", "[object CSSStyleSheet]"},
+            FF = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]"},
+            IE = {"[object CSSImportRule]", "§§URL§§second/",
+                "all", "0", "[object CSSStyleSheet]"})
     public void getImportFromCssRulesCollection_absolute() throws Exception {
         getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
     }
@@ -54,10 +54,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object CSSImportRule]", "foo.css",
-                "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
-            IE = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" })
+    @Alerts(DEFAULT = {"[object CSSImportRule]", "foo.css",
+                "[object MediaList]", "0", "[object CSSStyleSheet]"},
+            FF = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]"},
+            IE = {"[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]"})
     public void getImportFromCssRulesCollection_relative() throws Exception {
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
         final URL urlCss = new URL(URL_FIRST, "/dir1/dir2/foo.css");
@@ -174,7 +174,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void circularImportedStylesheetsComplexCase() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();

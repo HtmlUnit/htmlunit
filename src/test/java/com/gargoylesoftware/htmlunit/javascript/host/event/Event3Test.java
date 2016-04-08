@@ -145,7 +145,7 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented // TODO: in IE no click event can be registered for the window
-    @Alerts({ "span bubbling", "div", "div bubbling" })
+    @Alerts({"span bubbling", "div", "div bubbling"})
     public void testIE_EventBubbling() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -40,7 +40,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
         final String html
             = "<html><body><button id='a1'>a1</button><button id='a2' accesskey='A'>a2</button><script>\n"
@@ -68,7 +68,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "submit", "button", "submit" })
+    @Alerts({"submit", "button", "submit"})
     public void type() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -90,7 +90,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "submit", "submit", "submit", "submit", "reset", "button", "submit" })
+    @Alerts({"submit", "submit", "submit", "submit", "reset", "button", "submit"})
     public void getType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -126,8 +126,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id" },
-            IE = { "myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null" })
+    @Alerts(DEFAULT = {"myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id"},
+            IE = {"myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null"})
     @NotYetImplemented({ FF, CHROME })
     public void getForm() throws Exception {
         final String html = "<html>\n"
@@ -179,7 +179,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "test", "4", "42", "2", "[object HTMLButtonElement]", "26" })
+    @Alerts({"test", "4", "42", "2", "[object HTMLButtonElement]", "26"})
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"
@@ -216,7 +216,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "4", "null", "4" })
+    @Alerts({"null", "4", "null", "4"})
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
@@ -248,8 +248,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            CHROME = { "0", "2", "1", "2", "1", "1" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            CHROME = {"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"

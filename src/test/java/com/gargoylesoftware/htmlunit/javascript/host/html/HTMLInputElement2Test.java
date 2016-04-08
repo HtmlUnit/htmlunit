@@ -41,7 +41,7 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "hello", "me te" })
+    @Alerts({"hello", "me te"})
     public void selectionRange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

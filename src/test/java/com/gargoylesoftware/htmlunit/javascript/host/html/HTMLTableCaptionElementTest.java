@@ -38,8 +38,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "bottom", "top", "wrong", "" },
-            IE = { "left", "right", "bottom", "top", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "bottom", "top", "wrong", ""},
+            IE = {"left", "right", "bottom", "top", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -66,8 +66,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "top" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "top" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "top"},
+            IE = {"center", "error", "center", "error", "center", "left", "right", "bottom", "top"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
@@ -103,8 +103,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "middle", "8", "BOTtom" },
-            IE = { "top", "", "", "error", "error", "top", "", "bottom" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "middle", "8", "BOTtom"},
+            IE = {"top", "", "", "error", "error", "top", "", "bottom"})
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"

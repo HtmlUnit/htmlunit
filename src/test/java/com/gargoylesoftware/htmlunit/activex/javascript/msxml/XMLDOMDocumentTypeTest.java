@@ -172,7 +172,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "null", "exception-setNull", "exception-setEmpty", "exception-set" })
+            IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(doctype.nodeValue);\n"
@@ -247,7 +247,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-set", "exception-setEmpty", "exception-setNull" })
+            IE = {"exception-set", "exception-setEmpty", "exception-setNull"})
     public void text_set() throws Exception {
         final String test =
             // normal

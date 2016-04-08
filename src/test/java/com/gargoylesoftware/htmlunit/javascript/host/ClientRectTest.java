@@ -33,7 +33,7 @@ public class ClientRectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "100", "400", "100", "450", "50", "0" })
+    @Alerts({"100", "400", "100", "450", "50", "0"})
     public void properties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -59,7 +59,7 @@ public class ClientRectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void getBoundingClientRect_WidthPercent() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

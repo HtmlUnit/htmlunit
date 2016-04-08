@@ -48,7 +48,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "undefined" })
+    @Alerts({"undefined", "undefined"})
     public void scopeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -67,7 +67,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "undefined", "undefined", "http://www.meh.com/meh" })
+    @Alerts({"undefined", "undefined", "undefined", "http://www.meh.com/meh"})
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
@@ -95,7 +95,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "number", "number", "number", "number", "number", "number", "number", "number" })
+    @Alerts({"number", "number", "number", "number", "number", "number", "number", "number"})
     public void offsets() throws Exception {
         final String html = "<html>\n"
               + "<head>\n"
@@ -156,7 +156,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "15", "15" })
+    @Alerts({"15", "15"})
     public void offsetTopAndLeft_Padding() throws Exception {
         final String html =
               "<html>\n"
@@ -184,7 +184,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "13", "28" })
+    @Alerts({"13", "28"})
     public void offsetTopAndLeft_Margins() throws Exception {
         final String html =
               "<html>\n"
@@ -212,9 +212,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "12", "12" },
-            CHROME = { "15", "15" },
-            IE = { "15", "15" })
+    @Alerts(DEFAULT = {"12", "12"},
+            CHROME = {"15", "15"},
+            IE = {"15", "15"})
     @NotYetImplemented({ CHROME, IE })
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
@@ -243,7 +243,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void offsetTopAndLeft_Nothing() throws Exception {
         final String html =
               "<html>\n"
@@ -271,7 +271,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "50", "50" })
+    @Alerts({"50", "50"})
     public void offsetTopAndLeft_AbsolutelyPositioned() throws Exception {
         final String html =
               "<html>\n"
@@ -299,10 +299,10 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
+    @Alerts({"1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
                 "5 fixed_length 50", "6 fixed_inherit 10", "7 relative_auto 0", "8 relative_length 50",
                 "9 relative_inherit 10", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10" })
+                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10"})
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"
@@ -349,7 +349,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "40", "10" })
+    @Alerts({"40", "10"})
     public void offsetTopAndLeft_parentAbsolute() throws Exception {
         final String html =
               "<html>\n"
@@ -378,11 +378,11 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999" },
-            IE = { "true", "true", "2.0555555555555553", "3.0555555555555553",
+    @Alerts(DEFAULT = {"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"},
+            IE = {"true", "true", "2.0555555555555553", "3.0555555555555553",
                     "4.111111111111111", "5.111111111111111", "6.111111111111111",
                     "7.166666666666667", "8.166666666666666", "9.222222222222221",
-                    "101.22222222222223", "203.44444444444446", "6132.333333333333" })
+                    "101.22222222222223", "203.44444444444446", "6132.333333333333"})
     @NotYetImplemented(IE)
     public void offsetTopWithPreviousSiblings() throws Exception {
         String html =
@@ -425,7 +425,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "8", "8" })
+    @Alerts({"8", "8"})
     public void offsetTopAndLeftWhenParentIsBody() throws Exception {
         final String html
             = "<html>\n"
@@ -441,7 +441,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "23", "19" })
+    @Alerts({"23", "19"})
     public void offsetTopAndLeftWithRelativePosition() throws Exception {
         final String html
             = "<html><body onload='test()'><script language='javascript'>\n"
@@ -468,7 +468,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "30px", "46", "55px", "71", "71", "0", "0", "0", "0" })
+    @Alerts({"30px", "46", "55px", "71", "71", "0", "0", "0", "0"})
     public void offsetWidthAndHeight() throws Exception {
         final String html =
               "<html><head>\n"
@@ -507,7 +507,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void offsetWidthAndHeight_displayNoneAndChildren() throws Exception {
         final String html
             = "<html><body>\n"
@@ -523,8 +523,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "18" },
-            FF = { "0", "20" })
+    @Alerts(DEFAULT = {"0", "18"},
+            FF = { "0", "20"})
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -540,8 +540,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "75", "2", "5", "20", "50", "50", "18" },
-            FF = { "77", "2", "5", "20", "50", "50", "20" })
+    @Alerts(DEFAULT = {"75", "2", "5", "20", "50", "50", "18"},
+            FF = { "77", "2", "5", "20", "50", "50", "20"})
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
@@ -563,7 +563,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void offsetWidth_calculatedBasedOnPage() throws Exception {
         final String html
             = "<html><body>\n"
@@ -609,7 +609,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "0.5", "true" })
+    @Alerts({"1", "0.5", "true"})
     public void offsetWidth_cssFloat_rightOrLeft() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='withoutFloat1'>hello</div><div>hellohello</div>\n"
@@ -631,7 +631,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "something", "0" })
+    @Alerts({"something", "0"})
     public void textContent_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -659,7 +659,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "something", "0" })
+    @Alerts({"something", "0"})
     public void textContent_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -687,9 +687,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "null" },
-            CHROME = { "something", "0" },
-            FF38 = { "something", "innerText not supported" })
+    @Alerts(DEFAULT = {"something", "null"},
+            CHROME = {"something", "0"},
+            FF38 = { "something", "innerText not supported"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -721,8 +721,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            FF38 = { "something", "innerText not supported" })
+    @Alerts(DEFAULT = {"something", "0"},
+            FF38 = { "something", "innerText not supported"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -755,7 +755,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "input handler", "blur input" })
+    @Alerts({"input handler", "blur input"})
     public void eventHandlerBubble_blur() throws Exception {
         events("blur");
     }
@@ -765,7 +765,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "input handler", "focus input" })
+    @Alerts({"input handler", "focus input"})
     public void eventHandlerBubble_focus() throws Exception {
         events("focus");
     }
@@ -774,7 +774,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "input handler", "click input", "div handler", "click div" })
+    @Alerts({"input handler", "click input", "div handler", "click div"})
     public void eventHandlerBubble_click() throws Exception {
         events("click");
     }
@@ -814,7 +814,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeUnknown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -834,7 +834,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeUnknown2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -854,7 +854,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeClass() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -874,7 +874,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeClass2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -894,7 +894,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "center", "true", "center", "false" })
+    @Alerts({"true", "center", "true", "center", "false"})
     public void removeAttributeNode() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -920,7 +920,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "div1" })
+    @Alerts({"3", "div1"})
     public void querySelectorAll() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -952,7 +952,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "p1" })
+    @Alerts({"1", "p1"})
     public void querySelectorAllOnDisconnectedElement() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -1051,9 +1051,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Old = <b>Old innerHTML</b><!-- old comment -->",
+    @Alerts({"Old = <b>Old innerHTML</b><!-- old comment -->",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" })
+                "I"})
     public void getSetInnerHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1088,9 +1088,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Old = <b id=\"innerNode\">Old outerHTML</b>",
+    @Alerts({"Old = <b id=\"innerNode\">Old outerHTML</b>",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" })
+                "I"})
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1125,7 +1125,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "true" })
+    @Alerts({"false", "true"})
     public void dispatchEvent2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1191,7 +1191,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "clicked", "fireEvent not available" })
+    @Alerts({"clicked", "fireEvent not available"})
     public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
             "<html>\n"
@@ -1224,7 +1224,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "click", "fireEvent not available", "fireEvent not available" })
+    @Alerts({"click", "fireEvent not available", "fireEvent not available"})
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
             "<html>\n"
@@ -1288,8 +1288,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "body1", "setActive not available" },
-            IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2" })
+    @Alerts(DEFAULT = {"body1", "setActive not available"},
+            IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2"})
     @BuggyWebDriver(IE)
     @NotYetImplemented(IE)
     public void setActiveAndFocus() throws Exception {

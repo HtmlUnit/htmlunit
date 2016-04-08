@@ -86,8 +86,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "4", "function", "3" },
-            IE = { "4", "undefined", "exception" })
+    @Alerts(DEFAULT = {"4", "function", "3"},
+            IE = {"4", "undefined", "exception"})
     public void remove() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='div1'></div>\n"
@@ -110,7 +110,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void removeChild() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -157,7 +157,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void replaceChild_Normal() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -203,7 +203,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "2", "SPAN", "2", "#text", "H1", "H2" })
+    @Alerts({"2", "SPAN", "2", "#text", "H1", "H2"})
     public void getChildNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -230,7 +230,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "nb nodes: 2", "8", "1" })
+    @Alerts({"nb nodes: 2", "8", "1"})
     public void childNodes_Comments() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head>\n"
@@ -248,9 +248,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "length: 5",
+    @Alerts({"length: 5",
         "tempNode.name: undefined", "tempNode.name: input1", "tempNode.name: undefined",
-        "tempNode.name: input2", "tempNode.name: undefined" })
+        "tempNode.name: input2", "tempNode.name: undefined"})
     public void getChildNodesProperties() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -280,7 +280,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "document: 9", "document.body: 1", "body child 1: 3", "body child 2: 8" })
+    @Alerts({"document: 9", "document.body: 1", "body child 1: 3", "body child 2: 8"})
     public void nodeType() throws Exception {
         final String html = "<html><head><title>test</title>\n"
                 + "<script>\n"
@@ -331,8 +331,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-            FF = { "isSameNode not supported" })
+    @Alerts(DEFAULT = {"true", "false"},
+            FF = { "isSameNode not supported"})
     public void isSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -359,7 +359,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null"})
     public void appendChild_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -383,7 +383,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "exception", "1", "exception", "1", "exception", "1" })
+    @Alerts({"1", "exception", "1", "exception", "1", "exception", "1"})
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -432,7 +432,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "3", "3", "3", "3", "3", "3" })
+    @Alerts({"3", "3", "3", "3", "3", "3", "3", "3"})
     public void nodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -463,8 +463,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" })
+    @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>"})
     public void replaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -492,8 +492,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div id=\"myDiv3\"></div>" })
+    @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div id=\"myDiv3\"></div>"})
     public void replaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -560,7 +560,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "2", "4", "8", "16", "32" })
+    @Alerts({"1", "1", "2", "4", "8", "16", "32"})
     public void documentPositionConstants() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -586,7 +586,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
+    @Alerts({"0", "20", "20", "4", "10", "10", "2", "20", "exception"})
     public void compareDocumentPosition() throws Exception {
         final String html
             = "<html><head>\n"
@@ -627,7 +627,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "16" })
+    @Alerts({"0", "16"})
     public void compareDocumentPosition2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -689,7 +689,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "SPAN" })
+    @Alerts({"3", "SPAN"})
     public void insertBefore_nullRef() throws Exception {
         insertBefore("aNode.insertBefore(newNode, null);");
     }
@@ -740,7 +740,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "3", "SPAN" })
+            IE = {"3", "SPAN"})
     public void insertBefore_noSecondArg() throws Exception {
         insertBefore("aNode.insertBefore(newNode);");
     }
@@ -781,7 +781,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "SPAN" })
+    @Alerts({"3", "SPAN"})
     public void insertBeforeFragment_nullRef() throws Exception {
         insertBeforeFragment("aNode.insertBefore(fragment, null);");
     }
@@ -811,7 +811,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "3", "SPAN" })
+            IE = {"3", "SPAN"})
     public void insertBeforeFragment_noSecondArg() throws Exception {
         insertBeforeFragment("aNode.insertBefore(fragment);");
     }
@@ -853,7 +853,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null"})
     public void insertBefore_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -920,8 +920,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" },
-            IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" })
+    @Alerts(DEFAULT = {"4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true"},
+            IE = {"4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false"})
     public void normalize() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -958,8 +958,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Element]", "[object HTMLHtmlElement]" },
-            IE = { "undefined", "[object HTMLHtmlElement]" })
+    @Alerts(DEFAULT = {"[object Element]", "[object HTMLHtmlElement]"},
+            IE = {"undefined", "[object HTMLHtmlElement]"})
     public void parentElement() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -980,9 +980,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "hi", "null", "abcd", "null" },
-            CHROME = { "hi", "undefined", "abcd", "undefined" },
-            FF = { "hi", "undefined", "abcd", "undefined" })
+    @Alerts(DEFAULT = {"hi", "null", "abcd", "null"},
+            CHROME = {"hi", "undefined", "abcd", "undefined"},
+            FF = { "hi", "undefined", "abcd", "undefined"})
     public void attributes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1009,7 +1009,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"

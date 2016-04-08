@@ -36,7 +36,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "exception", "0" })
+    @Alerts({"exception", "0"})
     public void appendChild_recursive() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
@@ -60,7 +60,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "true", "exception", "1", "0" })
+    @Alerts({"true", "exception", "1", "0"})
     public void appendChild_recursive_parent() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"

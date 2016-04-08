@@ -33,8 +33,8 @@ public class ClientRectListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object ClientRectList]", "1", "[object ClientRect]", "[object ClientRect]" },
-            FF = { "[object DOMRect]", "1", "[object DOMRect]", "[object DOMRect]" })
+    @Alerts(DEFAULT = {"[object ClientRectList]", "1", "[object ClientRect]", "[object ClientRect]"},
+            FF = { "[object DOMRect]", "1", "[object DOMRect]", "[object DOMRect]"})
     public void getClientRects() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
@@ -57,8 +57,8 @@ public class ClientRectListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE = { "exception", "exception" })
+    @Alerts(DEFAULT = {"null", "null"},
+            IE = {"exception", "exception"})
     public void itemOutside() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
@@ -84,7 +84,7 @@ public class ClientRectListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "undefined" })
+    @Alerts({"undefined", "undefined"})
     public void indexOutside() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"

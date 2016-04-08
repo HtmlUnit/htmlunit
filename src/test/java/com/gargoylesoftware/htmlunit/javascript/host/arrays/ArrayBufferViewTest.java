@@ -34,7 +34,7 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "18", "93", "42" })
+    @Alerts({"18", "93", "42"})
     public void set_int8() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -59,7 +59,7 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "3", "-1" })
+    @Alerts({"3", "2", "3", "-1"})
     public void subarray_int8() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

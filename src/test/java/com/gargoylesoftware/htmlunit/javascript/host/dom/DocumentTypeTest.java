@@ -36,18 +36,18 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object DocumentType]", "true", "html,10,null,undefined,undefined,undefined",
+    @Alerts(CHROME = {"[object DocumentType]", "true", "html,10,null,undefined,undefined,undefined",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-                        + "undefined,undefined,undefined" },
+                        + "undefined,undefined,undefined"},
             FF38 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-                        + "null,undefined,undefined" },
+                        + "null,undefined,undefined"},
             FF45 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-                            + "undefined,undefined,undefined" },
-            IE = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+                            + "undefined,undefined,undefined"},
+            IE = {"[object DocumentType]", "true", "html,10,null,null,null,null",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-                        + "null,null,null" })
+                        + "null,null,null"})
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -80,14 +80,14 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(
-        CHROME = { "[object DocumentType]", "greeting,10,null,undefined,undefined,undefined",
-                    "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined" },
+        CHROME = {"[object DocumentType]", "greeting,10,null,undefined,undefined,undefined",
+                    "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
         FF38 = { "[object DocumentType]", "greeting,10,null,null,null,null",
-                    "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" },
+                    "greeting,MyIdentifier,hello.dtd,null,undefined,undefined"},
         FF45 = { "[object DocumentType]", "greeting,10,null,null,null,null",
-                    "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined" },
-        IE = { "[object DocumentType]", "greeting,10,null,null,null,null",
-                    "greeting,MyIdentifier,hello.dtd,null,null,null" })
+                    "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
+        IE = {"[object DocumentType]", "greeting,10,null,null,null,null",
+                    "greeting,MyIdentifier,hello.dtd,null,null,null"})
     public void doctype_xml() throws Exception {
         final String html =
               "<html>\n"
@@ -150,7 +150,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object DocumentType]", "[object HTMLHtmlElement]" })
+    @Alerts({"[object DocumentType]", "[object HTMLHtmlElement]"})
     public void document_children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
             + "<head>\n"

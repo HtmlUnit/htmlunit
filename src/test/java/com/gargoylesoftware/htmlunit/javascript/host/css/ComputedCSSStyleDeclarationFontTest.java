@@ -34,7 +34,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "16px", "2em", "32px", "150%", "24px" })
+    @Alerts({"", "16px", "2em", "32px", "150%", "24px"})
     public void fontSizeEm() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -62,13 +62,13 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+    @Alerts(DEFAULT = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "normal normal normal normal 16px / normal 'Times New Roman'",
-                "", "normal", "", "normal", "", "normal", "", "16px", "", "normal", "", "'Times New Roman'" },
+                "", "normal", "", "normal", "", "normal", "", "16px", "", "normal", "", "'Times New Roman'"},
             FF = { "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif",
-                "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif" },
-            IE = { "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
-                "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman" })
+                "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif"},
+            IE = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
+                "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman"})
     public void fontInitial() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -106,14 +106,14 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "15px arial, sans-serif", "normal normal normal normal 15px / normal arial, sans-serif",
+    @Alerts(DEFAULT = {"15px arial, sans-serif", "normal normal normal normal 15px / normal arial, sans-serif",
                 "normal", "normal",
                 "oblique 15px arial, sans-serif", "oblique normal normal normal 15px / normal arial, sans-serif",
-                "oblique", "oblique" },
+                "oblique", "oblique"},
             FF = { "15px arial,sans-serif", "", "normal", "normal",
-                    "oblique 15px arial,sans-serif", "", "oblique", "oblique" },
-            IE = { "15px/normal arial, sans-serif", "", "normal", "normal",
-                    "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique" })
+                    "oblique 15px arial,sans-serif", "", "oblique", "oblique"},
+            IE = {"15px/normal arial, sans-serif", "", "normal", "normal",
+                    "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique"})
     @NotYetImplemented
     public void fontStyle() throws Exception {
         font("15px arial, sans-serif", "fontStyle", "oblique");
@@ -152,10 +152,10 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "normal normal normal normal 16px / normal 'Times New Roman'",
-                "", "'Times New Roman'" },
-            FF = { "", "", "", "serif" },
-            IE = { "", "", "", "Times New Roman" })
+    @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal 'Times New Roman'",
+                "", "'Times New Roman'"},
+            FF = { "", "", "", "serif"},
+            IE = {"", "", "", "Times New Roman"})
     public void wrongFontFamily() throws Exception {
         font("xyz", "fontFamily", null);
     }
@@ -164,10 +164,10 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1px xyz", "normal normal normal normal 1px / normal xyz",
-                "xyz", "xyz", "1px abc", "normal normal normal normal 1px / normal abc", "abc", "abc" },
-            FF = { "1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc" },
-            IE = { "1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc" })
+    @Alerts(DEFAULT = {"1px xyz", "normal normal normal normal 1px / normal xyz",
+                "xyz", "xyz", "1px abc", "normal normal normal normal 1px / normal abc", "abc", "abc"},
+            FF = { "1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
+            IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
     @NotYetImplemented
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
@@ -177,10 +177,10 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "normal normal normal normal 16px / normal 'Times New Roman'",
-            "", "'Times New Roman'", "", "normal normal normal normal 16px / normal abc", "abc", "abc" },
-            FF = { "", "", "", "serif", "", "", "abc", "abc" },
-            IE = { "", "", "", "Times New Roman", "", "", "abc", "abc" })
+    @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal 'Times New Roman'",
+            "", "'Times New Roman'", "", "normal normal normal normal 16px / normal abc", "abc", "abc"},
+            FF = { "", "", "", "serif", "", "", "abc", "abc"},
+            IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
     public void minimalFontFamilyReversed() throws Exception {
         font("xyz 1px", "fontFamily", "abc");
     }

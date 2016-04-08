@@ -62,8 +62,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CONTENT_TYPE:application/octet-stream", "charset" },
-            IE = { "CONTENT_TYPE:text/plain", "charset" })
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            IE = {"CONTENT_TYPE:text/plain", "charset"})
     @NotYetImplemented(IE)
     public void contentType() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
@@ -301,7 +301,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -332,7 +332,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -366,7 +366,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-initial", "-initial", "-newDefault", "-newDefault" })
+    @Alerts({"-initial", "-initial", "-newDefault", "-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -398,7 +398,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-initial", "-initial", "-newDefault", "-newDefault" })
+    @Alerts({"-initial", "-initial", "-newDefault", "-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -429,7 +429,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-initial", "-default" })
+    @Alerts({"-initial", "-default"})
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -475,7 +475,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void nonZeroWidthHeight() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"

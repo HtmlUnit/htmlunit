@@ -95,8 +95,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "string", "true" },
-            IE = { "undefined", "false" })
+    @Alerts(DEFAULT = {"string", "true"},
+            IE = {"undefined", "false"})
     public void productSub() throws Exception {
         final String html = "<html><head><script>\n"
             + "alert(typeof(navigator.productSub));\n"
@@ -311,7 +311,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "number", "number" })
+    @Alerts({"number", "number"})
     public void mozilla() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -390,10 +390,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "Google Inc.", "" },
-            FF = { "", "" },
-            IE = { "", "undefined" },
-            EDGE = { "", "" })
+    @Alerts(CHROME = {"Google Inc.", ""},
+            FF = { "", ""},
+            IE = {"", "undefined"},
+            EDGE = { "", ""})
     public void vendor() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

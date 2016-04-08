@@ -35,7 +35,7 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "20%,*", "*,*" })
+    @Alerts({"20%,*", "*,*"})
     public void cols() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -59,7 +59,7 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "20%,*", "*,*" })
+    @Alerts({"20%,*", "*,*"})
     public void rows() throws Exception {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"

@@ -57,7 +57,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1234", "1234", "6789", "1234" })
+    @Alerts({"1234", "1234", "6789", "1234"})
     public void slice() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

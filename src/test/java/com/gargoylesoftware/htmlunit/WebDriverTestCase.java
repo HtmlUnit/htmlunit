@@ -77,7 +77,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import static org.junit.Assume.assumeTrue;
 
 /**
  * Base class for tests using WebDriver.
@@ -275,7 +274,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Closes the real ie browser drivers.
+     * Closes the real IE browser drivers.
      */
     protected void shutDownRealIE() {
         final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(INTERNET_EXPLORER);
@@ -828,7 +827,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         assertEquals(expectedAlerts, actualAlerts);
         if (!ignoreExpectationsLength()) {
-            assumeTrue(expectedAlerts.length == actualAlerts.size());
+            assertEquals(expectedAlerts.length, actualAlerts.size());
+            for (int i = expectedAlerts.length - 1; i >= 0; i--) {
+                assertEquals(expectedAlerts[i], actualAlerts.get(i));
+            }
         }
     }
 

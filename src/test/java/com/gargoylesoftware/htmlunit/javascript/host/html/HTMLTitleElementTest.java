@@ -33,7 +33,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Page Title", "New Title" })
+    @Alerts({"Page Title", "New Title"})
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -58,7 +58,7 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "New Title" })
+    @Alerts({"", "New Title"})
     public void textCreateElement() throws Exception {
         final String html =
             "<html>\n"

@@ -45,8 +45,8 @@ public class XSLProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "unknown", "unknown" })
+            IE = {"undefined", "undefined", "undefined", "undefined", "undefined",
+            "undefined", "undefined", "unknown", "unknown"})
     @NotYetImplemented(IE)
     public void methods() throws Exception {
         final String html = "<html><head><script>\n"

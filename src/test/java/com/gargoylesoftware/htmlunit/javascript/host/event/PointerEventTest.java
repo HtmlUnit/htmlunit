@@ -100,7 +100,7 @@ public class PointerEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "[object PointerEvent]", "", "false", "false", "0", "0", "0", "0", "0", "0", "", "false" })
+            IE = {"[object PointerEvent]", "", "false", "false", "0", "0", "0", "0", "0", "0", "", "false"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -122,8 +122,8 @@ public class PointerEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "[object PointerEvent]", "click", "true", "false", "123", "4", "5", "6", "17", "18",
-                "mouse", "false" })
+            IE = {"[object PointerEvent]", "click", "true", "false", "123", "4", "5", "6", "17", "18",
+                "mouse", "false"})
     public void initPointerEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -147,8 +147,8 @@ public class PointerEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "[object PointerEvent]", "click", "true", "false", "123", "4", "5", "6", "17", "18",
-                "mouse", "false" })
+            IE = {"[object PointerEvent]", "click", "true", "false", "123", "4", "5", "6", "17", "18",
+                "mouse", "false"})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

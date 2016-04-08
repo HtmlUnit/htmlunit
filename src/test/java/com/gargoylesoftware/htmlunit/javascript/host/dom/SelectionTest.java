@@ -62,8 +62,8 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0", "0", "cdefg" },
-            CHROME = { "0", "1", "1", "cdefg" })
+    @Alerts(DEFAULT = {"0", "0", "0", "cdefg"},
+            CHROME = {"0", "1", "1", "cdefg"})
     @NotYetImplemented(CHROME)
     public void inputSelectionsAreIndependent() throws Exception {
         final String html = "<html><body onload='test()'>\n"
@@ -90,10 +90,10 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {
                         "1:null/0/null/0/true/undefined/0/",
-                        "2:s2/0/s2/1/false/undefined/1/xyz/xyz" },
+                        "2:s2/0/s2/1/false/undefined/1/xyz/xyz"},
             CHROME = {
                         "1:null/0/null/0/true/None/0/",
-                        "2:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz" })
+                        "2:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz"})
     @NotYetImplemented(CHROME)
     public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
@@ -112,14 +112,14 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
                         "2:s2/0/s3/1/false/undefined/1/xyzfoo/xyzfoo",
                         "3:s2/0/s3/2/false/undefined/1/xyzfoo---/xyzfoo---",
-                        "4:s2/0/s3/3/false/undefined/1/xyzfoo---foo/xyzfoo---foo" },
+                        "4:s2/0/s3/3/false/undefined/1/xyzfoo---foo/xyzfoo---foo"},
             CHROME = {
                     "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
                     "2:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo/xyzfoo",
                     "3:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo---/xyzfoo---",
-                    "4:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo---foo/xyzfoo---foo" },
-            IE = { "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
-                        "selection.extend not available" })
+                    "4:[object Text]/0/[object Text]/3/false/Range/1/xyzfoo---foo/xyzfoo---foo"},
+            IE = {"1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+                        "selection.extend not available"})
     @NotYetImplemented(CHROME)
     public void extend() throws Exception {
         final String jsSnippet = ""
@@ -143,10 +143,10 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {
                         "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
-                        "2:s2/0/s2/0/true/undefined/1//" },
+                        "2:s2/0/s2/0/true/undefined/1//"},
             CHROME = {
                         "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
-                        "2:[object Text]/3/[object Text]/3/true/Caret/1//" })
+                        "2:[object Text]/3/[object Text]/3/true/Caret/1//"})
     @NotYetImplemented(CHROME)
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
@@ -164,10 +164,10 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {
                         "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
-                        "2:s2/1/s2/1/true/undefined/1//" },
+                        "2:s2/1/s2/1/true/undefined/1//"},
             CHROME = {
                         "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
-                        "2:[object Text]/3/[object Text]/3/true/Caret/1//" })
+                        "2:[object Text]/3/[object Text]/3/true/Caret/1//"})
     @NotYetImplemented(CHROME)
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
@@ -187,12 +187,12 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/undefined/0/",
                         "2:null/0/null/0/true/undefined/0/",
                         "3:s2/1/s3/1/false/undefined/1/foo/foo",
-                        "4:null/0/null/0/true/undefined/0/" },
+                        "4:null/0/null/0/true/undefined/0/"},
             CHROME = {
                     "1:null/0/null/0/true/None/0/",
                     "2:null/0/null/0/true/None/0/",
                     "3:[object Text]/0/[object Text]/3/false/Range/1/foo/foo",
-                    "4:null/0/null/0/true/None/0/" })
+                    "4:null/0/null/0/true/None/0/"})
     @NotYetImplemented(CHROME)
     public void range() throws Exception {
         final String jsSnippet = ""
@@ -218,10 +218,10 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {
                     "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
                     "2:null/0/null/0/true/undefined/0/",
-                    "false", "true" },
+                    "false", "true"},
             CHROME = {
                     "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo/yzfo",
-                    "exception" })
+                    "exception"})
     @NotYetImplemented(CHROME)
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
@@ -277,8 +277,8 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "null-0", "", "null-0", "", "null-0", "", "null-0" },
-            FF = { "", "null-0", "", "null-0", "null", "null" })
+    @Alerts(DEFAULT = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"},
+            FF = { "", "null-0", "", "null-0", "null", "null"})
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"

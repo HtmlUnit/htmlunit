@@ -50,9 +50,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "error [object ProgressEvent]", "error", "false", "0" /* "0" */ },
-            CHROME = { "error [object XMLHttpRequestProgressEvent]", "error", "false", "0" /* "0" */ },
-            IE = { "error [object ProgressEvent]", "error", "true", "0" /* "4479" */ })
+    @Alerts(DEFAULT = {"error [object ProgressEvent]", "error", "false", "0" /* "0" */},
+            CHROME = {"error [object XMLHttpRequestProgressEvent]", "error", "false", "0" /* "0" */},
+            IE = {"error [object ProgressEvent]", "error", "true", "0" /* "4479" */})
     @NotYetImplemented(IE)
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
@@ -82,8 +82,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "§§URL§§" },
-            IE = { "4", "200", "No Origin!" })
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§"},
+            IE = {"4", "200", "No Origin!"})
     public void simple() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -116,7 +116,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({ "4", "200", "null" })
+    @Alerts({"4", "200", "null"})
     @NotYetImplemented
     public void simpleHead() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
@@ -150,8 +150,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "§§URL§§" },
-            IE = { "4", "200", "No Origin!" })
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§"},
+            IE = {"4", "200", "No Origin!"})
     public void simplePost() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -185,7 +185,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "4", "200", "No Origin!" })
+            IE = {"4", "200", "No Origin!"})
     public void simplePut() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -257,8 +257,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "4", "0" },
-            IE = { "4", "200" })
+    @Alerts(DEFAULT = {"exception", "4", "0"},
+            IE = {"4", "200"})
     public void noAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin(null);
     }
@@ -294,8 +294,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "4", "0" },
-            IE = { "4", "200" })
+    @Alerts(DEFAULT = {"exception", "4", "0"},
+            IE = {"4", "200"})
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
@@ -304,9 +304,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
-            IE = { "4", "200", "null", "null", "null", "null" })
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
     }
@@ -315,9 +315,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
-            IE = { "4", "200", "null", "null", "null", "null" })
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
@@ -329,9 +329,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
-            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother" },
-            IE = { "4", "200", "null", "null", "null", "null" })
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "content-type, x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_methods() throws Exception {
         doPreflightTestAllowedMethods(null, "text/plain");
@@ -429,8 +429,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "4", "0" },
-            IE = { "4", "200" })
+    @Alerts(DEFAULT = {"exception", "4", "0"},
+            IE = {"4", "200"})
     //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
@@ -466,9 +466,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "4", "200", "options_headers", "x-ping,x-pong" },
-            CHROME = { "4", "200", "options_headers", "x-ping, x-pong" },
-            IE = { "4", "200", "options_headers", "null" })
+    @Alerts(DEFAULT = {"4", "200", "options_headers", "x-ping,x-pong"},
+            CHROME = {"4", "200", "options_headers", "x-ping, x-pong"},
+            IE = {"4", "200", "options_headers", "null"})
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -531,9 +531,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "false", "ex: open", "true" },
-            CHROME = { "false", "true", "false", "true" },
-            IE = { "false", "true", "false", "true" })
+    @Alerts(DEFAULT = {"false", "true", "false", "ex: open", "true"},
+            CHROME = {"false", "true", "false", "true"},
+            IE = {"false", "true", "false", "true"})
     public void withCredentials_setBeforeOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -573,7 +573,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({ "false", "true", "false", "true" })
+    @Alerts({"false", "true", "false", "true"})
     public void withCredentials_setBeforeOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -613,9 +613,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "ex: withCredentials=true", "ex: withCredentials=false" },
-            CHROME = { "false", "false", "true", "false" },
-            IE = { "false", "false", "true", "false" })
+    @Alerts(DEFAULT = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"},
+            CHROME = {"false", "false", "true", "false"},
+            IE = {"false", "false", "true", "false"})
     public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -648,9 +648,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "ex: withCredentials=true", "ex: withCredentials=false" },
-            CHROME = { "false", "false", "true", "false" },
-            IE = { "false", "false", "true", "false" })
+    @Alerts(DEFAULT = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"},
+            CHROME = {"false", "false", "true", "false"},
+            IE = {"false", "false", "true", "false"})
     public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -683,8 +683,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            IE = { "1", "0", "4", "200" })
+    @Alerts(DEFAULT = {"1", "0", "4", "0"},
+            IE = {"1", "0", "4", "200"})
     public void withCredentials() throws Exception {
         testWithCredentials("*", "true");
     }
@@ -693,7 +693,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({ "1", "0", "4", "200" })
+    @Alerts({"1", "0", "4", "200"})
     public void withCredentialsServer() throws Exception {
         testWithCredentials("http://localhost:" + PORT, "true");
     }
@@ -702,8 +702,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            IE = { "1", "0", "4", "200" })
+    @Alerts(DEFAULT = {"1", "0", "4", "0"},
+            IE = {"1", "0", "4", "200"})
     public void withCredentialsServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", "true");
     }
@@ -712,8 +712,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            IE = { "1", "0", "4", "200" })
+    @Alerts(DEFAULT = {"1", "0", "4", "0"},
+            IE = {"1", "0", "4", "200"})
     public void withCredentials_no_header() throws Exception {
         testWithCredentials("*", null);
     }
@@ -722,8 +722,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            IE = { "1", "0", "4", "200" })
+    @Alerts(DEFAULT = {"1", "0", "4", "0"},
+            IE = {"1", "0", "4", "200"})
     public void withCredentials_no_header_Server() throws Exception {
         testWithCredentials("http://localhost:" + PORT, null);
     }
@@ -732,8 +732,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            IE = { "1", "0", "4", "200" })
+    @Alerts(DEFAULT = {"1", "0", "4", "0"},
+            IE = {"1", "0", "4", "200"})
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", null);
     }

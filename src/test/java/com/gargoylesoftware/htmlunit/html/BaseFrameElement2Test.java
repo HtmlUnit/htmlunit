@@ -34,7 +34,7 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "posted", "called" })
+    @Alerts({"posted", "called"})
     public void windowEventListenersContainer() throws Exception {
         final String html
             = "<html>\n"

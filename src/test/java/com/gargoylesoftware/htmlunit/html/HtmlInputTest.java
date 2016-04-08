@@ -237,7 +237,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function handler() {\n}", "null" })
+    @Alerts({"function handler() {\n}", "null"})
     public void onchangeNull() throws Exception {
         final String html =
             "<html><head>\n"

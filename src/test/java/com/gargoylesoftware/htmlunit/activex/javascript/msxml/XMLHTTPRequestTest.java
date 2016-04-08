@@ -150,7 +150,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "orsc:1", "opened 1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent 1", "opened 2", "sent 2" })
+            IE = {"orsc:1", "opened 1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent 1", "opened 2", "sent 2"})
     public void onreadystatechange_sync() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -175,7 +175,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "orsc:1", "opened 1", "orsc:1", "sent 1", "orsc:2", "orsc:3", "orsc:4" })
+            IE = {"orsc:1", "opened 1", "orsc:1", "sent 1", "orsc:2", "orsc:3", "orsc:4"})
     public void onreadystatechange_async() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -194,7 +194,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "1", "4", "1", "4" })
+            IE = {"0", "1", "4", "1", "4"})
     public void readyState_sync() throws Exception {
         property_lifecycleSync("readyState");
     }
@@ -204,7 +204,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:1", "1:1", "2:2", "3:3", "4:4" })
+            IE = {"1:1", "1:1", "2:2", "3:3", "4:4"})
     public void readyState_async() throws Exception {
         property_lifecycleAsync("readyState");
     }
@@ -214,11 +214,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-created",
+            IE = {"exception-created",
                    "exception-opened",
                    "<root/>",
                    "exception-reopened",
-                   "<root/>" })
+                   "<root/>"})
     public void responseText_sync() throws Exception {
         property_lifecycleSync("responseText");
     }
@@ -228,11 +228,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:exception-async",
+            IE = {"1:exception-async",
                    "1:exception-async",
                    "2:exception-async",
                    "3:exception-async",
-                   "4:<root/>" })
+                   "4:<root/>"})
     public void responseText_async() throws Exception {
         property_lifecycleAsync("responseText");
     }
@@ -351,11 +351,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-created",
+            IE = {"exception-created",
                    "",
                    "<root/>\r\n",
                    "",
-                   "<root/>\r\n" })
+                   "<root/>\r\n"})
     public void responseXML_sync() throws Exception {
         property_lifecycleSync("responseXML.xml");
     }
@@ -365,7 +365,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:", "1:", "2:", "3:", "4:<root/>\r\n" })
+            IE = {"1:", "1:", "2:", "3:", "4:<root/>\r\n"})
     public void responseXML_async() throws Exception {
         property_lifecycleAsync("responseXML.xml");
     }
@@ -484,11 +484,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-created",
+            IE = {"exception-created",
                    "exception-opened",
                    "200",
                    "exception-reopened",
-                   "200" })
+                   "200"})
     public void status_sync() throws Exception {
         property_lifecycleSync("status");
     }
@@ -498,11 +498,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:exception-async",
+            IE = {"1:exception-async",
                    "1:exception-async",
                    "2:exception-async",
                    "3:exception-async",
-                   "4:200" })
+                   "4:200"})
     public void status_async() throws Exception {
         property_lifecycleAsync("status");
     }
@@ -512,11 +512,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-created",
+            IE = {"exception-created",
                    "exception-opened",
                    "OK",
                    "exception-reopened",
-                   "OK" })
+                   "OK"})
     public void statusText_sync() throws Exception {
         property_lifecycleSync("statusText");
     }
@@ -526,11 +526,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:exception-async",
+            IE = {"1:exception-async",
                    "1:exception-async",
                    "2:exception-async",
                    "3:exception-async",
-                   "4:OK" })
+                   "4:OK"})
     public void statusText_async() throws Exception {
         property_lifecycleAsync("statusText");
     }
@@ -540,8 +540,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0:ex status ex text ex xml",
-                   "0:ex status ex text ex xml" })
+            IE = {"0:ex status ex text ex xml",
+                   "0:ex status ex text ex xml"})
     public void abort_created() throws Exception {
         final String test = ""
             + "debugRequest(xhr);\n"
@@ -558,8 +558,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:ex status ex text ",
-                   "0:ex status ex text ex xml" })
+            IE = {"1:ex status ex text ",
+                   "0:ex status ex text ex xml"})
     public void abort_opened() throws Exception {
         final String test = ""
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
@@ -577,8 +577,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 <root/> <root/>\r\n",
-                   "0:ex status ex text ex xml" })
+            IE = {"4:200 <root/> <root/>\r\n",
+                   "0:ex status ex text ex xml"})
     public void abort_sentSync() throws Exception {
         final String test = ""
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
@@ -597,10 +597,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1:ex status ex text ",
+            IE = {"1:ex status ex text ",
                    "1:ex status ex text ",
                    "2:ex status ex text ",
-                   "0:ex status ex text ex xml" })
+                   "0:ex status ex text ex xml"})
     @NotYetImplemented(IE)
     // currently the started asynchronous request is not interrupted on abortion
     public void abort_sentAsync() throws Exception {
@@ -623,11 +623,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-created",
+            IE = {"exception-created",
                    "exception-opened",
                    "Date XYZ GMT\r\n"
                    + "Content-Type: text/xml; charset=ISO-8859-1\r\n"
-                   + "Transfer-Encoding: chunked\r\nServer: Jetty(XXX)\r\n\r\n" })
+                   + "Transfer-Encoding: chunked\r\nServer: Jetty(XXX)\r\n\r\n"})
     public void getAllResponseHeaders() throws Exception {
         final String test = ""
             // create
@@ -654,13 +654,13 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-created",
+            IE = {"exception-created",
                    "exception-opened",
                    "text/xml; charset=ISO-8859-1",
                    "exception-getNull",
                    "exception-getEmpty",
                    "",
-                   "text/xml; charset=ISO-8859-1" })
+                   "text/xml; charset=ISO-8859-1"})
     public void getResponseHeader() throws Exception {
         final String test = ""
             + "try {\n"
@@ -700,14 +700,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 GET localhost/bounce?null,-1 ",
+            IE = {"4:200 GET localhost/bounce?null,-1 ",
                    "4:200 POST localhost/bounce?null,0 ",
                    "4:200 PUT localhost/bounce?null,0 ",
                    "4:200  ",
                    "exception-methodTRACE", "0:ex status ex text ex xml",
                    "exception-methodNull", "0:ex status ex text ex xml",
                    "exception-methodEmpty", "0:ex status ex text ex xml",
-                   "1:ex status ex text ", "4:  " })
+                   "1:ex status ex text ", "4:  "})
     public void open_method() throws Exception {
         final String test = ""
             // GET
@@ -773,8 +773,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 DELETE localhost/bounce?null,0 ",
-                   "4:200 OPTIONS localhost/bounce?null,0 " })
+            IE = {"4:200 DELETE localhost/bounce?null,0 ",
+                   "4:200 OPTIONS localhost/bounce?null,0 "})
     @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
     public void open_method2() throws Exception {
@@ -800,11 +800,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 GET localhost/bounce?null,-1 ",
+            IE = {"4:200 GET localhost/bounce?null,-1 ",
                    "4:200 GET localhost/bounce?null,-1 ",
                    "exception-urlNull", "4:200 GET localhost/bounce?null,-1 ",
                    "exception-urlEmpty", "0:ex status ex text ex xml",
-                   "exception-urlNotFound", "4:  " })
+                   "exception-urlNotFound", "4:  "})
     public void open_url() throws Exception {
         final String test = ""
             // relative
@@ -896,10 +896,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 GET localhost/bounce?null,-1 ",
+            IE = {"4:200 GET localhost/bounce?null,-1 ",
                    "4:200 GET localhost/bounce?null,-1 ",
                    "4:200 GET localhost/bounce?null,-1 ",
-                   "4:200 POST localhost/bounce?null,4 " })
+                   "4:200 POST localhost/bounce?null,4 "})
     public void send_get() throws Exception {
         final String test = ""
             // no parameter
@@ -935,10 +935,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 POST localhost/bounce?null,0 ",
+            IE = {"4:200 POST localhost/bounce?null,0 ",
                    "4:200 POST localhost/bounce?null,0 ",
                    "4:200 POST localhost/bounce?null,0 ",
-                   "4:200 POST localhost/bounce?null,4 " })
+                   "4:200 POST localhost/bounce?null,4 "})
     public void send_post() throws Exception {
         final String test = ""
             // no parameter
@@ -974,10 +974,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 PUT localhost/bounce?null,0 ",
+            IE = {"4:200 PUT localhost/bounce?null,0 ",
                    "4:200 PUT localhost/bounce?null,0 ",
                    "4:200 PUT localhost/bounce?null,0 ",
-                   "4:200 PUT localhost/bounce?null,4 " })
+                   "4:200 PUT localhost/bounce?null,4 "})
     public void send_put() throws Exception {
         final String test = ""
             // no parameter
@@ -1013,10 +1013,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200  ",
+            IE = {"4:200  ",
                    "4:200  ",
                    "4:200  ",
-                   "4:200  " })
+                   "4:200  "})
     public void send_head() throws Exception {
         final String test = ""
             // no parameter
@@ -1052,10 +1052,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 DELETE localhost/bounce?null,0 ",
+            IE = {"4:200 DELETE localhost/bounce?null,0 ",
                    "4:200 DELETE localhost/bounce?null,0 ",
                    "4:200 DELETE localhost/bounce?null,0 ",
-                   "4:200 DELETE localhost/bounce?null,4 " })
+                   "4:200 DELETE localhost/bounce?null,4 "})
     @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
     public void send_delete() throws Exception {
@@ -1093,10 +1093,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4:200 OPTIONS localhost/bounce?null,0 ",
+            IE = {"4:200 OPTIONS localhost/bounce?null,0 ",
                    "4:200 OPTIONS localhost/bounce?null,0 ",
                    "4:200 OPTIONS localhost/bounce?null,0 ",
-                   "4:200 OPTIONS localhost/bounce?null,4 " })
+                   "4:200 OPTIONS localhost/bounce?null,4 "})
     @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
     public void send_options() throws Exception {
@@ -1134,8 +1134,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-resend",
-                   "4:200 GET localhost/bounce?null,-1 " })
+            IE = {"exception-resend",
+                   "4:200 GET localhost/bounce?null,-1 "})
     public void send_resend() throws Exception {
         final String test = ""
             + "xhr.open('GET', '/bounce', false);\n"
@@ -1153,11 +1153,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "*/*",
+            IE = {"*/*",
                    "gzip, deflate",
                    "null",
                    "localhost:12345",
-                   "§§URL§§" })
+                   "§§URL§§"})
     public void send_headersDefaultEmpty() throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedHeaders = getExpectedAlerts();
@@ -1189,11 +1189,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "*/*",
+            IE = {"*/*",
                    "gzip, deflate",
                    "4",
                    "localhost:12345",
-                   "§§URL§§" })
+                   "§§URL§§"})
     public void send_headersDefaultBody() throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedHeaders = getExpectedAlerts();
@@ -1224,18 +1224,18 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                        "null", "null", "no ActiveX" },
-            CHROME = { "null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-                        "null", "null", "no ActiveX" },
-            IE = { "bar",
+    @Alerts(DEFAULT = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                        "null", "null", "no ActiveX"},
+            CHROME = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                        "null", "null", "no ActiveX"},
+            IE = {"bar",
                    "application/javascript",
                    "null",
                    "null",
                    "exception-unopened",
                    "exception-setNameNull",
                    "exception-setNameEmpty",
-                   "exception-setValueNull" })
+                   "exception-setValueNull"})
     public void setRequestHeader() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         setExpectedAlerts(
@@ -1293,8 +1293,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "null", "null", "null" },
-            IE = { "", "null", "null", "4" })
+    @Alerts(DEFAULT = {"no ActiveX", "null", "null", "null"},
+            IE = {"", "null", "null", "4"})
     public void setRequestHeader_contentLength() throws Exception {
         final String[] expectedHeaders = getExpectedAlerts();
         setExpectedAlerts(getExpectedAlerts()[0]);

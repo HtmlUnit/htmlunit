@@ -51,8 +51,8 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object MessageEvent]", "type-message", "false", "false", "null", "", "", "null" },
-            FF = {"[object MessageEvent]", "type-message", "false", "false", "undefined", "", "", "null" },
+    @Alerts(DEFAULT = {"[object MessageEvent]", "type-message", "false", "false", "null", "", "", "null"},
+            FF = {"[object MessageEvent]", "type-message", "false", "false", "undefined", "", "", "null"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -75,7 +75,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MessageEvent]", "type-message", "false", "false",
-                            "test-data", "test-origin", "42", "[object Window]" },
+                            "test-data", "test-origin", "42", "[object Window]"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -102,7 +102,7 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DOM2: exception", "DOM3: [object MessageEvent]" })
+    @Alerts({"DOM2: exception", "DOM3: [object MessageEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -122,11 +122,11 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object MessageEvent]", "message", "true", "true", "hello",
-                            "http://localhost:", "2", "[object Window]" },
+    @Alerts(DEFAULT = {"[object MessageEvent]", "message", "true", "true", "hello",
+                            "http://localhost:", "2", "[object Window]"},
             FF38 = "no initMessageEvent",
-            IE = { "[object MessageEvent]", "message", "true", "true", "hello",
-                            "http://localhost:", "undefined", "[object Window]" })
+            IE = {"[object MessageEvent]", "message", "true", "true", "hello",
+                            "http://localhost:", "undefined", "[object Window]"})
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {

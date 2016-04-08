@@ -188,7 +188,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "false", "true", "true", "false" })
+    @Alerts({"false", "false", "true", "true", "false"})
     public void testDisabled() throws Exception {
         final String html = "<html><body onload='test()'><form name='f'>\n"
             + "  <select name='s' id='s'>\n"

@@ -43,8 +43,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,," },
-            FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," })
+    @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"},
+            FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
     @NotYetImplemented(CHROME)
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
@@ -128,8 +128,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void aLink() throws Exception {
         final String html =
             "<html>\n"
@@ -154,7 +154,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "http://www.foo.com/blah.gif", "blah.gif" })
+    @Alerts({"", "http://www.foo.com/blah.gif", "blah.gif"})
     public void background() throws Exception {
         final String html =
             "<html>\n"
@@ -179,8 +179,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -205,8 +205,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void link() throws Exception {
         final String html =
             "<html>\n"
@@ -231,8 +231,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -257,8 +257,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void vLink() throws Exception {
         final String html =
             "<html>\n"
@@ -283,21 +283,21 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLBodyElement]", "" },
-        CHROME = { "function HTMLBodyElement() { [native code] }", ""
+    @Alerts(DEFAULT = {"[object HTMLBodyElement]", ""},
+        CHROME = {"function HTMLBodyElement() { [native code] }", ""
             + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
             + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
             + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
             + "DOCUMENT_POSITION_PRECEDING, "
             + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
+            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
             FF = { "function HTMLBodyElement() {\n    [native code]\n}", ""
             + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
             + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
             + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
             + "DOCUMENT_POSITION_PRECEDING, "
             + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " })
+            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "})
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -324,7 +324,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "keydown (target)", "keydown (body)" })
+    @Alerts({"keydown (target)", "keydown (body)"})
     public void eventHandler() throws Exception {
         final String html =
             "<html>\n"
@@ -354,7 +354,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "8" })
+    @Alerts({"0", "8"})
     @NotYetImplemented
     public void top() throws Exception {
         final String html =

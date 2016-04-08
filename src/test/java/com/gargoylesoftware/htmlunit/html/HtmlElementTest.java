@@ -1029,7 +1029,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void getElementsByTagName() throws Exception {
         final String html
             = "<html>\n"

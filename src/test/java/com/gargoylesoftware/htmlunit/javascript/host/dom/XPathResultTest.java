@@ -36,7 +36,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "4", "1", "3" },
+    @Alerts(DEFAULT = {"4", "1", "3"},
             IE = "evaluate not supported")
     public void resultType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -78,7 +78,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "7", "id1", "id2" },
+    @Alerts(DEFAULT = {"7", "id1", "id2"},
             IE = "evaluate not supported")
     public void snapshotType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -119,7 +119,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "9", "id1" },
+    @Alerts(DEFAULT = {"9", "id1"},
             IE = "evaluate not supported")
     public void singleNodeValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -158,7 +158,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "id1", "id2" },
+    @Alerts(DEFAULT = {"id1", "id2"},
             IE = "evaluate not supported")
     public void iterateNext() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -227,7 +227,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"bar", "foo", "foo" },
+    @Alerts(DEFAULT = {"bar", "foo", "foo"},
             IE = "evaluate not supported")
     public void stringType() throws Exception {
         final String html = "<html><head><title attr=\"bar\">foo</title><script>\n"
@@ -258,7 +258,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true" },
+    @Alerts(DEFAULT = {"true", "true", "true", "true"},
             IE = "evaluate not supported")
     public void numberType() throws Exception {
         final String html = "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
@@ -292,7 +292,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "true", "true"},
             IE = "evaluate not supported")
     public void booleanType() throws Exception {
         final String html = "<html>\n"

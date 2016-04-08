@@ -104,7 +104,7 @@ public class SvgElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "myLine" })
+    @Alerts({"1", "myLine"})
     public void querySelectorAll() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

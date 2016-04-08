@@ -238,7 +238,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "§§URL§§", "§§URL§§" })
+    @Alerts({"§§URL§§", "§§URL§§"})
     public void locationAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -258,7 +258,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "First", "First", "FORM", "true", "true" })
+    @Alerts({"", "First", "First", "FORM", "true", "true"})
     public void newElementsAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -337,7 +337,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "scr1", "scr2"/*, "scr3", "scr4"*/ })
+    @Alerts({"scr1", "scr2"/*, "scr3", "scr4"*/ })
     public void writeAddNodesInCorrectPositions() throws Exception {
         final String html = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"

@@ -43,8 +43,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myForm", "TypeError" },
-            IE = { "myForm", "myForm" })
+    @Alerts(DEFAULT = {"myForm", "TypeError"},
+            IE = {"myForm", "myForm"})
     public void formsAccessor_FormsAsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -70,8 +70,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myForm", "TypeError" },
-            IE = { "myForm", "myForm" })
+    @Alerts(DEFAULT = {"myForm", "TypeError"},
+            IE = {"myForm", "myForm"})
     public void formsAccessor_FormsAsFunction2() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -97,8 +97,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "error", "error", "error" },
-            IE = { "textfieldid", "textfieldname", "textfieldid" })
+    @Alerts(DEFAULT = {"error", "error", "error"},
+            IE = {"textfieldid", "textfieldname", "textfieldid"})
     public void asFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -122,8 +122,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "TypeError" },
-            IE = { "textfieldid", "textfieldname", "textfieldid" })
+    @Alerts(DEFAULT = {"TypeError"},
+            IE = {"textfieldid", "textfieldname", "textfieldid"})
     public void asFunctionFormsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -269,7 +269,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test page can't be loaded
      */
     @Test
-    @Alerts({ "1", "val2" })
+    @Alerts({"1", "val2"})
     public void malformedHtml_nestedForms() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -293,7 +293,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "§§URL§§?par%F6m=Hello+G%FCnter", "par\ufffdm", "Hello G\ufffdnter" })
+    @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\ufffdm", "Hello G\ufffdnter"})
     public void encodingSubmit() throws Exception {
         final String html =
             "<html>\n"

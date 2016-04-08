@@ -39,7 +39,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
         final String html
             = "<html><body><map><area id='a1'/><area id='a2' accesskey='A'/></map><script>\n"
@@ -66,9 +66,9 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "", "[object HTMLAreaElement]" },
-            CHROME = { "", "function HTMLAreaElement() { [native code] }" },
-            FF = { "", "function HTMLAreaElement() {\n    [native code]\n}" })
+    @Alerts(IE = {"", "[object HTMLAreaElement]"},
+            CHROME = {"", "function HTMLAreaElement() { [native code] }"},
+            FF = { "", "function HTMLAreaElement() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

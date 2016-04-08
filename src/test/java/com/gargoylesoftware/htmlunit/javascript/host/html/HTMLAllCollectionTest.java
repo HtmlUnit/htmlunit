@@ -73,7 +73,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "b4-button4_1", "b4-button4_2" },
+    @Alerts(DEFAULT = {"coll 2", "b4-button4_1", "b4-button4_2"},
             IE = "b4-button4_1")
     public void namedItem_DuplicateId() throws Exception {
         namedItem("'b4'");
@@ -83,7 +83,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "b5_1-button5", "b5_2-button5" },
+    @Alerts(DEFAULT = {"coll 2", "b5_1-button5", "b5_2-button5"},
             IE = "b5_1-button5",
             CHROME = "null")
     public void namedItem_DuplicateName() throws Exception {
@@ -94,8 +94,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "b6-button6", "button6-button6_2" },
-            CHROME = { "button6-button6_2" },
+    @Alerts(DEFAULT = {"coll 2", "b6-button6", "button6-button6_2"},
+            CHROME = {"button6-button6_2"},
             IE = "b6-button6")
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("'button6'");
@@ -577,9 +577,9 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object HTMLAllCollection]", "[object HTMLAllCollection]" },
-            CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
-            FF = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}" })
+    @Alerts(IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"},
+            CHROME = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
+            FF = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

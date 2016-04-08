@@ -41,7 +41,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]" })
+    @Alerts({"DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -61,7 +61,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" })
+    @Alerts({"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true"})
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -89,7 +89,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1" })
+    @Alerts({"1", "1"})
     public void dispatchEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var clickCount = 0;\n"

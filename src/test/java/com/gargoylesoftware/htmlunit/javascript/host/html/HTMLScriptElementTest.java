@@ -88,7 +88,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
     public void srcWithJavaScriptProtocol_Static() throws Exception {
         final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
         loadPageWithAlerts2(html);
@@ -98,7 +97,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "§§URL§§foo.js", "foo.js", "§§URL§§", "" })
+    @Alerts({"§§URL§§foo.js", "foo.js", "§§URL§§", ""})
     public void srcPropertyShouldBeAFullUrl() throws Exception {
         final String html =
                 "<html>\n"
@@ -130,7 +129,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "null", "", "null" })
+    @Alerts({"", "null", "", "null"})
     public void srcPropertyNoSource() throws Exception {
         final String html =
                 "<html>\n"
@@ -162,7 +161,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
@@ -182,7 +180,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void reexecuteModifiedScript() throws Exception {
         final String html =
               "<html><head><title>foo</title></head><body>\n"
@@ -202,7 +200,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void createElementWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -227,7 +225,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "middle", "executed", "end" })
+    @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithCreateTextNodeAndAppend() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -253,7 +251,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void createElementWithSetText() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -274,7 +272,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "middle", "executed", "end" })
+    @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithSetTextAndAppend() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -296,7 +294,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void createElementWithSetSrc() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -320,7 +318,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "middle", "end", "executed" })
+    @Alerts({"start", "middle", "end", "executed"})
     public void createElementWithSetSrcAndAppend() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -345,7 +343,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void replaceSelfWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -369,7 +367,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void replaceSelfWithSetText() throws Exception {
         // TODO this test is the same as #reexecuteModifiedScriptWhenReappending()
         final String html =
@@ -391,7 +389,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void replaceSelfWithSetSrc() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -415,7 +413,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "executed", "end" })
+    @Alerts({"start", "executed", "end"})
     public void replaceWithCreateTextNodeEmpty() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -440,7 +438,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void replaceWithCreateTextNodeBlank() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -465,7 +463,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "script", "start", "end" })
+    @Alerts({"script", "start", "end"})
     public void replaceWithCreateTextNodeScript() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -492,7 +490,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "executed", "end" })
+    @Alerts({"start", "executed", "end"})
     public void replaceWithSetTextEmpty() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -513,7 +511,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void replaceWithSetTextBlank() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -534,7 +532,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "script", "start", "end" })
+    @Alerts({"script", "start", "end"})
     public void replaceWithSetTextScript() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -557,7 +555,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end", "executed" })
+    @Alerts({"start", "end", "executed"})
     public void replaceWithSetSrcEmpty() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -581,7 +579,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start", "end" })
+    @Alerts({"start", "end"})
     public void replaceWithSetSrcBlank() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -605,7 +603,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "script", "start", "end" })
+    @Alerts({"script", "start", "end"})
     public void replaceWithSetSrcScript() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -631,7 +629,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "executed", "start", "end" })
+    @Alerts({"executed", "start", "end"})
     public void moveWithAppend() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -654,7 +652,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "executed", "start", "end" })
+    @Alerts({"executed", "start", "end"})
     public void moveWithInsert() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -678,8 +676,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "script-for", "exception", "script-body" },
-            IE = { "script-body", "script-for", "hello" })
+    @Alerts(DEFAULT = {"script-for", "exception", "script-body"},
+            IE = {"script-body", "script-for", "hello"})
     public void scriptForEvent() throws Exception {
         // IE accepts it with () or without
         scriptForEvent("onload");
@@ -713,7 +711,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "4", "2", "5" })
+    @Alerts({"3", "4", "2", "5"})
     public void onReadyStateChange_Order() throws Exception {
         final String html =
               "<html>\n"
@@ -753,7 +751,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "4", "2" })
+    @Alerts({"3", "4", "2"})
     public void onReadyStateChange_Order_NoBody() throws Exception {
         final String html =
               "<html>\n"
@@ -822,7 +820,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3" },
+    @Alerts(DEFAULT = {"1", "2", "3"},
             IE = "1")
     public void scriptType() throws Exception {
         final String html
@@ -844,7 +842,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
     public void appendChild_UnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -868,7 +865,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
     public void insertBeforeUnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
         final String html =
@@ -928,7 +924,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function foo() { return a > b}", "function mce() { return a &gt; b}" })
+    @Alerts({"function foo() { return a > b}", "function mce() { return a &gt; b}"})
     public void innerHtml() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
@@ -987,7 +983,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "3", "2" })
+    @Alerts({"1", "3", "2"})
     public void async() throws Exception {
         final String html = "<html><body>\n"
             + "<script src='js1.js'></script>\n"
@@ -1006,7 +1002,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "1" })
+    @Alerts({"2", "1"})
     @NotYetImplemented
     public void async2() throws Exception {
         final String html = "<html><body>\n"
@@ -1029,7 +1025,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "1" })
+    @Alerts({"2", "1"})
     public void asyncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
@@ -1051,7 +1047,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2", "3" })
+    @Alerts({"1", "2", "3"})
     public void asyncFromAsyncTask() throws Exception {
         final String html = "<html><body><script>\n"
             + "function addAsyncScript() {\n"
@@ -1074,7 +1070,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "null", "true", "", "true", "", "false", "null" })
+    @Alerts({"false", "null", "true", "", "true", "", "false", "null"})
     public void asyncProperty() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -1113,7 +1109,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "null", "true", "true", "true", "", "true", "true", "false", "null" })
+    @Alerts({"false", "null", "true", "true", "true", "", "true", "true", "false", "null"})
     public void asyncAttribute() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

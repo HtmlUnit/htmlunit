@@ -129,7 +129,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "2", "child1=null", "child2=null", "null" })
+            IE = {"2", "child1=null", "child2=null", "null"})
     public void nextNode() throws Exception {
         final String test = ""
             + "alert(list.length);\n"
@@ -145,7 +145,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "2", "child1=null", "child1=null", "child2=null", "child1=null" })
+            IE = {"2", "child1=null", "child1=null", "child2=null", "child1=null"})
     public void reset() throws Exception {
         final String test = ""
             + "alert(list.length);\n"

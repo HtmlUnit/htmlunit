@@ -64,7 +64,7 @@ public class HtmlProgressTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "number70", "number100" })
+    @Alerts({"number70", "number100"})
     public void properties() throws Exception {
         final String html = "<html><body>\n"
             + "<progress id='it' value='70' max='100'>70%</progress>\n"

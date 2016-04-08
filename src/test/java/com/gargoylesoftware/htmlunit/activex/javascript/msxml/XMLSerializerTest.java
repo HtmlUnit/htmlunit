@@ -220,7 +220,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "<foo/>\r\n", "<foo/>" })
+            IE = {"<foo/>\r\n", "<foo/>"})
     public void document() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -241,7 +241,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "<img/>", "<?myTarget myData?>" })
+            IE = {"<img/>", "<?myTarget myData?>"})
     public void xml() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK

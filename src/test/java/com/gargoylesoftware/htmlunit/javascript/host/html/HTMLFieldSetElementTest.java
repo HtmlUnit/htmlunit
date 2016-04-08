@@ -38,10 +38,10 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "left", "right", "bottom", "middle",
-                "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"left", "right", "bottom", "middle",
+                "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -73,11 +73,11 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
-           IE = { "center", "error", "center", "error", "center", "left", "right",
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right",
+                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
+           IE = {"center", "error", "center", "error", "center", "left", "right",
                 "bottom", "middle", "top", "absBottom",
-                "absMiddle", "baseline", "textTop" })
+                "absMiddle", "baseline", "textTop"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html

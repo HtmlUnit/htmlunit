@@ -57,7 +57,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "addBehavior not available", "http://localhost:12345/" })
+    @Alerts({"addBehavior not available", "http://localhost:12345/"})
     public void addBehaviorDefaultHomePage() throws Exception {
         final String html1 =
             "<html>\n"
@@ -113,7 +113,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "startDownload not available",
-            IE = { "Refused", "foo" })
+            IE = {"Refused", "foo"})
     public void addBehaviorDefaultDownload() throws Exception {
         final URL url1 = new URL("http://htmlunit.sourceforge.net/");
         final URL url2 = new URL("http://htmlunit.sourceforge.net/test.txt");
@@ -340,7 +340,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"onfocus text1", "onfocus text2", "onfocus text1", "onfocus text2" })
+    @Alerts({"onfocus text1", "onfocus text2", "onfocus text1", "onfocus text2"})
     public void onFocusOnWindowFocusGain() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -383,7 +383,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"onblur text2", "onblur text1" })
+    @Alerts({"onblur text2", "onblur text1"})
     public void onBlurOnWindowFocusChange() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

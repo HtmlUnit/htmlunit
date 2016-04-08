@@ -399,7 +399,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2" })
+    @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -510,7 +510,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"cookies: first=1", "cookies: " })
+    @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

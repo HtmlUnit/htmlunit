@@ -87,7 +87,7 @@ public class SvgSvgTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function", "function" })
+    @Alerts({"function", "function"})
     public void functions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"

@@ -94,7 +94,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "start worker", "in imported script1", "in imported script2", "end worker" })
+    @Alerts({"start worker", "in imported script1", "in imported script2", "end worker"})
     public void importScripts() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -123,9 +123,9 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true" },
-            CHROME = { "[object global]", "[object global]", "true" },
-            IE = { "[object WorkerGlobalScope]", "[object WorkerGlobalScope]", "true" })
+    @Alerts(DEFAULT = {"[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true"},
+            CHROME = {"[object global]", "[object global]", "true"},
+            IE = {"[object WorkerGlobalScope]", "[object WorkerGlobalScope]", "true"})
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

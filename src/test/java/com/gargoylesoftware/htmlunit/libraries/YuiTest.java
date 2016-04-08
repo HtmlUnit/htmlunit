@@ -146,10 +146,10 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "test_regex", "test_createlink" },
-            FF = { "test_createlink" },
-            CHROME = { "test_regex", "test_createlink", "test_selected_element", "test_dom_path" },
-            IE = { "test_bold", "test_createlink" })
+    @Alerts(DEFAULT = {"test_regex", "test_createlink"},
+            FF = { "test_createlink"},
+            CHROME = {"test_regex", "test_createlink", "test_selected_element", "test_dom_path"},
+            IE = {"test_bold", "test_createlink"})
     @NotYetImplemented
     public void editor() throws Exception {
         doTest("editor.html", Arrays.asList(getExpectedAlerts()));

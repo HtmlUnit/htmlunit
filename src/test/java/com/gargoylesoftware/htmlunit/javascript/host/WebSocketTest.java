@@ -56,7 +56,7 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "ws://localhost:12345/", "", "0", "blob"})
+    @Alerts({"ws://localhost:12345/", "", "0", "blob"})
     public void initial() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -76,8 +76,8 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "blob", "blob", "arraybuffer", "blob", "blob" },
-            IE = { "blob", "exception", "arraybuffer", "blob", "exception" })
+    @Alerts(DEFAULT = {"blob", "blob", "arraybuffer", "blob", "blob"},
+            IE = {"blob", "exception", "arraybuffer", "blob", "exception"})
     @NotYetImplemented(IE)
     public void binaryType() throws Exception {
         final String html = "<html><head><script>\n"
@@ -208,7 +208,7 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ ": myname=My value!1", ": myname=My value!2" })
+    @Alerts({": myname=My value!1", ": myname=My value!2"})
     public void cookies() throws Exception {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new CookiesWebSocketHandler());
@@ -286,20 +286,20 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "onOpenListener", "onOpen",
+    @Alerts(DEFAULT = {"onOpenListener", "onOpen",
                 "onMessageTextListener", "server_text", "ws://localhost:12345", "", "null",
                 "onMessageText", "server_text", "ws://localhost:12345", "", "null",
                 "onMessageBinaryListener", "[object ArrayBuffer]", "ws://localhost:12345", "", "null",
                 "onMessageBinary", "[object ArrayBuffer]", "ws://localhost:12345", "", "null",
                 "onCloseListener code: 1000  wasClean: true",
-                "onClose code: 1000  wasClean: true" },
-            IE = { "onOpenListener", "onOpen",
+                "onClose code: 1000  wasClean: true"},
+            IE = {"onOpenListener", "onOpen",
                     "onMessageTextListener", "server_text", "", "undefined", "null",
                     "onMessageText", "server_text", "", "undefined", "null",
                     "onMessageBinaryListener", "[object ArrayBuffer]", "", "undefined", "null",
                     "onMessageBinary", "[object ArrayBuffer]", "", "undefined", "null",
                     "onCloseListener code: 1005  wasClean: true",
-                    "onClose code: 1005  wasClean: true" })
+                    "onClose code: 1005  wasClean: true"})
     @NotYetImplemented(IE)
     public void events() throws Exception {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",

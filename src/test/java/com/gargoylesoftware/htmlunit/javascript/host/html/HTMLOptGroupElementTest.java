@@ -33,7 +33,7 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "true", "true", "false", "true" })
+    @Alerts({"false", "true", "true", "false", "true"})
     public void disabledAttribute() throws Exception {
         final String html =
             "<html>\n"
@@ -73,7 +73,7 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "newLabel", "", "label" })
+    @Alerts({"", "newLabel", "", "label"})
     public void labelAttribute() throws Exception {
         final String html =
             "<html>\n"

@@ -69,7 +69,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "[object HTMLIFrameElement]", "null" })
+    @Alerts({"1", "[object HTMLIFrameElement]", "null"})
     public void selfClosingIFrame() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

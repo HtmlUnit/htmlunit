@@ -106,7 +106,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "success", "success", "success", "success" })
+    @Alerts({"success", "success", "success", "success"})
     public void width_like_properties() throws Exception {
         width_like_properties("bottom", "left", "right", "top");
     }
@@ -115,8 +115,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "borderBottomWidth 42% - 42em", "borderLeftWidth 42% - 42em",
-                "borderRightWidth 42% - 42em", "borderTopWidth 42% - 42em" })
+    @Alerts({"borderBottomWidth 42% - 42em", "borderLeftWidth 42% - 42em",
+                "borderRightWidth 42% - 42em", "borderTopWidth 42% - 42em"})
     public void width_like_properties_border() throws Exception {
         width_like_properties("borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderTopWidth");
     }
@@ -125,7 +125,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "success", "success", "success", "success" })
+    @Alerts({"success", "success", "success", "success"})
     public void width_like_properties_margin() throws Exception {
         width_like_properties("marginBottom", "marginLeft", "marginRight", "marginTop");
     }
@@ -134,7 +134,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "success", "success", "success", "success" })
+    @Alerts({"success", "success", "success", "success"})
     public void width_like_properties_padding() throws Exception {
         width_like_properties("paddingBottom", "paddingLeft", "paddingRight", "paddingTop");
     }
@@ -143,7 +143,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "success", "success", "success", "success", "success", "success" })
+    @Alerts({"success", "success", "success", "success", "success", "success"})
     public void width_like_properties_heightWidth() throws Exception {
         width_like_properties("height", "width", "maxHeight", "maxWidth", "minHeight", "minWidth");
     }
@@ -152,24 +152,24 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "success", "letterSpacing 42% - 42em",
+    @Alerts(DEFAULT = {"success", "letterSpacing 42% - 42em",
                         "outlineWidth 42% - 42em", "success", "success",
-                        "wordSpacing 42% - 42em" },
-            CHROME = { "success", "letterSpacing 42% - 42em",
+                        "wordSpacing 42% - 42em"},
+            CHROME = {"success", "letterSpacing 42% - 42em",
                         "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                         "success",
                         "success",
-                        "wordSpacing 42% - 42em" },
+                        "wordSpacing 42% - 42em"},
             FF38 = { "success", "letterSpacing 42% - 42em",
                         "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                         "success",
                         "success",
-                        "wordSpacing 42% - 42em" },
+                        "wordSpacing 42% - 42em"},
             FF45 = { "success", "letterSpacing 42% - 42em",
                         "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                         "success",
                         "success",
-                        "success" })
+                        "success"})
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");

@@ -57,7 +57,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "event", "false", "false" },
+    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -79,7 +79,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "event", "true", "false" },
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -103,7 +103,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object Event]", "", "false", "false" })
+    @Alerts({"[object Event]", "", "false", "false"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -124,7 +124,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]" })
+    @Alerts({"DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]"})
     public void create_createEventForDifferentTypes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -148,7 +148,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object Event]", "event", "true", "false" })
+    @Alerts({"[object Event]", "event", "true", "false"})
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -261,8 +261,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "true" },
-            FF = { "undefined", "false" })
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "true"},
+            FF = { "undefined", "false"})
     public void eventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -305,7 +305,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object Window]", "[object HTMLDivElement]" })
+    @Alerts({"[object Window]", "[object HTMLDivElement]"})
     public void currentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -326,7 +326,6 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
     public void addEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -345,7 +344,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
     public void typing_input() throws Exception {
         testTyping("<input type='text'", "");
         testTyping("<input type='password'", "");
@@ -356,7 +355,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" })
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
     public void typing_textara() throws Exception {
         testTyping("<textarea", "</textarea>");
     }
@@ -443,7 +442,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "inline", "null" })
+    @Alerts({"inline", "null"})
     public void iframeOnload2() throws Exception {
         final String html
             = "<html>\n"
@@ -464,8 +463,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false" },
-            FF = { "true", "exception" })
+    @Alerts(DEFAULT = {"false", "false"},
+            FF = { "true", "exception"})
     public void testIEWindowEvent() throws Exception {
         final String html =
             "<html><head>\n"
@@ -491,7 +490,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void commentInEventHandlerDeclaration() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -526,7 +525,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "[object Event]", "load", "false", "false" })
+    @Alerts({"[object Event]", "load", "false", "false"})
     public void onload() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -543,7 +542,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "[object Event]", "number" })
+    @Alerts({"[object Event]", "number"})
     public void timeStamp() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -560,7 +559,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "click", "true", "true", "click", "false", "false" })
+    @Alerts({"click", "true", "true", "click", "false", "false"})
     public void testInitEventClick() throws Exception {
         testInitEvent("click");
     }
@@ -569,7 +568,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "dblclick", "true", "true", "dblclick", "false", "false" })
+    @Alerts({"dblclick", "true", "true", "dblclick", "false", "false"})
     public void testInitEventDblClick() throws Exception {
         testInitEvent("dblclick");
     }
@@ -578,7 +577,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "unknown", "true", "true", "unknown", "false", "false" })
+    @Alerts({"unknown", "true", "true", "unknown", "false", "false"})
     public void testInitEventUnknown() throws Exception {
         testInitEvent("unknown");
     }
@@ -587,7 +586,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "cASe", "true", "true", "cASe", "false", "false" })
+    @Alerts({"cASe", "true", "true", "cASe", "false", "false"})
     public void testInitEventCaseSensitive() throws Exception {
         testInitEvent("cASe");
     }
@@ -624,7 +623,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "I was here" })
+    @Alerts({"true", "I was here"})
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -664,24 +663,24 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "e-0", "e-1", "e-2", "e-3", "e-4", "e-5",
+    @Alerts(DEFAULT = {"e-0", "e-1", "e-2", "e-3", "e-4", "e-5",
                         "e-6", "e-7", "e-8", "e-9", "e-10", "e-11",
                         "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "e-18",
                         "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                         "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
-                        "e-33" },
+                        "e-33"},
             FF = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
                      "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                      "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
                      "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                      "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
-                     "e-33" },
-            CHROME = { "e-0", "e-1", "e-2", "2000", "8000", "40",
+                     "e-33"},
+            CHROME = {"e-0", "e-1", "e-2", "2000", "8000", "40",
                      "e-6", "80", "800", "e-9", "1000", "e-11",
                      "e-12", "100", "400", "200", "e-16", "e-17", "e-18",
                      "1", "20", "10", "8", "4", "2",
                      "e-25", "e-26", "e-27", "e-28", "4000", "e-30", "e-31", "e-32",
-                     "e-33" })
+                     "e-33"})
     public void constants() throws Exception {
         final String html =
               "<html><body>\n"
@@ -729,9 +728,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "form1 -> custom", "form2 -> [object HTMLFormElement]",
+    @Alerts({"form1 -> custom", "form2 -> [object HTMLFormElement]",
             "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
-            "form1 -> custom", "form2 -> [object HTMLFormElement]" })
+            "form1 -> custom", "form2 -> [object HTMLFormElement]"})
     public void nameResolution() throws Exception {
         final String html = "<html><head><script>\n"
             + "var form1 = 'custom';\n"
@@ -756,9 +755,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "activeElement BODY" },
-            FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
-            IE = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
+    @Alerts(DEFAULT = {"activeElement BODY"},
+            FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY"},
+            IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented({ FF, IE })
     public void document_focus() throws Exception {
@@ -797,7 +796,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "focus INPUT", "focus INPUT" })
+    @Alerts({"focus INPUT", "focus INPUT"})
     public void document_input_focus() throws Exception {
         document_input("focus");
     }
@@ -807,7 +806,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "blur INPUT",
-            IE = { "blur BODY", "blur INPUT" })
+            IE = {"blur BODY", "blur INPUT"})
     @NotYetImplemented(IE)
     public void document_input_blur() throws Exception {
         document_input("blur");
@@ -857,7 +856,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2from window", "1from document" })
+    @Alerts({"2from window", "1from document"})
     public void eventHandlersParentScope() throws Exception {
         final String html = "<html><body>\n"
             + "<button name='button1' id='button1' onclick='alert(1 + foo)'>click me</button>\n"
@@ -879,7 +878,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "from theField", "from theForm", "from document", "from window" })
+    @Alerts({"from theField", "from theForm", "from document", "from window"})
     public void eventHandlersParentScopeChain_formFields() throws Exception {
         eventHandlersParentScopeChain("<button", "</button>");
         eventHandlersParentScopeChain("<select", "</select>");
@@ -917,7 +916,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "from theField", "from document", "from document", "from window" })
+    @Alerts({"from theField", "from document", "from document", "from window"})
     public void eventHandlersParentScopeChain_span() throws Exception {
         eventHandlersParentScopeChain("<span", "</span>");
     }

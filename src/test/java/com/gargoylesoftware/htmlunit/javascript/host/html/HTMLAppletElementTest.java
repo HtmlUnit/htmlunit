@@ -37,9 +37,9 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
-            IE = { "left", "right", "bottom", "middle", "top", "", "" },
-            CHROME = { "undefined", "undefined", "undefined", "undefined",
+    @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top", "wrong", ""},
+            IE = {"left", "right", "bottom", "middle", "top", "", ""},
+            CHROME = {"undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined"})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
@@ -66,8 +66,8 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"},
+            IE = {"center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
@@ -102,9 +102,9 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
-            CHROME = { "[object HTMLUnknownElement]", "exception" },
-            FF = { "[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}" })
+    @Alerts(IE = {"[object HTMLAppletElement]", "[object HTMLAppletElement]"},
+            CHROME = {"[object HTMLUnknownElement]", "exception"},
+            FF = { "[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

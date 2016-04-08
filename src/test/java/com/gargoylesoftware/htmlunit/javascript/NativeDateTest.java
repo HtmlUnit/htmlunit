@@ -38,7 +38,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-13", "84", "109" })
+    @Alerts({"-13", "84", "109"})
     public void getYear() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -58,7 +58,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "constructor: function", "getDate: function", "getDay: function", "getFullYear: function",
+    @Alerts({"constructor: function", "getDate: function", "getDay: function", "getFullYear: function",
             "getHours: function", "getMilliseconds: function", "getMinutes: function", "getMonth: function",
             "getSeconds: function", "getTime: function", "getTimezoneOffset: function", "getUTCDate: function",
             "getUTCDay: function", "getUTCFullYear: function", "getUTCHours: function", "getUTCMilliseconds: function",
@@ -70,7 +70,7 @@ public class NativeDateTest extends WebDriverTestCase {
             "setUTCSeconds: function", "setYear: function", "toDateString: function",
             "toLocaleDateString: function", "toLocaleString: function",
             "toLocaleTimeString: function", "toString: function", "toTimeString: function",
-            "toUTCString: function", "valueOf: function", "UTC: undefined" })
+            "toUTCString: function", "valueOf: function", "UTC: undefined"})
     public void methods_common() throws Exception {
         final String[] methods = {"constructor", "getDate", "getDay", "getFullYear", "getHours", "getMilliseconds",
             "getMinutes", "getMonth", "getSeconds", "getTime", "getTimezoneOffset", "getUTCDate", "getUTCDay",
@@ -102,7 +102,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"toISOString: function", "toJSON: function" })
+    @Alerts({"toISOString: function", "toJSON: function"})
     public void methods_differences() throws Exception {
         final String[] methods = {"toISOString", "toJSON"};
         final String html = createHTMLTestMethods("new Date()", methods);
@@ -152,8 +152,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
-                        "2005-07-03T15:14:05.000Z" })
+    @Alerts({"2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
+                        "2005-07-03T15:14:05.000Z"})
     public void toISOString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -174,8 +174,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                        "Sun, 03 Jul 2005 15:14:05 GMT" })
+    @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
+                        "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toUTCString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -194,8 +194,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                    "Sun, 03 Jul 2005 15:14:05 GMT" })
+    @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
+                    "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toGMTString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -233,9 +233,9 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "12:00:00 AM", "7:08:09 AM" },
-            IE = { "\u200E12\u200E:\u200E00\u200E:\u200E00\u200E \u200EAM",
-                    "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM" })
+    @Alerts(DEFAULT = {"12:00:00 AM", "7:08:09 AM"},
+            IE = {"\u200E12\u200E:\u200E00\u200E:\u200E00\u200E \u200EAM",
+                    "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM"})
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

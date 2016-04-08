@@ -138,7 +138,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true"})
     public void eventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

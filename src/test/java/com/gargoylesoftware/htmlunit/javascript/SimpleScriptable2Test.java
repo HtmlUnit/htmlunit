@@ -108,7 +108,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "x1", "x2", "x3", "x4", "x5" })
+    @Alerts({"x1", "x2", "x3", "x4", "x5"})
     public void arrayedMap() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -211,7 +211,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "function", "function" })
+    @Alerts({"true", "function", "function"})
     public void callee() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -322,9 +322,9 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "function", "true", "function length() {\n    [native code]\n}", "0", "0" },
-            CHROME = { "undefined", "false", "undefined", "exception" },
-            IE = { "function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0" })
+    @Alerts(FF = { "function", "true", "function length() {\n    [native code]\n}", "0", "0"},
+            CHROME = {"undefined", "false", "undefined", "exception"},
+            IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
     @NotYetImplemented(CHROME)
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

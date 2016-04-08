@@ -34,7 +34,7 @@ public class NodeFilterTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2", "3", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048" })
+    @Alerts({"1", "2", "3", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048"})
     public void constants() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

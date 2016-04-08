@@ -161,9 +161,9 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "true" },
-            CHROME = { "undefined", "undefined" },
-            IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = {"undefined", "true"},
+            CHROME = {"undefined", "undefined"},
+            IE = {"undefined", "undefined"})
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -180,7 +180,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
+    @Alerts(FF = { "true", "books", "books", "3", "#text", "0"},
             CHROME = "exception",
             IE = "exception")
     public void load() throws Exception {
@@ -216,7 +216,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
+    @Alerts(FF = { "true", "books", "books", "3", "#text", "0"},
             CHROME = "exception",
             IE = "exception")
     // TODO what is the difference to load()?
@@ -422,7 +422,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "book", "exception /title", "exception title" })
+    @Alerts({"book", "exception /title", "exception title"})
     public void selectNodes_fromRoot() throws Exception {
         // IE11 works only if running alone
         shutDownRealIE();
@@ -525,8 +525,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "true", "true", "true", "true", "true", "true", "true", "true",
-            "false", "true", "true", "true", "true", "true", "true", "true", "true" })
+            IE = {"true", "true", "true", "true", "true", "true", "true", "true",
+            "false", "true", "true", "true", "true", "true", "true", "true", "true"})
     public void testParseError() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -671,10 +671,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "same doc: false", "in first: 3", "book", "ownerDocument: doc1",
+    @Alerts({"same doc: false", "in first: 3", "book", "ownerDocument: doc1",
             "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
             "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
-            "ownerDocument: doc2", "in first: 1", "in 2nd: 4" })
+            "ownerDocument: doc2", "in first: 1", "in 2nd: 4"})
     public void moveChildBetweenDocuments() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -721,7 +721,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "0" })
+    @Alerts({"1", "0", "1", "0"})
     public void getElementsByTagName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -754,9 +754,9 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "0", "1" },
-            CHROME = { "1", "0" },
-            IE = { "1", "0" })
+    @Alerts(DEFAULT = {"0", "1", "0", "1"},
+            CHROME = {"1", "0"},
+            IE = {"1", "0"})
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -791,8 +791,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "true", "false" },
-            IE = { "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"false", "false", "true", "false"},
+            IE = {"false", "false", "false", "false"})
     // XML ID handling not yet correctly implemented
     public void getElementById_xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -825,8 +825,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true" },
-            IE = { "false", "false" })
+    @Alerts(DEFAULT = {"true", "true"},
+            IE = {"false", "false"})
     // XML ID handling not yet correctly implemented
     public void getElementById_html() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -850,7 +850,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void getElementById_xhtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -912,7 +912,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { },
+    @Alerts(DEFAULT = {},
             IE = "1")
     public void selectionNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -983,8 +983,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object XMLDocument]", "OK" },
-            IE = { "[object Document]", "OK" })
+    @Alerts(DEFAULT = {"[object XMLDocument]", "OK"},
+            IE = {"[object Document]", "OK"})
     @NotYetImplemented(IE)
     // Real IE11 seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
@@ -1056,7 +1056,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myAttr", "" })
+    @Alerts({"myAttr", ""})
     public void createAttributeNameValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

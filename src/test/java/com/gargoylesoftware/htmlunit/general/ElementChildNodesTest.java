@@ -60,7 +60,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void abbr() throws Exception {
         loadPageWithAlerts2(test("abbr"));
     }
@@ -71,7 +71,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void acronym() throws Exception {
         loadPageWithAlerts2(test("acronym"));
     }
@@ -82,7 +82,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void a() throws Exception {
         loadPageWithAlerts2(test("a"));
     }
@@ -93,7 +93,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void address() throws Exception {
         loadPageWithAlerts2(test("address"));
     }
@@ -104,7 +104,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }
@@ -115,7 +115,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void area() throws Exception {
         loadPageWithAlerts2(test("area"));
     }
@@ -126,7 +126,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void article() throws Exception {
         loadPageWithAlerts2(test("article"));
     }
@@ -137,7 +137,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void aside() throws Exception {
         loadPageWithAlerts2(test("aside"));
     }
@@ -148,7 +148,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void audio() throws Exception {
         loadPageWithAlerts2(test("audio"));
     }
@@ -159,7 +159,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void bgsound() throws Exception {
         loadPageWithAlerts2(test("bgsound"));
     }
@@ -170,7 +170,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void base() throws Exception {
         loadPageWithAlerts2(test("base"));
     }
@@ -181,7 +181,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
     }
@@ -192,7 +192,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void bdi() throws Exception {
         loadPageWithAlerts2(test("bdi"));
     }
@@ -203,7 +203,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void bdo() throws Exception {
         loadPageWithAlerts2(test("bdo"));
     }
@@ -214,7 +214,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void big() throws Exception {
         loadPageWithAlerts2(test("big"));
     }
@@ -225,7 +225,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void blink() throws Exception {
         loadPageWithAlerts2(test("blink"));
     }
@@ -236,7 +236,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void blockquote() throws Exception {
         loadPageWithAlerts2(test("blockquote"));
     }
@@ -247,7 +247,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void body() throws Exception {
         loadPageWithAlerts2(test("body"));
     }
@@ -258,7 +258,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void b() throws Exception {
         loadPageWithAlerts2(test("b"));
     }
@@ -269,7 +269,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "4", "3", "3", "5", "4", "4" })
+    @Alerts({"4", "3", "3", "5", "4", "4"})
     public void br() throws Exception {
         loadPageWithAlerts2(test("br"));
     }
@@ -280,7 +280,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
     }
@@ -291,7 +291,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void canvas() throws Exception {
         loadPageWithAlerts2(test("canvas"));
     }
@@ -302,7 +302,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void caption() throws Exception {
         loadPageWithAlerts2(test("caption"));
     }
@@ -313,7 +313,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void center() throws Exception {
         loadPageWithAlerts2(test("center"));
     }
@@ -324,7 +324,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void cite() throws Exception {
         loadPageWithAlerts2(test("cite"));
     }
@@ -335,7 +335,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void code() throws Exception {
         loadPageWithAlerts2(test("code"));
     }
@@ -346,8 +346,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
-            FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "3"},
+            FF = { "3", "2", "2", "3", "2", "2"})
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -358,7 +358,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void datalist() throws Exception {
         loadPageWithAlerts2(test("datalist"));
     }
@@ -369,7 +369,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void dfn() throws Exception {
         loadPageWithAlerts2(test("dfn"));
     }
@@ -380,7 +380,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
@@ -391,7 +391,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void del() throws Exception {
         loadPageWithAlerts2(test("del"));
     }
@@ -402,7 +402,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void details() throws Exception {
         loadPageWithAlerts2(test("details"));
     }
@@ -413,7 +413,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void dialog() throws Exception {
         loadPageWithAlerts2(test("dialog"));
     }
@@ -424,7 +424,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dir() throws Exception {
         loadPageWithAlerts2(test("dir"));
     }
@@ -435,7 +435,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void div() throws Exception {
         loadPageWithAlerts2(test("div"));
     }
@@ -446,7 +446,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dl() throws Exception {
         loadPageWithAlerts2(test("dl"));
     }
@@ -457,7 +457,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dt() throws Exception {
         loadPageWithAlerts2(test("dt"));
     }
@@ -468,7 +468,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void embed() throws Exception {
         loadPageWithAlerts2(test("embed"));
     }
@@ -479,7 +479,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void em() throws Exception {
         loadPageWithAlerts2(test("em"));
     }
@@ -490,7 +490,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void fieldset() throws Exception {
         loadPageWithAlerts2(test("fieldset"));
     }
@@ -501,7 +501,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void figcaption() throws Exception {
         loadPageWithAlerts2(test("figcaption"));
     }
@@ -512,7 +512,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void figure() throws Exception {
         loadPageWithAlerts2(test("figure"));
     }
@@ -523,7 +523,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void font() throws Exception {
         loadPageWithAlerts2(test("font"));
     }
@@ -534,7 +534,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void form() throws Exception {
         loadPageWithAlerts2(test("form"));
     }
@@ -545,7 +545,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void footer() throws Exception {
         loadPageWithAlerts2(test("footer"));
     }
@@ -556,7 +556,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void frame() throws Exception {
         loadPageWithAlerts2(test("frame"));
     }
@@ -567,7 +567,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
     }
@@ -578,7 +578,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h1() throws Exception {
         loadPageWithAlerts2(test("h1"));
     }
@@ -589,7 +589,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h2() throws Exception {
         loadPageWithAlerts2(test("h2"));
     }
@@ -600,7 +600,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h3() throws Exception {
         loadPageWithAlerts2(test("h3"));
     }
@@ -611,7 +611,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h4() throws Exception {
         loadPageWithAlerts2(test("h4"));
     }
@@ -622,7 +622,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h5() throws Exception {
         loadPageWithAlerts2(test("h5"));
     }
@@ -633,7 +633,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h6() throws Exception {
         loadPageWithAlerts2(test("h6"));
     }
@@ -644,7 +644,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void head() throws Exception {
         loadPageWithAlerts2(test("head"));
     }
@@ -655,7 +655,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void header() throws Exception {
         loadPageWithAlerts2(test("header"));
     }
@@ -666,7 +666,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void hr() throws Exception {
         loadPageWithAlerts2(test("hr"));
     }
@@ -677,7 +677,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void html() throws Exception {
         loadPageWithAlerts2(test("html"));
     }
@@ -688,7 +688,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void iframe() throws Exception {
         loadPageWithAlerts2(test("iframe"));
     }
@@ -699,7 +699,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
     }
@@ -710,7 +710,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void img() throws Exception {
         loadPageWithAlerts2(test("img"));
     }
@@ -721,7 +721,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void ins() throws Exception {
         loadPageWithAlerts2(test("ins"));
     }
@@ -732,8 +732,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
-            CHROME = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
+            CHROME = {"3", "2", "2", "3", "2", "2"})
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -744,7 +744,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void i() throws Exception {
         loadPageWithAlerts2(test("i"));
     }
@@ -755,7 +755,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void kbd() throws Exception {
         loadPageWithAlerts2(test("kbd"));
     }
@@ -766,7 +766,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -777,7 +777,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void label() throws Exception {
         loadPageWithAlerts2(test("label"));
     }
@@ -788,7 +788,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
     }
@@ -799,7 +799,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
@@ -810,7 +810,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void listing() throws Exception {
         loadPageWithAlerts2(test("listing"));
     }
@@ -821,7 +821,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void li() throws Exception {
         loadPageWithAlerts2(test("li"));
     }
@@ -832,7 +832,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void link() throws Exception {
         loadPageWithAlerts2(test("link"));
     }
@@ -843,8 +843,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
-            IE = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
+            IE = {"3", "2", "2", "3", "2", "2"})
     public void main() throws Exception {
         loadPageWithAlerts2(test("main"));
     }
@@ -855,7 +855,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void map() throws Exception {
         loadPageWithAlerts2(test("map"));
     }
@@ -866,7 +866,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
@@ -877,7 +877,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void mark() throws Exception {
         loadPageWithAlerts2(test("mark"));
     }
@@ -888,7 +888,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void menu() throws Exception {
         loadPageWithAlerts2(test("menu"));
     }
@@ -899,7 +899,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void menuitem() throws Exception {
         loadPageWithAlerts2(test("menuitem"));
     }
@@ -910,7 +910,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void meta() throws Exception {
         loadPageWithAlerts2(test("meta"));
     }
@@ -921,7 +921,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void meter() throws Exception {
         loadPageWithAlerts2(test("meter"));
     }
@@ -932,7 +932,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void multicol() throws Exception {
         loadPageWithAlerts2(test("multicol"));
     }
@@ -943,7 +943,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void nav() throws Exception {
         loadPageWithAlerts2(test("nav"));
     }
@@ -954,7 +954,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }
@@ -965,7 +965,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void nobr() throws Exception {
         loadPageWithAlerts2(test("nobr"));
     }
@@ -976,7 +976,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void noembed() throws Exception {
         loadPageWithAlerts2(test("noembed"));
     }
@@ -987,7 +987,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void noframes() throws Exception {
         loadPageWithAlerts2(test("noframes"));
     }
@@ -998,7 +998,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void nolayer() throws Exception {
         loadPageWithAlerts2(test("nolayer"));
     }
@@ -1009,7 +1009,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void noscript() throws Exception {
         loadPageWithAlerts2(test("noscript"));
     }
@@ -1020,7 +1020,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void object() throws Exception {
         loadPageWithAlerts2(test("object"));
     }
@@ -1031,7 +1031,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void ol() throws Exception {
         loadPageWithAlerts2(test("ol"));
     }
@@ -1042,7 +1042,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -1053,7 +1053,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }
@@ -1064,7 +1064,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void output() throws Exception {
         loadPageWithAlerts2(test("output"));
     }
@@ -1075,7 +1075,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void p() throws Exception {
         loadPageWithAlerts2(test("p"));
     }
@@ -1086,7 +1086,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void param() throws Exception {
         loadPageWithAlerts2(test("param"));
     }
@@ -1108,7 +1108,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void pre() throws Exception {
         loadPageWithAlerts2(test("pre"));
     }
@@ -1119,7 +1119,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void progress() throws Exception {
         loadPageWithAlerts2(test("progress"));
     }
@@ -1130,7 +1130,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void q() throws Exception {
         loadPageWithAlerts2(test("q"));
     }
@@ -1141,7 +1141,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -1152,7 +1152,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -1163,7 +1163,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void rp() throws Exception {
         loadPageWithAlerts2(test("rp"));
     }
@@ -1174,7 +1174,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void s() throws Exception {
         loadPageWithAlerts2(test("s"));
     }
@@ -1185,7 +1185,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void samp() throws Exception {
         loadPageWithAlerts2(test("samp"));
     }
@@ -1196,7 +1196,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void script() throws Exception {
         loadPageWithAlerts2(test("script"));
     }
@@ -1207,7 +1207,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void section() throws Exception {
         loadPageWithAlerts2(test("section"));
     }
@@ -1218,7 +1218,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void select() throws Exception {
         loadPageWithAlerts2(test("select"));
     }
@@ -1229,7 +1229,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void small() throws Exception {
         loadPageWithAlerts2(test("small"));
     }
@@ -1240,7 +1240,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void source() throws Exception {
         loadPageWithAlerts2(test("source"));
     }
@@ -1249,7 +1249,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void spacer() throws Exception {
         loadPageWithAlerts2(test("spacer"));
     }
@@ -1260,7 +1260,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void span() throws Exception {
         loadPageWithAlerts2(test("span"));
     }
@@ -1271,7 +1271,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void strike() throws Exception {
         loadPageWithAlerts2(test("strike"));
     }
@@ -1282,7 +1282,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void strong() throws Exception {
         loadPageWithAlerts2(test("strong"));
     }
@@ -1293,7 +1293,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void style() throws Exception {
         loadPageWithAlerts2(test("style"));
     }
@@ -1304,7 +1304,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void sub() throws Exception {
         loadPageWithAlerts2(test("sub"));
     }
@@ -1315,7 +1315,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void summary() throws Exception {
         loadPageWithAlerts2(test("summary"));
     }
@@ -1326,7 +1326,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void sup() throws Exception {
         loadPageWithAlerts2(test("sup"));
     }
@@ -1337,7 +1337,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "3", "2" })
+    @Alerts({"3", "2", "2", "3", "3", "2"})
     public void table() throws Exception {
         loadPageWithAlerts2(test("table"));
     }
@@ -1348,7 +1348,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void col() throws Exception {
         loadPageWithAlerts2(test("col"));
     }
@@ -1359,7 +1359,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void colgroup() throws Exception {
         loadPageWithAlerts2(test("colgroup"));
     }
@@ -1370,7 +1370,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void tbody() throws Exception {
         loadPageWithAlerts2(test("tbody"));
     }
@@ -1381,7 +1381,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void td() throws Exception {
         loadPageWithAlerts2(test("td"));
     }
@@ -1392,7 +1392,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void th() throws Exception {
         loadPageWithAlerts2(test("th"));
     }
@@ -1403,7 +1403,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void tr() throws Exception {
         loadPageWithAlerts2(test("tr"));
     }
@@ -1414,7 +1414,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void track() throws Exception {
         loadPageWithAlerts2(test("track"));
     }
@@ -1425,7 +1425,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
     }
@@ -1436,7 +1436,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void tfoot() throws Exception {
         loadPageWithAlerts2(test("tfoot"));
     }
@@ -1447,7 +1447,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1", "1", "1", "1", "1" })
+    @Alerts({"1", "1", "1", "1", "1", "1"})
     public void thead() throws Exception {
         loadPageWithAlerts2(test("thead"));
     }
@@ -1458,7 +1458,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void tt() throws Exception {
         loadPageWithAlerts2(test("tt"));
     }
@@ -1469,7 +1469,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void time() throws Exception {
         loadPageWithAlerts2(test("time"));
     }
@@ -1480,7 +1480,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void title() throws Exception {
         loadPageWithAlerts2(test("title"));
     }
@@ -1491,7 +1491,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void u() throws Exception {
         loadPageWithAlerts2(test("u"));
     }
@@ -1502,7 +1502,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void ul() throws Exception {
         loadPageWithAlerts2(test("ul"));
     }
@@ -1513,7 +1513,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void var() throws Exception {
         loadPageWithAlerts2(test("var"));
     }
@@ -1524,7 +1524,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void video() throws Exception {
         loadPageWithAlerts2(test("video"));
     }
@@ -1535,7 +1535,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void wbr() throws Exception {
         loadPageWithAlerts2(test("wbr"));
     }
@@ -1546,7 +1546,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "0", "1", "1", "0", "1" })
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void xmp() throws Exception {
         loadPageWithAlerts2(test("xmp"));
     }
@@ -1557,7 +1557,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "3" })
+    @Alerts({"3", "2", "2", "3", "2", "3"})
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
     }
@@ -1568,7 +1568,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void data() throws Exception {
         loadPageWithAlerts2(test("data"));
     }
@@ -1579,7 +1579,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void content() throws Exception {
         loadPageWithAlerts2(test("content"));
     }
@@ -1590,7 +1590,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void picture() throws Exception {
         loadPageWithAlerts2(test("picture"));
     }
@@ -1601,7 +1601,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void template() throws Exception {
         loadPageWithAlerts2(test("template"));
     }

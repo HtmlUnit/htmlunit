@@ -69,7 +69,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-undefined", "-undefined", "-" })
+    @Alerts({"-undefined", "-undefined", "-"})
     public void defaultValues() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -99,7 +99,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-undefined", "-", "-" })
+    @Alerts({"-undefined", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -133,8 +133,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -172,8 +172,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -210,7 +210,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" })
+    @Alerts({"initial-undefined", "initial-default", "newValue-default", "newValue-newDefault"})
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -240,7 +240,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-OK", "newValue-OK", "newValue-OK" })
+    @Alerts({"initial-OK", "newValue-OK", "newValue-OK"})
     public void innerHtml() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -268,8 +268,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-OK", "newValue-OK", "newValue-Cancel" },
-            FF38 = { "initial-undefined", "newValue-undefined", "newValue-Cancel" })
+    @Alerts(DEFAULT = {"initial-OK", "newValue-OK", "newValue-Cancel"},
+            FF38 = { "initial-undefined", "newValue-undefined", "newValue-Cancel"})
     public void innerText() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -297,7 +297,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK" })
+    @Alerts({"initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK"})
     public void valueAttributeNode() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -328,7 +328,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "submit", "1", "button-pushme", "Second" })
+    @Alerts({"submit", "1", "button-pushme", "Second"})
     public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"

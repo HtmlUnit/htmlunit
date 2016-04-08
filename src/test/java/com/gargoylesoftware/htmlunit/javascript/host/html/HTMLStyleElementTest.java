@@ -35,7 +35,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" })
+    @Alerts({"[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined"})
     public void stylesheet() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -83,7 +83,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ ".a > .t { }", ".b > .t { }", ".c > .t { }" })
+    @Alerts({".a > .t { }", ".b > .t { }", ".c > .t { }"})
     public void innerHtml() throws Exception {
         final String html
             = "<html><head>\n"
@@ -112,7 +112,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "text/test", "text/css" })
+    @Alerts({"", "text/test", "text/css"})
     public void type() throws Exception {
         final String html
             = "<html><head>\n"
@@ -141,7 +141,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "all", "screen, print,test" })
+    @Alerts({"", "all", "screen, print,test"})
     public void media() throws Exception {
         final String html
             = "<html><head>\n"
@@ -170,7 +170,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "all", "", "screen:screen", "priNT", "screen, print" })
+    @Alerts({"all", "", "screen:screen", "priNT", "screen, print"})
     public void media_setter() throws Exception {
         final String html
             = "<html><head>\n"
@@ -207,8 +207,8 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            FF = { "false", "true" })
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            FF = { "false", "true"})
     public void scoped() throws Exception {
         final String html
             = "<html><head>\n"
@@ -235,8 +235,8 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "true", "false" },
-            FF = { "false", "true", "false" })
+    @Alerts(DEFAULT = {"undefined", "true", "false"},
+            FF = { "false", "true", "false"})
     public void scoped_setter() throws Exception {
         final String html
             = "<html><head>\n"
@@ -266,7 +266,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "text/css" })
+    @Alerts({"", "text/css"})
     public void type_setter() throws Exception {
         final String html
             = "<html><head>\n"
@@ -290,7 +290,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(0, 128, 0)", "false", "rgb(0, 0, 0)" })
+    @Alerts({"rgb(0, 128, 0)", "false", "rgb(0, 0, 0)"})
     public void disabled() throws Exception {
         final String html
             = "<html><head>\n"

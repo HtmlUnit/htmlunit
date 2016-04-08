@@ -41,8 +41,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "justify", "char", "center", "wrong", "" },
-            IE = { "left", "right", "", "", "center", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "justify", "char", "center", "wrong", ""},
+            IE = {"left", "right", "", "", "center", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -70,9 +70,9 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "justify", "char", "center" },
-            IE = { "center", "error", "center", "error", "center", "left", "right",
-                    "error", "right", "error", "right", "center" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "justify", "char", "center"},
+            IE = {"center", "error", "center", "error", "center", "left", "right",
+                    "error", "right", "error", "right", "center"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
@@ -109,7 +109,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "p", "po", "", "u", "8", "U8" })
+    @Alerts({"p", "po", "", "u", "8", "U8"})
     public void ch() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -144,7 +144,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "4", "", "5.2", "-3", "abc" })
+    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
     public void chOff() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -179,8 +179,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "1", "5", "1", "1" },
-            IE = { "1", "2", "1", "error", "error", "5", "2", "1" })
+    @Alerts(DEFAULT = {"1", "2", "1", "5", "1", "1"},
+            IE = {"1", "2", "1", "error", "error", "5", "2", "1"})
     public void span() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -222,8 +222,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
-            IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
+    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
+            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
     @NotYetImplemented({ FF, CHROME })
     public void vAlign() throws Exception {
         final String html
@@ -266,8 +266,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3" },
-            IE = { "50", "75%", "", "", "20", "", "error", "error", "80", "40", "", "", "30%", "33" })
+    @Alerts(DEFAULT = {"50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3"},
+            IE = {"50", "75%", "", "", "20", "", "error", "error", "80", "40", "", "", "30%", "33"})
     public void width() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -349,8 +349,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "string" },
-            IE = { "", "string" })
+    @Alerts(DEFAULT = {"null", "string"},
+            IE = {"", "string"})
     public void width_null() throws Exception {
         final String html
             = "<html><head>"

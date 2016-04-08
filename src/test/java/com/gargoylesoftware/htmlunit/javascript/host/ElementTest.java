@@ -39,8 +39,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "attrName attrValue", "attrValue", "null", "anotherValue",
-                    "1", "4", "<span id='label'>changed</span>" })
+    @Alerts({"1", "attrName attrValue", "attrValue", "null", "anotherValue",
+                    "1", "4", "<span id='label'>changed</span>"})
     public void attributes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -110,7 +110,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "1" })
+    @Alerts({"2", "1"})
     public void removeChild() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -137,7 +137,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "lbl_SettingName", "outerHTML", "undefined" })
+    @Alerts({"lbl_SettingName", "outerHTML", "undefined"})
     public void getAttributeNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -186,7 +186,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "book", "exception" })
+    @Alerts({"book", "exception"})
     public void selectNode_root() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -215,7 +215,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1" })
+    @Alerts({"1", "1"})
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -303,7 +303,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "undefined" })
+    @Alerts({"undefined", "undefined"})
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -323,11 +323,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDivElement],DIV",
+    @Alerts({"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV" })
+                "[object HTMLUnknownElement],APP:DIV"})
     public void html_nodeName() throws Exception {
         html("nodeName");
     }
@@ -336,11 +336,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDivElement],DIV",
+    @Alerts({"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV" })
+                "[object HTMLUnknownElement],APP:DIV"})
     public void html_tagName() throws Exception {
         html("tagName");
     }
@@ -349,11 +349,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDivElement],null",
+    @Alerts({"[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],app",
                 "[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null" })
+                "[object HTMLUnknownElement],null"})
     public void html_prefix() throws Exception {
         html("prefix");
     }
@@ -362,11 +362,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDivElement],div",
+    @Alerts({"[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object Element],dIv",
                 "[object HTMLDivElement],div",
-                "[object HTMLUnknownElement],app:div" })
+                "[object HTMLUnknownElement],app:div"})
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -375,11 +375,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDivElement],undefined",
+    @Alerts({"[object HTMLDivElement],undefined",
                 "[object HTMLUnknownElement],undefined",
                 "[object Element],undefined",
                 "[object HTMLDivElement],undefined",
-                "[object HTMLUnknownElement],undefined" })
+                "[object HTMLUnknownElement],undefined"})
     public void html_baseName() throws Exception {
         html("baseName");
     }
@@ -388,11 +388,11 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+    @Alerts({"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml" })
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"})
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -670,14 +670,14 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "prototype found", ""
+    @Alerts(DEFAULT = {"prototype found", ""
                     + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
                     + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
                     + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
                     + "DOCUMENT_POSITION_PRECEDING, "
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
-            IE = { "prototype found", "" })
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
+            IE = {"prototype found", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -810,7 +810,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "first", "third", "3", "second", "second" })
+    @Alerts({"first", "third", "3", "second", "second"})
     public void firstElementChild() throws Exception {
         final String html
             = "<html><head>\n"
@@ -842,9 +842,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "§§URL§§", "§§URL§§" },
-            CHROME = { "null", "§§URL§§" },
-            IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = {"§§URL§§", "§§URL§§"},
+            CHROME = {"null", "§§URL§§"},
+            IE = {"undefined", "undefined"})
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -868,8 +868,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLCollection] 1", "[object HTMLCollection] 2", "[object HTMLCollection] 0" },
-            IE = { "exception", "[object HTMLCollection] 2", "[object HTMLCollection] 0" })
+    @Alerts(DEFAULT = {"[object HTMLCollection] 1", "[object HTMLCollection] 2", "[object HTMLCollection] 0"},
+            IE = {"exception", "[object HTMLCollection] 2", "[object HTMLCollection] 0"})
     public void children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -903,8 +903,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "a b c" },
-            IE = { "undefined", "a b c" })
+    @Alerts(DEFAULT = {"", "a b c"},
+            IE = {"undefined", "a b c"})
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -927,7 +927,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "test value", "true", "false", "finished" })
+    @Alerts({"test value", "true", "false", "finished"})
     public void attributeNS() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -956,7 +956,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "ab", "ab" })
+    @Alerts({"ab", "ab"})
     public void removeAttribute_case_sensitive() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -1020,8 +1020,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE = { "available", "null" })
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            IE = {"available", "null"})
     public void currentStyle() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1044,7 +1044,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "undefined" })
+    @Alerts({"undefined", "undefined"})
     public void allowKeyboardInput() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1090,10 +1090,10 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "function Element() {\n    [native code]\n}",
-            "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
-            CHROME = { "function Element() { [native code] }", "[object Object]",
-            "function Element() { [native code] }" },
-            IE = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
+            "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+            CHROME = {"function Element() { [native code] }", "[object Object]",
+            "function Element() { [native code] }"},
+            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented
     public void prototypConstructor() throws Exception {
         final String html
@@ -1124,10 +1124,10 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "function Element() {\n    [native code]\n}",
-            "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
-            CHROME = { "function Element() { [native code] }", "[object Object]",
-            "function Element() { [native code] }" },
-            IE = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
+            "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+            CHROME = {"function Element() { [native code] }", "[object Object]",
+            "function Element() { [native code] }"},
+            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

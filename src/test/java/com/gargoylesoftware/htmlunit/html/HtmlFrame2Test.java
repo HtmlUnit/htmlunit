@@ -97,10 +97,10 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
-                        "parent [object HTMLFormElement]" },
-            CHROME = { "second undefined", "third [object HTMLFormElement]",
-                        "parent [object HTMLFormElement]" })
+    @Alerts(DEFAULT = {"second [object HTMLFormElement]", "third [object HTMLFormElement]",
+                        "parent [object HTMLFormElement]"},
+            CHROME = {"second undefined", "third [object HTMLFormElement]",
+                        "parent [object HTMLFormElement]"})
     // real FF sometimes alerts 'third' before 'second'
     @NotYetImplemented(CHROME)
     public void postponeLoading() throws Exception {
@@ -131,7 +131,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "second", "third", "first" })
+    @Alerts({"second", "third", "first"})
     public void frameOnload() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
             + "  <FRAME name='second' src='second.html'>\n"

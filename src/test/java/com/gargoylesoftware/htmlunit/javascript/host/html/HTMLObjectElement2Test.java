@@ -37,7 +37,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLFormElement]", "null" })
+    @Alerts({"[object HTMLFormElement]", "null"})
     public void form() throws Exception {
         final String html
             = "<html>\n"

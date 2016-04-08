@@ -153,7 +153,7 @@ public class HtmlArea2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "false", "false", "false", "false", "true" })
+    @Alerts({"false", "false", "false", "false", "false", "true"})
     public void isDisplayedEmptyArea() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"

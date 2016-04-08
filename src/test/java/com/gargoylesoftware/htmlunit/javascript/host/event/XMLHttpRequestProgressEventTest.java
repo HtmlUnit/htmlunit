@@ -96,7 +96,7 @@ public class XMLHttpRequestProgressEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = { "[object XMLHttpRequestProgressEvent]", "", "false", "false", "false", "0", "0" })
+            CHROME = {"[object XMLHttpRequestProgressEvent]", "", "false", "false", "false", "0", "0"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

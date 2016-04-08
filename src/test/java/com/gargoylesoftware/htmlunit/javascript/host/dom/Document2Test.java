@@ -157,7 +157,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "div1", "null", "2", "1" })
+    @Alerts({"div1", "null", "2", "1"})
     public void importNode_deep() throws Exception {
         importNode(true);
     }
@@ -166,7 +166,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "div1", "null", "0" })
+    @Alerts({"div1", "null", "0"})
     public void importNode_notDeep() throws Exception {
         importNode(false);
     }
@@ -194,7 +194,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"parent", "child" },
+    @Alerts(DEFAULT = {"parent", "child"},
             IE = "evaluate not available")
     public void importNodeWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
@@ -236,7 +236,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"parent", "child", "child3" },
+    @Alerts(DEFAULT = {"parent", "child", "child3"},
             IE = "evaluate not available")
     public void importNodesWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
@@ -281,7 +281,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "text1" })
+    @Alerts({"null", "text1"})
     public void activeElement() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
@@ -304,8 +304,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#" },
-            IE = { "null", "http://localhost:12345/#", "http://localhost:12345/#" })
+    @Alerts(DEFAULT = {"[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#"},
+            IE = {"null", "http://localhost:12345/#", "http://localhost:12345/#"})
     @NotYetImplemented(IE)
     public void activeElement_iframe() throws Exception {
         final String html =
@@ -361,16 +361,16 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<p>a & b</p> &amp; \u0162 \" '",
+    @Alerts(DEFAULT = {"<p>a & b</p> &amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '",
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '" },
+                        "<p>a & b</p> &amp; \u0162 \" '"},
             FF38 = { "<p>a & b</p> &amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '",
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "undefined" })
+                        "undefined"})
     public void createTextNodeWithHtml() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -394,9 +394,9 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true" },
-            FF38 = { "error", "error", "false", "false", "false" },
-            FF45 = { "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
+            FF38 = { "error", "error", "false", "false", "false"},
+            FF45 = { "false", "false", "false", "false", "false"})
     @NotYetImplemented(FF)
     public void queryCommandEnabled() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
@@ -418,7 +418,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "bar", "null", "null" })
+    @Alerts({"bar", "null", "null"})
     public void getElementById() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -440,7 +440,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "bar", "null" })
+    @Alerts({"bar", "null"})
     public void getElementById_resetId() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -522,7 +522,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "first", "newest" })
+    @Alerts({"first", "newest"})
     public void getElementById_alwaysFirstOneInDocumentOrder() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='it' class='first'></span>\n"
@@ -543,7 +543,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ })
+    @Alerts({})
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -570,7 +570,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ })
+    @Alerts({})
     public void createStyleSheet_emptyUrl() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -597,7 +597,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ })
+    @Alerts({})
     public void createStyleSheet_insertAt() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

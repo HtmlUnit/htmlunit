@@ -42,8 +42,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "3", "center", "8", "foo" },
-            IE = { "left", "right", "", "error", "error", "center", "right", "" })
+    @Alerts(DEFAULT = {"left", "right", "3", "center", "8", "foo"},
+            IE = {"left", "right", "", "error", "error", "center", "right", ""})
     public void align() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -82,7 +82,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "p", "po", "", "u", "8", "U8" })
+    @Alerts({"p", "po", "", "u", "8", "U8"})
     public void ch() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -114,7 +114,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "4", "", "5.2", "-3", "abc" })
+    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
     public void chOff() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -146,8 +146,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
-            IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
+    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
+            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
     @NotYetImplemented({ FF, CHROME })
     public void vAlign() throws Exception {
         final String html
@@ -187,8 +187,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -215,7 +215,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"false", "null", "true", "", "true", "", "true", "blah", "false", "null" })
+    @Alerts({"false", "null", "true", "", "true", "", "true", "blah", "false", "null"})
     public void noWrap() throws Exception {
         final String html =
             "<html>\n"
@@ -251,7 +251,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "blah", "3", "" })
+    @Alerts({"", "blah", "3", ""})
     public void abbr() throws Exception {
         final String html =
             "<html>\n"
@@ -280,8 +280,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "3", "1", "2", "1", "5", "1", "2", "1" },
-            IE = { "1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5" })
+    @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
+            IE = {"1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5"})
     public void colSpan() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -326,8 +326,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "3", "1", "2", "1", "5", "1", "2", "1" },
-            IE = { "1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5" })
+    @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
+            IE = {"1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5"})
     public void rowSpan() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -377,7 +377,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "blah", "abc , xyz", "3", "" })
+    @Alerts({"", "blah", "abc , xyz", "3", ""})
     public void axis() throws Exception {
         final String html =
             "<html>\n"
@@ -409,7 +409,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "100,42", "90,36" })
+    @Alerts({"100,42", "90,36"})
     @NotYetImplemented
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html
@@ -435,8 +435,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "84,42", "84,42", "100,42", "82,36", "88,36", "90,36" },
-            CHROME = { "84,42", "84,42", "100,42", "82,36", "87,36", "90,36" })
+    @Alerts(DEFAULT = {"84,42", "84,42", "100,42", "82,36", "88,36", "90,36"},
+            CHROME = {"84,42", "84,42", "100,42", "82,36", "87,36", "90,36"})
     @NotYetImplemented
     public void cellWidthHeightWithBorderCollapseCellsInRow() throws Exception {
         final String html
@@ -472,7 +472,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "84,34", "84,34", "84,34", "82,32", "82,32", "82,32" })
+    @Alerts({"84,34", "84,34", "84,34", "82,32", "82,32", "82,32"})
     @NotYetImplemented
     public void cellWidthHeightWithBorderCollapseSameCellLayout() throws Exception {
         final String html
@@ -504,8 +504,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "100px", "200px", "400", "abc", "-5", "100.2", "10%" },
-            IE = { "100", "200", "400", "error", "400", "error", "400", "100", "10%" })
+    @Alerts(DEFAULT = {"100px", "200px", "400", "abc", "-5", "100.2", "10%"},
+            IE = {"100", "200", "400", "error", "400", "error", "400", "100", "10%"})
     public void width() throws Exception {
         final String html =
             "<html>\n"
@@ -568,8 +568,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
-            IE = { "", "#667788", "#000000", "red", "#123456", "#000000" })
+    @Alerts(DEFAULT = {"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"},
+            IE = {"", "#667788", "#000000", "red", "#123456", "#000000"})
     @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html
@@ -603,8 +603,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "", "", "", "", "", "" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"", "", "", "", "", ""})
     public void borderColorDark() throws Exception {
         final String html
             = "<html><body>\n"
@@ -637,8 +637,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "", "", "", "", "", "" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"", "", "", "", "", ""})
     public void borderColorLight() throws Exception {
         final String html
             = "<html><body>\n"

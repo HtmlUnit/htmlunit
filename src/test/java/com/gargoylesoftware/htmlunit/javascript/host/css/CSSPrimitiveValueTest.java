@@ -36,7 +36,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = { "function CSSPrimitiveValue() {\n    [native code]\n}",
-                        "012345678910111213141516171819202122232425" })
+                        "012345678910111213141516171819202122232425"})
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<script>\n"
@@ -63,7 +63,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "rgb(0, 0, 255)", "0" },
+    @Alerts(DEFAULT = {"rgb(0, 0, 255)", "0"},
             IE = "style.getPropertyCSSValue not available",
             CHROME = "style.getPropertyCSSValue not available")
     public void getPropertyCSSValue() throws Exception {

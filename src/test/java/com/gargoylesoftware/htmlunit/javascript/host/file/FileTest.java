@@ -39,14 +39,14 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "1", "ScriptExceptionTest1.txt",
+    @Alerts(CHROME = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "1437920507000", "", "14", "text/plain" },
+                            "1437920507000", "", "14", "text/plain"},
             FF = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "1437920507000", "undefined", "14", "text/plain" },
-            IE = { "1", "ScriptExceptionTest1.txt",
+                            "1437920507000", "undefined", "14", "text/plain"},
+            IE = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "undefined", "undefined", "14", "text/plain" })
+                            "undefined", "undefined", "14", "text/plain"})
     public void properties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

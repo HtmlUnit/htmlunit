@@ -35,8 +35,8 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "true" },
-            IE = { "undefined", "false" })
+    @Alerts(DEFAULT = {"function", "true"},
+            IE = {"undefined", "false"})
     public void prototype() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -68,7 +68,7 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { },
+    @Alerts(DEFAULT = {},
             IE = "exception")
     public void minimalUsage() throws Exception {
         final String html = "<html><body><script>\n"

@@ -34,7 +34,7 @@ public class HTMLParamElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myValue", "", "", "" })
+    @Alerts({"myValue", "", "", ""})
     public void value() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -64,7 +64,7 @@ public class HTMLParamElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "testParam", "", "", "" })
+    @Alerts({"testParam", "", "", ""})
     public void name() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -94,7 +94,7 @@ public class HTMLParamElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "ttt", "", "", "", "ttt", "", "", "", "ttt", "ttt", "ttt" })
+    @Alerts({"ttt", "", "", "", "ttt", "", "", "", "ttt", "ttt", "ttt"})
     public void type() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -133,7 +133,7 @@ public class HTMLParamElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "ref", "object", "data", "foo" })
+    @Alerts({"ref", "object", "data", "foo"})
     public void valueType() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -41,7 +41,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_appendChild_docFragment() throws Exception {
         performTest(true, true, false, true, false);
     }
@@ -50,7 +50,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_appendChild_docFragment() throws Exception {
         performTest(false, true, false, true, false);
     }
@@ -59,7 +59,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_insertBefore_docFragment() throws Exception {
         performTest(true, false, false, true, false);
     }
@@ -68,7 +68,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_insertBefore_docFragment() throws Exception {
         performTest(false, false, false, true, false);
     }
@@ -77,7 +77,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_appendChild_fromHtml_docFragment() throws Exception {
         performTest(true, true, true, true, false);
     }
@@ -86,7 +86,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_appendChild_fromHtml_docFragment() throws Exception {
         performTest(false, true, true, true, false);
     }
@@ -95,7 +95,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_insertBefore_fromHtml_docFragment() throws Exception {
         performTest(true, false, true, true, false);
     }
@@ -104,7 +104,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_insertBefore_fromHtml_docFragment() throws Exception {
         performTest(false, false, true, true, false);
     }
@@ -113,7 +113,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_appendChild_docFragment_cloneNode() throws Exception {
         performTest(true, true, false, true, true);
     }
@@ -122,7 +122,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_appendChild_docFragment_cloneNode() throws Exception {
         performTest(false, true, false, true, true);
     }
@@ -131,7 +131,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_insertBefore_docFragment_cloneNode() throws Exception {
         performTest(true, false, false, true, true);
     }
@@ -140,7 +140,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_insertBefore_docFragment_cloneNode() throws Exception {
         performTest(false, false, false, true, true);
     }
@@ -149,7 +149,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_appendChild_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(true, true, true, true, true);
     }
@@ -158,7 +158,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_appendChild_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(false, true, true, true, true);
     }
@@ -167,7 +167,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void checked_insertBefore_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(true, false, true, true, true);
     }
@@ -176,7 +176,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false" })
+    @Alerts({"false", "false", "false"})
     public void notchecked_insertBefore_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(false, false, true, true, true);
     }
@@ -185,7 +185,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_appendChild() throws Exception {
         performTest(true, true, false, false, false);
     }
@@ -194,7 +194,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_appendChild() throws Exception {
         performTest(false, true, false, false, false);
     }
@@ -203,7 +203,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_insertBefore() throws Exception {
         performTest(true, false, false, false, false);
     }
@@ -212,7 +212,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_insertBefore() throws Exception {
         performTest(false, false, false, false, false);
     }
@@ -221,7 +221,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_appendChild_fromHtml() throws Exception {
         performTest(true, true, true, false, false);
     }
@@ -230,7 +230,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_appendChild_fromHtml() throws Exception {
         performTest(false, true, true, false, false);
     }
@@ -239,7 +239,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_insertBefore_fromHtml() throws Exception {
         performTest(true, false, true, false, false);
     }
@@ -248,7 +248,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_insertBefore_fromHtml() throws Exception {
         performTest(false, false, true, false, false);
     }
@@ -257,7 +257,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_appendChild_cloneNode() throws Exception {
         performTest(true, true, false, false, true);
     }
@@ -266,7 +266,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_appendChild_cloneNode() throws Exception {
         performTest(false, true, false, false, true);
     }
@@ -275,7 +275,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_insertBefore_cloneNode() throws Exception {
         performTest(true, false, false, false, true);
     }
@@ -284,7 +284,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_insertBefore_cloneNode() throws Exception {
         performTest(false, false, false, false, true);
     }
@@ -293,7 +293,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(true, true, true, false, true);
     }
@@ -302,7 +302,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(false, true, true, false, true);
     }
@@ -311,7 +311,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void checked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(true, false, true, false, true);
     }
@@ -320,7 +320,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "false", "true", "true", "true" })
+    @Alerts({"false", "false", "false", "true", "true", "true"})
     public void notchecked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(false, false, true, false, true);
     }
@@ -420,7 +420,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true-true", "true-true", "false-false", "false-false", "true-true", "false-false" })
+    @Alerts({"true-true", "true-true", "false-false", "false-false", "true-true", "false-false"})
     public void defaultChecked() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -611,7 +611,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "on-", "on-", "on-", "on-" })
+    @Alerts({"on-", "on-", "on-", "on-"})
     public void defaultValues() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -648,7 +648,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "on-", "on-", "on-", "on-" })
+    @Alerts({"on-", "on-", "on-", "on-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -689,8 +689,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -730,8 +730,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -770,7 +770,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault"})
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -830,7 +830,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "null", "false", "", "false", "yes"})
+    @Alerts({"true", "null", "false", "", "false", "yes"})
     public void checkedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -872,7 +872,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
+    @Alerts({"false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
                         "true", "yes", "false", "yes", "true", "yes"})
     public void checkedAttributeJS() throws Exception {
         final String html =
@@ -932,7 +932,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "null", "false", "null", "true", "", "true", "",
+    @Alerts({"false", "null", "false", "null", "true", "", "true", "",
                         "true", "yes", "true", "yes"})
     public void defaultCheckedAttribute() throws Exception {
         final String html =

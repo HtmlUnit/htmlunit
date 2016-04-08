@@ -38,9 +38,9 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second" },
-            FF = { "function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second" },
-            IE = { "undefined", "exception" })
+    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second"},
+            FF = { "function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second"},
+            IE = {"undefined", "exception"})
     @NotYetImplemented(FF)
     public void simple() throws Exception {
         final String html = "<html><body>\n"

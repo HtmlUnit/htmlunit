@@ -47,7 +47,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
+    @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domain() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -66,7 +66,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "gargoylesoftware.com" })
+    @Alerts({"localhost", "gargoylesoftware.com"})
     public void domainFromLocalhost() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -86,7 +86,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
+    @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
@@ -108,7 +108,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
+    @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -127,7 +127,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com" })
+    @Alerts({"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"})
     public void domainLong() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -149,7 +149,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost" })
+    @Alerts({"localhost", "localhost"})
     public void domainSetSelf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -194,8 +194,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "www.gargoylesoftware.com", "www.gargoylesoftware.com" },
-            IE = { "www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception" })
+    @Alerts(DEFAULT = {"www.gargoylesoftware.com", "www.gargoylesoftware.com"},
+            IE = {"www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception"})
     public void domain_set_for_about_blank() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -219,7 +219,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "one", "two", "three", "four" })
+    @Alerts({"one", "two", "three", "four"})
     public void cookie_read() throws Exception {
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -259,7 +259,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "", "", "" })
+    @Alerts({"false", "", "", ""})
     public void cookie_write_cookiesDisabled() throws Exception {
         final String html = HTMLDocumentTest.getCookieWriteHtmlCode();
 
@@ -275,7 +275,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "", "blah=bleh" })
+    @Alerts({"", "", "blah=bleh"})
     public void cookieInLocalFile() throws Exception {
         final WebClient client = getWebClient();
 

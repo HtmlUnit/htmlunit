@@ -227,7 +227,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foo0", "foo1" })
+    @Alerts({"foo0", "foo1"})
     public void button_onClickTwice() throws Exception {
         onClickPageTest("<body><form>\n"
                 + "<button id='clickId' onClick='alert(\"foo\" + count++); return false;'>Item</button>\n"

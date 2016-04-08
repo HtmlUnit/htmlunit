@@ -51,9 +51,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
+    @Alerts(DEFAULT = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false"},
             IE = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
-                    "true", "[object HTMLStyleElement]", "true" })
+                    "true", "[object HTMLStyleElement]", "true"})
     public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -77,8 +77,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "4", "0", "1", "2", "3", "length", "item" },
-            FF = { "4", "0", "1", "2", "3", "item", "length" })
+    @Alerts(DEFAULT = {"4", "0", "1", "2", "3", "length", "item"},
+            FF = { "4", "0", "1", "2", "3", "item", "length"})
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -109,7 +109,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" })
+    @Alerts({"4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null"})
     public void href() throws Exception {
         final String baseUrl = getDefaultUrl().toExternalForm();
         final String html =
@@ -144,11 +144,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "8", "§§URL§§style1.css 1", "§§URL§§style2.css 0",
+    @Alerts(DEFAULT = {"8", "§§URL§§style1.css 1", "§§URL§§style2.css 0",
                         "§§URL§§style3.css 0", "§§URL§§style4.css 1",
                         "§§URL§§style5.css 1", "§§URL§§style6.css 0",
                         "§§URL§§style7.css 0", "§§URL§§style8.css 1"},
-            IE = { "2", "§§URL§§style1.css 1", "§§URL§§style5.css 1"})
+            IE = {"2", "§§URL§§style1.css 1", "§§URL§§style5.css 1"})
     @NotYetImplemented
     public void hrefWrongContentType() throws Exception {
         final String baseUrl = getDefaultUrl().toExternalForm();
@@ -192,8 +192,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "false", "false", "0", "2", "p" },
-            FF = { "1", "false", "true", "0", "2", "p" })
+    @Alerts(DEFAULT = {"1", "false", "false", "0", "2", "p"},
+            FF = { "1", "false", "true", "0", "2", "p"})
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -222,8 +222,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "false", "false", "undefined", "1", "div" },
-            FF = { "2", "false", "true", "undefined", "1", "div" })
+    @Alerts(DEFAULT = {"2", "false", "false", "undefined", "1", "div"},
+            FF = { "2", "false", "true", "undefined", "1", "div"})
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -343,7 +343,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", ".testStyleDef", ".testStyle" })
+    @Alerts({"2", ".testStyleDef", ".testStyle"})
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -398,8 +398,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "true", "true", "false" },
-            CHROME = { "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"false", "false", "true", "true", "false"},
+            CHROME = {"false", "false", "false", "false", "false"})
     public void langCondition() throws Exception {
         final String htmlSnippet = "<div id='elt2' lang='en'></div>\n"
                 + "  <div id='elt3' lang='en-GB'></div>\n"
@@ -411,8 +411,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "true", "false", "true" },
-            CHROME = { "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"false", "false", "true", "false", "true"},
+            CHROME = {"false", "false", "false", "false", "false"})
     public void langConditionParent() throws Exception {
         final String htmlSnippet =
                 "<div id='elt2' lang='en'>\n"
@@ -426,8 +426,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-            CHROME = { "false", "false" })
+    @Alerts(DEFAULT = {"true", "false"},
+            CHROME = {"false", "false"})
     public void css2_root() throws Exception {
         doTest(":root", "");
     }
@@ -437,8 +437,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "false" },
-            CHROME = { "false", "false", "false" })
+    @Alerts(DEFAULT = {"true", "true", "false"},
+            CHROME = {"false", "false", "false"})
     public void css3_not() throws Exception {
         doTest(":not(span)", "<span id='elt2'></span>");
     }
@@ -447,8 +447,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"false", "false", "true", "false", "true", "true", "true", "true"},
+            CHROME = {"false", "false", "false", "false", "false", "false", "false", "false"})
     public void css3_enabled() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' disabled>\n"
@@ -463,8 +463,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"false", "false", "true", "false", "true", "true", "true", "true"},
+            CHROME = {"false", "false", "false", "false", "false", "false", "false", "false"})
     public void css3_disabled() throws Exception {
         final String htmlSnippet = "<input id='elt2' disabled>\n"
             + "<input id='elt3'>\n"
@@ -479,8 +479,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "false", "true", "false", "true", "false" },
-            CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = {"false", "false", "false", "false", "true", "false", "true", "false"},
+            CHROME = {"false", "false", "false", "false", "false", "false", "false", "false"})
     public void css3_checked() throws Exception {
         final String htmlSnippet = "  <input id='elt2'>\n"
             + "  <input id='elt3' checked>\n"
@@ -630,8 +630,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "10", "10" },
-            CHROME = { "auto", "auto" })
+    @Alerts(DEFAULT = {"10", "10"},
+            CHROME = {"auto", "auto"})
     public void rulePriority_position() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -657,7 +657,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnStyleTag_noMedia() throws Exception {
         mediaOnStyleTag("");
     }
@@ -666,7 +666,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnStyleTag_whitespace() throws Exception {
         mediaOnStyleTag(" ");
     }
@@ -675,7 +675,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnStyleTag_all() throws Exception {
         mediaOnStyleTag("all");
     }
@@ -684,7 +684,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnStyleTag_screen() throws Exception {
         mediaOnStyleTag("screen");
     }
@@ -693,7 +693,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaOnStyleTag_print() throws Exception {
         mediaOnStyleTag("print");
     }
@@ -702,7 +702,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnStyleTag_print_not() throws Exception {
         mediaOnStyleTag("not print");
     }
@@ -711,7 +711,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnStyleTag_multipleWithScreen() throws Exception {
         mediaOnStyleTag("print, screen, tv");
     }
@@ -720,7 +720,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaOnStyleTag_multipleWithoutScreen() throws Exception {
         mediaOnStyleTag("print, projection, tv");
     }
@@ -745,7 +745,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnLinkTag_noMedia() throws Exception {
         mediaOnLinkTag("");
     }
@@ -754,7 +754,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnLinkTag_whitespace() throws Exception {
         mediaOnLinkTag(" ");
     }
@@ -763,7 +763,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnLinkTag_all() throws Exception {
         mediaOnLinkTag("all");
     }
@@ -772,7 +772,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnLinkTag_screen() throws Exception {
         mediaOnLinkTag("screen");
     }
@@ -781,8 +781,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            CHROME = { "block", "0" })
+    @Alerts(DEFAULT = {"block", "1"},
+            CHROME = {"block", "0"})
     public void mediaOnLinkTag_notScreen() throws Exception {
         mediaOnLinkTag("print");
     }
@@ -791,7 +791,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaOnLinkTag_multipleWithScreen() throws Exception {
         mediaOnLinkTag("print, screen, tv");
     }
@@ -800,8 +800,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            CHROME = { "block", "0" })
+    @Alerts(DEFAULT = {"block", "1"},
+            CHROME = {"block", "0"})
     public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
         mediaOnLinkTag("print, projection, tv");
     }
@@ -828,7 +828,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_screen() throws Exception {
         mediaRule("screen");
     }
@@ -837,7 +837,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_notScreen() throws Exception {
         mediaRule("print");
     }
@@ -846,7 +846,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_multipleWithScreen() throws Exception {
         mediaRule("print, screen, tv");
     }
@@ -855,7 +855,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_multipleWithoutScreen() throws Exception {
         mediaRule("print, projection, tv");
     }
@@ -864,8 +864,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            IE = { "none", "1" })
+    @Alerts(DEFAULT = {"block", "1"},
+            IE = {"none", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_max_width() throws Exception {
         mediaRule("screen and (max-width: 123px)");
@@ -875,7 +875,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_max_width_match() throws Exception {
         mediaRule("screen and (max-width: 10000px)");
     }
@@ -884,7 +884,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_min_width() throws Exception {
         mediaRule("screen and (min-width: 10000px)");
     }
@@ -893,8 +893,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE = { "block", "1" })
+    @Alerts(DEFAULT = {"none", "1"},
+            IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_min_width_match() throws Exception {
         mediaRule("screen and (min-width: 123px)");
@@ -904,7 +904,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_max_device_width() throws Exception {
         mediaRule("screen and (max-device-width: 123px)");
     }
@@ -913,7 +913,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_max_device_width_match() throws Exception {
         mediaRule("screen and (max-device-width: 10000px)");
     }
@@ -922,7 +922,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_min_device_width() throws Exception {
         mediaRule("screen and (min-device-width: 10000px)");
     }
@@ -931,7 +931,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_min_device_width_match() throws Exception {
         mediaRule("screen and (min-device-width: 123px)");
     }
@@ -940,8 +940,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            IE = { "none", "1" })
+    @Alerts(DEFAULT = {"block", "1"},
+            IE = {"none", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_max_height() throws Exception {
         mediaRule("screen and (max-height: 123px)");
@@ -951,7 +951,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_max_height_match() throws Exception {
         mediaRule("screen and (max-height: 10000px)");
     }
@@ -960,7 +960,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_min_height() throws Exception {
         mediaRule("screen and (min-height: 10000px)");
     }
@@ -969,8 +969,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE = { "block", "1" })
+    @Alerts(DEFAULT = {"none", "1"},
+            IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_min_height_match() throws Exception {
         mediaRule("screen and (min-height: 123px)");
@@ -980,7 +980,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_max_device_height() throws Exception {
         mediaRule("screen and (max-device-height: 123px)");
     }
@@ -989,7 +989,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_max_device_height_match() throws Exception {
         mediaRule("screen and (max-device-height: 10000px)");
     }
@@ -998,7 +998,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_min_device_height() throws Exception {
         mediaRule("screen and (min-device-height: 10000px)");
     }
@@ -1007,7 +1007,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_min_device_height_match() throws Exception {
         mediaRule("screen and (min-device-height: 123px)");
     }
@@ -1016,7 +1016,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_resolution() throws Exception {
         mediaRule("screen and (resolution: 4dpi)");
     }
@@ -1025,8 +1025,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE = { "block", "1" })
+    @Alerts(DEFAULT = {"none", "1"},
+            IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_resolution_match() throws Exception {
         mediaRule("screen and (resolution: 96dpi)");
@@ -1036,8 +1036,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            IE = { "none", "1" })
+    @Alerts(DEFAULT = {"block", "1"},
+            IE = {"none", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_max_resolution() throws Exception {
         mediaRule("screen and (max-resolution: 90dpi)");
@@ -1047,7 +1047,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "none", "1" })
+    @Alerts({"none", "1"})
     public void mediaRule_max_resolution_match() throws Exception {
         mediaRule("screen and (max-resolution: 10000dpi)");
     }
@@ -1056,7 +1056,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_min_resolution() throws Exception {
         mediaRule("screen and (min-resolution: 10000dpi)");
     }
@@ -1065,8 +1065,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE = { "block", "1" })
+    @Alerts(DEFAULT = {"none", "1"},
+            IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_min_resolution_match() throws Exception {
         mediaRule("screen and (min-resolution: 10dpi)");
@@ -1076,8 +1076,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            IE = { "none", "1" })
+    @Alerts(DEFAULT = {"block", "1"},
+            IE = {"none", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_portrait() throws Exception {
         mediaRule("screen and (orientation: portrait)");
@@ -1087,8 +1087,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE = { "block", "1" })
+    @Alerts(DEFAULT = {"none", "1"},
+            IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_portrait_not() throws Exception {
         mediaRule("not screen and (orientation: portrait)");
@@ -1098,8 +1098,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "none", "1" },
-            IE = { "block", "1" })
+    @Alerts(DEFAULT = {"none", "1"},
+            IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_landscape() throws Exception {
         mediaRule("screen and (orientation: landscape)");
@@ -1109,8 +1109,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" },
-            IE = { "none", "1" })
+    @Alerts(DEFAULT = {"block", "1"},
+            IE = {"none", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_landscape_not() throws Exception {
         mediaRule("not screen and (orientation: landscape)");
@@ -1120,7 +1120,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts({"block", "1"})
     public void mediaRule_invalidOrientation() throws Exception {
         mediaRule("screen and (orientation: unknown)");
     }

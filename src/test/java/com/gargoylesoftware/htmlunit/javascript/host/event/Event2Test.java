@@ -44,10 +44,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [clickMe] [1]" },
-            IE = { "[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [select] [1]" })
+    @Alerts(DEFAULT = {"[object Event] change b:true c:false [select] [-]",
+                "[object MouseEvent] click b:true c:true [clickMe] [1]"},
+            IE = {"[object Event] change b:true c:false [select] [-]",
+                "[object MouseEvent] click b:true c:true [select] [1]"})
     @BuggyWebDriver({ CHROME, FF })
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
@@ -90,12 +90,12 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object MouseEvent] click b:true c:true [radio] [1]",
-                "[object Event] change b:true c:false [radio] [-]" },
+    @Alerts(CHROME = {"[object MouseEvent] click b:true c:true [radio] [1]",
+                "[object Event] change b:true c:false [radio] [-]"},
             FF = { "[object MouseEvent] click b:true c:true [radio] [1]",
-                "[object Event] change b:true c:false [radio] [-]" },
-            IE = { "[object Event] change b:true c:false [radio] [-]",
-                "[object PointerEvent] click b:true c:true [radio] [1]" })
+                "[object Event] change b:true c:false [radio] [-]"},
+            IE = {"[object Event] change b:true c:false [radio] [-]",
+                "[object PointerEvent] click b:true c:true [radio] [1]"})
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -108,12 +108,12 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
-                "[object Event] change b:true c:false [checkbox] [-]" },
+    @Alerts(CHROME = {"[object MouseEvent] click b:true c:true [checkbox] [1]",
+                "[object Event] change b:true c:false [checkbox] [-]"},
             FF = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
-                "[object Event] change b:true c:false [checkbox] [-]" },
-            IE = { "[object Event] change b:true c:false [checkbox] [-]",
-                "[object PointerEvent] click b:true c:true [checkbox] [1]" })
+                "[object Event] change b:true c:false [checkbox] [-]"},
+            IE = {"[object Event] change b:true c:false [checkbox] [-]",
+                "[object PointerEvent] click b:true c:true [checkbox] [1]"})
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
@@ -300,9 +300,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+    @Alerts({"[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
                 "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
-                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]"})
     public void inputTextType() throws Exception {
         final String firstSnippet = "       <input type='text' id='typeHere'\n";
         final String secondSnippet = "/>\n";
@@ -315,9 +315,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+    @Alerts({"[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
                 "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
-                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]"})
     public void inputPasswordType() throws Exception {
         final String firstSnippet = "       <input type='password' id='typeHere'\n";
         final String secondSnippet = "/>\n";
@@ -330,9 +330,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+    @Alerts({"[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
                 "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
-                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]" })
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]"})
     public void textAreaType() throws Exception {
         final String firstSnippet = "       <textarea id='typeHere' rows='4' cols='2'\n";
         final String secondSnippet = "></textarea >\n";
@@ -423,7 +423,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "pass", "fail:66", "fail:undefined" })
+    @Alerts({"pass", "fail:66", "fail:undefined"})
     public void eventOnKeyDown() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -461,7 +461,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"object", "undefined", "undefined", "undefined", "undefined",
-            "object", "false", "false", "false", "false" })
+            "object", "false", "false", "false", "false"})
     public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -518,7 +518,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DOMContentLoaded type=DOMContentLoaded", "onLoad" })
+    @Alerts({"DOMContentLoaded type=DOMContentLoaded", "onLoad"})
     public void testDOMContentLoaded() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -540,7 +540,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "not canceled", "true", "canceled", "true" })
+    @Alerts({"false", "not canceled", "true", "canceled", "true"})
     public void testPreventDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -593,8 +593,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "SPAN" },
-            FF = { "false", "true", "SPAN" })
+    @Alerts(DEFAULT = {"false", "false", "SPAN"},
+            FF = { "false", "true", "SPAN"})
     public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"
@@ -622,7 +622,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "capturing", "at target", "bubbling" })
+    @Alerts({"capturing", "at target", "bubbling"})
     public void eventPhase() throws Exception {
         final String html =
               "<html>\n"
@@ -659,8 +659,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "window capturing", "div capturing", "span capturing",
-                "span bubbling", "div", "div bubbling", "window bubbling" })
+    @Alerts({"window capturing", "div capturing", "span capturing",
+                "span bubbling", "div", "div bubbling", "window bubbling"})
     public void eventCapturingAndBubbling() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -715,9 +715,9 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
                 "true"},
             CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing, false", "true",
-                "div capturing", "true", "true", "span capturing", "true", "true" },
+                "div capturing", "true", "true", "span capturing", "true", "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
-                "div capturing", "false", "false", "span capturing", "false", "true" })
+                "div capturing", "false", "false", "span capturing", "false", "true"})
     @NotYetImplemented({ CHROME, IE })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
@@ -764,7 +764,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" })
+    @Alerts({"w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2"})
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

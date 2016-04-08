@@ -48,8 +48,8 @@ public class TinyMceTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "348", "0" },
-            IE = { "348", "13" })
+    @Alerts(DEFAULT = {"348", "0"},
+            IE = {"348", "13"})
     @NotYetImplemented(IE)
     // TODO [IE11]XML tinymce 3.2.7 is not compatible with IE11
     public void api() throws Exception {
@@ -60,8 +60,8 @@ public class TinyMceTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "89", "0" },
-            IE = { "89", "4" })
+    @Alerts(DEFAULT = {"89", "0"},
+            IE = {"89", "4"})
     @NotYetImplemented
     // TODO [IE11]XML tinymce 3.2.7 is not compatible with IE11
     public void basic() throws Exception {

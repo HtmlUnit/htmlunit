@@ -62,7 +62,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void eventListener() throws Exception {
         final String html
             = "<html><head>\n"
@@ -95,7 +95,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void eventListener_return_false() throws Exception {
         final String html
             = "<html><head>\n"
@@ -137,7 +137,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2", "§§URL§§second/" })
+    @Alerts({"1", "2", "§§URL§§second/"})
     public void eventListener_returnValue_false() throws Exception {
         final String html
             = "<html><head>\n"

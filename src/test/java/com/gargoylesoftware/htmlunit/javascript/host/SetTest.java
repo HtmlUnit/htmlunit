@@ -34,8 +34,8 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "true" },
-            IE = { "1", "false" })
+    @Alerts(DEFAULT = {"3", "true"},
+            IE = {"1", "false"})
     public void has() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -62,10 +62,10 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]" },
+    @Alerts(DEFAULT = {"function values() { [native code] }",
+                "[object Set Iterator]", "0", "1", "[object Object]"},
             FF = { "function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]" },
+                    "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = { })
     public void iterator() throws Exception {
         final String html =
@@ -98,10 +98,10 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]" },
+    @Alerts(DEFAULT = {"function values() { [native code] }",
+                "[object Set Iterator]", "0", "1", "[object Object]"},
             FF = { "function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]" },
+                "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = { })
     public void values() throws Exception {
         final String html =

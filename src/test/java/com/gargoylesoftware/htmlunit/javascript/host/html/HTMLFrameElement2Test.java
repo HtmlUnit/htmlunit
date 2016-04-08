@@ -64,7 +64,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDocument]", "true" })
+    @Alerts({"[object HTMLDocument]", "true"})
     public void contentDocument() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -112,7 +112,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
+    @Alerts({"frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0"})
     public void frameTag1192854() throws Exception {
         final String html
             = "<html>\n"
@@ -145,7 +145,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function handler() {}", "null", "null" })
+    @Alerts({"function handler() {}", "null", "null"})
     @NotYetImplemented
     // Currently a \n is put between the {}
     public void onloadNull() throws Exception {
@@ -177,8 +177,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "§§URL§§subdir/frame.html", "§§URL§§frame.html" },
-            IE = { "§§URL§§subdir/frame.html" })
+    @Alerts(DEFAULT = {"§§URL§§subdir/frame.html", "§§URL§§frame.html"},
+            IE = {"§§URL§§subdir/frame.html"})
     @NotYetImplemented(IE)
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");
@@ -257,8 +257,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
-        "/frame2.html", "oFrame.foo: foo of frame 2" })
+    @Alerts({"about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
+        "/frame2.html", "oFrame.foo: foo of frame 2"})
     public void changingFrameDocumentLocation() throws Exception {
         final String firstHtml = "<html><head><script>\n"
             + "var oFrame;\n"
@@ -384,7 +384,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "head", "bottom", "frameset" })
+    @Alerts({"head", "bottom", "frameset"})
     public void onloadOrderRows() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50%,*' onLoad='alert(\"frameset\")'>\n"
@@ -411,7 +411,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "left", "right", "frameset" })
+    @Alerts({"left", "right", "frameset"})
     public void onloadOrderCols() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset cols='50%,*' onLoad='alert(\"frameset\")'>\n"
@@ -438,10 +438,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "OnloadTest", "header -> content -> frameSet",
+    @Alerts({"OnloadTest", "header -> content -> frameSet",
                 "content\nClick for new frame content with onload",
                 "header -> content -> frameSet -> onloadFrame",
-                "onloadFrame\nNew content loaded..." })
+                "onloadFrame\nNew content loaded..."})
     public void windowLocationReplaceOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
@@ -512,11 +512,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "OnloadTest", "header -> content -> frameSet",
+    @Alerts(DEFAULT = {"OnloadTest", "header -> content -> frameSet",
                         "content\nClick for new frame content with onload",
                         "header -> content -> frameSet -> onloadFrame",
-                        "onloadFrame\nNew content loaded..." },
-            FF = { "OnloadTest", "header -> frameSet", "" })
+                        "onloadFrame\nNew content loaded..."},
+            FF = { "OnloadTest", "header -> frameSet", ""})
     @NotYetImplemented(FF)
     public void windowLocationAssignOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
@@ -590,10 +590,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "OnloadTest", "header -> content -> frameSet",
+    @Alerts({"OnloadTest", "header -> content -> frameSet",
                 "content\nClick for new frame content with onload",
                 "header -> content -> frameSet -> onloadFrame",
-                "onloadFrame\nNew content loaded..." })
+                "onloadFrame\nNew content loaded..."})
     @NotYetImplemented
     public void windowLocationSetOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
@@ -667,7 +667,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost", "localhost", "localhost" })
+    @Alerts({"localhost", "localhost", "localhost", "localhost"})
     public void domain() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

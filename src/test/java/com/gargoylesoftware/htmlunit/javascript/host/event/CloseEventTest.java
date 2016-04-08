@@ -52,7 +52,7 @@ public class CloseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CloseEvent]", "type-close", "false", "false", "0", "", "false" },
+    @Alerts(DEFAULT = {"[object CloseEvent]", "type-close", "false", "false", "0", "", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -74,7 +74,7 @@ public class CloseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CloseEvent]", "type-close", "true", "false", "42", "test-reason", "true" },
+    @Alerts(DEFAULT = {"[object CloseEvent]", "type-close", "true", "false", "42", "test-reason", "true"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -101,8 +101,8 @@ public class CloseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "0", "", "false" },
-            CHROME = {"[object CloseEvent]", "close", "false", "false", "0", "", "false" },
+    @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "0", "", "false"},
+            CHROME = {"[object CloseEvent]", "close", "false", "false", "0", "", "false"},
             FF45 = "exception")
     @BuggyWebDriver(IE)
     public void create_createEvent() throws Exception {
@@ -125,7 +125,7 @@ public class CloseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object CloseEvent]", "close", "true", "false", "42", "time to close", "true" },
+    @Alerts(DEFAULT = {"[object CloseEvent]", "close", "true", "false", "42", "time to close", "true"},
             CHROME = "no initCloseEvent",
             FF45 = "exception")
     public void initCloseEvent() throws Exception {

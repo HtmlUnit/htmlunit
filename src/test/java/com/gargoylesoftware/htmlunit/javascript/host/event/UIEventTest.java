@@ -38,7 +38,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DOM2: [object UIEvent]", "DOM3: [object UIEvent]" })
+    @Alerts({"DOM2: [object UIEvent]", "DOM3: [object UIEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -58,7 +58,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "[object UIEvent]", "click", "true", "true", "true", "7" })
+    @Alerts({"[object UIEvent]", "click", "true", "true", "true", "7"})
     public void initUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -79,8 +79,8 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2" },
-            IE = { "[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0" })
+    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2"},
+            IE = {"[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0"})
     // FF38 has a detail of '1' for the double click but it is '2' when executed manually
     public void detail() throws Exception {
         final String html =
@@ -107,8 +107,8 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "[object Window]" },
-            IE = { "[object Event]", "undefined", "[object PointerEvent]", "[object Window]" })
+    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "[object Window]"},
+            IE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"})
     public void view() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"

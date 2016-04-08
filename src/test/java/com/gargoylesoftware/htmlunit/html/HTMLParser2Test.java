@@ -51,7 +51,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "beforeafter", "undefined" })
+    @Alerts({"beforeafter", "undefined"})
     @NotYetImplemented
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
@@ -120,7 +120,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "P", "BUTTON", "DIV" })
+    @Alerts({"P", "BUTTON", "DIV"})
     public void divInsideButton() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -148,7 +148,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "P", "LABEL", "OBJECT" })
+    @Alerts({"P", "LABEL", "OBJECT"})
     public void objectInsideLabel() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -245,7 +245,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" })
+    @Alerts({"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"})
     public void childNodes_p_parent() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -277,7 +277,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" })
+    @Alerts({"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"})
     public void childNodes_f() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -310,7 +310,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" })
+    @Alerts({"<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->"})
     public void ieConditionalCommentsNotInDom() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -50,7 +50,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "after", "comment" })
+    @Alerts({"after", "comment"})
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
@@ -67,8 +67,8 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "after", "undefined" },
-            FF38 = { "undefined", "undefined" })
+    @Alerts(DEFAULT = {"after", "undefined"},
+            FF38 = { "undefined", "undefined"})
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

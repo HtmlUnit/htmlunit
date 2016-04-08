@@ -37,7 +37,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -75,7 +75,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -112,8 +112,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-", "default-default", "some text-default", "some text-newdefault" },
-            IE = { "-", "-default", "some text-default", "some text-newdefault" })
+    @Alerts(DEFAULT = {"-", "default-default", "some text-default", "some text-newdefault"},
+            IE = {"-", "-default", "some text-default", "some text-newdefault"})
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -143,8 +143,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "7" },
-            IE = { "textLength not available" })
+    @Alerts(DEFAULT = {"7"},
+            IE = {"textLength not available"})
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -195,8 +195,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10" },
-            IE = { "0,0", "0,0", "3,3", "3,10" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
+            IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -205,8 +205,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11" },
-            IE = { "0,0", "0,0", "0,0", "0,11" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -215,8 +215,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
-            IE = { "0,0", "0,0", "10,10", "5,5" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
+            IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -244,8 +244,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "4,5", "10,10", "4,4", "1,1" },
-            IE = { "0,0", "4,5", "0,0", "0,0", "0,0" })
+    @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
+            IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -332,7 +332,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({ "1", "a", "", "b", "<!--comment-->2", "c", "<!--comment-->", "d" })
+    @Alerts({"1", "a", "", "b", "<!--comment-->2", "c", "<!--comment-->", "d"})
     public void textUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -371,7 +371,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({ "", "xyz", "1", "a", "1" })
+    @Alerts({"", "xyz", "1", "a", "1"})
     public void textUpdateFromJSText() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -398,8 +398,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "1", "a", "1" },
-            IE = { "", "123", "1", "a", "1" })
+    @Alerts(DEFAULT = {"", "", "1", "a", "1"},
+            IE = {"", "123", "1", "a", "1"})
     public void textUpdateFromJSSpan() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -427,8 +427,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "1", "xyz", "2", "a", "2" },
-            IE = { "", "123", "1", "123xyz", "2", "a", "1" })
+    @Alerts(DEFAULT = {"", "", "1", "xyz", "2", "a", "2"},
+            IE = {"", "123", "1", "123xyz", "2", "a", "1"})
     public void textUpdateFromJSSpanAndText() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -461,7 +461,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({ "", "", "1", "a", "1" })
+    @Alerts({"", "", "1", "a", "1"})
     public void textUpdateFromJSComment() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -488,8 +488,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            CHROME = { "0", "2", "1", "2", "1", "1" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            CHROME = {"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"

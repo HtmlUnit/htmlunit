@@ -34,7 +34,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "1", "0" })
+    @Alerts({"0", "0", "1", "0"})
     public void arguments() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -57,7 +57,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null"})
     public void argumentsShouldBeNullOutsideFunction() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -95,8 +95,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2", "world", "undefined", "undefined" },
-            IE = { "2", "hi", "undefined", "you" })
+    @Alerts(DEFAULT = {"2", "world", "undefined", "undefined"},
+            IE = {"2", "hi", "undefined", "you"})
     public void readOnlyWhenAccessedThroughFunction() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -121,7 +121,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "hi", "undefined", "you" })
+    @Alerts({"2", "hi", "undefined", "you"})
     public void writableWithinFunction() throws Exception {
         final String html = "<html><body><script>\n"
             + "function test1() {\n"

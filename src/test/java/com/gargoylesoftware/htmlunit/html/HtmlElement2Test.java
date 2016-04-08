@@ -67,7 +67,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void duplicateId() throws Exception {
         final String html
             = "<html>\n"
@@ -115,7 +115,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "true", "a", "a", "b", "b", "b", "c" })
+    @Alerts({"false", "true", "a", "a", "b", "b", "b", "c"})
     public void clonedNodeAttributes() throws Exception {
         final String html = "<html><body id='a' title='b'><script>\n"
             + "var x = document.body.cloneNode(true);\n"
@@ -139,7 +139,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "undefined", "undefined" })
+    @Alerts({"true", "undefined", "undefined"})
     public void textAndXmlUndefined() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -209,9 +209,9 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLBodyElement]" },
-            CHROME = { "[object HTMLInputElement]", "onblur", "onfocusout", "[object HTMLBodyElement]" },
-            IE = { "[object HTMLInputElement]", "null" })
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLBodyElement]"},
+            CHROME = {"[object HTMLInputElement]", "onblur", "onfocusout", "[object HTMLBodyElement]"},
+            IE = {"[object HTMLInputElement]", "null"})
     @NotYetImplemented(IE)
     public void removeActiveElement() throws Exception {
         final String html =
@@ -242,9 +242,9 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLBodyElement]" },
-            CHROME = { "[object HTMLInputElement]", "onblur1", "onfocusout1", "[object HTMLBodyElement]" },
-            IE = { "[object HTMLInputElement]", "null" })
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLBodyElement]"},
+            CHROME = {"[object HTMLInputElement]", "onblur1", "onfocusout1", "[object HTMLBodyElement]"},
+            IE = {"[object HTMLInputElement]", "null"})
     @NotYetImplemented(IE)
     public void removeParentOfActiveElement() throws Exception {
         final String html =

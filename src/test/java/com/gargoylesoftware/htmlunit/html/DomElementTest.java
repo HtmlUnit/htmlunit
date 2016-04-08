@@ -36,7 +36,7 @@ public final class DomElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "2" })
+    @Alerts({"2", "2"})
     public void getElementsByTagName() throws Exception {
         final String html = "<html><head><script>\n"
                 + "function test() {\n"

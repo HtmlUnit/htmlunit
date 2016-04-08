@@ -37,12 +37,12 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "constructor: function", "create: undefined", "defineProperties: undefined", "defineProperty: undefined",
+    @Alerts({"constructor: function", "create: undefined", "defineProperties: undefined", "defineProperty: undefined",
         "freeze: undefined", "getOwnPropertyDescriptor: undefined", "getOwnPropertyNames: undefined",
         "getPrototypeOf: undefined", "hasOwnProperty: function", "isExtensible: undefined", "isFrozen: undefined",
         "isPrototypeOf: function", "isSealed: undefined", "keys: undefined", "preventExtensions: undefined",
         "propertyIsEnumerable: function", "seal: undefined", "toLocaleString: function", "toString: function",
-        "valueOf: function" })
+        "valueOf: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"constructor", "create", "defineProperties", "defineProperty", "freeze",
             "getOwnPropertyDescriptor", "getOwnPropertyNames", "getPrototypeOf", "hasOwnProperty", "isExtensible",
@@ -57,8 +57,8 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
-            "__lookupSetter__: function" })
+    @Alerts({"__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
+            "__lookupSetter__: function"})
     public void methods_different() throws Exception {
         final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);

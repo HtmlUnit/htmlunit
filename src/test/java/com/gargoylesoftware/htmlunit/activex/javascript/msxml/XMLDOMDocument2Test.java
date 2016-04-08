@@ -67,7 +67,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "true", "books", "books", "1", "book", "0" })
+            IE = {"true", "books", "books", "1", "book", "0"})
     public void load() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -100,7 +100,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "true", "books", "books", "1", "book", "0" })
+            IE = {"true", "books", "books", "1", "book", "0"})
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = ""
@@ -173,7 +173,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "books" })
+            IE = {"1", "books"})
     public void selectNodes() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -204,7 +204,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "1" })
+            IE = {"0", "1"})
     public void selectNodes_caseSensitive() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -234,7 +234,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "2", "1" })
+            IE = {"2", "1"})
     public void selectNodes_namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -271,7 +271,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "book", "null", "book", "null" })
+            IE = {"book", "null", "book", "null"})
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -306,7 +306,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "book", "0", "1" })
+            IE = {"book", "0", "1"})
     public void selectNodes_fromRoot() throws Exception {
         final String html = ""
                 + "  function test() {\n"
@@ -338,7 +338,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "book", "#document", "book", "#document" })
+            IE = {"book", "#document", "book", "#document"})
     public void selectSingleNode() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -406,10 +406,10 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "same doc: false", "in first: 3", "book", "ownerDocument: doc1",
+            IE = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1",
                    "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
                    "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
-                   "ownerDocument: doc2", "in first: 1", "in 2nd: 4" })
+                   "ownerDocument: doc2", "in first: 1", "in 2nd: 4"})
     public void moveChildBetweenDocuments() throws Exception {
         final String html = ""
             + "function test() {\n"
@@ -456,7 +456,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "0", "1", "0" })
+            IE = {"1", "0", "1", "0"})
     public void getElementsByTagName() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -489,7 +489,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "1", "0", "1" })
+            IE = {"0", "1", "0", "1"})
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = ""
             + "  function test() {\n"

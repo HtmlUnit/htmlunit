@@ -45,7 +45,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "[object Storage]", "[object Storage]" })
+    @Alerts({"undefined", "[object Storage]", "[object Storage]"})
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -62,7 +62,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "global: true", "local: true", "session: true" })
+    @Alerts({"global: true", "local: true", "session: true"})
     public void storageEquals() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -79,7 +79,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "string", "1" })
+    @Alerts({"string", "1"})
     public void localStorage() throws Exception {
         final String firstHtml
             = "<html><head></head><body>\n"
@@ -112,7 +112,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "2", "there", "world", "1", "0" })
+    @Alerts({"0", "2", "there", "world", "1", "0"})
     public void sessionStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -205,7 +205,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "null", "extraMethod called", "null" })
+    @Alerts({"undefined", "null", "extraMethod called", "null"})
     public void prototypeIsExtensible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -230,8 +230,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
-            IE = { "function", "null", "string", "value", "1" })
+    @Alerts(DEFAULT = {"function", "null", "function", "value", "1"},
+            IE = {"function", "null", "string", "value", "1"})
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -251,9 +251,9 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
-            CHROME = { "function", "null", "string", "null", "0" },
-            FF = { "function", "null", "function", "value", "1" })
+    @Alerts(DEFAULT = {"function", "null", "string", "value", "1"},
+            CHROME = {"function", "null", "string", "null", "0"},
+            FF = { "function", "null", "function", "value", "1"})
     @NotYetImplemented(FF)
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"

@@ -53,7 +53,7 @@ public class MediaQueryListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "added", "removed" })
+    @Alerts({"added", "removed"})
     public void listener() throws Exception {
         final String html
             = "<html><head><script>\n"

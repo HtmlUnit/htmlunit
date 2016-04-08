@@ -67,7 +67,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "myIFrame" })
+    @Alerts({"1", "myIFrame"})
     public void referenceFromJavaScript() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -86,7 +86,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "about:blank", "about:blank" })
+    @Alerts({"about:blank", "about:blank"})
     public void directAccessPerName() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -136,7 +136,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLDocument]", "true" })
+    @Alerts({"[object HTMLDocument]", "true"})
     public void contentDocument() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -183,7 +183,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "false", "true", "true", "true", "object", "object" })
+    @Alerts({"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -222,8 +222,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "123", "undefined" },
-            IE = { "123" })
+    @Alerts(DEFAULT = {"123", "undefined"},
+            IE = {"123"})
     @NotYetImplemented(IE)
     public void iFrameReinitialized() throws Exception {
         final String html
@@ -281,8 +281,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56" },
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
+    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"},
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12"})
     public void width() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -334,8 +334,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56" },
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
+    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"},
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12"})
     public void height() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -388,9 +388,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "uninitialized", "complete" },
-            CHROME = { "complete", "complete" },
-            IE = { "loading", "complete" })
+    @Alerts(DEFAULT = {"uninitialized", "complete"},
+            CHROME = {"complete", "complete"},
+            IE = {"loading", "complete"})
     @NotYetImplemented({ FF, CHROME })
     public void readyState_IFrame() throws Exception {
         final String html
@@ -414,7 +414,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "[object HTMLBodyElement]" })
+    @Alerts({"null", "[object HTMLBodyElement]"})
     public void body() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -461,8 +461,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" },
-            IE = { "[object Window]", "[object HTMLIFrameElement]", "undefined", "" })
+    @Alerts(DEFAULT = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""},
+            IE = {"[object Window]", "[object HTMLIFrameElement]", "undefined", ""})
     @NotYetImplemented(IE)
     public void idByName() throws Exception {
         final String html
@@ -570,8 +570,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost", "localhost", "localhost",
-                "true", "true", "true" })
+    @Alerts({"localhost", "localhost", "localhost", "localhost",
+                "true", "true", "true"})
     public void domain() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -615,7 +615,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost", "true" })
+    @Alerts({"localhost", "localhost", "true"})
     public void domainDynamic() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -650,7 +650,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" })
+    @Alerts({"[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput"})
     public void contentWindowAndActiveElement() throws Exception {
         final String firstContent
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

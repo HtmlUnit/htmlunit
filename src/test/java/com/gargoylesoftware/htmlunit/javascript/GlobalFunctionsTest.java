@@ -40,7 +40,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "7.89", "7.89" })
+    @Alerts({"7.89", "7.89"})
     public void parseFloat() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -60,7 +60,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" })
+    @Alerts({"0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100"})
     public void parseInt() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -95,9 +95,9 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "decodeURI: function", "decodeURIComponent: function", "encodeURI: function",
+    @Alerts({"decodeURI: function", "decodeURIComponent: function", "encodeURI: function",
         "encodeURIComponent: function", "escape: function", "eval: function", "isFinite: function", "isNaN: function",
-        "parseFloat: function", "parseInt: function", "unescape: function" })
+        "parseFloat: function", "parseInt: function", "unescape: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent", "escape",
             "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "unescape"};
@@ -110,8 +110,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "isXMLName: undefined", "uneval: undefined" },
-            FF = { "isXMLName: undefined", "uneval: function" })
+    @Alerts(DEFAULT = {"isXMLName: undefined", "uneval: undefined"},
+            FF = { "isXMLName: undefined", "uneval: function"})
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};
         final String html = NativeDateTest.createHTMLTestMethods("this", methods);
@@ -123,8 +123,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
-                "%E6%B5%8B%E8%A9%A6" })
+    @Alerts({"http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
+                "%E6%B5%8B%E8%A9%A6"})
     public void encodeURIComponent() throws Exception {
         final String html
             = "<html>\n"

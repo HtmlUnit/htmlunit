@@ -329,7 +329,7 @@ public class CacheTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "hello", "hello" })
+    @Alerts({"hello", "hello"})
     public void xhrContentCached() throws Exception {
         final String html = "<html><head><title>page 1</title>\n"
             + "<script>\n"

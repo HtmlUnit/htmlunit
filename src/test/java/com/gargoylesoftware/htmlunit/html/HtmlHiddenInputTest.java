@@ -56,7 +56,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -87,7 +87,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -121,8 +121,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -160,8 +160,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -198,7 +198,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

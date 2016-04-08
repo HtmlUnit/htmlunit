@@ -106,7 +106,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "false", "false", "true" })
+    @Alerts({"true", "false", "false", "true"})
     public void functionCaller() throws Exception {
         final String html = "<html><head><script>\n"
             + "function myFunc() {\n"
@@ -126,8 +126,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"in goo", "in hoo", "in foo" },
-            FF = {"in goo", "in hoo", "foo error" })
+    @Alerts(DEFAULT = {"in goo", "in hoo", "in foo"},
+            FF = {"in goo", "in hoo", "foo error"})
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -153,9 +153,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function foo() {}", "function foo() {}" },
-            CHROME = { "undefined", "function foo() {}" },
-            FF = { "undefined", "foo error" })
+    @Alerts(DEFAULT = {"function foo() {}", "function foo() {}"},
+            CHROME = {"undefined", "function foo() {}"},
+            FF = { "undefined", "foo error"})
     @NotYetImplemented({ IE, CHROME })
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
@@ -179,15 +179,15 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Window]", "[object Window]", "true",
-                "[object HTMLDocument]", "[object HTMLDocument]", "true", "function" },
-            CHROME = { "function Window() { [native code] }", "function Window() { [native code] }", "true",
+    @Alerts(DEFAULT = {"[object Window]", "[object Window]", "true",
+                "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"},
+            CHROME = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
                 "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
-                "true", "function" },
+                "true", "function"},
             FF = { "function Window() {\n    [native code]\n}",
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
-                "function HTMLDocument() {\n    [native code]\n}", "true", "function" })
+                "function HTMLDocument() {\n    [native code]\n}", "true", "function"})
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -258,7 +258,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function", "function" })
+    @Alerts({"function", "function"})
     public void inline() throws Exception {
         final String html = "<html><head><script>\n"
                 + "alert(typeof Array.prototype.filter);\n"
@@ -400,8 +400,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "false", "0" },
-            IE = { "1", "true", "1" })
+    @Alerts(DEFAULT = {"0", "false", "0"},
+            IE = {"1", "true", "1"})
     public void nativeFunction_toStringValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -613,7 +613,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "3" })
+    @Alerts({"2", "3"})
     public void comment() throws Exception {
         final String html =
             "<html><head>\n"
@@ -631,9 +631,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rstlne-rstlne-rstlne", "rstlno-rstlne-rstlne",
+    @Alerts({"rstlne-rstlne-rstlne", "rstlno-rstlne-rstlne",
             "rstlna-rstlne-rstlne", "rstlne-rstlne-rstlne",
-            "rstlni-rstlni-rstlni", "rstlna-rstlna-rstlna" })
+            "rstlni-rstlni-rstlni", "rstlna-rstlna-rstlna"})
     public void regExpSupport() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"

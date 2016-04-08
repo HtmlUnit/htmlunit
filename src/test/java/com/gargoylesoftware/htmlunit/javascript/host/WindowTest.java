@@ -422,7 +422,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void openWindow_existingWindow() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1041,7 +1041,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "Jane", "Smith", "sdg", "finished" },
+    @Alerts(DEFAULT = {"undefined", "Jane", "Smith", "sdg", "finished"},
             CHROME = "not available")
     public void showModalDialog() throws Exception {
         final String html1
@@ -1096,7 +1096,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "sdg", "finished" })
+    @Alerts({"undefined", "sdg", "finished"})
     @NotYetImplemented
     public void showModalDialogWithButton() throws Exception {
         final String html1
@@ -1144,7 +1144,7 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            IE = { "[object Window]", "a" })
+            IE = {"[object Window]", "a"})
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1199,8 +1199,8 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "[object Window]", "[object Window]" },
-            IE = { "true", "123", "123" })
+    @Alerts(DEFAULT = {"true", "[object Window]", "[object Window]"},
+            IE = {"true", "123", "123"})
     public void overwriteProperty_top() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -1274,7 +1274,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "10", "20", "30", "40" })
+    @Alerts({"10", "20", "30", "40"})
     public void mozillaViewportSetters() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"

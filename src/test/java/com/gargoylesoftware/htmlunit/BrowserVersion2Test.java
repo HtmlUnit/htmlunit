@@ -54,9 +54,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
-            CHROME = { "2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" },
-            IE = { "2", "Accept: text/html, application/xhtml+xml, */*" })
+    @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+            CHROME = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
+            IE = {"2", "Accept: text/html, application/xhtml+xml, */*"})
     public void acceptHeaderWindowOpen() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -80,9 +80,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
-            CHROME = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" },
-            IE = {"2", "Accept: text/html, application/xhtml+xml, */*" })
+    @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+            CHROME = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
+            IE = {"2", "Accept: text/html, application/xhtml+xml, */*"})
     public void acceptHeaderAnchorClick() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);

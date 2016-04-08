@@ -34,7 +34,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts({ "one", "two", "three", "four", "five's" })
+    @Alerts({"one", "two", "three", "four", "five's"})
     public void dataProtocol() throws Exception {
         final String html = "<html><head><title>foo</title>"
             + "<script>"

@@ -169,7 +169,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.setVendor("");
         FIREFOX_38.buildId_ = "20160315145633";
         FIREFOX_38.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_38.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_38.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -181,7 +181,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_45.setVendor("");
         FIREFOX_45.buildId_ = "20160316151906";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_45.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_45.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -193,7 +193,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER.setVendor("");
         INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
-            "Cookie" });
+            "Cookie"});
         INTERNET_EXPLORER.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
         INTERNET_EXPLORER.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
         INTERNET_EXPLORER.setCssAcceptHeader("text/css, */*");
@@ -212,7 +212,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setCpuClass(null);
         CHROME.setBrowserLanguage("en-US");
         CHROME.setHeaderNamesOrdered(new String[] {
-            "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie" });
+            "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"});
         CHROME.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
         CHROME.setImgAcceptHeader("image/webp,image/*,*/*;q=0.8");
         CHROME.setCssAcceptHeader("text/css,*/*;q=0.1");

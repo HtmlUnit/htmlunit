@@ -37,7 +37,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -68,7 +68,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -102,8 +102,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -141,8 +141,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -179,7 +179,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default", "newValue-default", "newValue-newDefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-default", "newValue-newDefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -209,8 +209,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "textLength not available" },
-            FF = { "7" })
+    @Alerts(DEFAULT = {"textLength not available"},
+            FF = { "7"})
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -261,8 +261,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10" },
-            IE = { "0,0", "0,0", "3,3", "3,10" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
+            IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -271,8 +271,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11" },
-            IE = { "0,0", "0,0", "0,0", "0,11" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -281,8 +281,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
-            IE = { "0,0", "0,0", "10,10", "5,5" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
+            IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -310,8 +310,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "4,5", "10,10", "4,4", "1,1" },
-            IE = { "0,0", "4,5", "0,0", "0,0", "0,0" })
+    @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
+            IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

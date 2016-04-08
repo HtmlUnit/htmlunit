@@ -61,8 +61,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "center", "justify", "wrong", "" },
-            IE = { "left", "right", "center", "justify", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "center", "justify", "wrong", ""},
+            IE = {"left", "right", "center", "justify", "", ""})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -91,8 +91,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo" },
-            IE = { "center", "error", "center", "error", "center" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo"},
+            IE = {"center", "error", "center", "error", "center"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

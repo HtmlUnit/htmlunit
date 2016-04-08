@@ -39,7 +39,7 @@ public class PostponedActionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "before", "after", "second.html", "third.html" })
+    @Alerts({"before", "after", "second.html", "third.html"})
     public void loadingJavaScript() throws Exception {
         final String html = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -75,7 +75,7 @@ public class PostponedActionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "before", "after", "second.html" })
+    @Alerts({"before", "after", "second.html"})
     public void loadingJavaScript2() throws Exception {
         final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
@@ -108,7 +108,7 @@ public class PostponedActionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "setting timeout", "before", "after", "iframe.html", "simpleAlert"})
+    @Alerts({"setting timeout", "before", "after", "iframe.html", "simpleAlert"})
     public void loadingJavaScriptWithTimeout() throws Exception {
         final String html = "<html>\n"
                 + "<head><title>First Page</title>\n"

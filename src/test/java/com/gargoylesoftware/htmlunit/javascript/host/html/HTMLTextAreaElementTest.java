@@ -45,7 +45,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1234", "PoohBear" })
+    @Alerts({"1234", "PoohBear"})
     public void getValue() throws Exception {
         final String html
             = "<html>\n"
@@ -99,7 +99,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "TEXTAREA", "INPUT" })
+    @Alerts({"TEXTAREA", "INPUT"})
     public void setValue() throws Exception {
         final String html
             = "<html>\n"
@@ -124,8 +124,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "11", "0" },
-            IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = {"11", "0"},
+            IE = {"undefined", "undefined"})
     public void textLength() throws Exception {
         final String html
             = "<html>\n"
@@ -149,8 +149,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10", "7,7" },
-            IE = { "0,0", "0,0", "3,3", "3,10", "0,0" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10", "7,7"},
+            IE = {"0,0", "0,0", "3,3", "3,10", "0,0"})
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -159,8 +159,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11", "7,7" },
-            IE = { "0,0", "0,0", "0,0", "0,11", "0,0" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11", "7,7"},
+            IE = {"0,0", "0,0", "0,0", "0,11", "0,0"})
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -169,8 +169,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5", "7,7" },
-            IE = { "0,0", "0,0", "10,10", "5,5", "7,7" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5", "7,7"},
+            IE = {"0,0", "0,0", "10,10", "5,5", "7,7"})
     @NotYetImplemented(IE)
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
@@ -271,7 +271,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ " foo \n bar ", " foo \n bar " })
+    @Alerts({" foo \n bar ", " foo \n bar "})
     public void defaultValue() throws Exception {
         final String html
             = "<html>\n"
@@ -297,7 +297,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "false" })
+    @Alerts({"true", "false"})
     public void readOnly() throws Exception {
         final String html
             = "<html>\n"
@@ -324,7 +324,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
         final String html
             = "<html>\n"
@@ -364,9 +364,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "20", "5", "8", "4", "20", "20", "20", "3" },
-            FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3" },
-            IE = { "20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
+    @Alerts(CHROME = {"20", "5", "8", "4", "20", "20", "20", "3"},
+            FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3"},
+            IE = {"20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
     public void cols() throws Exception {
         final String html
             = "<html><head>\n"
@@ -415,9 +415,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "2", "5", "8", "4", "2", "2", "2", "3" },
-            FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3" },
-            IE = { "2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
+    @Alerts(CHROME = {"2", "5", "8", "4", "2", "2", "2", "3"},
+            FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3"},
+            IE = {"2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
     public void rows() throws Exception {
         final String html
             = "<html><head>\n"
@@ -467,7 +467,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "9", "9", "2", "7" })
+    @Alerts({"9", "9", "2", "7"})
     public void selectionRange() throws Exception {
         final String html
             = "<html>\n"
@@ -496,7 +496,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "test", "4", "42", "2", "[object HTMLTextAreaElement]", "28" })
+    @Alerts({"test", "4", "42", "2", "[object HTMLTextAreaElement]", "28"})
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"
@@ -533,8 +533,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "4", "", "0" },
-            IE = { "null", "4", "null", "4" })
+    @Alerts(DEFAULT = {"null", "4", "", "0"},
+            IE = {"null", "4", "null", "4"})
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
@@ -566,7 +566,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "12", "2", "[object HTMLTextAreaElement]", "28" })
+    @Alerts({"12", "2", "[object HTMLTextAreaElement]", "28"})
     public void getAttributeAndSetValueOther() throws Exception {
         final String html =
             "<html>\n"
@@ -598,8 +598,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-1", /* "null", */ "32", "32", "-1", "ms" },
-            IE = { "2147483647", /* "null", */ "32", "32", "2147483647", "ms" })
+    @Alerts(DEFAULT = {"-1", /* "null", */ "32", "32", "-1", "ms"},
+            IE = {"2147483647", /* "null", */ "32", "32", "2147483647", "ms"})
     public void getMaxLength() throws Exception {
         final String html
             = "<html>\n"
@@ -655,8 +655,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "10", "10", "error", "10", "10", "0", "0" },
-            IE = { "10", "10", "-1", "-1", "0", "0" })
+    @Alerts(DEFAULT = {"10", "10", "error", "10", "10", "0", "0"},
+            IE = {"10", "10", "-1", "-1", "0", "0"})
     public void setMaxLength() throws Exception {
         final String html
             = "<html>\n"

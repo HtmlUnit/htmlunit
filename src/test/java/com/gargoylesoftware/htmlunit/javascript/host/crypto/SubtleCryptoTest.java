@@ -37,12 +37,12 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Crypto]", "public", "true", "verify",
+    @Alerts(DEFAULT = {"[object Crypto]", "public", "true", "verify",
                         "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
                         "publicExponent [object Uint8Array]",
                         "private", "false", "sign",
                         "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                        "publicExponent [object Uint8Array]" },
+                        "publicExponent [object Uint8Array]"},
             IE = "undefined")
     @NotYetImplemented({ CHROME, FF })
     public void rsassa() throws Exception {

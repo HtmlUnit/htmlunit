@@ -54,10 +54,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
+    @Alerts({"16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
             "radio1", "radio1",
             "select1", "select2", "password1", "reset1",
-            "reset2", "submit1", "submit2", "textInput1", "textarea1" })
+            "reset2", "submit1", "submit2", "textInput1", "textarea1"})
     public void elementsAccessor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -104,7 +104,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "undefined" })
+    @Alerts({"undefined", "undefined"})
     public void elementsAccessorOutOfBound() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -126,7 +126,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "1", "2", "3" })
+    @Alerts({"3", "1", "2", "3"})
     public void radioButtonArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -178,7 +178,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "http://foo.com/", "mailto:me@bar.com", "mailto:me@bar.com" })
+    @Alerts({"http://foo.com/", "mailto:me@bar.com", "mailto:me@bar.com"})
     public void actionProperty() throws Exception {
         doTestProperty("action", "action", "http://foo.com/", "mailto:me@bar.com");
     }
@@ -187,7 +187,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myForm", "testForm", "testForm" })
+    @Alerts({"myForm", "testForm", "testForm"})
     public void nameProperty() throws Exception {
         doTestProperty("name", "name", "myForm", "testForm");
     }
@@ -278,7 +278,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "multipart/form-data", "application/x-www-form-urlencoded", "application/x-www-form-urlencoded" })
+    @Alerts({"multipart/form-data", "application/x-www-form-urlencoded", "application/x-www-form-urlencoded"})
     public void encodingProperty() throws Exception {
         doTestProperty("encoding", "enctype", "multipart/form-data", "application/x-www-form-urlencoded");
     }
@@ -287,8 +287,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "text/plain", "application/x-www-form-urlencoded", "newEncoding" },
-            IE = { "text/plain", "exception" })
+    @Alerts(DEFAULT = {"text/plain", "application/x-www-form-urlencoded", "newEncoding"},
+            IE = {"text/plain", "exception"})
     public void encodingProperty_textPlain() throws Exception {
         doTestProperty("encoding", "enctype", "text/plain", "newEncoding");
     }
@@ -297,8 +297,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
-            IE = { "application/x-www-form-urlencoded", "exception" })
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding"},
+            IE = {"application/x-www-form-urlencoded", "exception"})
     public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
@@ -307,7 +307,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "get", "post", "post" })
+    @Alerts({"get", "post", "post"})
     public void methodProperty() throws Exception {
         doTestProperty("method", "method", "get", "post");
     }
@@ -316,7 +316,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "_top", "_parent", "_parent" })
+    @Alerts({"_top", "_parent", "_parent"})
     public void targetProperty() throws Exception {
         doTestProperty("target", "target", "_top", "_parent");
     }
@@ -354,7 +354,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "id2", "foo" })
+    @Alerts({"id2", "foo"})
     public void inputNamedId() throws Exception {
         doTestInputWithName("id");
     }
@@ -363,7 +363,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "action2", "foo" })
+    @Alerts({"action2", "foo"})
     public void inputNamedAction() throws Exception {
         doTestInputWithName("action");
     }
@@ -487,7 +487,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    @Alerts({ "0", "1", "1", "true" })
+    @Alerts({"0", "1", "1", "true"})
     public void elementsLive() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -654,7 +654,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "before", "2" })
+    @Alerts({"before", "2"})
     public void fieldFoundWithID() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -682,7 +682,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "INPUT", "idImg1", "img2", "true" })
+    @Alerts({"INPUT", "idImg1", "img2", "true"})
     public void nonFieldChildFound() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -740,7 +740,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "page 1: formPage1", "page 2: formPage2" })
+    @Alerts({"page 1: formPage1", "page 2: formPage2"})
     public void formAccessAfterBrowsing() throws Exception {
         final String html = "<html><head><title>first</title>\n"
             + "<script>\n"
@@ -773,7 +773,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function handler() {}", "null", "null" })
+    @Alerts({"function handler() {}", "null", "null"})
     public void onsubmitNull() throws Exception {
         final String html =
             "<html><head>\n"
@@ -802,8 +802,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "page1.html", "page2.html", "page1.html", "page1.html" },
-            IE = { "page1.html", "page1.html", "page1.html", "page1.html" })
+    @Alerts(DEFAULT = {"page1.html", "page2.html", "page1.html", "page1.html"},
+            IE = {"page1.html", "page1.html", "page1.html", "page1.html"})
     @NotYetImplemented(IE)
     public void changeFormActionAfterSubmit() throws Exception {
         final String[] expectedFiles = getExpectedAlerts();
@@ -956,8 +956,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1" },
-            IE = { "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1" })
+    @Alerts(DEFAULT = {"page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1"},
+            IE = {"page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1"})
     @NotYetImplemented(IE)
     public void changesAfterCallToSubmit() throws Exception {
         final String[] expectedUrlSuffixes = getExpectedAlerts();
@@ -1198,8 +1198,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "foo4", "script4.js" },
-            IE = { "", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js" })
+    @Alerts(DEFAULT = {"", "foo4", "script4.js"},
+            IE = {"", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js"})
     @NotYetImplemented({ FF, CHROME })
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
@@ -1241,12 +1241,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "undefined",
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "undefined",
                         "[object HTMLInputElement]", "[object HTMLInputElement]",
-                        "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]" },
-            IE = { "[object HTMLInputElement]", "undefined",
+                        "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]"},
+            IE = {"[object HTMLInputElement]", "undefined",
                         "undefined", "[object HTMLInputElement]",
-                        "undefined", "undefined", "[object HTMLInputElement]" })
+                        "undefined", "undefined", "[object HTMLInputElement]"})
     public void accessByNameAfterNameChange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1279,7 +1279,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLInputElement]", "[object HTMLInputElement]" })
+    @Alerts({"[object HTMLInputElement]", "[object HTMLInputElement]"})
     public void lostChildrenFromElements() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1318,7 +1318,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "in listener", "page2 loaded" },
+    @Alerts(DEFAULT = {"in listener", "page2 loaded"},
             CHROME = "in listener",
             IE = "in listener")
     public void dispatchEventSubmitTriggersHandlers() throws Exception {
@@ -1351,9 +1351,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "srcElement null: false", "srcElement==form: true",
-                                                        "target null: false", "target==form: true" },
-            FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" })
+    @Alerts(DEFAULT = {"srcElement null: false", "srcElement==form: true",
+                                                        "target null: false", "target==form: true"},
+            FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head><title>first</title>\n"
             + "<script>\n"
@@ -1387,7 +1387,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "prepare frame", "submit form", "submitted ok" })
+    @Alerts({"prepare frame", "submit form", "submitted ok"})
     public void submitWithTargetOnIFrameAndOnload_script() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -1433,7 +1433,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "submit form", "listener: submitted ok" })
+    @Alerts({"submit form", "listener: submitted ok"})
     public void submitWithTargetOnIFrameAndOnload_bubbling() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"

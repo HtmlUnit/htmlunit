@@ -44,7 +44,7 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "1" })
+    @Alerts({"0", "1"})
     public void onLoad_calledWhenImageDownloaded_static() throws Exception {
         final String html = "<html><body><img src='foo.png' onload='test()'>\n"
             + "<script>\n"
@@ -95,7 +95,7 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void onLoad_calledWhenImageDownloaded_dynamic_twoSteps() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -125,7 +125,7 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "image one", "image two" })
+    @Alerts({"image one", "image two"})
     public void onLoad_calledWhenImageDownloaded_mixed() throws Exception {
         final String html
             = "<html><body><img id='img' name='img'/><script>\n"

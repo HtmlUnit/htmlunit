@@ -48,7 +48,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = { "ActiveX is working!", "Javascript called this method!" })
+            IE = {"ActiveX is working!", "Javascript called this method!"})
     public void classid() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -81,7 +81,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "Javascript called this method!", "ActiveX is still alive" })
+    @Alerts(IE = {"Javascript called this method!", "ActiveX is still alive"})
     public void activeXInteraction() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -127,7 +127,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "string", "test" })
+    @Alerts({"undefined", "string", "test"})
     public void activeXUnknownProperty() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -158,7 +158,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "function", "test" })
+    @Alerts({"undefined", "function", "test"})
     public void activeXUnknownMethod() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

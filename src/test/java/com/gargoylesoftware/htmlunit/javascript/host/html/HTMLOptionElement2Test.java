@@ -307,7 +307,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "option1", "0" })
+    @Alerts({"1", "option1", "0"})
     public void unselectResetToFirstOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -360,7 +360,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "true", "true", "false", "true" })
+    @Alerts({"false", "true", "true", "false", "true"})
     public void disabledAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -397,7 +397,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "some text", "some value", "false", "some other text", "some other value", "true" })
+    @Alerts({"some text", "some value", "false", "some other text", "some other value", "true"})
     public void readPropsBeforeAdding() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -449,7 +449,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "2" })
+    @Alerts({"2", "2"})
     public void setSelected() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -505,8 +505,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE = { "null", "undefined" })
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            IE = {"null", "undefined"})
     public void optionIndexOutOfBound() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -537,9 +537,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "o2: text: Option 2, label: Option 2, value: 2, defaultSelected: false, selected: false",
+    @Alerts({"o2: text: Option 2, label: Option 2, value: 2, defaultSelected: false, selected: false",
             "o3: text: Option 3, label: Option 3, value: 3, defaultSelected: true, selected: false",
-            "0", "1" })
+            "0", "1"})
     public void constructor() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -602,8 +602,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "[object Attr]", "null", "null", "null",
-                "null", "null", "null", "null", "null" })
+    @Alerts({"null", "[object Attr]", "null", "null", "null",
+                "null", "null", "null", "null", "null"})
     public void getAttributeNode() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -640,10 +640,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false null null", "false null null", "true *selected selected",
+    @Alerts({"false null null", "false null null", "true *selected selected",
                         "true null null", "false null null", "false *selected selected",
                         "false null null", "true null null", "false *selected selected",
-                        "true null null", "false null null", "false *selected selected" })
+                        "true null null", "false null null", "false *selected selected"})
     public void selectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -692,10 +692,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false null null", "false null null", "true *selected selected",
+    @Alerts({"false null null", "false null null", "true *selected selected",
                 "true null null", "false null null", "true *selected selected",
                 "true null null", "true null null", "true *selected selected",
-                "true null null", "false null null", "true *selected selected" })
+                "true null null", "false null null", "true *selected selected"})
     public void selectedAttributeMultiple() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -744,8 +744,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "1" },
-            IE = { "[object HTMLSelectElement]", "0", "1" })
+    @Alerts(DEFAULT = {"[object HTMLOptionsCollection]", "0", "1"},
+            IE = {"[object HTMLSelectElement]", "0", "1"})
     public void with_new() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -773,8 +773,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "exception", "0" },
-            IE = { "[object HTMLSelectElement]", "0", "1" })
+    @Alerts(DEFAULT = {"[object HTMLOptionsCollection]", "0", "exception", "0"},
+            IE = {"[object HTMLSelectElement]", "0", "1"})
     @NotYetImplemented(IE)
     public void without_new() throws Exception {
         final String html =
@@ -803,7 +803,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text1", "New Text1", "", "New Text2", "text3", "New Text3", "text4", "New Text4" })
+    @Alerts({"text1", "New Text1", "", "New Text2", "text3", "New Text3", "text4", "New Text4"})
     public void text() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -850,9 +850,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Text]", "[object Text]", "null" },
-            CHROME = { "null", "[object Text]", "[object Text]" },
-            IE = { "null", "[object Text]", "null" })
+    @Alerts(DEFAULT = {"[object Text]", "[object Text]", "null"},
+            CHROME = {"null", "[object Text]", "[object Text]"},
+            IE = {"null", "[object Text]", "null"})
     public void setText() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -884,7 +884,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "text1", "text1b", "text2" })
+    @Alerts({"text1", "text1b", "text2"})
     public void text_when_not_displayed() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -919,7 +919,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "text0", "text1", "text1b", "text2" })
+    @Alerts({"text0", "text1", "text1b", "text2"})
     public void defaultValueFromNestedNodes() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -979,8 +979,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "0", "o2" },
-            IE = { "evaluate not supported", "1", "0", "evaluate not supported" })
+    @Alerts(DEFAULT = {"o2", "1", "0", "o2"},
+            IE = {"evaluate not supported", "1", "0", "evaluate not supported"})
     public void xpathSelected() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
 
@@ -991,8 +991,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "1", "o2" },
-            IE = { "evaluate not supported", "1", "1", "evaluate not supported" })
+    @Alerts(DEFAULT = {"o2", "1", "1", "o2"},
+            IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     public void xpathSelectedSetAttribute() throws Exception {
         final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
 
@@ -1003,8 +1003,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "-1", "o2" },
-            IE = { "evaluate not supported", "1", "-1", "evaluate not supported" })
+    @Alerts(DEFAULT = {"o2", "1", "-1", "o2"},
+            IE = {"evaluate not supported", "1", "-1", "evaluate not supported"})
     public void xpathSelectedMultiple() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
 
@@ -1015,8 +1015,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "1", "o2" },
-            IE = { "evaluate not supported", "1", "1", "evaluate not supported" })
+    @Alerts(DEFAULT = {"o2", "1", "1", "o2"},
+            IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     public void xpathSelectedSetAttributeMultiple() throws Exception {
         final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
 
@@ -1073,7 +1073,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "value1", "text1", "label1", "value2", "text2", "text2" })
+    @Alerts({"value1", "text1", "label1", "value2", "text2", "text2"})
     public void label() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1104,7 +1104,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "", "", "text2", "text2", "text2", "label2" })
+    @Alerts({"", "", "", "", "text2", "text2", "text2", "label2"})
     public void setLabel() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1142,7 +1142,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "1", "2", "0" })
+    @Alerts({"0", "1", "2", "0"})
     public void index() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1181,9 +1181,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false-null", "true-selected", "false-null",
+    @Alerts({"false-null", "true-selected", "false-null",
                 "true-null", "false-selected", "false-null",
-                "false-null", "false-selected", "false-null" })
+                "false-null", "false-selected", "false-null"})
     public void selectAndAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1229,10 +1229,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false-null", "true-true", "true-null",
-                        "false-selected", "false-null", "true-true" },
+    @Alerts(DEFAULT = {"false-null", "true-true", "true-null",
+                        "false-selected", "false-null", "true-true"},
             FF = { "false-null", "true-true", "true-null",
-                    "false-selected", "false-null", "false-true" })
+                    "false-selected", "false-null", "false-true"})
     @NotYetImplemented(FF)
     public void setSelectedAttribute() throws Exception {
         final String html =
@@ -1277,10 +1277,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false-null", "true-true", "false-null",
-                        "false-null", "true-true", "false-null" },
-            IE = { "false-null", "true-true", "true-",
-                    "false-null", "true-true", "false-null" })
+    @Alerts(DEFAULT = {"false-null", "true-true", "false-null",
+                        "false-null", "true-true", "false-null"},
+            IE = {"false-null", "true-true", "true-",
+                    "false-null", "true-true", "false-null"})
     @NotYetImplemented(IE)
     public void createOption() throws Exception {
         final String html =
@@ -1328,7 +1328,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "o-mouse over [option1]", "s-mouse over [option1]" },
+    @Alerts(DEFAULT = {"o-mouse over [option1]", "s-mouse over [option1]"},
             IE = {})
     public void mouseOver() throws Exception {
         shutDownRealIE();
@@ -1436,7 +1436,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {},
-            FF = { "o-mouse over [option1]", "s-mouse over [option1]" })
+            FF = { "o-mouse over [option1]", "s-mouse over [option1]"})
     public void mouseOverDisabledOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

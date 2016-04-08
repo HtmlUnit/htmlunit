@@ -179,7 +179,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -226,7 +226,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -275,7 +275,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>\n"
             + "<head>\n"
@@ -320,7 +320,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>\n"
             + "<head>\n"
@@ -367,7 +367,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "Executed", "later" })
+    @Alerts ({ "Executed", "later"})
     // TODO [IE11]ERRORPAGE real IE11 displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"

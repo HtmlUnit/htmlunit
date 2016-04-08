@@ -39,8 +39,8 @@ public class ExternalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "external defined", "no AutoCompleteSaveForm" },
-            IE = { "external defined", "AutoCompleteSaveForm defined" })
+    @Alerts(DEFAULT = {"external defined", "no AutoCompleteSaveForm"},
+            IE = {"external defined", "AutoCompleteSaveForm defined"})
     public void autoCompleteSaveForm() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function fnSaveForm() {\n"
@@ -100,7 +100,7 @@ public class ExternalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0" })
+    @Alerts({"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0"})
     @BuggyWebDriver({ IE, CHROME }) // fail with missing permission
     public void isSearchProviderInstalled() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

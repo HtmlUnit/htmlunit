@@ -37,8 +37,8 @@ public class HtmlTableSection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLTableSectionElement]",
-                "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]" })
+    @Alerts({"[object HTMLTableSectionElement]",
+                "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -33,7 +33,7 @@ public class HTMLMapElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "true", "true", "true" })
+    @Alerts({"3", "true", "true", "true"})
     public void areas() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

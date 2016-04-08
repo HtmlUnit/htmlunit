@@ -33,7 +33,7 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "50", "100", "xxx", "zzz", "yyy" })
+    @Alerts({"0", "50", "100", "xxx", "zzz", "yyy"})
     public void enumChangeObject() throws Exception {
         final String html
             = "<html><head><script>\n"

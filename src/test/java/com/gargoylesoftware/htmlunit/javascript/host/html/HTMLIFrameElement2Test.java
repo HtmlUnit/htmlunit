@@ -114,7 +114,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "loaded", "foo" })
+    @Alerts({"loaded", "foo"})
     public void documentCreateElement_onLoad() throws Exception {
         final String html =
               "<html>\n"
@@ -147,7 +147,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "loaded", "" })
+    @Alerts({"loaded", ""})
     public void documentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -177,7 +177,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded", "foo" })
+    @Alerts({"createIFrame", "loaded", "foo"})
     public void documentCreateElement_onLoad2() throws Exception {
         final String html =
               "<html>\n"
@@ -211,7 +211,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded", "" })
+    @Alerts({"createIFrame", "loaded", ""})
     public void documentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -260,7 +260,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded" })
+    @Alerts({"createIFrame", "loaded"})
     public void documentCreateElement_iFrameInsideDiv() throws Exception {
         final String html =
                 "<html>\n"
@@ -294,7 +294,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded", "foo" })
+    @Alerts({"createIFrame", "loaded", "foo"})
     public void documentCreateElement_onLoad3() throws Exception {
         final String html =
               "<html>\n"
@@ -328,7 +328,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded", "" })
+    @Alerts({"createIFrame", "loaded", ""})
     public void documentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -509,7 +509,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded" })
+    @Alerts({"createIFrame", "loaded"})
     public void documentCreateElement_onLoad_srcAboutBlank() throws Exception {
         documentCreateElement_onLoad_srcX("about:blank");
     }
@@ -518,7 +518,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded" })
+    @Alerts({"createIFrame", "loaded"})
     public void documentCreateElement_onLoad_srcSomePage() throws Exception {
         documentCreateElement_onLoad_srcX("foo.html");
     }
@@ -579,7 +579,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "fragment append done", "loaded" })
+    @Alerts({"fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad() throws Exception {
         final String html =
               "<html>\n"
@@ -613,7 +613,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "fragment append done", "loaded" })
+    @Alerts({"fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -644,7 +644,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad2() throws Exception {
         final String html =
               "<html>\n"
@@ -679,7 +679,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -711,7 +711,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad3() throws Exception {
         final String html =
               "<html>\n"
@@ -746,7 +746,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -778,8 +778,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
-            IE = { "left", "right", "bottom", "middle", "top", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top", "wrong", ""},
+            IE = {"left", "right", "bottom", "middle", "top", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -805,8 +805,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"},
+            IE = {"center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
@@ -841,7 +841,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "loaded", "loaded", "loaded" })
+    @Alerts({"loaded", "loaded", "loaded"})
     public void onLoadCalledEachTimeFrameContentChanges() throws Exception {
         final String html =
               "<html>\n"
@@ -869,7 +869,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "about:blank", "§§URL§§" })
+    @Alerts({"about:blank", "§§URL§§"})
     public void location() throws Exception {
         final String html =
                 "<html>\n"

@@ -35,7 +35,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "symbol", "Symbol(Symbol.iterator)", "true" },
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.iterator)", "true"},
             IE = "not supported")
     public void iterator() throws Exception {
         name("iterator");
@@ -45,8 +45,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF45 = { "symbol", "Symbol(Symbol.match)", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            FF45 = { "symbol", "Symbol(Symbol.match)", "true"},
             IE = "not supported")
     public void match() throws Exception {
         name("match");
@@ -56,7 +56,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
             IE = "not supported")
     public void replace() throws Exception {
         name("replace");
@@ -66,7 +66,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
             IE = "not supported")
     public void search() throws Exception {
         name("search");
@@ -76,7 +76,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
             IE = "not supported")
     public void split() throws Exception {
         name("split");
@@ -86,7 +86,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
             IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");
@@ -96,8 +96,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            CHROME = { "symbol", "Symbol(Symbol.isConcatSpreadable)", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"},
             IE = "not supported")
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
@@ -107,8 +107,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            CHROME = { "symbol", "Symbol(Symbol.unscopables)", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.unscopables)", "true"},
             IE = "not supported")
     public void unscopables() throws Exception {
         name("unscopables");
@@ -118,8 +118,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            FF45 = { "symbol", "Symbol(Symbol.species)", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            FF45 = { "symbol", "Symbol(Symbol.species)", "true"},
             IE = "not supported")
     public void species() throws Exception {
         name("species");
@@ -129,9 +129,9 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            CHROME = { "symbol", "Symbol(Symbol.toPrimitive)", "true" },
-            FF45 = { "symbol", "Symbol(Symbol.toPrimitive)", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
+            FF45 = { "symbol", "Symbol(Symbol.toPrimitive)", "true"},
             IE = "not supported")
     public void toPrimitive() throws Exception {
         name("toPrimitive");
@@ -141,8 +141,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "true" },
-            CHROME = { "symbol", "Symbol(Symbol.toStringTag)", "true" },
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.toStringTag)", "true"},
             IE = "not supported")
     public void toStringTag() throws Exception {
         name("toStringTag");
@@ -171,7 +171,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
+    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"},
             IE = "not supported")
     public void string() throws Exception {
         final String html =
@@ -196,7 +196,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)" },
+    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"},
             IE = "not supported")
     public void defaultValue() throws Exception {
         final String html =
@@ -223,7 +223,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "symbol", "symbol", "symbol" },
+    @Alerts(DEFAULT = {"function", "symbol", "symbol", "symbol"},
             IE = "not supported")
     public void typeOf() throws Exception {
         final String html =
@@ -251,7 +251,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "Symbol(mario)" },
+    @Alerts(DEFAULT = {"false", "true", "Symbol(mario)"},
             IE = "not supported")
     public void symbolFor() throws Exception {
         final String html =
@@ -280,7 +280,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
+    @Alerts(DEFAULT = {"true", "false"},
             IE = "not supported")
     public void symbolForGlobal() throws Exception {
         final String html =
@@ -309,7 +309,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception" },
+    @Alerts(DEFAULT = {"exception", "exception"},
             IE = "not supported")
     public void symbolNew() throws Exception {
         final String html =
@@ -337,7 +337,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception" },
+    @Alerts(DEFAULT = {"exception", "exception"},
             IE = "not supported")
     public void globalSymbolRegistry() throws Exception {
         final String html =

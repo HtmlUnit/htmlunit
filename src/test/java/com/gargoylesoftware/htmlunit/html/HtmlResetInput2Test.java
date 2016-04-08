@@ -34,8 +34,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Reset-Reset", "Reset-Reset", "Reset-Reset" })
+    @Alerts(DEFAULT = {"-", "-", "-"},
+            IE = {"Reset-Reset", "Reset-Reset", "Reset-Reset"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -66,8 +66,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Reset-Reset", "Reset-Reset", "Reset-Reset" })
+    @Alerts(DEFAULT = {"-", "-", "-"},
+            IE = {"Reset-Reset", "Reset-Reset", "Reset-Reset"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -101,8 +101,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -140,8 +140,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -178,7 +178,7 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

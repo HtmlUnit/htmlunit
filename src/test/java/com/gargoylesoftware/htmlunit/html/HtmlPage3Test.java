@@ -103,10 +103,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
-            FF38 = { "windows-1252", "windows-1252", "undefined", "undefined" },
-            FF45 = { "windows-1252", "windows-1252", "windows-1252", "undefined" },
-            IE = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
+    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+            FF38 = { "windows-1252", "windows-1252", "undefined", "undefined"},
+            FF45 = { "windows-1252", "windows-1252", "windows-1252", "undefined"},
+            IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <title>foo</title>\n"
@@ -201,7 +201,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @exception Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLInputElement]", "1" })
+    @Alerts({"[object HTMLInputElement]", "1"})
     @BuggyWebDriver(IE)
     public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
@@ -228,7 +228,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @exception Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLInputElement]", "1" })
+    @Alerts({"[object HTMLInputElement]", "1"})
     public void write_getElementById_duringParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"

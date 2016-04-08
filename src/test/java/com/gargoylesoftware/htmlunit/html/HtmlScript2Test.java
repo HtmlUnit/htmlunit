@@ -65,7 +65,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "created", "hello", "replaced" })
+    @Alerts({"created", "hello", "replaced"})
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"
@@ -125,7 +125,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts({ "1", "5", "7" })
+    @Alerts({"1", "5", "7"})
     public void type_language() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -173,7 +173,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "deferred", "normal", "onload" })
+    @Alerts({"deferred", "normal", "onload"})
     public void defer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
@@ -190,7 +190,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false" })
+    @Alerts({"false", "false"})
     public void appendChild_newIdAndScriptAddedInOnce() throws Exception {
         final String html
             = "<html><body>\n"
@@ -212,7 +212,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void executesMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"
@@ -282,7 +282,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2", "3" })
+    @Alerts({"1", "2", "3"})
     public void settingSrcAttribute() throws Exception {
         final String html =
             "<html>\n"
@@ -317,8 +317,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "s-x", "z" },
-            IE = { "s-x", "x", "z" })
+    @Alerts(DEFAULT = {"s-x", "z"},
+            IE = {"s-x", "x", "z"})
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"
@@ -375,7 +375,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "loaded", "§§URL§§abcd" })
+    @Alerts({"loaded", "§§URL§§abcd"})
     public void lineBreaksInUrl() throws Exception {
         final String html
             = "<html><head>\n"

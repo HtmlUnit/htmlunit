@@ -34,7 +34,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]" })
+    @Alerts({"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

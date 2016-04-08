@@ -60,7 +60,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "[object Text]" })
+    @Alerts({"1", "[object Text]"})
     public void childNodes() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"

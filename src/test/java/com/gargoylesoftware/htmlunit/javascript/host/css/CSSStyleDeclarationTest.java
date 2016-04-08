@@ -58,7 +58,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "black", "pink", "color: pink;", "color: pink;" })
+    @Alerts({"black", "pink", "color: pink;", "color: pink;"})
     public void style_OneCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -84,9 +84,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
-            CHROME = {"black", "pink", "color: pink; background: blue;" },
-            IE = {"black", "pink", "background: blue; color: pink; foo: bar;" })
+    @Alerts(DEFAULT = {"black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;"},
+            CHROME = {"black", "pink", "color: pink; background: blue;"},
+            IE = {"black", "pink", "background: blue; color: pink; foo: bar;"})
     @NotYetImplemented
     public void style_MultipleCssAttributes() throws Exception {
         final String html
@@ -112,7 +112,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "", "pink", "color: pink;" })
+    @Alerts({"null", "", "pink", "color: pink;"})
     public void style_OneUndefinedCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -139,7 +139,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "hidden", "undefined" })
+    @Alerts({"", "hidden", "undefined"})
     public void mozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -199,7 +199,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "string", "string", "string", "undefined" })
+    @Alerts({"string", "string", "string", "undefined"})
     public void accessProperties() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
@@ -257,7 +257,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "*blue* string", "" })
+    @Alerts({"*blue* string", ""})
     public void removeProperty() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -278,7 +278,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "** string", "blue" })
+    @Alerts({"** string", "blue"})
     public void removePropertyUnknown() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -299,7 +299,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "** string", "blue" })
+    @Alerts({"** string", "blue"})
     public void removePropertyUndefined() throws Exception {
         final String html = "<html>\n"
             + "<head><title>First</title>\n"
@@ -324,7 +324,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "30px", "", "30px", "arial", "", "arial" })
+    @Alerts({"30px", "", "30px", "arial", "", "arial"})
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -356,7 +356,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "" })
+    @Alerts({"", ""})
     @NotYetImplemented
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
@@ -379,7 +379,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" })
+    @Alerts({"", "0.5", "0.4", "0.33333", "-3", "3", "", "", ""})
     public void initOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='o1' style='opacity: '>d</div>\n"
@@ -448,7 +448,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "exception" })
+    @Alerts({"undefined", "exception"})
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -468,7 +468,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "exception" })
+    @Alerts({"undefined", "exception"})
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -489,7 +489,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" })
+    @Alerts({"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""})
     public void borderStyles_noStyle() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -522,7 +522,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3px", "4px", "2px", "1px" })
+    @Alerts({"3px", "4px", "2px", "1px"})
     public void borderXxxWidth() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -543,7 +543,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "thin", "medium", "thick", "thick" })
+    @Alerts({"thin", "medium", "thick", "thick"})
     public void borderXxxWidthConstants() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -587,7 +587,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "foo" })
+    @Alerts({"undefined", "foo"})
     public void setUnsupportdProperty() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='my' style=''>d</div>\n"
@@ -606,7 +606,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5" })
+    @Alerts({"string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5"})
     public void zIndex() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -645,8 +645,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"string", "", "string", "", "string", "4", "string", "", "string", "", "string", "" },
-            IE = {"string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
+    @Alerts(DEFAULT = {"string", "", "string", "", "string", "4", "string", "", "string", "", "string", ""},
+            IE = {"string", "", "string", "", "number", "4", "string", "", "string", "", "string", ""})
     public void zIndexDefault() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -693,7 +693,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "1", "1" })
+    @Alerts({"", "", "1", "1"})
     public void zIndexSetUndefined() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -728,7 +728,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "1", "" })
+    @Alerts({"", "", "1", ""})
     public void zIndexSetNull() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -762,7 +762,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "7", "7", "", "4", "1" })
+    @Alerts({"", "7", "7", "", "4", "1"})
     public void zIndexSetString() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -805,7 +805,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "", "1", "1" })
+    @Alerts({"", "", "1", "1"})
     public void zIndexSetInvalid() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -837,7 +837,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "15px", "italic", "", "italic" })
+    @Alerts({"", "", "15px", "italic", "", "italic"})
     public void cssText() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -861,7 +861,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1px", "solid", "red" })
+    @Alerts({"1px", "solid", "red"})
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -882,7 +882,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "false" })
+    @Alerts({"true", "false"})
     public void display() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -902,9 +902,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)" },
-            CHROME = {"", "", "none", "rgb(0, 128, 0)" },
-            IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)" })
+    @Alerts(DEFAULT = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)"},
+            CHROME = {"", "", "none", "rgb(0, 128, 0)"},
+            IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)"})
     @NotYetImplemented(IE)
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
@@ -933,9 +933,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" },
-            CHROME = {"", "", "inline", "rgb(0, 0, 0)" },
-            IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" })
+    @Alerts(DEFAULT = {"block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
+            CHROME = {"", "", "inline", "rgb(0, 0, 0)"},
+            IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -960,7 +960,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1px", "2px" })
+    @Alerts({"1px", "2px"})
     public void resettingValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -981,7 +981,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2px", "30px" })
+    @Alerts({"2px", "30px"})
     public void resettingValue2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1007,7 +1007,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({
             "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
-            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px" })
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"})
     public void marginAllvsMarginSingle() throws Exception {
         final String html =
               "<html>\n"
@@ -1061,7 +1061,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({
         "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
-        "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px" })
+        "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"})
     public void paddingAllvsPaddingSingle() throws Exception {
         final String html =
               "<html>\n"
@@ -1316,7 +1316,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 'blah'", "0", "green", "green"})
+            IE = {"'font', 'blah', 0", "green", "green"})
     public void setAttributeFont0() throws Exception {
         setAttribute("'font', 'blah', 0");
     }
@@ -1326,7 +1326,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 'red'", "0", "green", "red"})
+            IE = {"'color', 'red', 0", "green", "red"})
     public void setAttributeColor0() throws Exception {
         setAttribute("'color', 'red', 0");
     }
@@ -1336,7 +1336,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 'red'", "0", "green", "red"})
+            IE = {"'ColoR', 'red', 0", "green", "red"})
     public void setAttributeColorCase0() throws Exception {
         setAttribute("'ColoR', 'red', 0");
     }
@@ -1346,7 +1346,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 'blah'", "1", "green", "green"})
+            IE = {"'font', 'blah', 1", "green", "green"})
     public void setAttributeFont1() throws Exception {
         setAttribute("'font', 'blah', 1");
     }
@@ -1356,7 +1356,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 'red'", "1", "green", "red"})
+            IE = {"'color', 'red', 1", "green", "red"})
     public void setAttributeColor1() throws Exception {
         setAttribute("'color', 'red', 1");
     }
@@ -1366,7 +1366,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 'red'", "1", "green", "red"})
+            IE = {"'ColoR', 'red', 1", "green", "red"})
     public void setAttributeColorCase1() throws Exception {
         setAttribute("'ColoR', 'red', 1");
     }
@@ -1509,7 +1509,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "red ", "black ", "blue important", "gray " })
+    @Alerts({"red ", "black ", "blue important", "gray "})
     public void setProperty() throws Exception {
         final String[] expected = getExpectedAlerts();
         setProperty("'background-color', 'red', ''", expected[0]);
@@ -1522,8 +1522,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"green ", "black important", "green " },
-            FF = { "green ", "green ", "green " })
+    @Alerts(DEFAULT = {"green ", "black important", "green "},
+            FF = { "green ", "green ", "green "})
     public void setPropertyImportant() throws Exception {
         final String[] expected = getExpectedAlerts();
         setProperty("'background-color', 'white', 'crucial'", expected[0]);
@@ -1558,7 +1558,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "important", "", "important" })
+    @Alerts({"", "important", "", "important"})
     public void getPropertyPriority() throws Exception {
         final String html =
                 "<html><body onload='test()'>\n"
@@ -1596,9 +1596,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"BLACK", "pink", "color: pink;", "color: pink;" },
-            CHROME = {"black", "pink", "color: pink;", "color: pink;" },
-            IE = {"black", "pink", "color: pink;", "color: pink;" })
+    @Alerts(DEFAULT = {"BLACK", "pink", "color: pink;", "color: pink;"},
+            CHROME = {"black", "pink", "color: pink;", "color: pink;"},
+            IE = {"black", "pink", "color: pink;", "color: pink;"})
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1624,8 +1624,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
-            IE = {"5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
+            IE = {"5px", "5", "1em", "16", "30px", "30"})
     public void pixelLeft() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
@@ -1651,8 +1651,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
-            IE = {"5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
+            IE = {"5px", "5", "1em", "16", "30px", "30"})
     public void pixelRight() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
@@ -1678,8 +1678,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
-            IE = {"5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
+            IE = {"5px", "5", "1em", "16", "30px", "30"})
     public void pixelTop() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='top: 5px; border: 1px solid black;'>a</div>\n"
@@ -1705,8 +1705,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
-            IE = {"5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
+            IE = {"5px", "5", "1em", "16", "30px", "30"})
     public void pixelBottom() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='bottom: 5px; border: 1px solid black;'>a</div>\n"
@@ -1734,9 +1734,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "none" },
-            CHROME = {"undefined", "before", "none", "exception" },
-            IE = {"function", "before", "none", "after", "none" })
+    @Alerts(DEFAULT = {"undefined", "none"},
+            CHROME = {"undefined", "before", "none", "exception"},
+            IE = {"function", "before", "none", "after", "none"})
     @NotYetImplemented
     public void interceptSetter() throws Exception {
         final String html = "<html>\n"
@@ -1769,7 +1769,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "", "" })
+    @Alerts({"", "", "", ""})
     public void setToNull() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1801,8 +1801,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "width", "", "undefined" },
-            FF = { "1", "width", "undefined", "undefined" })
+    @Alerts(DEFAULT = {"1", "width", "", "undefined"},
+            FF = { "1", "width", "undefined", "undefined"})
     public void length() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1824,7 +1824,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "border-box" })
+    @Alerts({"true", "true", "border-box"})
     public void boxSizing() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1851,8 +1851,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"auto", "auto" },
-            CHROME = {"auto", "" })
+    @Alerts(DEFAULT = {"auto", "auto"},
+            CHROME = {"auto", ""})
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

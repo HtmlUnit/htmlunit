@@ -42,7 +42,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "in test", "BODY" })
+    @Alerts({"in test", "BODY"})
     public void bodyAttributeWhenOpeningBodyGenerated() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
@@ -61,7 +61,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "3", "text3", "text3", "null" })
+    @Alerts({"2", "3", "text3", "text3", "null"})
     public void lostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
@@ -125,7 +125,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DIV", "TABLE" })
+    @Alerts({"DIV", "TABLE"})
     public void div_between_table_and_tr() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -270,7 +270,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "inFirst", "inSecond" })
+    @Alerts({"inFirst", "inSecond"})
     public void nestedForms() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='TransSearch'>\n"
@@ -313,7 +313,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "\uFFFD", "65533" })
+    @Alerts({"1", "\uFFFD", "65533"})
     public void entityWithInvalidUTF16Code() throws Exception {
         final String html = "<html><head><title>&#x1b3d6e;</title></head><body><script>"
             + "alert(document.title.length);\n"
@@ -344,11 +344,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
+    @Alerts({"4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
                 "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
                 "outerA", "BODY:null", "1", "#text:V", "true", "false",
                 "outerA", "DIV:null", "1", "#text:W", "false", "false",
-                "innerA", "DIV:null", "1", "#text:X", "false", "true" })
+                "innerA", "DIV:null", "1", "#text:X", "false", "true"})
     @NotYetImplemented
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
@@ -428,7 +428,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "DOC", "1" })
+    @Alerts({"DOC", "1"})
     public void unknownTagInTable() throws Exception {
         final String html = "<html><body>"
             + "<table id='it'><doc><tr><td>hello</td></tr></doc></table>"
@@ -443,7 +443,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "DOC", "1" })
+    @Alerts({"DOC", "1"})
     public void unknownTagInTbody() throws Exception {
         final String html = "<html><body>"
             + "<table id='it'><tbody><doc><tr><td>hello</td></tr></doc></tbody></table>"
@@ -458,7 +458,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "TABLE", "2", "FORM", "TBODY" })
+    @Alerts({"1", "TABLE", "2", "FORM", "TBODY"})
     public void formInTable1() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -500,7 +500,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "1c", "0", "TBODY", "3", "2a", "2b", "2c", "0", "TBODY" })
+    @Alerts({"3", "1a", "1b", "1c", "0", "TBODY", "3", "2a", "2b", "2c", "0", "TBODY"})
     public void formInTable2() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -557,7 +557,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "", "0", "TABLE" })
+    @Alerts({"3", "1a", "1b", "", "0", "TABLE"})
     public void formInTable3() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -590,7 +590,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "", "0", "DIV" })
+    @Alerts({"3", "1a", "1b", "", "0", "DIV"})
     @NotYetImplemented
     public void formInTable4() throws Exception {
         final String html = "<html>\n"
@@ -626,7 +626,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "1a", "0", "TR", "1", "2a", "0", "TR" })
+    @Alerts({"1", "1a", "0", "TR", "1", "2a", "0", "TR"})
     public void formInTable5() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -660,7 +660,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "1a", "1b", "0", "TR" })
+    @Alerts({"2", "1a", "1b", "0", "TR"})
     public void formInTable6() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -701,7 +701,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "1c", "0", "TR", "1", "2a", "1", "DIV" })
+    @Alerts({"3", "1a", "1b", "1c", "0", "TR", "1", "2a", "1", "DIV"})
     public void formInTable7() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -743,7 +743,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "1a", "1b", "2", "BODY", "TR", "TABLE", "2" })
+    @Alerts({"2", "1a", "1b", "2", "BODY", "TR", "TABLE", "2"})
     public void formInTable8() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -790,8 +790,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "3", "1b", "1a", "1c", "0", "TABLE" },
-            IE = { "3", "1a", "1b", "1c", "0", "TABLE" })
+    @Alerts(DEFAULT = {"3", "1b", "1a", "1c", "0", "TABLE"},
+            IE = {"3", "1a", "1b", "1c", "0", "TABLE"})
     @NotYetImplemented({ CHROME, FF })
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
@@ -828,7 +828,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "form1_submit", "0", "TABLE" })
+    @Alerts({"1", "form1_submit", "0", "TABLE"})
     public void formInTable10() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -859,7 +859,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "<div>caption</div>", "TABLE" })
+    @Alerts({"<div>caption</div>", "TABLE"})
     public void nonInlineElementInCaption() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -883,7 +883,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "input1", "submit1", "1", "LI", "2", "input2", "submit2", "2", "DIV" })
+    @Alerts({"2", "input1", "submit1", "1", "LI", "2", "input2", "submit2", "2", "DIV"})
     public void synthesizedDivInForm() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"

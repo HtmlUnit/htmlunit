@@ -35,7 +35,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "object", "true" })
+    @Alerts({"false", "object", "true"})
     public void prototype() throws Exception {
         final String html
             = "<html>\n"
@@ -56,8 +56,8 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "undefined", "false" },
-            IE = { "false", "object", "true" })
+    @Alerts(DEFAULT = {"true", "undefined", "false"},
+            IE = {"false", "object", "true"})
     public void prototypeUppercase() throws Exception {
         final String html
             = "<html>\n"
@@ -78,7 +78,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function", "function", "function", "function", "function" })
+    @Alerts({"function", "function", "function", "function", "function"})
     public void methods() throws Exception {
         final String html
             = "<html>\n"

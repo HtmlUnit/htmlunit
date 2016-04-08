@@ -36,10 +36,10 @@ public class HTMLBRElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "left", "all", "right", "none", "2", "foo", "left",
-                        "none", "right", "all", "2", "abc", "8" },
-            IE = { "", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
-                   "", "" })
+    @Alerts(DEFAULT = {"", "left", "all", "right", "none", "2", "foo", "left",
+                        "none", "right", "all", "2", "abc", "8"},
+            IE = {"", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
+                   "", ""})
     public void clear() throws Exception {
         final String html
             = "<html><body>\n"

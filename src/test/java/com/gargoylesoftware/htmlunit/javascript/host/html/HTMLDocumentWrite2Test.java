@@ -287,7 +287,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "<form></form>", "[object HTMLFormElement]" })
+    @Alerts({"<form></form>", "[object HTMLFormElement]"})
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
@@ -312,7 +312,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "<form></form>", "[object HTMLFormElement]" })
+    @Alerts({"<form></form>", "[object HTMLFormElement]"})
     public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -424,7 +424,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5" })
+    @Alerts({"null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5"})
     public void write_Destination() throws Exception {
         final String html =
               "<html>\n"
@@ -462,7 +462,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "[object HTMLBodyElement]", "", "foo" })
+    @Alerts({"null", "[object HTMLBodyElement]", "", "foo"})
     public void write_BodyAttributesKept() throws Exception {
         final String html =
               "<html>\n"
@@ -487,7 +487,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2", "3" })
+    @Alerts({"1", "2", "3"})
     public void write_ScriptExecutionOrder() throws Exception {
         final String html =
               "<html>\n"
@@ -531,7 +531,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "theBody", "theBody", "theBody" })
+    @Alerts({"theBody", "theBody", "theBody"})
     public void writeAddNodesToCorrectParent() throws Exception {
         final String html = "<html><head><title>foo</title></head>\n"
              + "<body id=\"theBody\">\n"
@@ -554,7 +554,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "outer", "inner1" })
+    @Alerts({"outer", "inner1"})
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
              + "function doTest(){\n"
@@ -582,7 +582,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
       * @throws Exception if the test fails
       */
     @Test
-    @Alerts({ "STYLE", "SCRIPT" })
+    @Alerts({"STYLE", "SCRIPT"})
     public void writeStyle() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
              + "<script>\n"

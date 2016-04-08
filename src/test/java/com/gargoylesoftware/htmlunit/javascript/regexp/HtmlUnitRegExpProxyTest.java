@@ -193,7 +193,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "false", "true" })
+    @Alerts({"true", "false", "true"})
     public void test_prototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -264,7 +264,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "{#abcd},{,abcd,}" })
+    @Alerts({"{#abcd},{,abcd,}"})
     public void testRegexWithNonEscapedCurlyBraces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -310,7 +310,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "[" })
+    @Alerts({"null", "["})
     public void openingSquareBracketInCharacterClass() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -348,7 +348,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ ":toto,toto,,", "null" })
+    @Alerts({":toto,toto,,", "null"})
     public void jqueryPseudo() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + " var re = /:((?:[\\w\\u00c0-\\uFFFF_-]|\\\\.)+)(?:\\((['\"]*)((?:\\([^\\)]+\\)"
@@ -368,11 +368,11 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({   "[floating=true],floating,=,,true",
+    @Alerts({  "[floating=true],floating,=,,true",
                 "[floating=\"true\"],floating,=,\",true",
                 "[floating=\"true'],floating,=,,\"true'",
                 "[floating=\"true],floating,=,,\"true",
-                "[floating=true\"],floating,=,,true\"" })
+                "[floating=true\"],floating,=,,true\""})
     public void extJs() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var re = /^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])/;\n"
@@ -394,7 +394,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "axxxxa,a", "xxxx,", "xxxx,", "xxxx," })
+    @Alerts({"axxxxa,a", "xxxx,", "xxxx,", "xxxx,"})
     public void backReferenceToOptionalGroup() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -415,7 +415,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "abcx\u0004,b,x", "null", "null", "null" })
+    @Alerts({"abcx\u0004,b,x", "null", "null", "null"})
     public void backReferenceToNotDefinedGroupsAreHandledAsOctal() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -436,7 +436,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "abcx,b,x", "abcx,b,x", "null", "null" })
+    @Alerts({"abcx,b,x", "abcx,b,x", "null", "null"})
     public void ignoreBackReferenceNotFinishedGroups() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -458,7 +458,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "abb,a,b", "abd,a,b" })
+    @Alerts({"null", "abb,a,b", "abd,a,b"})
     public void ignoreBackReferenceInCharacterClass() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -667,7 +667,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "\\*\\[", "\\\\", "+1", "abcdef", "1\\1abc123\\123de1234\\1234f", "\n  \n", "x  x", "x\"\\", "$$x$" })
+    @Alerts({"\\*\\[", "\\\\", "+1", "abcdef", "1\\1abc123\\123de1234\\1234f", "\n  \n", "x  x", "x\"\\", "$$x$"})
     public void testReplaceAll() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -765,7 +765,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b" })
+    @Alerts({"foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b"})
     public void replaceString() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -882,7 +882,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test(timeout = 1000)
-    @Alerts({ "2200915", "2000915" })
+    @Alerts({"2200915", "2000915"})
     public void replace_huge() throws Exception {
         final String html = "<html><body><script>\n"
             + "String.prototype.times = function(n) {\n"
@@ -908,7 +908,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void nullCharacter() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

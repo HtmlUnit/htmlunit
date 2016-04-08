@@ -68,8 +68,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "justify", "center", "wrong", "" },
-            IE = { "left", "right", "justify", "center", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "justify", "center", "wrong", ""},
+            IE = {"left", "right", "justify", "center", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -96,8 +96,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "justify", "center" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "justify", "center" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "justify", "center"},
+            IE = {"center", "error", "center", "error", "center", "left", "right", "justify", "center"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -133,7 +133,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "true", "null", "true" })
+    @Alerts({"null", "true", "null", "true"})
     public void handlers() throws Exception {
         final String html
             = "<html><body>\n"
@@ -153,7 +153,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "true", "false", "true", "true", "false" })
+    @Alerts({"false", "true", "false", "true", "true", "false"})
     public void clientHeight() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -197,7 +197,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "false", "true", "true", "true" })
+    @Alerts({"true", "true", "false", "true", "true", "true"})
     public void clientWidth() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

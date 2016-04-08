@@ -252,7 +252,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "c", "f" })
+    @Alerts({"c", "f"})
     public void addEventListener_error_clientThrows() throws Exception {
         addEventListener_error(true);
     }
@@ -261,7 +261,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "c", "f" })
+    @Alerts({"c", "f"})
     public void addEventListener_error_clientDoesNotThrow() throws Exception {
         addEventListener_error(false);
     }
@@ -338,7 +338,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "First script executes", "Second page loading" })
+    @Alerts({"First script executes", "Second page loading"})
     public void changingLocationSkipsFurtherScriptsOnPage() throws Exception {
         final String html
             = "<html><head></head>\n"

@@ -34,8 +34,8 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function", "undefined", "undefined",
-                "undefined", "undefined", "function", "function" },
+    @Alerts(DEFAULT = {"function", "function", "undefined", "undefined",
+                "undefined", "undefined", "function", "function"},
             IE = {})
     public void staticMethods() throws Exception {
         final String html =
@@ -301,7 +301,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "end", "in then" },
+    @Alerts(DEFAULT = {"end", "in then"},
             IE = "exception")
     public void then() throws Exception {
         final String html = "<html><body><script>"
@@ -318,7 +318,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "Success", "string", "oh, no!", "after catch" },
+    @Alerts(DEFAULT = {"Success", "string", "oh, no!", "after catch"},
             IE = {})
     public void catchTest() throws Exception {
         final String html = "<html>\n"

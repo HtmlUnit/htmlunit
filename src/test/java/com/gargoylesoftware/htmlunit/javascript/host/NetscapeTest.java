@@ -34,8 +34,8 @@ public class NetscapeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "exception" },
-            FF = { "[object Object]", "undefined", "[object Object]", "undefined" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "exception"},
+            FF = { "[object Object]", "undefined", "[object Object]", "undefined"})
     public void netscape() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

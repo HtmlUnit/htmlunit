@@ -124,7 +124,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
         final String html
             = "<html><body><label id='a1'>a1</label><label id='a2' accesskey='A'>a2</label><script>\n"
