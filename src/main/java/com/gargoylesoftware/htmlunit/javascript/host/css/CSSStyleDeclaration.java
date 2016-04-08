@@ -34,6 +34,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LEFT;
@@ -1392,6 +1393,54 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setFontSize(final String fontSize) {
         setStyleAttributePixel(FONT_SIZE, fontSize);
+    }
+
+    /**
+     * Gets the {@code font} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getFont() {
+        return getStyleAttribute(FONT);
+    }
+
+    /**
+     * Sets the {@code font} style attribute.
+     * @param font the new attribute
+     */
+    @JsxSetter
+    public void setFont(final String font) {
+        if (isValidFont(font)) {
+            setStyleAttribute(FONT.getAttributeName(), font);
+        }
+    }
+
+    private static boolean isValidFont(final String font) {
+        final String[] tokens = font.split(" ");
+        if (tokens.length > 1) {
+            if (!isValidFontSize(tokens[tokens.length - 2])) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isValidFontSize(final String fontSize) {
+        final int slash = fontSize.indexOf('/');
+        final String actualFontSize = slash == -1 ? fontSize : fontSize.substring(0, slash);
+        final String actualLineHeight = slash == -1 ? "" : fontSize.substring(slash + 1);
+        if (!isLength(actualFontSize)) {
+            return false;
+        }
+        if (!actualLineHeight.isEmpty() && !isValidLineHeight(actualLineHeight)) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidLineHeight(final String lineHeight) {
+        return isLength(lineHeight);
     }
 
     /**
