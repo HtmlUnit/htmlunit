@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -47,5 +48,17 @@ public class SVGElement extends Element {
     @JsxGetter
     public String getId() {
         return getDomNodeOrDie().getId();
+    }
+
+    /**
+     * Returns the bounding box, in current user space, of the geometry of all contained graphics elements.
+     * @return the bounding box
+     */
+    @JsxFunction
+    public SVGRect getBBox() {
+        final SVGRect rect = new SVGRect();
+        rect.setParentScope(getParentScope());
+        rect.setPrototype(getPrototype(rect.getClass()));
+        return rect;
     }
 }
