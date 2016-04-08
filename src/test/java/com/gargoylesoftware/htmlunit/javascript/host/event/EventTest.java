@@ -326,8 +326,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
-    public void testAddEventListener_HandlerNull() throws Exception {
+    @Alerts
+    public void addEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<script>\n"
@@ -397,7 +397,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "frame1",
-            CHROME = "")
+            CHROME = {})
     public void thisInEventHandler() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -418,7 +418,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "called",
-            CHROME = "")
+            CHROME = {})
     public void iframeOnload() throws Exception {
         final String html
             = "<html><head>\n"

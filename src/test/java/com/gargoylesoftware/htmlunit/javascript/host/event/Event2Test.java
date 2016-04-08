@@ -71,7 +71,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "")
+            IE = {})
     @BuggyWebDriver(CHROME)
     // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
@@ -698,8 +698,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
-            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false" })
+    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"},
+            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "false"})
     @NotYetImplemented(CHROME)
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
@@ -710,11 +712,12 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
-            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true",
-                        "div capturing, true, true", "span capturing, true, true" },
-            IE = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
-                        "div capturing, false, false", "span capturing, false, true" })
+    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"},
+            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing, false", "true",
+                "div capturing", "true", "true", "span capturing", "true", "true" },
+            IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
+                "div capturing", "false", "false", "span capturing", "false", "true" })
     @NotYetImplemented({ CHROME, IE })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");

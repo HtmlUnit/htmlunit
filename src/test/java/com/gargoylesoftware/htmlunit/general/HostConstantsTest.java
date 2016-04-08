@@ -100,6 +100,14 @@ public class HostConstantsTest extends WebDriverTestCase {
                 + "</body></html>");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean ignoreExpectationsLength() {
+        return true;
+    }
+
     private String getExpectedString() throws Exception {
         if (host_.endsWith("Array") || "Image".equals(host_) || "Option".equals(host_)) {
             return "";

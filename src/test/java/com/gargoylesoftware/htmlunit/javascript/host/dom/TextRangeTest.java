@@ -378,7 +378,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts
     public void compareEndPoints() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

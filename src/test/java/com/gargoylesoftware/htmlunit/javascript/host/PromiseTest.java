@@ -206,7 +206,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true, fulfilled!, TypeError: Throwing, Resolving",
+    @Alerts(DEFAULT = {"true", "fulfilled!", "TypeError: Throwing", "Resolving"},
             IE = {})
     public void resolveThenables() throws Exception {
         final String html = "<html>\n"
@@ -268,7 +268,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1, 2",
+    @Alerts(DEFAULT = {"1", "2"},
             IE = {})
     public void thenChanining() throws Exception {
         final String html =

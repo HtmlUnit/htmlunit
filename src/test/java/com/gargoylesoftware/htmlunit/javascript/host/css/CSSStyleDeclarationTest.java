@@ -84,9 +84,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
-            CHROME = { "black", "pink", "color: pink; background: blue;" },
-            IE = { "black", "pink", "background: blue; color: pink; foo: bar;" })
+    @Alerts(DEFAULT = {"black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;" },
+            CHROME = {"black", "pink", "color: pink; background: blue;" },
+            IE = {"black", "pink", "background: blue; color: pink; foo: bar;" })
     @NotYetImplemented
     public void style_MultipleCssAttributes() throws Exception {
         final String html
@@ -645,8 +645,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "string", "", "string", "", "string", "4", "string", "", "string", "", "string", "" },
-            IE = { "string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
+    @Alerts(DEFAULT = {"string", "", "string", "", "string", "4", "string", "", "string", "", "string", "" },
+            IE = {"string", "", "string", "", "number", "4", "string", "", "string", "", "string", "" })
     public void zIndexDefault() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -902,9 +902,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)" },
-            CHROME = { "", "", "none", "rgb(0, 128, 0)" },
-            IE = { "inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)" })
+    @Alerts(DEFAULT = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)" },
+            CHROME = {"", "", "none", "rgb(0, 128, 0)" },
+            IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)" })
     @NotYetImplemented(IE)
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
@@ -933,9 +933,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" },
-            CHROME = { "", "", "inline", "rgb(0, 0, 0)" },
-            IE = { "inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" })
+    @Alerts(DEFAULT = {"block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" },
+            CHROME = {"", "", "inline", "rgb(0, 0, 0)" },
+            IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)" })
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1171,25 +1171,102 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { },
-            IE = { "", "green", "green", "", "green", "green", "", "green", "green" })
+    @Alerts(DEFAULT = {},
+            IE = "")
     public void getAttribute() throws Exception {
-        getAttribute("\"font\"", new String[0]);
-        final String[] expected = getExpectedAlerts();
-        if (expected.length != 0) {
-            getAttribute("'font'", expected[0]);
-            getAttribute("'color'", expected[1]);
-            getAttribute("'ColoR'", expected[2]);
-            getAttribute("'font', 0", expected[3]);
-            getAttribute("'color', 0", expected[4]);
-            getAttribute("'coLOr', 0", expected[5]);
-            getAttribute("'font', 1", expected[6]);
-            getAttribute("'color', 1", expected[7]);
-            getAttribute("'ColOR', 1", expected[8]);
-        }
+        getAttribute("\"font\"");
     }
 
-    private void getAttribute(final String params, final String... expected) throws Exception {
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "")
+    public void getAttributeFont() throws Exception {
+        getAttribute("'font'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "green")
+    public void getAttributeColor() throws Exception {
+        getAttribute("'color'");
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "green")
+    public void getAttributeColorCase() throws Exception {
+        getAttribute("'ColoR'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "")
+    public void getAttributeFont0() throws Exception {
+        getAttribute("'font', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "green")
+    public void getAttributeColor0() throws Exception {
+        getAttribute("'color', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "green")
+    public void getAttributeColorCase0() throws Exception {
+        getAttribute("'coLOr', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "")
+    public void getAttributeFont1() throws Exception {
+        getAttribute("'font', 1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "green")
+    public void getAttributeColor1() throws Exception {
+        getAttribute("'color', 1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "green")
+    public void getAttributeColorCase1() throws Exception {
+        getAttribute("'ColOR', 1");
+    }
+
+    private void getAttribute(final String params) throws Exception {
         final String html =
               "<html><head><script>\n"
             + "function test() {\n"
@@ -1201,7 +1278,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<a id='a' href='#' style='color:green'>go</a></body></html>";
 
-        setExpectedAlerts(expected);
         loadPageWithAlerts2(html);
     }
 
@@ -1209,31 +1285,93 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "not supported", "not supported", "not supported", "not supported", "not supported",
-                "not supported", "not supported", "not supported", "not supported" },
-            IE = { "'font', 'blah', green, green",
-                "'color', 'red', green, red",
-                "'ColoR', 'red', green, red",
-                "'font', 'blah', 0, green, green",
-                "'color', 'red', 0, green, red",
-                "'ColoR', 'red', 0, green, red",
-                "'font', 'blah', 1, green, green",
-                "'color', 'red', 1, green, red",
-                "'ColoR', 'red', 1, green, red" })
-    public void setAttribute() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        setAttribute("'font', 'blah'", expected[0]);
-        setAttribute("'color', 'red'", expected[1]);
-        setAttribute("'ColoR', 'red'", expected[2]);
-        setAttribute("'font', 'blah', 0", expected[3]);
-        setAttribute("'color', 'red', 0", expected[4]);
-        setAttribute("'ColoR', 'red', 0", expected[5]);
-        setAttribute("'font', 'blah', 1", expected[6]);
-        setAttribute("'color', 'red', 1", expected[7]);
-        setAttribute("'ColoR', 'red', 1", expected[8]);
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'font', 'blah'", "green", "green"})
+    public void setAttributeFont() throws Exception {
+        setAttribute("'font', 'blah'");
     }
 
-    private void setAttribute(final String params, final String... expected) throws Exception {
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'color', 'red'", "green", "red"})
+    public void setAttributeColor() throws Exception {
+        setAttribute("'color', 'red'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'ColoR', 'red'", "green", "red"})
+    public void setAttributeColorCase() throws Exception {
+        setAttribute("'ColoR', 'red'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'font', 'blah'", "0", "green", "green"})
+    public void setAttributeFont0() throws Exception {
+        setAttribute("'font', 'blah', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'color', 'red'", "0", "green", "red"})
+    public void setAttributeColor0() throws Exception {
+        setAttribute("'color', 'red', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'ColoR', 'red'", "0", "green", "red"})
+    public void setAttributeColorCase0() throws Exception {
+        setAttribute("'ColoR', 'red', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'font', 'blah'", "1", "green", "green"})
+    public void setAttributeFont1() throws Exception {
+        setAttribute("'font', 'blah', 1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'color', 'red'", "1", "green", "red"})
+    public void setAttributeColor1() throws Exception {
+        setAttribute("'color', 'red', 1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'ColoR', 'red'", "1", "green", "red"})
+    public void setAttributeColorCase1() throws Exception {
+        setAttribute("'ColoR', 'red', 1");
+    }
+
+    private void setAttribute(final String params) throws Exception {
         final String html =
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='color:green'>go</a>\n"
@@ -1252,7 +1390,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        setExpectedAlerts(expected);
         loadPageWithAlerts2(html);
     }
 
@@ -1260,31 +1397,93 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "not supported", "not supported", "not supported", "not supported", "not supported",
-                "not supported", "not supported", "not supported", "not supported" },
-            IE = { "'font', green, false, green",
-                "'color', green, true, ",
-                "'ColoR', green, true, ",
-                "'font', 0, green, false, green",
-                "'color', 0, green, true, ",
-                "'ColoR', 0, green, true, ",
-                "'font', 1, green, false, green",
-                "'color', 1, green, true, ",
-                "'ColoR', 1, green, true, " })
-    public void removeAttribute() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        removeAttribute("'font'", expected[0]);
-        removeAttribute("'color'", expected[1]);
-        removeAttribute("'ColoR'", expected[2]);
-        removeAttribute("'font', 0", expected[3]);
-        removeAttribute("'color', 0", expected[4]);
-        removeAttribute("'ColoR', 0", expected[5]);
-        removeAttribute("'font', 1", expected[6]);
-        removeAttribute("'color', 1", expected[7]);
-        removeAttribute("'ColoR', 1", expected[8]);
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'font'", "green", "false", "green"})
+    public void removeAttributeFont() throws Exception {
+        removeAttribute("'font'");
     }
 
-    private void removeAttribute(final String params, final String... expected) throws Exception {
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'color'", "green", "true", ""})
+    public void removeAttributeColor() throws Exception {
+        removeAttribute("'color'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'ColoR'", "green", "true", ""})
+    public void removeAttributeColorCase() throws Exception {
+        removeAttribute("'ColoR'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'font', 0", "green", "false", "green"})
+    public void removeAttributeFont0() throws Exception {
+        removeAttribute("'font', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'color', 0", "green", "true", ""})
+    public void removeAttributeColor0() throws Exception {
+        removeAttribute("'color', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'ColoR', 0", "green", "true", ""})
+    public void removeAttributeColorCase0() throws Exception {
+        removeAttribute("'ColoR', 0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'font', 1", "green", "false", "green"})
+    public void removeAttributeFont1() throws Exception {
+        removeAttribute("'font', 1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'color', 1", "green", "true", ""})
+    public void removeAttributeColor1() throws Exception {
+        removeAttribute("'color', 1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "not supported",
+            IE = {"'ColoR', 1", "green", "true", ""})
+    public void removeAttributeColorCase1() throws Exception {
+        removeAttribute("'ColoR', 1");
+    }
+
+    private void removeAttribute(final String params) throws Exception {
         final String html =
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='color:green'>go</a>\n"
@@ -1303,7 +1502,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        setExpectedAlerts(expected);
         loadPageWithAlerts2(html);
     }
 
@@ -1324,7 +1522,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "green ", "black important", "green " },
+    @Alerts(DEFAULT = {"green ", "black important", "green " },
             FF = { "green ", "green ", "green " })
     public void setPropertyImportant() throws Exception {
         final String[] expected = getExpectedAlerts();
@@ -1398,9 +1596,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
-            CHROME = { "black", "pink", "color: pink;", "color: pink;" },
-            IE = { "black", "pink", "color: pink;", "color: pink;" })
+    @Alerts(DEFAULT = {"BLACK", "pink", "color: pink;", "color: pink;" },
+            CHROME = {"black", "pink", "color: pink;", "color: pink;" },
+            IE = {"black", "pink", "color: pink;", "color: pink;" })
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1426,8 +1624,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5px", "undefined", "1em", "undefined" },
-            IE = { "5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
+            IE = {"5px", "5", "1em", "16", "30px", "30" })
     public void pixelLeft() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
@@ -1453,8 +1651,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5px", "undefined", "1em", "undefined" },
-            IE = { "5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
+            IE = {"5px", "5", "1em", "16", "30px", "30" })
     public void pixelRight() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
@@ -1480,8 +1678,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5px", "undefined", "1em", "undefined" },
-            IE = { "5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
+            IE = {"5px", "5", "1em", "16", "30px", "30" })
     public void pixelTop() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='top: 5px; border: 1px solid black;'>a</div>\n"
@@ -1507,8 +1705,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5px", "undefined", "1em", "undefined" },
-            IE = { "5px", "5", "1em", "16", "30px", "30" })
+    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined" },
+            IE = {"5px", "5", "1em", "16", "30px", "30" })
     public void pixelBottom() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='bottom: 5px; border: 1px solid black;'>a</div>\n"
@@ -1536,9 +1734,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "none" },
-            CHROME = { "undefined", "before", "none", "exception" },
-            IE = { "function", "before", "none", "after", "none" })
+    @Alerts(DEFAULT = {"undefined", "none" },
+            CHROME = {"undefined", "before", "none", "exception" },
+            IE = {"function", "before", "none", "after", "none" })
     @NotYetImplemented
     public void interceptSetter() throws Exception {
         final String html = "<html>\n"
@@ -1603,7 +1801,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "width", "", "undefined" },
+    @Alerts(DEFAULT = {"1", "width", "", "undefined" },
             FF = { "1", "width", "undefined", "undefined" })
     public void length() throws Exception {
         final String html = "<html><head>\n"
@@ -1653,8 +1851,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "auto", "auto" },
-            CHROME = { "auto", "" })
+    @Alerts(DEFAULT = {"auto", "auto" },
+            CHROME = {"auto", "" })
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1750,7 +1948,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             final String nextLine = i + 1 < lines.size() ? lines.get(i + 1) : null;
             if (line.startsWith("    public ")
                     && line.contains(" " + info.getReadMethod().getName() + "(")
-                    && nextLine.contains("  return getStyleAttribute(")
+                    && nextLine != null && nextLine.contains("  return getStyleAttribute(")
                     && lines.get(i + 2).equals("    }")) {
                 final String styleName = nextLine.substring(nextLine.indexOf('(' + 1), nextLine.indexOf(')'));
                 try {

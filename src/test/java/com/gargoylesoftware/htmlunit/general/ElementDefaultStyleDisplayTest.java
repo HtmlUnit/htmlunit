@@ -1577,8 +1577,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "table-column-group" },
-            FF = { "block, table-column-group" },
-            IE = { "table-column-group, table-column-group" })
+            FF = { "block", "table-column-group" },
+            IE = { "table-column-group", "table-column-group" })
     public void colgroup() throws Exception {
         loadPageWithAlerts2(test("colgroup"));
     }

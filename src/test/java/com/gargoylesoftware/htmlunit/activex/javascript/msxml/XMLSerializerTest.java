@@ -50,13 +50,13 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "" },
-            IE = { "",
-                   "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
-                   + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     public void test() throws Exception {
-        final String expectedString = getExpectedAlerts()[1];
-        setExpectedAlerts(getExpectedAlerts()[0]);
+        final String expectedString = getExpectedAlerts().length != 0 ? ""
+                : "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
+                + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310";
+
         final String serializationText =
                 "<note> "
                 + "<to>Tove</to> \\n"
@@ -76,11 +76,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "" },
-            IE = { "", "<a><!--32abc32--></a>1310" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     public void comment() throws Exception {
-        final String expectedString = getExpectedAlerts()[1];
-        setExpectedAlerts(getExpectedAlerts()[0]);
+        final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a><!--32abc32--></a>1310";
 
         final String serializationText = "<a><!-- abc --></a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
@@ -92,11 +91,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "" },
-            IE = { "", "<a>&lt;&gt;&amp;</a>1310" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     public void xmlEntities() throws Exception {
-        final String expectedString = getExpectedAlerts()[1];
-        setExpectedAlerts(getExpectedAlerts()[0]);
+        final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a>&lt;&gt;&amp;</a>1310";
         final String serializationText = "<a>&lt;&gt;&amp;</a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
@@ -107,16 +105,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "" },
-            IE = { "",
-                    "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
-                    + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
-                    + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void nameSpaces() throws Exception {
-        final String expectedString = getExpectedAlerts()[1];
-        setExpectedAlerts(getExpectedAlerts()[0]);
+        final String expectedString = getExpectedAlerts().length != 0 ? ""
+                : "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
+                + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
+                + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
+
         final String serializationText =
                 "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n"
                 + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n"
@@ -137,12 +135,13 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "" },
-            IE = { "", "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
-                    + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     public void attributes() throws Exception {
-        final String expectedString = getExpectedAlerts()[1];
-        setExpectedAlerts(getExpectedAlerts()[0]);
+        final String expectedString = getExpectedAlerts().length != 0 ? ""
+                : "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
+                + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310";
+
         final String serializationText = "<document attrib=\"attribValue\">"
                                             + "<outer attrib=\"attribValue\">"
                                             + "<inner attrib=\"attribValue\"/>"
@@ -158,19 +157,19 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "no ActiveX", "" },
-            IE = {"",
-                    "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
-                    + "<head><title>html</title></head>"
-                    + "<body32id=\"bodyId\">"
-                    + "<span32class=\"spanClass\">foo</span>"
-                    + "</body>"
-                    + "</html>1310" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void htmlAttributes() throws Exception {
-        final String expectedString = getExpectedAlerts()[1];
-        setExpectedAlerts(getExpectedAlerts()[0]);
+        final String expectedString = getExpectedAlerts().length != 0 ? ""
+                : "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                        + "<head><title>html</title></head>"
+                        + "<body32id=\"bodyId\">"
+                        + "<span32class=\"spanClass\">foo</span>"
+                        + "</body>"
+                        + "</html>1310";
+
         final String serializationText = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
                                           + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                                           + "<head><title>html</title></head>"

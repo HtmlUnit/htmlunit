@@ -749,7 +749,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", " "},
+    @Alerts(DEFAULT = {"", ""},
             IE = {"undefined", "something"})
     public void origin() throws Exception {
         attribute("origin", "something");

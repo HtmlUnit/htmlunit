@@ -398,13 +398,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "null, undefined, null, [object FileList], null, undefined, undefined, null, null, null,"
-                + " undefined, null, undefined, null, undefined, null, null, null, null, null, null, null,"
-                + " null, null, null, null, null, null",
-            IE = "undefined, undefined, undefined, [object FileList], undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,"
-                + " undefined, undefined, undefined, undefined")
+    @Alerts(DEFAULT = {"null", "undefined", "null", "[object FileList]", "null", "undefined", "undefined", "null",
+                "null", "null", "undefined", "null", "undefined", "null", "undefined", "null", "null", "null", "null",
+                "null", "null", "null", "null", "null", "null", "null", "null", "null"},
+            IE = {"undefined", "undefined", "undefined", "[object FileList]", "undefined", "undefined", "undefined",
+                "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                "undefined", "undefined", "undefined", "undefined", "undefined"})
     @Test
     public void files() throws Exception {
         testAttribute("files", "", null);

@@ -63,8 +63,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "",
-            IE = "")
+    @Alerts
     public void createElement() throws Exception {
         final String html
             = "<html>\n"

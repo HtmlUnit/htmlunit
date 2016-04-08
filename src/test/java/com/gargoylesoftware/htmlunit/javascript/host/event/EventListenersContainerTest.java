@@ -109,7 +109,7 @@ public class EventListenersContainerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = {},
             IE = "exception")
     public void addEventListener_no_handleEvent() throws Exception {
         final String html

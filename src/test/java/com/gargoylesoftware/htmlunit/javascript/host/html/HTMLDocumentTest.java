@@ -1244,7 +1244,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0 commands supported",
-            CHROME = "3 commands supported, not supported: 2D-Position, AbsolutePosition, "
+            CHROME = {"3 commands supported", "not supported: 2D-Position, AbsolutePosition, "
                     + "BlockDirLTR, BlockDirRTL, BrowseMode, ClearAuthenticationCache, CreateBookmark, "
                     + "DirLTR, DirRTL, EditMode, InlineDirLTR, InlineDirRTL, InsertButton, InsertFieldset, "
                     + "InsertIFrame, InsertInputButton, InsertInputCheckbox, InsertInputFileUpload, "
@@ -1252,7 +1252,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                     + "InsertInputReset, InsertInputSubmit, InsertInputText, InsertMarquee, InsertSelectDropdown, "
                     + "InsertSelectListbox, InsertTextArea, LiveResize, MultipleSelection, "
                     + "Open, OverWrite, PlayImage, Refresh, RemoveParaFormat, SaveAs, SizeToControl, "
-                    + "SizeToControlHeight, SizeToControlWidth, Stop, StopImage, UnBookmark",
+                    + "SizeToControlHeight, SizeToControlWidth, Stop, StopImage, UnBookmark"},
             IE = "46 commands supported")
     public void queryCommandSupported_disctinct() throws Exception {
         final String[] commands = {"2D-Position", "AbsolutePosition",

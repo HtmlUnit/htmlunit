@@ -55,7 +55,7 @@ public class StyleMediaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "false" },
-            FF = "")
+            FF = {})
     public void matchMedium() throws Exception {
         final String html
             = "<html><head><script>\n"
