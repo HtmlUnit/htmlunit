@@ -54,7 +54,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HtmlUnit, HtmlUnit, false, false, false, 0")
+    @Alerts({"HtmlUnit", "HtmlUnit", "false", "false", "false", "0"})
     public void regExpPropertyNone() throws Exception {
         testProperties("HtmlUnit", "new RegExp('HtmlUnit')");
     }
@@ -63,7 +63,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HtmlUnit, HtmlUnit, true, false, false, 0")
+    @Alerts({"HtmlUnit", "HtmlUnit", "true", "false", "false", "0"})
     public void regExpPropertyIgnoreCase() throws Exception {
         testProperties("HtmlUnit", "new RegExp('HtmlUnit', 'i')");
     }
@@ -72,7 +72,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HtmlUnit, HtmlUnit, false, true, false, 8")
+    @Alerts({"HtmlUnit", "HtmlUnit", "false", "true", "false", "8"})
     public void regExpPropertyGlobal() throws Exception {
         testProperties("HtmlUnit", "new RegExp('HtmlUnit', 'g')");
     }
@@ -81,7 +81,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HtmlUnit, HtmlUnit, false, false, true, 0")
+    @Alerts({"HtmlUnit", "HtmlUnit", "false", "false", "true", "0"})
     public void regExpPropertyMultiline() throws Exception {
         testProperties("HtmlUnit", "new RegExp('HtmlUnit', 'm')");
     }
@@ -90,7 +90,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0, true, 8, true, 27, true, 8, true, 27, false, 0")
+    @Alerts({"0", "true", "8", "true", "27", "true", "8", "true", "27", "false", "0"})
     public void regExpPropertyLastIndexGlobalSetTest() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -123,7 +123,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0, HtmlUnit, 8")
+    @Alerts({"0", "HtmlUnit", "8"})
     public void regExpPropertyLastIndexGlobalExec() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

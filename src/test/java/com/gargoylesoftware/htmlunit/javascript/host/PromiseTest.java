@@ -36,7 +36,7 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function", "function", "undefined", "undefined",
                 "undefined", "undefined", "function", "function" },
-            IE = "")
+            IE = {})
     public void staticMethods() throws Exception {
         final String html =
             "<html>\n"
@@ -68,7 +68,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Resolved",
-            IE = "")
+            IE = {})
     public void resolve() throws Exception {
         final String html =
             "<html>\n"
@@ -96,7 +96,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Rejected",
-            IE = "")
+            IE = {})
     public void reject() throws Exception {
         final String html =
             "<html>\n"
@@ -124,7 +124,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = "")
+            IE = {})
     public void resolveEmpty() throws Exception {
         final String html =
             "<html>\n"
@@ -152,7 +152,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE = "")
+            IE = {})
     public void resolveArray() throws Exception {
         final String html =
             "<html>\n"
@@ -179,7 +179,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "")
+            IE = {})
     public void resolvePromise() throws Exception {
         final String html =
             "<html>\n"
@@ -207,7 +207,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true, fulfilled!, TypeError: Throwing, Resolving",
-            IE = "")
+            IE = {})
     public void resolveThenables() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -269,7 +269,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1, 2",
-            IE = "")
+            IE = {})
     public void thenChanining() throws Exception {
         final String html =
             "<html>\n"
@@ -319,7 +319,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Success", "string", "oh, no!", "after catch" },
-            IE = "")
+            IE = {})
     public void catchTest() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

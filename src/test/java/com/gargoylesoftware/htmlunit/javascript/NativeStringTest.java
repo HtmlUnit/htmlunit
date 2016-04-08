@@ -113,7 +113,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "3",
-            IE = "")
+            IE = {})
     public void trimRight() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -135,7 +135,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "4",
-            IE = "")
+            IE = {})
     public void trimLeft() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

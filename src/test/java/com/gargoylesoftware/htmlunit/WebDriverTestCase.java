@@ -801,6 +801,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Verifies the captured alerts.
+     *
      * @param maxWaitTime the maximum time to wait for the expected alert to be found
      * @param driver the driver instance
      * @param expectedAlerts the expected alerts
@@ -826,7 +827,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         assertEquals(expectedAlerts, actualAlerts);
-        assumeTrue(expectedAlerts.length == actualAlerts.size());
+        if (!ignoreExpectationsLength()) {
+            assumeTrue(expectedAlerts.length == actualAlerts.size());
+        }
+    }
+
+    /**
+     * Whether the expectations length must match the actual length or this can be ignored.
+     * @return whether to ignore checking the expectations length against the actual one
+     */
+    protected boolean ignoreExpectationsLength() {
+        return false;
     }
 
     /**

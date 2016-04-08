@@ -129,7 +129,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
 
         if (value != null) {
             html += "    div.style." + property + " = '" + value + "';\n"
-            + "    debug(div);\n";
+                    + "    debug(div);\n";
         }
 
         html += "  }\n"

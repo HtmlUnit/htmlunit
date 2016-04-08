@@ -61,6 +61,14 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean ignoreExpectationsLength() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

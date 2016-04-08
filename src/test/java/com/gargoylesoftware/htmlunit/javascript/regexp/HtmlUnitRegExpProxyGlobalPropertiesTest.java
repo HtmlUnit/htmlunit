@@ -64,6 +64,14 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean ignoreExpectationsLength() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

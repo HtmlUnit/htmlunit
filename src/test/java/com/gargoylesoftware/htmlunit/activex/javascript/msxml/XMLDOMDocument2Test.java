@@ -153,7 +153,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+            IE = {})
     public void setProperty() throws Exception {
         final String html = ""
             + "  function test() {\n"

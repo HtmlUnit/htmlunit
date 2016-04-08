@@ -67,7 +67,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "only screen and (color)", "print", "only screen and (color)", "print" })
+    @Alerts({ "2", "only screen and (color)", "print", "only screen and (color), print" })
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
