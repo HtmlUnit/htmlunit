@@ -135,7 +135,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String BACKGROUND_POSITION = "background-position";
     private static final String BACKGROUND_REPEAT = "background-repeat";
     private static final String BEHAVIOR = "behavior";
-    private static final String BORDER = "border";
     private static final String BORDER_BOTTOM_COLOR = "border-bottom-color";
     private static final String BORDER_BOTTOM_STYLE = "border-bottom-style";
     private static final String BORDER_LEFT_COLOR = "border-left-color";
@@ -904,24 +903,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the {@code border} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter
-    public String getBorder() {
-        return getStyleAttribute(BORDER);
-    }
-
-    /**
-     * Sets the {@code border} style attribute.
-     * @param border the new attribute
-     */
-    @JsxSetter
-    public void setBorder(final String border) {
-        setStyleAttribute(BORDER, border);
-    }
-
-    /**
      * Gets the {@code borderBottomColor} style attribute.
      * @return the style attribute
      */
@@ -1069,11 +1050,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the width, "" if not defined
      */
     private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
-        String value = getStyleAttribute(borderSideWidth);
+        String value = getStyleAttribute(borderSideWidth.getAttributeName());
         if (value.isEmpty()) {
-            value = findBorderWidth(getStyleAttribute(borderSide));
+            value = findBorderWidth(getStyleAttribute(borderSide.getAttributeName()));
             if (value == null) {
-                final String borderWidth = getStyleAttribute(BORDER_WIDTH);
+                final String borderWidth = getStyleAttribute(BORDER_WIDTH.getAttributeName());
                 if (!StringUtils.isEmpty(borderWidth)) {
                     final String[] values = StringUtils.split(borderWidth);
                     int index = values.length;

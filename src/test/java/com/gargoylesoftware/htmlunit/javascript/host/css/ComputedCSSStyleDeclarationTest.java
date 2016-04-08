@@ -1486,7 +1486,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "", "", "", "10", "10", "rgb(0, 128, 0)" },
             CHROME = { "", "", "", "auto", "auto", "rgb(0, 128, 0)" })
     public void zIndexComputed() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<style>\n"
             + "  .abc { z-index: 10; color:green }\n"
             + "</style>\n"
@@ -1517,7 +1517,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = { "0", "0", "0", "0", "", "", "", "", "", "", "", "",
                     "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px" })
     public void offsetWidth() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
@@ -1568,7 +1568,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             IE = { "undefined", "left", "undefined", "left", "undefined", "right" })
     @NotYetImplemented(IE)
     public void cssFloat2() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<style>\n"
             + "  .abc { float: right }\n"
             + "</style>\n"
@@ -1602,7 +1602,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = "1")
     public void custom() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<style>\n"
             + "  .abc { xyz: 1 }\n"
             + "</style>\n"

@@ -77,6 +77,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import static org.junit.Assume.assumeTrue;
 
 /**
  * Base class for tests using WebDriver.
@@ -825,6 +826,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         assertEquals(expectedAlerts, actualAlerts);
+        assumeTrue(expectedAlerts.length == actualAlerts.size());
     }
 
     /**

@@ -36,7 +36,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Test
     @Alerts({ "", "16px", "2em", "32px", "150%", "24px" })
     public void fontSizeEm() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
@@ -70,7 +70,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
             IE = { "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman" })
     public void fontInitial() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
@@ -120,15 +120,19 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     }
 
     private void font(final String fontToSet, final String property, final String value) throws Exception {
-        final String html = "<html><head>"
+        String html = "<html><head>"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
             + "    div.style.font = '" + fontToSet + "';\n"
-            + "    debug(div);\n"
-            + "    div.style." + property + " = '" + value + "';\n"
-            + "    debug(div);\n"
-            + "  }\n"
+            + "    debug(div);\n";
+
+        if (value != null) {
+            html += "    div.style." + property + " = '" + value + "';\n"
+            + "    debug(div);\n";
+        }
+
+        html += "  }\n"
             + "  function debug(div) {\n"
             + "    var style = window.getComputedStyle(div, null);\n"
             + "    alert(div.style.font);\n"
@@ -143,4 +147,42 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "normal normal normal normal 16px / normal 'Times New Roman'",
+                "", "'Times New Roman'" },
+            FF = { "", "", "", "serif" },
+            IE = { "", "", "", "Times New Roman" })
+    public void wrongFontFamily() throws Exception {
+        font("xyz", "fontFamily", null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1px xyz", "normal normal normal normal 1px / normal xyz",
+                "xyz", "xyz", "1px abc", "normal normal normal normal 1px / normal abc", "abc", "abc" },
+            FF = { "1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc" },
+            IE = { "1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc" })
+    @NotYetImplemented
+    public void minimalFontFamily() throws Exception {
+        font("1px xyz", "fontFamily", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "normal normal normal normal 16px / normal 'Times New Roman'",
+            "", "'Times New Roman'", "", "normal normal normal normal 16px / normal abc", "abc", "abc" },
+            FF = { "", "", "", "serif", "", "", "abc", "abc" },
+            IE = { "", "", "", "Times New Roman", "", "", "abc", "abc" })
+    public void minimalFontFamilyReversed() throws Exception {
+        font("xyz 1px", "fontFamily", "abc");
+    }
+
 }
