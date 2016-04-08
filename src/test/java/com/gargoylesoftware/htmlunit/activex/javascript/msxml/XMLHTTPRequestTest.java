@@ -1293,15 +1293,12 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"no ActiveX", "null", "null", "null"},
-            IE = {"", "null", "null", "4"})
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {})
     public void setRequestHeader_contentLength() throws Exception {
-        final String[] expectedHeaders = getExpectedAlerts();
-        setExpectedAlerts(getExpectedAlerts()[0]);
-
-        setRequestHeader_contentLength(null, expectedHeaders[1]);
-        setRequestHeader_contentLength("", expectedHeaders[2]);
-        setRequestHeader_contentLength("1234", expectedHeaders[3]);
+        setRequestHeader_contentLength(null, null);
+        setRequestHeader_contentLength("", null);
+        setRequestHeader_contentLength("1234", getExpectedAlerts().length == 0 ? "4" : null);
     }
 
     private void setRequestHeader_contentLength(final String content, final String contentLength) throws Exception {
@@ -1321,7 +1318,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
-        assertEquals(contentLength, "" + headers.get("Content-Length"));
+        assertEquals(contentLength, headers.get("Content-Length"));
     }
 
     private void property(final String property) throws Exception {

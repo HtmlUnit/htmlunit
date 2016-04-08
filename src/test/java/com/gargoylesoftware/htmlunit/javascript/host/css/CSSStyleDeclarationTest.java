@@ -1196,6 +1196,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void getAttributeColor() throws Exception {
         getAttribute("'color'");
     }
+
     /**
      * @throws Exception if an error occurs
      */

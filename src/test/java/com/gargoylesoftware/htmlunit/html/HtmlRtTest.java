@@ -33,9 +33,9 @@ public class HtmlRtTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"", "inline, block"},
+    @Alerts(CHROME = {"", "inline", "block"},
             FF = {"block", "ruby-text", "ruby-text"},
-            IE = {"ruby-textruby-text", "ruby-text"})
+            IE = {"ruby-text", "ruby-text", "ruby-text"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
