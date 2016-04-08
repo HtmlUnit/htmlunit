@@ -30,7 +30,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.*;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
@@ -136,17 +136,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String BACKGROUND_REPEAT = "background-repeat";
     private static final String BEHAVIOR = "behavior";
     private static final String BORDER = "border";
-    private static final String BORDER_BOTTOM = "border-bottom";
     private static final String BORDER_BOTTOM_COLOR = "border-bottom-color";
     private static final String BORDER_BOTTOM_STYLE = "border-bottom-style";
-    private static final String BORDER_LEFT = "border-left";
     private static final String BORDER_LEFT_COLOR = "border-left-color";
     private static final String BORDER_LEFT_STYLE = "border-left-style";
-    private static final String BORDER_WIDTH = "border-width";
-    private static final String BORDER_RIGHT = "border-right";
     private static final String BORDER_RIGHT_COLOR = "border-right-color";
     private static final String BORDER_RIGHT_STYLE = "border-right-style";
-    private static final String BORDER_TOP = "border-top";
     private static final String BORDER_TOP_COLOR = "border-top-color";
     private static final String BORDER_TOP_STYLE = "border-top-style";
     private static final String COLOR = "color";
@@ -175,25 +170,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     private static final Map<String, String> CamelizeCache_
             = Collections.synchronizedMap(new HashMap<String, String>());
-
-    /** The different types of shorthand values. */
-    private enum Shorthand {
-        TOP("top"),
-        RIGHT("right"),
-        BOTTOM("bottom"),
-        LEFT("left");
-
-        private final String string_;
-
-        Shorthand(final String stringRepresentation) {
-            string_ = stringRepresentation;
-        }
-
-        @Override
-        public String toString() {
-            return string_;
-        }
-    }
 
     /** Used to parse URLs. */
     private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
@@ -1007,7 +983,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderBottomWidth() {
-        return getBorderWidth(Shorthand.BOTTOM);
+        return getBorderWidth(BORDER_BOTTOM_WIDTH, BORDER_BOTTOM);
     }
 
     /**
@@ -1083,25 +1059,38 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderLeftWidth() {
-        return getBorderWidth(Shorthand.LEFT);
+        return getBorderWidth(BORDER_LEFT_WIDTH, BORDER_LEFT);
     }
 
     /**
      * Gets the border width for the specified side
-     * @param side the side
-     * @param side the side's position
+     * @param borderSideWidth the border side width Definition
+     * @param borderside the border side Definition
      * @return the width, "" if not defined
      */
-    private String getBorderWidth(final Shorthand side) {
-        String value = getStyleAttribute(BORDER + "-" + side + "-width");
+    private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
+        String value = getStyleAttribute(borderSideWidth);
         if (value.isEmpty()) {
-            value = findBorderWidth(getStyleAttribute(BORDER + "-" + side));
+            value = findBorderWidth(getStyleAttribute(borderSide));
             if (value == null) {
                 final String borderWidth = getStyleAttribute(BORDER_WIDTH);
                 if (!StringUtils.isEmpty(borderWidth)) {
                     final String[] values = StringUtils.split(borderWidth);
-                    if (values.length > side.ordinal()) {
-                        value = values[side.ordinal()];
+                    int index = values.length;
+                    if (borderSideWidth.name().contains("TOP")) {
+                        index = 0;
+                    }
+                    else if (borderSideWidth.name().contains("RIGHT")) {
+                        index = 1;
+                    }
+                    else if (borderSideWidth.name().contains("BOTTOM")) {
+                        index = 2;
+                    }
+                    else if (borderSideWidth.name().contains("LEFT")) {
+                        index = 3;
+                    }
+                    if (index < values.length) {
+                        value = values[index];
                     }
                 }
             }
@@ -1188,7 +1177,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderRightWidth() {
-        return getBorderWidth(Shorthand.RIGHT);
+        return getBorderWidth(BORDER_RIGHT_WIDTH, BORDER_RIGHT);
     }
 
     /**
@@ -1208,7 +1197,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderTop(final String borderTop) {
-        setStyleAttribute(BORDER_TOP, borderTop);
+        setStyleAttribute(BORDER_TOP.getAttributeName(), borderTop);
     }
 
     /**
@@ -1273,7 +1262,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderTopWidth() {
-        return getBorderWidth(Shorthand.TOP);
+        return getBorderWidth(BORDER_TOP_WIDTH, BORDER_TOP);
     }
 
     /**
