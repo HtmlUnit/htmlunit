@@ -41,10 +41,12 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LEFT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LETTER_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LINE_HEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_LEFT;
@@ -93,6 +95,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -1372,6 +1375,46 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the {@code fontFamily} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getFontFamily() {
+        return getStyleAttribute(FONT_FAMILY);
+    }
+
+    /**
+     * Sets the {@code fontFamily} style attribute.
+     * @param fontFamily the new attribute
+     */
+    @JsxSetter
+    public void setFontFamily(final String fontFamily) {
+        setStyleAttribute(FONT_FAMILY.getAttributeName(), fontFamily);
+        updateFont(false);
+    }
+
+    private void updateFont(final boolean force) {
+        final String font = getFont();
+        final String[] details = FontHelper.getDetails(font);
+        if (details != null || force) {
+            final StringBuilder newFont = new StringBuilder();
+            newFont.append(getFontSize());
+            final BrowserVersion browserVersion = getBrowserVersion();
+            if (browserVersion.hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
+                newFont.append('/');
+                if (details != null && details[FontHelper.LINE_HEIGHT_INDEX] != null) {
+                    newFont.append(details[FontHelper.LINE_HEIGHT_INDEX]);
+                }
+                else {
+                    newFont.append(LINE_HEIGHT.getDefaultComputedValue(browserVersion));
+                }
+            }
+
+            newFont.append(' ').append(getFontFamily());
+            setStyleAttribute(FONT.getAttributeName(), newFont.toString());
+        }
+    }
+    /**
      * Gets the {@code font} style attribute.
      * @return the style attribute
      */
@@ -1386,37 +1429,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setFont(final String font) {
-        if (isValidFont(font)) {
-            setStyleAttribute(FONT.getAttributeName(), font);
-        }
-    }
-
-    private static boolean isValidFont(final String font) {
-        final String[] tokens = font.split(" ");
-        if (tokens.length > 1) {
-            if (!isValidFontSize(tokens[tokens.length - 2])) {
-                return false;
+        final String[] details = FontHelper.getDetails(font);
+        if (details != null) {
+            setStyleAttribute(FONT_FAMILY.getAttributeName(), details[FontHelper.FONT_FAMILY_INDEX]);
+            final String fontSize = details[FontHelper.FONT_SIZE_INDEX];
+            if (details[FontHelper.LINE_HEIGHT_INDEX] != null) {
+                setStyleAttribute(LINE_HEIGHT.getAttributeName(), details[FontHelper.LINE_HEIGHT_INDEX]);
             }
-            return true;
+            setStyleAttribute(FONT_SIZE.getAttributeName(), fontSize);
+            updateFont(true);
         }
-        return false;
-    }
-
-    private static boolean isValidFontSize(final String fontSize) {
-        final int slash = fontSize.indexOf('/');
-        final String actualFontSize = slash == -1 ? fontSize : fontSize.substring(0, slash);
-        final String actualLineHeight = slash == -1 ? "" : fontSize.substring(slash + 1);
-        if (!isLength(actualFontSize)) {
-            return false;
-        }
-        if (!actualLineHeight.isEmpty() && !isValidLineHeight(actualLineHeight)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean isValidLineHeight(final String lineHeight) {
-        return isLength(lineHeight);
     }
 
     /**
@@ -2819,7 +2841,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param token the token to check
      * @return whether the token is a length or not
      */
-    private static boolean isLength(String token) {
+    static boolean isLength(String token) {
         if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
             || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
             || token.endsWith("%")) {

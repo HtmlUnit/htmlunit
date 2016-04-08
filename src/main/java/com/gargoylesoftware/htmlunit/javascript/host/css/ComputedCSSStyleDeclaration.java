@@ -31,7 +31,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CSS_FLOAT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STRETCH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_VARIANT;
@@ -581,7 +580,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 && getElement().getDomNodeOrDie().isAttachedToPage()) {
             return getStyleAttribute(FONT_STYLE) + ' ' + getStyleAttribute(FONT_VARIANT) + ' '
                     + getStyleAttribute(FONT_WEIGHT) + ' ' + getStyleAttribute(FONT_STRETCH) + ' '
-                    + getStyleAttribute(FONT_SIZE) + ' ' + '/' + ' ' + getStyleAttribute(LINE_HEIGHT) + ' '
+                    + getFontSize() + ' ' + '/' + ' ' + getStyleAttribute(LINE_HEIGHT) + ' '
                     + getStyleAttribute(FONT_FAMILY);
         }
         return "";
@@ -610,6 +609,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             value = pixelValue(value) + "px";
         }
         return value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getFontFamily() {
+        return defaultIfEmpty(super.getFontFamily(), FONT_FAMILY);
     }
 
     /**

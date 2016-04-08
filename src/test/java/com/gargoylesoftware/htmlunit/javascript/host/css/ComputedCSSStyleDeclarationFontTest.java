@@ -168,7 +168,6 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
                 "xyz", "xyz", "1px abc", "normal normal normal normal 1px / normal abc", "abc", "abc"},
             FF = { "1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
-    @NotYetImplemented
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
     }
