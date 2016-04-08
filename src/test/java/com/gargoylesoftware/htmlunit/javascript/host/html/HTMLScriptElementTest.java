@@ -88,7 +88,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts
     public void srcWithJavaScriptProtocol_Static() throws Exception {
         final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
         loadPageWithAlerts2(html);
@@ -162,7 +162,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
@@ -844,7 +844,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "")
+    @Alerts
     public void appendChild_UnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -868,7 +868,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "")
+    @Alerts
     public void insertBeforeUnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
         final String html =

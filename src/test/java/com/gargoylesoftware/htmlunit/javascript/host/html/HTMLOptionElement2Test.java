@@ -1329,7 +1329,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "o-mouse over [option1]", "s-mouse over [option1]" },
-            IE = "")
+            IE = {})
     public void mouseOver() throws Exception {
         shutDownRealIE();
 
@@ -1383,7 +1383,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "o-mouse over [option1]",
-            IE = "")
+            IE = {})
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1435,7 +1435,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = {},
             FF = { "o-mouse over [option1]", "s-mouse over [option1]" })
     public void mouseOverDisabledOption() throws Exception {
         final String html =

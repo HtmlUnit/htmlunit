@@ -131,7 +131,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             CHROME = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                  "string action", "string first_submit", "string id1", "string input_disabled",
                  "string item", "string length", "string namedItem", "string second_submit",
-                 "string val1, string val2" },
+                 "string val1", "string val2" },
             IE = { "string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2" })

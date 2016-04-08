@@ -422,7 +422,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "book", "exception /title, exception title" })
+    @Alerts({ "book", "exception /title", "exception title" })
     public void selectNodes_fromRoot() throws Exception {
         // IE11 works only if running alone
         shutDownRealIE();

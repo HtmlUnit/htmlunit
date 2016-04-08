@@ -702,7 +702,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(", hi")
+    @Alerts({ "", "hi" })
     public void charset() throws Exception {
         attribute("charset", "hi");
     }
@@ -729,7 +729,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = ", 0,0",
+    @Alerts(DEFAULT = { "", "0,0" },
             IE = {"", "0,0,0,0"})
     @NotYetImplemented(IE)
     public void coords() throws Exception {
@@ -740,7 +740,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(", en")
+    @Alerts({ "", "en"})
     public void hreflang() throws Exception {
         attribute("hreflang", "en");
     }
@@ -749,7 +749,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = ", ",
+    @Alerts(DEFAULT = {"", " "},
             IE = {"undefined", "something"})
     public void origin() throws Exception {
         attribute("origin", "something");
