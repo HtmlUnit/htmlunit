@@ -53,7 +53,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts({"beforeafter", "undefined"})
     @NotYetImplemented
-    public void testHtmlTableTextAroundTD() throws Exception {
+    public void htmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -79,7 +79,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("TABLE")
-    public void testHtmlTableWhitespaceAroundTD() throws Exception {
+    public void htmlTableWhitespaceAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
             + "function test() {\n"

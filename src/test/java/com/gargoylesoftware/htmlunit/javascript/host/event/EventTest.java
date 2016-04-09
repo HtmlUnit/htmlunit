@@ -465,7 +465,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false"},
             FF = { "true", "exception"})
-    public void testIEWindowEvent() throws Exception {
+    public void ieWindowEvent() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -560,7 +560,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"click", "true", "true", "click", "false", "false"})
-    public void testInitEventClick() throws Exception {
+    public void initEventClick() throws Exception {
         testInitEvent("click");
     }
 
@@ -569,7 +569,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"dblclick", "true", "true", "dblclick", "false", "false"})
-    public void testInitEventDblClick() throws Exception {
+    public void initEventDblClick() throws Exception {
         testInitEvent("dblclick");
     }
 
@@ -578,7 +578,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"unknown", "true", "true", "unknown", "false", "false"})
-    public void testInitEventUnknown() throws Exception {
+    public void initEventUnknown() throws Exception {
         testInitEvent("unknown");
     }
 
@@ -587,7 +587,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"cASe", "true", "true", "cASe", "false", "false"})
-    public void testInitEventCaseSensitive() throws Exception {
+    public void initEventCaseSensitive() throws Exception {
         testInitEvent("cASe");
     }
 

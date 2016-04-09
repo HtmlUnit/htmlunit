@@ -192,7 +192,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testHomeAndEndAndPageUpAndPageDownKeys() {
+    public void homeAndEndAndPageUpAndPageDownKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
@@ -336,7 +336,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testGenerateKeyPressEventEvenWhenElementPreventsDefault() {
+    public void generateKeyPressEventEvenWhenElementPreventsDefault() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement silent = driver.findElement(By.name("suppress"));

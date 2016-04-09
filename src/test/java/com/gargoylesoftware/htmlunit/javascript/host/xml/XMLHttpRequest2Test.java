@@ -490,7 +490,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("4")
-    public void testOnreadystatechange_sync() throws Exception {
+    public void onreadystatechange_sync() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -529,7 +529,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object Event]#[object XMLHttpRequest]")
-    public void testOnreadystatechangeSyncWithParam() throws Exception {
+    public void onreadystatechangeSyncWithParam() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -570,7 +570,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object Event]#[object XMLHttpRequest]")
-    public void testOnreadystatechangeAsyncWithParam() throws Exception {
+    public void onreadystatechangeAsyncWithParam() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"

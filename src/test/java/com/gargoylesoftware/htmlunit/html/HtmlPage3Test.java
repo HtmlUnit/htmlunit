@@ -136,7 +136,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnLoadHandler_ScriptNameRead() throws Exception {
+    public void onLoadHandler_ScriptNameRead() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "load=function (){};\n"

@@ -31,7 +31,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      * @throws Exception on error
      */
     @Test
-    public void testForJSFlagTrue() throws Exception {
+    public void forJSFlagTrue() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, true, true, null);
         assertTrue("JSObject Flag should have been set", config1.isJsObject());
     }
@@ -40,7 +40,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      * @throws Exception on error
      */
     @Test
-    public void testForJSFlagFalse() throws Exception {
+    public void forJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, false, true, null);
         assertFalse("JSObject Flag should not have been set", config1.isJsObject());
     }
@@ -54,7 +54,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
         /**
          * Dummy function.
          */
-        public void testFunction() {
+        public void function() {
         }
 
         /**

@@ -527,7 +527,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"true", "true", "true", "true", "true", "true", "true", "true",
             "false", "true", "true", "true", "true", "true", "true", "true", "true"})
-    public void testParseError() throws Exception {
+    public void parseError() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"

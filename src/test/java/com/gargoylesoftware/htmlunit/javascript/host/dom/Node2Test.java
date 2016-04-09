@@ -45,7 +45,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testReplaceChild_WithSameNode() throws Exception {
+    public void replaceChild_WithSameNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"

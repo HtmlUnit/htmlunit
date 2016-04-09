@@ -265,7 +265,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"{#abcd},{,abcd,}"})
-    public void testRegexWithNonEscapedCurlyBraces() throws Exception {
+    public void regexWithNonEscapedCurlyBraces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /(^|{)#([^}]+)(}|$)/;\n"
@@ -668,7 +668,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\\*\\[", "\\\\", "+1", "abcdef", "1\\1abc123\\123de1234\\1234f", "\n  \n", "x  x", "x\"\\", "$$x$"})
-    public void testReplaceAll() throws Exception {
+    public void replaceAll() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
