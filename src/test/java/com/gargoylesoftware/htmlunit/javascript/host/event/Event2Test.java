@@ -519,7 +519,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"DOMContentLoaded type=DOMContentLoaded", "onLoad"})
-    public void testDOMContentLoaded() throws Exception {
+    public void dOMContentLoaded() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>DOMContentLoaded</title>\n"

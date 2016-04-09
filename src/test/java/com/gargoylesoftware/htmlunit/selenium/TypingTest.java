@@ -157,7 +157,7 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    public void testAllPrintableKeys() {
+    public void allPrintableKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -208,7 +208,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testDeleteAndBackspaceKeys() {
+    public void deleteAndBackspaceKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));

@@ -874,7 +874,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testKeyboard_NoTabbableElements() throws Exception {
+    public void keyboard_NoTabbableElements() throws Exception {
         final WebClient webClient = getWebClient();
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
         final List<String> collectedAlerts = new ArrayList<>();
@@ -903,7 +903,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testKeyboard_OneTabbableElement() throws Exception {
+    public void keyboard_OneTabbableElement() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -939,7 +939,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testAccessKeys() throws Exception {
+    public void accessKeys() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1285,7 +1285,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBadCharset() throws Exception {
+    public void badCharset() throws Exception {
         final String page1Content = "<html><head><title>foo</title>\n"
                 + "</head><body></body></html>";
         final WebClient client = getWebClient();
@@ -1401,7 +1401,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBinaryFileFromFileSystem() throws Exception {
+    public void binaryFileFromFileSystem() throws Exception {
         final String testfileName = "tiny-jpg.img";
         final File testfile = getTestFile(testfileName);
         final byte[] directBytes = IOUtils.toByteArray(new FileInputStream(testfile));
@@ -1663,7 +1663,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testJavaScriptTimeout() throws Exception {
+    public void javaScriptTimeout() throws Exception {
         final WebClient client = getWebClient();
         final long timeout = 2000;
         final long oldTimeout = client.getJavaScriptTimeout();
@@ -1720,7 +1720,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testBasicWindowTracking() throws Exception {
+    public void basicWindowTracking() throws Exception {
         // Create mock web connection.
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse("<html></html");
@@ -1833,7 +1833,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(IE = "Third page loaded")
-    public void testWindowTracking_SpecialCase3() throws Exception {
+    public void windowTracking_SpecialCase3() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -1888,7 +1888,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testWindowTracking_SpecialCase4() throws Exception {
+    public void windowTracking_SpecialCase4() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);

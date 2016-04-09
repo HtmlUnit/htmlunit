@@ -100,9 +100,9 @@ public class CodeStyleTest {
         addAll(new File("src/test"), files);
         final List<String> classNames = getClassNames(files);
         process(files, classNames);
-        for (final String className : classNames) {
-            //addFailure("Not used " + className);
-        }
+        // for (final String className : classNames) {
+        //     addFailure("Not used " + className);
+        // }
 
         licenseYear();
         versionYear();

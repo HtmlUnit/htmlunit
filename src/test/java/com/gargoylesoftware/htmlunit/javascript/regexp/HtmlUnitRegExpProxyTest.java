@@ -194,7 +194,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "false", "true"})
-    public void test_prototype() throws Exception {
+    public void prototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /^(?:(?:(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|"
@@ -284,7 +284,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("aa-b-b-")
-    public void testBackSpace() throws Exception {
+    public void backSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /[p\\bz]/g;\n"

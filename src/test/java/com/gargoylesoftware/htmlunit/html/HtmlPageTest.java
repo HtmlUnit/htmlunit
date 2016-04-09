@@ -838,7 +838,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDocumentParentIsNull() throws Exception {
+    public void documentParentIsNull() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -853,7 +853,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDocumentElement() throws Exception {
+    public void documentElement() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -871,7 +871,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDocumentNodeType() throws Exception {
+    public void documentNodeType() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -889,7 +889,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDeregisterFrameWithoutSrc() throws Exception {
+    public void deregisterFrameWithoutSrc() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
