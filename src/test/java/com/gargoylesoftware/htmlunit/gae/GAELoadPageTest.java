@@ -64,7 +64,7 @@ public class GAELoadPageTest {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsyncUse() throws Exception {
+    public void asyncUse() throws Exception {
         final URL secondUrl = new URL(FIRST_URL, "/second/");
 
         final String html =

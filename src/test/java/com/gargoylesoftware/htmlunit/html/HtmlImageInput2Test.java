@@ -317,7 +317,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    public void testOutsideForm() throws Exception {
+    public void outsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"

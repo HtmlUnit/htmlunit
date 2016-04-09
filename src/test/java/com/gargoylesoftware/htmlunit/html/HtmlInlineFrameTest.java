@@ -102,7 +102,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testRecursiveSrcAttribute() throws Exception {
+    public void recursiveSrcAttribute() throws Exception {
         final String html = "<html><body><iframe id='a' src='#abc'></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlInlineFrame iframe = page.getHtmlElementById("a");
@@ -114,7 +114,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testRecursiveNestedFrames() throws Exception {
+    public void recursiveNestedFrames() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
@@ -148,7 +148,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testInvalidSrcAttribute() throws Exception {
+    public void invalidSrcAttribute() throws Exception {
         final String html = "<html><body><iframe id='a' src='foo://bar'></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlInlineFrame iframe = page.getHtmlElementById("a");
@@ -187,7 +187,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameCloneDoesNotReloadFrame() throws Exception {
+    public void frameCloneDoesNotReloadFrame() throws Exception {
         final String html1 = "<html><body><iframe src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body>abc</body></html>";
 
@@ -209,7 +209,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameWriteDoesNotReloadFrame() throws Exception {
+    public void frameWriteDoesNotReloadFrame() throws Exception {
         final String html1 =
               "<html><body>\n"
             + "<script>document.write('<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>')</script>\n"
@@ -238,7 +238,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameSetInnerHtmlDoesLoadFrame() throws Exception {
+    public void frameSetInnerHtmlDoesLoadFrame() throws Exception {
         final String html1 =
               "<html><body>\n"
             + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
@@ -280,7 +280,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameSetInnerHtmlDoesLoadFrameContentTimeout() throws Exception {
+    public void frameSetInnerHtmlDoesLoadFrameContentTimeout() throws Exception {
         final String html1 =
               "<html><body>\n"
             + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
@@ -330,7 +330,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameContentCreationViaJavascript() throws Exception {
+    public void frameContentCreationViaJavascript() throws Exception {
         final String html =
             "<html><head><title>frames</title></head>\n"
             + "<body>\n"
@@ -362,7 +362,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameContentCreationViaJavascriptUnicode() throws Exception {
+    public void frameContentCreationViaJavascriptUnicode() throws Exception {
         final String html =
             "<html><head><title>frames</title></head>\n"
             + "<body>\n"
@@ -394,7 +394,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameContentCreationViaJavascriptISO_8859_1() throws Exception {
+    public void frameContentCreationViaJavascriptISO_8859_1() throws Exception {
         final String html =
             "<html><head><title>frames</title></head>\n"
             + "<body>\n"
@@ -427,7 +427,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testFrameContentCreationViaJavascriptBeforeFrameResolved() throws Exception {
+    public void frameContentCreationViaJavascriptBeforeFrameResolved() throws Exception {
         final String html =
             "<html><head><title>frames</title></head>\n"
             + "<body>\n"

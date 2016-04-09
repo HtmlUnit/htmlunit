@@ -35,7 +35,7 @@ public class FocusableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnBlurWith2Pages() throws Exception {
+    public void onBlurWith2Pages() throws Exception {
         final String html =
             "<html>\n"
             + "<head>\n"

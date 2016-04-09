@@ -142,7 +142,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRemoveAllChildren() throws Exception {
+    public void removeAllChildren() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<p id='tag'><table>\n"
@@ -160,7 +160,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplace() throws Exception {
+    public void replace() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br><div id='tag2'/></body></html>";
@@ -199,7 +199,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetNewNodeById() throws Exception {
+    public void getNewNodeById() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div id='tag'/></body></html>";
@@ -268,7 +268,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertBefore() throws Exception {
+    public void insertBefore() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
@@ -316,7 +316,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetByXPath() throws Exception {
+    public void getByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
             + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
@@ -364,7 +364,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetFirstByXPath() throws Exception {
+    public void getFirstByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
             + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
@@ -394,7 +394,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetHtmlElementDescendantsOrder() throws Exception {
+    public void getHtmlElementDescendantsOrder() throws Exception {
         final String html = "<html><body id='0'>\n"
             + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>\n"
             + "<span id='I.2'><span id='I.2.a'/></span></span>\n"
@@ -424,7 +424,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetDescendants_remove() throws Exception {
+    public void getDescendants_remove() throws Exception {
         final String html =
               "<html><body id='body'>\n"
             + "<div id='a'>a<div id='b'>b</div>a<div id='c'>c</div>a</div><div id='d'>d</div>\n"
@@ -463,7 +463,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDomChangeListenerTestImpl_insertBefore() throws Exception {
+    public void domChangeListenerTestImpl_insertBefore() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -496,7 +496,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDomChangeListenerTestImpl_appendChild() throws Exception {
+    public void domChangeListenerTestImpl_appendChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -529,7 +529,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({"nodeDeleted: div,p", "nodeDeleted: div,p"})
-    public void testDomChangeListenerTestImpl_removeChild() throws Exception {
+    public void domChangeListenerTestImpl_removeChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -560,7 +560,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDomChangeListenerRegisterNewListener() throws Exception {
+    public void domChangeListenerRegisterNewListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -611,7 +611,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetByXPath_XML() throws Exception {
+    public void getByXPath_XML() throws Exception {
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -632,7 +632,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testOwnerDocument() throws Exception {
+    public void ownerDocument() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"

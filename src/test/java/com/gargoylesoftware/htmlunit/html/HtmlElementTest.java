@@ -552,7 +552,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_AddAttribute() throws Exception {
+    public void htmlAttributeChangeListener_AddAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -589,7 +589,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_ReplaceAttribute() throws Exception {
+    public void htmlAttributeChangeListener_ReplaceAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -626,7 +626,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_RemoveAttribute() throws Exception {
+    public void htmlAttributeChangeListener_RemoveAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -663,7 +663,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_RemoveListener() throws Exception {
+    public void htmlAttributeChangeListener_RemoveListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -696,7 +696,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseOver() throws Exception {
+    public void mouseOver() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -719,7 +719,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseMove() throws Exception {
+    public void mouseMove() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -742,7 +742,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseOut() throws Exception {
+    public void mouseOut() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -766,7 +766,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts("mousedown-0")
-    public void testMouseDown() throws Exception {
+    public void mouseDown() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -790,7 +790,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseUp() throws Exception {
+    public void mouseUp() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"

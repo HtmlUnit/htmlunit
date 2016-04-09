@@ -69,7 +69,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#getName()}.
      */
     @Test
-    public void testGetName() {
+    public void getName() {
         assertEquals(ENTRY_KEY, htmlAttr_.getName());
     }
 
@@ -77,7 +77,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#getNodeName()}.
      */
     @Test
-    public void testGetNodeName() {
+    public void getNodeName() {
         assertEquals(ENTRY_KEY, htmlAttr_.getNodeName());
     }
 
@@ -85,7 +85,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#getNodeType()}.
      */
     @Test
-    public void testGetNodeType() {
+    public void getNodeType() {
         assertEquals(org.w3c.dom.Node.ATTRIBUTE_NODE, htmlAttr_.getNodeType());
     }
 
@@ -93,7 +93,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#getNodeValue()}.
      */
     @Test
-    public void testGetNodeValue() {
+    public void getNodeValue() {
         assertEquals(ENTRY_VALUE, htmlAttr_.getNodeValue());
     }
 
@@ -101,7 +101,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#getValue()}.
      */
     @Test
-    public void testGetValue() {
+    public void getValue() {
         assertEquals(ENTRY_VALUE, htmlAttr_.getValue());
     }
 
@@ -118,7 +118,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      * Tests {@link DomAttr#getParentNode()}.
      */
     @Test
-    public void testGetParent() {
+    public void getParent() {
         assertSame(HTML_ELEMENT, htmlAttr_.getParentNode());
     }
 

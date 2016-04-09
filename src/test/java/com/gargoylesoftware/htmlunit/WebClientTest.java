@@ -111,7 +111,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testHtmlWindowEvents_changed() throws Exception {
+    public void htmlWindowEvents_changed() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
@@ -146,7 +146,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testHtmlWindowEvents_opened() throws Exception {
+    public void htmlWindowEvents_opened() throws Exception {
         final String page1Content = "<html><head><title>foo</title>\n"
                 + "<script>window.open('" + URL_SECOND + "', 'myNewWindow')</script>\n"
                 + "</head><body>\n"
@@ -185,7 +185,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testHtmlWindowEvents_closedFromFrame() throws Exception {
+    public void htmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent = "<html><head><title>first</title></head><body>\n"
                 + "<iframe src='" + URL_THIRD + "' id='frame1'></iframe>\n"
                 + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
@@ -999,7 +999,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testPressAccessKey_Button() throws Exception {
+    public void pressAccessKey_Button() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1086,7 +1086,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testGetPageFailingStatusCode() throws Exception {
+    public void getPageFailingStatusCode() throws Exception {
         final String firstContent = "<html><head><title>Hello World</title></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
@@ -1114,7 +1114,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testProxyConfig() throws Exception {
+    public void proxyConfig() throws Exception {
         // Create the client.
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
@@ -1177,7 +1177,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testProxyConfigWithRedirect() throws Exception {
+    public void proxyConfigWithRedirect() throws Exception {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
@@ -1212,7 +1212,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testProxyConfigForJS() throws Exception {
+    public void proxyConfigForJS() throws Exception {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title>\n"
@@ -1270,7 +1270,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
     /** Test the accessors for refreshHandler. */
     @Test
-    public void testRefreshHandlerAccessors() {
+    public void refreshHandlerAccessors() {
         final WebClient webClient = getWebClient();
         assertTrue(ImmediateRefreshHandler.class.isInstance(webClient.getRefreshHandler()));
 
@@ -1315,7 +1315,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testReusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
+    public void reusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
         final String firstContent = "<html><head><title>First</title></head>\n"
                 + "<body onload='document.myform.mysubmit.focus()'>\n"
                 + "<form action='" + URL_SECOND + "' name='myform'>\n"
@@ -1343,7 +1343,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testOpenerInFrameset() throws Exception {
+    public void openerInFrameset() throws Exception {
         final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>\n"
                 + "<frame src='" + URL_SECOND + "'>\n"
                 + "</frameset>\n"
@@ -1372,7 +1372,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGuessContentType() throws Exception {
+    public void guessContentType() throws Exception {
         final WebClient c = getWebClient();
 
         // tests empty files, type should be determined from file suffix
@@ -1448,7 +1448,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRequestHeader() throws Exception {
+    public void requestHeader() throws Exception {
         final String content = "<html></html>";
         final WebClient client = getWebClient();
 
@@ -1547,7 +1547,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOnBeforeUnloadCalledOnCorrectPage() throws Exception {
+    public void onBeforeUnloadCalledOnCorrectPage() throws Exception {
         final String html = "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
         final List<String> alerts = new ArrayList<>();
         loadPage(html, alerts);
@@ -1585,7 +1585,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testPlusNotEncodedInUrl() throws Exception {
+    public void plusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
@@ -1636,7 +1636,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testGetPageJavascriptProtocol() throws Exception {
+    public void getPageJavascriptProtocol() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse("<html><head><title>Hello World</title></head><body></body></html>");
@@ -1709,7 +1709,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOpenWindowWithNullUrl() throws Exception {
+    public void openWindowWithNullUrl() throws Exception {
         final WebClient client = getWebClient();
         final WebWindow window = client.openWindow(null, "TestingWindow");
         assertNotNull(window);
@@ -1906,7 +1906,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOpenWindowWithAboutBlank() throws Exception {
+    public void openWindowWithAboutBlank() throws Exception {
         final WebClient client = getWebClient();
         final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
         assertNotNull(window);
@@ -1965,7 +1965,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testMaintainJavaScriptParentScope() throws Exception {
+    public void maintainJavaScriptParentScope() throws Exception {
         final String basicContent = "<html><head>"
                 + "<title>basicContentTitle</title>\n"
                 + "</head><body>\n"
@@ -2059,7 +2059,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetTopLevelWindows() throws Exception {
+    public void getTopLevelWindows() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
