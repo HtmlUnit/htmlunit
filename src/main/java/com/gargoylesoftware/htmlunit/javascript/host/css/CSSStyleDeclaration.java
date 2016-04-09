@@ -1414,6 +1414,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             setStyleAttribute(FONT.getAttributeName(), newFont.toString());
         }
     }
+
     /**
      * Gets the {@code font} style attribute.
      * @return the style attribute

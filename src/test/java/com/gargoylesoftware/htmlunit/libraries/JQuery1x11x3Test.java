@@ -5017,7 +5017,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 20, 20")
-    @NotYetImplemented
     public void css__css_String__Object_() throws Exception {
         runTest("css: css(String, Object)");
     }
