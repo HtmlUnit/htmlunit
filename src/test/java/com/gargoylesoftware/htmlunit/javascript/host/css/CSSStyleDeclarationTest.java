@@ -1524,7 +1524,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"green ", "black important", "green "},
-            FF = { "green ", "green ", "green "})
+            FF = {"green ", "green ", "green "})
     public void setPropertyImportant() throws Exception {
         final String[] expected = getExpectedAlerts();
         setProperty("'background-color', 'white', 'crucial'", expected[0]);
@@ -1803,7 +1803,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "width", "", "undefined"},
-            FF = { "1", "width", "undefined", "undefined"})
+            FF = {"1", "width", "undefined", "undefined"})
     public void length() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

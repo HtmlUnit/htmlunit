@@ -44,7 +44,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented({ FF, IE })
-    @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f"},
+    @Alerts(FF = {"baz=blah", "foo=bar", "id=f", "name=f"},
             CHROME = {"name=f", "id=f", "foo=bar", "baz=blah"},
             IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
     public void attributes() throws Exception {
@@ -116,7 +116,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"myAttr", "myattr2", "myAttr", "myattr2", "myattr2"},
-            FF45 = { "myattr", "myattr2", "myattr", "myattr2", "myattr2"})
+            FF45 = {"myattr", "myattr2", "myattr", "myattr2", "myattr2"})
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

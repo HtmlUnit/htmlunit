@@ -78,7 +78,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "0", "1", "2", "3", "length", "item"},
-            FF = { "4", "0", "1", "2", "3", "item", "length"})
+            FF = {"4", "0", "1", "2", "3", "item", "length"})
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -193,7 +193,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "false", "false", "0", "2", "p"},
-            FF = { "1", "false", "true", "0", "2", "p"})
+            FF = {"1", "false", "true", "0", "2", "p"})
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -223,7 +223,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "false", "false", "undefined", "1", "div"},
-            FF = { "2", "false", "true", "undefined", "1", "div"})
+            FF = {"2", "false", "true", "undefined", "1", "div"})
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"

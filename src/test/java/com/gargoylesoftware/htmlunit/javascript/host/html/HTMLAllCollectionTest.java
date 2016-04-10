@@ -579,7 +579,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"},
             CHROME = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
-            FF = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
+            FF = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

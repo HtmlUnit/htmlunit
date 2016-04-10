@@ -35,7 +35,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = { "function CSSPrimitiveValue() {\n    [native code]\n}",
+            FF = {"function CSSPrimitiveValue() {\n    [native code]\n}",
                         "012345678910111213141516171819202122232425"})
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"

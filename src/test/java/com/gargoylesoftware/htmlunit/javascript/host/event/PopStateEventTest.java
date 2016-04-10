@@ -144,7 +144,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception"},
-            FF = { "dispatched"},
+            FF = {"dispatched"},
             CHROME = {"[object PopStateEvent]", "[object Window]", "popstate", "false", "true", "null", "dispatched"})
     @NotYetImplemented(IE)
     public void dispatchEvent() throws Exception {

@@ -155,7 +155,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function foo() {}", "function foo() {}"},
             CHROME = {"undefined", "function foo() {}"},
-            FF = { "undefined", "foo error"})
+            FF = {"undefined", "foo error"})
     @NotYetImplemented({ IE, CHROME })
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
@@ -184,7 +184,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             CHROME = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
                 "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
                 "true", "function"},
-            FF = { "function Window() {\n    [native code]\n}",
+            FF = {"function Window() {\n    [native code]\n}",
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function"})

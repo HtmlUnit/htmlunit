@@ -722,7 +722,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"cell1", "[object Text]", "abc", "[object Text]", ""},
             CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1"},
-            FF38 = { "undefined", "[object Text]", "abc", "[object Text]", ""})
+            FF38 = {"undefined", "[object Text]", "abc", "[object Text]", ""})
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

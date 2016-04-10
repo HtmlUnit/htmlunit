@@ -578,7 +578,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "inline", "inline-block", "inline-block",
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline"},
-            FF = { "inline", "inline", "inline", "inline", "inline", "inline",
+            FF = {"inline", "inline", "inline", "inline", "inline", "inline",
                     "inline", "inline", "inline", "inline"})
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -809,7 +809,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "inline"},
             CHROME = {"inline", "block", "none"},
-            FF = { "ruby", "ruby-text", "none"},
+            FF = {"ruby", "ruby-text", "none"},
             IE = {"ruby", "ruby-text", "inline"})
     public void defaultDisplayValues_R() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1048,7 +1048,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1240px", "auto"},
-            FF = { "1242px", "auto"})
+            FF = {"1242px", "auto"})
     @NotYetImplemented
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
@@ -1458,7 +1458,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false"},
-            FF = { "true", "true"})
+            FF = {"true", "true"})
     @NotYetImplemented(FF)
     public void scrollbarHeight() throws Exception {
         final String html = "<html><head><script>\n"
@@ -1564,7 +1564,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "left", "left", "right", "right"},
-            FF = { "left", "left", "left", "left", "right", "right"},
+            FF = {"left", "left", "left", "left", "right", "right"},
             IE = {"undefined", "left", "undefined", "left", "undefined", "right"})
     @NotYetImplemented(IE)
     public void cssFloat2() throws Exception {

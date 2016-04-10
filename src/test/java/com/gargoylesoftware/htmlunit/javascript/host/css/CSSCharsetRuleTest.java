@@ -34,7 +34,7 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "undefined"},
-            FF38 = { "1", "[object CSSCharsetRule]", "UTF-8"})
+            FF38 = {"1", "[object CSSCharsetRule]", "UTF-8"})
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

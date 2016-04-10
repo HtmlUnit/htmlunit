@@ -260,7 +260,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "transparent", "none", "repeat", "50% 0%", "scroll"},
+    @Alerts(FF = {"transparent", "none", "repeat", "50% 0%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat", "50% 0%", "scroll"},
             IE = {"transparent", "none", "repeat", "top", "scroll"})
     public void backgroundCssPosition4() throws Exception {

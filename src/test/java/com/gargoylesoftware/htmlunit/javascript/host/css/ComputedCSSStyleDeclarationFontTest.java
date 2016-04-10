@@ -65,7 +65,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "normal normal normal normal 16px / normal 'Times New Roman'",
                 "", "normal", "", "normal", "", "normal", "", "16px", "", "normal", "", "'Times New Roman'"},
-            FF = { "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif",
+            FF = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif"},
             IE = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman"})
@@ -110,7 +110,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
                 "normal", "normal",
                 "oblique 15px arial, sans-serif", "oblique normal normal normal 15px / normal arial, sans-serif",
                 "oblique", "oblique"},
-            FF = { "15px arial,sans-serif", "", "normal", "normal",
+            FF = {"15px arial,sans-serif", "", "normal", "normal",
                     "oblique 15px arial,sans-serif", "", "oblique", "oblique"},
             IE = {"15px/normal arial, sans-serif", "", "normal", "normal",
                     "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique"})
@@ -154,7 +154,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal 'Times New Roman'",
                 "", "'Times New Roman'"},
-            FF = { "", "", "", "serif"},
+            FF = {"", "", "", "serif"},
             IE = {"", "", "", "Times New Roman"})
     public void wrongFontFamily() throws Exception {
         font("xyz", "fontFamily", null);
@@ -166,7 +166,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1px xyz", "normal normal normal normal 1px / normal xyz",
                 "xyz", "xyz", "1px abc", "normal normal normal normal 1px / normal abc", "abc", "abc"},
-            FF = { "1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
+            FF = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
@@ -178,7 +178,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal 'Times New Roman'",
             "", "'Times New Roman'", "", "normal normal normal normal 16px / normal abc", "abc", "abc"},
-            FF = { "", "", "", "serif", "", "", "abc", "abc"},
+            FF = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
     public void minimalFontFamilyReversed() throws Exception {
         font("xyz 1px", "fontFamily", "abc");
@@ -190,7 +190,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
-            FF = { "1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
     @NotYetImplemented
     public void minimalLineHeight() throws Exception {
@@ -203,11 +203,50 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
-            FF = { "1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
     @NotYetImplemented
     public void minimalLineHeightSpace() throws Exception {
         font("1px / 2px xyz", "lineHeight", "normal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
+                "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
+            FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            IE = {"", "", "", "normal", "", "", "normal", "normal"})
+    @NotYetImplemented
+    public void minimalLineHeightSpace2() throws Exception {
+        font("1px/ 2px xyz", "lineHeight", "normal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
+                "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
+            FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
+    @NotYetImplemented
+    public void minimalLineHeightSpace3() throws Exception {
+        font("1px /2px xyz", "lineHeight", "normal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
+                "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
+            FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
+    @NotYetImplemented
+    public void minimalLineHeightSpace4() throws Exception {
+        font("1px  /2px xyz", "lineHeight", "normal");
     }
 
 }

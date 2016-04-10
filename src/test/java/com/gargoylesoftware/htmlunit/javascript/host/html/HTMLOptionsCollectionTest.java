@@ -832,7 +832,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
-            FF = { "2", "Two*", "Three"})
+            FF = {"2", "Two*", "Three"})
     public void removeThree() throws Exception {
         remove("3", false, false);
     }
@@ -842,7 +842,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
-            FF = { "2", "Two*", "Three*"})
+            FF = {"2", "Two*", "Three*"})
     public void removeThreeMulti() throws Exception {
         remove("3", false, true);
     }
@@ -870,7 +870,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
-            FF = { "2", "Two*", "Three"})
+            FF = {"2", "Two*", "Three"})
     public void removeTen() throws Exception {
         remove("10", false, false);
     }
@@ -880,7 +880,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
-            FF = { "2", "Two*", "Three*"})
+            FF = {"2", "Two*", "Three*"})
     public void removeTenMuti() throws Exception {
         remove("10", false, true);
     }
@@ -1069,7 +1069,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "", "4", "One", "1", "", "0"},
-            FF = { "1", "", "4", "One", "1", "", "1"})
+            FF = {"1", "", "4", "One", "1", "", "1"})
     public void setLength_increase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

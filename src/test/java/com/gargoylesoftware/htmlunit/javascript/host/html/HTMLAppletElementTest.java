@@ -104,7 +104,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"[object HTMLAppletElement]", "[object HTMLAppletElement]"},
             CHROME = {"[object HTMLUnknownElement]", "exception"},
-            FF = { "[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}"})
+            FF = {"[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

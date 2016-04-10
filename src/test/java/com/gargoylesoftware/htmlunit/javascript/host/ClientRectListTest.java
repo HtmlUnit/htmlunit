@@ -34,7 +34,7 @@ public class ClientRectListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object ClientRectList]", "1", "[object ClientRect]", "[object ClientRect]"},
-            FF = { "[object DOMRect]", "1", "[object DOMRect]", "[object DOMRect]"})
+            FF = {"[object DOMRect]", "1", "[object DOMRect]", "[object DOMRect]"})
     public void getClientRects() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"

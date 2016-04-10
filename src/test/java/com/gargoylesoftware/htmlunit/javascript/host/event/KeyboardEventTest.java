@@ -44,7 +44,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"DOM3: [object KeyboardEvent]", "vendor: exception"},
-            FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
+            FF = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -64,7 +64,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0-0", "0-0", "undefined-undefined"},
+    @Alerts(FF = {"0-0", "0-0", "undefined-undefined"},
             CHROME = {"exception", "0-0", "undefined-undefined"},
             IE = {"exception", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
@@ -93,7 +93,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception", "exception"},
-            FF = { "keydown, true, true, true, true, true, true, 65, 0",
+            FF = {"keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0",
                 "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0"})
@@ -283,7 +283,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"13", "13", "13"},
-            FF = { "0", "13", "13"})
+            FF = {"0", "13", "13"})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -312,7 +312,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {  "keydown:16,0,16",
+    @Alerts(FF = { "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:0,65,65",
                     "keyup:65,0,65",

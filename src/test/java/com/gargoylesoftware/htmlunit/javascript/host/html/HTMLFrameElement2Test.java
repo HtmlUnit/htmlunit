@@ -516,7 +516,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                         "content\nClick for new frame content with onload",
                         "header -> content -> frameSet -> onloadFrame",
                         "onloadFrame\nNew content loaded..."},
-            FF = { "OnloadTest", "header -> frameSet", ""})
+            FF = {"OnloadTest", "header -> frameSet", ""})
     @NotYetImplemented(FF)
     public void windowLocationAssignOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"

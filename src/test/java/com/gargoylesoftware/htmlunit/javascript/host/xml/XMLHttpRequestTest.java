@@ -175,7 +175,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1: 0-", "2: 0-", "#1: 0-", "3: 0-", "#1: 0-", "4: 0-",
                             "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"},
-            FF = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"},
+            FF = {"1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"},
             CHROME = {"1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-",
                     "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"})
     public void statusAsync() throws Exception {
@@ -262,7 +262,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"orsc1", "open-done", "orsc1", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]"},
-            FF = { "orsc1", "open-done", "send-done",
+            FF = {"orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]"},
             CHROME = {"orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]"})
@@ -979,7 +979,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"null", "myID", "blah", "span", "[object XMLDocument]"},
             CHROME = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]"},
-            FF = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]"})
+            FF = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]"})
     public void responseXML_getElementById2() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();

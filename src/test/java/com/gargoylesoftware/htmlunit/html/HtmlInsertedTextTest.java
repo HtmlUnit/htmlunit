@@ -35,7 +35,7 @@ public class HtmlInsertedTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"abcdef", "abcdef"},
-            FF38 = { "abcdef", "undefined"})
+            FF38 = {"abcdef", "undefined"})
     public void simple() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

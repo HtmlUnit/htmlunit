@@ -1089,7 +1089,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "function Element() {\n    [native code]\n}",
+    @Alerts(FF = {"function Element() {\n    [native code]\n}",
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             CHROME = {"function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }"},
@@ -1123,7 +1123,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "function Element() {\n    [native code]\n}",
+    @Alerts(FF = {"function Element() {\n    [native code]\n}",
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             CHROME = {"function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }"},

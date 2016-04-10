@@ -45,7 +45,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"Host", "Connection", "Accept", "User-Agent", "Accept-Encoding", "Accept-Language"},
-        FF = { "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection"},
+        FF = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection"},
         IE = {"Accept", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection"})
     @NotYetImplemented(IE)
     public void headers() throws Exception {
@@ -86,7 +86,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language",
             "Cookie"},
-        FF = { "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
+        FF = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
             "Connection"},
         IE = {"Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
             "Cookie"})

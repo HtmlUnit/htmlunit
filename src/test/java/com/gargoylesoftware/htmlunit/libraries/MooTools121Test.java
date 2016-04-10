@@ -73,7 +73,7 @@ public class MooTools121Test extends WebDriverTestCase {
             IE = {"364", "2", "0",
                     "should return the function bound to an object with multiple arguments",
                     "should return a CSS string representing the Element's styles"},
-            FF = { "364", "2", "0",
+            FF = {"364", "2", "0",
                     "should return true if the string constains the string and separator otherwise false",
                     "should return the function bound to an object with multiple arguments"})
     @Test

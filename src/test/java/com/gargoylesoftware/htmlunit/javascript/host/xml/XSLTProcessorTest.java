@@ -40,7 +40,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "97", "[object Element]"},
+    @Alerts(FF = {"97", "[object Element]"},
             IE = "exception",
             CHROME = "exception")
     @NotYetImplemented(FF)
@@ -149,7 +149,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "function", "function XSLTProcessor() {\n    [native code]\n}",
+    @Alerts(FF = {"function", "function XSLTProcessor() {\n    [native code]\n}",
                 "[object XSLTProcessor]"},
             CHROME = {"function", "function XSLTProcessor() { [native code] }",
                 "[object XSLTProcessor]"},

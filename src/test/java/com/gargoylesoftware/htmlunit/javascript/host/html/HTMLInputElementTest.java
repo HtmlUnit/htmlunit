@@ -466,7 +466,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF = { "abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+    @Alerts(FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                         "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
                         "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             CHROME = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",

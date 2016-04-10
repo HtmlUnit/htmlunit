@@ -367,7 +367,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", ""},
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"},
-            FF45 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
+            FF45 = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
             IE = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void innerText_body() throws Exception {
         final String html
@@ -397,7 +397,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", ""},
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"},
-            FF45 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
+            FF45 = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
             IE = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void innerText_header() throws Exception {
         final String html
@@ -427,7 +427,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", ""},
             CHROME = {"cell1", "[object HTMLTableRowElement]",
                         "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"},
-            FF45 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
+            FF45 = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
             IE = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void innerText_footer() throws Exception {
         final String html

@@ -48,7 +48,7 @@ public class HTMLDataElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "#12o", "undefined", "#12o"},
-            FF = { "1234", "#12o", "", "#12o"})
+            FF = {"1234", "#12o", "", "#12o"})
     public void value() throws Exception {
         final String html = "<html><body>\n"
             + "  <data id='d1' value='1234'>onetwothreefour</data>\n"

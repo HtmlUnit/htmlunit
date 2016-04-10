@@ -347,7 +347,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "3"},
-            FF = { "3", "2", "2", "3", "2", "2"})
+            FF = {"3", "2", "2", "3", "2", "2"})
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }

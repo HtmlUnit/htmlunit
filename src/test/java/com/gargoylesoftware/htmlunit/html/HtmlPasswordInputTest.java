@@ -342,7 +342,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"textLength not available"},
-            FF = { "7"})
+            FF = {"7"})
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

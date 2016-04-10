@@ -169,7 +169,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "new", ""},
-            FF = { "", "", "new", ""})
+            FF = {"", "", "new", ""})
     public void label() throws Exception {
         final String html =
                 "<html>\n"

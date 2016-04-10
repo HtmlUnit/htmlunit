@@ -68,7 +68,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"not found", "true"},
-            FF = { "found", "true"})
+            FF = {"found", "true"})
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -651,7 +651,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "89", "true", "true", "16"},
-            FF = { "true", "true", "94", "true", "true", "14"},
+            FF = {"true", "true", "94", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
         final String html
@@ -675,7 +675,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"679", "1256", "662", "1239"},
-            FF = { "674", "1258", "657", "1241"},
+            FF = {"674", "1258", "657", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -709,7 +709,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"})
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"})
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -721,7 +721,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = { "0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
+            FF = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
     public void scrolling2() throws Exception {
         scrolling(false);
     }
@@ -814,7 +814,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            FF = { "11", "91", "0"})
+            FF = {"11", "91", "0"})
     public void mozInnerScreenX() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1568,7 +1568,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object Window]", "[object Window]", ""},
             CHROME = {"[object Window]", "function Window() { [native code] }",
             "TEMPORARY, PERSISTENT, "},
-            FF = { "[object Window]", "function Window() {\n    [native code]\n}", ""})
+            FF = {"[object Window]", "function Window() {\n    [native code]\n}", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"

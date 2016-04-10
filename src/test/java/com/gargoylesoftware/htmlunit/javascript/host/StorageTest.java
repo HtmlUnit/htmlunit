@@ -253,7 +253,7 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "null", "string", "value", "1"},
             CHROME = {"function", "null", "string", "null", "0"},
-            FF = { "function", "null", "function", "value", "1"})
+            FF = {"function", "null", "function", "value", "1"})
     @NotYetImplemented(FF)
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"

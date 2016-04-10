@@ -104,8 +104,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
-            FF38 = { "windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = { "windows-1252", "windows-1252", "windows-1252", "undefined"},
+            FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
+            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"

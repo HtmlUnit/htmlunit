@@ -51,7 +51,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"number200", "number500", "number200", "number500", "number350", "number350"},
-            IE = { })
+            IE = {})
     public void properties() throws Exception {
         final String html = "<html><body>\n"
             + "<meter id='it' min='200' max='500' value='350'>\n"

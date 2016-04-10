@@ -180,7 +180,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "books", "books", "3", "#text", "0"},
+    @Alerts(FF = {"true", "books", "books", "3", "#text", "0"},
             CHROME = "exception",
             IE = "exception")
     public void load() throws Exception {
@@ -216,7 +216,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "books", "books", "3", "#text", "0"},
+    @Alerts(FF = {"true", "books", "books", "3", "#text", "0"},
             CHROME = "exception",
             IE = "exception")
     // TODO what is the difference to load()?
@@ -569,7 +569,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "http://myNS",
-            IE = { })
+            IE = {})
     public void createNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -650,7 +650,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "button",
-            IE = { })
+            IE = {})
     public void evaluate() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

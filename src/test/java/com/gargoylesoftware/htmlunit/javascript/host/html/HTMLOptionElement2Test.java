@@ -1231,7 +1231,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false-null", "true-true", "true-null",
                         "false-selected", "false-null", "true-true"},
-            FF = { "false-null", "true-true", "true-null",
+            FF = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"})
     @NotYetImplemented(FF)
     public void setSelectedAttribute() throws Exception {
@@ -1436,7 +1436,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {},
-            FF = { "o-mouse over [option1]", "s-mouse over [option1]"})
+            FF = {"o-mouse over [option1]", "s-mouse over [option1]"})
     public void mouseOverDisabledOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

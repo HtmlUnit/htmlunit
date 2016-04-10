@@ -64,9 +64,9 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
                 "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF = { "function values() {\n    [native code]\n}",
+            FF = {"function values() {\n    [native code]\n}",
                     "[object Set Iterator]", "0", "1", "[object Object]"},
-            IE = { })
+            IE = {})
     public void iterator() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -100,9 +100,9 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
                 "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF = { "function values() {\n    [native code]\n}",
+            FF = {"function values() {\n    [native code]\n}",
                 "[object Set Iterator]", "0", "1", "[object Object]"},
-            IE = { })
+            IE = {})
     public void values() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -131,7 +131,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", ""},
-            FF38 = { "undefined", "undefined"})
+            FF38 = {"undefined", "undefined"})
     public void incorrectExpression() throws Exception {
         final String html = "<html><head></head><body>"
             + "<div id='div1'><!--[if gte IE]>hello<![endif]--></div>\n"

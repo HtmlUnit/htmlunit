@@ -83,7 +83,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "getLineDash",
                         "removeHitRegion", "scrollPathIntoView", "setLineDash", "33 methods"},
-            FF = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
+            FF = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
                         "removeHitRegion", "scrollPathIntoView", "35 methods"},
             IE = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
                         "scrollPathIntoView", "35 methods"},
@@ -196,7 +196,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"rendering...", "...done"},
-            FF = { "rendering...", "exception"})
+            FF = {"rendering...", "exception"})
     public void drawImage_noImage() throws Exception {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"

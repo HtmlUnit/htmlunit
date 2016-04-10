@@ -58,9 +58,9 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF = { "function entries() {\n    [native code]\n}",
+            FF = {"function entries() {\n    [native code]\n}",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            IE = { })
+            IE = {})
     public void iterator() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -95,9 +95,9 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF = { "function entries() {\n    [native code]\n}",
+            FF = {"function entries() {\n    [native code]\n}",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            IE = { })
+            IE = {})
     public void entries() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -132,9 +132,9 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
                 "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
-            FF = { "function values() {\n    [native code]\n}",
+            FF = {"function values() {\n    [native code]\n}",
                 "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
-            IE = { })
+            IE = {})
     public void values() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -169,9 +169,9 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function keys() { [native code] }",
                 "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
-            FF = { "function keys() {\n    [native code]\n}",
+            FF = {"function keys() {\n    [native code]\n}",
                 "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
-            IE = { })
+            IE = {})
     public void keys() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -1007,7 +1007,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"},
-            FF = { "all == null", "all == null", "all == null", "all == null", "all == null"})
+            FF = {"all == null", "all == null", "all == null", "all == null", "all == null"})
     public void all_WithParentheses() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1246,7 +1246,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
             CHROME = {"undefined", "undefined", "null"},
-            FF = { "null", "null", "null"},
+            FF = {"null", "null", "null"},
             IE = {"undefined", "null", "undefined"})
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -1851,7 +1851,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "0", "0"},
-            FF = { "0", "1", "1"})
+            FF = {"0", "1", "1"})
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body onload='test()'>\n"

@@ -524,7 +524,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "18"},
-            FF = { "0", "20"})
+            FF = {"0", "20"})
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -541,7 +541,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"75", "2", "5", "20", "50", "50", "18"},
-            FF = { "77", "2", "5", "20", "50", "50", "20"})
+            FF = {"77", "2", "5", "20", "50", "50", "20"})
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
@@ -689,7 +689,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"something", "null"},
             CHROME = {"something", "0"},
-            FF38 = { "something", "innerText not supported"})
+            FF38 = {"something", "innerText not supported"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -722,7 +722,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"something", "0"},
-            FF38 = { "something", "innerText not supported"})
+            FF38 = {"something", "innerText not supported"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

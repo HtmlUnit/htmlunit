@@ -391,9 +391,9 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"Google Inc.", ""},
-            FF = { "", ""},
+            FF = {"", ""},
             IE = {"", "undefined"},
-            EDGE = { "", ""})
+            EDGE = {"", ""})
     public void vendor() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

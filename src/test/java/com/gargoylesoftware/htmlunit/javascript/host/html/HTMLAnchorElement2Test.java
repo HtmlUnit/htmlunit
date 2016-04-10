@@ -567,7 +567,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"§§URL§§second/", "object", "[object HTMLAnchorElement]"},
             CHROME = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
-            FF = { "§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
+            FF = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
     public void typeof() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

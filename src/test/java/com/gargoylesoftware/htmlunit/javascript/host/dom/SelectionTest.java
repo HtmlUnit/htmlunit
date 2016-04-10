@@ -278,7 +278,7 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"},
-            FF = { "", "null-0", "", "null-0", "null", "null"})
+            FF = {"", "null-0", "", "null-0", "null", "null"})
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"

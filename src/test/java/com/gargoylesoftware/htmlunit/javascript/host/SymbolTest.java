@@ -46,7 +46,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            FF45 = { "symbol", "Symbol(Symbol.match)", "true"},
+            FF45 = {"symbol", "Symbol(Symbol.match)", "true"},
             IE = "not supported")
     public void match() throws Exception {
         name("match");
@@ -119,7 +119,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            FF45 = { "symbol", "Symbol(Symbol.species)", "true"},
+            FF45 = {"symbol", "Symbol(Symbol.species)", "true"},
             IE = "not supported")
     public void species() throws Exception {
         name("species");
@@ -131,7 +131,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
             CHROME = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
-            FF45 = { "symbol", "Symbol(Symbol.toPrimitive)", "true"},
+            FF45 = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
             IE = "not supported")
     public void toPrimitive() throws Exception {
         name("toPrimitive");

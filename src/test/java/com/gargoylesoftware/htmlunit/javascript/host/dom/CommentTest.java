@@ -68,7 +68,7 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"after", "undefined"},
-            FF38 = { "undefined", "undefined"})
+            FF38 = {"undefined", "undefined"})
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

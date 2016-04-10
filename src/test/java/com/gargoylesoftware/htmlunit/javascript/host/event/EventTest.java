@@ -262,7 +262,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "true"},
-            FF = { "undefined", "false"})
+            FF = {"undefined", "false"})
     public void eventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -464,7 +464,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false"},
-            FF = { "true", "exception"})
+            FF = {"true", "exception"})
     public void ieWindowEvent() throws Exception {
         final String html =
             "<html><head>\n"
@@ -669,7 +669,7 @@ public class EventTest extends WebDriverTestCase {
                         "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                         "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
                         "e-33"},
-            FF = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
+            FF = {"e-0", "1", "e-2", "e-3", "e-4", "e-5",
                      "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                      "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
                      "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
@@ -756,7 +756,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"activeElement BODY"},
-            FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY"},
+            FF = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented({ FF, IE })

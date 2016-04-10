@@ -1353,7 +1353,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"srcElement null: false", "srcElement==form: true",
                                                         "target null: false", "target==form: true"},
-            FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"})
+            FF = {"srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head><title>first</title>\n"
             + "<script>\n"

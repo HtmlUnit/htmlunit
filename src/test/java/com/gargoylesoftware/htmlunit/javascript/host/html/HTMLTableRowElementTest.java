@@ -353,8 +353,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", ""},
             CHROME = {"cell1", "[object HTMLTableCellElement]",
                         "ex", "cell1", "[object HTMLTableCellElement]", "ex", "cell1"},
-            FF38 = { "undefined", "[object HTMLTableCellElement]", "abc", "[object HTMLTableCellElement]", ""},
-            FF45 = { "cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""})
+            FF38 = {"undefined", "[object HTMLTableCellElement]", "abc", "[object HTMLTableCellElement]", ""},
+            FF45 = {"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""})
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

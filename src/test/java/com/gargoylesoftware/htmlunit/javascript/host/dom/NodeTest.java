@@ -332,7 +332,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false"},
-            FF = { "isSameNode not supported"})
+            FF = {"isSameNode not supported"})
     public void isSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -898,7 +898,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { })
+            IE = {})
     public void insertBefore_newElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
@@ -982,7 +982,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"hi", "null", "abcd", "null"},
             CHROME = {"hi", "undefined", "abcd", "undefined"},
-            FF = { "hi", "undefined", "abcd", "undefined"})
+            FF = {"hi", "undefined", "abcd", "undefined"})
     public void attributes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

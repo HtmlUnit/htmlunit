@@ -34,7 +34,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "[object CSSFontFaceRule]", "5",
+    @Alerts(FF = {"[object CSSFontFaceRule]", "5",
             "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"Delicious-Bold.otf\");\n}"},
             CHROME = {"[object CSSFontFaceRule]", "5",
             "@font-face { font-family: Delicious; src: url(\"http://localhost:12345/Delicious-Bold.otf\"); }"},
