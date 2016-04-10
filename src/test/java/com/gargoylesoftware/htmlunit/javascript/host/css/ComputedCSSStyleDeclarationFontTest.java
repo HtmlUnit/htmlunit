@@ -184,4 +184,30 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
         font("xyz 1px", "fontFamily", "abc");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
+                "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
+            FF = { "1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
+    @NotYetImplemented
+    public void minimalLineHeight() throws Exception {
+        font("1px/2px xyz", "lineHeight", "normal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1px/2px xyz", "normal normal normal normal 1px / 2px xyz",
+                "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
+            FF = { "1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
+            IE = {"", "", "", "normal", "", "", "normal", "normal"})
+    @NotYetImplemented
+    public void minimalLineHeightSpace() throws Exception {
+        font("1px / 2px xyz", "lineHeight", "normal");
+    }
+
 }
