@@ -1135,6 +1135,9 @@ public final class StyleAttributes {
         /** The style property {@code marker-start}. */
         MARKER_START_("marker-start", "marker-start", ff("none")),
 
+        /** The style property {@code marks}. */
+        MARKS("marks", "marks", ffBelow45("")),
+
         /** The style property {@code mask}. */
         MASK("mask", "mask", ff("none"), ie("none"), chrome("none")),
 

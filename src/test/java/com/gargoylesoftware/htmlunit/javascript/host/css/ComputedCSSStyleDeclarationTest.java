@@ -1620,4 +1620,25 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void selector() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.querySelectorAll('div *').length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'>\n"
+            + "    <p>p</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

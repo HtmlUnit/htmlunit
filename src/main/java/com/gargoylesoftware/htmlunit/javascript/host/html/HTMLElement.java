@@ -2464,7 +2464,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         Object offsetParent = null;
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptableObject();
         if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getStyleAttribute(
-                StyleAttributes.Definition.POSITION))) {
+                StyleAttributes.Definition.POSITION, true))) {
             return null;
         }
 

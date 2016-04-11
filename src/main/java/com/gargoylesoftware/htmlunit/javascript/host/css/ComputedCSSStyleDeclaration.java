@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.AZIMUTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_COLOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
@@ -27,24 +28,60 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CAPTION_SIDE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.COLOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CSS_FLOAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CURSOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.DIRECTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.DISPLAY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ELEVATION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.EMPTY_CELLS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STRETCH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_VARIANT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_WEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LETTER_SPACING;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LINE_HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_IMAGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_TYPE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ORPHANS;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OVERFLOW;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PITCH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PITCH_RANGE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.QUOTES;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RICHNESS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK_HEADER;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK_NUMERAL;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK_PUNCTUATION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEECH_RATE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.STRESS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_ALIGN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_INDENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_TRANSFORM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VISIBILITY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VOICE_FAMILY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VOLUME;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WHITE_SPACE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDOWS;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
 
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedMap;
@@ -105,49 +142,50 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
 
-    /** The set of 'inheritable' attributes. */
-    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<>(Arrays.asList(
-        "azimuth",
-        "border-collapse",
-        "border-spacing",
-        "caption-side",
-        "color",
-        "cursor",
-        "direction",
-        "elevation",
-        "empty-cells",
-        "font-family",
-        "font-size",
-        "font-style",
-        "font-variant",
-        "font-weight",
-        "font",
-        "letter-spacing",
-        "line-height",
-        "list-style-image",
-        "list-style-position",
-        "list-style-type",
-        "list-style",
-        "orphans",
-        "pitch-range",
-        "pitch",
-        "quotes",
-        "richness",
-        "speak-header",
-        "speak-numeral",
-        "speak-punctuation",
-        "speak",
-        "speech-rate",
-        "stress",
-        "text-align",
-        "text-indent",
-        "text-transform",
-        "visibility",
-        "voice-fFamily",
-        "volume",
-        "white-space",
-        "widows",
-        "word-spacing"));
+    /** The set of 'inheritable' definitions. */
+    private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
+        AZIMUTH,
+        BORDER_COLLAPSE,
+        BORDER_SPACING,
+        CAPTION_SIDE,
+        COLOR,
+        CURSOR,
+        DIRECTION,
+        ELEVATION,
+        EMPTY_CELLS,
+        FONT_FAMILY,
+        FONT_SIZE,
+        FONT_STYLE,
+        FONT_VARIANT,
+        FONT_WEIGHT,
+        FONT,
+        LETTER_SPACING,
+        LINE_HEIGHT,
+        LIST_STYLE_IMAGE,
+        LIST_STYLE_POSITION,
+        LIST_STYLE_TYPE,
+        LIST_STYLE,
+        ORPHANS,
+        PITCH_RANGE,
+        PITCH,
+        QUOTES,
+        RICHNESS,
+        SPEAK_HEADER,
+        SPEAK_NUMERAL,
+        SPEAK_PUNCTUATION,
+        SPEAK,
+        SPEECH_RATE,
+        STRESS,
+        TEXT_ALIGN,
+        TEXT_INDENT,
+        TEXT_TRANSFORM,
+        VISIBILITY,
+        VOICE_FAMILY,
+        VOICE_FAMILY,
+        VOLUME,
+        WHITE_SPACE,
+        WIDOWS,
+        WORD_SPACING);
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -199,33 +237,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
         super(style.getElement());
         getElement().setDefaults(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * Overridden because some CSS properties are inherited from parent elements.
-     */
-    @Override
-    protected String getStyleAttribute(final String name) {
-        String s = super.getStyleAttribute(name);
-        if (s.isEmpty() && isInheritable(name)) {
-            final Element parent = getElement().getParentElement();
-            if (parent != null) {
-                s = getWindow().getComputedStyle(parent, null).getStyleAttribute(name);
-            }
-        }
-        return s;
-    }
-
-    /**
-     * Returns {@code true} if the specified CSS property is inheritable from parent elements.
-     * @param name the name of the style attribute to check for inheritability
-     * @return {@code true} if the specified CSS property is inheritable from parent elements
-     * @see <a href="http://www.w3.org/TR/CSS21/propidx.html">CSS Property Table</a>
-     */
-    private static boolean isInheritable(final String name) {
-        return INHERITABLE_ATTRIBUTES.contains(name);
     }
 
     /**
@@ -354,7 +365,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute("accelerator"), ACCELERATOR);
+        return defaultIfEmpty(getStyleAttribute(ACCELERATOR, false), ACCELERATOR);
     }
 
     /**
@@ -541,7 +552,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 changeValueIfEmpty = true;
             }
         }
-        final String value = super.getDisplay();
+        final String value = super.getStyleAttribute(DISPLAY, false);
         if (StringUtils.isEmpty(value)) {
             if (elem instanceof HTMLElement) {
                 final String defaultValue = ((HTMLElement) elem).getDefaultStyleDisplay();
@@ -578,10 +589,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getFont() {
         if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)
                 && getElement().getDomNodeOrDie().isAttachedToPage()) {
-            return getStyleAttribute(FONT_STYLE) + ' ' + getStyleAttribute(FONT_VARIANT) + ' '
-                    + getStyleAttribute(FONT_WEIGHT) + ' ' + getStyleAttribute(FONT_STRETCH) + ' '
-                    + getFontSize() + ' ' + '/' + ' ' + getStyleAttribute(LINE_HEIGHT) + ' '
-                    + getStyleAttribute(FONT_FAMILY);
+            return getStyleAttribute(FONT_STYLE, true) + ' ' + getStyleAttribute(FONT_VARIANT, true) + ' '
+                    + getStyleAttribute(FONT_WEIGHT, true) + ' ' + getStyleAttribute(FONT_STRETCH, true) + ' '
+                    + getFontSize() + ' ' + '/' + ' ' + getStyleAttribute(LINE_HEIGHT, true) + ' '
+                    + getStyleAttribute(FONT_FAMILY, true);
         }
         return "";
     }
@@ -629,7 +640,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
-            if (getStyleAttribute("height").isEmpty()) {
+            if (getStyleAttribute(HEIGHT, true).isEmpty()) {
                 return "auto";
             }
         }
@@ -637,7 +648,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return pixelString(elem, new CssValue(0, windowHeight) {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("height"), "362px");
+                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), "362px");
             }
         });
     }
@@ -837,7 +848,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
-            if (getStyleAttribute("width").isEmpty()) {
+            if (getStyleAttribute(WIDTH, true).isEmpty()) {
                 return "auto";
             }
         }
@@ -846,9 +857,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return pixelString(elem, new CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH);
+                final String value = style.getStyleAttribute(WIDTH, true);
                 if (StringUtils.isEmpty(value)) {
-                    if ("absolute".equals(getStyleAttribute("position"))) {
+                    if ("absolute".equals(getStyleAttribute(POSITION, true))) {
                         final String content = getDomNodeOrDie().getTextContent();
                         // do this only for small content
                         // at least for empty div's this is more correct
@@ -962,7 +973,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = pixelValue(getElement(), new CssValue(0, windowWidth) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
-                    return style.getStyleAttribute(WIDTH);
+                    return style.getStyleAttribute(WIDTH, true);
                 }
             });
         }
@@ -1123,7 +1134,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (element instanceof HTMLBodyElement) {
                     return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
                 }
-                return style.getStyleAttribute("height");
+                return style.getStyleAttribute(HEIGHT, true);
             }
         });
 
@@ -1198,7 +1209,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
         final Element node = getElement();
-        final String overflow = getStyleAttribute(OVERFLOW);
+        final String overflow = getStyleAttribute(OVERFLOW, true);
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
@@ -1398,7 +1409,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS {@code position} attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
-        String p = getStyleAttribute(POSITION);
+        String p = getStyleAttribute(POSITION, true);
         if ("inherit".equals(p)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
@@ -1628,17 +1639,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getStyleAttribute(final Definition style) {
+    public String getStyleAttribute(final Definition style, final boolean getDefaultValueIfEmpty) {
         if (!getElement().getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return EMPTY_FINAL;
         }
-        // don't use defaultIfEmpty for performance
-        // (no need to calculate the default if not empty)
-        final String value = super.getStyleAttribute(style);
-        if (StringUtils.isEmpty(value)) {
-            return style.getDefaultComputedValue(getBrowserVersion());
+        String value = super.getStyleAttribute(style, getDefaultValueIfEmpty);
+        if (value.isEmpty()) {
+            final Element parent = getElement().getParentElement();
+            if (INHERITABLE_DEFINITIONS.contains(style) && parent != null) {
+                value = getWindow().getComputedStyle(parent, null).getStyleAttribute(style, getDefaultValueIfEmpty);
+            }
+            else if (getDefaultValueIfEmpty) {
+                value = style.getDefaultComputedValue(getBrowserVersion());
+            }
         }
+
         return value;
     }
 

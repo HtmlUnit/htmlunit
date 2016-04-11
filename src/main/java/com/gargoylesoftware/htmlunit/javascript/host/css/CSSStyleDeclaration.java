@@ -28,17 +28,33 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BEHAVIOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOTTOM;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.DISPLAY;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
@@ -56,18 +72,24 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MAX_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MIN_HEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MIN_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OPACITY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OUTLINE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OUTLINE_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_LEFT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PAGE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RUBY_ALIGN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SIZE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_INDENT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VERTICAL_ALIGN;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.Z_INDEX_;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
@@ -137,30 +159,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
     /** CSS important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
-
-    private static final String BACKGROUND_ATTACHMENT = "background-attachment";
-    private static final String BACKGROUND_COLOR = "background-color";
-    private static final String BACKGROUND_IMAGE = "background-image";
-    private static final String BACKGROUND_POSITION = "background-position";
-    private static final String BACKGROUND_REPEAT = "background-repeat";
-    private static final String BEHAVIOR = "behavior";
-    private static final String BORDER_BOTTOM_COLOR = "border-bottom-color";
-    private static final String BORDER_BOTTOM_STYLE = "border-bottom-style";
-    private static final String BORDER_LEFT_COLOR = "border-left-color";
-    private static final String BORDER_LEFT_STYLE = "border-left-style";
-    private static final String BORDER_RIGHT_COLOR = "border-right-color";
-    private static final String BORDER_RIGHT_STYLE = "border-right-style";
-    private static final String BORDER_TOP_COLOR = "border-top-color";
-    private static final String BORDER_TOP_STYLE = "border-top-style";
-    private static final String COLOR = "color";
-    private static final String DISPLAY = "display";
-    private static final String MARKS = "marks";
-    private static final String OPACITY = "opacity";
-    private static final String OUTLINE = "outline";
-    private static final String PAGE = "page";
-    private static final String RUBY_ALIGN = "ruby-align";
-    private static final String SIZE = "size";
-    private static final String Z_INDEX = "z-index";
 
     private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
     private static final Pattern URL_PATTERN =
@@ -297,28 +295,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     protected Element getElement() {
         return jsElement_;
-    }
-
-    /**
-     * Returns the value of the named style attribute, or an empty string if it is not found.
-     *
-     * @param name the name of the style attribute whose value is to be retrieved
-     * @return the named style attribute value, or an empty string if it is not found
-     */
-    protected String getStyleAttribute(final String name) {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getPropertyValue(name);
-        }
-        final StyleElement element = getStyleElement(name);
-        if (element != null && element.getValue() != null) {
-            final String value = element.getValue();
-            if (!value.contains("url")
-                    && getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
-                return value.toLowerCase(Locale.ROOT);
-            }
-            return value;
-        }
-        return "";
     }
 
     /**
@@ -659,7 +635,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter(@WebBrowser(IE))
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute(Definition.ACCELERATOR.getAttributeName()), "false");
+        return defaultIfEmpty(getStyleAttribute(ACCELERATOR), "false");
     }
 
     /**
@@ -703,7 +679,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBackgroundAttachment(final String backgroundAttachment) {
-        setStyleAttribute(BACKGROUND_ATTACHMENT, backgroundAttachment);
+        setStyleAttribute(BACKGROUND_ATTACHMENT.getAttributeName(), backgroundAttachment);
     }
 
     /**
@@ -712,9 +688,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBackgroundColor() {
-        String value = getStyleAttribute(BACKGROUND_COLOR);
+        String value = getStyleAttribute(BACKGROUND_COLOR, false);
         if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND);
+            final String bg = getStyleAttribute(BACKGROUND, false);
             if (StringUtils.isBlank(bg)) {
                 return "";
             }
@@ -742,7 +718,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBackgroundColor(final String backgroundColor) {
-        setStyleAttribute(BACKGROUND_COLOR, backgroundColor);
+        setStyleAttribute(BACKGROUND_COLOR.getAttributeName(), backgroundColor);
     }
 
     /**
@@ -751,9 +727,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBackgroundImage() {
-        String value = getStyleAttribute(BACKGROUND_IMAGE);
+        String value = getStyleAttribute(BACKGROUND_IMAGE, false);
         if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND);
+            final String bg = getStyleAttribute(BACKGROUND, false);
             if (StringUtils.isNotBlank(bg)) {
                 value = findImageUrl(bg);
                 final boolean isComputed = getClass() != CSSStyleDeclaration.class;
@@ -785,7 +761,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBackgroundImage(final String backgroundImage) {
-        setStyleAttribute(BACKGROUND_IMAGE, backgroundImage);
+        setStyleAttribute(BACKGROUND_IMAGE.getAttributeName(), backgroundImage);
     }
 
     /**
@@ -794,12 +770,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBackgroundPosition() {
-        String value = getStyleAttribute(BACKGROUND_POSITION);
+        String value = getStyleAttribute(BACKGROUND_POSITION, false);
         if (value == null) {
             return null;
         }
         if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND);
+            final String bg = getStyleAttribute(BACKGROUND, false);
             if (bg == null) {
                 return null;
             }
@@ -873,7 +849,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBackgroundPosition(final String backgroundPosition) {
-        setStyleAttribute(BACKGROUND_POSITION, backgroundPosition);
+        setStyleAttribute(BACKGROUND_POSITION.getAttributeName(), backgroundPosition);
     }
 
     /**
@@ -882,9 +858,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBackgroundRepeat() {
-        String value = getStyleAttribute(BACKGROUND_REPEAT);
+        String value = getStyleAttribute(BACKGROUND_REPEAT, false);
         if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND);
+            final String bg = getStyleAttribute(BACKGROUND, false);
             if (StringUtils.isNotBlank(bg)) {
                 value = findRepeat(bg);
                 if (value == null) {
@@ -908,7 +884,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBackgroundRepeat(final String backgroundRepeat) {
-        setStyleAttribute(BACKGROUND_REPEAT, backgroundRepeat);
+        setStyleAttribute(BACKGROUND_REPEAT.getAttributeName(), backgroundRepeat);
     }
 
     /**
@@ -917,11 +893,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderBottomColor() {
-        String value = getStyleAttribute(BORDER_BOTTOM_COLOR);
+        String value = getStyleAttribute(BORDER_BOTTOM_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_BOTTOM));
+            value = findColor(getStyleAttribute(BORDER_BOTTOM, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER));
+                value = findColor(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -936,7 +912,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderBottomColor(final String borderBottomColor) {
-        setStyleAttribute(BORDER_BOTTOM_COLOR, borderBottomColor);
+        setStyleAttribute(BORDER_BOTTOM_COLOR.getAttributeName(), borderBottomColor);
     }
 
     /**
@@ -945,11 +921,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderBottomStyle() {
-        String value = getStyleAttribute(BORDER_BOTTOM_STYLE);
+        String value = getStyleAttribute(BORDER_BOTTOM_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM));
+            value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER));
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -964,7 +940,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderBottomStyle(final String borderBottomStyle) {
-        setStyleAttribute(BORDER_BOTTOM_STYLE, borderBottomStyle);
+        setStyleAttribute(BORDER_BOTTOM_STYLE.getAttributeName(), borderBottomStyle);
     }
 
     /**
@@ -993,11 +969,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderLeftColor() {
-        String value = getStyleAttribute(BORDER_LEFT_COLOR);
+        String value = getStyleAttribute(BORDER_LEFT_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_LEFT));
+            value = findColor(getStyleAttribute(BORDER_LEFT, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER));
+                value = findColor(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1012,7 +988,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderLeftColor(final String borderLeftColor) {
-        setStyleAttribute(BORDER_LEFT_COLOR, borderLeftColor);
+        setStyleAttribute(BORDER_LEFT_COLOR.getAttributeName(), borderLeftColor);
     }
 
     /**
@@ -1021,11 +997,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderLeftStyle() {
-        String value = getStyleAttribute(BORDER_LEFT_STYLE);
+        String value = getStyleAttribute(BORDER_LEFT_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_LEFT));
+            value = findBorderStyle(getStyleAttribute(BORDER_LEFT, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER));
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1040,7 +1016,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderLeftStyle(final String borderLeftStyle) {
-        setStyleAttribute(BORDER_LEFT_STYLE, borderLeftStyle);
+        setStyleAttribute(BORDER_LEFT_STYLE.getAttributeName(), borderLeftStyle);
     }
 
     /**
@@ -1059,11 +1035,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the width, "" if not defined
      */
     private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
-        String value = getStyleAttribute(borderSideWidth.getAttributeName());
+        String value = getStyleAttribute(borderSideWidth, false);
         if (value.isEmpty()) {
-            value = findBorderWidth(getStyleAttribute(borderSide.getAttributeName()));
+            value = findBorderWidth(getStyleAttribute(borderSide, false));
             if (value == null) {
-                final String borderWidth = getStyleAttribute(BORDER_WIDTH.getAttributeName());
+                final String borderWidth = getStyleAttribute(BORDER_WIDTH, false);
                 if (!StringUtils.isEmpty(borderWidth)) {
                     final String[] values = StringUtils.split(borderWidth);
                     int index = values.length;
@@ -1085,7 +1061,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 }
             }
             if (value == null) {
-                value = findBorderWidth(getStyleAttribute(BORDER));
+                value = findBorderWidth(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1111,11 +1087,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderRightColor() {
-        String value = getStyleAttribute(BORDER_RIGHT_COLOR);
+        String value = getStyleAttribute(BORDER_RIGHT_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_RIGHT));
+            value = findColor(getStyleAttribute(BORDER_RIGHT, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER));
+                value = findColor(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1130,7 +1106,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderRightColor(final String borderRightColor) {
-        setStyleAttribute(BORDER_RIGHT_COLOR, borderRightColor);
+        setStyleAttribute(BORDER_RIGHT_COLOR.getAttributeName(), borderRightColor);
     }
 
     /**
@@ -1139,11 +1115,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderRightStyle() {
-        String value = getStyleAttribute(BORDER_RIGHT_STYLE);
+        String value = getStyleAttribute(BORDER_RIGHT_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_RIGHT));
+            value = findBorderStyle(getStyleAttribute(BORDER_RIGHT, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER));
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1158,7 +1134,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderRightStyle(final String borderRightStyle) {
-        setStyleAttribute(BORDER_RIGHT_STYLE, borderRightStyle);
+        setStyleAttribute(BORDER_RIGHT_STYLE.getAttributeName(), borderRightStyle);
     }
 
     /**
@@ -1196,11 +1172,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderTopColor() {
-        String value = getStyleAttribute(BORDER_TOP_COLOR);
+        String value = getStyleAttribute(BORDER_TOP_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_TOP));
+            value = findColor(getStyleAttribute(BORDER_TOP, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER));
+                value = findColor(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1215,7 +1191,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderTopColor(final String borderTopColor) {
-        setStyleAttribute(BORDER_TOP_COLOR, borderTopColor);
+        setStyleAttribute(BORDER_TOP_COLOR.getAttributeName(), borderTopColor);
     }
 
     /**
@@ -1224,11 +1200,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBorderTopStyle() {
-        String value = getStyleAttribute(BORDER_TOP_STYLE);
+        String value = getStyleAttribute(BORDER_TOP_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_TOP));
+            value = findBorderStyle(getStyleAttribute(BORDER_TOP, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER));
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -1243,7 +1219,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderTopStyle(final String borderTopStyle) {
-        setStyleAttribute(BORDER_TOP_STYLE, borderTopStyle);
+        setStyleAttribute(BORDER_TOP_STYLE.getAttributeName(), borderTopStyle);
     }
 
     /**
@@ -1299,7 +1275,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setColor(final String color) {
-        setStyleAttribute(COLOR, color);
+        setStyleAttribute(COLOR.getAttributeName(), color);
     }
 
     /**
@@ -1353,7 +1329,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setDisplay(final String display) {
-        setStyleAttribute(DISPLAY, display);
+        setStyleAttribute(DISPLAY.getAttributeName(), display);
     }
 
     /**
@@ -1598,24 +1574,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the {@code marks} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
-    public String getMarks() {
-        return getStyleAttribute(MARKS);
-    }
-
-    /**
-     * Sets the {@code marks} style attribute.
-     * @param marks the new attribute
-     */
-    @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
-    public void setMarks(final String marks) {
-        setStyleAttribute(MARKS, marks);
-    }
-
-    /**
      * Gets the {@code maxHeight} style attribute.
      * @return the style attribute
      */
@@ -1731,11 +1689,37 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     /**
      * Get the value for the style attribute.
-     * @param style the style
+     * @param definition the definition
      * @return the value
      */
-    public String getStyleAttribute(final Definition style) {
-        return getStyleAttribute(style.getAttributeName());
+    public final String getStyleAttribute(final Definition definition) {
+        return getStyleAttribute(definition, true);
+    }
+
+    /**
+     * Get the value for the style attribute.
+     * @param definition the definition
+     * @param getDefaultValueIfEmpty whether to get the default value if empty or not
+     * @return the value
+     */
+    public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
+        return getStyleAttributeImpl(definition.getAttributeName());
+    }
+
+    private String getStyleAttributeImpl(final String string) {
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getPropertyValue(string);
+        }
+        final StyleElement element = getStyleElement(string);
+        if (element != null && element.getValue() != null) {
+            final String value = element.getValue();
+            if (!value.contains("url")
+                    && getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
+                return value.toLowerCase(Locale.ROOT);
+            }
+            return value;
+        }
+        return "";
     }
 
     @Override
@@ -1809,7 +1793,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getOpacity() {
-        final String opacity = getStyleAttribute(OPACITY);
+        final String opacity = getStyleAttribute(OPACITY, false);
         if (opacity == null || opacity.isEmpty()) {
             return "";
         }
@@ -1835,13 +1819,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setOpacity(final String opacity) {
         if (opacity.isEmpty()) {
-            setStyleAttribute(OPACITY, opacity);
+            setStyleAttribute(OPACITY.getAttributeName(), opacity);
         }
 
         final String trimedOpacity = opacity.trim();
         try {
             Float.parseFloat(trimedOpacity);
-            setStyleAttribute(OPACITY, trimedOpacity);
+            setStyleAttribute(OPACITY.getAttributeName(), trimedOpacity);
         }
         catch (final NumberFormatException e) {
             // ignore wrong value
@@ -1863,7 +1847,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOutline(final String outline) {
-        setStyleAttribute(OUTLINE, outline);
+        setStyleAttribute(OUTLINE.getAttributeName(), outline);
     }
 
     /**
@@ -1996,7 +1980,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
     public void setPage(final String page) {
-        setStyleAttribute(PAGE, page);
+        setStyleAttribute(PAGE.getAttributeName(), page);
     }
 
     /**
@@ -2248,7 +2232,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(IE))
     public void setRubyAlign(final String rubyAlign) {
-        setStyleAttribute(RUBY_ALIGN, rubyAlign);
+        setStyleAttribute(RUBY_ALIGN.getAttributeName(), rubyAlign);
     }
 
     /**
@@ -2266,7 +2250,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
     public void setSize(final String size) {
-        setStyleAttribute(SIZE, size);
+        setStyleAttribute(SIZE.getAttributeName(), size);
     }
 
     /**
@@ -2457,7 +2441,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public Object getZIndex() {
-        final String value = getStyleAttribute(Z_INDEX);
+        final String value = getStyleAttribute(Z_INDEX_);
         if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
             try {
                 return Integer.valueOf(value);
@@ -2485,7 +2469,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     public void setZIndex(final Object zIndex) {
         // empty
         if (zIndex == null || StringUtils.isEmpty(zIndex.toString())) {
-            setStyleAttribute(Z_INDEX, "");
+            setStyleAttribute(Z_INDEX_.getAttributeName(), "");
             return;
         }
         // undefined
@@ -2497,13 +2481,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         if (zIndex instanceof Number) {
             final Number number = (Number) zIndex;
             if (number.doubleValue() % 1 == 0) {
-                setStyleAttribute(Z_INDEX, Integer.toString(number.intValue()));
+                setStyleAttribute(Z_INDEX_.getAttributeName(), Integer.toString(number.intValue()));
             }
             return;
         }
         try {
             final int i = Integer.parseInt(zIndex.toString());
-            setStyleAttribute(Z_INDEX, Integer.toString(i));
+            setStyleAttribute(Z_INDEX_.getAttributeName(), Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             // ignore
@@ -2523,7 +2507,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 return (String) value;
             }
         }
-        return getStyleAttribute(name);
+        return getStyleAttributeImpl(name);
     }
 
     /**
