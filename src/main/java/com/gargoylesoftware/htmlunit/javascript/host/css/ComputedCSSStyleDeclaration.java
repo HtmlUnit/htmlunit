@@ -545,7 +545,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the {@code display} attribute.
-     * @param ignoreBlockIfNotAttached is {@link BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored 
+     * @param ignoreBlockIfNotAttached is {@link BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored
      * @return the {@code display} attribute
      */
     public String getDisplay(final boolean ignoreBlockIfNotAttached) {
