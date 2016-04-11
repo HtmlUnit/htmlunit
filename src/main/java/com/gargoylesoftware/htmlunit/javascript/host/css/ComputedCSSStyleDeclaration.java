@@ -602,7 +602,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        return defaultIfEmpty(super.getFontSize(), FONT_SIZE);
+        String value = super.getFontSize();
+        if (!value.isEmpty()) {
+            value = pixelValue(value) + "px";
+        }
+        return value;
     }
 
     /**
