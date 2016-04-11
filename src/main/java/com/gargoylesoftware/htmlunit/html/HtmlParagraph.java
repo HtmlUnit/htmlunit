@@ -56,6 +56,10 @@ public class HtmlParagraph extends HtmlElement {
     public final String getAlignAttribute() {
         return getAttribute("align");
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;

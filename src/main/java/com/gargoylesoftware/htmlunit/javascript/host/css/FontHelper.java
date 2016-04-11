@@ -27,7 +27,13 @@ final class FontHelper {
     static final int LINE_HEIGHT_INDEX = 4;
     static final int FONT_FAMILY_INDEX = 5;
 
-    static String[] getDetails(final String font) {
+    static String[] getDetails(String font, final boolean handleSpaceAfterSlash) {
+        while (font.contains("  ")) {
+            font = font.replace("  ", " ");
+        }
+        if (!handleSpaceAfterSlash && font.contains("/ ")) {
+            return null;
+        }
         final String[] tokens = font.split(" ");
         if (tokens.length > 1) {
             final String[] fontSizeDetails = getFontSizeDetails(tokens[tokens.length - 2]);

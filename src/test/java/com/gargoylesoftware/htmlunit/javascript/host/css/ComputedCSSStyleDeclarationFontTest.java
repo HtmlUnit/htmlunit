@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -192,7 +195,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
             FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
-    @NotYetImplemented
+    @NotYetImplemented(FF)
     public void minimalLineHeight() throws Exception {
         font("1px/2px xyz", "lineHeight", "normal");
     }
@@ -205,7 +208,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
             FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF })
     public void minimalLineHeightSpace() throws Exception {
         font("1px / 2px xyz", "lineHeight", "normal");
     }
@@ -218,7 +221,7 @@ public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
             FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF })
     public void minimalLineHeightSpace2() throws Exception {
         font("1px/ 2px xyz", "lineHeight", "normal");
     }

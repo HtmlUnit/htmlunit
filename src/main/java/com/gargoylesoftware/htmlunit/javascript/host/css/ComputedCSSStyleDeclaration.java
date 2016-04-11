@@ -623,6 +623,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getLineHeight() {
+        return defaultIfEmpty(super.getLineHeight(), LINE_HEIGHT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getFontFamily() {
         return defaultIfEmpty(super.getFontFamily(), FONT_FAMILY);
     }
