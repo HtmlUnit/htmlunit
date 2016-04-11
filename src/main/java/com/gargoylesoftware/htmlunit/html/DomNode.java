@@ -795,15 +795,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Indicates if the text representation of this element is made as a block, ie if new lines need
-     * to be inserted before and after it.
-     * @return {@code true} if this element represents a block
-     */
-    protected boolean isBlock() {
-        return false;
-    }
-
-    /**
      * Returns a string representation of the XML document from this element and all it's children (recursively).
      * The charset used is the current page encoding.
      * @return the XML string

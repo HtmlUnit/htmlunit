@@ -429,14 +429,6 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * {@inheritDoc}
-     */
-    @Override
-    protected boolean isBlock() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      * @return {@code true} as browsers ignore self closing <code>table</code> tags.
      */
     @Override

@@ -84,14 +84,6 @@ public class HtmlOrderedList extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isBlock() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }

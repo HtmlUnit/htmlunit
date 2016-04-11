@@ -20,6 +20,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * Utility to handle conversion from HTML code to string.
  * TODO: simplify it (it is just copied from what was available in DomNode and subclasses).
@@ -265,7 +269,17 @@ class HtmlSerializer {
             return;
         }
         else {
-            final boolean block = node.isBlock();
+            final boolean block;
+            final ScriptableObject scriptableObject = node.getScriptableObject();
+            if (scriptableObject instanceof Element && !(node instanceof HtmlBody)) {
+                final Element element = (Element) scriptableObject;
+                final String display = element.getWindow().getComputedStyle(element, null).getDisplay();
+                block = "block".equals(display);
+            }
+            else {
+                block = false;
+            }
+
             if (block) {
                 doAppendBlockSeparator();
             }

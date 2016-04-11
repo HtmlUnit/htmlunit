@@ -77,4 +77,17 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
         final HtmlDivision div = page.getHtmlElementById("foo");
         assertEquals("hello", div.asText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void css() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<div style='display:inline'>1</div><div style='display:inline'>2</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("12", page.getBody().asText());
+    }
 }

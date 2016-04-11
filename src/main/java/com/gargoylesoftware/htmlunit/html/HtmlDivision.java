@@ -65,12 +65,4 @@ public class HtmlDivision extends HtmlElement {
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isBlock() {
-        return true;
-    }
 }

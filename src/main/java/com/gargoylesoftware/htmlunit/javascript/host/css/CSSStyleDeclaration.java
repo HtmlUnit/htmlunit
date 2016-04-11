@@ -653,7 +653,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxGetter
     public String getBackgroundAttachment() {
-        String value = getStyleAttribute(BACKGROUND_ATTACHMENT);
+        String value = getStyleAttribute(BACKGROUND_ATTACHMENT, false);
         if (StringUtils.isBlank(value)) {
             final String bg = getStyleAttribute(BACKGROUND);
             if (StringUtils.isNotBlank(bg)) {
