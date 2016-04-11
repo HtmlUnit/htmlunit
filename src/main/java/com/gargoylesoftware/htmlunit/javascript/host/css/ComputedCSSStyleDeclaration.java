@@ -91,6 +91,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -539,6 +540,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
+        return getDisplay(false);
+    }
+
+    /**
+     * Returns the {@code display} attribute.
+     * @param ignoreBlockIfNotAttached is {@link BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored 
+     * @return the {@code display} attribute
+     */
+    public String getDisplay(final boolean ignoreBlockIfNotAttached) {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final Element elem = getElement();
@@ -548,7 +558,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
             }
-            if (browserVersion.hasFeature(CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED)) {
+            if (!ignoreBlockIfNotAttached && browserVersion.hasFeature(CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED)) {
                 changeValueIfEmpty = true;
             }
         }

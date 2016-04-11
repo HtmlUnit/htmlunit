@@ -273,7 +273,7 @@ class HtmlSerializer {
             final ScriptableObject scriptableObject = node.getScriptableObject();
             if (scriptableObject instanceof Element && !(node instanceof HtmlBody)) {
                 final Element element = (Element) scriptableObject;
-                final String display = element.getWindow().getComputedStyle(element, null).getDisplay();
+                final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
                 block = "block".equals(display);
             }
             else {

@@ -847,7 +847,7 @@ public final class StyleAttributes {
         FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ff("normal")),
 
         /** The style property {@code fontSize}. */
-        FONT_SIZE("fontSize", "font-size", chrome("16px"), ff(""), ie("")),
+        FONT_SIZE("fontSize", "font-size", chrome("16px"), ff("16px"), ie("16px")),
 
         /** The style property {@code font-size}. */
         FONT_SIZE_("font-size", "font-size", ff("16px")),
