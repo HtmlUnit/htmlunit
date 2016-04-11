@@ -1348,6 +1348,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setFontSize(final String fontSize) {
         setStyleAttributePixel(FONT_SIZE, fontSize);
+        updateFont(false);
     }
 
     /**

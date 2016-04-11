@@ -602,24 +602,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        String value = super.getFontSize();
-        if (value.isEmpty()) {
-            final Element parent = getElement().getParentElement();
-            if (parent != null) {
-                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                value = style.getFontSize();
-            }
-        }
-        if (value.isEmpty()) {
-            if (getElement().getDomNodeOrDie().isAttachedToPage()
-                    || !getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
-                value = "16px";
-            }
-        }
-        else {
-            value = pixelValue(value) + "px";
-        }
-        return value;
+        return defaultIfEmpty(super.getFontSize(), FONT_SIZE);
     }
 
     /**
