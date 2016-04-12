@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                BrowserVersion: Chrome is the BEST_SUPPORTED.
+            </action>
             <action type="add" dev="asashour" due-to="Madis P&#x00e4;rn" issue="228" system="features">
                 JavaScript: support Document.adoptNode.
             </action>

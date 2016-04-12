@@ -156,8 +156,11 @@ public class BrowserVersion implements Serializable, Cloneable {
         + " (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586",
         13, "Edge", null);
 
-    /** The best supported browser version at the moment. */
-    public static final BrowserVersion BEST_SUPPORTED = FIREFOX_38;
+    /**
+     * The best supported browser version at the moment.
+     */
+    public static final BrowserVersion BEST_SUPPORTED = CHROME;
+
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = BEST_SUPPORTED;
 

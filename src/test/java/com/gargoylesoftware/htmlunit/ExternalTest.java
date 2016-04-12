@@ -204,7 +204,7 @@ public class ExternalTest {
     }
 
     private static WebClient getWebClient() {
-        return new WebClient(BEST_SUPPORTED);
+        return new WebClient();
     }
 
     /**
