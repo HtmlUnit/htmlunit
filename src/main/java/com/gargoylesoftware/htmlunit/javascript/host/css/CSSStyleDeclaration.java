@@ -2514,7 +2514,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setPosition(final String position) {
-        if ("static".equalsIgnoreCase(position) || "absolute".equalsIgnoreCase(position)
+        if (position.isEmpty() || "static".equalsIgnoreCase(position) || "absolute".equalsIgnoreCase(position)
                 || "fixed".equalsIgnoreCase(position) || "relative".equalsIgnoreCase(position)
                 || "initial".equalsIgnoreCase(position) || "inherit".equalsIgnoreCase(position)) {
             setStyleAttribute(POSITION.getAttributeName(), position.toLowerCase());

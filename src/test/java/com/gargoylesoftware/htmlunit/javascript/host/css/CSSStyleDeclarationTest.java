@@ -2067,7 +2067,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "static", "", "static", "", "static", "absolute", "absolute"})
+    @Alerts({"", "static", "", "static", "", "static", "absolute", "absolute", "", "static"})
     public void position() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2079,6 +2079,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    div.style.position = ' ';\n"
             + "    debug(div);\n"
             + "    div.style.position = 'AbSoLuTe';\n"
+            + "    debug(div);\n"
+            + "    div.style.position = '';\n"
             + "    debug(div);\n"
             + "  }\n"
             + "  function debug(div) {\n"
