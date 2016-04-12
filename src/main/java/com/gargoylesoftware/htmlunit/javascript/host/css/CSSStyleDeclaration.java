@@ -2500,7 +2500,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the {@code orphans} style attribute.
+     * Gets the {@code position} style attribute.
      * @return the style attribute
      */
     @JsxGetter
