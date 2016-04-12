@@ -70,6 +70,9 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             return super.getOffsetHeight();
         }
 
+        if (isDisplayNone()) {
+            return 0;
+        }
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         final boolean includeBorder = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
         return style.getCalculatedHeight(includeBorder, true);
@@ -84,6 +87,10 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
             return (int) w;
+        }
+
+        if (isDisplayNone()) {
+            return 0;
         }
 
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);

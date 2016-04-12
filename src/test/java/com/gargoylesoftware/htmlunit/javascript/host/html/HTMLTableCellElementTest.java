@@ -666,4 +666,35 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true", "false", "false"})
+    public void offsetHeightParentHidden() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var table = document.getElementById('table1');\n"
+            + "      var td = document.getElementById('td1');\n"
+            + "      alert(td.offsetWidth != 0);\n"
+            + "      alert(td.offsetHeight != 0);\n"
+            + "      td.style.display = 'none';\n"
+            + "      alert(td.offsetWidth != 0);\n"
+            + "      alert(td.offsetHeight != 0);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <table id='table1'>\n"
+            + "    <tr><td id='td1'>One</td></tr>\n"
+            + "  </table>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

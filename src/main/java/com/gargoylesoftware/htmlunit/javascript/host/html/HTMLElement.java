@@ -1599,7 +1599,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetHeight() {
-        if (isDislayNone() || !getDomNodeOrDie().isAttachedToPage()) {
+        if (isDisplayNone() || !getDomNodeOrDie().isAttachedToPage()) {
             return 0;
         }
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
@@ -1611,8 +1611,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         return style.getCalculatedHeight(true, true);
     }
 
-    private boolean isDislayNone() {
-        // if a parent is display:none there's nothing that a child can do to override it
+    /**
+     * Returns whether the {@code display} is {@code none} or not.
+     * @return whether the {@code display} is {@code none} or not
+     */
+    protected final boolean isDisplayNone() {
         HTMLElement element = this;
         while (element != null) {
             final CSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
@@ -1635,7 +1638,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetWidth() {
-        if (isDislayNone() || !getDomNodeOrDie().isAttachedToPage()) {
+        if (isDisplayNone() || !getDomNodeOrDie().isAttachedToPage()) {
             return 0;
         }
 
