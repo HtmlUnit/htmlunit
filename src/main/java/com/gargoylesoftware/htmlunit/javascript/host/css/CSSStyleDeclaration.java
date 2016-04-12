@@ -73,6 +73,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MIN_HEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MIN_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OPACITY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ORPHANS;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OUTLINE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OUTLINE_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
@@ -87,6 +88,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_INDENT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VERTICAL_ALIGN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDOWS;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.Z_INDEX_;
@@ -2438,6 +2440,62 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setWidth(final String width) {
         setStyleAttributePixel(WIDTH, width);
+    }
+
+    /**
+     * Gets the {@code widows} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public String getWidows() {
+        return getStyleAttribute(WIDOWS);
+    }
+
+    /**
+     * Sets the {@code widows} style attribute.
+     * @param widows the new attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public void setWidows(final String widows) {
+        if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
+            try {
+                if (Integer.parseInt(widows) <= 0) {
+                    return;
+                }
+            }
+            catch (final NumberFormatException e) {
+                return;
+            }
+        }
+        setStyleAttribute(WIDOWS.getAttributeName(), widows);
+    }
+
+    /**
+     * Gets the {@code orphans} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public String getOrphans() {
+        return getStyleAttribute(ORPHANS);
+    }
+
+    /**
+     * Sets the {@code orphans} style attribute.
+     * @param orphans the new attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public void setOrphans(final String orphans) {
+        if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
+            try {
+                if (Integer.parseInt(orphans) <= 0) {
+                    return;
+                }
+            }
+            catch (final NumberFormatException e) {
+                return;
+            }
+        }
+        setStyleAttribute(ORPHANS.getAttributeName(), orphans);
     }
 
     /**

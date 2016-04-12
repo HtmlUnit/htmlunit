@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -1994,6 +1995,72 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             }
         }
         return false;
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "1", "", "1", "5", "5", "5", "5"},
+            IE = {"", "2", "0", "0", "5", "5", "0", "0"},
+            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+    @NotYetImplemented(FF38)
+    public void widows() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    debug(div);\n"
+            + "    div.style.widows = 0;\n"
+            + "    debug(div);\n"
+            + "    div.style.widows = 5;\n"
+            + "    debug(div);\n"
+            + "    div.style.widows = 0;\n"
+            + "    debug(div);\n"
+            + "  }\n"
+            + "  function debug(div) {\n"
+            + "    alert(div.style.widows);\n"
+            + "    alert(window.getComputedStyle(div, null).widows);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "auto", "", "auto", "5", "5", "5", "5"},
+            IE = {"", "2", "0", "0", "5", "5", "0", "0"},
+            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+    @NotYetImplemented(FF38)
+    public void orphans() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    debug(div);\n"
+            + "    div.style.orphans = 0;\n"
+            + "    debug(div);\n"
+            + "    div.style.orphans = 5;\n"
+            + "    debug(div);\n"
+            + "    div.style.orphans = 0;\n"
+            + "    debug(div);\n"
+            + "  }\n"
+            + "  function debug(div) {\n"
+            + "    alert(div.style.orphans);\n"
+            + "    alert(window.getComputedStyle(div, null).orphans);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 
 }

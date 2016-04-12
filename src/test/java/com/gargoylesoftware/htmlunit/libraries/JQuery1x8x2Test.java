@@ -4009,7 +4009,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
         FF38 = "0, 4, 4",
         FF45 = "0, 1, 1",
         IE = "0, 4, 4")
-    @NotYetImplemented(CHROME)
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }

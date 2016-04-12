@@ -843,6 +843,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getWidows() {
+        return defaultIfEmpty(super.getWidows(), WIDOWS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOrphans() {
+        return defaultIfEmpty(super.getOrphans(), ORPHANS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getWidth() {
         if ("none".equals(getDisplay())) {
             return "auto";
