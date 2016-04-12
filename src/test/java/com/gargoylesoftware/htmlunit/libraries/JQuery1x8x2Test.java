@@ -3954,7 +3954,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void css___visible_selector_works_properly_on_children_with_a_hidden_parent__bug__4512_() throws Exception {
         runTest("css: :visible selector works properly on children with a hidden parent (bug #4512)");
     }
