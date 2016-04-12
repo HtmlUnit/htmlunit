@@ -74,7 +74,6 @@ import org.apache.http.client.protocol.RequestAuthCache;
 import org.apache.http.client.protocol.RequestClientConnControl;
 import org.apache.http.client.protocol.RequestDefaultHeaders;
 import org.apache.http.client.protocol.RequestExpectContinue;
-import org.apache.http.client.protocol.ResponseContentEncoding;
 import org.apache.http.client.protocol.ResponseProcessCookies;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -632,7 +631,6 @@ public class HttpWebConnection implements WebConnection {
         b.add(new RequestAcceptEncoding());
         b.add(new RequestAuthCache());
         b.add(new ResponseProcessCookies());
-        b.add(new ResponseContentEncoding());
         builder.setHttpProcessor(b.build());
     }
 

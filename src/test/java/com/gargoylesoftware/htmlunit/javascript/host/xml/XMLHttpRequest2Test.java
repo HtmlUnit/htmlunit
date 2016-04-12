@@ -16,7 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -740,4 +743,69 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * Servlet for {@link #encodedXml()}.
+     */
+    public static class EncodedXmlServlet extends HttpServlet {
+        private static final String RESPONSE = "<xml><content>blah</content></xml>";
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final byte[] bytes = RESPONSE.getBytes("UTF-8");
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            final GZIPOutputStream gout = new GZIPOutputStream(bos);
+            gout.write(bytes);
+            gout.finish();
+
+            final byte[] encoded = bos.toByteArray();
+
+            response.setContentType("text/xml");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(200);
+            response.setContentLength(encoded.length);
+            response.setHeader("Content-Encoding", "gzip");
+
+            final OutputStream rout = response.getOutputStream();
+            rout.write(encoded);
+            rout.close();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml; charset=UTF-8", "gzip", "45"},
+            IE = {"<xml><content>blah</content></xml>", "text/xml; charset=UTF-8", "null", "null"})
+    @NotYetImplemented(IE)
+    public void encodedXml() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", EncodedXmlServlet.class);
+
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        var request = new XMLHttpRequest();\n"
+                        + "        request.open('GET', '/test', false, null, null);\n"
+                        + "        request.send();\n"
+                        + "        alert(request.responseText);\n"
+                        + "        alert(request.getResponseHeader('content-type'));\n"
+                        + "        alert(request.getResponseHeader('content-encoding'));\n"
+                        + "        alert(request.getResponseHeader('content-length'));\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        loadPageWithAlerts2(html, servlets);
+    }
 }

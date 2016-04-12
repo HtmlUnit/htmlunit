@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
@@ -187,6 +190,53 @@ public class WebResponseTest extends WebServerTestCase {
 
         final Page page = webClient.getPage(URL_FIRST);
         assertEquals("<html/>", page.getWebResponse().getContentAsString("EUROPE"));
+    }
+
+    /**
+     * Servlet for {@link #binaryResponseHeaders()}.
+     */
+    public static class BinaryResponseHeadersServlet extends HttpServlet {
+        private static final String RESPONSE = "<html><head><title>Foo</title></head><body>This is foo!</body></html>";
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final byte[] bytes = RESPONSE.getBytes("UTF-8");
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            final GZIPOutputStream gout = new GZIPOutputStream(bos);
+            gout.write(bytes);
+            gout.finish();
+
+            final byte[] encoded = bos.toByteArray();
+
+            response.setContentType("text/html");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(200);
+            response.setContentLength(encoded.length);
+            response.setHeader("Content-Encoding", "gzip");
+
+            final OutputStream rout = response.getOutputStream();
+            rout.write(encoded);
+            rout.close();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void binaryResponseHeaders() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", BinaryResponseHeadersServlet.class);
+        startWebServer("./", null, servlets);
+
+        final HtmlPage page = getWebClient().getPage("http://localhost:" + PORT + "/test");
+        assertEquals(BinaryResponseHeadersServlet.RESPONSE, page.getWebResponse().getContentAsString("UTF8"));
+
+        assertEquals("gzip", page.getWebResponse().getResponseHeaderValue("Content-Encoding"));
+        assertEquals("73", page.getWebResponse().getResponseHeaderValue("Content-Length"));
     }
 
     /**
