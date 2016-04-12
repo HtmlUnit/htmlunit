@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Madis Pärn
  */
 @RunWith(BrowserRunner.class)
 public class PromiseTest extends WebDriverTestCase {
@@ -349,5 +352,40 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Success",
+            IE = {})
+    public void thenInsideEventHandler() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if(!window.Promise) {\n"
+                + "          return;\n"
+                + "      }\n"
+                + "      document.getElementById('btn1').onclick = function() {\n"
+                + "          new Promise(function(resolve, reject) {\n"
+                + "              window.setTimeout( function() {\n"
+                + "                  resolve('Success');\n"
+                + "             }, 0);\n"
+                + "          }).then(function(value) {\n"
+                + "              alert(value);\n"
+                + "          });\n"
+                + "      };\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<button id='btn1'>BTN1</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("btn1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

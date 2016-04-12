@@ -9,6 +9,7 @@
     <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
     <suppress checks="FileLength" files="BrowserVersionFeatures.java"/>
     <suppress checks="FileLength" files="CSSStyleDeclaration.java"/>
+    <suppress checks="FileLength" files="CSSStyleDeclarationTest.java"/>
     <suppress checks="FileLength" files="DocumentTest.java"/>
     <suppress checks="FileLength" files="ElementClosesElementTest.java"/>
     <suppress checks="FileLength" files="ElementCreationTest.java"/>

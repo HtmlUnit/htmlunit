@@ -141,32 +141,38 @@ public class Promise extends SimpleScriptable {
 
             @Override
             public void execute() throws Exception {
-                Object newValue = null;
-                final Function toExecute = resolve_ ? onFulfilled : onRejected;
-                if (value_ instanceof Function) {
-                    final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(toExecute);
-                    try {
-                        ((Function) value_).call(Context.getCurrentContext(), window, thisPromise,
-                            new Object[] {wrapper, onRejected});
-                        if (wrapper.wasCalled_) {
-                            newValue = wrapper.value_;
+                Context.enter();
+                try {
+                    Object newValue = null;
+                    final Function toExecute = resolve_ ? onFulfilled : onRejected;
+                    if (value_ instanceof Function) {
+                        final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(toExecute);
+                        try {
+                            ((Function) value_).call(Context.getCurrentContext(), window, thisPromise,
+                                    new Object[] {wrapper, onRejected});
+                            if (wrapper.wasCalled_) {
+                                newValue = wrapper.value_;
+                            }
+                        }
+                        catch (final JavaScriptException e) {
+                            if (onRejected == null) {
+                                promise.exceptionDetails_ = e.details();
+                            }
+                            else if (!wrapper.wasCalled_) {
+                                newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
+                                        new Object[] {e.getValue()});
+                            }
                         }
                     }
-                    catch (final JavaScriptException e) {
-                        if (onRejected == null) {
-                            promise.exceptionDetails_ = e.details();
-                        }
-                        else if (!wrapper.wasCalled_) {
-                            newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
-                                    new Object[] {e.getValue()});
-                        }
+                    else {
+                        newValue = toExecute.call(Context.getCurrentContext(), window, thisPromise,
+                                new Object[] {value_});
                     }
+                    promise.value_ = newValue;
                 }
-                else {
-                    newValue = toExecute.call(Context.getCurrentContext(), window, thisPromise,
-                            new Object[] {value_});
+                finally {
+                    Context.exit();
                 }
-                promise.value_ = newValue;
             }
         };
 
@@ -192,9 +198,15 @@ public class Promise extends SimpleScriptable {
 
             @Override
             public void execute() throws Exception {
-                final Object newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
+                Context.enter();
+                try {
+                    final Object newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
                             new Object[] {exceptionDetails_});
-                promise.value_ = newValue;
+                    promise.value_ = newValue;
+                }
+                finally {
+                    Context.exit();
+                }
             }
         };
 
