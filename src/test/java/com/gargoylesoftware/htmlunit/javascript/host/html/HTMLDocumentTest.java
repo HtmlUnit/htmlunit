@@ -315,7 +315,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<title>Test</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if(!document.createElementNS) { alert('document.createElementNS not available'); return; }\n"
             + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');\n"
             + "  alert(elt);\n"
             + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'foo');\n"

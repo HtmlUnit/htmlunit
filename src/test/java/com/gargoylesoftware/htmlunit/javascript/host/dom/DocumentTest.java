@@ -332,14 +332,12 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Some:Div", "Some:Div", "myNS", "Some", "Div",
-                        "svg", "svg", "http://www.w3.org/2000/svg", "null", "svg"})
+    @Alerts({"Some:Div", "Some:Div", "myNS", "Some", "Div", "svg", "svg", "http://www.w3.org/2000/svg", "null", "svg"})
     public void createElementNS() throws Exception {
         final String html
             = "<html><head>\""
             + "<script>\n"
             + "  function doTest() {\n"
-            + "    if (!document.createElementNS) { alert('not available'); return }\n"
             + "    var div = document.createElementNS('myNS', 'Some:Div');\n"
             + "    alert(div.nodeName);\n"
             + "    alert(div.tagName);\n"
