@@ -421,4 +421,23 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void offsetHeight() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<div>1</div>\n"
+            + "</body>\n"
+            + "</html>";
+        final HtmlPage page = loadPage(html);
+        final HTMLElement host = (HTMLElement) page.<HtmlElement>getFirstByXPath("//div").getScriptableObject();
+        final int offsetHeight = host.getOffsetHeight();
+        assertTrue(offsetHeight > 0);
+
+    }
+
 }

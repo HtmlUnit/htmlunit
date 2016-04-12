@@ -326,10 +326,12 @@ public class MouseEvent extends UIEvent {
      */
     @SuppressWarnings("unchecked")
     public static MouseEvent getCurrentMouseEvent() {
-        final LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext()
-            .getThreadLocal(KEY_CURRENT_EVENT);
-        if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {
-            return (MouseEvent) events.getLast();
+        final Context context = Context.getCurrentContext();
+        if (context != null) {
+            final LinkedList<Event> events = (LinkedList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
+            if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {
+                return (MouseEvent) events.getLast();
+            }
         }
         return null;
     }
