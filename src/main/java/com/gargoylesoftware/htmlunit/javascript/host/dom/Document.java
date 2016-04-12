@@ -84,6 +84,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
  * @author Ronald Brill
  * @author Chuck Dumont
  * @author Frank Danek
+ * @author Madis Pärn
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms531073.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">W3C Dom Level 1</a>
  */
@@ -306,6 +307,21 @@ public class Document extends EventNode {
             childNode.processImportNode(this);
         }
         return domNode.getScriptableObject();
+    }
+
+    /**
+     * Adopts a node from an external document.
+     * The node and its subtree is removed from the document it's in (if any),
+     * and its ownerDocument is changed to the current document.
+     * The node can then be inserted into the current document.
+     *
+     * @param externalNode the node from another document to be adopted
+     * @return the adopted node that can be used in the current document
+     */
+    @JsxFunction
+    public Object adoptNode(final Node externalNode) {
+        externalNode.remove();
+        return importNode(externalNode, true);
     }
 
     /**

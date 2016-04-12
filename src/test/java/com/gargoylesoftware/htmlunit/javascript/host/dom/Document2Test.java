@@ -36,6 +36,8 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ronald Brill
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Madis Pärn
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class Document2Test extends WebDriverTestCase {
@@ -275,6 +277,27 @@ public class Document2Test extends WebDriverTestCase {
             + "</body></html>\n";
 
         loadPageWithAlerts2(html, 200);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"div1", "null", "null"})
+    public void adoptNode() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var newDoc = document.implementation.createHTMLDocument('something');\n"
+            + "    var node = newDoc.adoptNode(document.getElementById('div1'));\n"
+            + "    alert(node.id);\n"
+            + "    alert(node.parentNode);\n"
+            + "    alert(document.getElementById('div1'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'><div id='div1_1'></div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -543,7 +566,6 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({})
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -570,7 +592,6 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({})
     public void createStyleSheet_emptyUrl() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -597,7 +618,6 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({})
     public void createStyleSheet_insertAt() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
