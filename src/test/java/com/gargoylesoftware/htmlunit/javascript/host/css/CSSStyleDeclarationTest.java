@@ -2063,4 +2063,34 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "static", "", "static", "", "static", "absolute", "absolute"})
+    public void position() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    debug(div);\n"
+            + "    div.style.position = 'fake';\n"
+            + "    debug(div);\n"
+            + "    div.style.position = ' ';\n"
+            + "    debug(div);\n"
+            + "    div.style.position = 'AbSoLuTe';\n"
+            + "    debug(div);\n"
+            + "  }\n"
+            + "  function debug(div) {\n"
+            + "    alert(div.style.position);\n"
+            + "    alert(window.getComputedStyle(div, null).position);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

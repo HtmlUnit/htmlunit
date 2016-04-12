@@ -82,6 +82,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_TOP;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PAGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.POSITION;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RUBY_ALIGN;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SIZE;
@@ -2496,6 +2497,28 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             }
         }
         setStyleAttribute(ORPHANS.getAttributeName(), orphans);
+    }
+
+    /**
+     * Gets the {@code orphans} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getPosition() {
+        return getStyleAttribute(POSITION);
+    }
+
+    /**
+     * Sets the {@code position} style attribute.
+     * @param position the new attribute
+     */
+    @JsxSetter
+    public void setPosition(final String position) {
+        if ("static".equalsIgnoreCase(position) || "absolute".equalsIgnoreCase(position)
+                || "fixed".equalsIgnoreCase(position) || "relative".equalsIgnoreCase(position)
+                || "initial".equalsIgnoreCase(position) || "inherit".equalsIgnoreCase(position)) {
+            setStyleAttribute(POSITION.getAttributeName(), position.toLowerCase());
+        }
     }
 
     /**

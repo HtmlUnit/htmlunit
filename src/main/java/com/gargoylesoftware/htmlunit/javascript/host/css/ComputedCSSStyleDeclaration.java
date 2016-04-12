@@ -859,6 +859,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getPosition() {
+        return defaultIfEmpty(super.getPosition(), POSITION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getWidth() {
         if ("none".equals(getDisplay())) {
             return "auto";
