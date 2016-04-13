@@ -52,7 +52,7 @@ public class Storage extends SimpleScriptable {
     /**
      * Public default constructor only for the prototype.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public Storage() {
         store_ = null;
     }

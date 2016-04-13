@@ -125,7 +125,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _CSSCharsetRule_CSSCharsetRule() throws Exception {
         test("CSSCharsetRule", "CSSCharsetRule");
     }
@@ -423,7 +423,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _CSSRule_CSSCharsetRule() throws Exception {
         test("CSSRule", "CSSCharsetRule");
     }
@@ -4926,9 +4926,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Element_HTMLPictureElement() throws Exception {
         test("Element", "HTMLPictureElement");
     }
@@ -4937,9 +4936,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_HTMLPictureElement() throws Exception {
         test("EventTarget", "HTMLPictureElement");
     }
@@ -5097,9 +5095,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CryptoKey_CryptoKey() throws Exception {
         test("CryptoKey", "CryptoKey");
     }
@@ -5414,7 +5411,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _AudioNode_StereoPannerNode() throws Exception {
         test("AudioNode", "StereoPannerNode");
     }
@@ -5424,7 +5421,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _BroadcastChannel_BroadcastChannel() throws Exception {
         test("BroadcastChannel", "BroadcastChannel");
     }
@@ -5434,7 +5431,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMMatrixReadOnly_DOMMatrix() throws Exception {
         test("DOMMatrixReadOnly", "DOMMatrix");
     }
@@ -5444,7 +5441,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMMatrix_DOMMatrix() throws Exception {
         test("DOMMatrix", "DOMMatrix");
     }
@@ -5464,7 +5461,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _EventTarget_BroadcastChannel() throws Exception {
         test("EventTarget", "BroadcastChannel");
     }
@@ -5474,7 +5471,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule", "CSSCounterStyleRule");
     }
@@ -5484,7 +5481,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _CSSRule_CSSCounterStyleRule() throws Exception {
         test("CSSRule", "CSSCounterStyleRule");
     }
@@ -5493,9 +5490,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_MediaDevices() throws Exception {
         test("EventTarget", "MediaDevices");
     }
@@ -5505,7 +5501,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _EventTarget_StereoPannerNode() throws Exception {
         test("EventTarget", "StereoPannerNode");
     }
@@ -5722,7 +5718,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF45 = "true")
     public void _EventTarget_VTTCue() throws Exception {
         test("EventTarget", "VTTCue");
     }
@@ -5731,9 +5728,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("EventTarget", "XMLHttpRequestEventTarget");
     }
@@ -5902,7 +5898,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF45 = "true")
     public void _EventTarget_ScreenOrientation() throws Exception {
         test("EventTarget", "ScreenOrientation");
     }
@@ -6339,6 +6336,16 @@ public class HostParentOfATest extends HostParentOf {
             FF45 = "true")
     public void _EventTarget_CanvasCaptureMediaStream() throws Exception {
         test("EventTarget", "CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _EventTarget_MediaStream() throws Exception {
+        test("EventTarget", "MediaStream");
     }
 
     /**

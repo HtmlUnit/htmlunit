@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
 public class MediaDevices extends EventTarget {
 
     /**

@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTIO
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,14 +51,13 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-    @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass
 public class HTMLAllCollection extends HTMLCollection {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public HTMLAllCollection() {
     }
 

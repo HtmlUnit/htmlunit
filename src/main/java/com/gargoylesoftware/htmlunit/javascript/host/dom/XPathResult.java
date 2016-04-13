@@ -122,7 +122,7 @@ public class XPathResult extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor
     public XPathResult() {
     }
 

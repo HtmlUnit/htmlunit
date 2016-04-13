@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 
 import java.util.Collection;
 
@@ -888,7 +887,7 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @NotYetImplemented({ CHROME, FF38 })
+    @NotYetImplemented({ CHROME, FF })
     public void _HTMLCollection_HTMLAllCollection() throws Exception {
         test("HTMLCollection", "HTMLAllCollection");
     }
@@ -1743,9 +1742,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _HTMLElement_HTMLPictureElement() throws Exception {
         test("HTMLElement", "HTMLPictureElement");
     }
@@ -1754,9 +1752,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _HTMLPictureElement_HTMLPictureElement() throws Exception {
         test("HTMLPictureElement", "HTMLPictureElement");
     }

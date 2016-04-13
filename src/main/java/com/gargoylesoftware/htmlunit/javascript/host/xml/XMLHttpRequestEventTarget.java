@@ -33,7 +33,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public XMLHttpRequestEventTarget() {
     }
 

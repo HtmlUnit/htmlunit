@@ -34,7 +34,7 @@ public class SVGNumber extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public SVGNumber() {
     }
 }

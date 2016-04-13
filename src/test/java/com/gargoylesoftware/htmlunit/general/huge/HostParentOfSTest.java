@@ -1673,9 +1673,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Symbol_Symbol() throws Exception {
         test("Symbol", "Symbol");
     }
@@ -1685,7 +1684,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _StereoPannerNode_StereoPannerNode() throws Exception {
         test("StereoPannerNode", "StereoPannerNode");
     }

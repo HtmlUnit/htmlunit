@@ -2338,9 +2338,8 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Node_HTMLPictureElement() throws Exception {
         test("Node", "HTMLPictureElement");
     }
@@ -2534,7 +2533,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _mozRTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -2545,7 +2544,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription", "mozRTCSessionDescription");
     }
@@ -2556,7 +2555,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF45 = "true")
     public void _RTCIceCandidate_RTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "RTCIceCandidate");
     }
@@ -2641,9 +2641,8 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _NodeList_RadioNodeList() throws Exception {
         test("NodeList", "RadioNodeList");
     }
@@ -2683,9 +2682,8 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _RadioNodeList_RadioNodeList() throws Exception {
         test("RadioNodeList", "RadioNodeList");
     }
@@ -2707,7 +2705,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _MozMmsMessage_MozMmsMessage() throws Exception {
         test("MozMmsMessage", "MozMmsMessage");
     }
@@ -2718,7 +2716,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _MozMobileMessageThread_MozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread", "MozMobileMessageThread");
     }
@@ -2740,7 +2738,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF38 = "true")
     public void _MozSmsMessage_MozSmsMessage() throws Exception {
         test("MozSmsMessage", "MozSmsMessage");
     }
@@ -2867,9 +2865,8 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF38 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _MediaDevices_MediaDevices() throws Exception {
         test("MediaDevices", "MediaDevices");
     }

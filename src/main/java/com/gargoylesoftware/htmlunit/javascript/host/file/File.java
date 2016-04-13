@@ -49,7 +49,7 @@ public class File extends Blob {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public File() {
     }
 
@@ -89,7 +89,7 @@ public class File extends Blob {
      * Returns the {@code lastModified} property.
      * @return the {@code lastModified} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public long getLastModified() {
         return file_.lastModified();
     }

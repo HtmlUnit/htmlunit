@@ -14,15 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code Blob}.
@@ -35,8 +29,7 @@ public class Blob extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(IE),
-        @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor
     public Blob() {
     }
 

@@ -179,7 +179,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
         @JsxClass(domClass = HtmlAside.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
         @JsxClass(domClass = HtmlBaseFont.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlBidirectionalIsolation.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlBig.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 38))
+@JsxClass(browsers = @WebBrowser(FF))
 public class BroadcastChannel extends EventTarget {
 
     /**

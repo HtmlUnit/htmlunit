@@ -44,7 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
 public class Symbol extends SimpleScriptable {
 
     static final String ITERATOR_STRING = "Symbol(Symbol.iterator)";

@@ -25,7 +25,7 @@ import org.apache.commons.io.FileUtils;
  *
  * @author Ahmed Ashour
  */
-public class TestCaseCreator {
+public final class TestCaseCreator {
 
     /**
      * The entry point.
@@ -65,7 +65,7 @@ public class TestCaseCreator {
                 System.out.println();
             }
         }
-        System.out.println("             loadPageWithAlerts2(html);");
+        System.out.println("            loadPageWithAlerts2(html);");
         System.out.println("        }");
     }
 

@@ -204,7 +204,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public Window() {
     }
 
@@ -2063,6 +2063,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
+    @SuppressWarnings("null")
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
         final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
 

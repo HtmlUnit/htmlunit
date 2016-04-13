@@ -34,7 +34,7 @@ public class XPathExpression extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor
     public XPathExpression() {
     }
 }
