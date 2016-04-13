@@ -1673,7 +1673,39 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "<div id='div1'></div>\n"
+            + "  <div id='div1'></div>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"50%", "100px", "50%", "100px"},
+            IE = {"", "auto", "", "auto"})
+    @NotYetImplemented
+    public void topLeft() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "   var div1 = document.getElementById('div1');\n"
+            + "   var parent = document.createElement('div');\n"
+            + "   parent.style = 'position: relative; width: 200px; height: 200px; margin: 0; padding: 0; "
+            + "border-width: 0';\n"
+            + "   div1.appendChild(parent);\n"
+            + "\n"
+            + "   var div = document.createElement('div');\n"
+            + "   div.style = 'position: absolute; width: 20px; height: 20px; top: 50%; left: 50%';\n"
+            + "   parent.appendChild(div);\n"
+            + "\n"
+            + "   alert(div.style.top);\n"
+            + "   alert(window.getComputedStyle(div, null).top);\n"
+            + "   alert(div.style.top);\n"
+            + "   alert(window.getComputedStyle(div, null).top);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'></div>\n"
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
