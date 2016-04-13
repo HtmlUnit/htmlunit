@@ -667,10 +667,10 @@ public class CodeStyleTest {
      * Verifies that the class name is used.
      */
     private void className(final List<String> lines, final String relativePath) {
-        if (relativePath.contains("main") && relativePath.contains("host")
-                && !relativePath.contains("LabelsHelper")) {
+        if (relativePath.contains("main") && relativePath.contains("host")) {
             String fileName = relativePath.substring(0, relativePath.length() - 5);
             fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+            boolean failureFound = false;
             for (final String line : lines) {
                 if (line.startsWith(" * ")) {
                     int p0 = line.indexOf("{@code ");
@@ -679,9 +679,15 @@ public class CodeStyleTest {
                         final int p1 = line.indexOf('}',  p0 + 1);
                         final String name = line.substring(p0,  p1);
                         if (!name.equals(fileName)) {
-                            addFailure("Incorrect host class in " + relativePath);
+                            failureFound = true;
                         }
                     }
+                }
+                else if (line.startsWith("public class")) {
+                    if (failureFound) {
+                        addFailure("Incorrect host class in " + relativePath);
+                    }
+                    return;
                 }
             }
         }
