@@ -21,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link ComputedHeight}.
@@ -37,7 +36,6 @@ public class ComputedHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void offsetHeight() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -48,9 +46,9 @@ public class ComputedHeightTest extends WebDriverTestCase {
             + "var array = [];\n"
             + "for (var i = 0; i <= 128; i++) {\n"
             + "  e.style.fontSize = i + 'px';\n"
-            + "  array.push('array[' + i + '] = ' + e.offsetHeight + ';');\n"
+            + "  array.push(e.offsetHeight);\n"
             + "}\n"
-            + "document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
             + "</script></body></html>";
 
         final WebDriver driver = loadPage2(html);

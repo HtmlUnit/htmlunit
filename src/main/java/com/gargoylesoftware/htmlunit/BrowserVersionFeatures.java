@@ -67,10 +67,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_COMPUTED_NO_Z_INDEX,
 
-    /** Indicates that the default value for height of elements is 18 instead of 20. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    CSS_DEFAULT_ELEMENT_HEIGHT_18,
-
     /** Is display style of HtmlDialog is 'none'. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_DIALOG_NONE,

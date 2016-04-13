@@ -1394,7 +1394,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     private void updateFont(final String font, final boolean force) {
         final BrowserVersion browserVersion = getBrowserVersion();
-        final String[] details = FontHelper.getDetails(font, !browserVersion.hasFeature(CSS_SET_NULL_THROWS));
+        final String[] details = ComputedFont.getDetails(font, !browserVersion.hasFeature(CSS_SET_NULL_THROWS));
         if (details != null || force) {
             final StringBuilder newFont = new StringBuilder();
             newFont.append(getFontSize());
@@ -1434,12 +1434,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setFont(final String font) {
-        final String[] details = FontHelper.getDetails(font, !getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS));
+        final String[] details = ComputedFont.getDetails(font, !getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS));
         if (details != null) {
-            setStyleAttribute(FONT_FAMILY.getAttributeName(), details[FontHelper.FONT_FAMILY_INDEX]);
-            final String fontSize = details[FontHelper.FONT_SIZE_INDEX];
-            if (details[FontHelper.LINE_HEIGHT_INDEX] != null) {
-                setStyleAttribute(LINE_HEIGHT.getAttributeName(), details[FontHelper.LINE_HEIGHT_INDEX]);
+            setStyleAttribute(FONT_FAMILY.getAttributeName(), details[ComputedFont.FONT_FAMILY_INDEX]);
+            final String fontSize = details[ComputedFont.FONT_SIZE_INDEX];
+            if (details[ComputedFont.LINE_HEIGHT_INDEX] != null) {
+                setStyleAttribute(LINE_HEIGHT.getAttributeName(), details[ComputedFont.LINE_HEIGHT_INDEX]);
             }
             setStyleAttribute(FONT_SIZE.getAttributeName(), fontSize);
             updateFont(font, true);

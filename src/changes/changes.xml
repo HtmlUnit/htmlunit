@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1776">
+                CSS: fontSize influences the calculated height.
+            </action>
             <action type="fix" dev="rbri" issue="1774" due-to="Hartmut Arlt">
                 HttpWebConnection no longer removes 'Content-Length', 'Content-Encoding' and 'Content-MD5' HTTP headers.
             </action>

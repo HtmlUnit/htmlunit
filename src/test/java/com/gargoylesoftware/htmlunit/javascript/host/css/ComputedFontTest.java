@@ -26,12 +26,12 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@code font} properties of {@link ComputedCSSStyleDeclaration}.
+ * Tests for {@link ComputedFont}.
  *
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ComputedCSSStyleDeclarationFontTest extends WebDriverTestCase {
+public class ComputedFontTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails

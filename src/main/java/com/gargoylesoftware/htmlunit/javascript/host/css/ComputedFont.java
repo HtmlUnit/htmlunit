@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclarat
  *
  * @author Ahmed Ashour
  */
-final class FontHelper {
+final class ComputedFont {
 
     static final int FONT_SIZE_INDEX = 3;
     static final int LINE_HEIGHT_INDEX = 4;
@@ -72,7 +72,7 @@ final class FontHelper {
         return isLength(lineHeight) || "normal".equals(lineHeight);
     }
 
-    private FontHelper() {
+    private ComputedFont() {
     }
 
 }
