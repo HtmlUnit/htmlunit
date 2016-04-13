@@ -437,7 +437,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final HTMLElement host = (HTMLElement) page.<HtmlElement>getFirstByXPath("//div").getScriptableObject();
         final int offsetHeight = host.getOffsetHeight();
         assertTrue(offsetHeight > 0);
-
     }
 
 }
