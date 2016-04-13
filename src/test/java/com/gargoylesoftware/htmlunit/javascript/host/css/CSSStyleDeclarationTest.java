@@ -2099,15 +2099,16 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "green", "abc"},
-            FF = {"[object CSS2Properties]", "green", "abc"},
-            IE = {"[object MSStyleCSSProperties]", "", ""})
+    @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
+            FF = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
+            IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
     @NotYetImplemented
     public void setStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
+            + "    alert(div.style);\n"
             + "    div.style = 'color: green; font-family: abc';\n"
             + "    alert(div.style);\n"
             + "    alert(div.style.color);\n"

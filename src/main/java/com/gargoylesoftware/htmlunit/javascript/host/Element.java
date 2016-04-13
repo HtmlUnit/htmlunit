@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -217,7 +218,7 @@ public class Element extends EventNode {
         if ("*".equals(tagName)) {
             collection = new HTMLCollection(node, false) {
                 @Override
-                protected boolean isMatching(final DomNode node) {
+                protected boolean isMatching(final DomNode nodeToMatch) {
                     return true;
                 }
             };
@@ -225,8 +226,8 @@ public class Element extends EventNode {
         else {
             collection = new HTMLCollection(node, false) {
                 @Override
-                protected boolean isMatching(final DomNode node) {
-                    return tagNameLC.equalsIgnoreCase(node.getNodeName());
+                protected boolean isMatching(final DomNode nodeToMatch) {
+                    return tagNameLC.equalsIgnoreCase(nodeToMatch.getNodeName());
                 }
             };
         }
@@ -495,6 +496,17 @@ public class Element extends EventNode {
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
         return style_;
+    }
+
+    /**
+     * Sets the styles for this element.
+     * @param style the style of the element
+     */
+    @JsxSetter
+    public void setStyle(final String style) {
+        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            getStyle().setCssText(style);
+        }
     }
 
     /**

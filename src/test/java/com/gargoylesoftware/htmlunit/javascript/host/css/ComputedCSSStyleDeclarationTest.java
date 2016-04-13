@@ -1684,6 +1684,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"50%", "100px", "50%", "100px"},
             IE = {"", "auto", "", "auto"})
+    @NotYetImplemented
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -1697,7 +1698,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "   div.style = 'position: absolute; width: 20px; height: 20px; top: 50%; left: 50%';\n"
             + "   parent.appendChild(div);\n"
             + "\n"
-            + "   alert(div.style.left);\n"
+            + "   alert(div.style.top);\n"
             + "   alert(window.getComputedStyle(div, null).top);\n"
             + "   alert(div.style.left);\n"
             + "   alert(window.getComputedStyle(div, null).left);\n"
