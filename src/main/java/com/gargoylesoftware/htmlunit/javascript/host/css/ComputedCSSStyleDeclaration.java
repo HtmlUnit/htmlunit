@@ -696,6 +696,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginLeft() {
+        final String superMarginLeft = super.getMarginLeft();
+        if (!superMarginLeft.endsWith("%")) {
+            return pixelString(defaultIfEmpty(superMarginLeft, "0px"));
+        }
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
@@ -720,6 +724,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginRight() {
+        final String superMarginRight = super.getMarginRight();
+        if (!superMarginRight.endsWith("%")) {
+            return pixelString(defaultIfEmpty(superMarginRight, "0px"));
+        }
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
