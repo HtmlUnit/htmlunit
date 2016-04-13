@@ -54,6 +54,8 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_POSITION;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_TYPE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ORPHANS;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OVERFLOW;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
@@ -694,7 +696,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginLeft() {
-        return pixelString(defaultIfEmpty(super.getMarginLeft(), "0px"));
+        final Element elem = getElement();
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+        }
+
+        final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
+        return pixelString(elem, new CssValue(0, windowWidth) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(MARGIN_LEFT, true);
+                }
+                return style.getStyleAttribute(WIDTH, true);
+            }
+        });
     }
 
     /**
@@ -702,7 +720,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginRight() {
-        return pixelString(defaultIfEmpty(super.getMarginRight(), "0px"));
+        final Element elem = getElement();
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+        }
+
+        final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
+        return pixelString(elem, new CssValue(0, windowWidth) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(MARGIN_RIGHT, true);
+                }
+                return style.getStyleAttribute(WIDTH, true);
+            }
+        });
     }
 
     /**
