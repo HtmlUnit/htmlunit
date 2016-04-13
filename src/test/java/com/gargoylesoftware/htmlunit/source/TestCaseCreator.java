@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.source;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -50,15 +51,19 @@ public class TestCaseCreator {
         System.out.println("        @Alerts()");
         System.out.println("        public void test() throws Exception {");
 
-        boolean first = true;
-        for (final String line : FileUtils.readLines(file)) {
-            if (first) {
+        final List<String> lines = FileUtils.readLines(file);
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
+            if (i == 0) {
                 System.out.println("            final String html = \"" + line.replace("\"", "\\\"") + "\\n\"");
             }
             else {
-                System.out.println("                + \"" + line.replace("\"", "\\\"") + "\\n\"");
+                System.out.print("                + \"" + line.replace("\"", "\\\"") + "\\n\"");
+                if (i == lines.size() - 1) {
+                    System.out.print(";");
+                }
+                System.out.println();
             }
-            first = false;
         }
         System.out.println("             loadPageWithAlerts2(html);");
         System.out.println("        }");

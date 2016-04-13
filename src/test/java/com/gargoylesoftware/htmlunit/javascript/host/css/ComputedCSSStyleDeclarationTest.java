@@ -1641,4 +1641,39 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"50%", "200px", "25%", "100px"})
+    @NotYetImplemented
+    public void margin() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "   var div1 = document.getElementById('div1');\n"
+            + "   var container = document.createElement('div');\n"
+            + "   container.style.width = '400px';\n"
+            + "   div1.appendChild(container);\n"
+            + "\n"
+            + "   var el = document.createElement('div');\n"
+            + "   el.style.width = '50%';\n"
+            + "   el.style.marginRight = '50%';\n"
+            + "   container.appendChild(el);\n"
+            + "   alert(el.style.marginRight);\n"
+            + "   alert(window.getComputedStyle(el, null).marginRight);\n"
+            + "\n"
+            + "   el = document.createElement('div');\n"
+            + "   el.style.width = '50%';\n"
+            + "   el.style.minWidth = '300px';\n"
+            + "   el.style.marginLeft = '25%';\n"
+            + "   container.appendChild(el);\n"
+            + "   alert(el.style.marginLeft);\n"
+            + "   alert(window.getComputedStyle(el, null).marginLeft);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='div1'></div>\n"
+            + "</body></html>\n";
+         loadPageWithAlerts2(html);
+    }
 }
