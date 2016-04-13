@@ -546,67 +546,65 @@ public class WebClientTest extends SimpleWebTestCase {
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient webClient;
         final String proxyHost;
         final int proxyPort;
         if (useProxy) {
             proxyHost = "someHost";
             proxyPort = 12233345;
-            webClient = new WebClient(getBrowserVersion(), proxyHost, proxyPort);
         }
         else {
             proxyHost = null;
             proxyPort = 0;
-            webClient = getWebClient();
         }
 
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-        webClient.getOptions().setPrintContentOnFailingStatusCode(false);
+        try (final WebClient webClient = new WebClient(getBrowserVersion(), proxyHost, proxyPort)) {
+            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+            webClient.getOptions().setPrintContentOnFailingStatusCode(false);
 
-        final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
-        webConnection.setResponse(new URL(newLocation), secondContent);
+            final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
+            final MockWebConnection webConnection = new MockWebConnection();
+            webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
+            webConnection.setResponse(new URL(newLocation), secondContent);
 
-        webClient.setWebConnection(webConnection);
+            webClient.setWebConnection(webConnection);
 
-        final URL url = URL_FIRST;
+            final URL url = URL_FIRST;
 
-        HtmlPage page;
-        WebResponse webResponse;
+            HtmlPage page;
+            WebResponse webResponse;
 
-        //
-        // Second time redirection is turned on (default setting)
-        //
-        page = webClient.getPage(new WebRequest(url, initialRequestMethod));
-        webResponse = page.getWebResponse();
-        if (expectedRedirectedRequestMethod == null) {
-            // No redirect should have happened
+            //
+            // Second time redirection is turned on (default setting)
+            //
+            page = webClient.getPage(new WebRequest(url, initialRequestMethod));
+            webResponse = page.getWebResponse();
+            if (expectedRedirectedRequestMethod == null) {
+                // No redirect should have happened
+                assertEquals(statusCode, webResponse.getStatusCode());
+                assertEquals(initialRequestMethod, webConnection.getLastMethod());
+            }
+            else {
+                // A redirect should have happened
+                assertEquals(HttpStatus.SC_OK, webResponse.getStatusCode());
+                assertEquals(newLocation, webResponse.getWebRequest().getUrl());
+                assertEquals("Second", page.getTitleText());
+                assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());
+            }
+            assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
+            assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
+
+            //
+            // Second time redirection is turned off
+            //
+            webClient.getOptions().setRedirectEnabled(false);
+            page = webClient.getPage(new WebRequest(url, initialRequestMethod));
+            webResponse = page.getWebResponse();
             assertEquals(statusCode, webResponse.getStatusCode());
             assertEquals(initialRequestMethod, webConnection.getLastMethod());
-        }
-        else {
-            // A redirect should have happened
-            assertEquals(HttpStatus.SC_OK, webResponse.getStatusCode());
-            assertEquals(newLocation, webResponse.getWebRequest().getUrl());
-            assertEquals("Second", page.getTitleText());
-            assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());
-        }
-        assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
-        assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
+            assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
 
-        //
-        // Second time redirection is turned off
-        //
-        webClient.getOptions().setRedirectEnabled(false);
-        page = webClient.getPage(new WebRequest(url, initialRequestMethod));
-        webResponse = page.getWebResponse();
-        assertEquals(statusCode, webResponse.getStatusCode());
-        assertEquals(initialRequestMethod, webConnection.getLastMethod());
-        assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
-        assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
-
-        webClient.close();
+        }
     }
 
     /**
@@ -2060,6 +2058,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void getTopLevelWindows() throws Exception {
+        @SuppressWarnings("resource")
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
@@ -2172,6 +2171,7 @@ public class WebClientTest extends SimpleWebTestCase {
         getMockWebConnection().setResponse(getDefaultUrl(), html);
         getMockWebConnection().setDefaultResponse(html2);
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final int initialJSThreads = getJavaScriptThreads().size();
         webClient.setWebConnection(getMockWebConnection());
@@ -2238,14 +2238,14 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void closeToClearCache() throws Exception {
-        final WebClient webClient = getWebClient();
         final Cache cache = createMock(Cache.class);
-        webClient.setCache(cache);
-        cache.clear();
-        expectLastCall().atLeastOnce();
+        try (final WebClient webClient = getWebClient()) {
+            webClient.setCache(cache);
+            cache.clear();
+            expectLastCall().atLeastOnce();
 
-        replay(cache);
-        webClient.close();
+            replay(cache);
+        }
         verify(cache);
     }
 }

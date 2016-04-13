@@ -770,7 +770,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
             final OutputStream rout = response.getOutputStream();
             rout.write(encoded);
-            rout.close();
         }
     }
 

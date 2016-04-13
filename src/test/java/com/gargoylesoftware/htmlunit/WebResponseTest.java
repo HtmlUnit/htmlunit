@@ -219,7 +219,6 @@ public class WebResponseTest extends WebServerTestCase {
 
             final OutputStream rout = response.getOutputStream();
             rout.write(encoded);
-            rout.close();
         }
     }
 
