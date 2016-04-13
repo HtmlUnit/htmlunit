@@ -26,6 +26,8 @@ import java.util.zip.InflaterInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -38,6 +40,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  */
 public class WebResponseData implements Serializable {
+    private static final Log LOG = LogFactory.getLog(WebResponseData.class);
 
     private final int statusCode_;
     private final String statusMessage_;
@@ -99,7 +102,22 @@ public class WebResponseData implements Serializable {
         final String encoding = getHeader(headers, "content-encoding");
         if (encoding != null) {
             if (StringUtils.contains(encoding, "gzip")) {
-                stream = new GZIPInputStream(stream);
+                try {
+                    stream = new GZIPInputStream(stream);
+                }
+                catch (final IOException e) {
+                    LOG.error("Reading gzip encodec content failed.", e);
+                    stream.close();
+                    stream = IOUtils.toInputStream(
+                                "<html>\n"
+                                 + "<head><title>Problem loading page</title></head>\n"
+                                 + "<body>\n"
+                                 + "<h1>Content Encoding Error</h1>\n"
+                                 + "<p>The page you are trying to view cannot be shown because"
+                                 + " it uses an invalid or unsupported form of compression.</p>\n"
+                                 + "</body>\n"
+                                 + "</html>");
+                }
             }
             else if (StringUtils.contains(encoding, "deflate")) {
                 boolean zlibHeader = false;

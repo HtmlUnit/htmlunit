@@ -134,7 +134,8 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         conn.setResponse(URL_FIRST, content, 404, "OK", "text/html", headers);
 
         // only check that no exception is thrown
-        loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        assertTrue(driver.getPageSource().length() > 100);
     }
 
     /**
