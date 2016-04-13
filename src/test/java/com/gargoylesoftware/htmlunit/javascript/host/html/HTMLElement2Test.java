@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1148,7 +1147,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented({ FF, CHROME })
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

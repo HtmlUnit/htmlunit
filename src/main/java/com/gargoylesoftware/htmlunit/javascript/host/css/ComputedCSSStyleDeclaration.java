@@ -1419,6 +1419,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final int parentWidth = style.getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
+        else if ("fixed".equals(p) && !"auto".equals(r)) {
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
+            final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
+            left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
+        }
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
