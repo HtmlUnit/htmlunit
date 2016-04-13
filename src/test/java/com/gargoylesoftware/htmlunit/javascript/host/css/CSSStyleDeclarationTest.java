@@ -2095,4 +2095,30 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "green", "abc"},
+            FF = {"[object CSS2Properties]", "green", "abc"},
+            IE = {"[object MSStyleCSSProperties]", "", ""})
+    @NotYetImplemented
+    public void setStyle() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('mydiv');\n"
+            + "    div.style = 'color: green; font-family: abc';\n"
+            + "    alert(div.style);\n"
+            + "    alert(div.style.color);\n"
+            + "    alert(div.style.fontFamily);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='mydiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
