@@ -5251,7 +5251,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void css__percentage_properties_for_left_and_top_should_be_transformed_to_pixels__see__9505() throws Exception {
         runTest("css: percentage properties for left and top should be transformed to pixels, see #9505");
     }

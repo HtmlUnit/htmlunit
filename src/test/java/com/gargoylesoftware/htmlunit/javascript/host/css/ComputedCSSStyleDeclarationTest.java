@@ -1682,9 +1682,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"50%", "100px", "50%", "100px"},
-            IE = {"", "auto", "", "auto"})
-    @NotYetImplemented
+    @Alerts(DEFAULT = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"},
+            FF = {"", "0px", "", "0px", "50%", "100px", "50%", "100px"},
+            IE = {"", "auto", "", "auto", "", "auto", "", "auto"})
+    @NotYetImplemented(FF)
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -1698,6 +1699,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "   div.style = 'position: absolute; width: 20px; height: 20px; top: 50%; left: 50%';\n"
             + "   parent.appendChild(div);\n"
             + "\n"
+            + "   alert(parent.style.top);\n"
+            + "   alert(window.getComputedStyle(parent, null).top);\n"
+            + "   alert(parent.style.left);\n"
+            + "   alert(window.getComputedStyle(parent, null).left);\n"
             + "   alert(div.style.top);\n"
             + "   alert(window.getComputedStyle(div, null).top);\n"
             + "   alert(div.style.left);\n"
@@ -1709,4 +1714,5 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
 }

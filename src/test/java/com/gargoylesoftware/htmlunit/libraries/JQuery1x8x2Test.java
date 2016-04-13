@@ -3984,7 +3984,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void css__box_model_properties_incorrectly_returning___instead_of_px__see__10639_and__12088() throws Exception {
         runTest("css: box model properties incorrectly returning % instead of px, see #10639 and #12088");
     }
@@ -4048,7 +4047,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void css__percentage_properties_for_left_and_top_should_be_transformed_to_pixels__see__9505() throws Exception {
         runTest("css: percentage properties for left and top should be transformed to pixels, see #9505");
     }

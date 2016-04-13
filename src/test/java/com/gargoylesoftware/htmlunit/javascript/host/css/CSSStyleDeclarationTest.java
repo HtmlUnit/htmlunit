@@ -2102,7 +2102,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
             IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void setStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

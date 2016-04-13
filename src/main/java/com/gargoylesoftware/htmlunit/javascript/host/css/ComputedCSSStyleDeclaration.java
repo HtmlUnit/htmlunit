@@ -47,6 +47,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_VARIANT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_WEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LEFT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LETTER_SPACING;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LINE_HEIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE;
@@ -664,7 +665,21 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLeft() {
-        return defaultIfEmpty(super.getLeft(), "auto");
+        final String superLeft = super.getLeft();
+        if (!superLeft.endsWith("%")) {
+            return defaultIfEmpty(superLeft, "auto");
+        }
+
+        final Element elem = getElement();
+        return pixelString(elem, new CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(LEFT, true);
+                }
+                return style.getStyleAttribute(WIDTH, true);
+            }
+        });
     }
 
     /**
@@ -869,7 +884,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return "";
         }
-        return defaultIfEmpty(super.getTop(), TOP);
+        final String superTop = super.getTop();
+        if (!superTop.endsWith("%")) {
+            return defaultIfEmpty(superTop, TOP);
+        }
+
+        return pixelString(elem, new CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(TOP, true);
+                }
+                return style.getStyleAttribute(HEIGHT, true);
+            }
+        });
     }
 
     /**
