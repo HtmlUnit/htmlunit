@@ -5097,7 +5097,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }
@@ -5118,7 +5117,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
     public void css__show___resolves_correct_default_display__10227() throws Exception {
         runTest("css: show() resolves correct default display #10227");
     }
@@ -5129,7 +5127,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void css__show___resolves_correct_default_display_when_iframe_display_none__12904() throws Exception {
         runTest("css: show() resolves correct default display when iframe display:none #12904");
     }

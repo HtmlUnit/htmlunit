@@ -3893,7 +3893,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }

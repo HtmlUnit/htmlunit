@@ -1582,7 +1582,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         final CSSStyleDeclaration original = element.getStyle();
         final CSS2Properties style = new CSS2Properties(original);
 
-        final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
+        final StyleSheetList sheets = ((HTMLDocument) element.getOwnerDocument()).getStyleSheets();
         final boolean trace = LOG.isTraceEnabled();
         for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);

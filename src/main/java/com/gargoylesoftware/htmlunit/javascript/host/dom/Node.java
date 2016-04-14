@@ -602,10 +602,10 @@ public class Node extends EventTarget {
     @JsxGetter
     public Object getOwnerDocument() {
         final Object document = getDomNodeOrDie().getOwnerDocument();
-        if (document == null) {
-            return null;
+        if (document != null) {
+            return ((SgmlPage) document).getScriptableObject();
         }
-        return ((SgmlPage) document).getScriptableObject();
+        return null;
     }
 
     /**
