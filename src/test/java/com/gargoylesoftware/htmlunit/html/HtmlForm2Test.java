@@ -36,6 +36,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -336,18 +337,21 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "text/html, application/xhtml+xml, */*")
+    @NotYetImplemented
     public void acceptHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head></head><body>\n"
-            + "  <a href='test2'>Click Me</a>\n"
+            + "  <form action='test2'>\n"
+            + "    <input type=submit id='mySubmit'>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", HeadersServlet.class);
 
         final WebDriver driver = loadPage2(html, servlets);
-        driver.findElement(By.linkText("Click Me")).click();
+        driver.findElement(By.id("mySubmit")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 
