@@ -5268,7 +5268,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
     public void css__css__width___and_css__height___should_respect_box_sizing__see__11004() throws Exception {
         runTest("css: css('width') and css('height') should respect box-sizing, see #11004");
     }

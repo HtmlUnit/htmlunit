@@ -31,6 +31,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOX_SIZING;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CAPTION_SIDE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.COLOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CSS_FLOAT;
@@ -995,7 +996,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 && getElement().getDomNodeOrDie().isAttachedToPage()) {
             width -= 17;
         }
-        if (includePadding) {
+
+        if (includePadding && !"border-box".equals(getStyleAttribute(BOX_SIZING))) {
             width += getPaddingHorizontal();
         }
         return width;
@@ -1127,7 +1129,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 && getElement().getDomNodeOrDie().isAttachedToPage()) {
             height -= 17;
         }
-        if (includePadding) {
+
+        if (includePadding && !"border-box".equals(getStyleAttribute(BOX_SIZING))) {
             height += getPaddingVertical();
         }
         return height;
