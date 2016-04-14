@@ -1235,7 +1235,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         final ScriptResult r = page.executeJavaScriptIfPossible(url.toExternalForm(), "JavaScript URL", 1);
-        if ((r != null && r.getJavaScriptResult() == null) || ScriptResult.isUndefined(r)) {
+        if ((r.getJavaScriptResult() == null) || ScriptResult.isUndefined(r)) {
             // No new WebResponse to produce.
             return webWindow.getEnclosedPage().getWebResponse();
         }

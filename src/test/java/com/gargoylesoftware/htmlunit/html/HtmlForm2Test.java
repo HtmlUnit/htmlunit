@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -40,7 +42,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
 /**
  * Tests for {@link HtmlForm}, with BrowserRunner.
  *
@@ -337,7 +338,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "text/html, application/xhtml+xml, */*")
-    @NotYetImplemented
     public void acceptHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -348,7 +348,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/test2", HeadersServlet.class);
+        servlets.put("/test2", AcceptHeaderServlet.class);
 
         final WebDriver driver = loadPage2(html, servlets);
         driver.findElement(By.id("mySubmit")).click();
@@ -358,7 +358,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     /**
      * Servlet for {@link #acceptHeader()}.
      */
-    public static class HeadersServlet extends HttpServlet {
+    public static class AcceptHeaderServlet extends HttpServlet {
 
         /**
          * {@inheritDoc}
@@ -372,6 +372,54 @@ public class HtmlForm2Test extends WebDriverTestCase {
             final String html = "<html><head><script>\n"
                     + "function test() {\n"
                     + "  alert('" + request.getHeader("Accept") + "');\n"
+                    + "}\n"
+                    + "</script></head><body onload='test()'></body></html>";
+            
+            writer.write(getModifiedContent(html));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "gzip, deflate",
+            CHROME = "gzip, deflate, sdch")
+    @NotYetImplemented(CHROME)
+    public void acceptEncodingHeader() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head></head><body>\n"
+            + "  <form action='test2'>\n"
+            + "    <input type=submit id='mySubmit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", AcceptEncodingHeaderServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        driver.findElement(By.id("mySubmit")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Servlet for {@link #acceptEncodingHeader()}.
+     */
+    public static class AcceptEncodingHeaderServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            final String html = "<html><head><script>\n"
+                    + "function test() {\n"
+                    + "  alert('" + request.getHeader("Accept-Encoding") + "');\n"
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
             

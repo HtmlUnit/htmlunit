@@ -545,8 +545,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
-     * if requesting a page.
+     * Returns the value used by the browser for the {@code Accept} header if requesting a page.
      * @return the accept header string
      */
     public String getHtmlAcceptHeader() {
@@ -554,7 +553,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
+     * Returns the value used by the browser for the {@code Accept} header
      * if requesting an script.
      * @return the accept header string
      */
@@ -563,7 +562,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
+     * Returns the value used by the browser for the {@code Accept} header
      * if performing an XMLHttpRequest.
      * @return the accept header string
      */
@@ -572,7 +571,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
+     * Returns the value used by the browser for the {@code Accept} header
      * if requesting an image.
      * @return the accept header string
      */
@@ -581,8 +580,8 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
-     * if requesting a css declaration.
+     * Returns the value used by the browser for the {@code Accept} header
+     * if requesting a CSS declaration.
      * @return the accept header string
      */
     public String getCssAcceptHeader() {
@@ -681,35 +680,35 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * @param htmlAcceptHeader the accept header to be used when retrieving pages
+     * @param htmlAcceptHeader the {@code Accept} header to be used when retrieving pages
      */
     public void setHtmlAcceptHeader(final String htmlAcceptHeader) {
         htmlAcceptHeader_ = htmlAcceptHeader;
     }
 
     /**
-     * @param imgAcceptHeader the accept header to be used when retrieving images
+     * @param imgAcceptHeader the {@code Accept} header to be used when retrieving images
      */
     public void setImgAcceptHeader(final String imgAcceptHeader) {
         imgAcceptHeader_ = imgAcceptHeader;
     }
 
     /**
-     * @param cssAcceptHeader the accept header to be used when retrieving pages
+     * @param cssAcceptHeader the {@code Accept} header to be used when retrieving pages
      */
     public void setCssAcceptHeader(final String cssAcceptHeader) {
         cssAcceptHeader_ = cssAcceptHeader;
     }
 
     /**
-     * @param scriptAcceptHeader the accept header to be used when retrieving scripts
+     * @param scriptAcceptHeader the {@code Accept} header to be used when retrieving scripts
      */
     public void setScriptAcceptHeader(final String scriptAcceptHeader) {
         scriptAcceptHeader_ = scriptAcceptHeader;
     }
 
     /**
-     * @param xmlHttpRequestAcceptHeader the accept header to be used when
+     * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
      * performing XMLHttpRequests
      */
     public void setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
