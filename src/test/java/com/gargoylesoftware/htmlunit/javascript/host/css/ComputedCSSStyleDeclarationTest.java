@@ -1715,4 +1715,30 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("inline")
+    @NotYetImplemented
+    public void elementDocument() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + "  tt { display: none; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var iframe = document.createElement('iframe');\n"
+            + "    document.body.appendChild(iframe);\n"
+            + "\n"
+            + "    var doc = iframe.contentWindow.document;\n"
+            + "    var tt = doc.createElement('tt');\n"
+            + "    doc.body.appendChild(tt);\n"
+            + "    alert(window.getComputedStyle(tt, null).display);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
 }

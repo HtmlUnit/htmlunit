@@ -1228,7 +1228,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 34, 34")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, IE })
     public void support__Verify_that_the_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that the support tests resolve as expected per browser");
     }

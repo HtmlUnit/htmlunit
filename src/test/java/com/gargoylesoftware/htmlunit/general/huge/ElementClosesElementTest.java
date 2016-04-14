@@ -55425,7 +55425,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented(CHROME)
     public void _isindex_plaintext() throws Exception {
         test("isindex", "plaintext");
     }

@@ -5451,7 +5451,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
+            FF = "true")
     public void _DOMMatrixReadOnly_DOMMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly", "DOMMatrixReadOnly");
     }
@@ -6343,7 +6343,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _EventTarget_MediaStream() throws Exception {
         test("EventTarget", "MediaStream");
     }
