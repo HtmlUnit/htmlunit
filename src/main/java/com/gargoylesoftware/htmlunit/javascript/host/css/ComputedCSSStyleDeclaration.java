@@ -124,6 +124,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -1008,26 +1011,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return width_.intValue();
         }
 
-        final DomNode node = getElement().getDomNodeOrDie();
+        final Element element = getElement();
+        final DomNode node = element.getDomNodeOrDie();
         if (!node.mayBeDisplayed()) {
             width_ = Integer.valueOf(0);
             return 0;
         }
 
         final String display = getDisplay();
-        if ("none".equals(display) || "inline".equals(display)) {
+        if ("none".equals(display) || ("inline".equals(display) && !(element instanceof HTMLIFrameElement)
+                && !(element instanceof HTMLInputElement) && !(element instanceof HTMLTextAreaElement))) {
             width_ = Integer.valueOf(0);
             return 0;
         }
 
-        final int windowWidth = getElement().getWindow().getWebWindow().getInnerWidth();
+        final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
 
         final int width;
         final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
-            if (getElement() instanceof HTMLCanvasElement) {
+            if (element instanceof HTMLCanvasElement) {
                 return 300;
             }
 
@@ -1071,7 +1076,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(getElement(), new CssValue(0, windowWidth) {
+            width = pixelValue(element, new CssValue(0, windowWidth) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
                     return style.getStyleAttribute(WIDTH, true);
                 }

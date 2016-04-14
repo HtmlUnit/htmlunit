@@ -349,8 +349,8 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * _parent is a magic name. If we call open(url, '_parent') then the
-     * parent window must be reloaded.
+     * {@code _parent} is a magic name. If we call open(url, '_parent') then the parent window must be reloaded.
+     *
      * @throws Exception if the test fails
      */
     @Test
