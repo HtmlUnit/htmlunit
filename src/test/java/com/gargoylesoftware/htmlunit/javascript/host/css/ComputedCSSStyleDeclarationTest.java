@@ -1788,4 +1788,24 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("10")
+    public void offsetWidthWithDisplayInline() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
+            + "    document.body.appendChild(div);\n"
+            + "    div.style.cssText = 'display: inline; margin:0; border: 0; padding: 5px; width: 7px';\n"
+            + "    alert(div.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>\n";
+        loadPageWithAlerts2(html);
+    }
 }

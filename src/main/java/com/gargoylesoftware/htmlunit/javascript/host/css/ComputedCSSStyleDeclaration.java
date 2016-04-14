@@ -1015,7 +1015,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final String display = getDisplay();
-        if ("none".equals(display)) {
+        if ("none".equals(display) || "inline".equals(display)) {
             width_ = Integer.valueOf(0);
             return 0;
         }

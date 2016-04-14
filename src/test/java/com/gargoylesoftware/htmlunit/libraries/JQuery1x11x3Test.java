@@ -1228,7 +1228,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 34, 34")
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(IE)
     public void support__Verify_that_the_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that the support tests resolve as expected per browser");
     }
@@ -5278,7 +5278,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void css__css__width___should_work_correctly_before_document_ready___14084_() throws Exception {
         runTest("css: css('width') should work correctly before document ready (#14084)");
     }
