@@ -374,7 +374,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     + "  alert('" + request.getHeader("Accept") + "');\n"
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
-            
+
             writer.write(getModifiedContent(html));
         }
     }
@@ -422,7 +422,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     + "  alert('" + request.getHeader("Accept-Encoding") + "');\n"
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
-            
+
             writer.write(getModifiedContent(html));
         }
     }
