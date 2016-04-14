@@ -1808,4 +1808,59 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "100",
+            IE = "true")
+    @NotYetImplemented(IE)
+    public void borderBoxAffectsOffsetWidth2() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var divNormal = document.createElement('div');\n"
+            + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
+            + " padding: 2px; margin: 3px';\n"
+            + "    document.body.appendChild(divNormal);\n"
+            + "\n"
+            + "   if (window.navigator.userAgent.indexOf('Trident/') == -1) {\n"
+            + "     alert(divNormal.offsetWidth);\n"
+            + "   } else {\n"
+            + "     alert(divNormal.offsetWidth == window.innerWidth - 16);\n"
+            + "   }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>\n";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "100",
+            IE = "0")
+    public void borderBoxAffectsOffsetHeight2() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var divNormal = document.createElement('div');\n"
+            + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
+            + " padding: 2px; margin: 3px';\n"
+            + "    document.body.appendChild(divNormal);\n"
+            + "\n"
+            + "   if (window.navigator.userAgent.indexOf('Trident/') == -1) {\n"
+            + "     alert(divNormal.offsetHeight);\n"
+            + "   } else {\n"
+            + "     alert(divNormal.offsetHeight);\n"
+            + "   }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>\n";
+        loadPageWithAlerts2(html);
+    }
 }

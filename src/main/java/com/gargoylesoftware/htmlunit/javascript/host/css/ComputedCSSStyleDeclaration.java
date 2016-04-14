@@ -992,16 +992,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
         int width = getCalculatedWidth();
-        if (includeBorder) {
-            width += getBorderHorizontal();
-        }
-        else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)
-                && getElement().getDomNodeOrDie().isAttachedToPage()) {
-            width -= 17;
-        }
+        if (!"border-box".equals(getStyleAttribute(BOX_SIZING))) {
+            if (includeBorder) {
+                width += getBorderHorizontal();
+            }
+            else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)
+                    && getElement().getDomNodeOrDie().isAttachedToPage()) {
+                width -= 17;
+            }
 
-        if (includePadding && !"border-box".equals(getStyleAttribute(BOX_SIZING))) {
-            width += getPaddingHorizontal();
+            if (includePadding) {
+                width += getPaddingHorizontal();
+            }
         }
         return width;
     }
@@ -1127,16 +1129,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
         int height = getCalculatedHeight();
-        if (includeBorder) {
-            height += getBorderVertical();
-        }
-        else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)
-                && getElement().getDomNodeOrDie().isAttachedToPage()) {
-            height -= 17;
-        }
+        if (!"border-box".equals(getStyleAttribute(BOX_SIZING))) {
+            if (includeBorder) {
+                height += getBorderVertical();
+            }
+            else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)
+                    && getElement().getDomNodeOrDie().isAttachedToPage()) {
+                height -= 17;
+            }
 
-        if (includePadding && !"border-box".equals(getStyleAttribute(BOX_SIZING))) {
-            height += getPaddingVertical();
+            if (includePadding) {
+                height += getPaddingVertical();
+            }
         }
         return height;
     }

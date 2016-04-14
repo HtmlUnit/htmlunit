@@ -8047,7 +8047,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 16, 16")
-    @NotYetImplemented
     public void dimensions__box_sizing_border_box_child_of_a_hidden_elem__or_unconnected_node__has_accurate_inner_outer_Width___Height___see__10413() throws Exception {
         runTest("dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413");
     }
