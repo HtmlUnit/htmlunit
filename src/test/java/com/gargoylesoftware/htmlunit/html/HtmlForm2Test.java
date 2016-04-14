@@ -14,8 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -317,5 +327,51 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(1, requestedParams.size());
         assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
         assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            IE = "text/html, application/xhtml+xml, */*")
+    public void acceptHeader() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head></head><body>\n"
+            + "  <a href='test2'>Click Me</a>\n"
+            + "</body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", HeadersServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        driver.findElement(By.linkText("Click Me")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Servlet for {@link #acceptHeader()}.
+     */
+    public static class HeadersServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            final String html = "<html><head><script>\n"
+                    + "function test() {\n"
+                    + "  alert('" + request.getHeader("Accept") + "');\n"
+                    + "}\n"
+                    + "</script></head><body onload='test()'></body></html>";
+            
+            writer.write(getModifiedContent(html));
+        }
     }
 }
