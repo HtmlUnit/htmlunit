@@ -6386,8 +6386,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    FF38 = "false",
-    IE = "false")
+            FF38 = "false",
+            IE = "false")
     public void _EventTarget_SourceBufferList() throws Exception {
         test("EventTarget", "SourceBufferList");
     }
