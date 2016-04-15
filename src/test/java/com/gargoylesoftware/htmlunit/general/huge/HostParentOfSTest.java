@@ -2679,8 +2679,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _SourceBufferList_SourceBufferList() throws Exception {
         test("SourceBufferList", "SourceBufferList");
     }
@@ -2689,8 +2690,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _SourceBuffer_SourceBuffer() throws Exception {
         test("SourceBuffer", "SourceBuffer");
     }

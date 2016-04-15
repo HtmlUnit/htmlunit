@@ -250,10 +250,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     EVENT_TYPE_PROGRESSEVENT,
 
-    /** Supports event type 'XMLHttpRequestProgressEvent'. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT,
-
     /** For new pages the focus points to the body node. */
     @BrowserFeature(@WebBrowser(IE))
     FOCUS_BODY_ELEMENT_AT_START,

@@ -5861,10 +5861,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF = "function",
-            IE = "object")
+    @Alerts(DEFAULT = "function",
+            IE = "object",
+            CHROME = "undefined")
     public void domSettableTokenList() throws Exception {
         test("DOMSettableTokenList");
     }
@@ -6533,19 +6532,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void xMLHttpRequestProgressEvent() throws Exception {
-        test("XMLHttpRequestProgressEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    public void xMLHttpRequestUpload() throws Exception {
+    public void xmlHttpRequestUpload() throws Exception {
         test("XMLHttpRequestUpload");
     }
 
@@ -7184,8 +7173,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+    @Alerts(DEFAULT = "function",
+            FF38 = "undefined",
+            IE = "undefined")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }
@@ -7470,8 +7460,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+    @Alerts(DEFAULT = "function",
+            FF38 = "undefined",
+            IE = "undefined")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }

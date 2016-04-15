@@ -8407,9 +8407,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function DOMSettableTokenList() { [native code] }",
-            FF = "function DOMSettableTokenList() {\n    [native code]\n}",
-            IE = "[object DOMSettableTokenList]")
+    @Alerts(DEFAULT = "function DOMSettableTokenList() {\n    [native code]\n}",
+            IE = "[object DOMSettableTokenList]",
+            CHROME = "exception")
     public void domSettableTokenList() throws Exception {
         test("DOMSettableTokenList");
     }
@@ -9122,9 +9122,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function XMLHttpRequestProgressEvent() { [native code] }")
-    public void xMLHttpRequestProgressEvent() throws Exception {
+    @Alerts("exception")
+    public void xmlHttpRequestProgressEvent() throws Exception {
         test("XMLHttpRequestProgressEvent");
     }
 
@@ -9885,7 +9884,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function SourceBufferList() {\n    [native code]\n}")
+            FF45 = "function SourceBufferList() {\n    [native code]\n}",
+            CHROME = "function SourceBufferList() { [native code] }")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }
@@ -10180,7 +10180,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function SourceBuffer() {\n    [native code]\n}")
+            FF45 = "function SourceBuffer() {\n    [native code]\n}",
+            CHROME = "function SourceBuffer() { [native code] }")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }

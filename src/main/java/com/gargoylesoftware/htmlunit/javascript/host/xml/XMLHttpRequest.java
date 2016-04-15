@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
@@ -23,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITH
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -66,7 +66,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -194,7 +193,6 @@ public class XMLHttpRequest extends EventTarget {
     private void setState(final int state, Context context) {
         state_ = state;
 
-        final BrowserVersion browser = getBrowserVersion();
         if (stateChangeHandler_ != null && (async_ || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
@@ -210,48 +208,6 @@ public class XMLHttpRequest extends EventTarget {
                 }
                 LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
                 LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
-            }
-        }
-
-        if (state == DONE) {
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-
-            final XMLHttpRequestProgressEvent event = new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD);
-            final Object[] params = new Event[] {event};
-            if (!browser.hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
-                event.setLengthComputable(true);
-            }
-
-            if (webResponse_ != null) {
-                final long contentLength = webResponse_.getContentLength();
-                event.setLoaded(contentLength);
-                if (!browser.hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
-                    event.setTotal(contentLength);
-                }
-            }
-
-            if (loadHandler_ != null) {
-                jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
-            }
-
-            List<Scriptable> handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, false);
-            if (handlers != null) {
-                for (final Scriptable scriptable : handlers) {
-                    if (scriptable instanceof Function) {
-                        final Function function = (Function) scriptable;
-                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
-                    }
-                }
-            }
-
-            handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, true);
-            if (handlers != null) {
-                for (final Scriptable scriptable : handlers) {
-                    if (scriptable instanceof Function) {
-                        final Function function = (Function) scriptable;
-                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
-                    }
-                }
             }
         }
     }
@@ -298,18 +254,11 @@ public class XMLHttpRequest extends EventTarget {
      *                if {@code null}, the current thread's context is used.
      */
     private void processError(Context context) {
-        final BrowserVersion browser = getBrowserVersion();
         if (errorHandler_ != null) {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
-            final Object[] params;
-            if (browser.hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
-                params = new Event[] {new XMLHttpRequestProgressEvent(this, Event.TYPE_ERROR)};
-            }
-            else {
-                params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
-            }
+            final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
@@ -353,7 +302,7 @@ public class XMLHttpRequest extends EventTarget {
         if (webResponse_ != null) {
             final String encoding = webResponse_.getContentCharset();
             String defaultEncoding = null;
-            if (getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT)) {
+            if (getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
                 defaultEncoding = ((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset();
             }
             if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {
@@ -551,13 +500,11 @@ public class XMLHttpRequest extends EventTarget {
             }
 
             // password is ignored if no user defined
-            final boolean userIsNull = null == user || Undefined.instance == user;
-            if (!userIsNull) {
+            if (user != null && user != Undefined.instance) {
                 final String userCred = user.toString();
 
-                final boolean passwordIsNull = null == password || Undefined.instance == password;
                 String passwordCred = "";
-                if (!passwordIsNull) {
+                if (password != null && password != Undefined.instance) {
                     passwordCred = password.toString();
                 }
 
@@ -711,8 +658,7 @@ public class XMLHttpRequest extends EventTarget {
 
                 // header request-headers
                 final StringBuilder builder = new StringBuilder();
-                final boolean acceptContentType
-                    = getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT);
+                final boolean acceptContentType = getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
                 for (final Entry<String, String> header
                         : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
                     final String name = header.getKey().toLowerCase(Locale.ROOT);
@@ -825,7 +771,7 @@ public class XMLHttpRequest extends EventTarget {
         if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
             return true;
         }
-        final boolean acceptContentType = getBrowserVersion().hasFeature(EVENT_TYPE_XMLHTTPREQUESTPROGRESSEVENT);
+        final boolean acceptContentType = getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT),
                     header.getValue(), acceptContentType)) {

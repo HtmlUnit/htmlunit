@@ -735,16 +735,6 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _XMLHttpRequestProgressEvent_XMLHttpRequestProgressEvent() throws Exception {
-        test("XMLHttpRequestProgressEvent", "XMLHttpRequestProgressEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _XMLHttpRequestUpload_XMLHttpRequestUpload() throws Exception {

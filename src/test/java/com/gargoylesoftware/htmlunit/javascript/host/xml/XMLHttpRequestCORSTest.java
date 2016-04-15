@@ -51,7 +51,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"error [object ProgressEvent]", "error", "false", "0" /* "0" */},
-            CHROME = {"error [object XMLHttpRequestProgressEvent]", "error", "false", "0" /* "0" */},
             IE = {"error [object ProgressEvent]", "error", "true", "0" /* "4479" */})
     @NotYetImplemented(IE)
     public void noCorsHeaderCallsErrorHandler() throws Exception {

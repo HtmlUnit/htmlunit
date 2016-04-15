@@ -5550,7 +5550,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
     public void _DOMSettableTokenList_DOMSettableTokenList() throws Exception {
         test("DOMSettableTokenList", "DOMSettableTokenList");
     }
@@ -5559,7 +5560,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+        CHROME = "false")
     public void _DOMTokenList_DOMSettableTokenList() throws Exception {
         test("DOMTokenList", "DOMSettableTokenList");
     }
@@ -5811,16 +5813,6 @@ public class HostParentOfATest extends HostParentOf {
             IE = "true")
     public void _Event_WebGLContextEvent() throws Exception {
         test("Event", "WebGLContextEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Event_XMLHttpRequestProgressEvent() throws Exception {
-        test("Event", "XMLHttpRequestProgressEvent");
     }
 
     /**
@@ -6372,8 +6364,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _EventTarget_SourceBuffer() throws Exception {
         test("EventTarget", "SourceBuffer");
     }
@@ -6382,8 +6375,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+    FF38 = "false",
+    IE = "false")
     public void _EventTarget_SourceBufferList() throws Exception {
         test("EventTarget", "SourceBufferList");
     }
