@@ -1371,8 +1371,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object ProgressEvent]",
-            CHROME = "[object XMLHttpRequestProgressEvent]")
+    @Alerts("[object ProgressEvent]")
     public void loadParameter() throws Exception {
         final String html =
               "<html>\n"
@@ -1406,7 +1405,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "true"},
-            CHROME = {"someLoad [object XMLHttpRequestProgressEvent]", "load", "false"})
+            CHROME = {"someLoad [object ProgressEvent]", "load", "false"})
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
@@ -1442,7 +1441,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"},
-            CHROME = {"someLoad [object XMLHttpRequestProgressEvent]", "load", "false", "11", "0"})
+            CHROME = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"})
     public void addEventListenerDetails() throws Exception {
         final String html =
               "<html>\n"

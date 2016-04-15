@@ -193,6 +193,7 @@ public class XMLHttpRequest extends EventTarget {
     private void setState(final int state, Context context) {
         state_ = state;
 
+        final BrowserVersion browser = getBrowserVersion();
         if (stateChangeHandler_ != null && (async_ || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
@@ -208,6 +209,48 @@ public class XMLHttpRequest extends EventTarget {
                 }
                 LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
                 LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
+            }
+        }
+
+        if (state == DONE) {
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+
+            final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
+            final Object[] params = new Event[] {event};
+            if (!browser.hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+                event.setLengthComputable(true);
+            }
+
+            if (webResponse_ != null) {
+                final long contentLength = webResponse_.getContentLength();
+                event.setLoaded(contentLength);
+                if (!browser.hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+                    event.setTotal(contentLength);
+                }
+            }
+
+            if (loadHandler_ != null) {
+                jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
+            }
+
+            List<Scriptable> handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, false);
+            if (handlers != null) {
+                for (final Scriptable scriptable : handlers) {
+                    if (scriptable instanceof Function) {
+                        final Function function = (Function) scriptable;
+                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
+                    }
+                }
+            }
+
+            handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, true);
+            if (handlers != null) {
+                for (final Scriptable scriptable : handlers) {
+                    if (scriptable instanceof Function) {
+                        final Function function = (Function) scriptable;
+                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
+                    }
+                }
             }
         }
     }
@@ -644,8 +687,7 @@ public class XMLHttpRequest extends EventTarget {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN);
-            final boolean crossOriginResourceSharing = originHeaderValue != null;
-            if (crossOriginResourceSharing && isPreflight()) {
+            if (originHeaderValue != null && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
@@ -690,7 +732,7 @@ public class XMLHttpRequest extends EventTarget {
                 LOG.debug("Web response loaded successfully.");
             }
             boolean allowOriginResponse = true;
-            if (crossOriginResourceSharing) {
+            if (originHeaderValue != null) {
                 String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
                 if (getWithCredentials()) {

@@ -1863,4 +1863,28 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "0", "16"},
+            CHROME = {"8px", "0", "16"})
+    @NotYetImplemented
+    public void bodyOffsetWidth() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var win = window.innerWidth;\n"
+            + "    var html = document.documentElement.offsetWidth;\n"
+            + "    var body = document.body.offsetWidth;\n"
+            + "    alert(window.getComputedStyle(document.body, null).margin);\n"
+            + "    alert(win - html);\n"
+            + "    alert(win - body);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
