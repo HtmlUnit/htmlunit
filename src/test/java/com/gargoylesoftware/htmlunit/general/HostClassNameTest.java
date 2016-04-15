@@ -10345,4 +10345,14 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("PromiseRejectionEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationConnectionCloseEvent() { [native code] }")
+    public void presentationConnectionCloseEvent() throws Exception {
+        test("PresentationConnectionCloseEvent");
+    }
+
 }

@@ -234,6 +234,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PageTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PresentationConnectionAvailableEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PresentationConnectionCloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PromiseRejectionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.RTCDataChannelEvent;
@@ -496,7 +497,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PeriodicWave.class, Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
         PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
-        PresentationRequest.class,
+        PresentationConnectionCloseEvent.class, PresentationRequest.class,
         ProcessingInstruction.class, ProgressEvent.class, Promise.class, PromiseRejectionEvent.class,
         Proxy.class, PushManager.class,
         PushSubscription.class, RadioNodeList.class, Range.class, ReadableByteStream.class, ReadableStream.class,

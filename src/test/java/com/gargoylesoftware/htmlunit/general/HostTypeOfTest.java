@@ -7120,6 +7120,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
+    public void presentationConnectionCloseEvent() throws Exception {
+        test("PresentationConnectionCloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void presentationRequest() throws Exception {
         test("PresentationRequest");
     }

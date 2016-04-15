@@ -3472,6 +3472,16 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PresentationConnectionCloseEvent_PresentationConnectionCloseEvent() throws Exception {
+        test("PresentationConnectionCloseEvent", "PresentationConnectionCloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             FF38 = "false",
             IE = "false")

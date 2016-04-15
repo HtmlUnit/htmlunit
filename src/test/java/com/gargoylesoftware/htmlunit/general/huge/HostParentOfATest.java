@@ -6286,6 +6286,16 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    public void _Event_PresentationConnectionCloseEvent() throws Exception {
+        test("Event", "PresentationConnectionCloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _AudioNode_IIRFilterNode() throws Exception {
         test("AudioNode", "IIRFilterNode");
     }
