@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Andrea Martino
  */
-public class WebConsole {
+public class WebConsole implements Serializable {
 
     /**
      * A simple logging interface abstracting logging APIs.
@@ -332,7 +333,7 @@ public class WebConsole {
     /**
      * This class is the default formatter used by WebConsole.
      */
-    private static class DefaultFormatter implements Formatter {
+    private static class DefaultFormatter implements Formatter, Serializable {
 
         @Override
         public String printObject(final Object o) {
@@ -383,7 +384,7 @@ public class WebConsole {
     /**
      * This class is the default logger used by WebConsole.
      */
-    private static class DefaultLogger implements Logger {
+    private static class DefaultLogger implements Logger, Serializable {
         /** Logging support. */
         private static final Log LOG = LogFactory.getLog(WebConsole.class);
 
