@@ -1895,6 +1895,101 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         setLength("border-right-width", "borderRightWidth");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMaxWidthProperty() throws Exception {
+        setLengthProperty("max-width", "maxWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMaxWidth() throws Exception {
+        setLength("max-width", "maxWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMinWidthProperty() throws Exception {
+        setLengthProperty("min-width", "minWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMinWidth() throws Exception {
+        setLength("min-width", "minWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMaxHeightProperty() throws Exception {
+        setLengthProperty("max-height", "maxHeight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMaxHeight() throws Exception {
+        setLength("max-height", "maxHeight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMinHeightProperty() throws Exception {
+        setLengthProperty("min-height", "minHeight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMinHeight() throws Exception {
+        setLength("min-height", "minHeight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setTextIndentProperty() throws Exception {
+        setLengthProperty("text-indent", "textIndent");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setTextIndent() throws Exception {
+        setLength("text-indent", "textIndent");
+    }
+
     private void setLengthProperty(final String cssProp, final String prop) throws Exception {
         final String[] expected = getExpectedAlerts();
         setLengthProperty(cssProp, prop, "'4px', ''", expected[0]);

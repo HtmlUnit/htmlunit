@@ -196,7 +196,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             BORDER_TOP_WIDTH.getAttributeName(),
             BORDER_LEFT_WIDTH.getAttributeName(),
             BORDER_BOTTOM_WIDTH.getAttributeName(),
-            BORDER_RIGHT_WIDTH.getAttributeName()));
+            BORDER_RIGHT_WIDTH.getAttributeName(),
+            MAX_WIDTH.getAttributeName(),
+            MIN_WIDTH.getAttributeName(),
+            MAX_HEIGHT.getAttributeName(),
+            MIN_HEIGHT.getAttributeName(),
+            TEXT_INDENT.getAttributeName()));
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
@@ -1632,7 +1637,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMaxHeight(final String maxHeight) {
-        setStyleAttributePixel(MAX_HEIGHT, maxHeight);
+        setStyleLengthAttribute(MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true);
     }
 
     /**
@@ -1650,7 +1655,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMaxWidth(final String maxWidth) {
-        setStyleAttributePixel(MAX_WIDTH, maxWidth);
+        setStyleLengthAttribute(MAX_WIDTH.getAttributeName(), maxWidth, "", false, true);
     }
 
     /**
@@ -1668,7 +1673,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMinHeight(final String minHeight) {
-        setStyleAttributePixel(MIN_HEIGHT, minHeight);
+        setStyleLengthAttribute(MIN_HEIGHT.getAttributeName(), minHeight, "", true, true);
     }
 
     /**
@@ -1686,7 +1691,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMinWidth(final String minWidth) {
-        setStyleAttributePixel(MIN_WIDTH, minWidth);
+        setStyleLengthAttribute(MIN_WIDTH.getAttributeName(), minWidth, "", true, true);
     }
 
     /**
@@ -2402,7 +2407,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setTextIndent(final String textIndent) {
-        setStyleAttributePixel(TEXT_INDENT, textIndent);
+        setStyleLengthAttribute(TEXT_INDENT.getAttributeName(), textIndent, "", false, true);
     }
 
     /**
