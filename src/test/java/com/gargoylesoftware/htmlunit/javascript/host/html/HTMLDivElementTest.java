@@ -139,11 +139,11 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<div id='d1'></div>\n"
             + "<script>\n"
-            + "var d = document.getElementById('d1');\n"
-            + "alert(d.onchange);\n"
-            + "alert('onchange' in d);\n"
-            + "alert(d.onsubmit);\n"
-            + "alert('onsubmit' in d);\n"
+            + "  var d = document.getElementById('d1');\n"
+            + "  alert(d.onchange);\n"
+            + "  alert('onchange' in d);\n"
+            + "  alert(d.onsubmit);\n"
+            + "  alert('onsubmit' in d);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -153,7 +153,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"false", "true", "false", "true", "true", "false"})
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void clientHeight() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -162,22 +162,22 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      var elt = document.getElementById('emptyDiv');\n"
-            + "      alert(elt.clientHeight > 0);\n"
+            + "      alert(elt.clientHeight == 0);\n"
 
             + "      elt = document.getElementById('textDiv');\n"
-            + "      alert(elt.clientHeight > 0);\n"
+            + "      alert(elt.clientHeight > 15);\n"
 
             + "      elt = document.getElementById('styleDiv0');\n"
-            + "      alert(elt.clientHeight > 0);\n"
+            + "      alert(elt.clientHeight == 0);\n"
 
             + "      elt = document.getElementById('styleDiv10');\n"
-            + "      alert(elt.clientHeight > 0);\n"
+            + "      alert(elt.clientHeight > 5);\n"
 
             + "      elt = document.getElementById('styleDivAuto');\n"
-            + "      alert(elt.clientHeight > 0);\n"
+            + "      alert(elt.clientHeight > 15);\n"
 
             + "      elt = document.getElementById('styleDivAutoEmpty');\n"
-            + "      alert(elt.clientHeight > 0);\n"
+            + "      alert(elt.clientHeight == 0);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -197,7 +197,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "false", "true", "true", "true"})
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void clientWidth() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -206,22 +206,22 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      var elt = document.getElementById('emptyDiv');\n"
-            + "      alert(elt.clientWidth > 0);\n"
+            + "      alert(elt.clientWidth > 500);\n"
 
             + "      elt = document.getElementById('textDiv');\n"
-            + "      alert(elt.clientWidth > 0);\n"
+            + "      alert(elt.clientWidth > 500);\n"
 
             + "      elt = document.getElementById('styleDiv0');\n"
-            + "      alert(elt.clientWidth > 0);\n"
+            + "      alert(elt.clientWidth == 0);\n"
 
             + "      elt = document.getElementById('styleDiv10');\n"
-            + "      alert(elt.clientWidth > 0);\n"
+            + "      alert(elt.clientWidth > 8);\n"
 
             + "      elt = document.getElementById('styleDivAuto');\n"
-            + "      alert(elt.clientWidth > 0);\n"
+            + "      alert(elt.clientWidth > 500);\n"
 
             + "      elt = document.getElementById('styleDivAutoEmpty');\n"
-            + "      alert(elt.clientWidth > 0);\n"
+            + "      alert(elt.clientWidth > 500);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -232,6 +232,50 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             + "  <div id='styleDiv10' style='width: 10px'>HtmlUnit</div>\n"
             + "  <div id='styleDivAuto' style='width: auto'>HtmlUnit</div>\n"
             + "  <div id='styleDivAutoEmpty' style='width: auto'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true", "true"})
+    public void clientWidthNested() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var elt = document.getElementById('emptyDiv');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('textDiv');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('styleDiv0');\n"
+            + "      alert(elt.clientWidth == 0);\n"
+
+            + "      elt = document.getElementById('styleDiv10');\n"
+            + "      alert(elt.clientWidth > 8);\n"
+
+            + "      elt = document.getElementById('styleDivAuto');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('styleDivAutoEmpty');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='emptyDiv'><div></div></div>\n"
+            + "  <div id='textDiv'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDiv0' style='width: 0px'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDiv10' style='width: 10px'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDivAuto' style='width: auto'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDivAutoEmpty' style='width: auto'><div></div></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

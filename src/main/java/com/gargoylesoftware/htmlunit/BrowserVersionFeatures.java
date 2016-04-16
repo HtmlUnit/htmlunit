@@ -99,6 +99,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     CSS_KEYGEN_DISPLAY_INLINE_JS,
 
+    /** 'initial' is a valid length value. */
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
+    CSS_LENGTH_INITIAL,
+
     /** Is display style of HtmlNoEmbed is 'inline'. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOEMBED_INLINE,

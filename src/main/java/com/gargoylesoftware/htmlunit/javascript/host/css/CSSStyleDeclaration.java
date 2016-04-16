@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
@@ -102,12 +103,15 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -173,6 +177,26 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         Pattern.compile("(left|right|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
     private static final Pattern POSITION_PATTERN3 =
         Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
+
+    private static final Set<String> LENGTH_PROPERTIES = new HashSet<String>(Arrays.asList(
+            HEIGHT.getAttributeName(),
+            WIDTH.getAttributeName(),
+            TOP.getAttributeName(),
+            LEFT.getAttributeName(),
+            BOTTOM.getAttributeName(),
+            RIGHT.getAttributeName(),
+            MARGIN_TOP.getAttributeName(),
+            MARGIN_LEFT.getAttributeName(),
+            MARGIN_BOTTOM.getAttributeName(),
+            MARGIN_RIGHT.getAttributeName(),
+            PADDING_TOP.getAttributeName(),
+            PADDING_LEFT.getAttributeName(),
+            PADDING_BOTTOM.getAttributeName(),
+            PADDING_RIGHT.getAttributeName(),
+            BORDER_TOP_WIDTH.getAttributeName(),
+            BORDER_LEFT_WIDTH.getAttributeName(),
+            BORDER_BOTTOM_WIDTH.getAttributeName(),
+            BORDER_RIGHT_WIDTH.getAttributeName()));
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
@@ -961,9 +985,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderBottomWidth(final String borderBottomWidth) {
-        if (!borderBottomWidth.endsWith("%")) {
-            setStyleAttributePixel(BORDER_BOTTOM_WIDTH, borderBottomWidth);
-        }
+        setStyleLengthAttribute(BORDER_BOTTOM_WIDTH.getAttributeName(), borderBottomWidth, "", false, false);
     }
 
     /**
@@ -1079,9 +1101,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderLeftWidth(final String borderLeftWidth) {
-        if (!borderLeftWidth.endsWith("%")) {
-            setStyleAttributePixel(BORDER_LEFT_WIDTH, borderLeftWidth);
-        }
+        setStyleLengthAttribute(BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "", false, false);
     }
 
     /**
@@ -1155,9 +1175,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderRightWidth(final String borderRightWidth) {
-        if (!borderRightWidth.endsWith("%")) {
-            setStyleAttributePixel(BORDER_RIGHT_WIDTH, borderRightWidth);
-        }
+        setStyleLengthAttribute(BORDER_RIGHT_WIDTH.getAttributeName(), borderRightWidth, "", false, false);
     }
 
     /**
@@ -1240,9 +1258,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBorderTopWidth(final String borderTopWidth) {
-        if (!borderTopWidth.endsWith("%")) {
-            setStyleAttributePixel(BORDER_TOP_WIDTH, borderTopWidth);
-        }
+        setStyleLengthAttribute(BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "", false, false);
     }
 
     /**
@@ -1260,7 +1276,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setBottom(final String bottom) {
-        setStyleAttributePixel(BOTTOM, bottom);
+        setStyleLengthAttribute(BOTTOM.getAttributeName(), bottom, "", true, true);
     }
 
     /**
@@ -1461,7 +1477,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setHeight(final String height) {
-        setStyleAttributePixel(HEIGHT, height);
+        setStyleLengthAttribute(HEIGHT.getAttributeName(), height, "", true, true);
     }
 
     /**
@@ -1479,7 +1495,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setLeft(final String left) {
-        setStyleAttributePixel(LEFT, left);
+        setStyleLengthAttribute(LEFT.getAttributeName(), left, "", true, true);
     }
 
     /**
@@ -1544,7 +1560,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMarginBottom(final String marginBottom) {
-        setStyleAttributePixel(MARGIN_BOTTOM, marginBottom);
+        setStyleLengthAttribute(MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true);
     }
 
     /**
@@ -1562,7 +1578,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMarginLeft(final String marginLeft) {
-        setStyleAttributePixel(MARGIN_LEFT, marginLeft);
+        setStyleLengthAttribute(MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true);
     }
 
     /**
@@ -1580,7 +1596,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMarginRight(final String marginRight) {
-        setStyleAttributePixel(MARGIN_RIGHT, marginRight);
+        setStyleLengthAttribute(MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true);
     }
 
     /**
@@ -1598,7 +1614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setMarginTop(final String marginTop) {
-        setStyleAttributePixel(MARGIN_TOP, marginTop);
+        setStyleLengthAttribute(MARGIN_TOP.getAttributeName(), marginTop, "", true, true);
     }
 
     /**
@@ -1936,7 +1952,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setPaddingBottom(final String paddingBottom) {
-        setStyleAttributePixel(PADDING_BOTTOM, paddingBottom);
+        setStyleLengthAttribute(PADDING_BOTTOM.getAttributeName(), paddingBottom, "", false, true);
     }
 
     /**
@@ -1954,7 +1970,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setPaddingLeft(final String paddingLeft) {
-        setStyleAttributePixel(PADDING_LEFT, paddingLeft);
+        setStyleLengthAttribute(PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true);
     }
 
     /**
@@ -1972,7 +1988,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setPaddingRight(final String paddingRight) {
-        setStyleAttributePixel(PADDING_RIGHT, paddingRight);
+        setStyleLengthAttribute(PADDING_RIGHT.getAttributeName(), paddingRight, "", false, true);
     }
 
     /**
@@ -1990,7 +2006,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setPaddingTop(final String paddingTop) {
-        setStyleAttributePixel(PADDING_TOP, paddingTop);
+        setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true);
     }
 
     /**
@@ -2242,7 +2258,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setRight(final String right) {
-        setStyleAttributePixel(RIGHT, right);
+        setStyleLengthAttribute(RIGHT.getAttributeName(), right, "", true, true);
     }
 
     /**
@@ -2404,7 +2420,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setTop(final String top) {
-        setStyleAttributePixel(TOP, top);
+        setStyleLengthAttribute(TOP.getAttributeName(), top, "", true, true);
     }
 
     /**
@@ -2440,7 +2456,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter
     public void setWidth(final String width) {
-        setStyleAttributePixel(WIDTH, width);
+        setStyleLengthAttribute(WIDTH.getAttributeName(), width, "", true, true);
     }
 
     /**
@@ -2678,18 +2694,26 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction
     public void setProperty(final String name, final String value, final String important) {
-        if (StringUtils.isEmpty(important) || "null".equals(important)) {
-            setStyleAttribute(name, value, "");
-        }
-        if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
-            if (PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
-                setStyleAttribute(name, value, PRIORITY_IMPORTANT);
+        String imp = "";
+        if (!StringUtils.isEmpty(important) && !"null".equals(important)) {
+            if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
+                if (!PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
+                    return;
+                }
             }
+            else {
+                if (!PRIORITY_IMPORTANT.equals(important)) {
+                    return;
+                }
+            }
+            imp = PRIORITY_IMPORTANT;
+        }
+
+        if (LENGTH_PROPERTIES.contains(name)) {
+            setStyleLengthAttribute(name, value, imp, true, true);
         }
         else {
-            if (PRIORITY_IMPORTANT.equals(important)) {
-                setStyleAttribute(name, value, PRIORITY_IMPORTANT);
-            }
+            setStyleAttribute(name, value, imp);
         }
     }
 
@@ -3233,7 +3257,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the attribute name
      * @param value the attribute value
      */
-    protected void setStyleAttributePixel(final Definition name, String value) {
+    private void setStyleAttributePixel(final Definition name, String value) {
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
@@ -3250,5 +3274,69 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             //ignore
         }
         setStyleAttribute(name.getAttributeName(), value);
+    }
+
+    /**
+     * Sets the style attribute which should be treated as an integer in pixels.
+     * @param name the attribute name
+     * @param value the attribute value
+     * @param important important value
+     * @param auto true if auto is supported
+     * @param perecent true if percent is supported
+     */
+    private void setStyleLengthAttribute(final String name, String value, final String important,
+                final boolean auto, final boolean perecent) {
+        if (StringUtils.isEmpty(value)) {
+            setStyleAttribute(name, value);
+            return;
+        }
+
+        if ((auto && "auto".equals(value))
+                || ("initial".equals(value) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
+                || "inherit".equals(value)) {
+            setStyleAttribute(name, value);
+            return;
+        }
+
+        String unit = "px";
+        if (perecent && value.endsWith("%")) {
+            unit = value.substring(value.length() - 1);
+            value = value.substring(0, value.length() - 1);
+        }
+        else if (value.endsWith("px")
+            || value.endsWith("em")
+            || value.endsWith("ex")
+            || value.endsWith("px")
+            || value.endsWith("cm")
+            || value.endsWith("mm")
+            || value.endsWith("in")
+            || value.endsWith("pc")
+            || value.endsWith("pc")
+            || value.endsWith("ch")
+            || value.endsWith("vh")
+            || value.endsWith("vw")) {
+            unit = value.substring(value.length() - 2);
+            value = value.substring(0, value.length() - 2);
+        }
+        else if (value.endsWith("rem")
+            || value.endsWith("vmin")
+            || value.endsWith("vmax")) {
+            unit = value.substring(value.length() - 3);
+            value = value.substring(0, value.length() - 3);
+        }
+        try {
+            final float floatValue = Float.parseFloat(value);
+            if (floatValue % 1 == 0) {
+                value = Integer.toString((int) floatValue) + unit;
+            }
+            else {
+                value = Float.toString(floatValue) + unit;
+            }
+
+            setStyleAttribute(name, value, important);
+        }
+        catch (final Exception e) {
+            //ignore
+        }
     }
 }

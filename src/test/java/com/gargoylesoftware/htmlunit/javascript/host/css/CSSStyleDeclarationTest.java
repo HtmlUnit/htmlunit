@@ -1511,13 +1511,14 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"red ", "black ", "blue important", "gray "})
+    @Alerts({"red ", "black ", "blue important", "gray ", "green "})
     public void setProperty() throws Exception {
         final String[] expected = getExpectedAlerts();
-        setProperty("'background-color', 'red', ''", expected[0]);
-        setProperty("'background-ColoR', 'black', ''", expected[1]);
-        setProperty("'background-color', 'blue', 'important'", expected[2]);
-        setProperty("'background-color', 'gray', null", expected[3]);
+        setPropertyBackgroundColor("'background-color', 'red', ''", expected[0]);
+        setPropertyBackgroundColor("'background-ColoR', 'black', ''", expected[1]);
+        setPropertyBackgroundColor("'background-color', 'blue', 'important'", expected[2]);
+        setPropertyBackgroundColor("'background-color', 'gray', null", expected[3]);
+        setPropertyBackgroundColor("'background-color', 'green', undefined", expected[4]);
     }
 
     /**
@@ -1528,26 +1529,428 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"green ", "green ", "green "})
     public void setPropertyImportant() throws Exception {
         final String[] expected = getExpectedAlerts();
-        setProperty("'background-color', 'white', 'crucial'", expected[0]);
-        setProperty("'background-color', 'black', 'imPORTant'", expected[1]);
-        setProperty("'background-color', 'blue', 'important '", expected[2]);
+        setPropertyBackgroundColor("'background-color', 'white', 'crucial'", expected[0]);
+        setPropertyBackgroundColor("'background-color', 'black', 'imPORTant'", expected[1]);
+        setPropertyBackgroundColor("'background-color', 'blue', 'important '", expected[2]);
     }
 
-    private void setProperty(final String params, final String... expected) throws Exception {
+    private void setPropertyBackgroundColor(final String params, final String... expected) throws Exception {
         final String html =
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='background-color:green'>go</a>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var node = document.getElementById('a');\n"
-            + "    if (node.style.setProperty) {\n"
-            + "      try {\n"
-            + "        node.style.setProperty(" + params + ");\n"
-            + "        alert(node.style.backgroundColor + ' ' + node.style.getPropertyPriority('background-color'));\n"
-            + "      } catch(e) { alert(e); }\n"
-            + "    } else {\n"
-            + "      alert('not supported');\n"
-            + "    }\n"
+            + "    try {\n"
+            + "      node.style.setProperty(" + params + ");\n"
+            + "      alert(node.style.backgroundColor + ' ' + node.style.getPropertyPriority('background-color'));\n"
+            + "    } catch(e) { alert(e); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        setExpectedAlerts(expected);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setWidthProperty() throws Exception {
+        setLengthProperty("width", "width");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setWidth() throws Exception {
+        setLength("width", "width");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setHeightProperty() throws Exception {
+        setLengthProperty("height", "height");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setHeight() throws Exception {
+        setLength("height", "height");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setTopProperty() throws Exception {
+        setLengthProperty("top", "top");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setTop() throws Exception {
+        setLength("top", "top");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setLeftProperty() throws Exception {
+        setLengthProperty("left", "left");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setLeft() throws Exception {
+        setLength("left", "left");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setBottomProperty() throws Exception {
+        setLengthProperty("bottom", "bottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setBottom() throws Exception {
+        setLength("bottom", "bottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setRightProperty() throws Exception {
+        setLengthProperty("right", "right");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setRight() throws Exception {
+        setLength("right", "right");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMarginTopProperty() throws Exception {
+        setLengthProperty("margin-top", "marginTop");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMarginTop() throws Exception {
+        setLength("margin-top", "marginTop");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMarginLeftProperty() throws Exception {
+        setLengthProperty("margin-left", "marginLeft");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMarginLeft() throws Exception {
+        setLength("margin-left", "marginLeft");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMarginBottomProperty() throws Exception {
+        setLengthProperty("margin-bottom", "marginBottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMarginBottom() throws Exception {
+        setLength("margin-bottom", "marginBottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setMarginRightProperty() throws Exception {
+        setLengthProperty("margin-right", "marginRight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setMarginRight() throws Exception {
+        setLength("margin-right", "marginRight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setPaddingTopProperty() throws Exception {
+        setLengthProperty("padding-top", "paddingTop");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setPaddingTop() throws Exception {
+        setLength("padding-top", "paddingTop");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setPaddingLeftProperty() throws Exception {
+        setLengthProperty("padding-left", "paddingLeft");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setPaddingLeft() throws Exception {
+        setLength("padding-left", "paddingLeft");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setPaddingBottomProperty() throws Exception {
+        setLengthProperty("padding-bottom", "paddingBottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setPaddingBottom() throws Exception {
+        setLength("padding-bottom", "paddingBottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setPaddingRightProperty() throws Exception {
+        setLengthProperty("padding-right", "paddingRight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setPaddingRight() throws Exception {
+        setLength("padding-right", "paddingRight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setBorderTopWidthProperty() throws Exception {
+        setLengthProperty("border-top-width", "borderTopWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setBorderTopWidth() throws Exception {
+        setLength("border-top-width", "borderTopWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setBorderLeftWidthProperty() throws Exception {
+        setLengthProperty("border-left-width", "borderLeftWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setBorderLeftWidth() throws Exception {
+        setLength("border-left-width", "borderLeftWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setBorderBottomWidthProperty() throws Exception {
+        setLengthProperty("border-bottom-width", "borderBottomWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setBorderBottomWidth() throws Exception {
+        setLength("border-bottom-width", "borderBottomWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4px", "17px", "17px", "17px", ""})
+    public void setBorderRightWidthProperty() throws Exception {
+        setLengthProperty("border-right-width", "borderRightWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit", "17px", "17px", "17px", ""},
+            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit", "17px", "17px", "17px", ""})
+    public void setBorderRightWidth() throws Exception {
+        setLength("border-right-width", "borderRightWidth");
+    }
+
+    private void setLengthProperty(final String cssProp, final String prop) throws Exception {
+        final String[] expected = getExpectedAlerts();
+        setLengthProperty(cssProp, prop, "'4px', ''", expected[0]);
+        setLengthProperty(cssProp, prop, "undefined, ''", expected[1]);
+        setLengthProperty(cssProp, prop, "'undefined', ''", expected[2]);
+        setLengthProperty(cssProp, prop, "'undefinedpx', null", expected[3]);
+        setLengthProperty(cssProp, prop, "'', null", expected[4]);
+    }
+
+    private void setLength(final String cssProp, final String prop) throws Exception {
+        final String[] expected = getExpectedAlerts();
+        setLength(cssProp, prop, "4", expected[0]);
+        setLength(cssProp, prop, "'5px'", expected[1]);
+        setLength(cssProp, prop, "'6em'", expected[2]);
+        setLength(cssProp, prop, "'auto'", expected[3]);
+        setLength(cssProp, prop, "'70%'", expected[4]);
+        setLength(cssProp, prop, "'initial'", expected[5]);
+        setLength(cssProp, prop, "'inherit'", expected[6]);
+        setLength(cssProp, prop, "'ellen'", expected[7]);
+        setLength(cssProp, prop, "undefined", expected[8]);
+        setLength(cssProp, prop, "'undefined'", expected[9]);
+        setLength(cssProp, prop, "''", expected[10]);
+    }
+
+    private void setLengthProperty(final String cssProp, final String prop,
+                    final String params, final String... expected) throws Exception {
+        final String html =
+              "<html><body onload='test()'>\n"
+            + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var node = document.getElementById('a');\n"
+            + "    try {\n"
+            + "      node.style.setProperty('" + cssProp + "', " + params + ");\n"
+            + "      alert(node.style." + prop + ");\n"
+            + "    } catch(e) { alert(e); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        setExpectedAlerts(expected);
+        loadPageWithAlerts2(html);
+    }
+
+    private void setLength(final String cssProp, final String prop,
+                    final String params, final String... expected) throws Exception {
+        final String html =
+              "<html><body onload='test()'>\n"
+            + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var node = document.getElementById('a');\n"
+            + "    try {\n"
+            + "      node.style." + prop + " = " + params + ";\n"
+            + "      alert(node.style." + prop + ");\n"
+            + "    } catch(e) { alert(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -2003,7 +2406,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "1", "", "1", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF38 = {"", "", "", "", "5", "", "5", ""},
+            FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     @NotYetImplemented(FF38)
     public void widows() throws Exception {
         final String html = "<html><head>\n"
@@ -2036,7 +2440,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "auto", "", "auto", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF38 = {"", "", "", "", "5", "", "5", ""},
+            FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     @NotYetImplemented(FF38)
     public void orphans() throws Exception {
         final String html = "<html><head>\n"
