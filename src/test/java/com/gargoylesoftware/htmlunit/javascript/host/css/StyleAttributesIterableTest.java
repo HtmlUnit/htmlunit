@@ -25,6 +25,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
@@ -66,13 +67,17 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Default
     public void test() throws Exception {
+        test(definition_.getPropertyName());
+    }
+
+    private void test(final String propertyName) throws Exception {
         final String html =
             "<html><head><script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
             + "    var found = false;\n"
             + "    for (var i in e.style) {\n"
-            + "      if (i == '" + definition_.getPropertyName() + "') {\n"
+            + "      if (i == '" + propertyName + "') {\n"
             + "        found = true;\n"
             + "      }\n"
             + "    }\n"
@@ -90,7 +95,181 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Override
     protected String[] getExpectedAlerts() {
+        if (definition_ == null) {
+            return super.getExpectedAlerts();
+        }
         final BrowserVersion browserVersion = getBrowserVersion();
-        return new String[] {Boolean.toString(definition_.isAvailable(browserVersion, false))};
+        return new String[] {Boolean.toString(definition_.isAvailable(browserVersion, true))};
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PIXEL_BOTTOM() throws Exception {
+        test("pixelBottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PIXEL_HEIGHT() throws Exception {
+        test("pixelHeight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PIXEL_LEFT() throws Exception {
+        test("pixelLeft");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PIXEL_RIGHT() throws Exception {
+        test("pixelRight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PIXEL_TOP() throws Exception {
+        test("pixelTop");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _PIXEL_WIDTH() throws Exception {
+        test("pixelWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _POS_BOTTOM() throws Exception {
+        test("posBottom");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _POS_HEIGHT() throws Exception {
+        test("posHeight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _POS_LEFT() throws Exception {
+        test("posLeft");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _POS_RIGHT() throws Exception {
+        test("posRight");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _POS_TOP() throws Exception {
+        test("posTop");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _POS_WIDTH() throws Exception {
+        test("posWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _TEXT_DECORATION_BLINK() throws Exception {
+        test("textDecorationBlink");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _TEXT_DECORATION_LINE_THROUGH() throws Exception {
+        test("textDecorationLineThrough");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _TEXT_DECORATION_NONE() throws Exception {
+        test("textDecorationNone");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _TEXT_DECORATION_OVERLINE() throws Exception {
+        test("textDecorationOverline");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _TEXT_DECORATION_UNDERLINE() throws Exception {
+        test("textDecorationUnderline");
+    }
+
 }

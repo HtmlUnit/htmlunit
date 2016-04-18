@@ -2285,6 +2285,9 @@ public final class StyleAttributes {
         /** The style property {@code text-decoration}. */
         TEXT_DECORATION_("text-decoration", "text-decoration", ff("none")),
 
+        /** The style property {@code textDecorationBlink}. */
+        TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false").setIteratable(false)),
+
         /** The style property {@code textDecorationColor}. */
         TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color", ff("rgb(0, 0, 0)")),
 
@@ -2297,9 +2300,6 @@ public final class StyleAttributes {
         /** The style property {@code text-decoration-line}. */
         TEXT_DECORATION_LINE_("text-decoration-line", "text-decoration-line", ff("none")),
 
-        /** The style property {@code textDecorationBlink}. */
-        TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false").setIteratable(false)),
-
         /** The style property {@code textDecorationLineThrough}. */
         TEXT_DECORATION_LINE_THROUGH("textDecorationLineThrough", "text-decoration-line-through",
                 ie("false").setIteratable(false)),
@@ -2311,15 +2311,15 @@ public final class StyleAttributes {
         TEXT_DECORATION_OVERLINE("textDecorationOverline", "text-decoration-overline",
                 ie("false").setIteratable(false)),
 
-        /** The style property {@code textDecorationUnderline}. */
-        TEXT_DECORATION_UNDERLINE("textDecorationUnderline", "text-decoration-underline",
-                ie("false").setIteratable(false)),
-
         /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff("solid")),
 
         /** The style property {@code text-decoration-style}. */
         TEXT_DECORATION_STYLE_("text-decoration-style", "text-decoration-style", ff("solid")),
+
+        /** The style property {@code textDecorationUnderline}. */
+        TEXT_DECORATION_UNDERLINE("textDecorationUnderline", "text-decoration-underline",
+                ie("false").setIteratable(false)),
 
         /** The style property {@code textIndent}. */
         TEXT_INDENT("textIndent", "text-indent", chrome("0px"), ff(""), ie("")),
@@ -2870,8 +2870,8 @@ public final class StyleAttributes {
         Z_INDEX("zIndex", "z-index", ff("auto"), chrome("auto"), ie("auto")),
 
         /** The style property {@code z-index}. */
-        Z_INDEX_("z-index", "z-index", ff("auto"), chrome("auto"),
-                ie("auto")),
+        Z_INDEX_("z-index", "z-index", ff("auto"), chrome("auto").setIteratable(false),
+                ie("auto").setIteratable(false)),
 
         /** The style property {@code zoom}. */
         ZOOM("zoom", "zoom", ie("undefined"), chrome("1"));
@@ -2888,7 +2888,13 @@ public final class StyleAttributes {
         }
 
         boolean isAvailable(final BrowserVersion browserVersion, final boolean onlyIfIteratable) {
-            return BrowserConfiguration.isDefined(browserVersion, browserConfigurations_, onlyIfIteratable);
+            if (browserConfigurations_ == null) {
+                return true; // defined for all browsers
+            }
+
+            final BrowserConfiguration config
+                = BrowserConfiguration.getMatchingConfiguration(browserVersion, browserConfigurations_);
+            return config != null && (!onlyIfIteratable || config.isIteratable());
         }
 
         /**

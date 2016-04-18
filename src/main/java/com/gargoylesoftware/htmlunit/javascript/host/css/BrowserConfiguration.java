@@ -61,16 +61,6 @@ class BrowserConfiguration {
         return ff(defaultValue).startingWith(45);
     }
 
-    static boolean isDefined(final BrowserVersion browserVersion,
-            final BrowserConfiguration[] browserConfigurations, final boolean onlyIfIteratable) {
-        if (browserConfigurations == null) {
-            return true; // defined for all browsers
-        }
-
-        final BrowserConfiguration config = getMatchingConfiguration(browserVersion, browserConfigurations);
-        return config != null && (!onlyIfIteratable || config.isIteratable());
-    }
-
     static BrowserConfiguration getMatchingConfiguration(
             final BrowserVersion browserVersion,
             final BrowserConfiguration[] browserConfigurations) {
