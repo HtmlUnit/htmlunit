@@ -1887,4 +1887,34 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "24"},
+            FF = {"0", "26"})
+    @NotYetImplemented
+    public void offsetHeightTable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var table = document.createElement('table');\n"
+            + "    table.style.fontSize = '16px';\n"
+            + "    document.getElementById('myDiv').appendChild(table);\n"
+            + "    alert(table.offsetHeight);\n"
+            + "\n"
+            + "    var tr = document.createElement('tr');\n"
+            + "    table.appendChild(tr);\n"
+            + "    var td = document.createElement('td');\n"
+            + "    tr.appendChild(td);\n"
+            + "    td.appendChild(document.createTextNode('DATA'));\n"
+            + "    alert(table.offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
