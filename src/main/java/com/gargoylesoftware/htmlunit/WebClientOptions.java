@@ -23,6 +23,7 @@ import java.security.KeyStore;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Madis Pärn
  */
 public class WebClientOptions implements Serializable {
 
@@ -49,6 +50,7 @@ public class WebClientOptions implements Serializable {
     private boolean useInsecureSSL_; // default is secure SSL
     private String sslInsecureProtocol_;
     private int maxInMemory_ = 500 * 1024;
+    private int historySizeLimit_ = 50;
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
@@ -490,5 +492,21 @@ public class WebClientOptions implements Serializable {
      */
     public void setMaxInMemory(final int maxInMemory) {
         maxInMemory_ = maxInMemory;
+    }
+
+    /**
+     * Returns the maximum number of {@link Page pages} kept in {@link WebWindow#getHistory()}.
+     * @return the maximum number of pages in history
+     */
+    public int getHistorySizeLimit() {
+        return historySizeLimit_;
+    }
+
+    /**
+     * Sets the History size limit.
+     * @param historySizeLimit maximum number of pages in history
+     */
+    public void setHistorySizeLimit(final int historySizeLimit) {
+        historySizeLimit_ = historySizeLimit;
     }
 }

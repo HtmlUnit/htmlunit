@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="add" dev="asashour" due-to="Madis P&#x00e4;rn" issue="175" system="features">
+                WebClientOptions: add setHistorySizeLimit().
+            </action>
             <action type="fix" dev="rbri">
                 CSS: fix value verification for length property setters (e.g. width, height,...).
             </action>

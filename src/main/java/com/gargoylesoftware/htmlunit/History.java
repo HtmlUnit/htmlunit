@@ -33,10 +33,9 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Adam Afeltowicz
  * @author Ronald Brill
+ * @author Madis Pärn
  */
 public class History implements Serializable {
-    private static final int SIZE_LIMIT = 50;
-
     /**
      * The single entry in the history.
      */
@@ -224,7 +223,8 @@ public class History implements Serializable {
         while (entries_.size() > index_) {
             entries_.remove(index_);
         }
-        while (entries_.size() >= SIZE_LIMIT) {
+        final int sizeLimit = window_.getWebClient().getOptions().getHistorySizeLimit();
+        while (entries_.size() >= sizeLimit) {
             entries_.remove(0);
             index_--;
         }
