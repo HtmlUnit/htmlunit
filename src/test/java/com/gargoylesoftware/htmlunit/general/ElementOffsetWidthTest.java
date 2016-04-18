@@ -49,7 +49,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert("+ VALUE_ + ");\n"
+                    + "  alert(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "<title id='outer'><title></title>\n"
@@ -62,7 +62,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert("+ VALUE_ + ");\n"
+                    + "  alert(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
@@ -75,7 +75,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert("+ VALUE_ + ");\n"
+                    + "  alert(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head><body onload='test()'>\n"
@@ -88,7 +88,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert("+ VALUE_ + ");\n"
+                    + "  alert(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
@@ -101,7 +101,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert("+ VALUE_ + ");\n"
+                + "  alert(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -115,7 +115,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert("+ VALUE_ + ");\n"
+                + "  alert(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -162,7 +162,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void address() throws Exception {
         loadPageWithAlerts2(test("address"));
     }
@@ -198,7 +197,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void article() throws Exception {
         loadPageWithAlerts2(test("article"));
     }
@@ -210,7 +208,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void aside() throws Exception {
         loadPageWithAlerts2(test("aside"));
     }
@@ -322,7 +319,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void body() throws Exception {
         loadPageWithAlerts2(test("body"));
     }
@@ -393,7 +389,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void center() throws Exception {
         loadPageWithAlerts2(test("center"));
     }
@@ -450,7 +445,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "-16")
-    @NotYetImplemented(CHROME)
     public void details() throws Exception {
         loadPageWithAlerts2(test("details"));
     }
@@ -508,7 +502,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void dir() throws Exception {
         loadPageWithAlerts2(test("dir"));
     }
@@ -520,7 +513,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void div() throws Exception {
         loadPageWithAlerts2(test("div"));
     }
@@ -532,7 +524,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void dl() throws Exception {
         loadPageWithAlerts2(test("dl"));
     }
@@ -544,7 +535,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void dt() throws Exception {
         loadPageWithAlerts2(test("dt"));
     }
@@ -593,7 +583,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void figcaption() throws Exception {
         loadPageWithAlerts2(test("figcaption"));
     }
@@ -628,7 +617,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void footer() throws Exception {
         loadPageWithAlerts2(test("footer"));
     }
@@ -640,7 +628,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void form() throws Exception {
         loadPageWithAlerts2(test("form"));
     }
@@ -674,7 +661,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void h1() throws Exception {
         loadPageWithAlerts2(test("h1"));
     }
@@ -686,7 +672,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void h2() throws Exception {
         loadPageWithAlerts2(test("h2"));
     }
@@ -698,7 +683,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void h3() throws Exception {
         loadPageWithAlerts2(test("h3"));
     }
@@ -710,7 +694,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void h4() throws Exception {
         loadPageWithAlerts2(test("h4"));
     }
@@ -722,7 +705,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void h5() throws Exception {
         loadPageWithAlerts2(test("h5"));
     }
@@ -734,7 +716,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void h6() throws Exception {
         loadPageWithAlerts2(test("h6"));
     }
@@ -757,7 +738,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void header() throws Exception {
         loadPageWithAlerts2(test("header"));
     }
@@ -769,7 +749,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void hr() throws Exception {
         loadPageWithAlerts2(test("hr"));
     }
@@ -916,7 +895,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "-16")
-    @NotYetImplemented(CHROME)
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
     }
@@ -929,7 +907,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "8",
             FF = "-16")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, IE})
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
@@ -942,7 +920,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF})
+    @NotYetImplemented(IE)
     public void listing() throws Exception {
         loadPageWithAlerts2(test("listing"));
     }
@@ -978,7 +956,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF})
     public void main() throws Exception {
         loadPageWithAlerts2(test("main"));
     }
@@ -1001,7 +978,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
@@ -1024,7 +1001,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void menu() throws Exception {
         loadPageWithAlerts2(test("menu"));
     }
@@ -1072,7 +1048,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "-16")
-    @NotYetImplemented({ FF})
     public void multicol() throws Exception {
         loadPageWithAlerts2(test("multicol"));
     }
@@ -1095,7 +1070,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void nav() throws Exception {
         loadPageWithAlerts2(test("nav"));
     }
@@ -1175,7 +1149,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void ol() throws Exception {
         loadPageWithAlerts2(test("ol"));
     }
@@ -1188,7 +1161,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF})
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -1201,7 +1173,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF})
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }
@@ -1224,7 +1195,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void p() throws Exception {
         loadPageWithAlerts2(test("p"));
     }
@@ -1247,7 +1217,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void plaintext() throws Exception {
         loadPageWithAlerts2(test("plaintext"));
     }
@@ -1259,7 +1228,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void pre() throws Exception {
         loadPageWithAlerts2(test("pre"));
     }
@@ -1309,7 +1277,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1")
-    @NotYetImplemented({ FF, IE})
+    @NotYetImplemented
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -1354,7 +1322,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void section() throws Exception {
         loadPageWithAlerts2(test("section"));
     }
@@ -1467,7 +1434,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "-16")
-    @NotYetImplemented(CHROME)
     public void summary() throws Exception {
         loadPageWithAlerts2(test("summary"));
     }
@@ -1659,7 +1625,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
     public void ul() throws Exception {
         loadPageWithAlerts2(test("ul"));
     }
@@ -1706,7 +1671,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "112")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void xmp() throws Exception {
         loadPageWithAlerts2(test("xmp"));
     }

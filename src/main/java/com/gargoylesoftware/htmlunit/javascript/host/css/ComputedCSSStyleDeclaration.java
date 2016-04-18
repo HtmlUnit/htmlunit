@@ -970,10 +970,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         }
                     }
 
-                    return getWindowDefaultValue() + "px";
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (elem instanceof HTMLBodyElement) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
                 }
                 else if ("auto".equals(value)) {
-                    return getWindowDefaultValue() + "px";
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (elem instanceof HTMLBodyElement) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
                 }
 
                 return value;
@@ -1045,13 +1053,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = node.getTextContent().length() * PIXELS_PER_CHAR;
             }
             else if ("block".equals(display)) {
-                // Block elements take up 100% of the parent's width.
-                final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
-                width = pixelValue(parentJS, new CssValue(0, windowWidth) {
-                    @Override public String get(final ComputedCSSStyleDeclaration style) {
-                        return style.getWidth();
-                    }
-                }) - (getBorderHorizontal() + getPaddingHorizontal());
+                if (element instanceof HTMLBodyElement) {
+                    final String widthString = element.getWindow().getComputedStyle(element, null).getWidth();
+                    width = Integer.parseInt(widthString.substring(0, widthString.length() - 2));
+                }
+                else {
+                    // Block elements take up 100% of the parent's width.
+                    final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
+                    width = pixelValue(parentJS, new CssValue(0, windowWidth) {
+                        @Override public String get(final ComputedCSSStyleDeclaration style) {
+                            return style.getWidth();
+                        }
+                    }) - (getBorderHorizontal() + getPaddingHorizontal());
+                }
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton

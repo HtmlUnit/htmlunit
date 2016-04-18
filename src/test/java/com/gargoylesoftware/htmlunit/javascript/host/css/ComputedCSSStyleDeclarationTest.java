@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -1815,7 +1816,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "100",
             IE = "true")
-    @NotYetImplemented(IE)
     public void borderBoxAffectsOffsetWidth2() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -1870,7 +1870,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0", "16"},
             CHROME = {"8px", "0", "16"})
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, IE})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
