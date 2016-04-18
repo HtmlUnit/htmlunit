@@ -88,6 +88,7 @@
     <suppress checks="MethodName" files="HostParentOfITest.java"/>
     <suppress checks="MethodName" files="HostParentOfSTest.java"/>
     <suppress checks="MethodName" files="HostParentOfTTest.java"/>
+    <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
 
     <suppress checks="ParameterNumber" files="CanvasRenderingContext2D.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
