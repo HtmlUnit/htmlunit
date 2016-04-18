@@ -20,12 +20,12 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -2375,14 +2375,28 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests that all values in {@link StyleAttributes} have a method in {@link CSSStyleDeclaration}
-     * and is supported by the browser.
+     * Tests that all getters and setters {@link CSSStyleDeclaration} have correct browser support
+     * as defined in {@link StyleAttributes}.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
     public void styleAttributes() throws Exception {
+        final List<String> allProperties = new ArrayList<>();
+        for (final BrowserVersion browserVersion : ALL_BROWSERS_) {
+            final ClassConfiguration config
+                = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
+            for (final Definition definition : StyleAttributes.getDefinitions(browserVersion)) {
+                if (!definition.name().endsWith("_")) {
+                    final String propertyName = definition.getPropertyName();
+                    final PropertyInfo info = config.getPropertyMap().get(propertyName);
+                    if (info != null) {
+                        allProperties.add(propertyName);
+                    }
+                }
+            }
+        }
+
         final BrowserVersion browserVersion = getBrowserVersion();
         final ClassConfiguration config
             = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
@@ -2390,22 +2404,17 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             if (!definition.name().endsWith("_")) {
                 final String propertyName = definition.getPropertyName();
                 final PropertyInfo info = config.getPropertyMap().get(propertyName);
-                if (info == null) {
-                    fail(browserVersion.getNickname() + ": CSSStyleDeclaration: not defined " + propertyName);
-                }
-                else if (info.getReadMethod() == null) {
-                    fail(browserVersion.getNickname() + ": CSSStyleDeclaration: property "
-                            + propertyName + " does not have getter.");
-                }
-                else if (info.getWriteMethod() == null) {
-                    fail(browserVersion.getNickname() + ": CSSStyleDeclaration: property "
-                            + propertyName + " does not have setter.");
+                if (allProperties.contains(propertyName)
+                        && (info == null || info.getReadMethod() == null || info.getWriteMethod() == null)) {
+                    fail("CSSStyleDeclaration: " + propertyName + " must support " + browserVersion.getNickname());
                 }
             }
         }
+
         for (final String propertyName : config.getPropertyMap().keySet()) {
-            if (StyleAttributes.getDefinition(propertyName, browserVersion) == null) {
-                fail(browserVersion.getNickname() + " CSSStyleDeclaration: incorrectly defines " + propertyName);
+            if (!"length".equals(propertyName) && StyleAttributes.getDefinition(propertyName, browserVersion) == null) {
+                fail("CSSStyleDeclaration: incorrectly defines " + propertyName
+                        + " for " + browserVersion.getNickname());
             }
         }
     }

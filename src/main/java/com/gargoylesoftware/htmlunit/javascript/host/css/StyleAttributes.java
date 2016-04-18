@@ -1997,11 +1997,47 @@ public final class StyleAttributes {
         /** The style property {@code pitchRange}. */
         PITCH_RANGE("pitchRange", "pitch-range"),
 
+        /** The style property {@code pixelBottom}. */
+        PIXEL_BOTTOM("pixelBottom", "pixel-bottom", ie("").setIteratable(false)),
+
+        /** The style property {@code pixelHeight}. */
+        PIXEL_HEIGHT("pixelHeight", "pixel-height", ie("").setIteratable(false)),
+
+        /** The style property {@code pixelLeft}. */
+        PIXEL_LEFT("pixelLeft", "pixel-left", ie("").setIteratable(false)),
+
+        /** The style property {@code pixelRight}. */
+        PIXEL_RIGHT("pixelRight", "pixel-right", ie("").setIteratable(false)),
+
+        /** The style property {@code pixelTop}. */
+        PIXEL_TOP("pixelTop", "pixel-top", ie("").setIteratable(false)),
+
+        /** The style property {@code pixelWidth}. */
+        PIXEL_WIDTH("pixelWidth", "pixel-width", ie("").setIteratable(false)),
+
         /** The style property {@code pointerEvents}. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie("visiblePainted"), chrome("auto"), ff("auto")),
 
         /** The style property {@code pointer-events}. */
         POINTER_EVENTS_("pointer-events", "pointer-events", ff("auto")),
+
+        /** The style property {@code posBottom}. */
+        POS_BOTTOM("posBottom", "pos-bottom", ie("").setIteratable(false)),
+
+        /** The style property {@code posHeight}. */
+        POS_HEIGHT("posHeight", "pos-height", ie("").setIteratable(false)),
+
+        /** The style property {@code posLeft}. */
+        POS_LEFT("posLeft", "pos-left", ie("").setIteratable(false)),
+
+        /** The style property {@code posRight}. */
+        POS_RIGHT("posRight", "pos-right", ie("").setIteratable(false)),
+
+        /** The style property {@code posTop}. */
+        POS_TOP("posTop", "pos-top", ie("").setIteratable(false)),
+
+        /** The style property {@code posWidth}. */
+        POS_WIDTH("posWidth", "pos-width", ie("").setIteratable(false)),
 
         /** The style property {@code position}. */
         POSITION("position", "position", chrome("static"), ff("static"), ie("static")),
@@ -2811,6 +2847,9 @@ public final class StyleAttributes {
 
         /** The style property {@code y}. */
         Y("y", "y", chrome("0px")),
+
+        /** The style property {@code z-index}. */
+        Z_INDEX("zIndex", "z-index", ff("auto"), chrome("auto"), ie("auto")),
 
         /** The style property {@code z-index}. */
         Z_INDEX_("z-index", "z-index", ff("auto"), chrome("auto").setIteratable(false),

@@ -178,7 +178,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final Pattern POSITION_PATTERN3 =
         Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
-    private static final Set<String> LENGTH_PROPERTIES = new HashSet<String>(Arrays.asList(
+    private static final Set<String> LENGTH_PROPERTIES = new HashSet<>(Arrays.asList(
             HEIGHT.getAttributeName(),
             WIDTH.getAttributeName(),
             TOP.getAttributeName(),
@@ -1885,7 +1885,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code outline} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public String getOutline() {
         return getStyleAttribute(OUTLINE);
     }
@@ -1894,7 +1894,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code outline} style attribute.
      * @param outline the new attribute
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxSetter
     public void setOutline(final String outline) {
         setStyleAttribute(OUTLINE.getAttributeName(), outline);
     }
@@ -2018,7 +2018,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code page} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     public String getPage() {
         return getStyleAttribute(PAGE);
     }
@@ -2027,7 +2027,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code page} style attribute.
      * @param page the new attribute
      */
-    @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     public void setPage(final String page) {
         setStyleAttribute(PAGE.getAttributeName(), page);
     }
@@ -2231,24 +2231,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the {@code posWidth} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public int getPosWidth() {
-        return 0;
-    }
-
-    /**
-     * Sets the {@code posWidth} style attribute.
-     * @param posWidth the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setPosWidth(final int posWidth) {
-        // Empty.
-    }
-
-    /**
      * Gets the {@code right} style attribute.
      * @return the style attribute
      */
@@ -2270,7 +2252,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code rubyAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(FF)})
     public String getRubyAlign() {
         return getStyleAttribute(RUBY_ALIGN);
     }
@@ -2279,7 +2261,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code rubyAlign} style attribute.
      * @param rubyAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter({@WebBrowser(IE), @WebBrowser(FF)})
     public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(RUBY_ALIGN.getAttributeName(), rubyAlign);
     }
@@ -2288,7 +2270,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code size} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     public String getSize() {
         return getStyleAttribute(SIZE);
     }
@@ -2297,99 +2279,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code size} style attribute.
      * @param size the new attribute
      */
-    @JsxSetter(@WebBrowser(value = FF, maxVersion = 38))
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     public void setSize(final String size) {
         setStyleAttribute(SIZE.getAttributeName(), size);
-    }
-
-    /**
-     * Gets the {@code textDecorationBlink} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationBlink() {
-        return false;
-    }
-
-    /**
-     * Sets the {@code textDecorationBlink} style attribute.
-     * @param textDecorationBlink the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setTextDecorationBlink(final boolean textDecorationBlink) {
-        // Empty.
-    }
-
-    /**
-     * Gets the {@code textDecorationLineThrough} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationLineThrough() {
-        return false;
-    }
-
-    /**
-     * Sets the {@code textDecorationLineThrough} style attribute.
-     * @param textDecorationLineThrough the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setTextDecorationLineThrough(final boolean textDecorationLineThrough) {
-        // Empty.
-    }
-
-    /**
-     * Gets the {@code textDecorationNone} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationNone() {
-        return false;
-    }
-
-    /**
-     * Sets the {@code textDecorationNone} style attribute.
-     * @param textDecorationNone the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setTextDecorationNone(final boolean textDecorationNone) {
-        // Empty.
-    }
-
-    /**
-     * Gets the {@code textDecorationOverline} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationOverline() {
-        return false;
-    }
-
-    /**
-     * Sets the {@code textDecorationOverline} style attribute.
-     * @param textDecorationOverline the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setTextDecorationOverline(final boolean textDecorationOverline) {
-        // Empty.
-    }
-
-    /**
-     * Gets the {@code textDecorationUnderline} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationUnderline() {
-        return false;
-    }
-
-    /**
-     * Sets the {@code textDecorationUnderline} style attribute.
-     * @param textDecorationUnderline the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setTextDecorationUnderline(final boolean textDecorationUnderline) {
-        // Empty.
     }
 
     /**
@@ -2468,7 +2360,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code widows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
     public String getWidows() {
         return getStyleAttribute(WIDOWS);
     }
@@ -2477,7 +2369,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code widows} style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
     public void setWidows(final String widows) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {
@@ -2496,7 +2388,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -2505,7 +2397,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
     public void setOrphans(final String orphans) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {

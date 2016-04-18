@@ -104,4 +104,5 @@
     <suppress checks="VisibilityModifier" files=".*(?:Test|TestBase)\.java$"/>
     <suppress checks="VisibilityModifier" files="HostParentOf.java"/>
     <suppress checks="VisibilityModifier" files="WebTestCase.java"/>
+    <suppress checks="VisibilityModifier" files="WebDriverTestCase.java"/>
 </suppressions>
