@@ -6528,7 +6528,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void dimensions__window_vs__small_document() throws Exception {
         runTest("dimensions: window vs. small document");
     }

@@ -219,4 +219,12 @@ public class HTMLBodyElement extends HTMLElement {
     public void setVLink(final String vLink) {
         setColorAttribute("vLink", vLink);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getClientWidth() {
+        return super.getClientWidth() + 16;
+    }
 }
