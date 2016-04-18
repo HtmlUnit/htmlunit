@@ -2231,6 +2231,24 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the {@code posWidth} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public int getPosWidth() {
+        return 0;
+    }
+
+    /**
+     * Sets the {@code posWidth} style attribute.
+     * @param posWidth the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setPosWidth(final int posWidth) {
+        // Empty.
+    }
+
+    /**
      * Gets the {@code right} style attribute.
      * @return the style attribute
      */
@@ -2282,6 +2300,96 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     public void setSize(final String size) {
         setStyleAttribute(SIZE.getAttributeName(), size);
+    }
+
+    /**
+     * Gets the {@code textDecorationBlink} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public boolean getTextDecorationBlink() {
+        return false;
+    }
+
+    /**
+     * Sets the {@code textDecorationBlink} style attribute.
+     * @param textDecorationBlink the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setTextDecorationBlink(final boolean textDecorationBlink) {
+        // Empty.
+    }
+
+    /**
+     * Gets the {@code textDecorationLineThrough} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public boolean getTextDecorationLineThrough() {
+        return false;
+    }
+
+    /**
+     * Sets the {@code textDecorationLineThrough} style attribute.
+     * @param textDecorationLineThrough the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setTextDecorationLineThrough(final boolean textDecorationLineThrough) {
+        // Empty.
+    }
+
+    /**
+     * Gets the {@code textDecorationNone} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public boolean getTextDecorationNone() {
+        return false;
+    }
+
+    /**
+     * Sets the {@code textDecorationNone} style attribute.
+     * @param textDecorationNone the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setTextDecorationNone(final boolean textDecorationNone) {
+        // Empty.
+    }
+
+    /**
+     * Gets the {@code textDecorationOverline} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public boolean getTextDecorationOverline() {
+        return false;
+    }
+
+    /**
+     * Sets the {@code textDecorationOverline} style attribute.
+     * @param textDecorationOverline the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setTextDecorationOverline(final boolean textDecorationOverline) {
+        // Empty.
+    }
+
+    /**
+     * Gets the {@code textDecorationUnderline} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public boolean getTextDecorationUnderline() {
+        return false;
+    }
+
+    /**
+     * Sets the {@code textDecorationUnderline} style attribute.
+     * @param textDecorationUnderline the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setTextDecorationUnderline(final boolean textDecorationUnderline) {
+        // Empty.
     }
 
     /**

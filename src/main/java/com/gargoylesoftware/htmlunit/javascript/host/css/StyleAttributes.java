@@ -2297,6 +2297,24 @@ public final class StyleAttributes {
         /** The style property {@code text-decoration-line}. */
         TEXT_DECORATION_LINE_("text-decoration-line", "text-decoration-line", ff("none")),
 
+        /** The style property {@code textDecorationBlink}. */
+        TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false").setIteratable(false)),
+
+        /** The style property {@code textDecorationLineThrough}. */
+        TEXT_DECORATION_LINE_THROUGH("textDecorationLineThrough", "text-decoration-line-through",
+                ie("false").setIteratable(false)),
+
+        /** The style property {@code textDecorationNone}. */
+        TEXT_DECORATION_NONE("textDecorationNone", "text-decoration-none", ie("false").setIteratable(false)),
+
+        /** The style property {@code textDecorationOverline}. */
+        TEXT_DECORATION_OVERLINE("textDecorationOverline", "text-decoration-overline",
+                ie("false").setIteratable(false)),
+
+        /** The style property {@code textDecorationUnderline}. */
+        TEXT_DECORATION_UNDERLINE("textDecorationUnderline", "text-decoration-underline",
+                ie("false").setIteratable(false)),
+
         /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff("solid")),
 
@@ -2848,12 +2866,12 @@ public final class StyleAttributes {
         /** The style property {@code y}. */
         Y("y", "y", chrome("0px")),
 
-        /** The style property {@code z-index}. */
+        /** The style property {@code zIndex}. */
         Z_INDEX("zIndex", "z-index", ff("auto"), chrome("auto"), ie("auto")),
 
         /** The style property {@code z-index}. */
-        Z_INDEX_("z-index", "z-index", ff("auto"), chrome("auto").setIteratable(false),
-                ie("auto").setIteratable(false)),
+        Z_INDEX_("z-index", "z-index", ff("auto"), chrome("auto"),
+                ie("auto")),
 
         /** The style property {@code zoom}. */
         ZOOM("zoom", "zoom", ie("undefined"), chrome("1"));

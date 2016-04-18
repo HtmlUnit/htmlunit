@@ -91,6 +91,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Override
     protected String[] getExpectedAlerts() {
         final BrowserVersion browserVersion = getBrowserVersion();
-        return new String[] {Boolean.toString(definition_.isAvailable(browserVersion, true))};
+        return new String[] {Boolean.toString(definition_.isAvailable(browserVersion, false))};
     }
 }
