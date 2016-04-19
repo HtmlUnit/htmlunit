@@ -388,4 +388,35 @@ public class PromiseTest extends WebDriverTestCase {
         driver.findElement(By.id("btn1")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"object", "3", "3,1337,foo"},
+            IE = {})
+    public void all() throws Exception {
+        final String html = "<html>\n"
+            + "<head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.Promise) {\n"
+            + "      var p1 = Promise.resolve(3);\n"
+            + "      var p2 = 1337;\n"
+            + "      var p3 = new Promise(function(resolve, reject) {\n"
+            + "        setTimeout(resolve, 100, \"foo\");\n"
+            + "      });\n"
+            + "\n"
+            + "      Promise.all([ p1, p2, p3 ]).then(function(values) {\n"
+            + "        alert(typeof values);\n"
+            + "        alert(values.length);\n"
+            + "        alert(values);\n"
+            + "      });\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
