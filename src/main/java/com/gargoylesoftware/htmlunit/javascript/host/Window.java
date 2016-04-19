@@ -107,7 +107,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -197,7 +196,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private transient WeakHashMap<Node, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
+    private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
 
     private final Map<Type, Storage> storages_ = new HashMap<>();
 
@@ -1779,6 +1778,15 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
+     * Clears the computed styles for a specific {@link Element}
+     */
+    public void clearComputedStyles(final Element node) {
+        synchronized (computedStyles_) {
+            computedStyles_.remove(node);
+        }
+    }
+
+    /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
      * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
      * results in very meager performance gains. In order to get good (but still correct) performance, we need to be
@@ -1869,9 +1877,9 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             synchronized (computedStyles_) {
                 final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-                final Iterator<Map.Entry<Node, Map<String, CSS2Properties>>> i = computedStyles_.entrySet().iterator();
-                while (i.hasNext()) {
-                    final Map.Entry<Node, Map<String, CSS2Properties>> entry = i.next();
+                for (final Iterator<Map.Entry<Element, Map<String, CSS2Properties>>> i
+                        = computedStyles_.entrySet().iterator(); i.hasNext();) {
+                    final Map.Entry<Element, Map<String, CSS2Properties>> entry = i.next();
                     final DomNode node = entry.getKey().getDomNodeOrDie();
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()

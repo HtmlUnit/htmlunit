@@ -434,5 +434,24 @@ public class HTMLTableElement extends RowContainer {
     public String getInnerText() {
         return getDomNodeOrDie().asText();
     }
-}
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object appendChild(final Object childObject) {
+        final Object appendedChild = super.appendChild(childObject);
+        getWindow().clearComputedStyles(this);
+        return appendedChild;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object removeChild(Object childObject) {
+        final Object removedChild = super.removeChild(childObject);
+        getWindow().clearComputedStyles(this);
+        return removedChild;
+    }
+}

@@ -4456,7 +4456,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void manipulation__table_manipulation() throws Exception {
         runTest("manipulation: table manipulation");
     }
