@@ -1894,6 +1894,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "24"},
             FF = {"0", "26"})
+    @NotYetImplemented
     public void offsetHeightTable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

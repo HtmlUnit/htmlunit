@@ -141,14 +141,13 @@ public class Promise extends SimpleScriptable {
                     value_ = p.value_;
                     return false;
                 }
-                
+
                 if (p.value_ instanceof Function) {
                     // TODO
                 }
                 else {
                     values[i] = p.value_;
                 }
-                
             }
             final NativeArray array = new NativeArray(values);
             ScriptRuntime.setBuiltinProtoAndParent(array, getParentScope(), TopLevel.Builtins.Array);

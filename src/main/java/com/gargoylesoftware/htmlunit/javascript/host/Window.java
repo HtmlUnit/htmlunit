@@ -1778,11 +1778,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Clears the computed styles for a specific {@link Element}
+     * Clears the computed styles for a specific {@link Element}.
+     * @param element the element to clear its cache
      */
-    public void clearComputedStyles(final Element node) {
+    public void clearComputedStyles(final Element element) {
         synchronized (computedStyles_) {
-            computedStyles_.remove(node);
+            computedStyles_.remove(element);
         }
     }
 

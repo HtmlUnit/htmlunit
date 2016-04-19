@@ -449,7 +449,7 @@ public class HTMLTableElement extends RowContainer {
      * {@inheritDoc}
      */
     @Override
-    public Object removeChild(Object childObject) {
+    public Object removeChild(final Object childObject) {
         final Object removedChild = super.removeChild(childObject);
         getWindow().clearComputedStyles(this);
         return removedChild;
