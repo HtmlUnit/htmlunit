@@ -31,8 +31,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -45,6 +48,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class Promise extends SimpleScriptable {
 
     private Object value_;
+    /** To be set only by {@link #all(Context, Scriptable, Object[], Function)}. */
+    private Promise[] all_;
     private boolean resolve_ = true;
     private String exceptionDetails_;
 
@@ -125,6 +130,71 @@ public class Promise extends SimpleScriptable {
     }
 
     /**
+     * Also sets the value of this promise.
+     */
+    private boolean isResolved(final Function onRejected) {
+        if (all_ != null) {
+            final Object[] values = new Object[all_.length];
+            for (int i = 0; i < all_.length; i++) {
+                final Promise p = all_[i];
+                if (!p.isResolved(onRejected)) {
+                    value_ = p.value_;
+                    return false;
+                }
+                
+                if (p.value_ instanceof Function) {
+                    // TODO
+                }
+                else {
+                    values[i] = p.value_;
+                }
+                
+            }
+            final NativeArray array = new NativeArray(values);
+            ScriptRuntime.setBuiltinProtoAndParent(array, getParentScope(), TopLevel.Builtins.Array);
+            value_ = array;
+        }
+        return resolve_;
+    }
+
+    /**
+     * Returns a {@link Promise} that resolves when all of the promises in the iterable argument have resolved,
+     * or rejects with the reason of the first passed promise that rejects.
+     *
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     * @return a {@link Promise}
+     */
+    @JsxStaticFunction
+    public static Promise all(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        final Promise promise = new Promise();
+        promise.setResolve(true);
+        if (args.length == 0) {
+            promise.all_ = new Promise[0];
+        }
+        else {
+            final NativeArray array = (NativeArray) args[0];
+            final int length = (int) array.getLength();
+            promise.all_ = new Promise[length];
+            for (int i = 0; i < length; i++) {
+                final Object o = array.get(i);
+                if (o instanceof Promise) {
+                    promise.all_[i] = (Promise) o;
+                }
+                else {
+                    promise.all_[i] = resolve(null, thisObj, new Object[] {o}, null);
+                }
+            }
+        }
+        promise.setParentScope(thisObj.getParentScope());
+        promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
+        return promise;
+    }
+
+    /**
      * It takes two arguments, both are callback functions for the success and failure cases of the Promise.
      *
      * @param onFulfilled success function
@@ -144,7 +214,7 @@ public class Promise extends SimpleScriptable {
                 Context.enter();
                 try {
                     Object newValue = null;
-                    final Function toExecute = resolve_ ? onFulfilled : onRejected;
+                    final Function toExecute = isResolved(onRejected) ? onFulfilled : onRejected;
                     if (value_ instanceof Function) {
                         final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(toExecute);
                         try {
