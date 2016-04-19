@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Madis Pärn
  */
 public class History implements Serializable {
+
     /**
      * The single entry in the history.
      */
