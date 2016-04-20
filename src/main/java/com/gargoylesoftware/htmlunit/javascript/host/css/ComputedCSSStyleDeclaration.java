@@ -357,7 +357,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defualtValue} 
+     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defualtValue}
      * @param defaultValue the default value of the string
      * @return the string, or {@code toReturnIfEmptyOrDefault}
      */
@@ -664,7 +664,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return pixelString(elem, new CssValue(0, windowHeight) {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), "362px", "auto");
+                final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
+                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, "auto");
             }
         });
     }
@@ -1226,7 +1227,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
-        final int defaultHeight;
+        int defaultHeight;
         if (node instanceof HtmlDivision && node.getTextContent().trim().isEmpty()) {
             defaultHeight = 0;
         }
@@ -1250,6 +1251,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             defaultHeight = ComputedHeight.getHeight(getBrowserVersion(), getFontSize());
+            if (node instanceof HtmlDivision) {
+                defaultHeight *= StringUtils.countMatches(node.asText(), '\n') + 1;
+            }
         }
 
         final int defaultWindowHeight = getElement() instanceof HTMLCanvasElement ? 150 : windowHeight;

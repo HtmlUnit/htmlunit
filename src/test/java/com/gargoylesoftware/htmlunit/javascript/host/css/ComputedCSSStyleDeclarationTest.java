@@ -1945,4 +1945,35 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"18", "18px", "36", "36px", "54", "54px"},
+            FF = {"20", "20px", "40", "40px", "60", "60px"},
+            IE = {"18", "18.4px", "37", "36.8px", "55", "55.2px"})
+    @NotYetImplemented(IE)
+    public void heightManyLines() throws Exception {
+        final String html = "<html>\n"
+            + "<head><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('test1');\n"
+            + "    alert(div.offsetHeight);\n"
+            + "    alert(window.getComputedStyle(div, null).height);\n"
+            + "    div = document.getElementById('test2');\n"
+            + "    alert(div.offsetHeight);\n"
+            + "    alert(window.getComputedStyle(div, null).height);\n"
+            + "    div = document.getElementById('test3');\n"
+            + "    alert(div.offsetHeight);\n"
+            + "    alert(window.getComputedStyle(div, null).height);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id=\"test1\">This is a long string of text.</div>\n"
+            + "  <div id=\"test2\">This is a long string of text.<br>Some more text<br></div>\n"
+            + "  <div id=\"test3\">This is a long string of text.<br>Some more text<br>and some more...</div>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
