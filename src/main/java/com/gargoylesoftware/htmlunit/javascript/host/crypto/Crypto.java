@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.crypto;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Random;
 
@@ -61,7 +60,7 @@ public class Crypto extends SimpleScriptable {
      * @param array the array to fill
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">MDN Doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction
     public void getRandomValues(final ArrayBufferViewBase array) {
         if (array == null) {
             throw Context.reportRuntimeError("TypeError: Argument 1 of Crypto.getRandomValues is not an object.");

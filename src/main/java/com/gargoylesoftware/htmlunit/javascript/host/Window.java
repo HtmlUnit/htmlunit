@@ -151,7 +151,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends EventTarget implements ScriptableWithFallbackGetter, Function {
+public class Window extends EventTarget implements ScriptableWithFallbackGetter, Function, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
@@ -655,7 +655,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return an identification id
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction
     public int requestAnimationFrame(final Object callback) {
         // nothing for now
         return 1;
@@ -666,7 +666,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param requestId the ID value returned by the call to window.requestAnimationFrame()
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction
     public void cancelAnimationFrame(final Object requestId) {
         // nothing for now
     }
@@ -731,13 +731,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
             if (page.isHtmlPage()) {
                 ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
-                ((HtmlPage) page).addAutoCloseable(new AutoCloseable() {
-
-                    @Override
-                    public void close() throws Exception {
-                        Symbol.remove(Window.this);
-                    }
-                });
+                ((HtmlPage) page).addAutoCloseable(this);
             }
         }
 
@@ -941,8 +935,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Closes this window.
      */
-    @JsxFunction
-    public void close() {
+    @JsxFunction(functionName = "close")
+    public void close_js() {
         final WebWindow webWindow = getWebWindow();
         if (webWindow instanceof TopLevelWindow) {
             ((TopLevelWindow) webWindow).close();
@@ -2035,8 +2029,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Getter for the onchange event handler.
      * @return the handler
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @JsxGetter
     public Object getOnchange() {
         return getHandlerForJavaScript(Event.TYPE_CHANGE);
     }
@@ -2045,8 +2038,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Setter for the onchange event handler.
      * @param onchange the handler
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @JsxSetter
     public void setOnchange(final Object onchange) {
         setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
     }
@@ -2055,8 +2047,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Getter for the onsubmit event handler.
      * @return the handler
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @JsxGetter
     public Object getOnsubmit() {
         return getHandlerForJavaScript(Event.TYPE_SUBMIT);
     }
@@ -2065,8 +2056,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Setter for the onsubmit event handler.
      * @param onsubmit the handler
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @JsxSetter
     public void setOnsubmit(final Object onsubmit) {
         setHandlerForJavaScript(Event.TYPE_SUBMIT, onsubmit);
     }
@@ -2238,8 +2228,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the crypto property.
-     * @return the crypto property
+     * Returns the {@code crypto} property.
+     * @return the {@code crypto} property
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public Crypto getCrypto() {
@@ -2247,6 +2237,14 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             crypto_ = new Crypto(this);
         }
         return crypto_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() {
+        Symbol.remove(this);
     }
 }
 
