@@ -1923,7 +1923,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "false"})
-    @NotYetImplemented
     public void height() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

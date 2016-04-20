@@ -356,13 +356,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return str;
     }
 
-    private String defaultIfEmpty(final String str, final String defaultStr) {
+    /**
+     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defualtValue} 
+     * @param defaultValue the default value of the string
+     * @return the string, or {@code toReturnIfEmptyOrDefault}
+     */
+    private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
         if (!getElement().getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
             return EMPTY_FINAL;
         }
-        if (str == null || str.isEmpty()) {
-            return defaultStr;
+        if (str == null || str.isEmpty() || str.equals(defaultValue)) {
+            return toReturnIfEmptyOrDefault;
         }
         return str;
     }
@@ -465,7 +470,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px"));
+        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px", null));
     }
 
     /**
@@ -473,7 +478,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightColor() {
-        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)", null);
     }
 
     /**
@@ -481,7 +486,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightStyle() {
-        return defaultIfEmpty(super.getBorderRightStyle(), "none");
+        return defaultIfEmpty(super.getBorderRightStyle(), "none", null);
     }
 
     /**
@@ -489,7 +494,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px"));
+        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px", null));
     }
 
     /**
@@ -497,7 +502,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopColor() {
-        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)", null);
     }
 
     /**
@@ -505,7 +510,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopStyle() {
-        return defaultIfEmpty(super.getBorderTopStyle(), "none");
+        return defaultIfEmpty(super.getBorderTopStyle(), "none", null);
     }
 
     /**
@@ -513,7 +518,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px"));
+        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px", null));
     }
 
     /**
@@ -521,7 +526,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBottom() {
-        return defaultIfEmpty(super.getBottom(), "auto");
+        return defaultIfEmpty(super.getBottom(), "auto", null);
     }
 
     /**
@@ -529,7 +534,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getColor() {
-        final String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
+        final String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)", null);
         return toRGBColor(value);
     }
 
@@ -659,7 +664,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return pixelString(elem, new CssValue(0, windowHeight) {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), "362px");
+                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), "362px", "auto");
             }
         });
     }
@@ -671,7 +676,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getLeft() {
         final String superLeft = super.getLeft();
         if (!superLeft.endsWith("%")) {
-            return defaultIfEmpty(superLeft, "auto");
+            return defaultIfEmpty(superLeft, "auto", null);
         }
 
         final Element elem = getElement();
@@ -691,7 +696,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLetterSpacing() {
-        return defaultIfEmpty(super.getLetterSpacing(), "normal");
+        return defaultIfEmpty(super.getLetterSpacing(), "normal", null);
     }
 
     /**
@@ -707,7 +712,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginBottom() {
-        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px"));
+        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px", null));
     }
 
     /**
@@ -717,7 +722,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getMarginLeft() {
         final String superMarginLeft = super.getMarginLeft();
         if (!superMarginLeft.endsWith("%")) {
-            return pixelString(defaultIfEmpty(superMarginLeft, "0px"));
+            return pixelString(defaultIfEmpty(superMarginLeft, "0px", null));
         }
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
@@ -745,7 +750,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getMarginRight() {
         final String superMarginRight = super.getMarginRight();
         if (!superMarginRight.endsWith("%")) {
-            return pixelString(defaultIfEmpty(superMarginRight, "0px"));
+            return pixelString(defaultIfEmpty(superMarginRight, "0px", null));
         }
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
@@ -771,7 +776,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginTop() {
-        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px"));
+        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px", null));
     }
 
     /**
@@ -779,7 +784,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxHeight() {
-        return defaultIfEmpty(super.getMaxHeight(), "none");
+        return defaultIfEmpty(super.getMaxHeight(), "none", null);
     }
 
     /**
@@ -787,7 +792,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxWidth() {
-        return defaultIfEmpty(super.getMaxWidth(), "none");
+        return defaultIfEmpty(super.getMaxWidth(), "none", null);
     }
 
     /**
@@ -795,7 +800,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMinHeight() {
-        return defaultIfEmpty(super.getMinHeight(), "0px");
+        return defaultIfEmpty(super.getMinHeight(), "0px", null);
     }
 
     /**
@@ -803,7 +808,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMinWidth() {
-        return defaultIfEmpty(super.getMinWidth(), "0px");
+        return defaultIfEmpty(super.getMinWidth(), "0px", null);
     }
 
     /**
@@ -811,7 +816,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOpacity() {
-        return defaultIfEmpty(super.getOpacity(), "1");
+        return defaultIfEmpty(super.getOpacity(), "1", null);
     }
 
     /**
@@ -819,7 +824,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOutlineWidth() {
-        return defaultIfEmpty(super.getOutlineWidth(), "0px");
+        return defaultIfEmpty(super.getOutlineWidth(), "0px", null);
     }
 
     /**
@@ -835,7 +840,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingBottom() {
-        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px", null));
     }
 
     /**
@@ -843,7 +848,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingLeft() {
-        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px", null));
     }
 
     /**
@@ -851,7 +856,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingRight() {
-        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px", null));
     }
 
     /**
@@ -859,7 +864,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingTop() {
-        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px", null));
     }
 
     /**
@@ -867,7 +872,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getRight() {
-        return defaultIfEmpty(super.getRight(), "auto");
+        return defaultIfEmpty(super.getRight(), "auto", null);
     }
 
     /**
@@ -875,7 +880,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTextIndent() {
-        return defaultIfEmpty(super.getTextIndent(), "0px");
+        return defaultIfEmpty(super.getTextIndent(), "0px", null);
     }
 
     /**
@@ -909,7 +914,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getVerticalAlign() {
-        return defaultIfEmpty(super.getVerticalAlign(), "baseline");
+        return defaultIfEmpty(super.getVerticalAlign(), "baseline", null);
     }
 
     /**
