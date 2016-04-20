@@ -1917,4 +1917,33 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false"})
+    @NotYetImplemented
+    public void height() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <style>\n"
+            + "    .autoheight {\n"
+            + "      height: auto;\n"
+            + "    }\n"
+            + "  </style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    var style = window.getComputedStyle(div, null);\n"
+            + "    alert(style.height == '0px');\n"
+            + "    div.className = 'autoheight';\n"
+            + "    alert(style.height == '0px');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>A</div>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
