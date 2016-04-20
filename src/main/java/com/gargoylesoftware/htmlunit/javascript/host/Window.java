@@ -731,6 +731,13 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
             if (page.isHtmlPage()) {
                 ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
+                ((HtmlPage) page).addAutoCloseable(new AutoCloseable() {
+
+                    @Override
+                    public void close() throws Exception {
+                        Symbol.remove(Window.this);
+                    }
+                });
             }
         }
 

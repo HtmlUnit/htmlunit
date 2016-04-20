@@ -233,4 +233,18 @@ public class Symbol extends SimpleScriptable {
         }
         return super.getDefaultValue(hint);
     }
+
+    /**
+     * Removes all cached symbols, which have the specified {@code window} as their parent scope.
+     * @param window the window
+     */
+    public static void remove(final Window window) {
+        for (final java.util.Map<String, Symbol> symbols : SYMBOL_MAP_.values()) {
+            for (final java.util.Iterator<Symbol> it = symbols.values().iterator(); it.hasNext();) {
+                if (it.next().getParentScope() == window) {
+                    it.remove();
+                }
+            }
+        }
+    }
 }
