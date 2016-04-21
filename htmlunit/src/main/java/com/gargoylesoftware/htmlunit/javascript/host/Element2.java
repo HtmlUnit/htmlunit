@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Gargoyle Software Inc.
+ * Copyright (c) 2016 Gargoyle Software Inc.
  *
  * This code is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 only, as
