@@ -111,6 +111,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOSCRIPT_DISPLAY_INLINE,
 
+    /** Unit is not required when setting outline-width style. */
+    @BrowserFeature(@WebBrowser(IE))
+    CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED,
+
     /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_PROGRESS_DISPLAY_INLINE,
@@ -137,6 +141,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
+
+    /** 'auto' is supported when setting vertical-align style. */
+    @BrowserFeature(@WebBrowser(IE))
+    CSS_VERTICAL_ALIGN_SUPPORTS_AUTO,
 
     /** zIndex is of type Integer. Other values are ignored (''). */
     @BrowserFeature(@WebBrowser(IE))
