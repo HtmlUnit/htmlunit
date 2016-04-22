@@ -1629,7 +1629,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
             CHROME = { "[object Window]", "function Window() { [native code] }",
-            "toString, TEMPORARY, PERSISTENT, " },
+            "TEMPORARY, PERSISTENT, " },
             FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
             IE8 = { "[object]", "exception" })
     public void enumeratedProperties() throws Exception {
@@ -1642,8 +1642,9 @@ public class Window2Test extends WebDriverTestCase {
             + "      alert(window);\n"
             + "      alert(Window);\n"
             + "      var str = '';\n"
-            + "      for (var i in Window)\n"
+            + "      for (var i in Window) {\n"
             + "        str += i + ', ';\n"
+            + "      }\n"
             + "      alert(str);\n"
             + "    } catch (e) { alert('exception')}\n"
             + "  }\n"
