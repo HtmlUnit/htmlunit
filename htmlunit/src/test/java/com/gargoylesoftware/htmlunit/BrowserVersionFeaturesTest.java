@@ -67,7 +67,7 @@ public class BrowserVersionFeaturesTest  {
         browsers.add(BrowserVersion.FIREFOX_31);
         browsers.add(BrowserVersion.FIREFOX_38);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
-        browsers.add(BrowserVersion.INTERNET_EXPLORER_11);
+        browsers.add(BrowserVersion.INTERNET_EXPLORER);
         browsers.add(BrowserVersion.CHROME);
         browsers.add(BrowserVersion.EDGE);
 

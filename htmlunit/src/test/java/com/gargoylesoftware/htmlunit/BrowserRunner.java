@@ -82,11 +82,8 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff38")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, true));
                 }
-                if (browsers.contains("ie8")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
-                }
-                if (browsers.contains("ie11")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, true));
+                if (browsers.contains("ie")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, true));
                 }
                 if (browsers.contains("edge")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.EDGE, true));
@@ -102,11 +99,8 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-ff38")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, false));
             }
-            if (browsers.contains("hu-ie8")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-            }
-            if (browsers.contains("hu-ie11")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
+            if (browsers.contains("hu-ie")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
             }
             if (browsers.contains("hu-edge")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.EDGE, false));

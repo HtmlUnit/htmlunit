@@ -86,7 +86,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * Application name for the Internet Explorer series of browsers.
      */
-    private static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
+    private static final String INTERNET_EXPLORER_ = "Microsoft Internet Explorer";
 
     /**
      * Application name the Netscape navigator series of browsers.
@@ -133,13 +133,13 @@ public class BrowserVersion implements Serializable, Cloneable {
      * It exists as Internet Explorer 11 has Enterprise Mode, which behaves as Internet Explorer 8.
      */
     public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
-        INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
+        INTERNET_EXPLORER_, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
 
     /** Internet Explorer 11. */
-    public static final BrowserVersion INTERNET_EXPLORER_11 = new BrowserVersion(
+    public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
-        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE11", null);
+        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE", null);
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
@@ -163,7 +163,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Register plugins for the browser versions. */
     static {
         INTERNET_EXPLORER_8.initDefaultFeatures();
-        INTERNET_EXPLORER_11.initDefaultFeatures();
+        INTERNET_EXPLORER.initDefaultFeatures();
 
         FIREFOX_31.initDefaultFeatures();
         FIREFOX_38.initDefaultFeatures();
@@ -190,15 +190,15 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
-        INTERNET_EXPLORER_11.setBrowserLanguage("en-US");
-        INTERNET_EXPLORER_11.setVendor("");
-        INTERNET_EXPLORER_11.setHeaderNamesOrdered(new String[] {
+        INTERNET_EXPLORER.setBrowserLanguage("en-US");
+        INTERNET_EXPLORER.setVendor("");
+        INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
             "Cookie" });
-        INTERNET_EXPLORER_11.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
-        INTERNET_EXPLORER_11.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
-        INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
-        INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
+        INTERNET_EXPLORER.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
+        INTERNET_EXPLORER.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
+        INTERNET_EXPLORER.setCssAcceptHeader("text/css, */*");
+        INTERNET_EXPLORER.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
         EDGE.initDefaultFeatures();
         EDGE.setBrowserLanguage("en-US");
@@ -236,7 +236,7 @@ public class BrowserVersion implements Serializable, Cloneable {
                 "Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        INTERNET_EXPLORER_11.getPlugins().add(flash);
+        INTERNET_EXPLORER.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx");

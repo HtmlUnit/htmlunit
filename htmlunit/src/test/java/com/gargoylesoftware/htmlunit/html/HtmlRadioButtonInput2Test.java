@@ -684,7 +684,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("radio")).click();
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER != getBrowserVersion()) {
             driver.findElement(By.id("myInput")).click();
             assertEquals(getExpectedAlerts()[1], driver.getTitle());
         }

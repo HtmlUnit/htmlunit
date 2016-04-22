@@ -143,13 +143,9 @@ public class BrowserParameterizedRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.FIREFOX_38, true, tests));
                 }
-                if (browsers.contains("ie8")) {
+                if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.INTERNET_EXPLORER_8, true, tests));
-                }
-                if (browsers.contains("ie11")) {
-                    runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.INTERNET_EXPLORER_11, true, tests));
+                            klass, BrowserVersion.INTERNET_EXPLORER, true, tests));
                 }
                 if (browsers.contains("edge")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
@@ -169,13 +165,9 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.FIREFOX_38, false, tests));
             }
-            if (browsers.contains("hu-ie8")) {
+            if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.INTERNET_EXPLORER_8, false, tests));
-            }
-            if (browsers.contains("hu-ie11")) {
-                runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.INTERNET_EXPLORER_11, false, tests));
+                        klass, BrowserVersion.INTERNET_EXPLORER, false, tests));
             }
             if (browsers.contains("hu-edge")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(

@@ -210,7 +210,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         httpEntity.writeTo(out);
         out.close();
 
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER != getBrowserVersion()) {
             final Pattern pattern = Pattern
                 .compile("Content-Disposition: form-data; name=\"image\";"
                         + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");

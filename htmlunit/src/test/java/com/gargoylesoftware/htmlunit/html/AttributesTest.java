@@ -232,7 +232,7 @@ public class AttributesTest extends TestCase {
      */
     @Override
     protected void runTest() throws Exception {
-        try (final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_11)) {
+        try (final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER)) {
             final MockWebConnection connection = new MockWebConnection();
             connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
             webClient.setWebConnection(connection);

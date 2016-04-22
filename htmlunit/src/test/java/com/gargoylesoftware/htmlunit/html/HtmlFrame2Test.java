@@ -194,7 +194,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         Assert.assertEquals(4, actualAlerts.size());
 
         // ignore order of frame windows
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER != getBrowserVersion()) {
             // returns 'first' 'third' 'fourth' 'second'
             Assert.assertEquals("first", actualAlerts.get(0));
         }

@@ -188,10 +188,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             if (BROWSERS_PROPERTIES_.contains("hu")) {
                 BROWSERS_PROPERTIES_.add("hu-chrome");
-                BROWSERS_PROPERTIES_.add("hu-ff31");
                 BROWSERS_PROPERTIES_.add("hu-ff38");
-                BROWSERS_PROPERTIES_.add("hu-ie8");
-                BROWSERS_PROPERTIES_.add("hu-ie11");
+                BROWSERS_PROPERTIES_.add("hu-ie");
             }
         }
         return BROWSERS_PROPERTIES_;
