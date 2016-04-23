@@ -38,11 +38,11 @@ public @interface WebBrowser {
      * The minimum version which supports this feature.
      * @return the minimum version
      */
-    float minVersion() default 0;
+    int minVersion() default 0;
 
     /**
      * The maximum version which supports this feature.
      * @return the maximum version
      */
-    float maxVersion() default Float.MAX_VALUE;
+    int maxVersion() default Integer.MAX_VALUE;
 }

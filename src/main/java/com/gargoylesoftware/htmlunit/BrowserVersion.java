@@ -117,7 +117,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     public static final BrowserVersion FIREFOX_38 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0",
-        (float) 38.0, "FF38", null);
+        38, "FF38", null);
 
     /**
      * Firefox 45 ESR.
@@ -126,7 +126,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     public static final BrowserVersion FIREFOX_45 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
-        (float) 45.0, "FF45", null);
+        45, "FF45", null);
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
@@ -266,7 +266,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
-    private float browserVersionNumeric_;
+    private int browserVersionNumeric_;
     private final Set<PluginConfiguration> plugins_ = new HashSet<>();
     private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
     private final String nickname_;
@@ -283,10 +283,10 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
-     * @param browserVersionNumeric the floating number version of the browser
+     * @param browserVersionNumeric the number version of the browser
      */
     public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final float browserVersionNumeric) {
+        final String userAgent, final int browserVersionNumeric) {
 
         this(applicationName, applicationVersion, userAgent,
                 browserVersionNumeric, applicationName + browserVersionNumeric, null);
@@ -298,11 +298,11 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
-     * @param browserVersionNumeric the floating number version of the browser
+     * @param browserVersionNumeric the number version of the browser
      * @param features the browser features
      */
     public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final float browserVersionNumeric,
+        final String userAgent, final int browserVersionNumeric,
         final BrowserVersionFeatures[] features) {
 
         this(applicationName, applicationVersion, userAgent,
@@ -321,7 +321,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final float browserVersionNumeric,
+        final String userAgent, final int browserVersionNumeric,
         final String nickname, final BrowserVersionFeatures[] features) {
 
         applicationName_ = applicationName;
@@ -675,7 +675,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * @param browserVersion the browserVersion to set
      */
-    public void setBrowserVersion(final float browserVersion) {
+    public void setBrowserVersion(final int browserVersion) {
         browserVersionNumeric_ = browserVersion;
     }
 
@@ -718,7 +718,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * @return the browserVersionNumeric
      */
-    public float getBrowserVersionNumeric() {
+    public int getBrowserVersionNumeric() {
         return browserVersionNumeric_;
     }
 

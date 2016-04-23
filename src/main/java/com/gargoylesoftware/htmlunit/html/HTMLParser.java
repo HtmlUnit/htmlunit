@@ -589,8 +589,7 @@ public final class HTMLParser {
                         final String content = meta.getContentAttribute();
                         if (content.startsWith("IE=")) {
                             final String mode = content.substring(3).trim();
-                            final int version = (int) page_.getWebClient().getBrowserVersion().
-                                                                getBrowserVersionNumeric();
+                            final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
                             if ("edge".equals(mode)) {
                                 ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(version);
                             }

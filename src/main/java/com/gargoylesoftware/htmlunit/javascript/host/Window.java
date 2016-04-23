@@ -1924,7 +1924,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         if (getBrowserVersion().getBrowserVersionNumeric() < 10) {
             return 5;
         }
-        return (int) getBrowserVersion().getBrowserVersionNumeric();
+        return getBrowserVersion().getBrowserVersionNumeric();
     }
 
     /**
@@ -1935,7 +1935,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxFunction(@WebBrowser(IE))
     public int ScriptEngineMinorVersion() {
         if (getBrowserVersion().getBrowserVersionNumeric() < 10) {
-            return (int) getBrowserVersion().getBrowserVersionNumeric();
+            return getBrowserVersion().getBrowserVersionNumeric();
         }
         return 0;
     }

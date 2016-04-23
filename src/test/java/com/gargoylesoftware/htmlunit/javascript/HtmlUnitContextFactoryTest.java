@@ -37,7 +37,7 @@ public class HtmlUnitContextFactoryTest extends SimpleWebTestCase {
         final String html = "<html></html>";
         final String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0";
         final BrowserVersion browserVersion = new BrowserVersion("Firefox",
-                "5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0", userAgent, 39.0f);
+                "5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0", userAgent, 39);
 
         loadPage(browserVersion, html, null, URL_FIRST);
     }
