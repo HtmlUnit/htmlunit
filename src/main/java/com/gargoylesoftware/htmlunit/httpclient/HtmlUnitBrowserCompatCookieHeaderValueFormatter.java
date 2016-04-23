@@ -31,6 +31,7 @@ public class HtmlUnitBrowserCompatCookieHeaderValueFormatter extends BasicHeader
     /**
      * Single instance as in BasicHeaderValueFormatter.
      */
+    @SuppressWarnings("hiding")
     public static final HtmlUnitBrowserCompatCookieHeaderValueFormatter
                             INSTANCE = new HtmlUnitBrowserCompatCookieHeaderValueFormatter();
 

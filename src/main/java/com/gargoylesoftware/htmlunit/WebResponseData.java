@@ -116,7 +116,7 @@ public class WebResponseData implements Serializable {
                                  + "<p>The page you are trying to view cannot be shown because"
                                  + " it uses an invalid or unsupported form of compression.</p>\n"
                                  + "</body>\n"
-                                 + "</html>");
+                                 + "</html>", TextUtil.DEFAULT_CHARSET);
                 }
             }
             else if (StringUtils.contains(encoding, "deflate")) {
