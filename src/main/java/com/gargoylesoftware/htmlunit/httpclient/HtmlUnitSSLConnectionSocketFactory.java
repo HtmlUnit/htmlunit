@@ -42,9 +42,10 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpHost;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.ssl.SSLContexts;
 import org.apache.http.protocol.HttpContext;
 
 import com.gargoylesoftware.htmlunit.WebClientOptions;
@@ -130,9 +131,9 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
             final String[] supportedProtocols, final String[] supportedCipherSuites)
         throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
         super(SSLContexts.custom()
-                .loadKeyMaterial(keystore, keystorePassword).loadTrustMaterial(truststore).build(),
+                .loadKeyMaterial(keystore, keystorePassword).loadTrustMaterial(truststore, null).build(),
                 supportedProtocols, supportedCipherSuites,
-                BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+                new DefaultHostnameVerifier());
         useInsecureSSL_ = useInsecureSSL;
     }
 

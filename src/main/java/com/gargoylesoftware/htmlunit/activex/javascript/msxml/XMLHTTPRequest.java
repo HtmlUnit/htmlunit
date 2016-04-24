@@ -401,13 +401,11 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
 
             // password is ignored if no user defined
-            final boolean userIsNull = null == user || Undefined.instance == user;
-            if (!userIsNull) {
+            if (user != null && user != Undefined.instance) {
                 final String userCred = user.toString();
 
-                final boolean passwordIsNull = null == password || Undefined.instance == password;
                 String passwordCred = "";
-                if (!passwordIsNull) {
+                if (password != null && password != Undefined.instance) {
                     passwordCred = password.toString();
                 }
 

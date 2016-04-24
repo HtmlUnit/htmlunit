@@ -319,7 +319,7 @@ public class XMLDOMElement extends XMLDOMNode {
         if ("*".equals(tagNameTrimmed)) {
             collection = new XMLDOMNodeList(node, false, description) {
                 @Override
-                protected boolean isMatching(final DomNode node) {
+                protected boolean isMatching(final DomNode domNode) {
                     return true;
                 }
             };
@@ -351,8 +351,8 @@ public class XMLDOMElement extends XMLDOMNode {
         else {
             collection = new XMLDOMNodeList(node, false, description) {
                 @Override
-                protected boolean isMatching(final DomNode node) {
-                    return tagNameTrimmed.equals(node.getNodeName());
+                protected boolean isMatching(final DomNode domNode) {
+                    return tagNameTrimmed.equals(domNode.getNodeName());
                 }
             };
         }
