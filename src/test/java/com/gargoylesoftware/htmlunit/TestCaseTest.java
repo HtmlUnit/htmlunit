@@ -59,7 +59,7 @@ public final class TestCaseTest {
                     generateTestForHtmlElements(file);
                 }
                 else if (file.getName().endsWith(".java")) {
-                    final List<String> lines = FileUtils.readLines(file);
+                    final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                     for (final String line : lines) {
                         if (line.contains("(\"xmp\")")) {
                             final String relativePath = file.getAbsolutePath().substring(

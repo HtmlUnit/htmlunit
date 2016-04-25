@@ -324,7 +324,7 @@ public class HtmlPage extends InteractivePage {
         deregisterFramesIfNeeded();
         cleaning_ = false;
         if (autoCloseableList_ != null) {
-            for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
+            for (@SuppressWarnings("resource") final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
                 try {
                     closeable.close();
                 }

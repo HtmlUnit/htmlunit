@@ -32,6 +32,7 @@ import org.junit.runners.model.FrameworkMethod;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CodeStyleTest;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.general.HostExtractor;
 
 /**
@@ -50,7 +51,7 @@ final class TestCaseCorrector {
         final String testRoot = "src/test/java/";
         final String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
         final File file = new File(testRoot + method.getDeclaringClass().getName().replace('.', '/') + ".java");
-        final List<String> lines = FileUtils.readLines(file);
+        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
         final String methodLine = "    public void " + method.getName() + "()";
         if (realBrowser) {
             String defaultExpectation = null;

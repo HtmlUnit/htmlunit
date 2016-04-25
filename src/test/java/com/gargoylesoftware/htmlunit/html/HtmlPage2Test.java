@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -229,7 +230,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
-        final String content = FileUtils.readFileToString(file);
+        final String content = FileUtils.readFileToString(file, TextUtil.DEFAULT_CHARSET);
         assertFalse(content.contains("<script"));
 
         assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
@@ -425,7 +426,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
-        assertEquals(css, FileUtils.readFileToString(cssFile));
+        assertEquals(css, FileUtils.readFileToString(cssFile, TextUtil.DEFAULT_CHARSET));
 
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
     }
@@ -543,7 +544,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             assertTrue(file.exists());
             assertTrue(file.isFile());
             assertTrue(page.asXml().contains("</textarea>"));
-            assertTrue(FileUtils.readFileToString(file).contains("</textarea>"));
+            assertTrue(FileUtils.readFileToString(file, TextUtil.DEFAULT_CHARSET).contains("</textarea>"));
         }
         finally {
             file.delete();

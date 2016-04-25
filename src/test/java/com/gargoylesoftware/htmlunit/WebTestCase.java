@@ -650,7 +650,7 @@ public abstract class WebTestCase {
             final File outFile = new File(targetDir, generateTest_testName_);
 
             final String newContent = getModifiedContent(generateTest_content_);
-            FileUtils.writeStringToFile(outFile, newContent);
+            FileUtils.writeStringToFile(outFile, newContent, TextUtil.DEFAULT_CHARSET);
 
             // write the expected alerts
             final String suffix;
@@ -789,7 +789,7 @@ public abstract class WebTestCase {
     protected String getFileContent(final String fileName) throws IOException {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(fileName);
         assertNotNull(fileName, stream);
-        return IOUtils.toString(stream);
+        return IOUtils.toString(stream, TextUtil.DEFAULT_CHARSET);
     }
 
 }

@@ -57,7 +57,7 @@ public class NotYetImplementedTest {
                         && !"SimpleWebTestCase.java".equals(fileName)
                         && !"NotYetImplementedTest.java".equals(fileName)
                         && !"CodeStyleTest.java".equals(fileName)) {
-                    final List<String> lines = FileUtils.readLines(file);
+                    final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
                     process(lines, relativePath);
@@ -262,7 +262,7 @@ public class NotYetImplementedTest {
         builder.insert(overviewPos, overview);
 
         FileUtils.writeStringToFile(new File(ElementPropertiesTest.getTargetDirectory(), "notYetImplemented.html"),
-                builder.toString());
+                builder.toString(), TextUtil.DEFAULT_CHARSET);
     }
 
 }

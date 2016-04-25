@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -58,7 +59,7 @@ class XmlSerializer {
         }
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         outputDir_ = new File(file.getParentFile(), fileName);
-        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()));
+        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()), TextUtil.DEFAULT_CHARSET);
     }
 
     /**
@@ -206,7 +207,7 @@ class XmlSerializer {
         final DomAttr hrefAttr = map.get("href");
         if ((null != hrefAttr) && StringUtils.isNotBlank(hrefAttr.getValue())) {
             final File file = createFile(hrefAttr.getValue(), ".css");
-            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
+            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(), TextUtil.DEFAULT_CHARSET);
             hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
         }
 

@@ -56,7 +56,7 @@ public class ExternalTest {
     @Test
     public void pom() throws Exception {
         if (isDifferentWeek()) {
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"));
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
             for (int i = 0; i < lines.size(); i++) {
                 final String line = lines.get(i);
                 if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
@@ -91,7 +91,7 @@ public class ExternalTest {
     @Test
     public void snapshot() throws Exception {
         if (isDifferentWeek()) {
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"));
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
             String version = null;
             for (int i = 0; i < lines.size(); i++) {
                 if ("<artifactId>htmlunit</artifactId>".equals(lines.get(i).trim())) {

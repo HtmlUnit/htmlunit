@@ -429,19 +429,19 @@ public class HtmlImage extends HtmlElement {
             if (null == imageWebResponse_) {
                 throw new IOException("No image response available (src=" + getSrcAttribute() + ")");
             }
-            final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
-            final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
-            if (!iter.hasNext()) {
-                iis.close();
-                throw new IOException("No image detected in response");
-            }
-            final ImageReader imageReader = iter.next();
-            imageReader.setInput(iis);
-            imageData_ = new ImageData(imageReader);
+            try (final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream())) {
+                final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+                if (!iter.hasNext()) {
+                    throw new IOException("No image detected in response");
+                }
+                final ImageReader imageReader = iter.next();
+                imageReader.setInput(iis);
+                imageData_ = new ImageData(imageReader);
 
-            // dispose all others
-            while (iter.hasNext()) {
-                iter.next().dispose();
+                // dispose all others
+                while (iter.hasNext()) {
+                    iter.next().dispose();
+                }
             }
         }
     }
@@ -556,9 +556,8 @@ public class HtmlImage extends HtmlElement {
         protected void finalize() throws Throwable {
             if (imageReader_ != null) {
                 try {
-                    final ImageInputStream stream = (ImageInputStream) imageReader_.getInput();
-                    if (stream != null) {
-                        stream.close();
+                    try (final ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
+                        // nothing
                     }
                 }
                 catch (final IOException e) {

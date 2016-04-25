@@ -1304,6 +1304,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final JavaScriptEngine engine = webClient.getJavaScriptEngine();
 
@@ -1349,15 +1350,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 + "<body onload='setTimeout(test, 50);'>\n"
                 + "</body></html>";
 
-        final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        try (final WebClient webClient = getWebClient()) {
+            final List<String> collectedAlerts = new ArrayList<>();
+            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        loadPage(html);
-        Thread.sleep(100);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+            loadPage(html);
+            Thread.sleep(100);
+            assertEquals(getExpectedAlerts(), collectedAlerts);
 
-        webClient.close();
+        }
         Thread.sleep(400);
         assertEquals(0, getJavaScriptThreads().size());
     }

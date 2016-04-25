@@ -29,6 +29,7 @@ public class FileReader extends EventTarget {
 
     /** No data has been loaded yet. */
     @JsxConstant
+    @SuppressWarnings("hiding")
     public static final short EMPTY = 0;
 
     /** Data is currently being loaded. */

@@ -76,6 +76,7 @@ import org.w3c.dom.stylesheets.MediaList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -1006,7 +1007,7 @@ public class CSSStyleSheet extends StyleSheet {
                     final ByteArrayInputStream bis = (ByteArrayInputStream) is;
                     bis.reset();
                 }
-                return IOUtils.toString(is);
+                return IOUtils.toString(is, TextUtil.DEFAULT_CHARSET);
             }
             return "";
         }

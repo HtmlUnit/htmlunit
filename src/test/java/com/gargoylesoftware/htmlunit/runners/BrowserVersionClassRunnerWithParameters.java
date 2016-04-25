@@ -93,10 +93,12 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
             methods.add(newMethod);
         }
 
-        for (int i = 0; i < tests_.size() - 1; i++) {
-            final FrameworkMethodWithParameters method = new FrameworkMethodWithParameters(
-                    getTestClass(), defualtMethod.getMethod(), tests_.get(i + 1).getParameters());
-            methods.add(method);
+        if (defualtMethod != null) {
+            for (int i = 0; i < tests_.size() - 1; i++) {
+                final FrameworkMethodWithParameters method = new FrameworkMethodWithParameters(
+                        getTestClass(), defualtMethod.getMethod(), tests_.get(i + 1).getParameters());
+                methods.add(method);
+            }
         }
 
         for (final Iterator<FrameworkMethod> it = methods.iterator(); it.hasNext();) {

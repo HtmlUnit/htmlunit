@@ -144,7 +144,7 @@ public class BrowserVersionFeaturesTest  {
                 unusedCheck(file, unusedFeatures);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file);
+                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                 final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
                 for (final String line : lines) {
                     for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {

@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -2589,8 +2590,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
         final File cssFolder = new File("src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/");
-        final List<String> cssLines = FileUtils.readLines(new File(cssFolder, "CSSStyleDeclaration.java"));
-        final List<String> computedLines = FileUtils.readLines(new File(cssFolder, "ComputedCSSStyleDeclaration.java"));
+        final List<String> cssLines = FileUtils.readLines(new File(cssFolder, "CSSStyleDeclaration.java"),
+                TextUtil.DEFAULT_CHARSET);
+        final List<String> computedLines = FileUtils.readLines(new File(cssFolder, "ComputedCSSStyleDeclaration.java"),
+                TextUtil.DEFAULT_CHARSET);
         for (final String propertyName : propertyMap.keySet()) {
             final PropertyInfo info = propertyMap.get(propertyName);
             if (info.getReadMethod() == null) {

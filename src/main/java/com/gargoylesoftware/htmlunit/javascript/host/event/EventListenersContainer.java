@@ -230,7 +230,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (node != null && !node.handles(event)) {
+        if (node == null || !node.handles(event)) {
             return null;
         }
         ScriptResult allResult = null;

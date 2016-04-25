@@ -29,6 +29,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
+
 /**
  * Tests the general host tests have all JavaScript objects names defined in all the other tests.
  *
@@ -77,7 +79,7 @@ public class HostTestsTest {
                 collectionObjectNames(file, set);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file);
+                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                 for (final String line : lines) {
                     final Matcher matcher = pattern_.matcher(line);
                     while (matcher.find()) {
@@ -90,7 +92,7 @@ public class HostTestsTest {
 
     private static void ensure(final File file, final Set<String> set) throws IOException {
         final Set<String> unusedNames = new HashSet<>(set);
-        final List<String> lines = FileUtils.readLines(file);
+        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
         for (final String line : lines) {
             for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
                 if (line.contains("(\"" + it.next() + "\")")) {

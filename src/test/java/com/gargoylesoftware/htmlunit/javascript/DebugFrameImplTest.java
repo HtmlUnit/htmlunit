@@ -30,6 +30,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 
@@ -95,7 +96,8 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     void loggedCalls() throws Exception {
         final URL url = getClass().getResource("debugFrameImplTest.html");
-        final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"));
+        final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"),
+                TextUtil.DEFAULT_CHARSET);
 
         final StringWriter sw = new StringWriter();
         final Layout layout = new PatternLayout("%m%n");

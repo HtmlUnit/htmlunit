@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -642,7 +643,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("a")
     public void stackOverflow() throws Exception {
-        final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"));
+        final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"),
+                TextUtil.DEFAULT_CHARSET);
         final String html = buildHtml(
                   "var s = '" + s + "';\n"
                 + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"

@@ -559,7 +559,7 @@ public abstract class HtmlElement extends DomElement {
         final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyPressResult = fireEvent(keyPress);
 
-        if ((shiftDownResult == null || !shiftDown.isAborted(shiftDownResult))
+        if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
                 && !keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
             doType(c, shiftKey, ctrlKey, altKey);
         }

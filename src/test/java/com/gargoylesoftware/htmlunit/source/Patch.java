@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
+
 /**
  * Patches utilities.
  *
@@ -42,14 +44,14 @@ public final class Patch {
     public static void checkAuthor(final String baseDir, final String patchPath, final String authorName)
         throws IOException {
         final List<String> errors = new ArrayList<>();
-        final List<String> lines = FileUtils.readLines(new File(patchPath));
+        final List<String> lines = FileUtils.readLines(new File(patchPath), TextUtil.DEFAULT_CHARSET);
         for (final String line : lines) {
             if (line.startsWith("+++")) {
                 final String fileName = line.substring(4, line.indexOf('\t', 4));
                 if (fileName.endsWith(".java")) {
                     final File file = new File(baseDir, fileName);
                     if (file.exists()) {
-                        final List<String> fileLines = FileUtils.readLines(file);
+                        final List<String> fileLines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                         boolean authorFound = false;
                         for (final String fileLine : fileLines) {
                             if (fileLine.contains("@author " + authorName)) {
@@ -79,7 +81,7 @@ public final class Patch {
      * @throws IOException if an exception occurs
      */
     public static void generateHtmlString(final File htmlFile) throws IOException {
-        final List<String> lines = FileUtils.readLines(htmlFile);
+        final List<String> lines = FileUtils.readLines(htmlFile, TextUtil.DEFAULT_CHARSET);
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i).replace("\t", "    ").replace("\\", "\\\\").replace("\"", "\\\"");
             if (i == 0) {

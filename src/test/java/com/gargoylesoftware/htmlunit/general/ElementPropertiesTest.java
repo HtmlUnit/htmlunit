@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -255,7 +256,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     .append(htmlDetailsHeader())
                     .append(HTML_)
                     .append(htmlDetailsFooter())
-                    .append(htmlFooter()).toString());
+                    .append(htmlFooter()).toString(), TextUtil.DEFAULT_CHARSET);
     }
 
     private static void saveChart() throws IOException {

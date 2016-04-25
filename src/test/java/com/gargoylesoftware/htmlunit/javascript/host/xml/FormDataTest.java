@@ -36,6 +36,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -225,7 +226,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);
@@ -301,7 +302,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);
@@ -369,7 +370,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);
@@ -685,7 +686,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);

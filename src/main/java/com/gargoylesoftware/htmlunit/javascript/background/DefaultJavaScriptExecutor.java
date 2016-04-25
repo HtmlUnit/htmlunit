@@ -72,6 +72,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         return "JS executor for " + webClient_.get();
     }
 
+    @SuppressWarnings("deprecation")
     private void killThread() {
         if (eventLoopThread_ == null) {
             return;
