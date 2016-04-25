@@ -12,7 +12,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -20,7 +19,6 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
@@ -31,24 +29,24 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -57,8 +55,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 public class Window2 extends EventTarget2 {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
@@ -66,6 +62,12 @@ public class Window2 extends EventTarget2 {
     private Object controllers_ = new SimpleScriptObject();
     private Document2 document_;
     private HTMLCollection2 frames_; // has to be a member to have equality (==) working
+
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR, value = @WebBrowser(CHROME))
+    public static final int TEMPORARY = 0;
+
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR, value = @WebBrowser(CHROME))
+    public static final int PERSISTENT = 1;
 
     /**
      * Initialize the object.
@@ -119,25 +121,25 @@ public class Window2 extends EventTarget2 {
         return Global.instance().getDomObject();
     }
 
-    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter
     public static int getInnerHeight(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getInnerHeight();
     }
 
-    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter
     public static int getInnerWidth(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getInnerWidth();
     }
 
-    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter
     public static int getOuterHeight(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getOuterHeight();
     }
 
-    @Getter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @Getter
     public static int getOuterWidth(final Object self) {
         final WebWindow webWindow = Global.instance().getDomObject();
         return webWindow.getOuterWidth();
@@ -306,6 +308,15 @@ public class Window2 extends EventTarget2 {
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
             setPrototype(prototype);
+            ScriptUtils.initialize(this);
+        }
+ 
+        public int G$TEMPORARY() {
+            return TEMPORARY;
+        }
+
+        public int G$PERSISTENT() {
+            return PERSISTENT;
         }
     }
 
