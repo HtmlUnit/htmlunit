@@ -429,19 +429,20 @@ public class HtmlImage extends HtmlElement {
             if (null == imageWebResponse_) {
                 throw new IOException("No image response available (src=" + getSrcAttribute() + ")");
             }
-            try (final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream())) {
-                final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
-                if (!iter.hasNext()) {
-                    throw new IOException("No image detected in response");
-                }
-                final ImageReader imageReader = iter.next();
-                imageReader.setInput(iis);
-                imageData_ = new ImageData(imageReader);
+            @SuppressWarnings("resource")
+            final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
+            final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+            if (!iter.hasNext()) {
+                iis.close();
+                throw new IOException("No image detected in response");
+            }
+            final ImageReader imageReader = iter.next();
+            imageReader.setInput(iis);
+            imageData_ = new ImageData(imageReader);
 
-                // dispose all others
-                while (iter.hasNext()) {
-                    iter.next().dispose();
-                }
+            // dispose all others
+            while (iter.hasNext()) {
+                iter.next().dispose();
             }
         }
     }
