@@ -97,8 +97,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     private void initGlobal(final ScriptEngine engine, final Browser browser) {
         Browser.setCurrent(browser);
-        final SimpleScriptContext context = (SimpleScriptContext) engine.getContext();
-        final Global global = get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
+        final Global global = getGlobal();
         final Global oldGlobal = Context.getGlobal();
         try {
             Context.setGlobal(global);
