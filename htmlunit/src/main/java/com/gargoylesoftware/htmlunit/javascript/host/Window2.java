@@ -21,7 +21,6 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.collections.set.SynchronizedSortedSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,6 +30,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
@@ -267,9 +267,8 @@ public class Window2 extends EventTarget2 {
         return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name));
     }
 
-    
     public Object getArbitraryProperty(final String name) {
-        HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         Object object = getFrameWindowByName(page, name);
         return object;
     }
@@ -503,18 +502,18 @@ class HTMLCollectionFrames2 extends HTMLCollection2 {
         return node instanceof BaseFrameElement;
     }
 
-//    @Override
-//    protected Scriptable getScriptableForElement(final Object obj) {
-//        final WebWindow window;
-//        if (obj instanceof BaseFrameElement) {
-//            window = ((BaseFrameElement) obj).getEnclosedWindow();
-//        }
-//        else {
-//            window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
-//        }
-//
-//        return Window.getProxy(window);
-//    }
+    @Override
+    protected ScriptObject getScriptObjectForElement(final Object obj) {
+        final WebWindow window;
+        if (obj instanceof BaseFrameElement) {
+            window = ((BaseFrameElement) obj).getEnclosedWindow();
+        }
+        else {
+            window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
+        }
+
+        return window.getScriptObject2();
+    }
 
 //    @Override
 //    protected Object getWithPreemption(final String name) {

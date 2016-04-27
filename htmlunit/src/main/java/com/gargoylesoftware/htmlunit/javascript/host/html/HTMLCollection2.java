@@ -38,6 +38,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -60,6 +61,12 @@ public class HTMLCollection2 extends AbstractList2 {
      */
     public HTMLCollection2(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
         super(parentScope, attributeChangeSensitive, description);
+        List<Object> list = new ArrayList<>();
+        for (Object o : computeElements()) {
+                list.add(getScriptObjectForElement(o));
+        }
+        
+        setArray(new ObjectArrayData(list.toArray(new Object[list.size()]), list.size()));
     }
 
     public static HTMLCollection2 constructor(final boolean newObj, final Object self) {
@@ -143,18 +150,6 @@ public class HTMLCollection2 extends AbstractList2 {
             }
         }
         return null;
-    }
-
-    /**
-     * Gets the scriptable for the provided element that may already be the right scriptable.
-     * @param object the object for which to get the scriptable
-     * @return the scriptable
-     */
-    protected SimpleScriptObject getScriptObjectForElement(final Object object) {
-        if (object instanceof SimpleScriptObject) {
-            return (SimpleScriptObject) object;
-        }
-        return getScriptableFor(object);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
