@@ -21,10 +21,12 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.collections.set.SynchronizedSortedSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -39,6 +41,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+import com.gargoylesoftware.js.internal.dynalink.CallSiteDescriptor;
+import com.gargoylesoftware.js.internal.dynalink.linker.GuardedInvocation;
+import com.gargoylesoftware.js.internal.dynalink.linker.LinkRequest;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
@@ -255,13 +260,36 @@ public class Window2 extends EventTarget2 {
         return window.document_;
     }
 
+    @Override
+    public GuardedInvocation noSuchProperty(CallSiteDescriptor desc, LinkRequest request) {
+        final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
+        MethodHandle mh = virtualHandle("getArbitraryProperty", Object.class, String.class);
+        return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name));
+    }
+
+    
+    public Object getArbitraryProperty(final String name) {
+        HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        Object object = getFrameWindowByName(page, name);
+        return object;
+    }
+
+    private static Object getFrameWindowByName(final HtmlPage page, final String name) {
+        try {
+            return page.getFrameByName(name).getScriptObject2();
+        }
+        catch (final ElementNotFoundException e) {
+            return null;
+        }
+    }
+
     /**
      * Returns the number of frames contained by this window.
      * @return the number of frames contained by this window
      */
     @Getter
     public static int getLength(final Object self) {
-        final Window2 window = ((Global) self).getWindow();
+        final Window2 window = (Window2)self;
         return (int) window.getFrames2().getLength();
     }
 
@@ -312,6 +340,16 @@ public class Window2 extends EventTarget2 {
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
+                    name, MethodType.methodType(rtype, ptypes));
+        }
+        catch (final ReflectiveOperationException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
+        try {
+            return MethodHandles.lookup().findVirtual(Window2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {

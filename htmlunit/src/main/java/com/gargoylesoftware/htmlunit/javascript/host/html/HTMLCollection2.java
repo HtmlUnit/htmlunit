@@ -111,17 +111,7 @@ public class HTMLCollection2 extends AbstractList2 {
             return result;
         }
 
-        int idx = 0;
-        final Double doubleValue = (double) index;
-        if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
-            idx = doubleValue.intValue();
-        }
-
-        if (idx < 0 && getBrowserVersion().hasFeature(HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX)) {
-//            throw Context.reportRuntimeError("Invalid index.");
-        }
-
-        final Object object = get(idx);
+        final Object object = get((int) index);
 //        if (object == NOT_FOUND) {
 //            return null;
 //        }
