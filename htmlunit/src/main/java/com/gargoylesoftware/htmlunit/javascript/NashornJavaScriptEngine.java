@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
+import com.gargoylesoftware.htmlunit.javascript.host.History2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
@@ -123,6 +124,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("HTMLDocument", new HTMLDocument2.FunctionConstructor(), true);
                 global.put("Document", new Document2.FunctionConstructor(), true);
                 global.put("Element", new Element2.FunctionConstructor(), true);
+                global.put("History", new History2.FunctionConstructor(), true);
                 global.put("Node", new Node2.FunctionConstructor(), true);
                 global.put("HTMLInputElement", new HTMLInputElement2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
