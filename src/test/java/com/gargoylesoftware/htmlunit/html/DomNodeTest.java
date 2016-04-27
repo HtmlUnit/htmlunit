@@ -345,7 +345,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 3035213: xmlns value has to be trimmed.
+     * Regression test for bug #1149: xmlns value has to be trimmed.
      * @throws Exception if the test fails
      */
     @Test

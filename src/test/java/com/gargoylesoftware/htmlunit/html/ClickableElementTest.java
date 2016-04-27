@@ -317,7 +317,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
     /**
      * Test that no NPE is thrown when JS fails on link click
      * and WebClient.setThrowExceptionOnScriptError(false) is used.
-     * Test for bug 1385864.
+     * Test for bug #329.
      * @throws Exception if the test fails
      */
     @Test

@@ -178,8 +178,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 363.
-     * See http://sourceforge.net/p/htmlunit/bugs/363/.
+     * Regression test for bug #363.
      * @throws Exception if the test fails
      */
     @Test

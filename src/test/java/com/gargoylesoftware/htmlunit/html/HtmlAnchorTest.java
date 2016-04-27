@@ -309,7 +309,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2847838.
+     * Regression test for bug #894.
      * @throws Exception if the test fails
      */
     @Test
@@ -489,7 +489,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for bug 2794667.
+     * Test for bug #826.
      * @throws Exception if an error occurs
      */
     @Test

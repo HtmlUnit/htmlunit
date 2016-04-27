@@ -111,7 +111,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     /**
      * Verifies that cloned node attributes have the same initial values, but changes can be made
      * to the clone without affecting the original node, and that the id attribute is treated the
-     * same as all the other attributes. See bug 1707726.
+     * same as all the other attributes. See bug #468.
      * @throws Exception if an error occurs
      */
     @Test

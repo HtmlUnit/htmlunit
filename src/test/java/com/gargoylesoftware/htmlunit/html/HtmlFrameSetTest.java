@@ -172,8 +172,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
 
     /**
      * Forward referencing issue in FrameSet.
-     * Test for bug 291
-     * http://sourceforge.net/p/htmlunit/bugs/291/
+     * Test for bug #291
      * @throws Exception if the test fails
      */
     @Test

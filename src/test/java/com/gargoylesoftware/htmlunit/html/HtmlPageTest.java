@@ -482,7 +482,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 713646.
+     * Regression test for bug #69.
      * @throws Exception if the test fails
      */
     @Test
@@ -500,7 +500,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 713646.
+     * Regression test for bug #69.
      * @throws Exception if the test fails
      */
     @Test
@@ -636,7 +636,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2888604.
+     * Regression test for bug #954.
      * @throws Exception if the test fails
      */
     @Test
@@ -1071,7 +1071,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1233519.
+     * Regression test for bug #287.
      * @exception Exception If the test fails
      */
     @Test
@@ -1158,7 +1158,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1658273.
+     * Regression test for bug #428.
      * @throws Exception if the test fails
      */
     @Test
@@ -1182,7 +1182,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for bug 1714767.
+     * Test for bug #474.
      * @throws Exception if the test fails
      */
     @Test
@@ -1253,7 +1253,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     @Test
     public void serialization() throws Exception {
         // The document.all and form.elements calls are important because they trigger the creation
-        // of HTMLCollections, which have caused serialization problems in the past (see bug 1951047).
+        // of HTMLCollections, which have caused serialization problems in the past (see bug #606).
 
         final String content =
               "<html><body>\n"

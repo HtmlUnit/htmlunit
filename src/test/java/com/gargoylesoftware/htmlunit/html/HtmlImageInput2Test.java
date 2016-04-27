@@ -284,7 +284,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
+     * Test for bug #646.
      * @throws Exception if an error occurs
      */
     @Test
@@ -299,7 +299,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
+     * Test for bug #646.
      * @throws Exception if an error occurs
      */
     @Test

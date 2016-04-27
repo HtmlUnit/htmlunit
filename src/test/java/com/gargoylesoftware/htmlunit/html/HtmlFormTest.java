@@ -280,7 +280,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1628521 (NullPointerException when submitting forms).
+     * Regression test for NullPointerException when submitting forms.
      * @throws Exception if the test fails
      */
     @Test
@@ -1174,7 +1174,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1822108.
+     * Regression test for bug #536.
      * @throws Exception if the test fails
      */
     @Test
@@ -1274,7 +1274,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2644619 (form lost children breakage when there is more than one
+     * Regression test for bug #784 (form lost children breakage when there is more than one
      * form element with the same name).
      * @throws Exception if an error occurs
      */

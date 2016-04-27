@@ -90,7 +90,7 @@ public class DomTextTest extends SimpleWebTestCase {
     }
 
     /**
-     * This test once tested regression for bug #1731042 but the expectations have been changed
+     * This test once tested regression for bug #490 but the expectations have been changed
      * as asText() should now use new lines when appropriate.
      * @throws Exception if the test fails
      */
