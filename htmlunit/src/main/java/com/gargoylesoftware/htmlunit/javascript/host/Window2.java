@@ -103,7 +103,7 @@ public class Window2 extends EventTarget2 {
 
     @Function
     public static void alert(final Object self, final Object o) {
-        final AlertHandler handler = ((WebWindow) Global.instance().getDomObject()).getWebClient().getAlertHandler();
+        final AlertHandler handler = ((WebWindow) ((Global) self).getDomObject()).getWebClient().getAlertHandler();
         if (handler == null) {
             LOG.warn("window.alert(\"" + o + "\") no alert handler installed");
         }
@@ -118,48 +118,49 @@ public class Window2 extends EventTarget2 {
      * @return the WebWindow
      */
     public WebWindow getWebWindow() {
+        //TODO: get the Global not from thread scope
         return Global.instance().getDomObject();
     }
 
     @Getter
     public static int getInnerHeight(final Object self) {
-        final WebWindow webWindow = Global.instance().getDomObject();
+        final WebWindow webWindow = ((Global) self).getDomObject();
         return webWindow.getInnerHeight();
     }
 
     @Getter
     public static int getInnerWidth(final Object self) {
-        final WebWindow webWindow = Global.instance().getDomObject();
+        final WebWindow webWindow = ((Global) self).getDomObject();
         return webWindow.getInnerWidth();
     }
 
     @Getter
     public static int getOuterHeight(final Object self) {
-        final WebWindow webWindow = Global.instance().getDomObject();
+        final WebWindow webWindow = ((Global) self).getDomObject();
         return webWindow.getOuterHeight();
     }
 
     @Getter
     public static int getOuterWidth(final Object self) {
-        final WebWindow webWindow = Global.instance().getDomObject();
+        final WebWindow webWindow = ((Global) self).getDomObject();
         return webWindow.getOuterWidth();
     }
 
     @Getter
     public static Object getTop(final Object self) {
-        final WebWindow webWindow = Global.instance().getDomObject();
+        final WebWindow webWindow = ((Global) self).getDomObject();
         final WebWindow top = webWindow.getTopWindow();
         return top.getScriptObject2();
     }
 
     @Getter(@WebBrowser(FF))
     public static Object getControllers(final Object self) {
-        return Global.instance().<Window2>getWindow().controllers_;
+        return ((Global) self).<Window2>getWindow().controllers_;
     }
 
     @Setter(@WebBrowser(FF))
     public static void setControllers(final Object self, final Object value) {
-        Global.instance().<Window2>getWindow().controllers_ = value;
+        ((Global) self).<Window2>getWindow().controllers_ = value;
     }
 
     private Object getHandlerForJavaScript(final String eventName) {
@@ -168,7 +169,7 @@ public class Window2 extends EventTarget2 {
 
     @Getter
     public static Object getOnload(final Object self) {
-        final Window2 window = Global.instance().getWindow();
+        final Window2 window = ((Global) self).getWindow();
         final Object onload = window.getHandlerForJavaScript("load");
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
@@ -186,7 +187,7 @@ public class Window2 extends EventTarget2 {
 
     @Setter
     public static void setOnload(final Object self, final Object newOnload) {
-        final Window2 window = Global.instance().getWindow();
+        final Window2 window = ((Global) self).getWindow();
 //        if (window.getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
 //                && Context.getUndefinedValue().equals(newOnload)) {
 //                throw Context.reportRuntimeError("Invalid onload value: undefined.");
@@ -250,7 +251,7 @@ public class Window2 extends EventTarget2 {
      */
     @Getter
     public static Document2 getDocument(final Object self) {
-        final Window2 window = Global.instance().getWindow();
+        final Window2 window = ((Global) self).getWindow();
         return window.document_;
     }
 
@@ -260,7 +261,7 @@ public class Window2 extends EventTarget2 {
      */
     @Getter
     public static int getLength(final Object self) {
-        final Window2 window = Global.instance().getWindow();
+        final Window2 window = ((Global) self).getWindow();
         return (int) window.getFrames2().getLength();
     }
 

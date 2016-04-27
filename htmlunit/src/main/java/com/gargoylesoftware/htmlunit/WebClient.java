@@ -45,6 +45,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import javax.script.ScriptContext;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -1027,7 +1029,9 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
-        ((Global) newPage.getEnclosingWindow().getScriptObject2()).<Window2>getWindow().initialize(newPage);
+        final ScriptContext scriptContext = newPage.getEnclosingWindow().getScriptContext();
+        final Global global = NashornJavaScriptEngine.getGlobal(scriptContext);
+        global.<Window2>getWindow().initialize(newPage);
     }
 
     /**

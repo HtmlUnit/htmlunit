@@ -21,6 +21,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUT
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.ScriptContext;
+import javax.script.SimpleScriptContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -51,6 +54,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private Page enclosedPage_;
     private ScriptableObject scriptObject_;
     private ScriptObject scriptObject2_;
+    private ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
@@ -354,4 +358,11 @@ public abstract class WebWindowImpl implements WebWindow {
         outerHeight_ = outerHeight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScriptContext getScriptContext() {
+        return scriptContext_;
+    }
 }

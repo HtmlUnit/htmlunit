@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.SimpleScriptContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,7 +42,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngine;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
+import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
@@ -65,7 +65,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     private static final Log LOG = LogFactory.getLog(NashornJavaScriptEngine.class);
 
     private final WebClient webClient_;
-    final ScriptEngine engine = new NashornScriptEngineFactory().getScriptEngine();
+    final NashornScriptEngine engine = (NashornScriptEngine) new NashornScriptEngineFactory().getScriptEngine();
 
     /**
      * Creates an instance for the specified {@link WebClient}.
@@ -74,8 +74,6 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
      */
     public NashornJavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
-        
-        initGlobal(engine, getBrowser(webClient.getBrowserVersion()));
     }
 
     private static Browser getBrowser(final BrowserVersion version) {
@@ -95,9 +93,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         return new Browser(family, (int) version.getBrowserVersionNumeric());
     }
 
-    private void initGlobal(final ScriptEngine engine, final Browser browser) {
+    private void initGlobal(final ScriptContext scriptContext, final Browser browser) {
         Browser.setCurrent(browser);
-        final Global global = getGlobal();
+        final Global global = getGlobal(scriptContext);
         final Global oldGlobal = Context.getGlobal();
         try {
             Context.setGlobal(global);
@@ -186,8 +184,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
                 global.setMap(global.getMap().addAll(PropertyMap.newMap(list)));
             }
-            catch(Exception e) {
-                e.printStackTrace();
+            catch(final Exception e) {
+                throw new RuntimeException(e);
             }
         }
         finally {
@@ -243,11 +241,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     @Override
-    public Object execute(InteractivePage page, String sourceCode, String sourceName, int startLine) {
+    public Object execute(final InteractivePage page, final String sourceCode, final String sourceName,
+            final int startLine) {
         try {
-            return engine.eval(sourceCode);
+            return engine.eval(sourceCode, page.getEnclosingWindow().getScriptContext());
         }
-        catch(Exception e) {
+        catch(final Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -256,16 +255,18 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     public void registerWindowAndMaybeStartEventLoop(WebWindow webWindow) {
     }
 
-    public Global getGlobal() {
-        final SimpleScriptContext context = (SimpleScriptContext) engine.getContext();
+    public static Global getGlobal(final ScriptContext context) {
         return get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
     }
 
     @Override
     public void initialize(final WebWindow webWindow) {
-        final Global global = getGlobal();
+        final Global global = engine.createNashornGlobal();
+        final ScriptContext scriptContext = webWindow.getScriptContext();
+        scriptContext.setBindings(new ScriptObjectMirror(global, global), ScriptContext.ENGINE_SCOPE);
         global.setDomObject(webWindow);
         webWindow.setScriptObject(global);
+        initGlobal(scriptContext, getBrowser(webClient_.getBrowserVersion()));
     }
 
     @Override

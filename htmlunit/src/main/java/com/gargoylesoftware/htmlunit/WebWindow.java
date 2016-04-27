@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
+import javax.script.ScriptContext;
+
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
@@ -137,6 +139,8 @@ public interface WebWindow extends Serializable {
      * @return the JavaScript object that corresponds to this element
      */
     ScriptObject getScriptObject2();
+
+    ScriptContext getScriptContext();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

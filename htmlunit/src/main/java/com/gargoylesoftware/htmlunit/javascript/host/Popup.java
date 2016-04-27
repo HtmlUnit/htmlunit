@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import javax.script.ScriptContext;
+
 import com.gargoylesoftware.htmlunit.History;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -307,6 +309,12 @@ class PopupPseudoWebWindow implements WebWindow {
 
     @Override
     public ScriptObject getScriptObject2() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ScriptContext getScriptContext() {
         // TODO Auto-generated method stub
         return null;
     }
