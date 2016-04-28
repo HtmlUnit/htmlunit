@@ -32,10 +32,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -53,11 +49,16 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * @author Ahmed Ashour
@@ -1144,7 +1145,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
-        return fireEvent(new Event(this, eventType));
+        return fireEvent(new Event2(this, eventType));
     }
 
     /**
@@ -1155,31 +1156,45 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final Event event) {
+        System.out.println("Fire Event is empty");
+        return null;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Fires the event on the element. Nothing is done if JavaScript is disabled.
+     * @param event the event to fire
+     * @return the execution result, or {@code null} if nothing is executed
+     */
+    public ScriptResult fireEvent(final Event2 event) {
         final WebClient client = getPage().getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
             return null;
         }
 
-        if (!handles(event)) {
-            return null;
-        }
+//        if (!handles(event)) {
+//            return null;
+//        }
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget jsElt = (EventTarget) getScriptableObject();
-        final ContextAction action = new ContextAction() {
-            @Override
-            public Object run(final Context cx) {
-                return jsElt.fireEvent(event);
-            }
-        };
+        final EventTarget2 jsElt = (EventTarget2) getScriptObject2();
 
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-        final ScriptResult result = (ScriptResult) cf.call(action);
-        if (event.isAborted(result)) {
-            preventDefault();
-        }
+        final ScriptResult result = jsElt.fireEvent(event);
+//        final ContextAction action = new ContextAction() {
+//            @Override
+//            public Object run(final Context cx) {
+//                return jsElt.fireEvent(event);
+//            }
+//        };
+//
+//        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+//        final ScriptResult result = (ScriptResult) cf.call(action);
+//        if (event.isAborted(result)) {
+//            preventDefault();
+//        }
         return result;
     }
 

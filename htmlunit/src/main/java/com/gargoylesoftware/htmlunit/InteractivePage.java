@@ -33,6 +33,9 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 /**
  * An interactive SGML page, which is able to handle JavaScript events.
@@ -215,6 +218,31 @@ public abstract class InteractivePage extends SgmlPage {
         final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
+        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Execute a Function in the given context.
+     *
+     * @param function the JavaScript Function to call
+     * @param thisObject the "this" object to be used during invocation
+     * @param args the arguments to pass into the call
+     * @param htmlElementScope the HTML element for which this script is being executed
+     * This element will be the context during the JavaScript execution. If null,
+     * the context will default to the page.
+     * @return a ScriptResult which will contain both the current page (which may be different than
+     * the previous page and a JavaScript result object.
+     */
+    public ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function, final ScriptObject thisObject,
+            final Object[] args, final DomNode htmlElementScope) {
+
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+            return new ScriptResult(null, this);
+        }
+
+        final Object result = ScriptRuntime.apply(function, thisObject, args);
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
