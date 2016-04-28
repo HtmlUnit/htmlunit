@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Marek Gawlicki
  */
 @RunWith(BrowserRunner.class)
 public class DOMTokenListTest extends WebDriverTestCase {

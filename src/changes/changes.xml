@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
-            <action type="fix" dev="asashour" issue="1783">
+            <action type="fix" dev="asashour" issue="1783" due-to="Marek Gawlicki">
                 JavaScript: DOMTokenList as an array.
             </action>
             <action type="update" dev="asashour">
