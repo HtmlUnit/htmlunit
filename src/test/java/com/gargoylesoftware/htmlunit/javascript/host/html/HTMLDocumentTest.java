@@ -467,7 +467,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             "<html>\n"
             + "<script>\n"
             + "  function doTest() {\n"
-            + "    if (!document.createEvent) { return }\n"
             + "    var e = document.createEvent('MouseEvents');\n"
             + "    e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "    document.dispatchEvent(e);\n"

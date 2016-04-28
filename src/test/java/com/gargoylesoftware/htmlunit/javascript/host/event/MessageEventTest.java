@@ -135,19 +135,13 @@ public class MessageEventTest extends WebDriverTestCase {
         }
         final String origin = "http://localhost:" + PORT;
         final String html = "<html><body><script>\n"
-            + "try {\n"
-            + "  if (document.createEvent) {\n"
-            + "    var e = document.createEvent('MessageEvent');\n"
-            + "    if (e.initMessageEvent) {\n"
-            + "      e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
-            + "      dump(e);\n"
-            + "    } else {\n"
-            + "      alert('no initMessageEvent');"
-            + "    }\n"
-            + "  } else {\n"
-            + "    alert('no createEvent');"
-            + "  }\n"
-            + "} catch(e) { alert(e) }\n"
+            + "var e = document.createEvent('MessageEvent');\n"
+            + "if (e.initMessageEvent) {\n"
+            + "  e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
+            + "  dump(e);\n"
+            + "} else {\n"
+            + "  alert('no initMessageEvent');"
+            + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
 
