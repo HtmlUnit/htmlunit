@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object that represents a Range.
@@ -114,7 +115,7 @@ public class Range extends SimpleScriptable {
     @JsxGetter
     public Object getStartContainer() {
         if (startContainer_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return startContainer_;
     }
@@ -126,7 +127,7 @@ public class Range extends SimpleScriptable {
     @JsxGetter
     public Object getEndContainer() {
         if (endContainer_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return endContainer_;
     }
@@ -307,7 +308,7 @@ public class Range extends SimpleScriptable {
             ancestor = ancestor.getParent();
         }
 
-        return Context.getUndefinedValue();
+        return Undefined.instance;
     }
 
     /**

@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object for {@link HtmlSelect}.
@@ -129,7 +130,7 @@ public class HTMLSelectElement extends FormField {
     @JsxFunction
     public Object item(final int index) {
         final Object option = getOptions().item(index);
-        if (option == Context.getUndefinedValue()) {
+        if (option == Undefined.instance) {
             return null;
         }
         return option;

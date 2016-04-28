@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.RegExpProxy;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
@@ -152,7 +153,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 for (int i = 0; i <= matcher.groupCount(); i++) {
                     Object group = matcher.group(i);
                     if (group == null) {
-                        group = Context.getUndefinedValue();
+                        group = Undefined.instance;
                     }
                     groups.add(group);
                 }

@@ -663,7 +663,7 @@ public class XMLHttpRequest extends EventTarget {
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
-            && !Context.getUndefinedValue().equals(content)) {
+            && !Undefined.instance.equals(content)) {
             if (content instanceof FormData) {
                 ((FormData) content).fillRequest(webRequest_);
             }

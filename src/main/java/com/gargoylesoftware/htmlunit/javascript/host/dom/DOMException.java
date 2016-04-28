@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Exception for DOM manipulations.
@@ -152,7 +152,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter
     public Object getCode() {
         if (code_ == -1) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return code_;
     }
@@ -164,7 +164,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter
     public Object getMessage() {
         if (message_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return message_;
     }
@@ -176,7 +176,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter(@WebBrowser(FF))
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return lineNumber_;
     }
@@ -188,7 +188,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter(@WebBrowser(FF))
     public Object getFilename() {
         if (fileName_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return fileName_;
     }

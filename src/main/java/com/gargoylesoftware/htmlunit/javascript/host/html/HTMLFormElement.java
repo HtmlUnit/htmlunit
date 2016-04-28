@@ -65,6 +65,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code HTMLFormElement}.
@@ -521,7 +522,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return ScriptableObject.getProperty(this, ((Number) arg).intValue());
             }
         }
-        return Context.getUndefinedValue();
+        return Undefined.instance;
     }
 
     /**

@@ -48,6 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code WebSocket}.
@@ -156,7 +157,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             throw Context.reportRuntimeError(
                     "WebSocket Error: constructor must have one or two String parameters.");
         }
-        if (args[0] == Context.getUndefinedValue()) {
+        if (args[0] == Undefined.instance) {
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {

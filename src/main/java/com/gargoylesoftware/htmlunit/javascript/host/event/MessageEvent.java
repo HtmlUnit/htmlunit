@@ -89,7 +89,7 @@ public class MessageEvent extends Event {
 
         String origin = "";
         String lastEventId = "";
-        if (details != null && !Context.getUndefinedValue().equals(details)) {
+        if (details != null && !Undefined.instance.equals(details)) {
             data_ = details.get("data");
 
             final String detailOrigin = (String) details.get("origin");

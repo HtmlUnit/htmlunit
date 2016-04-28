@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing the HashChangeEvent.
@@ -81,7 +81,7 @@ public class HashChangeEvent extends Event {
 
         String oldURL = "";
         String newURL = "";
-        if (details != null && !Context.getUndefinedValue().equals(details)) {
+        if (details != null && !Undefined.instance.equals(details)) {
             oldURL = (String) details.get("oldURL");
             newURL = (String) details.get("newURL");
         }

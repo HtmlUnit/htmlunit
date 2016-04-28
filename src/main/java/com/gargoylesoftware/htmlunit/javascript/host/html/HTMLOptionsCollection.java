@@ -46,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -113,14 +114,14 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
 
         if (index >= htmlSelect_.getOptionSize()) {
             if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE)) {
                 return null;
             }
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
 
         return getScriptableFor(htmlSelect_.getOption(index));

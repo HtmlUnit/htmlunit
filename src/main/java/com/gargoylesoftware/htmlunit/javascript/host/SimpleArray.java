@@ -23,8 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code SimpleArray} allowing access per key and index (like {@link MimeTypeArray}).
@@ -56,7 +56,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
         if (response != null) {
             return response;
         }
-        return Context.getUndefinedValue();
+        return Undefined.instance;
     }
 
     /**

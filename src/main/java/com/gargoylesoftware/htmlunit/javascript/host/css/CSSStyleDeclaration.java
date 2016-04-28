@@ -2604,7 +2604,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
         // undefined
-        if (Context.getUndefinedValue().equals(zIndex)) {
+        if (Undefined.instance.equals(zIndex)) {
             return;
         }
 

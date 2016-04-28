@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing an event that is passed into event handlers when they are
@@ -345,7 +346,7 @@ public class Event extends SimpleScriptable {
         boolean bubbles = false;
         boolean cancelable = false;
 
-        if (details != null && !Context.getUndefinedValue().equals(details)) {
+        if (details != null && !Undefined.instance.equals(details)) {
             final Boolean detailBubbles = (Boolean) details.get("bubbles");
             if (detailBubbles != null) {
                 bubbles = detailBubbles.booleanValue();

@@ -41,8 +41,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.steadystate.css.dom.MediaListImpl;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * <p>An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
@@ -171,11 +171,8 @@ public class StyleSheetList extends SimpleScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        if (index < 0) {
-            return Context.getUndefinedValue();
-        }
-        if (index >= nodes_.getLength()) {
-            return Context.getUndefinedValue();
+        if (index < 0 || index >= nodes_.getLength()) {
+            return Undefined.instance;
         }
 
         final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));

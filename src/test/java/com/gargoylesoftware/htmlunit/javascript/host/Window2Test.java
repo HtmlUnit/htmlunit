@@ -77,10 +77,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  alert('found')\n"
             + "else\n"
             + "  alert('not found')\n"
-            + "try {\n"
-            + "  window.controllers = 'hello';\n"
-            + "}\n"
-            + "catch(e) { alert('exception') }\n"
+            + "window.controllers = 'hello';\n"
             + "alert(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
@@ -97,11 +94,8 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
-            + "try {\n"
             + "  window.controllers = 'hello';\n"
-            + "}\n"
-            + "catch(e) { alert('exception') }\n"
-            + "alert(window.controllers == 'hello');\n"
+            + "  alert(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -376,12 +370,10 @@ public class Window2Test extends WebDriverTestCase {
     public void overwriteFunctions_navigator() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    try {\n"
-            + "      function navigator() {\n"
-            + "        alert('hello');\n"
-            + "      }\n"
-            + "      navigator();\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    function navigator() {\n"
+            + "      alert('hello');\n"
+            + "    }\n"
+            + "    navigator();\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
 
@@ -491,10 +483,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  try {\n"
-            + "    window.open('" + URL_SECOND + "');\n"
-            + "  }\n"
-            + "  catch(e) { alert('exception') }\n"
+            + "  window.open('" + URL_SECOND + "');\n"
             + "</script>\n"
             + "</body></html>";
         final String windowContent = "<html><head></head>\n"
@@ -528,10 +517,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  try {\n"
-            + "    window.open('" + URL_SECOND + "', 'New window', 'width=200,height=100');\n"
-            + "  }\n"
-            + "  catch(e) { alert('exception') }\n"
+            + "  window.open('" + URL_SECOND + "', 'New window', 'width=200,height=100');\n"
             + "</script>\n"
             + "</body></html>";
         final String windowContent = "<html><head></head>\n"
@@ -565,19 +551,16 @@ public class Window2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  try {\n"
-            + "    window.open('" + URL_SECOND + "', 'window1', 'width=200,height=100', true);\n"
-            + "    window.open('" + URL_SECOND + "', 'window2', 'width=200,height=100', 'true');\n"
-            + "  }\n"
-            + "  catch(e) { alert('exception') }\n"
+            + "  window.open('" + URL_SECOND + "', 'window1', 'width=200,height=100', true);\n"
+            + "  window.open('" + URL_SECOND + "', 'window2', 'width=200,height=100', 'true');\n"
             + "</script>\n"
             + "</body></html>";
         final String windowContent = "<html><head></head>\n"
-                + "<body>\n"
-                + "<script>\n"
-                + "  window.opener.info(window.name);\n"
-                + "</script>\n"
-                + "</body></html>";
+            + "<body>\n"
+            + "<script>\n"
+            + "  window.opener.info(window.name);\n"
+            + "</script>\n"
+            + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
         loadPageWithAlerts2(html);
 
@@ -870,7 +853,6 @@ public class Window2Test extends WebDriverTestCase {
             + "    alert(x == myEvent);\n"
             + "    x.foo = 'I was here'\n"
             + "  }\n"
-            + "  \n"
             + "  window.addEventListener('click', listener, false);\n"
             + "  myEvent = document.createEvent('HTMLEvents');\n"
             + "  myEvent.initEvent('click', true, true);\n"
@@ -920,10 +902,8 @@ public class Window2Test extends WebDriverTestCase {
             + "  alert(typeof window.onbeforeunload);\n"
             + "  window.onbeforeunload = null;\n"
             + "  alert(window.onbeforeunload);\n"
-            + "  try {\n"
-            + "    window.onbeforeunload = undefined;\n"
-            + "    alert(window.onbeforeunload);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  window.onbeforeunload = undefined;\n"
+            + "  alert(window.onbeforeunload);\n"
             + "  \n"
             + "}\n"
             + "</script>\n"
@@ -973,11 +953,11 @@ public class Window2Test extends WebDriverTestCase {
     public void onError() throws Exception {
         final String html
             = "<script>\n"
-            + "alert(window.onerror);\n"
-            + "window.onerror=function(){alert(arguments.length);};\n"
-            + "alert(typeof window.onerror);\n"
-            + "try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
-            + "alert(undef);\n"
+            + "  alert(window.onerror);\n"
+            + "  window.onerror = function() { alert(arguments.length); };\n"
+            + "  alert(typeof window.onerror);\n"
+            + "  try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
+            + "  alert(undef);\n"
             + "</script>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
@@ -997,9 +977,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<div id='myDiv'></div>\n"
             + "<script>\n"
             + "  var e = document.getElementById('myDiv');\n"
-            + "  try {\n"
-            + "    alert(window.getComputedStyle(e, null).color);\n"
-            + "  } catch(e) { alert('exception') }\n"
+            + "  alert(window.getComputedStyle(e, null).color);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1019,9 +997,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('d');\n"
-            + "    try {\n"
             + "    alert(window.getComputedStyle(e, '').color);\n"
-            + "    } catch(e) { alert('exception') }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1045,9 +1021,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
             + "<script>\n"
             + "  var e = document.getElementById('myId');\n"
-            + "  try {\n"
-            + "    alert(window.getComputedStyle(e, null).color);\n"
-            + "  } catch(e) { alert('exception') }\n"
+            + "  alert(window.getComputedStyle(e, null).color);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1263,9 +1237,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String iframe = "<html><body><script>\n"
-            + "try {\n"
             + "  top.postMessage('hello', '*');\n"
-            + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
@@ -1327,10 +1299,8 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String iframe = "<html><body><script>\n"
-            + "try {\n"
             + "  top.postMessage('hello', '*');\n"
             + "  top.sync = false;\n"
-            + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
@@ -1566,15 +1536,13 @@ public class Window2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var str = '';\n"
-            + "    try {\n"
-            + "      alert(window);\n"
-            + "      alert(Window);\n"
-            + "      var str = '';\n"
-            + "      for (var i in Window) {\n"
-            + "        str += i + ', ';\n"
-            + "      }\n"
-            + "      alert(str);\n"
-            + "    } catch (e) { alert('exception')}\n"
+            + "    alert(window);\n"
+            + "    alert(Window);\n"
+            + "    var str = '';\n"
+            + "    for (var i in Window) {\n"
+            + "      str += i + ', ';\n"
+            + "    }\n"
+            + "    alert(str);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

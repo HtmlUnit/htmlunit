@@ -46,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The parent class of {@link NodeList} and {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
@@ -159,7 +160,7 @@ public class AbstractList extends SimpleScriptable implements Function {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
                 return null;
             }
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return object;
     }
@@ -396,7 +397,7 @@ public class AbstractList extends SimpleScriptable implements Function {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
                 return null;
             }
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return object;
     }

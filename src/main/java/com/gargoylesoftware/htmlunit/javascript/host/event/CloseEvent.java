@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code CloseEvent}.
@@ -77,7 +78,7 @@ public class CloseEvent extends Event {
         String reason = "";
         boolean wasClean = false;
 
-        if (details != null && !Context.getUndefinedValue().equals(details)) {
+        if (details != null && !Undefined.instance.equals(details)) {
             final Double detailCode = (Double) details.get("code");
             if (detailCode != null) {
                 code = detailCode.intValue();

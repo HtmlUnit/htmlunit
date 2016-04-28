@@ -812,7 +812,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
 
         final WebWindow top = getWebWindow().getTopWindow();
-        return getProxy(top);
+        return top.getScriptableObject();
     }
 
     /**
@@ -827,18 +827,18 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the parent property.
-     * @return the value of window.parent
+     * Returns the value of the {@code parent} property.
+     * @return the value of the {@code parent} property
      */
     @JsxGetter
-    public WindowProxy getParent() {
+    public ScriptableObject getParent() {
         final WebWindow parent = getWebWindow().getParentWindow();
-        return getProxy(parent);
+        return parent.getScriptableObject();
     }
 
     /**
-     * Returns the value of the opener property.
-     * @return the value of window.opener, {@code null} for a top level window
+     * Returns the value of the {@code opener} property.
+     * @return the value of the {@code opener}, or {@code null} for a top level window
      */
     @JsxGetter
     public Object getOpener() {
@@ -850,13 +850,13 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the opener property.
+     * Sets the {@code opener} property.
      * @param newValue the new value
      */
     @JsxSetter
     public void setOpener(final Object newValue) {
         if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && newValue != Context.getUndefinedValue() && !(newValue instanceof Window)) {
+            && newValue != null && newValue != Undefined.instance && !(newValue instanceof Window)) {
             throw Context.reportRuntimeError("Can't set opener to something other than a window!");
         }
         opener_ = newValue;
@@ -876,8 +876,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the frames property.
-     * @return the value of the frames property
+     * Returns the value of the {@code frames} property.
+     * @return the value of the {@code frames} property
      */
     @JsxGetter(propertyName = "frames")
     public Window getFrames_js() {
@@ -1319,7 +1319,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
             if (result instanceof Window) {
                 final WebWindow webWindow = ((Window) result).getWebWindow();
-                result = getProxy(webWindow);
+                result = webWindow.getScriptableObject();
             }
         }
 
@@ -1333,7 +1333,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     public Object get(final int index, final Scriptable start) {
         final HTMLCollection frames = getFrames();
         if (index >= frames.getLength()) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return frames.item(Integer.valueOf(index));
     }
@@ -2270,7 +2270,7 @@ class HTMLCollectionFrames extends HTMLCollection {
             window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
         }
 
-        return Window.getProxy(window);
+        return window.getScriptableObject();
     }
 
     @Override

@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * This is the host object that allows JavaScript to instantiate Java objects via the ActiveXObject
@@ -85,7 +86,7 @@ public class ActiveXObject extends SimpleScriptable {
             throw Context.reportRuntimeError(
                     "ActiveXObject Error: constructor must have one or two String parameters.");
         }
-        if (args[0] == Context.getUndefinedValue()) {
+        if (args[0] == Undefined.instance) {
             throw Context.reportRuntimeError("ActiveXObject Error: constructor parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {
