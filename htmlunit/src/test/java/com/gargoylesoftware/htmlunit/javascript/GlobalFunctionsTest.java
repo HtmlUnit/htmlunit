@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -39,7 +40,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "7.89", "7.89" })
+    @Alerts({"7.89", "7.89"})
     public void parseFloat() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -59,8 +60,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" },
-            IE8 = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "0", "0", "64", "0", "1", "8", "9", "100" })
+    @Alerts({"0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100"})
     public void parseInt() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -95,9 +95,9 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "decodeURI: function", "decodeURIComponent: function", "encodeURI: function",
+    @Alerts({"decodeURI: function", "decodeURIComponent: function", "encodeURI: function",
         "encodeURIComponent: function", "escape: function", "eval: function", "isFinite: function", "isNaN: function",
-        "parseFloat: function", "parseInt: function", "unescape: function" })
+        "parseFloat: function", "parseInt: function", "unescape: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent", "escape",
             "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "unescape"};
@@ -110,8 +110,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "isXMLName: undefined", "uneval: undefined" },
-            FF = { "isXMLName: undefined", "uneval: function" })
+    @Alerts(DEFAULT = {"isXMLName: undefined", "uneval: undefined"},
+            FF = {"isXMLName: undefined", "uneval: function"})
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};
         final String html = NativeDateTest.createHTMLTestMethods("this", methods);
@@ -123,21 +123,49 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
-                "%E6%B5%8B%E8%A9%A6" })
+    @Alerts({"http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
+                "%E6%B5%8B%E8%A9%A6"})
     public void encodeURIComponent() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  var uri='http://w3schools.com/my test.asp?name=st\u00E5le&car=saab';\n"
-            + "  alert(encodeURIComponent(uri));\n"
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var uri='http://w3schools.com/my test.asp?name=st\u00E5le&car=saab';\n"
+            + "    alert(encodeURIComponent(uri));\n"
 
-            + "  uri='\\u6D4B\\u8A66';\n"
-            + "  alert(encodeURIComponent(uri));\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "    uri='\\u6D4B\\u8A66';\n"
+            + "    alert(encodeURIComponent(uri));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for #1439.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("%E6%B5%8B%E8%A9%A6")
+    public void encodeURIComponentUtf8() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    uri='\u6D4B\u8A66';\n"
+            + "    alert(encodeURIComponent(uri));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", "UTF-8");
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

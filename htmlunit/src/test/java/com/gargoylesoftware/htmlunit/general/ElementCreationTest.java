@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -100,7 +98,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLAppletElement]",
-            IE8 = "[object]")
+            CHROME = "[object HTMLUnknownElement]")
     public void applet() throws Exception {
         test("applet");
     }
@@ -122,8 +120,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void article() throws Exception {
         test("article");
     }
@@ -134,8 +131,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void aside() throws Exception {
         test("aside");
     }
@@ -146,8 +142,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAudioElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLAudioElement]")
     public void audio() throws Exception {
         test("audio");
     }
@@ -183,7 +178,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLBaseFontElement]")
     public void basefont() throws Exception {
         test("basefont");
@@ -196,8 +191,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -301,8 +295,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLCanvasElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLCanvasElement]")
     public void canvas() throws Exception {
         test("canvas");
     }
@@ -360,8 +353,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDataListElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLDataListElement]")
     public void datalist() throws Exception {
         test("datalist");
     }
@@ -419,8 +411,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLModElement]",
-            IE8 = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLModElement]")
     public void del() throws Exception {
         test("del");
     }
@@ -431,8 +422,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDirectoryElement]",
-            IE8 = "[object HTMLUListElement]")
+    @Alerts("[object HTMLDirectoryElement]")
     public void dir() throws Exception {
         test("dir");
     }
@@ -454,8 +444,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLEmbedElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLEmbedElement]")
     public void embed() throws Exception {
         test("embed");
     }
@@ -502,8 +491,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void figure() throws Exception {
         test("figure");
     }
@@ -514,8 +502,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void figcaption() throws Exception {
         test("figcaption");
     }
@@ -537,8 +524,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void footer() throws Exception {
         test("footer");
     }
@@ -593,8 +579,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void header() throws Exception {
         test("header");
     }
@@ -728,8 +713,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLQuoteElement]",
-            IE8 = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLQuoteElement]")
     public void q() throws Exception {
         test("q");
     }
@@ -751,8 +735,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLModElement]",
-            IE8 = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLModElement]")
     public void ins() throws Exception {
         test("ins");
     }
@@ -801,8 +784,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
             CHROME = "[object HTMLKeygenElement]",
-            IE8 = "[object HTMLGenericElement]",
-            IE11 = "[object HTMLBlockElement]")
+            IE = "[object HTMLBlockElement]")
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -871,8 +853,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void main() throws Exception {
         test("main");
     }
@@ -894,8 +875,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void mark() throws Exception {
         test("mark");
     }
@@ -918,8 +898,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMenuElement]",
-            IE8 = "[object HTMLUListElement]")
+    @Alerts("[object HTMLMenuElement]")
     public void menu() throws Exception {
         test("menu");
     }
@@ -931,8 +910,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLMenuItemElement]",
-            IE8 = "[object HTMLGenericElement]")
+            FF = "[object HTMLMenuItemElement]")
     public void menuitem() throws Exception {
         test("menuitem");
     }
@@ -955,8 +933,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLMeterElement]",
-            IE8 = "[object HTMLGenericElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void meter() throws Exception {
         test("meter");
     }
@@ -967,8 +944,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void multicol() throws Exception {
         test("multicol");
     }
@@ -979,8 +955,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void nav() throws Exception {
         test("nav");
     }
@@ -1015,8 +990,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLNoShowElement]")
+    @Alerts("[object HTMLElement]")
     public void noembed() throws Exception {
         test("noembed");
     }
@@ -1027,8 +1001,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLNoShowElement]")
+    @Alerts("[object HTMLElement]")
     public void noframes() throws Exception {
         test("noframes");
     }
@@ -1039,8 +1012,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLNoShowElement]")
+    @Alerts("[object HTMLElement]")
     public void noscript() throws Exception {
         test("noscript");
     }
@@ -1051,8 +1023,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLObjectElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLObjectElement]")
     public void object() throws Exception {
         test("object");
     }
@@ -1074,8 +1045,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptGroupElement]",
-            IE8 = "[object HTMLOptionElement]")
+    @Alerts("[object HTMLOptGroupElement]")
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -1098,8 +1068,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLOutputElement]",
-            IE8 = "[object HTMLGenericElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void output() throws Exception {
         test("output");
     }
@@ -1144,8 +1113,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPreElement]",
-            IE8 = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLPreElement]")
     public void pre() throws Exception {
         test("pre");
     }
@@ -1156,8 +1124,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLProgressElement]")
     public void progress() throws Exception {
         test("progress");
     }
@@ -1170,7 +1137,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void rp() throws Exception {
         test("rp");
@@ -1184,7 +1151,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void rt() throws Exception {
         test("rt");
@@ -1198,7 +1165,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
+            FF = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void ruby() throws Exception {
         test("ruby");
@@ -1245,8 +1212,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLElement]")
     public void section() throws Exception {
         test("section");
     }
@@ -1280,8 +1246,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSourceElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLSourceElement]")
     public void source() throws Exception {
         test("source");
     }
@@ -1351,8 +1316,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]")
     public void summary() throws Exception {
         test("summary");
     }
@@ -1420,7 +1384,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            IE11 = "[object HTMLTableDataCellElement]")
+            IE = "[object HTMLTableDataCellElement]")
     public void td() throws Exception {
         test("td");
     }
@@ -1454,7 +1418,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            IE11 = "[object HTMLTableHeaderCellElement]")
+            IE = "[object HTMLTableHeaderCellElement]")
     public void th() throws Exception {
         test("th");
     }
@@ -1476,8 +1440,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTrackElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLTrackElement]")
     public void track() throws Exception {
         test("track");
     }
@@ -1512,8 +1475,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLTimeElement]",
-            IE8 = "[object HTMLGenericElement]")
+            FF = "[object HTMLTimeElement]")
     public void time() throws Exception {
         test("time");
     }
@@ -1524,9 +1486,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTitleElement]",
-            IE8 = "[object HTMLTextElement]")
-    @NotYetImplemented(Browser.IE8)
+    @Alerts("[object HTMLTitleElement]")
     public void title() throws Exception {
         // there seems to be a bug in ie8
         // document.createElement('title') creates a text element
@@ -1576,8 +1536,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLVideoElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLVideoElement]")
     public void video() throws Exception {
         test("video");
     }
@@ -1588,8 +1547,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE8 = "[object HTMLTextElement]")
+    @Alerts("[object HTMLElement]")
     public void wbr() throws Exception {
         test("wbr");
     }
@@ -1598,8 +1556,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void attribute() throws Exception {
         test("attribute");
     }
@@ -1608,8 +1565,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void clientInformation() throws Exception {
         test("clientInformation");
     }
@@ -1618,8 +1574,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void clipboardData() throws Exception {
         test("clipboardData");
     }
@@ -1629,8 +1584,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]")
     public void command() throws Exception {
         test("command");
     }
@@ -1639,8 +1593,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void comment() throws Exception {
         test("comment");
     }
@@ -1649,8 +1602,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void currentStyle() throws Exception {
         test("currentStyle");
     }
@@ -1659,8 +1611,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void custom() throws Exception {
         test("custom");
     }
@@ -1669,8 +1620,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void datagrid() throws Exception {
         test("datagrid");
     }
@@ -1679,8 +1629,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void datatemplate() throws Exception {
         test("datatemplate");
     }
@@ -1689,8 +1638,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void dataTransfer() throws Exception {
         test("dataTransfer");
     }
@@ -1699,8 +1647,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void defaults() throws Exception {
         test("defaults");
     }
@@ -1712,8 +1659,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLDetailsElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLDetailsElement]")
     public void details() throws Exception {
         test("details");
     }
@@ -1725,8 +1671,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLDialogElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLDialogElement]")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -1735,8 +1680,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void document() throws Exception {
         test("document");
     }
@@ -1745,8 +1689,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void DocumentCompatibleInfo() throws Exception {
         test("DocumentCompatibleInfo");
     }
@@ -1755,8 +1698,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object Object]")
+    @Alerts("[object HTMLUnknownElement]")
     public void event() throws Exception {
         test("event");
     }
@@ -1767,9 +1709,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
-            FF31 = "[object HTMLElement]",
-            FF38 = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            FF = "[object HTMLElement]")
     public void event_source() throws Exception {
         test("event-source");
     }
@@ -1778,8 +1718,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void external() throws Exception {
         test("external");
     }
@@ -1788,8 +1727,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void history() throws Exception {
         test("history");
     }
@@ -1798,8 +1736,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void hn() throws Exception {
         test("hn");
     }
@@ -1808,8 +1745,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void ilayer() throws Exception {
         test("ilayer");
     }
@@ -1818,8 +1754,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void implementation() throws Exception {
         test("implementation");
     }
@@ -1828,8 +1763,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void IMPORT() throws Exception {
         test("IMPORT");
     }
@@ -1839,8 +1773,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]")
     public void layer() throws Exception {
         test("layer");
     }
@@ -1849,8 +1782,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void location() throws Exception {
         test("location");
     }
@@ -1859,8 +1791,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void namespace() throws Exception {
         test("namespace");
     }
@@ -1869,8 +1800,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void navigator() throws Exception {
         test("navigator");
     }
@@ -1879,8 +1809,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void nest() throws Exception {
         test("nest");
     }
@@ -1890,8 +1819,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]")
     public void noLayer() throws Exception {
         test("nolayer");
     }
@@ -1900,8 +1828,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void page() throws Exception {
         test("page");
     }
@@ -1910,8 +1837,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void popup() throws Exception {
         test("popup");
     }
@@ -1921,8 +1847,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF38 = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]",
+            FF = "[object HTMLElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -1931,8 +1857,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void rbc() throws Exception {
         test("rbc");
     }
@@ -1942,8 +1867,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF38 = "[object HTMLElement]",
-            IE8 = "[object HTMLGenericElement]")
+            CHROME = "[object HTMLElement]",
+            FF = "[object HTMLElement]")
     public void rtc() throws Exception {
         test("rtc");
     }
@@ -1952,8 +1877,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void rule() throws Exception {
         test("rule");
     }
@@ -1962,8 +1886,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void runtimeStyle() throws Exception {
         test("runtimeStyle");
     }
@@ -1972,8 +1895,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void screen() throws Exception {
         test("screen");
     }
@@ -1982,8 +1904,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void selection() throws Exception {
         test("selection");
     }
@@ -1992,8 +1913,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void spacer() throws Exception {
         test("spacer");
     }
@@ -2002,8 +1922,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void Storage() throws Exception {
         test("Storage");
     }
@@ -2012,8 +1931,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void styleSheet() throws Exception {
         test("styleSheet");
     }
@@ -2022,8 +1940,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void TextNode() throws Exception {
         test("TextNode");
     }
@@ -2032,8 +1949,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void TextRange() throws Exception {
         test("TextRange");
     }
@@ -2042,8 +1958,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void TextRectangle() throws Exception {
         test("TextRectangle");
     }
@@ -2052,8 +1967,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void userProfile() throws Exception {
         test("userProfile");
     }
@@ -2062,8 +1976,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void window() throws Exception {
         test("window");
     }
@@ -2072,8 +1985,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void XDomainRequest() throws Exception {
         test("XDomainRequest");
     }
@@ -2082,8 +1994,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void xml() throws Exception {
         test("xml");
     }
@@ -2092,8 +2003,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void XMLHttpRequest() throws Exception {
         test("XMLHttpRequest");
     }
@@ -2105,8 +2015,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLDataElement]",
-            IE8 = "[object HTMLGenericElement]")
+            FF = "[object HTMLDataElement]")
     public void data() throws Exception {
         test("data");
     }
@@ -2118,8 +2027,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLContentElement]",
-            IE8 = "[object HTMLGenericElement]",
-            IE11 = "[object HTMLUnknownElement]")
+            IE = "[object HTMLUnknownElement]")
     public void content() throws Exception {
         test("content");
     }
@@ -2132,8 +2040,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLPictureElement]",
-            FF38 = "[object HTMLPictureElement]",
-            IE8 = "[object HTMLGenericElement]")
+            FF = "[object HTMLPictureElement]")
     public void picture() throws Exception {
         test("picture");
     }
@@ -2145,8 +2052,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTemplateElement]",
-            IE11 = "[object HTMLUnknownElement]",
-            IE8 = "[object HTMLGenericElement]")
+            IE = "[object HTMLUnknownElement]")
     public void template() throws Exception {
         test("template");
     }

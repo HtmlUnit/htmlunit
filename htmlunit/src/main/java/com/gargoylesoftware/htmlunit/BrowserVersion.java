@@ -52,18 +52,25 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
  *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
  *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
+ *     var isEdge = navigator.appVersion.indexOf('Edge') != -1;
  *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
- *     var numeric = 38;
+ *     var numeric = 45;
  *     if (isMicrosoft) {
  *         numeric = 11;
  *     }
+ *     else if (isEdge) {
+ *         numeric = 13;
+ *     }
  *     else if (isChrome) {
- *         numeric = 45;
+ *         numeric = 49;
  *     }
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
- *     var browser = "FIREFOX_38";
+ *     var browser = "FIREFOX_45";
  *     if (isMicrosoft) {
- *         browser = "INTERNET_EXPLORER_11";
+ *         browser = "INTERNET_EXPLORER";
+ *     }
+ *     else if (isEdge) {
+ *         browser = "EDGE";
  *     }
  *     else if (isChrome) {
  *         browser = "CHROME";
@@ -82,11 +89,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 public class BrowserVersion implements Serializable, Cloneable {
-
-    /**
-     * Application name for the Internet Explorer series of browsers.
-     */
-    private static final String INTERNET_EXPLORER_ = "Microsoft Internet Explorer";
 
     /**
      * Application name the Netscape navigator series of browsers.
@@ -109,101 +111,103 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
-     * Firefox 31 ESR.
-     * @since 2.16
-     * @deprecated as of 2.17
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_31 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:31.0) Gecko/20100101 Firefox/31.0",
-        (float) 31.0, "FF31", null);
-
-    /**
      * Firefox 38 ESR.
      * @since 2.17
      */
     public static final BrowserVersion FIREFOX_38 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0",
-        (float) 38.0, "FF38", null);
+        38, "FF38", null);
 
     /**
-     * Internet Explorer 8.
-     * It exists as Internet Explorer 11 has Enterprise Mode, which behaves as Internet Explorer 8.
+     * Firefox 45 ESR.
+     * @since 2.21
      */
-    public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
-        INTERNET_EXPLORER_, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
-        "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
+    public static final BrowserVersion FIREFOX_45 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
+        45, "FF45", null);
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
         "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE", null);
 
+    /**
+     * Internet Explorer 11.
+     * @deprecated as of 2.20, please use {@link #INTERNET_EXPLORER} instead
+     */
+    @Deprecated
+    public static final BrowserVersion INTERNET_EXPLORER_11 = INTERNET_EXPLORER;
+
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
-        45, "Chrome", null);
+        + " (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36",
+        50, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 10.0) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240",
+        + " (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586",
         "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240",
-        12, "Edge", null);
+        + " (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586",
+        13, "Edge", null);
+
+    /**
+     * The best supported browser version at the moment.
+     */
+    public static final BrowserVersion BEST_SUPPORTED = CHROME;
 
     /** The default browser version. */
-    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
+    private static BrowserVersion DefaultBrowserVersion_ = BEST_SUPPORTED;
 
     /** Register plugins for the browser versions. */
     static {
-        INTERNET_EXPLORER_8.initDefaultFeatures();
-        INTERNET_EXPLORER.initDefaultFeatures();
-
-        FIREFOX_31.initDefaultFeatures();
+        // FF38
         FIREFOX_38.initDefaultFeatures();
-
-        FIREFOX_31.setBrowserLanguage("en-US");
-        FIREFOX_31.setVendor("");
-        FIREFOX_31.buildId_ = "20150504194141";
-        FIREFOX_31.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
-        FIREFOX_31.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_31.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
-        FIREFOX_31.setCssAcceptHeader("text/css,*/*;q=0.1");
-
         FIREFOX_38.setBrowserLanguage("en-US");
         FIREFOX_38.setVendor("");
-        FIREFOX_38.buildId_ = "20150624141534";
+        FIREFOX_38.buildId_ = "20160315145633";
         FIREFOX_38.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_38.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_38.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
 
-        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
+        // FF45
+        FIREFOX_45.initDefaultFeatures();
+        FIREFOX_45.setBrowserLanguage("en-US");
+        FIREFOX_45.setVendor("");
+        FIREFOX_45.buildId_ = "20160316151906";
+        FIREFOX_45.setHeaderNamesOrdered(new String[] {
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
+        FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_45.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_45.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_45.setCssAcceptHeader("text/css,*/*;q=0.1");
 
+        // IE
+        INTERNET_EXPLORER.initDefaultFeatures();
         INTERNET_EXPLORER.setBrowserLanguage("en-US");
         INTERNET_EXPLORER.setVendor("");
         INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
-            "Cookie" });
+            "Cookie"});
         INTERNET_EXPLORER.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
         INTERNET_EXPLORER.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
         INTERNET_EXPLORER.setCssAcceptHeader("text/css, */*");
         INTERNET_EXPLORER.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
+        // EDGE
         EDGE.initDefaultFeatures();
         EDGE.setBrowserLanguage("en-US");
         EDGE.setVendor("");
 
+        // CHROME
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setVendor("Google Inc.");
@@ -211,7 +215,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setCpuClass(null);
         CHROME.setBrowserLanguage("en-US");
         CHROME.setHeaderNamesOrdered(new String[] {
-            "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie" });
+            "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"});
         CHROME.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
         CHROME.setImgAcceptHeader("image/webp,image/*,*/*;q=0.8");
         CHROME.setCssAcceptHeader("text/css,*/*;q=0.1");
@@ -220,20 +224,24 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "undefined", "pepflashplayer.dll");
+                "Shockwave Flash 21.0 r0", "undefined", "pepflashplayer.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "18.0.0.209", "NPSWF32_18_0_0_209.dll");
+                "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        FIREFOX_31.getPlugins().add(flash);
         FIREFOX_38.getPlugins().add(flash);
+        flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        FIREFOX_45.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "18.0.0.209", "Flash32_18_0_0_209.ocx");
+                "Shockwave Flash 21.0 r0", "21.0.0.197", "Flash32_21_0_0_197.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.getPlugins().add(flash);
@@ -258,7 +266,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
-    private float browserVersionNumeric_;
+    private int browserVersionNumeric_;
     private final Set<PluginConfiguration> plugins_ = new HashSet<>();
     private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
     private final String nickname_;
@@ -275,10 +283,10 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
-     * @param browserVersionNumeric the floating number version of the browser
+     * @param browserVersionNumeric the number version of the browser
      */
     public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final float browserVersionNumeric) {
+        final String userAgent, final int browserVersionNumeric) {
 
         this(applicationName, applicationVersion, userAgent,
                 browserVersionNumeric, applicationName + browserVersionNumeric, null);
@@ -290,11 +298,11 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
-     * @param browserVersionNumeric the floating number version of the browser
+     * @param browserVersionNumeric the number version of the browser
      * @param features the browser features
      */
     public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final float browserVersionNumeric,
+        final String userAgent, final int browserVersionNumeric,
         final BrowserVersionFeatures[] features) {
 
         this(applicationName, applicationVersion, userAgent,
@@ -313,7 +321,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final float browserVersionNumeric,
+        final String userAgent, final int browserVersionNumeric,
         final String nickname, final BrowserVersionFeatures[] features) {
 
         applicationName_ = applicationName;
@@ -370,7 +378,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns the default browser version that is used whenever a specific version isn't specified.
-     * Defaults to {@link #INTERNET_EXPLORER_8}.
+     * Defaults to {@link #BEST_SUPPORTED}.
      * @return the default browser version
      */
     public static BrowserVersion getDefault() {
@@ -537,8 +545,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
-     * if requesting a page.
+     * Returns the value used by the browser for the {@code Accept} header if requesting a page.
      * @return the accept header string
      */
     public String getHtmlAcceptHeader() {
@@ -546,7 +553,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
+     * Returns the value used by the browser for the {@code Accept} header
      * if requesting an script.
      * @return the accept header string
      */
@@ -555,7 +562,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
+     * Returns the value used by the browser for the {@code Accept} header
      * if performing an XMLHttpRequest.
      * @return the accept header string
      */
@@ -564,7 +571,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
+     * Returns the value used by the browser for the {@code Accept} header
      * if requesting an image.
      * @return the accept header string
      */
@@ -573,8 +580,8 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the value used by the browser for the accept header
-     * if requesting a css declaration.
+     * Returns the value used by the browser for the {@code Accept} header
+     * if requesting a CSS declaration.
      * @return the accept header string
      */
     public String getCssAcceptHeader() {
@@ -613,7 +620,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param vendor the vendor to set
      */
     public void setVendor(final String vendor) {
-        this.vendor_ = vendor;
+        vendor_ = vendor;
     }
 
     /**
@@ -668,40 +675,40 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * @param browserVersion the browserVersion to set
      */
-    public void setBrowserVersion(final float browserVersion) {
+    public void setBrowserVersion(final int browserVersion) {
         browserVersionNumeric_ = browserVersion;
     }
 
     /**
-     * @param htmlAcceptHeader the accept header to be used when retrieving pages
+     * @param htmlAcceptHeader the {@code Accept} header to be used when retrieving pages
      */
     public void setHtmlAcceptHeader(final String htmlAcceptHeader) {
         htmlAcceptHeader_ = htmlAcceptHeader;
     }
 
     /**
-     * @param imgAcceptHeader the accept header to be used when retrieving images
+     * @param imgAcceptHeader the {@code Accept} header to be used when retrieving images
      */
     public void setImgAcceptHeader(final String imgAcceptHeader) {
         imgAcceptHeader_ = imgAcceptHeader;
     }
 
     /**
-     * @param cssAcceptHeader the accept header to be used when retrieving pages
+     * @param cssAcceptHeader the {@code Accept} header to be used when retrieving pages
      */
     public void setCssAcceptHeader(final String cssAcceptHeader) {
         cssAcceptHeader_ = cssAcceptHeader;
     }
 
     /**
-     * @param scriptAcceptHeader the accept header to be used when retrieving scripts
+     * @param scriptAcceptHeader the {@code Accept} header to be used when retrieving scripts
      */
     public void setScriptAcceptHeader(final String scriptAcceptHeader) {
         scriptAcceptHeader_ = scriptAcceptHeader;
     }
 
     /**
-     * @param xmlHttpRequestAcceptHeader the accept header to be used when
+     * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
      * performing XMLHttpRequests
      */
     public void setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
@@ -711,7 +718,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * @return the browserVersionNumeric
      */
-    public float getBrowserVersionNumeric() {
+    public int getBrowserVersionNumeric() {
         return browserVersionNumeric_;
     }
 
@@ -750,8 +757,8 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the short name of the browser like "FF3", "IE7", ...
-     * This is used in different tests to reference the browser to which it applies.
+     * Returns the short name of the browser like {@code FF3}, {@code IE}, etc.
+     *
      * @return the short name (if any)
      */
     public String getNickname() {
@@ -779,7 +786,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param headerNames the header names in ordered manner
      */
     public void setHeaderNamesOrdered(final String[] headerNames) {
-        this.headerNamesOrdered_ = headerNames;
+        headerNamesOrdered_ = headerNames;
     }
 
     @Override

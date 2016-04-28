@@ -15,9 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_AFTER_ONCLICK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
 import java.io.IOException;
@@ -103,6 +100,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * Returns {@code true} if this element is currently selected.
      * @return {@code true} if this element is currently selected
      */
+    @Override
     public boolean isChecked() {
         return checkedState_;
     }
@@ -143,7 +141,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             }
         }
 
-        if (changed && !hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (changed) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
             if (scriptResult != null) {
                 page = scriptResult.getNewPage();
@@ -212,8 +210,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
-        if (!hasFeature(EVENT_ONCHANGE_LOSING_FOCUS) && !hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
+    protected ScriptResult doClickFireClickEvent(final Event event) {
+        if (!hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
 
@@ -224,8 +222,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doClickFireChangeEvent() throws IOException {
-        if (!hasFeature(EVENT_ONCHANGE_LOSING_FOCUS) && hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
+    protected void doClickFireChangeEvent() {
+        if (hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
     }
@@ -268,9 +266,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
         setChecked(isDefaultChecked());
-        if (hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            reset();
-        }
     }
 
     /**
@@ -296,24 +291,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     protected void onAddedToPage() {
         super.onAddedToPage();
-        if (!hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            setChecked(isChecked());
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlRadioButtonInput clone = (HtmlRadioButtonInput) super.cloneNode(deep);
-        if (wasCreatedByJavascript() && hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
-            clone.checkedState_ = false;
-        }
-        if (hasFeature(HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE)) {
-            clone.setDefaultValue(getValueAttribute(), false);
-        }
-        return clone;
+        setChecked(isChecked());
     }
 
     @Override
@@ -323,10 +301,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
 
     @Override
     void handleFocusLostValueChanged() {
-        final boolean fireOnChange = hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
-        if (fireOnChange) {
-            executeOnChangeHandlerIfAppropriate(this);
-        }
     }
 
     /**

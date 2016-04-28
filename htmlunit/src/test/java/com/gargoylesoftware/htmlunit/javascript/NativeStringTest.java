@@ -54,7 +54,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
+    @Alerts({"anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
             "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
             "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
             "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
@@ -62,7 +62,7 @@ public class NativeStringTest extends WebDriverTestCase {
             "slice: function", "small: function", "split: function", "strike: function", "sub: function",
             "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
             "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
-            "valueOf: function" })
+            "valueOf: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"anchor", "big", "blink", "bold", "charAt", "charCodeAt", "concat", "constructor",
             "equals", "equalsIgnoreCase", "fixed", "fontcolor", "fontsize", "fromCharCode", "indexOf", "italics",
@@ -79,9 +79,8 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "contains: undefined", "toSource: undefined", "trim: function" },
-            FF = { "contains: function", "toSource: function", "trim: function" },
-            IE8 = { "contains: undefined", "toSource: undefined", "trim: undefined" })
+    @Alerts(DEFAULT = {"contains: undefined", "toSource: undefined", "trim: function"},
+            FF = {"contains: function", "toSource: function", "trim: function"})
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
@@ -92,8 +91,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE8 = "")
+    @Alerts("2")
     public void trim() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -115,7 +113,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "3",
-            IE = "")
+            IE = {})
     public void trimRight() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -137,7 +135,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "4",
-            IE = "")
+            IE = {})
     public void trimLeft() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -159,8 +157,8 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "contains not supported",
-            FF = { "true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
-                        "true", "true", "false", "false" })
+            FF = {"true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
+                        "true", "true", "false", "false"})
     public void contains() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

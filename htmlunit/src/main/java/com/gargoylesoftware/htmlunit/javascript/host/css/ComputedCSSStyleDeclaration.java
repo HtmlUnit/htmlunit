@@ -14,18 +14,77 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_19;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.AZIMUTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_COLLAPSE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BOX_SIZING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CAPTION_SIDE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CSS_FLOAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.CURSOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.DIRECTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.DISPLAY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ELEVATION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.EMPTY_CELLS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STRETCH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_VARIANT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_WEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LETTER_SPACING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LINE_HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_IMAGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LIST_STYLE_TYPE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.MARGIN_RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ORPHANS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.OVERFLOW;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PITCH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PITCH_RANGE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.POSITION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.QUOTES;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RICHNESS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK_HEADER;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK_NUMERAL;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEAK_PUNCTUATION;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.SPEECH_RATE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.STRESS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_ALIGN;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_INDENT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TEXT_TRANSFORM;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VISIBILITY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VOICE_FAMILY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.VOLUME;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WHITE_SPACE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDOWS;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
 
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedMap;
@@ -34,6 +93,8 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -63,6 +124,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -79,52 +143,56 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(FF))
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
+    /** Denotes a value which should be returned as is. */
+    private static final String EMPTY_FINAL = new String("");
+
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
 
-    /** The set of 'inheritable' attributes. */
-    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<>(Arrays.asList(
-        "azimuth",
-        "border-collapse",
-        "border-spacing",
-        "caption-side",
-        "color",
-        "cursor",
-        "direction",
-        "elevation",
-        "empty-cells",
-        "font-family",
-        "font-size",
-        "font-style",
-        "font-variant",
-        "font-weight",
-        "font",
-        "letter-spacing",
-        "line-height",
-        "list-style-image",
-        "list-style-position",
-        "list-style-type",
-        "list-style",
-        "orphans",
-        "pitch-range",
-        "pitch",
-        "quotes",
-        "richness",
-        "speak-header",
-        "speak-numeral",
-        "speak-punctuation",
-        "speak",
-        "speech-rate",
-        "stress",
-        "text-align",
-        "text-indent",
-        "text-transform",
-        "visibility",
-        "voice-fFamily",
-        "volume",
-        "white-space",
-        "widows",
-        "word-spacing"));
+    /** The set of 'inheritable' definitions. */
+    private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
+        AZIMUTH,
+        BORDER_COLLAPSE,
+        BORDER_SPACING,
+        CAPTION_SIDE,
+        COLOR,
+        CURSOR,
+        DIRECTION,
+        ELEVATION,
+        EMPTY_CELLS,
+        FONT_FAMILY,
+        FONT_SIZE,
+        FONT_STYLE,
+        FONT_VARIANT,
+        FONT_WEIGHT,
+        FONT,
+        LETTER_SPACING,
+        LINE_HEIGHT,
+        LIST_STYLE_IMAGE,
+        LIST_STYLE_POSITION,
+        LIST_STYLE_TYPE,
+        LIST_STYLE,
+        ORPHANS,
+        PITCH_RANGE,
+        PITCH,
+        QUOTES,
+        RICHNESS,
+        SPEAK_HEADER,
+        SPEAK_NUMERAL,
+        SPEAK_PUNCTUATION,
+        SPEAK,
+        SPEECH_RATE,
+        STRESS,
+        TEXT_ALIGN,
+        TEXT_INDENT,
+        TEXT_TRANSFORM,
+        VISIBILITY,
+        VOICE_FAMILY,
+        VOICE_FAMILY,
+        VOLUME,
+        WHITE_SPACE,
+        WIDOWS,
+        WORD_SPACING);
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -181,33 +249,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * {@inheritDoc}
      *
-     * Overridden because some CSS properties are inherited from parent elements.
-     */
-    @Override
-    protected String getStyleAttribute(final String name) {
-        String s = super.getStyleAttribute(name);
-        if (s.isEmpty() && isInheritable(name)) {
-            final Element parent = getElement().getParentElement();
-            if (parent != null) {
-                s = getWindow().getComputedStyle(parent, null).getStyleAttribute(name);
-            }
-        }
-        return s;
-    }
-
-    /**
-     * Returns {@code true} if the specified CSS property is inheritable from parent elements.
-     * @param name the name of the style attribute to check for inheritability
-     * @return {@code true} if the specified CSS property is inheritable from parent elements
-     * @see <a href="http://www.w3.org/TR/CSS21/propidx.html">CSS Property Table</a>
-     */
-    private boolean isInheritable(final String name) {
-        return INHERITABLE_ATTRIBUTES.contains(name);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
      * This method does nothing as the object is read-only.
      */
     @Override
@@ -222,12 +263,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param selector the selector determining that the style applies to this element
      */
     public void applyStyleFromSelector(final org.w3c.dom.css.CSSStyleDeclaration declaration, final Selector selector) {
+        final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = new SelectorSpecificity(selector);
         for (int k = 0; k < declaration.getLength(); k++) {
             final String name = declaration.item(k);
             final String value = declaration.getPropertyValue(name);
             final String priority = declaration.getPropertyPriority(name);
-            applyLocalStyleAttribute(name, value, priority, specificity);
+            if (!"z-index".equals(name) || !browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                applyLocalStyleAttribute(name, value, priority, specificity);
+            }
         }
     }
 
@@ -299,6 +343,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
             final boolean isPixel) {
+        if (!getElement().getDomNodeOrDie().isAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return EMPTY_FINAL;
+        }
         if (str == null || str.isEmpty()) {
             return definition.getDefaultComputedValue(getBrowserVersion());
         }
@@ -308,9 +356,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return str;
     }
 
-    private String defaultIfEmpty(final String str, final String defaultStr) {
-        if (str == null || str.isEmpty()) {
-            return defaultStr;
+    /**
+     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defualtValue}
+     * @param defaultValue the default value of the string
+     * @return the string, or {@code toReturnIfEmptyOrDefault}
+     */
+    private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
+        if (!getElement().getDomNodeOrDie().isAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return EMPTY_FINAL;
+        }
+        if (str == null || str.isEmpty() || str.equals(defaultValue)) {
+            return toReturnIfEmptyOrDefault;
         }
         return str;
     }
@@ -320,15 +377,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute("accelerator"), Definition.ACCELERATOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBackground() {
-        return defaultIfEmpty(super.getBackground(), Definition.BACKGROUND);
+        return defaultIfEmpty(getStyleAttribute(ACCELERATOR, false), ACCELERATOR);
     }
 
     /**
@@ -336,7 +385,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundAttachment() {
-        return defaultIfEmpty(super.getBackgroundAttachment(), Definition.BACKGROUND_ATTACHMENT);
+        return defaultIfEmpty(super.getBackgroundAttachment(), BACKGROUND_ATTACHMENT);
     }
 
     /**
@@ -344,14 +393,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundColor() {
-        String value = super.getBackgroundColor();
+        final String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
-            value = Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
+            return BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
-        else if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
-            value = toRGBColor(value);
-        }
-        return value;
+        return toRGBColor(value);
     }
 
     /**
@@ -359,7 +405,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundImage() {
-        return defaultIfEmpty(super.getBackgroundImage(), Definition.BACKGROUND_IMAGE);
+        return defaultIfEmpty(super.getBackgroundImage(), BACKGROUND_IMAGE);
     }
 
     /**
@@ -368,23 +414,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundPosition() {
-        return defaultIfEmpty(super.getBackgroundPosition(), Definition.BACKGROUND_POSITION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBackgroundPositionX() {
-        return defaultIfEmpty(super.getBackgroundPositionX(), Definition.BACKGROUND_POSITION_X);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBackgroundPositionY() {
-        return defaultIfEmpty(super.getBackgroundPositionY(), Definition.BACKGROUND_POSITION_Y);
+        return defaultIfEmpty(super.getBackgroundPosition(), BACKGROUND_POSITION);
     }
 
     /**
@@ -392,31 +422,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundRepeat() {
-        return defaultIfEmpty(super.getBackgroundRepeat(), Definition.BACKGROUND_REPEAT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorder() {
-        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderBottom() {
-        return defaultIfEmpty(super.getBorderBottom(), Definition.BORDER_BOTTOM);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderColor() {
-        return defaultIfEmpty(super.getBorderColor(), Definition.BORDER_COLOR);
+        return defaultIfEmpty(super.getBackgroundRepeat(), BACKGROUND_REPEAT);
     }
 
     /**
@@ -424,7 +430,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomColor() {
-        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
+        return defaultIfEmpty(super.getBorderBottomColor(), BORDER_BOTTOM_COLOR);
     }
 
     /**
@@ -432,7 +438,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomStyle() {
-        return defaultIfEmpty(super.getBorderBottomStyle(), Definition.BORDER_BOTTOM_STYLE);
+        return defaultIfEmpty(super.getBorderBottomStyle(), BORDER_BOTTOM_STYLE);
     }
 
     /**
@@ -440,23 +446,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), Definition.BORDER_BOTTOM_WIDTH));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderCollapse() {
-        return defaultIfEmpty(super.getBorderCollapse(), Definition.BORDER_COLLAPSE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderLeft() {
-        return defaultIfEmpty(super.getBorderLeft(), Definition.BORDER_LEFT);
+        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), BORDER_BOTTOM_WIDTH));
     }
 
     /**
@@ -464,7 +454,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftColor() {
-        return defaultIfEmpty(super.getBorderLeftColor(), Definition.BORDER_LEFT_COLOR);
+        return defaultIfEmpty(super.getBorderLeftColor(), BORDER_LEFT_COLOR);
     }
 
     /**
@@ -472,7 +462,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftStyle() {
-        return defaultIfEmpty(super.getBorderLeftStyle(), Definition.BORDER_LEFT_STYLE);
+        return defaultIfEmpty(super.getBorderLeftStyle(), BORDER_LEFT_STYLE);
     }
 
     /**
@@ -480,15 +470,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px"));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderRight() {
-        return defaultIfEmpty(super.getBorderRight(), Definition.BORDER_RIGHT);
+        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px", null));
     }
 
     /**
@@ -496,7 +478,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightColor() {
-        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)", null);
     }
 
     /**
@@ -504,7 +486,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightStyle() {
-        return defaultIfEmpty(super.getBorderRightStyle(), "none");
+        return defaultIfEmpty(super.getBorderRightStyle(), "none", null);
     }
 
     /**
@@ -512,31 +494,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px"));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderSpacing() {
-        return defaultIfEmpty(super.getBorderSpacing(), "0px 0px");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderStyle() {
-        return defaultIfEmpty(super.getBorderStyle(), Definition.BORDER_STYLE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderTop() {
-        return defaultIfEmpty(super.getBorderTop(), Definition.BORDER_TOP);
+        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px", null));
     }
 
     /**
@@ -544,7 +502,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopColor() {
-        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)");
+        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)", null);
     }
 
     /**
@@ -552,7 +510,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopStyle() {
-        return defaultIfEmpty(super.getBorderTopStyle(), "none");
+        return defaultIfEmpty(super.getBorderTopStyle(), "none", null);
     }
 
     /**
@@ -560,15 +518,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px"));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBorderWidth() {
-        return defaultIfEmpty(super.getBorderWidth(), Definition.BORDER_WIDTH);
+        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px", null));
     }
 
     /**
@@ -576,47 +526,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBottom() {
-        return defaultIfEmpty(super.getBottom(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBoxSizing() {
-        return defaultIfEmpty(super.getBoxSizing(), Definition.BOX_SIZING);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCaptionSide() {
-        return defaultIfEmpty(super.getCaptionSide(), "top");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClear() {
-        return defaultIfEmpty(super.getClear(), "none");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClip() {
-        return defaultIfEmpty(super.getClip(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getContent() {
-        return defaultIfEmpty(super.getContent(), Definition.CONTENT);
+        return defaultIfEmpty(super.getBottom(), "auto", null);
     }
 
     /**
@@ -624,27 +534,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getColor() {
-        String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
-        if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
-            value = toRGBColor(value);
-        }
-        return value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCounterIncrement() {
-        return defaultIfEmpty(super.getCounterIncrement(), "none");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCounterReset() {
-        return defaultIfEmpty(super.getCounterReset(), "none");
+        final String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)", null);
+        return toRGBColor(value);
     }
 
     /**
@@ -652,23 +543,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getCssFloat() {
-        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCursor() {
-        return defaultIfEmpty(super.getCursor(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDirection() {
-        return defaultIfEmpty(super.getDirection(), "ltr");
+        return defaultIfEmpty(super.getCssFloat(), CSS_FLOAT);
     }
 
     /**
@@ -676,13 +551,52 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
+        return getDisplay(false);
+    }
+
+    /**
+     * Returns the {@code display} attribute.
+     * @param ignoreBlockIfNotAttached is {@link BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored
+     * @return the {@code display} attribute
+     */
+    public String getDisplay(final boolean ignoreBlockIfNotAttached) {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
-        final String value = super.getDisplay();
+        final Element elem = getElement();
+        boolean changeValueIfEmpty = false;
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            final BrowserVersion browserVersion = getBrowserVersion();
+            if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+            if (!ignoreBlockIfNotAttached && browserVersion.hasFeature(CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED)) {
+                changeValueIfEmpty = true;
+            }
+        }
+        final String value = super.getStyleAttribute(DISPLAY, false);
         if (StringUtils.isEmpty(value)) {
-            final Element elem = getElement();
             if (elem instanceof HTMLElement) {
-                return ((HTMLElement) elem).getDefaultStyleDisplay();
+                final String defaultValue = ((HTMLElement) elem).getDefaultStyleDisplay();
+                if (changeValueIfEmpty) {
+                    switch (defaultValue) {
+                        case "inline":
+                        case "inline-block":
+                        case "table-caption":
+                        case "table-cell":
+                        case "table-column":
+                        case "table-column-group":
+                        case "table-footer-group":
+                        case "table-header-group":
+                        case "table-row":
+                        case "table-row-group":
+                        case "list-item":
+                        case "ruby":
+                            return "block";
+
+                        default:
+                    }
+                }
+                return defaultValue;
             }
             return "";
         }
@@ -693,24 +607,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getEmptyCells() {
-        return defaultIfEmpty(super.getEmptyCells(), Definition.EMPTY_CELLS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getFont() {
-        return defaultIfEmpty(super.getFont(), Definition.FONT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFontFamily() {
-        return defaultIfEmpty(super.getFontFamily(), Definition.FONT_FAMILY);
+        if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)
+                && getElement().getDomNodeOrDie().isAttachedToPage()) {
+            return getStyleAttribute(FONT_STYLE, true) + ' ' + getStyleAttribute(FONT_VARIANT, true) + ' '
+                    + getStyleAttribute(FONT_WEIGHT, true) + ' ' + getStyleAttribute(FONT_STRETCH, true) + ' '
+                    + getFontSize() + ' ' + '/' + ' ' + getStyleAttribute(LINE_HEIGHT, true) + ' '
+                    + getStyleAttribute(FONT_FAMILY, true);
+        }
+        return "";
     }
 
     /**
@@ -719,15 +624,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getFontSize() {
         String value = super.getFontSize();
-        if (value.isEmpty()) {
-            final Element parent = getElement().getParentElement();
-            if (parent != null) {
-                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                value = style.getFontSize();
-            }
-        }
-        if (value.isEmpty()) {
-            value = "16px";
+        if (!value.isEmpty()) {
+            value = pixelValue(value) + "px";
         }
         return value;
     }
@@ -736,44 +634,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getFontSizeAdjust() {
-        return defaultIfEmpty(super.getFontSizeAdjust(), "none");
+    public String getLineHeight() {
+        return defaultIfEmpty(super.getLineHeight(), LINE_HEIGHT);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getFontStretch() {
-        String defaultStretch = "";
-        if (getBrowserVersion().hasFeature(CSS_FONT_STRECH_DEFAULT_NORMAL)) {
-            defaultStretch = "normal";
-        }
-        return defaultIfEmpty(super.getFontStretch(), defaultStretch);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFontStyle() {
-        return defaultIfEmpty(super.getFontStyle(), "normal");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFontVariant() {
-        return defaultIfEmpty(super.getFontVariant(), "normal");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFontWeight() {
-        return defaultIfEmpty(super.getFontWeight(), Definition.FONT_WEIGHT);
+    public String getFontFamily() {
+        return defaultIfEmpty(super.getFontFamily(), FONT_FAMILY);
     }
 
     /**
@@ -782,13 +652,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getHeight() {
         final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
-            return "auto";
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+            if (getStyleAttribute(HEIGHT, true).isEmpty()) {
+                return "auto";
+            }
         }
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
-        return pixelString(elem, new CssValue(windowHeight) {
-            @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("height"), "362px");
+        return pixelString(elem, new CssValue(0, windowHeight) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
+                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, "auto");
             }
         });
     }
@@ -797,64 +674,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getImeMode() {
-        return defaultIfEmpty(super.getImeMode(), Definition.IME_MODE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLayoutFlow() {
-        return defaultIfEmpty(super.getLayoutFlow(), Definition.LAYOUT_FLOW);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLayoutGrid() {
-        return defaultIfEmpty(super.getLayoutGrid(), Definition.LAYOUT_GRID);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLayoutGridChar() {
-        return defaultIfEmpty(super.getLayoutGridChar(), Definition.LAYOUT_GRID_CHAR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLayoutGridLine() {
-        return defaultIfEmpty(super.getLayoutGridLine(), Definition.LAYOUT_GRID_LINE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLayoutGridMode() {
-        return defaultIfEmpty(super.getLayoutGridMode(), Definition.LAYOUT_GRID_MODE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLayoutGridType() {
-        return defaultIfEmpty(super.getLayoutGridType(), Definition.LAYOUT_GRID_TYPE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getLeft() {
-        return defaultIfEmpty(super.getLeft(), "auto");
+        final String superLeft = super.getLeft();
+        if (!superLeft.endsWith("%")) {
+            return defaultIfEmpty(superLeft, "auto", null);
+        }
+
+        final Element elem = getElement();
+        return pixelString(elem, new CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(LEFT, true);
+                }
+                return style.getStyleAttribute(WIDTH, true);
+            }
+        });
     }
 
     /**
@@ -862,47 +697,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLetterSpacing() {
-        return defaultIfEmpty(super.getLetterSpacing(), "normal");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLineBreak() {
-        return defaultIfEmpty(super.getLineBreak(), Definition.LINE_BREAK);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getListStyle() {
-        return defaultIfEmpty(super.getListStyle(), Definition.LIST_STYLE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getListStyleImage() {
-        return defaultIfEmpty(super.getListStyleImage(), "none");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getListStylePosition() {
-        return defaultIfEmpty(super.getListStylePosition(), "outside");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getListStyleType() {
-        return defaultIfEmpty(super.getListStyleType(), "disc");
+        return defaultIfEmpty(super.getLetterSpacing(), "normal", null);
     }
 
     /**
@@ -910,7 +705,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMargin() {
-        return defaultIfEmpty(super.getMargin(), Definition.MARGIN, true);
+        return defaultIfEmpty(super.getMargin(), MARGIN, true);
     }
 
     /**
@@ -918,7 +713,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginBottom() {
-        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px"));
+        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px", null));
     }
 
     /**
@@ -926,7 +721,27 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginLeft() {
-        return pixelString(defaultIfEmpty(super.getMarginLeft(), "0px"));
+        final String superMarginLeft = super.getMarginLeft();
+        if (!superMarginLeft.endsWith("%")) {
+            return pixelString(defaultIfEmpty(superMarginLeft, "0px", null));
+        }
+        final Element elem = getElement();
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+        }
+
+        final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
+        return pixelString(elem, new CssValue(0, windowWidth) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(MARGIN_LEFT, true);
+                }
+                return style.getStyleAttribute(WIDTH, true);
+            }
+        });
     }
 
     /**
@@ -934,7 +749,27 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginRight() {
-        return pixelString(defaultIfEmpty(super.getMarginRight(), "0px"));
+        final String superMarginRight = super.getMarginRight();
+        if (!superMarginRight.endsWith("%")) {
+            return pixelString(defaultIfEmpty(superMarginRight, "0px", null));
+        }
+        final Element elem = getElement();
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+        }
+
+        final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
+        return pixelString(elem, new CssValue(0, windowWidth) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(MARGIN_RIGHT, true);
+                }
+                return style.getStyleAttribute(WIDTH, true);
+            }
+        });
     }
 
     /**
@@ -942,15 +777,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginTop() {
-        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px"));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMarkerOffset() {
-        return defaultIfEmpty(super.getMarkerOffset(), "auto");
+        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px", null));
     }
 
     /**
@@ -958,7 +785,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxHeight() {
-        return defaultIfEmpty(super.getMaxHeight(), "none");
+        return defaultIfEmpty(super.getMaxHeight(), "none", null);
     }
 
     /**
@@ -966,7 +793,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxWidth() {
-        return defaultIfEmpty(super.getMaxWidth(), "none");
+        return defaultIfEmpty(super.getMaxWidth(), "none", null);
     }
 
     /**
@@ -974,7 +801,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMinHeight() {
-        return defaultIfEmpty(super.getMinHeight(), "0px");
+        return defaultIfEmpty(super.getMinHeight(), "0px", null);
     }
 
     /**
@@ -982,567 +809,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMinWidth() {
-        return defaultIfEmpty(super.getMinWidth(), "0px");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsBlockProgression() {
-        return defaultIfEmpty(super.getMsBlockProgression(), Definition.MS_BLOCK_PROGRESSION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomChaining() {
-        return defaultIfEmpty(super.getMsContentZoomChaining(), Definition.MS_CONTENT_ZOOM_CHAINING);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomLimit() {
-        return defaultIfEmpty(super.getMsContentZoomLimit(), Definition.MS_CONTENT_ZOOM_LIMIT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomLimitMax() {
-        return defaultIfEmpty(super.getMsContentZoomLimitMax(), Definition.MS_CONTENT_ZOOM_LIMIT_MAX);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomLimitMin() {
-        return defaultIfEmpty(super.getMsContentZoomLimitMin(), Definition.MS_CONTENT_ZOOM_LIMIT_MIN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomSnap() {
-        return defaultIfEmpty(super.getMsContentZoomSnap(), Definition.MS_CONTENT_ZOOM_SNAP);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomSnapPoints() {
-        return defaultIfEmpty(super.getMsContentZoomSnapPoints(), Definition.MS_CONTENT_ZOOM_SNAP_POINTS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZoomSnapType() {
-        return defaultIfEmpty(super.getMsContentZoomSnapType(), Definition.MS_CONTENT_ZOOM_SNAP_TYPE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsContentZooming() {
-        return defaultIfEmpty(super.getMsContentZooming(), Definition.MS_CONTENT_ZOOMING);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlex() {
-        return defaultIfEmpty(super.getMsFlex(), Definition.MS_FLEX);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexAlign() {
-        return defaultIfEmpty(super.getMsFlexAlign(), Definition.MS_FLEX_ALIGN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexDirection() {
-        return defaultIfEmpty(super.getMsFlexDirection(), Definition.MS_FLEX_DIRECTION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexFlow() {
-        return defaultIfEmpty(super.getMsFlexFlow(), Definition.MS_FLEX_FLOW);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexItemAlign() {
-        return defaultIfEmpty(super.getMsFlexItemAlign(), Definition.MS_FLEX_ITEM_ALIGN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexLinePack() {
-        return defaultIfEmpty(super.getMsFlexLinePack(), Definition.MS_FLEX_LINE_PACK);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexNegative() {
-        return defaultIfEmpty(super.getMsFlexNegative(), Definition.MS_FLEX_NEGATIVE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexOrder() {
-        return defaultIfEmpty(super.getMsFlexOrder(), Definition.MS_FLEX_ORDER);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexPack() {
-        return defaultIfEmpty(super.getMsFlexPack(), Definition.MS_FLEX_PACK);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexPositive() {
-        return defaultIfEmpty(super.getMsFlexPositive(), Definition.MS_FLEX_POSITIVE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexPreferredSize() {
-        return defaultIfEmpty(super.getMsFlexPreferredSize(), Definition.MS_FLEX_PREFERRED_SIZE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlexWrap() {
-        return defaultIfEmpty(super.getMsFlexWrap(), Definition.MS_FLEX_WRAP);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlowFrom() {
-        return defaultIfEmpty(super.getMsFlowFrom(), Definition.MS_FLOW_FROM);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFlowInto() {
-        return defaultIfEmpty(super.getMsFlowInto(), Definition.MS_FLOW_INTO);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsFontFeatureSettings() {
-        return defaultIfEmpty(super.getMsFontFeatureSettings(), Definition.MS_FONT_FEATURE_SETTINGS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridColumn() {
-        return defaultIfEmpty(super.getMsGridColumn(), Definition.MS_GRID_COLUMN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridColumnAlign() {
-        return defaultIfEmpty(super.getMsGridColumnAlign(), Definition.MS_GRID_COLUMN_ALIGN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridColumnSpan() {
-        return defaultIfEmpty(super.getMsGridColumnSpan(), Definition.MS_GRID_COLUMN_SPAN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridColumns() {
-        return defaultIfEmpty(super.getMsGridColumns(), Definition.MS_GRID_COLUMNS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridRow() {
-        return defaultIfEmpty(super.getMsGridRow(), Definition.MS_GRID_ROW);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridRowAlign() {
-        return defaultIfEmpty(super.getMsGridRowAlign(), Definition.MS_GRID_ROW_ALIGN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridRowSpan() {
-        return defaultIfEmpty(super.getMsGridRowSpan(), Definition.MS_GRID_ROW_SPAN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsGridRows() {
-        return defaultIfEmpty(super.getMsGridRows(), Definition.MS_GRID_ROWS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsHighContrastAdjust() {
-        return defaultIfEmpty(super.getMsHighContrastAdjust(), Definition.MS_HIGH_CONTRAST_ADJUST);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsHyphenateLimitChars() {
-        return defaultIfEmpty(super.getMsHyphenateLimitChars(), Definition.MS_HYPHENATE_LIMIT_CHARS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsHyphenateLimitLines() {
-        return defaultIfEmpty(super.getMsHyphenateLimitLines(), Definition.MS_HYPHENATE_LIMIT_LINES);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsHyphenateLimitZone() {
-        return defaultIfEmpty(super.getMsHyphenateLimitZone(), Definition.MS_HYPHENATE_LIMIT_ZONE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsHyphens() {
-        return defaultIfEmpty(super.getMsHyphens(), Definition.MS_HYPHENS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsImeAlign() {
-        return defaultIfEmpty(super.getMsImeAlign(), Definition.MS_IME_ALIGN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsInterpolationMode() {
-        return defaultIfEmpty(super.getMsInterpolationMode(), Definition.MS_INTERPOLATION_MODE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsOverflowStyle() {
-        return defaultIfEmpty(super.getMsOverflowStyle(), Definition.MS_OVERFLOW_STYLE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsPerspective() {
-        return defaultIfEmpty(super.getMsPerspective(), Definition.MS_PERSPECTIVE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsPerspectiveOrigin() {
-        return defaultIfEmpty(super.getMsPerspectiveOrigin(), Definition.MS_PERSPECTIVE_ORIGIN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollChaining() {
-        return defaultIfEmpty(super.getMsScrollChaining(), Definition.MS_SCROLL_CHAINING);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollLimit() {
-        return defaultIfEmpty(super.getMsScrollLimit(), Definition.MS_SCROLL_LIMIT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollLimitXMax() {
-        return defaultIfEmpty(super.getMsScrollLimitXMax(), Definition.MS_SCROLL_LIMIT_X_MAX);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollLimitXMin() {
-        return defaultIfEmpty(super.getMsScrollLimitXMin(), Definition.MS_SCROLL_LIMIT_X_MIN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollLimitYMax() {
-        return defaultIfEmpty(super.getMsScrollLimitYMax(), Definition.MS_SCROLL_LIMIT_Y_MAX);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollLimitYMin() {
-        return defaultIfEmpty(super.getMsScrollLimitYMin(), Definition.MS_SCROLL_LIMIT_Y_MIN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollRails() {
-        return defaultIfEmpty(super.getMsScrollRails(), Definition.MS_SCROLL_RAILS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollSnapPointsX() {
-        return defaultIfEmpty(super.getMsScrollSnapPointsX(), Definition.MS_SCROLL_SNAP_POINTS_X);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollSnapPointsY() {
-        return defaultIfEmpty(super.getMsScrollSnapPointsY(), Definition.MS_SCROLL_SNAP_POINTS_Y);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollSnapType() {
-        return defaultIfEmpty(super.getMsScrollSnapType(), Definition.MS_SCROLL_SNAP_TYPE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollSnapX() {
-        return defaultIfEmpty(super.getMsScrollSnapX(), Definition.MS_SCROLL_SNAP_X);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollSnapY() {
-        return defaultIfEmpty(super.getMsScrollSnapY(), Definition.MS_SCROLL_SNAP_Y);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsScrollTranslation() {
-        return defaultIfEmpty(super.getMsScrollTranslation(), Definition.MS_SCROLL_TRANSLATION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTextCombineHorizontal() {
-        return defaultIfEmpty(super.getMsTextCombineHorizontal(), Definition.MS_TEXT_COMBINE_HORIZONTAL);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTouchAction() {
-        return defaultIfEmpty(super.getMsTouchAction(), Definition.MS_TOUCH_ACTION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTouchSelect() {
-        return defaultIfEmpty(super.getMsTouchSelect(), Definition.MS_TOUCH_SELECT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransform() {
-        return defaultIfEmpty(super.getMsTransform(), Definition.MS_TRANSFORM);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransformOrigin() {
-        return defaultIfEmpty(super.getMsTransformOrigin(), Definition.MS_TRANSFORM_ORIGIN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransformStyle() {
-        return defaultIfEmpty(super.getMsTransformStyle(), Definition.MS_TRANSFORM_STYLE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransition() {
-        return defaultIfEmpty(super.getMsTransition(), Definition.MS_TRANSITION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransitionDelay() {
-        return defaultIfEmpty(super.getMsTransitionDelay(), Definition.MS_TRANSITION_DELAY);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransitionDuration() {
-        return defaultIfEmpty(super.getMsTransitionDuration(), Definition.MS_TRANSITION_DURATION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransitionProperty() {
-        return defaultIfEmpty(super.getMsTransitionProperty(), Definition.MS_TRANSITION_PROPERTY);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsTransitionTimingFunction() {
-        return defaultIfEmpty(super.getMsTransitionTimingFunction(), Definition.MS_TRANSITION_TIMING_FUNCTION);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsUserSelect() {
-        return defaultIfEmpty(super.getMsUserSelect(), Definition.MS_USER_SELECT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsWrapFlow() {
-        return defaultIfEmpty(super.getMsWrapFlow(), Definition.MS_WRAP_FLOW);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsWrapMargin() {
-        return defaultIfEmpty(super.getMsWrapMargin(), Definition.MS_WRAP_MARGIN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMsWrapThrough() {
-        return defaultIfEmpty(super.getMsWrapThrough(), Definition.MS_WRAP_THROUGH);
+        return defaultIfEmpty(super.getMinWidth(), "0px", null);
     }
 
     /**
@@ -1550,39 +817,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOpacity() {
-        return defaultIfEmpty(super.getOpacity(), "1");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOrphans() {
-        return defaultIfEmpty(super.getOrphans(), Definition.ORPHANS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOutlineColor() {
-        return defaultIfEmpty(super.getOutlineColor(), Definition.OUTLINE_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOutlineOffset() {
-        return defaultIfEmpty(super.getOutlineOffset(), "0px");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOutlineStyle() {
-        return defaultIfEmpty(super.getOutlineStyle(), "none");
+        return defaultIfEmpty(super.getOpacity(), "1", null);
     }
 
     /**
@@ -1590,55 +825,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOutlineWidth() {
-        return defaultIfEmpty(super.getOutlineWidth(), "0px");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOverflow() {
-        return defaultIfEmpty(super.getOverflow(), "visible");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOverflowX() {
-        return defaultIfEmpty(super.getOverflowX(), "visible");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOverflowY() {
-        return defaultIfEmpty(super.getOverflowY(), "visible");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPageBreakAfter() {
-        return defaultIfEmpty(super.getPageBreakAfter(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPageBreakBefore() {
-        return defaultIfEmpty(super.getPageBreakBefore(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPageBreakInside() {
-        return defaultIfEmpty(super.getPageBreakInside(), Definition.PAGE_BREAK_INSIDE);
+        return defaultIfEmpty(super.getOutlineWidth(), "0px", null);
     }
 
     /**
@@ -1646,7 +833,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPadding() {
-        return defaultIfEmpty(super.getPadding(), Definition.PADDING, true);
+        return defaultIfEmpty(super.getPadding(), PADDING, true);
     }
 
     /**
@@ -1654,7 +841,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingBottom() {
-        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px", null));
     }
 
     /**
@@ -1662,7 +849,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingLeft() {
-        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px", null));
     }
 
     /**
@@ -1670,7 +857,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingRight() {
-        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px"));
+        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px", null));
     }
 
     /**
@@ -1678,23 +865,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingTop() {
-        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px"));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPointerEvents() {
-        return defaultIfEmpty(super.getPointerEvents(), Definition.POINTER_EVENTS);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPosition() {
-        return defaultIfEmpty(super.getPosition(), "static");
+        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px", null));
     }
 
     /**
@@ -1702,119 +873,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getRight() {
-        return defaultIfEmpty(super.getRight(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbar3dLightColor() {
-        return defaultIfEmpty(super.getScrollbar3dLightColor(), Definition.SCROLLBAR_3DLIGHT_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarArrowColor() {
-        return defaultIfEmpty(super.getScrollbarArrowColor(), Definition.SCROLLBAR_ARROW_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarBaseColor() {
-        return defaultIfEmpty(super.getScrollbarBaseColor(), Definition.SCROLLBAR_BASE_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarDarkShadowColor() {
-        return defaultIfEmpty(super.getScrollbarDarkShadowColor(), Definition.SCROLLBAR_DARKSHADOW_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarFaceColor() {
-        return defaultIfEmpty(super.getScrollbarFaceColor(), Definition.SCROLLBAR_FACE_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarHighlightColor() {
-        return defaultIfEmpty(super.getScrollbarHighlightColor(), Definition.SCROLLBAR_HIGHLIGHT_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarShadowColor() {
-        return defaultIfEmpty(super.getScrollbarShadowColor(), Definition.SCROLLBAR_SHADOW_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getScrollbarTrackColor() {
-        return defaultIfEmpty(super.getScrollbarTrackColor(), Definition.SCROLLBAR_TRACK_COLOR);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getStyleFloat() {
-        return defaultIfEmpty(super.getStyleFloat(), Definition.STYLE_FLOAT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTableLayout() {
-        return defaultIfEmpty(super.getTableLayout(), "auto");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextAlign() {
-        return defaultIfEmpty(super.getTextAlign(), Definition.TEXT_ALIGN);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextAlignLast() {
-        return defaultIfEmpty(super.getTextAlignLast(), Definition.TEXT_ALIGN_LAST);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextAutospace() {
-        return defaultIfEmpty(super.getTextAutospace(), Definition.TEXT_AUTOSPACE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextDecoration() {
-        return defaultIfEmpty(super.getTextDecoration(), "none");
+        return defaultIfEmpty(super.getRight(), "auto", null);
     }
 
     /**
@@ -1822,71 +881,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTextIndent() {
-        return defaultIfEmpty(super.getTextIndent(), "0px");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextJustify() {
-        return defaultIfEmpty(super.getTextJustify(), Definition.TEXT_JUSTIFY);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextJustifyTrim() {
-        return defaultIfEmpty(super.getTextJustifyTrim(), Definition.TEXT_JUSTIFY_TRIM);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextKashida() {
-        return defaultIfEmpty(super.getTextKashida(), Definition.TEXT_KASHIDA);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextKashidaSpace() {
-        return defaultIfEmpty(super.getTextKashidaSpace(), Definition.TEXT_KASHIDA_SPACE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextOverflow() {
-        return defaultIfEmpty(super.getTextOverflow(), Definition.TEXT_OVERFLOW);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextShadow() {
-        return defaultIfEmpty(super.getTextShadow(), Definition.TEXT_SHADOW);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextTransform() {
-        return defaultIfEmpty(super.getTextTransform(), "none");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextUnderlinePosition() {
-        return defaultIfEmpty(super.getTextUnderlinePosition(), Definition.TEXT_UNDERLINE_POSITION);
+        return defaultIfEmpty(super.getTextIndent(), "0px", null);
     }
 
     /**
@@ -1894,7 +889,25 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTop() {
-        return defaultIfEmpty(super.getTop(), Definition.TOP);
+        final Element elem = getElement();
+        if (!elem.getDomNodeOrDie().isAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return "";
+        }
+        final String superTop = super.getTop();
+        if (!superTop.endsWith("%")) {
+            return defaultIfEmpty(superTop, TOP);
+        }
+
+        return pixelString(elem, new CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCSSStyleDeclaration style) {
+                if (style.getElement() == elem) {
+                    return style.getStyleAttribute(TOP, true);
+                }
+                return style.getStyleAttribute(HEIGHT, true);
+            }
+        });
     }
 
     /**
@@ -1902,23 +915,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getVerticalAlign() {
-        return defaultIfEmpty(super.getVerticalAlign(), "baseline");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getVisibility() {
-        return defaultIfEmpty(super.getVisibility(), "visible");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getWhiteSpace() {
-        return defaultIfEmpty(super.getWhiteSpace(), "normal");
+        return defaultIfEmpty(super.getVerticalAlign(), "baseline", null);
     }
 
     /**
@@ -1926,15 +923,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWidows() {
-        return defaultIfEmpty(super.getWidows(), Definition.WIDOWS);
+        return defaultIfEmpty(super.getWidows(), WIDOWS);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getWritingMode() {
-        return defaultIfEmpty(super.getWritingMode(), Definition.WRITING_MODE);
+    public String getOrphans() {
+        return defaultIfEmpty(super.getOrphans(), ORPHANS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPosition() {
+        return defaultIfEmpty(super.getPosition(), POSITION);
     }
 
     /**
@@ -1947,21 +952,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isDirectlyAttachedToPage()) {
-            return "auto";
+        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+                return "";
+            }
+            if (getStyleAttribute(WIDTH, true).isEmpty()) {
+                return "auto";
+            }
         }
 
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
-        return pixelString(elem, new CssValue(windowWidth) {
+        return pixelString(elem, new CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH);
+                final String value = style.getStyleAttribute(WIDTH, true);
                 if (StringUtils.isEmpty(value)) {
-                    if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)) {
-                        return "auto";
-                    }
-
-                    if ("absolute".equals(getStyleAttribute("position"))) {
+                    if ("absolute".equals(getStyleAttribute(POSITION, true))) {
                         final String content = getDomNodeOrDie().getTextContent();
                         // do this only for small content
                         // at least for empty div's this is more correct
@@ -1970,14 +976,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         }
                     }
 
-                    return getWindowDefaultValue() + "px";
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (elem instanceof HTMLBodyElement) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
                 }
                 else if ("auto".equals(value)) {
-                    if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)) {
-                        return "auto";
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (elem instanceof HTMLBodyElement) {
+                        windowDefaultValue -= 16;
                     }
-
-                    return getWindowDefaultValue() + "px";
+                    return windowDefaultValue + "px";
                 }
 
                 return value;
@@ -1992,12 +1002,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
-        int width = getCalculatedWidth();
-        if (includeBorder) {
-            width += getBorderHorizontal();
+        if (!getElement().getDomNodeOrNull().isAttachedToPage()) {
+            return 0;
         }
-        if (includePadding) {
-            width += getPaddingHorizontal();
+        int width = getCalculatedWidth();
+        if (!"border-box".equals(getStyleAttribute(BOX_SIZING))) {
+            if (includeBorder) {
+                width += getBorderHorizontal();
+            }
+            else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)
+                    && getElement().getDomNodeOrDie().isAttachedToPage()) {
+                width -= 17;
+            }
+
+            if (includePadding) {
+                width += getPaddingHorizontal();
+            }
         }
         return width;
     }
@@ -2007,26 +1027,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return width_.intValue();
         }
 
-        final DomNode node = getElement().getDomNodeOrDie();
+        final Element element = getElement();
+        final DomNode node = element.getDomNodeOrDie();
         if (!node.mayBeDisplayed()) {
             width_ = Integer.valueOf(0);
             return 0;
         }
 
         final String display = getDisplay();
-        if ("none".equals(display)) {
+        if ("none".equals(display) || ("inline".equals(display) && !(element instanceof HTMLIFrameElement)
+                && !(element instanceof HTMLInputElement) && !(element instanceof HTMLTextAreaElement))) {
             width_ = Integer.valueOf(0);
             return 0;
         }
 
-        final int windowWidth = getElement().getWindow().getWebWindow().getInnerWidth();
+        final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
 
-        int width;
+        final int width;
         final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
-            if (getElement() instanceof HTMLCanvasElement) {
+            if (element instanceof HTMLCanvasElement) {
                 return 300;
             }
 
@@ -2037,21 +1059,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = node.getTextContent().length() * PIXELS_PER_CHAR;
             }
             else if ("block".equals(display)) {
-                // Block elements take up 100% of the parent's width.
-                final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
-                final String parentWidth = getWindow().getComputedStyle(parentJS, null).getWidth();
-                if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)
-                        && "auto".equals(parentWidth)) {
-                    width = windowWidth;
+                if (element instanceof HTMLBodyElement) {
+                    final String widthString = element.getWindow().getComputedStyle(element, null).getWidth();
+                    width = Integer.parseInt(widthString.substring(0, widthString.length() - 2));
                 }
                 else {
-                    width = pixelValue(parentJS, new CssValue(windowWidth) {
+                    // Block elements take up 100% of the parent's width.
+                    final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
+                    width = pixelValue(parentJS, new CssValue(0, windowWidth) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
                             return style.getWidth();
                         }
-                    });
+                    }) - (getBorderHorizontal() + getPaddingHorizontal());
                 }
-                width -= getBorderHorizontal() + getPaddingHorizontal();
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton
@@ -2078,9 +1098,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(getElement(), new CssValue(windowWidth) {
+            width = pixelValue(element, new CssValue(0, windowWidth) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
-                    return style.getStyleAttribute(WIDTH);
+                    return style.getStyleAttribute(WIDTH, true);
                 }
             });
         }
@@ -2125,12 +1145,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
-        int height = getCalculatedHeight();
-        if (includeBorder) {
-            height += getBorderVertical();
+        if (!getElement().getDomNodeOrNull().isAttachedToPage()) {
+            return 0;
         }
-        if (includePadding) {
-            height += getPaddingVertical();
+        int height = getCalculatedHeight();
+        if (!"border-box".equals(getStyleAttribute(BOX_SIZING))) {
+            if (includeBorder) {
+                height += getBorderVertical();
+            }
+            else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)
+                    && getElement().getDomNodeOrDie().isAttachedToPage()) {
+                height -= 17;
+            }
+
+            if (includePadding) {
+                height += getPaddingVertical();
+            }
         }
         return height;
     }
@@ -2151,13 +1181,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int contentHeight = getContentHeight();
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
         final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
-        int height;
-        if (contentHeight > 0
-                && ((useDefaultHeight && contentHeight > elementHeight)
-                        || (!useDefaultHeight && !explicitHeightSpecified))) {
+        final int height;
+        if (contentHeight > 0 && !explicitHeightSpecified) {
             height = contentHeight;
         }
         else {
@@ -2200,7 +1227,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
-        final int defaultHeight;
+        int defaultHeight;
         if (node instanceof HtmlDivision && node.getTextContent().trim().isEmpty()) {
             defaultHeight = 0;
         }
@@ -2222,30 +1249,26 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 defaultHeight = 0;
             }
         }
-        else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_19)) {
-            defaultHeight = 19;
-        }
-        else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_18)) {
-            defaultHeight = 18;
-        }
         else {
-            defaultHeight = 20;
+            defaultHeight = ComputedHeight.getHeight(getBrowserVersion(), getFontSize());
+            if (node instanceof HtmlDivision) {
+                defaultHeight *= StringUtils.countMatches(node.asText(), '\n') + 1;
+            }
         }
 
-        final int defaultValue = getElement() instanceof HTMLCanvasElement ? 150 : windowHeight;
+        final int defaultWindowHeight = getElement() instanceof HTMLCanvasElement ? 150 : windowHeight;
 
-        int height = pixelValue(getElement(), new CssValue(defaultValue) {
+        int height = pixelValue(getElement(), new CssValue(defaultHeight, defaultWindowHeight) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 final Element element = style.getElement();
                 if (element instanceof HTMLBodyElement) {
                     return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
                 }
-                return style.getStyleAttribute("height");
+                return style.getStyleAttribute(HEIGHT, true);
             }
         });
 
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
-        if (height == 0 && !explicitHeightSpecified || (useDefaultHeight && height < defaultHeight)) {
+        if (height == 0 && !explicitHeightSpecified) {
             height = defaultHeight;
         }
 
@@ -2307,18 +1330,25 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return {@code true} if the element is scrollable along the specified axis
      */
     public boolean isScrollable(final boolean horizontal) {
+        return isScrollable(horizontal, false);
+    }
+
+    /**
+     * @param ignoreSize whether to consider the content/calculated width/height
+     */
+    private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
         final Element node = getElement();
-        final String overflow = getOverflow();
+        final String overflow = getStyleAttribute(OVERFLOW, true);
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
-                && getContentWidth() > getCalculatedWidth();
+                && (ignoreSize || getContentWidth() > getCalculatedWidth());
         }
         else {
             // TODO: inherit, overflow-y
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
-                && getContentHeight() > getEmptyHeight();
+                && (ignoreSize || getContentHeight() > getEmptyHeight());
         }
         return scrollable;
     }
@@ -2436,13 +1466,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the computed left (X coordinate), relative to the node's parent's left edge
      */
     public int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        String p = getPositionWithInheritance();
+        final String p = getPositionWithInheritance();
         final String l = getLeftWithInheritance();
         final String r = getRightWithInheritance();
-
-        if ("fixed".equals(p) && getBrowserVersion().hasFeature(TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
-            p = "static";
-        }
 
         int left;
         if ("absolute".equals(p) && !"auto".equals(l)) {
@@ -2455,6 +1481,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
             final int parentWidth = style.getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
+        }
+        else if ("fixed".equals(p) && !"auto".equals(r)) {
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
+            final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
+            left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
         }
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
@@ -2513,20 +1545,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS {@code position} attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
-        String p = getPosition();
+        String p = getStyleAttribute(POSITION, true);
         if ("inherit".equals(p)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    p = "static";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    p = style.getPositionWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                p = "static";
             }
             else {
-                p = "static";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                p = style.getPositionWithInheritance();
             }
         }
         return p;
@@ -2539,18 +1566,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getLeftWithInheritance() {
         String left = getLeft();
         if ("inherit".equals(left)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    left = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    left = style.getLeftWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                left = "auto";
             }
             else {
-                left = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                left = style.getLeftWithInheritance();
             }
         }
         return left;
@@ -2563,18 +1585,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getRightWithInheritance() {
         String right = getRight();
         if ("inherit".equals(right)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    right = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    right = style.getRightWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                right = "auto";
             }
             else {
-                right = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                right = style.getRightWithInheritance();
             }
         }
         return right;
@@ -2587,18 +1604,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getTopWithInheritance() {
         String top = getTop();
         if ("inherit".equals(top)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    top = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    top = style.getTopWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                top = "auto";
             }
             else {
-                top = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                top = style.getTopWithInheritance();
             }
         }
         return top;
@@ -2611,37 +1623,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBottomWithInheritance() {
         String bottom = getBottom();
         if ("inherit".equals(bottom)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                if (parent == null) {
-                    bottom = "auto";
-                }
-                else {
-                    final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-                    bottom = style.getBottomWithInheritance();
-                }
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            if (parent == null) {
+                bottom = "auto";
             }
             else {
-                bottom = "auto";
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                bottom = style.getBottomWithInheritance();
             }
         }
         return bottom;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getRubyOverhang() {
-        return defaultIfEmpty(super.getRubyOverhang(), Definition.RUBY_OVERHANG);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getRubyPosition() {
-        return defaultIfEmpty(super.getRubyPosition(), Definition.RUBY_POSITION);
     }
 
     /**
@@ -2777,28 +1768,29 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordSpacing() {
-        return defaultIfEmpty(super.getWordSpacing(), Definition.WORD_SPACING);
+        return defaultIfEmpty(super.getWordSpacing(), WORD_SPACING);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getWordWrap() {
-        return defaultIfEmpty(super.getWordWrap(), Definition.WORD_WRAP);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getStyleAttributeValue(final Definition style) {
-        // don't use defaultIfEmpty for performance
-        // (no need to calculate the default if not empty)
-        final String value = super.getStyleAttributeValue(style);
-        if (StringUtils.isEmpty(value)) {
-            return style.getDefaultComputedValue(getBrowserVersion());
+    public String getStyleAttribute(final Definition style, final boolean getDefaultValueIfEmpty) {
+        if (!getElement().getDomNodeOrDie().isAttachedToPage()
+                && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return EMPTY_FINAL;
         }
+        String value = super.getStyleAttribute(style, getDefaultValueIfEmpty);
+        if (value.isEmpty()) {
+            final Element parent = getElement().getParentElement();
+            if (INHERITABLE_DEFINITIONS.contains(style) && parent != null) {
+                value = getWindow().getComputedStyle(parent, null).getStyleAttribute(style, getDefaultValueIfEmpty);
+            }
+            else if (getDefaultValueIfEmpty) {
+                value = style.getDefaultComputedValue(getBrowserVersion());
+            }
+        }
+
         return value;
     }
 
@@ -2812,14 +1804,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return "auto";
         }
         return response;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getZoom() {
-        return defaultIfEmpty(super.getZoom(), Definition.ZOOM);
     }
 
     /**
@@ -2844,10 +1828,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
      */
     protected String pixelString(final String value) {
-        if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
-            return value;
-        }
-        if (value.endsWith("px")) {
+        if (value == EMPTY_FINAL || value.endsWith("px")) {
             return value;
         }
         return pixelValue(value) + "px";
@@ -2864,9 +1845,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     protected String pixelString(final Element element, final CssValue value) {
         final String s = value.get(element);
-        if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
-            return s;
-        }
         if (s.endsWith("px")) {
             return s;
         }

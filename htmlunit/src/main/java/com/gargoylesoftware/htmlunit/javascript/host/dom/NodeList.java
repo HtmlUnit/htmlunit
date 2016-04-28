@@ -17,13 +17,16 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -36,12 +39,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class NodeList extends AbstractList {
 
     /**
@@ -54,12 +54,45 @@ public class NodeList extends AbstractList {
     /**
      * Creates an instance.
      *
-     * @param parentScope parent scope
+     * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
-     * @param description a text useful for debugging
      */
-    public NodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        super(parentScope, attributeChangeSensitive, description);
+    public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
+        super(domNode, attributeChangeSensitive);
+    }
+
+    /**
+     * Constructs an instance with an initial cache value.
+     * @param domNode the parent scope, on which we listen for changes
+     * @param initialElements the initial content for the cache
+     */
+    public NodeList(final DomNode domNode, final List<?> initialElements) {
+        super(domNode, initialElements);
+    }
+
+    /**
+     * Creates an instance.
+     * @param parentScope the parent scope
+     */
+    private NodeList(final ScriptableObject parentScope) {
+        setParentScope(parentScope);
+        setPrototype(getPrototype(getClass()));
+    }
+
+    /**
+     * Gets a static NodeList.
+     *
+     * @param parentScope the parent scope
+     * @param elements the elements
+     * @return an empty collection
+     */
+    public static NodeList staticNodeList(final HtmlUnitScriptable parentScope, final List<Object> elements) {
+        return new NodeList(parentScope) {
+            @Override
+            public List<Object> getElements() {
+                return elements;
+            }
+        };
     }
 }

@@ -47,11 +47,11 @@ public class HtmlDivision extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
         return getAttribute("align");
@@ -63,14 +63,6 @@ public class HtmlDivision extends HtmlElement {
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isBlock() {
         return true;
     }
 }

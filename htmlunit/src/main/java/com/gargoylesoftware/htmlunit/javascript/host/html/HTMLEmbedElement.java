@@ -14,17 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EMBED_OBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -36,13 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlEmbed.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlEmbed.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlEmbed.class)
 public class HTMLEmbedElement extends HTMLElement {
 
     /**
@@ -56,7 +45,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Returns the value of the {@code align} property.
      * @return the value of the {@code align} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getAlign() {
         return getAlign(true);
     }
@@ -65,7 +54,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Sets the value of the {@code align} property.
      * @param align the value of the {@code align} property
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void setAlign(final String align) {
         setAlign(align, false);
     }
@@ -115,16 +104,21 @@ public class HTMLEmbedElement extends HTMLElement {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
      */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if ((String.class.equals(hint) || hint == null) && getBrowserVersion().hasFeature(JS_EMBED_OBJECT)) {
-            final HtmlElement htmlElement = getDomNodeOrNull();
-            if (htmlElement != null && !((HtmlPage) htmlElement.getPage()).isQuirksMode()) {
-                return "[object]";
-            }
-        }
-        return super.getDefaultValue(hint);
+    @JsxGetter
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
     }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
+    }
+
 }

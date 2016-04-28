@@ -145,17 +145,12 @@ public class WebResponse implements Serializable {
      *         or {@code null} if none was specified
      */
     public String getContentCharsetOrNull() {
-        InputStream is = null;
-        try {
-            is = getContentAsStream();
+        try (final InputStream is = getContentAsStream()) {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
         }
         catch (final IOException e) {
             LOG.warn("Error trying to sniff encoding.", e);
             return null;
-        }
-        finally {
-            IOUtils.closeQuietly(is);
         }
     }
 
@@ -203,9 +198,19 @@ public class WebResponse implements Serializable {
      * @return the response content as a string
      */
     public String getContentAsString(final String encoding) {
-        InputStream in = null;
-        try {
-            in = responseData_.getInputStream();
+        return getContentAsString(encoding, null);
+    }
+
+    /**
+     * Returns the response content as a string, using the specified charset/encoding,
+     * rather than the charset/encoding specified in the server response. If the specified
+     * charset/encoding is not supported then the provided default encoding is used.
+     * @param encoding the charset/encoding to use to convert the response content into a string
+     * @param defaultEncoding the default encoding to use if the specified {@code encode} is not supported
+     * @return the response content as a string
+     */
+    public String getContentAsString(final String encoding, final String defaultEncoding) {
+        try (final InputStream in = responseData_.getInputStream()) {
             if (null == in) {
                 return null;
             }
@@ -216,7 +221,11 @@ public class WebResponse implements Serializable {
                 Charset.forName(encoding);
             }
             catch (final Exception e) {
-                final String cs = getContentCharset();
+                if (encoding.equals(defaultEncoding)) {
+                    LOG.warn(e);
+                    return "";
+                }
+                final String cs = defaultEncoding != null ? defaultEncoding : getContentCharset();
                 LOG.warn("Attempted to use unsupported encoding '"
                         + encoding + "'; using default content charset ('" + cs + "').");
                 return IOUtils.toString(in, cs);
@@ -228,9 +237,17 @@ public class WebResponse implements Serializable {
             LOG.warn(e);
             return null;
         }
-        finally {
-            IOUtils.closeQuietly(in);
+    }
+
+    /**
+     * Returns length of the content data.
+     * @return the length
+     */
+    public long getContentLength() {
+        if (responseData_ == null) {
+            return 0;
         }
+        return responseData_.getContentLength();
     }
 
     /**

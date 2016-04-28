@@ -72,7 +72,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
      * @return {@code false}
      */
     @Override
-    public boolean isDirectlyAttachedToPage() {
+    public boolean isAttachedToPage() {
         return false;
     }
 }

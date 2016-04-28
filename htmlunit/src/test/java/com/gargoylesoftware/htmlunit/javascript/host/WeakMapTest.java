@@ -33,10 +33,8 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "value2" },
-            FF31 = { "undefined", "undefined" },
-            IE8 = { },
-            IE11 = { "undefined", "undefined" })
+    @Alerts(DEFAULT = {"undefined", "value2"},
+            IE = {"undefined", "undefined"})
     public void get() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -56,8 +54,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { })
+    @Alerts("exception")
     public void setNonObject() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

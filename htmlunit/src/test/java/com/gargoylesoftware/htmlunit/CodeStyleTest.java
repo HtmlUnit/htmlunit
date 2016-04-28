@@ -18,8 +18,12 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -30,6 +34,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNURL;
@@ -88,42 +95,70 @@ public class CodeStyleTest {
         final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
         svnWCClient_ = new SVNWCClient(authManager, options);
-        process(new File("src/main"));
-        process(new File("src/test"));
+        final List<File> files = new ArrayList<>();
+        addAll(new File("src/main"), files);
+        addAll(new File("src/test"), files);
+        final List<String> classNames = getClassNames(files);
+        process(files, classNames);
+        // for (final String className : classNames) {
+        //     addFailure("Not used " + className);
+        // }
+
         licenseYear();
         versionYear();
+        parentInPom();
     }
 
-    private void process(final File dir) throws IOException {
-        final File[] files = dir.listFiles();
-        if (files != null) {
-            for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
-                    process(file);
+    private static List<String> getClassNames(final List<File> files) {
+        final List<String> list = new ArrayList<>();
+        for (final File file : files) {
+            String fileName = file.getName();
+            if (fileName.endsWith(".java")) {
+                fileName = fileName.substring(0, fileName.length() - 5);
+                fileName = fileName.substring(fileName.lastIndexOf('.') + 1);
+                list.add(fileName);
+            }
+        }
+        return list;
+    }
+
+    private void addAll(final File dir, final List<File> files) throws IOException {
+        final File[] children = dir.listFiles();
+        if (children != null) {
+            for (final File child : children) {
+                if (child.isDirectory() && !".svn".equals(child.getName())) {
+                    addAll(child, files);
                 }
                 else {
-                    final String relativePath = file.getAbsolutePath().substring(
-                            new File(".").getAbsolutePath().length() - 1);
-                    svnProperties(file, relativePath);
-                    if (file.getName().endsWith(".java")) {
-                        final List<String> lines = FileUtils.readLines(file);
-                        openingCurlyBracket(lines, relativePath);
-                        year(lines, relativePath);
-                        javaDocFirstLine(lines, relativePath);
-                        methodFirstLine(lines, relativePath);
-                        methodLastLine(lines, relativePath);
-                        lineBetweenMethods(lines, relativePath);
-                        runWith(lines, relativePath);
-                        vs85aspx(lines, relativePath);
-                        deprecated(lines, relativePath);
-                        staticJSMethod(lines, relativePath);
-                        singleAlert(lines, relativePath);
-                        staticLoggers(lines, relativePath);
-                        loggingEnabled(lines, relativePath);
-                        browserVersion_isIE(lines, relativePath);
-                        alerts(lines, relativePath);
-                    }
+                    files.add(child);
                 }
+            }
+        }
+    }
+
+    private void process(final List<File> files, final List<String> classNames) throws IOException {
+        for (final File file : files) {
+            final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
+            svnProperties(file, relativePath);
+            if (file.getName().endsWith(".java")) {
+                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                openingCurlyBracket(lines, relativePath);
+                year(lines, relativePath);
+                javaDocFirstLine(lines, relativePath);
+                methodFirstLine(lines, relativePath);
+                methodLastLine(lines, relativePath);
+                lineBetweenMethods(lines, relativePath);
+                runWith(lines, relativePath);
+                vs85aspx(lines, relativePath);
+                deprecated(lines, relativePath);
+                staticJSMethod(lines, relativePath);
+                singleAlert(lines, relativePath);
+                staticLoggers(lines, relativePath);
+                loggingEnabled(lines, relativePath);
+                browserVersion_isIE(lines, relativePath);
+                alerts(lines, relativePath);
+                className(lines, relativePath);
+                classNameUsed(lines, classNames, relativePath);
             }
         }
     }
@@ -294,7 +329,7 @@ public class CodeStyleTest {
                 }
                 else {
                     if (file.getName().endsWith(".xml")) {
-                        final List<String> lines = FileUtils.readLines(file);
+                        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                         final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
                         mixedIndentation(lines, relativePath);
@@ -349,7 +384,7 @@ public class CodeStyleTest {
      * Checks the year in LICENSE.txt.
      */
     private void licenseYear() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("LICENSE.txt"));
+        final List<String> lines = FileUtils.readLines(new File("LICENSE.txt"), TextUtil.DEFAULT_CHARSET);
         if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
             addFailure("Incorrect year in LICENSE.txt");
         }
@@ -360,13 +395,27 @@ public class CodeStyleTest {
      */
     private void versionYear() throws IOException {
         final List<String> lines =
-                FileUtils.readLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"));
+                FileUtils.readLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"),
+                        TextUtil.DEFAULT_CHARSET);
         for (final String line : lines) {
             if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
                 return;
             }
         }
         addFailure("Incorrect year in Version.getCopyright()");
+    }
+
+    /**
+     * Verifies no &lt;parent&gt; tag in {@code pom.xml}.
+     */
+    private void parentInPom() throws IOException {
+        final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).contains("<parent>")) {
+                addFailure("'pom.xml' should not have <parent> tag in line: " + (i + 1));
+                break;
+            }
+        }
     }
 
     /**
@@ -443,7 +492,7 @@ public class CodeStyleTest {
      * @param lines source code lines
      * @param index the index to start searching from, must be a 'javadoc' line.
      */
-    private List<String> getAnnotations(final List<String> lines, int index) {
+    private static List<String> getAnnotations(final List<String> lines, int index) {
         final List<String> annotations = new ArrayList<>();
         while (!lines.get(index++).trim().endsWith("*/")) {
             //empty;
@@ -549,7 +598,7 @@ public class CodeStyleTest {
         }
     }
 
-    private int getIndentation(final String line) {
+    private static int getIndentation(final String line) {
         final Matcher matcher = leadingWhitespace.matcher(line);
         if (matcher.find()) {
             return matcher.end() - matcher.start();
@@ -564,7 +613,9 @@ public class CodeStyleTest {
         if (relativePath.replace('\\', '/').contains("src/main/java")
                 && !relativePath.contains("JavaScriptConfiguration")
                 && !relativePath.contains("BrowserVersionFeatures")
-                && !relativePath.contains("HTMLDocument")) {
+                && !relativePath.contains("HTMLDocument")
+                && !relativePath.contains("HTMLParser")
+            && !relativePath.contains("DateTimeFormat")) {
             int index = 1;
             for (final String line : lines) {
                 if (line.contains(".isIE()") || line.contains(".isFirefox()")) {
@@ -592,6 +643,53 @@ public class CodeStyleTest {
             if (lines.get(i).startsWith("    @Alerts(")) {
                 final List<String> alerts = alertsToList(lines, i, true);
                 alertVerify(alerts, relativePath, i);
+            }
+        }
+    }
+
+    /**
+     * Verifies that the class name is used.
+     */
+    private static void classNameUsed(final List<String> lines, final List<String> classNames,
+            final String relativePath) {
+        String simpleName = relativePath.substring(0, relativePath.length() - 5);
+        simpleName = simpleName.substring(simpleName.lastIndexOf(File.separator) + 1);
+        for (final String line : lines) {
+            for (final Iterator<String> it = classNames.iterator(); it.hasNext();) {
+                final String className = it.next();
+                if (line.contains(className) && !className.equals(simpleName)) {
+                    it.remove();
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifies that the class name is used.
+     */
+    private void className(final List<String> lines, final String relativePath) {
+        if (relativePath.contains("main") && relativePath.contains("host")) {
+            String fileName = relativePath.substring(0, relativePath.length() - 5);
+            fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+            boolean failureFound = false;
+            for (final String line : lines) {
+                if (line.startsWith(" * ")) {
+                    int p0 = line.indexOf("{@code ");
+                    if (p0 != -1) {
+                        p0 = p0 + "{@code ".length();
+                        final int p1 = line.indexOf('}',  p0 + 1);
+                        final String name = line.substring(p0,  p1);
+                        if (!name.equals(fileName)) {
+                            failureFound = true;
+                        }
+                    }
+                }
+                else if (line.startsWith("public class")) {
+                    if (failureFound) {
+                        addFailure("Incorrect host class in " + relativePath);
+                    }
+                    return;
+                }
             }
         }
     }
@@ -767,20 +865,74 @@ public class CodeStyleTest {
                 break;
 
             case "IE":
-                if (previousList.contains("IE8") || previousList.contains("IE11")) {
+                if (previousList.contains("IE11")) {
                     addFailure("IE must be before specifc IE version in "
                             + relativePath + ", line: " + (lineIndex + 1));
                 }
                 break;
 
             case "FF":
-                if (previousList.contains("FF31") || previousList.contains("FF38")) {
+                if (previousList.contains("FF38") || previousList.contains("FF45")) {
                     addFailure("FF must be before specifc FF version in "
                             + relativePath + ", line: " + (lineIndex + 1));
                 }
                 break;
 
             default:
+        }
+    }
+
+    /**
+     * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void tests() throws Exception {
+        testTests(new File("src/test/java"));
+    }
+
+    private void testTests(final File dir) throws Exception {
+        for (final File file : dir.listFiles()) {
+            if (file.isDirectory()) {
+                if (!".svn".equals(file.getName())) {
+                    testTests(file);
+                }
+            }
+            else {
+                if (file.getName().endsWith(".java")) {
+                    final int index = new File("src/test/java").getAbsolutePath().length();
+                    String name = file.getAbsolutePath();
+                    name = name.substring(index + 1, name.length() - 5);
+                    name = name.replace(File.separatorChar, '.');
+                    final Class<?> clazz;
+                    try {
+                        clazz = Class.forName(name);
+                    }
+                    catch (final Exception e) {
+                        continue;
+                    }
+                    name = file.getName();
+                    if (name.endsWith("Test.java") || name.endsWith("TestCase.java")) {
+                        for (final Constructor<?> ctor : clazz.getConstructors()) {
+                            if (ctor.getParameterTypes().length == 0) {
+                                for (final Method method : clazz.getDeclaredMethods()) {
+                                    if (Modifier.isPublic(method.getModifiers())
+                                            && method.getAnnotation(Before.class) == null
+                                            && method.getAnnotation(BeforeClass.class) == null
+                                            && method.getAnnotation(After.class) == null
+                                            && method.getAnnotation(AfterClass.class) == null
+                                            && method.getAnnotation(Test.class) == null
+                                            && method.getReturnType() == Void.TYPE
+                                            && method.getParameterTypes().length == 0) {
+                                        fail("Method '" + method.getName()
+                                                + "' in " + name + " does not declare @Test annotation");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

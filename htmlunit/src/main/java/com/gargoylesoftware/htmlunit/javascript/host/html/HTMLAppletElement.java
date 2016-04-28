@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPLET_OBJECT;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -26,7 +24,6 @@ import java.lang.reflect.Method;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -45,19 +42,13 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlApplet.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = HtmlApplet.class,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlApplet.class, browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
 public class HTMLAppletElement extends HTMLElement {
 
     /**
      * The constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(FF), @WebBrowser(EDGE) })
     public HTMLAppletElement() {
     }
 
@@ -172,75 +163,10 @@ public class HTMLAppletElement extends HTMLElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if ((String.class.equals(hint) || hint == null) && getBrowserVersion().hasFeature(JS_APPLET_OBJECT)) {
-            return "[object]";
-        }
-        return super.getDefaultValue(hint);
-    }
-
-    /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getClassid() {
         return getDomNodeOrDie().getAttribute("classid");
     }
@@ -249,7 +175,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         // see HTMLObjectElement.setClassid

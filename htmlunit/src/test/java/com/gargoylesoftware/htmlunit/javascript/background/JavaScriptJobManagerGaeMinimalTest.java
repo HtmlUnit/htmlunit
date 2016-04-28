@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.easymock.EasyMock;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -91,8 +90,8 @@ public class JavaScriptJobManagerGaeMinimalTest {
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
         final int executedJobs = eventLoop_.pumpEventLoop(10_000);
-        Assert.assertEquals(1, executedJobs);
-        Assert.assertEquals(1, count.intValue());
+        assertEquals(1, executedJobs);
+        assertEquals(1, count.intValue());
         assertEquals(0, manager_.getJobCount());
     }
 
@@ -114,8 +113,8 @@ public class JavaScriptJobManagerGaeMinimalTest {
         };
         id.setValue(manager_.addJob(job, page_));
         final int executedJobs = eventLoop_.pumpEventLoop(1000);
-        Assert.assertEquals(5, executedJobs);
-        Assert.assertEquals(5, count.intValue());
+        assertEquals(5, executedJobs);
+        assertEquals(5, count.intValue());
     }
 
     /**
@@ -135,8 +134,8 @@ public class JavaScriptJobManagerGaeMinimalTest {
         };
         manager_.addJob(job, page_);
         final int executedJobs = eventLoop_.pumpEventLoop(1000);
-        Assert.assertEquals(5, executedJobs);
-        Assert.assertEquals(5, count.intValue());
+        assertEquals(5, executedJobs);
+        assertEquals(5, count.intValue());
     }
 
     /**
@@ -151,12 +150,12 @@ public class JavaScriptJobManagerGaeMinimalTest {
                 count.setValue(manager_.getJobCount());
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job, page_);
         final int executedJobs = eventLoop_.pumpEventLoop(1000);
-        Assert.assertEquals(1, executedJobs);
-        Assert.assertEquals(1, count.intValue());
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(1, executedJobs);
+        assertEquals(1, count.intValue());
+        assertEquals(0, manager_.getJobCount());
     }
 
     /**
@@ -176,11 +175,11 @@ public class JavaScriptJobManagerGaeMinimalTest {
                 }
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job, page_);
         final int executedJobs = eventLoop_.pumpEventLoop(1000);
-        Assert.assertEquals(1, executedJobs);
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(1, executedJobs);
+        assertEquals(0, manager_.getJobCount());
     }
 
     /**
@@ -200,12 +199,12 @@ public class JavaScriptJobManagerGaeMinimalTest {
             // Empty.
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job1, page_);
         manager_.addJob(job2, page_);
         final int executedJobs = eventLoop_.pumpEventLoop(200);
-        Assert.assertEquals(1, executedJobs);
-        Assert.assertEquals(1, manager_.getJobCount());
+        assertEquals(1, executedJobs);
+        assertEquals(1, manager_.getJobCount());
     }
 
     /**
@@ -231,11 +230,11 @@ public class JavaScriptJobManagerGaeMinimalTest {
             // Empty.
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job1, page_);
         manager_.addJob(job2, page_);
         final int executedJobs = eventLoop_.pumpEventLoop(70);
-        Assert.assertEquals(1, executedJobs);
-        Assert.assertEquals(1, manager_.getJobCount());
+        assertEquals(1, executedJobs);
+        assertEquals(1, manager_.getJobCount());
     }
 }

@@ -14,17 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,12 +32,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
-import org.apache.xerces.util.XMLStringBuffer;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLAttributes;
@@ -52,11 +43,6 @@ import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 import org.apache.xerces.xni.parser.XMLParserConfiguration;
-import org.cyberneko.html.HTMLConfiguration;
-import org.cyberneko.html.HTMLEventInfo;
-import org.cyberneko.html.HTMLScanner;
-import org.cyberneko.html.HTMLTagBalancer;
-import org.cyberneko.html.HTMLTagBalancingListener;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
@@ -75,14 +61,17 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.cyberneko.HTMLConfiguration;
+import net.sourceforge.htmlunit.cyberneko.HTMLElements;
+import net.sourceforge.htmlunit.cyberneko.HTMLEventInfo;
+import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
+import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancer;
+import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
 
 /**
- * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
+ * <p>SAX parser implementation that uses the NekoHTML {@link net.sourceforge.htmlunit.cyberneko.HTMLConfiguration}
  * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -194,7 +183,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static HtmlPage parseHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final HtmlPage page = new HtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
+        final HtmlPage page = new HtmlPage(webResponse, webWindow);
         parse(webResponse, webWindow, page, false);
         return page;
     }
@@ -208,7 +197,7 @@ public final class HTMLParser {
      * @throws IOException if there is an IO error
      */
     public static XHtmlPage parseXHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final XHtmlPage page = new XHtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
+        final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         parse(webResponse, webWindow, page, true);
         return page;
     }
@@ -244,20 +233,20 @@ public final class HTMLParser {
             throw new ObjectInstantiationException("Error setting HTML parser feature", e);
         }
 
-        final InputStream content = webResponse.getContentAsStream();
-        final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
+        try (final InputStream content = webResponse.getContentAsStream()) {
+            final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
 
-        page.registerParsingStart();
-        try {
-            domBuilder.parse(in);
-        }
-        catch (final XNIException e) {
-            // extract enclosed exception
-            final Throwable origin = extractNestedException(e);
-            throw new RuntimeException("Failed parsing content from " + url, origin);
+            page.registerParsingStart();
+            try {
+                domBuilder.parse(in);
+            }
+            catch (final XNIException e) {
+                // extract enclosed exception
+                final Throwable origin = extractNestedException(e);
+                throw new RuntimeException("Failed parsing content from " + url, origin);
+            }
         }
         finally {
-            IOUtils.closeQuietly(content);
             page.registerParsingEnd();
         }
 
@@ -357,7 +346,7 @@ public final class HTMLParser {
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
             final String qualifiedName) {
-        if (SVG_NAMESPACE.equals(namespaceURI) && page.hasFeature(SVG)) {
+        if (SVG_NAMESPACE.equals(namespaceURI)) {
             return SVG_FACTORY;
         }
         if (namespaceURI == null || namespaceURI.isEmpty()
@@ -365,11 +354,11 @@ public final class HTMLParser {
 
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
-            if (index != -1) {
-                tagName = tagName.substring(index + 1);
+            if (index == -1) {
+                tagName = tagName.toLowerCase(Locale.ROOT);
             }
             else {
-                tagName = tagName.toLowerCase(Locale.ROOT);
+                tagName = tagName.substring(index + 1);
             }
             final ElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
@@ -399,7 +388,6 @@ public final class HTMLParser {
         private StringBuilder characters_;
         private HeadParsed headParsed_ = HeadParsed.NO;
         private boolean parsingInnerHead_ = false;
-        private HtmlElement head_;
         private HtmlElement body_;
         private boolean lastTagWasSynthesized_;
         private HtmlForm formWaitingForLostChildren_;
@@ -437,7 +425,7 @@ public final class HTMLParser {
             page_ = (HtmlPage) node.getPage();
 
             currentNode_ = node;
-            for (final Node ancestor : currentNode_.getAncestors(true)) {
+            for (final Node ancestor : currentNode_.getAncestors()) {
                 stack_.push((DomNode) ancestor);
             }
 
@@ -460,8 +448,7 @@ public final class HTMLParser {
                 }
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.getOptions().isJavaScriptEnabled());
-                setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME,
-                    !webClient.getBrowserVersion().hasFeature(HTMLIFRAME_IGNORE_SELFCLOSING));
+                setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, false);
 
                 setContentHandler(this);
                 setLexicalHandler(this); //comments and CDATA
@@ -477,17 +464,24 @@ public final class HTMLParser {
          * @return the configuration
          */
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
+            final HTMLConfiguration configuration = new HTMLConfiguration();
+            configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.AREA, "AREA",
+                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
-            // for IE we need a special scanner that will be able to understand conditional comments
-            if (browserVersion.hasFeature(HTMLCONDITIONAL_COMMENTS)) {
-                return new HTMLConfiguration() {
-                    @Override
-                    protected HTMLScanner createDocumentScanner() {
-                        return new HTMLScannerForIE(browserVersion);
-                    }
-                };
+            if (browserVersion.isChrome()) {
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
+                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.ISINDEX, "ISINDEX",
+                        HTMLElements.Element.INLINE, HTMLElements.BODY, null));
             }
-            return new HTMLConfiguration();
+            else if (browserVersion.isIE()) {
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
+                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.MAIN, "MAIN",
+                        HTMLElements.Element.INLINE, HTMLElements.BODY, null));
+            }
+
+            return configuration;
         }
 
         /**
@@ -519,19 +513,13 @@ public final class HTMLParser {
 
         /** {@inheritDoc ContentHandler#startElement(String,String,String,Attributes)} */
         @Override
-        public void startElement(
-                String namespaceURI, final String localName,
-                final String qName, final Attributes atts)
+        public void startElement(String namespaceURI, final String localName, String qName, final Attributes atts)
             throws SAXException {
 
             handleCharacters();
 
-            final String tagLower = localName.toLowerCase(Locale.ROOT);
+            String tagLower = localName.toLowerCase(Locale.ROOT);
             if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
-                return;
-            }
-
-            if (parsingInnerHead_ && page_.hasFeature(IGNORE_CONTENTS_OF_INNER_HEAD)) {
                 return;
             }
 
@@ -571,6 +559,12 @@ public final class HTMLParser {
             if (!(page_ instanceof XHtmlPage) && XHTML_NAMESPACE.equals(namespaceURI)) {
                 namespaceURI = null;
             }
+
+            final boolean keyGenAsSelect = "keygen".equals(tagLower) && page_.hasFeature(KEYGEN_AS_SELECT);
+            if (keyGenAsSelect) {
+                tagLower = "select";
+                qName = "select";
+            }
             final ElementFactory factory = getElementFactory(page_, namespaceURI, qName);
             final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts, true);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
@@ -587,18 +581,6 @@ public final class HTMLParser {
             if ("body".equals(tagLower)) {
                 body_ = (HtmlElement) newElement;
             }
-            else if ("head".equals(tagLower)) {
-                head_ = (HtmlElement) newElement;
-            }
-            else if ("html".equals(tagLower)) {
-                if (!page_.hasFeature(JS_DEFINE_GETTER) && page_.isQuirksMode()) {
-                    // this is not really correct; a following meta tag may disable the quirks
-                    // mode; but at the moment i have no idea for a better place for this
-                    removePrototypeProperties(page_.getEnclosingWindow().getScriptableObject(), "Array",
-                        "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
-                        "reduceRight", "some");
-                }
-            }
             else if ("meta".equals(tagLower)) {
                 // i like the IE
                 if (page_.hasFeature(META_X_UA_COMPATIBLE)) {
@@ -607,8 +589,7 @@ public final class HTMLParser {
                         final String content = meta.getContentAttribute();
                         if (content.startsWith("IE=")) {
                             final String mode = content.substring(3).trim();
-                            final int version = (int) page_.getWebClient().getBrowserVersion().
-                                                                getBrowserVersionNumeric();
+                            final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
                             if ("edge".equals(mode)) {
                                 ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(version);
                             }
@@ -628,22 +609,17 @@ public final class HTMLParser {
                     }
                 }
             }
+            if (keyGenAsSelect) {
+                DomElement option = factory.createElementNS(page_, namespaceURI, "option", null, true);
+                option.appendChild(new DomText(page_, "High Grade"));
+                newElement.appendChild(option);
+
+                option = factory.createElementNS(page_, namespaceURI, "option", null, true);
+                option.appendChild(new DomText(page_, "Medium Grade"));
+                newElement.appendChild(option);
+            }
             currentNode_ = newElement;
             stack_.push(currentNode_);
-        }
-
-        /**
-         * Removes prototype properties.
-         * @param scope the scope
-         * @param className the class for which properties should be removed
-         * @param properties the properties to remove
-         */
-        private void removePrototypeProperties(final Scriptable scope, final String className,
-                final String... properties) {
-            final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
-            for (final String property : properties) {
-                prototype.delete(property);
-            }
         }
 
         /**
@@ -697,9 +673,6 @@ public final class HTMLParser {
                     parent.insertBefore(newElement);
                 }
             }
-            else if (head_ != null && "title".equals(newNodeName) && !parsingInnerHead_) {
-                head_.appendChild(newElement);
-            }
             else if (formWaitingForLostChildren_ != null && "form".equals(parentNodeName)) {
                 // Do not append any children to invalid form. Submittable are inserted after the form,
                 // everything else before the table.
@@ -737,13 +710,13 @@ public final class HTMLParser {
             return searchedNode;
         }
 
-        private boolean isTableChild(final String nodeName) {
+        private static boolean isTableChild(final String nodeName) {
             return "thead".equals(nodeName) || "tbody".equals(nodeName)
                     || "tfoot".equals(nodeName) || "caption".equals(nodeName)
                     || "colgroup".equals(nodeName);
         }
 
-        private boolean isTableCell(final String nodeName) {
+        private static boolean isTableCell(final String nodeName) {
             return "td".equals(nodeName) || "th".equals(nodeName);
         }
 
@@ -773,7 +746,7 @@ public final class HTMLParser {
                 if ("head".equals(tagLower)) {
                     parsingInnerHead_ = false;
                 }
-                if ("head".equals(tagLower) || page_.hasFeature(IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                if ("head".equals(tagLower)) {
                     return;
                 }
             }
@@ -802,64 +775,10 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         @Override
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
-            if ((characters_ == null || characters_.length() == 0)
-                    && page_.hasFeature(HTMLPARSER_REMOVE_EMPTY_CONTENT)
-                    && StringUtils.isBlank(new String(ch, start, length))) {
-
-                DomNode node = currentNode_.getLastChild();
-                if (currentNode_ instanceof HTMLElement.ProxyDomNode) {
-                    final HTMLElement.ProxyDomNode proxyNode = (HTMLElement.ProxyDomNode) currentNode_;
-                    node = proxyNode.getDomNode();
-                    if (!proxyNode.isAppend()) {
-                        node = node.getPreviousSibling();
-                        if (node == null) {
-                            node = proxyNode.getDomNode().getParentNode();
-                        }
-                    }
-                }
-                if (removeEmptyCharacters(node)) {
-                    return;
-                }
-            }
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
             characters_.append(ch, start, length);
-        }
-
-        private boolean removeEmptyCharacters(final DomNode node) {
-            if (node != null) {
-                if (node instanceof HtmlInput) {
-                    return false;
-                }
-                if (node.getFirstChild() != null
-                    && (node instanceof HtmlAnchor || node instanceof HtmlSpan
-                        || node instanceof HtmlFont
-                        || node instanceof HtmlStrong || node instanceof HtmlBold
-                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined
-                        || node instanceof HtmlEmphasis
-                        || node instanceof HtmlAbbreviated || node instanceof HtmlAcronym
-                        || node instanceof HtmlBaseFont || node instanceof HtmlBidirectionalOverride
-                        || node instanceof HtmlBig || node instanceof HtmlBlink
-                        || node instanceof HtmlCitation || node instanceof HtmlCode
-                        || node instanceof HtmlDeletedText || node instanceof HtmlDefinition
-                        || node instanceof HtmlInsertedText || node instanceof HtmlKeyboard
-                        || node instanceof HtmlLabel || node instanceof HtmlMap
-                        || node instanceof HtmlNoBreak || node instanceof HtmlInlineQuotation
-                        || node instanceof HtmlS || node instanceof HtmlSample
-                        || node instanceof HtmlSmall || node instanceof HtmlStrike
-                        || node instanceof HtmlSubscript || node instanceof HtmlSuperscript
-                        || node instanceof HtmlTeletype || node instanceof HtmlVariable
-                        )) {
-                    return false;
-                }
-            }
-            else {
-                if (currentNode_ instanceof HtmlFont) {
-                    return false;
-                }
-            }
-            return true;
         }
 
         /** {@inheritDoc} */
@@ -887,12 +806,36 @@ public final class HTMLParser {
                     final DomText text = new DomText(page_, textValue);
                     characters_.setLength(0);
 
-                    // malformed HTML: </td>some text</tr> => text comes before the table
-                    if (currentNode_ instanceof HtmlTableRow && StringUtils.isNotBlank(textValue)) {
-                        final HtmlTableRow row = (HtmlTableRow) currentNode_;
-                        final HtmlTable enclosingTable = row.getEnclosingTable();
-                        if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
-                            enclosingTable.insertBefore(text);
+                    if (StringUtils.isNotBlank(textValue)) {
+                        // malformed HTML: </td>some text</tr> => text comes before the table
+                        if (currentNode_ instanceof HtmlTableRow) {
+                            final HtmlTableRow row = (HtmlTableRow) currentNode_;
+                            final HtmlTable enclosingTable = row.getEnclosingTable();
+                            if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
+                                if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                                    final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                                    domText.setTextContent(domText + textValue);
+                                }
+                                else {
+                                    enclosingTable.insertBefore(text);
+                                }
+                            }
+                        }
+                        else if (currentNode_ instanceof HtmlTable) {
+                            final HtmlTable enclosingTable = (HtmlTable) currentNode_;
+                            if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                                final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                                domText.setTextContent(domText + textValue);
+                            }
+                            else {
+                                enclosingTable.insertBefore(text);
+                            }
+                        }
+                        else if (currentNode_ instanceof HtmlImage) {
+                            currentNode_.setNextSibling(text);
+                        }
+                        else {
+                            currentNode_.appendChild(text);
                         }
                     }
                     else {
@@ -937,11 +880,8 @@ public final class HTMLParser {
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final String data = new String(ch, start, length);
-            if (!data.startsWith("[CDATA")
-                    || page_.hasFeature(HTML_CDATA_AS_COMMENT)) {
-                final DomComment comment = new DomComment(page_, data);
-                currentNode_.appendChild(comment);
-            }
+            final DomComment comment = new DomComment(page_, data);
+            currentNode_.appendChild(comment);
         }
 
         /** {@inheritDoc} */
@@ -971,13 +911,7 @@ public final class HTMLParser {
             page_.setDocumentType(type);
 
             final Node child;
-            if (page_.hasFeature(DOCTYPE_IS_COMMENT)) {
-                child = new DomComment(page_, "DOCTYPE " + name + " PUBLIC \""
-                        + publicId + "\"      \"" + systemId + '"');
-            }
-            else {
-                child = type;
-            }
+            child = type;
             page_.appendChild(child);
         }
 
@@ -1009,22 +943,28 @@ public final class HTMLParser {
             // when multiple body elements are encountered, the attributes of the discarded
             // elements are used when not previously defined
             if (body_ != null && "body".equalsIgnoreCase(elem.localpart) && attrs != null) {
-                // add the attributes that don't already exist
-                final int length = attrs.getLength();
-                for (int i = 0; i < length; i++) {
-                    final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
-                    if (body_.getAttributes().getNamedItem(attrName) == null) {
-                        body_.setAttribute(attrName, attrs.getValue(i));
-                        if (attrName.startsWith("on") && body_.getScriptableObject() != null) {
-                            final HTMLBodyElement jsBody = (HTMLBodyElement) body_.getScriptableObject();
-                            jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
-                        }
-                    }
-                }
+                copyAttributes(body_, attrs);
+            }
+            if (body_ != null && "html".equalsIgnoreCase(elem.localpart) && attrs != null) {
+                copyAttributes((DomElement) body_.getParentNode(), attrs);
             }
 
             if (headParsed_ == HeadParsed.YES && "head".equalsIgnoreCase(elem.localpart)) {
                 parsingInnerHead_ = true;
+            }
+        }
+
+        private static void copyAttributes(final DomElement to, final XMLAttributes attrs) {
+            final int length = attrs.getLength();
+            for (int i = 0; i < length; i++) {
+                final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
+                if (to.getAttributes().getNamedItem(attrName) == null) {
+                    to.setAttribute(attrName, attrs.getValue(i));
+                    if (attrName.startsWith("on") && to.getScriptableObject() instanceof HTMLBodyElement) {
+                        final HTMLBodyElement jsBody = (HTMLBodyElement) to.getScriptableObject();
+                        jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
+                    }
+                }
             }
         }
 
@@ -1043,7 +983,7 @@ public final class HTMLParser {
             }
         }
 
-        private boolean isSynthesized(final Augmentations augs) {
+        private static boolean isSynthesized(final Augmentations augs) {
             final HTMLEventInfo info = (augs == null) ? null
                     : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
             return info != null ? info.isSynthesized() : false;
@@ -1089,108 +1029,5 @@ class HTMLErrorHandler extends DefaultErrorHandler {
                 exception.getLineNumber(),
                 exception.getColumnNumber(),
                 key);
-    }
-}
-
-class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
-    HTMLScannerForIE(final BrowserVersion browserVersion) {
-        fContentScanner = new ContentScannerForIE(browserVersion);
-    }
-
-    class ContentScannerForIE extends HTMLScanner.ContentScanner {
-        private final BrowserVersion browserVersion_;
-
-        ContentScannerForIE(final BrowserVersion browserVersion) {
-            browserVersion_ = browserVersion;
-        }
-
-        @Override
-        protected void scanComment() throws IOException {
-            final String s = nextContent(30); // [if ...
-            if (s.startsWith("[if ") && s.contains("]>")) {
-                final String condition = StringUtils.substringBefore(s.substring(4), "]>");
-                try {
-                    if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
-                        // skip until ">"
-                        for (int i = 0; i < condition.length() + 6; i++) {
-                            read();
-                        }
-                        if (s.contains("]><!-->")) {
-                            skip("<!-->", false);
-                        }
-                        else if (s.contains("]>-->")) {
-                            skip("-->", false);
-                        }
-                    }
-                    else {
-                        final StringBuilder builder = new StringBuilder();
-                        while (!builder.toString().endsWith("-->")) {
-                            builder.append((char) read());
-                        }
-                    }
-                    return;
-                }
-                catch (final Exception e) { // incorrect expression => handle it as plain text
-                    // TODO: report it!
-                    final XMLStringBuffer buffer = new XMLStringBuffer("<!--");
-                    scanMarkupContent(buffer, '-');
-                    buffer.append("-->");
-                    fDocumentHandler.characters(buffer, locationAugs());
-                    return;
-                }
-            }
-            // this is a normal comment, not a conditional comment for IE
-            super.scanComment();
-        }
-
-        @Override
-        public String nextContent(final int len) throws IOException {
-            return super.nextContent(len);
-        }
-
-        @Override
-        public boolean scanMarkupContent(final XMLStringBuffer buffer, final char cend) throws IOException {
-            return super.scanMarkupContent(buffer, cend);
-        }
-    }
-
-    @Override
-    protected boolean skipMarkup(final boolean balance) throws IOException {
-        final ContentScannerForIE contentScanner = (ContentScannerForIE) fContentScanner;
-        final String s = contentScanner.nextContent(30);
-        if (s.startsWith("[if ") && s.contains("]>")) {
-            final String condition = StringUtils.substringBefore(s.substring(4), "]>");
-            try {
-                if (IEConditionalCommentExpressionEvaluator.evaluate(condition, contentScanner.browserVersion_)) {
-                    // skip until ">"
-                    for (int i = 0; i < condition.length() + 6; i++) {
-                        read();
-                    }
-                    return true;
-                }
-
-                final XMLStringBuffer buffer = new XMLStringBuffer();
-                int ch;
-                while ((ch = read()) != -1) {
-                    buffer.append((char) ch);
-                    if (buffer.toString().endsWith("<![endif]>")) {
-                        final XMLStringBuffer trimmedBuffer
-                            = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
-                        fDocumentHandler.comment(trimmedBuffer, locationAugs());
-                        return true;
-                    }
-                }
-            }
-            catch (final Exception e) { // incorrect expression => handle it as plain text
-                // TODO: report it!
-                final XMLStringBuffer buffer = new XMLStringBuffer("<!--");
-                contentScanner.scanMarkupContent(buffer, '-');
-                buffer.append("-->");
-                fDocumentHandler.characters(buffer, locationAugs());
-                return true;
-            }
-
-        }
-        return super.skipMarkup(balance);
     }
 }

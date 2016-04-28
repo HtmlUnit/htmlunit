@@ -14,19 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-import static org.junit.Assert.assertSame;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -50,7 +49,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "1", "3", "0" })
+    @Alerts({"3", "1", "3", "0"})
     public void getSelectedIndex() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -89,7 +88,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "0", "3", "-1" })
+    @Alerts({"3", "0", "3", "-1"})
     public void getSelectedIndexNothingSelected() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -128,7 +127,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "-1", "0", "-1" })
+    @Alerts({"0", "-1", "0", "-1"})
     public void getSelectedIndexNoOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -160,7 +159,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "1", "3", "2" })
+    @Alerts({"3", "1", "3", "2"})
     public void setSelectedIndex() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -231,8 +230,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-1", "2", "-1", "-1" },
-            IE = { "-1", "2", "-1", "-1" })
+    @Alerts(DEFAULT = {"-1", "2", "-1", "-1"},
+            IE = {"-1", "2", "-1", "-1"})
     public void setSelectedIndexInvalidValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -273,7 +272,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "value1", "One", "value2", "Two", "value3", "Three" })
+    @Alerts({"3", "value1", "One", "value2", "Two", "value3", "Three"})
     public void getOptions() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -307,9 +306,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "value1", "One", "value2", "Two", "value3", "Three" },
-            CHROME = { "3", "value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"3", "value1", "One", "value2", "Two", "value3", "Three"})
     public void getOptionLabel() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -343,7 +340,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "true", "true", "false" })
+    @Alerts({"false", "true", "true", "false"})
     public void getOptionSelected() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -436,7 +433,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "4", "Four", "value4" })
+    @Alerts({"4", "Four", "value4"})
     public void addOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -470,7 +467,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "true", "4", "Four", "value4", "true", "3", "false" })
+    @Alerts({"1", "true", "4", "Four", "value4", "true", "3", "false"})
     public void addOptionSelected() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -515,7 +512,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "4", "Four", "value4" })
+    @Alerts({"4", "Four", "value4"})
     public void addOptionWithAddMethodIndexNull() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -552,7 +549,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "4", "Four", "value4", "Three b", "value3b" })
+    @Alerts({"4", "Four", "value4", "Three b", "value3b"})
     public void addOptionWithAddMethodNoSecondParameter() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -592,7 +589,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "test", "testValue" })
+    @Alerts({"0", "test", "testValue"})
     public void addOptionTooEmptySelectWithAddMethodIndexNull() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -624,7 +621,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "foo*" })
+    @Alerts({"0", "1", "0", "foo*"})
     public void addOptionMethodIndexMinusOneEmptySelect() throws Exception {
         addOptionMethod(", -1", true, false);
     }
@@ -633,7 +630,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "-1", "foo" })
+    @Alerts({"0", "1", "-1", "foo"})
     public void addOptionMethodIndexMinusOneEmptySelectMulti() throws Exception {
         addOptionMethod(", -1", true, true);
     }
@@ -642,7 +639,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "foo*" })
+    @Alerts({"0", "1", "0", "foo*"})
     public void addOptionMethodIndexZeroEmptySelect() throws Exception {
         addOptionMethod(", 0", true, false);
     }
@@ -651,7 +648,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "-1", "foo" })
+    @Alerts({"0", "1", "-1", "foo"})
     public void addOptionMethodIndexZeroEmptySelectMulti() throws Exception {
         addOptionMethod(", 0", true, true);
     }
@@ -660,7 +657,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "foo*" })
+    @Alerts({"0", "1", "0", "foo*"})
     public void addOptionMethodIndexOneEmptySelect() throws Exception {
         addOptionMethod(", 1", true, false);
     }
@@ -669,7 +666,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "-1", "foo" })
+    @Alerts({"0", "1", "-1", "foo"})
     public void addOptionMethodIndexOneEmptySelectMulti() throws Exception {
         addOptionMethod(", 1", true, true);
     }
@@ -678,7 +675,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "foo*" })
+    @Alerts({"0", "1", "0", "foo*"})
     public void addOptionMethodIndexFourEmptySelect() throws Exception {
         addOptionMethod(", 4", true, false);
     }
@@ -687,7 +684,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "-1", "foo" })
+    @Alerts({"0", "1", "-1", "foo"})
     public void addOptionMethodIndexFourEmptySelectMulti() throws Exception {
         addOptionMethod(", 4", true, true);
     }
@@ -696,7 +693,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three", "foo"})
     public void addOptionMethodIndexMinusOne() throws Exception {
         addOptionMethod(", -1", false, false);
     }
@@ -705,7 +702,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three*", "foo"})
     public void addOptionMethodIndexMinusOneMulti() throws Exception {
         addOptionMethod(", -1", false, true);
     }
@@ -714,7 +711,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "foo", "One", "Two*", "Three" })
+    @Alerts({"3", "4", "2", "foo", "One", "Two*", "Three"})
     public void addOptionMethodIndexZero() throws Exception {
         addOptionMethod(", 0", false, false);
     }
@@ -723,7 +720,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "foo", "One", "Two*", "Three*" })
+    @Alerts({"3", "4", "2", "foo", "One", "Two*", "Three*"})
     public void addOptionMethodIndexZeroMulti() throws Exception {
         addOptionMethod(", 0", false, true);
     }
@@ -732,7 +729,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "One", "foo", "Two*", "Three" })
+    @Alerts({"3", "4", "2", "One", "foo", "Two*", "Three"})
     public void addOptionMethodIndexOne() throws Exception {
         addOptionMethod(", 1", false, false);
     }
@@ -741,7 +738,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "One", "foo", "Two*", "Three*" })
+    @Alerts({"3", "4", "2", "One", "foo", "Two*", "Three*"})
     public void addOptionMethodIndexOneMulti() throws Exception {
         addOptionMethod(", 1", false, true);
     }
@@ -750,7 +747,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "foo", "Three" })
+    @Alerts({"3", "4", "1", "One", "Two*", "foo", "Three"})
     public void addOptionMethodhIndexTwo() throws Exception {
         addOptionMethod(", 2", false, false);
     }
@@ -759,7 +756,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "foo", "Three*" })
+    @Alerts({"3", "4", "1", "One", "Two*", "foo", "Three*"})
     public void addOptionMethodhIndexTwoMulti() throws Exception {
         addOptionMethod(", 2", false, true);
     }
@@ -768,7 +765,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three", "foo"})
     public void addOptionMethodIndexThree() throws Exception {
         addOptionMethod(", 3", false, false);
     }
@@ -777,7 +774,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three*", "foo"})
     public void addOptionMethodIndexThreeMulti() throws Exception {
         addOptionMethod(", 3", false, true);
     }
@@ -786,7 +783,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three", "foo"})
     public void addOptionMethodIndexFour() throws Exception {
         addOptionMethod(", 4", false, false);
     }
@@ -795,7 +792,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three*", "foo"})
     public void addOptionMethodIndexFourMulti() throws Exception {
         addOptionMethod(", 4", false, true);
     }
@@ -804,7 +801,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "foo*" })
+    @Alerts({"0", "1", "0", "foo*"})
     public void addOptionMethodOptionNullEmptySelect() throws Exception {
         addOptionMethod(", null", true, false);
     }
@@ -813,7 +810,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "-1", "foo" })
+    @Alerts({"0", "1", "-1", "foo"})
     public void addOptionMethodOptionNullEmptySelectMulti() throws Exception {
         addOptionMethod(", null", true, true);
     }
@@ -822,7 +819,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "exception" })
+    @Alerts({"0", "exception"})
     public void addOptionMethodNewOptionEmptySelect() throws Exception {
         addOptionMethod(", new Option('foo', '123')", true, false);
     }
@@ -831,7 +828,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "exception" })
+    @Alerts({"0", "exception"})
     public void addOptionMethodNewOptionEmptySelectMulti() throws Exception {
         addOptionMethod(", new Option('foo', '123')", true, true);
     }
@@ -840,7 +837,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three", "foo"})
     public void addOptionMethodOptionNull() throws Exception {
         addOptionMethod(", null", false, false);
     }
@@ -849,7 +846,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three*", "foo"})
     public void addOptionMethodOptionNullMulti() throws Exception {
         addOptionMethod(", null", false, true);
     }
@@ -858,7 +855,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "exception" })
+    @Alerts({"3", "exception"})
     public void addOptionMethodNewOption() throws Exception {
         addOptionMethod(", new Option('foo', '123')", false, false);
     }
@@ -867,7 +864,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "exception" })
+    @Alerts({"3", "exception"})
     public void addOptionMethodNewOptionMulti() throws Exception {
         addOptionMethod(", new Option('foo', '123')", false, true);
     }
@@ -876,7 +873,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "foo", "One", "Two*", "Three" })
+    @Alerts({"3", "4", "2", "foo", "One", "Two*", "Three"})
     public void addOptionMethodOptionFirst() throws Exception {
         addOptionMethod(", oSelect.options[0]", false, false);
     }
@@ -885,8 +882,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "2", "foo", "One", "Two*", "Three*" },
-            IE8 = { "3", "4", "2", "foo", "One", "Two*", "Three*" })
+    @Alerts({"3", "4", "2", "foo", "One", "Two*", "Three*"})
     public void addOptionMethodOptionFirstMulti() throws Exception {
         addOptionMethod(", oSelect.options[0]", false, true);
     }
@@ -895,7 +891,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "One", "foo", "Two*", "Three" })
+    @Alerts({"3", "4", "2", "One", "foo", "Two*", "Three"})
     public void addOptionMethodOptionSecond() throws Exception {
         addOptionMethod(", oSelect.options[1]", false, false);
     }
@@ -904,7 +900,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "2", "One", "foo", "Two*", "Three*" })
+    @Alerts({"3", "4", "2", "One", "foo", "Two*", "Three*"})
     public void addOptionMethodOptionSecondMulti() throws Exception {
         addOptionMethod(", oSelect.options[1]", false, true);
     }
@@ -913,7 +909,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "foo", "Three" })
+    @Alerts({"3", "4", "1", "One", "Two*", "foo", "Three"})
     public void addOptionMethodOptionThird() throws Exception {
         addOptionMethod(", oSelect.options[2]", false, false);
     }
@@ -922,7 +918,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "foo", "Three*" })
+    @Alerts({"3", "4", "1", "One", "Two*", "foo", "Three*"})
     public void addOptionMethodOptionThirdMulti() throws Exception {
         addOptionMethod(", oSelect.options[2]", false, true);
     }
@@ -931,7 +927,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three", "foo"})
     public void addOptionMethodOptionLast() throws Exception {
         addOptionMethod(", oSelect.options[3]", false, false);
     }
@@ -940,7 +936,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "1", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "1", "One", "Two*", "Three*", "foo"})
     public void addOptionMethodOptionLastMulti() throws Exception {
         addOptionMethod(", oSelect.options[3]", false, true);
     }
@@ -990,7 +986,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1" })
+    @Alerts({"0", "1"})
     public void addWithIndexEmptySelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1021,8 +1017,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0", "-1" },
-            IE = { "0", "exception" })
+    @Alerts(DEFAULT = {"0", "0", "-1"},
+            IE = {"0", "exception"})
     public void removeOptionMethodIndexMinusOneEmptySelect() throws Exception {
         removeOptionMethod("-1", true, false);
     }
@@ -1031,8 +1027,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0", "-1" },
-            IE = { "0", "exception" })
+    @Alerts(DEFAULT = {"0", "0", "-1"},
+            IE = {"0", "exception"})
     public void removeOptionMethodIndexMinusOneEmptySelectMulti() throws Exception {
         removeOptionMethod("-1", true, true);
     }
@@ -1041,7 +1037,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodIndexZeroEmptySelect() throws Exception {
         removeOptionMethod("0", true, false);
     }
@@ -1050,7 +1046,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodIndexZeroEmptySelectMulti() throws Exception {
         removeOptionMethod("0", true, true);
     }
@@ -1059,7 +1055,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodIndexOneEmptySelect() throws Exception {
         removeOptionMethod("1", true, false);
     }
@@ -1068,7 +1064,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodIndexOneEmptySelectMulti() throws Exception {
         removeOptionMethod("1", true, true);
     }
@@ -1077,7 +1073,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodIndexFourEmptySelect() throws Exception {
         removeOptionMethod("4", true, false);
     }
@@ -1086,7 +1082,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodIndexFourEmptySelectMulti() throws Exception {
         removeOptionMethod("4", true, true);
     }
@@ -1095,8 +1091,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "3", "1", "One", "Two*", "Three" },
-            IE = { "3", "exception" })
+    @Alerts(DEFAULT = {"3", "3", "1", "One", "Two*", "Three"},
+            IE = {"3", "exception"})
     public void removeOptionMethodIndexMinusOne() throws Exception {
         removeOptionMethod("-1", false, false);
     }
@@ -1105,8 +1101,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "3", "1", "One", "Two*", "Three*" },
-            IE = { "3", "exception" })
+    @Alerts(DEFAULT = {"3", "3", "1", "One", "Two*", "Three*"},
+            IE = {"3", "exception"})
     public void removeOptionMethodIndexMinusOneMulti() throws Exception {
         removeOptionMethod("-1", false, true);
     }
@@ -1115,7 +1111,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodIndexZero() throws Exception {
         removeOptionMethod("0", false, false);
     }
@@ -1124,7 +1120,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodIndexZeroMulti() throws Exception {
         removeOptionMethod("0", false, true);
     }
@@ -1133,7 +1129,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "One*", "Three" })
+    @Alerts({"3", "2", "0", "One*", "Three"})
     public void removeOptionMethodIndexOne() throws Exception {
         removeOptionMethod("1", false, false);
     }
@@ -1142,7 +1138,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "1", "One", "Three*" })
+    @Alerts({"3", "2", "1", "One", "Three*"})
     public void removeOptionMethodIndexOneMulti() throws Exception {
         removeOptionMethod("1", false, true);
     }
@@ -1151,7 +1147,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "1", "One", "Two*" })
+    @Alerts({"3", "2", "1", "One", "Two*"})
     public void removeOptionMethodhIndexTwo() throws Exception {
         removeOptionMethod("2", false, false);
     }
@@ -1160,7 +1156,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "1", "One", "Two*" })
+    @Alerts({"3", "2", "1", "One", "Two*"})
     public void removeOptionMethodhIndexTwoMulti() throws Exception {
         removeOptionMethod("2", false, true);
     }
@@ -1169,7 +1165,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "1", "One", "Two*", "Three" })
+    @Alerts({"3", "3", "1", "One", "Two*", "Three"})
     public void removeOptionMethodIndexThree() throws Exception {
         removeOptionMethod("3", false, false);
     }
@@ -1178,7 +1174,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "1", "One", "Two*", "Three*" })
+    @Alerts({"3", "3", "1", "One", "Two*", "Three*"})
     public void removeOptionMethodIndexThreeMulti() throws Exception {
         removeOptionMethod("3", false, true);
     }
@@ -1187,7 +1183,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "1", "One", "Two*", "Three" })
+    @Alerts({"3", "3", "1", "One", "Two*", "Three"})
     public void removeOptionMethodIndexFour() throws Exception {
         removeOptionMethod("4", false, false);
     }
@@ -1196,7 +1192,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "1", "One", "Two*", "Three*" })
+    @Alerts({"3", "3", "1", "One", "Two*", "Three*"})
     public void removeOptionMethodIndexFourMulti() throws Exception {
         removeOptionMethod("4", false, true);
     }
@@ -1205,7 +1201,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodOptionNullEmptySelect() throws Exception {
         removeOptionMethod("null", true, false);
     }
@@ -1214,7 +1210,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodOptionNullEmptySelectMulti() throws Exception {
         removeOptionMethod("null", true, true);
     }
@@ -1223,7 +1219,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodNewOptionEmptySelect() throws Exception {
         removeOptionMethod("new Option('foo', '123')", true, false);
     }
@@ -1232,7 +1228,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "-1" })
+    @Alerts({"0", "0", "-1"})
     public void removeOptionMethodNewOptionEmptySelectMulti() throws Exception {
         removeOptionMethod("new Option('foo', '123')", true, true);
     }
@@ -1241,7 +1237,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodOptionNull() throws Exception {
         removeOptionMethod("null", false, false);
     }
@@ -1250,7 +1246,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodOptionNullMulti() throws Exception {
         removeOptionMethod("null", false, true);
     }
@@ -1259,7 +1255,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodNewOption() throws Exception {
         removeOptionMethod("new Option('foo', '123')", false, false);
     }
@@ -1268,7 +1264,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodNewOptionMulti() throws Exception {
         removeOptionMethod("new Option('foo', '123')", false, true);
     }
@@ -1277,7 +1273,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodOptionFirst() throws Exception {
         removeOptionMethod("oSelect.options[0]", false, false);
     }
@@ -1286,7 +1282,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodOptionFirstMulti() throws Exception {
         removeOptionMethod("oSelect.options[0]", false, true);
     }
@@ -1295,7 +1291,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodOptionSecond() throws Exception {
         removeOptionMethod("oSelect.options[1]", false, false);
     }
@@ -1304,7 +1300,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodOptionSecondMulti() throws Exception {
         removeOptionMethod("oSelect.options[1]", false, true);
     }
@@ -1313,7 +1309,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodOptionThird() throws Exception {
         removeOptionMethod("oSelect.options[2]", false, false);
     }
@@ -1322,7 +1318,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodOptionThirdMulti() throws Exception {
         removeOptionMethod("oSelect.options[2]", false, true);
     }
@@ -1331,7 +1327,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    @Alerts({"3", "2", "0", "Two*", "Three"})
     public void removeOptionMethodOptionLast() throws Exception {
         removeOptionMethod("oSelect.options[3]", false, false);
     }
@@ -1340,7 +1336,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    @Alerts({"3", "2", "0", "Two*", "Three*"})
     public void removeOptionMethodOptionLastMulti() throws Exception {
         removeOptionMethod("oSelect.options[3]", false, true);
     }
@@ -1387,7 +1383,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "Three", "value3" })
+    @Alerts({"2", "Three", "value3"})
     public void removeOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1417,7 +1413,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "Three", "value3" })
+    @Alerts({"2", "Three", "value3"})
     public void removeOptionWithRemoveMethod() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1448,7 +1444,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "Three", "value3" })
+    @Alerts({"2", "Three", "value3"})
     public void optionsRemoveMethod() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1510,7 +1506,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2", "", "", "foo", "fooValue" })
+    @Alerts({"1", "2", "", "", "foo", "fooValue"})
     public void increaseOptionsSettingLength() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1544,7 +1540,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "One", "value1" })
+    @Alerts({"One", "value1"})
     public void optionArrayHasItemMethod() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1572,9 +1568,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Two", "", "Two", "", "" },
-            IE8 = { "", "", "", "", "" })
-    @NotYetImplemented(IE8)
+    @Alerts({"Two", "", "Two", "", ""})
     public void getValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1615,7 +1609,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1" })
+    @Alerts({"0", "1"})
     public void setValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1644,7 +1638,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
+            IE = {"2-2", "1-1", "2-2", "0-0", "2-2", "1-1"})
     public void optionsDelegateToSelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1685,7 +1679,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "b", "3", "c" })
+    @Alerts({"2", "b", "3", "c"})
     public void optionsArrayAdd() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1748,7 +1742,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "true", "false", "false", "0"})
+    @Alerts({"0", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeNegativeOne() throws Exception {
         defaultSelectedValue("-1", false);
     }
@@ -1757,7 +1751,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "false", "false", "false", "-1" })
+    @Alerts({"0", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeNegativeOne_Multi() throws Exception {
         defaultSelectedValue("-1", true);
     }
@@ -1766,7 +1760,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts ({ "0", "true", "false", "false", "0" })
+    @Alerts ({ "0", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeZero() throws Exception {
         defaultSelectedValue("0", false);
     }
@@ -1775,7 +1769,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts ({ "0", "false", "false", "false", "-1" })
+    @Alerts ({ "0", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeZero_Multi() throws Exception {
         defaultSelectedValue("0", true);
     }
@@ -1784,7 +1778,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "true", "false", "false", "0" })
+    @Alerts({"1", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeOne() throws Exception {
         defaultSelectedValue("1", false);
     }
@@ -1793,7 +1787,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "false", "false", "false", "-1" })
+    @Alerts({"1", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeOne_Multi() throws Exception {
         defaultSelectedValue("1", true);
     }
@@ -1802,7 +1796,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "false", "false", "false", "-1" })
+    @Alerts({"2", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeTwo() throws Exception {
         defaultSelectedValue("2", false);
     }
@@ -1811,7 +1805,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "false", "false", "false", "-1" })
+    @Alerts({"2", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeTwo_Multi() throws Exception {
         defaultSelectedValue("2", true);
     }
@@ -1820,7 +1814,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "true", "false", "false", "0" })
+    @Alerts({"0", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeInvalid() throws Exception {
         defaultSelectedValue("x", false);
     }
@@ -1829,7 +1823,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "false", "false", "false", "-1" })
+    @Alerts({"0", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeInvalid_Mulzi() throws Exception {
         defaultSelectedValue("x", true);
     }
@@ -1898,7 +1892,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "false", "false" })
+    @Alerts({"true", "false", "false"})
     public void multiple() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1960,7 +1954,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1" })
+    @Alerts({"0", "1"})
     public void selectedIndex_onfocus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1989,7 +1983,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "o1", "o2" })
+    @Alerts({"o1", "o2"})
     public void value_onfocus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2018,7 +2012,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-1", "0", "-1" })
+    @Alerts({"-1", "0", "-1"})
     public void selectedIndex_appendChild() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2047,7 +2041,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-1", "0", "-1" })
+    @Alerts({"-1", "0", "-1"})
     public void selectedIndex_insertBefore() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2076,7 +2070,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-1", "0", "-1" })
+    @Alerts({"-1", "0", "-1"})
     public void selectedIndex_add() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2108,8 +2102,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "first", "null", "null" },
-            IE8 = { "first", "null", "exception" })
+    @Alerts({"first", "null", "null"})
     public void item() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2135,8 +2128,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "two", "" },
-            FF = { "two", "two" })
+    @Alerts(DEFAULT = {"two", ""},
+            FF = {"two", "two"})
     public void value() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2164,7 +2157,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "two", "one" })
+    @Alerts({"two", "one"})
     public void valueByValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2192,8 +2185,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "two", "" },
-            FF = { "two", "two" })
+    @Alerts(DEFAULT = {"two", ""},
+            FF = {"two", "two"})
     public void valueByValueCase() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2221,8 +2214,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "two", "One" },
-            IE = { "two", "" })
+    @Alerts(DEFAULT = {"two", "One"},
+            IE = {"two", ""})
     public void valueByText() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2250,8 +2243,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "two", "One" },
-            IE = { "two", "" })
+    @Alerts(DEFAULT = {"two", "One"},
+            IE = {"two", ""})
     public void valueByTextTrim() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2279,8 +2272,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "two", "" },
-            FF = { "two", "two" })
+    @Alerts(DEFAULT = {"two", ""},
+            FF = {"two", "two"})
     public void valueNull() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2308,7 +2301,38 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "One", "Two", "One" })
+    @Alerts(DEFAULT = {"two", "", ""},
+            FF = {"two", "two", "two"})
+    public void valueOther() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    alert(select.value);\n"
+            + "    select.value = 1234;\n"
+            + "    alert(select.value);\n"
+            + "    select.value = select;\n"
+            + "    alert(select.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect'>\n"
+            + "    <option>One</option>\n"
+            + "    <option selected value='two'>Two</option>\n"
+            + "  </select>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"One", "Two", "One"})
     public void valueAfterReset() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2333,6 +2357,109 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "    <option value='Two'>Two</option>\n"
             + "  </select>\n"
             + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("mouse over")
+    @BuggyWebDriver(IE)
+    public void mouseOver() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='4' onmouseover='doTest()'>\n"
+            + "      <option value='option1' id='option1' >Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("select1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void mouseOverDisabledSelect() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      alert('mouse over');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1' size='4' onmouseover='doTest()' disabled='disabled'>\n"
+            + "      <option value='option1' id='option1'>Option1</option>\n"
+            + "      <option value='option2' id='option2'>Option2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("select1")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            CHROME = {"0", "2", "1", "2", "1", "1"})
+    public void labels() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      debug(document.getElementById('e1'));\n"
+            + "      debug(document.getElementById('e2'));\n"
+            + "      debug(document.getElementById('e3'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      var labels = document.getElementById('e4').labels;\n"
+            + "      document.body.removeChild(document.getElementById('l4'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      alert(labels ? labels.length : labels);\n"
+            + "    }\n"
+            + "    function debug(e) {\n"
+            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='e1'>e 1</select><br>\n"
+            + "  <label>something <label> click here <select id='e2'>e 2</select></label></label><br>\n"
+            + "  <label for='e3'> and here</label>\n"
+            + "  <select id='e3'>e 3</select><br>\n"
+            + "  <label id='l4' for='e4'> what about</label>\n"
+            + "  <label> this<select id='e4'>e 4</select></label><br>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

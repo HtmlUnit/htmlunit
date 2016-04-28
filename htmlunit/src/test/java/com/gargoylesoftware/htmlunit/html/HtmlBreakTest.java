@@ -36,8 +36,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBRElement]",
-        IE8 = "[object]")
+    @Alerts("[object HTMLBRElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -62,7 +61,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
     @Test
     public void asText() throws Exception {
         final String html = "<html><head>\n"
-            + "</head><body>"
+            + "</head><body>\n"
             + "Hello<br/>world\n"
             + "</body></html>";
 

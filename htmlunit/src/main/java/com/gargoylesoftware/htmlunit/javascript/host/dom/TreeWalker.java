@@ -40,8 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class TreeWalker extends SimpleScriptable {
 
     private Node root_;

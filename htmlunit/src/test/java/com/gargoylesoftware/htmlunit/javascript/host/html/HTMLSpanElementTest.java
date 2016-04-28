@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -42,8 +39,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no",
-            IE8 = "yes")
+    @Alerts("no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -71,8 +67,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement] undefined",
-            IE8 = "[object] undefined")
+    @Alerts("[object HTMLSpanElement] undefined")
     public void cite() throws Exception {
         final String html =
             "<html>\n"
@@ -97,7 +92,6 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("beforeSpace afterSpace")
-    @NotYetImplemented(IE8)
     public void asText() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='foo'><span>beforeSpace</span><span> </span><span>afterSpace</span></div>"

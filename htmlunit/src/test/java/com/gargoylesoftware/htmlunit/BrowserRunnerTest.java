@@ -49,7 +49,7 @@ public class BrowserRunnerTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void thatBeforeClassMethodHasBeenCalledOnlyOnce() throws Exception {
+    public void thatBeforeClassMethodHasBeenCalledOnlyOnce() {
         assertEquals(1, Counter_);
     }
 }

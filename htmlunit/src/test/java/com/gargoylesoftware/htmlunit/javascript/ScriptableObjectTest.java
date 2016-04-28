@@ -37,7 +37,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts({ "default", "default", "default" })
+    @Alerts({"default", "default", "default"})
     public void readOnlyPrototype() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"

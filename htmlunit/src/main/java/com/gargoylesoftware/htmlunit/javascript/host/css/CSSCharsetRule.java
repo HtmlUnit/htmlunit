@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 38))
 public class CSSCharsetRule extends CSSRule {
 
     /**

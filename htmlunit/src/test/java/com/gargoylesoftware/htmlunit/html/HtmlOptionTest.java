@@ -77,7 +77,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetValue() throws Exception {
+    public void getValue() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -103,7 +103,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetValue_ContentsIsValue() throws Exception {
+    public void getValue_ContentsIsValue() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -188,8 +188,8 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "false", "true", "true", "false" })
-    public void testDisabled() throws Exception {
+    @Alerts({"false", "false", "true", "true", "false"})
+    public void disabled() throws Exception {
         final String html = "<html><body onload='test()'><form name='f'>\n"
             + "  <select name='s' id='s'>\n"
             + "    <option value='o1' id='o1'>One</option>\n"

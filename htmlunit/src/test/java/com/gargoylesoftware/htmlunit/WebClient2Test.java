@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_IGNORE_EMPTY;
 import static com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
-import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         // with query string not encoded
         HtmlPage page = client.getPage("http://first?a=b c&d=\u00E9\u00E8");
-        String expected;
+        final String expected;
         final boolean ie = getBrowserVersion().isIE();
         if (ie) {
             expected = "?a=b%20c&d=\u00E9\u00E8";
@@ -284,7 +284,9 @@ public class WebClient2Test extends SimpleWebTestCase {
    */
     @Test
     public void buildCookie() throws Exception {
-        checkCookie("", EMPTY_COOKIE_NAME, "", "/", false, null);
+        if (!getBrowserVersion().hasFeature(HTTP_COOKIE_IGNORE_EMPTY)) {
+            checkCookie("", EMPTY_COOKIE_NAME, "", "/", false, null);
+        }
         checkCookie("toto", EMPTY_COOKIE_NAME, "toto", "/", false, null);
         checkCookie("toto=", "toto", "", "/", false, null);
         checkCookie("toto=foo", "toto", "foo", "/", false, null);

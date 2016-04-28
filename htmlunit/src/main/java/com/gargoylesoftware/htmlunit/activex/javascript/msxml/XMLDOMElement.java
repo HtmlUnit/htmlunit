@@ -319,7 +319,7 @@ public class XMLDOMElement extends XMLDOMNode {
         if ("*".equals(tagNameTrimmed)) {
             collection = new XMLDOMNodeList(node, false, description) {
                 @Override
-                protected boolean isMatching(final DomNode node) {
+                protected boolean isMatching(final DomNode domNode) {
                     return true;
                 }
             };
@@ -333,15 +333,15 @@ public class XMLDOMElement extends XMLDOMNode {
                     if (domNode == null) {
                         return response;
                     }
-                    for (final DomNode node : getCandidates()) {
-                        if (node instanceof DomText) {
-                            final DomText domText = (DomText) node;
+                    for (final DomNode candidate : getCandidates()) {
+                        if (candidate instanceof DomText) {
+                            final DomText domText = (DomText) candidate;
                             if (!StringUtils.isBlank(domText.getWholeText())) {
-                                response.add(node);
+                                response.add(candidate);
                             }
                         }
                         else {
-                            response.add(node);
+                            response.add(candidate);
                         }
                     }
                     return response;
@@ -351,8 +351,8 @@ public class XMLDOMElement extends XMLDOMNode {
         else {
             collection = new XMLDOMNodeList(node, false, description) {
                 @Override
-                protected boolean isMatching(final DomNode node) {
-                    return tagNameTrimmed.equals(node.getNodeName());
+                protected boolean isMatching(final DomNode domNode) {
+                    return tagNameTrimmed.equals(domNode.getNodeName());
                 }
             };
         }

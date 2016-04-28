@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -38,8 +39,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,6 +54,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchSessionException;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -67,6 +68,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -74,35 +76,34 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * Base class for tests using WebDriver.
  * <p>
  * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
- * "test.properties" in the HtmlUnit root directory.
+ * "{@code test.properties}" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff38,ie11
-   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
-   ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   ff38.bin=/usr/bin/firefox                            [Unix-like]
+   browsers=hu,ff45,ie
    chrome.bin=/path/to/chromedriver                     [Unix-like]
+   ff45.bin=/usr/bin/firefox                            [Unix-like]
+   ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
+   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    autofix=true
  * </pre>
- * The file should contain four properties: "browsers", "ie.bin", "ff38.bin", and "chrome.bin".
+ * The file could contain some properties:
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie8", "hu-ff31",
- *   "ff31", "ff38", "ie8", "ie11", "chrome", which will be used to driver real browsers,
- *   note that you can't define more than one IE as there is no standard way
- *   to have multiple IEs on the same machine</li>
- *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
- *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
- *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
- *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
+ *   "hu-ie", "hu-ff45", "ff45", "ie", "chrome", which will be used to drive real browsers</li>
  *
- *   <li>ff38.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
+ *   <li>ff45.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+ *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
+ *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
+ *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
+ *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
  *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
  *   or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
  * </ul>
@@ -120,14 +121,26 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     public static final String AUTOFIX_ = "htmlunit.autofix";
 
+    /**
+     * All browsers supported.
+     */
+    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_38,
+        BrowserVersion.FIREFOX_45, BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+
+    /**
+     * Browsers which run by default.
+     */
+    public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_38,
+        BrowserVersion.FIREFOX_45, BrowserVersion.INTERNET_EXPLORER};
+
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
     private static Set<String> BROWSERS_PROPERTIES_;
     private static String CHROME_BIN_;
     private static String EDGE_BIN_;
     private static String IE_BIN_;
-    private static String FF31_BIN_;
     private static String FF38_BIN_;
+    private static String FF45_BIN_;
 
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
@@ -162,7 +175,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final Properties properties = new Properties();
                 final File file = new File("test.properties");
                 if (file.exists()) {
-                    properties.load(new FileInputStream(file));
+                    try (final FileInputStream in = new FileInputStream(file)) {
+                        properties.load(in);
+                    }
+
                     String browsersValue = properties.getProperty("browsers");
                     if (browsersValue == null || browsersValue.isEmpty()) {
                         browsersValue = "hu";
@@ -173,8 +189,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
-                    FF31_BIN_ = properties.getProperty("ff31.bin");
                     FF38_BIN_ = properties.getProperty("ff38.bin");
+                    FF45_BIN_ = properties.getProperty("ff45.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
                     System.setProperty(AUTOFIX_, Boolean.toString(autofix));
@@ -187,9 +203,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList("hu"));
             }
             if (BROWSERS_PROPERTIES_.contains("hu")) {
-                BROWSERS_PROPERTIES_.add("hu-chrome");
-                BROWSERS_PROPERTIES_.add("hu-ff38");
-                BROWSERS_PROPERTIES_.add("hu-ie");
+                for (final BrowserVersion browserVersion : DEFAULT_RUNNING_BROWSERS_) {
+                    BROWSERS_PROPERTIES_.add("hu-" + browserVersion.getNickname().toLowerCase());
+                }
             }
         }
         return BROWSERS_PROPERTIES_;
@@ -202,7 +218,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebDriver getWebDriver() {
         final BrowserVersion browserVersion = getBrowserVersion();
         WebDriver driver;
-        if (useRealBrowser_) {
+        if (useRealBrowser()) {
             driver = WEB_DRIVERS_REAL_BROWSERS.get(browserVersion);
             if (driver == null) {
                 try {
@@ -252,6 +268,34 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Closes the real browser drivers.
+     * @see #shutDownRealBrowsersAfterTest()
+     */
+    private static void shutDownRealBrowsers() {
+        for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
+            try {
+                driver.quit();
+            }
+            catch (final UnreachableBrowserException e) {
+                LOG.error("Can't quit browser", e);
+                // ignore, the browser is gone
+            }
+        }
+        WEB_DRIVERS_REAL_BROWSERS.clear();
+    }
+
+    /**
+     * Closes the real IE browser drivers.
+     */
+    protected void shutDownRealIE() {
+        final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(INTERNET_EXPLORER);
+        if (driver != null) {
+            driver.quit();
+            WEB_DRIVERS_REAL_BROWSERS.remove(INTERNET_EXPLORER);
+        }
+    }
+
+    /**
      * Stops all WebServers.
      * @throws Exception if it fails
      */
@@ -268,6 +312,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
         STATIC_SERVER_ = null;
         STATIC_SERVER2_ = null;
         STATIC_SERVER3_ = null;
+    }
+
+    /**
+     * @return whether to use real browser or not.
+     */
+    protected boolean useRealBrowser() {
+        return useRealBrowser_;
     }
 
     /**
@@ -292,7 +343,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws IOException in case of exception
      */
     protected WebDriver buildWebDriver() throws IOException {
-        if (useRealBrowser_) {
+        if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {
                     System.setProperty("webdriver.ie.driver", IE_BIN_);
@@ -324,11 +375,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             String ffBinary = null;
-            if (BrowserVersion.FIREFOX_31 == getBrowserVersion()) {
-                ffBinary = FF31_BIN_;
-            }
             if (BrowserVersion.FIREFOX_38 == getBrowserVersion()) {
                 ffBinary = FF38_BIN_;
+            }
+            if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
+                ffBinary = FF45_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
@@ -505,7 +556,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
 
-        private void doService(final HttpServletRequest request, final HttpServletResponse response)
+        private static void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
             String url = request.getRequestURL().toString();
             if (LOG.isDebugEnabled()) {
@@ -640,14 +691,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         mockWebConnection.setResponse(url, html, contentType, charset);
         startWebServer(mockWebConnection);
 
-        final WebDriver driver = getWebDriver();
+        WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
             try {
                 driver.manage().window().setSize(new Dimension(1272, 768));
             }
-            catch (final WebDriverException e) {
-                // ChromeDriver version 0.5 (Mar 26, 2013) does not support the setSize command
-                LOG.warn(e.getMessage(), e);
+            catch (final NoSuchSessionException e) {
+                // maybe the driver was killed by the test before; setup a new one
+                shutDownRealBrowsers();
+
+                driver = getWebDriver();
+                driver.manage().window().setSize(new Dimension(1272, 768));
             }
         }
         driver.get(url.toExternalForm());
@@ -757,6 +811,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Verifies the captured alerts.
+     *
      * @param maxWaitTime the maximum time to wait for the expected alert to be found
      * @param driver the driver instance
      * @param expectedAlerts the expected alerts
@@ -764,15 +819,38 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
         throws Exception {
-        // gets the collected alerts, waiting a bit if necessary
-        List<String> actualAlerts = getCollectedAlerts(driver);
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
-        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
-            Thread.sleep(30);
+        List<String> actualAlerts = null;
+
+        try {
+            // gets the collected alerts, waiting a bit if necessary
             actualAlerts = getCollectedAlerts(driver);
+
+            final long maxWait = System.currentTimeMillis() + maxWaitTime;
+            while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
+                Thread.sleep(30);
+                actualAlerts = getCollectedAlerts(driver);
+            }
+        }
+        catch (final WebDriverException e) {
+            shutDownRealBrowsers();
+            throw e;
         }
 
         assertEquals(expectedAlerts, actualAlerts);
+        if (!ignoreExpectationsLength()) {
+            assertEquals(expectedAlerts.length, actualAlerts.size());
+            for (int i = expectedAlerts.length - 1; i >= 0; i--) {
+                assertEquals(expectedAlerts[i], actualAlerts.get(i));
+            }
+        }
+    }
+
+    /**
+     * Whether the expectations length must match the actual length or this can be ignored.
+     * @return whether to ignore checking the expectations length against the actual one
+     */
+    protected boolean ignoreExpectationsLength() {
+        return false;
     }
 
     /**
@@ -851,7 +929,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-        final Object result = jsExecutor.executeScript("top.__huCatchedAlerts");
+        final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
 
         if (result != null) {
             if (driver instanceof HtmlUnitDriver) {
@@ -922,21 +1000,45 @@ public abstract class WebDriverTestCase extends WebTestCase {
             assertEquals(0, getJavaScriptThreads().size());
         }
 
-        if (useRealBrowser_) {
-            final WebDriver driver = getWebDriver();
-            final String currentWindow = driver.getWindowHandle();
+        if (useRealBrowser()) {
+            final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(getBrowserVersion());
+            if (driver != null) {
+                try {
+                    final String currentWindow = driver.getWindowHandle();
 
-            // close all windows except the current one
-            for (final String handle : driver.getWindowHandles()) {
-                if (!currentWindow.equals(handle)) {
-                    driver.switchTo().window(handle).close();
+                    final Set<String> handles = driver.getWindowHandles();
+                    // close all windows except the current one
+                    handles.remove(currentWindow);
+
+                    if (handles.size() > 0) {
+                        for (final String handle : handles) {
+                            try {
+                                driver.switchTo().window(handle);
+                                driver.close();
+                            }
+                            catch (final NoSuchWindowException e) {
+                                LOG.error("Error switching to browser window; quit browser.", e);
+                                WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
+                                driver.quit();
+                                return;
+                            }
+                        }
+
+                        // we have to force WebDriver to treat the remaining window
+                        // as the one we like to work with from now on
+                        // looks like a web driver issue to me (version 2.47.2)
+                        driver.switchTo().window(currentWindow);
+                    }
+
+                    driver.manage().deleteAllCookies();
+
+                    // in the remaining window, load a blank page
+                    driver.get("about:blank");
+                }
+                catch (final WebDriverException e) {
+                    shutDownRealBrowsers();
                 }
             }
-
-            driver.manage().deleteAllCookies();
-
-            // in the remaining window, load a blank page
-            driver.get("about:blank");
         }
     }
 

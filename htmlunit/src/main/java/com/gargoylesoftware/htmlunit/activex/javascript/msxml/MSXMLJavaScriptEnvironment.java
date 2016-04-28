@@ -19,17 +19,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 
 /**
  * JavaScript environment for the MSXML ActiveX library.
@@ -96,7 +97,7 @@ public class MSXMLJavaScriptEnvironment {
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
      */
-    private ScriptableObject configureClass(final ClassConfiguration config/*, final Scriptable window*/)
+    private static ScriptableObject configureClass(final ClassConfiguration config/*, final Scriptable window*/)
         throws InstantiationException, IllegalAccessException {
 
         final Class<?> jsHostClass = config.getHostClass();
@@ -113,17 +114,18 @@ public class MSXMLJavaScriptEnvironment {
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
-    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
+    private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
             final ScriptableObject scriptable) {
 
         // the constants
         configureConstants(config, scriptable);
 
         // the properties
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
-            final String propertyName = propertyEntry.getKey();
-            final Method readMethod = propertyEntry.getValue().getReadMethod();
-            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+        final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
+        for (final String propertyName : propertyMap.keySet()) {
+            final PropertyInfo info = propertyMap.get(propertyName);
+            final Method readMethod = info.getReadMethod();
+            final Method writeMethod = info.getWriteMethod();
             scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
@@ -137,18 +139,11 @@ public class MSXMLJavaScriptEnvironment {
         }
     }
 
-    private void configureConstants(final ClassConfiguration config,
+    private static void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
-        final Class<?> linkedClass = config.getHostClass();
-        for (final String constant : config.getConstants()) {
-            try {
-                final Object value = linkedClass.getField(constant).get(null);
-                scriptable.defineProperty(constant, value, ScriptableObject.READONLY | ScriptableObject.PERMANENT);
-            }
-            catch (final Exception e) {
-                throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
-                    + config.getHostClass().getName());
-            }
+        for (final ConstantInfo constantInfo : config.getConstants()) {
+            scriptable.defineProperty(constantInfo.getName(), constantInfo.getValue(),
+                    ScriptableObject.READONLY | ScriptableObject.PERMANENT);
         }
     }
 

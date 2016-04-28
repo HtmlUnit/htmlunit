@@ -18,11 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOM_CDATA_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -37,12 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author David K. Taylor
  * @author Chris Erskine
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class CharacterData extends Node {
 
     /**
@@ -53,7 +46,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Gets the JavaScript property "data" for this character data.
+     * Gets the JavaScript property {@code data} for this character data.
      * @return the String of data
      */
     @JsxGetter
@@ -63,7 +56,7 @@ public class CharacterData extends Node {
     }
 
     /**
-     * Sets the JavaScript property "data" for this character data.
+     * Sets the JavaScript property {@code data} for this character data.
      * @param newValue the new String of data
      */
     @JsxSetter

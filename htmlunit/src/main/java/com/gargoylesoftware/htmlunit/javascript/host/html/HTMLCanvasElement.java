@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCanvas;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,6 +30,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 /**
  * A JavaScript object for {@link HtmlCanvas}.
  *
@@ -39,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+        @WebBrowser(IE), @WebBrowser(EDGE) })
 public class HTMLCanvasElement extends HTMLElement {
 
     private Object context_;

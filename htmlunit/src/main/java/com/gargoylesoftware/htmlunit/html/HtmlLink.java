@@ -57,11 +57,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset". Refer to the
+     * Returns the value of the attribute {@code charset}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charset"
+     * @return the value of the attribute {@code charset}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
@@ -69,11 +69,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "href". Refer to the
+     * Returns the value of the attribute {@code href}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "href"
+     * @return the value of the attribute {@code href}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
@@ -81,11 +81,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "hreflang". Refer to the
+     * Returns the value of the attribute {@code hreflang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "hreflang"
+     * @return the value of the attribute {@code hreflang}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefLangAttribute() {
@@ -93,11 +93,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -105,11 +105,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "rel". Refer to the
+     * Returns the value of the attribute {@code rel}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rel"
+     * @return the value of the attribute {@code rel}
      * or an empty string if that attribute isn't defined.
      */
     public final String getRelAttribute() {
@@ -117,11 +117,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "rev". Refer to the
+     * Returns the value of the attribute {@code rev}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rev"
+     * @return the value of the attribute {@code rev}
      * or an empty string if that attribute isn't defined.
      */
     public final String getRevAttribute() {
@@ -129,11 +129,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "media". Refer to the
+     * Returns the value of the attribute {@code media}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "media"
+     * @return the value of the attribute {@code media}
      * or an empty string if that attribute isn't defined.
      */
     public final String getMediaAttribute() {
@@ -141,11 +141,11 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "target". Refer to the
+     * Returns the value of the attribute {@code target}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "target"
+     * @return the value of the attribute {@code target}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {
@@ -163,9 +163,30 @@ public class HtmlLink extends HtmlElement {
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
+        return getWebResponse(downloadIfNeeded, null);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * If the linked content is not already downloaded it triggers a download. Then it stores the response
+     * for later use.<br>
+     *
+     * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
+     * @param request the request; if null getWebRequest() is called to create one
+     * @return {@code null} if no download should be performed and when this wasn't already done; the response
+     * received when performing a request for the content referenced by this tag otherwise
+     * @throws IOException if an error occurs while downloading the content
+     */
+    public WebResponse getWebResponse(final boolean downloadIfNeeded, final WebRequest request) throws IOException {
         if (downloadIfNeeded && cachedWebResponse_ == null) {
             final WebClient webclient = getPage().getWebClient();
-            cachedWebResponse_ = webclient.loadWebResponse(getWebRequest());
+            if (null == request) {
+                cachedWebResponse_ = webclient.loadWebResponse(getWebRequest());
+            }
+            else {
+                cachedWebResponse_ = webclient.loadWebResponse(request);
+            }
         }
         return cachedWebResponse_;
     }
@@ -178,8 +199,14 @@ public class HtmlLink extends HtmlElement {
     public WebRequest getWebRequest() throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
+
         final WebRequest request = new WebRequest(url);
+
         request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+
+        final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
+        request.setAdditionalHeader("Accept", accept);
+
         return request;
     }
 

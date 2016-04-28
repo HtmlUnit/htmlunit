@@ -48,11 +48,11 @@ public class HtmlMap extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name"
+     * @return the value of the attribute {@code name}
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
@@ -81,7 +81,7 @@ public class HtmlMap extends HtmlElement {
         String name = getNameAttribute();
         if (null != page && StringUtils.isNotBlank(name)) {
             name = "#" + name.trim();
-            for (HtmlElement elem : page.getDocumentElement().getHtmlElementsByTagName("img")) {
+            for (HtmlElement elem : page.getDocumentElement().getElementsByTagName("img")) {
                 final HtmlImage image = (HtmlImage) elem;
                 if (name.equals(image.getUseMapAttribute())) {
                     return image;

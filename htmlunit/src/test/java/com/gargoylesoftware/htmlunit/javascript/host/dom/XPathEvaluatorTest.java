@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,10 +38,10 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second" },
-            FF38 = { "function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second" },
-            IE = { "undefined", "exception" })
-    @NotYetImplemented(FF38)
+    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second"},
+            FF = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second"},
+            IE = {"undefined", "exception"})
+    @NotYetImplemented(FF)
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"
@@ -113,9 +113,9 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     public void namespacesWithCustomNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "  function nsResolver(prefix) {"
-            + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;"
-            + "  }"
+            + "  function nsResolver(prefix) {\n"
+            + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;\n"
+            + "  }\n"
 
             + "  var xml = "
             + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
@@ -128,8 +128,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "  </soap:Envelope>';\n"
 
             + "  function test() {\n"
-            + "    if (window.XPathEvaluator) {"
-            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');"
+            + "    if (window.XPathEvaluator) {\n"
+            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');\n"
             + "      var xpe = new XPathEvaluator();\n"
             + "      var result = xpe.evaluate('/s:Envelope/s:books/s:book/title/text()', "
                                    + "doc.documentElement, nsResolver, XPathResult.STRING_TYPE, null);\n"

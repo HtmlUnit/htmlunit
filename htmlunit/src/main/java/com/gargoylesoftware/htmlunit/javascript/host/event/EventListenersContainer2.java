@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_RESULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_UNDEFINED_AS_NULL;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,9 +146,7 @@ public class EventListenersContainer2 implements Serializable {
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
         Object handler = value;
-        if (jsNode_.getWindow().getBrowserVersion()
-            .hasFeature(JS_EVENT_HANDLER_UNDEFINED_AS_NULL)
-            && Undefined.instance == value) {
+        if (Undefined.instance == value) {
             handler = null;
         }
 
@@ -200,22 +195,22 @@ public class EventListenersContainer2 implements Serializable {
 //                    }
 //                }
                 if (function != null) {
-                    final ScriptResult result =
-                            page.executeJavaScriptFunctionIfPossible(function, thisObject, args, node);
+//                    final ScriptResult result =
+//                            page.executeJavaScriptFunctionIfPossible(function, thisObject, args, node);
 //                    if (event.isPropagationStopped()) {
 //                        allResult = result;
 //                    }
-                    if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
-                        if (ScriptResult.isFalse(result)) {
-                            allResult = result;
-                        }
-                        else {
+//                    if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
+//                        if (ScriptResult.isFalse(result)) {
+//                            allResult = result;
+//                        }
+//                        else {
 //                            final Object eventReturnValue = event.getReturnValue();
 //                            if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
 //                                allResult = new ScriptResult(Boolean.FALSE, page);
 //                            }
-                        }
-                    }
+//                        }
+//                    }
                 }
             }
         }
@@ -237,8 +232,8 @@ public class EventListenersContainer2 implements Serializable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Executing " + Event2.getType(event) + " handler for " + node);
             }
-            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_,
-                    propHandlerArgs, page);
+//            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_,
+//                    propHandlerArgs, page);
         }
         return null;
     }

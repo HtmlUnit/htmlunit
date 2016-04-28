@@ -19,8 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link Set}.
@@ -34,9 +34,8 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "true" },
-            IE8 = { },
-            IE11 = { "1", "false" })
+    @Alerts(DEFAULT = {"3", "true"},
+            IE = {"1", "false"})
     public void has() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -63,12 +62,11 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]" },
-            FF38 = { "function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]" },
-            FF31 = { },
-            IE = { })
+    @Alerts(DEFAULT = {"function values() { [native code] }",
+                "[object Set Iterator]", "0", "1", "[object Object]"},
+            FF = {"function values() {\n    [native code]\n}",
+                    "[object Set Iterator]", "0", "1", "[object Object]"},
+            IE = {})
     public void iterator() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -100,12 +98,11 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]" },
-            FF38 = { "function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]" },
-            FF31 = { },
-            IE = { })
+    @Alerts(DEFAULT = {"function values() { [native code] }",
+                "[object Set Iterator]", "0", "1", "[object Object]"},
+            FF = {"function values() {\n    [native code]\n}",
+                "[object Set Iterator]", "0", "1", "[object Object]"},
+            IE = {})
     public void values() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

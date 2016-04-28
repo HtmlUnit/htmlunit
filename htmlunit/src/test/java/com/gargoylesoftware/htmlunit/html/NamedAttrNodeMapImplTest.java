@@ -14,11 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -37,7 +43,7 @@ public class NamedAttrNodeMapImplTest {
     public void construction() throws Exception {
         try {
             new NamedAttrNodeMapImpl(null, true);
-            Assert.fail("IllegalArgumentException expected.");
+            fail("IllegalArgumentException expected.");
         }
         catch (final IllegalArgumentException e) {
             // expected
@@ -45,7 +51,7 @@ public class NamedAttrNodeMapImplTest {
 
         try {
             new NamedAttrNodeMapImpl(null, false);
-            Assert.fail("IllegalArgumentException expected.");
+            fail("IllegalArgumentException expected.");
         }
         catch (final IllegalArgumentException e) {
             // expected
@@ -54,11 +60,11 @@ public class NamedAttrNodeMapImplTest {
         final DomElement dom = new HtmlBreak("", null, null);
 
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
 
         final Map<String, DomAttr> attribs = new HashMap<>();
         map = new NamedAttrNodeMapImpl(dom, true, attribs);
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
     }
 
     /**
@@ -70,21 +76,21 @@ public class NamedAttrNodeMapImplTest {
         final DomElement dom = new HtmlBreak("", null, null);
 
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
         map.put("Key", new DomAttr(null, "", "", null, false));
-        Assert.assertTrue(map.containsKey("Key"));
-        Assert.assertFalse(map.containsKey("key"));
-        Assert.assertNotNull(map.get("Key"));
-        Assert.assertNull(map.get("key"));
+        assertTrue(map.containsKey("Key"));
+        assertFalse(map.containsKey("key"));
+        assertNotNull(map.get("Key"));
+        assertNull(map.get("key"));
 
         final Map<String, DomAttr> attribs = new HashMap<>();
         attribs.put("Key", new DomAttr(null, "", "", null, false));
 
         map = new NamedAttrNodeMapImpl(dom, true, attribs);
-        Assert.assertTrue(map.containsKey("Key"));
-        Assert.assertFalse(map.containsKey("key"));
-        Assert.assertNotNull(map.get("Key"));
-        Assert.assertNull(map.get("key"));
+        assertTrue(map.containsKey("Key"));
+        assertFalse(map.containsKey("key"));
+        assertNotNull(map.get("Key"));
+        assertNull(map.get("key"));
     }
 
     /**
@@ -96,21 +102,21 @@ public class NamedAttrNodeMapImplTest {
         final DomElement dom = new HtmlBreak("", null, null);
 
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, false);
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
         map.put("Key", new DomAttr(null, "", "", null, false));
-        Assert.assertTrue(map.containsKey("Key"));
-        Assert.assertTrue(map.containsKey("key"));
-        Assert.assertNotNull(map.get("Key"));
-        Assert.assertNotNull(map.get("key"));
+        assertTrue(map.containsKey("Key"));
+        assertTrue(map.containsKey("key"));
+        assertNotNull(map.get("Key"));
+        assertNotNull(map.get("key"));
 
         final Map<String, DomAttr> attribs = new HashMap<>();
         attribs.put("Key", new DomAttr(null, "", "", null, false));
 
         map = new NamedAttrNodeMapImpl(dom, false, attribs);
-        Assert.assertTrue(map.containsKey("Key"));
-        Assert.assertTrue(map.containsKey("key"));
-        Assert.assertNotNull(map.get("Key"));
-        Assert.assertNotNull(map.get("key"));
+        assertTrue(map.containsKey("Key"));
+        assertTrue(map.containsKey("key"));
+        assertNotNull(map.get("Key"));
+        assertNotNull(map.get("key"));
     }
 
     /**
@@ -122,29 +128,29 @@ public class NamedAttrNodeMapImplTest {
         final DomElement dom = new HtmlBreak("", null, null);
 
         final NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, false);
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
         map.put("Key1", new DomAttr(null, "", "attr1", null, false));
         map.put("Key2", new DomAttr(null, "", "attr2", null, false));
 
-        Assert.assertTrue(map.containsKey("Key1"));
-        Assert.assertTrue(map.containsKey("Key2"));
+        assertTrue(map.containsKey("Key1"));
+        assertTrue(map.containsKey("Key2"));
 
-        Assert.assertEquals("attr1", map.item(0).getNodeName());
-        Assert.assertEquals("attr2", map.item(1).getNodeName());
+        assertEquals("attr1", map.item(0).getNodeName());
+        assertEquals("attr2", map.item(1).getNodeName());
 
         final Iterator<String> keys = map.keySet().iterator();
-        Assert.assertEquals("key1", keys.next());
-        Assert.assertEquals("key2", keys.next());
+        assertEquals("key1", keys.next());
+        assertEquals("key2", keys.next());
 
         final Iterator<Map.Entry<String, DomAttr>> attrs = map.entrySet().iterator();
 
         Map.Entry<String, DomAttr> entry = attrs.next();
-        Assert.assertEquals("key1", entry.getKey());
-        Assert.assertEquals("attr1", entry.getValue().getNodeName());
+        assertEquals("key1", entry.getKey());
+        assertEquals("attr1", entry.getValue().getNodeName());
 
         entry = attrs.next();
-        Assert.assertEquals("key2", entry.getKey());
-        Assert.assertEquals("attr2", entry.getValue().getNodeName());
+        assertEquals("key2", entry.getKey());
+        assertEquals("attr2", entry.getValue().getNodeName());
     }
 
     /**
@@ -156,28 +162,28 @@ public class NamedAttrNodeMapImplTest {
         final DomElement dom = new HtmlBreak("", null, null);
 
         final NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
         map.put("Key1", new DomAttr(null, "", "attr1", null, false));
         map.put("Key2", new DomAttr(null, "", "attr2", null, false));
 
-        Assert.assertTrue(map.containsKey("Key1"));
-        Assert.assertTrue(map.containsKey("Key2"));
+        assertTrue(map.containsKey("Key1"));
+        assertTrue(map.containsKey("Key2"));
 
-        Assert.assertEquals("attr1", map.item(0).getNodeName());
-        Assert.assertEquals("attr2", map.item(1).getNodeName());
+        assertEquals("attr1", map.item(0).getNodeName());
+        assertEquals("attr2", map.item(1).getNodeName());
 
         final Iterator<String> keys = map.keySet().iterator();
-        Assert.assertEquals("Key1", keys.next());
-        Assert.assertEquals("Key2", keys.next());
+        assertEquals("Key1", keys.next());
+        assertEquals("Key2", keys.next());
 
         final Iterator<Map.Entry<String, DomAttr>> attrs = map.entrySet().iterator();
 
         Map.Entry<String, DomAttr> entry = attrs.next();
-        Assert.assertEquals("Key1", entry.getKey());
-        Assert.assertEquals("attr1", entry.getValue().getNodeName());
+        assertEquals("Key1", entry.getKey());
+        assertEquals("attr1", entry.getValue().getNodeName());
 
         entry = attrs.next();
-        Assert.assertEquals("Key2", entry.getKey());
-        Assert.assertEquals("attr2", entry.getValue().getNodeName());
+        assertEquals("Key2", entry.getKey());
+        assertEquals("attr2", entry.getValue().getNodeName());
     }
 }

@@ -33,12 +33,20 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface JsxStaticFunction {
 
-    /** The {@link WebBrowser}s supported by this function. */
+    /**
+     * The {@link WebBrowser}s supported by this function.
+     * @return the {@link WebBrowser}s
+     */
     WebBrowser[] value() default {
         @WebBrowser(CHROME),
         @WebBrowser(FF),
         @WebBrowser(IE),
         @WebBrowser(EDGE)
     };
-}
 
+    /**
+     * The JavaScript function name.
+     * @return the function name
+     */
+    String functionName() default "";
+}

@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -68,10 +65,9 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "", "true", "true", "" },
-            FF31 = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
-            FF38 = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
-            CHROME = { "[object BeforeUnloadEvent]", "beforeunload", "false", "true", "" },
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "", "true", "true", ""},
+            FF = {"[object BeforeUnloadEvent]", "", "false", "false", ""},
+            CHROME = {"[object BeforeUnloadEvent]", "beforeunload", "false", "true", ""},
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -93,7 +89,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "beforeunload", "true", "false", "" },
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", ""},
             IE = "exception")
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -116,7 +112,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "beforeunload", "true", "false", "" },
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", ""},
             IE = "exception")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -140,10 +136,8 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "beforeunload", "true", "false", "undefined" },
-            CHROME = { "[object Event]", "beforeunload", "true", "false", "true" },
-            IE8 = "exception")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"[object Event]", "beforeunload", "true", "false", "undefined"},
+            CHROME = {"[object Event]", "beforeunload", "true", "false", "true"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

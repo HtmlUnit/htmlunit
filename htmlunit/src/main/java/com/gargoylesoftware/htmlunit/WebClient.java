@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 
@@ -1244,12 +1243,7 @@ public class WebClient implements Serializable, AutoCloseable {
             response = makeWebResponseForFileUrl(webRequest);
         }
         else if ("data".equals(protocol)) {
-            if (browserVersion_.hasFeature(PROTOCOL_DATA)) {
-                response = makeWebResponseForDataUrl(webRequest);
-            }
-            else {
-                throw new MalformedURLException("Unknown protocol: data");
-            }
+            response = makeWebResponseForDataUrl(webRequest);
         }
         else {
             response = loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
@@ -1809,10 +1803,13 @@ public class WebClient implements Serializable, AutoCloseable {
             scriptEngine_.shutdown();
         }
 
-        //FIXME Depends on the implementation
-        if (webConnection_ instanceof HttpWebConnection) {
-            ((HttpWebConnection) webConnection_).shutdown();
+        try {
+            webConnection_.close();
         }
+        catch (final Exception e) {
+            LOG.error("Exception while closing the connection", e);
+        }
+
         cache_.clear();
     }
 
@@ -2027,11 +2024,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
      * @param request the request to perform
+     * @param checkHash if true check for hashChenage
      * @param forceLoad if true always load the request even if there is already the same in the queue
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final boolean forceLoad, final String description) {
+        final WebRequest request, final boolean checkHash, final boolean forceLoad, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
         boolean justHashJump = false;
@@ -2043,11 +2041,13 @@ public class WebClient implements Serializable, AutoCloseable {
                     return;
                 }
 
-                final URL current = page.getUrl();
-                justHashJump =
-                        HttpMethod.GET == request.getHttpMethod()
-                        && url.sameFile(current)
-                        && null != url.getRef();
+                if (checkHash) {
+                    final URL current = page.getUrl();
+                    justHashJump =
+                            HttpMethod.GET == request.getHttpMethod()
+                            && url.sameFile(current)
+                            && null != url.getRef();
+                }
             }
         }
 

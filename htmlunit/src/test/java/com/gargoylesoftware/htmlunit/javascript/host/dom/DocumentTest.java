@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
 
@@ -30,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -58,7 +54,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "form1", "form2" })
+    @Alerts({"2", "form1", "form2"})
     public void formsAccessor_TwoForms() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -128,9 +124,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "second" },
-            CHROME = { "§§URL§§", "second" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"", "second"})
     public void formArray() throws Exception {
         final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
@@ -165,7 +159,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "1", "true" })
+    @Alerts({"0", "1", "1", "true"})
     public void formsLive() throws Exception {
         final String html =
             "<html>\n"
@@ -194,8 +188,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "1", "true", "name: end" },
-            IE = { "0", "3", "3", "true", "id: firstLink" })
+    @Alerts(DEFAULT = {"0", "1", "1", "true", "name: end"},
+            IE = {"0", "3", "3", "true", "id: firstLink"})
     public void anchors() throws Exception {
         final String html =
             "<html>\n"
@@ -231,7 +225,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "3", "3", "true", "firstLink" })
+    @Alerts({"0", "3", "3", "true", "firstLink"})
     public void links() throws Exception {
         final String html =
             "<html>\n"
@@ -263,7 +257,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "parentNode: null", "DIV", "1", "null", "DIV", "button1value", "text1value", "text" })
+    @Alerts({"parentNode: null", "DIV", "1", "null", "DIV", "button1value", "text1value", "text"})
     public void createElement() throws Exception {
         final String html
             = "<html>\n"
@@ -309,10 +303,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DIV,DIV,http://www.w3.org/1999/xhtml,null,div",
-                "HI:DIV,HI:DIV,http://www.w3.org/1999/xhtml,null,hi:div" },
-            IE8 = { "DIV,DIV,undefined,undefined,undefined",
-                "HI:DIV,HI:DIV,undefined,undefined,undefined" })
+    @Alerts({"DIV,DIV,http://www.w3.org/1999/xhtml,null,div",
+                "HI:DIV,HI:DIV,http://www.w3.org/1999/xhtml,null,hi:div"})
     public void documentCreateElement2() throws Exception {
         final String html
             = "<html>\n"
@@ -340,15 +332,12 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Some:Div", "Some:Div", "myNS", "Some", "Div",
-                        "svg", "svg", "http://www.w3.org/2000/svg", "null", "svg" },
-            IE8 = "not available")
+    @Alerts({"Some:Div", "Some:Div", "myNS", "Some", "Div", "svg", "svg", "http://www.w3.org/2000/svg", "null", "svg"})
     public void createElementNS() throws Exception {
         final String html
             = "<html><head>\""
             + "<script>\n"
             + "  function doTest() {\n"
-            + "    if (!document.createElementNS) { alert('not available'); return }\n"
             + "    var div = document.createElementNS('myNS', 'Some:Div');\n"
             + "    alert(div.nodeName);\n"
             + "    alert(div.tagName);\n"
@@ -375,7 +364,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Some Text", "9", "3", "Some Text", "#text" })
+    @Alerts({"Some Text", "9", "3", "Some Text", "#text"})
     public void createTextNode() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -425,8 +414,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "exception" },
-            IE8 = { "1", "2", "HTML", "DIV", "1" })
+    @Alerts({"1", "exception"})
     public void appendChildAtDocumentLevel() throws Exception {
         final String html =
               "<html>\n"
@@ -484,7 +472,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true"})
     public void cloneNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -654,7 +642,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "HTML", "true" })
+    @Alerts({"true", "HTML", "true"})
     public void documentElement() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -849,7 +837,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "tangerine", "ginger" })
+    @Alerts({"tangerine", "ginger"})
     public void allProperty_KeyByName() throws Exception {
         final String html
             = "<html>\n"
@@ -941,7 +929,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "button", "button", "true" })
+    @Alerts({"button", "button", "true"})
     public void getElementsByTagName() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1016,8 +1004,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "HTML", "HEAD", "TITLE", "SCRIPT", "BODY" },
-            FF38 = { "all == null", "all == null", "all == null", "all == null", "all == null" })
+    @Alerts(DEFAULT = {"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"},
+            FF = {"all == null", "all == null", "all == null", "all == null", "all == null"})
     public void all_WithParentheses() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1044,7 +1032,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "HTML", "HEAD", "TITLE", "SCRIPT", "BODY" })
+    @Alerts({"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"})
     public void all_IndexByInt() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1082,8 +1070,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE8 = "null",
+            FF = "null",
             CHROME = "null")
     public void all_NamedItem_Unknown() throws Exception {
         namedItem("foo");
@@ -1103,7 +1090,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("<->form2")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_ByName_formWithoutId() throws Exception {
         namedItem("form2");
     }
@@ -1113,7 +1099,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("f3<->form3")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_ByName() throws Exception {
         namedItem("form3");
     }
@@ -1122,7 +1107,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "f4<->form4_1", "f4<->form4_2" },
+    @Alerts(DEFAULT = {"coll 2", "f4<->form4_1", "f4<->form4_2"},
             IE = "f4<->form4_1")
     public void all_NamedItem_DuplicateId() throws Exception {
         namedItem("f4");
@@ -1132,9 +1117,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "f5_1<->form5", "f5_2<->form5" },
+    @Alerts(DEFAULT = {"coll 2", "f5_1<->form5", "f5_2<->form5"},
             IE = "f5_1<->form5")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_DuplicateName() throws Exception {
         namedItem("form5");
     }
@@ -1143,10 +1127,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "f6<->form6", "form6<->form6_2" },
-            CHROME = { "coll 2", "form6<->form6_2", "f6<->form6" },
+    @Alerts(DEFAULT = {"coll 2", "f6<->form6", "form6<->form6_2"},
+            CHROME = {"coll 2", "form6<->form6_2", "f6<->form6"},
             IE = "f6<->form6")
-    @NotYetImplemented(CHROME)
     public void all_NamedItem_DuplicateIdName() throws Exception {
         namedItem("form6");
     }
@@ -1192,7 +1175,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "a", "b", "a", "b", "0" })
+            IE = {"a", "b", "a", "b", "0"})
     public void all_tags() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1223,8 +1206,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "false", "false" },
-            IE8 = { "true", "true" })
+    @Alerts({"false", "false"})
     public void all_AsBoolean() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -1243,7 +1225,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void all_Caching() throws Exception {
         final String html
             = "<html><head><title>Test</title></head>\n"
@@ -1260,11 +1242,10 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
-            CHROME = { "undefined", "undefined", "null" },
-            FF38 = { "null", "null", "null" },
-            IE8 = { "null", "null", "null" },
-            IE11 = { "undefined", "null", "undefined" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
+            CHROME = {"undefined", "undefined", "null"},
+            FF = {"null", "null", "null"},
+            IE = {"undefined", "null", "undefined"})
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -1282,7 +1263,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "value1", "value1", "value2", "value2" })
+    @Alerts({"value1", "value1", "value2", "value2"})
     public void getElementsByName() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1336,7 +1317,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2", "2", "true" })
+    @Alerts({"1", "2", "2", "true"})
     public void images() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1441,9 +1422,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "loading", "complete" },
-            IE8 = { "interactive", "complete" })
-    @NotYetImplemented(IE8)
+    @Alerts({"loading", "complete"})
     public void readyState() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1478,8 +1457,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "byId" },
-            IE8 = { "findMe", "byId" })
+    @Alerts({"null", "byId"})
     public void getElementById_findByName() throws Exception {
         final String html
             = "<html><head><title>foo</title></head>\n"
@@ -1502,7 +1480,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({"myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined"})
     public void directAccessByName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -1534,7 +1512,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object HTMLCollection]", "2" })
+    @Alerts({"[object HTMLCollection]", "2"})
     public void scriptsArray() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script lang='JavaScript'>\n"
             + "    function doTest(){\n"
@@ -1556,8 +1534,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "object", "FORM" },
-            IE11 = { "function", "undefined" })
+    @Alerts(DEFAULT = {"object", "FORM"},
+            IE = {"function", "undefined"})
     public void precedence() throws Exception {
         final String html = "<html><head></head>\n"
             + "<body>\n"
@@ -1573,9 +1551,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-            IE = { "false", "true" },
-            IE11 = { "true", "true" })
+    @Alerts(DEFAULT = {"true", "false"},
+            IE = {"true", "true"})
     public void defaultViewAndParentWindow() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -1592,7 +1569,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "123" })
+    @Alerts({"undefined", "123"})
     public void put() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -1611,10 +1588,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDocument]", "[object HTMLBodyElement]",
-                "true", "true", "true", "false", "true", "false" },
-            IE8 = { "[object]", "[object]", "true", "true", "true", "true", "true", "true" })
-    @NotYetImplemented(IE8)
+    @Alerts({"[object HTMLDocument]", "[object HTMLBodyElement]",
+                "true", "true", "true", "false", "true", "false"})
     public void documentCloneNode() throws Exception {
         final String html = "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
@@ -1642,8 +1617,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "[object]")
+    @Alerts("exception")
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1689,8 +1663,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            IE8 = "exception")
+    @Alerts({"true", "object", "[object Event]", "false"})
     public void createEvent_FF_Event() throws Exception {
         createEvent_FF("Event");
     }
@@ -1699,8 +1672,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            IE8 = "exception")
+    @Alerts({"true", "object", "[object Event]", "false"})
     public void createEvent_FF_Events() throws Exception {
         createEvent_FF("Events");
     }
@@ -1709,8 +1681,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            IE8 = "exception")
+    @Alerts({"true", "object", "[object Event]", "false"})
     public void createEvent_FF_HTMLEvents() throws Exception {
         createEvent_FF("HTMLEvents");
     }
@@ -1745,8 +1716,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null", "[object HTMLDivElement]" },
-            IE8 = "exception")
+    @Alerts({"null", "null", "[object HTMLDivElement]"})
     public void createEvent_FF_Target() throws Exception {
         final String html =
               "<html>\n"
@@ -1773,8 +1743,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "true", "object", "[object]" })
+    @Alerts("exception")
     public void createEventObject_IE() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
@@ -1796,8 +1765,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "BODY")
+    @Alerts("null")
     public void elementFromPoint() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1813,8 +1781,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object StyleSheetList]", "0", "true" },
-            IE8 = { "[object]", "0", "true" })
+    @Alerts({"[object StyleSheetList]", "0", "true"})
     public void styleSheets() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1833,9 +1800,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
-            IE = { "Inherit", "!", "Inherit", "Off", "Off", "!", "Off", "Off", "Off", "Off", "Off" },
-            IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
+    @Alerts(DEFAULT = {"off", "off", "on", "on", "on", "off", "off", "off", "off"},
+            IE = {"inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit"})
     public void designMode_root() throws Exception {
         designMode("document");
     }
@@ -1845,9 +1811,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
-            IE = { "Inherit", "!", "Inherit", "On", "On", "!", "On", "Off", "Off", "Inherit", "Inherit" },
-            IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
+    @Alerts(DEFAULT = {"off", "off", "on", "on", "on", "off", "off", "off", "off"},
+            IE = {"inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit"})
     public void designMode_iframe() throws Exception {
         designMode("window.frames['f'].document");
     }
@@ -1883,11 +1848,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0", "0" },
-            FF = { "0", "1", "1" },
-            IE8 = { "undefined", "undefined", "undefined" })
-    @BuggyWebDriver(FF31)
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", "0", "0"},
+            FF = {"0", "1", "1"})
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body onload='test()'>\n"
@@ -1910,14 +1872,12 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Minimal test for <tt>execCommand</tt>.
+     * Minimal test for {@code execCommand}.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-            CHROME = { "false", "false" },
-            IE8 = { "true", "command foo not supported" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"true", "false"},
+            CHROME = {"false", "false"})
     public void execCommand() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1944,17 +1904,15 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLHeadingElement]",
             CHROME = "null",
             IE = "not available")
-    @NotYetImplemented(CHROME)
     public void evaluate_caseInsensitiveAttribute() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    if(document.evaluate) {\n"
-            + "      var expr = './/*[@CLASS]';\n"
-            + "      var result = document.evaluate(expr, "
-                                + "document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
-            + "      alert(result.iterateNext());\n"
-            + "    } else { alert('not available'); }\n"
-            + "  }\n"
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if(document.evaluate) {\n"
+            + "    var expr = './/*[@CLASS]';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    alert(result.iterateNext());\n"
+            + "  } else { alert('not available'); }\n"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <h1 class='title'>Some text</h1>\n"
             + "</body></html>";
@@ -1994,8 +1952,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1: null", "2: null", "3: [object HTMLBodyElement]" },
-            IE8 = { "1: null", "2: [object]", "3: [object]" })
+    @Alerts({"1: null", "2: null", "3: [object HTMLBodyElement]"})
     public void noBodyTag() throws Exception {
         final String html =
               "<html>\n"
@@ -2017,8 +1974,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]" },
-            IE8 = { "1: null", "2: [object]" })
+    @Alerts({"1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]"})
     public void noBodyTag_IFrame() throws Exception {
         final String html =
               "<html>\n"
@@ -2045,7 +2001,6 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "x")
     public void fireEvent() throws Exception {
         final String html =
               "<html><body>\n"
@@ -2085,8 +2040,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "text1", "not available" },
-            IE = { "null", "text1", "text2", "onfocus text2" })
+    @Alerts(DEFAULT = {"null", "text1", "not available"},
+            IE = {"null", "text1", "text2", "onfocus text2"})
     @NotYetImplemented(IE)
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
@@ -2117,8 +2072,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "123", "captured" },
-            IE8 = { "not available", "123" })
+    @Alerts({"123", "captured"})
     public void captureEvents() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -2142,8 +2096,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Comment]",
-            IE8 = "[object]")
+    @Alerts("[object Comment]")
     public void createComment() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2166,8 +2119,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "books", "books", "3", "#text", "0" },
-            IE8 = { "books", "books", "1", "book", "0" })
+    @Alerts({"books", "books", "3", "#text", "0"})
     public void createAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2201,8 +2153,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1" },
-            IE8 = "")
+    @Alerts({"0", "1"})
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2227,6 +2178,28 @@ public class DocumentTest extends WebDriverTestCase {
             + "</soap:Envelope>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void oninput() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert('oninput' in document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }

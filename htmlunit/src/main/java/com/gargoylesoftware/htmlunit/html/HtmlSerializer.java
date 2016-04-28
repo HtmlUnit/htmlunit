@@ -14,15 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -35,15 +35,17 @@ class HtmlSerializer {
     private final StringBuilder buffer_ = new StringBuilder();
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
     protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
+    private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
+
     /** Indicates a new line. Will be rendered as line separator. */
     protected static final String AS_TEXT_NEW_LINE = "§nl§";
+    private static final int AS_TEXT_NEW_LINE_LENGTH = AS_TEXT_NEW_LINE.length();
+
     /** Indicates a non blank that can't be trimmed or reduced. */
     protected static final String AS_TEXT_BLANK = "§blank§";
     /** Indicates a tab. */
     protected static final String AS_TEXT_TAB = "§tab§";
 
-    private static final Pattern CLEAN_UP_PATTERN = Pattern.compile("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+");
-    private static final Pattern REDUCE_WHITESPACE_PATTERN = Pattern.compile("\\s*" + AS_TEXT_BLOCK_SEPARATOR + "\\s*");
     private static final Pattern TEXT_AREA_PATTERN = Pattern.compile("\r?\n");
 
     private boolean appletEnabled_;
@@ -63,35 +65,35 @@ class HtmlSerializer {
         return cleanUp(response);
     }
 
-    private String cleanUp(String text) {
+    protected String cleanUp(String text) {
         // ignore <br/> at the end of a block
-        text = StringUtils.replace(text, AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
         text = reduceWhitespace(text);
         text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
         final String ls = System.getProperty("line.separator");
         text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
-        text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
+        // text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
+        text = StringUtils.replace(text, AS_TEXT_BLOCK_SEPARATOR, ls);
         text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
 
         return text;
     }
 
-    protected String reduceWhitespace(String text) {
-        text = text.trim();
+    private static String reduceWhitespace(String text) {
+        text = trim(text);
 
         // remove white spaces before or after block separators
-        text = REDUCE_WHITESPACE_PATTERN.matcher(text).replaceAll(AS_TEXT_BLOCK_SEPARATOR);
+        text = reduceWhiteSpaceAroundBlockSeparator(text);
 
         // remove leading block separators
         while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(AS_TEXT_BLOCK_SEPARATOR.length());
+            text = text.substring(AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
 
         // remove trailing block separators
         while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR.length());
+            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
-        text = text.trim();
+        text = trim(text);
 
         final StringBuilder buffer = new StringBuilder(text.length());
 
@@ -105,13 +107,13 @@ class HtmlSerializer {
             }
             else {
                 if (whitespace) {
-                    if (!Character.isWhitespace(ch)) {
+                    if (!isSpace(ch)) {
                         buffer.append(ch);
                         whitespace = false;
                     }
                 }
                 else {
-                    if (Character.isWhitespace(ch)) {
+                    if (isSpace(ch)) {
                         whitespace = true;
                         buffer.append(' ');
                     }
@@ -122,6 +124,76 @@ class HtmlSerializer {
             }
         }
         return buffer.toString();
+    }
+
+    private static boolean isSpace(final char ch) {
+        return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
+    }
+
+    private static String trim(String string) {
+        int length = string.length();
+
+        int start = 0;
+        while (start != length && isSpace(string.charAt(start))) {
+            start++;
+        }
+        if (start != 0) {
+            string = string.substring(start);
+            length = string.length();
+        }
+
+        if (length != 0) {
+            int end = length;
+            while (end != 0 && isSpace(string.charAt(end - 1))) {
+                end--;
+            }
+            if (end != length) {
+                string = string.substring(0, end);
+            }
+        }
+
+        return string;
+    }
+
+    private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
+        int p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+        if (p0 == -1) {
+            return text;
+        }
+
+        final int length = text.length();
+        if (length <= AS_TEXT_BLOCK_SEPARATOR_LENGTH) {
+            return text;
+        }
+
+        final StringBuilder result = new StringBuilder(length);
+        int start = 0;
+        while (p0 != -1) {
+            int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+            while (p0 != start && isSpace(text.charAt(p0 - 1))) {
+                p0--;
+            }
+            if (p0 >= AS_TEXT_NEW_LINE_LENGTH && text.startsWith(AS_TEXT_NEW_LINE, p0 - AS_TEXT_NEW_LINE_LENGTH)) {
+                p0 = p0 - AS_TEXT_NEW_LINE_LENGTH;
+            }
+            result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
+
+            while (p1 < length && isSpace(text.charAt(p1))) {
+                p1++;
+            }
+            start = p1;
+
+            // ignore duplicates
+            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+            while (p0 != -1 && p0 == start) {
+                start += AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+                p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+            }
+        }
+        if (start < length) {
+            result.append(text.substring(start));
+        }
+        return result.toString();
     }
 
     protected void appendNode(final DomNode node) {
@@ -197,7 +269,17 @@ class HtmlSerializer {
             return;
         }
         else {
-            final boolean block = node.isBlock();
+            final boolean block;
+            final ScriptableObject scriptableObject = node.getScriptableObject();
+            if (scriptableObject instanceof Element && !(node instanceof HtmlBody)) {
+                final Element element = (Element) scriptableObject;
+                final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+                block = "block".equals(display);
+            }
+            else {
+                block = false;
+            }
+
             if (block) {
                 doAppendBlockSeparator();
             }
@@ -272,18 +354,9 @@ class HtmlSerializer {
     private void appendHtmlTextArea(final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
-
-            final BrowserVersion browser = htmlTextArea.getPage().getWebClient().getBrowserVersion();
-            if (browser.hasFeature(HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT)) {
-                text = TEXT_AREA_PATTERN.matcher(text).replaceAll("");
-                text = StringUtils.replace(text, "\r", "");
-                text = StringUtils.normalizeSpace(text);
-            }
-            else {
-                text = StringUtils.stripEnd(text, null);
-                text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
-                text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
-            }
+            text = StringUtils.stripEnd(text, null);
+            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
+            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
             doAppend(text);
         }
@@ -306,10 +379,17 @@ class HtmlSerializer {
         }
         final HtmlTableFooter tableFooter = htmlTable.getFooter();
 
-        first = appendHtmlTableRows(htmlTable.getRows(), first, tableHeader, tableFooter);
+        final List<HtmlTableRow> tableRows = htmlTable.getRows();
+        first = appendHtmlTableRows(tableRows, first, tableHeader, tableFooter);
 
         if (tableFooter != null) {
             first = appendHtmlTableRows(tableFooter.getRows(), first, null, null);
+        }
+        else if (tableRows.isEmpty()) {
+            final DomNode firstChild = htmlTable.getFirstChild();
+            if (firstChild != null) {
+                appendNode(firstChild);
+            }
         }
 
         doAppendBlockSeparator();
@@ -361,7 +441,7 @@ class HtmlSerializer {
     }
 
     /**
-     * Appends a &lt;ol&gt; taking care to numerate it.
+     * Appends a {@code <ol>} taking care to numerate it.
      * @param htmlOrderedList the OL element
      */
     private void appendHtmlOrderedList(final HtmlOrderedList htmlOrderedList) {

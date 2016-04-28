@@ -61,7 +61,7 @@ public class HtmlImageInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         final String name = getNameAttribute();
         final String prefix;
         // a clicked image without name sends parameter x and y

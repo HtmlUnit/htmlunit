@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONHASHCHANGE_BUBBLES_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing the HashChangeEvent.
@@ -65,7 +65,7 @@ public class HashChangeEvent extends Event {
         oldURL_ = oldURL;
         newURL_ = newURL;
 
-        if (getBrowserVersion().hasFeature(EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE)) {
+        if (getBrowserVersion().hasFeature(EVENT_ONHASHCHANGE_BUBBLES_FALSE)) {
             setBubbles(false);
         }
         setCancelable(false);
@@ -81,7 +81,7 @@ public class HashChangeEvent extends Event {
 
         String oldURL = "";
         String newURL = "";
-        if (details != null && !Context.getUndefinedValue().equals(details)) {
+        if (details != null && !Undefined.instance.equals(details)) {
             oldURL = (String) details.get("oldURL");
             newURL = (String) details.get("newURL");
         }
@@ -98,7 +98,7 @@ public class HashChangeEvent extends Event {
      * @param oldURL the old URL
      * @param newURL the new URL
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxFunction(@WebBrowser(FF))
     public void initHashChangeEvent(final String type, final boolean bubbles, final boolean cancelable,
         final String oldURL, final String newURL) {
         initEvent(type, bubbles, cancelable);

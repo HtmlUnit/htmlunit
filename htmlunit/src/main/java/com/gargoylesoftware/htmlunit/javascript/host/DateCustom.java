@@ -15,10 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_DATE_SHORT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
-import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -45,8 +43,6 @@ public final class DateCustom {
 
     private DateCustom() { }
 
-    private static Field DATE_FIELD_;
-
     /**
      * Converts a date to a string, returning the "date" portion using the operating system's locale's conventions.
      * @param context the JavaScript context
@@ -60,17 +56,17 @@ public final class DateCustom {
         final String formatString;
         final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
 
-        if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS)) {
+        if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200Edd\u200E.\u200EMM\u200E.\u200Eyyyy";
+            formatString = "\u200EM\u200E/\u200Ed\u200E/\u200Eyyyy";
         }
         else if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT)) {
-            formatString = "d.M.yyyy";
+            formatString = "M/d/yyyy";
         }
         else {
             formatString = "EEEE, MMMM dd, yyyy";
         }
-        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(thisObj));
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(browserVersion));
         return format.format(getDateValue(thisObj));
     }
 
@@ -85,17 +81,16 @@ public final class DateCustom {
     public static String toLocaleTimeString(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String formatString;
-        final BrowserVersion browserVersion =
-                ((Window) thisObj.getParentScope()).getWebWindow().getWebClient().getBrowserVersion();
+        final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
 
-        if (browserVersion.hasFeature(JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS)) {
+        if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200EHH\u200E:\u200Emm\u200E:\u200Ess";
+            formatString = "\u200Eh\u200E:\u200Emm\u200E:\u200Ess\u200E \u200Ea";
         }
         else {
-            formatString = "HH:mm:ss";
+            formatString = "h:mm:ss a";
         }
-        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(thisObj));
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(browserVersion));
         return format.format(getDateValue(thisObj));
     }
 
@@ -114,20 +109,11 @@ public final class DateCustom {
     }
 
     private static long getDateValue(final Scriptable thisObj) {
-        try {
-            if (DATE_FIELD_ == null) {
-                DATE_FIELD_ = thisObj.getClass().getDeclaredField("date");
-                DATE_FIELD_.setAccessible(true);
-            }
-            return ((Double) DATE_FIELD_.get(thisObj)).longValue();
-        }
-        catch (final Exception e) {
-            throw Context.throwAsScriptRuntimeEx(e);
-        }
+        final Date date = (Date) Context.jsToJava(thisObj, Date.class);
+        return date.getTime();
     }
 
-    private static Locale getLocale(final Scriptable thisObj) {
-        final BrowserVersion broserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
-        return new Locale(broserVersion.getSystemLanguage());
+    private static Locale getLocale(final BrowserVersion browserVersion) {
+        return new Locale(browserVersion.getSystemLanguage());
     }
 }

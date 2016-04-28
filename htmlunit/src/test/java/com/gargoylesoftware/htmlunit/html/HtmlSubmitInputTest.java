@@ -27,8 +27,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -73,7 +71,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foo", "bar" })
+    @Alerts({"foo", "bar"})
     public void click_onClick() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -135,9 +133,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            CHROME = "1")
-    @NotYetImplemented(Browser.CHROME)
+    @Alerts("2")
     public void doubleSubmission() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -201,9 +197,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-", "-", "-" },
-            IE8 = { "Submit Query-", "Submit Query-", "Submit Query-" },
-            IE11 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
+    @Alerts(DEFAULT = {"-", "-", "-"},
+            IE = {"Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -234,9 +229,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Submit Query-", "Submit Query-", "Submit Query-" },
-            IE11 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
+    @Alerts(DEFAULT = {"-", "-", "-"},
+            IE = {"Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -270,10 +264,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -311,10 +303,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -351,8 +341,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newdefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

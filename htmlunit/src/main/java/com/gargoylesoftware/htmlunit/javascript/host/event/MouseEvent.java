@@ -14,18 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSERVENT_BUTTON_CODE_IE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOUSE_EVENT_KEY_CODE_ZERO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.LinkedList;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -34,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing a Mouse Event.
@@ -45,13 +41,30 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class MouseEvent extends UIEvent {
+
+    /** Constant for {@code MOZ_SOURCE_UNKNOWN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_UNKNOWN = 0;
+    /** Constant for {@code MOZ_SOURCE_MOUSE}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_MOUSE = 1;
+    /** Constant for {@code MOZ_SOURCE_PEN}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_PEN = 2;
+    /** Constant for {@code MOZ_SOURCE_ERASER}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_ERASER = 3;
+    /** Constant for {@code MOZ_SOURCE_CURSOR}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_CURSOR = 4;
+    /** Constant for {@code MOZ_SOURCE_TOUCH}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_TOUCH = 5;
+    /** Constant for {@code MOZ_SOURCE_KEYBOARD}. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int MOZ_SOURCE_KEYBOARD = 6;
 
     /** The click event type, triggered by "onclick" event handlers. */
     public static final String TYPE_CLICK = "click";
@@ -85,9 +98,6 @@ public class MouseEvent extends UIEvent {
 
     /** The code for right mouse button. */
     public static final int BUTTON_RIGHT = 2;
-
-    /** The button code for IE (1: left button, 4: middle button, 2: right button). */
-    private static final int[] buttonCodeToIE = {1, 4, 2};
 
     /** The event's screen coordinates; initially {@code null} and lazily initialized for performance reasons. */
     private Integer screenX_, screenY_;
@@ -239,15 +249,6 @@ public class MouseEvent extends UIEvent {
      */
     @JsxGetter
     public int getButton() {
-        if (getBrowserVersion().hasFeature(EVENT_MOUSERVENT_BUTTON_CODE_IE)) {
-            if (getType().equals(TYPE_CONTEXT_MENU)) {
-                return 0;
-            }
-            if (getType().equals(TYPE_CLICK)) {
-                return button_;
-            }
-            return buttonCodeToIE[button_];
-        }
         return button_;
     }
 
@@ -256,25 +257,7 @@ public class MouseEvent extends UIEvent {
      * @param value the button code
      */
     @JsxSetter
-    public void setButton(int value) {
-        if (getBrowserVersion().hasFeature(EVENT_MOUSERVENT_BUTTON_CODE_IE)
-                && !TYPE_CLICK.equals(getType())) {
-            switch (value) {
-                case 1:
-                    value = 0;
-                    break;
-
-                case 4:
-                    value = 1;
-                    break;
-
-                case 2:
-                    value = 2;
-                    break;
-
-                default:
-            }
-        }
+    public void setButton(final int value) {
         button_ = value;
     }
 
@@ -283,7 +266,7 @@ public class MouseEvent extends UIEvent {
      * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
      * @return the button code
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getWhich() {
         return button_ + 1;
     }
@@ -307,7 +290,7 @@ public class MouseEvent extends UIEvent {
      * @param button what mouse button is pressed
      * @param relatedTarget is there a related target for the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public void initMouseEvent(
             final String type,
             final boolean bubbles,
@@ -343,10 +326,12 @@ public class MouseEvent extends UIEvent {
      */
     @SuppressWarnings("unchecked")
     public static MouseEvent getCurrentMouseEvent() {
-        final LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext()
-            .getThreadLocal(KEY_CURRENT_EVENT);
-        if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {
-            return (MouseEvent) events.getLast();
+        final Context context = Context.getCurrentContext();
+        if (context != null) {
+            final LinkedList<Event> events = (LinkedList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
+            if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {
+                return (MouseEvent) events.getLast();
+            }
         }
         return null;
     }
@@ -370,7 +355,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public boolean getAltKey() {
         return super.getAltKey();
     }
@@ -379,7 +364,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public boolean getCtrlKey() {
         return super.getCtrlKey();
     }
@@ -388,20 +373,8 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public boolean getShiftKey() {
         return super.getShiftKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
-    public Object getKeyCode() {
-        if (getBrowserVersion().hasFeature(JS_MOUSE_EVENT_KEY_CODE_ZERO)) {
-            return 0;
-        }
-        return Undefined.instance;
     }
 }

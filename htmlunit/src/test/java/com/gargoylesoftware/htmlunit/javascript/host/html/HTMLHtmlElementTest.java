@@ -40,8 +40,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHtmlElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLHtmlElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -61,10 +60,9 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
-            CHROME = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }" },
-            IE11 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
-            IE8 = { "[object]", "exception" })
+    @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}"},
+            CHROME = {"[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }"},
+            IE = {"[object HTMLHtmlElement]", "[object HTMLHtmlElement]"})
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -84,7 +82,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "HEAD", "BODY", "null", "null" })
+    @Alerts({"2", "HEAD", "BODY", "null", "null"})
     public void childNodes_1() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
@@ -103,7 +101,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "HEAD" })
+    @Alerts({"1", "HEAD"})
     public void childNodes_2() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
@@ -119,8 +117,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true" },
-            IE8 = { "true", "false", "true", "false" })
+    @Alerts({"true", "true", "true", "true"})
     public void clientWidth() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'"
             + " 'http://www.w3.org/TR/html4/loose.dtd'>" // important for IE6!!!

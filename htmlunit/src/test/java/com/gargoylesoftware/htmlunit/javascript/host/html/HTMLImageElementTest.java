@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,8 +54,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]" },
-            IE8 = { "[object]", "[object]" })
+    @Alerts({"[object HTMLImageElement]", "[object HTMLImageElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -77,7 +75,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "IMG", "IMG" })
+    @Alerts({"IMG", "IMG"})
     public void nodeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -98,7 +96,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "IMG", "IMG" })
+    @Alerts({"IMG", "IMG"})
     public void tagName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -119,12 +117,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG" },
-            CHROME = { "[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG" },
-            FF = { "[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
-                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG" })
+    @Alerts(DEFAULT = {"[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+            CHROME = {"[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+            FF = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
+                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
     public void image() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -151,8 +149,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "undefined", "", "" },
-            IE = { "", "", "", "" })
+    @Alerts(DEFAULT = {"", "undefined", "", ""},
+            IE = {"", "", "", ""})
     public void src() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -292,7 +290,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "relative", "", "" })
+    @Alerts({"true", "relative", "", ""})
     public void newImage() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -313,12 +311,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "middle", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
-            CHROME = { "left", "right", "center", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
-            IE = { "left", "right", "center", "", "bottom", "middle",
-                "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "middle", "justify", "bottom", "middle",
+                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
+            CHROME = {"left", "right", "center", "justify", "bottom", "middle",
+                "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+            IE = {"left", "right", "center", "", "bottom", "middle",
+                "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented(FF)
     public void getAlign() throws Exception {
         final String html
@@ -350,13 +348,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
-            CHROME = { "CenTer", "8", "foo", "left", "right", "center", "justify",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
-            IE = { "center", "error", "center", "error", "center", "left", "right",
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
+                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
+            CHROME = {"CenTer", "8", "foo", "left", "right", "center", "justify",
+                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
+            IE = {"center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
-                "absMiddle", "baseline", "textTop" })
+                "absMiddle", "baseline", "textTop"})
     @NotYetImplemented(FF)
     public void setAlign() throws Exception {
         final String html
@@ -400,9 +398,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
-            IE = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" },
-            IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
+    @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
+            IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
     public void widthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -431,7 +428,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
+    @Alerts({"number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1"})
     public void widthHeightWithSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -455,13 +452,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        final FileInputStream fis = new FileInputStream(new File(url.toURI()));
-        final byte[] directBytes = IOUtils.toByteArray(fis);
-        fis.close();
+        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+            final byte[] directBytes = IOUtils.toByteArray(fis);
 
-        final MockWebConnection webConnection = getMockWebConnection();
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+            final MockWebConnection webConnection = getMockWebConnection();
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         loadPageWithAlerts2(html);
     }
@@ -471,11 +468,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
       * @throws Exception if the test fails
       */
     @Test
-    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
-            CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
-            IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" },
-            IE8 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24"},
+            CHROME = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
+            IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
     public void widthHeightEmptySource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -499,13 +494,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        final FileInputStream fis = new FileInputStream(new File(url.toURI()));
-        final byte[] directBytes = IOUtils.toByteArray(fis);
-        fis.close();
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+            final byte[] directBytes = IOUtils.toByteArray(fis);
+            final MockWebConnection webConnection = getMockWebConnection();
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         loadPageWithAlerts2(html);
     }
@@ -515,11 +509,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
       * @throws Exception if the test fails
       */
     @Test
-    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
-            CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
-            IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" },
-            IE8 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24"},
+            CHROME = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
+            IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
     public void widthHeightBlankSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -543,13 +535,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        final FileInputStream fis = new FileInputStream(new File(url.toURI()));
-        final byte[] directBytes = IOUtils.toByteArray(fis);
-        fis.close();
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+            final byte[] directBytes = IOUtils.toByteArray(fis);
+            final MockWebConnection webConnection = getMockWebConnection();
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
 
         loadPageWithAlerts2(html);
     }
@@ -559,10 +550,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
-            CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
-            IE8 = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
-            IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
+    @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24"},
+            CHROME = {"number: 300", "number: 200", "number: 20", "number: 20", "number: 20", "number: 20"},
+            IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
     public void widthHeightInvalidSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -586,6 +576,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+
+        shutDownRealIE();
     }
 
     /**
@@ -593,17 +585,17 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "true" })
+    @Alerts(DEFAULT = {"true", "true", "true", "true"},
+            IE = {"false", "false", "false", "true"})
     public void complete() throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
+        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
 
-        final URL urlImage = new URL(URL_SECOND, "img.jpg");
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-        getMockWebConnection().setDefaultResponse("Test");
+            final URL urlImage = new URL(URL_SECOND, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
 
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -633,7 +625,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "test", "string", "hui", "", "null", "false", "true", "" })
+    @Alerts({"test", "string", "hui", "", "null", "false", "true", ""})
     public void alt() throws Exception {
         final String html =
             "<html>\n"

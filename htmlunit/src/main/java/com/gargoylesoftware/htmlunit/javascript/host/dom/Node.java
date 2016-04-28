@@ -14,15 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -31,24 +24,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Interpreter;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -58,8 +41,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Interpreter;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object {@code Node} which is the base class for all DOM
@@ -76,89 +65,84 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-    })
+@JsxClass
 public class Node extends EventTarget {
 
-    /** "Live" child nodes collection; has to be a member to have equality (==) working. */
-    private NodeList childNodes_;
-
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
 
     /** @see org.w3c.dom.Node#ATTRIBUTE_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
 
     /** @see org.w3c.dom.Node#TEXT_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
 
     /** @see org.w3c.dom.Node#CDATA_SECTION_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_REFERENCE_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
 
     /** @see org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
 
     /** @see org.w3c.dom.Node#COMMENT_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_NODE */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 
     /** @see org.w3c.dom.Node#NOTATION_NODE */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_DISCONNECTED */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_PRECEDING */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_FOLLOWING */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINS */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINED_BY */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant
     public static final short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
         = org.w3c.dom.Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+
+    /** "Live" child nodes collection; has to be a member to have equality (==) working. */
+    private NodeList childNodes_;
 
     /**
      * Creates an instance.
@@ -169,7 +153,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nodeType" for the current node.
+     * Gets the JavaScript property {@code nodeType} for the current node.
      * @return the node type
      */
     @JsxGetter
@@ -178,7 +162,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nodeName" for the current node.
+     * Gets the JavaScript property {@code nodeName} for the current node.
      * @return the node name
      */
     @JsxGetter
@@ -187,7 +171,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nodeValue" for the current node.
+     * Gets the JavaScript property {@code nodeValue} for the current node.
      * @return the node value
      */
     @JsxGetter
@@ -196,7 +180,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Sets the JavaScript property "nodeValue" for the current node.
+     * Sets the JavaScript property {@code nodeValue} for the current node.
      * @param newValue the new node value
      */
     @JsxSetter
@@ -217,9 +201,6 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                    return childNode;
-                }
                 throw asJavaScriptException(
                     new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                         DOMException.HIERARCHY_REQUEST_ERR));
@@ -234,16 +215,6 @@ public class Node extends EventTarget {
             // Append the child to the parent node
             parentNode.appendChild(childDomNode);
             appendedChild = childObject;
-
-            // if the parentNode has null parentNode in IE,
-            // create a DocumentFragment to be the parentNode's parentNode.
-            if (!(parentNode instanceof SgmlPage)
-                    && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
-                    && getBrowserVersion().hasFeature(
-                            JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = parentNode.getPage().createDocumentFragment();
-                fragment.appendChild(parentNode);
-            }
 
             initInlineFrameIfNeeded(childDomNode);
             for (final DomNode domNode : childDomNode.getDescendants()) {
@@ -260,7 +231,7 @@ public class Node extends EventTarget {
      *
      * @param childDomNode
      */
-    private void initInlineFrameIfNeeded(final DomNode childDomNode) {
+    private static void initInlineFrameIfNeeded(final DomNode childDomNode) {
         if (childDomNode instanceof HtmlInlineFrame) {
             final HtmlInlineFrame frame = (HtmlInlineFrame) childDomNode;
             if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
@@ -337,9 +308,6 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                    return newChild;
-                }
                 throw asJavaScriptException(
                     new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                         DOMException.HIERARCHY_REQUEST_ERR));
@@ -348,9 +316,6 @@ public class Node extends EventTarget {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
                     if (!isNodeInsertable((Node) child.getScriptableObject())) {
-                        if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                            return newChild;
-                        }
                         throw asJavaScriptException(
                             new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                                 DOMException.HIERARCHY_REQUEST_ERR));
@@ -361,19 +326,11 @@ public class Node extends EventTarget {
             // extract refChild
             final DomNode refChildNode;
             if (refChildObject == Undefined.instance) {
-                if (getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT)) {
-                    if (args.length > 1) {
-                        throw Context.reportRuntimeError("Invalid argument.");
-                    }
+                if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
                     refChildNode = null;
                 }
                 else {
-                    if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
-                        refChildNode = null;
-                    }
-                    else {
-                        throw Context.reportRuntimeError("insertBefore: not enough arguments");
-                    }
+                    throw Context.reportRuntimeError("insertBefore: not enough arguments");
                 }
             }
             else if (refChildObject != null) {
@@ -394,13 +351,6 @@ public class Node extends EventTarget {
                             DOMException.HIERARCHY_REQUEST_ERR));
             }
             insertedChild = newChild;
-
-            // if parentNode is null, create a DocumentFragment to be the parentNode
-            if (domNode.getParentNode() == null && getBrowserVersion()
-                    .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = domNode.getPage().createDocumentFragment();
-                fragment.appendChild(domNode);
-            }
         }
         return insertedChild;
     }
@@ -410,8 +360,21 @@ public class Node extends EventTarget {
      * @param childObject the node
      * @return {@code false} if it is not allowed here
      */
-    private boolean isNodeInsertable(final Node childObject) {
-        return !(childObject instanceof HTMLHtmlElement);
+    private static boolean isNodeInsertable(final Node childObject) {
+        if (childObject instanceof HTMLHtmlElement) {
+            final DomNode domNode = childObject.getDomNodeOrDie();
+            return !(domNode.getPage().getDocumentElement() == domNode);
+        }
+        return true;
+    }
+
+    /**
+     * Removes the DOM node from its parent.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove">MDN documentation</a>
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    public void remove() {
+        getDomNodeOrDie().remove();
     }
 
     /**
@@ -421,21 +384,20 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Object removeChild(final Object childObject) {
-        Object removedChild = null;
-
-        if (childObject instanceof Node) {
-            // Get XML node for the DOM node passed in
-            final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
-
-            if (!getDomNodeOrDie().isAncestorOf(childNode)) {
-                Context.throwAsScriptRuntimeEx(new Exception("NotFoundError: Failed to execute 'removeChild' on '"
-                            + this + "': The node to be removed is not a child of this node."));
-            }
-            // Remove the child from the parent node
-            childNode.remove();
-            removedChild = childObject;
+        if (!(childObject instanceof Node)) {
+            return null;
         }
-        return removedChild;
+
+        // Get XML node for the DOM node passed in
+        final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
+
+        if (!getDomNodeOrDie().isAncestorOf(childNode)) {
+            Context.throwAsScriptRuntimeEx(new Exception("NotFoundError: Failed to execute 'removeChild' on '"
+                        + this + "': The node to be removed is not a child of this node."));
+        }
+        // Remove the child from the parent node
+        childNode.remove();
+        return childObject;
     }
 
     /**
@@ -497,29 +459,7 @@ public class Node extends EventTarget {
         final DomNode clonedNode = domNode.cloneNode(deep);
 
         final Node jsClonedNode = getJavaScriptNode(clonedNode);
-        if (getBrowserVersion().hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
-            // need to copy the event listener when they exist
-            copyEventListenersWhenNeeded(domNode, clonedNode);
-        }
-
         return jsClonedNode;
-    }
-
-    private void copyEventListenersWhenNeeded(final DomNode domNode, final DomNode clonedNode) {
-        final Node jsNode = (Node) domNode.getScriptableObject();
-        if (jsNode != null) {
-            final Node jsClonedNode = getJavaScriptNode(clonedNode);
-            jsClonedNode.getEventListenersContainer().copyFrom(jsNode.getEventListenersContainer());
-        }
-
-        // look through the children
-        DomNode child = domNode.getFirstChild();
-        DomNode clonedChild = clonedNode.getFirstChild();
-        while (child != null && clonedChild != null) {
-            copyEventListenersWhenNeeded(child, clonedChild);
-            child = child.getNextSibling();
-            clonedChild = clonedChild.getNextSibling();
-        }
     }
 
     /**
@@ -533,7 +473,7 @@ public class Node extends EventTarget {
      *
      * @return whether this node is the same node as the given one
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public boolean isSameNode(final Object other) {
         return other == this;
     }
@@ -555,20 +495,11 @@ public class Node extends EventTarget {
     public NodeList getChildNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
-            final boolean ignoreEmptyTextNode = node.getOwnerDocument() instanceof XmlPage
-                    && getBrowserVersion().hasFeature(JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES)
-                    && isXMLSpaceDefault(node);
-
-            childNodes_ = new NodeList(node, false, "Node.childNodes") {
+            childNodes_ = new NodeList(node, false) {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = new ArrayList<>();
                     for (final DomNode child : node.getChildren()) {
-                        //IE: XmlPage ignores all empty text nodes
-                        if (ignoreEmptyTextNode && child instanceof DomText
-                            && StringUtils.isBlank(((DomText) child).getNodeValue())) { //and 'xml:space' is 'default'
-                            continue;
-                        }
                         response.add(child);
                     }
 
@@ -580,24 +511,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Recursively checks whether "xml:space" attribute is set to "default".
-     * @param node node to start checking from
-     * @return whether "xml:space" attribute is set to "default"
-     */
-    private static boolean isXMLSpaceDefault(DomNode node) {
-        for ( ; node instanceof DomElement; node = node.getParentNode()) {
-            final String value = ((DomElement) node).getAttribute("xml:space");
-            if (!value.isEmpty()) {
-                if ("default".equals(value)) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns this node's parent node.
      * @return this node's parent node
      */
@@ -606,7 +519,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "parentNode" for the node that
+     * Gets the JavaScript property {@code parentNode} for the node that
      * contains the current node.
      * @return the parent node
      */
@@ -616,7 +529,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "nextSibling" for the node that
+     * Gets the JavaScript property {@code nextSibling} for the node that
      * contains the current node.
      * @return the next sibling node or null if the current node has
      * no next sibling.
@@ -627,7 +540,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "previousSibling" for the node that
+     * Gets the JavaScript property {@code previousSibling} for the node that
      * contains the current node.
      * @return the previous sibling node or null if the current node has
      * no previous sibling.
@@ -638,7 +551,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "firstChild" for the node that
+     * Gets the JavaScript property {@code firstChild} for the node that
      * contains the current node.
      * @return the first child node or null if the current node has
      * no children.
@@ -649,7 +562,7 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Gets the JavaScript property "lastChild" for the node that
+     * Gets the JavaScript property {@code lastChild} for the node that
      * contains the current node.
      * @return the last child node or null if the current node has
      * no children.
@@ -672,19 +585,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "onclick")
-     * @param listener the event listener
-     * @return {@code true} if the listener has been added
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
-     * @see #addEventListener(String, Scriptable, boolean)
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public boolean attachEvent(final String type, final Function listener) {
-        return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
@@ -702,33 +602,28 @@ public class Node extends EventTarget {
     @JsxGetter
     public Object getOwnerDocument() {
         final Object document = getDomNodeOrDie().getOwnerDocument();
-        if (document == null) {
-            return null;
+        if (document != null) {
+            return ((SgmlPage) document).getScriptableObject();
         }
-        return ((SgmlPage) document).getScriptableObject();
+        return null;
     }
 
     /**
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
-        final String prefix = domNode.getPrefix();
-        if (getBrowserVersion().hasFeature(JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED)
-                && (prefix == null || domNode.getHtmlPageOrNull() != null)) {
-            return "";
-        }
-        return prefix;
+        return domNode.getPrefix();
     }
 
     /**
      * Returns the local name of this element.
      * @return the local name of this element
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public String getLocalName() {
+    @JsxGetter
+    public Object getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
 
@@ -736,24 +631,9 @@ public class Node extends EventTarget {
      * Returns The URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public String getNamespaceURI() {
-        final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
-        return namespaceURI;
-    }
-
-    /**
-     * Returns the base name of this element.
-     * @return the base name of this element
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getBaseName() {
-        final DomElement domElem = (DomElement) getDomNodeOrDie();
-        final boolean isXmlPage = domElem.getOwnerDocument() instanceof XmlPage;
-        if (isXmlPage) {
-            return domElem.getLocalName();
-        }
-        return Undefined.instance;
+    @JsxGetter
+    public Object getNamespaceURI() {
+        return getDomNodeOrDie().getNamespaceURI();
     }
 
     /**
@@ -763,7 +643,7 @@ public class Node extends EventTarget {
      * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public short compareDocumentPosition(final Object node) {
         if (!(node instanceof Node)) {
             throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
@@ -780,33 +660,10 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Represents the xml content of the node and its descendants.
-     * @return the xml content of the node and its descendants
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public Object getXml() {
-        final DomNode node = getDomNodeOrDie();
-        if (node.getPage() instanceof XmlPage) {
-            if (this instanceof Element) {
-                final XMLSerializer serializer = new XMLSerializer();
-                serializer.setParentScope(getParentScope());
-                String xml = serializer.serializeToString(this);
-                if (getBrowserVersion().hasFeature(JS_XML_SERIALIZER_APPENDS_CRLF)
-                        && xml.endsWith("\r\n")) {
-                    xml = xml.substring(0, xml.length() - 2);
-                }
-                return xml;
-            }
-            return node.asXml();
-        }
-        return Undefined.instance;
-    }
-
-    /**
      * Gets the textContent attribute.
      * @return the contents of this node as text
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getTextContent() {
         return getDomNodeOrDie().getTextContent();
     }
@@ -815,13 +672,13 @@ public class Node extends EventTarget {
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setTextContent(final Object value) {
         getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
     }
 
     /**
-     * Gets the JavaScript property "parentElement".
+     * Gets the JavaScript property {@code parentElement}.
      * @return the parent element
      * @see #getParentNode()
      */

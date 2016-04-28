@@ -14,16 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -38,13 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlHtml.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlHtml.class, isJSObject = false,
-            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-    })
+@JsxClass(domClass = HtmlHtml.class)
 public class HTMLHtmlElement extends HTMLElement {
 
     /**
@@ -73,50 +63,13 @@ public class HTMLHtmlElement extends HTMLElement {
     }
 
     /**
-     * IE has some special idea here.
-     * {@inheritDoc}
-     */
-    @Override
-    public int getClientLeft() {
-        if (getBrowserVersion().hasFeature(JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
-            return 2;
-        }
-        return super.getClientLeft();
-    }
-
-    /**
-     * IE has some special idea here.
-     * {@inheritDoc}
-     */
-    @Override
-    public int getClientTop() {
-        if (getBrowserVersion().hasFeature(JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
-            return 2;
-        }
-        return super.getClientTop();
-    }
-
-    /**
-     * Overwritten to throw an exception in IE8/9.
+     * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
     @JsxSetter
     @Override
     public void setOuterHTML(final Object value) {
         throw Context.reportRuntimeError("outerHTML is read-only for tag 'html'");
-    }
-
-    /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for the contents of this node
-     */
-    @JsxSetter
-    @Override
-    public void setInnerHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag 'html'");
-        }
-        super.setInnerHTML(value);
     }
 
     /**

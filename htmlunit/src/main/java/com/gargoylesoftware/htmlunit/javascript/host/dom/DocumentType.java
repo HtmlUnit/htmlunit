@@ -15,9 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_PREFIX_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -33,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -44,8 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>
  * @see <a href="http://www.xulplanet.com/references/objref/DocumentType.html">XUL Planet</a>
  */
-@JsxClass(domClass = DomDocumentType.class,
-    browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+@JsxClass(domClass = DomDocumentType.class)
 public class DocumentType extends Node {
 
     /**
@@ -76,7 +72,7 @@ public class DocumentType extends Node {
      * Returns the publicId.
      * @return the publicId
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getPublicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
@@ -85,7 +81,7 @@ public class DocumentType extends Node {
      * Returns the systemId.
      * @return the systemId
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getSystemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }
@@ -94,7 +90,7 @@ public class DocumentType extends Node {
      * Returns the internal subset.
      * @return the internal subset
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(value = FF, maxVersion = 38), @WebBrowser(IE) })
     public String getInternalSubset() {
         final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
         if (StringUtils.isNotEmpty(subset)) {
@@ -118,10 +114,7 @@ public class DocumentType extends Node {
         if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_NULL)) {
             return null;
         }
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_EMPTY_STRING)) {
-            return "";
-        }
-        return Context.getUndefinedValue();
+        return Undefined.instance;
     }
 
     /**
@@ -138,10 +131,7 @@ public class DocumentType extends Node {
         if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_NULL)) {
             return null;
         }
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_EMPTY_STRING)) {
-            return "";
-        }
-        return Context.getUndefinedValue();
+        return Undefined.instance;
     }
 
     /**
@@ -149,9 +139,37 @@ public class DocumentType extends Node {
      */
     @Override
     public Object getPrefix() {
-        if (getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+        final Object prefix = super.getPrefix();
+
+        if (prefix == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
             return Undefined.instance;
         }
-        return super.getPrefix();
+        return prefix;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getLocalName() {
+        final Object localName = super.getLocalName();
+
+        if (localName == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+            return Undefined.instance;
+        }
+        return localName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getNamespaceURI() {
+        final Object namespaceURI = super.getNamespaceURI();
+
+        if (namespaceURI == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+            return Undefined.instance;
+        }
+        return namespaceURI;
     }
 }

@@ -28,11 +28,11 @@ public interface DisabledElement {
     boolean isDisabled();
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the
+     * Returns the value of the attribute {@code disabled}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "disabled" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code disabled} or an empty string if that attribute isn't defined
      */
     String getDisabledAttribute();
 

@@ -37,8 +37,7 @@ public class HtmlFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFontElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLFontElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

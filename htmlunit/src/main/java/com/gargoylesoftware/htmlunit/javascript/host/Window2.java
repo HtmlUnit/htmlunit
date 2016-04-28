@@ -276,16 +276,23 @@ public class Window2 extends EventTarget2 {
         return window.history_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public GuardedInvocation noSuchProperty(CallSiteDescriptor desc, LinkRequest request) {
+    public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
-        MethodHandle mh = virtualHandle("getArbitraryProperty", Object.class, String.class);
+        final MethodHandle mh = virtualHandle("getArbitraryProperty", Object.class, String.class);
         return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name));
     }
 
-    public Object getArbitraryProperty(final String name) {
+    @SuppressWarnings("unused")
+    private Object getArbitraryProperty(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         Object object = getFrameWindowByName(page, name);
+        if (object == null) {
+            object = Undefined.getUndefined();
+        }
         return object;
     }
 

@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_OFFSET_INCLUDES_BORDER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
@@ -32,12 +30,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -52,13 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlTableCell.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableCell.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlTableCell.class)
 public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**
@@ -72,24 +64,15 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * {@inheritDoc}
      */
     @Override
-    public void setAttribute(final String name, String value) {
-        if ("noWrap".equals(name) && value != null
-                && getBrowserVersion().hasFeature(JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE)) {
-            value = "true";
-        }
-        super.setAttribute(name, value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public int getOffsetHeight() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
             return super.getOffsetHeight();
         }
 
+        if (isDisplayNone()) {
+            return 0;
+        }
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         final boolean includeBorder = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
         return style.getCalculatedHeight(includeBorder, true);
@@ -106,8 +89,12 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             return (int) w;
         }
 
+        if (isDisplayNone()) {
+            return 0;
+        }
+
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        if ("collapse".equals(style.getBorderCollapse())) {
+        if ("collapse".equals(style.getStyleAttribute(StyleAttributes.Definition.BORDER_COLLAPSE))) {
             final HtmlTableRow row = getRow();
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();
@@ -215,23 +202,19 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setColSpan(final String colSpan) {
-        String s;
         try {
             final int i = (int) Double.parseDouble(colSpan);
-            if (i > 0) {
-                s = Integer.toString(i);
-            }
-            else {
+            if (i <= 0) {
                 throw new NumberFormatException(colSpan);
             }
+            getDomNodeOrDie().setAttribute("colSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            s = "1";
+            getDomNodeOrDie().setAttribute("colSpan", "1");
         }
-        getDomNodeOrDie().setAttribute("colSpan", s);
     }
 
     /**
@@ -255,23 +238,19 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setRowSpan(final String rowSpan) {
-        String s;
         try {
             final int i = (int) Double.parseDouble(rowSpan);
-            if (i > 0) {
-                s = Integer.toString(i);
-            }
-            else {
+            if (i <= 0) {
                 throw new NumberFormatException(rowSpan);
             }
+            getDomNodeOrDie().setAttribute("rowSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            s = "1";
+            getDomNodeOrDie().setAttribute("rowSpan", "1");
         }
-        getDomNodeOrDie().setAttribute("rowSpan", s);
     }
 
     /**
@@ -292,8 +271,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     @JsxSetter
     public void setNoWrap(final boolean noWrap) {
         if (noWrap) {
-            final String value = getBrowserVersion().hasFeature(JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET) ? "true" : "";
-            getDomNodeOrDie().setAttribute("noWrap", value);
+            getDomNodeOrDie().setAttribute("noWrap", "");
         }
         else {
             getDomNodeOrDie().removeAttribute("noWrap");
@@ -355,7 +333,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
+     * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
     @JsxSetter

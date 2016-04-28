@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_CHARSET_RULE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -33,9 +32,12 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -74,9 +76,11 @@ import org.w3c.dom.stylesheets.MediaList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DisabledElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -89,8 +93,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -102,13 +106,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.steadystate.css.dom.CSSImportRuleImpl;
 import com.steadystate.css.dom.CSSMediaRuleImpl;
+import com.steadystate.css.dom.CSSRuleListImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
+import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.dom.MediaListImpl;
+import com.steadystate.css.dom.Property;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACMediaListImpl;
 import com.steadystate.css.parser.SACParserCSS3;
 import com.steadystate.css.parser.SelectorListImpl;
+import com.steadystate.css.parser.media.MediaQuery;
 import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
 import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
@@ -128,11 +136,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Guy Burton
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class CSSStyleSheet extends StyleSheet {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
@@ -148,12 +152,15 @@ public class CSSStyleSheet extends StyleSheet {
 
     /** The collection of rules defined in this style sheet. */
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
+    private List<Integer> cssRulesIndexFix_;
 
     /** The CSS import rules and their corresponding stylesheets. */
     private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
+
+    private boolean enabled_ = true;
 
     private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             "link", "visited", "hover", "active",
@@ -223,14 +230,30 @@ public class CSSStyleSheet extends StyleSheet {
      * @param style the style to modify
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
+     * @deprecated as of 2.21, please use {@link #modifyIfNecessary(ComputedCSSStyleDeclaration, Element, String)}
      */
+    @Deprecated
     public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element) {
+        modifyIfNecessary(style, element, null);
+    }
+
+    /**
+     * Modifies the specified style object by adding any style rules which apply to the specified
+     * element.
+     *
+     * @param style the style to modify
+     * @param element the element to which style rules must apply in order for them to be added to
+     *        the specified style
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
+     */
+    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
+            final String pseudoElement) {
         final CSSRuleList rules = getWrappedSheet().getCssRules();
-        modifyIfNecessary(style, element, rules, new HashSet<String>());
+        modifyIfNecessary(style, element, pseudoElement, rules, new HashSet<String>());
     }
 
     private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
-        final CSSRuleList rules, final Set<String> alreadyProcessing) {
+            final String pseudoElement, final CSSRuleList rules, final Set<String> alreadyProcessing) {
         if (rules == null) {
             return;
         }
@@ -247,7 +270,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
-                    final boolean selected = selects(browser, selector, e);
+                    final boolean selected = selects(browser, selector, e, pseudoElement);
                     if (selected) {
                         final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
                         style.applyStyleFromSelector(dec, selector);
@@ -257,7 +280,7 @@ public class CSSStyleSheet extends StyleSheet {
             else if (CSSRule.IMPORT_RULE == ruleType) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
                 final MediaList mediaList = importRule.getMedia();
-                if (isActive(mediaList)) {
+                if (isActive(this, mediaList)) {
                     CSSStyleSheet sheet = imports_.get(importRule);
                     if (sheet == null) {
                         // TODO: surely wrong: in which case is it null and why?
@@ -271,16 +294,16 @@ public class CSSStyleSheet extends StyleSheet {
                     if (!alreadyProcessing.contains(sheet.getUri())) {
                         final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
                         alreadyProcessing.add(getUri());
-                        sheet.modifyIfNecessary(style, element, sheetRules, alreadyProcessing);
+                        sheet.modifyIfNecessary(style, element, pseudoElement, sheetRules, alreadyProcessing);
                     }
                 }
             }
             else if (CSSRule.MEDIA_RULE == ruleType) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
                 final MediaList mediaList = mediaRule.getMedia();
-                if (isActive(mediaList)) {
+                if (isActive(this, mediaList)) {
                     final CSSRuleList internalRules = mediaRule.getCssRules();
-                    modifyIfNecessary(style, element, internalRules, alreadyProcessing);
+                    modifyIfNecessary(style, element, pseudoElement, internalRules, alreadyProcessing);
                 }
             }
         }
@@ -302,24 +325,28 @@ public class CSSStyleSheet extends StyleSheet {
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
-            final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
+            final WebResponse response;
             final WebClient client = page.getWebClient();
             if (link != null) {
                 // Use link.
                 request = link.getWebRequest();
-                request.setAdditionalHeader("Accept", accept);
+                // our cache is a bit strange;
+                // loadWebResponse check the cache for the web response
+                // AND also fixes the request url for the following cache lookups
+                response = link.getWebResponse(true, request);
             }
             else {
                 // Use href.
+                final String accept = client.getBrowserVersion().getCssAcceptHeader();
                 request = new WebRequest(new URL(url), accept);
                 final String referer = page.getUrl().toExternalForm();
                 request.setAdditionalHeader("Referer", referer);
-            }
 
-            // our cache is a bit strange;
-            // loadWebResponse check the cache for the web response
-            // AND also fixes the request url for the following cache lookups
-            final WebResponse response = client.loadWebResponse(request);
+                // our cache is a bit strange;
+                // loadWebResponse check the cache for the web response
+                // AND also fixes the request url for the following cache lookups
+                response = client.loadWebResponse(request);
+            }
 
             // now we can look into the cache with the fixed request for
             // a cached script
@@ -339,8 +366,9 @@ public class CSSStyleSheet extends StyleSheet {
                 source.setEncoding(response.getContentCharset());
                 sheet = new CSSStyleSheet(element, source, uri);
                 // cache the style sheet
-                cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
-                response.cleanUp();
+                if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
+                    response.cleanUp();
+                }
             }
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -389,6 +417,20 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element) {
+        return selects(browserVersion, selector, element, null);
+    }
+
+    /**
+     * Returns {@code true} if the specified selector selects the specified element.
+     *
+     * @param browserVersion the browser version
+     * @param selector the selector to test
+     * @param element the element to test
+     * @param pseudoElement the pseudo element to match, (can be {@code null})
+     * @return {@code true} if it does apply, {@code false} if it doesn't apply
+     */
+    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
+            final DomElement element, final String pseudoElement) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 if (selector instanceof GeneralAdjacentSelectorImpl) {
@@ -419,11 +461,15 @@ public class CSSStyleSheet extends StyleSheet {
                     && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                if (selects(browserVersion, ds.getSimpleSelector(), element)) {
-                    DomNode ancestor = element.getParentNode();
+                final SimpleSelector simpleSelector = ds.getSimpleSelector();
+                if (selects(browserVersion, simpleSelector, element, pseudoElement)) {
+                    DomNode ancestor = element;
+                    if (simpleSelector.getSelectorType() != Selector.SAC_PSEUDO_ELEMENT_SELECTOR) {
+                        ancestor = ancestor.getParentNode();
+                    }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof HtmlElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor)) {
+                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor, pseudoElement)) {
                             return true;
                         }
                         ancestor = ancestor.getParentNode();
@@ -432,9 +478,9 @@ public class CSSStyleSheet extends StyleSheet {
                 return false;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final Condition condition = conditional.getCondition();
-                return selects(browserVersion, conditional.getSimpleSelector(), element)
-                    && selects(browserVersion, condition, element);
+                final SimpleSelector simpleSel = conditional.getSimpleSelector();
+                return (simpleSel == null || selects(browserVersion, simpleSel, element))
+                    && selects(browserVersion, conditional.getCondition(), element);
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
@@ -454,6 +500,11 @@ public class CSSStyleSheet extends StyleSheet {
                 final NegativeSelector ns = (NegativeSelector) selector;
                 return !selects(browserVersion, ns.getSimpleSelector(), element);
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
+                if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
+                    final String pseudoName = ((ElementSelector) selector).getLocalName();
+                    return pseudoName.equals(pseudoElement.substring(1));
+                }
+                return false;
             case Selector.SAC_COMMENT_NODE_SELECTOR:
             case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
             case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
@@ -477,28 +528,16 @@ public class CSSStyleSheet extends StyleSheet {
         if (condition instanceof PrefixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
-            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
-                final String attrib = element.getAttribute(ac.getLocalName());
-                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.startsWith(value);
-            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).startsWith(value);
         }
         if (condition instanceof SuffixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
-            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
-                final String attrib = element.getAttribute(ac.getLocalName());
-                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.endsWith(value);
-            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).endsWith(value);
         }
         if (condition instanceof SubstringAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
-            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
-                final String attrib = element.getAttribute(ac.getLocalName());
-                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.contains(value);
-            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).contains(value);
         }
         switch (condition.getConditionType()) {
@@ -551,17 +590,14 @@ public class CSSStyleSheet extends StyleSheet {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (!browserVersion.hasFeature(CSS_SELECTOR_LANG)) {
-                    return false;
-                }
                 final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
                     final String nodeLang = ((HtmlElement) node).getAttribute("lang");
-                    // "en", "en-GB" should be matched by "en" but not "english"
-                    if (nodeLang.startsWith(lcLang)
-                        && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength))) {
-                        return true;
+                    if (ATTRIBUTE_NOT_DEFINED != nodeLang) {
+                        // "en", "en-GB" should be matched by "en" but not "english"
+                        return nodeLang.startsWith(lcLang)
+                            && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength));
                     }
                 }
                 return false;
@@ -651,173 +687,182 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         final String value = condition.getValue();
-        if ("root".equals(value)) {
-            return element == element.getPage().getDocumentElement();
-        }
-        else if ("enabled".equals(value)) {
-            return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
-        }
-        if ("disabled".equals(value)) {
-            return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
-        }
-        if ("focus".equals(value)) {
-            final HtmlPage htmlPage = element.getHtmlPageOrNull();
-            if (htmlPage != null) {
-                final DomElement focus = htmlPage.getFocusedElement();
-                return element == focus;
-            }
-        }
-        else if ("checked".equals(value)) {
-            return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
-                || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
-                || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
-        }
-        else if ("first-child".equals(value)) {
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("last-child".equals(value)) {
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("first-of-type".equals(value)) {
-            final String type = element.getNodeName();
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("last-of-type".equals(value)) {
-            final String type = element.getNodeName();
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if (value.startsWith("nth-child(")) {
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-last-child(")) {
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-of-type(")) {
-            final String type = element.getNodeName();
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-last-of-type(")) {
-            final String type = element.getNodeName();
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if ("only-child".equals(value)) {
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("only-of-type".equals(value)) {
-            final String type = element.getNodeName();
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("empty".equals(value)) {
-            return isEmpty(element);
-        }
-        else if ("target".equals(value)) {
-            final String ref = element.getPage().getUrl().getRef();
-            return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
-        }
-        else if (value.startsWith("not(")) {
-            final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            final AtomicBoolean errorOccured = new AtomicBoolean(false);
-            final ErrorHandler errorHandler = new ErrorHandler() {
-                @Override
-                public void warning(final CSSParseException exception) throws CSSException {
-                    // ignore
-                }
+        switch (value) {
+            case "root":
+                return element == element.getPage().getDocumentElement();
 
-                @Override
-                public void fatalError(final CSSParseException exception) throws CSSException {
-                    errorOccured.set(true);
-                }
+            case "enabled":
+                return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
 
-                @Override
-                public void error(final CSSParseException exception) throws CSSException {
-                    errorOccured.set(true);
-                }
-            };
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
-            parser.setErrorHandler(errorHandler);
-            try {
-                final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
-                if (errorOccured.get() || selectorList == null || selectorList.getLength() != 1) {
-                    throw new CSSException("Invalid selectors: " + selectors);
-                }
+            case "disabled":
+                return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
 
-                validateSelectors(selectorList, 9, element);
+            case "focus":
+                final HtmlPage htmlPage = element.getHtmlPageOrNull();
+                if (htmlPage != null) {
+                    final DomElement focus = htmlPage.getFocusedElement();
+                    return element == focus;
+                }
+                return false;
 
-                return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
-            }
-            catch (final IOException e) {
-                throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
-            }
+            case "checked":
+                return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
+                        || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
+                                || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
+
+            case "first-child":
+                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                    if (n instanceof DomElement) {
+                        return false;
+                    }
+                }
+                return true;
+
+            case "last-child":
+                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                    if (n instanceof DomElement) {
+                        return false;
+                    }
+                }
+                return true;
+
+            case "first-of-type":
+                final String firstType = element.getNodeName();
+                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                    if (n instanceof DomElement && n.getNodeName().equals(firstType)) {
+                        return false;
+                    }
+                }
+                return true;
+
+            case "last-of-type":
+                final String lastType = element.getNodeName();
+                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                    if (n instanceof DomElement && n.getNodeName().equals(lastType)) {
+                        return false;
+                    }
+                }
+                return true;
+
+            case "only-child":
+                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                    if (n instanceof DomElement) {
+                        return false;
+                    }
+                }
+                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                    if (n instanceof DomElement) {
+                        return false;
+                    }
+                }
+                return true;
+
+            case "only-of-type":
+                final String type = element.getNodeName();
+                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                    if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                        return false;
+                    }
+                }
+                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                    if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                        return false;
+                    }
+                }
+                return true;
+
+            case "empty":
+                return isEmpty(element);
+
+            case "target":
+                if (browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                    return false;
+                }
+                final String ref = element.getPage().getUrl().getRef();
+                return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
+
+            default:
+                if (value.startsWith("nth-child(")) {
+                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                    int index = 0;
+                    for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
+                        if (n instanceof DomElement) {
+                            index++;
+                        }
+                    }
+                    return getNth(nth, index);
+                }
+                else if (value.startsWith("nth-last-child(")) {
+                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                    int index = 0;
+                    for (DomNode n = element; n != null; n = n.getNextSibling()) {
+                        if (n instanceof DomElement) {
+                            index++;
+                        }
+                    }
+                    return getNth(nth, index);
+                }
+                else if (value.startsWith("nth-of-type(")) {
+                    final String nthType = element.getNodeName();
+                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                    int index = 0;
+                    for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
+                        if (n instanceof DomElement && n.getNodeName().equals(nthType)) {
+                            index++;
+                        }
+                    }
+                    return getNth(nth, index);
+                }
+                else if (value.startsWith("nth-last-of-type(")) {
+                    final String nthLastType = element.getNodeName();
+                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                    int index = 0;
+                    for (DomNode n = element; n != null; n = n.getNextSibling()) {
+                        if (n instanceof DomElement && n.getNodeName().equals(nthLastType)) {
+                            index++;
+                        }
+                    }
+                    return getNth(nth, index);
+                }
+                else if (value.startsWith("not(")) {
+                    final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                    final AtomicBoolean errorOccured = new AtomicBoolean(false);
+                    final ErrorHandler errorHandler = new ErrorHandler() {
+                        @Override
+                        public void warning(final CSSParseException exception) throws CSSException {
+                            // ignore
+                        }
+
+                        @Override
+                        public void fatalError(final CSSParseException exception) throws CSSException {
+                            errorOccured.set(true);
+                        }
+
+                        @Override
+                        public void error(final CSSParseException exception) throws CSSException {
+                            errorOccured.set(true);
+                        }
+                    };
+                    final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+                    parser.setErrorHandler(errorHandler);
+                    try {
+                        final SelectorList selectorList
+                            = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+                        if (errorOccured.get() || selectorList == null || selectorList.getLength() != 1) {
+                            throw new CSSException("Invalid selectors: " + selectors);
+                        }
+
+                        validateSelectors(selectorList, 9, element);
+
+                        return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
+                    }
+                    catch (final IOException e) {
+                        throw new CSSException("Error parsing CSS selectors from '" + selectors + "': "
+                                + e.getMessage());
+                    }
+                }
+                return false;
         }
-        return false;
     }
 
     private static boolean isEmpty(final DomElement element) {
@@ -962,7 +1007,7 @@ public class CSSStyleSheet extends StyleSheet {
                     final ByteArrayInputStream bis = (ByteArrayInputStream) is;
                     bis.reset();
                 }
-                return IOUtils.toString(is);
+                return IOUtils.toString(is, TextUtil.DEFAULT_CHARSET);
             }
             return "";
         }
@@ -972,17 +1017,17 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * For Firefox.
-     * @return the owner
+     * Returns the owner node.
+     * @return the owner node
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public HTMLElement getOwnerNode() {
         return ownerNode_;
     }
 
     /**
-     * For Internet Explorer.
-     * @return the owner
+     * Returns the owner element, same as {@link #getOwnerNode()}.
+     * @return the owner element
      */
     @JsxGetter(@WebBrowser(IE))
     public HTMLElement getOwningElement() {
@@ -1002,10 +1047,12 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
+            cssRulesIndexFix_ = new ArrayList<>();
+            refreshCssRules();
         }
         return cssRules_;
     }
@@ -1028,10 +1075,6 @@ public class CSSStyleSheet extends StyleSheet {
                 if ("".equals(href) && version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
                     return null;
                 }
-                if (!version.hasFeature(STYLESHEET_HREF_EXPANDURL)) {
-                    // Don't expand relative URLs.
-                    return href;
-                }
                 // Expand relative URLs.
                 try {
                     final URL url = page.getFullyQualifiedUrl(href);
@@ -1044,10 +1087,6 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
 
-        // <style type="text/css"> ... </style>
-        if (version.hasFeature(STYLESHEET_HREF_STYLE_EMPTY)) {
-            return "";
-        }
         return null;
     }
 
@@ -1058,14 +1097,58 @@ public class CSSStyleSheet extends StyleSheet {
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      * @return the position of the inserted rule
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public int insertRule(final String rule, final int position) {
         try {
-            return wrapped_.insertRule(rule, position);
+            final int result = wrapped_.insertRule(rule, fixIndex(position));
+            refreshCssRules();
+            return result;
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
         }
+    }
+
+    private void refreshCssRules() {
+        if (cssRules_ == null) {
+            return;
+        }
+
+        cssRules_.clearRules();
+        cssRulesIndexFix_.clear();
+
+        final boolean ignoreCharsetRules = !getBrowserVersion().hasFeature(JS_CSSRULELIST_CHARSET_RULE);
+
+        final org.w3c.dom.css.CSSRuleList ruleList = getWrappedSheet().getCssRules();
+        final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
+        int pos = 0;
+        for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext();) {
+            final org.w3c.dom.css.CSSRule rule = it.next();
+            if (ignoreCharsetRules && rule instanceof org.w3c.dom.css.CSSCharsetRule) {
+                cssRulesIndexFix_.add(pos);
+                continue;
+            }
+
+            final com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule cssRule
+                        = com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule.create(this, rule);
+            if (null == cssRule) {
+                cssRulesIndexFix_.add(pos);
+            }
+            else {
+                cssRules_.addRule(cssRule);
+            }
+            pos++;
+        }
+    }
+
+    private int fixIndex(int index) {
+        for (final int fix : cssRulesIndexFix_) {
+            if (fix > index) {
+                return index;
+            }
+            index++;
+        }
+        return index;
     }
 
     /**
@@ -1073,10 +1156,11 @@ public class CSSStyleSheet extends StyleSheet {
      * @param position the position of the rule to be deleted
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxFunction
     public void deleteRule(final int position) {
         try {
-            wrapped_.deleteRule(position);
+            wrapped_.deleteRule(fixIndex(position));
+            refreshCssRules();
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
@@ -1095,6 +1179,7 @@ public class CSSStyleSheet extends StyleSheet {
         final String completeRule = selector + " {" + rule + "}";
         try {
             wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+            refreshCssRules();
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
@@ -1110,7 +1195,8 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void removeRule(final int position) {
         try {
-            wrapped_.deleteRule(position);
+            wrapped_.deleteRule(fixIndex(position));
+            refreshCssRules();
         }
         catch (final DOMException e) {
             throw Context.throwAsScriptRuntimeEx(e);
@@ -1150,26 +1236,185 @@ public class CSSStyleSheet extends StyleSheet {
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
         final SACMediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
-        return isActive(new MediaListImpl(mediaList));
+        return isActive(this, new MediaListImpl(mediaList));
+    }
+
+    /**
+     * Returns {@code true} if this stylesheet is enabled.
+     * @return {@code true} if this stylesheet is enabled
+     */
+    public boolean isEnabled() {
+        return enabled_;
+    }
+
+    /**
+     * Sets whether this sheet is enabled or not.
+     * @param enabled enabled or not
+     */
+    public void setEnabled(final boolean enabled) {
+        enabled_ = enabled;
     }
 
     /**
      * Returns whether the specified {@link MediaList} is active or not.
+     * @param scriptable the scriptable
      * @param mediaList the media list
      * @return whether the specified {@link MediaList} is active or not
      */
-    static boolean isActive(final MediaList mediaList) {
+    static boolean isActive(final SimpleScriptable scriptable, final MediaList mediaList) {
         if (mediaList.getLength() == 0) {
             return true;
         }
 
         for (int i = 0; i < mediaList.getLength(); i++) {
-            final String mediaType = mediaList.item(i);
-            if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+            final MediaQuery mediaQuery = ((MediaListImpl) mediaList).mediaQuery(i);
+            boolean isActive = isActive(scriptable, mediaQuery);
+            if (mediaQuery.isNot()) {
+                isActive = !isActive;
+            }
+            if (isActive) {
                 return true;
             }
         }
         return false;
+    }
+
+    private static boolean isActive(final SimpleScriptable scriptable, final MediaQuery mediaQuery) {
+        final String mediaType = mediaQuery.getMedia();
+        if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+            for (final Property property : mediaQuery.getProperties()) {
+                final float val;
+                switch (property.getName()) {
+                    case "max-width":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-width":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-width":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-width":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-height":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-height":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-height":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-height":
+                        val = pixelValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "resolution":
+                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        if (Math.round(val) != scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-resolution":
+                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        if (val < scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-resolution":
+                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        if (val > scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "orientation":
+                        final String orient = property.getValue().getCssText();
+                        final WebWindow window = scriptable.getWindow().getWebWindow();
+                        if ("portrait".equals(orient)) {
+                            if (window.getInnerWidth() > window.getInnerHeight()) {
+                                return false;
+                            }
+                        }
+                        else if ("landscape".equals(orient)) {
+                            if (window.getInnerWidth() < window.getInnerHeight()) {
+                                return false;
+                            }
+                        }
+                        else {
+                            LOG.warn("CSSValue '" + property.getValue().getCssText()
+                                        + "' not supported for feature 'orientation'.");
+                            return false;
+                        }
+                        break;
+
+                    default:
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static float pixelValue(final CSSValueImpl cssValue) {
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_PX) {
+            return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
+        }
+
+        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");
+        return -1;
+    }
+
+    private static float resolutionValue(final CSSValueImpl cssValue) {
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_DIMENSION) {
+            final String text = cssValue.getCssText();
+            if (text.endsWith("dpi")) {
+                return cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+            }
+            if (text.endsWith("dpcm")) {
+                return 2.54f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+            }
+            if (text.endsWith("dppx")) {
+                return 96 * cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+            }
+        }
+
+        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");
+        return -1;
     }
 
     /**
@@ -1198,8 +1443,9 @@ public class CSSStyleSheet extends StyleSheet {
                 return true;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                return isValidSelector(conditional.getSimpleSelector(), documentMode, domNode)
-                        && isValidSelector(conditional.getCondition(), documentMode, domNode);
+                final SimpleSelector simpleSel = conditional.getSimpleSelector();
+                return (simpleSel == null || isValidSelector(simpleSel, documentMode, domNode))
+                        && isValidCondition(conditional.getCondition(), documentMode, domNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
             case Selector.SAC_CHILD_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
@@ -1224,14 +1470,20 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      */
-    private static boolean isValidSelector(final Condition condition, final int documentMode, final DomNode domNode) {
+    private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return isValidSelector(cc1.getFirstCondition(), documentMode, domNode)
-                        && isValidSelector(cc1.getSecondCondition(), documentMode, domNode);
+                return isValidCondition(cc1.getFirstCondition(), documentMode, domNode)
+                        && isValidCondition(cc1.getSecondCondition(), documentMode, domNode);
             case Condition.SAC_ATTRIBUTE_CONDITION:
             case Condition.SAC_ID_CONDITION:
+            case Condition.SAC_LANG_CONDITION:
+            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
+            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+            case Condition.SAC_ONLY_CHILD_CONDITION:
+            case Condition.SAC_ONLY_TYPE_CONDITION:
+            case Condition.SAC_CONTENT_CONDITION:
             case Condition.SAC_CLASS_CONDITION:
                 return true;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
@@ -1249,7 +1501,8 @@ public class CSSStyleSheet extends StyleSheet {
 
                 if (!CSS2_PSEUDO_CLASSES.contains(value)
                         && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
-                        && !domNode.isDirectlyAttachedToPage()) {
+                        && !domNode.isAttachedToPage()
+                        && !domNode.hasChildNodes()) {
                     throw new CSSException("Syntax Error");
                 }
 

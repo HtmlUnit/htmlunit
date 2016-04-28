@@ -14,19 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_UNDEFINED_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_IN_HTML_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -48,8 +41,6 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,8 +61,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -95,7 +84,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
@@ -119,17 +107,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.DataTransfer;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
@@ -141,7 +128,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -165,7 +151,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends EventTarget implements ScriptableWithFallbackGetter, Function {
+public class Window extends EventTarget implements ScriptableWithFallbackGetter, Function, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
@@ -198,8 +184,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     private Event currentEvent_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private Map<Class<? extends HtmlUnitScriptable>, HtmlUnitScriptable> prototypes_ = new HashMap<>();
-    private Map<String, HtmlUnitScriptable> prototypesPerJSName_ = new HashMap<>();
+    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
+    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
     private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
@@ -210,14 +196,14 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private transient WeakHashMap<Node, CSS2Properties> computedStyles_ = new WeakHashMap<>();
+    private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
 
     private final Map<Type, Storage> storages_ = new HashMap<>();
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public Window() {
     }
 
@@ -256,8 +242,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param map a Map of ({@link Class}, {@link Scriptable})
      * @param prototypesPerJSName map of {@link String} and {@link Scriptable}
      */
-    public void setPrototypes(final Map<Class<? extends HtmlUnitScriptable>, HtmlUnitScriptable> map,
-            final Map<String, HtmlUnitScriptable> prototypesPerJSName) {
+    public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map,
+            final Map<String, Scriptable> prototypesPerJSName) {
         prototypes_ = map;
         prototypesPerJSName_ = prototypesPerJSName;
     }
@@ -285,7 +271,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public String btoa(final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -295,7 +281,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public String atob(final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
@@ -332,7 +318,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "document".
+     * Returns the JavaScript property {@code document}.
      * @return the document
      */
     @JsxGetter(propertyName = "document")
@@ -352,7 +338,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public ApplicationCache getApplicationCache() {
         return applicationCache_;
     }
@@ -449,20 +435,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         return getProxy(newWebWindow);
     }
 
-    /**
-     * Creates a popup window.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536392.aspx">MSDN documentation</a>
-     * @return the created popup
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public Popup createPopup() {
-        final Popup popup = new Popup();
-        popup.setParentScope(this);
-        popup.setPrototype(getPrototype(Popup.class));
-        popup.init(this);
-        return popup;
-    }
-
     private URL makeUrlForOpenWindow(final String urlString) {
         if (urlString.isEmpty()) {
             return WebClient.URL_ABOUT_BLANK;
@@ -546,7 +518,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "navigator".
+     * Returns the JavaScript property {@code navigator}.
      * @return the navigator
      */
     @JsxGetter
@@ -555,7 +527,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "clientInformation".
+     * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
@@ -564,15 +536,15 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the JavaScript property "clipboardData".
-     * @return the ClipboardData
+     * Returns the JavaScript property {@code clipboardData}.
+     * @return the {@link DataTransfer}
      */
     @JsxGetter(@WebBrowser(IE))
-    public ClipboardData getClipboardData() {
-        final ClipboardData clipboardData = new ClipboardData();
-        clipboardData.setParentScope(this);
-        clipboardData.setPrototype(getPrototype(clipboardData.getClass()));
-        return clipboardData;
+    public DataTransfer getClipboardData() {
+        final DataTransfer dataTransfer = new DataTransfer();
+        dataTransfer.setParentScope(this);
+        dataTransfer.setPrototype(getPrototype(dataTransfer.getClass()));
+        return dataTransfer;
     }
 
     /**
@@ -580,8 +552,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the window property (a reference to <tt>this</tt>)
      */
     @JsxGetter(propertyName = "window")
-    public WindowProxy getWindow_js() {
-        return windowProxy_;
+    public Window getWindow_js() {
+        return this;
     }
 
     /**
@@ -589,8 +561,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return this
      */
     @JsxGetter
-    public WindowProxy getSelf() {
-        return windowProxy_;
+    public Window getSelf() {
+        return this;
     }
 
     /**
@@ -652,7 +624,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the console property.
      * @return the console property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public ScriptableObject getConsole() {
         return console_;
     }
@@ -661,7 +633,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Sets the console.
      * @param console the console
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setConsole(final ScriptableObject console) {
         console_ = console;
     }
@@ -683,7 +655,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return an identification id
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction
     public int requestAnimationFrame(final Object callback) {
         // nothing for now
         return 1;
@@ -694,7 +666,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param requestId the ID value returned by the call to window.requestAnimationFrame()
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction
     public void cancelAnimationFrame(final Object requestId) {
         // nothing for now
     }
@@ -759,6 +731,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
             if (page.isHtmlPage()) {
                 ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
+                ((HtmlPage) page).addAutoCloseable(this);
             }
         }
 
@@ -839,7 +812,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
 
         final WebWindow top = getWebWindow().getTopWindow();
-        return getProxy(top);
+        return top.getScriptableObject();
     }
 
     /**
@@ -854,18 +827,18 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the parent property.
-     * @return the value of window.parent
+     * Returns the value of the {@code parent} property.
+     * @return the value of the {@code parent} property
      */
     @JsxGetter
-    public WindowProxy getParent() {
+    public ScriptableObject getParent() {
         final WebWindow parent = getWebWindow().getParentWindow();
-        return getProxy(parent);
+        return parent.getScriptableObject();
     }
 
     /**
-     * Returns the value of the opener property.
-     * @return the value of window.opener, {@code null} for a top level window
+     * Returns the value of the {@code opener} property.
+     * @return the value of the {@code opener}, or {@code null} for a top level window
      */
     @JsxGetter
     public Object getOpener() {
@@ -877,13 +850,13 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the opener property.
+     * Sets the {@code opener} property.
      * @param newValue the new value
      */
     @JsxSetter
     public void setOpener(final Object newValue) {
         if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && newValue != Context.getUndefinedValue() && !(newValue instanceof Window)) {
+            && newValue != null && newValue != Undefined.instance && !(newValue instanceof Window)) {
             throw Context.reportRuntimeError("Can't set opener to something other than a window!");
         }
         opener_ = newValue;
@@ -903,12 +876,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the frames property.
-     * @return the value of the frames property
+     * Returns the value of the {@code frames} property.
+     * @return the value of the {@code frames} property
      */
     @JsxGetter(propertyName = "frames")
-    public WindowProxy getFrames_js() {
-        return windowProxy_;
+    public Window getFrames_js() {
+        return this;
     }
 
     /**
@@ -962,8 +935,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Closes this window.
      */
-    @JsxFunction
-    public void close() {
+    @JsxFunction(functionName = "close")
+    public void close_js() {
         final WebWindow webWindow = getWebWindow();
         if (webWindow instanceof TopLevelWindow) {
             ((TopLevelWindow) webWindow).close();
@@ -1131,10 +1104,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @JsxSetter
     public void setOnload(final Object newOnload) {
-        if (getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
-            && Context.getUndefinedValue().equals(newOnload)) {
-            throw Context.reportRuntimeError("Invalid onload value: undefined.");
-        }
         getEventListenersContainer().setEventHandlerProp("load", newOnload);
     }
 
@@ -1193,29 +1162,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxSetter
     public void setOnhashchange(final Object newHandler) {
         setHandlerForJavaScript(Event.TYPE_HASH_CHANGE, newHandler);
-    }
-
-    /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "load")
-     * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
-     * @return {@code true} if the listener has been added
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public boolean attachEvent(final String type, final Function listener) {
-        return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
-     * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "onload")
-     * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void detachEvent(final String type, final Function listener) {
-        getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
     /**
@@ -1302,14 +1248,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             final String url = e.getPage().getUrl().toExternalForm();
             final int line = e.getFailingLineNumber();
 
-            Object[] args;
-            if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT)) {
-                final int column = e.getFailingColumnNumber();
-                args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
-            }
-            else {
-                args = new Object[] {msg, url, Integer.valueOf(line)};
-            }
+            final int column = e.getFailingColumnNumber();
+            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
             f.call(Context.getCurrentContext(), this, this, args);
         }
     }
@@ -1330,19 +1270,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
-            throw Context.reportRuntimeError("Window is not a function.");
-        }
-        if (args.length > 0) {
-            final Object arg = args[0];
-            if (arg instanceof String) {
-                return ScriptableObject.getProperty(this, (String) arg);
-            }
-            if (arg instanceof Number) {
-                return ScriptableObject.getProperty(this, ((Number) arg).intValue());
-            }
-        }
-        return Context.getUndefinedValue();
+        throw Context.reportRuntimeError("Window is not a function.");
     }
 
     /**
@@ -1350,10 +1278,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
-            throw Context.reportRuntimeError("Window is not a function.");
-        }
-        return null;
+        throw Context.reportRuntimeError("Window is not a function.");
     }
 
     /**
@@ -1396,21 +1321,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 final WebWindow webWindow = ((Window) result).getWebWindow();
                 result = getProxy(webWindow);
             }
-            else if (result instanceof HTMLUnknownElement && getBrowserVersion()
-                    .hasFeature(JS_XML_IN_HTML_VIA_ACTIVEXOBJECT)) {
-                final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
-                if ("xml".equals(unknownElement.getNodeName())) {
-                    final MSXMLActiveXObjectFactory factory =
-                            getWebWindow().getWebClient().getMSXMLActiveXObjectFactory();
-                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", getWebWindow());
-                    final Iterator<HtmlElement> children = unknownElement.getHtmlElementDescendants().iterator();
-                    if (children.hasNext()) {
-                        final HtmlElement root = children.next();
-                        document.loadXML(root.asXml().trim());
-                    }
-                    result = document;
-                }
-            }
         }
 
         return result;
@@ -1423,14 +1333,14 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     public Object get(final int index, final Scriptable start) {
         final HTMLCollection frames = getFrames();
         if (index >= frames.getLength()) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return frames.item(Integer.valueOf(index));
     }
 
     private static Object getFrameWindowByName(final HtmlPage page, final String name) {
         try {
-            return page.getFrameByName(name).getScriptObject();
+            return page.getFrameByName(name).getScriptableObject();
         }
         catch (final ElementNotFoundException e) {
             return NOT_FOUND;
@@ -1438,7 +1348,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     private Object getElementsByName(final HtmlPage page, final String name) {
-        Object result = NOT_FOUND;
 
         // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
         // like getHtmlElementsByName() and getHtmlElementById() as much as possible, so as to avoid XPath
@@ -1448,56 +1357,48 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         final List<DomElement> elements = page.getElementsByName(name);
 
         final boolean includeFormFields = getBrowserVersion().hasFeature(JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME);
-        final Predicate filter = new Predicate() {
-            @Override
-            public boolean evaluate(final Object object) {
-                if (object instanceof HtmlEmbed
-                    || object instanceof HtmlForm
-                    || object instanceof HtmlImage
-                    || object instanceof HtmlObject) {
-                    return true;
-                }
-                if (includeFormFields && (
-                        object instanceof HtmlAnchor
-                        || object instanceof HtmlButton
-                        || object instanceof HtmlInput
-                        || object instanceof HtmlMap
-                        || object instanceof HtmlSelect
-                        || object instanceof HtmlTextArea)) {
-                    return true;
-                }
-                return false;
+        final Filter filter = new Filter(includeFormFields);
+
+        final Iterator<DomElement> it = elements.iterator();
+        while (it.hasNext()) {
+            if (!filter.matches(it.next())) {
+                it.remove();
             }
-        };
-        CollectionUtils.filter(elements, filter);
+        }
+
+        if (elements.size() == 0) {
+            return NOT_FOUND;
+        }
 
         if (elements.size() == 1) {
-            result = getScriptableFor(elements.get(0));
+            return getScriptableFor(elements.get(0));
         }
-        else if (elements.size() > 1) {
-            // Null must be changed to '' for proper collection initialization.
-            final String expElementName = "null".equals(name) ? "" : name;
 
-            result = new HTMLCollection(page, true, "Window.getElementsByName('" + name + "')") {
-                @Override
-                protected List<Object> computeElements() {
-                    final List<DomElement> elements = page.getElementsByName(expElementName);
-                    CollectionUtils.filter(elements, filter);
+        // Null must be changed to '' for proper collection initialization.
+        final String expElementName = "null".equals(name) ? "" : name;
 
-                    return new ArrayList<Object>(elements);
-                }
+        return new HTMLCollection(page, true) {
+            @Override
+            protected List<Object> computeElements() {
+                final List<DomElement> expElements = page.getElementsByName(expElementName);
+                final List<Object> result = new ArrayList<>(expElements.size());
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    if ("name".equals(event.getName())) {
-                        return EffectOnCache.RESET;
+                for (DomElement domElement : expElements) {
+                    if (filter.matches(domElement)) {
+                        result.add(domElement);
                     }
-                    return EffectOnCache.NONE;
                 }
-            };
-        }
+                return result;
+            }
 
-        return result;
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                if ("name".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     /**
@@ -1507,28 +1408,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     public static WindowProxy getProxy(final WebWindow w) {
         return ((Window) w.getScriptableObject()).windowProxy_;
-    }
-
-    /**
-     * Executes the specified script code as long as the language is JavaScript or JScript.
-     * @param script the script code to execute
-     * @param language the language of the specified code ("JavaScript" or "JScript")
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void execScript(final String script, final Object language) {
-        final String languageStr = Context.toString(language);
-        if (language == Undefined.instance
-            || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
-            ScriptRuntime.evalSpecial(Context.getCurrentContext(), this, this, new Object[] {script}, null, 0);
-        }
-        else if ("vbscript".equalsIgnoreCase(languageStr)) {
-            throw Context.reportRuntimeError("VBScript not supported in Window.execScript().");
-        }
-        else {
-            // Unrecognized language: use the IE error message ("Invalid class string").
-            throw Context.reportRuntimeError("Invalid class string");
-        }
     }
 
     /**
@@ -1566,10 +1445,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @JsxFunction
     public int setInterval(final Object code, int timeout, final Object language) {
-        if (timeout == 0 && getBrowserVersion().hasFeature(JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT)) {
-            return setTimeout(code, timeout, language);
-        }
-
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }
@@ -1617,7 +1492,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getInnerWidth() {
         return getWebWindow().getInnerWidth();
     }
@@ -1627,7 +1502,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getOuterWidth() {
         return getWebWindow().getOuterWidth();
     }
@@ -1637,7 +1512,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getInnerHeight() {
         return getWebWindow().getInnerHeight();
     }
@@ -1647,7 +1522,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getOuterHeight() {
         return getWebWindow().getOuterHeight();
     }
@@ -1670,7 +1545,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param type the type of events to capture
      * @see Document#captureEvents(String)
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public void captureEvents(final String type) {
         // Empty.
     }
@@ -1689,37 +1564,43 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * that of <tt>element.style</tt>, but the value returned by this method is read-only.
      *
      * @param element the element
-     * @param pseudo a string specifying the pseudo-element to match (may be {@code null})
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
      * @return the computed style
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
-    public CSS2Properties getComputedStyle(final Element element, final String pseudo) {
-        CSS2Properties style;
-
+    @JsxFunction
+    public CSS2Properties getComputedStyle(final Element element, final String pseudoElement) {
         synchronized (computedStyles_) {
-            style = computedStyles_.get(element);
-        }
-        if (style != null) {
-            return style;
+            final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            if (elementMap != null) {
+                final CSS2Properties style = elementMap.get(pseudoElement);
+                if (style != null) {
+                    return style;
+                }
+            }
         }
 
         final CSSStyleDeclaration original = element.getStyle();
-        style = new CSS2Properties(original);
+        final CSS2Properties style = new CSS2Properties(original);
 
-        final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
+        final StyleSheetList sheets = ((HTMLDocument) element.getOwnerDocument()).getStyleSheets();
         final boolean trace = LOG.isTraceEnabled();
         for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-            if (sheet.isActive()) {
+            if (sheet.isActive() && sheet.isEnabled()) {
                 if (trace) {
                     LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
                 }
-                sheet.modifyIfNecessary(style, element);
+                sheet.modifyIfNecessary(style, element, pseudoElement);
             }
         }
 
         synchronized (computedStyles_) {
-            computedStyles_.put(element, style);
+            Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            if (elementMap == null) {
+                elementMap = new WeakHashMap<>();
+                computedStyles_.put(element, elementMap);
+            }
+            elementMap.put(pseudoElement, style);
         }
 
         return style;
@@ -1729,7 +1610,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public Selection getSelection() {
         final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed
@@ -1776,7 +1657,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
             // the dialog window is close()'ed? Would only work in interpreted mode, though.
-            final ScriptableObject jsDialog = (ScriptableObject) dialog.getScriptObject();
+            final ScriptableObject jsDialog = dialog.getScriptableObject();
             return jsDialog.get("returnValue", jsDialog);
         }
         catch (final IOException e) {
@@ -1799,7 +1680,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         try {
             final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            final Window jsDialog = (Window) dialog.getScriptObject();
+            final Window jsDialog = (Window) dialog.getScriptableObject();
             return jsDialog;
         }
         catch (final IOException e) {
@@ -1860,6 +1741,52 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             "class",
             "height",
             "width"));
+
+    private static final class Filter {
+        private final boolean includeFormFields_;
+
+        private Filter(final boolean includeFormFields) {
+            includeFormFields_ = includeFormFields;
+        }
+
+        private boolean matches(final Object object) {
+            if (object instanceof HtmlEmbed
+                || object instanceof HtmlForm
+                || object instanceof HtmlImage
+                || object instanceof HtmlObject) {
+                return true;
+            }
+            if (includeFormFields_ && (
+                    object instanceof HtmlAnchor
+                    || object instanceof HtmlButton
+                    || object instanceof HtmlInput
+                    || object instanceof HtmlMap
+                    || object instanceof HtmlSelect
+                    || object instanceof HtmlTextArea)) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Clears the computed styles.
+     */
+    public void clearComputedStyles() {
+        synchronized (computedStyles_) {
+            computedStyles_.clear();
+        }
+    }
+
+    /**
+     * Clears the computed styles for a specific {@link Element}.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStyles(final Element element) {
+        synchronized (computedStyles_) {
+            computedStyles_.remove(element);
+        }
+    }
 
     /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
@@ -1939,26 +1866,22 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         private void nodeChanged(final DomNode changed, final String attribName) {
             // If a stylesheet was changed, all of our calculations could be off; clear the cache.
             if (changed instanceof HtmlStyle) {
-                synchronized (computedStyles_) {
-                    computedStyles_.clear();
-                }
+                clearComputedStyles();
                 return;
             }
             if (changed instanceof HtmlLink) {
                 final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase(Locale.ROOT);
                 if ("stylesheet".equals(rel)) {
-                    synchronized (computedStyles_) {
-                        computedStyles_.clear();
-                    }
+                    clearComputedStyles();
                     return;
                 }
             }
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             synchronized (computedStyles_) {
                 final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-                final Iterator<Map.Entry<Node, CSS2Properties>> i = computedStyles_.entrySet().iterator();
-                while (i.hasNext()) {
-                    final Map.Entry<Node, CSS2Properties> entry = i.next();
+                for (final Iterator<Map.Entry<Element, Map<String, CSS2Properties>>> i
+                        = computedStyles_.entrySet().iterator(); i.hasNext();) {
+                    final Map.Entry<Element, Map<String, CSS2Properties>> entry = i.next();
                     final DomNode node = entry.getKey().getDomNodeOrDie();
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()
@@ -2001,7 +1924,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         if (getBrowserVersion().getBrowserVersionNumeric() < 10) {
             return 5;
         }
-        return (int) getBrowserVersion().getBrowserVersionNumeric();
+        return getBrowserVersion().getBrowserVersionNumeric();
     }
 
     /**
@@ -2012,7 +1935,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxFunction(@WebBrowser(IE))
     public int ScriptEngineMinorVersion() {
         if (getBrowserVersion().getBrowserVersionNumeric() < 10) {
-            return (int) getBrowserVersion().getBrowserVersionNumeric();
+            return getBrowserVersion().getBrowserVersionNumeric();
         }
         return 0;
     }
@@ -2031,7 +1954,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the value of {@code pageXOffset} property.
      * @return the value of {@code pageXOffset} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getPageXOffset() {
         return 0;
     }
@@ -2040,7 +1963,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the value of {@code pageYOffset} property.
      * @return the value of {@code pageYOffset} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getPageYOffset() {
         return 0;
     }
@@ -2075,7 +1998,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * {@inheritDoc}
      * Used to allow re-declaration of constants (eg: "var undefined;").
-     * @see com.gargoylesoftware.htmlunit.javascript.NativeGlobalTest
      */
     @Override
     public boolean isConst(final String name) {
@@ -2096,7 +2018,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -2107,8 +2029,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Getter for the onchange event handler.
      * @return the handler
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getOnchange() {
         return getHandlerForJavaScript(Event.TYPE_CHANGE);
     }
@@ -2117,8 +2038,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Setter for the onchange event handler.
      * @param onchange the handler
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setOnchange(final Object onchange) {
         setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
     }
@@ -2127,8 +2047,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Getter for the onsubmit event handler.
      * @return the handler
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getOnsubmit() {
         return getHandlerForJavaScript(Event.TYPE_SUBMIT);
     }
@@ -2137,8 +2056,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Setter for the onsubmit event handler.
      * @param onsubmit the handler
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setOnsubmit(final Object onsubmit) {
         setHandlerForJavaScript(Event.TYPE_SUBMIT, onsubmit);
     }
@@ -2151,9 +2069,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
+    @SuppressWarnings("null")
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
         final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
-        if (!"*".equals(targetOrigin)) {
+
+        // TODO: do the same origin check for '/' also
+        if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
             URL targetURL = null;
             try {
                 targetURL = new URL(targetOrigin);
@@ -2162,11 +2083,10 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 Context.throwAsScriptRuntimeEx(
                         new Exception(
                                 "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
-                                + targetOrigin + "' was specified."));
+                                + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
             }
 
-            if (!getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT)
-                    && getPort(targetURL) != getPort(currentURL)) {
+            if (getPort(targetURL) != getPort(currentURL)) {
                 return;
             }
             if (!targetURL.getHost().equals(currentURL.getHost())) {
@@ -2182,16 +2102,11 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 
-        if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUS)) {
-            dispatchEvent(event);
-            return;
-        }
-
         final JavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
             @Override
             public void execute() throws Exception {
-                final ContextAction action = new ContextAction() {
+                final ContextAction contextAction = new ContextAction() {
                     @Override
                     public Object run(final Context cx) {
                         return dispatchEvent(event);
@@ -2199,7 +2114,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 };
 
                 final ContextFactory cf = jsEngine.getContextFactory();
-                cf.call(action);
+                cf.call(contextAction);
             }
         };
         jsEngine.addPostponedAction(action);
@@ -2227,7 +2142,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code performance} property.
      * @return the {@code performance} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Performance getPerformance() {
         final Performance performance = new Performance();
         performance.setParentScope(this);
@@ -2239,7 +2154,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code devicePixelRatio} property.
      * @return the {@code devicePixelRatio} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getDevicePixelRatio() {
         return 1;
     }
@@ -2248,7 +2163,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code styleMedia} property.
      * @return the {@code styleMedia} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public StyleMedia getStyleMedia() {
         final StyleMedia styleMedia = new StyleMedia();
         styleMedia.setParentScope(this);
@@ -2262,12 +2177,30 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param mediaQueryString the media query
      * @return a new MediaQueryList object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public MediaQueryList matchMedia(final String mediaQueryString) {
         final MediaQueryList mediaQueryList = new MediaQueryList(mediaQueryString);
         mediaQueryList.setParentScope(this);
         mediaQueryList.setPrototype(getPrototype(mediaQueryList.getClass()));
         return mediaQueryList;
+    }
+
+    /**
+     * Stub only at the moment.
+     * @param search the text string for which to search
+     * @param caseSensitive if true, specifies a case-sensitive search
+     * @param backwards if true, specifies a backward search
+     * @param wrapAround if true, specifies a wrap around search
+     * @param wholeWord if true, specifies a whole word search
+     * @param searchInFrames if true, specifies a search in frames
+     * @param showDialog if true, specifies a show Dialog.
+     * @return false
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public boolean find(final String search, final boolean caseSensitive,
+            final boolean backwards, final boolean wrapAround,
+            final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
+        return false;
     }
 
     /**
@@ -2295,8 +2228,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the crypto property.
-     * @return the crypto property
+     * Returns the {@code crypto} property.
+     * @return the {@code crypto} property
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public Crypto getCrypto() {
@@ -2305,13 +2238,21 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
         return crypto_;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() {
+        Symbol.remove(this);
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames.class);
 
     HTMLCollectionFrames(final HtmlPage page) {
-        super(page, false, "Window.frames");
+        super(page, false);
     }
 
     @Override
@@ -2329,7 +2270,7 @@ class HTMLCollectionFrames extends HTMLCollection {
             window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
         }
 
-        return Window.getProxy(window);
+        return window.getScriptableObject();
     }
 
     @Override
@@ -2345,8 +2286,7 @@ class HTMLCollectionFrames extends HTMLCollection {
                 }
                 return getScriptableForElement(window);
             }
-            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)
-                    && frameElt.getAttribute("id").equals(name)) {
+            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID) && frameElt.getId().equals(name)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
                 }

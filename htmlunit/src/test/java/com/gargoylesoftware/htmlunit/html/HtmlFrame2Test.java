@@ -15,12 +15,10 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -29,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -80,7 +77,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     }
 
     /**
-     * URL about:blank has as special meaning as it is what is loaded in the frame.
+     * URL {@code about:blank} has a special meaning as it is what is loaded in the frame
      * before the real content is loaded.
      * @throws Exception if an error occurs
      */
@@ -100,11 +97,10 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
-                        "parent [object HTMLFormElement]" },
-            CHROME = { "second undefined", "third [object HTMLFormElement]",
-                        "parent [object HTMLFormElement]" },
-                        IE8 = { "second [object]", "third [object]", "parent [object]" })
+    @Alerts(DEFAULT = {"second [object HTMLFormElement]", "third [object HTMLFormElement]",
+                        "parent [object HTMLFormElement]"},
+            CHROME = {"second undefined", "third [object HTMLFormElement]",
+                        "parent [object HTMLFormElement]"})
     // real FF sometimes alerts 'third' before 'second'
     @NotYetImplemented(CHROME)
     public void postponeLoading() throws Exception {
@@ -135,7 +131,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "second", "third", "first" })
+    @Alerts({"second", "third", "first"})
     public void frameOnload() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
             + "  <FRAME name='second' src='second.html'>\n"
@@ -162,7 +158,6 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
     public void frameOnloadFrameInFrame() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
             + "  <FRAME name='second' src='second.html'>\n"
@@ -191,17 +186,10 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         final List<String> actualAlerts = getCollectedAlerts(driver);
 
         // tested with real ff17 and ie6; running in selenium returns different results
-        Assert.assertEquals(4, actualAlerts.size());
+        assertEquals(4, actualAlerts.size());
 
-        // ignore order of frame windows
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER != getBrowserVersion()) {
-            // returns 'first' 'third' 'fourth' 'second'
-            Assert.assertEquals("first", actualAlerts.get(0));
-        }
-        else {
-            // returns 'first' at last
-            Assert.assertEquals("first", actualAlerts.get(3));
-        }
+        // returns 'first' at last
+        assertEquals("first", actualAlerts.get(3));
     }
 
     /**

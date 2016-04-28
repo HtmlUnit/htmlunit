@@ -93,7 +93,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         testEmptyGZippedContent(HttpStatus.SC_NO_CONTENT, -1, null);
     }
 
-    private void testEmptyGZippedContent(final int statusCode, final int contentLength,
+    private static void testEmptyGZippedContent(final int statusCode, final int contentLength,
                 final String contentType) throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
@@ -189,7 +189,6 @@ public class WebResponseDataTest extends WebServerTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("Hello Redirected!");
-            writer.close();
         }
     }
 

@@ -84,7 +84,7 @@ class SimpleHTMLParserListener implements HTMLParserListener {
         LOG.warn(format(message, url, html, line, column));
     }
 
-    private String format(final String message, final URL url, final String html,
+    private static String format(final String message, final URL url, final String html,
             final int line, final int column) {
         final StringBuilder buffer = new StringBuilder(message);
         buffer.append(" (");

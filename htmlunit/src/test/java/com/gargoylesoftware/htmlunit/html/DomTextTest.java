@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertSame;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +90,7 @@ public class DomTextTest extends SimpleWebTestCase {
     }
 
     /**
-     * This test once tested regression for bug #1731042 but the expectations have been changed
+     * This test once tested regression for bug #490 but the expectations have been changed
      * as asText() should now use new lines when appropriate.
      * @throws Exception if the test fails
      */
@@ -246,7 +244,7 @@ public class DomTextTest extends SimpleWebTestCase {
      * @param node the node to look at
      * @return the position
      */
-    private int readPositionAmongParentChildren(final DomNode node) {
+    private static int readPositionAmongParentChildren(final DomNode node) {
         int i = 0;
         for (final DomNode child : node.getParentNode().getChildren()) {
             if (child == node) {
@@ -295,6 +293,18 @@ public class DomTextTest extends SimpleWebTestCase {
         text.setTextContent("xyz");
         assertEquals("xyz", text.getTextContent());
         assertEquals("xyz", page.asText());
+    }
+
+    /**
+     * Test case for #1366.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getTextContentWhitespace() throws Exception {
+        final String html = "<html><body><div id='s'><b>Hello</b> <b>World</b>!</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlElement text = page.getHtmlElementById("s");
+        assertEquals("Hello World!", text.getTextContent());
     }
 
     /**

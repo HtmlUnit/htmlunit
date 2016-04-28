@@ -33,9 +33,8 @@ public class NodeIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDivElement], [object HTMLSpanElement], [object HTMLSpanElement],"
-                + " [object HTMLSpanElement]",
-            IE8 = "")
+    @Alerts({"[object HTMLDivElement]", "[object HTMLSpanElement]", "[object HTMLSpanElement]",
+            "[object HTMLSpanElement]"})
     public void filterNull() throws Exception {
         final String html
             = "<html>\n"
@@ -68,8 +67,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLParagraphElement]",
-            IE8 = "")
+    @Alerts("[object HTMLParagraphElement]")
     public void filterFunction() throws Exception {
         final String html
             = "<html>\n"
@@ -105,8 +103,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "def",
-            IE8 = "")
+    @Alerts("def")
     public void filterObject() throws Exception {
         final String html
             = "<html>\n"

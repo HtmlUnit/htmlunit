@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 /**
@@ -34,7 +35,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("", out);
+        assertEquals("", out);
     }
 
     /**
@@ -47,7 +48,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "abc1234";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("abc1234", out);
+        assertEquals("abc1234", out);
     }
 
     /**
@@ -60,7 +61,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "abc\\t234";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("abc\\t234", out);
+        assertEquals("abc\\t234", out);
     }
 
     /**
@@ -73,7 +74,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "abc\\";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("abc\\", out);
+        assertEquals("abc\\", out);
     }
 
     /**
@@ -86,7 +87,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "\\x0A";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("\\x0A", out);
+        assertEquals("\\x0A", out);
     }
 
     /**
@@ -99,7 +100,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "\\u0074";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("\\u0074", out);
+        assertEquals("\\u0074", out);
     }
 
     /**
@@ -111,31 +112,31 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "\\9";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("\\09", out);
+        assertEquals("\\09", out);
 
         in = "\\9abc";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("\\09abc", out);
+        assertEquals("\\09abc", out);
 
         in = "\\91";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("\\091", out);
+        assertEquals("\\091", out);
 
         in = "\\91abc";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("\\091abc", out);
+        assertEquals("\\091abc", out);
 
         in = "\\912";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("\\0912", out);
+        assertEquals("\\0912", out);
 
         in = "\\912abc";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("\\0912abc", out);
+        assertEquals("\\0912abc", out);
 
         in = "(a) (b) \\02";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a) (b) \\02", out);
+        assertEquals("(a) (b) \\02", out);
     }
 
     /**
@@ -147,11 +148,11 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "[\\0-\\x08]";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[\\x00-\\x08]", out);
+        assertEquals("[\\x00-\\x08]", out);
 
         in = "[\\0\\9]";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[\\x00\\09]", out);
+        assertEquals("[\\x00\\09]", out);
     }
 
     /**
@@ -164,7 +165,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "abc\\A12\\y";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("abcA12y", out);
+        assertEquals("abcA12y", out);
     }
 
     /**
@@ -176,11 +177,11 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "[afg]";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[afg]", out);
+        assertEquals("[afg]", out);
 
         in = "[a-g]";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[a-g]", out);
+        assertEquals("[a-g]", out);
     }
 
     /**
@@ -192,7 +193,7 @@ public class RegExpJsToJavaConverterTest {
 
         final String in = "[af[g]";
         final String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[af\\[g]", out);
+        assertEquals("[af\\[g]", out);
     }
 
     /**
@@ -205,7 +206,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "ab[";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("ab\\[", out);
+        assertEquals("ab\\[", out);
     }
 
     /**
@@ -217,19 +218,19 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "[\\b]";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[\\cH]", out);
+        assertEquals("[\\cH]", out);
 
         in = "[ab\\b]";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[ab\\cH]", out);
+        assertEquals("[ab\\cH]", out);
 
         in = "[\\bc]";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[\\cHc]", out);
+        assertEquals("[\\cHc]", out);
 
         in = "[ab\\bcd]";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("[ab\\cHcd]", out);
+        assertEquals("[ab\\cHcd]", out);
     }
 
     /**
@@ -242,7 +243,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "ab[^c]";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("ab[^c]", out);
+        assertEquals("ab[^c]", out);
     }
 
     /**
@@ -255,7 +256,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "(a)b[^\\1]";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("(a)b.", out);
+        assertEquals("(a)b.", out);
     }
 
     /**
@@ -268,7 +269,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "(a)b[^\\n]";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("(a)b[^\\n]", out);
+        assertEquals("(a)b[^\\n]", out);
     }
 
     /**
@@ -281,7 +282,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "ab[^";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("ab\\[^", out);
+        assertEquals("ab\\[^", out);
     }
 
     /**
@@ -294,7 +295,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "ab{1}";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("ab{1}", out);
+        assertEquals("ab{1}", out);
     }
 
     /**
@@ -307,7 +308,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "ab{1,7}";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("ab{1,7}", out);
+        assertEquals("ab{1,7}", out);
     }
 
     /**
@@ -320,7 +321,7 @@ public class RegExpJsToJavaConverterTest {
         final String in = "ab{1,}";
         final String out = regExpJsToJavaConverter.convert(in);
 
-        Assert.assertEquals("ab{1,}", out);
+        assertEquals("ab{1,}", out);
     }
 
     /**
@@ -332,15 +333,15 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "ab{";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("ab\\{", out);
+        assertEquals("ab\\{", out);
 
         in = "ab{} x";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("ab\\{\\} x", out);
+        assertEquals("ab\\{\\} x", out);
 
         in = "ab{x} x";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("ab\\{x\\} x", out);
+        assertEquals("ab\\{x\\} x", out);
     }
 
     /**
@@ -352,31 +353,31 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "(a)(b) \\1 \\2";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a)(b) \\1 \\2", out);
+        assertEquals("(a)(b) \\1 \\2", out);
 
         in = "(a)(?b) \\1 \\2 \\3";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a)(?b) \\1 \\2 \\03", out);
+        assertEquals("(a)(?b) \\1 \\2 \\03", out);
 
         in = "(a)(?:b) \\1 \\2";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a)(?:b) \\1 \\02", out);
+        assertEquals("(a)(?:b) \\1 \\02", out);
 
         in = "(a\\1) \\2";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a) \\02", out);
+        assertEquals("(a) \\02", out);
 
         in = "(a)(b\\1\\2) \\3";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a)(b\\1) \\03", out);
+        assertEquals("(a)(b\\1) \\03", out);
 
         in = "(a)(b\\1\\2)(c\\1\\2\\3) \\3 \\7";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("(a)(b\\1)(c\\1\\2) \\3 \\07", out);
+        assertEquals("(a)(b\\1)(c\\1\\2) \\3 \\07", out);
 
         in = "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals(
+        assertEquals(
                 "^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*"
                 + "((?:['\\\"])?)((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])",
                 out);
@@ -391,11 +392,11 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "ab(";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("ab(", out);
+        assertEquals("ab(", out);
 
         in = "ab(?";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("ab(?", out);
+        assertEquals("ab(?", out);
     }
 
     /**
@@ -407,15 +408,15 @@ public class RegExpJsToJavaConverterTest {
 
         String in = "a(xy)? b \\1";
         String out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("a((?:xy)?) b \\1", out);
+        assertEquals("a((?:xy)?) b \\1", out);
 
         in = "a(xy) b \\1";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("a(xy) b \\1", out);
+        assertEquals("a(xy) b \\1", out);
 
         in = "a(xy)? (u)? b \\1 \\2";
         out = regExpJsToJavaConverter.convert(in);
-        Assert.assertEquals("a((?:xy)?) ((?:u)?) b \\1 \\2", out);
+        assertEquals("a((?:xy)?) ((?:u)?) b \\1 \\2", out);
     }
 
     /**
@@ -425,19 +426,19 @@ public class RegExpJsToJavaConverterTest {
     public void escapeCurlyBraces() {
         final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
 
-        Assert.assertEquals("\\{", regExpJsToJavaConverter.convert("{"));
-        Assert.assertEquals("\\{", regExpJsToJavaConverter.convert("\\{"));
-        Assert.assertEquals("\\}", regExpJsToJavaConverter.convert("}"));
-        Assert.assertEquals("\\}", regExpJsToJavaConverter.convert("\\}"));
-        Assert.assertEquals("(^|\\{)#([^\\}]+)(\\}|$)", regExpJsToJavaConverter.convert("(^|{)#([^}]+)(}|$)"));
+        assertEquals("\\{", regExpJsToJavaConverter.convert("{"));
+        assertEquals("\\{", regExpJsToJavaConverter.convert("\\{"));
+        assertEquals("\\}", regExpJsToJavaConverter.convert("}"));
+        assertEquals("\\}", regExpJsToJavaConverter.convert("\\}"));
+        assertEquals("(^|\\{)#([^\\}]+)(\\}|$)", regExpJsToJavaConverter.convert("(^|{)#([^}]+)(}|$)"));
 
-        Assert.assertEquals("a{5}", regExpJsToJavaConverter.convert("a{5}"));
-        Assert.assertEquals("a{5,}", regExpJsToJavaConverter.convert("a{5,}"));
-        Assert.assertEquals("a{5,10}", regExpJsToJavaConverter.convert("a{5,10}"));
+        assertEquals("a{5}", regExpJsToJavaConverter.convert("a{5}"));
+        assertEquals("a{5,}", regExpJsToJavaConverter.convert("a{5,}"));
+        assertEquals("a{5,10}", regExpJsToJavaConverter.convert("a{5,10}"));
 
         // issue 3434548
-        Assert.assertEquals("\\{\\{abc\\}\\}", regExpJsToJavaConverter.convert("{{abc}}"));
-        Assert.assertEquals("\\{{2}\\}{2}", regExpJsToJavaConverter.convert("{{2}}{2}"));
+        assertEquals("\\{\\{abc\\}\\}", regExpJsToJavaConverter.convert("{{abc}}"));
+        assertEquals("\\{{2}\\}{2}", regExpJsToJavaConverter.convert("{{2}}{2}"));
     }
 
     /**
@@ -447,18 +448,18 @@ public class RegExpJsToJavaConverterTest {
     public void escapeOpeningSquareBracketInCharacterClass() {
         final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
 
-        Assert.assertEquals("[ab\\[]", regExpJsToJavaConverter.convert("[ab[]"));
-        Assert.assertEquals("[\\[]", regExpJsToJavaConverter.convert("[[]"));
-        Assert.assertEquals("[a\\[b]", regExpJsToJavaConverter.convert("[a[b]"));
-        Assert.assertEquals("[ab][a\\[b][ab]", regExpJsToJavaConverter.convert("[ab][a[b][ab]"));
-        Assert.assertEquals("[!\\^()\\[\\]]", regExpJsToJavaConverter.convert("[!\\^()[\\]]"));
+        assertEquals("[ab\\[]", regExpJsToJavaConverter.convert("[ab[]"));
+        assertEquals("[\\[]", regExpJsToJavaConverter.convert("[[]"));
+        assertEquals("[a\\[b]", regExpJsToJavaConverter.convert("[a[b]"));
+        assertEquals("[ab][a\\[b][ab]", regExpJsToJavaConverter.convert("[ab][a[b][ab]"));
+        assertEquals("[!\\^()\\[\\]]", regExpJsToJavaConverter.convert("[!\\^()[\\]]"));
 
         // with already escaped [
-        Assert.assertEquals("[ab\\[]", regExpJsToJavaConverter.convert("[ab\\[]"));
-        Assert.assertEquals("[\\[]", regExpJsToJavaConverter.convert("[\\[]"));
-        Assert.assertEquals("[a\\[b]", regExpJsToJavaConverter.convert("[a\\[b]"));
-        Assert.assertEquals("[ab][a\\[b][ab]", regExpJsToJavaConverter.convert("[ab][a\\[b][ab]"));
-        Assert.assertEquals("[!\\^()\\[\\]]", regExpJsToJavaConverter.convert("[!\\^()\\[\\]]"));
+        assertEquals("[ab\\[]", regExpJsToJavaConverter.convert("[ab\\[]"));
+        assertEquals("[\\[]", regExpJsToJavaConverter.convert("[\\[]"));
+        assertEquals("[a\\[b]", regExpJsToJavaConverter.convert("[a\\[b]"));
+        assertEquals("[ab][a\\[b][ab]", regExpJsToJavaConverter.convert("[ab][a\\[b][ab]"));
+        assertEquals("[!\\^()\\[\\]]", regExpJsToJavaConverter.convert("[!\\^()\\[\\]]"));
     }
 
 }

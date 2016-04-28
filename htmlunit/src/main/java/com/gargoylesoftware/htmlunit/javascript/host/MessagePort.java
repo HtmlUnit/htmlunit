@@ -14,11 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.net.URL;
 
@@ -44,8 +42,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class MessagePort extends EventTarget {
 
     private MessagePort port1_;
@@ -110,16 +107,11 @@ public class MessagePort extends EventTarget {
             event.setParentScope(port1_);
             event.setPrototype(getPrototype(event.getClass()));
 
-            if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUS)) {
-                port1_.dispatchEvent(event);
-                return;
-            }
-
             final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
             final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
                 @Override
                 public void execute() throws Exception {
-                    final ContextAction action = new ContextAction() {
+                    final ContextAction contextAction = new ContextAction() {
                         @Override
                         public Object run(final Context cx) {
                             return port1_.dispatchEvent(event);
@@ -127,7 +119,7 @@ public class MessagePort extends EventTarget {
                     };
 
                     final ContextFactory cf = jsEngine.getContextFactory();
-                    cf.call(action);
+                    cf.call(contextAction);
                 }
             };
             jsEngine.addPostponedAction(action);

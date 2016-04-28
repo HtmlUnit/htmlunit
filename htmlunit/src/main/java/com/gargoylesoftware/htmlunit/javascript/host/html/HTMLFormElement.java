@@ -16,7 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
@@ -33,10 +34,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -50,7 +53,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -63,9 +65,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * A JavaScript object for {@code Form}.
+ * A JavaScript object for {@code HTMLFormElement}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
@@ -79,13 +82,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlForm.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlForm.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlForm.class)
 public class HTMLFormElement extends HTMLElement implements Function {
 
     private HTMLCollection elements_; // has to be a member to have equality (==) working
@@ -108,7 +105,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "name".
+     * Returns the value of the JavaScript attribute {@code name}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -117,7 +114,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "name".
+     * Sets the value of the JavaScript attribute {@code name}.
      * @param name the new value
      */
     @JsxSetter
@@ -127,7 +124,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "elements".
+     * Returns the value of the JavaScript attribute {@code elements}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -135,7 +132,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
 
-            elements_ = new HTMLCollection(htmlForm, false, "HTMLFormElement.elements") {
+            elements_ = new HTMLCollection(htmlForm, false) {
                 private boolean filterChildrenOfNestedForms_;
 
                 @Override
@@ -185,26 +182,31 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "length".
-     * Does not count input type=image elements as browsers (IE6, Firfox 1.7) do
-     * (cf <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
+     * Returns the value of the JavaScript attribute {@code length}.
+     * Does not count input {@code type=image} elements
+     * (<a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
      * @return the value of this attribute
      */
     @JsxGetter
     public int getLength() {
         final int all = getElements().getLength();
-        final int images = getHtmlForm().getElementsByAttribute("input", "type", "image").size();
+        final int images = getHtmlForm().getElementsByAttribute(HtmlInput.TAG_NAME, "type", "image").size();
         return all - images;
     }
 
     /**
-     * Returns the value of the JavaScript attribute "action".
+     * Returns the value of the JavaScript attribute {@code action}.
      * @return the value of this attribute
      */
     @JsxGetter
     public String getAction() {
         String action = getHtmlForm().getActionAttribute();
-        if (getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL)) {
+        final BrowserVersion browser = getBrowserVersion();
+        if (action != DomElement.ATTRIBUTE_NOT_DEFINED) {
+            if (action.length() == 0 && browser.hasFeature(JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY)) {
+                return action;
+            }
+
             try {
                 action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
             }
@@ -216,7 +218,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "action".
+     * Sets the value of the JavaScript attribute {@code action}.
      * @param action the new value
      */
     @JsxSetter
@@ -226,7 +228,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "method".
+     * Returns the value of the JavaScript attribute {@code method}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -235,7 +237,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "method".
+     * Sets the value of the JavaScript attribute {@code method}.
      * @param method the new value
      */
     @JsxSetter
@@ -245,7 +247,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "target".
+     * Returns the value of the JavaScript attribute {@code target}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -254,8 +256,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the <tt>onsubmit</tt> event handler for this element.
-     * @return the <tt>onsubmit</tt> event handler for this element
+     * Returns the {@code onsubmit} event handler for this element.
+     * @return the {@code onsubmit} event handler for this element
      */
     @Override
     @JsxGetter(@WebBrowser(IE))
@@ -264,8 +266,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the <tt>onsubmit</tt> event handler for this element.
-     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
+     * Sets the {@code onsubmit} event handler for this element.
+     * @param onsubmit the {@code onsubmit} event handler for this element
      */
     @Override
     @JsxSetter(@WebBrowser(IE))
@@ -274,7 +276,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "target".
+     * Sets the value of the JavaScript attribute {@code target}.
      * @param target the new value
      */
     @JsxSetter
@@ -284,7 +286,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "enctype".
+     * Returns the value of the JavaScript attribute {@code enctype}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -299,7 +301,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "enctype".
+     * Sets the value of the JavaScript attribute {@code enctype}.
      * @param enctype the new value
      */
     @JsxSetter
@@ -316,7 +318,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "encoding".
+     * Returns the value of the JavaScript attribute {@code encoding}.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -325,7 +327,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "encoding".
+     * Sets the value of the JavaScript attribute {@code encoding}.
      * @param encoding the new value
      */
     @JsxSetter
@@ -333,7 +335,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
         setEnctype(encoding);
     }
 
-    private HtmlForm getHtmlForm() {
+    /**
+     * @return the associated HtmlForm
+     */
+    public HtmlForm getHtmlForm() {
         return (HtmlForm) getDomNodeOrDie();
     }
 
@@ -355,7 +360,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
             final WebRequest request = getHtmlForm().getWebRequest(null);
             final String target = page.getResolvedTarget(getTarget());
             final boolean forceDownload = webClient.getBrowserVersion().hasFeature(JS_FORM_SUBMIT_FORCES_DOWNLOAD);
-            webClient.download(page.getEnclosingWindow(), target, request, forceDownload, "JS form.submit()");
+            final boolean checkHash =
+                    !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
+            webClient.download(page.getEnclosingWindow(),
+                        target, request, checkHash, forceDownload, "JS form.submit()");
         }
     }
 
@@ -514,7 +522,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return ScriptableObject.getProperty(this, ((Number) arg).intValue());
             }
         }
-        return Context.getUndefinedValue();
+        return Undefined.instance;
     }
 
     /**

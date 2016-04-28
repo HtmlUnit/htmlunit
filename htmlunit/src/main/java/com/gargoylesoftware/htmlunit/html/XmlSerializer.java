@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -58,7 +59,7 @@ class XmlSerializer {
         }
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         outputDir_ = new File(file.getParentFile(), fileName);
-        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()));
+        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()), TextUtil.DEFAULT_CHARSET);
     }
 
     /**
@@ -174,11 +175,11 @@ class XmlSerializer {
                 ((HtmlPage) enclosedPage).save(file);
             }
             else {
-                final InputStream is = enclosedPage.getWebResponse().getContentAsStream();
-                final FileOutputStream fos = new FileOutputStream(file);
-                IOUtils.copyLarge(is, fos);
-                IOUtils.closeQuietly(is);
-                IOUtils.closeQuietly(fos);
+                try (final InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
+                    try (final FileOutputStream fos = new FileOutputStream(file)) {
+                        IOUtils.copyLarge(is, fos);
+                    }
+                }
             }
         }
 
@@ -186,7 +187,7 @@ class XmlSerializer {
         return map;
     }
 
-    private String getFileExtension(final Page enclosedPage) {
+    private static String getFileExtension(final Page enclosedPage) {
         if (enclosedPage != null) {
             if (enclosedPage.isHtmlPage()) {
                 return "html";
@@ -206,7 +207,7 @@ class XmlSerializer {
         final DomAttr hrefAttr = map.get("href");
         if ((null != hrefAttr) && StringUtils.isNotBlank(hrefAttr.getValue())) {
             final File file = createFile(hrefAttr.getValue(), ".css");
-            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
+            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(), TextUtil.DEFAULT_CHARSET);
             hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
         }
 
@@ -228,7 +229,7 @@ class XmlSerializer {
         return map;
     }
 
-    private String getSuffix(final WebResponse response) {
+    private static String getSuffix(final WebResponse response) {
         // first try to take the one from the requested file
         final String url = response.getWebRequest().getUrl().toString();
         final String fileName = StringUtils.substringAfterLast(StringUtils.substringBefore(url, "?"), "/");
@@ -242,7 +243,8 @@ class XmlSerializer {
         return MimeType.getFileExtension(response.getContentType());
     }
 
-    private Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt, final String attrName) {
+    private static Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt,
+            final String attrName) {
         final Map<String, DomAttr> newMap = new HashMap<>(elt.getAttributesMap());
 
         // clone the specified element, if possible

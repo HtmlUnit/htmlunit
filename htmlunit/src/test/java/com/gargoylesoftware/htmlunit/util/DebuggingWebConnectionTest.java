@@ -95,9 +95,9 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
     @Test
     public void gzip() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos);
-        IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
-        gzipOutputStream.close();
+        try (final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos)) {
+            IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
+        }
 
         final MockWebConnection mockConnection = new MockWebConnection();
         final List<NameValuePair> responseHeaders = Arrays.asList(
@@ -106,12 +106,13 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
             responseHeaders);
 
         final String dirName = "test-" + getClass().getSimpleName();
-        final DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName);
+        try (final DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName)) {
 
-        final WebRequest request = new WebRequest(getDefaultUrl());
-        final WebResponse response = dwc.getResponse(request); // was throwing here
-        assertNull(response.getResponseHeaderValue("Content-Encoding"));
+            final WebRequest request = new WebRequest(getDefaultUrl());
+            final WebResponse response = dwc.getResponse(request); // was throwing here
+            assertNull(response.getResponseHeaderValue("Content-Encoding"));
 
-        FileUtils.deleteDirectory(dwc.getReportFolder());
+            FileUtils.deleteDirectory(dwc.getReportFolder());
+        }
     }
 }

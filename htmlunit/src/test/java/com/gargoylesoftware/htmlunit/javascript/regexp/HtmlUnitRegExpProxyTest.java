@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -193,8 +194,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "false", "true" })
-    public void test_prototype() throws Exception {
+    @Alerts({"true", "false", "true"})
+    public void prototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /^(?:(?:(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|"
@@ -264,8 +265,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "{#abcd},{,abcd,}" })
-    public void testRegexWithNonEscapedCurlyBraces() throws Exception {
+    @Alerts({"{#abcd},{,abcd,}"})
+    public void regexWithNonEscapedCurlyBraces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /(^|{)#([^}]+)(}|$)/;\n"
@@ -284,7 +285,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("aa-b-b-")
-    public void testBackSpace() throws Exception {
+    public void backSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var regexp = /[p\\bz]/g;\n"
@@ -310,7 +311,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "[" })
+    @Alerts({"null", "["})
     public void openingSquareBracketInCharacterClass() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -348,7 +349,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ ":toto,toto,,", "null" })
+    @Alerts({":toto,toto,,", "null"})
     public void jqueryPseudo() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + " var re = /:((?:[\\w\\u00c0-\\uFFFF_-]|\\\\.)+)(?:\\((['\"]*)((?:\\([^\\)]+\\)"
@@ -368,11 +369,11 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({   "[floating=true],floating,=,,true",
+    @Alerts({  "[floating=true],floating,=,,true",
                 "[floating=\"true\"],floating,=,\",true",
                 "[floating=\"true'],floating,=,,\"true'",
                 "[floating=\"true],floating,=,,\"true",
-                "[floating=true\"],floating,=,,true\"" })
+                "[floating=true\"],floating,=,,true\""})
     public void extJs() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var re = /^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])/;\n"
@@ -394,7 +395,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "axxxxa,a", "xxxx,", "xxxx,", "xxxx," })
+    @Alerts({"axxxxa,a", "xxxx,", "xxxx,", "xxxx,"})
     public void backReferenceToOptionalGroup() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -415,7 +416,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "abcx\u0004,b,x", "null", "null", "null" })
+    @Alerts({"abcx\u0004,b,x", "null", "null", "null"})
     public void backReferenceToNotDefinedGroupsAreHandledAsOctal() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -436,7 +437,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "abcx,b,x", "abcx,b,x", "null", "null" })
+    @Alerts({"abcx,b,x", "abcx,b,x", "null", "null"})
     public void ignoreBackReferenceNotFinishedGroups() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -458,7 +459,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "abb,a,b", "abd,a,b" })
+    @Alerts({"null", "abb,a,b", "abd,a,b"})
     public void ignoreBackReferenceInCharacterClass() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -479,7 +480,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "afood$0$7b",
-            IE11 = "afoodfoo$7b")
+            IE = "afoodfoo$7b")
     public void replace_backReferences() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, '$1d$0$7')");
     }
@@ -559,7 +560,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0db",
-            IE11 = "adfoodb")
+            IE = "adfoodb")
     public void replace_backReference_$0() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, 'd$0d')");
         testEvaluate("'afoob'.replace(/(foo)/, 'd$0d')");
@@ -570,7 +571,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0db",
-            IE11 = "adfkxxxkodb")
+            IE = "adfkxxxkodb")
     public void replace_backReference_$0WithMultipleGroups() throws Exception {
         testEvaluate("'afkxxxkob'.replace(/(f)k(.*)k(o)/g, 'd$0d')");
         testEvaluate("'afkxxxkob'.replace(/(f)k(.*)k(o)/, 'd$0d')");
@@ -581,7 +582,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0db",
-            IE11 = "adfoodb")
+            IE = "adfoodb")
     public void replace_backReference_$0WithNoGroups() throws Exception {
         testEvaluate("'afoob'.replace(/foo/g, 'd$0d')");
         testEvaluate("'afoob'.replace(/foo/, 'd$0d')");
@@ -592,7 +593,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0dbfuoc",
-            IE11 = "adfoodbfuoc")
+            IE = "adfoodbfuoc")
     public void replace_backReference_$0WithMultipleHits() throws Exception {
         testEvaluate("'afoobfuoc'.replace(/(f.o)/, 'd$0d')");
     }
@@ -602,7 +603,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ad$0dbd$0dc",
-            IE11 = "adfoodbdfuodc")
+            IE = "adfoodbdfuodc")
     public void replace_backReference_$0WithMultipleHitsGlobal() throws Exception {
         testEvaluate("'afoobfuoc'.replace(/(f.o)/g, 'd$0d')");
     }
@@ -616,7 +617,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         testEvaluate("\"kid's toys\".replace(/'/g, \"\\\\'\")");
     }
 
-    private String buildHtml(final String script) {
+    private static String buildHtml(final String script) {
         return "<html><head><script>function test() {\n"
             + script
             + "\n}</script>"
@@ -642,7 +643,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("a")
     public void stackOverflow() throws Exception {
-        final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"));
+        final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"),
+                TextUtil.DEFAULT_CHARSET);
         final String html = buildHtml(
                   "var s = '" + s + "';\n"
                 + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"
@@ -667,8 +669,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "\\*\\[", "\\\\", "+1", "abcdef", "1\\1abc123\\123de1234\\1234f", "\n  \n", "x  x", "x\"\\", "$$x$" })
-    public void testReplaceAll() throws Exception {
+    @Alerts({"\\*\\[", "\\\\", "+1", "abcdef", "1\\1abc123\\123de1234\\1234f", "\n  \n", "x  x", "x\"\\", "$$x$"})
+    public void replaceAll() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -765,7 +767,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b" })
+    @Alerts({"foobar", "$0bar", "$1bar", "\\$1bar", "\\1", "cb", "cb", "a$$b", "a$1b", "a$`b", "a$'b"})
     public void replaceString() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -882,7 +884,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test(timeout = 1000)
-    @Alerts({ "2200915", "2000915" })
+    @Alerts({"2200915", "2000915"})
     public void replace_huge() throws Exception {
         final String html = "<html><body><script>\n"
             + "String.prototype.times = function(n) {\n"
@@ -908,7 +910,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true", "true" })
+    @Alerts({"true", "true", "true", "true", "true", "true"})
     public void nullCharacter() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link Symbol}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SymbolTest extends WebDriverTestCase {
@@ -34,9 +35,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "symbol",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.iterator)", "true"},
+            IE = "not supported")
     public void iterator() throws Exception {
         name("iterator");
     }
@@ -45,9 +45,9 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            FF45 = {"symbol", "Symbol(Symbol.match)", "true"},
+            IE = "not supported")
     public void match() throws Exception {
         name("match");
     }
@@ -56,9 +56,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            IE = "not supported")
     public void replace() throws Exception {
         name("replace");
     }
@@ -67,9 +66,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            IE = "not supported")
     public void search() throws Exception {
         name("search");
     }
@@ -78,9 +76,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            IE = "not supported")
     public void split() throws Exception {
         name("split");
     }
@@ -89,9 +86,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");
     }
@@ -100,9 +96,9 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"},
+            IE = "not supported")
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
     }
@@ -111,10 +107,9 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "symbol",
-            FF = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.unscopables)", "true"},
+            IE = "not supported")
     public void unscopables() throws Exception {
         name("unscopables");
     }
@@ -123,9 +118,9 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            FF45 = {"symbol", "Symbol(Symbol.species)", "true"},
+            IE = "not supported")
     public void species() throws Exception {
         name("species");
     }
@@ -134,9 +129,10 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
+            FF45 = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
+            IE = "not supported")
     public void toPrimitive() throws Exception {
         name("toPrimitive");
     }
@@ -145,9 +141,9 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.toStringTag)", "true"},
+            IE = "not supported")
     public void toStringTag() throws Exception {
         name("toStringTag");
     }
@@ -159,9 +155,10 @@ public class SymbolTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (window.Symbol) {\n"
-            + "      alert(typeof Symbol." + name + ");\n"
-            + "    }\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    alert(typeof Symbol." + name + ");\n"
+            + "    alert(Symbol." + name + ");\n"
+            + "    alert(Symbol." + name + " === Symbol." + name + ");\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -174,9 +171,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.iterator)",
-            FF31 = {},
-            IE = {})
+    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"},
+            IE = "not supported")
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -184,9 +180,10 @@ public class SymbolTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (window.Symbol) {\n"
-            + "      alert(Symbol.iterator.toString());\n"
-            + "    }\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    alert(Symbol().toString());\n"
+            + "    alert(Symbol('foo').toString());\n"
+            + "    alert(Symbol.iterator.toString());\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -199,11 +196,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = {},
-            IE = {})
-    // The current WebTestCase alert handling is incorrect, as it uses 'String(alertValue)'
-    // In real browsers, the exception is thrown
+    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"},
+            IE = "not supported")
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -211,11 +205,154 @@ public class SymbolTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (window.Symbol) {\n"
-            + "      try {"
-            + "        alert(Symbol.iterator);\n"
-            + "      } catch(e) {alert('exception')}\n"
-            + "    }\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(Symbol());\n"
+            + "      alert(Symbol('foo'));\n"
+            + "      alert(Symbol.iterator);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "symbol", "symbol", "symbol"},
+            IE = "not supported")
+    public void typeOf() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(typeof Symbol);\n"
+            + "      alert(typeof Symbol());\n"
+            + "      alert(typeof Symbol('foo'));\n"
+            + "      alert(typeof Symbol.iterator);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "true", "Symbol(mario)"},
+            IE = "not supported")
+    public void symbolFor() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(Symbol('bar') === Symbol('bar'));\n"
+            + "      alert(Symbol.for('bar') === Symbol.for('bar'));\n"
+
+            + "      var sym = Symbol.for('mario');\n"
+            + "      alert(sym.toString());\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false"},
+            IE = "not supported")
+    public void symbolForGlobal() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (window.Symbol) { globSym = Symbol.for('global'); }\n"
+            + "</script>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      alert(Symbol.for('global') === globSym);\n"
+            + "      alert(Symbol('global') === globSym);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"exception", "exception"},
+            IE = "not supported")
+    public void symbolNew() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      new Symbol();\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {"
+            + "      new Symbol('foo');\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"exception", "exception"},
+            IE = "not supported")
+    public void globalSymbolRegistry() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    try {"
+            + "      new Symbol();\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {"
+            + "      new Symbol('foo');\n"
+            + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

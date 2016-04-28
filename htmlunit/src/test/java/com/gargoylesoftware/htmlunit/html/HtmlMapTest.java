@@ -37,8 +37,7 @@ public class HtmlMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMapElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLMapElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,17 +44,15 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [clickMe] [1]" },
-            IE = { "[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [select] [1]" },
-            IE8 = { "[object] change b:undefined c:undefined [select] [-]",
-                "[object] click b:undefined c:undefined [select] [-]" })
+    @Alerts(DEFAULT = {"[object Event] change b:true c:false [select] [-]",
+                "[object MouseEvent] click b:true c:true [clickMe] [1]"},
+            IE = {"[object Event] change b:true c:false [select] [-]",
+                "[object MouseEvent] click b:true c:true [select] [1]"})
     @BuggyWebDriver({ CHROME, FF })
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
     // ChromeDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" instead of "clickMe"
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     // No idea why the IE11 fires a MouseEvent here instead of a PointerEvent
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
@@ -64,7 +62,7 @@ public class Event2Test extends WebDriverTestCase {
                 + "               <option id='o_id3' value='o_value3'>option3</option>\n"
                 + "       </select>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -73,7 +71,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "")
+            IE = {})
     @BuggyWebDriver(CHROME)
     // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
@@ -84,7 +82,7 @@ public class Event2Test extends WebDriverTestCase {
                 + "               <option id='o_id3' value='o_value3'>option3</option>\n"
                 + "       </select>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -92,18 +90,17 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object MouseEvent] click b:true c:true [radio] [1]",
-                "[object Event] change b:true c:false [radio] [-]" },
-            FF = { "[object MouseEvent] click b:true c:true [radio] [1]",
-                "[object Event] change b:true c:false [radio] [-]" },
-            IE = { "[object Event] change b:true c:false [radio] [-]",
-                "[object PointerEvent] click b:true c:true [radio] [1]" },
-            IE8 = { "[object] click b:undefined c:undefined [radio] [-]" })
+    @Alerts(CHROME = {"[object MouseEvent] click b:true c:true [radio] [1]",
+                "[object Event] change b:true c:false [radio] [-]"},
+            FF = {"[object MouseEvent] click b:true c:true [radio] [1]",
+                "[object Event] change b:true c:false [radio] [-]"},
+            IE = {"[object Event] change b:true c:false [radio] [-]",
+                "[object PointerEvent] click b:true c:true [radio] [1]"})
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -111,18 +108,17 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
-                "[object Event] change b:true c:false [checkbox] [-]" },
-            FF = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
-                "[object Event] change b:true c:false [checkbox] [-]" },
-            IE = { "[object Event] change b:true c:false [checkbox] [-]",
-                "[object PointerEvent] click b:true c:true [checkbox] [1]" },
-            IE8 = { "[object] click b:undefined c:undefined [checkbox] [-]" })
+    @Alerts(CHROME = {"[object MouseEvent] click b:true c:true [checkbox] [1]",
+                "[object Event] change b:true c:false [checkbox] [-]"},
+            FF = {"[object MouseEvent] click b:true c:true [checkbox] [1]",
+                "[object Event] change b:true c:false [checkbox] [-]"},
+            IE = {"[object Event] change b:true c:false [checkbox] [-]",
+                "[object PointerEvent] click b:true c:true [checkbox] [1]"})
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -131,13 +127,12 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -146,13 +141,12 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -161,13 +155,12 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -179,7 +172,7 @@ public class Event2Test extends WebDriverTestCase {
         final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -188,13 +181,12 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -203,13 +195,12 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
     /**
@@ -218,16 +209,15 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">anchor</a>\n";
 
-        testEvents(firstSnippet, secondSnippet);
+        testClickEvents(firstSnippet, secondSnippet);
     }
 
-    private void testEvents(final String firstSnippet, final String secondSnippet) throws Exception {
+    private void testClickEvents(final String firstSnippet, final String secondSnippet) throws Exception {
         final String html =
                 "<html>\n"
                 + "<head>\n"
@@ -306,13 +296,134 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     /**
+     * Test event order for typing into an entry field.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]"})
+    public void inputTextType() throws Exception {
+        final String firstSnippet = "       <input type='text' id='typeHere'\n";
+        final String secondSnippet = "/>\n";
+
+        testTypeEvents(firstSnippet, secondSnippet);
+    }
+
+    /**
+     * Test event order for typing into an password field.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]"})
+    public void inputPasswordType() throws Exception {
+        final String firstSnippet = "       <input type='password' id='typeHere'\n";
+        final String secondSnippet = "/>\n";
+
+        testTypeEvents(firstSnippet, secondSnippet);
+    }
+
+    /**
+     * Test event order for typing into an password field.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object KeyboardEvent] keydown b:true c:true [typeHere] [65]",
+                "[object KeyboardEvent] keypress b:true c:true [typeHere] [97]",
+                "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]"})
+    public void textAreaType() throws Exception {
+        final String firstSnippet = "       <textarea id='typeHere' rows='4' cols='2'\n";
+        final String secondSnippet = "></textarea >\n";
+
+        testTypeEvents(firstSnippet, secondSnippet);
+    }
+
+    private void testTypeEvents(final String firstSnippet, final String secondSnippet) throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "  <script type='text/javascript'>\n"
+                + "  <!--\n"
+                + "    function dumpEvent(event) {\n"
+                + "      var msg = event;\n"
+                + "      msg = msg + ' ' + event.type;\n"
+                + "      msg = msg + ' b:' + event.bubbles;\n"
+                + "      msg = msg + ' c:' + event.cancelable;\n"
+                + "\n"
+                + "      // target\n"
+                + "      var eTarget;\n"
+                + "      if (event.target) {\n"
+                + "        eTarget = event.target;\n"
+                + "      } else if (event.srcElement) {\n"
+                + "        eTarget = event.srcElement;\n"
+                + "      }\n"
+                + "      // defeat Safari bug\n"
+                + "      if (eTarget.nodeType == 3) {\n"
+                + "        eTarget = eTarget.parentNode;\n"
+                + "      }\n"
+                + "\n"
+                + "      if (eTarget.name) {\n"
+                + "        msg = msg + ' [' + eTarget.name + ']';\n"
+                + "      } else {\n"
+                + "        msg = msg + ' [' + eTarget.id + ']';\n"
+                + "      }\n"
+                + "\n"
+                + "      // key code\n"
+                + "      var eCode;\n"
+                + "      if (event.keyCode) {\n"
+                + "        eCode = event.keyCode;\n"
+                + "      } else if (event.which) {\n"
+                + "        eCode = event.which;\n"
+                + "      } else if (event.button) {\n"
+                + "        eCode = event.button;\n"
+                + "      }\n"
+                + "      if (eCode) {\n"
+                + "        var char = String.fromCharCode(eCode);\n"
+                + "        msg = msg + ' [' + eCode + ']';\n"
+                + "      } else {\n"
+                + "        msg = msg + ' [-]';\n"
+                + "      }\n"
+                + "\n"
+                + "      alert(msg);\n"
+                + "    }\n"
+                + "  //-->\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "    <form id='form' name='form' action='#'>\n"
+                + "        <input type='text' id='start' name='startText'/>\n"
+                + "\n"
+                + firstSnippet
+                + "           onclick='dumpEvent(event);'\n"
+//                + "           ondblclick='dumpEvent(event);'\n"
+//                + "           oncontextmenu='dumpEvent(event);'\n"
+//                + "           onfocus='dumpEvent(event);'\n"
+//                + "           onblur='dumpEvent(event);'\n"
+//                + "           onmousedown = 'dumpEvent(event);'\n"
+//                + "           onmouseup = 'dumpEvent(event);'\n"
+                + "           onkeydown = 'dumpEvent(event);'\n"
+                + "           onkeyup = 'dumpEvent(event);'\n"
+                + "           onkeypress = 'dumpEvent(event);'\n"
+//                + "           onselect = 'dumpEvent(event);'\n"
+                + "           onchange = 'dumpEvent(event);'"
+                + secondSnippet
+                + "   </form>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("typeHere")).sendKeys("a");
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
      * Tests that event fires on key press.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "pass", "fail:66", "fail:undefined" },
-            CHROME = { "pass", "fail:66", "fail:0" },
-            IE8 = { "pass", "fail:66", "fail:0" })
+    @Alerts({"pass", "fail:66", "fail:undefined"})
     public void eventOnKeyDown() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -349,10 +460,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"object", "undefined", "undefined", "undefined", "undefined",
-            "object", "false", "false", "false", "false" },
-            IE8 = {"object", "false", "false", "false", "undefined",
-            "object", "false", "false", "false", "undefined" })
+    @Alerts({"object", "undefined", "undefined", "undefined", "undefined",
+            "object", "false", "false", "false", "false"})
     public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -409,16 +518,13 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOMContentLoaded type=DOMContentLoaded", "onLoad" },
-            IE8 = "onLoad")
-    public void testDOMContentLoaded() throws Exception {
+    @Alerts({"DOMContentLoaded type=DOMContentLoaded", "onLoad"})
+    public void dOMContentLoaded() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>DOMContentLoaded</title>\n"
             + "<script>\n"
-            + "  if (document.addEventListener) {\n"
-            + "    document.addEventListener('DOMContentLoaded', onDCL, false);\n"
-            + "  }\n"
+            + "  document.addEventListener('DOMContentLoaded', onDCL, false);\n"
             + "  function onDCL(e) {\n"
             + "    alert('DOMContentLoaded type=' + e.type);\n"
             + "  }\n"
@@ -434,8 +540,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "not canceled", "true", "canceled", "true" },
-            IE8 = { })
+    @Alerts({"false", "not canceled", "true", "canceled", "true"})
     public void testPreventDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -465,14 +570,12 @@ public class Event2Test extends WebDriverTestCase {
             + "  }\n"
 
             + "  function test() {\n"
-            + "    if (document.createEvent) {\n"
-            + "      alert(document.getElementById('checkbox').checked);\n"
-            + "      simulateClick();\n"
-            + "      alert(document.getElementById('checkbox').checked);\n"
-            + "      addHandler();\n"
-            + "      simulateClick();\n"
-            + "      alert(document.getElementById('checkbox').checked);\n"
-            + "    }\n"
+            + "    alert(document.getElementById('checkbox').checked);\n"
+            + "    simulateClick();\n"
+            + "    alert(document.getElementById('checkbox').checked);\n"
+            + "    addHandler();\n"
+            + "    simulateClick();\n"
+            + "    alert(document.getElementById('checkbox').checked);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -488,9 +591,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "SPAN" },
-            FF = { "false", "true", "SPAN" },
-            IE8 = { "true", "false", "SPAN" })
+    @Alerts(DEFAULT = {"false", "false", "SPAN"},
+            FF = {"false", "true", "SPAN"})
     public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"
@@ -518,19 +620,15 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "capturing", "at target", "bubbling" },
-            IE8 = "unknown")
-    @NotYetImplemented(CHROME)
+    @Alerts({"capturing", "at target", "bubbling"})
     public void eventPhase() throws Exception {
         final String html =
               "<html>\n"
             + "<head><script>\n"
             + "  function init() {\n"
             + "    var form = document.forms[0];\n"
-            + "    if (form.addEventListener) {\n"
-            + "      form.addEventListener('click', alertPhase, true);\n"
-            + "      form.addEventListener('click', alertPhase, false);\n"
-            + "    }\n"
+            + "    form.addEventListener('click', alertPhase, true);\n"
+            + "    form.addEventListener('click', alertPhase, false);\n"
             + "  }\n"
 
             + "  function alertPhase(e) {\n"
@@ -559,9 +657,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing",
-                "span bubbling", "div", "div bubbling", "window bubbling" },
-            IE8 = "div")
+    @Alerts({"window capturing", "div capturing", "span capturing",
+                "span bubbling", "div", "div bubbling", "window bubbling"})
     public void eventCapturingAndBubbling() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -571,20 +668,14 @@ public class Event2Test extends WebDriverTestCase {
             + "  }\n"
 
             + "  function init() {\n"
-            + "    if (window.addEventListener) {\n"
-            + "      window.addEventListener('click', t('window capturing'), true);\n"
-            + "      window.addEventListener('click', t('window bubbling'), false);\n"
-            + "    }\n"
+            + "    window.addEventListener('click', t('window capturing'), true);\n"
+            + "    window.addEventListener('click', t('window bubbling'), false);\n"
             + "    var oDiv = document.getElementById('theDiv');\n"
-            + "    if (oDiv.addEventListener) {\n"
-            + "      oDiv.addEventListener('click', t('div capturing'), true);\n"
-            + "      oDiv.addEventListener('click', t('div bubbling'), false);\n"
-            + "    }\n"
+            + "    oDiv.addEventListener('click', t('div capturing'), true);\n"
+            + "    oDiv.addEventListener('click', t('div bubbling'), false);\n"
             + "    var oSpan = document.getElementById('theSpan');\n"
-            + "    if (oSpan.addEventListener) {\n"
-            + "      oSpan.addEventListener('click', t('span capturing'), true);\n"
-            + "      oSpan.addEventListener('click', t('span bubbling'), false);\n"
-            + "    }\n"
+            + "    oSpan.addEventListener('click', t('span capturing'), true);\n"
+            + "    oSpan.addEventListener('click', t('span bubbling'), false);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -605,9 +696,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
-            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false" },
-            IE8 = { "div", "div" })
+    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"},
+            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "false"})
     @NotYetImplemented(CHROME)
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
@@ -618,13 +710,13 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
-            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true",
-                        "div capturing, true, true", "span capturing, true, true" },
-            IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
-                        "div capturing, false, false", "span capturing, false, true" },
-            IE8 = { "div", "div" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"},
+            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing, false", "true",
+                "div capturing", "true", "true", "span capturing", "true", "true"},
+            IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
+                "div capturing", "false", "false", "span capturing", "false", "true"})
+    @NotYetImplemented({ CHROME, IE })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }
@@ -645,17 +737,11 @@ public class Event2Test extends WebDriverTestCase {
             + "    };\n"
             + "  }\n"
             + "  function init() {\n"
-            + "    if (window.addEventListener) {\n"
-            + "      window.addEventListener('click', t('window capturing'), true);\n"
-            + "    }\n"
+            + "    window.addEventListener('click', t('window capturing'), true);\n"
             + "    var oDiv = document.getElementById('theDiv');\n"
-            + "    if (oDiv.addEventListener) {\n"
-            + "      oDiv.addEventListener('click', t('div capturing'), true);\n"
-            + "    }\n"
+            + "    oDiv.addEventListener('click', t('div capturing'), true);\n"
             + "    var oSpan = document.getElementById('theSpan');\n"
-            + "    if (oSpan.addEventListener) {\n"
-            + "      oSpan.addEventListener('click', t('span capturing'), true);\n"
-            + "    }\n"
+            + "    oSpan.addEventListener('click', t('span capturing'), true);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -676,8 +762,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" },
-            IE8 = { })
+    @Alerts({"w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2"})
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -687,20 +772,14 @@ public class Event2Test extends WebDriverTestCase {
             + "    return function(e) { alert(_s); counter++; if (counter >= 5) e.stopPropagation(); };\n"
             + "  }\n"
             + "  function init() {\n"
-            + "    if (window.addEventListener) {\n"
-            + "      window.addEventListener('click', t('w'), true);\n"
-            + "      window.addEventListener('click', t('w 2'), true);\n"
-            + "    }\n"
+            + "    window.addEventListener('click', t('w'), true);\n"
+            + "    window.addEventListener('click', t('w 2'), true);\n"
             + "    var oDiv = document.getElementById('theDiv');\n"
-            + "    if (oDiv.addEventListener) {\n"
-            + "      oDiv.addEventListener('click', t('d'), true);\n"
-            + "      oDiv.addEventListener('click', t('d 2'), true);\n"
-            + "    }\n"
+            + "    oDiv.addEventListener('click', t('d'), true);\n"
+            + "    oDiv.addEventListener('click', t('d 2'), true);\n"
             + "    var oSpan = document.getElementById('theSpan');\n"
-            + "    if (oSpan.addEventListener) {\n"
-            + "      oSpan.addEventListener('click', t('s'), true);\n"
-            + "      oSpan.addEventListener('click', t('s 2'), true);\n"
-            + "    }\n"
+            + "    oSpan.addEventListener('click', t('s'), true);\n"
+            + "    oSpan.addEventListener('click', t('s 2'), true);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='init()'>\n"

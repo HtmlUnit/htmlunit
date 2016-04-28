@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.EDGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_38;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_45;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -39,6 +44,8 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -62,7 +69,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("CONFIGURATION_MAP_");
         field.setAccessible(true);
-        final Map<?, ?> leakyMap = (Map<? , ?>) field.get(null);
+        final Map<?, ?> leakyMap = (Map<?, ?>) field.get(null);
 
         // maybe some BrowserVersions are already known
         final int knownBrowsers = leakyMap.size();
@@ -95,7 +102,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         System.gc();
     }
 
-    private String getMemoryStats() {
+    private static String getMemoryStats() {
         final Runtime rt = Runtime.getRuntime();
         final long free = rt.freeMemory() / 1024;
         final long total = rt.totalMemory() / 1024;
@@ -122,7 +129,8 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 catch (final Throwable t) {
                     continue;
                 }
-                if ("com.gargoylesoftware.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())) {
+                if ("com.gargoylesoftware.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())
+                        || "Reflect".equals(klass.getSimpleName())) {
                     continue;
                 }
                 if (klass.getAnnotation(JsxClasses.class) != null) {
@@ -133,6 +141,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 }
             }
         }
+        foundJsxClasses.remove(DedicatedWorkerGlobalScope.class.getName());
         final List<String> definedClasses = new ArrayList<>();
         for (final Class<?> klass : JavaScriptConfiguration.CLASSES_) {
             definedClasses.add(klass.getName());
@@ -180,14 +189,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
                     jarPath = jarPath.replace("%20", " ");
                 }
-                final JarFile jarFile = new JarFile(jarPath);
-                for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
-                    final String entryName = entries.nextElement().getName();
-                    if (entryName.endsWith(".class")) {
-                        list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
+                try (final JarFile jarFile = new JarFile(jarPath)) {
+                    for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
+                        final String entryName = entries.nextElement().getName();
+                        if (entryName.endsWith(".class")) {
+                            list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
+                        }
                     }
                 }
-                jarFile.close();
             }
             catch (final IOException e) {
                 throw new RuntimeException(klass.getPackage().getName() + " does not appear to be a valid package", e);
@@ -226,6 +235,30 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                     fail("Method " + methodName + " in " + klass.getSimpleName() + " should not start with \"get\"");
                 }
             }
+        }
+    }
+
+    /**
+     * Tests that all classes included in {@link JavaScriptConfiguration#CLASSES_} defining an
+     * {@link JsxClasses}/{@link JsxClass} annotation for at least one browser.
+     */
+    @Test
+    public void obsoleteJsxClasses() {
+        final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX_38);
+        final BrowserVersion[] browsers = new BrowserVersion[]
+        {FIREFOX_38, FIREFOX_45, CHROME, INTERNET_EXPLORER, EDGE};
+
+        for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
+            boolean found = false;
+            for (BrowserVersion browser : browsers) {
+                if (AbstractJavaScriptConfiguration.getClassConfiguration(klass, browser) != null) {
+                    found = true;
+                    break;
+                }
+            }
+            assertTrue("Class " + klass
+                    + " is member of JavaScriptConfiguration.CLASSES_ but does not define @JsxClasses/@JsxClass",
+                    found);
         }
     }
 

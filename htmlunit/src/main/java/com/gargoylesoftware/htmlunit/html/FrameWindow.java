@@ -19,7 +19,6 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowImpl;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
  * The web window for a frame or iframe.
@@ -82,7 +81,7 @@ public class FrameWindow extends WebWindowImpl {
      */
     @Override
     protected boolean isJavaScriptInitializationNeeded() {
-        return getScriptObject() == null
+        return getScriptableObject() == null
             || !(getEnclosedPage().getWebResponse() instanceof StringWebResponse);
         // TODO: find a better way to distinguish content written by document.open(),...
     }

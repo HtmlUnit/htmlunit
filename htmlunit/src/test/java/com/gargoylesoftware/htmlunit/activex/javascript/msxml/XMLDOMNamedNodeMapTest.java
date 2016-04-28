@@ -168,7 +168,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "2", "name1=y1", "name2=y2", "null" })
+            IE = {"2", "name1=y1", "name2=y2", "null"})
     public void nextNode() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -184,7 +184,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "name=y", "0", "null", "name=y" })
+            IE = {"1", "name=y", "0", "null", "name=y"})
     public void removeNamedItem() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -202,7 +202,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "1", "null" })
+            IE = {"1", "1", "null"})
     public void removeNamedItem_unknown() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -218,7 +218,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "1", "null" })
+            IE = {"1", "1", "null"})
     public void removeNamedItem_caseSensitive() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -234,7 +234,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "exception-removeNull" })
+            IE = {"0", "exception-removeNull"})
     public void removeNamedItem_null() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -250,7 +250,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "2", "name1=y1", "name1=y1", "name2=y2", "name1=y1" })
+            IE = {"2", "name1=y1", "name1=y1", "name2=y2", "name1=y1"})
     public void reset() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -269,7 +269,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "1", "myAttr=", "true" })
+            IE = {"0", "1", "myAttr=", "true"})
     public void setNamedItem() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -287,7 +287,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "exception-setNull" })
+            IE = {"0", "exception-setNull"})
     public void setNamedItem_null() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"

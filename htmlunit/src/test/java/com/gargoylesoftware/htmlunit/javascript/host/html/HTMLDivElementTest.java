@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Unit tests for {@link HTMLDivElement}.
@@ -40,8 +41,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no",
-            IE8 = "yes")
+    @Alerts("no")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -68,8 +68,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "justify", "center", "wrong", "" },
-            IE = { "left", "right", "justify", "center", "", "" })
+    @Alerts(DEFAULT = {"left", "right", "justify", "center", "wrong", ""},
+            IE = {"left", "right", "justify", "center", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -96,8 +96,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "justify", "center" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "justify", "center" })
+    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "justify", "center"},
+            IE = {"center", "error", "center", "error", "center", "left", "right", "justify", "center"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -133,20 +133,151 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "true", "null", "true" },
-            IE8 = { "undefined", "false", "undefined", "false" })
+    @Alerts({"null", "true", "null", "true"})
     public void handlers() throws Exception {
         final String html
             = "<html><body>\n"
             + "<div id='d1'></div>\n"
             + "<script>\n"
-            + "var d = document.getElementById('d1');\n"
-            + "alert(d.onchange);\n"
-            + "alert('onchange' in d);\n"
-            + "alert(d.onsubmit);\n"
-            + "alert('onsubmit' in d);\n"
+            + "  var d = document.getElementById('d1');\n"
+            + "  alert(d.onchange);\n"
+            + "  alert('onchange' in d);\n"
+            + "  alert(d.onsubmit);\n"
+            + "  alert('onsubmit' in d);\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true", "true"})
+    public void clientHeight() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var elt = document.getElementById('emptyDiv');\n"
+            + "      alert(elt.clientHeight == 0);\n"
+
+            + "      elt = document.getElementById('textDiv');\n"
+            + "      alert(elt.clientHeight > 15);\n"
+
+            + "      elt = document.getElementById('styleDiv0');\n"
+            + "      alert(elt.clientHeight == 0);\n"
+
+            + "      elt = document.getElementById('styleDiv10');\n"
+            + "      alert(elt.clientHeight > 5);\n"
+
+            + "      elt = document.getElementById('styleDivAuto');\n"
+            + "      alert(elt.clientHeight > 15);\n"
+
+            + "      elt = document.getElementById('styleDivAutoEmpty');\n"
+            + "      alert(elt.clientHeight == 0);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='emptyDiv'></div>\n"
+            + "  <div id='textDiv'>HtmlUnit</div>\n"
+            + "  <div id='styleDiv0' style='height: 0px'>HtmlUnit</div>\n"
+            + "  <div id='styleDiv10' style='height: 10px'>HtmlUnit</div>\n"
+            + "  <div id='styleDivAuto' style='height: auto'>HtmlUnit</div>\n"
+            + "  <div id='styleDivAutoEmpty' style='height: auto'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true", "true"})
+    public void clientWidth() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var elt = document.getElementById('emptyDiv');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('textDiv');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('styleDiv0');\n"
+            + "      alert(elt.clientWidth == 0);\n"
+
+            + "      elt = document.getElementById('styleDiv10');\n"
+            + "      alert(elt.clientWidth > 8);\n"
+
+            + "      elt = document.getElementById('styleDivAuto');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('styleDivAutoEmpty');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='emptyDiv'></div>\n"
+            + "  <div id='textDiv'>HtmlUnit</div>\n"
+            + "  <div id='styleDiv0' style='width: 0px'>HtmlUnit</div>\n"
+            + "  <div id='styleDiv10' style='width: 10px'>HtmlUnit</div>\n"
+            + "  <div id='styleDivAuto' style='width: auto'>HtmlUnit</div>\n"
+            + "  <div id='styleDivAutoEmpty' style='width: auto'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true", "true"})
+    public void clientWidthNested() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var elt = document.getElementById('emptyDiv');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('textDiv');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('styleDiv0');\n"
+            + "      alert(elt.clientWidth == 0);\n"
+
+            + "      elt = document.getElementById('styleDiv10');\n"
+            + "      alert(elt.clientWidth > 8);\n"
+
+            + "      elt = document.getElementById('styleDivAuto');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+
+            + "      elt = document.getElementById('styleDivAutoEmpty');\n"
+            + "      alert(elt.clientWidth > 500);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='emptyDiv'><div></div></div>\n"
+            + "  <div id='textDiv'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDiv0' style='width: 0px'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDiv10' style='width: 10px'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDivAuto' style='width: auto'><div>HtmlUnit</div></div>\n"
+            + "  <div id='styleDivAutoEmpty' style='width: auto'><div></div></div>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

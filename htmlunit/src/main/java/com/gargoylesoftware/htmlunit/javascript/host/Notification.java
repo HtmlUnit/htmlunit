@@ -14,12 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NOTIFICATION_GRANTED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticGetter;
@@ -41,6 +40,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 public class Notification extends EventTarget {
 
     /**
+     * The maximum number of actions supported.
+     */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short maxActions            = 2;
+
+    /**
      * JavaScript constructor.
      * @param title the title
      */
@@ -56,10 +61,6 @@ public class Notification extends EventTarget {
      */
     @JsxStaticGetter
     public static String getPermission(final Scriptable thisObj) {
-        final SimpleScriptable scripatble = (SimpleScriptable) thisObj.getParentScope();
-        if (scripatble.getBrowserVersion().hasFeature(JS_NOTIFICATION_GRANTED)) {
-            return "granted";
-        }
         return "default";
     }
 

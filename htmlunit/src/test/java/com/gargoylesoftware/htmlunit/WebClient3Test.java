@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
@@ -24,7 +24,6 @@ import java.util.Random;
 import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -46,205 +45,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html")
-    public void redirect301() throws Exception {
-        redirect(301, "/page2.html");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html")
-    public void redirectAbsolute301() throws Exception {
-        redirect(301, new URL(URL_FIRST, "/page2.html").toExternalForm());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html?test=foo")
-    // FF38 succeeds only when running alone
-    public void redirect301WithQuery() throws Exception {
-        redirect(301, "/page2.html?test=foo");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html#hash")
-    // FF38 succeeds only when running alone
-    public void redirect301WithHash() throws Exception {
-        redirect(301, "/page2.html#hash");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html?test=foo#hash")
-    // FF38 succeeds only when running alone
-    public void redirect301WithQueryAndHash() throws Exception {
-        redirect(301, "/page2.html?test=foo#hash");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
-            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
-    @NotYetImplemented
-    // FF38 succeeds only when running alone
-    public void redirect301WithQueryAndHashSpecialChars() throws Exception {
-        redirect(301, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html?test=foo#hash")
-    // FF38 succeeds only when running alone
-    public void redirectAbsolute301WithQueryAndHash() throws Exception {
-        redirect(301, new URL(URL_FIRST, "/page2.html?test=foo#hash").toExternalForm());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
-            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
-    @NotYetImplemented
-    // FF38 succeeds only when running alone
-    public void redirectAbsolute301WithQueryAndHashSpecialChars() throws Exception {
-        redirect(301, new URL(URL_FIRST,
-                "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4").toExternalForm());
-    }
-
-    /**
-     * Regression test for bug 2822048: a 302 redirect without Location header.
-     * @throws Exception if an error occurs
-     */
-    // TODO [IE11]ERRORPAGE real IE11 displays his own error page (res://ieframe.dll/dnserror.htm#<url>)
-    @Test
-    public void redirect302WithoutLocation() throws Exception {
-        final String html = "<html><body><a href='page2'>to redirect</a></body></html>";
-        getMockWebConnection().setDefaultResponse("", 302, "Found", null);
-
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.tagName("a")).click();
-        assertEquals(getDefaultUrl() + "page2", driver.getCurrentUrl());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html?test=foo")
-    // FF38 succeeds only when running alone
-    public void redirect302WithQuery() throws Exception {
-        redirect(302, "/page2.html?test=foo");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html#hash")
-    // FF38 succeeds only when running alone
-    public void redirect302WithHash() throws Exception {
-        redirect(302, "/page2.html#hash");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("§§URL§§page2.html?test=foo#hash")
-    // FF38 succeeds only when running alone
-    public void redirect302WithQueryAndHash() throws Exception {
-        redirect(302, "/page2.html?test=foo#hash");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
-            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
-    @NotYetImplemented
-    // FF38 succeeds only when running alone
-    public void redirect302WithQueryAndHashSpecialChars() throws Exception {
-        redirect(302, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
-    }
-
-    private void redirect(final int code, final String redirectUrl) throws Exception {
-        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
-
-        final URL url = new URL(getDefaultUrl(), "page2.html");
-        getMockWebConnection().setResponse(url, html);
-
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Location", redirectUrl));
-        getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
-
-        expandExpectedAlertsVariables(getDefaultUrl());
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.tagName("a")).click();
-
-        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-    }
-
-    /**
-     * Regression test for bug 3017719: a 302 redirect should change the page url.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void redirect302() throws Exception {
-        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
-
-        final URL url = new URL(getDefaultUrl(), "page2.html");
-        getMockWebConnection().setResponse(url, html);
-
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Location", "/page2.html"));
-        getMockWebConnection().setDefaultResponse("", 302, "Found", null, headers);
-
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.tagName("a")).click();
-        assertEquals(url.toString(), driver.getCurrentUrl());
-    }
-
-    /**
-     * Regression test for bug 3035155.
-     * Bug was fixes in HttpClient 4.1.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    // FF38 succeeds only when running alone
-    public void redirect302UrlsInQuery() throws Exception {
-        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
-
-        final URL url = new URL(getDefaultUrl(), "page2.html");
-        getMockWebConnection().setResponse(url, html);
-
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Location", "/page2.html?param=http%3A//somwhere.org"));
-        getMockWebConnection().setDefaultResponse("", 302, "Found", null, headers);
-
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.tagName("a")).click();
-        assertEquals(url.toString() + "?param=http%3A//somwhere.org", driver.getCurrentUrl());
-    }
 
     /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
@@ -368,7 +168,7 @@ public class WebClient3Test extends WebDriverTestCase {
         for (int i = 1; i < 100; i++) {
             final WebDriver webDriver = loadPage2(firstContent);
             webDriver.findElement(By.tagName("a")).click();
-            Assert.assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
+            assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
         }
     }
 
@@ -379,31 +179,33 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
-    // TODO [IE11]MODALPANEL real IE11 opens a modal panel 'really close window?' which webdriver cannot handle
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>"
-            + "<head>"
-            + "<script type='text/javascript'>"
-            + "  function info(msg) {"
-            + "    alert(msg);"
-            + "  }"
-            + "</script>"
-            + "</head>"
-            + "<body>"
-            + " <a id='testAnchor' href='" + URL_SECOND + "' target='_blank' onclick='info(\"open\")'>to second</a>"
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
+        final String firstContent = "<html>\n"
+            + "<head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + " <a id='testAnchor' href='" + URL_SECOND + "' target='_blank' onclick='info(\"open\")'>to second</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>"
-            + "<script type='text/javascript'>"
-            + "  function first() {"
-            + "    window.opener.info('first');"
-            + "    window.setTimeout(second, 10);"
-            + "  }"
-            + "  function second() {"
-            + "    window.opener.info('second');"
-            + "    window.close();"
-            + "  }"
-            + "</script>"
+        final String secondContent = "<html><head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function first() {\n"
+            + "    window.opener.info('first');\n"
+            + "    window.setTimeout(second, 10);\n"
+            + "  }\n"
+            + "  function second() {\n"
+            + "    window.opener.info('second');\n"
+            + "    window.close();\n"
+            + "  }\n"
+            + "</script>\n"
             + "</head>"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
@@ -424,33 +226,35 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
-    // TODO [IE11]MODALPANEL real IE11 opens a modal panel 'really close window?' which webdriver cannot handle
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>"
-            + "<head>"
-            + "<script type='text/javascript'>"
-            + "  function info(msg) {"
-            + "    alert(msg);"
-            + "  }"
-            + "</script>"
-            + "</head>"
-            + "<body>"
-            + "<form action='" + URL_SECOND + "' target='_blank'>"
-            + " <input id='testSubmit' type='submit' value='Submit' onclick='info(\"open\")'>"
-            + "</form>"
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
+        final String firstContent = "<html>\n"
+            + "<head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form action='" + URL_SECOND + "' target='_blank'>\n"
+            + " <input id='testSubmit' type='submit' value='Submit' onclick='info(\"open\")'>\n"
+            + "</form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>"
-            + "<script type='text/javascript'>"
-            + "  function first() {"
-            + "    window.opener.info('first');"
-            + "    window.setTimeout(second, 10);"
-            + "  }"
-            + "  function second() {"
-            + "    window.opener.info('second');"
-            + "    window.close();"
-            + "  }"
-            + "</script>"
+        final String secondContent = "<html><head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function first() {\n"
+            + "    window.opener.info('first');\n"
+            + "    window.setTimeout(second, 10);\n"
+            + "  }\n"
+            + "  function second() {\n"
+            + "    window.opener.info('second');\n"
+            + "    window.close();\n"
+            + "  }\n"
+            + "</script>\n"
             + "</head>"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
@@ -471,31 +275,31 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>"
-            + "<head>"
-            + "<script type='text/javascript'>"
-            + "  function info(msg) {"
-            + "    alert(msg);"
-            + "  }"
-            + "</script>"
-            + "</head>"
-            + "<body>"
+        final String firstContent = "<html>\n"
+            + "<head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
             + " <a id='testAnchor' href='#'"
-            + "     onclick='info(\"open\");window.open(\"" + URL_SECOND + "\", \"Popup\", \"\");'>open window</a>"
+            + "     onclick='info(\"open\");window.open(\"" + URL_SECOND + "\", \"Popup\", \"\");'>open window</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>"
-            + "<script type='text/javascript'>"
-            + "  function first() {"
-            + "    window.opener.info('first');"
-            + "    window.setTimeout(second, 10);"
-            + "  }"
-            + "  function second() {"
-            + "    window.opener.info('second');"
-            + "    window.close();"
-            + "  }"
-            + "</script>"
+        final String secondContent = "<html><head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function first() {\n"
+            + "    window.opener.info('first');\n"
+            + "    window.setTimeout(second, 10);\n"
+            + "  }\n"
+            + "  function second() {\n"
+            + "    window.opener.info('second');\n"
+            + "    window.close();\n"
+            + "  }\n"
+            + "</script>\n"
             + "</head>"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
@@ -516,36 +320,36 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second" })
+    @Alerts ({ "open", "first", "second"})
     public void windowOpenedByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>"
-            + "<head>"
-            + "<script type='text/javascript'>"
-            + "  function info(msg) {"
-            + "    alert(msg);"
-            + "  }"
-            + "</script>"
-            + "</head>"
-            + "<body>"
-            + "<form action='" + URL_SECOND + "' name='myForm'>"
+        final String firstContent = "<html>\n"
+            + "<head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form action='" + URL_SECOND + "' name='myForm'>\n"
             + " <input id='testSubmit' type='button' value='Submit' "
             + "   onclick='info(\"open\");"
             + "   window.open(\"" + URL_SECOND + "\", \"Popup\");"
             + "   document.myForm.target = \"Popup\";'"
-            + " >"
-            + "</form>"
+            + " >\n"
+            + "</form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>"
-            + "<script type='text/javascript'>"
-            + "  function first() {"
-            + "    window.opener.info('first');"
-            + "    window.setTimeout(second, 10);"
-            + "  }"
-            + "  function second() {"
-            + "    window.opener.info('second');"
-            + "    window.close();"
-            + "  }"
-            + "</script>"
+        final String secondContent = "<html><head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function first() {\n"
+            + "    window.opener.info('first');\n"
+            + "    window.setTimeout(second, 10);\n"
+            + "  }\n"
+            + "  function second() {\n"
+            + "    window.opener.info('second');\n"
+            + "    window.close();\n"
+            + "  }\n"
+            + "</script>\n"
             + "</head>"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
@@ -563,7 +367,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "Executed", "later" })
+    @Alerts ({ "Executed", "later"})
     // TODO [IE11]ERRORPAGE real IE11 displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"
@@ -607,8 +411,10 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("modified")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void deflateCompressionGZipCompatible() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         doTestDeflateCompression(true);
     }
 
@@ -618,8 +424,8 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "modified",
-            IE11 = "Hello world")
-    @NotYetImplemented(IE11)
+            IE = "Hello world")
+    @NotYetImplemented(IE)
     // IE11 does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);

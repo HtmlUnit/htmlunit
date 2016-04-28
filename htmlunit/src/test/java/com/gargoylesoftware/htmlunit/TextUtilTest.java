@@ -20,7 +20,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -28,7 +27,7 @@ import org.junit.Test;
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public final class TextUtilTest extends SimpleWebTestCase {
+public class TextUtilTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -60,9 +59,11 @@ public final class TextUtilTest extends SimpleWebTestCase {
             final String input = entry[0];
             final String expectedResult = entry[1];
 
-            final InputStream inputStream = TextUtil.toInputStream(input, encoding);
-            final String actualResult = new BufferedReader(new InputStreamReader(inputStream, encoding)).readLine();
-            Assert.assertEquals(expectedResult, actualResult);
+            try (final InputStream inputStream = TextUtil.toInputStream(input, encoding)) {
+                try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, encoding))) {
+                    assertEquals(expectedResult, reader.readLine());
+                }
+            }
         }
     }
 
@@ -72,17 +73,17 @@ public final class TextUtilTest extends SimpleWebTestCase {
     @Test
     public void stringToByteArray() throws Exception {
         byte[] result = TextUtil.stringToByteArray(null, "UTF-8");
-        Assert.assertEquals(0, result.length);
+        assertEquals(0, result.length);
 
         result = TextUtil.stringToByteArray("", "UTF-8");
-        Assert.assertEquals(0, result.length);
+        assertEquals(0, result.length);
 
         result = TextUtil.stringToByteArray("htmlunit", "UTF-8");
-        Assert.assertEquals(8, result.length);
-        Assert.assertEquals(104, result[0]);
+        assertEquals(8, result.length);
+        assertEquals(104, result[0]);
 
         result = TextUtil.stringToByteArray("htmlunit", "Klingon");
-        Assert.assertEquals(0, result.length);
+        assertEquals(0, result.length);
     }
 
 }

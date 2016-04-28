@@ -40,14 +40,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
-                "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF31 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
-            FF38 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
-            IE11 = { "[object CSSImportRule]", "§§URL§§second/",
-                "all", "0", "[object CSSStyleSheet]" },
-            IE8 = "cssRules undefined")
-    // IE8 does not support CSSStyleSheet.cssRules
+    @Alerts(DEFAULT = {"[object CSSImportRule]", "§§URL§§second/",
+                "[object MediaList]", "0", "[object CSSStyleSheet]"},
+            FF = {"[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]"},
+            IE = {"[object CSSImportRule]", "§§URL§§second/",
+                "all", "0", "[object CSSStyleSheet]"})
     public void getImportFromCssRulesCollection_absolute() throws Exception {
         getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
     }
@@ -57,13 +54,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object CSSImportRule]", "foo.css",
-                "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            FF31 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
-            FF38 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
-            IE11 = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" },
-            IE8 = "cssRules undefined")
-    // IE8 does not support CSSStyleSheet.cssRules
+    @Alerts(DEFAULT = {"[object CSSImportRule]", "foo.css",
+                "[object MediaList]", "0", "[object CSSStyleSheet]"},
+            FF = {"[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]"},
+            IE = {"[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]"})
     public void getImportFromCssRulesCollection_relative() throws Exception {
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
         final URL urlCss = new URL(URL_FIRST, "/dir1/dir2/foo.css");
@@ -107,7 +101,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d,null) : d.currentStyle;\n"
+            + "var s = window.getComputedStyle(d, null);\n"
             + "alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -130,7 +124,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "var s = window.getComputedStyle(d, null);\n"
             + "alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -158,7 +152,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
             + "  var d = document.getElementById('d');\n"
-            + "  var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "  var s = window.getComputedStyle(d, null);\n"
             + "  alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -180,9 +174,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "true" })
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @Alerts({"true", "true", "true"})
     public void circularImportedStylesheetsComplexCase() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
             + "<body>\n"
@@ -191,13 +187,13 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='f'>foo</div>\n"
             + "<script>\n"
             + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "var s = window.getComputedStyle(d, null);\n"
             + "alert(s.color.indexOf('128') > 0);\n"
             + "var e = document.getElementById('e');\n"
-            + "s = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "s = window.getComputedStyle(e, null);\n"
             + "alert(s.color.indexOf('127') > 0);\n"
             + "var f = document.getElementById('f');\n"
-            + "s = window.getComputedStyle ? window.getComputedStyle(f, null) : f.currentStyle;\n"
+            + "s = window.getComputedStyle(f, null);\n"
             + "alert(s.color.indexOf('126') > 0);\n"
             + "</script>\n"
             + "</body></html>";
@@ -232,8 +228,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("42px")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void importedStylesheetsLoadedAccordingToMediaType() throws Exception {
+        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        shutDownRealIE();
+
         final String html
             = "<html><head>\n"
             + "  <style>\n"
@@ -246,7 +244,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "  <div id='d'>foo</div>\n"
             + "  <script>\n"
             + "    var d = document.getElementById('d');\n"
-            + "    var s = window.getComputedStyle ? window.getComputedStyle(d,null) : d.currentStyle;\n"
+            + "    var s = window.getComputedStyle(d, null);\n"
             + "    alert(s.fontSize);\n"
             + "</script>\n"
             + "</body></html>";

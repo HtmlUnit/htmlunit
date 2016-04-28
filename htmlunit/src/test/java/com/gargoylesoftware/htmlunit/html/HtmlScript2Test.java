@@ -65,8 +65,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "created", "hello", "replaced" },
-            IE8 = "exception")
+    @Alerts({"created", "hello", "replaced"})
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"
@@ -90,8 +89,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLScriptElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLScriptElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -127,7 +125,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts({ "1", "5", "7" })
+    @Alerts({"1", "5", "7"})
     public void type_language() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -175,8 +173,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "deferred", "normal", "onload" },
-            IE8 = { "normal", "deferred", "onload" })
+    @Alerts({"deferred", "normal", "onload"})
     public void defer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
@@ -193,7 +190,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false" })
+    @Alerts({"false", "false"})
     public void appendChild_newIdAndScriptAddedInOnce() throws Exception {
         final String html
             = "<html><body>\n"
@@ -215,7 +212,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void executesMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"
@@ -262,8 +259,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "3",
-            IE8 = "exception")
+    @Alerts("3")
     public void setTextMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"
@@ -286,8 +282,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3" },
-            IE8 = { "1", "2", "3", "4", "5" })
+    @Alerts({"1", "2", "3"})
     public void settingSrcAttribute() throws Exception {
         final String html =
             "<html>\n"
@@ -322,9 +317,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "s-x", "z" },
-            IE11 = { "s-x", "x", "z" },
-            IE8 = "s-x")
+    @Alerts(DEFAULT = {"s-x", "z"},
+            IE = {"s-x", "x", "z"})
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"
@@ -332,17 +326,17 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var s1 = document.createElement('script');\n"
             + "    s1.text = 'alert(\"s-x\")';\n"
-            + "    if(s1.addEventListener) s1.addEventListener('load', function(){alert('x')}, false);\n"
+            + "    s1.addEventListener('load', function(){alert('x')}, false);\n"
             + "    document.body.insertBefore(s1, document.body.firstChild);\n"
             + "    \n"
             + "    var s2 = document.createElement('script');\n"
             + "    s2.src = '//:';\n"
-            + "    if(s2.addEventListener) s2.addEventListener('load', function(){alert('y')}, false);\n"
+            + "    s2.addEventListener('load', function(){alert('y')}, false);\n"
             + "    document.body.insertBefore(s2, document.body.firstChild);\n"
             + "    \n"
             + "    var s3 = document.createElement('script');\n"
             + "    s3.src = 'script.js';\n"
-            + "    if(s3.addEventListener) s3.addEventListener('load', function(){alert('z')}, false);\n"
+            + "    s3.addEventListener('load', function(){alert('z')}, false);\n"
             + "    document.body.insertBefore(s3, document.body.firstChild);\n"
             + "  }\n"
             + "</script>\n"
@@ -381,7 +375,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "loaded", "§§URL§§abcd" })
+    @Alerts({"loaded", "§§URL§§abcd"})
     public void lineBreaksInUrl() throws Exception {
         final String html
             = "<html><head>\n"

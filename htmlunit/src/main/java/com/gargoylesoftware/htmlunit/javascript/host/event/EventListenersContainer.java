@@ -15,14 +15,20 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_RESULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_UNDEFINED_AS_NULL;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,40 +39,87 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 /**
  * Container for event listener.
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class EventListenersContainer implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
     static class Handlers implements Serializable {
-        private final List<Scriptable> capturingHandlers_ = new ArrayList<>();
-        private final List<Scriptable> bubblingHandlers_ = new ArrayList<>();
+        private List<Scriptable> capturingHandlers_;
+        private List<Scriptable> bubblingHandlers_;
         private Object handler_;
-        List<Scriptable> getHandlers(final boolean useCapture) {
+
+        Handlers() {
+            capturingHandlers_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
+            bubblingHandlers_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
+        }
+
+        private Handlers(final List<Scriptable> capturingHandlers,
+                    final List<Scriptable> bubblingHandlers, final Object handler) {
+            capturingHandlers_ = Collections.unmodifiableList(new ArrayList<>(capturingHandlers));
+            bubblingHandlers_ = Collections.unmodifiableList(new ArrayList<>(bubblingHandlers));
+            handler_ = handler;
+        }
+
+        private List<Scriptable> getHandlers(final boolean useCapture) {
             if (useCapture) {
                 return capturingHandlers_;
             }
             return bubblingHandlers_;
         }
+
+        private synchronized boolean addListener(final Scriptable listener, final boolean useCapture) {
+            final List<Scriptable> listeners = getHandlers(useCapture);
+
+            if (listeners.contains(listener)) {
+                return false;
+            }
+
+            List<Scriptable> newListeners = new ArrayList<>(listeners.size() + 1);
+            newListeners.addAll(listeners);
+            newListeners.add(listener);
+            newListeners = Collections.unmodifiableList(newListeners);
+
+            if (useCapture) {
+                capturingHandlers_ = newListeners;
+            }
+            else {
+                bubblingHandlers_ = newListeners;
+            }
+
+            return true;
+        }
+
+        private synchronized void removeListener(final Scriptable listener, final boolean useCapture) {
+            final List<Scriptable> listeners = getHandlers(useCapture);
+
+            final int idx = listeners.indexOf(listener);
+            if (idx < 0) {
+                return;
+            }
+
+            List<Scriptable> newListeners = new ArrayList<>(listeners);
+            newListeners.remove(idx);
+            newListeners = Collections.unmodifiableList(newListeners);
+
+            if (useCapture) {
+                capturingHandlers_ = newListeners;
+            }
+            else {
+                bubblingHandlers_ = newListeners;
+            }
+        }
+
         @Override
         protected Handlers clone() {
-            final Handlers clone = new Handlers();
-            clone.handler_ = handler_;
-            clone.capturingHandlers_.addAll(capturingHandlers_);
-            clone.bubblingHandlers_.addAll(bubblingHandlers_);
-            return clone;
+            return new Handlers(capturingHandlers_, bubblingHandlers_, handler_);
         }
     }
 
@@ -94,14 +147,14 @@ public class EventListenersContainer implements Serializable {
             return true;
         }
 
-        final List<Scriptable> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
-        if (listeners.contains(listener)) {
+        final Handlers handlers = getHandlersOrCreateIt(type);
+        final boolean added = handlers.addListener(listener, useCapture);
+        if (!added) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
             }
             return false;
         }
-        listeners.add(listener);
         return true;
     }
 
@@ -131,14 +184,18 @@ public class EventListenersContainer implements Serializable {
 
     /**
      * Removes event listener.
-     * @param type the type
+     * @param eventType the type
      * @param listener the listener
      * @param useCapture to use capture or not
      */
-    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        final List<Scriptable> handlers = getHandlers(type, useCapture);
+    public void removeEventListener(final String eventType, final Scriptable listener, final boolean useCapture) {
+        if (null == listener) {
+            return;
+        }
+
+        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ROOT));
         if (handlers != null) {
-            handlers.remove(listener);
+            handlers.removeListener(listener, useCapture);
         }
     }
 
@@ -149,9 +206,7 @@ public class EventListenersContainer implements Serializable {
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
         Object handler = value;
-        if (jsNode_.getWindow().getBrowserVersion()
-            .hasFeature(JS_EVENT_HANDLER_UNDEFINED_AS_NULL)
-            && Undefined.instance == value) {
+        if (Undefined.instance == value) {
             handler = null;
         }
 
@@ -175,7 +230,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (!event.applies(node)) {
+        if (node == null || !node.handles(event)) {
             return null;
         }
         ScriptResult allResult = null;
@@ -183,9 +238,9 @@ public class EventListenersContainer implements Serializable {
         if (handlers != null && !handlers.isEmpty()) {
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
-            // make a copy of the list as execution of an handler may (de-)register handlers
-            final List<Scriptable> handlersToExecute = new ArrayList<>(handlers);
-            for (final Scriptable listener : handlersToExecute) {
+
+            // no need for a copy, handlers are copy on write
+            for (final Scriptable listener : handlers) {
                 Function function = null;
                 Scriptable thisObject = null;
                 if (listener instanceof Function) {
@@ -225,7 +280,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventHandler(final Event event, final Object[] propHandlerArgs) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (!event.applies(node)) {
+        if (node != null && !node.handles(event)) {
             return null;
         }
         final Function handler = getEventHandler(event.getType());
@@ -358,5 +413,4 @@ public class EventListenersContainer implements Serializable {
     public String toString() {
         return getClass().getSimpleName() + "[node=" + jsNode_ + " handlers=" + eventHandlers_.keySet() + "]";
     }
-
 }

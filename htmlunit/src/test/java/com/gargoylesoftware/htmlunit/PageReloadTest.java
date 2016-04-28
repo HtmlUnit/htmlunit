@@ -14,18 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.net.URL;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for page reloading in various situations.
@@ -385,7 +381,6 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             CHROME = "1",
             IE = "1")
-    @NotYetImplemented(CHROME)
     public void submitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -402,10 +397,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void submitGet_url_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -425,10 +419,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR2 },
-            CHROME = { "1", ANCHOR2 },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR2 },
+            CHROME = {"1", ANCHOR2 },
+            IE = {"1", ""})
     public void submitGet_url_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -464,10 +457,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void submitGet_url_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -561,10 +553,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void submitGet_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmpty",
                 Integer.parseInt(getExpectedAlerts()[0]),
@@ -586,10 +577,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void submitGet_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -609,10 +599,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR2 },
-            CHROME = { "1", ANCHOR2 },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR2 },
+            CHROME = {"1", ANCHOR2 },
+            IE = {"1", ""})
     public void submitGet_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -649,10 +638,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = {"1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void submitGet_urlHash_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1092,7 +1080,6 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             CHROME = "1",
             IE = "1")
-    @NotYetImplemented(CHROME)
     public void jsSubmitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -1109,10 +1096,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void jsSubmitGet_url_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                     PATHNAME, getExpectedAlerts()[1]);
@@ -1132,10 +1118,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR2 },
-            CHROME = { "1", ANCHOR2 },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR2 },
+            CHROME = {"1", ANCHOR2 },
+            IE = {"1", ""})
     public void jsSubmitGet_url_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1171,10 +1156,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void jsSubmitGet_url_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1266,10 +1250,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void jsSubmitGet_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
                "jsSubmitGetEmpty", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, getExpectedAlerts()[1]);
@@ -1290,10 +1273,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void jsSubmitGet_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1313,10 +1295,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR2 },
-            CHROME = { "1", ANCHOR2 },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR2 },
+            CHROME = {"1", ANCHOR2 },
+            IE = {"1", ""})
     public void jsSubmitGet_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentHash",
                 Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, getExpectedAlerts()[1]);
@@ -1352,10 +1333,9 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", ANCHOR },
-            CHROME = { "1", ANCHOR },
-            IE = { "1", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"0", ANCHOR},
+            CHROME = {"1", ANCHOR},
+            IE = {"1", ""})
     public void jsSubmitGet_urlHash_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1786,22 +1766,22 @@ public class PageReloadTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(RELOAD2_URL), html);
 
         final WebDriver driver = loadPage2(html, new URL(url));
-        Assert.assertEquals(getMockWebConnection().getRequestCount(), 1);
+        assertEquals(getMockWebConnection().getRequestCount(), 1);
 
         // click
         driver.findElement(By.id(id)).click();
-        Assert.assertEquals(counterChange, getMockWebConnection().getRequestCount() - 1);
+        assertEquals(counterChange, getMockWebConnection().getRequestCount() - 1);
 
         // check location visible to javascript
         driver.findElement(By.id("updateLocationInfo")).click();
         final String hash = driver.findElement(By.id("locationHash")).getText();
         final String pathname = driver.findElement(By.id("locationPathname")).getText();
 
-        Assert.assertEquals(expectedPathname, pathname);
-        Assert.assertEquals(expectedHash, hash);
+        assertEquals(expectedPathname, pathname);
+        assertEquals(expectedHash, hash);
     }
 
-    private String testPage() {
+    private static String testPage() {
         return testPageHeader()
                 + testPageBody()
                 + testPageAnchorPart()
@@ -1809,7 +1789,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + testPageFormPostPart();
     }
 
-    private String testPageHeader() {
+    private static String testPageHeader() {
         return "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
                 + "<html>\n"
                 + "  <head>\n"
@@ -1819,9 +1799,8 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  </head>\n";
     }
 
-    private String testPageBody() {
+    private static String testPageBody() {
         return "<body>\n"
-
                 + "  <div id='locationPathname'></div>\n"
                 + "  <div id='locationHash'></div>\n"
                 + "  <input type='button' id='updateLocationInfo' value='updateLocationInfo' "
@@ -1829,7 +1808,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "document.getElementById(\"locationPathname\").innerHTML=location.pathname;'>\n";
     }
 
-    private String testPageAnchorPart() {
+    private static String testPageAnchorPart() {
         return "  <a id='linkEmpty' href=''>linkEmpty</a>\n"
                 + "  <a id='linkEmptyHash' href='#'>linkEmptyHash</a>\n"
                 + "  <a id='linkHash' href='#anchor'>linkHash</a>\n"
@@ -1846,7 +1825,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "/reload2.html#anchor2" + "'>linkDifferentUrlDifferentHash</a>\n";
     }
 
-    private String testPageFormGetPart() {
+    private static String testPageFormGetPart() {
         return "  <form action='' method='GET'>\n"
                 + "    <input type='button' id='javascriptEmpty' value='javascriptEmpty'"
                 + " onclick='location.href=\"\"'>\n"
@@ -1992,7 +1971,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  </form>\n";
     }
 
-    private String testPageFormPostPart() {
+    private static String testPageFormPostPart() {
         return "  <form action='' method='POST'>\n"
                 + "    <input type='submit' id='submitPostEmpty' value='submitPostEmpty'>\n"
                 + "    <input type='BUTTON' id='jsSubmitPostEmpty' value='jsSubmitPostEmpty'  onclick='submit();'>\n"
@@ -2114,7 +2093,7 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "</html>";
     }
 
-    private String testResponse() {
+    private static String testResponse() {
         return "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
                 + "<html>\n"
                 + "  <head>\n"

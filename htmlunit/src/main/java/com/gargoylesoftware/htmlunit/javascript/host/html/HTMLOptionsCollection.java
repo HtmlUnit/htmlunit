@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
@@ -47,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -114,17 +114,14 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0) {
-            if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
-                throw Context.reportRuntimeError("Invalid index for option collection: " + index);
-            }
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
 
         if (index >= htmlSelect_.getOptionSize()) {
             if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE)) {
                 return null;
             }
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
 
         return getScriptableFor(htmlSelect_.getOption(index));

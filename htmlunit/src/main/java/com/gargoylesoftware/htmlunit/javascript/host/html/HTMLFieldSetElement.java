@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlFieldSet;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -32,13 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlFieldSet.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlFieldSet.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlFieldSet.class)
 public class HTMLFieldSetElement extends FormChild {
 
     /**
@@ -64,6 +57,24 @@ public class HTMLFieldSetElement extends FormChild {
     @JsxSetter(@WebBrowser(IE))
     public void setAlign(final String align) {
         setAlign(align, false);
+    }
+
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
     }
 
 }

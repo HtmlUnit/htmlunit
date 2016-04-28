@@ -14,21 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_XML_IS_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -44,16 +38,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Stack;
+import java.util.TreeMap;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -66,8 +52,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -81,10 +65,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
-import com.gargoylesoftware.htmlunit.javascript.host.event.XMLHttpRequestProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
@@ -107,23 +100,22 @@ public class XMLHttpRequest extends EventTarget {
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
     /** The object has been created, but not initialized (the open() method has not been called). */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final int UNSENT = 0;
     /** The object has been created, but the send() method has not been called. */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final int OPENED = 1;
     /** The send() method has been called, but the status and headers are not yet available. */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final int HEADERS_RECEIVED = 2;
     /** Some data has been received. */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final int LOADING = 3;
     /** All the data has been received; the complete data is available in responseBody and responseText. */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant
     public static final int DONE = 4;
 
     private static final String HEADER_ORIGIN = "Origin";
-    private static final char REQUEST_HEADERS_SEPARATOR = ',';
 
     private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
@@ -202,20 +194,14 @@ public class XMLHttpRequest extends EventTarget {
         state_ = state;
 
         final BrowserVersion browser = getBrowserVersion();
-        // Firefox doesn't trigger onreadystatechange handler for sync requests except for 'completed'
-        final boolean noTriggerForSync = browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
-        if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || state == DONE)) {
+        if (stateChangeHandler_ != null && (async_ || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
             }
-            Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            if (browser.hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
-                params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
-            }
-
+            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
             jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
             if (LOG.isDebugEnabled()) {
                 if (context == null) {
@@ -226,11 +212,22 @@ public class XMLHttpRequest extends EventTarget {
             }
         }
 
-        // Firefox has a separate onload handler, too.
-        final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
-        if (triggerOnload && state == DONE) {
+        if (state == DONE) {
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            final Object[] params = new Event[] {new XMLHttpRequestProgressEvent(this, Event.TYPE_LOAD)};
+
+            final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
+            final Object[] params = new Event[] {event};
+            if (!browser.hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+                event.setLengthComputable(true);
+            }
+
+            if (webResponse_ != null) {
+                final long contentLength = webResponse_.getContentLength();
+                event.setLoaded(contentLength);
+                if (!browser.hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+                    event.setTotal(contentLength);
+                }
+            }
 
             if (loadHandler_ != null) {
                 jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
@@ -262,7 +259,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Function getOnload() {
         return loadHandler_;
     }
@@ -271,7 +268,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the event handler that fires on load.
      * @param loadHandler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setOnload(final Function loadHandler) {
         loadHandler_ = loadHandler;
     }
@@ -280,7 +277,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the event handler that fires on error.
      * @return the event handler that fires on error
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxGetter
     public Function getOnerror() {
         return errorHandler_;
     }
@@ -289,7 +286,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the event handler that fires on error.
      * @param errorHandler the event handler that fires on error
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxSetter
     public void setOnerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
@@ -300,14 +297,16 @@ public class XMLHttpRequest extends EventTarget {
      *                if {@code null}, the current thread's context is used.
      */
     private void processError(Context context) {
-        if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
+        if (errorHandler_ != null) {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+
+            final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
             }
-            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, params);
             if (LOG.isDebugEnabled()) {
                 if (context == null) {
                     context = Context.getCurrentContext();
@@ -344,7 +343,15 @@ public class XMLHttpRequest extends EventTarget {
             return "";
         }
         if (webResponse_ != null) {
-            return webResponse_.getContentAsString();
+            final String encoding = webResponse_.getContentCharset();
+            String defaultEncoding = null;
+            if (getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+                defaultEncoding = ((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset();
+            }
+            if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {
+                defaultEncoding = encoding;
+            }
+            return webResponse_.getContentAsString(encoding, defaultEncoding);
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
@@ -368,13 +375,6 @@ public class XMLHttpRequest extends EventTarget {
         if (contentType.isEmpty() || contentType.contains("xml")) {
             final WebWindow webWindow = getWindow().getWebWindow();
             try {
-                if (getBrowserVersion().hasFeature(XHR_RESPONSE_XML_IS_ACTIVEXOBJECT)) {
-                    final XmlPage page = new XmlPage(webResponse_, webWindow, true, false);
-                    final MSXMLActiveXObjectFactory factory = webWindow.getWebClient().getMSXMLActiveXObjectFactory();
-                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", webWindow);
-                    document.setDomNode(page);
-                    return document;
-                }
                 final XmlPage page = new XmlPage(webResponse_, webWindow);
                 final XMLDocument document = new XMLDocument();
                 document.setPrototype(getPrototype(document.getClass()));
@@ -403,9 +403,6 @@ public class XMLHttpRequest extends EventTarget {
     @JsxGetter
     public int getStatus() {
         if (state_ == UNSENT || state_ == OPENED) {
-            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
-                throw Context.reportRuntimeError("status not set");
-            }
             return 0;
         }
         if (webResponse_ != null) {
@@ -424,9 +421,6 @@ public class XMLHttpRequest extends EventTarget {
     @JsxGetter
     public String getStatusText() {
         if (state_ == UNSENT || state_ == OPENED) {
-            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
-                throw Context.reportRuntimeError("statusText not set");
-            }
             return "";
         }
         if (webResponse_ != null) {
@@ -531,7 +525,7 @@ public class XMLHttpRequest extends EventTarget {
             request.setCharset("UTF-8");
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
-            if (!isSameOrigin(originUrl, fullUrl) && getBrowserVersion().hasFeature(XHR_ORIGIN_HEADER)) {
+            if (!isSameOrigin(originUrl, fullUrl)) {
                 final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
                         .append(originUrl.getHost());
                 if (originUrl.getPort() != -1) {
@@ -549,13 +543,11 @@ public class XMLHttpRequest extends EventTarget {
             }
 
             // password is ignored if no user defined
-            final boolean userIsNull = null == user || Undefined.instance == user;
-            if (!userIsNull) {
+            if (user != null && user != Undefined.instance) {
                 final String userCred = user.toString();
 
-                final boolean passwordIsNull = null == password || Undefined.instance == password;
                 String passwordCred = "";
-                if (!passwordIsNull) {
+                if (password != null && password != Undefined.instance) {
                     passwordCred = password.toString();
                 }
 
@@ -623,7 +615,7 @@ public class XMLHttpRequest extends EventTarget {
         }
         else {
             if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
-                // quite strange but IE and FF seem both to fire state loading twice
+                // quite strange but IE seems to fire state loading twice
                 // in async mode (at least with HTML of the unit tests)
                 setState(OPENED, Context.getCurrentContext());
             }
@@ -671,7 +663,7 @@ public class XMLHttpRequest extends EventTarget {
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
-            && !Context.getUndefinedValue().equals(content)) {
+            && !Undefined.instance.equals(content)) {
             if (content instanceof FormData) {
                 ((FormData) content).fillRequest(webRequest_);
             }
@@ -695,8 +687,7 @@ public class XMLHttpRequest extends EventTarget {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN);
-            final boolean crossOriginResourceSharing = originHeaderValue != null;
-            if (crossOriginResourceSharing && isPreflight()) {
+            if (originHeaderValue != null && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
@@ -709,11 +700,13 @@ public class XMLHttpRequest extends EventTarget {
 
                 // header request-headers
                 final StringBuilder builder = new StringBuilder();
-                for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+                final boolean acceptContentType = getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
+                for (final Entry<String, String> header
+                        : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
                     final String name = header.getKey().toLowerCase(Locale.ROOT);
-                    if (isPreflightHeader(name, header.getValue())) {
+                    if (isPreflightHeader(name, header.getValue(), acceptContentType)) {
                         if (builder.length() != 0) {
-                            builder.append(REQUEST_HEADERS_SEPARATOR);
+                            builder.append(acceptContentType ? ", " : ",");
                         }
                         builder.append(name);
                     }
@@ -739,7 +732,7 @@ public class XMLHttpRequest extends EventTarget {
                 LOG.debug("Web response loaded successfully.");
             }
             boolean allowOriginResponse = true;
-            if (crossOriginResourceSharing) {
+            if (originHeaderValue != null) {
                 String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
                 if (getWithCredentials()) {
@@ -820,9 +813,10 @@ public class XMLHttpRequest extends EventTarget {
         if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
             return true;
         }
+        final boolean acceptContentType = getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT),
-                    header.getValue())) {
+                    header.getValue(), acceptContentType)) {
                 return true;
             }
         }
@@ -844,7 +838,7 @@ public class XMLHttpRequest extends EventTarget {
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             final String key = header.getKey().toLowerCase(Locale.ROOT);
-            if (isPreflightHeader(key, header.getValue())
+            if (isPreflightHeader(key, header.getValue(), false)
                     && !headersHeader.contains(key)) {
                 return false;
             }
@@ -855,14 +849,15 @@ public class XMLHttpRequest extends EventTarget {
     /**
      * @param name header name (MUST be lower-case for performance reasons)
      * @param value header value
+     * @param acceptContentType whether to consider {@code content-type} header as preflight or not
      */
-    private boolean isPreflightHeader(final String name, final String value) {
+    private static boolean isPreflightHeader(final String name, final String value, final boolean acceptContentType) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
                 || FormEncodingType.MULTIPART.getName().equals(lcValue)
-                || "text/plain".equals(lcValue)
-                || lcValue.startsWith("text/plain;charset=")) {
+                || (!acceptContentType
+                        && ("text/plain".equals(lcValue) || lcValue.startsWith("text/plain;charset=")))) {
                 return false;
             }
             return true;
@@ -920,7 +915,7 @@ public class XMLHttpRequest extends EventTarget {
      * @param mimeType the type used to override that returned by the server (if any)
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
-    @JsxFunction({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction
     public void overrideMimeType(final String mimeType) {
         if (getBrowserVersion().hasFeature(XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND)
                 && state_ != UNSENT && state_ != OPENED) {
@@ -933,7 +928,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the {@code withCredentials} property.
      * @return the {@code withCredentials} property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public boolean getWithCredentials() {
         return withCredentials_;
     }
@@ -942,7 +937,7 @@ public class XMLHttpRequest extends EventTarget {
      * Sets the {@code withCredentials} property.
      * @param withCredentials the {@code withCredentials} property.
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
         if (!async_ && state_ != UNSENT) {
             if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {
@@ -996,6 +991,18 @@ public class XMLHttpRequest extends EventTarget {
         return upload;
     }
 
+    /**
+     * Returns the {@code upload} property - IE version.
+     * @return the {@code upload} property
+     */
+    @JsxGetter(value = @WebBrowser(IE), propertyName = "upload")
+    public XMLHttpRequestEventTarget getUploadIE() {
+        final XMLHttpRequestEventTarget upload = new XMLHttpRequestEventTarget();
+        upload.setParentScope(getParentScope());
+        upload.setPrototype(getPrototype(upload.getClass()));
+        return upload;
+    }
+
     private static final class NetworkErrorWebResponse extends WebResponse {
         private final WebRequest request_;
 
@@ -1026,6 +1033,11 @@ public class XMLHttpRequest extends EventTarget {
 
         @Override
         public String getContentAsString(final String encoding) {
+            return "";
+        }
+
+        @Override
+        public String getContentAsString(final String encoding, final String defaultEncoding) {
             return "";
         }
 

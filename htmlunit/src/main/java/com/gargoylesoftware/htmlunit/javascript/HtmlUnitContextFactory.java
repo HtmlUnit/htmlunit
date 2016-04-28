@@ -14,24 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_IS_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVAL_LOCAL_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NON_ECMA_GET_YEAR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
-import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
-
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -43,6 +28,11 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -57,7 +47,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10_000;
 
     private final BrowserVersion browserVersion_;
-    private final WebClient webClient_;
     private long timeout_;
     private Debugger debugger_;
     private final ErrorReporter errorReporter_;
@@ -70,8 +59,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @param webClient the web client using this factory
      */
     public HtmlUnitContextFactory(final WebClient webClient) {
-        WebAssert.notNull("webClient", webClient);
-        webClient_ = webClient;
         browserVersion_ = webClient.getBrowserVersion();
         errorReporter_ = new StrictErrorReporter();
     }
@@ -182,22 +169,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 }
             }
 
-            // Pre process the source code
-            final HtmlPage page = (HtmlPage) Context.getCurrentContext()
-                .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
-            source = preProcess(page, source, sourceName, lineno, null);
-
-            //source = new StringScriptPreProcessor(HtmlUnitContextFactory.this)
-            //    .preProcess(page, source, sourceName, lineno, null);
-
-            // PreProcess IE Conditional Compilation if needed
-            if (browserVersion_.hasFeature(HTMLCONDITIONAL_COMMENTS)) {
-                final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
-                source = ieCCPreProcessor.preProcess(page, source, sourceName, lineno, null);
-//                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
-//                    .preProcess(htmlPage, sourceCode, sourceName, null);
-            }
-
             return super.compileString(source, compiler, compilationErrorReporter,
                     sourceName, lineno, securityDomain);
         }
@@ -215,34 +186,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
             return super.compileFunction(scope, source, compiler,
                     compilationErrorReporter, sourceName, lineno, securityDomain);
         }
-    }
-
-    /**
-     * Pre process the specified source code in the context of the given page using the processor specified
-     * in the webclient. This method delegates to the pre processor handler specified in the
-     * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
-     * unchanged.
-     * @param htmlPage the page
-     * @param sourceCode the code to process
-     * @param sourceName a name for the chunk of code (used in error messages)
-     * @param lineNumber the line number of the source code
-     * @param htmlElement the HTML element that will act as the context
-     * @return the source code after being pre processed
-     * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
-     */
-    protected String preProcess(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final int lineNumber,
-        final HtmlElement htmlElement) {
-
-        String newSourceCode = sourceCode;
-        final ScriptPreProcessor preProcessor = webClient_.getScriptPreProcessor();
-        if (preProcessor != null) {
-            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, lineNumber, htmlElement);
-            if (newSourceCode == null) {
-                newSourceCode = "";
-            }
-        }
-        return newSourceCode;
     }
 
     /**
@@ -320,28 +263,25 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_PARENT_PROTO_PROPERTIES:
                 return !browserVersion_.hasFeature(JS_PARENT_PROTO_PROPERTIES);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return browserVersion_.hasFeature(JS_NON_ECMA_GET_YEAR);
+                return false;
             case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:
                 return true;
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:
                 return false;
             case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT:
-                return browserVersion_.hasFeature(JS_ARGUMENTS_IS_OBJECT);
+                return false;
             case Context.FEATURE_HTMLUNIT_FUNCTION_NULL_SETTER:
                 return true;
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
                 return browserVersion_.hasFeature(JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION);
             case Context.FEATURE_HTMLUNIT_EVAL_LOCAL_SCOPE:
-                return browserVersion_.hasFeature(JS_EVAL_LOCAL_SCOPE);
+                return false;
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
-                return browserVersion_.hasFeature(JS_ERROR_STACK);
+                return true;
             case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:
-                final HtmlPage htmlPage = (HtmlPage) Context.getCurrentContext()
-                    .getThreadLocal(JavaScriptEngine.KEY_STARTING_PAGE);
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_CONSTRUCTOR)
-                        || htmlPage == null || !htmlPage.isQuirksMode();
+                return true;
             case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_OBJECT_METHOD);
+                return false;
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
             case Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10:

@@ -16,34 +16,30 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_PROPERTIES;
 
 import java.lang.reflect.Method;
 import java.util.Stack;
-
-import org.apache.commons.collections.Transformer;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 /**
  * Base class for Rhino host objects in HtmlUnit.
@@ -238,12 +234,13 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      * @param scriptable the script object to initialize
      */
     protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
-        final WebWindow enclosingWindow = domNode.getPage().getEnclosingWindow();
-        if (enclosingWindow.getEnclosedPage() == domNode.getPage()) {
+        final SgmlPage page = domNode.getPage();
+        final WebWindow enclosingWindow = page.getEnclosingWindow();
+        if (enclosingWindow != null && enclosingWindow.getEnclosedPage() == page) {
             scriptable.setParentScope(enclosingWindow.getScriptableObject());
         }
         else {
-            scriptable.setParentScope(ScriptableObject.getTopLevelScope(domNode.getPage().getScriptableObject()));
+            scriptable.setParentScope(ScriptableObject.getTopLevelScope(page.getScriptableObject()));
         }
     }
 
@@ -262,19 +259,6 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
     }
 
     /**
-     * Gets a transformer getting the scriptable element for an {@link HtmlElement}.
-     * @return the transformer
-     */
-    protected Transformer getTransformerScriptableFor() {
-        return new Transformer() {
-            @Override
-            public Object transform(final Object obj) {
-                return getScriptableFor(obj);
-            }
-        };
-    }
-
-    /**
      * Returns the JavaScript default value of this object. This is the JavaScript equivalent of a toString() in Java.
      *
      * @param hint a hint as to the format of the default value (ignored in this case)
@@ -283,13 +267,6 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
-            if ((getDomNodeOrNull() != null || getParentScope() != null)
-                    && getBrowserVersion().hasFeature(JS_OBJECT_IN_QUIRKS_MODE)) {
-                final Page page = getWindow().getWebWindow().getEnclosedPage();
-                if (page != null && page.isHtmlPage() && ((HtmlPage) page).isQuirksMode()) {
-                    return "[object]";
-                }
-            }
             return "[object " + getClassName() + "]";
         }
         return super.getDefaultValue(hint);
@@ -401,10 +378,6 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
 
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
-        if (!getBrowserVersion().hasFeature(SET_READONLY_PROPERTIES)) {
-            throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
-                    name, getClassName(), Context.toString(value));
-        }
         for (final Method m : getClass().getMethods()) {
             final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
             if (jsxGetter != null) {

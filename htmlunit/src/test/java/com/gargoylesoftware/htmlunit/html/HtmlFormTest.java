@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -29,13 +25,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -92,7 +86,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
         assertEquals("url", getDefaultUrl() + "?foo=2&button=foo", secondPage.getUrl());
-        Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -252,7 +246,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     public void submit_onSubmitHandler_preventDefaultOnly() throws Exception {
         final String firstHtml
             = "<html><body>\n"
-            + "<form method='post' action='/foo' >"
+            + "<form method='post' action='/foo' >\n"
             + "<input type='submit' id='button'/>\n"
             + "</form>\n"
             + "<script>\n"
@@ -264,12 +258,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "  }\n"
             + "}\n"
             + "var oForm = document.forms[0];\n"
-            + "if (oForm.addEventListener) {\n"
-            + "  oForm.addEventListener('submit', foo, false);\n"
-            + "}"
-            + "else if (oForm.attachEvent) {\n"
-            + "  oForm.attachEvent('onsubmit', foo);\n"
-            + "}"
+            + "oForm.addEventListener('submit', foo, false);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -291,7 +280,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1628521 (NullPointerException when submitting forms).
+     * Regression test for NullPointerException when submitting forms.
      * @throws Exception if the test fails
      */
     @Test
@@ -790,7 +779,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         assertEquals("Get all", expectedInputs, actualInputs);
         assertEquals(Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 
-        Assert.assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
+        assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
         try {
             form.getInputByValue("none-matching");
             fail("Expected ElementNotFoundException");
@@ -819,9 +808,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First textarea with name 'ta1'", page.getElementById("ta1_1"),
+        assertEquals("First textarea with name 'ta1'", page.getElementById("ta1_1"),
             form.getTextAreaByName("ta1"));
-        Assert.assertEquals("First textarea with name 'ta2'", page.getElementById("ta2_1"),
+        assertEquals("First textarea with name 'ta2'", page.getElementById("ta2_1"),
             form.getTextAreaByName("ta2"));
 
         try {
@@ -852,9 +841,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First button with name 'b1'", page.getElementById("b1_1"),
+        assertEquals("First button with name 'b1'", page.getElementById("b1_1"),
             form.getButtonByName("b1"));
-        Assert.assertEquals("First button with name 'b2'", page.getElementById("b2_1"),
+        assertEquals("First button with name 'b2'", page.getElementById("b2_1"),
             form.getButtonByName("b2"));
 
         try {
@@ -885,7 +874,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
         final WebWindow firstWindow = client.getCurrentWindow();
-        Assert.assertEquals("first window name", "", firstWindow.getName());
+        assertEquals("first window name", "", firstWindow.getName());
         assertSame(page, firstWindow.getEnclosedPage());
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -913,7 +902,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage secondPage = page.getHtmlElementById("clickMe").click();
 
         assertNotNull(secondPage);
-        Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
+        assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
     }
 
     /**
@@ -1042,14 +1031,14 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
+    @Alerts(DEFAULT = {"foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
                         "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
                         "foo#anchor",
-                        "foo?foo=12#anchor" },
-            IE = { "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
+                        "foo?foo=12#anchor"},
+            IE = {"foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
                     "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
                     "foo#anchor",
-                    "foo?foo=12#anchor" })
+                    "foo?foo=12#anchor"})
     public void urlAfterSubmitWithAnchor() throws Exception {
         urlAfterSubmit("get", "foo#anchor", getExpectedAlerts()[0]);
         urlAfterSubmit("get", "foo?foo=12#anchor", getExpectedAlerts()[1]);
@@ -1185,7 +1174,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1822108.
+     * Regression test for bug #536.
      * @throws Exception if the test fails
      */
     @Test
@@ -1285,7 +1274,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2644619 (form lost children breakage when there is more than one
+     * Regression test for bug #784 (form lost children breakage when there is more than one
      * form element with the same name).
      * @throws Exception if an error occurs
      */
@@ -1334,7 +1323,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<script>\n"
             + "var i = 0;\n"
             + "while (document.cb_form.Quantity[i]) {\n"
-            + "document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g,'');\n"
+            + "document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g, '');\n"
             + "if ((document.cb_form.Quantity[i].value.length == 0)) {document.cb_form.Quantity[i].value='1';}\n"
             + "i++;\n"
             + "}\n"
@@ -1358,49 +1347,5 @@ public class HtmlFormTest extends SimpleWebTestCase {
         urlAfterSubmit(url, "post", "?hi", url + "?hi");
         urlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
             getDefaultUrl() + "test.html?hi");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented({ FF, CHROME })
-    public void encoding() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <form>\n"
-            + "    <input name='par\u00F6m' value='Hello G\u00FCnter'>\n"
-            + "    <input id='mySubmit' type='submit' value='Submit'>\n"
-            + "  </form>\n"
-            + "   <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
-            + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final URL url = getDefaultUrl();
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(html, "text/html", "UTF-8");
-
-        final HtmlPage page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getUrl());
-        final HtmlPage submitPage = page.getHtmlElementById("mySubmit").click();
-        final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
-        final String submitSuffix;
-        final String linkSuffix;
-        if (getBrowserVersion().isIE()) {
-            submitSuffix = "?par%C3%B6m=Hello+G%C3%BCnter";
-            linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
-        }
-        else {
-            submitSuffix = "?par\u00F6m=Hello+G\u00FCnter";
-            linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
-        }
-        assertEquals(url.toExternalForm() + submitSuffix, submitPage.getUrl());
-        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getUrl());
     }
 }

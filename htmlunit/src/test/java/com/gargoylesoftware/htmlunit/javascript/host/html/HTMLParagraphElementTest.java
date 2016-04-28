@@ -38,8 +38,7 @@ public class HTMLParagraphElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLParagraphElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLParagraphElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -62,8 +61,8 @@ public class HTMLParagraphElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
-            IE = {"", "error", "", "left", "error", "left", "right" })
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right"},
+            IE = {"", "error", "", "left", "error", "left", "right"})
     public void align() throws Exception {
         final String html =
             "<html>\n"

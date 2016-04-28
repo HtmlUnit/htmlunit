@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static org.junit.Assert.fail;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -72,7 +73,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, content);
         try {
             webClient.getPage(URL_FIRST);
-            Assert.fail("FailingHttpStatusCodeException expected");
+            fail("FailingHttpStatusCodeException expected");
         }
         catch (final FailingHttpStatusCodeException e) {
             // expected
@@ -140,7 +141,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         try {
             loadPage(html);
-            Assert.fail("FailingHttpStatusCodeException expected");
+            fail("FailingHttpStatusCodeException expected");
         }
         catch (final FailingHttpStatusCodeException e) {
             // expected
@@ -166,15 +167,18 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final CollectingJavaScriptErrorListener javaScriptErrorListener = new CollectingJavaScriptErrorListener();
         webClient.setJavaScriptErrorListener(javaScriptErrorListener);
 
-        final String html = "<html><head><title>Throw JavaScript Error</title>"
-                + "<script src='unknown://nowhere' type='text/javascript'></script></head>"
-                + "<body></body></html>";
+        final String html = "<html>\n"
+                + "<head><title>Throw JavaScript Error</title>\n"
+                + "<script src='unknown://nowhere' type='text/javascript'></script>\n"
+                + "</head>\n"
+                + "<body></body>\n"
+                + "</html>";
 
         loadPage(html);
 
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
-        assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: unknown",
+        assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: 'unknown'",
                     javaScriptErrorListener.getMalformedScriptURLErrors());
         assertEquals("", javaScriptErrorListener.getTimeoutErrors());
     }

@@ -56,4 +56,37 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "20:40", "undefined", ""},
+            FF = {"", "20:40", "2001-05-15 19:00", ""})
+    public void datetime() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Testpage</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "         var time1 = document.getElementById('time1');\n"
+            + "         alert(time1.dateTime);\n"
+            + "         time1.dateTime = '20:40';\n"
+            + "         alert(time1.dateTime);\n"
+
+            + "         var time2 = document.getElementById('time2');\n"
+            + "         alert(time2.dateTime);\n"
+            + "         time2.dateTime = '';\n"
+            + "         alert(time2.dateTime);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <p>start <time id='time1'>20:00</time></p>"
+            + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

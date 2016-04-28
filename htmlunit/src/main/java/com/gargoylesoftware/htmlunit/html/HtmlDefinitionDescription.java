@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -50,5 +52,17 @@ public class HtmlDefinitionDescription extends HtmlElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        final HtmlPage page = getHtmlPageOrNull();
+        if (page.isQuirksMode() && page.hasFeature(HTMLDEFINITION_INLINE_IN_QUIRKS)) {
+            return DisplayStyle.INLINE;
+        }
+        return super.getDefaultStyleDisplay();
     }
 }

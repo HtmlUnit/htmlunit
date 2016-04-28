@@ -41,8 +41,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUListElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLUListElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -65,10 +64,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
-                   "true", "false", "true", "false", "", "null", "", "null" },
-            IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
-                   "true", "false", "true", "false", "true", "false", "true", "false" })
+    @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
+                   "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
             "<html>\n"
@@ -113,9 +110,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
-            IE8 = { "", "", "", "A", "", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" },
-            IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
+    @Alerts(DEFAULT = {"", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"},
+            IE = {"", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I"})
     public void type() throws Exception {
         final String html =
                 "<html>\n"

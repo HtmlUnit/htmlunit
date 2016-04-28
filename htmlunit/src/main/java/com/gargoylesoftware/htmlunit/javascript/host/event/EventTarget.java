@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_WINDOW_EXECUTE_IF_DITACHED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -27,7 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 
@@ -43,10 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code EventTarget}.
@@ -75,9 +73,8 @@ public class EventTarget extends SimpleScriptable {
      * @param listener the event listener
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
-     * @see #attachEvent(String, Function)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -106,20 +103,15 @@ public class EventTarget extends SimpleScriptable {
             final Object[] args = new Object[] {event};
 
             // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
+            final Object[] propHandlerArgs = args;
 
+            final Event previousEvent = window.getCurrentEvent();
             window.setCurrentEvent(event);
             try {
                 return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
             }
             finally {
-                window.setCurrentEvent(null); // reset event
+                window.setCurrentEvent(previousEvent); // reset event
             }
         }
         return null;
@@ -188,13 +180,7 @@ public class EventTarget extends SimpleScriptable {
             }
 
             // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
+            final Object[] propHandlerArgs = args;
 
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
@@ -277,7 +263,7 @@ public class EventTarget extends SimpleScriptable {
      * @return {@code false} if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final DomElement element = (DomElement) getDomNodeOrNull();
@@ -304,7 +290,7 @@ public class EventTarget extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDataList;
@@ -33,8 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDataList.class,
-    browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlDataList.class)
 public class HTMLDataListElement extends HTMLElement {
 
     private HTMLCollection options_;
@@ -53,7 +51,7 @@ public class HTMLDataListElement extends HTMLElement {
     @JsxGetter
     public Object getOptions() {
         if (options_ == null) {
-            options_ = new HTMLCollection(getDomNodeOrDie(), false, "options") {
+            options_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlOption;

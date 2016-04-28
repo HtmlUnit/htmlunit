@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
 
 import java.net.MalformedURLException;
@@ -66,8 +67,8 @@ public class HtmlForm extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "form";
 
-    private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
-        Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
+    private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES = Arrays.asList(HtmlInput.TAG_NAME,
+        HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME);
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
@@ -134,7 +135,10 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        webClient.download(webWindow, target, request, false, "JS form.submit()");
+        /** Calling form.submit() twice forces double download. */
+        final boolean checkHash =
+                !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
+        webClient.download(webWindow, target, request, checkHash, false, "JS form.submit()");
         return htmlPage;
     }
 
@@ -210,6 +214,8 @@ public class HtmlForm extends HtmlElement {
         }
 
         final WebRequest request = new WebRequest(url, method);
+        request.setAdditionalHeader("Accept", browser.getHtmlAcceptHeader());
+        request.setAdditionalHeader("Accept-Encoding", "gzip, deflate");
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
@@ -236,21 +242,23 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * Returns a list of {@link KeyValuePair}s that represent the data that will be
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns a list of {@link NameValuePair}s that represent the data that will be
      * sent to the server when this form is submitted. This is primarily intended to aid
      * debugging.
      *
      * @param submitElement the element used to submit the form, or {@code null} if the
      *        form was submitted by JavaScript
-     * @return the list of {@link KeyValuePair}s that represent that data that will be sent
+     * @return the list of {@link NameValuePair}s that represent that data that will be sent
      *         to the server when this form is submitted
      */
-    private List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
+    public List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
         final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
         final List<NameValuePair> parameterList = new ArrayList<>(submittableElements.size());
         for (final SubmittableElement element : submittableElements) {
-            for (final NameValuePair pair : element.getSubmitKeyValuePairs()) {
+            for (final NameValuePair pair : element.getSubmitNameValuePairs()) {
                 parameterList.add(pair);
             }
         }
@@ -307,7 +315,7 @@ public class HtmlForm extends HtmlElement {
         return submittableElements;
     }
 
-    private boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
+    private static boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
         if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName)) {
             return false;
@@ -320,11 +328,11 @@ public class HtmlForm extends HtmlElement {
             return true;
         }
 
-        if (!"isindex".equals(tagName) && !element.hasAttribute("name")) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && !element.hasAttribute("name")) {
             return false;
         }
 
-        if (!"isindex".equals(tagName) && "".equals(element.getAttribute("name"))) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttribute("name"))) {
             return false;
         }
 
@@ -334,7 +342,7 @@ public class HtmlForm extends HtmlElement {
                 return ((HtmlInput) element).isChecked();
             }
         }
-        if ("select".equals(tagName)) {
+        if (HtmlSelect.TAG_NAME.equals(tagName)) {
             return ((HtmlSelect) element).isValidForSubmission();
         }
         return true;
@@ -349,7 +357,7 @@ public class HtmlForm extends HtmlElement {
      *        submitted by JavaScript
      * @return {@code true} if the specified element gets submitted when this form is submitted
      */
-    private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
+    private static boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
         if (!isValidForSubmission(element, submitElement)) {
             return false;
@@ -366,7 +374,7 @@ public class HtmlForm extends HtmlElement {
                 return false;
             }
         }
-        if ("button".equals(tagName)) {
+        if (HtmlButton.TAG_NAME.equals(tagName)) {
             return false;
         }
 
@@ -380,7 +388,7 @@ public class HtmlForm extends HtmlElement {
      * @return all input elements which are members of this form and have the specified name
      */
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = getFormElementsByAttribute("input", "name", name);
+        final List<HtmlInput> list = getFormElementsByAttribute(HtmlInput.TAG_NAME, "name", name);
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -458,7 +466,7 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlInput> inputs = getInputsByName(name);
 
         if (inputs.isEmpty()) {
-            throw new ElementNotFoundException("input", "name", name);
+            throw new ElementNotFoundException(HtmlInput.TAG_NAME, "name", name);
         }
         return (I) inputs.get(0);
     }
@@ -470,7 +478,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = getFormElementsByAttribute("select", "name", name);
+        final List<HtmlSelect> list = getFormElementsByAttribute(HtmlSelect.TAG_NAME, "name", name);
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -492,7 +500,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlSelect getSelectByName(final String name) throws ElementNotFoundException {
         final List<HtmlSelect> list = getSelectsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("select", "name", name);
+            throw new ElementNotFoundException(HtmlSelect.TAG_NAME, "name", name);
         }
         return list.get(0);
     }
@@ -504,7 +512,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = getFormElementsByAttribute("button", "name", name);
+        final List<HtmlButton> list = getFormElementsByAttribute(HtmlButton.TAG_NAME, "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -526,7 +534,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlButton getButtonByName(final String name) throws ElementNotFoundException {
         final List<HtmlButton> list = getButtonsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("button", "name", name);
+            throw new ElementNotFoundException(HtmlButton.TAG_NAME, "name", name);
         }
         return list.get(0);
     }
@@ -538,7 +546,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = getFormElementsByAttribute("textarea", "name", name);
+        final List<HtmlTextArea> list = getFormElementsByAttribute(HtmlTextArea.TAG_NAME, "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -560,7 +568,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlTextArea getTextAreaByName(final String name) throws ElementNotFoundException {
         final List<HtmlTextArea> list = getTextAreasByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("textarea", "name", name);
+            throw new ElementNotFoundException(HtmlTextArea.TAG_NAME, "name", name);
         }
         return list.get(0);
     }
@@ -621,156 +629,156 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "action". Refer to the <a
+     * Returns the value of the attribute {@code action}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "action" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code action} or an empty string if that attribute isn't defined
      */
     public final String getActionAttribute() {
         return getAttribute("action");
     }
 
     /**
-     * Sets the value of the attribute "action". Refer to the <a
+     * Sets the value of the attribute {@code action}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param action the value of the attribute "action"
+     * @param action the value of the attribute {@code action}
      */
     public final void setActionAttribute(final String action) {
         setAttribute("action", action);
     }
 
     /**
-     * Returns the value of the attribute "method". Refer to the <a
+     * Returns the value of the attribute {@code method}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "method" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code method} or an empty string if that attribute isn't defined
      */
     public final String getMethodAttribute() {
         return getAttribute("method");
     }
 
     /**
-     * Sets the value of the attribute "method". Refer to the <a
+     * Sets the value of the attribute {@code method}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param method the value of the attribute "method"
+     * @param method the value of the attribute {@code method}
      */
     public final void setMethodAttribute(final String method) {
         setAttribute("method", method);
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the <a
+     * Returns the value of the attribute {@code name}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Sets the value of the attribute "name". Refer to the <a
+     * Sets the value of the attribute {@code name}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param name the value of the attribute "name"
+     * @param name the value of the attribute {@code name}
      */
     public final void setNameAttribute(final String name) {
         setAttribute("name", name);
     }
 
     /**
-     * Returns the value of the attribute "enctype". Refer to the <a
+     * Returns the value of the attribute {@code enctype}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute. "Enctype" is the encoding type
      * used when submitting a form back to the server.
      *
-     * @return the value of the attribute "enctype" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code enctype} or an empty string if that attribute isn't defined
      */
     public final String getEnctypeAttribute() {
         return getAttribute("enctype");
     }
 
     /**
-     * Sets the value of the attribute "enctype". Refer to the <a
+     * Sets the value of the attribute {@code enctype}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute. "Enctype" is the encoding type
      * used when submitting a form back to the server.
      *
-     * @param encoding the value of the attribute "enctype"
+     * @param encoding the value of the attribute {@code enctype}
      */
     public final void setEnctypeAttribute(final String encoding) {
         setAttribute("enctype", encoding);
     }
 
     /**
-     * Returns the value of the attribute "onsubmit". Refer to the <a
+     * Returns the value of the attribute {@code onsubmit}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "onsubmit" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onsubmit} or an empty string if that attribute isn't defined
      */
     public final String getOnSubmitAttribute() {
         return getAttribute("onsubmit");
     }
 
     /**
-     * Returns the value of the attribute "onreset". Refer to the <a
+     * Returns the value of the attribute {@code onreset}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "onreset" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onreset} or an empty string if that attribute isn't defined
      */
     public final String getOnResetAttribute() {
         return getAttribute("onreset");
     }
 
     /**
-     * Returns the value of the attribute "accept". Refer to the <a
+     * Returns the value of the attribute {@code accept}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "accept" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accept} or an empty string if that attribute isn't defined
      */
     public final String getAcceptAttribute() {
         return getAttribute("accept");
     }
 
     /**
-     * Returns the value of the attribute "accept-charset". Refer to the <a
+     * Returns the value of the attribute {@code accept-charset}. Refer to the <a
      * href='http://www.w3.org/TR/html401/interact/forms.html#adef-accept-charset'>
      * HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accept-charset" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accept-charset} or an empty string if that attribute isn't defined
      */
     public final String getAcceptCharsetAttribute() {
         return getAttribute("accept-charset");
     }
 
     /**
-     * Returns the value of the attribute "target". Refer to the <a
+     * Returns the value of the attribute {@code target}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "target" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
         return getAttribute("target");
     }
 
     /**
-     * Sets the value of the attribute "target". Refer to the <a
+     * Sets the value of the attribute {@code target}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @param target the value of the attribute "target"
+     * @param target the value of the attribute {@code target}
      */
     public final void setTargetAttribute(final String target) {
         setAttribute("target", target);
@@ -787,7 +795,7 @@ public class HtmlForm extends HtmlElement {
     public <I extends HtmlInput> I getInputByValue(final String value) throws ElementNotFoundException {
         final List<HtmlInput> list = getInputsByValue(value);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException("input", "value", value);
+            throw new ElementNotFoundException(HtmlInput.TAG_NAME, "value", value);
         }
         return (I) list.get(0);
     }
@@ -798,7 +806,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the inputs in this form with the specified value
      */
     public List<HtmlInput> getInputsByValue(final String value) {
-        final List<HtmlInput> results = getFormElementsByAttribute("input", "value", value);
+        final List<HtmlInput> results = getFormElementsByAttribute(HtmlInput.TAG_NAME, "value", value);
 
         for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {

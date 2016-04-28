@@ -67,7 +67,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final DomElement button2 = page.getElementsByName("b2").get(0);
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input");
@@ -83,7 +83,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertFalse(sheet.selects(selector, input2));
     }
 
-    private Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
+    private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
         return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
     }
 
@@ -149,7 +149,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
               + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).item(0);
@@ -182,14 +182,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_pseudoClass_lang() throws Exception {
-        if ("IE8".equals(getBrowserVersion().getNickname())) {
-            testSelects(":lang(en)", false, false, false);
-            testSelects(":lang(de)", false, false, false);
-        }
-        else {
-            testSelects(":lang(en)", false, true, true);
-            testSelects(":lang(de)", false, false, false);
-        }
+        testSelects(":lang(en)", false, true, true);
+        testSelects(":lang(de)", false, false, false);
     }
 
     /**
@@ -197,8 +191,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_pseudoClass_negation() throws Exception {
-        final boolean css3 = !(getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() <= 9);
-        testSelects(":not(div)", css3, false, css3);
+        testSelects(":not(div)", true, false, true);
     }
 
     private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,
@@ -215,7 +208,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
             + "</html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
         final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).item(0);
         assertEquals(selectBody, sheet.selects(selector, page.getHtmlElementById("b")));
@@ -237,7 +230,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
         final NodeList list = htmlPage.getElementsByTagName("body");
         final HtmlElement element = (HtmlElement) list.item(0);
-        final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptObject()).getCurrentStyle();
+        final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptableObject()).getCurrentStyle();
         assertEquals("CSSStyleDeclaration for ''", style.toString());
     }
 

@@ -227,7 +227,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foo0", "foo1" })
+    @Alerts({"foo0", "foo1"})
     public void button_onClickTwice() throws Exception {
         onClickPageTest("<body><form>\n"
                 + "<button id='clickId' onClick='alert(\"foo\" + count++); return false;'>Item</button>\n"
@@ -317,7 +317,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
     /**
      * Test that no NPE is thrown when JS fails on link click
      * and WebClient.setThrowExceptionOnScriptError(false) is used.
-     * Test for bug 1385864.
+     * Test for bug #329.
      * @throws Exception if the test fails
      */
     @Test
@@ -982,34 +982,4 @@ public class ClickableElementTest extends SimpleWebTestCase {
                 + "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>\n"
                 + "</form></body></html>", 2);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void dblClick() throws Exception {
-        final String content = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + "  function clickMe() {\n"
-            + "    document.getElementById('myTextarea').value+='click-';\n"
-            + "  }\n"
-            + "  function dblClickMe() {\n"
-            + "    document.getElementById('myTextarea').value+='dblclick-';\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body id='myBody' onclick='clickMe()' ondblclick='dblClickMe()'>\n"
-            + "<textarea id='myTextarea'></textarea>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(content);
-        final HtmlBody body = page.getHtmlElementById("myBody");
-        // WebDriver has currently no support for double click
-        // (http://code.google.com/p/webdriver/issues/detail?id=161)
-        body.dblClick();
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
-        assertEquals("click-dblclick-", textArea.getText());
-    }
-
 }

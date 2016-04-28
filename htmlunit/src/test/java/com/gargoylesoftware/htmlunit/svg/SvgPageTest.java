@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
-
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +24,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Tests for {@link SvgPage}.
@@ -72,12 +69,7 @@ public class SvgPageTest extends WebServerTestCase {
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals(mimeType, page.getWebResponse().getContentType());
-        if (getBrowserVersion().hasFeature(SVG)) {
-            assertTrue(SvgPage.class.isInstance(page));
-        }
-        else {
-            assertTrue(XmlPage.class.isInstance(page));
-        }
+        assertTrue(SvgPage.class.isInstance(page));
         assertEquals(content, page.getWebResponse().getContentAsString());
         return page;
     }

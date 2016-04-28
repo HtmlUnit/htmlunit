@@ -17,31 +17,25 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Element;
+
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
- * A JavaScript object for {@code Label}.
+ * A JavaScript object for {@code HTMLLabelElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlLabel.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlLabel.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlLabel.class)
 public class HTMLLabelElement extends FormChild {
 
     /**
@@ -71,56 +65,19 @@ public class HTMLLabelElement extends FormChild {
     }
 
     /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
+     * @return the HTMLElement to which the given label object is assigned
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLElement getControl() {
+        final String id = getHtmlFor();
+        if (StringUtils.isBlank(id)) {
+            return null;
+        }
+        final HtmlElement htmlElem = getDomNodeOrDie();
+        final Element elem = htmlElem.getPage().getElementById(id);
+        if (null == elem || !(elem instanceof HtmlElement)) {
+            return null;
+        }
+        return (HTMLElement) ((HtmlElement) elem).getScriptableObject();
     }
 }

@@ -63,11 +63,11 @@ public abstract class TableRowGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align"
+     * @return the value of the attribute {@code align}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -75,11 +75,11 @@ public abstract class TableRowGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "char". Refer to the
+     * Returns the value of the attribute {@code char}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "char"
+     * @return the value of the attribute {@code char}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -87,11 +87,11 @@ public abstract class TableRowGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charoff". Refer to the
+     * Returns the value of the attribute {@code charoff}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charoff"
+     * @return the value of the attribute {@code charoff}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -99,11 +99,11 @@ public abstract class TableRowGroup extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "valign". Refer to the
+     * Returns the value of the attribute {@code valign}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "valign"
+     * @return the value of the attribute {@code valign}
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {

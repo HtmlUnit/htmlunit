@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SCR_NOT_EXPANDED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -27,15 +23,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -50,13 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlScript.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-            @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlScript.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlScript.class)
 public class HTMLScriptElement extends HTMLElement {
 
     /**
@@ -67,8 +54,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code src} attribute.
-     * @return the {@code src} attribute
+     * Returns the {@code src} property.
+     * @return the {@code src} property
      */
     @JsxGetter
     public String getSrc() {
@@ -77,21 +64,19 @@ public class HTMLScriptElement extends HTMLElement {
         if (ATTRIBUTE_NOT_DEFINED == src) {
             return src;
         }
-        if (!getBrowserVersion().hasFeature(JS_SCRIPT_SCR_NOT_EXPANDED)) {
-            try {
-                final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
-                src = expandedSrc.toString();
-            }
-            catch (final MalformedURLException e) {
-                // ignore
-            }
+        try {
+            final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
+            src = expandedSrc.toString();
+        }
+        catch (final MalformedURLException e) {
+            // ignore
         }
         return src;
     }
 
     /**
-     * Sets the {@code src} attribute.
-     * @param src the {@code src} attribute
+     * Sets the {@code src} property.
+     * @param src the {@code src} property
      */
     @JsxSetter
     public void setSrc(final String src) {
@@ -99,8 +84,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code text} attribute.
-     * @return the {@code text} attribute
+     * Returns the {@code text} property.
+     * @return the {@code text} property
      */
     @JsxGetter
     public String getText() {
@@ -115,8 +100,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code text} attribute.
-     * @param text the {@code text} attribute
+     * Sets the {@code text} property.
+     * @param text the {@code text} property
      */
     @JsxSetter
     public void setText(final String text) {
@@ -126,15 +111,12 @@ public class HTMLScriptElement extends HTMLElement {
         htmlElement.appendChild(textChild);
 
         final HtmlScript tmpScript = (HtmlScript) htmlElement;
-        if (getBrowserVersion().hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT)) {
-            tmpScript.resetExecuted();
-        }
         tmpScript.executeScriptIfNeeded();
     }
 
     /**
-     * Returns the {@code type} attribute.
-     * @return the {@code type} attribute
+     * Returns the {@code type} property.
+     * @return the {@code type} property
      */
     @JsxGetter
     public String getType() {
@@ -142,8 +124,8 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code type} attribute.
-     * @param type the {@code type} attribute
+     * Sets the {@code type} property.
+     * @param type the {@code type} property
      */
     @JsxSetter
     public void setType(final String type) {
@@ -172,7 +154,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getOnload() {
         return getEventHandlerProp("onload");
     }
@@ -181,7 +163,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on load.
      * @param handler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setOnload(final Object handler) {
         setEventHandlerProp("onload", handler);
     }
@@ -208,10 +190,6 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     public Object appendChild(final Object childObject) {
-        if (getBrowserVersion().hasFeature(JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
-            throw Context.reportRuntimeError("Unexpected call to method or property access");
-        }
-
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
         final boolean wasEmpty = tmpScript.getFirstChild() == null;
         final Object result = super.appendChild(childObject);
@@ -223,34 +201,25 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Overwritten for special IE handling.
-     *
-     * @param args the arguments
-     * @return the newly added child node
+     * Returns the {@code async} property.
+     * @return the {@code async} property
      */
-    @Override
-    protected Object insertBeforeImpl(final Object[] args) {
-        if (getBrowserVersion().hasFeature(JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
-            throw Context.reportRuntimeError("Unexpected call to method or property access");
+    @JsxGetter
+    public boolean getAsync() {
+        return getDomNodeOrDie().hasAttribute("async");
+    }
+
+    /**
+     * Sets the {@code async} property.
+     * @param async the {@code async} property
+     */
+    @JsxSetter
+    public void setAsync(final boolean async) {
+        if (async) {
+            getDomNodeOrDie().setAttribute("async", "");
         }
-        return super.insertBeforeImpl(args);
-    }
-
-    /**
-     * Returns the <tt>async</tt> attribute.
-     * @return the <tt>async</tt> attribute
-     */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)})
-    public String getAsync() {
-        return getDomNodeOrDie().getAttribute("async");
-    }
-
-    /**
-     * Sets the <tt>async</tt> attribute.
-     * @param type the <tt>async</tt> attribute
-     */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)})
-    public void setAsync(final String type) {
-        getDomNodeOrDie().setAttribute("async", type);
+        else {
+            getDomNodeOrDie().removeAttribute("async");
+        }
     }
 }

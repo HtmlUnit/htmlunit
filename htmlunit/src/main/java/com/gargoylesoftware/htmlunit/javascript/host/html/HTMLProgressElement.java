@@ -17,13 +17,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlProgress;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 /**
  * The JavaScript object {@code HTMLProgressElement}.
@@ -33,9 +33,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlProgress.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlProgress.class)
 public class HTMLProgressElement extends HTMLElement {
+
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -70,4 +72,17 @@ public class HTMLProgressElement extends HTMLElement {
             return defaultValue;
         }
     }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie());
+        }
+        return labels_;
+    }
+
 }

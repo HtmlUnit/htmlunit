@@ -84,12 +84,12 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "", "", "",
+            IE = {"", "", "",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
             + "alert(comment.data);\n"
@@ -173,7 +173,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "0", "0", "4", "9", "6" })
+            IE = {"0", "0", "4", "9", "6"})
     public void length() throws Exception {
         final String test = ""
             + "alert(comment.length);\n"
@@ -233,12 +233,12 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "", "", "",
+            IE = {"", "", "",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(comment.nodeValue);\n"
@@ -354,12 +354,12 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "", "", "",
+            IE = {"", "", "",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
             + "alert(comment.text);\n"
@@ -403,7 +403,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "<!---->", "<!--  -->", "<!--text-->", "<!--text\r\ntext-->", "<!--  text  text  -->" })
+            IE = {"<!---->", "<!--  -->", "<!--text-->", "<!--text\r\ntext-->", "<!--  text  text  -->"})
     public void xml() throws Exception {
         final String test =
             // empty
@@ -459,7 +459,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myComment", "myComment-appended", "exception-appendNull", "myComment-appended", "myComment-appended\n" })
+            IE = {"myComment", "myComment-appended", "exception-appendNull", "myComment-appended", "myComment-appended\n"})
     public void appendData() throws Exception {
         final String test = ""
             + "alert(comment.data);\n"
@@ -485,12 +485,12 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myComment", "myCommen", "myCen", "yCen",
+            IE = {"myComment", "myCommen", "myCen", "yCen",
                    "exception-deletePosNegative", "yCen",
                    "exception-deletePosTooHigh", "yCen",
                    "yCen",
                    "exception-deleteCntNegative", "yCen",
-                   "y" })
+                   "y"})
     public void deleteData() throws Exception {
         final String test = ""
             + "alert(comment.data);\n"
@@ -533,12 +533,12 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myComment", "myComment-b", "myCom-m-ment-b", "f-myCom-m-ment-b",
+            IE = {"myComment", "myComment-b", "myCom-m-ment-b", "f-myCom-m-ment-b",
                    "exception-insertNull", "f-myCom-m-ment-b", "\nf-myCom-m-ment-b",
                    "\nf-myCom-m-ment-b",
                    "exception-insertPosNegative", "\nf-myCom-m-ment-b",
                    "\nf-myCom-m-ment-b",
-                   "exception-insertPosTooHigh", "\nf-myCom-m-ment-b" })
+                   "exception-insertPosTooHigh", "\nf-myCom-m-ment-b"})
     public void insertData() throws Exception {
         final String test = ""
             + "alert(comment.data);\n"
@@ -586,13 +586,13 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myComment", "myCommen-b", "myC-m-en-b", "f-yC-m-en-b",
+            IE = {"myComment", "myCommen-b", "myC-m-en-b", "f-yC-m-en-b",
                    "exception-replaceNull", "f-yCen-b", "f-y\nn-b",
                    "exception-replacePosNegative", "f-y\nn-b",
                    "exception-replacePosTooHigh", "f-y\nn-b",
                    "f-yC\nn-b",
                    "exception-replaceCntNegative", "f-yC\nn-b",
-                   "fX" })
+                   "fX"})
     public void replaceData() throws Exception {
         final String test = ""
             + "alert(comment.data);\n"
@@ -645,12 +645,12 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myComment", "t", "myComment", "omm", "myComment", "m", "myComment",
+            IE = {"myComment", "t", "myComment", "omm", "myComment", "m", "myComment",
                    "exception-substringPosNegative", "myComment",
                    "exception-substringPosTooHigh", "myComment",
                    "", "myComment",
                    "exception-substringCntNegative", "myComment",
-                   "yComment", "myComment" })
+                   "yComment", "myComment"})
     public void substringData() throws Exception {
         final String test = ""
             + "alert(comment.data);\n"

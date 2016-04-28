@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +45,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testReplaceChild_WithSameNode() throws Exception {
+    public void replaceChild_WithSameNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -64,7 +62,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void eventListener() throws Exception {
         final String html
             = "<html><head>\n"
@@ -77,13 +75,8 @@ public class Node2Test extends SimpleWebTestCase {
             + "  }\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myAnchor');\n"
-            + "    if (e.addEventListener) {\n"
-            + "      e.addEventListener('click', clicking1, false);\n"
-            + "      e.addEventListener('click', clicking2, false);\n"
-            + "    } else if (e.attachEvent) {\n"
-            + "      e.attachEvent('onclick', clicking1);\n"
-            + "      e.attachEvent('onclick', clicking2);\n"
-            + "    }\n"
+            + "     e.addEventListener('click', clicking1, false);\n"
+            + "     e.addEventListener('click', clicking2, false);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
@@ -102,7 +95,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void eventListener_return_false() throws Exception {
         final String html
             = "<html><head>\n"
@@ -116,13 +109,8 @@ public class Node2Test extends SimpleWebTestCase {
             + "  }\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myAnchor');\n"
-            + "    if (e.addEventListener) {\n"
-            + "      e.addEventListener('click', clicking1, false);\n"
-            + "      e.addEventListener('click', clicking2, false);\n"
-            + "    } else if (e.attachEvent) {\n"
-            + "      e.attachEvent('onclick', clicking1);\n"
-            + "      e.attachEvent('onclick', clicking2);\n"
-            + "    }\n"
+            + "    e.addEventListener('click', clicking1, false);\n"
+            + "    e.addEventListener('click', clicking2, false);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
@@ -149,8 +137,7 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "§§URL§§second/" },
-            IE8 = { "1", "2", "§§URL§§" })
+    @Alerts({"1", "2", "§§URL§§second/"})
     public void eventListener_returnValue_false() throws Exception {
         final String html
             = "<html><head>\n"
@@ -165,13 +152,8 @@ public class Node2Test extends SimpleWebTestCase {
             + "  }\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myAnchor');\n"
-            + "    if (e.addEventListener) {\n"
-            + "      e.addEventListener('click', clicking1, false);\n"
-            + "      e.addEventListener('click', clicking2, false);\n"
-            + "    } else if (e.attachEvent) {\n"
-            + "      e.attachEvent('onclick', clicking1);\n"
-            + "      e.attachEvent('onclick', clicking2);\n"
-            + "    }\n"
+            + "    e.addEventListener('click', clicking1, false);\n"
+            + "    e.addEventListener('click', clicking2, false);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"

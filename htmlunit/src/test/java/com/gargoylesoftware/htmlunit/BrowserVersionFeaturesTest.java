@@ -64,9 +64,8 @@ public class BrowserVersionFeaturesTest  {
     @Test
     public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<>();
-        browsers.add(BrowserVersion.FIREFOX_31);
         browsers.add(BrowserVersion.FIREFOX_38);
-        browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
+        browsers.add(BrowserVersion.FIREFOX_45);
         browsers.add(BrowserVersion.INTERNET_EXPLORER);
         browsers.add(BrowserVersion.CHROME);
         browsers.add(BrowserVersion.EDGE);
@@ -106,7 +105,7 @@ public class BrowserVersionFeaturesTest  {
         }
     }
 
-    private String expectedBrowserName(final BrowserVersion browser) {
+    private static String expectedBrowserName(final BrowserVersion browser) {
         if (browser.isIE()) {
             return "IE";
         }
@@ -145,7 +144,7 @@ public class BrowserVersionFeaturesTest  {
                 unusedCheck(file, unusedFeatures);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file);
+                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                 final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
                 for (final String line : lines) {
                     for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {

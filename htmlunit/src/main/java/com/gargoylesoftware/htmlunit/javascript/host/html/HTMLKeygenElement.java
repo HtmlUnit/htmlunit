@@ -19,7 +19,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 /**
  * The JavaScript object {@code HTMLKeygenElement}.
@@ -31,10 +34,44 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(CHROME))
 public class HTMLKeygenElement extends HTMLElement {
 
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
+
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor
     public HTMLKeygenElement() {
     }
+
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
+    }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie());
+        }
+        return labels_;
+    }
+
 }

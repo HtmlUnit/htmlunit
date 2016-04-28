@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class ElementOuterHtmlTest extends WebDriverTestCase {
 
-    private String test(final String elementName) {
+    private static String test(final String elementName) {
         return "<!DOCTYPE html><html><head>\n"
                 + "  <script>\n"
                 + "    function test(){\n"
@@ -52,8 +52,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<abbr></abbr>",
-            IE8 = "<ABBR></ABBR>")
+    @Alerts("<abbr></abbr>")
     public void abbr() throws Exception {
         loadPageWithAlerts2(test("abbr"));
     }
@@ -62,8 +61,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<acronym></acronym>",
-            IE8 = "<ACRONYM></ACRONYM>")
+    @Alerts("<acronym></acronym>")
     public void acronym() throws Exception {
         loadPageWithAlerts2(test("acronym"));
     }
@@ -72,8 +70,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<a></a>",
-            IE8 = "<A></A>")
+    @Alerts("<a></a>")
     public void a() throws Exception {
         loadPageWithAlerts2(test("a"));
     }
@@ -82,8 +79,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<address></address>",
-            IE8 = "<ADDRESS></ADDRESS>")
+    @Alerts("<address></address>")
     public void address() throws Exception {
         loadPageWithAlerts2(test("address"));
     }
@@ -92,8 +88,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<applet></applet>",
-            IE8 = "<APPLET></APPLET>")
+    @Alerts("<applet></applet>")
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }
@@ -102,8 +97,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<area>",
-            IE8 = "<AREA>")
+    @Alerts("<area>")
     public void area() throws Exception {
         loadPageWithAlerts2(test("area"));
     }
@@ -140,7 +134,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<bgsound>",
-            IE8 = "<BGSOUND>",
             CHROME = "<bgsound></bgsound>")
     public void bgsound() throws Exception {
         loadPageWithAlerts2(test("bgsound"));
@@ -150,8 +143,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<base>",
-            IE8 = "<BASE>")
+    @Alerts("<base>")
     public void base() throws Exception {
         loadPageWithAlerts2(test("base"));
     }
@@ -161,8 +153,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<basefont>",
-            IE = "<BASEFONT></BASEFONT>",
-            IE11 = "<basefont></basefont>")
+            IE = "<basefont></basefont>")
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
     }
@@ -180,8 +171,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<bdo></bdo>",
-            IE8 = "<BDO></BDO>")
+    @Alerts("<bdo></bdo>")
     public void bdo() throws Exception {
         loadPageWithAlerts2(test("bdo"));
     }
@@ -190,8 +180,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<big></big>",
-            IE8 = "<BIG></BIG>")
+    @Alerts("<big></big>")
     public void big() throws Exception {
         loadPageWithAlerts2(test("big"));
     }
@@ -200,8 +189,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<blink></blink>",
-            IE8 = "<BLINK></BLINK>")
+    @Alerts("<blink></blink>")
     public void blink() throws Exception {
         loadPageWithAlerts2(test("blink"));
     }
@@ -210,8 +198,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<blockquote></blockquote>",
-            IE8 = "<BLOCKQUOTE></BLOCKQUOTE>")
+    @Alerts("<blockquote></blockquote>")
     public void blockquote() throws Exception {
         loadPageWithAlerts2(test("blockquote"));
     }
@@ -220,8 +207,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<body></body>",
-            IE8 = "<BODY></BODY>")
+    @Alerts("<body></body>")
     public void body() throws Exception {
         loadPageWithAlerts2(test("body"));
     }
@@ -230,8 +216,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<b></b>",
-            IE8 = "<B></B>")
+    @Alerts("<b></b>")
     public void b() throws Exception {
         loadPageWithAlerts2(test("b"));
     }
@@ -240,8 +225,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<br>",
-            IE8 = "<BR>")
+    @Alerts("<br>")
     public void br() throws Exception {
         loadPageWithAlerts2(test("br"));
     }
@@ -250,8 +234,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<button></button>",
-            IE8 = "<BUTTON type=submit></BUTTON>")
+    @Alerts("<button></button>")
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
     }
@@ -269,8 +252,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<caption></caption>",
-            IE8 = "<CAPTION></CAPTION>")
+    @Alerts("<caption></caption>")
     public void caption() throws Exception {
         loadPageWithAlerts2(test("caption"));
     }
@@ -279,8 +261,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<center></center>",
-            IE8 = "<CENTER></CENTER>")
+    @Alerts("<center></center>")
     public void center() throws Exception {
         loadPageWithAlerts2(test("center"));
     }
@@ -289,8 +270,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<cite></cite>",
-            IE8 = "<CITE></CITE>")
+    @Alerts("<cite></cite>")
     public void cite() throws Exception {
         loadPageWithAlerts2(test("cite"));
     }
@@ -299,8 +279,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<code></code>",
-            IE8 = "<CODE></CODE>")
+    @Alerts("<code></code>")
     public void code() throws Exception {
         loadPageWithAlerts2(test("code"));
     }
@@ -309,8 +288,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<col>",
-            IE8 = "<COL>")
+    @Alerts("<col>")
     public void col() throws Exception {
         loadPageWithAlerts2(test("col"));
     }
@@ -319,8 +297,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<colgroup></colgroup>",
-            IE8 = "<COLGROUP></COLGROUP>")
+    @Alerts("<colgroup></colgroup>")
     public void colgroup() throws Exception {
         loadPageWithAlerts2(test("colgroup"));
     }
@@ -329,8 +306,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<command></command>",
-            FF31 = "<command>")
+    @Alerts("<command></command>")
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -348,8 +324,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<dfn></dfn>",
-            IE8 = "<DFN></DFN>")
+    @Alerts("<dfn></dfn>")
     public void dfn() throws Exception {
         loadPageWithAlerts2(test("dfn"));
     }
@@ -358,8 +333,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<dd></dd>",
-            IE8 = "<DD></DD>")
+    @Alerts("<dd></dd>")
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
@@ -368,8 +342,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<del></del>",
-            IE8 = "<DEL></DEL>")
+    @Alerts("<del></del>")
     public void del() throws Exception {
         loadPageWithAlerts2(test("del"));
     }
@@ -396,8 +369,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<dir></dir>",
-            IE8 = "<DIR></DIR>")
+    @Alerts("<dir></dir>")
     public void dir() throws Exception {
         loadPageWithAlerts2(test("dir"));
     }
@@ -406,8 +378,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div></div>",
-            IE8 = "<DIV></DIV>")
+    @Alerts("<div></div>")
     public void div() throws Exception {
         loadPageWithAlerts2(test("div"));
     }
@@ -416,8 +387,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<dl></dl>",
-            IE8 = "<DL></DL>")
+    @Alerts("<dl></dl>")
     public void dl() throws Exception {
         loadPageWithAlerts2(test("dl"));
     }
@@ -426,8 +396,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<dt></dt>",
-            IE8 = "<DT></DT>")
+    @Alerts("<dt></dt>")
     public void dt() throws Exception {
         loadPageWithAlerts2(test("dt"));
     }
@@ -436,8 +405,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<embed>",
-            IE8 = "<EMBED>")
+    @Alerts("<embed>")
     public void embed() throws Exception {
         loadPageWithAlerts2(test("embed"));
     }
@@ -446,8 +414,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<em></em>",
-            IE8 = "<EM></EM>")
+    @Alerts("<em></em>")
     public void em() throws Exception {
         loadPageWithAlerts2(test("em"));
     }
@@ -456,8 +423,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<fieldset></fieldset>",
-            IE8 = "<FIELDSET></FIELDSET>")
+    @Alerts("<fieldset></fieldset>")
     public void fieldset() throws Exception {
         loadPageWithAlerts2(test("fieldset"));
     }
@@ -484,8 +450,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<font></font>",
-            IE8 = "<FONT></FONT>")
+    @Alerts("<font></font>")
     public void font() throws Exception {
         loadPageWithAlerts2(test("font"));
     }
@@ -494,8 +459,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<form></form>",
-            IE8 = "<FORM></FORM>")
+    @Alerts("<form></form>")
     public void form() throws Exception {
         loadPageWithAlerts2(test("form"));
     }
@@ -513,8 +477,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<frame>",
-            IE8 = "<FRAME>")
+    @Alerts("<frame>")
     public void frame() throws Exception {
         loadPageWithAlerts2(test("frame"));
     }
@@ -523,8 +486,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<frameset></frameset>",
-            IE8 = "<FRAMESET></FRAMESET>")
+    @Alerts("<frameset></frameset>")
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
     }
@@ -533,8 +495,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h1></h1>",
-            IE8 = "<H1></H1>")
+    @Alerts("<h1></h1>")
     public void h1() throws Exception {
         loadPageWithAlerts2(test("h1"));
     }
@@ -543,8 +504,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h2></h2>",
-            IE8 = "<H2></H2>")
+    @Alerts("<h2></h2>")
     public void h2() throws Exception {
         loadPageWithAlerts2(test("h2"));
     }
@@ -553,8 +513,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h3></h3>",
-            IE8 = "<H3></H3>")
+    @Alerts("<h3></h3>")
     public void h3() throws Exception {
         loadPageWithAlerts2(test("h3"));
     }
@@ -563,8 +522,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h4></h4>",
-            IE8 = "<H4></H4>")
+    @Alerts("<h4></h4>")
     public void h4() throws Exception {
         loadPageWithAlerts2(test("h4"));
     }
@@ -573,8 +531,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h5></h5>",
-            IE8 = "<H5></H5>")
+    @Alerts("<h5></h5>")
     public void h5() throws Exception {
         loadPageWithAlerts2(test("h5"));
     }
@@ -583,8 +540,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h6></h6>",
-            IE8 = "<H6></H6>")
+    @Alerts("<h6></h6>")
     public void h6() throws Exception {
         loadPageWithAlerts2(test("h6"));
     }
@@ -593,8 +549,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<head></head>",
-            IE8 = "<HEAD></HEAD>")
+    @Alerts("<head></head>")
     public void head() throws Exception {
         loadPageWithAlerts2(test("head"));
     }
@@ -612,8 +567,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<hr>",
-            IE8 = "<HR>")
+    @Alerts("<hr>")
     public void hr() throws Exception {
         loadPageWithAlerts2(test("hr"));
     }
@@ -622,8 +576,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<html></html>",
-            IE8 = "<HTML></HTML>")
+    @Alerts("<html></html>")
     public void html() throws Exception {
         loadPageWithAlerts2(test("html"));
     }
@@ -632,8 +585,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<iframe></iframe>",
-            IE8 = "<IFRAME></IFRAME>")
+    @Alerts("<iframe></iframe>")
     public void iframe() throws Exception {
         loadPageWithAlerts2(test("iframe"));
     }
@@ -642,8 +594,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<q></q>",
-            IE8 = "<Q></Q>")
+    @Alerts("<q></q>")
     public void q() throws Exception {
         loadPageWithAlerts2(test("q"));
     }
@@ -652,8 +603,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<ruby></ruby>",
-            IE8 = "<RUBY></RUBY>")
+    @Alerts("<ruby></ruby>")
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -662,8 +612,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<rt></rt>",
-            IE8 = "<RT></RT>")
+    @Alerts("<rt></rt>")
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -672,8 +621,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<rp></rp>",
-            IE8 = "<RP></RP>")
+    @Alerts("<rp></rp>")
     public void rp() throws Exception {
         loadPageWithAlerts2(test("rp"));
     }
@@ -684,8 +632,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<image></image>",
             CHROME = "<image>",
-            IE8 = "<IMG>",
-            IE11 = "<img>")
+            IE = "<img>")
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
     }
@@ -694,8 +641,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<img>",
-            IE8 = "<IMG>")
+    @Alerts("<img>")
     public void img() throws Exception {
         loadPageWithAlerts2(test("img"));
     }
@@ -704,8 +650,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<ins></ins>",
-            IE8 = "<INS></INS>")
+    @Alerts("<ins></ins>")
     public void ins() throws Exception {
         loadPageWithAlerts2(test("ins"));
     }
@@ -715,8 +660,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<isindex></isindex>",
-            IE = "<ISINDEX>",
-            IE11 = "<isindex>")
+            IE = "<isindex>")
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -725,8 +669,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<i></i>",
-            IE8 = "<I></I>")
+    @Alerts("<i></i>")
     public void i() throws Exception {
         loadPageWithAlerts2(test("i"));
     }
@@ -735,8 +678,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<kbd></kbd>",
-            IE8 = "<KBD></KBD>")
+    @Alerts("<kbd></kbd>")
     public void kbd() throws Exception {
         loadPageWithAlerts2(test("kbd"));
     }
@@ -746,7 +688,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<keygen>",
-            IE8 = "<keygen></keygen>",
             CHROME = "<keygen></keygen>")
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
@@ -756,8 +697,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<label></label>",
-            IE8 = "<LABEL></LABEL>")
+    @Alerts("<label></label>")
     public void label() throws Exception {
         loadPageWithAlerts2(test("label"));
     }
@@ -775,8 +715,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<legend></legend>",
-            IE8 = "<LEGEND></LEGEND>")
+    @Alerts("<legend></legend>")
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
@@ -785,8 +724,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<listing></listing>",
-            IE8 = "<LISTING></LISTING>")
+    @Alerts("<listing></listing>")
     public void listing() throws Exception {
         loadPageWithAlerts2(test("listing"));
     }
@@ -795,8 +733,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<li></li>",
-            IE8 = "<LI></LI>")
+    @Alerts("<li></li>")
     public void li() throws Exception {
         loadPageWithAlerts2(test("li"));
     }
@@ -805,8 +742,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<link>",
-            IE8 = "<LINK>")
+    @Alerts("<link>")
     public void link() throws Exception {
         loadPageWithAlerts2(test("link"));
     }
@@ -824,8 +760,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<map></map>",
-            IE8 = "<MAP></MAP>")
+    @Alerts("<map></map>")
     public void map() throws Exception {
         loadPageWithAlerts2(test("map"));
     }
@@ -834,8 +769,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<marquee></marquee>",
-            IE8 = "<MARQUEE></MARQUEE>")
+    @Alerts("<marquee></marquee>")
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
@@ -853,8 +787,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<menu></menu>",
-            IE8 = "<MENU></MENU>")
+    @Alerts("<menu></menu>")
     public void menu() throws Exception {
         loadPageWithAlerts2(test("menu"));
     }
@@ -872,8 +805,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<meta>",
-            IE8 = "<META>")
+    @Alerts("<meta>")
     public void meta() throws Exception {
         loadPageWithAlerts2(test("meta"));
     }
@@ -910,8 +842,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<nextid></nextid>",
-            IE8 = "<NEXTID>",
-            IE11 = "<nextid>")
+            IE = "<nextid>")
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }
@@ -920,8 +851,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<nobr></nobr>",
-            IE8 = "<NOBR></NOBR>")
+    @Alerts("<nobr></nobr>")
     public void nobr() throws Exception {
         loadPageWithAlerts2(test("nobr"));
     }
@@ -930,8 +860,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<noembed></noembed>",
-            IE8 = "<NOEMBED></NOEMBED>")
+    @Alerts("<noembed></noembed>")
     public void noembed() throws Exception {
         loadPageWithAlerts2(test("noembed"));
     }
@@ -940,8 +869,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<noframes></noframes>",
-            IE8 = "<NOFRAMES></NOFRAMES>")
+    @Alerts("<noframes></noframes>")
     public void noframes() throws Exception {
         loadPageWithAlerts2(test("noframes"));
     }
@@ -950,8 +878,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<noscript></noscript>",
-            IE8 = "<NOSCRIPT></NOSCRIPT>")
+    @Alerts("<noscript></noscript>")
     public void noscript() throws Exception {
         loadPageWithAlerts2(test("noscript"));
     }
@@ -969,8 +896,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<object></object>",
-            IE8 = "<OBJECT></OBJECT>")
+    @Alerts("<object></object>")
     public void object() throws Exception {
         loadPageWithAlerts2(test("object"));
     }
@@ -979,8 +905,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<ol></ol>",
-            IE8 = "<OL></OL>")
+    @Alerts("<ol></ol>")
     public void ol() throws Exception {
         loadPageWithAlerts2(test("ol"));
     }
@@ -989,8 +914,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<optgroup></optgroup>",
-            IE8 = "<OPTGROUP></OPTGROUP>")
+    @Alerts("<optgroup></optgroup>")
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -999,8 +923,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<option></option>",
-            IE8 = "<OPTION></OPTION>")
+    @Alerts("<option></option>")
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }
@@ -1018,8 +941,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<p></p>",
-            IE8 = "<P></P>")
+    @Alerts("<p></p>")
     public void p() throws Exception {
         loadPageWithAlerts2(test("p"));
     }
@@ -1028,8 +950,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<param>",
-            IE8 = "<PARAM>")
+    @Alerts("<param>")
     public void param() throws Exception {
         loadPageWithAlerts2(test("param"));
     }
@@ -1038,8 +959,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<plaintext></plaintext>",
-            IE8 = "<PLAINTEXT></PLAINTEXT>")
+    @Alerts("<plaintext></plaintext>")
     public void plaintext() throws Exception {
         loadPageWithAlerts2(test("plaintext"));
     }
@@ -1048,8 +968,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<pre></pre>",
-            IE8 = "<PRE></PRE>")
+    @Alerts("<pre></pre>")
     public void pre() throws Exception {
         loadPageWithAlerts2(test("pre"));
     }
@@ -1067,8 +986,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<s></s>",
-            IE8 = "<S></S>")
+    @Alerts("<s></s>")
     public void s() throws Exception {
         loadPageWithAlerts2(test("s"));
     }
@@ -1077,8 +995,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<samp></samp>",
-            IE8 = "<SAMP></SAMP>")
+    @Alerts("<samp></samp>")
     public void samp() throws Exception {
         loadPageWithAlerts2(test("samp"));
     }
@@ -1087,8 +1004,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<script></script>",
-            IE8 = "<SCRIPT></SCRIPT>")
+    @Alerts("<script></script>")
     public void script() throws Exception {
         loadPageWithAlerts2(test("script"));
     }
@@ -1106,8 +1022,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<select></select>",
-            IE8 = "<SELECT></SELECT>")
+    @Alerts("<select></select>")
     public void select() throws Exception {
         loadPageWithAlerts2(test("select"));
     }
@@ -1116,8 +1031,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<small></small>",
-            IE8 = "<SMALL></SMALL>")
+    @Alerts("<small></small>")
     public void small() throws Exception {
         loadPageWithAlerts2(test("small"));
     }
@@ -1126,8 +1040,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<source>",
-            IE8 = "<source></source>")
+    @Alerts("<source>")
     public void source() throws Exception {
         loadPageWithAlerts2(test("source"));
     }
@@ -1145,8 +1058,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<span></span>",
-            IE8 = "<SPAN></SPAN>")
+    @Alerts("<span></span>")
     public void span() throws Exception {
         loadPageWithAlerts2(test("span"));
     }
@@ -1155,8 +1067,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<strike></strike>",
-            IE8 = "<STRIKE></STRIKE>")
+    @Alerts("<strike></strike>")
     public void strike() throws Exception {
         loadPageWithAlerts2(test("strike"));
     }
@@ -1165,8 +1076,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<strong></strong>",
-            IE8 = "<STRONG></STRONG>")
+    @Alerts("<strong></strong>")
     public void strong() throws Exception {
         loadPageWithAlerts2(test("strong"));
     }
@@ -1175,8 +1085,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<style></style>",
-            IE8 = "<STYLE></STYLE>")
+    @Alerts("<style></style>")
     public void style() throws Exception {
         loadPageWithAlerts2(test("style"));
     }
@@ -1185,8 +1094,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<sub></sub>",
-            IE8 = "<SUB></SUB>")
+    @Alerts("<sub></sub>")
     public void sub() throws Exception {
         loadPageWithAlerts2(test("sub"));
     }
@@ -1204,8 +1112,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<sup></sup>",
-            IE8 = "<SUP></SUP>")
+    @Alerts("<sup></sup>")
     public void sup() throws Exception {
         loadPageWithAlerts2(test("sup"));
     }
@@ -1214,8 +1121,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<table></table>",
-            IE8 = "<TABLE></TABLE>")
+    @Alerts("<table></table>")
     public void table() throws Exception {
         loadPageWithAlerts2(test("table"));
     }
@@ -1224,8 +1130,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<tbody></tbody>",
-            IE8 = "<TBODY></TBODY>")
+    @Alerts("<tbody></tbody>")
     public void tbody() throws Exception {
         loadPageWithAlerts2(test("tbody"));
     }
@@ -1234,8 +1139,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<td></td>",
-            IE8 = "<TD></TD>")
+    @Alerts("<td></td>")
     public void td() throws Exception {
         loadPageWithAlerts2(test("td"));
     }
@@ -1244,8 +1148,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<th></th>",
-            IE8 = "<TH></TH>")
+    @Alerts("<th></th>")
     public void th() throws Exception {
         loadPageWithAlerts2(test("th"));
     }
@@ -1254,8 +1157,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<tr></tr>",
-            IE8 = "<TR></TR>")
+    @Alerts("<tr></tr>")
     public void tr() throws Exception {
         loadPageWithAlerts2(test("tr"));
     }
@@ -1265,8 +1167,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<track>",
-            CHROME = "<track></track>",
-            IE8 = "<track></track>")
+            CHROME = "<track></track>")
     public void track() throws Exception {
         loadPageWithAlerts2(test("track"));
     }
@@ -1275,8 +1176,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<textarea></textarea>",
-            IE8 = "<TEXTAREA></TEXTAREA>")
+    @Alerts("<textarea></textarea>")
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
     }
@@ -1285,8 +1185,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<tfoot></tfoot>",
-            IE8 = "<TFOOT></TFOOT>")
+    @Alerts("<tfoot></tfoot>")
     public void tfoot() throws Exception {
         loadPageWithAlerts2(test("tfoot"));
     }
@@ -1295,8 +1194,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<thead></thead>",
-            IE8 = "<THEAD></THEAD>")
+    @Alerts("<thead></thead>")
     public void thead() throws Exception {
         loadPageWithAlerts2(test("thead"));
     }
@@ -1305,8 +1203,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<tt></tt>",
-            IE8 = "<TT></TT>")
+    @Alerts("<tt></tt>")
     public void tt() throws Exception {
         loadPageWithAlerts2(test("tt"));
     }
@@ -1324,8 +1221,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<title></title>",
-            IE8 = "<TITLE></TITLE>")
+    @Alerts("<title></title>")
     public void title() throws Exception {
         loadPageWithAlerts2(test("title"));
     }
@@ -1334,8 +1230,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<u></u>",
-            IE8 = "<U></U>")
+    @Alerts("<u></u>")
     public void u() throws Exception {
         loadPageWithAlerts2(test("u"));
     }
@@ -1344,8 +1239,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<ul></ul>",
-            IE8 = "<UL></UL>")
+    @Alerts("<ul></ul>")
     public void ul() throws Exception {
         loadPageWithAlerts2(test("ul"));
     }
@@ -1354,8 +1248,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<var></var>",
-            IE8 = "<VAR></VAR>")
+    @Alerts("<var></var>")
     public void var() throws Exception {
         loadPageWithAlerts2(test("var"));
     }
@@ -1373,8 +1266,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<wbr>",
-            IE8 = "<WBR>")
+    @Alerts("<wbr>")
     public void wbr() throws Exception {
         loadPageWithAlerts2(test("wbr"));
     }
@@ -1383,8 +1275,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<xmp></xmp>",
-            IE8 = "<XMP></XMP>")
+    @Alerts("<xmp></xmp>")
     public void xmp() throws Exception {
         loadPageWithAlerts2(test("xmp"));
     }
@@ -1402,8 +1293,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<input>",
-            IE8 = "<INPUT>")
+    @Alerts("<input>")
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
     }

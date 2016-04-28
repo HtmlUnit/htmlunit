@@ -26,9 +26,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
-import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
@@ -39,23 +40,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlAddress.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlBlockQuote.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlCenter.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlExample.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlListing.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlPlainText.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlPreformattedText.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(IE)),
+        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(IE))
     })
 public class HTMLBlockElement extends HTMLElement {
 
@@ -77,8 +68,7 @@ public class HTMLBlockElement extends HTMLElement {
      * @return the value of the {@code cite} property
      */
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttribute("cite");
-        return cite;
+        return getDomNodeOrDie().getAttribute("cite");
     }
 
     /**
@@ -118,4 +108,41 @@ public class HTMLBlockElement extends HTMLElement {
         }
         return false;
     }
+
+    /**
+     * Returns the value of the {@code clear} property.
+     * @return the value of the {@code clear} property
+     */
+    @JsxGetter
+    public String getClear() {
+        return getDomNodeOrDie().getAttribute("clear");
+    }
+
+    /**
+     * Returns the value of the {@code clear} property.
+     * @param clear the value
+     */
+    @JsxSetter
+    public void setClear(final String clear) {
+        getDomNodeOrDie().setAttribute("clear", clear);
+    }
+
+    /**
+     * Returns the value of the {@code width} property.
+     * @return the value of the {@code width} property
+     */
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
+        return getWidthOrHeight("width", Boolean.TRUE);
+    }
+
+    /**
+     * Sets the value of the {@code width} property.
+     * @param width the value of the {@code width} property
+     */
+    @JsxSetter
+    public void setWidth(final String width) {
+        setWidthOrHeight("width", width, true);
+    }
+
 }

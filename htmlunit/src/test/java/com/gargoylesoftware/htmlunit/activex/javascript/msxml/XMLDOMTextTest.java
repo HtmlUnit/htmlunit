@@ -85,12 +85,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "X", "X", "X",
+            IE = {"X", "X", "X",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -174,7 +174,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "0", "4", "9", "6" })
+            IE = {"1", "0", "4", "9", "6"})
     public void length() throws Exception {
         final String test = ""
             + "alert(text.length);\n"
@@ -234,12 +234,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "X", "X", "X",
+            IE = {"X", "X", "X",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(text.nodeValue);\n"
@@ -283,7 +283,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "true", "true", "true" })
+            IE = {"true", "true", "true"})
     @NotYetImplemented(IE)
     // Xerxes is the problem here as they do treat whitespaces as text nodes.
     public void nodeValue_empty() throws Exception {
@@ -384,12 +384,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "X", "X", "X",
+            IE = {"X", "X", "X",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
             + "alert(text.text);\n"
@@ -433,7 +433,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "text", "text\r\ntext", "  text  text  " })
+            IE = {"text", "text\r\ntext", "  text  text  "})
     public void xml() throws Exception {
         final String test =
             // text
@@ -481,7 +481,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myText", "myText-appended", "exception-appendNull", "myText-appended", "myText-appended\n" })
+            IE = {"myText", "myText-appended", "exception-appendNull", "myText-appended", "myText-appended\n"})
     public void appendData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -507,12 +507,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myText", "myTex", "myx", "yx",
+            IE = {"myText", "myTex", "myx", "yx",
                    "exception-deletePosNegative", "yx",
                    "exception-deletePosTooHigh", "yx",
                    "yx",
                    "exception-deleteCntNegative", "yx",
-                   "y" })
+                   "y"})
     public void deleteData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -555,12 +555,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myText", "myText-b", "myT-m-ext-b", "f-myT-m-ext-b",
+            IE = {"myText", "myText-b", "myT-m-ext-b", "f-myT-m-ext-b",
                    "exception-insertNull", "f-myT-m-ext-b", "\nf-myT-m-ext-b",
                    "\nf-myT-m-ext-b",
                    "exception-insertPosNegative", "\nf-myT-m-ext-b",
                    "\nf-myT-m-ext-b",
-                   "exception-insertPosTooHigh", "\nf-myT-m-ext-b" })
+                   "exception-insertPosTooHigh", "\nf-myT-m-ext-b"})
     public void insertData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -608,13 +608,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myText", "myTex-b", "my-m-x-b", "f-y-m-x-b",
+            IE = {"myText", "myTex-b", "my-m-x-b", "f-y-m-x-b",
                    "exception-replaceNull", "f-y--x-b", "f-y\nx-b",
                    "exception-replacePosNegative", "f-y\nx-b",
                    "exception-replacePosTooHigh", "f-y\nx-b",
                    "f-y\nx-b",
                    "exception-replaceCntNegative", "f-y\nx-b",
-                   "f" })
+                   "f"})
     public void replaceData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -667,9 +667,9 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "2", "#text", "2", "my", "#text", "4", "Text", "true",
+            IE = {"1", "2", "#text", "2", "my", "#text", "4", "Text", "true",
                    "exception-splitPosNegative", "my",
-                   "exception-splitPosTooHigh", "my" })
+                   "exception-splitPosTooHigh", "my"})
     public void splitText() throws Exception {
         final String test = ""
             + "alert(root.childNodes.length);\n"
@@ -700,12 +700,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myText", "t", "myText", "Te", "myText", "m", "myText",
+            IE = {"myText", "t", "myText", "Te", "myText", "m", "myText",
                    "exception-substringPosNegative", "myText",
                    "exception-substringPosTooHigh", "myText",
                    "", "myText",
                    "exception-substringCntNegative", "myText",
-                   "yText", "myText" })
+                   "yText", "myText"})
     public void substringData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"

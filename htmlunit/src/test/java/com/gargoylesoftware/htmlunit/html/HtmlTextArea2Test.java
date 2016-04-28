@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -29,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlTextInput}.
  *
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextArea2Test extends WebDriverTestCase {
@@ -37,7 +37,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -75,7 +75,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -112,8 +112,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-", "default-default", "some text-default", "some text-newdefault" },
-            IE = { "-", "-default", "some text-default", "some text-newdefault" })
+    @Alerts(DEFAULT = {"-", "default-default", "some text-default", "some text-newdefault"},
+            IE = {"-", "-default", "some text-default", "some text-newdefault"})
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -143,8 +143,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "7" },
-            IE = { "textLength not available" })
+    @Alerts(DEFAULT = {"7"},
+            IE = {"textLength not available"})
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -178,11 +178,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "    alert(getSelection(document.getElementById('text1')).length);\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
-            + "    if (typeof element.selectionStart == 'number') {\n"
-            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } else if (document.selection && document.selection.createRange) {\n"
-            + "      return document.selection.createRange().text;\n"
-            + "    }\n"
+            + "    return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -195,9 +191,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10" },
-            IE11 = { "0,0", "0,0", "3,3", "3,10" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
+            IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -206,9 +201,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11" },
-            IE11 = { "0,0", "0,0", "0,0", "0,11" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -217,9 +211,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
-            IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
-            IE11 = { "0,0", "0,0", "10,10", "5,5" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
+            IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -247,9 +240,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "4,5", "10,10", "4,4", "1,1" },
-            IE11 = { "0,0", "4,5", "0,0", "0,0", "0,0" },
-            IE8 = { "undefined,undefined", "4,5", "4,5", "4,5", "0,4" })
+    @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
+            IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -282,8 +274,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = " foo \n bar\n test\n a <p>html snippet</p>",
-            FF31 = "foo bar test a <p>html snippet</p>")
+    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>")
     public void asText() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -294,7 +285,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("textArea1"));
-        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
@@ -311,15 +302,14 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("textArea1"));
-        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
-            FF31 = "foo bar <p>html snippet</p>")
+    @Alerts(" foo \n bar <p>html snippet</p>")
     public void parentAsText() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -331,14 +321,14 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("form1"));
-        Assert.assertEquals(getExpectedAlerts()[0], textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({ "1", "a", "", "b", "<!--comment-->2", "c", "<!--comment-->", "d" })
+    @Alerts({"1", "a", "", "b", "<!--comment-->2", "c", "<!--comment-->", "d"})
     public void textUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -377,7 +367,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({ "", "xyz", "1", "a", "1" })
+    @Alerts({"", "xyz", "1", "a", "1"})
     public void textUpdateFromJSText() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -404,8 +394,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "1", "a", "1" },
-            IE = { "", "123", "1", "a", "1" })
+    @Alerts(DEFAULT = {"", "", "1", "a", "1"},
+            IE = {"", "123", "1", "a", "1"})
     public void textUpdateFromJSSpan() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -433,8 +423,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "1", "xyz", "2", "a", "2" },
-            IE = { "", "123", "1", "123xyz", "2", "a", "1" })
+    @Alerts(DEFAULT = {"", "", "1", "xyz", "2", "a", "2"},
+            IE = {"", "123", "1", "123xyz", "2", "a", "1"})
     public void textUpdateFromJSSpanAndText() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -467,7 +457,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({ "", "", "1", "a", "1" })
+    @Alerts({"", "", "1", "a", "1"})
     public void textUpdateFromJSComment() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -487,6 +477,43 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            CHROME = {"0", "2", "1", "2", "1", "1"})
+    public void labels() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      debug(document.getElementById('e1'));\n"
+            + "      debug(document.getElementById('e2'));\n"
+            + "      debug(document.getElementById('e3'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      var labels = document.getElementById('e4').labels;\n"
+            + "      document.body.removeChild(document.getElementById('l4'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      alert(labels ? labels.length : labels);\n"
+            + "    }\n"
+            + "    function debug(e) {\n"
+            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='e1'>e 1</textarea><br>\n"
+            + "  <label>something <label> click here <textarea id='e2'>e 2</textarea></label></label><br>\n"
+            + "  <label for='e3'> and here</label>\n"
+            + "  <textarea id='e3'>e 3</textarea><br>\n"
+            + "  <label id='l4' for='e4'> what about</label>\n"
+            + "  <label> this<textarea id='e4'>e 4</textarea></label><br>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

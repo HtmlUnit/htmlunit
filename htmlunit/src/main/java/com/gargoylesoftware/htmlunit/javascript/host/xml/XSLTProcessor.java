@@ -205,7 +205,7 @@ public class XSLTProcessor extends SimpleScriptable {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }
 
-    private String getQualifiedName(final String namespaceURI, final String localName) {
+    private static String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null && !namespaceURI.isEmpty() && !"null".equals(namespaceURI)) {
             qualifiedName = '{' + namespaceURI + '}' + localName;

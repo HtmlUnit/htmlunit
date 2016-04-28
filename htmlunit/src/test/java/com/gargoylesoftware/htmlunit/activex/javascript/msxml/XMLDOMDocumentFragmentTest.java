@@ -72,8 +72,8 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "4", "#cdata-section=child-cdata", "true", "#comment=child-comment", "true",
-                   "child-element=null", "true", "#text=child-text", "true" })
+            IE = {"4", "#cdata-section=child-cdata", "true", "#comment=child-comment", "true",
+                   "child-element=null", "true", "#text=child-text", "true"})
     public void childNodes() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"
@@ -139,7 +139,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "child-element=null", "true" })
+            IE = {"child-element=null", "true"})
     public void firstChild() throws Exception {
         final String test = ""
             + "var element = doc.createElement('child-element');\n"
@@ -165,7 +165,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "child-element=null", "true" })
+            IE = {"child-element=null", "true"})
     public void lastChild() throws Exception {
         final String test = ""
             + "var element = doc.createElement('child-element');\n"
@@ -221,7 +221,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "null", "exception-setNull", "exception-setEmpty", "exception-set" })
+            IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(fragment.nodeValue);\n"
@@ -303,7 +303,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "exception-set", "exception-setEmpty", "exception-setNull" })
+            IE = {"exception-set", "exception-setEmpty", "exception-setNull"})
     public void text_set() throws Exception {
         final String test =
             // normal

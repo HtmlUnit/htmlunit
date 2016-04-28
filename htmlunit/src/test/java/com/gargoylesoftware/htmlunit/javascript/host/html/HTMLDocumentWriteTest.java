@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static org.junit.Assert.assertNotNull;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -136,13 +132,12 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     }
 
     /**
-     * IE accepts the use of detached functions, but FF doesn't.
+     * IE accepts the use of detached functions.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "",
-            FF = "exception occurred")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "exception occurred",
+            IE = "")
     public void write_AssignedToVar() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -243,7 +238,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "§§URL§§", "§§URL§§" })
+    @Alerts({"§§URL§§", "§§URL§§"})
     public void locationAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -252,7 +247,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "  document.open();\n"
             + "  document.write('<html><body onload=\"alert(document.location)\"></body></html>');\n"
             + "  document.close();\n"
-            + "}"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
@@ -263,7 +258,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "First", "First", "FORM", "true", "true" })
+    @Alerts({"", "First", "First", "FORM", "true", "true"})
     public void newElementsAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -279,7 +274,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "  alert(document.submitForm.tagName);\n"
             + "  alert(window.document == document);\n"
             + "  alert(document.submitForm == document.getElementsByTagName('form')[0]);\n"
-            + "}"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
@@ -342,7 +337,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "scr1", "scr2"/*, "scr3", "scr4"*/ })
+    @Alerts({"scr1", "scr2"/*, "scr3", "scr4"*/ })
     public void writeAddNodesInCorrectPositions() throws Exception {
         final String html = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"

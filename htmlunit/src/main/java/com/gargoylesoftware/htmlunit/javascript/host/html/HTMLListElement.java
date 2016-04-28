@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLIST_LIMIT_COMPACT_TO_BOOLEAN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TYPE_ACCEPTS_ARBITRARY_VALUES;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -54,17 +53,6 @@ public class HTMLListElement extends HTMLElement {
         else {
             getDomNodeOrDie().removeAttribute("compact");
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getAttribute(final String attributeName, final Integer flags) {
-        if ("compact".equals(attributeName) && getBrowserVersion().hasFeature(HTMLLIST_LIMIT_COMPACT_TO_BOOLEAN)) {
-            return getCompact();
-        }
-        return super.getAttribute(attributeName, flags);
     }
 
     /**

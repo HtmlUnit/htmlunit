@@ -38,8 +38,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLinkElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLLinkElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<link id='myId' href='file1.css'>\n"

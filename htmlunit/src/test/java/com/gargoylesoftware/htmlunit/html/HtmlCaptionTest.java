@@ -36,8 +36,7 @@ public class HtmlCaptionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableCaptionElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLTableCaptionElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -18,7 +18,6 @@ import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,10 +80,10 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
     public void proxySettingsAreNotUsedForSubsequentRequestToNonProxyHosts() throws Exception {
         URL resourceUrl = new URL("http://localhost:" + PORT2 + "/response.txt");
         TextPage page = getWebClient().getPage(UrlUtils.getUrlWithNewPort(resourceUrl, PORT2));
-        Assert.assertEquals("proxy should have been used", "proxy-response", page.getContent().trim());
+        assertEquals("proxy should have been used", "proxy-response", page.getContent().trim());
 
         resourceUrl = new URL("http://127.0.0.1:" + PORT + "/response.txt");
         page = getWebClient().getPage(resourceUrl);
-        Assert.assertEquals("proxy should not be used", "no-proxy-response", page.getContent().trim());
+        assertEquals("proxy should not be used", "no-proxy-response", page.getContent().trim());
     }
 }

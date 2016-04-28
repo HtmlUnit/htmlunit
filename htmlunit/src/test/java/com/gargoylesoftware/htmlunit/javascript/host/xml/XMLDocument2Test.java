@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,11 +38,11 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myTarget,myData,7", "myTarget,myData", "<?myTarget myData?>" })
+    @Alerts({"myTarget,myData,7", "myTarget,myData", "<?myTarget myData?>"})
     public void createProcessingInstruction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    d.setAttribute('fluffy', 'true');\n"
             + "    d.setAttribute('numAttributes', '2');\n"
@@ -56,7 +53,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    alert(pi.target + ',' + pi.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -67,12 +63,12 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>" },
-            IE11 = { "#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij" })
+    @Alerts(DEFAULT = {"#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>"},
+            IE = {"#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij"})
     public void createCDATASection() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
@@ -81,7 +77,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    alert(cdata.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -92,12 +87,12 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>" },
-            IE11 = { "#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?" })
+    @Alerts(DEFAULT = {"#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>"},
+            IE = {"#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?"})
     public void createCDATASection_specialChars() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('<>&?');\n"
@@ -106,7 +101,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    alert(cdata.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -143,7 +137,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createNode_element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
             + "      alert(node.localName);\n"
@@ -152,7 +146,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "      alert(node.nodeName);\n"
             + "    } else { alert('createNode not available'); }\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -162,11 +155,11 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "a", "null", "b" })
+    @Alerts({"a", "null", "b"})
     public void documentElementCaching() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var a = doc.createElement('a');\n"
             + "    var b = doc.createElement('b');\n"
             + "    doc.appendChild(a);\n"
@@ -176,7 +169,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    doc.appendChild(b);\n"
             + "    alert(doc.documentElement.tagName);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -190,11 +182,10 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createElement_namespace() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var a = doc.createElement('a:b');\n"
             + "    alert(a.tagName);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -207,7 +198,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "content", "content" })
+            IE = {"content", "content"})
     public void text() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -235,7 +226,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "foo", "foo" })
+    @Alerts({"foo", "foo"})
     public void firstChild_element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -262,7 +253,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "foo", "foo" })
+            IE = {"foo", "foo"})
     public void firstChild_element_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -294,9 +285,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "foo", "foo" },
-            IE8 = { "xml", "foo" })
-    @NotYetImplemented(IE8)
+    @Alerts({"foo", "foo"})
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -325,7 +314,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "xml", "foo" })
+            IE = {"xml", "foo"})
     @NotYetImplemented(IE)
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
@@ -360,7 +349,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "apache", "foo" })
+    @Alerts({"apache", "foo"})
     public void firstChild_processingInstruction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -388,7 +377,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "apache", "foo" })
+            IE = {"apache", "foo"})
     public void firstChild_processingInstruction_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -421,7 +410,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "dtd", "a" })
+    @Alerts({"dtd", "a"})
     public void firstChild_documentType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -446,7 +435,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "dtd", "a" })
+            IE = {"dtd", "a"})
     public void firstChild_documentType_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -476,7 +465,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "#comment", "foo" })
+    @Alerts({"#comment", "foo"})
     public void firstChild_comment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -504,7 +493,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "#comment", "foo" })
+            IE = {"#comment", "foo"})
     public void firstChild_comment_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -538,9 +527,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3" },
-            IE11 = { "id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3" })
-    @NotYetImplemented({ FF, CHROME, IE8 })
+    @Alerts(DEFAULT = {"name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3"},
+            IE = {"id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3"})
     public void attributeOrder() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

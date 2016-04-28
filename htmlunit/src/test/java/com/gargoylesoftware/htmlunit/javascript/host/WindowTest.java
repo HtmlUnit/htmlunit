@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -353,8 +349,8 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * _parent is a magic name. If we call open(url, '_parent') then the
-     * parent window must be reloaded.
+     * {@code _parent} is a magic name. If we call open(url, '_parent') then the parent window must be reloaded.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -426,7 +422,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts({"true", "true", "true"})
     public void openWindow_existingWindow() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1045,12 +1041,13 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "Jane", "Smith", "sdg", "finished" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"undefined", "Jane", "Smith", "sdg", "finished"},
+            CHROME = "not available")
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
             + "  function test() {\n"
+            + "    if (!window.showModalDialog) {alert('not available'); return; }\n"
             + "    alert(window.returnValue);\n"
             + "    var o = new Object();\n"
             + "    o.firstName = 'Jane';\n"
@@ -1085,8 +1082,10 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlElement button = page.getHtmlElementById("b");
         final HtmlPage dialogPage = button.click();
 
-        final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
-        dialog.close();
+        if (getExpectedAlerts().length > 1) {
+            final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
+            dialog.close();
+        }
 
         assertEquals(getExpectedAlerts(), actual);
     }
@@ -1097,7 +1096,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "sdg", "finished" })
+    @Alerts({"undefined", "sdg", "finished"})
     @NotYetImplemented
     public void showModalDialogWithButton() throws Exception {
         final String html1
@@ -1145,8 +1144,7 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            IE8 = { "[object]", "a" },
-            IE11 = { "[object Window]", "a" })
+            IE = {"[object Window]", "a"})
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1201,8 +1199,8 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "[object Window]", "[object Window]" },
-            IE = { "true", "123", "123" })
+    @Alerts(DEFAULT = {"true", "[object Window]", "[object Window]"},
+            IE = {"true", "123", "123"})
     public void overwriteProperty_top() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -1276,8 +1274,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "10", "20", "30", "40" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({"10", "20", "30", "40"})
     public void mozillaViewportSetters() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"

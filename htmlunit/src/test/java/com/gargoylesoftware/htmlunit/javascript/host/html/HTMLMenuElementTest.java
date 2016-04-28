@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -25,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 
@@ -43,8 +40,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMenuElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLMenuElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -67,10 +63,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
-                   "true", "false", "true", "false", "", "null", "", "null" },
-            IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
-                   "true", "false", "true", "false", "true", "false", "true", "false" })
+    @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
+                   "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -115,16 +109,13 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "list", "list", "list", "context", "toolbar", "null", "", "blah",
-                        "context", "ToolBar", "list", "context", "toolbar", "context", "list", "list" },
-            CHROME = { "undefined", "undefined", "undefined", "undefined", "undefined",
+    @Alerts(DEFAULT = {"list", "list", "list", "context", "toolbar", "null", "", "blah",
+                        "context", "ToolBar", "list", "context", "toolbar", "context", "list", "list"},
+            CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined",
                     "null", "", "blah", "context", "ToolBar", "list",
-                    "context", "toolbar", "ConText", "", "unknown" },
-            IE8 = { "", "", "", "", "", "", "", "blah",
-                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" },
-            IE11 = { "", "", "", "", "", "null", "", "blah",
-                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", "" })
-    @NotYetImplemented(IE8)
+                    "context", "toolbar", "ConText", "", "unknown"},
+            IE = {"", "", "", "", "", "null", "", "blah",
+                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", ""})
     public void type() throws Exception {
         final String html =
                 "<html>\n"
@@ -177,8 +168,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "new", "" },
-            FF = { "", "", "new", "" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "new", ""},
+            FF = {"", "", "new", ""})
     public void label() throws Exception {
         final String html =
                 "<html>\n"

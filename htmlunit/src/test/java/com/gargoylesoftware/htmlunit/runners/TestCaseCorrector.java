@@ -25,12 +25,14 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.ComparisonFailure;
 import org.junit.runners.model.FrameworkMethod;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CodeStyleTest;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.general.HostExtractor;
 
 /**
@@ -49,7 +51,7 @@ final class TestCaseCorrector {
         final String testRoot = "src/test/java/";
         final String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
         final File file = new File(testRoot + method.getDeclaringClass().getName().replace('.', '/') + ".java");
-        final List<String> lines = FileUtils.readLines(file);
+        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
         final String methodLine = "    public void " + method.getName() + "()";
         if (realBrowser) {
             String defaultExpectation = null;
@@ -148,6 +150,7 @@ final class TestCaseCorrector {
     private static String getActualString(final ComparisonFailure failure) {
         String actual = failure.getActual();
         actual = actual.substring(1, actual.length() - 1).replace("\r", "\\r").replace("\n", "\\n");
+        actual = StringEscapeUtils.escapeJava(actual);
         if (actual.length() > 96) {
             final StringBuilder builder = new StringBuilder();
             while (!actual.isEmpty()) {
@@ -186,7 +189,7 @@ final class TestCaseCorrector {
                     lines.set(i - 1, "    @NotYetImplemented(" + browserSet.iterator().next() + ")");
                 }
                 else if (browserSet.size() > 1) {
-                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browserSet, ", ") + " })");
+                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browserSet, ", ") + "})");
                 }
                 else {
                     lines.remove(i - 1);
@@ -194,13 +197,13 @@ final class TestCaseCorrector {
             }
             else {
                 final List<String> allBrowsers =
-                        new ArrayList<>(Arrays.asList("CHROME", "IE8", "IE11", "FF31", "FF38", "EDGE"));
+                        new ArrayList<>(Arrays.asList("CHROME", "IE", "FF38", "FF45", "EDGE"));
                 for (final Iterator<String> it = allBrowsers.iterator(); it.hasNext();) {
                     if (it.next().equals(browserString)) {
                         it.remove();
                     }
                 }
-                lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(allBrowsers, ", ") + " })");
+                lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(allBrowsers, ", ") + "})");
             }
         }
     }
@@ -241,7 +244,7 @@ final class TestCaseCorrector {
                     browsers = browsers.substring(1, browsers.length() - 1).trim();
                 }
                 browsers += ", " + browserString;
-                lines.set(i - 1, "    @NotYetImplemented({ " + browsers + " })");
+                lines.set(i - 1, "    @NotYetImplemented({ " + browsers + "})");
             }
         }
         else {

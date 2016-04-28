@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -60,6 +59,6 @@ public class HtmlNoFramesTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         assertEquals("", page.getElementById("it").asText());
-        Assert.assertFalse(page.asText(), page.asText().contains("Some text"));
+        assertFalse(page.asText(), page.asText().contains("Some text"));
     }
 }

@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_TYPE_HTMLANCHORELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -39,8 +38,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -63,12 +62,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlAnchor.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, domClass = HtmlAnchor.class,
-            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-    })
+@JsxClass(domClass = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
 
     /**
@@ -105,6 +99,20 @@ public class HTMLAnchorElement extends HTMLElement {
         }
         catch (final MalformedURLException e) {
             return hrefAttr;
+        }
+    }
+
+    /**
+     * Sets the focus to this element.
+     */
+    @JsxFunction
+    @Override
+    public void focus() {
+        final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+        final String hrefAttr = anchor.getHrefAttribute();
+
+        if (hrefAttr != DomElement.ATTRIBUTE_NOT_DEFINED) {
+            anchor.focus();
         }
     }
 
@@ -206,7 +214,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getSearch() throws Exception {
+    public String getSearch() {
         try {
             final String query = getUrl().getQuery();
             if (query == null) {
@@ -245,11 +253,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the hash portion of the link's URL (the portion following the '#', including the '#').
      * @return the hash portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getHash() throws Exception {
+    public String getHash() {
         try {
             final String hash = getUrl().getRef();
             if (hash == null) {
@@ -276,11 +283,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the host portion of the link's URL (the '[hostname]:[port]' portion).
      * @return the host portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getHost() throws Exception {
+    public String getHost() {
         try {
             final URL url = getUrl();
             final int port = url.getPort();
@@ -322,11 +328,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the hostname portion of the link's URL.
      * @return the hostname portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getHostname() throws Exception {
+    public String getHostname() {
         try {
             return getUrl().getHost();
         }
@@ -349,11 +354,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the pathname portion of the link's URL.
      * @return the pathname portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getPathname() throws Exception {
+    public String getPathname() {
         try {
             final URL url = getUrl();
             if (!url.getProtocol().startsWith("http")
@@ -399,11 +403,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the port portion of the link's URL.
      * @return the port portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getPort() throws Exception {
+    public String getPort() {
         try {
             final int port = getUrl().getPort();
             if (port == -1) {
@@ -430,11 +433,10 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the protocol portion of the link's URL, including the trailing ':'.
      * @return the protocol portion of the link's URL, including the trailing ':'
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String getProtocol() throws Exception {
+    public String getProtocol() {
         try {
             if (getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
                 final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
@@ -509,7 +511,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code text} attribute.
      * @return the {@code text} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getText() {
         final DomNode htmlElement = getDomNodeOrDie();
         return htmlElement.asText();
@@ -519,21 +521,10 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code text} attribute.
      * @param text the {@code text} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         htmlElement.setTextContent(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTypeOf() {
-        if (getPrototype() != null && getBrowserVersion().hasFeature(JS_ANCHOR_TYPE_HTMLANCHORELEMENT)) {
-            return "HTMLAnchorElement";
-        }
-        return super.getTypeOf();
     }
 
     /**
@@ -596,7 +587,25 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getOrigin() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        if (!getDomNodeOrDie().hasAttribute("href")) {
+            return "";
+        }
+
+        try {
+            return getUrl().getProtocol() + "://" + getHost();
+        }
+        catch (final Exception e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code origin} attribute.
+     * @param origin {@code origin} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setOrigin(final String origin) {
+        // ignore
     }
 
     /**
@@ -659,7 +668,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getPing() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        return ((HtmlAnchor) getDomNodeOrDie()).getPingAttribute();
     }
 
     /**
@@ -668,7 +677,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void setPing(final String ping) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        getDomNodeOrDie().setAttribute("ping", ping);
     }
 
     /**
@@ -720,7 +729,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code searchParams} attribute.
      * @return the {@code searchParams} attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
     public String getSearchParams() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -803,60 +812,6 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setUrn(final String urn) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 }

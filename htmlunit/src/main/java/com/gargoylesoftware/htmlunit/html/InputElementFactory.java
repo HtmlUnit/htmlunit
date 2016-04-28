@@ -91,13 +91,9 @@ public final class InputElementFactory implements ElementFactory {
         if (type == null) {
             type = "";
         }
-        else {
-            type = type.toLowerCase(Locale.ROOT);
-            attributeMap.get("type").setValue(type); // type value has to be lower case
-        }
 
         final HtmlInput result;
-        switch (type) {
+        switch (type.toLowerCase(Locale.ROOT)) {
             case "":
                 // This not an illegal value, as it defaults to "text"
                 // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT

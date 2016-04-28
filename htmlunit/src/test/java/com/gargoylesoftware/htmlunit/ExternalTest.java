@@ -15,8 +15,9 @@
 package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assume.assumeNotNull;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -55,7 +56,7 @@ public class ExternalTest {
     @Test
     public void pom() throws Exception {
         if (isDifferentWeek()) {
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"));
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
             for (int i = 0; i < lines.size(); i++) {
                 final String line = lines.get(i);
                 if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
@@ -67,6 +68,16 @@ public class ExternalTest {
                     }
                 }
             }
+            assertVersion("org.sonatype.oss", "oss-parent", "9");
+            assertChromeDriver("2.21");
+        }
+    }
+
+    private static void assertChromeDriver(final String version) throws Exception {
+        try (final WebClient webClient = getWebClient()) {
+            final AbstractPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
+            final String pageContent = page.getWebResponse().getContentAsString().trim();
+            assertEquals("Chrome Driver", pageContent, version);
         }
     }
 
@@ -80,7 +91,7 @@ public class ExternalTest {
     @Test
     public void snapshot() throws Exception {
         if (isDifferentWeek()) {
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"));
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
             String version = null;
             for (int i = 0; i < lines.size(); i++) {
                 if ("<artifactId>htmlunit</artifactId>".equals(lines.get(i).trim())) {
@@ -88,6 +99,7 @@ public class ExternalTest {
                     break;
                 }
             }
+            assertNotNull(version);
             if (version.contains("SNAPSHOT")) {
                 try (final WebClient webClient = getWebClient()) {
                     final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
@@ -106,9 +118,15 @@ public class ExternalTest {
     private static void assertVersion(final String groupId, final String artifactId, final String version)
             throws Exception {
         String latestVersion = null;
+        String url = "https://repo1.maven.org/maven2/"
+                        + groupId.replace('.', '/') + '/'
+                        + artifactId.replace('.', '/');
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
         try (final WebClient webClient = getWebClient()) {
-            final HtmlPage page = webClient.getPage("https://repo1.maven.org/maven2/" + groupId.replace('.', '/') + '/'
-                    + artifactId.replace('.', '/'));
+            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+            final HtmlPage page = webClient.getPage(url);
             for (final HtmlAnchor anchor : page.getAnchors()) {
                 String itemVersion = anchor.getTextContent();
                 itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
@@ -198,7 +216,7 @@ public class ExternalTest {
             page = page.getAnchorByText("Log in as guest").click();
             webClient.waitForBackgroundJavaScript(1000);
             final HtmlTable table = page.getFirstByXPath("//table[@class='statusTable']");
-            assumeTrue(page.asXml(), table != null);
+            assumeNotNull(page.asXml(), table);
             final HtmlTableCell cell = table.getRow(1).getCell(3);
             final String triggerText = cell.asText();
 

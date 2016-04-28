@@ -58,6 +58,36 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "null", "null", "null"},
+            IE = {"undefined", "undefined", "undefined", "undefined"})
+    public void control() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    alert(document.getElementById('label1').control);\n"
+            + "    alert(document.getElementById('label2').control);\n"
+            + "    alert(document.getElementById('label3').control);\n"
+            + "    alert(document.getElementById('label4').control);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <label id='label1' for='checkbox1'>My Label</label>\n"
+            + "  <input type='checkbox' id='checkbox1'><br>\n"
+            + "  <label id='label2' for='checkbox2'>My Label</label>\n"
+            + "  <label id='label3' for=''>My Label</label>\n"
+            + "  <label id='label4'>My Label</label>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Tests that clicking the label by JavaScript does not change 'htmlFor' attribute in FF!!
      *
      * @throws Exception if the test fails
@@ -94,7 +124,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
         final String html
             = "<html><body><label id='a1'>a1</label><label id='a2' accesskey='A'>a2</label><script>\n"
@@ -121,8 +151,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFormElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
         final String html
             = "<html><body><form><label id='a'>a</label></form><script>\n"

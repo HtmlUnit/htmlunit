@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -63,8 +62,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "newtrue",
-            IE8 = "on")
+    @Alerts("newtrue")
     public void onchangeHandlerInvoked() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -112,7 +110,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "oneItem.checked: false twoItems.checked: true", "oneItem.checked: true twoItems.checked: false" })
+    @Alerts({"oneItem.checked: false twoItems.checked: true", "oneItem.checked: true twoItems.checked: false"})
     public void updateStateFirstForOnclickHandler() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -158,8 +156,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second",
-            IE8 = "First")
+    @Alerts("Second")
     public void setChecked() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -212,16 +209,16 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final WebClient webClient = page.getWebClient();
-        Assert.assertSame(page.getEnclosingWindow(), webClient.getCurrentWindow());
+        assertSame(page.getEnclosingWindow(), webClient.getCurrentWindow());
 
         // open popup
         final HtmlPage page2 = page.getHtmlElementById("clickMe").click();
-        Assert.assertNotSame(page, page2);
-        Assert.assertSame(page2.getEnclosingWindow(), webClient.getCurrentWindow());
+        assertNotSame(page, page2);
+        assertSame(page2.getEnclosingWindow(), webClient.getCurrentWindow());
 
         // click radio buttons in the original page
         final HtmlPage page3 = page.getHtmlElementById("radio1").click();
-        Assert.assertSame(page, page3);
-        Assert.assertSame(page3.getEnclosingWindow(), webClient.getCurrentWindow());
+        assertSame(page, page3);
+        assertSame(page3.getEnclosingWindow(), webClient.getCurrentWindow());
     }
 }

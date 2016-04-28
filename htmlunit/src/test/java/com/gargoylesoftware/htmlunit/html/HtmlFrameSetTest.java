@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertSame;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,8 +172,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
 
     /**
      * Forward referencing issue in FrameSet.
-     * Test for bug 291
-     * http://sourceforge.net/p/htmlunit/bugs/291/
+     * Test for bug #291
      * @throws Exception if the test fails
      */
     @Test
@@ -404,6 +401,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();

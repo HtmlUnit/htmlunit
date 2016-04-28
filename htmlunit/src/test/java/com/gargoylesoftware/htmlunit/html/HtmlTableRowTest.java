@@ -16,9 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Tests for {@link HtmlTableRow}.
@@ -43,9 +39,13 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class HtmlTableRowTest extends SimpleWebTestCase {
 
     private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"
-            + "<table id='table'><tr id='row'>\n"
-            + "<td id='cell' width='20'><input type='text' id='foo'/></td>\n"
-            + "</tr></table>\n" + "</body></html>";
+            + "<table id='table'>"
+            + "<tr id='row'>\n"
+            + "<td id='cell' width='20'>"
+            + "<input type='text' id='foo'/></td>\n"
+            + "</tr>"
+            + "</table>\n"
+            + "</body></html>";
 
     private HtmlPage page_;
     private HtmlTable table_;
@@ -109,12 +109,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedRowHasNullParent() throws Exception {
-        if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() == 8) {
-            assertNotNull(rowClone_.getParentNode());
-        }
-        else {
-            assertNull(rowClone_.getParentNode());
-        }
+        assertNull(rowClone_.getParentNode());
     }
 
     /**
@@ -218,7 +213,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         final String cmd = "document.getElementById('cell')";
         final HTMLElement jselement = (HTMLElement) page_.executeJavaScript(cmd).getJavaScriptResult();
 
-        assertSame(jselement, cell_.getScriptObject());
+        assertSame(jselement, cell_.getScriptableObject());
     }
 
     /**
@@ -233,7 +228,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         final HTMLElement jselement = (HTMLElement) object;
         assertEquals("original", ScriptableObject.getProperty(jselement, "a"));
 
-        assertSame(jselement, cell_.getScriptObject());
+        assertSame(jselement, cell_.getScriptableObject());
     }
 
     /**
@@ -297,7 +292,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         // scriptable object
         page_.executeJavaScript(cmd);
 
-        assertNotSame(cell_.getScriptObject(), cellClone_.getScriptObject());
+        assertNotSame(cell_.getScriptableObject(), cellClone_.getScriptableObject());
     }
 
     /**

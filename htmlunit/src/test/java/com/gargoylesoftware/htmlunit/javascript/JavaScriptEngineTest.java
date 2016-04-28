@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -29,7 +28,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
-import org.junit.Assert;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -56,12 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Tests for the {@link JavaScriptEngine}.
@@ -423,9 +421,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String jsContent = "function doTest() { alert('gZip'); }";
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        final GZIPOutputStream gzipper = new GZIPOutputStream(bytes);
-        gzipper.write(jsContent.getBytes("ASCII"));
-        gzipper.close();
+        try (final GZIPOutputStream gzipper = new GZIPOutputStream(bytes)) {
+            gzipper.write(jsContent.getBytes("ASCII"));
+        }
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
@@ -451,16 +449,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void externalScriptEmptyGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
-        final String jsContent = "";
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bytes.write(jsContent.getBytes("ASCII"));
-        bytes.close();
+        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
+            bytes.write("".getBytes("ASCII"));
 
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Content-Length", "0"));
-        headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
-                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Content-Length", "0"));
+            headers.add(new NameValuePair("Content-Encoding", "gzip"));
+            webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                    bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+        }
 
         final String htmlContent
             = "<html><head>\n"
@@ -480,15 +477,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void externalScriptBrokenGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
-        final String jsContent = "function doTest() { alert('gZip'); }";
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bytes.write(jsContent.getBytes("ASCII"));
-        bytes.close();
+        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
+            final String jsContent = "function doTest() { alert('gZip'); }";
+            bytes.write(jsContent.getBytes("ASCII"));
 
-        final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
-                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Content-Encoding", "gzip"));
+            webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                    bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+        }
 
         final String htmlContent
             = "<html><head>\n"
@@ -499,7 +496,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         try {
             loadPageWithAlerts(htmlContent);
-            Assert.fail("ScriptException expected");
+            fail("ScriptException expected");
         }
         catch (final ScriptException e) {
             // expected
@@ -839,7 +836,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             // Success
         }
 
-        Assert.assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
+        assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
 
         // Try a valid object in the map
         webConnection.setDefaultResponse(getJavaScriptContent(
@@ -857,7 +854,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 new String[] {new MockActiveXObject().GetMessage()}, collectedAlerts);
     }
 
-    private String getJavaScriptContent(final String javascript) {
+    private static String getJavaScriptContent(final String javascript) {
         return "<html><head><title>foo</title><script>\n"
              + javascript
              + "</script></head><body>\n"
@@ -1307,6 +1304,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final JavaScriptEngine engine = webClient.getJavaScriptEngine();
 
@@ -1352,15 +1350,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 + "<body onload='setTimeout(test, 50);'>\n"
                 + "</body></html>";
 
-        final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        try (final WebClient webClient = getWebClient()) {
+            final List<String> collectedAlerts = new ArrayList<>();
+            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        loadPage(html);
-        Thread.sleep(100);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+            loadPage(html);
+            Thread.sleep(100);
+            assertEquals(getExpectedAlerts(), collectedAlerts);
 
-        webClient.close();
+        }
         Thread.sleep(400);
         assertEquals(0, getJavaScriptThreads().size());
     }

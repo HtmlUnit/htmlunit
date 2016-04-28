@@ -35,11 +35,10 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" },
-            IE8 = { "[object]", "undefined", "[object]" })
+    @Alerts({"[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined"})
     public void stylesheet() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  alert(f);\n"
@@ -61,7 +60,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void styleChildren() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  var doc = document;\n"
             + "  var style = doc.createElement('style');\n"
@@ -84,10 +83,10 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ ".a > .t { }", ".b > .t { }", ".c > .t { }" })
+    @Alerts({".a > .t { }", ".b > .t { }", ".c > .t { }"})
     public void innerHtml() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='style_none'>.a > .t { }</style>\n"
             + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
@@ -113,10 +112,10 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "text/test", "text/css" })
+    @Alerts({"", "text/test", "text/css"})
     public void type() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='style_none'>my { }</style>\n"
             + "<style type='text/test' id='style_text'>my { }</style>\n"
@@ -142,10 +141,10 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "all", "screen, print,test" })
+    @Alerts({"", "all", "screen, print,test"})
     public void media() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='style_none'>my { }</style>\n"
             + "<style media='all' id='style_all'>my { }</style>\n"
@@ -171,10 +170,10 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "all", "", "screen:screen", "priNT", "screen, print" })
+    @Alerts({"all", "", "screen:screen", "priNT", "screen, print"})
     public void media_setter() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='myStyle' media='all'>my { }</style>\n"
 
@@ -208,10 +207,69 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "text/css" })
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            FF = {"false", "true"})
+    public void scoped() throws Exception {
+        final String html
+            = "<html><head>\n"
+
+            + "<style id='style_none'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('style_none');\n"
+            + "  alert(style.scoped);\n"
+            + "  style = document.getElementById('style_scoped');\n"
+            + "  alert(style.scoped);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <style id='style_scoped' scoped>my { }</style>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "true", "false"},
+            FF = {"false", "true", "false"})
+    public void scoped_setter() throws Exception {
+        final String html
+            = "<html><head>\n"
+
+            + "<style id='myStyle' media='all'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('myStyle');\n"
+
+            + "  alert(style.scoped);\n"
+
+            + "  style.scoped = true;\n"
+            + "  alert(style.scoped);\n"
+
+            + "  style.media = false;\n"
+            + "  alert(style.media);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "text/css"})
     public void type_setter() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<style id='style_none'></style>\n"
 
             + "<script>\n"
@@ -223,6 +281,33 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"rgb(0, 128, 0)", "false", "rgb(0, 0, 0)"})
+    public void disabled() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<style id='myStyle'> .abc { color: green; }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var style = document.getElementById('myStyle');\n"
+            + "  alert(window.getComputedStyle(div, '').color);\n"
+            + "  alert(style.disabled);\n"
+            + "  style.disabled = true;\n"
+            + "  alert(window.getComputedStyle(div, '').color);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "  <div id='myDiv' class='abc'>abcd</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

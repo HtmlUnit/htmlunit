@@ -14,13 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -28,15 +25,12 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
@@ -53,48 +47,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ IE, CHROME })
-    @Alerts(FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
-    public void readyState() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <script>\n"
-            + "    var doc;"
-            + "    function test() {\n"
-            + "      var iframe = document.createElement('iframe');\n"
-            + "      var textarea = document.getElementById('myTextarea');\n"
-            + "      textarea.parentNode.appendChild(iframe);\n"
-            + "      doc = iframe.contentWindow.document;\n"
-            + "      check();\n"
-            + "      setTimeout(check, 100);\n"
-            + "    }\n"
-            + "    function check() {\n"
-            + "      var textarea = document.getElementById('myTextarea');\n"
-            + "      textarea.value += doc.readyState + ',' + doc.body + '-';\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<div>\n"
-            + "  <textarea id='myTextarea' cols='80'></textarea>\n"
-            + "</div>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final HtmlPage page = loadPage(html);
-        page.getWebClient().waitForBackgroundJavaScript(500);
-
-        final List<String> actual = new LinkedList<>();
-        actual.add(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
-
-        assertEquals(getExpectedAlerts(), actual);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
+    @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domain() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -113,7 +66,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "gargoylesoftware.com" })
+    @Alerts({"localhost", "gargoylesoftware.com"})
     public void domainFromLocalhost() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -125,18 +78,15 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://localhost"), -1);
     }
 
   /**
     * @throws Exception if the test fails
     */
     @Test
-    @Alerts(DEFAULT = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
-            IE8 = { "WWW.GARGOYLESOFTWARE.COM", "GaRgOyLeSoFtWaRe.CoM" })
-    @NotYetImplemented(Browser.IE11)
+    @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
@@ -150,7 +100,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(new URL("http://www.gargoylesoftware.com/"), html);
+        getMockWebConnection().setDefaultResponse(html);
         loadPageWithAlerts(html, urlGargoyleUpperCase, -1);
     }
 
@@ -158,9 +108,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
-            IE = { "www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -179,7 +127,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com" })
+    @Alerts({"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"})
     public void domainLong() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -193,16 +141,15 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(getWebClient(), html, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"), -1);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost" })
+    @Alerts({"localhost", "localhost"})
     public void domainSetSelf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -214,9 +161,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts(html, new URL("http://localhost"), -1);
     }
 
     /**
@@ -248,9 +194,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "www.gargoylesoftware.com", "www.gargoylesoftware.com" },
-            IE = { "www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"www.gargoylesoftware.com", "www.gargoylesoftware.com"},
+            IE = {"www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception"})
     public void domain_set_for_about_blank() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -274,7 +219,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "one", "two", "three", "four" })
+    @Alerts({"one", "two", "three", "four"})
     public void cookie_read() throws Exception {
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -314,7 +259,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "", "", "" })
+    @Alerts({"false", "", "", ""})
     public void cookie_write_cookiesDisabled() throws Exception {
         final String html = HTMLDocumentTest.getCookieWriteHtmlCode();
 
@@ -330,7 +275,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "", "blah=bleh" })
+    @Alerts({"", "", "blah=bleh"})
     public void cookieInLocalFile() throws Exception {
         final WebClient client = getWebClient();
 

@@ -17,10 +17,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLIFrameElement}.
@@ -66,7 +67,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "myIFrame" })
+    @Alerts({"1", "myIFrame"})
     public void referenceFromJavaScript() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -85,7 +86,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "about:blank", "about:blank" })
+    @Alerts({"about:blank", "about:blank"})
     public void directAccessPerName() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -135,11 +136,10 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDocument]", "true" },
-            IE8 = { "[object]", "true" })
+    @Alerts({"[object HTMLDocument]", "true"})
     public void contentDocument() throws Exception {
         final String html
-            = "<!DOCTYPE html>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
             + "  <title>first</title>\n"
@@ -183,7 +183,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "false", "true", "true", "true", "object", "object" })
+    @Alerts({"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -222,14 +222,16 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "123", "undefined" },
-            IE11 = { "123" })
-    @NotYetImplemented(IE11)
+    @Alerts(DEFAULT = {"123", "undefined"},
+            IE = {"123"})
+    @NotYetImplemented(IE)
     public void iFrameReinitialized() throws Exception {
         final String html
-            = "<!DOCTYPE html>\n"
-            + "<html><body><a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
-            + "<iframe name='theFrame' src='1.html'></iframe>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<body>\n"
+            + "  <a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
+            + "  <iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
 
         final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
@@ -245,8 +247,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         driver.findElement(By.id("test")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
         assertEquals(3, getMockWebConnection().getRequestCount());
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -266,6 +268,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<iframe id='iframe1'></iframe>\n"
             + "</body></html>";
+
+        // [IE11] real IE11 waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
+
         loadPageWithAlerts2(html);
     }
 
@@ -273,8 +281,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56" },
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
+    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"},
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12"})
     public void width() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -326,8 +334,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56" },
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
+    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"},
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12"})
     public void height() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -380,9 +388,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "uninitialized", "complete" },
-            CHROME = { "complete", "complete" },
-            IE = { "loading", "complete" })
+    @Alerts(DEFAULT = {"uninitialized", "complete"},
+            CHROME = {"complete", "complete"},
+            IE = {"loading", "complete"})
     @NotYetImplemented({ FF, CHROME })
     public void readyState_IFrame() throws Exception {
         final String html
@@ -406,8 +414,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]" },
-            IE8 = { "null", "[object]" })
+    @Alerts({"null", "[object HTMLBodyElement]"})
     public void body() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -454,13 +461,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" },
-            IE11 = { "[object Window]", "[object HTMLIFrameElement]", "undefined", "" },
-            IE8 = { "[object]", "[object]", "undefined", "" })
+    @Alerts(DEFAULT = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""},
+            IE = {"[object Window]", "[object HTMLIFrameElement]", "undefined", ""})
     @NotYetImplemented(IE)
     public void idByName() throws Exception {
         final String html
-            = "<!DOCTYPE html>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>"
             + "<script>\n"
             + "  function test() {\n"
@@ -564,8 +570,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost", "localhost", "localhost",
-                "true", "true", "true" })
+    @Alerts({"localhost", "localhost", "localhost", "localhost",
+                "true", "true", "true"})
     public void domain() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -609,7 +615,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost", "true" })
+    @Alerts({"localhost", "localhost", "true"})
     public void domainDynamic() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -644,29 +650,29 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
-            IE8 = { "[object]", "topbody", "framebody", "[object]", "topbody", "frameinput" })
-    @NotYetImplemented({ CHROME, IE11, FF })
+    @Alerts({"[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput"})
     public void contentWindowAndActiveElement() throws Exception {
         final String firstContent
-            = "<html>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function check() {"
+            + "    function check() {\n"
             + "      alert(document.getElementById('frame').contentWindow);\n"
             + "      alert(document.activeElement.id);\n"
             + "      alert(window.frame.window.document.activeElement.id);\n"
-            + "    }"
+            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body id='topbody'>\n"
-            + "<iframe id='frame' name='frame' src='" + URL_SECOND + "'></iframe>\n"
+            + "  <iframe id='frame' name='frame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
         final String frameContent
-            = "<html>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "<body id='framebody'>\n"
-                + "  <input id='frameinput'>\n"
+            + "  <input id='frameinput'>\n"
             + "</body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -678,7 +684,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
         jsExecutor.executeScript("check();");
-        jsExecutor.executeScript("Object(document.getElementById('frame').contentWindow);");
 
         driver.switchTo().frame("frame");
         driver.findElement(By.id("frameinput")).click();

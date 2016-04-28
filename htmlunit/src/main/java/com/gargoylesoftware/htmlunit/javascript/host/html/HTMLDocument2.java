@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -24,22 +25,39 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.DOMException;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -47,11 +65,29 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
-
 public class HTMLDocument2 extends Document2 {
 
     private static final Log LOG = LogFactory.getLog(HTMLDocument2.class);
+
+    /**
+     * Map<String, Class> which maps strings a caller may use when calling into
+     * {@link #createEvent(String)} to the associated event class. To support a new
+     * event creation type, the event type and associated class need to be added into this map in
+     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
+     * have a no-arg constructor.
+     */
+    /** Contains all supported DOM level 2 events. */
+    private static final Map<String, Class<? extends Event2>> SUPPORTED_DOM2_EVENT_TYPE_MAP;
+    /** Contains all supported DOM level 3 events. DOM level 2 events are not included. */
+    private static final Map<String, Class<? extends Event2>> SUPPORTED_DOM3_EVENT_TYPE_MAP;
+    /** Contains all supported vendor specific events. */
+    private static final Map<String, Class<? extends Event2>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
+
+    // all as lowercase for performance
+    private static final Set<String> EXECUTE_CMDS_IE = new HashSet<>();
+    /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
+    private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
+    private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
 
     /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuffer_ = new StringBuilder();
@@ -63,6 +99,98 @@ public class HTMLDocument2 extends Document2 {
     private int documentMode_ = -1;
 
     private boolean closePostponedAction_;
+
+    /** Initializes the supported event type map. */
+    static {
+        final Map<String, Class<? extends Event2>> dom2EventMap = new HashMap<>();
+        dom2EventMap.put("HTMLEvents", Event2.class);
+        dom2EventMap.put("MouseEvents", MouseEvent2.class);
+        dom2EventMap.put("MutationEvents", MutationEvent2.class);
+        dom2EventMap.put("UIEvents", UIEvent2.class);
+        SUPPORTED_DOM2_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom2EventMap);
+
+        final Map<String, Class<? extends Event2>> dom3EventMap = new HashMap<>();
+        dom3EventMap.put("Event", Event2.class);
+        dom3EventMap.put("KeyboardEvent", KeyboardEvent2.class);
+        dom3EventMap.put("MouseEvent", MouseEvent2.class);
+        dom3EventMap.put("MessageEvent", MessageEvent2.class);
+        dom3EventMap.put("MutationEvent", MutationEvent2.class);
+        dom3EventMap.put("UIEvent", UIEvent2.class);
+        dom3EventMap.put("CustomEvent", CustomEvent2.class);
+        dom3EventMap.put("CloseEvent", CloseEvent2.class);
+        SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
+
+        final Map<String, Class<? extends Event2>> additionalEventMap = new HashMap<>();
+        additionalEventMap.put("BeforeUnloadEvent", BeforeUnloadEvent2.class);
+        additionalEventMap.put("Events", Event2.class);
+        additionalEventMap.put("HashChangeEvent", HashChangeEvent2.class);
+        additionalEventMap.put("KeyEvents", KeyboardEvent2.class);
+        additionalEventMap.put("PointerEvent", PointerEvent2.class);
+        additionalEventMap.put("PopStateEvent", PopStateEvent2.class);
+        additionalEventMap.put("ProgressEvent", ProgressEvent2.class);
+        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
+
+        // commands
+        List<String> cmds = Arrays.asList(
+            "2D-Position", "AbsolutePosition",
+            "BlockDirLTR", "BlockDirRTL", "BrowseMode",
+            "ClearAuthenticationCache", "CreateBookmark", "Copy", "Cut",
+            "DirLTR", "DirRTL",
+            "EditMode",
+            "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
+            "InsertIFrame", "InsertInputButton", "InsertInputCheckbox",
+            "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
+            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee",
+            "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea",
+            "LiveResize", "MultipleSelection", "Open",
+            "OverWrite", "PlayImage",
+            "Refresh", "RemoveParaFormat", "SaveAs",
+            "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
+            "UnBookmark",
+            "Paste"
+        );
+        for (final String cmd : cmds) {
+            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
+        }
+
+        cmds = Arrays.asList(
+            "BackColor", "BackgroundImageCache" /* Undocumented */,
+            "Bold",
+            "CreateLink", "Delete",
+            "FontName", "FontSize", "ForeColor", "FormatBlock",
+            "Indent", "InsertHorizontalRule", "InsertImage",
+            "InsertOrderedList", "InsertParagraph", "InsertUnorderedList",
+            "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
+            "JustifyRight",
+            "Outdent",
+            "Print",
+            "Redo", "RemoveFormat",
+            "SelectAll", "StrikeThrough", "Subscript", "Superscript",
+            "Underline", "Undo", "Unlink", "Unselect"
+        );
+        for (final String cmd : cmds) {
+            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
+            if (!"Bold".equals(cmd)) {
+                EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
+            }
+        }
+
+        cmds = Arrays.asList(
+            "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
+            "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
+            "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
+            "insertParagraph", "italic",
+            "justifyCenter", "JustifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
+            "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
+            "useCSS", "styleWithCSS"
+        );
+        for (final String cmd : cmds) {
+            EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ROOT));
+            if (!"bold".equals(cmd)) {
+                EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
+            }
+        }
+    }
 
     public static HTMLDocument2 constructor(final boolean newObj, final Object self) {
         final HTMLDocument2 host = new HTMLDocument2();
@@ -87,9 +215,14 @@ public class HTMLDocument2 extends Document2 {
     public Object getElementById(final String id) {
         implicitCloseIfNecessary();
         Object result = null;
-        try {
-            final boolean caseSensitive = getBrowserVersion().hasFeature(JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE);
-            final DomElement domElement = getPage().getElementById(id, caseSensitive);
+        final DomElement domElement = getPage().getElementById(id);
+        if (null == domElement) {
+            // Just fall through - result is already set to null
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("getElementById(" + id + "): no DOM node found with this id");
+            }
+        }
+        else {
             final Object jsElement = getScriptableFor(domElement);
             if (jsElement == null) {
                 if (LOG.isDebugEnabled()) {
@@ -100,23 +233,6 @@ public class HTMLDocument2 extends Document2 {
             }
             else {
                 result = jsElement;
-            }
-        }
-        catch (final ElementNotFoundException e) {
-            // Just fall through - result is already set to null
-            final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
-                    && getPage().isQuirksMode()) {
-                final HTMLCollection elements = getElementsByName(id);
-                result = elements.get(0, elements);
-                if (result instanceof UniqueTag) {
-                    return null;
-                }
-                LOG.warn("getElementById(" + id + ") did a getElementByName for Internet Explorer");
-                return result;
-            }
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("getElementById(" + id + "): no DOM node found with this id");
             }
         }
         return result;
@@ -131,35 +247,33 @@ public class HTMLDocument2 extends Document2 {
      * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a "name" attribute with the specified value
      */
-    @JsxFunction
-    public HTMLCollection getElementsByName(final String elementName) {
+    @Function
+    public HTMLCollection2 getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
-        if (getBrowserVersion().hasFeature(JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING)
-                && StringUtils.isEmpty(elementName)
-                || "null".equals(elementName)) {
-//            return HTMLCollection.emptyCollection(getWindow());
+        if ("null".equals(elementName)) {
+            return HTMLCollection2.emptyCollection(getWindow());
         }
         // Null must me changed to '' for proper collection initialization.
         final String expElementName = "null".equals(elementName) ? "" : elementName;
 
         final HtmlPage page = getPage();
-        final String description = "HTMLDocument.getElementsByName('" + elementName + "')";
-        final HTMLCollection collection = new HTMLCollection(page, true, description) {
-            @Override
-            protected List<Object> computeElements() {
-                return new ArrayList<Object>(page.getElementsByName(expElementName));
-            }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                if ("name".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
-        };
-
-        return collection;
+//        final HTMLCollection2 collection = new HTMLCollection2(page, true) {
+//            @Override
+//            protected List<Object> computeElements() {
+//                return new ArrayList<Object>(page.getElementsByName(expElementName));
+//            }
+//
+//            @Override
+//            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+//                if ("name".equals(event.getName())) {
+//                    return EffectOnCache.RESET;
+//                }
+//                return EffectOnCache.NONE;
+//            }
+//        };
+//
+//        return collection;
+        return null;
     }
 
     /**
@@ -184,7 +298,7 @@ public class HTMLDocument2 extends Document2 {
      *
      * @throws IOException if an IO problem occurs
      */
-    @JsxFunction
+    @Function
     public void close() throws IOException {
         if (writeInCurrentDocument_) {
             LOG.warn("close() called when document is not open.");
@@ -201,6 +315,52 @@ public class HTMLDocument2 extends Document2 {
             final WebWindow window = page.getEnclosingWindow();
             webClient.loadWebResponseInto(webResponse, window);
         }
+    }
+
+    /**
+     * Implementation of the {@link org.w3c.dom.events.DocumentEvent} interface's
+     * {@link org.w3c.dom.events.DocumentEvent#createEvent(String)} method. The method creates an
+     * uninitialized event of the specified type.
+     *
+     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent">DocumentEvent</a>
+     * @param eventType the event type to create
+     * @return an event object for the specified type
+     * @throws DOMException if the event type is not supported (will have a type of
+     *         DOMException.NOT_SUPPORTED_ERR)
+     */
+    @Function
+    public Event2 createEvent(final String eventType) throws DOMException {
+        Class<? extends Event2> clazz = null;
+        clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
+        if (clazz == null) {
+            clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
+            if (CloseEvent2.class == clazz
+                    && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
+                clazz = null;
+            }
+        }
+        if (clazz == null) {
+            if ("Events".equals(eventType)
+                || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
+                || "HashChangeEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
+                || "BeforeUnloadEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
+                || "PointerEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
+                || "PopStateEvent".equals(eventType)
+                || "ProgressEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)) {
+                clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
+            }
+        }
+        if (clazz == null) {
+            throw new RuntimeException(new DOMException(DOMException.NOT_SUPPORTED_ERR,
+                "Event Type is not supported: " + eventType));
+        }
+        final Event2 event = Event2.constructor(true, getWindow());
+        event.eventCreated();
+        return event;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
@@ -227,6 +387,8 @@ public class HTMLDocument2 extends Document2 {
     public static final class Prototype extends PrototypeObject {
         public ScriptFunction getElementById;
         public ScriptFunction getElementsByName;
+        public ScriptFunction close;
+        public ScriptFunction createEvent;
 
         public ScriptFunction G$getElementById() {
             return getElementById;
@@ -242,6 +404,22 @@ public class HTMLDocument2 extends Document2 {
 
         public void S$getElementsByName(final ScriptFunction function) {
             this.getElementById = function;
+        }
+
+        public ScriptFunction G$close() {
+            return close;
+        }
+
+        public void S$close(final ScriptFunction function) {
+            this.close = function;
+        }
+
+        public ScriptFunction G$createEvent() {
+            return createEvent;
+        }
+
+        public void S$createEvent(final ScriptFunction function) {
+            this.createEvent = function;
         }
 
         Prototype() {

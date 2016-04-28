@@ -14,19 +14,34 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
+import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.By.ByTagName;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Tests for {@link HtmlForm}, with BrowserRunner.
  *
@@ -40,8 +55,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myForm", "TypeError" },
-            IE = { "myForm", "myForm" })
+    @Alerts(DEFAULT = {"myForm", "TypeError"},
+            IE = {"myForm", "myForm"})
     public void formsAccessor_FormsAsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -67,8 +82,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myForm", "TypeError" },
-            IE = { "myForm", "myForm" })
+    @Alerts(DEFAULT = {"myForm", "TypeError"},
+            IE = {"myForm", "myForm"})
     public void formsAccessor_FormsAsFunction2() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -94,8 +109,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "error", "error", "error" },
-            IE = { "textfieldid", "textfieldname", "textfieldid" })
+    @Alerts(DEFAULT = {"error", "error", "error"},
+            IE = {"textfieldid", "textfieldname", "textfieldid"})
     public void asFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -119,8 +134,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "TypeError" },
-            IE = { "textfieldid", "textfieldname", "textfieldid" })
+    @Alerts(DEFAULT = {"TypeError"},
+            IE = {"textfieldid", "textfieldname", "textfieldid"})
     public void asFunctionFormsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -266,7 +281,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test page can't be loaded
      */
     @Test
-    @Alerts({ "1", "val2" })
+    @Alerts({"1", "val2"})
     public void malformedHtml_nestedForms() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -284,5 +299,131 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</form></body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\ufffdm", "Hello G\ufffdnter"})
+    public void encodingSubmit() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <input name='par\u00F6m' value='Hello G\u00FCnter'>\n"
+            + "    <input id='mySubmit' type='submit' value='Submit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(new ById("mySubmit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        assertEquals(1, requestedParams.size());
+        assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
+        assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            IE = "text/html, application/xhtml+xml, */*")
+    public void acceptHeader() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head></head><body>\n"
+            + "  <form action='test2'>\n"
+            + "    <input type=submit id='mySubmit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", AcceptHeaderServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        driver.findElement(By.id("mySubmit")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Servlet for {@link #acceptHeader()}.
+     */
+    public static class AcceptHeaderServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            final String html = "<html><head><script>\n"
+                    + "function test() {\n"
+                    + "  alert('" + request.getHeader("Accept") + "');\n"
+                    + "}\n"
+                    + "</script></head><body onload='test()'></body></html>";
+
+            writer.write(getModifiedContent(html));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "gzip, deflate",
+            CHROME = "gzip, deflate, sdch")
+    @NotYetImplemented(CHROME)
+    public void acceptEncodingHeader() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head></head><body>\n"
+            + "  <form action='test2'>\n"
+            + "    <input type=submit id='mySubmit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", AcceptEncodingHeaderServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+        driver.findElement(By.id("mySubmit")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Servlet for {@link #acceptEncodingHeader()}.
+     */
+    public static class AcceptEncodingHeaderServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            final String html = "<html><head><script>\n"
+                    + "function test() {\n"
+                    + "  alert('" + request.getHeader("Accept-Encoding") + "');\n"
+                    + "}\n"
+                    + "</script></head><body onload='test()'></body></html>";
+
+            writer.write(getModifiedContent(html));
+        }
     }
 }

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_IGNORE_TARGET_FOR_JS_HREF;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -26,10 +27,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -64,10 +67,11 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Same as {@link #doClickStateUpdate()}, except that it accepts an href suffix, needed when a click is
+     * Same as {@link #doClickStateUpdate()}, except that it accepts an {@code href} suffix, needed when a click is
      * performed on an image map to pass information on the click position.
      *
-     * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
+     * @param hrefSuffix the suffix to add to the anchor's {@code href} attribute
+     *        (for instance coordinates from an image map)
      * @throws IOException if an IO error occurs
      */
     protected void doClickStateUpdate(final String hrefSuffix) throws IOException {
@@ -79,7 +83,7 @@ public class HtmlAnchor extends HtmlElement {
         if (ATTRIBUTE_NOT_DEFINED == getHrefAttribute()) {
             return;
         }
-        HtmlPage htmlPage = (HtmlPage) getPage();
+        HtmlPage page = (HtmlPage) getPage();
         if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
@@ -98,32 +102,46 @@ public class HtmlAnchor extends HtmlElement {
                 builder.append(ch);
             }
 
-            final WebWindow win = htmlPage.getWebClient().openTargetWindow(htmlPage.getEnclosingWindow(),
-                    htmlPage.getResolvedTarget(getTargetAttribute()), "_self");
-            final Page page = win.getEnclosedPage();
-            if (page != null && page.isHtmlPage()) {
-                htmlPage = (HtmlPage) page;
-                htmlPage.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+            if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
+                page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+            }
+            else {
+                final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
+                        page.getResolvedTarget(getTargetAttribute()), "_self");
+                final Page enclosedPage = win.getEnclosedPage();
+                if (enclosedPage != null && enclosedPage.isHtmlPage()) {
+                    page = (HtmlPage) enclosedPage;
+                    page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+                }
             }
             return;
         }
 
-        final URL url = getTargetUrl(href, htmlPage);
+        final URL url = getTargetUrl(href, page);
 
-        final BrowserVersion browser = htmlPage.getWebClient().getBrowserVersion();
+        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+        if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
+            final URL pingUrl = getTargetUrl(getPingAttribute(), page);
+            final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
+            pingRequest.setAdditionalHeader("Ping-From", page.getUrl().toExternalForm());
+            pingRequest.setAdditionalHeader("Ping-To", url.toExternalForm());
+            pingRequest.setRequestBody("PING");
+            page.getWebClient().loadWebResponse(pingRequest);
+        }
+
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
-        webRequest.setCharset(htmlPage.getPageEncoding());
-        webRequest.setAdditionalHeader("Referer", htmlPage.getUrl().toExternalForm());
+        webRequest.setCharset(page.getPageEncoding());
+        webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()
                     + ", derived from href '" + href
                     + "', using the originating URL "
-                    + htmlPage.getUrl());
+                    + page.getUrl());
         }
-        htmlPage.getWebClient().download(htmlPage.getEnclosingWindow(),
-                htmlPage.getResolvedTarget(getTargetAttribute()),
-                webRequest, false, "Link click");
+        page.getWebClient().download(page.getEnclosingWindow(),
+                page.getResolvedTarget(getTargetAttribute()),
+                webRequest, true, false, "Link click");
     }
 
     /**
@@ -163,154 +181,154 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset". Refer to the
+     * Returns the value of the attribute {@code charset}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charset" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code charset} or an empty string if that attribute isn't defined
      */
     public final String getCharsetAttribute() {
         return getAttribute("charset");
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         return getAttribute("type");
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Returns the value of the attribute "href". Refer to the
+     * Returns the value of the attribute {@code href}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "href" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code href} or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
         return getAttribute("href").trim();
     }
 
     /**
-     * Returns the value of the attribute "hreflang". Refer to the
+     * Returns the value of the attribute {@code hreflang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "hreflang" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code hreflang} or an empty string if that attribute isn't defined
      */
     public final String getHrefLangAttribute() {
         return getAttribute("hreflang");
     }
 
     /**
-     * Returns the value of the attribute "rel". Refer to the
+     * Returns the value of the attribute {@code rel}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rel" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code rel} or an empty string if that attribute isn't defined
      */
     public final String getRelAttribute() {
         return getAttribute("rel");
     }
 
     /**
-     * Returns the value of the attribute "rev". Refer to the
+     * Returns the value of the attribute {@code rev}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rev" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code rev} or an empty string if that attribute isn't defined
      */
     public final String getRevAttribute() {
         return getAttribute("rev");
     }
 
     /**
-     * Returns the value of the attribute "accesskey". Refer to the
+     * Returns the value of the attribute {@code accesskey}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttribute("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "shape". Refer to the
+     * Returns the value of the attribute {@code shape}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "shape" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code shape} or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
         return getAttribute("shape");
     }
 
     /**
-     * Returns the value of the attribute "coords". Refer to the
+     * Returns the value of the attribute {@code coords}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "coords" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code coords} or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
         return getAttribute("coords");
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the
+     * Returns the value of the attribute {@code tabindex}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttribute("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the
+     * Returns the value of the attribute {@code onfocus}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttribute("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the
+     * Returns the value of the attribute {@code onblur}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttribute("onblur");
     }
 
     /**
-     * Returns the value of the attribute "target". Refer to the
+     * Returns the value of the attribute {@code target}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "target" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
         return getAttribute("target");
@@ -346,4 +364,25 @@ public class HtmlAnchor extends HtmlElement {
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+            return true;
+        }
+        return super.handles(event);
+    }
+
+    /**
+     * Returns the value of the attribute {@code ping}.
+     *
+     * @return the value of the attribute {@code ping}
+     */
+    public final String getPingAttribute() {
+        return getAttribute("ping");
+    }
+
 }

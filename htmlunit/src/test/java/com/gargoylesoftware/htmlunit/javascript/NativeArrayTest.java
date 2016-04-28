@@ -40,10 +40,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
-            FF = { "1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9" },
-            IE = { "1<>9", "9<>5", "9<>2", "9<>1", "1<>5", "5<>1", "5<>2", "5<>1", "1<>1", "1<>2", "2<>1", "1<>1" },
-            IE11 = { "5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5" })
+    @Alerts(DEFAULT = {"1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9"},
+            FF = {"1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9"},
+            IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
     @NotYetImplemented({ FF, IE })
     public void sort() throws Exception {
         final String html
@@ -67,9 +66,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "concat: function", "constructor: function", "isArray: undefined", "join: function", "pop: function",
+    @Alerts({"concat: function", "constructor: function", "isArray: undefined", "join: function", "pop: function",
         "push: function", "reverse: function", "shift: function", "slice: function", "sort: function",
-        "splice: function", "toLocaleString: function", "toString: function", "unshift: function" })
+        "splice: function", "toLocaleString: function", "toString: function", "unshift: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"concat", "constructor", "isArray", "join", "pop", "push", "reverse", "shift",
             "slice", "sort", "splice", "toLocaleString", "toString", "unshift"};
@@ -82,11 +81,8 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "every: function", "filter: function", "forEach: function", "indexOf: function",
-            "lastIndexOf: function", "map: function", "reduce: function", "reduceRight: function", "some: function" },
-            IE8 = { "every: undefined", "filter: undefined", "forEach: undefined", "indexOf: undefined",
-            "lastIndexOf: undefined", "map: undefined", "reduce: undefined", "reduceRight: undefined",
-            "some: undefined" })
+    @Alerts({"every: function", "filter: function", "forEach: function", "indexOf: function",
+            "lastIndexOf: function", "map: function", "reduce: function", "reduceRight: function", "some: function"})
     public void methods_different() throws Exception {
         final String[] methods = {"every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
             "reduceRight", "some"};
@@ -113,7 +109,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "hello", "foo", "hello" })
+    @Alerts({"hello", "foo", "hello"})
     public void deleteShouldNotWalkPrototypeChain() throws Exception {
         final String html = "<html><body><script>\n"
             + "Array.prototype.foo = function() { alert('hello')};\n"
@@ -175,4 +171,75 @@ public class NativeArrayTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"angel,clown,mandarin", "clown,mandarin", "angel"})
+    public void shift() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = ['angel', 'clown', 'mandarin' ];\n"
+            + "  alert(myFish);\n"
+
+            + "  var shifted = myFish.shift();\n"
+            + "  alert(myFish);\n"
+            + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"mandarin", "", "mandarin"})
+    public void shiftOneElement() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = [ 'mandarin' ];\n"
+            + "  alert(myFish);\n"
+
+            + "  var shifted = myFish.shift();\n"
+            + "  alert(myFish);\n"
+            + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "", "undefined"})
+    public void shiftEmpty() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var myFish = [ ];\n"
+            + "  alert(myFish);\n"
+
+            + "  var shifted = myFish.shift();\n"
+            + "  alert(myFish);\n"
+            + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

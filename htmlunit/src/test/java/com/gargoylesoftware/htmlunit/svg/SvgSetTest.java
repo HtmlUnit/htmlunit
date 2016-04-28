@@ -40,8 +40,7 @@ public class SvgSetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGSetElement]",
-            IE = "[object HTMLGenericElement]",
-            IE11 = "[object SVGElement]")
+            IE = "[object SVGElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

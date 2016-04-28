@@ -14,9 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -56,8 +59,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
-    static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
-        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     /**
      * This produced a deadlock situation with HtmlUnit-2.6 and HttmlUnit-2.7-SNAPSHOT on 17.09.09.
@@ -79,12 +80,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Ignore
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', url, false);\n"
             + "  xhr.send('');\n"
             + "}\n";
         final String jsCallASynchXHR = "function callASynchXHR(url) {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  var handler = function() {\n"
             + "    if (xhr.readyState == 4)\n"
             + "      alert(xhr.responseText);\n"
@@ -135,7 +136,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void setRequestHeader() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var xhr = " + XHRInstantiation_ + ";\n"
+            + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'second.html', false);\n"
             + "    xhr.setRequestHeader('Accept', 'text/javascript, application/javascript, */*');\n"
             + "    xhr.setRequestHeader('Accept-Language', 'ar-eg');\n"
@@ -169,7 +170,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String setHeader = headerValue == null ? ""
                 : "xhr.setRequestHeader('Content-length', 1234);\n";
         final String html = "<html><body><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "xhr.open('POST', 'second.html', false);\n"
             + "var body = '" + body + "';\n"
             + "xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');\n"
@@ -190,15 +191,14 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
-            IE8 = { "3", "exception", "exception", "pass", "pass" },
-            IE11 = { "1", "exception", "exception", "pass", "pass" })
-    @NotYetImplemented(IE11)
+    @Alerts(DEFAULT = {"5", "pass", "pass", "pass", "pass"},
+            IE = {"1", "exception", "exception", "pass", "pass"})
+    @NotYetImplemented(IE)
     // real IE11 invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var values = [null, '', ' ', '  \\t  '];\n"
             + "for (var i = 0; i < values.length; i++) {\n"
             + "  try {\n"
@@ -224,8 +224,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" },
-            IE8 = { "1", "bla", "someAttr", "someValue", "false", "foo", "2", "fi1" })
+    @Alerts({"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1"})
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
         testResponseXML("text/xml");
@@ -243,7 +242,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  xhr.send('');\n"
             + "  alert(xhr.responseXML);\n"
@@ -262,7 +261,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  xhr.send('');\n"
             + "  var childNodes = xhr.responseXML.childNodes;\n"
@@ -296,7 +295,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  alert(xhr.responseXML);\n"
             + "}\n"
@@ -326,7 +325,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ok",
-            IE11 = "exception")
+            IE = "exception")
     public void sameOriginPolicy_aboutBlank() throws Exception {
         sameOriginPolicy("about:blank");
     }
@@ -335,7 +334,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  try {\n"
             + "    xhr.open('GET', '" + url + "', false);\n"
             + "    alert('ok');\n"
@@ -356,7 +355,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void put() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var xhr = " + XHRInstantiation_ + ";\n"
+            + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('PUT', 'second.html', false);\n"
             + "    xhr.send('Something');\n"
             + "  }\n"
@@ -376,11 +375,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "[object]")
+    @Alerts("[object XMLDocument]")
     public void iframeInResponse() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "xhr.open('GET', 'foo.xml', false);\n"
             + "xhr.send('');\n"
             + "alert(xhr.responseXML);\n"
@@ -399,12 +397,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "in timeout", "hello" })
+    @Alerts({"in timeout", "hello"})
     @NotYetImplemented
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4)\n"
             + "    alert(xhr.responseText);\n"
@@ -425,20 +423,20 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "hello", "in timeout" })
-    @BuggyWebDriver(IE11)
+    @Alerts({"hello", "in timeout"})
+    @BuggyWebDriver(IE)
     // IEDriver catches "in timeout", "hello" but real IE11 gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', '/delay200/foo.txt', false);\n"
             + "  xhr.send('');\n"
             + "}\n"
             + "function doTest() {\n"
             + "  setTimeout(function(){ alert('in timeout');}, 5);\n"
             + "  wait();\n"
-            + "  var xhr2 = " + XHRInstantiation_ + ";\n"
+            + "  var xhr2 = new XMLHttpRequest();\n"
             + "  var handler = function() {\n"
             + "    if (xhr2.readyState == 4)\n"
             + "      alert(xhr2.responseText);\n"
@@ -463,7 +461,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void post() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('POST', '/test2?a=b', false);\n"
             + "  xhr.send('');\n"
             + "  alert(xhr.responseText);\n"
@@ -486,7 +484,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             throws ServletException, IOException {
             final Writer writer = resp.getWriter();
             writer.write(req.getQueryString() + ',' + req.getContentLength());
-            writer.close();
         }
     }
 
@@ -495,9 +492,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "4",
-            IE8 = { "1", "2", "3", "4" })
-    public void testOnreadystatechange_sync() throws Exception {
+    @Alerts("4")
+    public void onreadystatechange_sync() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -505,7 +501,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    <script>\n"
             + "      var xhr;\n"
             + "      function test() {\n"
-            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr = new XMLHttpRequest();\n"
             + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "        xhr.onreadystatechange = onStateChange;\n"
             + "        xhr.send('');\n"
@@ -535,9 +531,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
-            IE8 = "no param")
-    public void testOnreadystatechangeSyncWithParam() throws Exception {
+    @Alerts("[object Event]#[object XMLHttpRequest]")
+    public void onreadystatechangeSyncWithParam() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -545,7 +540,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    <script>\n"
             + "      var xhr;\n"
             + "      function test() {\n"
-            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr = new XMLHttpRequest();\n"
             + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "        xhr.onreadystatechange = onStateChange;\n"
             + "        xhr.send('');\n"
@@ -577,9 +572,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
-            IE8 = "no param")
-    public void testOnreadystatechangeAsyncWithParam() throws Exception {
+    @Alerts("[object Event]#[object XMLHttpRequest]")
+    public void onreadystatechangeAsyncWithParam() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -587,7 +581,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    <script>\n"
             + "      var xhr;\n"
             + "      function test() {\n"
-            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr = new XMLHttpRequest();\n"
             + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
             + "        xhr.onreadystatechange = onStateChange;\n"
             + "        xhr.send('');\n"
@@ -619,12 +613,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({ "ok", "4" })
+    @Alerts({"ok", "4"})
     public void sameOriginCorsSimple() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  try {\n"
             + "    xhr.open('GET', '" + URL_CROSS_ORIGIN + "', false);\n"
             + "    alert('ok');\n"
@@ -666,7 +660,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "    <script>\n"
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
-                        + "        var request = " + XHRInstantiation_ + ";\n"
+                        + "        var request = new XMLHttpRequest();\n"
                         + "        request.open('GET', '/protected/token', false, 'foo', 'bar');\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
@@ -697,7 +691,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "    <script>\n"
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
-                        + "        var request = " + XHRInstantiation_ + ";\n"
+                        + "        var request = new XMLHttpRequest();\n"
                         + "        request.open('GET', '" + URL_SECOND + "', false, null, null);\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
@@ -721,7 +715,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public void patch() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('PATCH', '/test2', false);\n"
             + "  xhr.send('some body data');\n"
             + "  alert(xhr.responseText);\n"
@@ -746,8 +740,71 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             writer.write(req.getMethod());
             writer.write('|');
             writer.write(IOUtils.toString(req.getReader()));
-            writer.close();
         }
     }
 
+    /**
+     * Servlet for {@link #encodedXml()}.
+     */
+    public static class EncodedXmlServlet extends HttpServlet {
+        private static final String RESPONSE = "<xml><content>blah</content></xml>";
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final byte[] bytes = RESPONSE.getBytes("UTF-8");
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            final GZIPOutputStream gout = new GZIPOutputStream(bos);
+            gout.write(bytes);
+            gout.finish();
+
+            final byte[] encoded = bos.toByteArray();
+
+            response.setContentType("text/xml");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(200);
+            response.setContentLength(encoded.length);
+            response.setHeader("Content-Encoding", "gzip");
+
+            final OutputStream rout = response.getOutputStream();
+            rout.write(encoded);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml; charset=UTF-8", "gzip", "45"},
+            IE = {"<xml><content>blah</content></xml>", "text/xml; charset=UTF-8", "null", "null"})
+    @NotYetImplemented(IE)
+    public void encodedXml() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", EncodedXmlServlet.class);
+
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        var request = new XMLHttpRequest();\n"
+                        + "        request.open('GET', '/test', false, null, null);\n"
+                        + "        request.send();\n"
+                        + "        alert(request.responseText);\n"
+                        + "        alert(request.getResponseHeader('content-type'));\n"
+                        + "        alert(request.getResponseHeader('content-encoding'));\n"
+                        + "        alert(request.getResponseHeader('content-length'));\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        loadPageWithAlerts2(html, servlets);
+    }
 }

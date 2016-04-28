@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.List;
 
@@ -27,7 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -47,8 +45,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "[object Storage]", "[object Storage]" },
-            IE8 = { "undefined", "[object]", "[object]" })
+    @Alerts({"undefined", "[object Storage]", "[object Storage]"})
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -65,9 +62,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "global: true", "local: true", "session: true" },
-            IE8 = { "global: true", "exception", "exception" })
-    @NotYetImplemented(IE8)
+    @Alerts({"global: true", "local: true", "session: true"})
     public void storageEquals() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -84,7 +79,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "string", "1" })
+    @Alerts({"string", "1"})
     public void localStorage() throws Exception {
         final String firstHtml
             = "<html><head></head><body>\n"
@@ -117,7 +112,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "2", "there", "world", "1", "0" })
+    @Alerts({"0", "2", "there", "world", "1", "0"})
     public void sessionStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -166,8 +161,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "I was here",
-            IE8 = "")
+    @Alerts("I was here")
     @BuggyWebDriver({ CHROME, FF })
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
     // But when executed manually the LocalStorage is shared.
@@ -211,8 +205,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "null", "extraMethod called", "null" },
-        IE8 = { "undefined", "null", "exception" })
+    @Alerts({"undefined", "null", "extraMethod called", "null"})
     public void prototypeIsExtensible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -237,10 +230,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
-            IE11 = { "function", "null", "string", "value", "1" },
-            IE8 = { "undefined", "null", "string", "value", "1" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"function", "null", "function", "value", "1"},
+            IE = {"function", "null", "string", "value", "1"})
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -260,11 +251,10 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
-            CHROME = { "function", "null", "string", "null", "0" },
-            FF38 = { "function", "null", "function", "value", "1" },
-            IE8 = { "undefined", "null", "string", "value", "1" })
-    @NotYetImplemented({ IE8, Browser.FF38 })
+    @Alerts(DEFAULT = {"function", "null", "string", "value", "1"},
+            CHROME = {"function", "null", "string", "null", "0"},
+            FF = {"function", "null", "function", "value", "1"})
+    @NotYetImplemented(FF)
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

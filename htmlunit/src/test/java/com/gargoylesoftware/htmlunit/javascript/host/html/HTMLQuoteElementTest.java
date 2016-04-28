@@ -35,7 +35,7 @@ public class HTMLQuoteElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
+            IE = "false")
     public void prototypeComparison() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

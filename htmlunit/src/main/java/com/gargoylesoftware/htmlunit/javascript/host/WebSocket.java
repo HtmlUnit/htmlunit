@@ -14,12 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
+import java.io.IOException;
 import java.net.URI;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -27,8 +26,10 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -37,24 +38,29 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code WebSocket}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Madis Pärn
  *
  * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla documentation</a>
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
-public class WebSocket extends EventTarget {
+@JsxClass
+public class WebSocket extends EventTarget implements AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(WebSocket.class);
 
@@ -75,10 +81,13 @@ public class WebSocket extends EventTarget {
     private Function errorHandler_;
     private Function messageHandler_;
     private Function openHandler_;
-    private int readyState_ = CLOSED;
+    private URI url_;
+    private int readyState_ = CONNECTING;
+    private String binaryType_ = "blob";
 
     private HtmlPage containingPage_;
-    private Session incomingSession_;
+    private WebSocketClient client_;
+    private volatile Session incomingSession_;
     private Session outgoingSession_;
 
     /**
@@ -96,20 +105,39 @@ public class WebSocket extends EventTarget {
     private WebSocket(final String url, final Object protocols, final Window window) {
         try {
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            setParentScope(window);
+            setDomNode(containingPage_.getBody(), false);
 
-            final WebSocketClient client;
             if (containingPage_.getWebClient().getOptions().isUseInsecureSSL()) {
-                client = new WebSocketClient(new SslContextFactory(true));
+                client_ = new WebSocketClient(new SslContextFactory(true));
             }
             else {
-                client = new WebSocketClient();
+                client_ = new WebSocketClient();
             }
-            client.start();
-            incomingSession_ = client.connect(new WebSocketImpl(), new URI(url)).get();
-            readyState_ = OPEN;
+            client_.setCookieStore(new WebSocketCookieStore(window.getWebWindow().getWebClient()));
+            client_.start();
+            containingPage_.addAutoCloseable(this);
+            url_ = new URI(url);
+
+            // there seem to be a bug in jetty, this constructor sets the cookies twice
+            // incomingSession_ = client_.connect(new WebSocketImpl(), new URI(url)).get();
+            final Future<Session> connectFuture = client_.connect(new WebSocketImpl(),
+                                                                    url_, new ClientUpgradeRequest());
+            client_.getExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        readyState_ = CONNECTING;
+                        incomingSession_ = connectFuture.get();
+                    }
+                    catch (final Exception e) {
+                        LOG.error("WS connect error", e);
+                    }
+                }
+            });
         }
         catch (final Exception e) {
-            LOG.error(e);
+            LOG.error("WS constructor error", e);
         }
     }
 
@@ -129,7 +157,7 @@ public class WebSocket extends EventTarget {
             throw Context.reportRuntimeError(
                     "WebSocket Error: constructor must have one or two String parameters.");
         }
-        if (args[0] == Context.getUndefinedValue()) {
+        if (args[0] == Undefined.instance) {
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {
@@ -208,7 +236,6 @@ public class WebSocket extends EventTarget {
     @JsxSetter
     public void setOnopen(final Function openHandler) {
         openHandler_ = openHandler;
-        fireOnOpen();
     }
 
     /**
@@ -219,6 +246,58 @@ public class WebSocket extends EventTarget {
     @JsxGetter
     public int getReadyState() {
         return readyState_;
+    }
+
+    /**
+     * @return the url
+     */
+    @JsxGetter
+    public String getUrl() {
+        return url_.toString();
+    }
+
+    /**
+     * @return the sub protocol used
+     */
+    @JsxGetter
+    public String getProtocol() {
+        return "";
+    }
+
+    /**
+     * @return the sub protocol used
+     */
+    @JsxGetter
+    public long getBufferedAmount() {
+        return 0L;
+    }
+
+    /**
+     * @return the used binary type
+     */
+    @JsxGetter
+    public String getBinaryType() {
+        return binaryType_;
+    }
+
+    /**
+     * Sets the used binary type.
+     * @param type the type
+     */
+    @JsxSetter
+    public void setBinaryType(final String type) {
+        if ("arraybuffer".equals(type)
+            || "blob".equals(type)) {
+            binaryType_ = type;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws Exception {
+        close(null, null);
     }
 
     /**
@@ -236,7 +315,16 @@ public class WebSocket extends EventTarget {
             if (outgoingSession_ != null) {
                 outgoingSession_.close();
             }
-            readyState_ = CLOSED;
+        }
+
+        try {
+            if (client_ != null) {
+                client_.stop();
+                client_ = null;
+            }
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -248,67 +336,99 @@ public class WebSocket extends EventTarget {
     public void send(final Object content) {
         try {
             if (content instanceof String) {
-                outgoingSession_.getRemote().sendString(content.toString());
+                outgoingSession_.getRemote().sendString((String) content);
+            }
+            else if (content instanceof ArrayBuffer) {
+                final byte[] bytes = ((ArrayBuffer) content).getBytes();
+                final ByteBuffer buffer = ByteBuffer.wrap(bytes);
+                outgoingSession_.getRemote().sendBytes(buffer);
             }
             else {
                 throw new IllegalStateException(
                         "Not Yet Implemented: WebSocket.send() was used to send non-string value");
             }
         }
-        catch (final Exception e) {
-            LOG.error(e);
+        catch (final IOException e) {
+            LOG.error("WS send error", e);
         }
     }
 
-    private void fireOnOpen() {
-        if (openHandler_ == null) {
+    private void fire(final Event evt) {
+        evt.setTarget(this);
+        evt.setParentScope(getParentScope());
+        evt.setPrototype(getPrototype(evt.getClass()));
+
+        final JavaScriptEngine engine = containingPage_.getWebClient().getJavaScriptEngine();
+        engine.getContextFactory().call(new ContextAction() {
+            @Override
+            public ScriptResult run(final Context cx) {
+                return executeEventLocally(evt);
+            }
+        });
+    }
+
+    private void callFunction(final Function function, final Object[] args) {
+        if (function == null) {
             return;
         }
-        final Scriptable scope = openHandler_.getParentScope();
-        final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-        jsEngine.callFunction(containingPage_, openHandler_, scope, WebSocket.this,
-                ArrayUtils.EMPTY_OBJECT_ARRAY);
+        final Scriptable scope = function.getParentScope();
+        final JavaScriptEngine engine = containingPage_.getWebClient().getJavaScriptEngine();
+        engine.callFunction(containingPage_, function, scope, this, args);
     }
 
     private class WebSocketImpl extends WebSocketAdapter {
+
         @Override
         public void onWebSocketConnect(final Session session) {
+            super.onWebSocketConnect(session);
+            readyState_ = OPEN;
             outgoingSession_ = session;
+
+            final Event openEvent = new Event();
+            openEvent.setType(Event.TYPE_OPEN);
+            fire(openEvent);
+            callFunction(openHandler_, ArrayUtils.EMPTY_OBJECT_ARRAY);
         }
 
         @Override
-        public void onWebSocketClose(final int closeCode, final String message) {
-            if (closeHandler_ == null) {
-                return;
-            }
-            final Scriptable scope = closeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, closeHandler_, scope, WebSocket.this,
-                    new Object[] {closeCode, message});
+        public void onWebSocketClose(final int statusCode, final String reason) {
+            super.onWebSocketClose(statusCode, reason);
+            readyState_ = CLOSED;
+            outgoingSession_ = null;
+
+            final CloseEvent closeEvent = new CloseEvent();
+            closeEvent.setCode(statusCode);
+            closeEvent.setReason(reason);
+            closeEvent.setWasClean(true);
+            fire(closeEvent);
+            callFunction(closeHandler_, new Object[] {closeEvent});
         }
 
         @Override
-        public void onWebSocketText(final String data) {
-            if (messageHandler_ == null) {
-                return;
-            }
-            final Scriptable scope = messageHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            final MessageEvent event = new MessageEvent(data);
-            event.setParentScope(getParentScope());
-            event.setPrototype(getPrototype(event.getClass()));
-            jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this, new Object[] {event});
+        public void onWebSocketText(final String message) {
+            super.onWebSocketText(message);
+
+            final MessageEvent msgEvent = new MessageEvent(message);
+            msgEvent.setOrigin(getUrl());
+            fire(msgEvent);
+            callFunction(messageHandler_, new Object[] {msgEvent});
         }
 
         @Override
         public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
-            if (messageHandler_ == null) {
-                return;
-            }
-            final Scriptable scope = messageHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this,
-                    new Object[] {data, offset, length});
+            super.onWebSocketBinary(data, offset, length);
+
+            final ArrayBuffer buffer = new ArrayBuffer();
+            buffer.setParentScope(getParentScope());
+            buffer.setPrototype(getPrototype(buffer.getClass()));
+
+            buffer.constructor(length);
+            buffer.setBytes(0, Arrays.copyOfRange(data, offset, length));
+
+            final MessageEvent msgEvent = new MessageEvent(buffer);
+            msgEvent.setOrigin(getUrl());
+            fire(msgEvent);
+            callFunction(messageHandler_, new Object[] {msgEvent});
         }
     }
 }

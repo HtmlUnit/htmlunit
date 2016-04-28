@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
@@ -54,7 +55,7 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "value".
+     * Returns the value of the JavaScript attribute {@code value}.
      *
      * @return the value of this attribute
      */
@@ -64,17 +65,17 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "value".
+     * Sets the value of the JavaScript attribute {@code value}.
      *
      * @param newValue the new value
      */
     @JsxSetter
-    public void setValue(final String newValue) {
-        getDomNodeOrDie().setAttribute("value", newValue);
+    public void setValue(final Object newValue) {
+        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
     }
 
     /**
-     * Returns the value of the JavaScript attribute "name".
+     * Returns the value of the JavaScript attribute {@code name}.
      *
      * @return the value of this attribute
      */
@@ -84,7 +85,7 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the value of the JavaScript attribute "name".
+     * Sets the value of the JavaScript attribute {@code name}.
      *
      * @param newName the new name
      */
@@ -94,8 +95,8 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the <tt>onchange</tt> event handler for this element.
-     * @param onchange the <tt>onchange</tt> event handler for this element
+     * Sets the {@code onchange} event handler for this element.
+     * @param onchange the {@code onchange} event handler for this element
      */
     @Override
     @JsxSetter(@WebBrowser(IE))
@@ -104,8 +105,8 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Returns the <tt>onchange</tt> event handler for this element.
-     * @return the <tt>onchange</tt> event handler for this element
+     * Returns the {@code onchange} event handler for this element.
+     * @return the {@code onchange} event handler for this element
      */
     @Override
     @JsxGetter(@WebBrowser(IE))

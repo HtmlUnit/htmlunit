@@ -760,19 +760,19 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.2</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.2</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -796,15 +796,9 @@
             <version>2.11.0</version>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.nekohtml</groupId>
-            <artifactId>nekohtml</artifactId>
-            <version>1.9.22</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>neko-htmlunit</artifactId>
+            <version>2.21</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>

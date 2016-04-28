@@ -117,7 +117,10 @@ public abstract class AbstractJavaScriptConfiguration {
                         + hostClassName + "' has both.");
                 }
                 final JsxClass[] jsxClassValues = jsxClasses.value();
-
+                if (jsxClassValues.length == 1) {
+                    throw new RuntimeException("No need to specify JsxClasses with a single JsxClass for "
+                            + hostClassName);
+                }
                 final Set<Class<?>> domClasses = new HashSet<>();
 
                 boolean isJsObject = false;
@@ -145,8 +148,7 @@ public abstract class AbstractJavaScriptConfiguration {
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
                                 isDefinedInStandardsMode, className);
 
-                process(classConfiguration, hostClassName, expectedBrowserName,
-                        browserVersionNumeric);
+                process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
                 return classConfiguration;
             }
 
@@ -167,8 +169,7 @@ public abstract class AbstractJavaScriptConfiguration {
                     = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
                             jsxClass.isDefinedInStandardsMode(), className);
 
-                process(classConfiguration, hostClassName, expectedBrowserName,
-                        browserVersionNumeric);
+                process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
                 return classConfiguration;
             }
         }
@@ -225,9 +226,16 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
                 else if (annotation instanceof JsxFunction) {
-                    if (isSupported(((JsxFunction) annotation).value(),
-                            expectedBrowserName, browserVersionNumeric)) {
-                        classConfiguration.addFunction(method);
+                    final JsxFunction jsxFunction = (JsxFunction) annotation;
+                    if (isSupported(jsxFunction.value(), expectedBrowserName, browserVersionNumeric)) {
+                        final String name;
+                        if (jsxFunction.functionName().isEmpty()) {
+                            name = method.getName();
+                        }
+                        else {
+                            name = jsxFunction.functionName();
+                        }
+                        classConfiguration.addFunction(name, method);
                     }
                 }
                 else if (annotation instanceof JsxStaticGetter) {
@@ -240,9 +248,16 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
                 else if (annotation instanceof JsxStaticFunction) {
-                    if (isSupported(((JsxStaticFunction) annotation).value(),
-                            expectedBrowserName, browserVersionNumeric)) {
-                        classConfiguration.addStaticFunction(method);
+                    final JsxStaticFunction jsxStaticFunction = (JsxStaticFunction) annotation;
+                    if (isSupported(jsxStaticFunction.value(), expectedBrowserName, browserVersionNumeric)) {
+                        final String name;
+                        if (jsxStaticFunction.functionName().isEmpty()) {
+                            name = method.getName();
+                        }
+                        else {
+                            name = jsxStaticFunction.functionName();
+                        }
+                        classConfiguration.addStaticFunction(name, method);
                     }
                 }
                 else if (annotation instanceof JsxConstructor) {
@@ -255,15 +270,13 @@ public abstract class AbstractJavaScriptConfiguration {
         }
         for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
             final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-            if (jsxConstant != null
-                    && isSupported(jsxConstant.value(), expectedBrowserName, browserVersionNumeric)) {
+            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowserName, browserVersionNumeric)) {
                 classConfiguration.addConstant(field.getName());
             }
         }
         for (final Entry<String, Method> getterEntry : allGetters.entrySet()) {
             final String property = getterEntry.getKey();
-            classConfiguration.addProperty(property,
-                    getterEntry.getValue(), allSetters.get(property));
+            classConfiguration.addProperty(property, getterEntry.getValue(), allSetters.get(property));
         }
     }
 

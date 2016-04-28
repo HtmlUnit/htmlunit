@@ -135,13 +135,13 @@ public class BrowserParameterizedRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.CHROME, true, tests));
                 }
-                if (browsers.contains("ff31")) {
-                    runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.FIREFOX_31, true, tests));
-                }
                 if (browsers.contains("ff38")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.FIREFOX_38, true, tests));
+                }
+                if (browsers.contains("ff45")) {
+                    runners_.add(new BrowserVersionClassRunnerWithParameters(
+                            klass, BrowserVersion.FIREFOX_45, true, tests));
                 }
                 if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
@@ -157,13 +157,13 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.CHROME, false, tests));
             }
-            if (browsers.contains("hu-ff31")) {
-                runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.FIREFOX_31, false, tests));
-            }
             if (browsers.contains("hu-ff38")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.FIREFOX_38, false, tests));
+            }
+            if (browsers.contains("hu-ff45")) {
+                runners_.add(new BrowserVersionClassRunnerWithParameters(
+                        klass, BrowserVersion.FIREFOX_45, false, tests));
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
@@ -173,6 +173,9 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.EDGE, false, tests));
             }
+        }
+        else {
+            throw new IllegalStateException("No @Test method found");
         }
     }
 
@@ -221,8 +224,7 @@ public class BrowserParameterizedRunner extends Suite {
     }
 
     private List<TestWithParameters> createTestsForParameters(
-            final Iterable<Object> allParameters, final String namePattern)
-        throws Exception {
+            final Iterable<Object> allParameters, final String namePattern) {
         int i = 0;
         final List<TestWithParameters> children = new ArrayList<>();
         for (final Object parametersOfSingleTest : allParameters) {

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -79,7 +77,7 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
             + "<script>\n"
             + "function copy(node) {\n"
             + "  e.value = '231';"
-            + "}"
+            + "}\n"
             + "var e = document.getElementById('t');\n"
             + "e.onkeyup = copy;\n"
             + "var c = e.cloneNode();\n"
@@ -165,8 +163,7 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "My old value" },
-            IE8 = "My new value")
+    @Alerts({"exception", "My old value"})
     public void setSelectionText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -303,4 +300,64 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
         assertEquals("tes t", t.getValueAttribute());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeDelKey() throws Exception {
+        final String html = "<html><head></head><body><input id='t'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_DELETE);
+        assertEquals("tt", t.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitOnEnter() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <form action='result.html'>\n"
+            + "    <input id='t' value='hello'/>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+
+        t.type("\n");
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitOnEnterWithoutForm() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <input id='t' value='hello'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlTextInput t = page.getHtmlElementById("t");
+
+        t.type("\n");
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
 }

@@ -22,15 +22,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for a {@link HtmlFrame}.
@@ -40,13 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlFrame.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlFrame.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlFrame.class)
 public class HTMLFrameElement extends HTMLElement {
 
     /**
@@ -118,8 +109,8 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>onload</tt> event handler for this element.
-     * @param eventHandler the <tt>onload</tt> event handler for this element
+     * Sets the {@code onload} event handler for this element.
+     * @param eventHandler the {@code onload} event handler for this element
      */
     @JsxSetter
     public void setOnload(final Object eventHandler) {
@@ -127,8 +118,8 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>onload</tt> event handler for this element.
-     * @return the <tt>onload</tt> event handler for this element
+     * Returns the {@code onload} event handler for this element.
+     * @return the {@code onload} event handler for this element
      */
     @JsxGetter
     public Object getOnload() {
@@ -160,59 +151,5 @@ public class HTMLFrameElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
-    }
-
-    /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 }

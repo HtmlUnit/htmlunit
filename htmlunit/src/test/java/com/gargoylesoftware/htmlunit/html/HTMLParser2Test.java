@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,10 +51,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "beforeafter", "undefined" },
-            IE8 = { "before", "after", "TABLE" })
-    @NotYetImplemented({ FF, IE11, CHROME })
-    public void testHtmlTableTextAroundTD() throws Exception {
+    @Alerts({"beforeafter", "undefined"})
+    @NotYetImplemented
+    public void htmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -84,7 +79,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("TABLE")
-    public void testHtmlTableWhitespaceAroundTD() throws Exception {
+    public void htmlTableWhitespaceAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -105,8 +100,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "Hi!",
-            IE8 = { })
+    @Alerts("Hi!")
     @NotYetImplemented
     public void unclosedCommentsInScript() throws Exception {
         final String html = "<html><body>\n"
@@ -126,7 +120,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "P", "BUTTON", "DIV" })
+    @Alerts({"P", "BUTTON", "DIV"})
     public void divInsideButton() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -154,7 +148,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "P", "LABEL", "OBJECT" })
+    @Alerts({"P", "LABEL", "OBJECT"})
     public void objectInsideLabel() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -251,8 +245,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" },
-            IE8 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" })
+    @Alerts({"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"})
     public void childNodes_p_parent() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -284,8 +277,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" },
-            IE8 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" })
+    @Alerts({"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"})
     public void childNodes_f() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -318,8 +310,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" },
-            IE8 = { "", "<BR>" })
+    @Alerts({"<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->"})
     public void ieConditionalCommentsNotInDom() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -354,6 +345,64 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<label>XL</label>\n"
             + "</a>\n"
             + "<script>alert(document.links.length)</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1423/">Bug 1423</a>
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"\n<var data=\"f\">\n<a href=\"#\">a</a>\n<div>d</div>\n<li>l</li>\n</var>\n", "3"})
+    public void varInsideUl() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head></head>"
+            + "<body>\n"
+            + "<ul id='myUl'>\n"
+            +   "<var data='f'>\n"
+            +     "<a href='#'>a</a>\n"
+            +     "<div>d</div>\n"
+            +     "<li>l</li>\n"
+            +   "</var>\n"
+            + "</ul>\n"
+            + "<script>"
+            + "  var tmp = document.getElementById('myUl');\n"
+            + "  alert(tmp.innerHTML);\n"
+            + "  alert(tmp.childNodes.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1046/">Bug 1046</a>
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"\n<table>\n<tbody><tr>\n<td>data</td>\n</tr>\n</tbody></table>\n", "3"})
+    public void tableInsideAnchor() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head></head>"
+            + "<body>\n"
+            +  "<a id='myA' href='#'>\n"
+            +   "<table>\n"
+            +     "<tr>\n"
+            +       "<td>data</td>\n"
+            +     "</tr>\n"
+            +   "</table>\n"
+            +  "</a>\n"
+            + "<script>"
+            + "  var tmp = document.getElementById('myA');\n"
+            + "  alert(tmp.innerHTML);\n"
+            + "  alert(tmp.childNodes.length);\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

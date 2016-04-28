@@ -36,8 +36,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLTableElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -62,7 +61,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three" })
+    @Alerts({"TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three"})
     public void two_theads() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import java.util.Collections;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -67,7 +68,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebElement p = driver.findElement(By.id("p"));
         try {
             p.sendKeys("abc");
-            Assert.fail();
+            fail();
         }
         catch (final InvalidElementStateException e) {
             // as expected
@@ -168,7 +169,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -199,7 +200,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -233,8 +234,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -272,8 +273,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -310,8 +311,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-default", "newValue-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newdefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-default", "newValue-newdefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -341,8 +341,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "textLength not available" },
-            FF = { "7" })
+    @Alerts(DEFAULT = {"textLength not available"},
+            FF = {"7"})
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -376,11 +376,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "    alert(getSelection(document.getElementById('text1')).length);\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
-            + "    if (typeof element.selectionStart == 'number') {\n"
-            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } else if (document.selection && document.selection.createRange) {\n"
-            + "      return document.selection.createRange().text;\n"
-            + "    }\n"
+            + "    return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -393,9 +389,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10" },
-            IE11 = { "0,0", "0,0", "3,3", "3,10" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
+            IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -404,9 +399,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11" },
-            IE11 = { "0,0", "0,0", "0,0", "0,11" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -415,9 +409,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
-            IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
-            IE11 = { "0,0", "0,0", "10,10", "5,5" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
+            IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -445,9 +438,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "4,5", "10,10", "4,4", "1,1" },
-            IE11 = { "0,0", "4,5", "0,0", "0,0", "0,0" },
-            IE8 = { "undefined,undefined", "4,5", "4,5", "4,5", "0,4" })
+    @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
+            IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

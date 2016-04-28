@@ -15,9 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -29,8 +27,10 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -47,8 +47,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE8 = { "HTML", "" })
+    @Alerts({"undefined", "undefined"})
     public void scopeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -67,9 +66,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" },
-            IE8 = { "blah", "http://www.blah.com/blah", "error" })
-    @NotYetImplemented(IE8)
+    @Alerts({"undefined", "undefined", "undefined", "http://www.meh.com/meh"})
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
@@ -97,7 +94,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "number", "number", "number", "number", "number", "number", "number", "number" })
+    @Alerts({"number", "number", "number", "number", "number", "number", "number", "number"})
     public void offsets() throws Exception {
         final String html = "<html>\n"
               + "<head>\n"
@@ -123,8 +120,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "attachEvent not available",
-            IE8 = { "30", "30", "30" })
+    @Alerts("attachEvent not available")
     public void offsetWidth_withEvent() throws Exception {
         final String html =
               "<html>\n"
@@ -159,7 +155,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "15", "15" })
+    @Alerts({"15", "15"})
     public void offsetTopAndLeft_Padding() throws Exception {
         final String html =
               "<html>\n"
@@ -187,7 +183,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "13", "28" })
+    @Alerts({"13", "28"})
     public void offsetTopAndLeft_Margins() throws Exception {
         final String html =
               "<html>\n"
@@ -215,10 +211,10 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "12", "12" },
-            CHROME = { "15", "15" },
-            IE11 = { "15", "15" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @Alerts(DEFAULT = {"12", "12"},
+            CHROME = {"15", "15"},
+            IE = {"15", "15"})
+    @NotYetImplemented({ CHROME, IE })
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -246,7 +242,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void offsetTopAndLeft_Nothing() throws Exception {
         final String html =
               "<html>\n"
@@ -274,7 +270,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "50", "50" })
+    @Alerts({"50", "50"})
     public void offsetTopAndLeft_AbsolutelyPositioned() throws Exception {
         final String html =
               "<html>\n"
@@ -302,18 +298,14 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
+    @Alerts({"1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
                 "5 fixed_length 50", "6 fixed_inherit 10", "7 relative_auto 0", "8 relative_length 50",
                 "9 relative_inherit 10", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10" },
-            IE8 = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 0", "4 fixed_auto 0",
-                "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
-                "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-                "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" })
+                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10"})
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"
-            + "  return this.replace(/^\\s+|\\s+$/g,'');\n"
+            + "  return this.replace(/^\\s+|\\s+$/g, '');\n"
             + "}\n"
             + "function test() {\n"
             + "  var output = document.getElementById('output');\n"
@@ -356,7 +348,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "40", "10" })
+    @Alerts({"40", "10"})
     public void offsetTopAndLeft_parentAbsolute() throws Exception {
         final String html =
               "<html>\n"
@@ -385,28 +377,43 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "true", "true", "true" })
+    @Alerts(DEFAULT = {"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"},
+            IE = {"true", "true", "2.0555555555555553", "3.0555555555555553",
+                    "4.111111111111111", "5.111111111111111", "6.111111111111111",
+                    "7.166666666666667", "8.166666666666666", "9.222222222222221",
+                    "101.22222222222223", "203.44444444444446", "6132.333333333333"})
+    @NotYetImplemented(IE)
     public void offsetTopWithPreviousSiblings() throws Exception {
-        String html = "<html><head>\n"
+        String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('d1').offsetTop == 0);\n"
-            + "    alert(document.getElementById('d2').offsetTop > 0);\n"
-            + "    alert(document.getElementById('d3').offsetTop == document.getElementById('d2').offsetTop * 2);\n"
-            + "    alert(document.getElementById('d4').offsetTop == document.getElementById('d2').offsetTop * 3);\n"
-            + "    alert(document.getElementById('d5').offsetTop == document.getElementById('d2').offsetTop * 6004);\n"
+            + "    var d2OffsetTop = document.getElementById('d2').offsetTop;\n"
+            + "    alert(d2OffsetTop > 0);\n"
+
+            + "    alert(document.getElementById('d3').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d4').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d5').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d6').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d7').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d8').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d9').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d10').offsetTop/d2OffsetTop);\n"
+
+            + "    alert(document.getElementById('d100').offsetTop/d2OffsetTop);\n"
+            + "    alert(document.getElementById('d200').offsetTop/d2OffsetTop);\n"
+
+            + "    alert(document.getElementById('d6000').offsetTop/d2OffsetTop);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body style='padding: 0px; margin: 0px;' onload='test()'>\n"
-            + "  <div id='d1'>foo</div>\n"
-            + "  <div id='d2'>foo</div>\n"
-            + "  <div id='d3'>foo</div>\n"
-            + "  <div id='d4'>foo</div>\n";
-        for (int i = 0; i < 6000; i++) {
-            html += "  <div>foo</div>\n";
+            + "<body style='padding: 0px; margin: 0px;' onload='test()'>\n";
+        for (int i = 1; i <= 6000; i++) {
+            html += "  <div id='d" + i + "'>bar</div>\n";
         }
-        html += "  <div id='d5'>bar</div>\n"
+        html = html
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
@@ -417,8 +424,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "8", "8" },
-            IE8 = { "10", "15" })
+    @Alerts({"8", "8"})
     public void offsetTopAndLeftWhenParentIsBody() throws Exception {
         final String html
             = "<html>\n"
@@ -434,7 +440,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "23", "19" })
+    @Alerts({"23", "19"})
     public void offsetTopAndLeftWithRelativePosition() throws Exception {
         final String html
             = "<html><body onload='test()'><script language='javascript'>\n"
@@ -461,9 +467,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "30px", "46", "55px", "71", "71", "0", "0", "0", "0" },
-            IE8 = { "30px", "44", "55px", "55", "55", "0", "0", "0", "0" })
-    @NotYetImplemented(IE8)
+    @Alerts({"30px", "46", "55px", "71", "71", "0", "0", "0", "0"})
     public void offsetWidthAndHeight() throws Exception {
         final String html =
               "<html><head>\n"
@@ -502,7 +506,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void offsetWidthAndHeight_displayNoneAndChildren() throws Exception {
         final String html
             = "<html><body>\n"
@@ -518,9 +522,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "18" },
-            FF = { "0", "20" },
-            IE8 = { "19", "19" })
+    @Alerts(DEFAULT = {"0", "18"},
+            FF = {"0", "20"})
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -536,9 +539,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "75", "2", "5", "20", "50", "50", "18" },
-            FF = { "77", "2", "5", "20", "50", "50", "20" },
-            IE8 = { "108", "19", "20", "20", "50", "50", "19" })
+    @Alerts(DEFAULT = {"75", "2", "5", "20", "50", "50", "18"},
+            FF = {"77", "2", "5", "20", "50", "50", "20"})
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
@@ -560,7 +562,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void offsetWidth_calculatedBasedOnPage() throws Exception {
         final String html
             = "<html><body>\n"
@@ -606,7 +608,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "0.5", "true" })
+    @Alerts({"1", "0.5", "true"})
     public void offsetWidth_cssFloat_rightOrLeft() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='withoutFloat1'>hello</div><div>hellohello</div>\n"
@@ -628,8 +630,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            IE8 = { "something", "something" })
+    @Alerts({"something", "0"})
     public void textContent_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -657,8 +658,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            IE8 = { "something", "something" })
+    @Alerts({"something", "0"})
     public void textContent_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -686,10 +686,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            FF = { "something", "innerText not supported" },
-            IE = { "something", "null" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"something", "null"},
+            CHROME = {"something", "0"},
+            FF38 = {"something", "innerText not supported"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -721,8 +720,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "something", "0" },
-            FF = { "something", "innerText not supported" })
+    @Alerts(DEFAULT = {"something", "0"},
+            FF38 = {"something", "innerText not supported"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -755,7 +754,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "input handler", "blur input" })
+    @Alerts({"input handler", "blur input"})
     public void eventHandlerBubble_blur() throws Exception {
         events("blur");
     }
@@ -765,7 +764,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "input handler", "focus input" })
+    @Alerts({"input handler", "focus input"})
     public void eventHandlerBubble_focus() throws Exception {
         events("focus");
     }
@@ -774,7 +773,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "input handler", "click input", "div handler", "click div" })
+    @Alerts({"input handler", "click input", "div handler", "click div"})
     public void eventHandlerBubble_click() throws Exception {
         events("click");
     }
@@ -794,10 +793,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "function addListener(id, event) {\n"
             + "  var handler = function(e) { log(event + ' ' + id) };\n"
             + "  var e = document.getElementById(id);\n"
-            + "  if (e.addEventListener)\n"
-            + "    e.addEventListener(event, handler, false)\n"
-            + "  else\n"
-            + "    e.attachEvent('on' + event, handler);\n"
+            + "  e.addEventListener(event, handler, false)\n"
             + "}\n"
             + "var eventType = '" + type + "';\n"
             + "addListener('div', eventType);\n"
@@ -817,7 +813,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeUnknown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -837,7 +833,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeUnknown2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -857,7 +853,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeClass() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -877,7 +873,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "klazz" })
+    @Alerts({"null", "klazz"})
     public void setAttributeNodeClass2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -897,7 +893,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "center", "true", "center", "false" })
+    @Alerts({"true", "center", "true", "center", "false"})
     public void removeAttributeNode() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -923,8 +919,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "div1" },
-            IE8 = "undefined")
+    @Alerts({"3", "div1"})
     public void querySelectorAll() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -934,13 +929,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</style>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if(document.body.querySelectorAll) {\n"
-            + "    var redTags = document.body.querySelectorAll('.green,.red');\n"
-            + "    alert(redTags.length);\n"
-            + "    alert(redTags.item(0).id);\n"
-            + "  }\n"
-            + "  else\n"
-            + "    alert('undefined');\n"
+            + "  var redTags = document.body.querySelectorAll('.green,.red');\n"
+            + "  alert(redTags.length);\n"
+            + "  alert(redTags.item(0).id);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1' class='red'>First</div>\n"
@@ -956,21 +947,16 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "p1" },
-            IE8 = "undefined")
+    @Alerts({"1", "p1"})
     public void querySelectorAllOnDisconnectedElement() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if(document.body.querySelectorAll) {\n"
-            + "    var myDiv = document.createElement('div');\n"
-            + "    myDiv.innerHTML = '<p id=\"p1\" class=\"TEST\"></p>';\n"
-            + "    var found = myDiv.querySelectorAll('.TEST');\n"
-            + "    alert(found.length);\n"
-            + "    alert(found.item(0).id);\n"
-            + "  }\n"
-            + "  else\n"
-            + "    alert('undefined');\n"
+            + "  var myDiv = document.createElement('div');\n"
+            + "  myDiv.innerHTML = '<p id=\"p1\" class=\"TEST\"></p>';\n"
+            + "  var found = myDiv.querySelectorAll('.TEST');\n"
+            + "  alert(found.length);\n"
+            + "  alert(found.item(0).id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1035,18 +1021,13 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "undefined")
+    @Alerts("1")
     public void querySelectorAll_noDuplication() throws Exception {
         final String html = "<html><body>\n"
             + "<div><span>First</span></div>\n"
             + "<script>\n"
-            + "  if(document.body.querySelectorAll) {\n"
-            + "    var tags = document.body.querySelectorAll('span, div > span');\n"
-            + "    alert(tags.length);\n"
-            + "  }\n"
-            + "  else\n"
-            + "    alert('undefined');\n"
+            + "  var tags = document.body.querySelectorAll('span, div > span');\n"
+            + "  alert(tags.length);\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
@@ -1057,14 +1038,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {
-                "Old = <b>Old innerHTML</b><!-- old comment -->",
+    @Alerts({"Old = <b>Old innerHTML</b><!-- old comment -->",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" },
-            IE8 = {
-                "Old = <B>Old innerHTML</B><!-- old comment -->",
-                "New = <B><I id=newElt>New cell value</I></B>",
-                "I" })
+                "I"})
     public void getSetInnerHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1099,12 +1075,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Old = <b id=\"innerNode\">Old outerHTML</b>",
+    @Alerts({"Old = <b id=\"innerNode\">Old outerHTML</b>",
                 "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" },
-            IE8 = { "Old = <B id=innerNode>Old outerHTML</B>",
-                "New = <B><I id=newElt>New cell value</I></B>",
-                "I" })
+                "I"})
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1139,7 +1112,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true" }, IE8 = { })
+    @Alerts({"false", "true"})
     public void dispatchEvent2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1153,11 +1126,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "    cb.dispatchEvent(evt);\n"
             + "  }\n"
             + "  function test() {\n"
-            + "    if (document.createEvent) {\n"
-            + "      alert(document.getElementById('checkbox').checked);\n"
-            + "      simulateClick();\n"
-            + "      alert(document.getElementById('checkbox').checked);\n"
-            + "    }\n"
+            + "    alert(document.getElementById('checkbox').checked);\n"
+            + "    simulateClick();\n"
+            + "    alert(document.getElementById('checkbox').checked);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
@@ -1173,9 +1144,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
-    @NotYetImplemented({ FF, CHROME, IE8 })
+    @Alerts("true")
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1206,8 +1175,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "clicked", "fireEvent not available" },
-            IE8 = { "clicked", "clicked" })
+    @Alerts({"clicked", "fireEvent not available"})
     public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
             "<html>\n"
@@ -1240,8 +1208,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available" },
-            IE8 = { "click", "click", "click" })
+    @Alerts({"click", "fireEvent not available", "fireEvent not available"})
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
             "<html>\n"
@@ -1299,5 +1266,66 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</script></body></html>";
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"body1", "setActive not available"},
+            IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2"})
+    @BuggyWebDriver(IE)
+    @NotYetImplemented(IE)
+    public void setActiveAndFocus() throws Exception {
+        final String firstHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>First</title>\n"
+            + "  <script>var win2;</script>\n"
+            + "</head>\n"
+            + "<body id='body1' onload='alert(document.activeElement.id)'>\n"
+            + "<form name='form1'>\n"
+            + "  <input id='text1' onfocus='alert(\"onfocus text1\"); win2.focus();'>\n"
+            + "  <button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\", \"second\");'>Click me</a>\n"
+            + "</form>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
+
+        final String secondHtml =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Second</title>\n"
+            + "</head>\n"
+            + "<body id='body2'>\n"
+            + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "  <button id='button2' onClick='doTest();'>Click me</a>\n"
+            + "  <script>\n"
+            + "     function doTest() {\n"
+            + "         var elem = opener.document.getElementById('text1');\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         if (!elem.setActive) { alert('setActive not available'); return; }\n"
+            + "         elem.setActive();\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         alert(document.activeElement);\n"
+            + "         document.getElementById('text2').setActive();\n"
+            + "         alert(document.activeElement.id);\n"
+            + "         alert(opener);\n"
+            + "         opener.focus();\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml);
+        assertEquals("First", driver.getTitle());
+
+        driver.findElement(By.id("button1")).click();
+        driver.switchTo().window("second");
+        assertEquals("Second", driver.getTitle());
+
+        driver.findElement(By.id("button2")).click();
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

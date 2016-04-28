@@ -57,7 +57,7 @@ public class NotYetImplementedTest {
                         && !"SimpleWebTestCase.java".equals(fileName)
                         && !"NotYetImplementedTest.java".equals(fileName)
                         && !"CodeStyleTest.java".equals(fileName)) {
-                    final List<String> lines = FileUtils.readLines(file);
+                    final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
                     process(lines, relativePath);
@@ -149,10 +149,9 @@ public class NotYetImplementedTest {
         String lastFile = null;
 
         int count = 0;
-        int countIE8 = 0;
         int countIE11 = 0;
-        int countFF31 = 0;
         int countFF38 = 0;
+        int countFF45 = 0;
         int countChrome = 0;
         int countEdge = 0;
         for (final String entry : entries_) {
@@ -190,30 +189,25 @@ public class NotYetImplementedTest {
             builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
 
-            if (browser.contains("IE8")) {
-                countIE8++;
-            }
             if (browser.contains("IE11")) {
                 countIE11++;
             }
-            if (!browser.contains("IE8")
-                    && !browser.contains("IE11")
+            if (!browser.contains("IE11")
                     && browser.contains("IE")) {
-                countIE8++;
                 countIE11++;
             }
 
-            if (browser.contains("FF31")) {
-                countFF31++;
-            }
             if (browser.contains("FF38")) {
                 countFF38++;
             }
-            if (!browser.contains("FF31")
-                    && !browser.contains("FF38")
+            if (browser.contains("FF45")) {
+                countFF45++;
+            }
+            if (!browser.contains("FF38")
+                    && !browser.contains("FF45")
                     && browser.contains("FF")) {
-                countFF31++;
                 countFF38++;
+                countFF45++;
             }
             if (browser.contains("CHROME")) {
                 countChrome++;
@@ -222,10 +216,9 @@ public class NotYetImplementedTest {
                 countEdge++;
             }
             if (browser.contains("All")) {
-                countIE8++;
                 countIE11++;
-                countFF31++;
                 countFF38++;
+                countFF45++;
                 countChrome++;
                 countEdge++;
             }
@@ -240,23 +233,18 @@ public class NotYetImplementedTest {
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countIE8)).append("</td>\n");
-        overview.append("    <td>for IE8</td>\n");
-        overview.append("  </tr>\n");
-
-        overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(countIE11)).append("</td>\n");
         overview.append("    <td>for IE11</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countFF31)).append("</td>\n");
-        overview.append("    <td>for FF31</td>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countFF38)).append("</td>\n");
+        overview.append("    <td>for FF38</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countFF38)).append("</td>\n");
-        overview.append("    <td>for FF38</td>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countFF45)).append("</td>\n");
+        overview.append("    <td>for FF45</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
@@ -274,7 +262,7 @@ public class NotYetImplementedTest {
         builder.insert(overviewPos, overview);
 
         FileUtils.writeStringToFile(new File(ElementPropertiesTest.getTargetDirectory(), "notYetImplemented.html"),
-                builder.toString());
+                builder.toString(), TextUtil.DEFAULT_CHARSET);
     }
 
 }

@@ -34,7 +34,7 @@ public interface SubmittableElement {
      * @return the values that will be sent back to the server whenever this element's
      *         containing form is submitted
      */
-    NameValuePair[] getSubmitKeyValuePairs();
+    NameValuePair[] getSubmitNameValuePairs();
 
     /**
      * Returns the value of this element to the default value or checked state (usually what it was at

@@ -193,6 +193,45 @@ public class Event2 extends SimpleScriptObject {
         ((Event2) self).type_ = value;
     }
 
+    /**
+     * Called whenever an event is created using <code>Document.createEvent(..)</code>.
+     * This method is called after the parent scope was set so you are able to access the browser version.
+     */
+    public void eventCreated() {
+        setBubbles(false);
+        setCancelable(false);
+    }
+
+    /**
+     * @return whether or not this event bubbles
+     */
+    @Getter
+    public boolean getBubbles() {
+        return bubbles_;
+    }
+
+    /**
+     * @param bubbles the bubbles to set
+     */
+    protected void setBubbles(final boolean bubbles) {
+        bubbles_ = bubbles;
+    }
+
+    /**
+     * @return whether or not this event can be canceled
+     */
+    @Getter
+    public boolean getCancelable() {
+        return cancelable_;
+    }
+
+    /**
+     * @param cancelable the cancelable to set
+     */
+    protected void setCancelable(final boolean cancelable) {
+        cancelable_ = cancelable;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Event2.class,

@@ -35,8 +35,7 @@ public class CDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Comment]",
-            IE8 = "null")
+    @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -55,17 +54,11 @@ public class CDATASectionTest extends WebDriverTestCase {
     public void splitText() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"
             + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
             + "    cdata.splitText(2);\n"
             + "    alert(root.childNodes.length);\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -35,8 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class NodeIterator extends SimpleScriptable {
 
     private Node root_;
@@ -239,7 +237,7 @@ public class NodeIterator extends SimpleScriptable {
         return getFirstUncleNode(parent);
     }
 
-    private Node getChild(final Node node, final boolean lookLeft) {
+    private static Node getChild(final Node node, final boolean lookLeft) {
         if (node == null) {
             return null;
         }
@@ -255,7 +253,7 @@ public class NodeIterator extends SimpleScriptable {
         return child;
     }
 
-    private Node getSibling(final Node node, final boolean lookLeft) {
+    private static Node getSibling(final Node node, final boolean lookLeft) {
         if (node == null) {
             return null;
         }

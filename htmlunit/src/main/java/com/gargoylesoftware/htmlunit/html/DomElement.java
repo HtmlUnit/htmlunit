@@ -32,6 +32,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -49,16 +53,11 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * @author Ahmed Ashour
@@ -399,13 +398,23 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      */
     @Override
     public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
-        return new AbstractDomNodeList<HtmlElement>(this) {
+        return getElementsByTagNameImpl(tagName);
+    }
+
+    /**
+     * This should be {@link #getElementsByTagName(String)}, but is separate because of the type erasure in Java.
+     * @param name The name of the tag to match on
+     * @return A list of matching elements.
+     */
+    <E extends HtmlElement> DomNodeList<E> getElementsByTagNameImpl(final String tagName) {
+        return new AbstractDomNodeList<E>(this) {
             @Override
-            protected List<HtmlElement> provideElements() {
-                final List<HtmlElement> res = new LinkedList<>();
-                for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
-                    if (elem.getLocalName().equals(tagName)) {
-                        res.add(elem);
+            @SuppressWarnings("unchecked")
+            protected List<E> provideElements() {
+                final List<E> res = new LinkedList<>();
+                for (final HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
+                    if (elem.getLocalName().equalsIgnoreCase(tagName)) {
+                        res.add((E) elem);
                     }
                 }
                 return res;
@@ -834,10 +843,8 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
     /**
      * This method implements the control onchange handler call during the click action.
-     *
-     * @throws IOException if an IO error occurs
      */
-    protected void doClickFireChangeEvent() throws IOException {
+    protected void doClickFireChangeEvent() {
         // nothing to do, in the default case
     }
 
@@ -845,19 +852,8 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * This method implements the control onclick handler call during the click action.
      * @param event the click event used
      * @return the script result
-     * @throws IOException if an IO error occurs
      */
-    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
-        return fireEvent(event);
-    }
-
-    /**
-     * This method implements the control onclick handler call during the click action.
-     * @param event the click event used
-     * @return the script result
-     * @throws IOException if an IO error occurs
-     */
-    protected ScriptResult doClickFireClickEvent(final Event2 event) throws IOException {
+    protected ScriptResult doClickFireClickEvent(final Event event) {
         return fireEvent(event);
     }
 
@@ -897,8 +893,17 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             return (P) getPage();
         }
 
-        //call click event first
-        final P clickPage = click(shiftKey, ctrlKey, altKey);
+        // call click event first
+        P clickPage = click(shiftKey, ctrlKey, altKey);
+        if (clickPage != getPage()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("dblClick() is ignored, as click() loaded a different page.");
+            }
+            return clickPage;
+        }
+
+        // call click event a second time
+        clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("dblClick() is ignored, as click() loaded a different page.");
@@ -1110,10 +1115,8 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      */
     private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
         final boolean altKey, final int button) {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
-        }
-        final Page page = getPage();
+        final SgmlPage page = getPage();
+
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
             && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
@@ -1141,7 +1144,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
-        return fireEvent(new Event2(this, eventType));
+        return fireEvent(new Event(this, eventType));
     }
 
     /**
@@ -1152,44 +1155,31 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final Event event) {
-        System.out.println("Fire Event is empty");
-        return null;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Fires the event on the element. Nothing is done if JavaScript is disabled.
-     * @param event the event to fire
-     * @return the execution result, or {@code null} if nothing is executed
-     */
-    public ScriptResult fireEvent(final Event2 event) {
         final WebClient client = getPage().getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
             return null;
         }
 
-//        if (!event.applies(this)) {
-//            return null;
-//        }
+        if (!handles(event)) {
+            return null;
+        }
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget2 jsElt = (EventTarget2) getScriptObject2();
-        final ScriptResult result = jsElt.fireEvent(event);
-//        final ContextAction action = new ContextAction() {
-//            @Override
-//            public Object run(final Context cx) {
-//                return jsElt.fireEvent(event);
-//            }
-//        };
-//
-//        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-//        final ScriptResult result = (ScriptResult) cf.call(action);
-//        if (event.isAborted(result)) {
-//            preventDefault();
-//        }
+        final EventTarget jsElt = (EventTarget) getScriptableObject();
+        final ContextAction action = new ContextAction() {
+            @Override
+            public Object run(final Context cx) {
+                return jsElt.fireEvent(event);
+            }
+        };
+
+        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final ScriptResult result = (ScriptResult) cf.call(action);
+        if (event.isAborted(result)) {
+            preventDefault();
+        }
         return result;
     }
 

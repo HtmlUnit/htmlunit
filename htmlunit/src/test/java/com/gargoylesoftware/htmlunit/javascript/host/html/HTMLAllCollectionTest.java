@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -37,10 +34,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "null",
-            FF38 = "null",
-            IE8 = "null")
+    @Alerts(DEFAULT = "null",
+            IE = "undefined")
     public void namedItem_Unknown() throws Exception {
         namedItem("'foo'");
     }
@@ -78,7 +73,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "b4-button4_1", "b4-button4_2" },
+    @Alerts(DEFAULT = {"coll 2", "b4-button4_1", "b4-button4_2"},
             IE = "b4-button4_1")
     public void namedItem_DuplicateId() throws Exception {
         namedItem("'b4'");
@@ -88,7 +83,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "b5_1-button5", "b5_2-button5" },
+    @Alerts(DEFAULT = {"coll 2", "b5_1-button5", "b5_2-button5"},
             IE = "b5_1-button5",
             CHROME = "null")
     public void namedItem_DuplicateName() throws Exception {
@@ -99,8 +94,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 2", "b6-button6", "button6-button6_2" },
-            CHROME = { "button6-button6_2" },
+    @Alerts(DEFAULT = {"coll 2", "b6-button6", "button6-button6_2"},
+            CHROME = {"button6-button6_2"},
             IE = "b6-button6")
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("'button6'");
@@ -111,8 +106,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_ZeroIndex() throws Exception {
         namedItem("0");
     }
@@ -122,8 +116,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_ValidIndex() throws Exception {
         namedItem("1");
     }
@@ -133,8 +126,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_DoubleIndex() throws Exception {
         namedItem("1.1");
     }
@@ -144,8 +136,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_InvalidIndex() throws Exception {
         namedItem("200");
     }
@@ -155,8 +146,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_IndexAsString() throws Exception {
         namedItem("'1'");
     }
@@ -166,8 +156,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE11 = "undefined",
-            FF31 = "undefined")
+            IE = "undefined")
     public void namedItem_IndexDoubleAsString() throws Exception {
         namedItem("'1.1'");
     }
@@ -217,11 +206,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE11 = "null",
-            IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "null",
+            CHROME = "undefined")
     public void item_Unknown() throws Exception {
         item("'foo'");
     }
@@ -230,9 +216,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
+    @Alerts("b2-button2")
     public void item_ById() throws Exception {
         item("'b2'");
     }
@@ -242,9 +226,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            CHROME = "undefined",
-            IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
+            CHROME = "undefined")
     public void item_ByName() throws Exception {
         item("'button2'");
     }
@@ -253,10 +235,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE11 = "null",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "null",
+            CHROME = "undefined")
     public void item_NegativIndex() throws Exception {
         item("-1");
     }
@@ -265,8 +245,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHtml-undefined",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts("myHtml-undefined")
     public void item_ZeroIndex() throws Exception {
         item("0");
     }
@@ -275,8 +254,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts("myHead-undefined")
     public void item_ValidIndex() throws Exception {
         item("1");
     }
@@ -285,10 +263,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "myHead-undefined",
-            IE11 = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "myHead-undefined",
+            CHROME = "undefined")
     public void item_DoubleIndex() throws Exception {
         item("1.1");
     }
@@ -297,10 +273,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE = "null",
-            CHROME = "null")
+    @Alerts("null")
     public void item_InvalidIndex() throws Exception {
         item("200");
     }
@@ -309,10 +282,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            FF38 = "null",
-            IE11 = "null",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "null",
+            CHROME = "myHead-undefined")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -321,10 +292,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "null",
-            IE11 = "null",
-            IE8 = "myHtml-undefined")
+    @Alerts(DEFAULT = "null",
+            CHROME = "undefined")
     public void item_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }
@@ -352,7 +321,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all.item(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -404,8 +373,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHtml-undefined",
-            IE8 = "[object HTMLCommentElement]")
+    @Alerts("myHtml-undefined")
     public void arrayIndex_ZeroIndex() throws Exception {
         arrayIndex("0");
     }
@@ -414,8 +382,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+    @Alerts("myHead-undefined")
     public void arrayIndex_ValidIndex() throws Exception {
         arrayIndex("1");
     }
@@ -425,8 +392,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE11 = "myHead-undefined",
-            IE8 = "myHtml-undefined")
+            IE = "myHead-undefined")
     public void arrayIndex_DoubleIndex() throws Exception {
         arrayIndex("1.1");
     }
@@ -444,8 +410,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myTitle-undefined",
-            IE8 = "myHead-undefined")
+    @Alerts("myTitle-undefined")
     public void arrayIndex_IndexAsString() throws Exception {
         arrayIndex("'2'");
     }
@@ -473,7 +438,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all[" + name + "];\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -488,11 +453,133 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object HTMLAllCollection]", "[object HTMLAllCollection]" },
-            IE8 = { "[object]", "exception" },
-            CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
-            FF31 = { "[object HTML document.all class]", "exception" },
-            FF38 = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}" })
+    @Alerts(DEFAULT = "undefined",
+            FF = "null")
+    public void functionIndex_Unknown() throws Exception {
+        functionIndex("'foo'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("b2-button2")
+    public void functionIndex_ById() throws Exception {
+        functionIndex("'b2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "b2-button2",
+            CHROME = "undefined")
+    public void functionIndex_ByName() throws Exception {
+        functionIndex("'button2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "null")
+    public void functionIndex_NegativIndex() throws Exception {
+        functionIndex("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "myHtml-undefined",
+            FF = "null")
+    public void functionIndex_ZeroIndex() throws Exception {
+        functionIndex("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "myHead-undefined",
+            FF = "null")
+    public void functionIndex_ValidIndex() throws Exception {
+        functionIndex("1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = "undefined",
+            IE = "myHead-undefined")
+    public void functionIndex_DoubleIndex() throws Exception {
+        functionIndex("1.1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE = "undefined")
+    public void functionIndex_InvalidIndex() throws Exception {
+        functionIndex("200");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "myTitle-undefined",
+            FF = "null")
+    public void functionIndex_IndexAsString() throws Exception {
+        functionIndex("'2'");
+    }
+
+    private void functionIndex(final String name) throws Exception {
+        final String html
+            = "<!doctype html>\n"
+            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
+            + "  function report(result) {\n"
+            + "    if (result == null || result == undefined) {\n"
+            + "      alert(result);\n"
+            + "    } else if (('length' in result) && ('item' in result)) {\n"
+            + "      alert('coll ' + result.length);\n"
+            + "      for(var i = 0; i < result.length; i++) {\n"
+            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "      }\n"
+            + "    } else if (result.id || result.name) {\n"
+            + "      alert(result.id + '-' + result.name);\n"
+            + "    } else {\n"
+            + "      alert(result);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function doTest() {\n"
+            + "    try {\n"
+            + "      var item = document.all(" + name + ");\n"
+            + "      report(item);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <button id='b1' name='button1'></button>\n"
+            + "  <button id='b2' name='button2'></button>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"},
+            CHROME = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
+            FF = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

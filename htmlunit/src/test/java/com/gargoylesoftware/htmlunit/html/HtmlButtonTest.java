@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -123,8 +120,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "submit",
-            IE8 = "button")
+    @Alerts("submit")
     public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
@@ -136,5 +132,21 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         final HtmlButton button = page.getHtmlElementById("button");
         assertEquals(getExpectedAlerts()[0], button.getTypeAttribute());
         assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String html
+            = "<html><body><title>foo</title>\n"
+            + "<button></button>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final String xml = page.asXml();
+        assertTrue("Node not expanded in: " + xml, xml.contains("</button>"));
     }
 }

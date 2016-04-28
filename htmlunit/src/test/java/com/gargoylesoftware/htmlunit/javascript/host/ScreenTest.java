@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -40,8 +37,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "768", "768" },
-            IE8 = { "768", "set exception" })
+    @Alerts({"768", "768"})
     public void availHeight() throws Exception {
         testNumericProperty("availHeight");
     }
@@ -50,10 +46,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE = { "undefined", "1234" },
-            IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = {"undefined", "1234"})
     public void availLeft() throws Exception {
         testNumericProperty("availLeft");
     }
@@ -62,10 +56,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE = { "undefined", "1234" },
-            IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = {"undefined", "1234"})
     public void availTop() throws Exception {
         testNumericProperty("availTop");
     }
@@ -74,8 +66,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "1024", "1024" },
-            IE8 = { "1024", "set exception" })
+    @Alerts({"1024", "1024"})
     public void availWidth() throws Exception {
         testNumericProperty("availWidth");
     }
@@ -84,9 +75,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "0", "0" },
-            IE8 = { "0", "-1" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"0", "0"})
     public void bufferDepth() throws Exception {
         testNumericProperty("bufferDepth");
     }
@@ -95,8 +85,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "24", "24" },
-            IE8 = { "24", "set exception" })
+    @Alerts({"24", "24"})
     public void colorDepth() throws Exception {
         testNumericProperty("colorDepth");
     }
@@ -105,9 +94,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void deviceXDPI() throws Exception {
         testNumericProperty("deviceXDPI");
     }
@@ -116,9 +104,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void deviceYDPI() throws Exception {
         testNumericProperty("deviceYDPI");
     }
@@ -127,9 +114,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "false" },
-            IE = { "true", "true" },
-            IE8 = { "true", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "false"},
+            IE = {"true", "true"})
     public void fontSmoothingEnabled() throws Exception {
         testBooleanProperty("fontSmoothingEnabled");
     }
@@ -138,8 +124,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "768", "768" },
-            IE8 = { "768", "set exception" })
+    @Alerts({"768", "768"})
     public void height() throws Exception {
         testNumericProperty("height");
     }
@@ -148,10 +133,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            FF = { "0", "0" },
-            IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            FF = {"0", "0"})
     public void left() throws Exception {
         testNumericProperty("left");
     }
@@ -160,10 +143,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            FF = { "0", "0" },
-            IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            FF = {"0", "0"})
     public void top() throws Exception {
         testNumericProperty("top");
     }
@@ -172,9 +153,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void logicalXDPI() throws Exception {
         testNumericProperty("logicalXDPI");
     }
@@ -183,9 +163,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void logicalYDPI() throws Exception {
         testNumericProperty("logicalYDPI");
     }
@@ -194,9 +173,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "24", "24" },
-            IE8 = { "undefined", "set exception" })
-    @NotYetImplemented(IE8)
+    @Alerts({"24", "24"})
     public void pixelDepth() throws Exception {
         testNumericProperty("pixelDepth");
     }
@@ -205,9 +182,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void systemXDPI() throws Exception {
         testNumericProperty("systemXDPI");
     }
@@ -216,9 +192,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE = { "96", "96" },
-            IE8 = { "96", "set exception" })
+    @Alerts(DEFAULT = {"undefined", "1234"},
+            IE = {"96", "96"})
     public void systemYDPI() throws Exception {
         testNumericProperty("systemYDPI");
     }
@@ -227,9 +202,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "1234" },
-            IE8 = { "0", "1234" })
-    @NotYetImplemented(IE8)
+    @Alerts({"undefined", "1234"})
     public void updateInterval() throws Exception {
         testNumericProperty("updateInterval");
     }
@@ -238,8 +211,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "1024", "1024" },
-            IE8 = { "1024", "set exception" })
+    @Alerts({"1024", "1024"})
     public void width() throws Exception {
         testNumericProperty("width");
     }

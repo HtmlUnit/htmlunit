@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_B
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
@@ -30,6 +32,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 /**
  * Wrapper for the HTML element "option".
@@ -130,7 +133,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return {@code null} if no select is found (for instance malformed HTML)
      */
     public HtmlSelect getEnclosingSelect() {
-        return (HtmlSelect) getEnclosingElement("select");
+        return (HtmlSelect) getEnclosingElement(HtmlSelect.TAG_NAME);
     }
 
     /**
@@ -141,11 +144,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "selected". Refer to the
+     * Returns the value of the attribute {@code selected}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "selected"
+     * @return the value of the attribute {@code selected}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
@@ -188,34 +191,34 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "label". Refer to the
+     * Returns the value of the attribute {@code label}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "label" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
         return getAttribute("label");
     }
 
     /**
-     * Sets the value of the attribute "label". Refer to the
+     * Sets the value of the attribute {@code label}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newLabel the value of the attribute "label"
+     * @param newLabel the value of the attribute {@code label}
      */
     public final void setLabelAttribute(final String newLabel) {
         setAttribute("label", newLabel);
     }
 
     /**
-     * Returns the value of the attribute "value". Refer to the
+     * Returns the value of the attribute {@code value}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
      * initial value if value attribute is not set</a>
-     * @return the value of the attribute "value"
+     * @return the value of the attribute {@code value}
      */
     public final String getValueAttribute() {
         String value = getAttribute("value");
@@ -226,11 +229,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Sets the value of the attribute "value". Refer to the
+     * Sets the value of the attribute {@code value}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newValue the value of the attribute "value"
+     * @param newValue the value of the attribute {@code value}
      */
     public final void setValueAttribute(final String newValue) {
         setAttribute("value", newValue);
@@ -396,10 +399,34 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
+    public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        final SgmlPage page = getPage();
+        if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION)) {
+            return page;
+        }
+        return super.mouseOver(shiftKey, ctrlKey, altKey, button);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public DisplayStyle getDefaultStyleDisplay() {
         if (hasFeature(CSS_DISPLAY_BLOCK2)) {
             return DisplayStyle.BLOCK;
         }
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (MouseEvent.TYPE_MOUSE_OVER.equals(event.getType())
+                && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION)) {
+            return true;
+        }
+        return super.handles(event);
     }
 }

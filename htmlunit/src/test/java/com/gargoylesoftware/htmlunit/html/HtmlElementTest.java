@@ -14,20 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -54,7 +51,20 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertTrue("Element should have attribute", node.hasAttribute("id"));
+        assertTrue("Element should have attribute", node.hasAttribute("id"));
+    }
+
+    /**
+     * Test hasAttribute() on an element with the attribute but without an value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void hasAttributeWithMissingValue() throws Exception {
+        final String html = "<html><head></head><body id='tag' attrib>text</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement node = page.getHtmlElementById("tag");
+        assertTrue("Element should have attribute", node.hasAttribute("attrib"));
     }
 
     /**
@@ -67,7 +77,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertFalse("Element should not have attribute", node.hasAttribute("foo"));
+        assertFalse("Element should not have attribute", node.hasAttribute("foo"));
     }
 
     /**
@@ -81,7 +91,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertTrue("Element should have attribute", node.hasAttributeNS("http://foobar", "foo"));
+        assertTrue("Element should have attribute", node.hasAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -94,7 +104,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertFalse("Element should not have attribute", node.hasAttributeNS("http://foobar", "foo"));
+        assertFalse("Element should not have attribute", node.hasAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -107,7 +117,35 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
+        assertEquals("Element should have attribute", "tag", node.getId());
+    }
+
+    /**
+     * Test getAttribute() on an element with the attribute but without an value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getAttributeWithMissingValue() throws Exception {
+        final String html = "<html><head></head><body id='tag' attrib>text</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement node = page.getHtmlElementById("tag");
+        assertEquals("", node.getAttribute("attrib"));
+        assertTrue(DomElement.ATTRIBUTE_VALUE_EMPTY == node.getAttribute("attrib"));
+    }
+
+    /**
+     * Test getAttribute() on an element with the attribute but without an value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getAttributeWithEmptyValue() throws Exception {
+        final String html = "<html><head></head><body id='tag' attrib=''>text</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement node = page.getHtmlElementById("tag");
+        assertEquals("", node.getAttribute("attrib"));
+        assertTrue(DomElement.ATTRIBUTE_VALUE_EMPTY == node.getAttribute("attrib"));
     }
 
     /**
@@ -120,7 +158,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
 
     /**
@@ -134,7 +172,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -147,7 +185,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -163,11 +201,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
-                Assert.assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
+                assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -183,11 +221,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("id".equals(attr.getName())) {
-                Assert.assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
+                assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -203,11 +241,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
-                Assert.assertEquals("Element should have a local name", "foo", attr.getLocalName());
+                assertEquals("Element should have a local name", "foo", attr.getLocalName());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -224,11 +262,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("id".equals(attr.getName())) {
                 // This is not standard, but to change it now would break backwards compatibility.
-                Assert.assertEquals("Element should not have a local name", "id", attr.getLocalName());
+                assertEquals("Element should not have a local name", "id", attr.getLocalName());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -244,11 +282,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
-                Assert.assertEquals("Element should have a prefix", "ns", attr.getPrefix());
+                assertEquals("Element should have a prefix", "ns", attr.getPrefix());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -264,11 +302,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlElement node = page.getHtmlElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("id".equals(attr.getName())) {
-                Assert.assertEquals("Element should not have a prefix", null, attr.getPrefix());
+                assertEquals("Element should not have a prefix", null, attr.getPrefix());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -285,12 +323,12 @@ public class HtmlElementTest extends SimpleWebTestCase {
         for (final DomAttr attr : node.getAttributesMap().values()) {
             if ("ns:foo".equals(attr.getName())) {
                 attr.setPrefix("other");
-                Assert.assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
-                Assert.assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
+                assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
+                assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
                 return;
             }
         }
-        Assert.fail("Attribute ns:foo not found.");
+        fail("Attribute ns:foo not found.");
     }
 
     /**
@@ -305,7 +343,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttribute("id", "other");
-        Assert.assertEquals("Element should have attribute", "other", node.getAttribute("id"));
+        assertEquals("Element should have attribute", "other", node.getId());
     }
 
     /**
@@ -320,7 +358,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttribute("foo", "other");
-        Assert.assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
+        assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
     }
 
     /**
@@ -335,7 +373,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
-        Assert.assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -350,7 +388,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
-        Assert.assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -365,7 +403,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttribute("id");
-        Assert.assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
+        assertEquals("Element should not have removed attribute", "", node.getId());
     }
 
     /**
@@ -380,7 +418,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttribute("foo");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
 
     /**
@@ -395,7 +433,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
-        Assert.assertEquals("Element should not have removed attribute", "",
+        assertEquals("Element should not have removed attribute", "",
             node.getAttributeNS("http://foobar", "foo"));
     }
 
@@ -411,7 +449,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlElement node = page.getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
-        Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -514,7 +552,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_AddAttribute() throws Exception {
+    public void htmlAttributeChangeListener_AddAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -551,7 +589,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_ReplaceAttribute() throws Exception {
+    public void htmlAttributeChangeListener_ReplaceAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -588,7 +626,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_RemoveAttribute() throws Exception {
+    public void htmlAttributeChangeListener_RemoveAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -625,7 +663,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testHtmlAttributeChangeListener_RemoveListener() throws Exception {
+    public void htmlAttributeChangeListener_RemoveListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -658,7 +696,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseOver() throws Exception {
+    public void mouseOver() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -681,7 +719,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseMove() throws Exception {
+    public void mouseMove() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -704,7 +742,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseOut() throws Exception {
+    public void mouseOut() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -727,9 +765,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-0",
-            IE8 = "mousedown-1")
-    public void testMouseDown() throws Exception {
+    @Alerts("mousedown-0")
+    public void mouseDown() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -753,7 +790,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMouseUp() throws Exception {
+    public void mouseUp() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -777,8 +814,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mousedown-2-mouseup-2-contextmenu-2-",
-            FF = "mousedown-3-mouseup-3-contextmenu-3-",
-            IE8 = "mousedown-2-mouseup-2-contextmenu-0-")
+            FF = "mousedown-3-mouseup-3-contextmenu-3-")
     public void rightClick() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -815,9 +851,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-2-mouseup-2-",
-            FF = "mousedown-3-mouseup-3-")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "mousedown-0-mouseup-0-",
+            FF = "mousedown-1-mouseup-1-")
     public void mouse_Down_Up() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -949,7 +984,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented(IE11)
     public void asTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -957,13 +991,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</head>\n"
             + "<body>Welcome\n"
             + "<p style='visibility:collapse'>hidden text\n"
-            + "<FONT COLOR='#FF0000' style='visibility:visible'>to the world</FONT>\n"
+            + "<font color='#FF0000' style='visibility:visible'>to the world</font>\n"
             + "some more hidden text</p>\n"
             + "</body>\n"
             + "</html>";
-        final String expected = "IE8".equals(getBrowserVersion().getNickname())
-            ? "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "hidden text to the world some more hidden text"
-            : "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world";
+        final String expected = "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world";
 
         final HtmlPage page = loadPage(html);
         assertEquals(expected, page.asText());
@@ -997,7 +1029,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts({"1", "2"})
     public void getElementsByTagName() throws Exception {
         final String html
             = "<html>\n"
@@ -1050,7 +1082,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         // case sensitive
         inputs = page.getElementsByTagName("inPUT");
-        assertEquals(0, inputs.getLength());
+        assertEquals(1, inputs.getLength());
 
         // empty
         inputs = page.getElementsByTagName("");
@@ -1154,8 +1186,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "true")
+    @Alerts("false")
     public void isDisplayed() throws Exception {
         final String html = "<html><head>\n"
             + "</head>\n"

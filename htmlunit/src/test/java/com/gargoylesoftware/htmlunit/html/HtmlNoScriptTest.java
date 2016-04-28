@@ -38,7 +38,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    public void testGetElementById() throws Exception {
+    public void getElementById() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -60,8 +60,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "[object Text]" },
-            IE8 = { "0", "null" })
+    @Alerts({"1", "[object Text]"})
     public void childNodes() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
@@ -107,7 +106,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormValues() throws Exception {
+    public void formValues() throws Exception {
         final String html
             = "<html><body>\n"
             + "<form name='item' method='get'>\n"

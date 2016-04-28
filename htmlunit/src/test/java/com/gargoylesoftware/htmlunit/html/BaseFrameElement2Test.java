@@ -34,8 +34,7 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "posted", "called" },
-            IE8 = "posted")
+    @Alerts({"posted", "called"})
     public void windowEventListenersContainer() throws Exception {
         final String html
             = "<html>\n"
@@ -46,11 +45,7 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
             + "    iframe.src = '';\n"
             + "    document.documentElement.appendChild(iframe);\n"
             + "    var win = iframe.contentWindow;\n"
-            + "    if (win.addEventListener) {\n"
-            + "      win.addEventListener('message', handler);\n"
-            + "    } else {\n"
-            + "      win.attachEvent('message', handler);\n"
-            + "    }\n"
+            + "    win.addEventListener('message', handler);\n"
             + "    win.postMessage('hello', '*');\n"
             + "    alert('posted');\n"
             + "  }\n"

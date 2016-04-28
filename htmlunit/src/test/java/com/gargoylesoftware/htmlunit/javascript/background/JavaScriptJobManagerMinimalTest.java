@@ -15,11 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.easymock.EasyMock;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,8 +89,8 @@ public class JavaScriptJobManagerMinimalTest {
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
         final int remainingJobs = manager_.waitForJobs(1090);
-        Assert.assertTrue("At least one remaining job expected.", remainingJobs >= 1);
-        Assert.assertTrue("Less than 10 jobs (" + count.intValue() + ") processed.", count.intValue() >= 10);
+        assertTrue("At least one remaining job expected.", remainingJobs >= 1);
+        assertTrue("Less than 10 jobs (" + count.intValue() + ") processed.", count.intValue() >= 10);
     }
 
     /**
@@ -118,12 +118,12 @@ public class JavaScriptJobManagerMinimalTest {
         };
         manager_.addJob(job, page_);
         final int remainingJobs = manager_.waitForJobs(300);
-        Assert.assertTrue(remainingJobs >= 1);
+        assertTrue(remainingJobs >= 1);
         // first interval starts at 5 and ends at 205
         // with a fix delay (what would be wrong), we would have second interval start at 205+200 = 405
         // and therefore count == 1
         // with a fix rate (correct), second interval starts at 205 and therefore count == 2
-        Assert.assertEquals(2, count.intValue());
+        assertEquals(2, count.intValue());
     }
 
     /**
@@ -141,7 +141,7 @@ public class JavaScriptJobManagerMinimalTest {
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
         manager_.waitForJobs(1000);
-        Assert.assertEquals(1, count.intValue());
+        assertEquals(1, count.intValue());
     }
 
     /**
@@ -162,7 +162,7 @@ public class JavaScriptJobManagerMinimalTest {
         };
         id.setValue(manager_.addJob(job, page_));
         manager_.waitForJobs(1000);
-        Assert.assertEquals(5, count.intValue());
+        assertEquals(5, count.intValue());
     }
 
     /**
@@ -182,7 +182,7 @@ public class JavaScriptJobManagerMinimalTest {
         };
         manager_.addJob(job, page_);
         manager_.waitForJobs(1000);
-        Assert.assertEquals(5, count.intValue());
+        assertEquals(5, count.intValue());
     }
 
     /**
@@ -197,11 +197,11 @@ public class JavaScriptJobManagerMinimalTest {
                 count.setValue(manager_.getJobCount());
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job, page_);
         manager_.waitForJobs(1000);
-        Assert.assertEquals(1, count.intValue());
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(1, count.intValue());
+        assertEquals(0, manager_.getJobCount());
     }
 
     private void waitForCurrentLongJob(final WaitingMode waitingMode, final int expectedFinalJobCount) {
@@ -230,7 +230,7 @@ public class JavaScriptJobManagerMinimalTest {
             default:
                 throw new IllegalArgumentException("Not handled");
         }
-        Assert.assertEquals(expectedFinalJobCount, manager_.getJobCount());
+        assertEquals(expectedFinalJobCount, manager_.getJobCount());
     }
 
     /**
@@ -262,7 +262,7 @@ public class JavaScriptJobManagerMinimalTest {
             // Empty.
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job1, page_);
         manager_.addJob(job2, page_);
         final long delayMillis = 250;
@@ -276,7 +276,7 @@ public class JavaScriptJobManagerMinimalTest {
             default:
                 throw new IllegalArgumentException("Not handled");
         }
-        Assert.assertEquals(expectedFinalJobCount, manager_.getJobCount());
+        assertEquals(expectedFinalJobCount, manager_.getJobCount());
     }
 
     /**
@@ -315,7 +315,7 @@ public class JavaScriptJobManagerMinimalTest {
             // Empty.
             }
         };
-        Assert.assertEquals(0, manager_.getJobCount());
+        assertEquals(0, manager_.getJobCount());
         manager_.addJob(job1, page_);
         manager_.addJob(job2, page_);
         // sometimes it takes some time to reach this point
@@ -331,7 +331,7 @@ public class JavaScriptJobManagerMinimalTest {
             default:
                 throw new RuntimeException("Unknown value for waitingMode enum " + waitingMode);
         }
-        Assert.assertEquals(expectedFinalJobCount, manager_.getJobCount());
+        assertEquals(expectedFinalJobCount, manager_.getJobCount());
     }
 
     /**

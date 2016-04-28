@@ -41,9 +41,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
-    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
-        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
-
     /**
      * {@inheritDoc}
      */
@@ -419,7 +416,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Alerts("Hello World")
     public void basicAuthenticationXHR() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4)\n"
             + "    alert(xhr.responseText);\n"
@@ -444,7 +441,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @NotYetImplemented(IE)
     public void basicAuthenticationXHRWithUsername() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4) {\n"
             + "    var s = xhr.responseText.replace(/[\\r\\n]/g, '')"
@@ -470,7 +467,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUser() throws Exception {
         final String html = "<html><head><script>\n"
-            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4) {\n"
             + "    var s = xhr.responseText.replace(/[\\r\\n]/g, '')"

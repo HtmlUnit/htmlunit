@@ -15,32 +15,26 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TEXTAREA_CRNL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.regex.Pattern;
-
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object {@code HTMLTextAreaElement}.
@@ -54,16 +48,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  * @author Carsten Steul
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlTextArea.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTextArea.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlTextArea.class)
 public class HTMLTextAreaElement extends FormField {
 
-    private static final Pattern NORMALIZE_VALUE_PATTERN = Pattern.compile("([^\\r])\\n");
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -87,11 +76,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @Override
     public String getValue() {
-        String value = ((HtmlTextArea) getDomNodeOrDie()).getText();
-        if (getBrowserVersion().hasFeature(TEXTAREA_CRNL)) {
-            value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
-        }
-        return value;
+        return ((HtmlTextArea) getDomNodeOrDie()).getText();
     }
 
     /**
@@ -99,8 +84,13 @@ public class HTMLTextAreaElement extends FormField {
      * @param value the new value
      */
     @Override
-    public void setValue(final String value) {
-        ((HtmlTextArea) getDomNodeOrDie()).setText(value);
+    public void setValue(final Object value) {
+        if (null == value && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_VALUE_NULL)) {
+            ((HtmlTextArea) getDomNodeOrDie()).setText("");
+            return;
+        }
+
+        ((HtmlTextArea) getDomNodeOrDie()).setText(Context.toString(value));
     }
 
     /**
@@ -124,9 +114,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setCols(final String cols) {
-        int i;
         try {
-            i = Float.valueOf(cols).intValue();
+            final int i = Float.valueOf(cols).intValue();
             if (i < 0) {
                 if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION)) {
                     throw new NumberFormatException("New value for cols '" + cols + "' is smaller than zero.");
@@ -134,14 +123,14 @@ public class HTMLTextAreaElement extends FormField {
                 getDomNodeOrDie().setAttribute("cols", null);
                 return;
             }
+            getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            return;
+            getDomNodeOrDie().setAttribute("cols", "20");
         }
-        getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
     }
 
     /**
@@ -165,9 +154,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxSetter
     public void setRows(final String rows) {
-        int i;
         try {
-            i = new Float(rows).intValue();
+            final int i = new Float(rows).intValue();
             if (i < 0) {
                 if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION)) {
                     throw new NumberFormatException("New value for rows '" + rows + "' is smaller than zero.");
@@ -175,14 +163,15 @@ public class HTMLTextAreaElement extends FormField {
                 getDomNodeOrDie().setAttribute("rows", null);
                 return;
             }
+            getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            return;
+
+            getDomNodeOrDie().setAttribute("rows", "2");
         }
-        getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
     }
 
     /**
@@ -192,11 +181,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxGetter
     public String getDefaultValue() {
-        String value = ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
-        if (getBrowserVersion().hasFeature(TEXTAREA_CRNL)) {
-            value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
-        }
-        return value;
+        return ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
     }
 
     /**
@@ -222,7 +207,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getSelectionStart() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionStart();
     }
@@ -231,7 +216,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setSelectionStart(final int start) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -240,7 +225,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getSelectionEnd() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -249,7 +234,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setSelectionEnd(final int end) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionEnd(end);
     }
@@ -259,7 +244,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param start the index of the first character to select
      * @param end the index of the character after the selection
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public void setSelectionRange(final int start, final int end) {
         setSelectionStart(start);
         setSelectionEnd(end);
@@ -292,70 +277,12 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
      * Returns the maximum number of characters in this text area.
      * @return the maximum number of characters in this text area
      */
     @JsxGetter
     public Object getMaxLength() {
         final String maxLength = getDomNodeOrDie().getAttribute("maxLength");
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == maxLength
-                && getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
-            return Undefined.instance;
-        }
 
         try {
             return Integer.parseInt(maxLength);
@@ -363,9 +290,6 @@ public class HTMLTextAreaElement extends FormField {
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT)) {
                 return Integer.MAX_VALUE;
-            }
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
-                return maxLength;
             }
             return -1;
         }
@@ -387,11 +311,6 @@ public class HTMLTextAreaElement extends FormField {
             getDomNodeOrDie().setAttribute("maxLength", maxLength);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
-                getDomNodeOrDie().setAttribute("maxLength", maxLength);
-                return;
-            }
-
             getDomNodeOrDie().setAttribute("maxLength", "0");
             return;
         }
@@ -401,7 +320,7 @@ public class HTMLTextAreaElement extends FormField {
      * Returns the {@code placeholder} attribute.
      * @return the {@code placeholder} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getPlaceholder() {
         return ((HtmlTextArea) getDomNodeOrDie()).getPlaceholder();
     }
@@ -410,8 +329,21 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the {@code placeholder} attribute.
      * @param placeholder the new {@code placeholder} value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setPlaceholder(final String placeholder) {
         ((HtmlTextArea) getDomNodeOrDie()).setPlaceholder(placeholder);
     }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie());
+        }
+        return labels_;
+    }
+
 }

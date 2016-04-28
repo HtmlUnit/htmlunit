@@ -62,8 +62,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CONTENT_TYPE:application/octet-stream", "charset" },
-            IE = { "CONTENT_TYPE:text/plain", "charset" })
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            IE = {"CONTENT_TYPE:text/plain", "charset"})
     @NotYetImplemented(IE)
     public void contentType() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
@@ -98,7 +98,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             throws ServletException, IOException {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            response.getWriter().write("<html>"
+            response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
                 + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
@@ -137,7 +137,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
                     writer.write("error");
                 }
             }
-            writer.close();
         }
     }
 
@@ -160,7 +159,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             while ((line = reader.readLine()) != null) {
                 writer.write(line);
             }
-            writer.close();
         }
     }
 
@@ -202,7 +200,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("CONTENT_TYPE:" + request.getContentType());
-            writer.close();
         }
     }
 
@@ -297,7 +294,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("TRANSFER_ENCODING:" + request.getHeader("TRANSFER-ENCODING"));
-            writer.close();
         }
     }
 
@@ -305,7 +301,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -336,7 +332,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -370,8 +366,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-initial", "-initial", "-newDefault", "-newDefault" },
-            IE8 = { "-", "-", "-newDefault", "-newDefault" })
+    @Alerts({"-initial", "-initial", "-newDefault", "-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -403,8 +398,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-initial", "-initial", "-newDefault", "-newDefault" },
-            IE8 = { "-", "-", "-newDefault", "-newDefault" })
+    @Alerts({"-initial", "-initial", "-newDefault", "-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -435,8 +429,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-initial", "-default" },
-            IE8 = { "-", "-default" })
+    @Alerts({"-initial", "-default"})
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -482,7 +475,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void nonZeroWidthHeight() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"

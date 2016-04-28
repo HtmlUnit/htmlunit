@@ -15,13 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_CONSTRUCTOR_IGNORES_LABEL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -34,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlOptionGroup;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -51,15 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlOption.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlOption.class, isJSObject = false,
-                browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlOptionGroup.class, isJSObject = false,
-                browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlOption.class)
 public class HTMLOptionElement extends FormChild {
 
     /**
@@ -86,9 +73,7 @@ public class HTMLOptionElement extends FormChild {
 
         if (!"undefined".equals(newText)) {
             htmlOption.appendChild(new DomText(page, newText));
-            if (!getBrowserVersion().hasFeature(JS_OPTION_CONSTRUCTOR_IGNORES_LABEL)) {
-                htmlOption.setLabelAttribute(newText);
-            }
+            htmlOption.setLabelAttribute(newText);
         }
         if (!"undefined".equals(newValue)) {
             htmlOption.setValueAttribute(newValue);
@@ -114,8 +99,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setValue(final String newValue) {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            ((HtmlOption) getDomNodeOrNull()).setValueAttribute(newValue);
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            ((HtmlOption) dom).setValueAttribute(newValue);
         }
     }
 
@@ -125,8 +111,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public String getText() {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            return ((HtmlOption) getDomNodeOrNull()).getText();
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            return ((HtmlOption) dom).getText();
         }
         return null;
     }
@@ -137,8 +124,13 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setText(final String newText) {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            ((HtmlOption) getDomNodeOrNull()).setText(newText);
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            ((HtmlOption) dom).setText(newText);
+
+            if (!hasAttribute("label")) {
+                setLabel(newText);
+            }
         }
     }
 
@@ -148,8 +140,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getSelected() {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            return ((HtmlOption) getDomNodeOrNull()).isSelected();
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            return ((HtmlOption) dom).isSelected();
         }
         return false;
     }
@@ -164,11 +157,7 @@ public class HTMLOptionElement extends FormChild {
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
         if (!selected && optionNode.isSelected()
                 && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
-
-            // un-selecting selected option has no effect in IE and selects first option in FF
-            if (getBrowserVersion().hasFeature(HTMLOPTION_UNSELECT_SELECTS_FIRST)) {
-                enclosingSelect.getOption(0).setSelected(true, false);
-            }
+            enclosingSelect.getOption(0).setSelected(true, false);
         }
         else {
             optionNode.setSelected(selected, false);
@@ -181,8 +170,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getDefaultSelected() {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            return ((HtmlOption) getDomNodeOrNull()).isDefaultSelected();
+        final DomNode dom = getDomNodeOrNull();
+        if (dom instanceof HtmlOption) {
+            return ((HtmlOption) dom).isDefaultSelected();
         }
         return false;
     }
@@ -234,60 +224,6 @@ public class HTMLOptionElement extends FormChild {
     }
 
     /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
      * Returns the {@code index} property.
      * @return the {@code index} property
      */
@@ -307,9 +243,8 @@ public class HTMLOptionElement extends FormChild {
      * {@inheritDoc}
      */
     @Override
-    public void setAttribute(String name, final String value) {
+    public void setAttribute(final String name, final String value) {
         super.setAttribute(name, value);
-        name = fixAttributeName(name);
         if ("selected".equals(name)) {
             setSelected(true);
         }
@@ -319,10 +254,9 @@ public class HTMLOptionElement extends FormChild {
      * {@inheritDoc}
      */
     @Override
-    public void removeAttribute(String name) {
+    public void removeAttribute(final String name) {
         super.removeAttribute(name);
         if (getBrowserVersion().hasFeature(HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS)) {
-            name = fixAttributeName(name);
             if ("selected".equals(name)) {
                 setSelected(false);
             }

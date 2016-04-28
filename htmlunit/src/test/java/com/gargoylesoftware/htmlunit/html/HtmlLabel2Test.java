@@ -37,8 +37,7 @@ public class HtmlLabel2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLabelElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLLabelElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

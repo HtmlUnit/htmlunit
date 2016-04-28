@@ -14,11 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -32,7 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -53,13 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlTable.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTable.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlTable.class)
 public class HTMLTableElement extends RowContainer {
 
     private HTMLCollection tBodies_; // has to be a member to have equality (==) working
@@ -78,7 +67,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getCaption() {
-        final List<HtmlElement> captions = getDomNodeOrDie().getHtmlElementsByTagName("caption");
+        final List<HtmlElement> captions = getDomNodeOrDie().getElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
         }
@@ -91,10 +80,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setCaption(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("Can't set caption");
-        }
-        else if (!(o instanceof HTMLTableCaptionElement)) {
+        if (!(o instanceof HTMLTableCaptionElement)) {
             throw Context.reportRuntimeError("Not a caption");
         }
 
@@ -112,7 +98,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getTFoot() {
-        final List<HtmlElement> tfoots = getDomNodeOrDie().getHtmlElementsByTagName("tfoot");
+        final List<HtmlElement> tfoots = getDomNodeOrDie().getElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
         }
@@ -125,10 +111,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTFoot(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("Can't set tFoot");
-        }
-        else if (!(o instanceof HTMLTableSectionElement
+        if (!(o instanceof HTMLTableSectionElement
             && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
             throw Context.reportRuntimeError("Not a tFoot");
         }
@@ -147,7 +130,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getTHead() {
-        final List<HtmlElement> theads = getDomNodeOrDie().getHtmlElementsByTagName("thead");
+        final List<HtmlElement> theads = getDomNodeOrDie().getElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
         }
@@ -160,10 +143,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTHead(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("Can't set tHead");
-        }
-        else if (!(o instanceof HTMLTableSectionElement
+        if (!(o instanceof HTMLTableSectionElement
             && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
             throw Context.reportRuntimeError("Not a tHead");
         }
@@ -183,7 +163,7 @@ public class HTMLTableElement extends RowContainer {
     public Object getTBodies() {
         if (tBodies_ == null) {
             final HtmlTable table = (HtmlTable) getDomNodeOrDie();
-            tBodies_ = new HTMLCollection(table, false, "HTMLTableElement.tBodies") {
+            tBodies_ = new HTMLCollection(table, false) {
                 @Override
                 protected List<Object> computeElements() {
                     return new ArrayList<Object>(table.getBodies());
@@ -260,16 +240,6 @@ public class HTMLTableElement extends RowContainer {
     @JsxFunction
     public void deleteTHead() {
         getDomNodeOrDie().removeChild("thead", 0);
-    }
-
-    /**
-     * Refreshes the content of this table.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536687.aspx">
-     * MSDN Documentation</a>
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public void refresh() {
-        // Empty: this method only affects rendering, which we don't care about.
     }
 
     /**
@@ -447,81 +417,41 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for the contents of this node
-     */
-    @JsxSetter
-    @Override
-    public void setInnerHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag 'table'");
-        }
-        super.setInnerHTML(value);
-    }
-
-    /**
-     * Overwritten to throw an exception because this is readonly.
-     * @param value the new value for the contents of this node
+     * {@inheritDoc}
      */
     @Override
-    protected void setInnerTextImpl(final String value) {
+    public void setInnerText(final Object value) {
         if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
             throw Context.reportRuntimeError("innerText is read-only for tag 'table'");
         }
-        super.setInnerTextImpl(value);
+        super.setInnerText(value);
     }
 
     /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
+     * {@inheritDoc}
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    @Override
+    public String getInnerText() {
+        return getDomNodeOrDie().asText();
     }
 
     /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
+     * {@inheritDoc}
      */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    @Override
+    public Object appendChild(final Object childObject) {
+        final Object appendedChild = super.appendChild(childObject);
+        getWindow().clearComputedStyles(this);
+        return appendedChild;
     }
 
     /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
+     * {@inheritDoc}
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    @Override
+    public Object removeChild(final Object childObject) {
+        final Object removedChild = super.removeChild(childObject);
+        getWindow().clearComputedStyles(this);
+        return removedChild;
     }
 }

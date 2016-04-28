@@ -14,8 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.net.URL;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentWrite2Test extends WebDriverTestCase {
@@ -40,8 +42,30 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("[object HTMLDocument]")
+    public void openResult() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var res = document.open();\n"
+            + "  alert(res);\n"
+            + "  document.close();\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("Hello There")
-    // TODO [IE11] real IE11 waits for the page to load until infinity
     public void write() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -55,6 +79,11 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>"
             + "</body>\n"
             + "</html>";
+
+        // [IE11] real IE11 waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
         loadPageWithAlerts2(html);
     }
 
@@ -224,6 +253,9 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"2", "§§URL§§foo"},
+            IE = {"1", "§§URL§§"})
+    @NotYetImplemented(IE)
     public void urlResolutionInWriteForm() throws Exception {
         final String html = "<html><head>"
             + "<script>"
@@ -237,15 +269,16 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>"
             + "</body></html>";
 
+        final int startCount = getMockWebConnection().getRequestCount();
+        expandExpectedAlertsVariables(URL_FIRST);
+
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.switchTo().window("myPopup");
         driver.findElement(By.id("it")).click();
 
-        assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequest().getUrl());
-
-        // for some reason, the selenium driven browser is in an invalid state after this test
-        shutDownAll();
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount() - startCount);
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
     }
 
     /**
@@ -254,8 +287,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "<form></form>", "[object HTMLFormElement]" },
-            IE8 = { "<FORM></FORM>", "[object]" })
+    @Alerts({"<form></form>", "[object HTMLFormElement]"})
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
@@ -280,8 +312,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "<form></form>", "[object HTMLFormElement]" },
-            IE8 = { "<FORM></FORM>", "[object]" })
+    @Alerts({"<form></form>", "[object HTMLFormElement]"})
     public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -347,7 +378,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "exception")
     public void write_fromScriptAddedWithAppendChild_inline() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='it'><script>\n"
@@ -394,8 +424,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5" },
-            IE8 = { "null", "[object]", "s1 s2 s3 s4 s5" })
+    @Alerts({"null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5"})
     public void write_Destination() throws Exception {
         final String html =
               "<html>\n"
@@ -433,8 +462,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]", "", "foo" },
-            IE8 = { "null", "[object]", "", "foo" })
+    @Alerts({"null", "[object HTMLBodyElement]", "", "foo"})
     public void write_BodyAttributesKept() throws Exception {
         final String html =
               "<html>\n"
@@ -459,7 +487,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2", "3" })
+    @Alerts({"1", "2", "3"})
     public void write_ScriptExecutionOrder() throws Exception {
         final String html =
               "<html>\n"
@@ -503,7 +531,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "theBody", "theBody", "theBody" })
+    @Alerts({"theBody", "theBody", "theBody"})
     public void writeAddNodesToCorrectParent() throws Exception {
         final String html = "<html><head><title>foo</title></head>\n"
              + "<body id=\"theBody\">\n"
@@ -526,7 +554,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "outer", "inner1" })
+    @Alerts({"outer", "inner1"})
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
              + "function doTest(){\n"
@@ -546,13 +574,15 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
              + "</body></html>";
 
         loadPageWithAlerts2(html);
+
+        shutDownAll();
     }
 
      /**
       * @throws Exception if the test fails
       */
     @Test
-    @Alerts({ "STYLE", "SCRIPT" })
+    @Alerts({"STYLE", "SCRIPT"})
     public void writeStyle() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
              + "<script>\n"

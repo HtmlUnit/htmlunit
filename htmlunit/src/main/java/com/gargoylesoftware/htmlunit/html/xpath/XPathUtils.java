@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,7 +135,9 @@ public final class XPathUtils {
         }
 
         final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
-        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive);
+        final boolean attributeCaseSensitive
+            = contextNode.getPage().getWebClient().getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
+        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive, attributeCaseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }

@@ -14,11 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,9 +59,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "object")
-    @NotYetImplemented(IE8)
+    @Alerts("function")
     public void toStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -82,8 +76,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "5", "exception" },
-            IE8 = { "5", "6" })
+    @Alerts({"5", "exception"})
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -105,12 +98,10 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = { "string 0", "string @@iterator", "string item", "string length", "string namedItem" },
-            FF38 = { "string 0", "string item", "string length", "string namedItem" },
-            CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
-            IE = { "string length", "string myForm" },
-            IE11 = { "string item", "string length", "string myForm", "string namedItem" })
-    @NotYetImplemented({  FF31, IE11, CHROME })
+    @Alerts(DEFAULT = {"string 0", "string item", "string length", "string namedItem"},
+            CHROME = {"string 0", "string item", "string length", "string myForm", "string namedItem"},
+            IE = {"string item", "string length", "string myForm", "string namedItem"})
+    @NotYetImplemented({ IE })
     public void for_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -135,20 +126,16 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                    "string @@iterator", "string item", "string length", "string namedItem" },
-            FF38 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                    "string item", "string length", "string namedItem" },
-            CHROME = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+    @Alerts(DEFAULT = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+            "string item", "string length", "string namedItem"},
+            CHROME = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                  "string action", "string first_submit", "string id1", "string input_disabled",
                  "string item", "string length", "string namedItem", "string second_submit",
-                 "string val1, string val2" },
-            IE8 = { "string 1", "string action", "string first_submit", "string length",
-                "string second_submit", "string val1", "string val2" },
-            IE11 = { "string 1", "string action", "string first_submit", "string item",
+                 "string val1", "string val2"},
+            IE = {"string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
-                "string val2" })
-    @NotYetImplemented({ FF31, IE11, CHROME })
+                "string val2"})
+    @NotYetImplemented({ IE })
     public void for_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -182,8 +169,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false" },
-            IE = {"true", "true" })
+    @Alerts(DEFAULT = {"false", "false"},
+            IE = {"true", "true"})
     public void tags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -202,10 +189,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ FF, CHROME })
-    @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
-            IE = { "null", "null", "undefined", "null" },
-            IE11 = { "null", "null", "undefined", "undefined" })
+    @Alerts(DEFAULT = {"null", "null", "undefined", "exception"},
+            IE = {"null", "null", "undefined", "undefined"})
     public void outOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -227,7 +212,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "undefined", "undefined", "undefined" })
+    @Alerts({"undefined", "undefined", "undefined"})
     public void inexistentProperties() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -245,8 +230,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "#text", "5" },
-            IE8 = { "1", "DIV", "2" })
+    @Alerts({"3", "#text", "5"})
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -287,8 +271,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLHeadingElement]", "undefined" },
-            IE8 = { "[object]", "undefined" })
+    @Alerts({"[object HTMLHeadingElement]", "undefined"})
     public void getElementWithDollarSign() throws Exception {
         final String html
             = "<h3 id='$h'>h</h3><script>\n"
@@ -303,8 +286,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({"function", "function", "function", "function"})
     public void array_prototype() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -325,9 +307,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
-    @NotYetImplemented(IE8)
+    @Alerts({"function", "function", "function", "function"})
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -366,7 +346,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b1-button1",
-            IE11 = "null")
+            IE = "null")
     public void item_Unknown() throws Exception {
         item("'foo'");
     }
@@ -376,7 +356,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b1-button1",
-            IE11 = "b2-button2")
+            IE = "b2-button2")
     public void item_ById() throws Exception {
         item("'b2'");
     }
@@ -386,7 +366,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b1-button1",
-            IE11 = "b2-button2")
+            IE = "b2-button2")
     public void item_ByName() throws Exception {
         item("'button2'");
     }
@@ -395,8 +375,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "exception")
+    @Alerts("null")
     public void item_NegativIndex() throws Exception {
         item("-1");
     }
@@ -442,7 +421,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -452,7 +431,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void item_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }
@@ -480,7 +459,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var col = document.getElementsByTagName('button');\n"
             + "      report(col.item(" + name + "));\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -596,7 +575,131 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var col = document.getElementsByTagName('button');\n"
             + "      report(col[" + name + "]);\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <button id='b1' name='button1'></button>\n"
+            + "  <button id='b2' name='button2'></button>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_Unknown() throws Exception {
+        functionIndex("'foo'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_ById() throws Exception {
+        functionIndex("'b2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_ByName() throws Exception {
+        functionIndex("'button2'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_NegativIndex() throws Exception {
+        functionIndex("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b1-button1")
+    public void functionIndex_ZeroIndex() throws Exception {
+        functionIndex("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_ValidIndex() throws Exception {
+        functionIndex("1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "b2-button2")
+    public void functionIndex_DoubleIndex() throws Exception {
+        functionIndex("1.1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_InvalidIndex() throws Exception {
+        functionIndex("2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "undefined")
+    public void functionIndex_IndexAsString() throws Exception {
+        functionIndex("'2'");
+    }
+
+    private void functionIndex(final String name) throws Exception {
+        final String html
+            = "<!doctype html>\n"
+            + "<html><head><title>First</title><script>\n"
+            + "  function report(result) {\n"
+            + "    if (result == null || result == undefined) {\n"
+            + "      alert(result);\n"
+            + "    } else if (('length' in result) && ('item' in result)) {\n"
+            + "      alert('coll ' + result.length);\n"
+            + "      for(var i = 0; i < result.length; i++) {\n"
+            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "      }\n"
+            + "    } else if (result.id || result.name) {\n"
+            + "      alert(result.id + '-' + result.name);\n"
+            + "    } else {\n"
+            + "      alert(result);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function doTest() {\n"
+            + "    try {\n"
+            + "      var col = document.getElementsByTagName('button');\n"
+            + "      report(col(" + name + "));\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -667,7 +770,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "b6-button6",
             CHROME = "button6-button6_2")
-    @NotYetImplemented(CHROME)
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("button6");
     }
@@ -713,7 +815,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void namedItem_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -723,7 +825,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b2-button2",
-            IE11 = "null")
+            IE = "null")
     public void namedItem_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }

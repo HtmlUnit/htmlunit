@@ -77,7 +77,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the valid "vAlign" values for this element, depending on the browser being emulated
      */
     private String[] getValidVAlignValues() {
-        String[] valid;
+        final String[] valid;
         if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
             valid = VALIGN_VALID_VALUES_IE;
         }

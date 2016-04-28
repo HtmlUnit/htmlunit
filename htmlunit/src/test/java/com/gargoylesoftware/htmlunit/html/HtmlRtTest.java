@@ -33,11 +33,9 @@ public class HtmlRtTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = ", inline, block",
-            FF31 = "block, inline, inline",
-            FF38 = "block, ruby-text, ruby-text",
-            IE8 = "null, inline, inline",
-            IE11 = "ruby-text, ruby-text, ruby-text")
+    @Alerts(CHROME = {"", "inline", "block"},
+            FF = {"block", "ruby-text", "ruby-text"},
+            IE = {"ruby-text", "ruby-text", "ruby-text"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -50,7 +48,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function check(e) {\n"
-            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
             + "    alert(disp);\n"
             + "  }\n"
@@ -68,11 +66,9 @@ public class HtmlRtTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = ", inline, block",
-            FF31 = "block, inline, inline",
-            FF38 = "block, ruby-text, ruby-text",
-            IE8 = "null, ruby-text, ruby-text",
-            IE11 = "ruby-text, ruby-text, ruby-text")
+    @Alerts(CHROME = {"", "inline", "block"},
+            FF = {"block", "ruby-text", "ruby-text"},
+            IE = {"ruby-text", "ruby-text", "ruby-text"})
     public void defaultStyleStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -86,7 +82,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function check(e) {\n"
-            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
             + "    alert(disp);\n"
             + "  }\n"

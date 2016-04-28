@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_OBJECT_CLASSID;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_OBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -24,12 +23,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -48,13 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlObject.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlObject.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlObject.class)
 public class HTMLObjectElement extends FormChild implements Wrapper {
 
     private Scriptable wrappedActiveX_;
@@ -108,7 +98,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxGetter(@WebBrowser(IE))
     public String getClassid() {
         final String classid = getDomNodeOrDie().getAttribute("classid");
         return classid;
@@ -118,7 +108,7 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    @JsxSetter(@WebBrowser(IE))
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(HTML_OBJECT_CLASSID)) {
@@ -219,74 +209,6 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if ((String.class.equals(hint) || hint == null) && getBrowserVersion().hasFeature(JS_OBJECT_OBJECT)) {
-            final HtmlElement htmlElement = getDomNodeOrNull();
-            if (htmlElement != null && !((HtmlPage) htmlElement.getPage()).isQuirksMode()) {
-                return "[object]";
-            }
-        }
-        return super.getDefaultValue(hint);
-    }
-
-    /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
      * Returns the value of the {@code width} property.
      * @return the value of the {@code width} property
      */
@@ -320,6 +242,42 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
     @JsxSetter
     public void setHeight(final String height) {
         setWidthOrHeight("height", height, true);
+    }
+
+    /**
+     * Returns the value of the {@code align} property.
+     * @return the value of the {@code align} property
+     */
+    @JsxGetter
+    public String getAlign() {
+        return getAlign(true);
+    }
+
+    /**
+     * Sets the value of the {@code align} property.
+     * @param align the value of the {@code align} property
+     */
+    @JsxSetter
+    public void setAlign(final String align) {
+        setAlign(align, false);
+    }
+
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
     }
 
 }

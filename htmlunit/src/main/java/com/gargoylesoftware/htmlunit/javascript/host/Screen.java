@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCREEN_SETTER_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -22,13 +21,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@code Screen}.
@@ -43,11 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class Screen extends SimpleScriptable {
 
     private int bufferDepth_;
@@ -75,10 +67,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter
     public void setAvailHeight(final int availHeight) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.availHeight is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -114,10 +103,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setAvailTop(final int availTop) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.availTop is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -135,10 +121,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter
     public void setAvailWidth(final int availWidth) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.availWidth is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -156,10 +139,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBufferDepth(final int bufferDepth) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            bufferDepth_ = -1;
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -177,10 +157,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter
     public void setColorDepth(final int colorDepth) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.colorDepth is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -198,10 +175,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setDeviceXDPI(final int deviceXDPI) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.deviceXDPI is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -219,10 +193,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setDeviceYDPI(final int deviceYDPI) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.deviceYDPI is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -240,10 +211,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setFontSmoothingEnabled(final boolean fontSmoothingEnabled) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.fontSmoothingEnabled is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -261,10 +229,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter
     public void setHeight(final int height) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.height is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -300,10 +265,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setLogicalXDPI(final int logicalXDPI) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.logicalXDPI is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -321,10 +283,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setLogicalYDPI(final int logicalYDPI) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.logicalYDPI is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -360,10 +319,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setSystemXDPI(final int systemXDPI) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.systemYDPI is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -381,10 +337,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setSystemYDPI(final int systemYDPI) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.systemYDPI is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 
     /**
@@ -406,15 +359,6 @@ public class Screen extends SimpleScriptable {
     }
 
     /**
-     * Returns the {@code updateInterval} property.
-     * @return the {@code updateInterval} property
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public int getUpdateInterval() {
-        return 0;
-    }
-
-    /**
      * Returns the {@code width} property.
      * @return the {@code width} property
      */
@@ -429,9 +373,6 @@ public class Screen extends SimpleScriptable {
      */
     @JsxSetter
     public void setWidth(final int width) {
-        if (getBrowserVersion().hasFeature(JS_SCREEN_SETTER_THROWS_ERROR)) {
-            throw Context.reportRuntimeError("screen.width is read only");
-        }
-        // otherwise ignore
+        // ignore
     }
 }

@@ -159,6 +159,28 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
+     * Removes the credentials from the AuthScope.
+     * @param authscope the AuthScope to remove the credentials of
+     * @return whether it was removed or not
+     */
+    public synchronized boolean removeCredentials(final AuthScope authscope) {
+        if (authscope == null) {
+            throw new IllegalArgumentException("Authentication scope may not be null");
+        }
+        int bestMatchFactor = -1;
+        AuthScopeProxy bestMatch = null;
+        for (final AuthScopeProxy proxy : credentialsMap_.keySet()) {
+            final AuthScope current = proxy.getAuthScope();
+            final int factor = authscope.match(current);
+            if (factor > bestMatchFactor) {
+                bestMatchFactor = factor;
+                bestMatch = proxy;
+            }
+        }
+        return credentialsMap_.remove(bestMatch) != null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

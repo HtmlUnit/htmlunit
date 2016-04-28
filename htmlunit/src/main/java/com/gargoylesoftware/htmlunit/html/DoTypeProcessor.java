@@ -109,7 +109,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         selectionDelegate.setSelectionEnd(selectionEnd);
     }
 
-    private void add(final StringBuilder newValue, final char c, final int selectionStart,
+    private static void add(final StringBuilder newValue, final char c, final int selectionStart,
             final int selectionEnd) {
         if (selectionStart != newValue.length()) {
             newValue.replace(selectionStart, selectionEnd, Character.toString(c));
@@ -119,7 +119,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         }
     }
 
-    private void add(final StringBuilder newValue, final String string, final int selectionStart,
+    private static void add(final StringBuilder newValue, final String string, final int selectionStart,
             final int selectionEnd) {
         if (selectionStart != newValue.length()) {
             newValue.replace(selectionStart, selectionEnd, string);
@@ -129,7 +129,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         }
     }
 
-    private String getClipboardContent() {
+    private static String getClipboardContent() {
         String result = "";
         final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         final Transferable contents = clipboard.getContents(null);

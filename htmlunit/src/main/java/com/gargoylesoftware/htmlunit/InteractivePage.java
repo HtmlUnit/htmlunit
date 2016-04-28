@@ -14,10 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.w3c.dom.ranges.Range;
 
@@ -28,13 +33,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.js.nashorn.api.scripting.JSObject;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * An interactive SGML page, which is able to handle JavaScript events.
@@ -87,12 +85,14 @@ public abstract class InteractivePage extends SgmlPage {
         elementWithFocus_ = null;
 
         if (!windowActivated) {
-            if (oldFocusedElement != null) {
-                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
-            }
+            if (hasFeature(EVENT_FOCUS_IN_FOCUS_OUT_BLUR)) {
+                if (oldFocusedElement != null) {
+                    oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+                }
 
-            if (newElement != null) {
-                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+                if (newElement != null) {
+                    newElement.fireEvent(Event.TYPE_FOCUS_IN);
+                }
             }
 
             if (oldFocusedElement != null) {
@@ -114,6 +114,16 @@ public abstract class InteractivePage extends SgmlPage {
             elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
         }
 
+        if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+            if (oldFocusedElement != null) {
+                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+            }
+
+            if (newElement != null) {
+                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+            }
+        }
+
         // If a page reload happened as a result of the focus change then obviously this
         // element will not have the focus because its page has gone away.
         return this == getEnclosingWindow().getEnclosedPage();
@@ -129,10 +139,12 @@ public abstract class InteractivePage extends SgmlPage {
     }
 
     /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
      * Sets the element with focus.
      * @param elementWithFocus the element with focus
      */
-    protected void setElementWithFocus(final DomElement elementWithFocus) {
+    public void setElementWithFocus(final DomElement elementWithFocus) {
         elementWithFocus_ = elementWithFocus;
     }
 
@@ -202,57 +214,6 @@ public abstract class InteractivePage extends SgmlPage {
 
         final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
-
-        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Execute a Function in the given context.
-     *
-     * @param function the JavaScript Function to call
-     * @param thisObject the "this" object to be used during invocation
-     * @param args the arguments to pass into the call
-     * @param htmlElementScope the HTML element for which this script is being executed
-     * This element will be the context during the JavaScript execution. If null,
-     * the context will default to the page.
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
-     */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function, final ScriptObject thisObject,
-            final Object[] args, final DomNode htmlElementScope) {
-
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
-        }
-
-        final Object result = ScriptRuntime.apply(function, thisObject, args);
-        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Execute a Function in the given context.
-     *
-     * @param jsObject the JavaScript Function to call
-     * @param thisObject the "this" object to be used during invocation
-     * @param args the arguments to pass into the call
-     * @param htmlElementScope the HTML element for which this script is being executed
-     * This element will be the context during the JavaScript execution. If null,
-     * the context will default to the page.
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
-     */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final JSObject jsObject, final ScriptObject thisObject,
-            final Object[] args) {
-
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
-        }
-
-        final Object result = jsObject.call(thisObject, args);
 
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }

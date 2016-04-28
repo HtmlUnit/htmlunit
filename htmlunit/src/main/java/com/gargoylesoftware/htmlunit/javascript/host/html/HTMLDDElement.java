@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -27,11 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-        @JsxClass(domClass = HtmlDefinitionDescription.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(IE))
 public class HTMLDDElement extends HTMLElement {
 
 }

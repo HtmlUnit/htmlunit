@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +47,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "value")
     public void onpropertychange() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -68,7 +67,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void duplicateId() throws Exception {
         final String html
             = "<html>\n"
@@ -92,8 +91,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
-    @Alerts(IE8 = { "1", "1" })
     public void onpropertychange2() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -114,11 +111,11 @@ public class HtmlElement2Test extends WebDriverTestCase {
     /**
      * Verifies that cloned node attributes have the same initial values, but changes can be made
      * to the clone without affecting the original node, and that the id attribute is treated the
-     * same as all the other attributes. See bug 1707726.
+     * same as all the other attributes. See bug #468.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "true", "a", "a", "b", "b", "b", "c" })
+    @Alerts({"false", "true", "a", "a", "b", "b", "b", "c"})
     public void clonedNodeAttributes() throws Exception {
         final String html = "<html><body id='a' title='b'><script>\n"
             + "var x = document.body.cloneNode(true);\n"
@@ -142,7 +139,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "undefined", "undefined" })
+    @Alerts({"true", "undefined", "undefined"})
     public void textAndXmlUndefined() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -185,9 +182,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0",
             FF = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
-                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0",
-            IE8 = "down: 16,undefined down: 49,undefined press: 33,undefined up: 49,undefined up: 16,undefined"
-                + " down: 16,undefined down: 220,undefined press: 124,undefined up: 220,undefined up: 16,undefined")
+                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0")
     //https://github.com/SeleniumHQ/selenium/issues/639
     @BuggyWebDriver(Browser.FF)
     public void shiftKeys() throws Exception {
@@ -210,4 +205,74 @@ public class HtmlElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], result.getText());
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLBodyElement]"},
+            CHROME = {"[object HTMLInputElement]", "onblur", "onfocusout", "[object HTMLBodyElement]"},
+            IE = {"[object HTMLInputElement]", "null"})
+    @NotYetImplemented(IE)
+    public void removeActiveElement() throws Exception {
+        final String html =
+               HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<title>foo</title>\n"
+                + "<script>\n"
+                + "function test(){\n"
+                + "  var elem = document.getElementById('text1');\n"
+                + "  elem.focus();\n"
+                + "  alert(document.activeElement);\n"
+                + "  elem.parentNode.removeChild(elem);\n"
+                + "  alert(document.activeElement);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<form name='form1'>\n"
+                + "  <input id='text1' onblur='alert(\"onblur\")' onfocusout='alert(\"onfocusout\")'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLBodyElement]"},
+            CHROME = {"[object HTMLInputElement]", "onblur1", "onfocusout1", "[object HTMLBodyElement]"},
+            IE = {"[object HTMLInputElement]", "null"})
+    @NotYetImplemented(IE)
+    public void removeParentOfActiveElement() throws Exception {
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<title>foo</title>\n"
+                + "<script>\n"
+                + "function test(){\n"
+                + "  var elem = document.getElementById('text1');\n"
+                + "  elem.focus();\n"
+                + "  alert(document.activeElement);\n"
+
+                + "  var elem = document.getElementById('parent');\n"
+                + "  elem.parentNode.removeChild(elem);\n"
+                + "  alert(document.activeElement);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<form name='form1'>\n"
+                + "  <div id='parent'>\n"
+                + "    <input id='text1' onblur='alert(\"onblur1\")' onfocusout='alert(\"onfocusout1\")'>\n"
+                + "    <input id='text2' onblur='alert(\"onblur2\")' onfocusout='alert(\"onfocusout2\")'>\n"
+                + "  </div>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

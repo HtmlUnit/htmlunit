@@ -58,7 +58,7 @@ public class RowContainer extends HTMLElement {
     @JsxGetter
     public Object getRows() {
         if (rows_ == null) {
-            rows_ = new HTMLCollection(getDomNodeOrDie(), false, "rows") {
+            rows_ = new HTMLCollection(getDomNodeOrDie(), false) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node);

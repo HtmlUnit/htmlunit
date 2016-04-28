@@ -144,7 +144,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      */
     @JsxFunction
     public Object nextNode() {
-        Object nextNode;
+        final Object nextNode;
         final List<DomNode> elements = getElements();
         if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
             nextNode = elements.get(currentIndex_).getScriptableObject();
@@ -318,7 +318,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
 
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
-                final String id = ((DomElement) next).getAttribute("id");
+                final String id = ((DomElement) next).getId();
                 if (name.equals(id)) {
                     matchingElements.add(next);
                 }
@@ -363,7 +363,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @return the specified object, unless it is the {@link #NOT_FOUND} constant, in which case {@code null}
      *         is returned for IE.
      */
-    private Object nullIfNotFound(final Object object) {
+    private static Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
             return null;
         }

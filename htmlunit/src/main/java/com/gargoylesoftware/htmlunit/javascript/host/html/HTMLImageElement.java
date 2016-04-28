@@ -17,12 +17,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -30,8 +28,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -43,11 +40,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLImageElement}.
@@ -59,13 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlImage.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlImage.class, isJSObject = false,
-                browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlImage.class)
 public class HTMLImageElement extends HTMLElement {
     private static final Map<String, String> NORMALIZED_ALIGN_VALUES;
     static {
@@ -138,8 +130,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Sets the <tt>onload</tt> event handler for this element.
-     * @param onloadHandler the <tt>onload</tt> event handler for this element
+     * Sets the {@code onload} event handler for this element.
+     * @param onloadHandler the {@code onload} event handler for this element
      */
     @JsxSetter
     public void setOnload(final Object onloadHandler) {
@@ -151,8 +143,8 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the <tt>onload</tt> event handler for this element.
-     * @return the <tt>onload</tt> event handler for this element
+     * Returns the {@code onload} event handler for this element.
+     * @return the {@code onload} event handler for this element
      */
     @JsxGetter
     public Object getOnload() {
@@ -253,9 +245,7 @@ public class HTMLImageElement extends HTMLElement {
                 return Integer.parseInt(widthAttrib);
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)) {
-                    return 1;
-                }
+                // ignore
             }
         }
 
@@ -266,22 +256,21 @@ public class HTMLImageElement extends HTMLElement {
             }
             catch (final IOException e) {
                 final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)) {
-                    return 1;
-                }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                     return 28;
                 }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    return 0;
+                    if (StringUtils.isBlank(src)) {
+                        return 0;
+                    }
+                    return 20;
                 }
                 return 24;
             }
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)
-                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
             return 28;
         }
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)
@@ -315,9 +304,7 @@ public class HTMLImageElement extends HTMLElement {
                 return Integer.parseInt(height);
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)) {
-                    return 1;
-                }
+                // ignore
             }
         }
 
@@ -328,22 +315,21 @@ public class HTMLImageElement extends HTMLElement {
             }
             catch (final IOException e) {
                 final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)) {
-                    return 1;
-                }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                     return 30;
                 }
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    return 0;
+                    if (StringUtils.isBlank(src)) {
+                        return 0;
+                    }
+                    return 20;
                 }
                 return 24;
             }
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)
-                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
             return 30;
         }
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)
@@ -380,64 +366,10 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
      * Returns the value of the {@code naturalWidth} property.
      * @return the value of the {@code naturalWidth} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getNaturalWidth() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         try {
@@ -452,7 +384,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the {@code naturalHeight} property.
      * @return the value of the {@code naturalHeight} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public int getNaturalHeight() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         try {
@@ -462,4 +394,23 @@ public class HTMLImageElement extends HTMLElement {
             return 0;
         }
     }
+
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
+    }
+
 }

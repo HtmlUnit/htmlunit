@@ -33,11 +33,9 @@ public class HtmlRpTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = ", inline, none",
-            FF31 = "block, inline, inline",
-            FF38 = "none, none, none",
-            IE8 = "null, inline, inline",
-            IE11 = "inline, inline, inline")
+    @Alerts(DEFAULT = {"", "inline", "none"},
+            FF = {"none", "none", "none"},
+            IE = {"inline", "inline", "inline"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -50,7 +48,7 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function check(e) {\n"
-            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
             + "    alert(disp);\n"
             + "  }\n"

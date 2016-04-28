@@ -20,9 +20,6 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -43,7 +40,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.CSSException;
@@ -115,7 +111,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testHtmlWindowEvents_changed() throws Exception {
+    public void htmlWindowEvents_changed() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
@@ -150,7 +146,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testHtmlWindowEvents_opened() throws Exception {
+    public void htmlWindowEvents_opened() throws Exception {
         final String page1Content = "<html><head><title>foo</title>\n"
                 + "<script>window.open('" + URL_SECOND + "', 'myNewWindow')</script>\n"
                 + "</head><body>\n"
@@ -189,7 +185,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testHtmlWindowEvents_closedFromFrame() throws Exception {
+    public void htmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent = "<html><head><title>first</title></head><body>\n"
                 + "<iframe src='" + URL_THIRD + "' id='frame1'></iframe>\n"
                 + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
@@ -401,7 +397,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void redirection307_TemporaryRedirect_PostMethod() throws Exception {
         final int statusCode = 307;
         final HttpMethod initialRequestMethod = HttpMethod.POST;
-        final HttpMethod expectedRedirectedRequestMethod = null;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.POST;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
@@ -539,6 +535,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param useProxy indicates if the test should be performed with a proxy
      * @throws Exception if the test fails
      */
+    @SuppressWarnings("resource")
     private void doTestRedirection(
             final int statusCode,
             final HttpMethod initialRequestMethod,
@@ -878,25 +875,25 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testKeyboard_NoTabbableElements() throws Exception {
+    public void keyboard_NoTabbableElements() throws Exception {
         final WebClient webClient = getWebClient();
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         DomElement focus = page.getFocusedElement();
-        Assert.assertTrue("original", (focus == null)
+        assertTrue("original", (focus == null)
                 || (focus == page.getDocumentElement())
                 || (focus == page.getBody()));
 
         focus = page.tabToPreviousElement();
-        Assert.assertNull("previous", focus);
+        assertNull("previous", focus);
 
         focus = page.tabToNextElement();
-        Assert.assertNull("next", focus);
+        assertNull("next", focus);
 
         focus = page.pressAccessKey('a');
-        Assert.assertNull("accesskey", focus);
+        assertNull("accesskey", focus);
 
         final String[] expectedAlerts = {};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -907,7 +904,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testKeyboard_OneTabbableElement() throws Exception {
+    public void keyboard_OneTabbableElement() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -916,23 +913,23 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlElement element = page.getHtmlElementById("submit0");
 
         final DomElement focus = page.getFocusedElement();
-        Assert.assertTrue("original", (focus == null)
+        assertTrue("original", (focus == null)
                 || (focus == page.getDocumentElement())
                 || (focus == page.getBody()));
 
         final DomElement accessKey = page.pressAccessKey('x');
-        Assert.assertEquals("accesskey", focus, accessKey);
+        assertEquals("accesskey", focus, accessKey);
 
-        Assert.assertEquals("next", element, page.tabToNextElement());
-        Assert.assertEquals("nextAgain", element, page.tabToNextElement());
+        assertEquals("next", element, page.tabToNextElement());
+        assertEquals("nextAgain", element, page.tabToNextElement());
 
         page.getFocusedElement().blur();
-        Assert.assertNull("original", page.getFocusedElement());
+        assertNull("original", page.getFocusedElement());
 
-        Assert.assertEquals("previous", element, page.tabToPreviousElement());
-        Assert.assertEquals("previousAgain", element, page.tabToPreviousElement());
+        assertEquals("previous", element, page.tabToPreviousElement());
+        assertEquals("previousAgain", element, page.tabToPreviousElement());
 
-        Assert.assertEquals("accesskey", element, page.pressAccessKey('z'));
+        assertEquals("accesskey", element, page.pressAccessKey('z'));
 
         final String[] expectedAlerts = {"focus-0", "blur-0", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -943,7 +940,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testAccessKeys() throws Exception {
+    public void accessKeys() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1003,7 +1000,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testPressAccessKey_Button() throws Exception {
+    public void pressAccessKey_Button() throws Exception {
         final WebClient webClient = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1028,7 +1025,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @return the loaded page
      * @throws Exception if something goes wrong
      */
-    private HtmlPage getPageForKeyboardTest(
+    private static HtmlPage getPageForKeyboardTest(
             final WebClient webClient, final String[] tabIndexValues) throws Exception {
 
         final StringBuilder buffer = new StringBuilder();
@@ -1090,7 +1087,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testGetPageFailingStatusCode() throws Exception {
+    public void getPageFailingStatusCode() throws Exception {
         final String firstContent = "<html><head><title>Hello World</title></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
@@ -1118,7 +1115,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testProxyConfig() throws Exception {
+    public void proxyConfig() throws Exception {
         // Create the client.
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
@@ -1181,7 +1178,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testProxyConfigWithRedirect() throws Exception {
+    public void proxyConfigWithRedirect() throws Exception {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
@@ -1216,7 +1213,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testProxyConfigForJS() throws Exception {
+    public void proxyConfigForJS() throws Exception {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title>\n"
@@ -1274,7 +1271,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
     /** Test the accessors for refreshHandler. */
     @Test
-    public void testRefreshHandlerAccessors() {
+    public void refreshHandlerAccessors() {
         final WebClient webClient = getWebClient();
         assertTrue(ImmediateRefreshHandler.class.isInstance(webClient.getRefreshHandler()));
 
@@ -1289,7 +1286,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBadCharset() throws Exception {
+    public void badCharset() throws Exception {
         final String page1Content = "<html><head><title>foo</title>\n"
                 + "</head><body></body></html>";
         final WebClient client = getWebClient();
@@ -1319,7 +1316,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testReusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
+    public void reusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
         final String firstContent = "<html><head><title>First</title></head>\n"
                 + "<body onload='document.myform.mysubmit.focus()'>\n"
                 + "<form action='" + URL_SECOND + "' name='myform'>\n"
@@ -1347,7 +1344,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testOpenerInFrameset() throws Exception {
+    public void openerInFrameset() throws Exception {
         final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>\n"
                 + "<frame src='" + URL_SECOND + "'>\n"
                 + "</frameset>\n"
@@ -1376,26 +1373,26 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGuessContentType() throws Exception {
+    public void guessContentType() throws Exception {
         final WebClient c = getWebClient();
 
         // tests empty files, type should be determined from file suffix
-        Assert.assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
-        Assert.assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
-        Assert.assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
-        Assert.assertEquals("empty.js", "text/javascript", c.guessContentType(getTestFile("empty.js")));
+        assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
+        assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
+        assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
+        assertEquals("empty.js", "text/javascript", c.guessContentType(getTestFile("empty.js")));
 
         // test real files with bad file suffix
-        Assert.assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
-        Assert.assertEquals("tiny-jpg.img", "image/jpeg", c.guessContentType(getTestFile("tiny-jpg.img")));
-        Assert.assertEquals("tiny-gif.img", "image/gif", c.guessContentType(getTestFile("tiny-gif.img")));
+        assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
+        assertEquals("tiny-jpg.img", "image/jpeg", c.guessContentType(getTestFile("tiny-jpg.img")));
+        assertEquals("tiny-gif.img", "image/gif", c.guessContentType(getTestFile("tiny-gif.img")));
 
         // tests XHTML files, types will be determined based on a mixture of file suffixes and contents
         // note that "xhtml.php" returns content type "text/xml" in Firefox, but "application/xml" is good enough...
-        Assert.assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
-        Assert.assertEquals("xhtml.htm", "text/html", c.guessContentType(getTestFile("xhtml.htm")));
-        Assert.assertEquals("xhtml.html", "text/html", c.guessContentType(getTestFile("xhtml.html")));
-        Assert.assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
+        assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
+        assertEquals("xhtml.htm", "text/html", c.guessContentType(getTestFile("xhtml.htm")));
+        assertEquals("xhtml.html", "text/html", c.guessContentType(getTestFile("xhtml.html")));
+        assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
     }
 
     /**
@@ -1405,7 +1402,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBinaryFileFromFileSystem() throws Exception {
+    public void binaryFileFromFileSystem() throws Exception {
         final String testfileName = "tiny-jpg.img";
         final File testfile = getTestFile(testfileName);
         final byte[] directBytes = IOUtils.toByteArray(new FileInputStream(testfile));
@@ -1452,7 +1449,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    public void testRequestHeader() throws Exception {
+    public void requestHeader() throws Exception {
         final String content = "<html></html>";
         final WebClient client = getWebClient();
 
@@ -1551,7 +1548,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOnBeforeUnloadCalledOnCorrectPage() throws Exception {
+    public void onBeforeUnloadCalledOnCorrectPage() throws Exception {
         final String html = "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
         final List<String> alerts = new ArrayList<>();
         loadPage(html, alerts);
@@ -1589,7 +1586,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testPlusNotEncodedInUrl() throws Exception {
+    public void plusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
@@ -1640,7 +1637,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testGetPageJavascriptProtocol() throws Exception {
+    public void getPageJavascriptProtocol() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse("<html><head><title>Hello World</title></head><body></body></html>");
@@ -1667,7 +1664,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testJavaScriptTimeout() throws Exception {
+    public void javaScriptTimeout() throws Exception {
         final WebClient client = getWebClient();
         final long timeout = 2000;
         final long oldTimeout = client.getJavaScriptTimeout();
@@ -1713,10 +1710,10 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOpenWindowWithNullUrl() throws Exception {
+    public void openWindowWithNullUrl() throws Exception {
         final WebClient client = getWebClient();
         final WebWindow window = client.openWindow(null, "TestingWindow");
-        Assert.assertNotNull(window);
+        assertNotNull(window);
     }
 
     /**
@@ -1724,7 +1721,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testBasicWindowTracking() throws Exception {
+    public void basicWindowTracking() throws Exception {
         // Create mock web connection.
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse("<html></html");
@@ -1798,7 +1795,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
-        Assert.assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
+        assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
 
@@ -1827,7 +1824,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         buttonA.click();
-        Assert.assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
+        assertNotNull(webClient.getCurrentWindow().getEnclosedPage());
         assertEquals("First", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
 
@@ -1837,7 +1834,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(IE = "Third page loaded")
-    public void testWindowTracking_SpecialCase3() throws Exception {
+    public void windowTracking_SpecialCase3() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -1892,7 +1889,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testWindowTracking_SpecialCase4() throws Exception {
+    public void windowTracking_SpecialCase4() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
@@ -1910,10 +1907,10 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testOpenWindowWithAboutBlank() throws Exception {
+    public void openWindowWithAboutBlank() throws Exception {
         final WebClient client = getWebClient();
         final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
-        Assert.assertNotNull(window);
+        assertNotNull(window);
     }
 
     /**
@@ -1951,15 +1948,15 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page1 = client.getPage(URL_FIRST);
-        ((HTMLStyleElement) page1.getBody().getFirstChild().getScriptObject()).getSheet();
+        ((HTMLStyleElement) page1.getBody().getFirstChild().getScriptableObject()).getSheet();
         assertEquals(0, errors.intValue());
 
         final HtmlPage page2 = client.getPage(URL_SECOND);
-        ((HTMLStyleElement) page2.getBody().getFirstChild().getScriptObject()).getSheet();
+        ((HTMLStyleElement) page2.getBody().getFirstChild().getScriptableObject()).getSheet();
         assertEquals(0, errors.intValue());
 
         final HtmlPage page3 = client.getPage(URL_THIRD);
-        ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptObject()).getSheet();
+        ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptableObject()).getSheet();
         assertEquals(2, errors.intValue());
         assertEquals("http://127.0.0.1:" + PORT + "/third/http://127.0.0.1:" + PORT + "/third/", errorUri.toString());
     }
@@ -1969,7 +1966,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
-    public void testMaintainJavaScriptParentScope() throws Exception {
+    public void maintainJavaScriptParentScope() throws Exception {
         final String basicContent = "<html><head>"
                 + "<title>basicContentTitle</title>\n"
                 + "</head><body>\n"
@@ -2063,7 +2060,8 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetTopLevelWindows() throws Exception {
+    public void getTopLevelWindows() throws Exception {
+        @SuppressWarnings("resource")
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
@@ -2176,6 +2174,7 @@ public class WebClientTest extends SimpleWebTestCase {
         getMockWebConnection().setResponse(getDefaultUrl(), html);
         getMockWebConnection().setDefaultResponse(html2);
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final int initialJSThreads = getJavaScriptThreads().size();
         webClient.setWebConnection(getMockWebConnection());
@@ -2225,14 +2224,14 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
 
         final WebWindow firstWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 1");
-        Assert.assertNotNull(firstWindow);
+        assertNotNull(firstWindow);
 
         final WebRequest firstRequest1 = firstWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", firstRequest1.getUrl().toExternalForm());
         firstRequest1.setUrl(UrlUtils.toUrlSafe(WebClient.ABOUT_BLANK + "#anchor"));
 
         final WebWindow secondWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 2");
-        Assert.assertNotNull(secondWindow);
+        assertNotNull(secondWindow);
         final WebRequest secondRequest = secondWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", secondRequest.getUrl().toExternalForm());
     }
@@ -2242,14 +2241,14 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void closeToClearCache() throws Exception {
-        final WebClient webClient = getWebClient();
         final Cache cache = createMock(Cache.class);
-        webClient.setCache(cache);
-        cache.clear();
-        expectLastCall().atLeastOnce();
+        try (final WebClient webClient = getWebClient()) {
+            webClient.setCache(cache);
+            cache.clear();
+            expectLastCall().atLeastOnce();
 
-        replay(cache);
-        webClient.close();
+            replay(cache);
+        }
         verify(cache);
     }
 }

@@ -16,15 +16,15 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -64,14 +63,11 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Adam Afeltowicz
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class Location extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Location.class);
@@ -91,7 +87,7 @@ public class Location extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public Location() {
     }
 
@@ -185,7 +181,7 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getUrl();
-            final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_ENCODED);
+            final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -212,6 +208,22 @@ public class Location extends SimpleScriptable {
      */
     @JsxSetter
     public void setHref(final String newLocation) throws IOException {
+        setHref(newLocation, false, null);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the location URL to an entirely new value.
+     *
+     * @param newLocation the new location URL
+     * @param justHistoryAPIPushState indicates if change is caused by using HTML5 HistoryAPI
+     * @param state the state object passed down if justHistoryAPIPushState is true
+     * @throws IOException if loading the specified location fails
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
+     */
+    public void setHref(final String newLocation, final boolean justHistoryAPIPushState, final Object state)
+            throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
@@ -239,7 +251,10 @@ public class Location extends SimpleScriptable {
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
 
             final WebWindow webWindow = getWindow().getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", request, false, "JS set location");
+            webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");
+            if (justHistoryAPIPushState) {
+                webWindow.getWebClient().loadDownloadedResponses();
+            }
         }
         catch (final MalformedURLException e) {
             LOG.error("setHref('" + newLocation + "') got MalformedURLException", e);
@@ -281,7 +296,8 @@ public class Location extends SimpleScriptable {
     public String getHash() {
         final boolean decodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
-        if (decodeHash && hash_ != null) {
+
+        if (hash_ != null && (decodeHash || hash_.equals(getUrl().getRef()))) {
             hash = decodeHash(hash);
         }
 
@@ -290,6 +306,9 @@ public class Location extends SimpleScriptable {
                     && getHref().endsWith("#")) {
                 return "#";
             }
+        }
+        else if (getBrowserVersion().hasFeature(JS_LOCATION_HASH_HASH_IS_ENCODED)) {
+            return "#" + UrlUtils.encodeHash(hash);
         }
         else {
             return "#" + hash;
@@ -352,7 +371,7 @@ public class Location extends SimpleScriptable {
         }
     }
 
-    private String decodeHash(final String hash) {
+    private static String decodeHash(final String hash) {
         if (hash.indexOf('%') == -1) {
             return hash;
         }
@@ -518,7 +537,7 @@ public class Location extends SimpleScriptable {
      * Returns the {@code origin} property.
      * @return the {@code origin} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getOrigin() {
         return getUrl().getProtocol() + "://" + getHost();
     }

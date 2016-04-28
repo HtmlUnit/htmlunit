@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_WINDOW_EXECUTE_IF_DITACHED;
 
 import java.lang.invoke.MethodHandle;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 
@@ -37,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -63,6 +62,7 @@ public class EventTarget2 extends SimpleScriptObject {
         return eventListenersContainer_;
     }
 
+    @Function
     public static String addEventListener(final Object self) {
         return Browser.getCurrent().getFamily().name();
     }
@@ -161,13 +161,7 @@ public class EventTarget2 extends SimpleScriptObject {
             }
 
             // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
+            final Object[] propHandlerArgs = args;
 
             // bubbling phase
 //            event.setEventPhase(Event.AT_TARGET);

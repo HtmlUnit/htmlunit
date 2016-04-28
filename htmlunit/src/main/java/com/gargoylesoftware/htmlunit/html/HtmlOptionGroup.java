@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTIONGROUP_NO_DISABLED;
 
 import java.util.Map;
 
@@ -60,9 +59,6 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      */
     @Override
     public final boolean isDisabled() {
-        if (hasFeature(HTMLOPTIONGROUP_NO_DISABLED)) {
-            return false;
-        }
         return hasAttribute("disabled");
     }
 
@@ -75,22 +71,22 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "label". Refer to the
+     * Returns the value of the attribute {@code label}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "label" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
         return getAttribute("label");
     }
 
     /**
-     * Sets the value of the attribute "label". Refer to the
+     * Sets the value of the attribute {@code label}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newLabel the value of the attribute "label"
+     * @param newLabel the value of the attribute {@code label}
      */
     public final void setLabelAttribute(final String newLabel) {
         setAttribute("label", newLabel);
@@ -101,7 +97,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      * @return {@code null} if no select is found (for instance malformed html)
      */
     public HtmlSelect getEnclosingSelect() {
-        return (HtmlSelect) getEnclosingElement("select");
+        return (HtmlSelect) getEnclosingElement(HtmlSelect.TAG_NAME);
     }
 
     /**

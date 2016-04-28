@@ -33,10 +33,9 @@ public class HtmlKeyGenTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = ", inline-block, inline-block",
-            FF = "block, inline, inline-block",
-            IE11 = "inline, inline, inline",
-            IE8 = "null, inline, inline")
+    @Alerts(DEFAULT = {"", "inline-block", "inline-block"},
+            FF = {"block", "inline", "inline-block"},
+            IE = {"inline", "inline", "inline"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -49,7 +48,7 @@ public class HtmlKeyGenTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function check(e) {\n"
-            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
             + "    alert(disp);\n"
             + "  }\n"

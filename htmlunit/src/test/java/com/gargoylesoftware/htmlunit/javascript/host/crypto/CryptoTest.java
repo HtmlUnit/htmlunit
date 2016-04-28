@@ -33,9 +33,8 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" },
-        IE8 = { "exception" },
-        IE11 = { "true", "exception" })
+    @Alerts(DEFAULT = {"true", "false"},
+            IE = {"true", "exception"})
     public void getRandomValues() throws Exception {
         final String html = "<html><head><script>\n"
             + "try {\n"

@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
 import java.io.IOException;
@@ -28,6 +25,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -44,6 +44,7 @@ import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -52,11 +53,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -183,7 +181,7 @@ public abstract class HtmlElement extends DomElement {
 
         final String oldAttributeValue = getAttribute(qualifiedName);
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        final boolean mappedElement = isDirectlyAttachedToPage()
+        final boolean mappedElement = isAttachedToPage()
                     && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage
@@ -207,10 +205,6 @@ public abstract class HtmlElement extends DomElement {
             fireHtmlAttributeReplaced(htmlEvent);
             htmlPage.fireHtmlAttributeReplaced(htmlEvent);
         }
-
-        if (hasFeature(EVENT_PROPERTY_CHANGE)) {
-            fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
-        }
     }
 
     /**
@@ -227,7 +221,7 @@ public abstract class HtmlElement extends DomElement {
         final String qualifiedName = attribute.getName();
         final String oldAttributeValue = getAttribute(qualifiedName);
         final HtmlPage htmlPage = (HtmlPage) getPage();
-        final boolean mappedElement = isDirectlyAttachedToPage()
+        final boolean mappedElement = isAttachedToPage()
                     && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage
@@ -252,10 +246,6 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.fireHtmlAttributeReplaced(htmlEvent);
         }
 
-        if (hasFeature(EVENT_PROPERTY_CHANGE)) {
-            fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
-        }
-
         return result;
     }
 
@@ -263,11 +253,13 @@ public abstract class HtmlElement extends DomElement {
      * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
      * @param tagNames the tag names to match (case-insensitive)
      * @return the HTML elements that are descendants of this element and that have one of the specified tag name
+     * @deprecated as of 2.21, please use {@link #getElementsByTagName(String)}
      */
+    @Deprecated
     public final List<HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
         final List<HtmlElement> list = new ArrayList<>();
         for (final String tagName : tagNames) {
-            list.addAll(getHtmlElementsByTagName(tagName));
+            list.addAll(getElementsByTagName(tagName));
         }
         return list;
     }
@@ -277,18 +269,11 @@ public abstract class HtmlElement extends DomElement {
      * @param tagName the tag name to match (case-insensitive)
      * @param <E> the sub-element type
      * @return the HTML elements that are descendants of this element and that have the specified tag name
+     * @deprecated as of 2.21, please use {@link #getElementsByTagName(String)}, which returns read-only list
      */
-    @SuppressWarnings("unchecked")
+    @Deprecated
     public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {
-        final List<E> list = new ArrayList<>();
-        final String lowerCaseTagName = tagName.toLowerCase(Locale.ROOT);
-        final Iterable<HtmlElement> iterable = getHtmlElementDescendants();
-        for (final HtmlElement element : iterable) {
-            if (lowerCaseTagName.equals(element.getTagName())) {
-                list.add((E) element);
-            }
-        }
-        return list;
+        return new ArrayList<>(this.<E>getElementsByTagNameImpl(tagName));
     }
 
     /**
@@ -574,17 +559,15 @@ public abstract class HtmlElement extends DomElement {
         final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyPressResult = fireEvent(keyPress);
 
-        if ((shiftDownResult == null || !shiftDown.isAborted(shiftDownResult))
+        if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
                 && !keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
         final WebClient webClient = page.getWebClient();
-        final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        if (browserVersion.hasFeature(EVENT_INPUT)
-            && (this instanceof HtmlTextInput
+        if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
-            || this instanceof HtmlPasswordInput)) {
+            || this instanceof HtmlPasswordInput) {
             final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }
@@ -600,11 +583,9 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            if (!browserVersion.hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
-                final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
-                if (submit != null) {
-                    return submit.click();
-                }
+            final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
+            if (submit != null) {
+                return submit.click();
             }
             form.submit((SubmittableElement) this);
             webClient.getJavaScriptEngine().processPostponedActions();
@@ -624,7 +605,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
-    public Page type(final int keyCode) throws IOException {
+    public Page type(final int keyCode) {
         return type(keyCode, false, false, false, true, true, true);
     }
 
@@ -751,14 +732,12 @@ public abstract class HtmlElement extends DomElement {
      * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
      */
     @Deprecated
-    public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
+    public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         return type(keyCode, shiftKey, ctrlKey, altKey, true, true, true);
     }
 
     private Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
-        final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp)
-        throws IOException {
+        final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -798,10 +777,9 @@ public abstract class HtmlElement extends DomElement {
             doType(keyCode, shiftKey, ctrlKey, altKey);
         }
 
-        if (browserVersion.hasFeature(EVENT_INPUT)
-            && (this instanceof HtmlTextInput
+        if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
-            || this instanceof HtmlPasswordInput)) {
+            || this instanceof HtmlPasswordInput) {
             final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }
@@ -864,12 +842,7 @@ public abstract class HtmlElement extends DomElement {
             ((DomText) domNode).doType(keyCode, shiftKey, ctrlKey, altKey);
         }
         else if (domNode instanceof HtmlElement) {
-            try {
-                ((HtmlElement) domNode).type(keyCode, shiftKey, ctrlKey, altKey);
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(e);
-            }
+            ((HtmlElement) domNode).type(keyCode, shiftKey, ctrlKey, altKey);
         }
     }
 
@@ -997,7 +970,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final HtmlElement appendChildIfNoneExists(final String tagName) {
         final HtmlElement child;
-        final List<HtmlElement> children = getHtmlElementsByTagName(tagName);
+        final List<HtmlElement> children = getElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
             child = (HtmlElement) ((HtmlPage) getPage()).createElement(tagName);
@@ -1017,7 +990,7 @@ public abstract class HtmlElement extends DomElement {
      * @param i the index of the child to remove
      */
     public final void removeChild(final String tagName, final int i) {
-        final List<HtmlElement> children = getHtmlElementsByTagName(tagName);
+        final List<HtmlElement> children = getElementsByTagName(tagName);
         if (i >= 0 && i < children.size()) {
             children.get(i).remove();
         }
@@ -1031,7 +1004,7 @@ public abstract class HtmlElement extends DomElement {
      * @return true if an event handler has been defined otherwise false
      */
     public final boolean hasEventHandlers(final String eventName) {
-        final HTMLElement2 jsObj = (HTMLElement2) getScriptObject2();
+        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
         return jsObj.hasEventHandlers(eventName);
     }
 
@@ -1130,143 +1103,143 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the value of the attribute "lang". Refer to the
+     * Returns the value of the attribute {@code lang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code lang} or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
         return getAttribute("lang");
     }
 
     /**
-     * Returns the value of the attribute "xml:lang". Refer to the
+     * Returns the value of the attribute {@code xml:lang}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code xml:lang} or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
         return getAttribute("xml:lang");
     }
 
     /**
-     * Returns the value of the attribute "dir". Refer to the
+     * Returns the value of the attribute {@code dir}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code dir} or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
         return getAttribute("dir");
     }
 
     /**
-     * Returns the value of the attribute "onclick". Refer to the
+     * Returns the value of the attribute {@code onclick}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onclick" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onclick} or an empty string if that attribute isn't defined
      */
     public final String getOnClickAttribute() {
         return getAttribute("onclick");
     }
 
     /**
-     * Returns the value of the attribute "ondblclick". Refer to the
+     * Returns the value of the attribute {@code ondblclick}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "ondblclick" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code ondblclick} or an empty string if that attribute isn't defined
      */
     public final String getOnDblClickAttribute() {
         return getAttribute("ondblclick");
     }
 
     /**
-     * Returns the value of the attribute "onmousedown". Refer to the
+     * Returns the value of the attribute {@code onmousedown}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmousedown" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmousedown} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseDownAttribute() {
         return getAttribute("onmousedown");
     }
 
     /**
-     * Returns the value of the attribute "onmouseup". Refer to the
+     * Returns the value of the attribute {@code onmouseup}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmouseup" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmouseup} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseUpAttribute() {
         return getAttribute("onmouseup");
     }
 
     /**
-     * Returns the value of the attribute "onmouseover". Refer to the
+     * Returns the value of the attribute {@code onmouseover}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmouseover" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmouseover} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOverAttribute() {
         return getAttribute("onmouseover");
     }
 
     /**
-     * Returns the value of the attribute "onmousemove". Refer to the
+     * Returns the value of the attribute {@code onmousemove}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmousemove" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmousemove} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseMoveAttribute() {
         return getAttribute("onmousemove");
     }
 
     /**
-     * Returns the value of the attribute "onmouseout". Refer to the
+     * Returns the value of the attribute {@code onmouseout}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onmouseout" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onmouseout} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOutAttribute() {
         return getAttribute("onmouseout");
     }
 
     /**
-     * Returns the value of the attribute "onkeypress". Refer to the
+     * Returns the value of the attribute {@code onkeypress}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onkeypress" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onkeypress} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyPressAttribute() {
         return getAttribute("onkeypress");
     }
 
     /**
-     * Returns the value of the attribute "onkeydown". Refer to the
+     * Returns the value of the attribute {@code onkeydown}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onkeydown" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onkeydown} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyDownAttribute() {
         return getAttribute("onkeydown");
     }
 
     /**
-     * Returns the value of the attribute "onkeyup". Refer to the
+     * Returns the value of the attribute {@code onkeyup}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onkeyup" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onkeyup} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyUpAttribute() {
         return getAttribute("onkeyup");
@@ -1312,8 +1285,7 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public boolean isDisplayed() {
-        if (!hasFeature(HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED)
-                && ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
+        if (ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
             return false;
         }
         return super.isDisplayed();
@@ -1333,7 +1305,7 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Helper for src retrieval and normalization.
      *
-     * @return the value of the attribute "src" with all line breaks removed
+     * @return the value of the attribute {@code src} with all line breaks removed
      * or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
@@ -1346,5 +1318,63 @@ public abstract class HtmlElement extends DomElement {
         }
 
         return StringUtils.replaceChars(attrib, "\r\n", "");
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Detach this node from all relationships with other nodes.
+     * This is the first step of an move.
+     */
+    @Override
+    protected void detach() {
+        final HTMLDocument doc = (HTMLDocument) getPage().getScriptableObject();
+        final Object activeElement = doc.getActiveElement();
+
+        if (activeElement == getScriptableObject()) {
+            doc.setActiveElement(null);
+            if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                ((InteractivePage) getPage()).setFocusedElement(null);
+            }
+            else {
+                ((InteractivePage) getPage()).setElementWithFocus(null);
+            }
+
+            super.detach();
+            return;
+        }
+
+        for (DomNode child : getChildNodes()) {
+            if (activeElement == child.getScriptableObject()) {
+                doc.setActiveElement(null);
+                if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                    ((InteractivePage) getPage()).setFocusedElement(null);
+                }
+                else {
+                    ((InteractivePage) getPage()).setElementWithFocus(null);
+                }
+
+                super.detach();
+                return;
+            }
+        }
+
+        super.detach();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+            return this instanceof SubmittableElement;
+        }
+
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return false;
+        }
+
+        return super.handles(event);
     }
 }

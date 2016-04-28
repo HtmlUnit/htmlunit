@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.Arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -44,9 +43,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOM3: [object KeyboardEvent]", "vendor: exception" },
-            FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" },
-            IE8 = { "DOM3: exception", "vendor: exception" })
+    @Alerts(DEFAULT = {"DOM3: [object KeyboardEvent]", "vendor: exception"},
+            FF = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -66,11 +64,9 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0-0", "0-0", "undefined-undefined" },
-            CHROME = { "exception", "0-0", "0-0" },
-            IE = { "exception", "exception", "exception" },
-            IE11 = { "exception", "0-0", "undefined-undefined" })
-    @NotYetImplemented(CHROME)
+    @Alerts(FF = {"0-0", "0-0", "undefined-undefined"},
+            CHROME = {"exception", "0-0", "undefined-undefined"},
+            IE = {"exception", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -96,11 +92,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception" },
-            FF = { "keydown, true, true, true, true, true, true, 65, 0",
+    @Alerts(DEFAULT = {"exception", "exception"},
+            FF = {"keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0",
                 "keydown, true, true, true, true, true, true, 65, 0",
-                "keyup, false, false, false, false, false, false, 32, 0" })
+                "keyup, false, false, false, false, false, false, 32, 0"})
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'ctrlKey', 'altKey',\n"
@@ -137,13 +133,13 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
+    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keyup() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
             + "  alert(e.keyCode);"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeyup='handleKey(event)'/>\n"
@@ -161,14 +157,14 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
-        "82", "83", "84", "85", "86", "87", "88", "89", "90" })
+    @Alerts({"65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
+        "82", "83", "84", "85", "86", "87", "88", "89", "90"})
     public void keyCodes2_keyup() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
-            + "}"
+            + "  alert(e.keyCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeyup='handleKey(event)'/>\n"
@@ -186,13 +182,13 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
+    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keydown() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
-            + "}"
+            + "  alert(e.keyCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeydown='handleKey(event)'/>\n"
@@ -210,14 +206,14 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
-        "82", "83", "84", "85", "86", "87", "88", "89", "90" })
+    @Alerts({"65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
+        "82", "83", "84", "85", "86", "87", "88", "89", "90"})
     public void keyCodes2_keydown() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
-            + "}"
+            + "  alert(e.keyCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeydown='handleKey(event)'/>\n"
@@ -235,15 +231,13 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keypress() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.charCode);"
-            + "}"
+            + "  alert(e.charCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeypress='handleKey(event)'/>\n"
@@ -261,20 +255,16 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "97", "98", "99",
+    @Alerts({"97", "98", "99",
             "100", "101", "102", "103", "104", "105", "106", "107", "108", "109",
             "110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
-            "120", "121", "122" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" })
+            "120", "121", "122"})
     public void keyCodes2_keypress() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.charCode);"
-            + "}"
+            + "  alert(e.charCode);\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<input id='t' onkeypress='handleKey(event)'/>\n"
@@ -292,7 +282,37 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {  "keydown:16,0,16",
+    @Alerts(DEFAULT = {"13", "13", "13"},
+            FF = {"0", "13", "13"})
+    public void keyCodeEnter_keypress() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function handleKey(e) {\n"
+            + "  alert(e.charCode);\n"
+            + "  alert(e.keyCode);\n"
+            + "  alert(e.which);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <textarea id='t' onkeypress='handleKey(event)'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("\n");
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:0,65,65",
                     "keyup:65,0,65",
@@ -305,33 +325,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keyup:190,0,190",
                     "keydown:13,0,13",
                     "keypress:13,0,13",
-                    "keyup:13,0,13" },
-            CHROME = { "keydown:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:65,65,65",
-                    "keyup:65,0,65",
-                    "keyup:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:97,97,97",
-                    "keyup:65,0,65",
-                    "keydown:190,0,190",
-                    "keypress:46,46,46",
-                    "keyup:190,0,190" },
-             IE8 = { "keydown:16,undefined,undefined",
-                    "keydown:65,undefined,undefined",
-                    "keypress:65,undefined,undefined",
-                    "keyup:65,undefined,undefined",
-                    "keyup:16,undefined,undefined",
-                    "keydown:65,undefined,undefined",
-                    "keypress:97,undefined,undefined",
-                    "keyup:65,undefined,undefined",
-                    "keydown:190,undefined,undefined",
-                    "keypress:46,undefined,undefined",
-                    "keyup:190,undefined,undefined",
-                    "keydown:13,undefined,undefined",
-                    "keypress:13,undefined,undefined",
-                    "keyup:13,undefined,undefined" },
-           IE11 = { "keydown:16,0,16",
+                    "keyup:13,0,13"},
+            CHROME = {"keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:65,65,65",
                     "keyup:65,0,65",
@@ -344,10 +339,23 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keyup:190,0,190",
                     "keydown:13,0,13",
                     "keypress:13,13,13",
-                    "keyup:13,0,13" })
-    // WebDriver with real IE11 does not get the '\r' but real IE11 does
-    // TODO [IE11] HtmlUnit (or WebDriver?) does not fire an own event for the shift key (down + up)
-    @NotYetImplemented(CHROME)
+                    "keyup:13,0,13"},
+           IE = {"keydown:16,0,16",
+                    "keydown:65,0,65",
+                    "keypress:65,65,65",
+                    "keyup:65,0,65",
+                    "keyup:16,0,16",
+                    "keydown:65,0,65",
+                    "keypress:97,97,97",
+                    "keyup:65,0,65",
+                    "keydown:190,0,190",
+                    "keypress:46,46,46",
+                    "keyup:190,0,190",
+                    "keydown:13,0,13",
+                    "keypress:13,13,13",
+                    "keyup:13,0,13"})
+    // An issue with HtmlUnitWebDriver, which mandates a containing form of the <input> to handle pressing RETURN
+    @NotYetImplemented
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -364,7 +372,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "</script>\n"
             + "<textarea id='myTextarea' cols=80 rows=20></textarea>\n"
             + "</body></html>";
-        final String keysToSend = "Aa.\r";
+        final String keysToSend = "Aa." + Keys.RETURN;
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("keyId")).sendKeys(keysToSend);
 

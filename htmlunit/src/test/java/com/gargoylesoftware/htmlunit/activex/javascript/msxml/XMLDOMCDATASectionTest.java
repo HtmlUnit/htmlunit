@@ -86,12 +86,12 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { " ", " ", " ",
+            IE = {" ", " ", " ",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -175,7 +175,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "0", "4", "9", "6" })
+            IE = {"1", "0", "4", "9", "6"})
     public void length() throws Exception {
         final String test = ""
             + "alert(cdata.length);\n"
@@ -235,12 +235,12 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { " ", " ", " ",
+            IE = {" ", " ", " ",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(cdata.nodeValue);\n"
@@ -379,12 +379,12 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { " ", " ", " ",
+            IE = {" ", " ", " ",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
             + "alert(cdata.text);\n"
@@ -428,7 +428,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\r\ntext]]>", "<![CDATA[<tag/>]]>" })
+            IE = {"<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\r\ntext]]>", "<![CDATA[<tag/>]]>"})
     public void xml() throws Exception {
         final String test = ""
             + "alert(cdata.xml);\n"
@@ -479,7 +479,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\n" })
+            IE = {"myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\n"})
     public void appendData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -505,12 +505,12 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myCDATA", "myCDAT", "myT", "yT",
+            IE = {"myCDATA", "myCDAT", "myT", "yT",
                    "exception-deletePosNegative", "yT",
                    "exception-deletePosTooHigh", "yT",
                    "yT",
                    "exception-deleteCntNegative", "yT",
-                   "y" })
+                   "y"})
     public void deleteData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -553,12 +553,12 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myCDATA", "myCDATA-b", "myC-m-DATA-b", "f-myC-m-DATA-b",
+            IE = {"myCDATA", "myCDATA-b", "myC-m-DATA-b", "f-myC-m-DATA-b",
                    "exception-insertNull", "f-myC-m-DATA-b", "\nf-myC-m-DATA-b",
                    "\nf-myC-m-DATA-b",
                    "exception-insertPosNegative", "\nf-myC-m-DATA-b",
                    "\nf-myC-m-DATA-b",
-                   "exception-insertPosTooHigh", "\nf-myC-m-DATA-b" })
+                   "exception-insertPosTooHigh", "\nf-myC-m-DATA-b"})
     public void insertData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -606,13 +606,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myCDATA", "myCDAT-b", "my-m-T-b", "f-y-m-T-b",
+            IE = {"myCDATA", "myCDAT-b", "my-m-T-b", "f-y-m-T-b",
                    "exception-replaceNull", "f-y--T-b", "f-y\nT-b",
                    "exception-replacePosNegative", "f-y\nT-b",
                    "exception-replacePosTooHigh", "f-y\nT-b",
                    "f-y\nT-b",
                    "exception-replaceCntNegative", "f-y\nT-b",
-                   "f" })
+                   "f"})
     public void replaceData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -665,9 +665,9 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "2", "#cdata-section", "2", "my", "#cdata-section", "5", "CDATA", "true",
+            IE = {"1", "2", "#cdata-section", "2", "my", "#cdata-section", "5", "CDATA", "true",
                    "exception-splitPosNegative", "my",
-                   "exception-splitPosTooHigh", "my" })
+                   "exception-splitPosTooHigh", "my"})
     public void splitText() throws Exception {
         final String test = ""
             + "alert(root.childNodes.length);\n"
@@ -698,12 +698,12 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "myCDATA", "A", "myCDATA", "CDA", "myCDATA", "m", "myCDATA",
+            IE = {"myCDATA", "A", "myCDATA", "CDA", "myCDATA", "m", "myCDATA",
                    "exception-substringPosNegative", "myCDATA",
                    "exception-substringPosTooHigh", "myCDATA",
                    "", "myCDATA",
                    "exception-substringCntNegative", "myCDATA",
-                   "yCDATA", "myCDATA" })
+                   "yCDATA", "myCDATA"})
     public void substringData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"

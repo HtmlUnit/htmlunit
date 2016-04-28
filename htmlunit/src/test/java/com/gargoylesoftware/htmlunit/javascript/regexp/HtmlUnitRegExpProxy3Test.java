@@ -14,10 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -45,18 +46,18 @@ public class HtmlUnitRegExpProxy3Test {
 
         final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null, BrowserVersion.FIREFOX_38);
 
-        Assert.assertEquals("$", proxy.computeReplacementValue("$$", theString, matcher0group));
-        Assert.assertEquals("$$x$", proxy.computeReplacementValue("$$$$x$$", theString, matcher0group));
+        assertEquals("$", proxy.computeReplacementValue("$$", theString, matcher0group));
+        assertEquals("$$x$", proxy.computeReplacementValue("$$$$x$$", theString, matcher0group));
 
-        Assert.assertEquals("$1", proxy.computeReplacementValue("$1", theString, matcher0group));
-        Assert.assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher0group));
-        Assert.assertEquals("h", proxy.computeReplacementValue("$1", theString, matcher1group));
-        Assert.assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher1group));
+        assertEquals("$1", proxy.computeReplacementValue("$1", theString, matcher0group));
+        assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher0group));
+        assertEquals("h", proxy.computeReplacementValue("$1", theString, matcher1group));
+        assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher1group));
 
-        Assert.assertEquals("$", proxy.computeReplacementValue("$", theString, matcher0group));
-        Assert.assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group));
-        Assert.assertEquals("\\\\$", proxy.computeReplacementValue("\\\\$", theString, matcher1group));
-        Assert.assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group));
+        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher0group));
+        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group));
+        assertEquals("\\\\$", proxy.computeReplacementValue("\\\\$", theString, matcher1group));
+        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group));
     }
 
     /**
@@ -66,9 +67,9 @@ public class HtmlUnitRegExpProxy3Test {
      */
     @Test
     public void removeBackReferencesInCharacterClasses() {
-        Assert.assertEquals("(a)(b)[^c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[^\\2c]"));
-        Assert.assertEquals("(a)(b)[c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\2c]"));
-        Assert.assertEquals("(a)(b)[\\\\2c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\\\2c]"));
+        assertEquals("(a)(b)[^c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[^\\2c]"));
+        assertEquals("(a)(b)[c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\2c]"));
+        assertEquals("(a)(b)[\\\\2c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\\\2c]"));
     }
 
     /**
@@ -77,11 +78,11 @@ public class HtmlUnitRegExpProxy3Test {
      */
     @Test
     public void unescapeIllegallyEscapedChars() {
-        Assert.assertEquals("a", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\a"));
+        assertEquals("a", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\a"));
 
         final char[] specials = {'b', 'B', 'c', 'd', 'D', 'f', 'n', 'o', 'r', 's', 'S', 't', 'v', 'w', 'W', 'x'};
         for (final char c : specials) {
-            Assert.assertEquals("\\" + c, HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\" + c));
+            assertEquals("\\" + c, HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\" + c));
         }
     }
 }

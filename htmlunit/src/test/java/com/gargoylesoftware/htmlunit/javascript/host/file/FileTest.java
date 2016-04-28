@@ -23,6 +23,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -39,17 +40,14 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "1", "ScriptExceptionTest1.txt",
+    @Alerts(CHROME = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "1437920507000", "", "14", "text/plain" },
-            FF31 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "undefined", "undefined", "14", "text/plain" },
-            FF38 = { "1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
-                            "1437920507000", "undefined", "14", "text/plain" },
-            IE11 = { "1", "ScriptExceptionTest1.txt",
+                            "1437920507000", "", "14", "text/plain"},
+            FF = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
+                            "1437920507000", "undefined", "14", "text/plain"},
+            IE = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
-                            "undefined", "undefined", "14", "text/plain" },
-            IE8 = { })
+                            "undefined", "undefined", "14", "text/plain"})
     public void properties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -84,7 +82,7 @@ public class FileTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit");
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
 
             // do not use millis here because different file systems
             // have different precisions

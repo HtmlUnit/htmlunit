@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -186,6 +184,70 @@ public abstract class WebTestCase {
     }
 
     /**
+     * Assert that the specified object is null.
+     * @param message the message
+     * @param object the object to check
+     */
+    public static void assertNull(final String message, final Object object) {
+        Assert.assertNull(message, object);
+    }
+
+    /**
+     * Assert that the specified object is not null.
+     * @param object the object to check
+     */
+    public static void assertNotNull(final Object object) {
+        Assert.assertNotNull(object);
+    }
+
+    /**
+     * Assert that the specified object is not null.
+     * @param message the message
+     * @param object the object to check
+     */
+    public static void assertNotNull(final String message, final Object object) {
+        Assert.assertNotNull(message, object);
+    }
+
+    /**
+     * Asserts that two objects refer to the same object.
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertSame(final Object expected, final Object actual) {
+        Assert.assertSame(expected, actual);
+    }
+
+    /**
+     * Asserts that two objects refer to the same object.
+     * @param message the message
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertSame(final String message, final Object expected, final Object actual) {
+        Assert.assertSame(message, expected, actual);
+    }
+
+    /**
+     * Asserts that two objects do not refer to the same object.
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertNotSame(final Object expected, final Object actual) {
+        Assert.assertNotSame(expected, actual);
+    }
+
+    /**
+     * Asserts that two objects do not refer to the same object.
+     * @param message the message
+     * @param expected the expected object
+     * @param actual the actual object
+     */
+    public static void assertNotSame(final String message, final Object expected, final Object actual) {
+        Assert.assertNotSame(message, expected, actual);
+    }
+
+    /**
      * Facility to test external form of urls. Comparing external form of URLs is
      * really faster than URL.equals() as the host doesn't need to be resolved.
      * @param expectedUrl the expected URL
@@ -202,6 +264,16 @@ public abstract class WebTestCase {
      */
     protected static void assertEquals(final Object expected, final Object actual) {
         Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * Asserts the two objects are equal.
+     * @param message the message
+     * @param expected the expected object
+     * @param actual the object to test
+     */
+    protected static void assertEquals(final String message, final Object expected, final Object actual) {
+        Assert.assertEquals(message, expected, actual);
     }
 
     /**
@@ -422,9 +494,7 @@ public abstract class WebTestCase {
      */
     private String createInstrumentationScript(final List<String> expectedAlerts) throws IOException {
         // generate the js code
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("alertVerifier.js");
-        final String baseJS = IOUtils.toString(is);
-        IOUtils.closeQuietly(is);
+        final String baseJS = getFileContent("alertVerifier.js");
 
         final StringBuilder sb = new StringBuilder();
         sb.append("\n<script type='text/javascript'>\n");
@@ -477,7 +547,7 @@ public abstract class WebTestCase {
      * @param method the method
      * @return {@code true} if this is a junit test
      */
-    private boolean isPublicTestMethod(final Method method) {
+    private static boolean isPublicTestMethod(final Method method) {
         return method.getParameterTypes().length == 0
             && (method.getName().startsWith("test") || method.getAnnotation(Test.class) != null)
             && method.getReturnType() == Void.TYPE
@@ -580,7 +650,7 @@ public abstract class WebTestCase {
             final File outFile = new File(targetDir, generateTest_testName_);
 
             final String newContent = getModifiedContent(generateTest_content_);
-            FileUtils.writeStringToFile(outFile, newContent);
+            FileUtils.writeStringToFile(outFile, newContent, TextUtil.DEFAULT_CHARSET);
 
             // write the expected alerts
             final String suffix;
@@ -597,10 +667,11 @@ public abstract class WebTestCase {
 
             final File expectedLog = new File(outFile.getParentFile(), outFile.getName() + suffix);
 
-            final FileOutputStream fos = new FileOutputStream(expectedLog);
-            final ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(generateTest_expectedAlerts_);
-            oos.close();
+            try (final FileOutputStream fos = new FileOutputStream(expectedLog)) {
+                try (final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                    oos.writeObject(generateTest_expectedAlerts_);
+                }
+            }
         }
     }
 
@@ -708,4 +779,17 @@ public abstract class WebTestCase {
 
         return jsThreads;
     }
+
+    /**
+     * Read the content of the given file using our classloader.
+     * @param fileName the file name
+     * @return the content as string
+     * @throws IOException in case of error
+     */
+    protected String getFileContent(final String fileName) throws IOException {
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(fileName);
+        assertNotNull(fileName, stream);
+        return IOUtils.toString(stream, TextUtil.DEFAULT_CHARSET);
+    }
+
 }

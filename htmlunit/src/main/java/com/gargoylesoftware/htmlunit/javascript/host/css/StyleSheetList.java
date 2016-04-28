@@ -15,14 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.SACMediaList;
@@ -35,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -46,6 +40,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.steadystate.css.dom.MediaListImpl;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * <p>An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
@@ -62,11 +59,7 @@ import com.steadystate.css.dom.MediaListImpl;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class StyleSheetList extends SimpleScriptable {
 
     /**
@@ -106,7 +99,7 @@ public class StyleSheetList extends SimpleScriptable {
                 }
                 final WebClient webClient = getWindow().getWebWindow().getWebClient();
                 final SACMediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
-                return CSSStyleSheet.isActive(new MediaListImpl(mediaList));
+                return CSSStyleSheet.isActive(this, new MediaListImpl(mediaList));
             }
         }
         return false;
@@ -133,7 +126,7 @@ public class StyleSheetList extends SimpleScriptable {
         final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
 
         if (cssEnabled) {
-            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true, "stylesheets") {
+            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     if (node instanceof HtmlStyle) {
@@ -178,19 +171,8 @@ public class StyleSheetList extends SimpleScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        if (index < 0) {
-            if (getWindow().getBrowserVersion().hasFeature(
-                    JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX)) {
-                throw Context.reportRuntimeError("Invalid negative index: " + index);
-            }
-            return Context.getUndefinedValue();
-        }
-        else if (index >= nodes_.getLength()) {
-            if (getWindow().getBrowserVersion().hasFeature(
-                    JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX)) {
-                throw Context.reportRuntimeError("Invalid index: " + index);
-            }
-            return Context.getUndefinedValue();
+        if (index < 0 || index >= nodes_.getLength()) {
+            return Undefined.instance;
         }
 
         final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));

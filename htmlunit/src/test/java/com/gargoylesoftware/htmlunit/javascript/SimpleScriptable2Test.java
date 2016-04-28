@@ -72,8 +72,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Arguments]",
-            IE8 = "[object Object]")
+    @Alerts("[object Arguments]")
     public void arguments_toString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -109,7 +108,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "x1", "x2", "x3", "x4", "x5" })
+    @Alerts({"x1", "x2", "x3", "x4", "x5"})
     public void arrayedMap() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -122,7 +121,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "    map['x5'] = 'y5';\n"
             + "    for (var i in map) {\n"
             + "      alert(i);\n"
-            + "    }"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -135,8 +134,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void parentProtoFeature() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>First</title><script>\n"
@@ -213,7 +211,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "function", "function" })
+    @Alerts({"true", "function", "function"})
     public void callee() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -233,8 +231,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDivElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLDivElement]")
     public void getDefaultValue() throws Exception {
         getDefaultValue(false);
     }
@@ -276,8 +273,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "exception")
+    @Alerts("false")
     public void set_ReadOnly_window_closed() throws Exception {
         set_ReadOnly("window.closed");
     }
@@ -288,8 +284,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "window.length was set",
-            IE8 = "exception")
+    @Alerts("window.length was set")
     public void set_ReadOnly_window_length() throws Exception {
         set_ReadOnly("window.length");
     }
@@ -327,10 +322,9 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "function", "true", "function length() {\n    [native code]\n}", "0", "0" },
-            CHROME = { "undefined", "false", "undefined", "exception" },
-            IE11 = { "function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0" },
-            IE8 = "exception")
+    @Alerts(FF = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
+            CHROME = {"undefined", "false", "undefined", "exception"},
+            IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
     @NotYetImplemented(CHROME)
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

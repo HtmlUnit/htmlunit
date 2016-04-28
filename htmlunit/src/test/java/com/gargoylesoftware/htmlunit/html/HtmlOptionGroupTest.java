@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -47,14 +46,14 @@ public class HtmlOptionGroupTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlOptionGroup optionGroup = page.getHtmlElementById("myId");
-        Assert.assertNotNull(optionGroup.getEnclosingSelect());
+        assertNotNull(optionGroup.getEnclosingSelect());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "false", "true", "false", "true", "false", "false", "false" })
+    @Alerts({"false", "false", "true", "false", "true", "false", "false", "false"})
     public void disabled() throws Exception {
         final String html = "<html><body onload='test()'><form name='f'>\n"
             + "  <select name='s' id='s'>\n"
@@ -88,8 +87,7 @@ public class HtmlOptionGroupTest extends SimpleWebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final boolean disabled = !"IE8".equals(getBrowserVersion().getNickname());
-        assertEquals(disabled, ((HtmlOptionGroup) page.getElementById("g1")).isDisabled());
+        assertEquals(true, ((HtmlOptionGroup) page.getElementById("g1")).isDisabled());
         assertFalse(((HtmlOptionGroup) page.getElementById("g2")).isDisabled());
     }
 

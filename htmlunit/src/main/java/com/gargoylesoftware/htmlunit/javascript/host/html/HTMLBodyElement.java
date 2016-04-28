@@ -14,22 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_IE11;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_IE8;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -44,12 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContain
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlBody.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-            @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, domClass = HtmlBody.class,
-            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-    })
+@JsxClass(domClass = HtmlBody.class)
 public class HTMLBodyElement extends HTMLElement {
 
     /**
@@ -80,6 +69,7 @@ public class HTMLBodyElement extends HTMLElement {
      *
      * @see HTMLFrameSetElement#getEventListenersContainer()
      */
+    @Override
     public EventListenersContainer getEventListenersContainer() {
         return getWindow().getEventListenersContainer();
     }
@@ -89,11 +79,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     public void setDefaults(final ComputedCSSStyleDeclaration style) {
-        if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_IE8)) {
-            style.setDefaultLocalStyleAttribute("margin", "15px 10px");
-            style.setDefaultLocalStyleAttribute("padding", "0px");
-        }
-        else if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_IE11)) {
+        if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
             style.setDefaultLocalStyleAttribute("margin", "8px");
             style.setDefaultLocalStyleAttribute("padding", "0px");
         }
@@ -235,15 +221,10 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for replacing this node
+     * {@inheritDoc}
      */
-    @JsxSetter
     @Override
-    public void setOuterHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_OUTER_HTML_BODY_HEAD_READONLY)) {
-            throw Context.reportRuntimeError("outerHTML is read-only for tag 'body'");
-        }
-        super.setOuterHTML(value);
+    public int getClientWidth() {
+        return super.getClientWidth() + 16;
     }
 }

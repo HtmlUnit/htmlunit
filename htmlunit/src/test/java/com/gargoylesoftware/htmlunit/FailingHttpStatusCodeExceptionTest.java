@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -62,7 +63,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
         final WebClient client = getWebClientWithMockWebConnection();
         try {
             client.getPage(getDefaultUrl());
-            Assert.fail("FailingHttpStatusCodeException expected");
+            fail("FailingHttpStatusCodeException expected");
         }
         catch (final FailingHttpStatusCodeException e) {
             // expected

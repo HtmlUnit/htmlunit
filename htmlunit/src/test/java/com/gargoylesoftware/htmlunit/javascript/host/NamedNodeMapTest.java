@@ -44,39 +44,9 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented({ FF, IE })
-    @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f" },
-            CHROME = { "name=f", "id=f", "foo=bar", "baz=blah" },
-            IE8 = { "onresizeend=null", "onrowenter=null",
-                    "aria-haspopup=", "ondragleave=null", "onbeforepaste=null",
-                    "ondragover=null", "onbeforecopy=null", "aria-disabled=",
-                    "onpage=null", "onbeforeactivate=null", "accessKey=",
-                    "onbeforeeditfocus=null", "oncontrolselect=null", "aria-hidden=",
-                    "onblur=null", "hideFocus=false", "style=null", "onbeforedeactivate=null",
-                    "dir=", "aria-expanded=", "onkeydown=null", "ondragstart=null", "onscroll=null",
-                    "onpropertychange=null", "ondragenter=null", "id=f", "aria-level=0",
-                    "onrowsinserted=null", "lang=", "onmouseup=null", "aria-busy=",
-                    "oncontextmenu=null", "language=", "dataSrc=null", "implementation=null",
-                    "onbeforeupdate=null", "onreadystatechange=null", "onmouseenter=null",
-                    "onresize=null", "aria-checked=", "aria-readonly=", "oncopy=null",
-                    "onselectstart=null", "onmove=null", "ondragend=null", "onrowexit=null",
-                    "aria-secret=", "onactivate=null", "class=", "onfocus=null", "onfocusin=null",
-                    "onmouseover=null", "oncut=null", "onmousemove=null", "title=", "role=",
-                    "dataFld=null", "onfocusout=null", "onfilterchange=null", "disabled=false",
-                    "aria-posinset=0", "ondrop=null", "ondblclick=null", "onrowsdelete=null",
-                    "tabIndex=0", "onkeypress=null", "aria-relevant=", "onlosecapture=null", "aria-live=",
-                    "ondeactivate=null", "aria-labelledby=", "aria-pressed=", "ondatasetchanged=null",
-                    "ondataavailable=null", "aria-invalid=", "onafterupdate=null", "onmousewheel=null",
-                    "onkeyup=null", "onmovestart=null", "aria-valuenow=", "aria-selected=",
-                    "onmouseout=null", "aria-owns=", "aria-valuemax=", "onmoveend=null",
-                    "contentEditable=inherit", "dataFormatAs=null", "oncellchange=null", "aria-valuemin=",
-                    "onlayoutcomplete=null", "onhelp=null", "onerrorupdate=null", "onmousedown=null",
-                    "aria-setsize=0", "onpaste=null", "onmouseleave=null", "onclick=null", "ondrag=null",
-                    "aria-controls=", "onresizestart=null", "aria-flowto=", "ondatasetcomplete=null",
-                    "aria-required=", "aria-describedby=", "onbeforecut=null", "aria-activedescendant=",
-                    "aria-multiselectable=", "accept-charset=UNKNOWN", "encType=application/x-www-form-urlencoded",
-                    "onsubmit=null", "method=get", "onreset=null",
-                    "name=f", "action=", "target=", "baz=blah", "foo=bar" },
-            IE11 = { "name=f", "id=f", "baz=blah", "foo=bar" })
+    @Alerts(FF = {"baz=blah", "foo=bar", "id=f", "name=f"},
+            CHROME = {"name=f", "id=f", "foo=bar", "baz=blah"},
+            IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
     public void attributes() throws Exception {
         final String html =
               "<html>\n"
@@ -106,8 +76,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "name", "f", "name", "f", "name", "f", "name", "f", "null" },
-            IE8 = { "name", "f", "name", "f", "name", "f", "exception", "null" })
+    @Alerts({"name", "f", "name", "f", "name", "f", "name", "f", "null"})
     public void getNamedItem_HTML() throws Exception {
         final String html =
               "<html>\n"
@@ -146,7 +115,8 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myAttr", "myattr2", "myAttr", "myattr2", "myattr2" })
+    @Alerts(DEFAULT = {"myAttr", "myattr2", "myAttr", "myattr2", "myattr2"},
+            FF45 = {"myattr", "myattr2", "myattr", "myattr2", "myattr2"})
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -184,8 +154,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "name", "y", "name", "y", "null", "undefined", "null" },
-            IE8 = { "name", "y", "exception", "null", "undefined", "null" })
+    @Alerts({"name", "y", "name", "y", "null", "undefined", "null"})
     public void getNamedItem_XML() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -263,7 +232,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "true", "[object Attr]", "true", "[object Attr]" })
+    @Alerts({"true", "[object Attr]", "true", "[object Attr]"})
     public void has() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html ng-app><body>\n"
             + "<script>\n"
@@ -282,7 +251,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "div1", "" })
+    @Alerts({"div1", ""})
     public void removeNamedItem() throws Exception {
         final String html =
               "<html>\n"
@@ -304,8 +273,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
-            IE8 = { "[object]", "[object]", "[object]" })
+    @Alerts({"undefined", "undefined", "undefined"})
     public void unspecifiedAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -360,8 +328,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<input id=\"myinput\" name=\"test_input\">",
-            IE8 = "<INPUT id=myinput name=test_input>")
+    @Alerts("<input id=\"myinput\" name=\"test_input\">")
     public void readAccessOnlyDefinesNewAttribs() throws Exception {
         final String html =
                 "<html>\n"

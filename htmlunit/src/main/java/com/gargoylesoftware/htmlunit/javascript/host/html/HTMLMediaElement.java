@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMedia;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,8 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class HTMLMediaElement extends HTMLElement {
 
     /**
@@ -68,7 +66,7 @@ public class HTMLMediaElement extends HTMLElement {
     @JsxConstant
     public static final short HAVE_ENOUGH_DATA = 4;
 
-    /** There is no data yet.  The {@link #getReadyState} is also {@link #HAVE_NOTHING}. */
+    /** There is no data yet. */
     @JsxConstant
     public static final short NETWORK_EMPTY = 0;
 

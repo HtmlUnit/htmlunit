@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -29,7 +25,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -51,8 +46,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLButtonElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLButtonElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -75,7 +69,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-undefined", "-undefined", "-" })
+    @Alerts({"-undefined", "-undefined", "-"})
     public void defaultValues() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -105,7 +99,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-undefined", "-", "-" })
+    @Alerts({"-undefined", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -139,8 +133,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -178,8 +172,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -216,7 +210,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" })
+    @Alerts({"initial-undefined", "initial-default", "newValue-default", "newValue-newDefault"})
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -246,7 +240,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-OK", "newValue-OK", "newValue-OK" })
+    @Alerts({"initial-OK", "newValue-OK", "newValue-OK"})
     public void innerHtml() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -274,8 +268,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-OK", "newValue-OK", "newValue-Cancel" },
-            FF = { "initial-undefined", "newValue-undefined", "newValue-Cancel" })
+    @Alerts(DEFAULT = {"initial-OK", "newValue-OK", "newValue-Cancel"},
+            FF38 = {"initial-undefined", "newValue-undefined", "newValue-Cancel"})
     public void innerText() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -303,9 +297,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK" },
-            IE8 = { "initial-initial-OK", "newValue--OK", "newValue--OK" })
-    @NotYetImplemented(IE8)
+    @Alerts({"initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK"})
     public void valueAttributeNode() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -336,8 +328,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit", "1", "button-pushme", "Second" },
-            IE8 = { "button", "0", "", "First" })
+    @Alerts({"submit", "1", "button-pushme", "Second"})
     public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -370,8 +361,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE8 = "1")
+    @Alerts("2")
     public void typeUnknown() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -502,8 +492,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE8 = "1")
+    @Alerts("2")
     public void submitWithoutType() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -535,7 +524,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented({ FF, CHROME })
     public void typeUnknownExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -567,7 +555,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented({ FF, CHROME })
     public void typeSubmitExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -629,7 +616,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented({ FF, CHROME })
     public void submitWithoutTypeExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -689,9 +675,46 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
-    @NotYetImplemented
+    @Alerts(DEFAULT = {"2", "second"},
+            IE = {"1", "first"})
+    public void externalPreferenceFrom() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm2' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <form id='myForm3' action='" + URL_THIRD + "'>\n"
+            + "    <button type='submit' id='myButton' form='myForm2'>Explicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+        final String thirdContent
+            = "<html><head><title>third</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        shutDownRealIE();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "second"},
+            IE = {"1", "first"})
     public void internalDifferentFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -706,25 +729,27 @@ public class HtmlButton2Test extends WebDriverTestCase {
             = "<html><head><title>second</title></head><body>\n"
             + "  <p>hello world</p>\n"
             + "</body></html>";
+        final String thirdContent
+            = "<html><head><title>third</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse(secondContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
-        if (expectedReqCount > 1) {
-            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
-        }
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "submit",
-            IE8 = "button")
+    @Alerts("submit")
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

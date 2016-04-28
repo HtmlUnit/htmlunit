@@ -36,7 +36,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Enumerator not supported",
-            IE = { "true", "undefined", "undefined", "undefined", "true" })
+            IE = {"true", "undefined", "undefined", "undefined", "true"})
     public void basicEmptyEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -49,7 +49,7 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "      alert(en.moveNext());\n"
             + "      alert(en.item());\n"
             + "      alert(en.atEnd());\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  } else {\n"
             + "    alert('Enumerator not supported');\n"
             + "  }\n"
@@ -66,8 +66,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Enumerator not supported",
-            IE = { "false", "[object]", "undefined", "undefined", "true" },
-            IE11 = { "exception" })
+            IE = {"exception"})
     public void basicEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -80,7 +79,7 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "      alert(en.moveNext());\n"
             + "      alert(en.item());\n"
             + "      alert(en.atEnd());\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  } else {\n"
             + "    alert('Enumerator not supported');\n"
             + "  }\n"
@@ -97,7 +96,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Enumerator not supported",
-            IE = { "exception" })
+            IE = {"exception"})
     public void basicEnumeratorWrongType() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -105,7 +104,7 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
             + "      var en = new Enumerator(window);\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  } else {\n"
             + "    alert('Enumerator not supported');\n"
             + "  }\n"
@@ -123,9 +122,8 @@ public class EnumeratorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "f t1 t2", "Enumerator not supported" },
-            IE = { "f t1 t2", "t1", "t2" },
-            IE11 = { "f t1 t2", "exception" })
+    @Alerts(DEFAULT = {"f t1 t2", "Enumerator not supported"},
+            IE = {"f t1 t2", "exception"})
     public void formEnumerator() throws Exception {
         final String html
             = "<html>\n"
@@ -144,7 +142,7 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "      for( ; !e.atEnd(); e.moveNext()) {\n"
             + "        alert(e.item().id);\n"
             + "      }\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  } else {\n"
             + "    alert('Enumerator not supported');\n"
             + "  }\n"
@@ -157,9 +155,8 @@ public class EnumeratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "Enumerator not supported" },
-            IE = { "undefined", "text" },
-            IE11 = { "undefined", "exception" })
+    @Alerts(DEFAULT = {"undefined", "Enumerator not supported"},
+            IE = {"undefined", "exception"})
     public void item() throws Exception {
         final String html
             = "<html><head>\n"
@@ -170,7 +167,7 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
             + "      alert(new Enumerator(form).item().TyPe);\n"
-            + "    } catch(e) { alert('exception'); }"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  } else {\n"
             + "    alert('Enumerator not supported');\n"
             + "  }\n"

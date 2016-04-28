@@ -44,7 +44,7 @@ public class EncodingSnifferTest {
         header("UTF-8", "Content-Type", "text/html;charset=utf-8;");
     }
 
-    private void header(final String expectedEncoding, final String headerName, final String headerValue) {
+    private static void header(final String expectedEncoding, final String headerName, final String headerValue) {
         final NameValuePair header = new NameValuePair(headerName, headerValue);
         assertEquals(expectedEncoding, sniffEncodingFromHttpHeaders(singletonList(header)));
     }
@@ -77,7 +77,7 @@ public class EncodingSnifferTest {
         meta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
     }
 
-    private void meta(final String expectedEncoding, final String content) {
+    private static void meta(final String expectedEncoding, final String content) {
         assertEquals(expectedEncoding, sniffEncodingFromMetaTag(content.getBytes()));
     }
 
@@ -102,7 +102,7 @@ public class EncodingSnifferTest {
         xmlDeclaration("utf-8", "<?xml encoding=\"utf-8\"?>");
     }
 
-    private void xmlDeclaration(final String expectedEncoding, final String content) {
+    private static void xmlDeclaration(final String expectedEncoding, final String content) {
         assertEquals(expectedEncoding, sniffEncodingFromXmlDeclaration(content.getBytes()));
     }
 
@@ -138,7 +138,7 @@ public class EncodingSnifferTest {
         contentType("utf-8", "\n text/html ; charset = \n\"utf-8\"");
     }
 
-    private void contentType(final String expectedEncoding, final String contentType) {
+    private static void contentType(final String expectedEncoding, final String contentType) {
         assertEquals(expectedEncoding, extractEncodingFromContentType(contentType));
     }
 

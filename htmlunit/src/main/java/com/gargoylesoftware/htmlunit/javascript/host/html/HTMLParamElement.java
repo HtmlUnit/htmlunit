@@ -17,12 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlParameter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -31,13 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlParameter.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlParameter.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlParameter.class)
 public class HTMLParamElement extends HTMLElement {
 
     /**
@@ -45,6 +38,42 @@ public class HTMLParamElement extends HTMLElement {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public HTMLParamElement() {
+    }
+
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Returns the {@code value} attribute.
+     * @return the {@code value} attribute
+     */
+    @JsxGetter
+    public String getValue() {
+        return getDomNodeOrDie().getAttribute("value");
+    }
+
+    /**
+     * Returns the {@code type} attribute.
+     * @return the {@code type} attribute
+     */
+    @JsxGetter
+    public String getType() {
+        return getDomNodeOrDie().getAttribute("type");
+    }
+
+    /**
+     * Returns the {@code valuetype} attribute.
+     * @return the {@code valuetype} attribute
+     */
+    @JsxGetter
+    public String getValueType() {
+        return getDomNodeOrDie().getAttribute("valuetype");
     }
 
     /**

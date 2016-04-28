@@ -46,9 +46,6 @@ public class RangeTest extends WebDriverTestCase {
         + "  alert(r.endOffset);\n"
         + "}\n"
         + "function test() {\n"
-        + "  if (!document.createRange) {\n"
-        + "    return;\n"
-        + "  }\n"
         + "  var r = document.createRange();\n";
 
     private static final String contentEnd = "\n}\n</script></head>\n"
@@ -63,8 +60,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" },
-            IE8 = { })
+    @Alerts({"true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0"})
     public void emptyRange() throws Exception {
         loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }
@@ -73,7 +69,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "BODY", "BODY", "1", "BODY", "2" }, IE8 = { })
+    @Alerts({"false", "BODY", "BODY", "1", "BODY", "2"})
     public void selectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -85,7 +81,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "DIV", "DIV", "0", "DIV", "2" }, IE8 = { })
+    @Alerts({"false", "DIV", "DIV", "0", "DIV", "2"})
     public void selectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -97,19 +93,16 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>",
-            IE8 = { })
+    @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
     public void createContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    if (document.createRange) {\n"
-            + "      var element = document.getElementById('myDiv2');\n"
-            + "      var range = element.ownerDocument.createRange();\n"
-            + "      range.setStartAfter(element);\n"
-            + "      var fragment = range.createContextualFragment('<div>harhar</div>');\n"
-            + "      element.parentNode.insertBefore(fragment, element.nextSibling);\n"
-            + "      alert(element.parentNode.innerHTML);\n"
-            + "    }\n"
+            + "    var element = document.getElementById('myDiv2');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('<div>harhar</div>');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    alert(element.parentNode.innerHTML);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
@@ -123,8 +116,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Text]", "[object HTMLTableRowElement]" },
-            IE8 = "exception")
+    @Alerts({"[object Text]", "[object HTMLTableRowElement]"})
     public void createContextualFragment2() throws Exception {
         final String html = "<html><body>\n"
             + "<div id ='d'></div>\n"
@@ -152,25 +144,23 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
-            "[object HTMLSpanElement]" }, IE8 = { })
+    @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
+            "[object HTMLSpanElement]"})
     public void extractContents() throws Exception {
         final String html =
               "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var d = document.getElementById('d');\n"
-            + "    var s = document.getElementById('s');\n"
-            + "    var r = document.createRange();\n"
-            + "    r.setStart(s.firstChild, 4);\n"
-            + "    r.setEnd(d.childNodes[2], 2);\n"
-            + "    alert(s.innerHTML);\n"
-            + "    alert(r);\n"
-            + "    var fragment = r.extractContents();\n"
-            + "    alert(fragment);\n"
-            + "    alert(fragment.childNodes[0] + ' ' + fragment.childNodes[1]);\n"
-            + "    alert(s.innerHTML);\n"
-            + "    alert(document.getElementById('s'));\n"
-            + "  }\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(s.firstChild, 4);\n"
+            + "  r.setEnd(d.childNodes[2], 2);\n"
+            + "  alert(s.innerHTML);\n"
+            + "  alert(r);\n"
+            + "  var fragment = r.extractContents();\n"
+            + "  alert(fragment);\n"
+            + "  alert(fragment.childNodes[0] + ' ' + fragment.childNodes[1]);\n"
+            + "  alert(s.innerHTML);\n"
+            + "  alert(document.getElementById('s'));\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -179,38 +169,35 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {
+    @Alerts({
             "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
             "2 text1",
             "3 [object DocumentFragment]",
             "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
             "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
             "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
-            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" },
-            IE8 = { })
+            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
     public void extractContents2() throws Exception {
         final String html =
               "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var d = document.getElementById('d');\n"
-            + "    var b = document.getElementById('b');\n"
-            + "    var s = document.getElementById('s');\n"
-            + "    var r = document.createRange();\n"
-            + "    r.setStart(d, 0);\n"
-            + "    r.setEnd(b, 1);\n"
-            + "    alert('1 ' + d.innerHTML);\n"
-            + "    alert('2 ' + r);\n"
-            + "    var f = r.extractContents();\n"
-            + "    alert('3 ' + f);\n"
-            + "    alert('4 ' + f.childNodes.length + ': ' + f.childNodes[0] + ': ' + f.childNodes[0].innerHTML);\n"
-            + "    alert('5 ' + d.innerHTML);\n"
-            + "    var r2 = document.createRange();\n"
-            + "    r2.setStart(s, 1);\n"
-            + "    r2.setEnd(d, 1);\n"
-            + "    var f2 = r2.extractContents();\n"
-            + "    alert('6 ' + f2.childNodes.length + ': ' + f2.childNodes[0] + ': ' + f2.childNodes[0].innerHTML);\n"
-            + "    alert('7 ' + d.innerHTML);\n"
-            + "  }\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 0);\n"
+            + "  r.setEnd(b, 1);\n"
+            + "  alert('1 ' + d.innerHTML);\n"
+            + "  alert('2 ' + r);\n"
+            + "  var f = r.extractContents();\n"
+            + "  alert('3 ' + f);\n"
+            + "  alert('4 ' + f.childNodes.length + ': ' + f.childNodes[0] + ': ' + f.childNodes[0].innerHTML);\n"
+            + "  alert('5 ' + d.innerHTML);\n"
+            + "  var r2 = document.createRange();\n"
+            + "  r2.setStart(s, 1);\n"
+            + "  r2.setEnd(d, 1);\n"
+            + "  var f2 = r2.extractContents();\n"
+            + "  alert('6 ' + f2.childNodes.length + ': ' + f2.childNodes[0] + ': ' + f2.childNodes[0].innerHTML);\n"
+            + "  alert('7 ' + d.innerHTML);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -219,16 +206,14 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "2", "3" }, IE8 = { })
+    @Alerts({"0", "1", "2", "3"})
     public void constants() throws Exception {
         final String html =
               "<html><body><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    alert(Range.START_TO_START);\n"
-            + "    alert(Range.START_TO_END);\n"
-            + "    alert(Range.END_TO_END);\n"
-            + "    alert(Range.END_TO_START);\n"
-            + "  }\n"
+            + "  alert(Range.START_TO_START);\n"
+            + "  alert(Range.START_TO_END);\n"
+            + "  alert(Range.END_TO_END);\n"
+            + "  alert(Range.END_TO_START);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -237,22 +222,20 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-1", "1", "1", "-1", "0" }, IE8 = { })
+    @Alerts({"-1", "1", "1", "-1", "0"})
     public void compareBoundaryPoints() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d1'><div id='d2'></div></div>\n"
             + "<script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var range = document.createRange();\n"
-            + "    range.selectNode(document.getElementById('d1'));\n"
-            + "    var sourceRange = document.createRange();\n"
-            + "    sourceRange.selectNode(document.getElementById('d2'));\n"
-            + "    alert(range.compareBoundaryPoints(Range.START_TO_START, sourceRange));\n"
-            + "    alert(range.compareBoundaryPoints(Range.START_TO_END, sourceRange));\n"
-            + "    alert(range.compareBoundaryPoints(Range.END_TO_END, sourceRange));\n"
-            + "    alert(range.compareBoundaryPoints(Range.END_TO_START, sourceRange));\n"
-            + "    alert(range.compareBoundaryPoints(Range.START_TO_START, range));\n"
-            + "  }\n"
+            + "  var range = document.createRange();\n"
+            + "  range.selectNode(document.getElementById('d1'));\n"
+            + "  var sourceRange = document.createRange();\n"
+            + "  sourceRange.selectNode(document.getElementById('d2'));\n"
+            + "  alert(range.compareBoundaryPoints(Range.START_TO_START, sourceRange));\n"
+            + "  alert(range.compareBoundaryPoints(Range.START_TO_END, sourceRange));\n"
+            + "  alert(range.compareBoundaryPoints(Range.END_TO_END, sourceRange));\n"
+            + "  alert(range.compareBoundaryPoints(Range.END_TO_START, sourceRange));\n"
+            + "  alert(range.compareBoundaryPoints(Range.START_TO_START, range));\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -261,25 +244,23 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad", "bc" }, IE8 = { })
+    @Alerts({"abcd", "bc", "null", "null", "ad", "bc"})
     public void extractContents3() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
             + "<span id='c'>c</span><span id='d'>d</span></div><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var d = document.getElementById('d');\n"
-            + "    var s = document.getElementById('s');\n"
-            + "    var r = document.createRange();\n"
-            + "    r.setStart(d, 1);\n"
-            + "    r.setEnd(d, 3);\n"
-            + "    alert(d.textContent);\n"
-            + "    alert(r.toString());\n"
-            + "    var x = r.extractContents();\n"
-            + "    alert(document.getElementById('b'));\n"
-            + "    alert(document.getElementById('c'));\n"
-            + "    alert(d.textContent);\n"
-            + "    alert(x.textContent);\n"
-            + "  }\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 1);\n"
+            + "  r.setEnd(d, 3);\n"
+            + "  alert(d.textContent);\n"
+            + "  alert(r.toString());\n"
+            + "  var x = r.extractContents();\n"
+            + "  alert(document.getElementById('b'));\n"
+            + "  alert(document.getElementById('c'));\n"
+            + "  alert(d.textContent);\n"
+            + "  alert(x.textContent);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -288,25 +269,23 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
-            "qwerty", "[object HTMLSpanElement]" }, IE8 = { })
+    @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
+            "qwerty", "[object HTMLSpanElement]"})
     public void cloneContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var d = document.getElementById('d');\n"
-            + "    var s = document.getElementById('s');\n"
-            + "    var r = document.createRange();\n"
-            + "    r.setStart(s.firstChild, 4);\n"
-            + "    r.setEnd(d.childNodes[2], 2);\n"
-            + "    alert(s.innerHTML);\n"
-            + "    alert(r);\n"
-            + "    var fragment = r.cloneContents();\n"
-            + "    alert(fragment);\n"
-            + "    alert(fragment.childNodes[0] + ' ' + fragment.childNodes[1]);\n"
-            + "    alert(s.innerHTML);\n"
-            + "    alert(document.getElementById('s'));\n"
-            + "  }\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(s.firstChild, 4);\n"
+            + "  r.setEnd(d.childNodes[2], 2);\n"
+            + "  alert(s.innerHTML);\n"
+            + "  alert(r);\n"
+            + "  var fragment = r.cloneContents();\n"
+            + "  alert(fragment);\n"
+            + "  alert(fragment.childNodes[0] + ' ' + fragment.childNodes[1]);\n"
+            + "  alert(s.innerHTML);\n"
+            + "  alert(document.getElementById('s'));\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -315,22 +294,20 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "bcqwertyxy", "null", "az" }, IE8 = { })
+    @Alerts({"qwerty", "bcqwertyxy", "null", "az"})
     public void deleteContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var d = document.getElementById('d');\n"
-            + "    var s = document.getElementById('s');\n"
-            + "    var r = document.createRange();\n"
-            + "    r.setStart(d.firstChild, 1);\n"
-            + "    r.setEnd(d.childNodes[2], 2);\n"
-            + "    alert(s.innerHTML);\n"
-            + "    alert(r.toString());\n"
-            + "    r.deleteContents();\n"
-            + "    alert(document.getElementById('s'));\n"
-            + "    alert(d.textContent);\n"
-            + "  }\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d.firstChild, 1);\n"
+            + "  r.setEnd(d.childNodes[2], 2);\n"
+            + "  alert(s.innerHTML);\n"
+            + "  alert(r.toString());\n"
+            + "  r.deleteContents();\n"
+            + "  alert(document.getElementById('s'));\n"
+            + "  alert(d.textContent);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -339,24 +316,22 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad" }, IE8 = { })
+    @Alerts({"abcd", "bc", "null", "null", "ad"})
     public void deleteContents2() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
             + "<span id='d'>d</span></div><script>\n"
-            + "  if (document.createRange) {\n"
-            + "    var d = document.getElementById('d');\n"
-            + "    var s = document.getElementById('s');\n"
-            + "    var r = document.createRange();\n"
-            + "    r.setStart(d, 1);\n"
-            + "    r.setEnd(d, 3);\n"
-            + "    alert(d.textContent);\n"
-            + "    alert(r.toString());\n"
-            + "    r.deleteContents();\n"
-            + "    alert(document.getElementById('b'));\n"
-            + "    alert(document.getElementById('c'));\n"
-            + "    alert(d.textContent);\n"
-            + "  }\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 1);\n"
+            + "  r.setEnd(d, 3);\n"
+            + "  alert(d.textContent);\n"
+            + "  alert(r.toString());\n"
+            + "  r.deleteContents();\n"
+            + "  alert(document.getElementById('b'));\n"
+            + "  alert(document.getElementById('c'));\n"
+            + "  alert(d.textContent);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }

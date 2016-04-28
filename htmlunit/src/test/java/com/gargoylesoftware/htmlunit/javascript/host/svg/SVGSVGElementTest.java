@@ -35,18 +35,13 @@ public class SVGSVGElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRect]",
-            IE8 = "undefined")
+    @Alerts("[object SVGRect]")
     public void createSVGRect() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (document.createElementNS) {\n"
-            + "      alert(document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect());\n"
-            + "    } else {\n"
-            + "      alert('undefined');\n"
-            + "    }\n"
+            + "    alert(document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect());\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

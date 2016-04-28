@@ -16,9 +16,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -33,7 +37,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -64,7 +68,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -98,8 +102,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -137,8 +141,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -175,8 +179,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-default", "newValue-newDefault" },
-            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newDefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-default", "newValue-newDefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -206,8 +209,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "textLength not available" },
-            FF = { "7" })
+    @Alerts(DEFAULT = {"textLength not available"},
+            FF = {"7"})
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -241,11 +244,7 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
             + "    alert(getSelection(document.getElementById('text1')).length);\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
-            + "    if (typeof element.selectionStart == 'number') {\n"
-            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } else if (document.selection && document.selection.createRange) {\n"
-            + "      return document.selection.createRange().text;\n"
-            + "    }\n"
+            + "    return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -258,9 +257,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10" },
-            IE11 = { "0,0", "0,0", "3,3", "3,10" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
+            IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -269,9 +267,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11" },
-            IE11 = { "0,0", "0,0", "0,0", "0,11" },
-            IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -280,9 +277,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
-            IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
-            IE11 = { "0,0", "0,0", "10,10", "5,5" })
+    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
+            IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -310,9 +306,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "4,5", "10,10", "4,4", "1,1" },
-            IE11 = { "0,0", "4,5", "0,0", "0,0", "0,0" },
-            IE8 = { "undefined,undefined", "4,5", "4,5", "4,5", "0,4" })
+    @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
+            IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -339,5 +334,50 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitOnEnter() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <form action='result.html'>\n"
+            + "    <input id='t' value='hello'/>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("\n");
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void submitOnEnterWithoutForm() throws Exception {
+        // this seem to be a bug in Selenium
+        // real browsers simply ignore the missing form
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <input id='t' value='hello'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys("\n");
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
     }
 }

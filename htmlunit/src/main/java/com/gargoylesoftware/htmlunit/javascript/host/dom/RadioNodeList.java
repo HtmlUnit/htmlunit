@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class RadioNodeList extends NodeList {
 
     /**

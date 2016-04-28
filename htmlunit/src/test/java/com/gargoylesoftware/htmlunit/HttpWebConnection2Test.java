@@ -86,7 +86,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         }
     }
 
-    private String headersToString(final WebRequest request) {
+    private static String headersToString(final WebRequest request) {
         // why doesn't HtmlUnit send these headers whereas Firefox does?
         final List<String> ignoredHeaders = Arrays.asList("accept", "accept-charset", "accept-encoding",
             "accept-language", "keep-alive");
@@ -134,6 +134,25 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         conn.setResponse(URL_FIRST, content, 404, "OK", "text/html", headers);
 
         // only check that no exception is thrown
-        loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        assertTrue(driver.getPageSource().length() > 100);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void redirectBrokenGzip() throws Exception {
+        final String html = "<html></html>";
+
+        final List<NameValuePair> headers = Arrays.asList(new NameValuePair("Location", URL_SECOND.toString()),
+                new NameValuePair("Content-Encoding", "gzip"));
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_FIRST, "12", 302, "Some error", "text/html", headers);
+        conn.setResponse(URL_SECOND, html);
+
+        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
+    }
+
 }

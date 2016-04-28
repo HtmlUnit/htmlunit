@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NODE_APPEND_CHILD_SELF_IGNORE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
 
@@ -31,7 +28,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -62,6 +58,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -70,7 +68,6 @@ import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -147,8 +144,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * This is the JavaScript object corresponding to this DOM node. It may
      * be null if there isn't a corresponding JavaScript object.
      */
-    private Object scriptableObject_;
-
+    private Object scriptObject_;
 
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
@@ -173,13 +169,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private int endColumnNumber_ = -1;
 
-    private boolean directlyAttachedToPage_;
+    private boolean attachedToPage_;
 
-    private Collection<DomChangeListener> domListeners_;
     private final Object listeners_lock_ = new Serializable() { };
 
     /** The listeners which are to be notified of characterData change. */
     private Collection<CharacterDataChangeListener> characterDataListeners_;
+    private List<CharacterDataChangeListener> characterDataListenersList_;
+
+    private Collection<DomChangeListener> domListeners_;
+    private List<DomChangeListener> domListenersList_;
 
     /**
      * Creates a new instance.
@@ -282,7 +281,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param scriptObject the JavaScript object
      */
     public void setScriptableObject(final Object scriptObject) {
-        scriptableObject_ = scriptObject;
+        scriptObject_ = scriptObject;
     }
 
     /**
@@ -520,8 +519,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         // get ancestors of both
-        final List<Node> myAncestors = getAncestors(true);
-        final List<Node> otherAncestors = ((DomNode) other).getAncestors(true);
+        final List<Node> myAncestors = getAncestors();
+        final List<Node> otherAncestors = ((DomNode) other).getAncestors();
 
         final int max = Math.min(myAncestors.size(), otherAncestors.size());
 
@@ -562,14 +561,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Gets the ancestors of the node.
-     * @param includeSelf should this node be returned too
      * @return a list of the ancestors with the root at the first position
      */
-    protected List<Node> getAncestors(final boolean includeSelf) {
+    protected List<Node> getAncestors() {
         final List<Node> list = new ArrayList<>();
-        if (includeSelf) {
-            list.add(this);
-        }
+        list.add(this);
+
         Node node = getParentNode();
         while (node != null) {
             list.add(0, node);
@@ -737,35 +734,36 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (!mayBeDisplayed()) {
             return false;
         }
+
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null && htmlPage.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
-            final LinkedList<CSSStyleDeclaration> styles = new LinkedList<>();
-
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
-            for (final Node node : getAncestors(true)) {
-                final Object scriptableObject = ((DomNode) node).getScriptObject2();
+            final List<Node> ancestors = getAncestors();
+            final ArrayList<CSSStyleDeclaration> styles = new ArrayList<>(ancestors.size());
+
+            for (final Node node : ancestors) {
+                final Object scriptableObject = ((DomNode) node).getScriptableObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
-                    final String display = style.getDisplay();
-                    if (DisplayStyle.NONE.value().equals(display)) {
+                    if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
                     }
-                    styles.addFirst(style);
+                    styles.add(style);
                 }
             }
 
-            final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
-            for (final CSSStyleDeclaration style : styles) {
-                final String visibility = style.getVisibility();
+            for (int i = styles.size() - 1; i >= 0; i--) {
+                final CSSStyleDeclaration style = styles.get(i);
+                final String visibility = style.getStyleAttribute(StyleAttributes.Definition.VISIBILITY);
                 if (visibility.length() > 5) {
                     if ("visible".equals(visibility)) {
                         return true;
                     }
-                    if ("hidden".equals(visibility) || (collapseInvisible && "collapse".equals(visibility))) {
+                    if ("hidden".equals(visibility) || "collapse".equals(visibility)) {
                         return false;
                     }
                 }
@@ -799,18 +797,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Indicates if the text representation of this element is made as a block, ie if new lines need
-     * to be inserted before and after it.
-     * @return {@code true} if this element represents a block
-     */
-    protected boolean isBlock() {
-        return false;
-    }
-
-    /**
      * Returns a string representation of the XML document from this element and all it's children (recursively).
      * The charset used is the current page encoding.
-     *
      * @return the XML string
      */
     public String asXml() {
@@ -819,15 +807,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (htmlPage != null) {
             charsetName = htmlPage.getPageEncoding();
         }
+
         final StringWriter stringWriter = new StringWriter();
-        final PrintWriter printWriter = new PrintWriter(stringWriter);
-        if (charsetName != null && this instanceof HtmlHtml) {
-            printWriter.print("<?xml version=\"1.0\" encoding=\"" + charsetName + "\"?>");
-            printWriter.print("\r\n");
+        try (final PrintWriter printWriter = new PrintWriter(stringWriter)) {
+            if (charsetName != null && this instanceof HtmlHtml) {
+                printWriter.print("<?xml version=\"1.0\" encoding=\"");
+                printWriter.print(charsetName);
+                printWriter.print("\"?>\r\n");
+            }
+            printXml("", printWriter);
+            return stringWriter.toString();
         }
-        printXml("", printWriter);
-        printWriter.close();
-        return stringWriter.toString();
     }
 
     /**
@@ -890,8 +880,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.nextSibling_ = null;
         newnode.previousSibling_ = null;
         newnode.firstChild_ = null;
-        newnode.scriptableObject_ = null;
-        newnode.directlyAttachedToPage_ = false;
+        newnode.scriptObject_ = null;
+        newnode.attachedToPage_ = false;
 
         // if deep, clone the children too.
         if (deep) {
@@ -900,13 +890,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
 
-        if (hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)
-                && !(this instanceof Document) && !(this instanceof DomDocumentFragment)) {
-            final Scriptable prototype = newnode.getScriptableObject().getPrototype();
-            final DomNode documentFragment = getPage().createDocumentFragment();
-            documentFragment.basicAppend(newnode);
-            newnode.getScriptableObject().setPrototype(prototype);
-        }
         return newnode;
     }
 
@@ -937,7 +920,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the JavaScript object that corresponds to this node
      */
     public ScriptableObject getScriptableObject() {
-        if (scriptableObject_ == null) {
+        if (scriptObject_ == null) {
             final SgmlPage page = getPage();
             if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
@@ -956,9 +939,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptableObject_ = ((SimpleScriptable) page.getScriptableObject()).makeScriptableFor(this);
+            scriptObject_ = ((SimpleScriptable) page.getScriptableObject()).makeScriptableFor(this);
         }
-        return (ScriptableObject) scriptableObject_;
+        return (ScriptableObject) scriptObject_;
     }
 
     /**
@@ -972,7 +955,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the JavaScript object that corresponds to this node
      */
     public ScriptObject getScriptObject2() {
-        if (scriptableObject_ == null) {
+        if (scriptObject_ == null) {
             final SgmlPage page = getPage();
             if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
@@ -991,9 +974,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptableObject_ = ((SimpleScriptObject) page.getScriptObject2()).makeScriptableFor(this);
+            scriptObject_ = ((SimpleScriptObject) page.getScriptObject2()).makeScriptableFor(this);
         }
-        return (ScriptObject) scriptableObject_;
+        return (ScriptObject) scriptObject_;
     }
 
     /**
@@ -1002,9 +985,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     @Override
     public DomNode appendChild(final Node node) {
         if (node == this) {
-            if (!hasFeature(NODE_APPEND_CHILD_SELF_IGNORE)) {
-                Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
-            }
+            Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
             return this;
         }
         final DomNode domNode = (DomNode) node;
@@ -1126,10 +1107,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     private void fireAddition(final DomNode domNode) {
-        final boolean wasAlreadyAttached = domNode.isDirectlyAttachedToPage();
-        domNode.directlyAttachedToPage_ = isDirectlyAttachedToPage();
+        final boolean wasAlreadyAttached = domNode.isAttachedToPage();
+        domNode.attachedToPage_ = isAttachedToPage();
 
-        if (isDirectlyAttachedToPage()) {
+        if (isAttachedToPage()) {
             // trigger events
             final Page page = getPage();
             if (null != page && page.isHtmlPage()) {
@@ -1139,7 +1120,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // a node that is already "complete" (ie not being parsed) and not yet attached
             if (!domNode.isBodyParsed() && !wasAlreadyAttached) {
                 for (final DomNode child : domNode.getDescendants()) {
-                    child.directlyAttachedToPage_ = true;
+                    child.attachedToPage_ = true;
                     child.onAllChildrenAddedToPage(true);
                 }
                 domNode.onAllChildrenAddedToPage(true);
@@ -1430,7 +1411,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return new Iterable<DomNode>() {
             @Override
             public Iterator<DomNode> iterator() {
-                return new DescendantElementsIterator<DomNode>(DomNode.class);
+                return new DescendantElementsIterator<>(DomNode.class);
             }
         };
     }
@@ -1447,7 +1428,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return new Iterable<HtmlElement>() {
             @Override
             public Iterator<HtmlElement> iterator() {
-                return new DescendantElementsIterator<HtmlElement>(HtmlElement.class);
+                return new DescendantElementsIterator<>(HtmlElement.class);
             }
         };
     }
@@ -1464,7 +1445,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return new Iterable<DomElement>() {
             @Override
             public Iterator<DomElement> iterator() {
-                return new DescendantElementsIterator<DomElement>(DomElement.class);
+                return new DescendantElementsIterator<>(DomElement.class);
             }
         };
     }
@@ -1749,11 +1730,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void addDomChangeListener(final DomChangeListener listener) {
         WebAssert.notNull("listener", listener);
+
         synchronized (listeners_lock_) {
             if (domListeners_ == null) {
                 domListeners_ = new LinkedHashSet<>();
             }
             domListeners_.add(listener);
+            domListenersList_ = null;
         }
     }
 
@@ -1766,9 +1749,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void removeDomChangeListener(final DomChangeListener listener) {
         WebAssert.notNull("listener", listener);
+
         synchronized (listeners_lock_) {
             if (domListeners_ != null) {
                 domListeners_.remove(listener);
+                domListenersList_ = null;
             }
         }
     }
@@ -1804,11 +1789,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void addCharacterDataChangeListener(final CharacterDataChangeListener listener) {
         WebAssert.notNull("listener", listener);
+
         synchronized (listeners_lock_) {
             if (characterDataListeners_ == null) {
                 characterDataListeners_ = new LinkedHashSet<>();
             }
             characterDataListeners_.add(listener);
+            characterDataListenersList_ = null;
         }
     }
 
@@ -1821,9 +1808,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void removeCharacterDataChangeListener(final CharacterDataChangeListener listener) {
         WebAssert.notNull("listener", listener);
+
         synchronized (listeners_lock_) {
             if (characterDataListeners_ != null) {
                 characterDataListeners_.remove(listener);
+                characterDataListenersList_ = null;
             }
         }
     }
@@ -1873,19 +1862,25 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private List<DomChangeListener> safeGetDomListeners() {
         synchronized (listeners_lock_) {
-            if (domListeners_ != null) {
-                return new ArrayList<>(domListeners_);
+            if (domListeners_ == null) {
+                return null;
             }
-            return null;
+            if (domListenersList_ == null) {
+                domListenersList_ = new ArrayList<>(domListeners_);
+            }
+            return domListenersList_;
         }
     }
 
     private List<CharacterDataChangeListener> safeGetCharacterDataListeners() {
         synchronized (listeners_lock_) {
-            if (characterDataListeners_ != null) {
-                return new ArrayList<>(characterDataListeners_);
+            if (characterDataListeners_ == null) {
+                return null;
             }
-            return null;
+            if (characterDataListenersList_ == null) {
+                characterDataListenersList_ = new ArrayList<>(characterDataListeners_);
+            }
+            return characterDataListenersList_;
         }
     }
 
@@ -1955,11 +1950,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Indicates if this node is currently directly attached to the page.
+     * Indicates if this node is currently attached to the page.
      * @return {@code true} if the page is one ancestor of the node.
      */
-    public boolean isDirectlyAttachedToPage() {
-        return directlyAttachedToPage_;
+    public boolean isAttachedToPage() {
+        return attachedToPage_;
     }
 
     /**
@@ -2012,4 +2007,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             errorDetected_ = true;
         }
     };
+
+    /**
+     * Indicates if the provided event can be applied to this node.
+     * Overwrite this.
+     * @param event the event
+     * @return {@code false} if the event can't be applied
+     */
+    public boolean handles(final Event event) {
+        return true;
+    }
 }

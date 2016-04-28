@@ -45,11 +45,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "abbr". Refer to the
+     * Returns the value of the attribute {@code abbr}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "abbr"
+     * @return the value of the attribute {@code abbr}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAbbrAttribute() {
@@ -57,11 +57,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "axis". Refer to the
+     * Returns the value of the attribute {@code axis}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "axis"
+     * @return the value of the attribute {@code axis}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAxisAttribute() {
@@ -69,11 +69,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "headers". Refer to the
+     * Returns the value of the attribute {@code headers}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "headers"
+     * @return the value of the attribute {@code headers}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeadersAttribute() {
@@ -81,11 +81,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "scope". Refer to the
+     * Returns the value of the attribute {@code scope}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "scope"
+     * @return the value of the attribute {@code scope}
      * or an empty string if that attribute isn't defined.
      */
     public final String getScopeAttribute() {
@@ -93,11 +93,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "rowspan". Refer to the
+     * Returns the value of the attribute {@code rowspan}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rowspan"
+     * @return the value of the attribute {@code rowspan}
      * or an empty string if that attribute isn't defined.
      */
     public final String getRowSpanAttribute() {
@@ -105,11 +105,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "colspan". Refer to the
+     * Returns the value of the attribute {@code colspan}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "colspan"
+     * @return the value of the attribute {@code colspan}
      * or an empty string if that attribute isn't defined.
      */
     public final String getColumnSpanAttribute() {
@@ -117,11 +117,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "align". Refer to the
+     * Returns the value of the attribute {@code align}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "align"
+     * @return the value of the attribute {@code align}
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -129,11 +129,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "char". Refer to the
+     * Returns the value of the attribute {@code char}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "char"
+     * @return the value of the attribute {@code char}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -141,11 +141,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "charoff". Refer to the
+     * Returns the value of the attribute {@code charoff}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charoff"
+     * @return the value of the attribute {@code charoff}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -153,11 +153,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "valign". Refer to the
+     * Returns the value of the attribute {@code valign}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "valign"
+     * @return the value of the attribute {@code valign}
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
@@ -165,11 +165,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "nowrap". Refer to the
+     * Returns the value of the attribute {@code nowrap}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "nowrap"
+     * @return the value of the attribute {@code nowrap}
      * or an empty string if that attribute isn't defined.
      */
     public final String getNoWrapAttribute() {
@@ -177,11 +177,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "bgcolor". Refer to the
+     * Returns the value of the attribute {@code bgcolor}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "bgcolor"
+     * @return the value of the attribute {@code bgcolor}
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
@@ -189,11 +189,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "width". Refer to the
+     * Returns the value of the attribute {@code width}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "width"
+     * @return the value of the attribute {@code width}
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -201,11 +201,11 @@ public class HtmlTableDataCell extends HtmlTableCell {
     }
 
     /**
-     * Returns the value of the attribute "height". Refer to the
+     * Returns the value of the attribute {@code height}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "height"
+     * @return the value of the attribute {@code height}
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {

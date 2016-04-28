@@ -14,12 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOREUNLOAD_USES_EVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IN_STANDARDS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 
 import java.io.File;
@@ -33,7 +29,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -78,9 +73,8 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -127,6 +121,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Joerg Werner
  */
 public class HtmlPage extends InteractivePage {
 
@@ -152,6 +147,13 @@ public class HtmlPage extends InteractivePage {
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
+    private List<AutoCloseable> autoCloseableList_;
+    private ElementFromPointHandler elementFromPointHandler_;
+
+    private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
+    private static final List<String> ACCEPTABLE_TAG_NAMES = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME, HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME);
 
     static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override
@@ -172,10 +174,23 @@ public class HtmlPage extends InteractivePage {
      * Creates an instance of HtmlPage.
      * An HtmlPage instance is normally retrieved with {@link WebClient#getPage(String)}.
      *
-     * @param originatingUrl the URL that was used to load this page
      * @param webResponse the web response that was used to create this page
      * @param webWindow the window that this page is being loaded into
      */
+    public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
+        super(webResponse, webWindow);
+    }
+
+    /**
+     * Creates an instance of HtmlPage.
+     * An HtmlPage instance is normally retrieved with {@link WebClient#getPage(String)}.
+     *
+     * @param originatingUrl the URL that was used to load this page
+     * @param webResponse the web response that was used to create this page
+     * @param webWindow the window that this page is being loaded into
+     * @deprecated as of 2.20, please use {@link #HtmlPage(WebResponse, WebWindow)} instead
+     */
+    @Deprecated
     public HtmlPage(final URL originatingUrl, final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
     }
@@ -219,8 +234,7 @@ public class HtmlPage extends InteractivePage {
                 final TopLevelWindow topWindow = (TopLevelWindow) enclosingWindow;
                 final WebWindow openerWindow = topWindow.getOpener();
                 if (openerWindow != null && openerWindow.getEnclosedPage() != null) {
-                    baseUrl_ = openerWindow.getEnclosedPage().getWebResponse()
-                    .getWebRequest().getUrl();
+                    baseUrl_ = openerWindow.getEnclosedPage().getWebResponse().getWebRequest().getUrl();
                 }
             }
         }
@@ -236,9 +250,7 @@ public class HtmlPage extends InteractivePage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        if (hasFeature(EVENT_DOM_CONTENT_LOADED)) {
-            executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
-        }
+        executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
 
@@ -311,6 +323,16 @@ public class HtmlPage extends InteractivePage {
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
         cleaning_ = false;
+        if (autoCloseableList_ != null) {
+            for (@SuppressWarnings("resource") final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
+                try {
+                    closeable.close();
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     /**
@@ -570,12 +592,11 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     public DomElement getElementById(final String elementId) {
-        try {
-            return getElementById(elementId, true);
+        final SortedSet<DomElement> elements = idMap_.get(elementId);
+        if (elements != null) {
+            return elements.first();
         }
-        catch (final ElementNotFoundException e) {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -605,7 +626,7 @@ public class HtmlPage extends InteractivePage {
      * @return the list of {@link HtmlAnchor} in this page
      */
     public List<HtmlAnchor> getAnchors() {
-        return getDocumentElement().getHtmlElementsByTagName("a");
+        return getDocumentElement().getElementsByTagNameImpl("a");
     }
 
     /**
@@ -644,7 +665,7 @@ public class HtmlPage extends InteractivePage {
      * @return all the forms in this page
      */
     public List<HtmlForm> getForms() {
-        return getDocumentElement().getHtmlElementsByTagName("form");
+        return getDocumentElement().getElementsByTagNameImpl("form");
     }
 
     /**
@@ -703,7 +724,7 @@ public class HtmlPage extends InteractivePage {
         final List<String> list = new ArrayList<>();
 
         for (final HtmlElement element : getTabbableElements()) {
-            list.add(element.getAttribute("id"));
+            list.add(element.getId());
         }
 
         return Collections.unmodifiableList(list);
@@ -737,12 +758,10 @@ public class HtmlPage extends InteractivePage {
     * @return all the tabbable elements in proper tab order
     */
     public List<HtmlElement> getTabbableElements() {
-        final List<String> tags = Arrays
-            .asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List<HtmlElement> tabbableElements = new ArrayList<>();
         for (final HtmlElement element : getHtmlElementDescendants()) {
             final String tagName = element.getTagName();
-            if (tags.contains(tagName)) {
+            if (TABBABLE_TAGS.contains(tagName)) {
                 final boolean disabled = element.hasAttribute("disabled");
                 if (!disabled && element.getTabIndex() != HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
                     tabbableElements.add(element);
@@ -753,7 +772,7 @@ public class HtmlPage extends InteractivePage {
         return Collections.unmodifiableList(tabbableElements);
     }
 
-    private Comparator<HtmlElement> createTabOrderComparator() {
+    private static Comparator<HtmlElement> createTabOrderComparator() {
         return new Comparator<HtmlElement>() {
             @Override
             public int compare(final HtmlElement element1, final HtmlElement element2) {
@@ -839,11 +858,8 @@ public class HtmlPage extends InteractivePage {
         final List<HtmlElement> elements = new ArrayList<>();
 
         final String searchString = Character.toString(accessKey).toLowerCase(Locale.ROOT);
-        final List<String> acceptableTagNames = Arrays.asList(
-                new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
-
         for (final HtmlElement element : getHtmlElementDescendants()) {
-            if (acceptableTagNames.contains(element.getTagName())) {
+            if (ACCEPTABLE_TAG_NAMES.contains(element.getTagName())) {
                 final String accessKeyAttribute = element.getAttribute("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
                     elements.add(element);
@@ -939,13 +955,14 @@ public class HtmlPage extends InteractivePage {
                 LOG.info("Ignoring script src [" + srcAttribute + "]");
                 return JavaScriptLoadResult.NOOP;
             }
-            else if (!"http".equals(protocol) && !"https".equals(protocol)
+            if (!"http".equals(protocol) && !"https".equals(protocol)
                     && !"data".equals(protocol) && !"file".equals(protocol)) {
-                LOG.error("Unable to build URL for script src tag [" + srcAttribute + "] (protocol: " + protocol + ")");
+                LOG.error("Unable to build URL for script src tag ["
+                                + srcAttribute + "] (protocol: '" + protocol + "')");
                 final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
                 if (javaScriptErrorListener != null) {
                     javaScriptErrorListener.malformedScriptURL(this, srcAttribute,
-                        new MalformedURLException("unknown protocol: " + protocol));
+                        new MalformedURLException("unknown protocol: '" + protocol + "'"));
                 }
                 return JavaScriptLoadResult.NOOP;
             }
@@ -1132,7 +1149,7 @@ public class HtmlPage extends InteractivePage {
      * @param clazz the class to search for
      * @return {@code null} if no child found
      */
-    private DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
+    private static DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
         if (startElement == null) {
             return null;
         }
@@ -1190,37 +1207,26 @@ public class HtmlPage extends InteractivePage {
 
         // Execute the specified event on the document element.
         final WebWindow window = getEnclosingWindow();
-        if (window.getScriptObject2() != null) {
+        if (window.getScriptableObject() != null) {
             final HtmlElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
             }
-            final Event2 event;
-            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
-                && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
-                event = new BeforeUnloadEvent2(element, eventType);
+            final Event event;
+            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
+                event = new BeforeUnloadEvent(element, eventType);
             }
             else {
-                event = new Event2(element, eventType);
+                event = new Event(element, eventType);
             }
             element.fireEvent(event);
-//            if (!isOnbeforeunloadAccepted(this, event)) {
-//                return false;
-//            }
+            if (!isOnbeforeunloadAccepted(this, event)) {
+                return false;
+            }
         }
 
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
         if (window instanceof FrameWindow) {
-            if (Event.TYPE_LOAD.equals(eventType)) {
-                if (!hasFeature(EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
-                    final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-                    // IE8 triggers this event only in some cases
-                    if (frame.wasCreatedByJavascript()) {
-                        return true;
-                    }
-                }
-            }
-
             final FrameWindow fw = (FrameWindow) window;
             final BaseFrameElement frame = fw.getFrameElement();
 
@@ -1234,8 +1240,7 @@ public class HtmlPage extends InteractivePage {
                     LOG.debug("Executing on" + eventType + " handler for " + frame);
                 }
                 final Event event;
-                if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
-                    && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+                if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
                     event = new BeforeUnloadEvent(frame, eventType);
                 }
                 else {
@@ -1373,7 +1378,7 @@ public class HtmlPage extends InteractivePage {
         }
         if (hasFeature(JS_DEFERRED)) {
             final HtmlElement doc = getDocumentElement();
-            final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
+            final List<HtmlElement> elements = doc.getElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
                     final HtmlScript script = (HtmlScript) e;
@@ -1390,7 +1395,7 @@ public class HtmlPage extends InteractivePage {
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
         if (getWebClient().getOptions().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
-            final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
+            final List<HtmlElement> elements = getDocumentElement().getElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
                     final HtmlScript script = (HtmlScript) e;
@@ -1462,7 +1467,7 @@ public class HtmlPage extends InteractivePage {
             final Page newPage;
             if (element instanceof HtmlAnchor || element instanceof HtmlArea || element instanceof HtmlButton
                     || element instanceof HtmlInput || element instanceof HtmlLabel || element instanceof HtmlLegend
-                    || element instanceof HtmlTextArea || element instanceof HtmlArea || element instanceof HtmlArea) {
+                    || element instanceof HtmlTextArea || element instanceof HtmlArea) {
                 newPage = element.click();
             }
             else {
@@ -1559,64 +1564,18 @@ public class HtmlPage extends InteractivePage {
      * has this ID (not allowed by the HTML spec), then this method returns the
      * first one.
      *
-     * @param id the ID value to search for
+     * @param elementId the ID value to search for
      * @param <E> the element type
      * @return the HTML element with the specified ID
      * @throws ElementNotFoundException if no element was found matching the specified ID
      */
     @SuppressWarnings("unchecked")
-    public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        return (E) getElementById(id, true);
-    }
-
-    /**
-     * Returns the HTML element with the specified ID. If more than one element
-     * has this ID (not allowed by the HTML spec), then this method returns the
-     * first one.
-     *
-     * @param id the ID value to search for
-     * @param caseSensitive whether to consider case sensitivity or not
-     * @param <E> the element type
-     * @return the HTML element with the specified ID
-     * @throws ElementNotFoundException if no element was found matching the specified ID
-     */
-    public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
-        throws ElementNotFoundException {
-
-        return getElementById(id, caseSensitive);
-    }
-
-    /**
-     * Returns the element with the specified ID. If more than one element
-     * has this ID, then this method returns the
-     * first one.
-     *
-     * @param id the ID value to search for
-     * @param caseSensitive whether to consider case sensitivity or not
-     * @param <E> the element type
-     * @return the element with the specified ID
-     * @throws ElementNotFoundException if no element was found matching the specified ID
-     */
-    @SuppressWarnings("unchecked")
-    public <E extends DomElement> E getElementById(final String id, final boolean caseSensitive)
-        throws ElementNotFoundException {
-
-        SortedSet<DomElement> elements = idMap_.get(id);
-
-        // not found maybe we have to search case insensitive
-        if (null == elements && !caseSensitive) {
-            for (final String key : idMap_.keySet()) {
-                if (key.equalsIgnoreCase(id)) {
-                    elements = idMap_.get(key);
-                    break;
-                }
-            }
+    public <E extends HtmlElement> E getHtmlElementById(final String elementId) throws ElementNotFoundException {
+        final DomElement element = getElementById(elementId);
+        if (element == null) {
+            throw new ElementNotFoundException("*", "id", elementId);
         }
-
-        if (elements != null) {
-            return (E) elements.first();
-        }
-        throw new ElementNotFoundException("*", "id", id);
+        return (E) element;
     }
 
     /**
@@ -1849,18 +1808,18 @@ public class HtmlPage extends InteractivePage {
     }
 
     private void calculateBase() {
-        final List<HtmlBase> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
+        final List<HtmlElement> baseElements = getDocumentElement().getElementsByTagName("base");
         switch (baseElements.size()) {
             case 0:
                 base_ = null;
                 break;
 
             case 1:
-                base_ = baseElements.get(0);
+                base_ = (HtmlBase) baseElements.get(0);
                 break;
 
             default:
-                base_ = baseElements.get(0);
+                base_ = (HtmlBase) baseElements.get(0);
                 notifyIncorrectness("Multiple 'base' detected, only the first is used.");
         }
     }
@@ -1909,14 +1868,14 @@ public class HtmlPage extends InteractivePage {
             return Collections.emptyList(); // weird case, for instance if document.documentElement has been removed
         }
         final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
-        final List<HtmlMeta> tags = getDocumentElement().getHtmlElementsByTagName("meta");
-        for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
-            final HtmlMeta element = iter.next();
-            if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
-                iter.remove();
+        final List<HtmlMeta> tags = getDocumentElement().getElementsByTagNameImpl("meta");
+        final List<HtmlMeta> foundTags = new ArrayList<>();
+        for (HtmlMeta htmlMeta : tags) {
+            if (nameLC.equals(htmlMeta.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
+                foundTags.add(htmlMeta);
             }
         }
-        return tags;
+        return foundTags;
     }
 
     /**
@@ -2204,11 +2163,6 @@ public class HtmlPage extends InteractivePage {
     @Override
     protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
-
-        if (hasFeature(JS_WINDOW_IN_STANDARDS_MODE) && !isQuirksMode()) {
-            final JavaScriptEngine jsEngine = getWebClient().getJavaScriptEngine();
-            jsEngine.definePropertiesInStandardsMode(this);
-        }
     }
 
     /**
@@ -2227,8 +2181,7 @@ public class HtmlPage extends InteractivePage {
      * @return true for {@code quirks mode}, false for {@code standards mode}
      */
     public boolean isQuirksMode() {
-        return false;
-//        return "BackCompat".equals(((HTMLDocument) getScriptableObject()).getCompatMode());
+        return "BackCompat".equals(((HTMLDocument) getScriptableObject()).getCompatMode());
     }
 
     /**
@@ -2236,7 +2189,7 @@ public class HtmlPage extends InteractivePage {
      * {@inheritDoc}
      */
     @Override
-    public boolean isDirectlyAttachedToPage() {
+    public boolean isAttachedToPage() {
         return true;
     }
 
@@ -2246,15 +2199,6 @@ public class HtmlPage extends InteractivePage {
     @Override
     public boolean isHtmlPage() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    //TODO: to be removed, once WebDriver is released
-    public HtmlElement getFocusedElement() {
-        return (HtmlElement) super.getFocusedElement();
     }
 
     /**
@@ -2280,7 +2224,7 @@ public class HtmlPage extends InteractivePage {
             }
         }
         else {
-            final String href = base_.getHrefAttribute();
+            final String href = base_.getHrefAttribute().trim();
             if (StringUtils.isEmpty(href)) {
                 baseUrl = getUrl();
             }
@@ -2312,5 +2256,57 @@ public class HtmlPage extends InteractivePage {
         }
 
         return baseUrl;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Adds an {@link AutoCloseable}, which would be closed during the {@link #cleanUp()}.
+     * @param autoCloseable the autoclosable
+     */
+    public void addAutoCloseable(final AutoCloseable autoCloseable) {
+        if (autoCloseableList_ == null) {
+            autoCloseableList_ = new ArrayList<>();
+        }
+        autoCloseableList_.add(autoCloseable);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+            return true;
+        }
+        return super.handles(event);
+    }
+
+    /**
+     * Sets the {@link ElementFromPointHandler}.
+     * @param elementFromPointHandler the handler
+     */
+    public void setElementFromPointHandler(final ElementFromPointHandler elementFromPointHandler) {
+        elementFromPointHandler_ = elementFromPointHandler;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the element for the specified x coordinate and the specified y coordinate.
+     *
+     * @param x the x offset, in pixels
+     * @param y the y offset, in pixels
+     * @return the element for the specified x coordinate and the specified y coordinate
+     */
+    public HtmlElement getElementFromPoint(final int x, final int y) {
+        if (elementFromPointHandler_ == null) {
+            LOG.warn("ElementFromPointHandler was not specicifed for " + this);
+            if (x <= 0 || y <= 0) {
+                return null;
+            }
+            return getBody();
+        }
+        return elementFromPointHandler_.getElementFromPoint(this, x, y);
     }
 }

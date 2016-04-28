@@ -74,8 +74,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TreeWalker_TreeWalker() throws Exception {
         test("TreeWalker", "TreeWalker");
     }
@@ -84,8 +83,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_UIEvent() throws Exception {
         test("UIEvent", "UIEvent");
     }
@@ -94,8 +92,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _Uint16Array_Uint16Array() throws Exception {
         test("Uint16Array", "Uint16Array");
     }
@@ -104,8 +101,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _Uint32Array_Uint32Array() throws Exception {
         test("Uint32Array", "Uint32Array");
     }
@@ -114,8 +110,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _Uint8Array_Uint8Array() throws Exception {
         test("Uint8Array", "Uint8Array");
     }
@@ -124,8 +119,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _Uint8ClampedArray_Uint8ClampedArray() throws Exception {
         test("Uint8ClampedArray", "Uint8ClampedArray");
     }
@@ -134,8 +128,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebSocket_WebSocket() throws Exception {
         test("WebSocket", "WebSocket");
     }
@@ -153,8 +146,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _XMLDocument_XMLDocument() throws Exception {
         test("XMLDocument", "XMLDocument");
     }
@@ -172,8 +164,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _XMLSerializer_XMLSerializer() throws Exception {
         test("XMLSerializer", "XMLSerializer");
     }
@@ -186,16 +177,6 @@ public class HostParentOfTTest extends HostParentOf {
             IE = "false")
     public void _XPathEvaluator_XPathEvaluator() throws Exception {
         test("XPathEvaluator", "XPathEvaluator");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _XPathNSResolver_XPathNSResolver() throws Exception {
-        test("XPathNSResolver", "XPathNSResolver");
     }
 
     /**
@@ -222,8 +203,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _Text_CDATASection() throws Exception {
         test("Text", "CDATASection");
     }
@@ -232,8 +212,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_KeyboardEvent() throws Exception {
         test("UIEvent", "KeyboardEvent");
     }
@@ -242,8 +221,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_MouseEvent() throws Exception {
         test("UIEvent", "MouseEvent");
     }
@@ -253,7 +231,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
     }
@@ -262,8 +240,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _URLSearchParams_URLSearchParams() throws Exception {
         test("URLSearchParams", "URLSearchParams");
     }
@@ -272,8 +250,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _Worker_Worker() throws Exception {
         test("Worker", "Worker");
     }
@@ -282,8 +259,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLRenderingContext_WebGLRenderingContext() throws Exception {
         test("WebGLRenderingContext", "WebGLRenderingContext");
     }
@@ -332,8 +308,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TransitionEvent_TransitionEvent() throws Exception {
         test("TransitionEvent", "TransitionEvent");
     }
@@ -342,8 +317,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_CompositionEvent() throws Exception {
         test("UIEvent", "CompositionEvent");
     }
@@ -352,8 +326,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_FocusEvent() throws Exception {
         test("UIEvent", "FocusEvent");
     }
@@ -372,8 +345,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_WheelEvent() throws Exception {
         test("UIEvent", "WheelEvent");
     }
@@ -382,8 +354,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WheelEvent_WheelEvent() throws Exception {
         test("WheelEvent", "WheelEvent");
     }
@@ -402,9 +373,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            IE11 = "true")
+    @Alerts("true")
     public void _UIEvent_DragEvent() throws Exception {
         test("UIEvent", "DragEvent");
     }
@@ -434,7 +403,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE11 = "true")
+            IE = "true")
     public void _UIEvent_MouseWheelEvent() throws Exception {
         test("UIEvent", "MouseWheelEvent");
     }
@@ -463,8 +432,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TextMetrics_TextMetrics() throws Exception {
         test("TextMetrics", "TextMetrics");
     }
@@ -473,8 +441,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _URL_URL() throws Exception {
         test("URL", "URL");
     }
@@ -483,8 +450,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WeakMap_WeakMap() throws Exception {
         test("WeakMap", "WeakMap");
     }
@@ -494,7 +460,6 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF31 = "false",
             IE = "false")
     public void _WeakSet_WeakSet() throws Exception {
         test("WeakSet", "WeakSet");
@@ -514,8 +479,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TimeRanges_TimeRanges() throws Exception {
         test("TimeRanges", "TimeRanges");
     }
@@ -533,8 +497,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _ValidityState_ValidityState() throws Exception {
         test("ValidityState", "ValidityState");
     }
@@ -543,9 +506,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false",
-            FF31 = "false")
+    @Alerts("true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
     }
@@ -566,7 +527,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -575,8 +536,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TextTrackCueList_TextTrackCueList() throws Exception {
         test("TextTrackCueList", "TextTrackCueList");
     }
@@ -585,9 +545,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE11 = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false")
     public void _TextTrackCue_TextTrackCue() throws Exception {
         test("TextTrackCue", "TextTrackCue");
     }
@@ -596,8 +555,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF38 = "false",
+            IE = "false")
     public void _TextTrackCue_VTTCue() throws Exception {
         test("TextTrackCue", "VTTCue");
     }
@@ -606,8 +566,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TextTrackList_TextTrackList() throws Exception {
         test("TextTrackList", "TextTrackList");
     }
@@ -616,8 +575,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TextTrack_TextTrack() throws Exception {
         test("TextTrack", "TextTrack");
     }
@@ -626,8 +584,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _TrackEvent_TrackEvent() throws Exception {
         test("TrackEvent", "TrackEvent");
     }
@@ -636,8 +593,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }
@@ -648,7 +604,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }
@@ -667,8 +623,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLActiveInfo_WebGLActiveInfo() throws Exception {
         test("WebGLActiveInfo", "WebGLActiveInfo");
     }
@@ -677,8 +632,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLBuffer_WebGLBuffer() throws Exception {
         test("WebGLBuffer", "WebGLBuffer");
     }
@@ -689,7 +643,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            IE11 = "true")
+            IE = "true")
     public void _WebGLContextEvent_WebGLContextEvent() throws Exception {
         test("WebGLContextEvent", "WebGLContextEvent");
     }
@@ -698,8 +652,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLFramebuffer_WebGLFramebuffer() throws Exception {
         test("WebGLFramebuffer", "WebGLFramebuffer");
     }
@@ -708,8 +661,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLProgram_WebGLProgram() throws Exception {
         test("WebGLProgram", "WebGLProgram");
     }
@@ -718,8 +670,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLRenderbuffer_WebGLRenderbuffer() throws Exception {
         test("WebGLRenderbuffer", "WebGLRenderbuffer");
     }
@@ -728,8 +679,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLShaderPrecisionFormat_WebGLShaderPrecisionFormat() throws Exception {
         test("WebGLShaderPrecisionFormat", "WebGLShaderPrecisionFormat");
     }
@@ -738,8 +688,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLShader_WebGLShader() throws Exception {
         test("WebGLShader", "WebGLShader");
     }
@@ -748,8 +697,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLTexture_WebGLTexture() throws Exception {
         test("WebGLTexture", "WebGLTexture");
     }
@@ -758,8 +706,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _WebGLUniformLocation_WebGLUniformLocation() throws Exception {
         test("WebGLUniformLocation", "WebGLUniformLocation");
     }
@@ -779,20 +726,9 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF31 = "false")
+            IE = "false")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _XMLHttpRequestProgressEvent_XMLHttpRequestProgressEvent() throws Exception {
-        test("XMLHttpRequestProgressEvent", "XMLHttpRequestProgressEvent");
     }
 
     /**
@@ -1203,5 +1139,35 @@ public class HostParentOfTTest extends HostParentOf {
             CHROME = "true")
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _WEBGL_compressed_texture_s3tc_WEBGL_compressed_texture_s3tc() throws Exception {
+        test("WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
+        test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
+        test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }
 }

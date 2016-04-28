@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URL;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -42,8 +41,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]" },
-            IE8 = { "DOM2: exception", "DOM3: exception" })
+    @Alerts({"DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -63,8 +61,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" },
-            IE8 = "exception")
+    @Alerts({"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true"})
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -92,7 +89,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1" })
+    @Alerts({"1", "1"})
     public void dispatchEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var clickCount = 0;\n"
@@ -168,8 +165,7 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = "1")
+    @Alerts("0")
     public void button_onmousedown() throws Exception {
         final String html = "<html><body>\n"
             + "<p id='clicker'>Click me!</p>\n"
@@ -196,6 +192,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Click on DIV(id=div1): true, true, false, false")
+    @BuggyWebDriver(IE)
     public void eventCoordinates_div() throws Exception {
         eventCoordinates("div1");
     }
@@ -228,13 +225,12 @@ public class MouseEventTest extends WebDriverTestCase {
     }
 
     private void eventCoordinates(final String id) throws Exception {
-        final URL url = getClass().getClassLoader().getResource("event_coordinates.html");
-        assertNotNull(url);
+        final String html = getFileContent("event_coordinates.html");
 
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts();
-        final WebDriver driver = loadPageWithAlerts2(url);
+        final WebDriver driver = loadPageWithAlerts2(html);
         assertEquals("Mouse Event coordinates", driver.getTitle());
 
         final WebElement textarea = driver.findElement(By.id("myTextarea"));

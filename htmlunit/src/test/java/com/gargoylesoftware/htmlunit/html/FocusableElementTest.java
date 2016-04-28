@@ -35,7 +35,7 @@ public class FocusableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnBlurWith2Pages() throws Exception {
+    public void onBlurWith2Pages() throws Exception {
         final String html =
             "<html>\n"
             + "<head>\n"
@@ -93,7 +93,8 @@ public class FocusableElementTest extends SimpleWebTestCase {
             + "    <option>Austria</option><option>Belgium</option><option>Bulgaria</option>\n"
             + "  </select>\n"
             + "  <textarea id='myTextarea' cols='80' rows='20'></textarea>\n"
-            + "</body></html>";
+            + "</body>\n"
+            + "</html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlSelect select1 = (HtmlSelect) page.getElementById("select1");

@@ -36,8 +36,7 @@ public class HtmlCanvasTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLCanvasElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLCanvasElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -52,12 +51,7 @@ public class HtmlCanvasTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (!"IE8".equals(getBrowserVersion().getNickname())) {
-                assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
-            }
-            else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
-            }
+            assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 }

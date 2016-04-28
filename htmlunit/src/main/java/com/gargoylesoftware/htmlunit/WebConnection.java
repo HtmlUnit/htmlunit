@@ -22,8 +22,9 @@ import java.io.IOException;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public interface WebConnection {
+public interface WebConnection extends AutoCloseable {
 
     /**
      * Submits a request and retrieves a response.

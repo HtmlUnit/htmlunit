@@ -54,8 +54,7 @@ public class HtmlHeadTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHeadElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLHeadElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head id='myId'><script>\n"
             + "  function test() {\n"

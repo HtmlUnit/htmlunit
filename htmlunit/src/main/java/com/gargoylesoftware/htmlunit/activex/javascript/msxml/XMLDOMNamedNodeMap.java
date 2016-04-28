@@ -60,7 +60,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
      * @param node the owning node
      */
     public XMLDOMNamedNodeMap(final DomNode node) {
-        setParentScope((Scriptable) node.getScriptableObject());
+        setParentScope(node.getScriptableObject());
         setPrototype(getPrototype(getClass()));
 
         attributes_ = node.getAttributes();

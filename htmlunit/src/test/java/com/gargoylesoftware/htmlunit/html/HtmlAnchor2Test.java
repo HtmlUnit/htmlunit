@@ -14,18 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertSame;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By.ById;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -44,7 +52,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "hi", "%28%29" })
+    @Alerts({"hi", "%28%29"})
     public void href_js_escaping() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -67,7 +75,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "(*%a", "%28%A" })
+    @Alerts({"(*%a", "%28%A"})
     public void href_js_escaping2() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -135,7 +143,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             CHROME = "",
-            IE11 = "")
+            IE = "")
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
@@ -179,7 +187,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "page2.html",
-            IE11 = "")
+            IE = "")
     public void clickNestedInputImageElement() throws Exception {
         final String html =
               "<html>\n"
@@ -202,7 +210,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "page2.html",
-            IE11 = "")
+            IE = "")
     public void clickNestedInputTextElement() throws Exception {
         final String html =
               "<html>\n"
@@ -225,7 +233,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "page2.html",
-            IE11 = "")
+            IE = "")
     public void clickNestedInputPasswordElement() throws Exception {
         final String html =
               "<html>\n"
@@ -272,7 +280,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             CHROME = "",
-            IE11 = "")
+            IE = "")
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"
@@ -341,10 +349,10 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     public void clickBlankTargetHashOnly() throws Exception {
         final String html =
                 "<html>\n"
-                        + "<head><title>foo</title></head>\n"
-                        + "<body>\n"
-                        + "<a id='a' target='_blank' href='#'>Foo</a>\n"
-                        + "</body></html>\n";
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "<a id='a' target='_blank' href='#'>Foo</a>\n"
+                + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         assertEquals(1, driver.getWindowHandles().size());
@@ -358,8 +366,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "My Link", "", "abcd" },
-            IE8 = {"undefined", "undefined", "undefined" })
+    @Alerts({"My Link", "", "abcd"})
     public void getText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -382,8 +389,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" },
-            IE8 = { "undefined 0", "Hello 0", "undefined 1", "Hello 1", "undefined 2", "Hello 2" })
+    @Alerts({"My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0"})
     public void setText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -420,8 +426,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<a id=\"a\" href=\"#x\">foo</a>",
-            IE8 = "<A id=a href=\"#x\">foo</A>")
+    @Alerts("<a id=\"a\" href=\"#x\">foo</a>")
     public void innerHtmlHrefQuotedEvenInIE() throws Exception {
         final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
             + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
@@ -435,7 +440,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     public void click() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
@@ -465,8 +472,10 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     public void clickAnchorName() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
             + "</body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -476,5 +485,141 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("a1")).click();
         assertEquals(1, webConnection.getRequestCount()); // no second server hit
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "#anchor", "#!bang"})
+    public void dontReloadHashBang() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_FIRST + "test' id='a1'>link1</a>\n"
+            + "  <a href='" + URL_FIRST + "test#anchor' id='a2'>link2</a>\n"
+            + "  <a href='" + URL_FIRST + "test#!bang' id='a3'>link3</a>\n"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a1').hash);\n"
+            + "    alert(document.getElementById('a2').hash);\n"
+            + "    alert(document.getElementById('a3').hash);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(html);
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        assertEquals(1, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a1")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a2")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a3")).click();
+        assertEquals(2, webConnection.getRequestCount());
+    }
+
+    /**
+     * Testcase for issue #1492.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"#!board/WebDev", "#!article/WebDev/35", "#!article/WebDev/35"})
+    public void dontReloadHashBang2() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_FIRST + "test/#!board/WebDev' id='a1'>link1</a>\n"
+            + "  <a href='" + URL_FIRST + "test/#!article/WebDev/35' id='a2'>link2</a>\n"
+            + "  <a href='" + URL_FIRST + "test#!article/WebDev/35' id='a3'>link2</a>\n"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a1').hash);\n"
+            + "    alert(document.getElementById('a2').hash);\n"
+            + "    alert(document.getElementById('a3').hash);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(html);
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        assertEquals(1, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a1")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a2")).click();
+        assertEquals(2, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a3")).click();
+        assertEquals(3, webConnection.getRequestCount());
+    }
+
+    /**
+     * FF behaves is different.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = "click href click doubleClick ",
+            CHROME = "click href click href doubleClick ",
+            FF = "click href click doubleClick href ")
+    @BuggyWebDriver({ FF, CHROME })
+    @NotYetImplemented({ FF, IE })
+    public void doubleClick() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "  <a id='myAnchor' "
+            +       "href=\"javascript:document.getElementById('myTextarea').value+='href ';void(0);\" "
+            +       "onClick=\"document.getElementById('myTextarea').value+='click ';\" "
+            +       "onDblClick=\"document.getElementById('myTextarea').value+='doubleClick ';\">foo</a>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Actions action = new Actions(driver);
+        action.doubleClick(driver.findElement(By.id("myAnchor")));
+        action.perform();
+
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("myTextarea")).getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"§§URL§§bug.html?h%F6=G%FCnter", "h\ufffd", "G\ufffdnter"},
+            IE = {"§§URL§§bug.html?h\u00F6=G\u00FCnter", "h\ufffd", "G\ufffdnter"})
+    public void encoding() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "   <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html, "text/html", "UTF-8");
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(new ById("myLink")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        assertEquals(1, requestedParams.size());
+        assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
+        assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
     }
 }

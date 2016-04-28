@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,8 +39,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMParser]",
-            IE8 = "exception")
+    @Alerts("[object DOMParser]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -61,9 +58,8 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDocument]",
-            IE8 = "exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("[object HTMLDocument]")
+    @NotYetImplemented
     public void parseFromString_text_html() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -85,8 +81,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object XMLDocument]")
     public void parseFromString_text_xml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -108,8 +103,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object XMLDocument]")
     public void parseFromString_application_xml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -131,8 +125,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE8 = "exception")
+    @Alerts("[object XMLDocument]")
     public void parseFromString_application_xhtmlXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -156,8 +149,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object SVGDocument]",
             CHROME = "[object XMLDocument]",
-            IE11 = "[object XMLDocument]",
-            IE8 = "exception")
+            IE = "[object XMLDocument]")
     @NotYetImplemented(FF)
     public void parseFromString_application_svgXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -202,8 +194,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "9",
-            IE8 = "exception")
+    @Alerts("9")
     public void parseFromString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -236,7 +227,6 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "parsererror",
             IE = "exception")
-    @NotYetImplemented(CHROME)
     public void parseFromString_invalidXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -262,9 +252,7 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "parsererror",
-            IE = "0",
-            IE8 = "exception")
-    @NotYetImplemented(CHROME)
+            IE = "0")
     public void parseFromString_emptyString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -311,9 +299,8 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5", "[object CDATASection]", "[object Comment]", "[object Element]",
-            "[object ProcessingInstruction]", "[object Text]" },
-            IE8 = "exception")
+    @Alerts({"5", "[object CDATASection]", "[object Comment]", "[object Element]",
+                "[object ProcessingInstruction]", "[object Text]"})
     public void parseFromString_processingInstructionKept() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

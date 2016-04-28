@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -52,12 +50,10 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -79,7 +75,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFileInput() throws Exception {
+    public void fileInput() throws Exception {
         String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
         testFileInput(path);
         final File file = new File(new URI(path));
@@ -162,12 +158,12 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        httpEntity.writeTo(out);
-        out.close();
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            httpEntity.writeTo(out);
 
-        Assert.assertTrue(
-                out.toString().contains("Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
+            assertTrue(out.toString().contains(
+                    "Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
+        }
     }
 
     /**
@@ -206,20 +202,20 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        httpEntity.writeTo(out);
-        out.close();
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            httpEntity.writeTo(out);
 
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER != getBrowserVersion()) {
-            final Pattern pattern = Pattern
-                .compile("Content-Disposition: form-data; name=\"image\";"
-                        + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
-            final Matcher matcher = pattern.matcher(out.toString());
-            assertTrue(matcher.find());
-        }
-        else if (getBrowserVersion().isFirefox()) {
-            assertTrue(out.toString()
-                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
+            if (getBrowserVersion().isIE()) {
+                final Pattern pattern = Pattern
+                        .compile("Content-Disposition: form-data; name=\"image\";"
+                                + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
+                final Matcher matcher = pattern.matcher(out.toString());
+                assertTrue(matcher.find());
+            }
+            else {
+                assertTrue(out.toString()
+                        .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
+            }
         }
     }
 
@@ -256,18 +252,18 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        httpEntity.writeTo(out);
-        out.close();
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            httpEntity.writeTo(out);
 
-        assertTrue(out.toString()
-                .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
+            assertTrue(out.toString()
+                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
+        }
     }
 
     /**
      * Helper that does some nasty magic.
      */
-    private HttpEntity post(final WebClient client,
+    private static HttpEntity post(final WebClient client,
             final MockWebConnection webConnection)
             throws NoSuchMethodException, IllegalAccessException,
             InvocationTargetException {
@@ -346,7 +342,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         f.getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
-        Assert.assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
+        assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
 
         fileInput.setContentType("text/webtest");
         f.getInputByName("mysubmit").click();
@@ -386,15 +382,10 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
         final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
 
-        InputStream content = null;
-        try {
-            content = httpResponse.getEntity().getContent();
+        try (final InputStream content = httpResponse.getEntity().getContent()) {
             final String response = new String(IOUtils.toByteArray(content));
             //this is the value with ASCII encoding
             assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
-        }
-        finally {
-            IOUtils.closeQuietly(content);
         }
     }
 
@@ -448,7 +439,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
             throws ServletException, IOException {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            response.getWriter().write("<html>"
+            response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
                 + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
@@ -492,7 +483,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
                     writer.write("error");
                 }
             }
-            writer.close();
         }
     }
 
@@ -547,7 +537,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
             throws ServletException, IOException {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            response.getWriter().write("<html>"
+            response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file' multiple><br>\n"
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"

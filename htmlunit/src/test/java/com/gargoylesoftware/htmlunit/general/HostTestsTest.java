@@ -29,6 +29,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
+
 /**
  * Tests the general host tests have all JavaScript objects names defined in all the other tests.
  *
@@ -47,8 +49,8 @@ public class HostTestsTest {
     @Test
     public void test() throws Exception {
         final Set<String> set = new HashSet<>();
-        final String testRoot = "src/test/java/";
-        collectionObjectNames(new File(testRoot), set);
+        final File testRoot = new File("src/test/java");
+        collectionObjectNames(testRoot, set);
 
         // Remove all Prototypes, as we plan to have test cases separate for them soon
         // TODO: add Prototype tests (e.g. alert(Element.prototype)
@@ -62,8 +64,13 @@ public class HostTestsTest {
             set.add("arguments");
         }
 
-        ensure(new File(testRoot + HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
-        ensure(new File(testRoot + HostTypeOfTest.class.getName().replace('.', '/') + ".java"), set);
+        // Worker
+        set.remove("DedicatedWorkerGlobalScope");
+        set.remove("WorkerGlobalScope");
+        set.remove("global");
+
+        ensure(new File(testRoot, HostClassNameTest.class.getName().replace('.', '/') + ".java"), set);
+        ensure(new File(testRoot, HostTypeOfTest.class.getName().replace('.', '/') + ".java"), set);
     }
 
     private void collectionObjectNames(final File dir, final Set<String> set) throws IOException {
@@ -72,7 +79,7 @@ public class HostTestsTest {
                 collectionObjectNames(file, set);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file);
+                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                 for (final String line : lines) {
                     final Matcher matcher = pattern_.matcher(line);
                     while (matcher.find()) {
@@ -83,9 +90,9 @@ public class HostTestsTest {
         }
     }
 
-    private void ensure(final File file, final Set<String> set) throws IOException {
+    private static void ensure(final File file, final Set<String> set) throws IOException {
         final Set<String> unusedNames = new HashSet<>(set);
-        final List<String> lines = FileUtils.readLines(file);
+        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
         for (final String line : lines) {
             for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
                 if (line.contains("(\"" + it.next() + "\")")) {

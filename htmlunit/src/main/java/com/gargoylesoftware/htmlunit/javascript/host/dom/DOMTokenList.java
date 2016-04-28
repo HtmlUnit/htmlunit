@@ -15,19 +15,17 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -36,6 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DOMTokenList}.
@@ -43,8 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class DOMTokenList extends SimpleScriptable {
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
@@ -151,6 +150,10 @@ public class DOMTokenList extends SimpleScriptable {
             result.append(value, to, value.length());
 
             value = result.toString();
+
+            if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
+                value = StringUtils.join(StringUtils.split(value, whitespaceChars()), ' ');
+            }
             updateAttribute(value);
 
             pos = position(value, token);
@@ -199,15 +202,27 @@ public class DOMTokenList extends SimpleScriptable {
             return null;
         }
         final String value = getDefaultValue(null);
-        final List<String> values = Arrays.asList(StringUtils.split(value, whitespaceChars()));
-        if (index < values.size()) {
-            return values.get(index);
+        final String[] values = StringUtils.split(value, whitespaceChars());
+        if (index < values.length) {
+            return values[index];
         }
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        final Object value = item(index);
+        if (value == null && (!getBrowserVersion().hasFeature(JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE))) {
+            return Undefined.instance;
+        }
+        return value;
+    }
+
     private void updateAttribute(final String value) {
-        final HtmlElement domNode = (HtmlElement) getDomNodeOrDie();
+        final DomElement domNode = (DomElement) getDomNodeOrDie();
         DomAttr attr = (DomAttr) domNode.getAttributes().getNamedItem(attributeName_);
         if (null == attr) {
             attr = domNode.getPage().createAttribute(attributeName_);

@@ -36,9 +36,8 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLElement]" },
-            IE8 = { "[object]", "[object]" , "[object]" },
-            IE11 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" })
+    @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"},
+            IE = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLUnknownElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -67,9 +66,8 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLElement]" },
-        IE8 = { "[object HTMLGenericElement]", "[object HTMLGenericElement]" , "[object HTMLGenericElement]" },
-        IE11 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" })
+    @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"},
+        IE = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLUnknownElement]"})
     public void simpleScriptable_strict() throws Exception {
         final String header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
@@ -94,5 +92,21 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String html
+            = "<html><body><title>foo</title>\n"
+            + "<foo></foo>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final String xml = driver.getPageSource();
+        assertTrue("Node not expanded in: " + xml, xml.contains("</foo>"));
     }
 }

@@ -39,8 +39,7 @@ public class SvgEllipseTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGEllipseElement]",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("[object SVGEllipseElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

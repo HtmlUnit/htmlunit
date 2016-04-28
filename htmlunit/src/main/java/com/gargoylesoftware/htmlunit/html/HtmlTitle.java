@@ -53,7 +53,7 @@ public class HtmlTitle extends HtmlElement {
     public void setNodeValue(final String message) {
         final DomNode child = getFirstChild();
         if (child == null) {
-            final DomNode textNode = new DomText(getPage() , message);
+            final DomNode textNode = new DomText(getPage(), message);
             appendChild(textNode);
         }
         else if (child instanceof DomText) {
@@ -72,5 +72,13 @@ public class HtmlTitle extends HtmlElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.NONE;
     }
 }

@@ -14,11 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 import java.util.Map;
@@ -75,10 +71,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "one", "two", "three" },
-            IE8 = { "undefined", "one", "two", "three" })
+    @Alerts({"null", "one", "two", "three"})
     @BuggyWebDriver
-    @NotYetImplemented(IE8)
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
@@ -158,7 +152,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "parent.myVariable = second", "top.myVariable = first" })
+    @Alerts({"parent.myVariable = second", "top.myVariable = first"})
     public void javascriptVariableFromTopAndParentFrame() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
@@ -197,7 +191,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "parent.second.myVariable = second", "parent.third.myVariable = third" })
+    @Alerts({"parent.second.myVariable = second", "parent.third.myVariable = third"})
     public void javascriptVariableFromNamedFrame() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
         final URL urlFourth = new URL(URL_FIRST, "fourth/");
@@ -259,7 +253,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "fourth-second=Â§Â§URL2Â§Â§", "fourth-third=Â§Â§URL3Â§Â§" })
+    @Alerts({"fourth-second=Â§Â§URL2Â§Â§", "fourth-third=Â§Â§URL3Â§Â§"})
     public void getFrameByName() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
         final URL urlFourth = new URL(URL_FIRST, "fourth/");
@@ -308,8 +302,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "false", "false", "true" })
-    @BuggyWebDriver({ CHROME, IE })
+    @Alerts({"false", "false", "true"})
+    @BuggyWebDriver(IE)
     public void closed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -416,7 +410,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "")
+            FF = {})
     public void scrollByLines() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -434,7 +428,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "")
+            FF = {})
     public void scrollByPages() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -464,7 +458,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "form1", "form1", "2", "2" })
+    @Alerts({"form1", "form1", "2", "2"})
     public void formByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -495,9 +489,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "frame1", "frame1", "0", "0" },
-            IE = { "frame1", "frame1", "2", "2" },
-            IE8 = { "frame1", "frame1", "exception:w.f2", "exception:f2" })
+    @Alerts(DEFAULT = {"frame1", "frame1", "0", "0"},
+            IE = {"frame1", "frame1", "2", "2"})
     @NotYetImplemented(IE)
     public void frameByName() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
@@ -536,7 +529,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "frame1", "frame1", "0", "0" })
+    @Alerts({"frame1", "frame1", "0", "0"})
     public void iframeByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -569,9 +562,9 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT" },
-            IE = { "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA",
-                "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA" })
+    @Alerts(DEFAULT = {"5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT"},
+            IE = {"11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA",
+                "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA"})
     // The following tags cause problems with WebDriver:
     // applet, body, frame, frameset, head, html, isindex, meta, plaintext, title
     // The iframe tag is treated as frame and as such has priority over the other tags, which would make the test
@@ -743,9 +736,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "10-10" },
-            IE8 = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10",
-                "exception:setAttributeNS", "9-9" })
+    @Alerts({"2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "10-10"})
     public void elementsByName_changedAfterGet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -833,10 +824,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2-2", "3-3" },
-            IE8 = { "2-2", "2-2" })
-    @NotYetImplemented({ FF, CHROME, IE11 })
-    public void elementsByName_changedAfterGet_nyi() throws Exception {
+    @Alerts({"2-2", "3-3"})
+    public void elementsByName_changedAfterGet2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -868,8 +857,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1",
-                "image1", "element1", "element1" })
+    @Alerts({"form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1",
+                "image1", "element1", "element1"})
     public void elementsById() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -927,7 +916,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "f1", "f1" })
+    @Alerts({"f1", "f1"})
     public void frameById() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
@@ -958,8 +947,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = { "JavaScript", "JScript", "exception1", "exception2: Invalid class string" })
+    @Alerts("exception")
     public void execScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -993,7 +981,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "test2", "test" })
+    @Alerts({"test2", "test"})
     public void onLoadFunction() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1027,8 +1015,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "a", "null" },
-            IE8 = { "a", "exception", "[object Object]" })
+    @Alerts({"a", "null"})
     public void onloadNotAFunction() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body><script>\n"
@@ -1046,8 +1033,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "test1", "test2", "onload" },
-            IE8 = { "true", "true", "exception", "onload" })
+    @Alerts({"false", "false", "test1", "test2", "onload"})
     public void addOnLoadEventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1075,9 +1061,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "exception", "onload" },
-            IE8 = { "false", "false", "onload", "test2", "test1, param null: false", "test1, param null: false" })
-    @NotYetImplemented(IE8)
+    @Alerts({"true", "true", "exception", "onload"})
     public void attachOnLoadEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1106,8 +1090,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "detached")
+    @Alerts("exception")
     public void detachEventInAttachEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1132,7 +1115,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "window.name before: ", "window.name after: main" })
+    @Alerts({"window.name before: ", "window.name after: main"})
     public void windowName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1154,8 +1137,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "number", "number", "number", "number" },
-            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts({"number", "number", "number", "number"})
     public void mozillaViewport() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1214,9 +1196,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "exception")
-    @NotYetImplemented(IE8)
+    @Alerts("1")
     public void evalScopeOtherWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
@@ -1240,7 +1220,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "elementValue", "elementValue", "elementValue" })
+    @Alerts({"elementValue", "elementValue", "elementValue"})
     public void evalScopeLocal() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
@@ -1305,9 +1285,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "123", "captured" },
-            IE8 = { "exception", "123" })
-    @NotYetImplemented(IE8)
+    @Alerts({"123", "captured"})
     public void captureEvents() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
@@ -1373,7 +1351,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "undefined", "true" })
+    @Alerts({"undefined", "undefined", "true"})
     public void undefinedProperty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1614,8 +1592,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "undefined")
+    @Alerts("1")
     public void devicePixelRatio() throws Exception {
         final String html
             = "<html><head><script>\n"

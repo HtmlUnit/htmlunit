@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -44,18 +40,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void querySelectorAll_nullUndefined() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll(null).length);\n"
-            + "      alert(document.querySelectorAll(undefined).length);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll(null).length);\n"
+            + "  alert(document.querySelectorAll(undefined).length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -73,20 +65,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "exception", "exception" })
+    @Alerts({"exception", "exception"})
     public void querySelectorAll_emptyString() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll(''));\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('  '));\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll(''));\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll('  '));\n"
+            + "  } catch(e) {alert('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -106,27 +96,22 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2" },
-            IE8 = "exception")
+    @Alerts({"li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2"})
     public void nth_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(n)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(2n)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(n)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(2n)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
 
-            + "      alert(document.querySelectorAll('li:nth-child(-n+2)').length);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(-n+2)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(-n+2)')[1].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('li:nth-child(-n+2)').length);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(-n+2)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(-n+2)')[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -144,22 +129,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "li2", "2", "li1", "li3" },
-            IE8 = "exception")
+    @Alerts({"1", "li2", "2", "li1", "li3"})
     public void nth_child_even_odd() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('li:nth-child(even)').length);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(eVen)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(odd)').length);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(OdD)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-child(ODD)')[1].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('li:nth-child(even)').length);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(eVen)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(odd)').length);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(OdD)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(ODD)')[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -177,22 +157,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "[object HTMLBodyElement]", "1", "0" })
+    @Alerts({"1", "[object HTMLBodyElement]", "1", "0"})
     public void childSelector_html_body() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('html > body').length);\n"
-            + "      alert(document.querySelectorAll('html > body')[0]);\n"
-            + "      alert(document.querySelectorAll('  \\t\\r\\n  html > body  \\t\\r\\n  ').length);\n"
+            + "  alert(document.querySelectorAll('html > body').length);\n"
+            + "  alert(document.querySelectorAll('html > body')[0]);\n"
+            + "  alert(document.querySelectorAll('  \\t\\r\\n  html > body  \\t\\r\\n  ').length);\n"
 
-            + "      elem = document.getElementById('root');\n"
-            + "      alert(elem.querySelectorAll('html > body').length);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  elem = document.getElementById('root');\n"
+            + "  alert(elem.querySelectorAll('html > body').length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -232,19 +208,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li1", "li4", "li7", "li10" },
-            IE8 = { "exception" })
+    @Alerts({"li1", "li4", "li7", "li10"})
     public void nth_child_equation() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
-            + "      for (var i = 0 ; i < list.length; i++) {\n"
-            + "        alert(list[i].id);\n"
-            + "      }\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "  var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -292,17 +263,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "ul2" })
+    @Alerts({"1", "ul2"})
     public void directAdjacentSelector() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('p+ul');\n"
-            + "    alert(list.length);\n"
-            + "    alert(list[0].id);\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll('p+ul');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -319,17 +288,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "thing1" })
+    @Alerts({"1", "thing1"})
     public void prefixAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[id^=\"thing\"]');\n"
-            + "    alert(list.length);\n"
-            + "    alert(list[0].id);\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll('[id^=\"thing\"]');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -346,19 +313,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing1></UL>" })
+    @Alerts("0")
     public void prefixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[id^=\"\"]');\n"
-            + "    alert(list.length);\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
-            + "    }\n"
+            + "  var list = document.querySelectorAll('[id^=\"\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -376,17 +340,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "something" })
+    @Alerts({"1", "something"})
     public void suffixAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[id$=\"thing\"]');\n"
-            + "    alert(list.length);\n"
-            + "    alert(list[0].id);\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll('[id$=\"thing\"]');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -403,19 +365,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing2></UL>" })
+    @Alerts("0")
     public void suffixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[id$=\"\"]');\n"
-            + "    alert(list.length);\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
-            + "    }\n"
+            + "  var list = document.querySelectorAll('[id$=\"\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -433,18 +392,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "something", "thing2" })
+    @Alerts({"2", "something", "thing2"})
     public void substringAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[id*=\"thing\"]');\n"
-            + "    alert(list.length);\n"
-            + "    alert(list[0].id);\n"
-            + "    alert(list[1].id);\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll('[id*=\"thing\"]');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
+            + "  alert(list[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -461,19 +418,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing2></UL>" })
+    @Alerts("0")
     public void substringAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[id*=\"\"]');\n"
-            + "    alert(list.length);\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
-            + "    }\n"
+            + "  var list = document.querySelectorAll('[id*=\"\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -491,18 +445,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "id1", "id2" })
+    @Alerts({"2", "id1", "id2"})
     public void oneOfAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[title~=\"w2\"]');\n"
-            + "    alert(list.length);\n"
-            + "    alert(list[0].id);\n"
-            + "    alert(list[1].id);\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll('[title~=\"w2\"]');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
+            + "  alert(list[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -525,10 +477,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[title~=\"\"]');\n"
-            + "    alert(list.length);\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll('[title~=\"\"]');\n"
+            + "  alert(list.length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -545,18 +495,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "id2", "id3" })
+    @Alerts({"2", "id2", "id3"})
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[title]');\n"
-            + "    alert(list.length);\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].id);\n"
-            + "    }\n"
+            + "  var list = document.querySelectorAll('[title]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -574,18 +522,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "id3" })
+    @Alerts({"1", "id3"})
     public void emptyAttributeValue() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[title=\"\"]');\n"
-            + "    alert(list.length);\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].id);\n"
-            + "    }\n"
+            + "  var list = document.querySelectorAll('[title=\"\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -603,18 +549,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "ul2", "ul3" })
+    @Alerts({"2", "ul2", "ul3"})
     public void generalAdjacentSelector() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('div~ul');\n"
-            + "    alert(list.length);\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].id);\n"
-            + "    }\n"
+            + "  var list = document.querySelectorAll('div~ul');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -632,22 +576,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li3", "2", "li1", "li3" },
-            IE8 = "exception")
+    @Alerts({"li3", "2", "li1", "li3"})
     public void nth_last_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
-
-            + "      alert(document.querySelectorAll('li:nth-last-child(odd)').length);\n"
-            + "      alert(document.querySelectorAll('li:nth-last-child(odd)')[0].id);\n"
-            + "      alert(document.querySelectorAll('li:nth-last-child(odd)')[1].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-last-child(odd)').length);\n"
+            + "  alert(document.querySelectorAll('li:nth-last-child(odd)')[0].id);\n"
+            + "  alert(document.querySelectorAll('li:nth-last-child(odd)')[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -665,33 +603,28 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0" },
-            IE8 = "exception")
+    @Alerts({"2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0"})
     public void nth_last_child2() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "      alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
-            + "      alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
+            + "  alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "  alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
-            + "      elem = document.getElementById('root');\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
+            + "  elem = document.getElementById('root');\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
-            + "      elem = document.getElementById('parent');\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
+            + "  elem = document.getElementById('parent');\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
-            + "      elem = document.getElementById('div1');\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  elem = document.getElementById('div1');\n"
+            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -711,18 +644,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void nth_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p:nth-of-type(2)')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('p:nth-of-type(2)')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -740,18 +668,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void nth_last_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p:nth-last-of-type(1)')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('p:nth-last-of-type(1)')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -769,20 +692,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { },
-            IE8 = { "li1" })
-    @NotYetImplemented(IE8)
     public void pseudoAfter() throws Exception {
         final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Pseudo-After</title><script>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>Pseudo-After</title><script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      var list = document.querySelectorAll('#li1:after');\n"
-            + "      for (var i = 0 ; i < list.length; i++) {\n"
-            + "        alert(list[i].id);\n"
-            + "      }\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "  var list = document.querySelectorAll('#li1:after');\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -806,9 +723,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "   alert(document.querySelectorAll('li:first-child')[0].id);\n"
-            + "  }\n"
+            + " alert(document.querySelectorAll('li:first-child')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -826,18 +741,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li3",
-            IE8 = "exception")
+    @Alerts("li3")
     public void last_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('li:last-child')[0].id);\n"
-            + "    } catch (e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('li:last-child')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -855,18 +765,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id2",
-            IE8 = "exception")
+    @Alerts("id2")
     public void first_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p:first-of-type')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('p:first-of-type')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -895,11 +800,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p a:not(a:first-of-type)')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll('p a:not(a:first-of-type)')[0].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -918,18 +821,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id4",
-            IE8 = "exception")
+    @Alerts("id4")
     public void last_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p:last-of-type')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('p:last-of-type')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -949,18 +847,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void only_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('h1:only-child')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('h1:only-child')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -980,18 +873,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3",
-            IE8 = "exception")
+    @Alerts("id3")
     public void only_of_type() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p:only-of-type')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('p:only-of-type')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1011,19 +899,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "id2", "span1" },
-            IE8 = "exception")
+    @Alerts({"id2", "span1"})
     public void empty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('p:empty')[0].id);\n"
-            + "      alert(document.querySelectorAll('span:empty')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('p:empty')[0].id);\n"
+            + "  alert(document.querySelectorAll('span:empty')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1040,18 +923,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id2",
-            IE8 = "exception")
+    @Alerts("id2")
     public void not() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.querySelectorAll('input:not([type=\"file\"])')[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  alert(document.querySelectorAll('input:not([type=\"file\"])')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1066,21 +944,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "item_2", "item_3" },
-            IE8 = "exception")
+    @Alerts({"2", "item_2", "item_3"})
     public void childNot() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      var res = document.querySelectorAll('#list li:not(#item_1)');\n"
-            + "      alert(res.length);\n"
-            + "      alert(res[0].id);\n"
-            + "      alert(res[1].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  var res = document.querySelectorAll('#list li:not(#item_1)');\n"
+            + "  alert(res.length);\n"
+            + "  alert(res[0].id);\n"
+            + "  alert(res[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1098,20 +971,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "item_2" },
-            IE8 = "exception")
+    @Alerts({"1", "item_2"})
     public void childNotNot() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      var res = document.querySelectorAll('#list li:not(#item_1):not(#item_3)');\n"
-            + "      alert(res.length);\n"
-            + "      alert(res[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  var res = document.querySelectorAll('#list li:not(#item_1):not(#item_3)');\n"
+            + "  alert(res.length);\n"
+            + "  alert(res[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1129,32 +997,24 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
-            IE = { "1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2" })
+    @Alerts(DEFAULT = {"0", "undefined", "1", "[object HTMLInputElement]", "id2"},
+            IE = {"1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2"})
     @BuggyWebDriver(Browser.FF)
     public void focus() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':focus');\n"
-            + "      alert(found.length);\n"
-            + "      alert(found[0]);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll(':focus');\n"
+            + "  alert(found.length);\n"
+            + "  alert(found[0]);\n"
             + "\n"
             + "  document.getElementById('id2').focus();\n"
             + "\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':focus');\n"
-            + "      alert(found.length);\n"
-            + "      alert(found[0]);\n"
-            + "      alert(found[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll(':focus');\n"
+            + "  alert(found.length);\n"
+            + "  alert(found[0]);\n"
+            + "  alert(found[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1169,20 +1029,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "5", "cb1", "rd1", "sl1", "ml1", "ml3" },
-            IE8 = "exception")
+    @Alerts({"5", "cb1", "rd1", "sl1", "ml1", "ml3"})
     public void checked() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':checked');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll(':checked');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1211,30 +1066,23 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "cb1", "rd1", "2", "cb2", "rd2" },
-            IE8 = { "exception", "exception" })
+    @Alerts({"2", "cb1", "rd1", "2", "cb2", "rd2"})
     public void checkedChanged() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':checked');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "  found = document.querySelectorAll(':checked');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
 
-            + "    document.getElementById('cb1').checked = false;\n"
-            + "    document.getElementById('cb2').checked = true;\n"
-            + "    document.getElementById('rd1').checked = false;\n"
-            + "    document.getElementById('rd2').checked = true;\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':checked');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  document.getElementById('cb1').checked = false;\n"
+            + "  document.getElementById('cb2').checked = true;\n"
+            + "  document.getElementById('rd1').checked = false;\n"
+            + "  document.getElementById('rd2').checked = true;\n"
+            + "  found = document.querySelectorAll(':checked');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1251,29 +1099,23 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "cb1", "rd1", "2", "cb1", "rd1" })
+    @Alerts({"2", "cb1", "rd1", "2", "cb1", "rd1"})
     public void checkedAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll('[checked]');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "  found = document.querySelectorAll('[checked]');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
 
-            + "    document.getElementById('cb1').checked = false;\n"
-            + "    document.getElementById('cb2').checked = true;\n"
-            + "    document.getElementById('rd1').checked = false;\n"
-            + "    document.getElementById('rd2').checked = true;\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll('[checked]');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  document.getElementById('cb1').checked = false;\n"
+            + "  document.getElementById('cb2').checked = true;\n"
+            + "  document.getElementById('rd1').checked = false;\n"
+            + "  document.getElementById('rd2').checked = true;\n"
+            + "  found = document.querySelectorAll('[checked]');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1290,36 +1132,24 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1-iy", "1-iy", "2", "1-iy", "1-iz"},
-            IE8 = { "1", "exception", "exception", "2", "exception", "exception" })
-    @NotYetImplemented(IE8)
+    @Alerts({"1", "1-iy", "1-iy", "2", "1-iy", "1-iz"})
     public void selectedChecked() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      alert(document.getElementById('s1').selectedIndex);\n"
-            + "      var sel = document.querySelectorAll('[selected]');\n"
-            + "      alert(sel.length + '-' + sel[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "    try {\n"
-            + "      sel = document.querySelectorAll(':checked');\n"
-            + "      alert(sel.length + '-' + sel[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "  alert(document.getElementById('s1').selectedIndex);\n"
+            + "  var sel = document.querySelectorAll('[selected]');\n"
+            + "  alert(sel.length + '-' + sel[0].id);\n"
+            + "  sel = document.querySelectorAll(':checked');\n"
+            + "  alert(sel.length + '-' + sel[0].id);\n"
 
-            + "    document.getElementById('iz').selected = 'selected';\n"
-            + "    try {\n"
-            + "      alert(document.getElementById('s1').selectedIndex);\n"
-            + "      var sel = document.querySelectorAll('[selected]');\n"
-            + "      alert(sel.length + '-' + sel[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "    try {\n"
-            + "      sel = document.querySelectorAll(':checked');\n"
-            + "      alert(sel.length + '-' + sel[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  document.getElementById('iz').selected = 'selected';\n"
+            + "  alert(document.getElementById('s1').selectedIndex);\n"
+            + "  var sel = document.querySelectorAll('[selected]');\n"
+            + "  alert(sel.length + '-' + sel[0].id);\n"
+            + "  sel = document.querySelectorAll(':checked');\n"
+            + "  alert(sel.length + '-' + sel[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1337,20 +1167,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "id1", "id3" },
-            IE8 = "exception")
+    @Alerts({"2", "id1", "id3"})
     public void enabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll('input:enabled');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll('input:enabled');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1366,20 +1191,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "id2" },
-            IE8 = "exception")
+    @Alerts({"1", "id2"})
     public void disabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll('input:disabled');\n"
-            + "      alert(found.length);\n"
-            + "      for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll('input:disabled');\n"
+            + "  alert(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1395,22 +1215,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "id2" },
-            CHROME = { "0" },
-            IE8 = "exception")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"1", "id2"},
+            CHROME = {"0"})
     public void target() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':target');\n"
-            + "      alert(found.length);\n"
-            + "      if (found.length > 0) { alert(found[0].id); }\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll(':target');\n"
+            + "  alert(found.length);\n"
+            + "  if (found.length > 0) { alert(found[0].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1426,19 +1241,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0" },
-            IE8 = "exception")
+    @Alerts("0")
     public void targetNoHash() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':target');\n"
-            + "      alert(found.length);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll(':target');\n"
+            + "  alert(found.length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1454,19 +1264,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0" },
-            IE8 = "exception")
+    @Alerts("0")
     public void targetUnknown() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll(':target');\n"
-            + "      alert(found.length);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  found = document.querySelectorAll(':target');\n"
+            + "  alert(found.length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1482,20 +1287,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "[object HTMLHtmlElement]" },
-            IE8 = "exception")
+    @Alerts({"1", "[object HTMLHtmlElement]"})
     public void root() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      var list = document.querySelectorAll(':root');\n"
-            + "      alert(list.length);\n"
-            + "      alert(list[0]);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
+            + "  var list = document.querySelectorAll(':root');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0]);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1508,7 +1308,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "first", "second" })
+    @Alerts({"first", "second"})
     public void escapedAttributeValue() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1533,7 +1333,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "6", "3" })
+    @Alerts({"6", "3"})
     public void differentWhitespaceClassName() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1562,7 +1362,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "first", "second", "third" })
+    @Alerts({"first", "second", "third"})
     public void escapedClassName() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1591,12 +1391,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Invalid Selectors</title><script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      var list = document.querySelectorAll('li:foo() ~ li');\n"
-            + "      alert(list.length);\n"
-            + "    } catch (e) {alert('exception')}\n"
-            + "  }\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('li:foo() ~ li');\n"
+            + "    alert(list.length);\n"
+            + "  } catch(e) {alert('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1613,225 +1411,237 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null", "null"})
     public void activeEmptyDetached() throws Exception {
         emptyAndDetached("*:active");
+        emptyAndDetached(":active");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void checkedEmptyDetached() throws Exception {
         emptyAndDetached("*:checked");
+        emptyAndDetached(":checked");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void disabledEmptyDetached() throws Exception {
         emptyAndDetached("*:disabled");
+        emptyAndDetached(":disabled");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void emptyEmptyDetached() throws Exception {
         emptyAndDetached("*:empty");
+        emptyAndDetached(":empty");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void enabledEmptyDetached() throws Exception {
         emptyAndDetached("*:enabled");
+        emptyAndDetached(":enabled");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "[object HTMLUnknownElement]", "null" })
-    @NotYetImplemented(IE8)
+    @Alerts({"null", "null", "[object HTMLSpanElement]"})
     public void firstchildEmptyDetached() throws Exception {
         emptyAndDetached("*:first-child");
+        emptyAndDetached(":first-child");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void firstoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:first-of-type");
+        emptyAndDetached(":first-of-type");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null", "null"})
     public void focusEmptyDetached() throws Exception {
         emptyAndDetached("*:focus");
+        emptyAndDetached(":focus");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null", "null"})
     public void hoverEmptyDetached() throws Exception {
         emptyAndDetached("*:hover");
+        emptyAndDetached(":hover");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void lastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:last-child");
+        emptyAndDetached(":last-child");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void lastoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:last-of-type");
+        emptyAndDetached(":last-of-type");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null", "null"})
     public void linkEmptyDetached() throws Exception {
         emptyAndDetached("*:link");
+        emptyAndDetached(":link");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void notEmptyDetached() throws Exception {
         emptyAndDetached("*:not(p)");
+        emptyAndDetached(":not(p)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void nthchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-child(2n)");
+        emptyAndDetached(":nth-child(2n)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void nthlastchildEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-last-child(2n)");
+        emptyAndDetached(":nth-last-child(2n)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void nthoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:nth-of-type(2n)");
+        emptyAndDetached(":nth-of-type(2n)");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void onlychildEmptyDetached() throws Exception {
         emptyAndDetached("*:only-child");
+        emptyAndDetached(":only-child");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
+            IE = {"null", "exception", "[object HTMLSpanElement]"})
     public void onlyoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:only-of-type");
+        emptyAndDetached(":only-of-type");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "exception", "exception" },
-            IE11 = { "null", "exception" })
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"null", "exception", "null"})
     public void rootEmptyDetached() throws Exception {
         emptyAndDetached("*:root");
+        emptyAndDetached(":root");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "null" })
+    @Alerts({"null", "null", "null"})
     public void visitedEmptyDetached() throws Exception {
         emptyAndDetached("*:visited");
+        emptyAndDetached(":visited");
     }
 
     private void emptyAndDetached(final String selector) throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
-            + "  if (!div.querySelector) { alert('querySelector not available'); return; }\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
             + "    alert(found);\n"
             + "  } catch(e) {alert('exception')}\n"
 
             + "  div = document.createElement('div');\n"
+            + "  try {\n"
+            + "    found = div.querySelector('" + selector + "');\n"
+            + "    alert(found);\n"
+            + "  } catch(e) {alert('exception')}\n"
+
+            + "  var input = document.createElement('span');\n"
+            + "  div.appendChild(input);\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
             + "    alert(found);\n"

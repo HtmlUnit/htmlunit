@@ -401,13 +401,11 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
 
             // password is ignored if no user defined
-            final boolean userIsNull = null == user || Undefined.instance == user;
-            if (!userIsNull) {
+            if (user != null && user != Undefined.instance) {
                 final String userCred = user.toString();
 
-                final boolean passwordIsNull = null == password || Undefined.instance == password;
                 String passwordCred = "";
-                if (!passwordIsNull) {
+                if (password != null && password != Undefined.instance) {
                     passwordCred = password.toString();
                 }
 
@@ -496,7 +494,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        if (content != null && !Context.getUndefinedValue().equals(content)) {
+        if (content != null && !Undefined.instance.equals(content)) {
             if (!"".equals(content) && HttpMethod.GET == webRequest_.getHttpMethod()) {
                 webRequest_.setHttpMethod(HttpMethod.POST);
             }
@@ -527,8 +525,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN);
-            final boolean crossOriginResourceSharing = originHeaderValue != null;
-            if (crossOriginResourceSharing && isPreflight()) {
+            if (originHeaderValue != null && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
@@ -571,7 +568,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                 LOG.debug("Web response loaded successfully.");
             }
             boolean allowOriginResponse = true;
-            if (crossOriginResourceSharing) {
+            if (originHeaderValue != null) {
                 final String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
                 allowOriginResponse = allowOriginResponse || ALLOW_ORIGIN_ALL.equals(value);
@@ -645,7 +642,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @param name header name (MUST be lower-case for performance reasons)
      * @param value header value
      */
-    private boolean isPreflightHeader(final String name, final String value) {
+    private static boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)

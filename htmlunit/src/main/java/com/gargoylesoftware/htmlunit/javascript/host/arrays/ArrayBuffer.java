@@ -14,17 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -35,8 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class ArrayBuffer extends SimpleScriptable {
 
     private byte[] bytes_;
@@ -66,7 +59,7 @@ public class ArrayBuffer extends SimpleScriptable {
      * @param end (optional) byte index to end slicing
      * @return the newly created ArrayBuffer
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public ArrayBuffer slice(final int begin, Object end) {
         if (end == Undefined.instance) {
             end = getByteLength();
@@ -97,7 +90,10 @@ public class ArrayBuffer extends SimpleScriptable {
         }
     }
 
-    byte[] getBytes() {
+    /**
+     * @return the bytes
+     */
+    public byte[] getBytes() {
         return bytes_;
     }
 }

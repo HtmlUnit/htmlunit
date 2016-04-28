@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE;
-
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -51,7 +49,7 @@ public class HtmlHiddenInput extends HtmlInput {
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
-        if (hasFeature(HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE) && "value".equals(qualifiedName)) {
+        if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);

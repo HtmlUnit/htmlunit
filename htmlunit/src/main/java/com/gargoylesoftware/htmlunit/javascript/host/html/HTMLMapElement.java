@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +25,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -37,13 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlMap.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlMap.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlMap.class)
 public class HTMLMapElement extends HTMLElement {
 
     private HTMLCollection areas_;
@@ -56,14 +49,14 @@ public class HTMLMapElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the JavaScript attribute "areas".
+     * Returns the value of the JavaScript attribute {@code areas}.
      * @return the value of this attribute
      */
     @JsxGetter
     public HTMLCollection getAreas() {
         if (areas_ == null) {
             final HtmlMap map = (HtmlMap) getDomNodeOrDie();
-            areas_ = new HTMLCollection(map, false, "HTMLMapElement.areas") {
+            areas_ = new HTMLCollection(map, false) {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> list = new ArrayList<>();
@@ -78,4 +71,23 @@ public class HTMLMapElement extends HTMLElement {
         }
         return areas_;
     }
+
+    /**
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
+     */
+    @JsxGetter
+    public String getName() {
+        return getDomNodeOrDie().getAttribute("name");
+    }
+
+    /**
+     * Sets the {@code name} attribute.
+     * @param name the {@code name} attribute
+     */
+    @JsxSetter
+    public void setName(final String name) {
+        getDomNodeOrDie().setAttribute("name", name);
+    }
+
 }

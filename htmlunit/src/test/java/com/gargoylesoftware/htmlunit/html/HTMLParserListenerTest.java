@@ -142,14 +142,14 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
 
             @Override
             public void error(final String message, final URL url, final String html,
-                    final int line, final int column, final String key) {
-                messages.add(new MessageInfo(true, message, url, html, line, column, key));
+                    final int errorLine, final int column, final String key) {
+                messages.add(new MessageInfo(true, message, url, html, errorLine, column, key));
             }
 
             @Override
             public void warning(final String message, final URL url, final String html,
-                    final int line, final int column, final String key) {
-                messages.add(new MessageInfo(false, message, url, html, line, column, key));
+                    final int warningLine, final int column, final String key) {
+                messages.add(new MessageInfo(false, message, url, html, warningLine, column, key));
             }
         };
         webClient.setHTMLParserListener(collecter);
@@ -176,7 +176,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
      */
     @Test
     public void parseFragment() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String htmlContent = "<html><head><title>foo</title>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
@@ -211,7 +211,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
         webClient.setHTMLParserListener(collecter);
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
+        webConnection.setDefaultResponse(htmlContent);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import static org.junit.Assert.assertSame;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -52,10 +50,15 @@ public class WebConnectionWrapperTest extends SimpleWebTestCase {
                 assertSame(wrs, request);
                 return response;
             }
+            @Override
+            public void close() {
+                // nothing
+            }
         };
 
-        final WebConnectionWrapper wrapper = new WebConnectionWrapper(realConnection);
-        assertSame(response, wrapper.getResponse(wrs));
+        try (final WebConnectionWrapper wrapper = new WebConnectionWrapper(realConnection)) {
+            assertSame(response, wrapper.getResponse(wrs));
+        }
     }
 
 }

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -27,13 +25,12 @@ import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
@@ -42,9 +39,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 public class HTMLCollection2 extends AbstractList2 {
 
     /**
@@ -52,6 +46,22 @@ public class HTMLCollection2 extends AbstractList2 {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
     public HTMLCollection2() {
+    }
+
+    /**
+     * Gets an empty collection.
+     * @param window the current scope
+     * @return an empty collection
+     */
+    public static HTMLCollection2 emptyCollection(final Window2 window) {
+        return null;
+//        final List<Object> list = Collections.emptyList();
+//        return new HTMLCollection2(window) {
+//            @Override
+//            public List<Object> getElements() {
+//                return list;
+//            }
+//        };
     }
 
     /**
@@ -75,27 +85,6 @@ public class HTMLCollection2 extends AbstractList2 {
         final HTMLCollection2 host = new HTMLCollection2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
-    }
-
-    /**
-     * Returns the elements whose associated host objects are available through this collection.
-     * @return the elements whose associated host objects are available through this collection
-     */
-    @Override
-    protected List<Object> computeElements() {
-        final List<Object> response = new ArrayList<>();
-        final DomNode domNode = getDomNodeOrNull();
-        if (domNode == null) {
-            return response;
-        }
-        final boolean commentIsElement = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
-        for (final DomNode node : getCandidates()) {
-            if ((node instanceof DomElement
-                    || (commentIsElement && node instanceof DomComment)) && isMatching(node)) {
-                response.add(node);
-            }
-        }
-        return response;
     }
 
     /**

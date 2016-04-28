@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -25,16 +24,11 @@ import java.util.List;
 
 import org.w3c.css.sac.CSSException;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
@@ -49,13 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-B63ED1A3">
  * W3C Dom Level 1</a>
  */
-@JsxClasses({
-        @JsxClass(domClass = DomDocumentFragment.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-                domClass = DomDocumentFragment.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = DomDocumentFragment.class)
 public class DocumentFragment extends Node {
 
     //TODO: seems that in IE, DocumentFragment extends HTMLDocument
@@ -68,18 +56,6 @@ public class DocumentFragment extends Node {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getXml() {
-        final Node node = getFirstChild();
-        if (node != null) {
-            return node.getXml();
-        }
-        return "";
-    }
-
-    /**
      * Creates a new HTML attribute with the specified name.
      *
      * @param attributeName the name of the attribute to create
@@ -88,17 +64,6 @@ public class DocumentFragment extends Node {
     @JsxFunction(@WebBrowser(IE))
     public Object createAttribute(final String attributeName) {
         return getDocument().createAttribute(attributeName);
-    }
-
-    /**
-     * Create a new HTML element with the given tag name.
-     *
-     * @param tagName the tag name
-     * @return the new HTML element, or NOT_FOUND if the tag is not supported
-     */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
-    public Object createElement(final String tagName) {
-        return getDocument().createElement(tagName);
     }
 
     /**
@@ -147,13 +112,13 @@ public class DocumentFragment extends Node {
      * @return the static node list
      */
     @JsxFunction
-    public StaticNodeList querySelectorAll(final String selectors) {
+    public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<Node> nodes = new ArrayList<>();
+            final List<Object> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add((Node) domNode.getScriptableObject());
+                nodes.add(domNode.getScriptableObject());
             }
-            return new StaticNodeList(nodes, this);
+            return NodeList.staticNodeList(this, nodes);
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
@@ -182,28 +147,11 @@ public class DocumentFragment extends Node {
     }
 
     /**
-     * Returns the value of the {@code URL} property.
-     * @return the value of the {@code URL} property
-     */
-    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "URL")
-    public String getURL() {
-        return WebClient.ABOUT_BLANK;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
-            if ((getDomNodeOrNull() != null || getParentScope() != null)
-                    && getBrowserVersion().hasFeature(JS_OBJECT_IN_QUIRKS_MODE)) {
-                final Page page = getWindow().getWebWindow().getEnclosedPage();
-                if (page != null && page.isHtmlPage() && ((HtmlPage) page).isQuirksMode()) {
-                    return "[object]";
-                }
-                return "[object HTMLDocument]";
-            }
             return "[object " + getClassName() + "]";
         }
         return super.getDefaultValue(hint);

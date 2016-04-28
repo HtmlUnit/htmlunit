@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,10 +42,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
-            CHROME = { "caption1", "caption2", "null", "caption3", "exception" },
-            IE8 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"caption1", "caption2", "null", "caption3", "exception",
+                            "[object HTMLTableCaptionElement]", "caption3", "caption4"})
     public void tableCaptions() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -58,15 +54,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  <script type='text/javascript' language='JavaScript'>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.caption.innerHTML);\n"
+
             + "    table.deleteCaption();\n"
             + "    alert(table.caption.innerHTML);\n"
+
             + "    table.deleteCaption();\n"
             + "    alert(table.caption);\n"
+
             + "    var newCaption = table.createCaption();\n"
             + "    newCaption.innerHTML = 'caption3';\n"
             + "    alert(table.caption.innerHTML);\n"
+
             + "    try { table.caption = 123; } catch(e) { alert('exception') }\n"
-            + "    alert(table.caption.innerHTML);\n"
+            + "    alert(table.caption);\n"
+            + "    if (table.caption) { alert(table.caption.innerHTML) }\n"
+
             + "    var caption4 = document.createElement('caption');\n"
             + "    caption4.innerHTML = 'caption4';\n"
             + "    try { table.caption = caption4; } catch(e) { alert('exception') }\n"
@@ -81,10 +83,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
-            CHROME = { "thead1", "thead2", "null", "thead3", "exception" },
-            IE8 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"thead1", "thead2", "null", "thead3", "exception",
+                            "[object HTMLTableSectionElement]", "thead3", "thead4"})
     public void tableHeaders() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -97,15 +97,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  <script type='text/javascript' language='JavaScript'>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.tHead.id);\n"
+
             + "    table.deleteTHead();\n"
             + "    alert(table.tHead.id);\n"
+
             + "    table.deleteTHead();\n"
             + "    alert(table.tHead);\n"
+
             + "    var newTHead = table.createTHead();\n"
             + "    newTHead.id = 'thead3';\n"
             + "    alert(table.tHead.id);\n"
+
             + "    try { table.tHead = 123; } catch(e) { alert('exception') }\n"
-            + "    alert(table.tHead.id);\n"
+            + "    alert(table.tHead);\n"
+            + "    if (table.tHead) { alert(table.tHead.id) }\n"
+
             + "    var tHead4 = document.createElement('tHead');\n"
             + "    tHead4.id = 'thead4';\n"
             + "    try { table.tHead = tHead4; } catch(e) { alert('exception') }\n"
@@ -120,7 +126,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "true", "4 2 2", "6 3 3" })
+    @Alerts({"2", "true", "4 2 2", "6 3 3"})
     public void tableBodies() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -155,7 +161,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "true", "3", "2", "3", "2" })
+    @Alerts({"2", "true", "3", "2", "3", "2"})
     public void tableRows() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -188,7 +194,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1" })
+    @Alerts({"1", "1"})
     public void tableHeadRows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -214,8 +220,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "true", "8 2 2 2 2",
-        "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3" })
+    @Alerts({"2", "true", "8 2 2 2 2",
+        "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"})
     public void tableRowsWithManySections() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -271,10 +277,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
-            CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception" },
-            IE8 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"tfoot1", "tfoot2", "null", "tfoot3", "exception",
+                            "[object HTMLTableSectionElement]", "tfoot3", "tfoot4"})
     public void tableFooters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -287,15 +291,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.tFoot.id);\n"
+
             + "    table.deleteTFoot();\n"
             + "    alert(table.tFoot.id);\n"
+
             + "    table.deleteTFoot();\n"
             + "    alert(table.tFoot);\n"
+
             + "    var newTFoot = table.createTFoot();\n"
             + "    newTFoot.id = 'tfoot3';\n"
             + "    alert(table.tFoot.id);\n"
+
             + "    try { table.tFoot = 123; } catch(e) { alert('exception') }\n"
-            + "    alert(table.tFoot.id);\n"
+            + "    alert(table.tFoot);\n"
+            + "    if (table.tFoot) { alert(table.tFoot.id) }\n"
+
             + "    var tFoot4 = document.createElement('tFoot');\n"
             + "    tFoot4.id = 'tfoot4';\n"
             + "    try { table.tFoot = tFoot4; } catch(e) { alert('exception') }\n"
@@ -310,7 +320,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "1", "-1" })
+    @Alerts({"0", "1", "0", "1", "-1"})
     public void cellIndex() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
@@ -356,7 +366,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "3", "2" })
+    @Alerts({"2", "3", "2"})
     public void insertRowEmpty() throws Exception {
         insertRow("");
     }
@@ -365,7 +375,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "exception" })
+    @Alerts({"2", "exception"})
     public void insertRow_MinusTwo() throws Exception {
         insertRow("-2");
     }
@@ -374,7 +384,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "3", "2" })
+    @Alerts({"2", "3", "2"})
     public void insertRow_MinusOne() throws Exception {
         insertRow("-1");
     }
@@ -383,7 +393,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "3", "0" })
+    @Alerts({"2", "3", "0"})
     public void insertRow_Zero() throws Exception {
         insertRow("0");
     }
@@ -392,7 +402,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "3", "1" })
+    @Alerts({"2", "3", "1"})
     public void insertRow_One() throws Exception {
         insertRow("1");
     }
@@ -401,7 +411,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "3", "2" })
+    @Alerts({"2", "3", "2"})
     public void insertRow_Two() throws Exception {
         insertRow("2");
     }
@@ -410,7 +420,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "exception" })
+    @Alerts({"2", "exception"})
     public void insertRow_Three() throws Exception {
         insertRow("3");
     }
@@ -420,7 +430,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mytable", "mytable" })
+    @Alerts({"mytable", "mytable"})
     public void insertRowNested() throws Exception {
         final String html =
             "<html><head>\n"
@@ -451,7 +461,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "TBODY", "TABLE" })
+    @Alerts({"TBODY", "TABLE"})
     public void insertRowInEmptyTable() throws Exception {
         final String html =
             "<html><head>\n"
@@ -478,7 +488,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "TBODY", "TBODY", "TBODY" })
+    @Alerts({"TBODY", "TBODY", "TBODY"})
     public void insertRowInTableWithEmptyTbody() throws Exception {
         final String html =
             "<html><head>\n"
@@ -505,7 +515,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "1" })
+    @Alerts({"1", "1"})
     public void nestedTables() throws Exception {
         final String html =
             "<html><head>\n"
@@ -537,15 +547,14 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "table: [object HTMLTableElement]",
+    @Alerts(DEFAULT = {"table: [object HTMLTableElement]",
                 "row: [object HTMLTableRowElement]",
                 "headcell: [object HTMLTableCellElement]",
-                "datacell: [object HTMLTableCellElement]" },
-            IE = { "table: [object HTMLTableElement]",
+                "datacell: [object HTMLTableCellElement]"},
+            IE = {"table: [object HTMLTableElement]",
                 "row: [object HTMLTableRowElement]",
                 "headcell: [object HTMLTableHeaderCellElement]",
-                "datacell: [object HTMLTableDataCellElement]" },
-            IE8 = { "table: [object]", "row: [object]", "headcell: [object]", "datacell: [object]" })
+                "datacell: [object HTMLTableDataCellElement]"})
     public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"
@@ -614,8 +623,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no refresh function",
-            IE8 = "refreshed")
+    @Alerts("no refresh function")
     public void refresh() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -641,8 +649,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
-            IE = {"", "error", "", "left", "error", "left", "right" })
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right"},
+            IE = {"", "error", "", "left", "error", "left", "right"})
     public void align() throws Exception {
         final String html =
             "<html>\n"
@@ -684,9 +692,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -713,11 +720,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "[object Text]", "abc", "[object Text]", "" },
-            CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1" },
-            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
-            IE11 = { "cell1", "[object Text]", "abc", "[object Text]", "" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @Alerts(DEFAULT = {"cell1", "[object Text]", "abc", "[object Text]", ""},
+            CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1"},
+            FF38 = {"undefined", "[object Text]", "abc", "[object Text]", ""})
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -743,9 +748,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "\n    cell1\n  ", "[object Text]", "abc", "[object Text]", "" },
-            IE8 = { "undefined", "[object]", "abc", "[object]", "" })
-    @NotYetImplemented(CHROME)
+    @Alerts({"\n    cell1\n  ", "[object Text]", "abc", "[object Text]", ""})
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
@@ -771,8 +774,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
-            IE = { "", "#667788", "#000000", "red", "#123456", "#000000" })
+    @Alerts(DEFAULT = {"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"},
+            IE = {"", "#667788", "#000000", "red", "#123456", "#000000"})
     @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html
@@ -806,8 +809,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "", "", "", "red", "#123456", "#000000" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"", "", "", "red", "#123456", "#000000"})
     @NotYetImplemented(IE)
     public void borderColorDark() throws Exception {
         final String html
@@ -841,8 +844,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "", "", "", "red", "#123456", "#000000" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"", "", "", "red", "#123456", "#000000"})
     @NotYetImplemented(IE)
     public void borderColorLight() throws Exception {
         final String html

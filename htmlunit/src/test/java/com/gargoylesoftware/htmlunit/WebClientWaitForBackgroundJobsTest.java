@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  */
 @RunWith(BrowserRunner.class)
 public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
-    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
-        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     private long startTime_;
 
@@ -158,7 +154,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "    function doWork() {\n"
             + "      clearTimeout(intervalId);\n"
             + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is here\n"
-            + "      var request = " + XHRInstantiation_ + ";\n"
+            + "      var request = new XMLHttpRequest();\n"
             + "      request.open('GET', 'wait', false);\n"
             + "      request.send('');\n"
             + "      alert('end work');\n"
@@ -326,7 +322,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "      }\n"
             + "    }\n"
             + "    function test() {\n"
-            + "      request = " + XHRInstantiation_ + ";\n"
+            + "      request = new XMLHttpRequest();\n"
             + "      request.open('GET', 'wait', true);\n"
             + "      request.onreadystatechange = onReadyStateChange;\n"
             + "      // waitForBackgroundJavaScriptStartingBefore should be called when JS execution is in send()\n"

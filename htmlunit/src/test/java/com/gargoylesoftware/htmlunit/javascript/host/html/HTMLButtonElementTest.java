@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +40,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
+    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
         final String html
             = "<html><body><button id='a1'>a1</button><button id='a2' accesskey='A'>a2</button><script>\n"
@@ -69,10 +68,9 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit", "button", "submit" },
-            IE8 = { "button", "exception", "button", "button" })
+    @Alerts({"submit", "button", "submit"})
     public void type() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var b = document.createElement('button');\n"
             + "    alert(b.type);\n"
@@ -92,11 +90,10 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "submit", "submit", "submit", "submit", "reset", "button", "submit" },
-            IE8 = { "button", "button", "submit", "button", "reset", "button", "button" })
+    @Alerts({"submit", "submit", "submit", "submit", "reset", "button", "submit"})
     public void getType() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myNone').type);\n"
@@ -129,13 +126,12 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id" },
-            IE11 = { "myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null" },
-            IE8 = { "myFormId", "", "", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" })
-    @NotYetImplemented({ FF, IE8, CHROME })
+    @Alerts(DEFAULT = {"myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id"},
+            IE = {"myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null"})
+    @NotYetImplemented({ FF, CHROME })
     public void getForm() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function show(id) {\n"
             + "    elem = document.getElementById(id);\n"
@@ -183,12 +179,11 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLButtonElement]", "26" },
-            IE8 = { "test", "4", "42", "2", "[object]", "8" })
+    @Alerts({"test", "4", "42", "2", "[object HTMLButtonElement]", "26"})
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"
-            + "  <head><title>foo</title>\n"
+            + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
@@ -221,11 +216,11 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "4", "null", "4" })
+    @Alerts({"null", "4", "null", "4"})
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
-            + "  <head><title>foo</title>\n"
+            + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
@@ -245,6 +240,43 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "    <button id='t'>abc</button>\n"
             + "  </body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            CHROME = {"0", "2", "1", "2", "1", "1"})
+    public void labels() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      debug(document.getElementById('e1'));\n"
+            + "      debug(document.getElementById('e2'));\n"
+            + "      debug(document.getElementById('e3'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      var labels = document.getElementById('e4').labels;\n"
+            + "      document.body.removeChild(document.getElementById('l4'));\n"
+            + "      debug(document.getElementById('e4'));\n"
+            + "      alert(labels ? labels.length : labels);\n"
+            + "    }\n"
+            + "    function debug(e) {\n"
+            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <button id='e1'>e 1</button><br>\n"
+            + "  <label>something <label> click here <button id='e2'>e 2</button></label></label><br>\n"
+            + "  <label for='e3'> and here</label>\n"
+            + "  <button id='e3'>e 3</button><br>\n"
+            + "  <label id='l4' for='e4'> what about</label>\n"
+            + "  <label> this<button id='e4'>e 4</button></label><br>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

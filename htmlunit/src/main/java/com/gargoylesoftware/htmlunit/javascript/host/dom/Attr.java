@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTR_BASE_URI_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -25,7 +24,6 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -33,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code Attr}.
@@ -47,13 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = DomAttr.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = DomAttr.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = DomAttr.class)
 public class Attr extends Node {
 
     /**
@@ -119,7 +110,7 @@ public class Attr extends Node {
      * Returns the owner element.
      * @return the owner element
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getOwnerElement() {
         final DomElement parent = getDomNodeOrDie().getOwnerElement();
         if (parent != null) {
@@ -194,22 +185,11 @@ public class Attr extends Node {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getBaseName() {
-        return Undefined.instance;
-    }
-
-    /**
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String getBaseURI() {
-        if (!getBrowserVersion().hasFeature(JS_ATTR_BASE_URI_NULL)) {
-            return getDomNodeOrDie().getPage().getUrl().toExternalForm();
-        }
-        return null;
+        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 }

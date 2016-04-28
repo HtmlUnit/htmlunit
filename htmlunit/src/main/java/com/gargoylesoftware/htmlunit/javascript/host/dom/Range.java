@@ -17,12 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
-import org.apache.commons.collections.ListUtils;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -40,20 +37,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object that represents a Range.
  *
  * @see <a href="http://www.xulplanet.com/references/objref/Range.html">XULPlanet</a>
- * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html">
- * DOM-Level-2-Traversal-Range</a>
+ * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html">DOM-Level-2-Traversal-Range</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author James Phillpotts
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class Range extends SimpleScriptable {
 
     /** Comparison mode for compareBoundaryPoints. */
@@ -71,22 +67,6 @@ public class Range extends SimpleScriptable {
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
     public static final short END_TO_START = 3;
-
-    /** Node before. */
-    @JsxConstant(@WebBrowser(CHROME))
-    public static final short NODE_BEFORE = 0;
-
-    /** Node after. */
-    @JsxConstant(@WebBrowser(CHROME))
-    public static final short NODE_AFTER = 1;
-
-    /** Node before and after. */
-    @JsxConstant(@WebBrowser(CHROME))
-    public static final short NODE_BEFORE_AND_AFTER = 2;
-
-    /** Node inside. */
-    @JsxConstant(@WebBrowser(CHROME))
-    public static final short NODE_INSIDE = 3;
 
     private Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;
@@ -135,7 +115,7 @@ public class Range extends SimpleScriptable {
     @JsxGetter
     public Object getStartContainer() {
         if (startContainer_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return startContainer_;
     }
@@ -147,7 +127,7 @@ public class Range extends SimpleScriptable {
     @JsxGetter
     public Object getEndContainer() {
         if (endContainer_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return endContainer_;
     }
@@ -210,7 +190,7 @@ public class Range extends SimpleScriptable {
         startOffset_ = getPositionInContainer(refNode);
     }
 
-    private int getPositionInContainer(final Node refNode) {
+    private static int getPositionInContainer(final Node refNode) {
         int i = 0;
         Node node = refNode;
         while (node.getPreviousSibling() != null) {
@@ -313,41 +293,22 @@ public class Range extends SimpleScriptable {
      */
     @JsxGetter
     public Object getCommonAncestorContainer() {
-        final Node ancestor = getCommonAncestor();
-        if (ancestor == null) {
-            return Context.getUndefinedValue();
-        }
-        return ancestor;
-    }
-
-    /**
-     * Returns the deepest common ancestor container of the Range's two boundary points.
-     * @return the deepest common ancestor container of the Range's two boundary points
-     */
-    @SuppressWarnings("unchecked")
-    private Node getCommonAncestor() {
-        final List<Node> startAncestors = getAncestorsAndSelf(startContainer_);
-        final List<Node> endAncestors = getAncestorsAndSelf(endContainer_);
-        final List<Node> commonAncestors = ListUtils.intersection(startAncestors, endAncestors);
-        if (commonAncestors.isEmpty()) {
-            return null;
-        }
-        return commonAncestors.get(0);
-    }
-
-    /**
-     * Returns the ancestors of the specified node.
-     * @param node the node to start with
-     * @return the ancestors of the specified node
-     */
-    private List<Node> getAncestorsAndSelf(final Node node) {
-        final List<Node> ancestors = new ArrayList<>();
-        Node ancestor = node;
+        final HashSet<Node> startAncestors = new HashSet<>();
+        Node ancestor = startContainer_;
         while (ancestor != null) {
-            ancestors.add(ancestor);
+            startAncestors.add(ancestor);
             ancestor = ancestor.getParent();
         }
-        return ancestors;
+
+        ancestor = endContainer_;
+        while (ancestor != null) {
+            if (startAncestors.contains(ancestor)) {
+                return ancestor;
+            }
+            ancestor = ancestor.getParent();
+        }
+
+        return Undefined.instance;
     }
 
     /**

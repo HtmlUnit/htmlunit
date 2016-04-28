@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FRAMESET_INLINE;
-
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -46,48 +44,48 @@ public class HtmlFrameSet extends HtmlElement {
         super(qualifiedName, page, attributes);
 
         // force script object creation now to forward onXXX handlers to window
-        getScriptObject2();
+        getScriptableObject();
     }
 
     /**
-     * Returns the value of the attribute "rows". Refer to the
+     * Returns the value of the attribute {@code rows}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "rows" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code rows} or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
         return getAttribute("rows");
     }
 
     /**
-     * Returns the value of the attribute "cols". Refer to the
+     * Returns the value of the attribute {@code cols}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "cols" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code cols} or an empty string if that attribute isn't defined
      */
     public final String getColsAttribute() {
         return getAttribute("cols");
     }
 
     /**
-     * Returns the value of the attribute "onload". Refer to the
+     * Returns the value of the attribute {@code onload}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
         return getAttribute("onload");
     }
 
     /**
-     * Returns the value of the attribute "onunload". Refer to the
+     * Returns the value of the attribute {@code onunload}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onunload" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onunload} or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
         return getAttribute("onunload");
@@ -98,9 +96,6 @@ public class HtmlFrameSet extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_FRAMESET_INLINE)) {
-            return DisplayStyle.INLINE;
-        }
         return super.getDefaultStyleDisplay();
     }
 }

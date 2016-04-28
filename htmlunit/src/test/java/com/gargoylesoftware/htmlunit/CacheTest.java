@@ -50,10 +50,10 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class CacheTest extends SimpleWebTestCase {
 
     /**
-     * @throws Exception if the test fails
+     * Test.
      */
     @Test
-    public void isDynamicContent() throws Exception {
+    public void isCacheableContent() {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<>();
         final WebResponse response = new DummyWebResponse() {
@@ -63,28 +63,28 @@ public class CacheTest extends SimpleWebTestCase {
             }
         };
 
-        assertTrue(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT");
-        assertFalse(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Last-Modified", formatHttpDate(DateUtils.addMinutes(new Date(), -5)));
-        assertTrue(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", formatHttpDate(DateUtils.addMinutes(new Date(), 5)));
-        assertTrue(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", formatHttpDate(DateUtils.addHours(new Date(), 1)));
-        assertFalse(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.remove("Last-Modified");
-        assertFalse(cache.isDynamicContent(response));
+        assertTrue(cache.isCacheableContent(response));
 
         headers.put("Expires", "0");
-        assertTrue(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", "-1");
-        assertTrue(cache.isDynamicContent(response));
+        assertFalse(cache.isCacheableContent(response));
     }
 
     /**
@@ -329,13 +329,12 @@ public class CacheTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "hello", "hello" })
+    @Alerts({"hello", "hello"})
     public void xhrContentCached() throws Exception {
         final String html = "<html><head><title>page 1</title>\n"
             + "<script>\n"
             + "  function doTest() {\n"
-            + "    var xhr = window.XMLHttpRequest ? new XMLHttpRequest()"
-            + "      : new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.txt', false);\n"
             + "    xhr.send('');\n"
             + "    alert(xhr.responseText);\n"
@@ -395,10 +394,9 @@ public class CacheTest extends SimpleWebTestCase {
 
     /**
      * Ensures {@link WebResponse#cleanUp()} is called on calling {@link Cache#clear()}.
-     * @throws Exception if the test fails
      */
     @Test
-    public void cleanUpOnClear() throws Exception {
+    public void cleanUpOnClear() {
         final WebRequest request1 = new WebRequest(URL_FIRST, HttpMethod.GET);
         final WebResponse response1 = createMock(WebResponse.class);
         expect(response1.getWebRequest()).andReturn(request1);

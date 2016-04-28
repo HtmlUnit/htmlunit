@@ -34,8 +34,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" },
-            IE8 = "exception")
+    @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"})
     public void constants() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -58,8 +57,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined" },
-            IE8 = "exception")
+    @Alerts({"undefined", "undefined", "undefined", "undefined"})
     public void properties() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -80,9 +78,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "true", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1" },
-            FF = { "3", "true", "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1" },
-            IE8 = { "1" })
+    @Alerts(DEFAULT = {"3", "true", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1"},
+            FF = {"3", "true", "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1"})
     /*
      * Messages:
      * CHROME: "A Node was inserted somewhere it doesn't belong."

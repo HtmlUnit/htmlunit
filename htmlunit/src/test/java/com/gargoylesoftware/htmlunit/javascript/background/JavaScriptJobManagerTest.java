@@ -14,13 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -165,15 +162,15 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(firstContent);
         final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
         final JavaScriptJobManager mgr = iframe.getEnclosedWindow().getJobManager();
-        Assert.assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
+        assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
 
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
         final HtmlPage newPage = anchor.click();
-        Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
-        Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
+        assertEquals("new page should load", "Third", newPage.getTitleText());
+        assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
         mgr.waitForJobs(10000);
-        Assert.assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());
+        assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());
     }
 
     /**
@@ -207,7 +204,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         // Not perfect, but 100 chances to start should be enough for a loaded system
         Thread.sleep(500);
 
-        Assert.assertFalse("At least one alert should have fired by now", collectedAlerts.isEmpty());
+        assertFalse("At least one alert should have fired by now", collectedAlerts.isEmpty());
         ((TopLevelWindow) page.getEnclosingWindow()).close();
 
         // 100 chances to stop
@@ -218,6 +215,6 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         // 100 chances to fail
         jobManager.waitForJobs(500);
 
-        Assert.assertEquals("No new alerts should have happened", finalValue, collectedAlerts.size());
+        assertEquals("No new alerts should have happened", finalValue, collectedAlerts.size());
     }
 }

@@ -32,7 +32,7 @@ public class HTMLTextElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "New Text" })
+    @Alerts({"undefined", "New Text"})
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -58,7 +58,7 @@ public class HTMLTextElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "New Text" })
+    @Alerts({"undefined", "New Text"})
     public void textCreateElement() throws Exception {
         final String html =
             "<html>\n"

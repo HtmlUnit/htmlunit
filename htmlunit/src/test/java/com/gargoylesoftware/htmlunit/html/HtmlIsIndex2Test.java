@@ -14,9 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,9 +44,8 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            CHROME = "[object HTMLUnknownElement]",
-            IE8 = "[object]")
-    @NotYetImplemented({ FF, IE11, CHROME })
+            CHROME = "[object HTMLUnknownElement]")
+    @NotYetImplemented({ IE, FF })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -65,7 +63,7 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlIsIndex.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 }

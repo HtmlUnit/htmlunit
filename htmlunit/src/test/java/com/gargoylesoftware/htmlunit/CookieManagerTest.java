@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -42,6 +43,15 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  */
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
+
+    /**
+     * Closes the real ie because clearing all cookies seem to be not working
+     * at the moment.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
 
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
     public static final String HTML_ALERT_COOKIE = "<html><head>\n"
@@ -164,6 +174,28 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for issue 1735.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void valueEmpty() throws Exception {
+        ensureCookieValueIsSentBackUnquoted("SID=");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void valueUnsafe() throws Exception {
+        ensureCookieValueIsSentBackUnquoted("SID=\"");
+        ensureCookieValueIsSentBackUnquoted("SID=\"\"");
+        ensureCookieValueIsSentBackUnquoted("SID=ab\"cd");
+
+        ensureCookieValueIsSentBackUnquoted("SID=\\");
+        ensureCookieValueIsSentBackUnquoted("SID=ab\\cd");
+    }
+
+    /**
      * If a Version 1 cookie is set with a value that requires quoting,
      * but wasn't quoted by the server, then this value should be
      * sent back unquoted as well.
@@ -259,7 +291,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first=1; second=2; third=3",
             CHROME = "fourth=4; third=3",
-            IE11 = "first=1; fourth=4; second=2; third=3")
+            IE = "first=1; fourth=4; second=2; third=3")
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
@@ -278,7 +310,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             CHROME = "cookie1=1",
-            IE11 = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
+            IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun 01-Dec-68 16:00:00 GMT"));
@@ -300,7 +332,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             CHROME = "cookie1=1",
-            IE11 = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
+            IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun,01 Dec 68 16:00:00 GMT"));
@@ -321,7 +353,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "cookie1=1",
-            IE11 = "cookie1=1; cookie6=6")
+            IE = "cookie1=1; cookie6=6")
     public void cookieExpires_TwoDigits3() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun-01 Dec 68 16:00:00 GMT"));
@@ -367,7 +399,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2" })
+    @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -417,7 +449,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
-            IE11 = "first=1")
+            IE = "first=1")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;path=/foo/blah"));
@@ -436,7 +468,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
-            IE11 = "first=1")
+            IE = "first=1")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
@@ -478,7 +510,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"cookies: first=1", "cookies: " })
+    @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

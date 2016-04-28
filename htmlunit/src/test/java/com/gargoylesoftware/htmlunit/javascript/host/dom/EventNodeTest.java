@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -24,7 +22,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -32,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class EventNodeTest extends WebDriverTestCase {
@@ -40,8 +38,7 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "fireEvent not available",
-            IE8 = "true")
+    @Alerts("fireEvent not available")
     public void fireEvent() throws Exception {
         final String html
             = "<html><head>\n"
@@ -63,8 +60,7 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "createEventObject not available",
-            IE8 = "hello")
+    @Alerts("createEventObject not available")
     public void fireEvent_initFromTemplate() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -92,8 +88,6 @@ public class EventNodeTest extends WebDriverTestCase {
     @Alerts("mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
         + "click text,mousedown image,focus image,mouseup image,click image,mousedown textarea,focus textarea,"
         + "mouseup textarea,click textarea,")
-    @BuggyWebDriver(IE)
-    // IEDriver generates the focus event for the image after the click although it's fired after the mousedown
     public void clickEvents() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

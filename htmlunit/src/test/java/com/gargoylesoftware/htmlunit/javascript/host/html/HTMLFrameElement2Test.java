@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
 
@@ -64,8 +64,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLDocument]", "true" },
-            IE8 = { "[object]", "true" })
+    @Alerts({"[object HTMLDocument]", "true"})
     public void contentDocument() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -113,7 +112,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
+    @Alerts({"frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0"})
     public void frameTag1192854() throws Exception {
         final String html
             = "<html>\n"
@@ -146,8 +145,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
-            IE8 = { "function handler() {}", "null", "exception" })
+    @Alerts({"function handler() {}", "null", "null"})
     @NotYetImplemented
     // Currently a \n is put between the {}
     public void onloadNull() throws Exception {
@@ -179,9 +177,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "§§URL§§subdir/frame.html", "§§URL§§frame.html" },
-            IE11 = { "§§URL§§subdir/frame.html" })
-    @NotYetImplemented(IE11)
+    @Alerts(DEFAULT = {"§§URL§§subdir/frame.html", "§§URL§§frame.html"},
+            IE = {"§§URL§§subdir/frame.html"})
+    @NotYetImplemented(IE)
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");
         location("Frame1.location.replace(\"frame.html\")");
@@ -259,8 +257,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
-        "/frame2.html", "oFrame.foo: foo of frame 2" })
+    @Alerts({"about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
+        "/frame2.html", "oFrame.foo: foo of frame 2"})
     public void changingFrameDocumentLocation() throws Exception {
         final String firstHtml = "<html><head><script>\n"
             + "var oFrame;\n"
@@ -307,8 +305,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Window]",
             CHROME = "[object HTMLFrameElement]",
-            FF = "[object HTMLFrameElement]",
-            IE8 = "[object]")
+            FF = "[object HTMLFrameElement]")
     public void frames_framesetOnLoad() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
@@ -333,8 +330,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLFrameElement]",
-            IE8 = "[object]",
-            IE11 = "[object Window]")
+            IE = "[object Window]")
     public void frames_bodyOnLoad() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
@@ -359,8 +355,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Window]",
             CHROME = "[object HTMLFrameElement]",
-            FF = "[object HTMLFrameElement]",
-            IE8 = "[object]")
+            FF = "[object HTMLFrameElement]")
     public void parent_frames() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
@@ -389,7 +384,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "head", "bottom", "frameset" })
+    @Alerts({"head", "bottom", "frameset"})
     public void onloadOrderRows() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50%,*' onLoad='alert(\"frameset\")'>\n"
@@ -416,7 +411,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "left", "right", "frameset" })
+    @Alerts({"left", "right", "frameset"})
     public void onloadOrderCols() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset cols='50%,*' onLoad='alert(\"frameset\")'>\n"
@@ -443,10 +438,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "OnloadTest", "header -> content -> frameSet",
+    @Alerts({"OnloadTest", "header -> content -> frameSet",
                 "content\nClick for new frame content with onload",
                 "header -> content -> frameSet -> onloadFrame",
-                "onloadFrame\nNew content loaded..." })
+                "onloadFrame\nNew content loaded..."})
     public void windowLocationReplaceOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
@@ -501,8 +496,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         // content frame
         driver.switchTo().defaultContent();
         driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[2],
-                driver.findElement(By.tagName("body")).getText());
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
         driver.switchTo().defaultContent();
@@ -518,11 +512,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "OnloadTest", "header -> content -> frameSet",
+    @Alerts(DEFAULT = {"OnloadTest", "header -> content -> frameSet",
                         "content\nClick for new frame content with onload",
                         "header -> content -> frameSet -> onloadFrame",
-                        "onloadFrame\nNew content loaded..." },
-            FF = { "OnloadTest", "header -> frameSet", "" })
+                        "onloadFrame\nNew content loaded..."},
+            FF = {"OnloadTest", "header -> frameSet", ""})
     @NotYetImplemented(FF)
     public void windowLocationAssignOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
@@ -578,8 +572,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         // content frame
         driver.switchTo().defaultContent();
         driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[2],
-                driver.findElement(By.tagName("body")).getText());
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
             driver.findElement(By.name("onloadFrameAnchor")).click();
@@ -597,10 +590,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "OnloadTest", "header -> content -> frameSet",
+    @Alerts({"OnloadTest", "header -> content -> frameSet",
                 "content\nClick for new frame content with onload",
                 "header -> content -> frameSet -> onloadFrame",
-                "onloadFrame\nNew content loaded..." })
+                "onloadFrame\nNew content loaded..."})
     @NotYetImplemented
     public void windowLocationSetOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
@@ -656,8 +649,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         // content frame
         driver.switchTo().defaultContent();
         driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[2],
-                driver.findElement(By.tagName("body")).getText());
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
             driver.findElement(By.name("onloadFrameAnchor")).click();
@@ -675,7 +667,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "localhost", "localhost", "localhost", "localhost" })
+    @Alerts({"localhost", "localhost", "localhost", "localhost"})
     public void domain() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

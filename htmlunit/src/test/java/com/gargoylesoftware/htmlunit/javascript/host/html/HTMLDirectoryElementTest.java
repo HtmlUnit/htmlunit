@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,8 +43,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDirectoryElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLDirectoryElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -67,10 +66,8 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
-                "true", "false", "true", "false", "", "null", "", "null" },
-            IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
-                "true", "false", "true", "false", "true", "false", "true", "false" })
+    @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
+                "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -115,11 +112,10 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined",
-                        "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
-            IE8 = { "", "", "", "A", "", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" },
-            IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
-    @NotYetImplemented(IE11)
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
+                        "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"},
+            IE = {"", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I"})
+    @NotYetImplemented(IE)
     public void type() throws Exception {
         final String html =
                 "<html>\n"

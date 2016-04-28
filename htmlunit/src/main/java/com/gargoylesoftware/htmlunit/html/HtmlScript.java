@@ -14,37 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SCRIPT_DISPLAY_INLINE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ASYNC_NOT_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
@@ -52,8 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -103,11 +91,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset". Refer to the
+     * Returns the value of the attribute {@code charset}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "charset"
+     * @return the value of the attribute {@code charset}
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
@@ -115,11 +103,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type"
+     * @return the value of the attribute {@code type}
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -127,11 +115,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "language". Refer to the
+     * Returns the value of the attribute {@code language}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "language"
+     * @return the value of the attribute {@code language}
      * or an empty string if that attribute isn't defined.
      */
     public final String getLanguageAttribute() {
@@ -139,11 +127,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "src". Refer to the
+     * Returns the value of the attribute {@code src}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "src"
+     * @return the value of the attribute {@code src}
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
@@ -151,27 +139,27 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "event".
-     * @return the value of the attribute "event"
+     * Returns the value of the attribute {@code event}.
+     * @return the value of the attribute {@code event}
      */
     public final String getEventAttribute() {
         return getAttribute("event");
     }
 
     /**
-     * Returns the value of the attribute "for".
-     * @return the value of the attribute "for"
+     * Returns the value of the attribute {@code for}.
+     * @return the value of the attribute {@code for}
      */
     public final String getHtmlForAttribute() {
         return getAttribute("for");
     }
 
     /**
-     * Returns the value of the attribute "defer". Refer to the
+     * Returns the value of the attribute {@code defer}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "defer"
+     * @return the value of the attribute {@code defer}
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {
@@ -209,23 +197,10 @@ public class HtmlScript extends HtmlElement {
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if (isDirectlyAttachedToPage()) {
-            final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
-            // always execute if IE;
-            if (alwaysReexecute) {
-                resetExecuted();
-                final PostponedAction action = new PostponedAction(getPage()) {
-                    @Override
-                    public void execute() {
-                        executeScriptIfNeeded();
-                    }
-                };
-                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
-                engine.addPostponedAction(action);
-            }
+        if (isAttachedToPage()) {
             // if FF, only execute if the "src" attribute
             // was undefined and there was no inline code.
-            else if (oldValue.isEmpty() && getFirstChild() == null) {
+            if (oldValue.isEmpty() && getFirstChild() == null) {
                 final PostponedAction action = new PostponedAction(getPage()) {
                     @Override
                     public void execute() {
@@ -255,28 +230,12 @@ public class HtmlScript extends HtmlElement {
             @Override
             public void execute() {
 //                final HTMLDocument jsDoc = (HTMLDocument)
-//                        ((Window2) getPage().getEnclosingWindow().getScriptObject2()).getDocument();
+//                        ((Window) getPage().getEnclosingWindow().getScriptableObject()).getDocument();
 //                jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
 //                        && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
 
                 try {
-                    final boolean onReady = hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
-                    if (onReady) {
-                        if (!isDeferred()) {
-                            if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
-                                setAndExecuteReadyState(READY_STATE_COMPLETE);
-                                executeScriptIfNeeded();
-                            }
-                            else {
-                                setAndExecuteReadyState(READY_STATE_LOADING);
-                                executeScriptIfNeeded();
-                                setAndExecuteReadyState(READY_STATE_LOADED);
-                            }
-                        }
-                    }
-                    else {
-                        executeScriptIfNeeded();
-                    }
+                    executeScriptIfNeeded();
                 }
                 finally {
 //                    jsDoc.setExecutingDynamicExternalPosponed(false);
@@ -284,9 +243,13 @@ public class HtmlScript extends HtmlElement {
             }
         };
 
-        if ((!hasFeature(JS_SCRIPT_ASYNC_NOT_SUPPORTED) && hasAttribute("async"))
+        final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+        if (hasAttribute("async") && !engine.isScriptRunning()) {
+            final HtmlPage owningPage = getHtmlPageOrNull();
+            owningPage.addAfterLoadAction(action);
+        }
+        else if (hasAttribute("async")
                 || postponed && StringUtils.isBlank(getTextContent())) {
-            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
         else {
@@ -327,18 +290,7 @@ public class HtmlScript extends HtmlElement {
             if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
-                window.attachEvent(event, function);
-                return;
-            }
-            if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID)) {
-                try {
-                    final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
-                    elt.setEventHandler(event, scriptCode);
-                }
-                catch (final ElementNotFoundException e) {
-                    LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
-                        + forr + "\". Ignoring.");
-                }
+                window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
                 return;
             }
         }
@@ -385,7 +337,7 @@ public class HtmlScript extends HtmlElement {
 
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
-            executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+            executeEvent(Event.TYPE_ERROR);
             return;
         }
 
@@ -399,14 +351,14 @@ public class HtmlScript extends HtmlElement {
                     executed_ = true;
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
                     if (result == JavaScriptLoadResult.SUCCESS) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD, EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
+                        executeEvent(Event.TYPE_LOAD);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                        executeEvent(Event.TYPE_ERROR);
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
-                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                    executeEvent(Event.TYPE_ERROR);
                     throw e;
                 }
             }
@@ -415,16 +367,16 @@ public class HtmlScript extends HtmlElement {
             // <script>[code]</script>
             executeInlineScriptIfNeeded();
 
-            executeEventIfBrowserHasFeature(Event.TYPE_LOAD, EVENT_ONLOAD_INTERNAL_JAVASCRIPT);
+            if (hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
+                executeEvent(Event.TYPE_LOAD);
+            }
         }
     }
 
-    private void executeEventIfBrowserHasFeature(final String type, final BrowserVersionFeatures feature) {
-        if (hasFeature(feature)) {
-//            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
-//            final Event event = new Event(HtmlScript.this, type);
-//            script.executeEventLocally(event);
-        }
+    private void executeEvent(final String type) {
+        final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
+        final Event event = new Event(HtmlScript.this, type);
+        script.executeEventLocally(event);
     }
 
     /**
@@ -437,7 +389,7 @@ public class HtmlScript extends HtmlElement {
             return false;
         }
 
-        if (!isDirectlyAttachedToPage()) {
+        if (!isAttachedToPage()) {
             return false;
         }
 
@@ -507,11 +459,9 @@ public class HtmlScript extends HtmlElement {
                 return true;
             }
 
-            final boolean appJavascriptSupported = browserVersion.hasFeature(HTMLSCRIPT_APPLICATION_JAVASCRIPT);
-            if (appJavascriptSupported
-                    && ("application/javascript".equalsIgnoreCase(typeAttribute)
+            if ("application/javascript".equalsIgnoreCase(typeAttribute)
                             || "application/ecmascript".equalsIgnoreCase(typeAttribute)
-                            || "application/x-javascript".equalsIgnoreCase(typeAttribute))) {
+                            || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
                 return true;
             }
             return false;
@@ -529,12 +479,6 @@ public class HtmlScript extends HtmlElement {
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
-        if (hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
-            setReadyState(state);
-//            final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
-//            final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-//            script.executeEventLocally(event);
-        }
     }
 
     /**
@@ -623,9 +567,6 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_SCRIPT_DISPLAY_INLINE)) {
-            return DisplayStyle.INLINE;
-        }
         return DisplayStyle.NONE;
     }
 }

@@ -56,19 +56,17 @@ public class XmlPage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "true", "14" },
-            IE = { "true", "16" },
-            IE11 = { "true", "15" })
+    @Alerts(DEFAULT =  { "true", "14"},
+            IE = {"true", "15"})
     public void createElement() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    doc.appendChild(doc.createElement('elementName'));\n"
             + "    var xml = " + XMLDocumentTest.callSerializeXMLDocumentToString("doc") + ";\n"
             + "    alert(xml.indexOf('<elementName') != -1);\n"
             + "    alert(xml.length);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -80,17 +78,15 @@ public class XmlPage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Element]",
-            IE8 = "exception")
+    @Alerts("[object Element]")
     public void createElementNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    try {\n"
             + "      alert(doc.createElementNS('myNS', 'ppp:eee'));\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 

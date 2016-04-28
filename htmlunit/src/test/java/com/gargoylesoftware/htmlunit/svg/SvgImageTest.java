@@ -39,8 +39,7 @@ public class SvgImageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGImageElement]",
-            IE8 = "[object HTMLImageElement]")
+    @Alerts("[object SVGImageElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

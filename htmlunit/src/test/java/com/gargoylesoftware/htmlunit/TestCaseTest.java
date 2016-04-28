@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -21,7 +23,6 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -58,7 +59,7 @@ public final class TestCaseTest {
                     generateTestForHtmlElements(file);
                 }
                 else if (file.getName().endsWith(".java")) {
-                    final List<String> lines = FileUtils.readLines(file);
+                    final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
                     for (final String line : lines) {
                         if (line.contains("(\"xmp\")")) {
                             final String relativePath = file.getAbsolutePath().substring(
@@ -95,7 +96,7 @@ public final class TestCaseTest {
         return list;
     }
 
-    private void checkLines(final String relativePath, final String line, final List<String> lines,
+    private static void checkLines(final String relativePath, final String line, final List<String> lines,
             final String elementName, final List<String> allElements) {
         final List<String> allExpectedLines = new ArrayList<>();
         for (final String element : allElements) {
@@ -103,7 +104,7 @@ public final class TestCaseTest {
         }
         allExpectedLines.removeAll(lines);
         if (!allExpectedLines.isEmpty()) {
-            Assert.fail("You must specify the following line in " + relativePath + ":\n"
+            fail("You must specify the following line in " + relativePath + ":\n"
                     + StringUtils.join(allExpectedLines, System.lineSeparator()));
         }
     }

@@ -25,10 +25,12 @@ import java.io.File;
  * @author David D. Kilzer
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class KeyDataPair extends NameValuePair {
 
     private final File fileObject_;
+    private final String fileName_;
     private final String mimeType_;
     private final String charset_;
     private byte[] data_;
@@ -38,20 +40,22 @@ public class KeyDataPair extends NameValuePair {
      *
      * @param key the key
      * @param file the file
+     * @param fileName the name of the file
      * @param mimeType the MIME type
      * @param charset the charset encoding
      */
-    public KeyDataPair(final String key, final File file, final String mimeType,
-            final String charset) {
+    public KeyDataPair(final String key, final File file, final String fileName,
+            final String mimeType, final String charset) {
 
-        super(key, file.getName());
+        super(key, (file == null) ? "" : file.getName());
 
-        if (file.exists()) {
+        if (file != null && file.exists()) {
             fileObject_ = file;
         }
         else {
             fileObject_ = null;
         }
+        fileName_ = fileName;
 
         mimeType_ = mimeType;
         charset_ = charset;
@@ -84,6 +88,13 @@ public class KeyDataPair extends NameValuePair {
      */
     public File getFile() {
         return fileObject_;
+    }
+
+    /**
+     * @return the fileName
+     */
+    public String getFileName() {
+        return fileName_;
     }
 
     /**

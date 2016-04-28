@@ -14,24 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_SET_TYPE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 /**
  * The JavaScript object that represents a {@link HtmlButton} (&lt;button type=...&gt;).
@@ -42,14 +37,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlButton.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlButton.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlButton.class)
 public class HTMLButtonElement extends FormField {
+
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -59,16 +51,13 @@ public class HTMLButtonElement extends FormField {
     }
 
     /**
-     * Sets the value of the attribute "type".
+     * Sets the value of the attribute {@code type}.
      * <p>Note that there is no GUI change in the shape of the button,
      * so we don't treat it like {@link HTMLInputElement#setType(String)}.</p>
      * @param newType the new type to set
      */
     @JsxSetter
     public void setType(final String newType) {
-        if (getBrowserVersion().hasFeature(JS_BUTTON_SET_TYPE_THROWS_EXCEPTION)) {
-            throw Context.reportRuntimeError("Object doesn't support this action");
-        }
         getDomNodeOrDie().setAttribute("type", newType);
     }
 
@@ -91,63 +80,19 @@ public class HTMLButtonElement extends FormField {
         if ("button".equals(type)) {
             return "button";
         }
-        if (getBrowserVersion().hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
-            return "button";
-        }
         return "submit";
     }
 
     /**
-     * Returns the {@code dataFld} attribute.
-     * @return the {@code dataFld} attribute
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFld() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie());
+        }
+        return labels_;
     }
 
-    /**
-     * Sets the {@code dataFld} attribute.
-     * @param dataFld {@code dataFld} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFld(final String dataFld) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataFormatAs} attribute.
-     * @return the {@code dataFormatAs} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataFormatAs() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataFormatAs} attribute.
-     * @param dataFormatAs {@code dataFormatAs} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataFormatAs(final String dataFormatAs) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code dataSrc} attribute.
-     * @return the {@code dataSrc} attribute
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public String getDataSrc() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code dataSrc} attribute.
-     * @param dataSrc {@code dataSrc} attribute
-     */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
-    public void setDataSrc(final String dataSrc) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
 }

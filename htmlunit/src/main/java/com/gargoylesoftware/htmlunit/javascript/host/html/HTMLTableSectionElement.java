@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -43,21 +42,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlTableBody.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableBody.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-        @JsxClass(domClass = HtmlTableHeader.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableHeader.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-            @JsxClass(domClass = HtmlTableFooter.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                    @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableFooter.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        @JsxClass(domClass = HtmlTableBody.class),
+        @JsxClass(domClass = HtmlTableHeader.class),
+        @JsxClass(domClass = HtmlTableFooter.class)
     })
 public class HTMLTableSectionElement extends RowContainer {
 
@@ -97,14 +84,10 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the valid "vAlign" values for this element, depending on the browser being emulated
      */
     private String[] getValidVAlignValues() {
-        String[] valid;
         if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
-            valid = VALIGN_VALID_VALUES_IE;
+            return VALIGN_VALID_VALUES_IE;
         }
-        else {
-            valid = null;
-        }
-        return valid;
+        return null;
     }
 
     /**
@@ -168,7 +151,7 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
+     * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
     @JsxSetter
@@ -179,26 +162,12 @@ public class HTMLTableSectionElement extends RowContainer {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for the contents of this node
-     */
-    @JsxSetter
-    @Override
-    public void setInnerHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag '"
-                            + getDomNodeOrDie().getNodeName() + "'");
-        }
-        super.setInnerHTML(value);
-    }
-
-    /**
      * Overwritten to throw an exception because this is readonly.
      * @param value the new value for the contents of this node
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     @Override
-    public void setInnerText(final String value) {
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    public void setInnerText(final Object value) {
         if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
             throw Context.reportRuntimeError("innerText is read-only for tag '"
                     + getDomNodeOrDie().getNodeName() + "'");

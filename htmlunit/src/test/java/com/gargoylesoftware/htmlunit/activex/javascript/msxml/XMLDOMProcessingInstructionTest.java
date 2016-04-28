@@ -64,7 +64,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "1", "version=1.0" })
+            IE = {"1", "version=1.0"})
     @NotYetImplemented(IE)
     // DOM processing instructions do not support attributes
     public void attributes_xmlDecl() throws Exception {
@@ -80,7 +80,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "3", "version=1.0", "encoding=utf-8", "standalone=yes" })
+            IE = {"3", "version=1.0", "encoding=utf-8", "standalone=yes"})
     @NotYetImplemented(IE)
     // DOM processing instructions do not support attributes
     public void attributes_complete_xmlDecl() throws Exception {
@@ -151,12 +151,12 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
+            IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
             + "alert(instr.data);\n"
@@ -195,10 +195,10 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
+            IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
                    "exception-setNull",
                    "exception-setEmpty",
-                   "exception-set" })
+                   "exception-set"})
     public void data_xmlDecl() throws Exception {
         final String test = ""
             + "alert(instr.data);\n"
@@ -365,12 +365,12 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
+            IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(instr.nodeValue);\n"
@@ -409,10 +409,10 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
+            IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
                    "exception-setNull",
                    "exception-setEmpty",
-                   "exception-set" })
+                   "exception-set"})
     public void nodeValue_xmlDecl() throws Exception {
         final String test = ""
             + "alert(instr.nodeValue);\n"
@@ -603,12 +603,12 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
+            IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
                    "exception-setNull",
                    "", "", "",
                    "test", "test", "test",
                    "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>" })
+                   "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
             + "alert(instr.text);\n"
@@ -647,10 +647,10 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = { "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
+            IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
                    "exception-setNull",
                    "exception-setEmpty",
-                   "exception-set" })
+                   "exception-set"})
     public void text_xmlDecl() throws Exception {
         final String test = ""
             + "alert(instr.text);\n"

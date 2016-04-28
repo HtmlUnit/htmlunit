@@ -17,11 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EMPTY_STRING_IS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EXCEPTION_ON_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 
@@ -68,8 +68,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chuck Dumont
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class XMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(XMLDocument.class);
@@ -191,7 +190,8 @@ public class XMLDocument extends Document {
         }
     }
 
-    private XmlPage createParserErrorXmlPage(final String message, final WebWindow webWindow) throws IOException {
+    private static XmlPage createParserErrorXmlPage(final String message, final WebWindow webWindow)
+            throws IOException {
         final String xml = "<parsererror xmlns=\"http://www.mozilla.org/newlayout/xml/parsererror.xml\">\n"
             + message + "\n"
             + "<sourcetext></sourcetext>\n"
@@ -257,11 +257,18 @@ public class XMLDocument extends Document {
             return HTMLCollection.emptyCollection(getWindow());
         }
 
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false,
-                "XMLDocument.getElementsByTagName") {
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
-                return node.getNodeName().equals(tagName);
+                final String nodeName;
+                if (getBrowserVersion().hasFeature(JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL)) {
+                    nodeName = node.getLocalName();
+                }
+                else {
+                    nodeName = node.getNodeName();
+                }
+
+                return nodeName.equals(tagName);
             }
         };
 

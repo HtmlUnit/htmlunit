@@ -19,11 +19,13 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
  * Tests for {@link HtmlPasswordInput}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPasswordInput2Test extends SimpleWebTestCase {
@@ -45,4 +47,42 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         assertEquals("Bye World", input.getValueAttribute());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeLeftArrow() throws Exception {
+        final String html = "<html><head></head><body><input type='password' id='t'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPasswordInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getValueAttribute());
+        t.type('s');
+        assertEquals("test", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_SPACE);
+        assertEquals("tes t", t.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeDelKey() throws Exception {
+        final String html = "<html><head></head><body><input type='password' id='t'/></body></html>";
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPasswordInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("tet", t.getValueAttribute());
+        t.type(KeyboardEvent.DOM_VK_DELETE);
+        assertEquals("tt", t.getValueAttribute());
+    }
 }

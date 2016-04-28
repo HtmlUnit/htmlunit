@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -430,7 +426,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         option.setSelected(true);
     }
 
-    private void checkOptions(final HtmlSelect select) {
+    private static void checkOptions(final HtmlSelect select) {
         final List<HtmlOption> options = select.getOptions();
         if (options.isEmpty()) {
             assertNull(select.getFirstChild());
@@ -564,7 +560,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getHtmlElementsByTagName("select").get(0);
+        final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getElementsByTagName("select").get(0);
         assertEquals("foo\nbar\nbaz", select.asText());
     }
 

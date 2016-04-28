@@ -14,14 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -29,20 +29,20 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
+import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
- * Tests all {@code constant}s defined in host classes.
- *
- * This is meant to be run against real browsers.
+ * Test all {@code constant}s defined in host classes.
  *
  * @author Ahmed Ashour
  */
-@Ignore
 @RunWith(BrowserParameterizedRunner.class)
+@ToRunWithRealBrowsers
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**
@@ -78,46 +78,71 @@ public class HostConstantsTest extends WebDriverTestCase {
         loadPageWithAlerts2("<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
-                + "  var all = [];\n"
-                + "  for (var x in " + host_ + ") {\n"
-                + "    if (typeof " + host_ + "[x] == 'number') {\n"
-                + "      all.push(x);\n"
+                + "  try {\n"
+                + "    var all = [];\n"
+                + "    for (var x in " + host_ + ") {\n"
+                + "      if (typeof " + host_ + "[x] == 'number') {\n"
+                + "        all.push(x);\n"
+                + "      }\n"
                 + "    }\n"
+                + "    all.sort();\n"
+                + "    var string = '';\n"
+                + "    for (var i in all) {\n"
+                + "      var x = all[i];\n"
+                + "      string += x + ':' + " + host_ + "[x] + ' ';\n"
+                + "    }\n"
+                + "    alert(string);\n"
+                + "  } catch (e) {\n"
                 + "  }\n"
-                + "  all.sort();\n"
-                + "  var string = '';\n"
-                + "  for (var i in all) {\n"
-                + "    var x = all[i];\n"
-                + "    string += x + ':' + " + host_ + "[x] + ' ';\n"
-                + "  }\n"
-                + "  alert(string);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean ignoreExpectationsLength() {
+        return true;
+    }
+
     private String getExpectedString() throws Exception {
-        if (host_.endsWith("Array")) {
+        if (host_.endsWith("Array") || "Image".equals(host_) || "Option".equals(host_)) {
             return "";
         }
+        if ("Error".equals(host_) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
+            return "stackTraceLimit:10 ";
+        }
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());
-        final Map<String, Object> constants = new TreeMap<>();
+        final List<String> constants = new ArrayList<>();
         ClassConfiguration classConfig = javaScriptConfig.getClassConfiguration(host_);
 
         boolean first = true;
-        while (classConfig != null && (!first || classConfig.isJsObject())) {
-            final Class<?> linkedClass = classConfig.getHostClass();
-            for (final String constant : new TreeSet<>(classConfig.getConstants())) {
-                final Object value = linkedClass.getField(constant).get(null);
-                constants.put(constant, value);
+        while (classConfig != null) {
+            if (first && !classConfig.isJsObject()) {
+                break;
+            }
+            if (first || classConfig.getJsConstructor() != null) {
+                for (final ConstantInfo constantInfo : classConfig.getConstants()) {
+                    constants.add(constantInfo.getName() + ":" + constantInfo.getValue());
+                }
             }
             classConfig = javaScriptConfig.getClassConfiguration(classConfig.getExtendedClassName());
             first = false;
         }
+
+        Collections.sort(constants, new Comparator<String>() {
+
+            @Override
+            public int compare(final String o1, final String o2) {
+                return o1.substring(0, o1.indexOf(':')).compareTo(o2.substring(0, o2.indexOf(':')));
+            }
+        });
         final StringBuilder builder = new StringBuilder();
-        for (final String key : constants.keySet()) {
-            builder.append(key).append(':').append(constants.get(key)).append(' ');
+        for (final String key : constants) {
+            builder.append(key).append(' ');
         }
         return builder.toString();
     }

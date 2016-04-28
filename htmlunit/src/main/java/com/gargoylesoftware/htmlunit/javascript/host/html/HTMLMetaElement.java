@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -32,13 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlMeta.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlMeta.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlMeta.class)
 public class HTMLMetaElement extends HTMLElement {
 
     /**
@@ -49,8 +42,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "charset" attribute.
-     * @return the charset attribute
+     * Returns the {@code charset} attributee.
+     * @return the {@code charset} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getCharset() {
@@ -59,7 +52,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code charset} attribute.
-     * @param charset the charset attribute
+     * @param charset the {@code charset} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setCharset(final String charset) {
@@ -67,8 +60,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "content" attribute.
-     * @return the content attribute
+     * Returns the {@code content} attribute.
+     * @return the {@code content} attribute
      */
     @JsxGetter
     public String getContent() {
@@ -85,8 +78,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "http-equiv" attribute.
-     * @return the http-equiv attribute
+     * Returns the {@code http-equiv} attribute.
+     * @return the {@code http-equiv} attribute
      */
     @JsxGetter
     public String getHttpEquiv() {
@@ -103,8 +96,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "name" attribute.
-     * @return the name attribute
+     * Returns the {@code name} attribute.
+     * @return the {@code name} attribute
      */
     @JsxGetter
     public String getName() {
@@ -113,7 +106,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code name} attribute.
-     * @param name the name attribute
+     * @param name the {@code name} attribute
      */
     @JsxSetter
     public void setName(final String name) {
@@ -121,8 +114,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "scheme" attribute.
-     * @return the scheme attribute
+     * Returns the {@code scheme} attribute.
+     * @return the {@code scheme} attribute
      */
     @JsxGetter
     public String getScheme() {
@@ -131,7 +124,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code scheme} attribute.
-     * @param scheme the scheme attribute
+     * @param scheme the {@code scheme} attribute
      */
     @JsxSetter
     public void setScheme(final String scheme) {
@@ -139,8 +132,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * Returns "url" attribute.
-     * @return the url attribute
+     * Returns the {@code url} attribute.
+     * @return the {@code url} attribute
      */
     @JsxGetter(@WebBrowser(IE))
     public String getUrl() {
@@ -149,7 +142,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code url} attribute.
-     * @param url the url attribute
+     * @param url the {@code url} attribute
      */
     @JsxSetter(@WebBrowser(IE))
     public void setUrl(final String url) {

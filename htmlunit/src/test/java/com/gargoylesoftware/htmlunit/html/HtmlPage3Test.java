@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.List;
 
@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage3Test extends WebDriverTestCase {
@@ -82,30 +83,30 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final List<WebElement> elements = driver.findElements(By.xpath("//*"));
-        Assert.assertEquals(7, elements.size());
+        assertEquals(7, elements.size());
 
-        Assert.assertEquals("html", elements.get(0).getTagName());
-        Assert.assertEquals("head", elements.get(1).getTagName());
-        Assert.assertEquals("script", elements.get(2).getTagName());
-        Assert.assertEquals("body", elements.get(3).getTagName());
-        Assert.assertEquals("form", elements.get(4).getTagName());
-        Assert.assertEquals("input", elements.get(5).getTagName());
+        assertEquals("html", elements.get(0).getTagName());
+        assertEquals("head", elements.get(1).getTagName());
+        assertEquals("script", elements.get(2).getTagName());
+        assertEquals("body", elements.get(3).getTagName());
+        assertEquals("form", elements.get(4).getTagName());
+        assertEquals("input", elements.get(5).getTagName());
 
         final WebElement input = elements.get(6);
-        Assert.assertEquals("input", input.getTagName());
-        Assert.assertEquals("myHiddenField", input.getAttribute("name"));
-        Assert.assertEquals("js", input.getAttribute("addedBy"));
-        Assert.assertEquals("js", input.getAttribute("addedby"));
+        assertEquals("input", input.getTagName());
+        assertEquals("myHiddenField", input.getAttribute("name"));
+        assertEquals("js", input.getAttribute("addedBy"));
+        assertEquals("js", input.getAttribute("addedby"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
-            FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
-            IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
+    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+            FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
+            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
+            IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <title>foo</title>\n"
@@ -135,7 +136,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnLoadHandler_ScriptNameRead() throws Exception {
+    public void onLoadHandler_ScriptNameRead() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "load=function (){};\n"
@@ -190,19 +191,18 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final WebElement form = driver.findElement(By.id("form1"));
         final WebElement input = form.findElement(By.name("textInput1"));
-        Assert.assertEquals("name", "textInput1", input.getAttribute("name"));
+        assertEquals("name", "textInput1", input.getAttribute("name"));
 
-        Assert.assertEquals("value", "textInput1", input.getAttribute("value"));
-        Assert.assertEquals("type", "text", input.getAttribute("type"));
+        assertEquals("value", "textInput1", input.getAttribute("value"));
+        assertEquals("type", "text", input.getAttribute("type"));
     }
 
     /**
      * @exception Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "1" },
-            IE8 = { "[object]", "1" })
-    @BuggyWebDriver(IE11)
+    @Alerts({"[object HTMLInputElement]", "1"})
+    @BuggyWebDriver(IE)
     public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title><script>\n"
@@ -215,6 +215,12 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
+
+        // [IE11] real IE11 waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
+
         loadPageWithAlerts2(html);
     }
 
@@ -222,8 +228,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @exception Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLInputElement]", "1" },
-            IE8 = { "[object]", "1" })
+    @Alerts({"[object HTMLInputElement]", "1"})
     public void write_getElementById_duringParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -240,8 +245,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello",
-            IE8 = { })
+    @Alerts("Hello")
     public void application_javascript_type() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -257,8 +261,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello",
-            IE8 = { })
+    @Alerts("Hello")
     public void application_x_javascript_type() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -356,4 +359,28 @@ public class HtmlPage3Test extends WebDriverTestCase {
         basePath("---****://==", URL_SECOND + "---****://path");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathLeadingAndTrailingWhitespace()  throws Exception {
+        basePath(" \t\n" + "http://localhost:" + PORT + "/base_path/" + "\n\t ",
+                "http://localhost:" + PORT + "/base_path/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathEmpty()  throws Exception {
+        basePath("", "http://localhost:" + PORT + "/second/path");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void basePathWhitespaceOnly()  throws Exception {
+        basePath(" \t\n ", "http://localhost:" + PORT + "/second/path");
+    }
 }

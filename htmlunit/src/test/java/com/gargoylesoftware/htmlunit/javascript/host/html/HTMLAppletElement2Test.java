@@ -43,6 +43,10 @@ public class HTMLAppletElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void callAppletMethodFromJS() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClientWithMockWebConnection();

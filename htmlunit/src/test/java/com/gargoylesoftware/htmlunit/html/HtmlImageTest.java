@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -64,13 +63,13 @@ public class HtmlImageTest extends SimpleWebTestCase {
         final HtmlImage img = page.getHtmlElementById(imgId);
 
         final Page page2 = img.click();
-        Assert.assertEquals("same page after click", samePage, Boolean.valueOf(page == page2));
+        assertEquals("same page after click", samePage, Boolean.valueOf(page == page2));
         if (!samePage.booleanValue()) {
             assertEquals("http://server/foo" + urlSuffixClick, page2.getUrl());
         }
 
         final Page page3 = img.click(25, 30);
-        Assert.assertEquals("same page after click(25, 30)", samePage, Boolean.valueOf(page == page3));
+        assertEquals("same page after click(25, 30)", samePage, Boolean.valueOf(page == page3));
         if (!samePage.booleanValue()) {
             assertEquals("http://server/foo" + urlSuffixClickXY, page3.getUrl());
         }
@@ -138,10 +137,10 @@ public class HtmlImageTest extends SimpleWebTestCase {
     public void asXml() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
-            + "<img id='img1' src='foo.png'>"
-            + "<img id='img2' name='testName' src='foo.png' alt='young'>"
-            + "<img id='img3' src='foo.png' width='11' height='17px' >"
-            + "<img id='img4' src='foo.png' width='11em' height='17%' >"
+            + "<img id='img1' src='foo.png'>\n"
+            + "<img id='img2' name='testName' src='foo.png' alt='young'>\n"
+            + "<img id='img3' src='foo.png' width='11' height='17px'>\n"
+            + "<img id='img4' src='foo.png' width='11em' height='17%'>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(content);
 

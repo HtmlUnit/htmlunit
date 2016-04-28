@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -63,11 +62,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
         originalName_ = getNameAttribute();
-        if ((attributes == null || !attributes.containsKey("type"))
-                && hasFeature(BUTTON_EMPTY_TYPE_BUTTON)
-                && page instanceof HtmlPage && !((HtmlPage) page).isQuirksMode()) {
-            setAttribute("type", "submit");
-        }
     }
 
     /**
@@ -86,7 +80,20 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     protected boolean doClickStateUpdate() throws IOException {
         final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
 
-        final HtmlForm form = getEnclosingForm();
+        HtmlForm form = null;
+        final String formId = getAttribute("form");
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == formId) {
+            form = getEnclosingForm();
+        }
+        else {
+            if (hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED))  {
+                final DomElement elem = getHtmlPageOrNull().getElementById(formId);
+                if (elem instanceof HtmlForm) {
+                    form = (HtmlForm) elem;
+                }
+            }
+        }
+
         if (form != null) {
             if ("button".equals(type)) {
                 return false;
@@ -101,13 +108,11 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
                 form.reset();
                 return false;
             }
-            if (hasFeature(BUTTON_UNKNOWN_TYPE_DOES_NOT_SUBMIT)) {
-                return false;
-            }
 
             form.submit(this);
             return false;
         }
+
         super.doClickStateUpdate();
         return false;
     }
@@ -124,7 +129,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
 
@@ -196,22 +201,22 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the
+     * Returns the value of the attribute {@code name}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Returns the value of the attribute "value". Refer to the
+     * Returns the value of the attribute {@code value}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "value" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
         return getAttribute("value");
@@ -230,33 +235,28 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         String type = super.getAttribute(attributeName);
 
         if (type == DomElement.ATTRIBUTE_NOT_DEFINED && "type".equalsIgnoreCase(attributeName)) {
-            if (hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
-                type = "button";
-            }
-            else {
-                type = "submit";
-            }
+            type = "submit";
         }
         return type;
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
+     * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "type" or the default value if that attribute isn't defined
+     * @return the value of the attribute {@code type} or the default value if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         return getAttribute("type");
     }
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the
+     * Returns the value of the attribute {@code disabled}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "disabled" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code disabled} or an empty string if that attribute isn't defined
      */
     @Override
     public final String getDisabledAttribute() {
@@ -264,44 +264,44 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the
+     * Returns the value of the attribute {@code tabindex}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttribute("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "accesskey". Refer to the
+     * Returns the value of the attribute {@code accesskey}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttribute("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the
+     * Returns the value of the attribute {@code onfocus}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttribute("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the
+     * Returns the value of the attribute {@code onblur}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttribute("onblur");
@@ -343,5 +343,14 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE_BLOCK;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@code true} to make generated XML readable as HTML.
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
     }
 }

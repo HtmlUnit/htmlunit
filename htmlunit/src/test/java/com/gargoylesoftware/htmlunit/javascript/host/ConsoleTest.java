@@ -35,8 +35,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "object", "true" },
-            IE8 = { "true", "undefined", "false" })
+    @Alerts({"false", "object", "true"})
     public void prototype() throws Exception {
         final String html
             = "<html>\n"
@@ -57,8 +56,8 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "undefined", "false" },
-            IE11 = { "false", "object", "true" })
+    @Alerts(DEFAULT = {"true", "undefined", "false"},
+            IE = {"false", "object", "true"})
     public void prototypeUppercase() throws Exception {
         final String html
             = "<html>\n"
@@ -79,8 +78,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function", "function", "function", "function" },
-            IE8 = "window.console not available")
+    @Alerts({"function", "function", "function", "function", "function"})
     public void methods() throws Exception {
         final String html
             = "<html>\n"

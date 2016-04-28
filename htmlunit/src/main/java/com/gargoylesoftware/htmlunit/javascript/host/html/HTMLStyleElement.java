@@ -14,11 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.StringReader;
 
@@ -27,14 +25,11 @@ import org.w3c.css.sac.InputSource;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLStyleElement}.
@@ -44,13 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlStyle.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlStyle.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlStyle.class)
 public class HTMLStyleElement extends HTMLElement {
 
     private CSSStyleSheet sheet_;
@@ -67,7 +56,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
      * @return the sheet
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public CSSStyleSheet getSheet() {
         if (sheet_ != null) {
             return sheet_;
@@ -90,15 +79,6 @@ public class HTMLStyleElement extends HTMLElement {
         }
 
         return sheet_;
-    }
-
-    /**
-     * Gets the associated sheet (IE).
-     * @return the sheet
-     */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
-    public CSSStyleSheet getStyleSheet() {
-        return getSheet();
     }
 
     /**
@@ -142,15 +122,46 @@ public class HTMLStyleElement extends HTMLElement {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for the contents of this node
+     * Returns the scoped of this style.
+     * @return the scoped
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public boolean getScoped() {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        return style.hasAttribute("scoped");
+    }
+
+    /**
+     * Sets the scoped of this style.
+     * @param scoped the new scoped
+     */
+    @JsxSetter(@WebBrowser(FF))
+    public void setScoped(final boolean scoped) {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        style.setAttribute("scoped", Boolean.toString(scoped));
+    }
+
+    /**
+     * Returns the {@code disabled} property.
+     * @return the {@code disabled} property
+     */
+    @JsxGetter
+    public boolean isDisabled() {
+        return !getSheet().isEnabled();
+    }
+
+    /**
+     * Sets the {@code disabled} property.
+     * @param disabled the {@code disabled} property
      */
     @Override
     @JsxSetter
-    public void setInnerHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag 'style'");
+    public void setDisabled(final boolean disabled) {
+        final CSSStyleSheet sheet = getSheet();
+        final boolean modified = disabled == sheet.isEnabled();
+        sheet.setEnabled(!disabled);
+        if (modified) {
+            getWindow().clearComputedStyles();
         }
-        super.setInnerHTML(value);
     }
 }

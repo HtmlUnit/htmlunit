@@ -34,8 +34,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE8 = "exception")
+    @Alerts("false")
     public void prototype() throws Exception {
         final String html
             = "<html><body>\n"

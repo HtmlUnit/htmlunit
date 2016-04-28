@@ -93,7 +93,6 @@ public class HtmlPage4Test extends WebServerTestCase {
                     + "</body>\n"
                     + "</html>";
             writer.write(response);
-            writer.close();
         }
 
         /**
@@ -154,7 +153,7 @@ public class HtmlPage4Test extends WebServerTestCase {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);
             final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
-            ((HTMLBodyElement) page.getBody().getScriptObject()).getCurrentStyle();
+            ((HTMLBodyElement) page.getBody().getScriptableObject()).getCurrentStyle();
 
             assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());
             assertEquals(initialTempFiles + 1, getTempFiles());
@@ -195,7 +194,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         }
     }
 
-    private int getTempFiles() {
+    private static int getTempFiles() {
         final File file = new File(System.getProperty("java.io.tmpdir"));
         final String[] list = file.list(new FilenameFilter() {
             @Override

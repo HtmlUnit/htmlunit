@@ -33,7 +33,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addNoPosEmpty() throws Exception {
         add("", true, false);
     }
@@ -42,7 +42,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addNoPosEmptyMulti() throws Exception {
         add("", true, true);
     }
@@ -51,7 +51,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three", "foo"})
     public void addNoPos() throws Exception {
         add("", false, false);
     }
@@ -60,7 +60,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three*", "foo"})
     public void addNoPosMulti() throws Exception {
         add("", false, true);
     }
@@ -69,7 +69,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addPosMinusOneEmpty() throws Exception {
         add(", -1", true, false);
     }
@@ -78,7 +78,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addPosMinusOneEmptyMulti() throws Exception {
         add(", -1", true, true);
     }
@@ -87,7 +87,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three", "foo"})
     public void addPosMinusOne() throws Exception {
         add(", -1", false, false);
     }
@@ -96,7 +96,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three*", "foo"})
     public void addPosMinusOneMulti() throws Exception {
         add(", -1", false, true);
     }
@@ -105,7 +105,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addPosZeroEmpty() throws Exception {
         add(", 0", true, false);
     }
@@ -114,7 +114,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addPosZeroEmptyMulti() throws Exception {
         add(", 0", true, true);
     }
@@ -123,7 +123,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "foo", "One", "Two*", "Three" })
+    @Alerts({"3", "4", "foo", "One", "Two*", "Three"})
     public void addPosZero() throws Exception {
         add(", 0", false, false);
     }
@@ -132,7 +132,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "foo", "One", "Two*", "Three*" })
+    @Alerts({"3", "4", "foo", "One", "Two*", "Three*"})
     public void addPosZeroMulti() throws Exception {
         add(", 0", false, true);
     }
@@ -141,7 +141,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addPosOneEmpty() throws Exception {
         add(", 1", true, false);
     }
@@ -150,7 +150,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addPosOneEmptyMulti() throws Exception {
         add(", 1", true, true);
     }
@@ -159,7 +159,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "foo", "Two*", "Three" })
+    @Alerts({"3", "4", "One", "foo", "Two*", "Three"})
     public void addPosOne() throws Exception {
         add(", 1", false, false);
     }
@@ -168,7 +168,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "foo", "Two*", "Three*" })
+    @Alerts({"3", "4", "One", "foo", "Two*", "Three*"})
     public void addPosOneMulti() throws Exception {
         add(", 1", false, true);
     }
@@ -177,7 +177,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addPosThreeEmpty() throws Exception {
         add(", 3", true, false);
     }
@@ -186,7 +186,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addPosThreeEmptyMulti() throws Exception {
         add(", 3", true, true);
     }
@@ -195,7 +195,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three", "foo"})
     public void addPosThree() throws Exception {
         add(", 3", false, false);
     }
@@ -204,7 +204,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three*", "foo"})
     public void addPosThreeMulti() throws Exception {
         add(", 3", false, true);
     }
@@ -213,7 +213,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addPosTenEmpty() throws Exception {
         add(", 10", true, false);
     }
@@ -222,7 +222,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addPosTenEmptyMulti() throws Exception {
         add(", 10", true, true);
     }
@@ -231,7 +231,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three", "foo"})
     public void addPosTen() throws Exception {
         add(", 10", false, false);
     }
@@ -240,7 +240,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three*", "foo"})
     public void addPosTenMulti() throws Exception {
         add(", 10", false, true);
     }
@@ -249,7 +249,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void addBeforeNullEmpty() throws Exception {
         add(", null", true, false);
     }
@@ -258,7 +258,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void addBeforeNullEmptyMulti() throws Exception {
         add(", null", true, true);
     }
@@ -267,7 +267,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three", "foo"})
     public void addBeforeNull() throws Exception {
         add(", null", false, false);
     }
@@ -276,7 +276,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three*", "foo"})
     public void addBeforeNullMulti() throws Exception {
         add(", null", false, true);
     }
@@ -285,7 +285,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "exception" })
+    @Alerts({"0", "exception"})
     public void addBeforeUnknownEmpty() throws Exception {
         add(", new Option('foo', '123')", true, false);
     }
@@ -294,7 +294,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "exception" })
+    @Alerts({"0", "exception"})
     public void addBeforeUnknownEmptyMulti() throws Exception {
         add(", new Option('foo', '123')", true, true);
     }
@@ -303,7 +303,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "exception" })
+    @Alerts({"3", "exception"})
     public void addBeforeUnknown() throws Exception {
         add(", new Option('foo', '123')", false, false);
     }
@@ -312,7 +312,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "exception" })
+    @Alerts({"3", "exception"})
     public void addBeforeUnknownMulti() throws Exception {
         add(", new Option('foo', '123')", false, true);
     }
@@ -321,7 +321,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "foo", "One", "Two*", "Three" })
+    @Alerts({"3", "4", "foo", "One", "Two*", "Three"})
     public void addBeforeFirst() throws Exception {
         add(", oSelect.options[0]", false, false);
     }
@@ -330,7 +330,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "foo", "One", "Two*", "Three*" })
+    @Alerts({"3", "4", "foo", "One", "Two*", "Three*"})
     public void addBeforeFirstMulti() throws Exception {
         add(", oSelect.options[0]", false, true);
     }
@@ -339,7 +339,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "foo", "Two*", "Three" })
+    @Alerts({"3", "4", "One", "foo", "Two*", "Three"})
     public void addBeforeSecond() throws Exception {
         add(", oSelect.options[1]", false, false);
     }
@@ -348,7 +348,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "foo", "Two*", "Three*" })
+    @Alerts({"3", "4", "One", "foo", "Two*", "Three*"})
     public void addBeforeSecondMulti() throws Exception {
         add(", oSelect.options[1]", false, true);
     }
@@ -357,7 +357,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "foo", "Three" })
+    @Alerts({"3", "4", "One", "Two*", "foo", "Three"})
     public void addBeforeLast() throws Exception {
         add(", oSelect.options[2]", false, false);
     }
@@ -366,7 +366,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "foo", "Three*" })
+    @Alerts({"3", "4", "One", "Two*", "foo", "Three*"})
     public void addBeforeLastMulti() throws Exception {
         add(", oSelect.options[2]", false, true);
     }
@@ -412,8 +412,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "exception")
+    @Alerts("undefined")
     public void getMinusOneEmpty() throws Exception {
         get("-1", true);
     }
@@ -422,8 +421,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE8 = "exception")
+    @Alerts("undefined")
     public void getMinusOne() throws Exception {
         get("-1", false);
     }
@@ -520,7 +518,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void putMinusOneNullEmpty() throws Exception {
         put("-1", "null", true, false);
     }
@@ -529,7 +527,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts({"0", "0"})
     public void putMinusOneNullEmptyMulti() throws Exception {
         put("-1", "null", true, true);
     }
@@ -538,7 +536,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "Three" })
+    @Alerts({"3", "3", "One", "Two*", "Three"})
     public void putMinusOneNull() throws Exception {
         put("-1", "null", false, false);
     }
@@ -547,7 +545,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "Three*" })
+    @Alerts({"3", "3", "One", "Two*", "Three*"})
     public void putMinusOneNullMulti() throws Exception {
         put("-1", "null", false, true);
     }
@@ -556,7 +554,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "Three" })
+    @Alerts({"3", "3", "One", "Two*", "Three"})
     public void putMinusOneEmpty() throws Exception {
         put("-1", "opt", false, false);
     }
@@ -565,7 +563,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "Three*" })
+    @Alerts({"3", "3", "One", "Two*", "Three*"})
     public void putMinusOneEmptyMulti() throws Exception {
         put("-1", "opt", false, true);
     }
@@ -574,7 +572,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "Three" })
+    @Alerts({"3", "3", "One", "Two*", "Three"})
     public void putMinusOne() throws Exception {
         put("-1", "opt", false, false);
     }
@@ -583,7 +581,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "Three*" })
+    @Alerts({"3", "3", "One", "Two*", "Three*"})
     public void putMinusOneMulti() throws Exception {
         put("-1", "opt", false, true);
     }
@@ -592,7 +590,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo*" })
+    @Alerts({"0", "1", "foo*"})
     public void putZeroEmpty() throws Exception {
         put("0", "opt", true, false);
     }
@@ -601,7 +599,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "foo" })
+    @Alerts({"0", "1", "foo"})
     public void putZeroEmptyMulti() throws Exception {
         put("0", "opt", true, true);
     }
@@ -610,7 +608,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "foo", "Two*", "Three" })
+    @Alerts({"3", "3", "foo", "Two*", "Three"})
     public void putZero() throws Exception {
         put("0", "opt", false, false);
     }
@@ -619,7 +617,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "foo", "Two*", "Three*" })
+    @Alerts({"3", "3", "foo", "Two*", "Three*"})
     public void putZeroMulti() throws Exception {
         put("0", "opt", false, true);
     }
@@ -628,7 +626,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One*", "foo", "Three" })
+    @Alerts({"3", "3", "One*", "foo", "Three"})
     public void putOne() throws Exception {
         put("1", "opt", false, false);
     }
@@ -637,7 +635,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "foo", "Three*" })
+    @Alerts({"3", "3", "One", "foo", "Three*"})
     public void putOneMulit() throws Exception {
         put("1", "opt", false, true);
     }
@@ -646,7 +644,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "foo" })
+    @Alerts({"3", "3", "One", "Two*", "foo"})
     public void putTwo() throws Exception {
         put("2", "opt", false, false);
     }
@@ -655,7 +653,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "3", "One", "Two*", "foo" })
+    @Alerts({"3", "3", "One", "Two*", "foo"})
     public void putTwoMulti() throws Exception {
         put("2", "opt", false, true);
     }
@@ -664,7 +662,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three", "foo"})
     public void putThree() throws Exception {
         put("3", "opt", false, false);
     }
@@ -673,7 +671,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
+    @Alerts({"3", "4", "One", "Two*", "Three*", "foo"})
     public void putThreeMulti() throws Exception {
         put("3", "opt", false, true);
     }
@@ -682,7 +680,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "11", "One", "Two*", "Three", "", "", "", "", "", "", "", "foo" })
+    @Alerts({"3", "11", "One", "Two*", "Three", "", "", "", "", "", "", "", "foo"})
     public void putTen() throws Exception {
         put("10", "opt", false, false);
     }
@@ -691,7 +689,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "11", "One", "Two*", "Three*", "", "", "", "", "", "", "", "foo" })
+    @Alerts({"3", "11", "One", "Two*", "Three*", "", "", "", "", "", "", "", "foo"})
     public void putTenMulti() throws Exception {
         put("10", "opt", false, true);
     }
@@ -757,8 +755,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2", "Two*", "Three" },
-            CHROME = { "3", "One", "Two*", "Three" },
+    @Alerts(DEFAULT = {"2", "Two*", "Three"},
+            CHROME = {"3", "One", "Two*", "Three"},
             IE = "exception")
     public void removeMinusOne() throws Exception {
         remove("-1", false, false);
@@ -768,8 +766,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2", "Two*", "Three*" },
-            CHROME = { "3", "One", "Two*", "Three*" },
+    @Alerts(DEFAULT = {"2", "Two*", "Three*"},
+            CHROME = {"3", "One", "Two*", "Three*"},
             IE = "exception")
     public void removeMinusOneMulti() throws Exception {
         remove("-1", false, true);
@@ -779,7 +777,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "Two*", "Three" })
+    @Alerts({"2", "Two*", "Three"})
     public void removeZero() throws Exception {
         remove("0", false, false);
     }
@@ -788,7 +786,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "Two*", "Three*" })
+    @Alerts({"2", "Two*", "Three*"})
     public void removeZeroMulti() throws Exception {
         remove("0", false, true);
     }
@@ -797,7 +795,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "One*", "Three" })
+    @Alerts({"2", "One*", "Three"})
     public void removeOne() throws Exception {
         remove("1", false, false);
     }
@@ -806,7 +804,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "One", "Three*" })
+    @Alerts({"2", "One", "Three*"})
     public void removeOneMulti() throws Exception {
         remove("1", false, true);
     }
@@ -815,7 +813,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "One", "Two*" })
+    @Alerts({"2", "One", "Two*"})
     public void removeTwo() throws Exception {
         remove("2", false, false);
     }
@@ -824,7 +822,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "One", "Two*" })
+    @Alerts({"2", "One", "Two*"})
     public void removeTwoMulti() throws Exception {
         remove("2", false, true);
     }
@@ -833,8 +831,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "One", "Two*", "Three" },
-            FF = { "2", "Two*", "Three" })
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
+            FF = {"2", "Two*", "Three"})
     public void removeThree() throws Exception {
         remove("3", false, false);
     }
@@ -843,8 +841,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "One", "Two*", "Three*" },
-            FF = { "2", "Two*", "Three*" })
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
+            FF = {"2", "Two*", "Three*"})
     public void removeThreeMulti() throws Exception {
         remove("3", false, true);
     }
@@ -871,8 +869,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "One", "Two*", "Three" },
-            FF = { "2", "Two*", "Three" })
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
+            FF = {"2", "Two*", "Three"})
     public void removeTen() throws Exception {
         remove("10", false, false);
     }
@@ -881,8 +879,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "One", "Two*", "Three*" },
-            FF = { "2", "Two*", "Three*" })
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
+            FF = {"2", "Two*", "Three*"})
     public void removeTenMuti() throws Exception {
         remove("10", false, true);
     }
@@ -926,7 +924,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "3" })
+    @Alerts({"0", "1", "3"})
     public void length() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -962,8 +960,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception", "exception" },
-            FF = { "0", "1", "One", "3", "One", "Two", "Three" })
+    @Alerts(DEFAULT = {"0", "1", "One", "3", "One", "Two", "Three"},
+            IE = {"exception", "exception", "exception"})
     public void setLengthMinusOne() throws Exception {
         setLength("-1");
     }
@@ -972,7 +970,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "0", "0" })
+    @Alerts({"0", "0", "0"})
     public void setLengthZero() throws Exception {
         setLength("0");
     }
@@ -981,7 +979,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "", "1", "One", "1", "One" })
+    @Alerts({"1", "", "1", "One", "1", "One"})
     public void setLengthOne() throws Exception {
         setLength("1");
     }
@@ -990,7 +988,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "", "", "2", "One", "", "2", "One", "Two" })
+    @Alerts({"2", "", "", "2", "One", "", "2", "One", "Two"})
     public void setLengthTwo() throws Exception {
         setLength("2");
     }
@@ -999,7 +997,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "", "", "", "3", "One", "", "", "3", "One", "Two", "Three" })
+    @Alerts({"3", "", "", "", "3", "One", "", "", "3", "One", "Two", "Three"})
     public void setLengthThree() throws Exception {
         setLength("3");
     }
@@ -1008,9 +1006,9 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "10", "", "", "", "", "", "", "", "", "", "",
+    @Alerts({"10", "", "", "", "", "", "", "", "", "", "",
               "10", "One", "", "", "", "", "", "", "", "", "",
-              "10", "One", "Two", "Three", "", "", "", "", "", "", "" })
+              "10", "One", "Two", "Three", "", "", "", "", "", "", ""})
     public void setLengthTen() throws Exception {
         setLength("10");
     }
@@ -1070,8 +1068,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "", "4", "One", "1", "", "0" },
-            FF = { "1", "", "4", "One", "1", "", "1" })
+    @Alerts(DEFAULT = {"1", "", "4", "One", "1", "", "0"},
+            FF = {"1", "", "4", "One", "1", "", "1"})
     public void setLength_increase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

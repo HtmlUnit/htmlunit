@@ -17,8 +17,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHECKED_RETURNS_CHECKED_OR_EMPTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_EMAIL_TRIMMED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_URL_TRIMMED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -26,13 +28,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+import java.util.Locale;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -41,16 +43,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object for {@code HTMLInputElement}.
@@ -64,14 +69,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlInput.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlInput.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlInput.class)
 public class HTMLInputElement extends FormField {
+
+    /** "Live" labels collection; has to be a member to have equality (==) working. */
+    private AbstractList labels_;
 
     /**
      * Creates an instance.
@@ -81,17 +83,29 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the value of the attribute "type".
+     * Returns the {@code type} property.
+     * @return the {@code type} property
+     */
+    @JsxGetter
+    public String getType() {
+        return getDomNodeOrDie().getTypeAttribute().toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Sets the value of the attribute {@code type}.
      * Note: this replace the DOM node with a new one.
      * @param newType the new type to set
      */
     @JsxSetter
-    public void setType(final String newType) {
+    public void setType(String newType) {
         HtmlInput input = getDomNodeOrDie();
 
         final String currentType = input.getAttribute("type");
 
         if (!currentType.equalsIgnoreCase(newType)) {
+            if (newType != null && getBrowserVersion().hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
+                newType = newType.toLowerCase(Locale.ROOT);
+            }
             final AttributesImpl attributes = readAttributes(input);
             final int index = attributes.getIndex("type");
             if (index > -1) {
@@ -127,6 +141,41 @@ public class HTMLInputElement extends FormField {
                 super.setAttribute("type", newType);
             }
         }
+    }
+
+    /**
+     * Sets the value of the JavaScript attribute {@code value}.
+     *
+     * @param newValue the new value
+     */
+    @JsxSetter
+    @Override
+    public void setValue(final Object newValue) {
+        if (null == newValue) {
+            getDomNodeOrDie().setAttribute("value", "");
+            return;
+        }
+
+        String val = Context.toString(newValue);
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (StringUtils.isNotEmpty(val) && "file".equalsIgnoreCase(getType())) {
+            if (browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {
+                throw Context.reportRuntimeError("InvalidStateError: "
+                        + "Failed to set the 'value' property on 'HTMLInputElement'.");
+            }
+            return;
+        }
+
+        if (StringUtils.isBlank(val)) {
+            if ("email".equalsIgnoreCase(getType()) && browserVersion.hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED))  {
+                val = "";
+            }
+            else if ("url".equalsIgnoreCase(getType()) && browserVersion.hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+                val = "";
+            }
+        }
+
+        getDomNodeOrDie().setAttribute("value", val);
     }
 
     /**
@@ -173,25 +222,6 @@ public class HTMLInputElement extends FormField {
             ((HtmlTextInput) input).select();
         }
         // currently nothing for other input types
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getAttribute(String attributeName, final Integer flags) {
-        final Object value = super.getAttribute(attributeName, flags);
-        if (getBrowserVersion().hasFeature(JS_CHECKED_RETURNS_CHECKED_OR_EMPTY)) {
-            attributeName = fixAttributeName(attributeName);
-            if ("checked".equals(attributeName)) {
-                if (value == null) {
-                    return DomElement.ATTRIBUTE_NOT_DEFINED;
-                }
-                return "checked";
-            }
-        }
-
-        return value;
     }
 
     /**
@@ -261,7 +291,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code selectionStart} attribute.
      * @return the selection start
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getSelectionStart() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
@@ -270,7 +300,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code selectionStart} attribute.
      * @param start selection start
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setSelectionStart(final int start) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -279,7 +309,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code selectionEnd} attribute.
      * @return the selection end
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxGetter
     public int getSelectionEnd() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -288,7 +318,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code selectionEnd} attribute.
      * @param end selection end
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
+    @JsxSetter
     public void setSelectionEnd(final int end) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }
@@ -335,7 +365,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code min} property.
      * @return the {@code min} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getMin() {
         return getDomNodeOrDie().getAttribute("min");
     }
@@ -344,7 +374,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code min} property.
      * @param min the {@code min} property
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setMin(final String min) {
         getDomNodeOrDie().setAttribute("min", min);
     }
@@ -353,7 +383,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code max} property.
      * @return the {@code max} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getMax() {
         return getDomNodeOrDie().getAttribute("max");
     }
@@ -362,7 +392,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code max} property.
      * @param max the {@code max} property
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setMax(final String max) {
         getDomNodeOrDie().setAttribute("max", max);
     }
@@ -390,7 +420,7 @@ public class HTMLInputElement extends FormField {
      * @param start the index of the first character to select
      * @param end the index of the character after the selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction
     public void setSelectionRange(final int start, final int end) {
         setSelectionStart(start);
         setSelectionEnd(end);
@@ -479,20 +509,9 @@ public class HTMLInputElement extends FormField {
         final boolean newState = domNode.isChecked();
 
         if (originalState != newState
-            && (domNode instanceof HtmlRadioButtonInput
-                    || (domNode instanceof HtmlCheckBoxInput
-                            && !getBrowserVersion().hasFeature(JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT)))) {
+            && (domNode instanceof HtmlRadioButtonInput || domNode instanceof HtmlCheckBoxInput)) {
             domNode.fireEvent(Event.TYPE_CHANGE);
         }
-    }
-
-    /**
-     * Returns the {@code type} property.
-     * @return the {@code type} property
-     */
-    @JsxGetter
-    public String getType() {
-        return getDomNodeOrDie().getTypeAttribute();
     }
 
     /**
@@ -507,7 +526,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code required} attribute.
      * @return the {@code required} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public boolean isRequired() {
         return getDomNodeOrDie().isRequired();
     }
@@ -516,7 +535,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code required} attribute.
      * @param required the new attribute value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setRequired(final boolean required) {
         getDomNodeOrDie().setRequired(required);
     }
@@ -561,7 +580,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code autocomplete} attribute.
      * @return the {@code autocomplete} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getAutocomplete() {
         return getDomNodeOrDie().getAutocomplete();
     }
@@ -570,7 +589,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code autocomplete} attribute.
      * @param autocomplete the new {@code autocomplete} value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setAutocomplete(final String autocomplete) {
         getDomNodeOrDie().setAutocomplete(autocomplete);
     }
@@ -579,7 +598,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code files} property.
      * @return the {@code files} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getFiles() {
         if (getDomNodeOrDie() instanceof HtmlFileInput) {
             final FileList list = new FileList(HtmlFileInput.splitFiles(getValue()));
@@ -597,7 +616,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code placeholder} attribute.
      * @return the {@code placeholder} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public String getPlaceholder() {
         return getDomNodeOrDie().getPlaceholder();
     }
@@ -606,7 +625,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code placeholder} attribute.
      * @param placeholder the new {@code placeholder} value
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setPlaceholder(final String placeholder) {
         getDomNodeOrDie().setPlaceholder(placeholder);
     }
@@ -657,6 +676,18 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setHeight(final int height) {
         getDomNodeOrDie().setAttribute("height", Integer.toString(height));
+    }
+
+    /**
+     * Returns the labels associated with the element.
+     * @return the labels associated with the element
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public AbstractList getLabels() {
+        if (labels_ == null) {
+            labels_ = new LabelsHelper(getDomNodeOrDie());
+        }
+        return labels_;
     }
 
 }

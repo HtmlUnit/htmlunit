@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.util.Map;
@@ -136,6 +135,14 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
+    protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void typeDone(final String newValue) {
         if (newValue.length() <= getMaxLength()) {
             setAttribute("value", newValue);
@@ -174,8 +181,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
-        boolean modifyValue = hasFeature(HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE);
-        modifyValue = modifyValue && getValueAttribute().equals(getDefaultValue());
+        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
     }
 }

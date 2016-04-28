@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -24,7 +23,6 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
-import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -263,10 +261,7 @@ public class AbstractList2 extends SimpleScriptObject {
             return response;
         }
         for (final DomNode node : getCandidates()) {
-            final boolean commentIncluded = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT)
-                    && node instanceof DomComment;
-
-            if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
+            if (node instanceof DomElement && isMatching(node)) {
                 response.add(node);
             }
         }

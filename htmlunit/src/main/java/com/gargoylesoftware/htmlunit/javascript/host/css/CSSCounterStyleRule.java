@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 38))
+@JsxClass(browsers = @WebBrowser(FF))
 public class CSSCounterStyleRule extends CSSRule {
 
 }

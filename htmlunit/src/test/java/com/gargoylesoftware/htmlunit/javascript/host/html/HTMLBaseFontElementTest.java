@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -37,11 +34,10 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLSpanElement]", "undefined", "undefined", "undefined" },
-            CHROME = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
-            FF38 = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
-            IE = { "[object]", "", "3", "" },
-            IE11 = { "[object HTMLBaseFontElement]", "", "3", "" })
+    @Alerts(DEFAULT = {"[object HTMLSpanElement]", "undefined", "undefined", "undefined"},
+            CHROME = {"[object HTMLElement]", "undefined", "undefined", "undefined"},
+            FF = {"[object HTMLElement]", "undefined", "undefined", "undefined"},
+            IE = {"[object HTMLBaseFontElement]", "", "3", ""})
     public void defaults() throws Exception {
         final String html =
             "<html>\n"
@@ -66,8 +62,8 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "42" },
-            IE = { "4", "42" })
+    @Alerts(DEFAULT = {"undefined", "42"},
+            IE = {"4", "42"})
     public void size() throws Exception {
         final String html =
             "<html>\n"
@@ -95,8 +91,8 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "helvetica" },
-            IE = { "swiss", "helvetica" })
+    @Alerts(DEFAULT = {"undefined", "helvetica"},
+            IE = {"swiss", "helvetica"})
     public void face() throws Exception {
         final String html =
             "<html>\n"
@@ -124,10 +120,8 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "blue" },
-            IE = { "#ff0000", "#0000ff" },
-            IE11 = { "red", "blue" })
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = {"undefined", "blue"},
+            IE = {"red", "blue"})
     public void color() throws Exception {
         final String html =
             "<html>\n"
@@ -155,11 +149,9 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]" },
-            IE8 = { "[object]", "exception" },
-            CHROME = { "[object HTMLElement]", "exception" },
-            FF31 = { "[object HTMLSpanElement]", "exception" },
-            FF38 = { "[object HTMLElement]", "exception" })
+    @Alerts(IE = {"[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]"},
+            CHROME = {"[object HTMLElement]", "exception"},
+            FF = {"[object HTMLElement]", "exception"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

@@ -18,8 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACER
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_NO_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,8 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class CSSFontFaceRule extends CSSRule {
 
     private static final Pattern REPLACEMENT_1 = Pattern.compile("font-family: ([^;]*);");
@@ -93,16 +90,16 @@ public class CSSFontFaceRule extends CSSRule {
             final HtmlPage page = (HtmlPage)
                     ((CSSStyleSheet) getParentScope()).getWindow().getWebWindow().getEnclosedPage();
             try {
-                cssText = matcher.replaceFirst("src: url(" + page.getFullyQualifiedUrl(url) + ");");
+                cssText = matcher.replaceFirst("src: url(\"" + page.getFullyQualifiedUrl(url) + "\");");
             }
             catch (final Exception e) {
                 switch (url) {
                     case "//:":
-                        cssText = matcher.replaceFirst("src: url(" + "http:///" + ");");
+                        cssText = matcher.replaceFirst("src: url(\"" + "http:///" + "\");");
                         break;
 
                     case "//":
-                        cssText = matcher.replaceFirst("src: url(" + "http:" + ");");
+                        cssText = matcher.replaceFirst("src: url(\"" + "http:" + "\");");
                         break;
 
                     default:

@@ -51,8 +51,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
             CHROME = "§§URL§§?button.x=9&button.y=7&button=foo",
-            IE8 = "§§URL§§?button.x=15&button.y=16",
-            IE11 = "§§URL§§?button.x=14&button.y=15")
+            IE = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
     public void click_NoPosition() throws Exception {
         final String html
@@ -75,8 +74,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
             CHROME = "§§URL§§?button.x=22&button.y=7",
-            IE8 = "§§URL§§?button.x=15&button.y=16",
-            IE11 = "§§URL§§?button.x=14&button.y=15")
+            IE = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
     public void click_NoPosition_NoValue() throws Exception {
         final String html
@@ -95,7 +93,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -126,7 +124,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-" })
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterclone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -160,8 +158,8 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -199,8 +197,8 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -237,7 +235,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
+    @Alerts({"initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault"})
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -286,7 +284,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
+     * Test for bug #646.
      * @throws Exception if an error occurs
      */
     @Test
@@ -301,7 +299,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
+     * Test for bug #646.
      * @throws Exception if an error occurs
      */
     @Test
@@ -319,7 +317,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    public void testOutsideForm() throws Exception {
+    public void outsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"
@@ -337,13 +335,12 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§abcd/img.gif")
     public void lineBreaksInUrl() throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img");
-        final byte[] directBytes = IOUtils.toByteArray(is);
-        is.close();
-
-        final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        }
 
         final String html
             = "<html><head>\n"

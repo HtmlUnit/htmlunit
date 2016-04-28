@@ -36,8 +36,8 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "toFixed: function", "toExponential: function", "toLocaleString: function", "toPrecision: function",
-        "toString: function", "valueOf: function" })
+    @Alerts({"toFixed: function", "toExponential: function", "toLocaleString: function", "toPrecision: function",
+        "toString: function", "valueOf: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"toFixed", "toExponential", "toLocaleString", "toPrecision", "toString", "valueOf"};
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", methods);

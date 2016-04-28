@@ -14,13 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
@@ -52,7 +50,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
-        Assert.assertTrue("Element should have attribute", node.hasAttributes());
+        assertTrue("Element should have attribute", node.hasAttributes());
     }
 
     /**
@@ -66,7 +64,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode parent = node.getParentNode();
-        Assert.assertFalse("Element should not have attribute", parent.hasAttributes());
+        assertFalse("Element should not have attribute", parent.hasAttributes());
     }
 
     /**
@@ -80,7 +78,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertFalse("Text should not have attribute", child.hasAttributes());
+        assertFalse("Text should not have attribute", child.hasAttributes());
     }
 
     /**
@@ -94,7 +92,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
+        assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
     /**
@@ -108,7 +106,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
+        assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
     }
 
     /**
@@ -122,7 +120,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have a prefix", null, child.getLocalName());
+        assertEquals("Text should not have a prefix", null, child.getLocalName());
     }
 
     /**
@@ -137,14 +135,14 @@ public class DomNodeTest extends SimpleWebTestCase {
         final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         child.setPrefix("bar"); // This does nothing.
-        Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
+        assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testRemoveAllChildren() throws Exception {
+    public void removeAllChildren() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<p id='tag'><table>\n"
@@ -155,14 +153,14 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final DomNode node = page.getElementById("tag");
         node.removeAllChildren();
-        Assert.assertEquals("Did not remove all nodes", null, node.getFirstChild());
+        assertEquals("Did not remove all nodes", null, node.getFirstChild());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplace() throws Exception {
+    public void replace() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br><div id='tag2'/></body></html>";
@@ -201,7 +199,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetNewNodeById() throws Exception {
+    public void getNewNodeById() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div id='tag'/></body></html>";
@@ -270,7 +268,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertBefore() throws Exception {
+    public void insertBefore() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
@@ -302,7 +300,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @param node the node to look at
      * @return the position
      */
-    private int readPositionAmongParentChildren(final DomNode node) {
+    private static int readPositionAmongParentChildren(final DomNode node) {
         int i = 0;
         for (final DomNode child : node.getParentNode().getChildren()) {
             if (child == node) {
@@ -318,7 +316,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetByXPath() throws Exception {
+    public void getByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
             + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
@@ -347,7 +345,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 3035213: xmlns value has to be trimmed.
+     * Regression test for bug #1149: xmlns value has to be trimmed.
      * @throws Exception if the test fails
      */
     @Test
@@ -366,7 +364,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetFirstByXPath() throws Exception {
+    public void getFirstByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
             + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
@@ -396,7 +394,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetHtmlElementDescendantsOrder() throws Exception {
+    public void getHtmlElementDescendantsOrder() throws Exception {
         final String html = "<html><body id='0'>\n"
             + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>\n"
             + "<span id='I.2'><span id='I.2.a'/></span></span>\n"
@@ -426,7 +424,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetDescendants_remove() throws Exception {
+    public void getDescendants_remove() throws Exception {
         final String html =
               "<html><body id='body'>\n"
             + "<div id='a'>a<div id='b'>b</div>a<div id='c'>c</div>a</div><div id='d'>d</div>\n"
@@ -465,7 +463,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDomChangeListenerTestImpl_insertBefore() throws Exception {
+    public void domChangeListenerTestImpl_insertBefore() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -498,7 +496,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDomChangeListenerTestImpl_appendChild() throws Exception {
+    public void domChangeListenerTestImpl_appendChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -531,7 +529,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({"nodeDeleted: div,p", "nodeDeleted: div,p"})
-    public void testDomChangeListenerTestImpl_removeChild() throws Exception {
+    public void domChangeListenerTestImpl_removeChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -562,7 +560,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDomChangeListenerRegisterNewListener() throws Exception {
+    public void domChangeListenerRegisterNewListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -613,7 +611,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetByXPath_XML() throws Exception {
+    public void getByXPath_XML() throws Exception {
         final String xml
             = "<books>\n"
             + "  <book>\n"
@@ -634,7 +632,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testOwnerDocument() throws Exception {
+    public void ownerDocument() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"

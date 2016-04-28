@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Arrays;
 
@@ -37,11 +37,15 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class FocusableElement2Test extends WebDriverTestCase {
     private static final String COMMON_ID = " id='focusId'";
-    private static final String COMMON_EVENTS = " onblur=\"alert('onblur')\" onfocus=\"alert('onfocus')\"";
+    private static final String COMMON_EVENTS = " onblur=\"alert('onblur')\" "
+                                                    + "onfocusin=\"alert('onfocusin')\" "
+                                                    + "onfocusout=\"alert('onfocusout')\" "
+                                                    + "onfocus=\"alert('onfocus')\"";
     private static final String COMMON_ATTRIBUTES = COMMON_ID + COMMON_EVENTS;
 
     /**
@@ -77,8 +81,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + tag
             + "<script type=\"text/javascript\" language=\"JavaScript\">\n"
-            + "document.getElementById('focusId').focus();\n"
-            + "document.getElementById('focusId').blur();\n"
+            + "  document.getElementById('focusId').focus();\n"
+            + "  document.getElementById('focusId').blur();\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -91,7 +95,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
     public void anchor_onblur_onfocus() throws Exception {
         testTagWithClick("<a href='javascript:void(0)'>link</a>");
     }
@@ -102,7 +108,10 @@ public class FocusableElement2Test extends WebDriverTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocusout", "onfocus", "onblur"})
+    @NotYetImplemented(IE)
     public void anchor_onblur_onfocus_methodsCalls() throws Exception {
         testWithCallFocusBlur("<a href='.'>link</a>");
     }
@@ -133,7 +142,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
     public void button_onblur_onfocus() throws Exception {
         testTagWithClick("<button name='foo' value='bar' type='button'>button</button>");
     }
@@ -144,9 +155,11 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
     public void labelContainsInput_onblur_onfocus() throws Exception {
-        final String body = "<form><label " + COMMON_ID + ">"
+        final String body = "<form><label " + COMMON_ID + ">\n"
                 + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n";
         testWithClick(body);
     }
@@ -157,7 +170,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
     public void labelReferencesInput_onblur_onfocus() throws Exception {
         final String body = "<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>\n"
                 + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>\n";
@@ -170,7 +185,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
     public void select_onblur_onfocus() throws Exception {
         testTagWithClick("<select><option>1</option></select>");
     }
@@ -181,7 +198,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "onfocus", "onblur" })
+    @Alerts(DEFAULT = {"onfocus", "onblur"},
+            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
+            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
     public void textarea_onblur_onfocus() throws Exception {
         testTagWithClick("<textarea>Text</textarea>");
     }
@@ -193,9 +212,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "done\nfocus",
-            CHROME = "done",
-            IE8 = "done")
-    @NotYetImplemented({ FF, IE11 })
+            CHROME = "done")
+    @NotYetImplemented({ FF, IE })
     public void focusOnNonFocusableElementShouldNotTriggerDocumentFocus() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -207,17 +225,12 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
 
-                + "</head><body>"
+                + "</head><body>\n"
                 + "<div id='it'>div</div>\n"
                 + "<textarea id='log'></textarea>\n"
 
                 + "<script>\n"
-                + "  if (document.addEventListener) {\n"
-                + "    document.addEventListener('focus', ff, true);\n"
-                + "  }\n"
-                + "  else {\n"
-                + "    document.attachEvent('onfocus', ff);\n"
-                + "  }\n"
+                + "  document.addEventListener('focus', ff, true);\n"
                 + "  document.getElementById('it').focus();\n"
                 + "  document.getElementById('it').blur();\n"
                 + "  log('done');\n"
@@ -235,7 +248,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(Browser.IE)
-    @Alerts({ "input1", "focus1", "div", "input2", "blur1", "focus2" })
+    @Alerts({"input1", "focus1", "div", "input2", "blur1", "focus2"})
     public void focusOnNonFocusableElementShouldNotChangeCurrentFocus() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -247,7 +260,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
 
-                + "</head><body>"
+                + "</head><body>\n"
                 + "<textarea id='log'></textarea>\n"
                 + "<div id='div' onblur=\"log('blur')\" onfocus=\"log('focus')\">div</div>\n"
                 + "<input id='input1' onblur=\"log('blur1')\" onfocus=\"log('focus1')\">\n"
@@ -273,7 +286,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "focus1", "blur1" })
+    @Alerts({"focus1", "blur1"})
     public void clickOnNonFocusableElementChangesCurrentFocus() throws Exception {
         final String html = "<html><body>\n"
             + "<textarea id='log'></textarea>\n"
@@ -298,7 +311,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true" })
+    @Alerts({"true", "true"})
     public void onAllElements() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

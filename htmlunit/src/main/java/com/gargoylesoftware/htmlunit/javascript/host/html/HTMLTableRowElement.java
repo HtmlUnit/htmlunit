@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -32,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -51,13 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlTableRow.class,
-                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                        @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlTableRow.class,
-            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass(domClass = HtmlTableRow.class)
 public class HTMLTableRowElement extends HTMLTableComponent {
 
     private HTMLCollection cells_; // has to be a member to have equality (==) working
@@ -96,12 +87,10 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         DomNode row = getDomNodeOrDie();
         final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
         if (table == null) { // a not attached document.createElement('TR')
-            if (!getBrowserVersion().hasFeature(JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED)) {
-                return -1;
+            if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
+                return 0;
             }
-            // IE 6, 7 and 8 return really strange values: large integers that are not constants
-            // as tests on different browsers give different results
-            return 5461640;
+            return -1;
         }
         int index = -1;
         while (row != null) {
@@ -121,7 +110,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     public Object getCells() {
         if (cells_ == null) {
             final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
-            cells_ = new HTMLCollection(row, false, "cells") {
+            cells_ = new HTMLCollection(row, false) {
                 @Override
                 protected List<Object> computeElements() {
                     return new ArrayList<Object>(row.getCells());
@@ -213,7 +202,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
+     * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
     @JsxSetter
@@ -223,25 +212,12 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     }
 
     /**
-     * Overwritten to throw an exception in IE8/9.
-     * @param value the new value for the contents of this node
-     */
-    @JsxSetter
-    @Override
-    public void setInnerHTML(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag 'tr'");
-        }
-        super.setInnerHTML(value);
-    }
-
-    /**
      * Overwritten to throw an exception because this is readonly.
      * @param value the new value for the contents of this node
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     @Override
-    public void setInnerText(final String value) {
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    public void setInnerText(final Object value) {
         if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
             throw Context.reportRuntimeError("innerText is read-only for tag 'tr'");
         }

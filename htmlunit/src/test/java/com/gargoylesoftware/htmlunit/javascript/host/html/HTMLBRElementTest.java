@@ -36,10 +36,10 @@ public class HTMLBRElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "left", "all", "right", "none", "2", "foo", "left",
-                        "none", "right", "all", "2", "abc", "8" },
-            IE = { "", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
-                   "", "" })
+    @Alerts(DEFAULT = {"", "left", "all", "right", "none", "2", "foo", "left",
+                        "none", "right", "all", "2", "abc", "8"},
+            IE = {"", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
+                   "", ""})
     public void clear() throws Exception {
         final String html
             = "<html><body>\n"
@@ -94,8 +94,7 @@ public class HTMLBRElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<br id=\"myId\">",
-            IE8 = "<BR id=myId>")
+    @Alerts("<br id=\"myId\">")
     public void outerHTML() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

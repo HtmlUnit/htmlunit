@@ -14,29 +14,101 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code ClientRectList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
-        @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+@JsxClasses({
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(FF)),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+    })
 public class ClientRectList extends SimpleScriptable {
+
+    private final List<ClientRect> clientRects_;
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(EDGE) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
     public ClientRectList() {
+        clientRects_ = new ArrayList<>();
+    }
+
+    /**
+     * Returns the length property.
+     * @return the length
+     */
+    @JsxGetter
+    public int getLength() {
+        return clientRects_.size();
+    }
+
+    /**
+     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
+     * {@inheritDoc}
+     */
+    @Override
+    public final Object get(final int index, final Scriptable start) {
+        if (index >= 0 && index < clientRects_.size()) {
+            return clientRects_.get(index);
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Returns the item at the specified index.
+     * @param index the index
+     * @return the found item
+     */
+    @JsxFunction
+    public ClientRect item(final int index) {
+        if (index >= 0 && index < clientRects_.size()) {
+            return clientRects_.get(index);
+        }
+        if (getBrowserVersion().hasFeature(JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND)) {
+            throw Context.reportRuntimeError("Invalid index '" + index + "'");
+        }
+        return null;
+    }
+
+    /**
+     * Add an rect.
+     * @param clientRect the rect to add
+     */
+    public void add(final ClientRect clientRect) {
+        clientRects_.add(clientRect);
+    }
+
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class == hint
+                && clientRects_.size() > 0
+                && getBrowserVersion().hasFeature(JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST)) {
+            return clientRects_.get(0).getDefaultValue(hint);
+        }
+        return super.getDefaultValue(hint);
     }
 }

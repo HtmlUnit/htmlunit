@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-
 /**
  * Set of tests for ill formed HTML code.
  * @author Marc Guillemot
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebDriverTestCase {
@@ -41,7 +42,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "in test", "BODY" })
+    @Alerts({"in test", "BODY"})
     public void bodyAttributeWhenOpeningBodyGenerated() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
@@ -60,7 +61,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "3", "text3", "text3", "null" })
+    @Alerts({"2", "3", "text3", "text3", "null"})
     public void lostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test(){\n"
@@ -124,7 +125,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "DIV", "TABLE" })
+    @Alerts({"DIV", "TABLE"})
     public void div_between_table_and_tr() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -180,32 +181,88 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug 2838901.
+    * Regression test for bug #889.
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts(IE8 = "0")
-    @NotYetImplemented(IE8)
+    @Alerts("0")
     public void missingSingleQuote() throws Exception {
-        final String html = "<html><body>"
-            + "Go to <a href='http://blah.com>blah</a> now."
-            + "<script>alert(document.links.length)</script>"
-            + "</body></html>";
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.links.length);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  Go to <a href='http://blah.com>blah</a> now.\n"
+                + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
     /**
-    * Regression test for bug 2838901.
+    * Regression test for bug #889.
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts(IE8 = "0")
-    @NotYetImplemented(IE8)
+    @Alerts("0")
     public void missingDoubleQuote() throws Exception {
-        final String html = "<html><body>"
-                + "Go to <a href='http://blah.com>blah</a> now."
-            + "<script>alert(document.links.length)</script>"
-            + "</body></html>";
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.links.length);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  Go to <a href=\"http://blah.com>blah</a> now.\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+    * Regression test for bug #1192.
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @Alerts({"submit", "button"})
+    public void brokenInputSingleQuote() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.getElementById('myBody').firstChild.type);\n"
+                + "    alert(document.getElementById('myBody').firstChild.value);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body id='myBody' onload='test()'>"
+                +   "<input width:250px' type='submit' value='button'>"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+    * Regression test for bug #1192.
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @Alerts({"submit", "button"})
+    public void brokenInputDoubleQuote() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(document.getElementById('myBody').firstChild.type);\n"
+                + "    alert(document.getElementById('myBody').firstChild.value);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body id='myBody' onload='test()'>"
+                +   "<input width:250px\" type=\"submit\" value=\"button\">"
+                + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -213,7 +270,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "inFirst", "inSecond" })
+    @Alerts({"inFirst", "inSecond"})
     public void nestedForms() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='TransSearch'>\n"
@@ -256,7 +313,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "\uFFFD", "65533" })
+    @Alerts({"1", "\uFFFD", "65533"})
     public void entityWithInvalidUTF16Code() throws Exception {
         final String html = "<html><head><title>&#x1b3d6e;</title></head><body><script>"
             + "alert(document.title.length);\n"
@@ -287,16 +344,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
+    @Alerts({"4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
                 "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
                 "outerA", "BODY:null", "1", "#text:V", "true", "false",
                 "outerA", "DIV:null", "1", "#text:W", "false", "false",
-                "innerA", "DIV:null", "1", "#text:X", "false", "true" },
-            IE8 = { "6", "A:null", "A:null", "#text:Y", "#text:Z", "2",
-                "innerDiv", "A:null", "3", "#text:W", "A:null", "#text:Y",
-                "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                "innerA", "DIV:null", "1", "#text:X", "false", "true",
-                "exception" })
+                "innerA", "DIV:null", "1", "#text:X", "false", "true"})
     @NotYetImplemented
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
@@ -376,7 +428,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "DOC", "1" })
+    @Alerts({"DOC", "1"})
     public void unknownTagInTable() throws Exception {
         final String html = "<html><body>"
             + "<table id='it'><doc><tr><td>hello</td></tr></doc></table>"
@@ -391,7 +443,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "DOC", "1" })
+    @Alerts({"DOC", "1"})
     public void unknownTagInTbody() throws Exception {
         final String html = "<html><body>"
             + "<table id='it'><tbody><doc><tr><td>hello</td></tr></doc></tbody></table>"
@@ -406,7 +458,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "TABLE", "2", "FORM", "TBODY" })
+    @Alerts({"1", "TABLE", "2", "FORM", "TBODY"})
     public void formInTable1() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -448,7 +500,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "1c", "0", "TBODY", "3", "2a", "2b", "2c", "0", "TBODY" })
+    @Alerts({"3", "1a", "1b", "1c", "0", "TBODY", "3", "2a", "2b", "2c", "0", "TBODY"})
     public void formInTable2() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -488,14 +540,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </table>"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -505,7 +557,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "", "0", "TABLE" })
+    @Alerts({"3", "1a", "1b", "", "0", "TABLE"})
     public void formInTable3() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -521,14 +573,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </table>"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -538,11 +590,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    // correct FF/CHROME assertion is
-    // @Alerts({ "3", "1a", "1b", "", "0", "DIV" })
-    // this test is NOT marked as NYI because we like to ensure
-    // to get notified if something changes
-    @Alerts({ "3", "1a", "1b", "", "1", "DIV" })
+    @Alerts({"3", "1a", "1b", "", "0", "DIV"})
+    @NotYetImplemented
     public void formInTable4() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -558,16 +607,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "        </tr>\n"
                 + "      </form>\n"
                 + "    </div>\n"
-                + "  </table>"
+                + "  </table>\n"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -577,7 +626,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "1a", "0", "TR", "1", "2a", "0", "TR" })
+    @Alerts({"1", "1a", "0", "TR", "1", "2a", "0", "TR"})
     public void formInTable5() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -592,16 +641,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "      <td>\n"
                 + "      </td>\n"
                 + "    </tr>\n"
-                + "  </table>"
+                + "  </table>\n"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -611,7 +660,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "1a", "1b", "0", "TR" })
+    @Alerts({"2", "1a", "1b", "0", "TR"})
     public void formInTable6() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -633,16 +682,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "      </td>\n"
                 + "    </form>\n"
                 + "  </tr>\n"
-                + "</table>"
+                + "</table>\n"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -652,7 +701,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "3", "1a", "1b", "1c", "0", "TR", "1", "2a", "1", "DIV" })
+    @Alerts({"3", "1a", "1b", "1c", "0", "TR", "1", "2a", "1", "DIV"})
     public void formInTable7() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -675,16 +724,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    <form name='form2'>\n"
                 + "      <input type='hidden' name='2a' value='a2' />\n"
                 + "    </form>\n"
-                + "  </div>"
+                + "  </div>\n"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -694,7 +743,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "1a", "1b", "2", "BODY", "TR", "TABLE", "2" })
+    @Alerts({"2", "1a", "1b", "2", "BODY", "TR", "TABLE", "2"})
     public void formInTable8() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -721,17 +770,17 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "        </tbody>\n"
                 + "      </table>\n"
                 + "    </div>\n"
-                + "  </form>"
+                + "  </form>\n"
                 + "<script>\n"
-                + "  alert(document.form1.elements.length);"
-                + "  for(var j = 0; j < document.form1.elements.length; j++) {"
-                + "    alert(document.form1.elements[j].name);"
-                + "  }"
-                + "  alert(document.form1.children.length);"
-                + "  alert(document.form1.parentNode.tagName);"
-                + "  alert(document.form1['1b'].parentNode.tagName);"
-                + "  alert(document.getElementById('colgroup').parentNode.tagName);"
-                + "  alert(document.getElementById('colgroup').children.length);"
+                + "  alert(document.form1.elements.length);\n"
+                + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
+                + "    alert(document.form1.elements[j].name);\n"
+                + "  }\n"
+                + "  alert(document.form1.children.length);\n"
+                + "  alert(document.form1.parentNode.tagName);\n"
+                + "  alert(document.form1['1b'].parentNode.tagName);\n"
+                + "  alert(document.getElementById('colgroup').parentNode.tagName);\n"
+                + "  alert(document.getElementById('colgroup').children.length);\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -741,11 +790,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    // correct FF/CHROME assertion is
-    // @Alerts({ "3", "1b", "1a", "1c", "0", "TABLE" })
-    // this test is NOT marked as NYI because we like to ensure
-    // to get notified if something changes
-    @Alerts({ "3", "1a", "1b", "1c", "0", "TABLE" })
+    @Alerts(DEFAULT = {"3", "1b", "1a", "1c", "0", "TABLE"},
+            IE = {"3", "1a", "1b", "1c", "0", "TABLE"})
+    @NotYetImplemented({ CHROME, FF })
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -763,14 +810,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "        </tr>\n"
                 + "      </tbody>\n"
                 + "    </form>\n"
-                + "  </table>"
+                + "  </table>\n"
                 + "<script>\n"
-                + "  alert(document.form1.elements.length);"
-                + "  for(var j = 0; j < document.form1.elements.length; j++) {"
-                + "    alert(document.form1.elements[j].name);"
-                + "  }"
-                + "  alert(document.form1.children.length);"
-                + "  alert(document.form1.parentNode.tagName);"
+                + "  alert(document.form1.elements.length);\n"
+                + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
+                + "    alert(document.form1.elements[j].name);\n"
+                + "  }\n"
+                + "  alert(document.form1.children.length);\n"
+                + "  alert(document.form1.parentNode.tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -781,7 +828,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "form1_submit", "0", "TABLE" })
+    @Alerts({"1", "form1_submit", "0", "TABLE"})
     public void formInTable10() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -812,8 +859,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "<div>caption</div>", "TABLE" },
-            IE8 = { "<DIV>caption</DIV>", "TABLE" })
+    @Alerts({"<div>caption</div>", "TABLE"})
     public void nonInlineElementInCaption() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -837,7 +883,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "input1", "submit1", "1", "LI", "2", "input2", "submit2", "2", "DIV" })
+    @Alerts({"2", "input1", "submit1", "1", "LI", "2", "input2", "submit2", "2", "DIV"})
     public void synthesizedDivInForm() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -855,16 +901,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "      <input name='input2' value='value2'>\n"
                 + "      <input name='submit2' type='submit'>\n"
                 + "    </form>\n"
-                + "  </div>"
+                + "  </div>\n"
                 + "<script>\n"
-                + "  for(var i = 0; i < document.forms.length; i++) {"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
-                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {"
-                + "      alert(document.forms[i].elements[j].name);"
-                + "    }"
-                + "    alert(document.forms[i].children.length);"
-                + "    alert(document.forms[i].parentNode.tagName);"
-                + "  }"
+                + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
+                + "      alert(document.forms[i].elements[j].name);\n"
+                + "    }\n"
+                + "    alert(document.forms[i].children.length);\n"
+                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);

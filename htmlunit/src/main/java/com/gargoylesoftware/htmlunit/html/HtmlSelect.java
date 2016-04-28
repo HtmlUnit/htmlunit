@@ -111,7 +111,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the currently selected options
      */
     public List<HtmlOption> getSelectedOptions() {
-        List<HtmlOption> result;
+        final List<HtmlOption> result;
         if (isMultipleSelectEnabled()) {
             // Multiple selections possible.
             result = new ArrayList<>();
@@ -145,7 +145,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return all of the options in this select element
      */
     public List<HtmlOption> getOptions() {
-        return Collections.unmodifiableList(this.<HtmlOption>getHtmlElementsByTagName("option"));
+        return Collections.unmodifiableList(this.<HtmlOption>getElementsByTagNameImpl("option"));
     }
 
     /**
@@ -155,7 +155,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the option specified by the index
      */
     public HtmlOption getOption(final int index) {
-        return this.<HtmlOption>getHtmlElementsByTagName("option").get(index);
+        return this.<HtmlOption>getElementsByTagNameImpl("option").get(index);
     }
 
     /**
@@ -163,7 +163,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the number of options
      */
     public int getOptionSize() {
-        return getHtmlElementsByTagName("option").size();
+        return getElementsByTagName("option").size();
     }
 
     /**
@@ -172,7 +172,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param newLength the new length property value
      */
     public void setOptionSize(final int newLength) {
-        final List<HtmlElement> elementList = getHtmlElementsByTagName("option");
+        final List<HtmlElement> elementList = getElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
             elementList.get(i).remove();
@@ -369,7 +369,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public NameValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitNameValuePairs() {
         final String name = getNameAttribute();
 
         final List<HtmlOption> selectedOptions = getSelectedOptions();
@@ -536,31 +536,31 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the value of the attribute "name". Refer to the <a
+     * Returns the value of the attribute {@code name}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttribute("name");
     }
 
     /**
-     * Returns the value of the attribute "size". Refer to the <a
+     * Returns the value of the attribute {@code size}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return the value of the attribute "size" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
         return getAttribute("size");
     }
 
     /**
-     * Returns the value of the attribute "multiple". Refer to the <a
+     * Returns the value of the attribute {@code multiple}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "multiple" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code multiple} or an empty string if that attribute isn't defined
      */
     public final String getMultipleAttribute() {
         return getAttribute("multiple");
@@ -583,40 +583,40 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the value of the attribute "tabindex". Refer to the <a
+     * Returns the value of the attribute {@code tabindex}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttribute("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "onfocus". Refer to the <a
+     * Returns the value of the attribute {@code onfocus}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttribute("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur". Refer to the <a
+     * Returns the value of the attribute {@code onblur}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttribute("onblur");
     }
 
     /**
-     * Returns the value of the attribute "onchange". Refer to the <a
+     * Returns the value of the attribute {@code onchange}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return the value of the attribute "onchange" or an empty string if that attribute isn't defined
+     * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
         return getAttribute("onchange");

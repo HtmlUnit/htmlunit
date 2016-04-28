@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link MediaQueryList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MediaQueryListTest extends WebDriverTestCase {
@@ -33,14 +34,40 @@ public class MediaQueryListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "")
+    @Alerts("true")
     public void matches() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
             + "      if (window.matchMedia) {\n"
             + "        alert(window.matchMedia('(min-width: 400px)').matches);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"added", "removed"})
+    public void listener() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "  function listener(mql) {\n"
+            + "    alert(mql);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "      if (window.matchMedia) {\n"
+            + "        var mql = window.matchMedia('(min-width: 400px)');\n"
+            + "        mql.addListener(listener);\n"
+            + "        alert('added');\n"
+            + "        mql.removeListener(listener);\n"
+            + "        alert('removed');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

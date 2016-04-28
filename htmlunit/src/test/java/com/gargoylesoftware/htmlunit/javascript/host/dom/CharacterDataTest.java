@@ -35,7 +35,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Some Text", "9", "3", "Some Text", "#text" })
+    @Alerts({"Some Text", "9", "3", "Some Text", "#text"})
     public void textNode() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -60,7 +60,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Some New Text", "Some New Text" })
+    @Alerts({"Some New Text", "Some New Text"})
     public void setData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -83,7 +83,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Some New Text", "Some New Text" })
+    @Alerts({"Some New Text", "Some New Text"})
     public void setNodeValue() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -128,7 +128,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "Some Text", "Some", "Some", "me", "" })
+    @Alerts({"Some Text", "Some", "Some", "me", ""})
     public void deleteData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -173,8 +173,8 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "", "" },
-            IE = { "", "", "", "exception" })
+    @Alerts(DEFAULT = {"", "", "", ""},
+            IE = {"", "", "", "exception"})
     public void deleteDataEmptyImput() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -213,8 +213,8 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception", "exception", "exception" },
-            IE = { "exception", "exception", "abcde", "exception" })
+    @Alerts(DEFAULT = {"exception", "exception", "exception", "exception"},
+            IE = {"exception", "exception", "abcde", "exception"})
     public void deleteDataInvalidStart() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -252,8 +252,8 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Some Not So New Te", "Some ", "So" },
-            IE = { "exception", "exception", "exception" })
+    @Alerts(DEFAULT = {"Some Not So New Te", "Some ", "So"},
+            IE = {"exception", "exception", "exception"})
     public void deleteDataNegativeCount() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -331,7 +331,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"New", "Some New Text" })
+    @Alerts({"New", "Some New Text"})
     public void substringData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -353,7 +353,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Some ", "Text", "true" })
+    @Alerts({"Some ", "Text", "true"})
     public void textImpl_splitText() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

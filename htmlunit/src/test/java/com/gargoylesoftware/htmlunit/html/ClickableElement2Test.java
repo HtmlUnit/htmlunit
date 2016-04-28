@@ -14,13 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -30,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ClickableElement2Test extends WebDriverTestCase {
@@ -51,5 +57,36 @@ public class ClickableElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("textfield1")).click();
 
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("click click dblclick ")
+    @BuggyWebDriver({ FF, CHROME })
+    public void dblClick() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    document.getElementById('myTextarea').value+='click ';\n"
+            + "  }\n"
+            + "  function dblClickMe() {\n"
+            + "    document.getElementById('myTextarea').value+='dblclick ';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onclick='clickMe()' ondblclick='dblClickMe()'>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(content);
+
+        final Actions action = new Actions(driver);
+        action.doubleClick(driver.findElement(By.id("myBody")));
+        action.perform();
+
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("myTextarea")).getAttribute("value"));
     }
 }

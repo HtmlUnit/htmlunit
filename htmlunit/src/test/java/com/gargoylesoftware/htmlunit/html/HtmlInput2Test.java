@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +43,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "null", "error", "handler", "null", "error" })
+    @Alerts({"null", "error", "handler", "null", "error"})
     public void onchangeDirectCall() throws Exception {
         final String html =
             "<html><head>\n"
@@ -83,7 +81,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    @Alerts({"mousedown; onfocus; mouseup; onclick;", ""})
     public void clickButtonEventSequence() throws Exception {
         testClickEventSequence("<input type='button' id='" + TEST_ID + "'>Check", false);
     }
@@ -94,7 +92,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    @Alerts({"mousedown; onfocus; mouseup; onclick;", ""})
     public void clickImageEventSequence() throws Exception {
         testClickEventSequence("<input type='image' id='" + TEST_ID + "'>Check", true);
     }
@@ -105,10 +103,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
-            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
-            IE8 = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
-    @BuggyWebDriver(IE8)
+    @Alerts(DEFAULT = {"mousedown; onfocus; mouseup; onclick; onchange;", ""},
+            IE = {"mousedown; onfocus; mouseup; onchange; onclick;", ""})
     public void clickCheckboxEventSequence() throws Exception {
         testClickEventSequence("<input type='checkbox' id='" + TEST_ID + "'>Check", false);
     }
@@ -119,7 +115,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    @Alerts({"mousedown; onfocus; mouseup; onclick;", ""})
     public void clickPasswordEventSequence() throws Exception {
         testClickEventSequence("<input type='password' id='" + TEST_ID + "'>Check", false);
     }
@@ -130,10 +126,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
-            IE11 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" },
-            IE8 = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
-    @BuggyWebDriver(IE8)
+    @Alerts(DEFAULT = {"mousedown; onfocus; mouseup; onclick; onchange;", ""},
+            IE = {"mousedown; onfocus; mouseup; onchange; onclick;", ""})
     public void clickRadioEventSequence() throws Exception {
         testClickEventSequence("<input type='radio' name='test' id='" + TEST_ID + "'>Check", false);
     }
@@ -144,7 +138,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    @Alerts({"mousedown; onfocus; mouseup; onclick;", ""})
     public void clickResetEventSequence() throws Exception {
         testClickEventSequence("<input type='reset' id='" + TEST_ID + "'>Check", true);
     }
@@ -155,7 +149,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    @Alerts({"mousedown; onfocus; mouseup; onclick;", ""})
     public void clickTextEventSequence() throws Exception {
         testClickEventSequence("<input type='text' id='" + TEST_ID + "'>Check", false);
     }
@@ -166,7 +160,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "mousedown; onfocus; mouseup; onchange; onclick;", "" })
+    @Alerts({"mousedown; onfocus; mouseup; onchange; onclick;", ""})
     @BuggyWebDriver
     public void clickOptionEventSequence() throws Exception {
         testClickEventSequence("<select size='2'><option id='" + TEST_ID + "'>1</option></select>", false);

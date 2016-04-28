@@ -39,8 +39,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLEmbedElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLEmbedElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -63,8 +62,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLEmbedElement]",
-            IE8 = "[object]")
+    @Alerts("[object HTMLEmbedElement]")
     public void saveAs() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

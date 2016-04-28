@@ -14,27 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEY_CODE_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlArea;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -66,11 +59,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-                @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-    })
+@JsxClass
 public class Event extends SimpleScriptable {
 
     /**
@@ -142,20 +131,26 @@ public class Event extends SimpleScriptable {
     /** The message event type, triggered by postMessage. */
     public static final String TYPE_MESSAGE = "message";
 
+    /** The close event type, triggered by "onclose" event handlers. */
+    public static final String TYPE_CLOSE = "close";
+
+    /** The open event type, triggered by "onopen" event handlers. */
+    public static final String TYPE_OPEN = "open";
+
     /** No event phase. */
     @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxConstant
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxConstant
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxConstant
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
@@ -336,10 +331,8 @@ public class Event extends SimpleScriptable {
      * This method is called after the parent scope was set so you are able to access the browser version.
      */
     public void eventCreated() {
-        if (getBrowserVersion().hasFeature(EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE)) {
-            setBubbles(false);
-            setCancelable(false);
-        }
+        setBubbles(false);
+        setCancelable(false);
     }
 
     /**
@@ -353,7 +346,7 @@ public class Event extends SimpleScriptable {
         boolean bubbles = false;
         boolean cancelable = false;
 
-        if (details != null && !Context.getUndefinedValue().equals(details)) {
+        if (details != null && !Undefined.instance.equals(details)) {
             final Boolean detailBubbles = (Boolean) details.get("bubbles");
             if (detailBubbles != null) {
                 bubbles = detailBubbles.booleanValue();
@@ -411,7 +404,7 @@ public class Event extends SimpleScriptable {
      * Returns the event target to which the event was originally dispatched.
      * @return the event target to which the event was originally dispatched
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter
     public Object getTarget() {
         return target_;
     }
@@ -429,7 +422,7 @@ public class Event extends SimpleScriptable {
      * is useful during event capturing and event bubbling.
      * @return the current event target
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter
     public Scriptable getCurrentTarget() {
         return currentTarget_;
     }
@@ -472,7 +465,7 @@ public class Event extends SimpleScriptable {
      * Returns the time at which this event was created.
      * @return the time at which this event was created
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter
     public long getTimeStamp() {
         return timeStamp_;
     }
@@ -489,12 +482,8 @@ public class Event extends SimpleScriptable {
      * Returns the key code associated with the event.
      * @return the key code associated with the event
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getKeyCode() {
         if (keyCode_ == null) {
-            if (getBrowserVersion().hasFeature(JS_EVENT_KEY_CODE_UNDEFINED)) {
-                return Undefined.instance;
-            }
             return Integer.valueOf(0);
         }
         return keyCode_;
@@ -503,7 +492,6 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether SHIFT has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public boolean getShiftKey() {
         return shiftKey_;
     }
@@ -518,7 +506,6 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether CTRL has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public boolean getCtrlKey() {
         return ctrlKey_;
     }
@@ -533,7 +520,6 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether ALT has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public boolean getAltKey() {
         return altKey_;
     }
@@ -548,7 +534,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return the current event phase for the event
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxGetter
     public int getEventPhase() {
         return eventPhase_;
     }
@@ -569,7 +555,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event bubbles
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxGetter
     public boolean getBubbles() {
         return bubbles_;
     }
@@ -584,7 +570,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event can be canceled
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxGetter
     public boolean getCancelable() {
         return cancelable_;
     }
@@ -601,7 +587,7 @@ public class Event extends SimpleScriptable {
      * called for this event. Otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
     public boolean getDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
@@ -625,7 +611,7 @@ public class Event extends SimpleScriptable {
     /**
      * Stops the event from propagating.
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(EDGE) })
+    @JsxFunction
     public void stopPropagation() {
         stopPropagation_ = true;
     }
@@ -642,7 +628,6 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(EDGE) })
     public Object getReturnValue() {
         return returnValue_;
     }
@@ -651,7 +636,6 @@ public class Event extends SimpleScriptable {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }
@@ -660,7 +644,6 @@ public class Event extends SimpleScriptable {
      * Returns the property name associated with the event.
      * @return the property name associated with the event
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getPropertyName() {
         return propertyName_;
     }
@@ -671,11 +654,24 @@ public class Event extends SimpleScriptable {
      * @param bubbles whether or not the event should bubble
      * @param cancelable whether or not the event the event should be cancelable
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxFunction
     public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
         type_ = type;
         bubbles_ = bubbles;
         cancelable_ = cancelable;
+        if (TYPE_BEFORE_UNLOAD.equals(type) && getBrowserVersion().hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+            try {
+                final Method readMethod = getClass().getMethod("getReturnValue");
+                final Method writeMethod = getClass().getMethod("setReturnValue", Object.class);
+                defineProperty("returnValue", null, readMethod, writeMethod, ScriptableObject.EMPTY);
+                if ("Event".equals(getClass().getSimpleName())) {
+                    setReturnValue(Boolean.TRUE);
+                }
+            }
+            catch (final Exception e) {
+                throw Context.throwAsScriptRuntimeEx(e);
+            }
+        }
     }
 
     /**
@@ -683,7 +679,7 @@ public class Event extends SimpleScriptable {
      * Any default action associated with the event will not occur.
      * Calling this method for a non-cancelable event has no effect.
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxFunction
     public void preventDefault() {
         preventDefault_ = true;
     }
@@ -697,10 +693,7 @@ public class Event extends SimpleScriptable {
      * @return {@code true} if this event has been aborted
      */
     public boolean isAborted(final ScriptResult result) {
-        final boolean checkReturnValue = getBrowserVersion().hasFeature(JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE);
-        return ScriptResult.isFalse(result)
-                || (!checkReturnValue && preventDefault_)
-                || (checkReturnValue && Boolean.FALSE.equals(returnValue_));
+        return ScriptResult.isFalse(result) || preventDefault_;
     }
 
     /**
@@ -716,22 +709,4 @@ public class Event extends SimpleScriptable {
         buffer.append(");");
         return buffer.toString();
     }
-
-    /**
-     * Indicates if the current event can be applied to the provided node.
-     * TODO: investigate systematically ALL nodes and ALL events!
-     * @param node the node to test
-     * @return {@code false} if the event can't be applied
-     */
-    public boolean applies(final DomNode node) {
-        if (TYPE_BLUR.equals(getType()) || TYPE_FOCUS.equals(getType())) {
-            if (getBrowserVersion().hasFeature(EVENT_FOCUS_DOCUMENT_DESCENDANTS) && node instanceof HtmlPage) {
-                return true;
-            }
-            return node instanceof SubmittableElement || node instanceof HtmlAnchor
-                || node instanceof HtmlArea;
-        }
-        return true;
-    }
-
 }

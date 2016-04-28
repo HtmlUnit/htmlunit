@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Exception for DOM manipulations.
@@ -37,8 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(EDGE) })
+@JsxClass
 public class DOMException extends SimpleScriptable {
     /** If the specified range of text does not fit into a DOMString. */
     @JsxConstant
@@ -116,10 +115,10 @@ public class DOMException extends SimpleScriptable {
     @JsxConstant
     public static final short DATA_CLONE_ERR = 25;
     /** Parse error. */
-    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    @JsxConstant(@WebBrowser(IE))
     public static final short PARSE_ERR = 81;
     /** Serialize error. */
-    @JsxConstant(@WebBrowser(value = IE, minVersion = 11))
+    @JsxConstant(@WebBrowser(IE))
     public static final short SERIALIZE_ERR = 82;
 
     private final short code_;
@@ -153,7 +152,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter
     public Object getCode() {
         if (code_ == -1) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return code_;
     }
@@ -165,7 +164,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter
     public Object getMessage() {
         if (message_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return message_;
     }
@@ -177,7 +176,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter(@WebBrowser(FF))
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return lineNumber_;
     }
@@ -189,7 +188,7 @@ public class DOMException extends SimpleScriptable {
     @JsxGetter(@WebBrowser(FF))
     public Object getFilename() {
         if (fileName_ == null) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return fileName_;
     }

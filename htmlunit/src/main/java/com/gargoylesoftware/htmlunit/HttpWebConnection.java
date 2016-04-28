@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CRED
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -74,16 +74,19 @@ import org.apache.http.client.protocol.RequestAuthCache;
 import org.apache.http.client.protocol.RequestClientConnControl;
 import org.apache.http.client.protocol.RequestDefaultHeaders;
 import org.apache.http.client.protocol.RequestExpectContinue;
-import org.apache.http.client.protocol.ResponseContentEncoding;
 import org.apache.http.client.protocol.ResponseProcessCookies;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.config.ConnectionConfig;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.conn.DnsResolver;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.util.PublicSuffixMatcher;
+import org.apache.http.conn.util.PublicSuffixMatcherLoader;
 import org.apache.http.cookie.CookieSpecProvider;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -93,9 +96,11 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpProcessorBuilder;
+import org.apache.http.protocol.HttpRequestExecutor;
 import org.apache.http.protocol.RequestContent;
 import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.TextUtils;
 
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
@@ -254,7 +259,7 @@ public class HttpWebConnection implements WebConnection {
      */
     @SuppressWarnings("deprecation")
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
-        throws IOException, URISyntaxException {
+        throws URISyntaxException {
 
         final String charset = webRequest.getCharset();
 
@@ -359,14 +364,14 @@ public class HttpWebConnection implements WebConnection {
         return httpMethod;
     }
 
-    private String escapeQuery(final String query) {
+    private static String escapeQuery(final String query) {
         if (query == null) {
             return null;
         }
         return query.replace("%%", "%25%25");
     }
 
-    private Charset getCharset(final String charset, final List<NameValuePair> pairs) {
+    private static Charset getCharset(final String charset, final List<NameValuePair> pairs) {
         for (final NameValuePair pair : pairs) {
             if (pair instanceof KeyDataPair) {
                 final KeyDataPair pairWithFile = (KeyDataPair) pair;
@@ -383,8 +388,7 @@ public class HttpWebConnection implements WebConnection {
         return null;
     }
 
-    void buildFilePart(final KeyDataPair pairWithFile, final MultipartEntityBuilder builder)
-        throws IOException {
+    void buildFilePart(final KeyDataPair pairWithFile, final MultipartEntityBuilder builder) {
         String mimeType = pairWithFile.getMimeType();
         if (mimeType == null) {
             mimeType = "application/octet-stream";
@@ -397,6 +401,9 @@ public class HttpWebConnection implements WebConnection {
             final String filename;
             if (file == null) {
                 filename = pairWithFile.getValue();
+            }
+            else if (pairWithFile.getFileName() != null) {
+                filename = pairWithFile.getFileName();
             }
             else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
                 filename = file.getAbsolutePath();
@@ -422,9 +429,12 @@ public class HttpWebConnection implements WebConnection {
             return;
         }
 
-        String filename;
+        final String filename;
         if (pairWithFile.getFile() == null) {
             filename = pairWithFile.getValue();
+        }
+        else if (pairWithFile.getFileName() != null) {
+            filename = pairWithFile.getFileName();
         }
         else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
             filename = pairWithFile.getFile().getAbsolutePath();
@@ -543,7 +553,7 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setTimeout(timeout);
     }
 
-    private RequestConfig.Builder createRequestConfigBuilder(final int timeout) {
+    private static RequestConfig.Builder createRequestConfigBuilder(final int timeout) {
         final RequestConfig.Builder requestBuilder = RequestConfig.custom()
                 .setCookieSpec(HACKED_COOKIE_POLICY)
                 .setRedirectsEnabled(false)
@@ -555,7 +565,7 @@ public class HttpWebConnection implements WebConnection {
         return requestBuilder;
     }
 
-    private SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
+    private static SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
         final SocketConfig.Builder socketBuilder = SocketConfig.custom()
                 // timeout
                 .setSoTimeout(timeout);
@@ -606,8 +616,7 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 
-    private void configureHttpProcessorBuilder(final HttpClientBuilder builder, final WebRequest webRequest)
-        throws IOException {
+    private void configureHttpProcessorBuilder(final HttpClientBuilder builder, final WebRequest webRequest) {
         final HttpProcessorBuilder b = HttpProcessorBuilder.create();
         for (final HttpRequestInterceptor i : getHttpRequestInterceptors(webRequest)) {
             b.add(i);
@@ -622,7 +631,6 @@ public class HttpWebConnection implements WebConnection {
         b.add(new RequestAcceptEncoding());
         b.add(new RequestAuthCache());
         b.add(new ResponseProcessCookies());
-        b.add(new ResponseContentEncoding());
         builder.setHttpProcessor(b.build());
     }
 
@@ -683,7 +691,7 @@ public class HttpWebConnection implements WebConnection {
      * @return a wrapper around the downloaded content
      * @throws IOException in case of read issues
      */
-    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) throws IOException {
+    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) {
         if (is == null) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
@@ -698,10 +706,10 @@ public class HttpWebConnection implements WebConnection {
                     // we have exceeded the max for memory, let's write everything to a temporary file
                     final File file = File.createTempFile("htmlunit", ".tmp");
                     file.deleteOnExit();
-                    final FileOutputStream fos = new FileOutputStream(file);
-                    bos.writeTo(fos); // what we have already read
-                    IOUtils.copyLarge(is, fos); // what remains from the server response
-                    fos.close();
+                    try (final FileOutputStream fos = new FileOutputStream(file)) {
+                        bos.writeTo(fos); // what we have already read
+                        IOUtils.copyLarge(is, fos); // what remains from the server response
+                    }
                     return new DownloadedContent.OnFile(file, true);
                 }
             }
@@ -710,10 +718,9 @@ public class HttpWebConnection implements WebConnection {
             LOG.warn("Connection was closed while reading from stream.", e);
             return new DownloadedContent.InMemory(bos.toByteArray());
         }
-        catch (final EOFException e) {
+        catch (final IOException e) {
             // this might happen with broken gzip content
-            // see com.gargoylesoftware.htmlunit.HttpWebConnection2Test.brokenGzip()
-            LOG.warn("EndOfFile while reading from stream.", e);
+            LOG.warn("Exception while reading from stream.", e);
             return new DownloadedContent.InMemory(bos.toByteArray());
         }
         finally {
@@ -738,12 +745,14 @@ public class HttpWebConnection implements WebConnection {
         return new WebResponse(responseData, request, loadTime);
     }
 
-    private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) throws IOException {
+    private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) {
         final List<HttpRequestInterceptor> list = new ArrayList<>();
         final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
-        final int port = webRequest.getUrl().getPort();
-        final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
-        if (port != 80 && port > 0) {
+        final URL url = webRequest.getUrl();
+        final StringBuilder host = new StringBuilder(url.getHost());
+
+        final int port = url.getPort();
+        if (port > 0 && port != url.getDefaultPort()) {
             host.append(':');
             host.append(Integer.toString(port));
         }
@@ -908,9 +917,10 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Shutdown the connection.
+     * {@inheritDoc}
      */
-    public void shutdown() {
+    @Override
+    public void close() {
         if (httpClientBuilder_.get() != null) {
             httpClientBuilder_.set(null);
         }
@@ -921,34 +931,42 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Has the exact logic in HttpClientBuilder, but with the ability to configure
-     * <code>socketFactory</code>.
+     * Has the exact logic in {@link HttpClientBuilder#build()} which sets the {@code connManager} part,
+     * but with the ability to configure {@code socketFactory}.
      */
-    private PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
+    private static PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
-        LayeredConnectionSocketFactory sslSocketFactory;
         try {
-            sslSocketFactory = (LayeredConnectionSocketFactory)
-                        FieldUtils.readDeclaredField(builder, "sslSocketFactory", true);
-            final SocketConfig defaultSocketConfig = (SocketConfig)
-                        FieldUtils.readDeclaredField(builder, "defaultSocketConfig", true);
-            final ConnectionConfig defaultConnectionConfig = (ConnectionConfig)
-                        FieldUtils.readDeclaredField(builder, "defaultConnectionConfig", true);
-            final boolean systemProperties = (Boolean) FieldUtils.readDeclaredField(builder, "systemProperties", true);
-            final int maxConnTotal = (Integer) FieldUtils.readDeclaredField(builder, "maxConnTotal", true);
-            final int maxConnPerRoute = (Integer) FieldUtils.readDeclaredField(builder, "maxConnPerRoute", true);
-            HostnameVerifier hostnameVerifier = (HostnameVerifier)
-                        FieldUtils.readDeclaredField(builder, "hostnameVerifier", true);
-            final SSLContext sslcontext = (SSLContext) FieldUtils.readDeclaredField(builder, "sslContext", true);
+            PublicSuffixMatcher publicSuffixMatcher = getField(builder, "publicSuffixMatcher");
+            if (publicSuffixMatcher == null) {
+                publicSuffixMatcher = PublicSuffixMatcherLoader.getDefault();
+            }
+
+            HttpRequestExecutor requestExec = getField(builder, "requestExec");
+            if (requestExec == null) {
+                requestExec = new HttpRequestExecutor();
+            }
+
+            LayeredConnectionSocketFactory sslSocketFactory = getField(builder, "sslSocketFactory");
+            final SocketConfig defaultSocketConfig = getField(builder, "defaultSocketConfig");
+            final ConnectionConfig defaultConnectionConfig = getField(builder, "defaultConnectionConfig");
+            final boolean systemProperties = getField(builder, "systemProperties");
+            final int maxConnTotal = getField(builder, "maxConnTotal");
+            final int maxConnPerRoute = getField(builder, "maxConnPerRoute");
+            HostnameVerifier hostnameVerifier = getField(builder, "hostnameVerifier");
+            final SSLContext sslcontext = getField(builder, "sslContext");
+            final DnsResolver dnsResolver = getField(builder, "dnsResolver");
+            final long connTimeToLive = getField(builder, "connTimeToLive");
+            final TimeUnit connTimeToLiveTimeUnit = getField(builder, "connTimeToLiveTimeUnit");
 
             if (sslSocketFactory == null) {
                 final String[] supportedProtocols = systemProperties
-                        ? StringUtils.split(System.getProperty("https.protocols"), ',') : null;
+                        ? split(System.getProperty("https.protocols")) : null;
                 final String[] supportedCipherSuites = systemProperties
-                        ? StringUtils.split(System.getProperty("https.cipherSuites"), ',') : null;
+                        ? split(System.getProperty("https.cipherSuites")) : null;
                 if (hostnameVerifier == null) {
-                    hostnameVerifier = SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
+                    hostnameVerifier = new DefaultHostnameVerifier(publicSuffixMatcher);
                 }
                 if (sslcontext != null) {
                     sslSocketFactory = new SSLConnectionSocketFactory(
@@ -968,36 +986,53 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
 
-            final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
+            final PoolingHttpClientConnectionManager poolingmgr = new PoolingHttpClientConnectionManager(
                     RegistryBuilder.<ConnectionSocketFactory>create()
                         .register("http", socketFactory)
                         .register("https", sslSocketFactory)
-                        .build());
+                        .build(),
+                        null,
+                        null,
+                        dnsResolver,
+                        connTimeToLive,
+                        connTimeToLiveTimeUnit != null ? connTimeToLiveTimeUnit : TimeUnit.MILLISECONDS);
             if (defaultSocketConfig != null) {
-                connectionManager.setDefaultSocketConfig(defaultSocketConfig);
+                poolingmgr.setDefaultSocketConfig(defaultSocketConfig);
             }
             if (defaultConnectionConfig != null) {
-                connectionManager.setDefaultConnectionConfig(defaultConnectionConfig);
+                poolingmgr.setDefaultConnectionConfig(defaultConnectionConfig);
             }
             if (systemProperties) {
                 String s = System.getProperty("http.keepAlive", "true");
                 if ("true".equalsIgnoreCase(s)) {
                     s = System.getProperty("http.maxConnections", "5");
                     final int max = Integer.parseInt(s);
-                    connectionManager.setDefaultMaxPerRoute(max);
-                    connectionManager.setMaxTotal(2 * max);
+                    poolingmgr.setDefaultMaxPerRoute(max);
+                    poolingmgr.setMaxTotal(2 * max);
                 }
             }
             if (maxConnTotal > 0) {
-                connectionManager.setMaxTotal(maxConnTotal);
+                poolingmgr.setMaxTotal(maxConnTotal);
             }
             if (maxConnPerRoute > 0) {
-                connectionManager.setDefaultMaxPerRoute(maxConnPerRoute);
+                poolingmgr.setDefaultMaxPerRoute(maxConnPerRoute);
             }
-            return connectionManager;
+            return poolingmgr;
         }
         catch (final IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String[] split(final String s) {
+        if (TextUtils.isBlank(s)) {
+            return null;
+        }
+        return s.split(" *, *");
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T getField(final Object target, final String fieldName) throws IllegalAccessException {
+        return (T) FieldUtils.readDeclaredField(target, fieldName, true);
     }
 }

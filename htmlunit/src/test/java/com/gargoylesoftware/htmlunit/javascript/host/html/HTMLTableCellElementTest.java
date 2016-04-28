@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLTableCellElement}.
@@ -42,8 +42,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "left", "right", "3", "center", "8", "foo" },
-            IE = { "left", "right", "", "error", "error", "center", "right", "" })
+    @Alerts(DEFAULT = {"left", "right", "3", "center", "8", "foo"},
+            IE = {"left", "right", "", "error", "error", "center", "right", ""})
     public void align() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -82,8 +82,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
-            IE8 = { "", "", "", "u", "8", "U8" })
+    @Alerts({"p", "po", "", "u", "8", "U8"})
     public void ch() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -115,8 +114,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
-            IE8 = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
     public void chOff() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -148,8 +146,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
-            IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
+    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
+            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
     @NotYetImplemented({ FF, CHROME })
     public void vAlign() throws Exception {
         final String html
@@ -189,9 +187,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            IE = {"", "#0000aa", "#000000" },
-            IE11 = {"", "#0000aa", "#0" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x"},
+            IE = {"", "#0000aa", "#0"})
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -218,8 +215,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null" },
-            IE8 = {"false", "false", "true", "true", "true", "true", "true", "true", "false", "false" })
+    @Alerts({"false", "null", "true", "", "true", "", "true", "blah", "false", "null"})
     public void noWrap() throws Exception {
         final String html =
             "<html>\n"
@@ -255,7 +251,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "blah", "3", "" })
+    @Alerts({"", "blah", "3", ""})
     public void abbr() throws Exception {
         final String html =
             "<html>\n"
@@ -284,8 +280,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "3", "1", "2", "1", "5", "1", "2", "1" },
-            IE = { "1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5" })
+    @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
+            IE = {"1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5"})
     public void colSpan() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -330,8 +326,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "3", "1", "2", "1", "5", "1", "2", "1" },
-            IE = { "1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5" })
+    @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
+            IE = {"1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5"})
     public void rowSpan() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -381,7 +377,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "blah", "abc , xyz", "3", "" })
+    @Alerts({"", "blah", "abc , xyz", "3", ""})
     public void axis() throws Exception {
         final String html =
             "<html>\n"
@@ -413,12 +409,75 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
-            IE8 = { "84,30", "84,30", "84,30", "83,30", "82,30", "83,30" })
-    @NotYetImplemented(IE)
+    @Alerts({"100,42", "90,36"})
+    @NotYetImplemented
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html
-            = "<html><body><table id='t'><tr>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body><table id='t'><tr>\n"
+            + "<td id='td1' style='width: 80px; height: 30px; "
+                        + "border: 2px solid blue; border-width: 2px 7px 10px 13px; padding: 0px;'>a</td>\n"
+            + "</tr></table>\n"
+            + "<script>\n"
+            + "  var t = document.getElementById('t');\n"
+            + "  var td1 = document.getElementById('td1');\n"
+
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+
+            + "  t.style.borderCollapse = 'collapse';\n"
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"84,42", "84,42", "100,42", "82,36", "88,36", "90,36"},
+            CHROME = {"84,42", "84,42", "100,42", "82,36", "87,36", "90,36"})
+    @NotYetImplemented
+    public void cellWidthHeightWithBorderCollapseCellsInRow() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body><table id='t'><tr>\n"
+            + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
+            + "<td id='td2' style='width: 80px; height: 30px; "
+                        + "border: solid blue; border-width: 2px; padding: 0px;'>a</td>\n"
+            + "<td id='td3' style='width: 80px; height: 30px; "
+                        + "border: 2px solid blue; border-width: 2px 7px 10px 13px; padding: 0px;'>a</td>\n"
+            + "</tr></table>\n"
+            + "<script>\n"
+            + "  var t = document.getElementById('t');\n"
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+            + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
+            + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
+
+            + "  t.style.borderCollapse = 'collapse';\n"
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+            + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
+            + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests some obscure table cell CSS calculations required by the MochiKit tests.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"84,34", "84,34", "84,34", "82,32", "82,32", "82,32"})
+    @NotYetImplemented
+    public void cellWidthHeightWithBorderCollapseSameCellLayout() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body><table id='t'><tr>\n"
             + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td2' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td3' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
@@ -445,8 +504,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "100px", "200px", "400", "abc", "-5", "100.2", "10%" },
-            IE = { "100", "200", "400", "error", "400", "error", "400", "100", "10%" })
+    @Alerts(DEFAULT = {"100px", "200px", "400", "abc", "-5", "100.2", "10%"},
+            IE = {"100", "200", "400", "error", "400", "error", "400", "100", "10%"})
     public void width() throws Exception {
         final String html =
             "<html>\n"
@@ -489,9 +548,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE8 = { "1" })
-    @NotYetImplemented(IE8)
+    @Alerts("0")
     public void offsetHeight() throws Exception {
         final String html =
             "<html><body>\n"
@@ -511,9 +568,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
-            IE11 = { "", "#667788", "#000000", "red", "#123456", "#000000" },
-            IE8 = { "", "#667788", "#000000", "#ff0000", "#123456", "#000000" })
+    @Alerts(DEFAULT = {"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"},
+            IE = {"", "#667788", "#000000", "red", "#123456", "#000000"})
     @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html
@@ -547,8 +603,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "", "", "", "", "", "" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"", "", "", "", "", ""})
     public void borderColorDark() throws Exception {
         final String html
             = "<html><body>\n"
@@ -581,8 +637,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
-            IE = { "", "", "", "", "", "" })
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"", "", "", "", "", ""})
     public void borderColorLight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -610,4 +666,35 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true", "false", "false"})
+    public void offsetHeightParentHidden() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var table = document.getElementById('table1');\n"
+            + "      var td = document.getElementById('td1');\n"
+            + "      alert(td.offsetWidth != 0);\n"
+            + "      alert(td.offsetHeight != 0);\n"
+            + "      td.style.display = 'none';\n"
+            + "      alert(td.offsetWidth != 0);\n"
+            + "      alert(td.offsetHeight != 0);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <table id='table1'>\n"
+            + "    <tr><td id='td1'>One</td></tr>\n"
+            + "  </table>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

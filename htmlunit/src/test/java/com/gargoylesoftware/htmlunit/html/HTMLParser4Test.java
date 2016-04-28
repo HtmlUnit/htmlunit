@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -93,10 +90,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "4", "[object HTMLScriptElement]", "[object Text]",
-                "[object HTMLTitleElement]", "[object Text]" },
-            IE8 = { "2", "[object HTMLTitleElement]", "[object HTMLScriptElement]", "undefined", "undefined" })
-    @NotYetImplemented(IE8)
+    @Alerts({"4", "[object HTMLScriptElement]", "[object Text]",
+                "[object HTMLTitleElement]", "[object Text]"})
     public void badlyFormedHTML_scriptBeforeHead() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<script>var i = 7;</script>\n"
@@ -123,10 +118,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "4", "[object HTMLScriptElement]", "[object Text]",
-                "[object HTMLTitleElement]", "[object Text]" },
-            IE8 = { "3", "[object]", "[object]", "[object]", "undefined" })
-    @NotYetImplemented(IE8)
+    @Alerts({"4", "[object HTMLScriptElement]", "[object Text]",
+                "[object HTMLTitleElement]", "[object Text]"})
     public void badlyFormedHTML_scriptBeforeDoctype() throws Exception {
         final String html = "<script>var i = 7;</script>\n"
             + HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -153,9 +146,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "4", "[object HTMLParagraphElement]", "[object Text]",
-                "[object HTMLScriptElement]", "[object Text]" },
-            IE8 = { "3", "[object]", "[object]", "[object]", "undefined" })
+    @Alerts({"4", "[object HTMLParagraphElement]", "[object Text]",
+                "[object HTMLScriptElement]", "[object Text]"})
     @NotYetImplemented
     public void badlyFormedHTML_scriptAfterHtml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -210,7 +202,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts({"false", "true" })
+    @Alerts({"false", "true"})
     public void duplicatedAttribute() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -233,10 +225,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "1", "3", "[object HTMLScriptElement]",
-                "[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLFormElement]" },
-            IE8 = { "1", "3", "[object HTMLScriptElement]",
-                "[object HTMLGenericElement]", "[object HTMLGenericElement]", "[object HTMLFormElement]" })
+    @Alerts({"1", "3", "[object HTMLScriptElement]",
+                "[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLFormElement]"})
     public void namespace() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
@@ -266,14 +256,10 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "1",
+    @Alerts({"1",
                 "[object Element]", "app:script,app:script,http://www.appcelerator.org,app,script",
                 "[object HTMLScriptElement]", "SCRIPT,SCRIPT,http://www.w3.org/1999/xhtml,null,script",
-                "[object HTMLUnknownElement]", "APP:SCRIPT,APP:SCRIPT,http://www.w3.org/1999/xhtml,null,app:script" },
-            IE8 = { "1",
-                "createElementNS() is not defined",
-                "[object HTMLScriptElement]", "SCRIPT,SCRIPT,undefined,undefined,undefined",
-                "[object HTMLGenericElement]", "script,script,undefined,undefined,undefined" })
+                "[object HTMLUnknownElement]", "APP:SCRIPT,APP:SCRIPT,http://www.w3.org/1999/xhtml,null,app:script"})
     public void namespace2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
@@ -310,17 +296,14 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
+    @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
-                "innerDiv", "outerDiv" },
-            IE8 = { "titles", "HEAD", "Outer Html",
-                "bodyTitles",
-                "innerDiv", "outerDiv" })
-    @BuggyWebDriver(IE11)
+                "innerDiv", "outerDiv"})
+    @BuggyWebDriver(IE)
     // The correct values for IE11 are:
-    //            IE11 = { "titles", "HEAD", "Outer Html", "DIV", "",
+    //            IE = {"titles", "HEAD", "Outer Html", "DIV", "",
     //                "bodyTitles", "DIV", "",
-    //                "innerDiv", "outerDiv" })
+    //                "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void completeHtmlInsideDiv() throws Exception {
@@ -372,17 +355,14 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
+    @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
-                "innerDiv", "outerDiv" },
-            IE8 = { "titles", "HEAD", "Outer Html",
-                "bodyTitles",
-                "innerDiv", "outerDiv" })
-    @BuggyWebDriver(IE11)
+                "innerDiv", "outerDiv"})
+    @BuggyWebDriver(IE)
     // The correct values for IE11 are:
-    //            IE11 = { "titles", "HEAD", "Outer Html", "DIV", "",
+    //            IE = {"titles", "HEAD", "Outer Html", "DIV", "",
     //                "bodyTitles", "DIV", "",
-    //                "innerDiv", "outerDiv" })
+    //                "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void writeCompleteHtmlInsideDIV() throws Exception {
@@ -433,12 +413,9 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "titles", "HEAD", "Outer Html", "DIV", "Inner Html",
+    @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
-                "innerDiv", "outerDiv" },
-            IE8 = { "titles", "HEAD", "Outer Html",
-                "bodyTitles",
-                "innerDiv", "outerDiv" })
+                "innerDiv", "outerDiv"})
     public void setCompleteHtmlToDIV_innerHTML() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -486,12 +463,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = { "titles", "HEAD", "Inner Html",
-                "misc", "true", "BODY" },
-            IE8 = { "exception",
-                "titles", "HEAD", "Outer Html",
-                "misc", "true" })
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts({"titles", "HEAD", "Inner Html", "misc", "true", "BODY"})
+    @NotYetImplemented
     // currently the content of HEAD and BODY are added directly to HTML
     public void setCompleteHtmlToHTML_innerHTML() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

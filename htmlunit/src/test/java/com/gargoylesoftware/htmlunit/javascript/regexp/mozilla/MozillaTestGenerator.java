@@ -20,6 +20,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
+
 /**
  * Utility for automatically transforming Moalla JavaScript tests to WebDriver test cases.
  *
@@ -40,7 +42,7 @@ public final class MozillaTestGenerator {
      */
     public static void printMozillaTest(final String author, final String htmlunitRoot,
             final String mozillaRoot, final String jsPath, final boolean initialScript) throws IOException {
-        for (final Object o : FileUtils.readLines(new File(htmlunitRoot, "LICENSE.txt"))) {
+        for (final Object o : FileUtils.readLines(new File(htmlunitRoot, "LICENSE.txt"), TextUtil.DEFAULT_CHARSET)) {
             System.out.println(o);
         }
         final String[] jsPathTokens = jsPath.split("/");
@@ -63,7 +65,7 @@ public final class MozillaTestGenerator {
         String className = jsPathTokens[jsPathTokens.length - 1];
         className = Character.toUpperCase(className.charAt(0)) + className.substring(1, className.length() - 3);
         System.out.println("public class " + className + "Test extends WebDriverTestCase {");
-        final List<String> lines = FileUtils.readLines(new File(mozillaRoot, jsPath));
+        final List<String> lines = FileUtils.readLines(new File(mozillaRoot, jsPath), TextUtil.DEFAULT_CHARSET);
         int testNumber = 1;
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
