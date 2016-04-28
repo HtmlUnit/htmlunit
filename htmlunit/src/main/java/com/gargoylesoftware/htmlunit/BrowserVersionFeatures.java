@@ -856,13 +856,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
+    /** DOMTokenList uses an enhanced set of whitespace chars. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS,
+
     /** DOMTokenList index access returns null if index is outside. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE,
-
-    /** DOMTokenList uses a enhanced set of whitespace chars. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS,
 
     /** DOMTokenList removed all whitespace chars during edit. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1189,7 +1189,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_FILE_THROWS,
 
     /** When expanding the collection by setting the length don't add
-     * a empty text node. */
+     * an empty text node. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 

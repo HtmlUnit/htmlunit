@@ -42,6 +42,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marek Gawlicki
  */
 @JsxClass
 public class DOMTokenList extends SimpleScriptable {
@@ -215,7 +216,7 @@ public class DOMTokenList extends SimpleScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         final Object value = item(index);
-        if (value == null && (!getBrowserVersion().hasFeature(JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE))) {
+        if (value == null && !getBrowserVersion().hasFeature(JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE)) {
             return Undefined.instance;
         }
         return value;

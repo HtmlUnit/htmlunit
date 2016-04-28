@@ -7,7 +7,522 @@
     </properties>
 
     <body>
-        <release version="2.19" date="" description="Bugfixes">
+        <release version="2.22" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1783" due-to="Marek Gawlicki">
+                JavaScript: DOMTokenList as an array.
+            </action>
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: modify BrowserVersion.browserVersionNumeric from float to int.
+            </action>
+            <action type="fix" dev="asashour" issue="1781">
+                JavaScript: clear cached Symbols on closing the page.
+            </action>
+            <action type="add" dev="asashour" due-to="Madis P&#x00e4;rn" issue="175" system="features">
+                WebClientOptions: add setHistorySizeLimit().
+            </action>
+            <action type="fix" dev="rbri">
+                CSS: fix value verification for length property setters (e.g. width, height,...).
+            </action>
+            <action type="fix" dev="asashour" issue="1777">
+                HtmlForm: to include Accept and Accept-Encoding headers on submission.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: window.getComputedStyle() should use sheets of the element.document.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix HTMLElement.style setter.
+            </action>
+            <action type="fix" dev="asashour" issue="1626">
+                JavaScript: fix HTMLElement.offsetLeft.
+            </action>
+            <action type="fix" dev="asashour" issue="1776">
+                CSS: fontSize influences the calculated height.
+            </action>
+            <action type="fix" dev="rbri" issue="1774" due-to="Hartmut Arlt">
+                HttpWebConnection no longer removes 'Content-Length', 'Content-Encoding' and 'Content-MD5' HTTP headers.
+            </action>
+            <action type="update" dev="asashour">
+                BrowserVersion: Chrome is the BEST_SUPPORTED.
+            </action>
+            <action type="add" dev="asashour" due-to="Madis P&#x00e4;rn" issue="228" system="features">
+                JavaScript: support Document.adoptNode.
+            </action>
+            <action type="fix" dev="asashour" issue="1770">
+                DomNode: .asText() to handle CSS styles.
+            </action>
+            <action type="add" dev="asashour" issue="1506">
+                JavaScript: add primitive support for SVGElement.getBBox().
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: Promise supports .reject() and .catch().
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: IE supports the data URIs.
+            </action>
+            <action type="fix" dev="asashour" issue="1768">
+                JavaScript: fix caching of computed styles.
+            </action>
+            <action type="fix" dev="asashour" issue="1764">
+                DomNode: fix .asText() for some special spaces.
+            </action>
+            <action type="fix" dev="asashour">
+                Fix CSS selector regression introduced during handling pseudo element in window.getComputedStyle().
+            </action>
+        </release>
+        <release version="2.21" date="Apr 6, 2016" description="FF45, Bugfixes">
+            <action type="update" dev="asashour">
+                Use Neko-HtmlUnit fork.
+            </action>
+            <action type="fix" dev="asashour" issue="1765">
+                JavaScript: window.getComputedStyle() to handle pseudo element.
+            </action>
+            <action type="fix" dev="asashour" issue="889">
+                Malformed HTML: handle unterminated attribute value.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix .offsetWidth, .offsetHeight, .clientWidth and .clientHeight of unconnected elements.
+            </action>
+            <action type="add" dev="rbri" due-to="Madis P&#x00e4;rn">
+                WebSocket support for binary data added.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: datetime property added for time elements.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: do not execute iframe onload handle if set while the element is attached to page (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: CSSStyleDeclaration to return lower-case values (Chrome and IE).
+            </action>
+            <action type="fix" dev="rbri" due-to="Madis P&#x00e4;rn" issue="1762">
+                WebSocket event handling fixed, open event now fired, tests added.
+            </action>
+            <action type="add" dev="rbri">
+                Improved MessageEvent implementation.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: Event.eventPhase is supported by Chrome.
+            </action>
+            <action type="update" dev="asashour">
+                HtmlElement: deprecate .getHtmlElementsByTagName() and .getHtmlElementsByTagNames().
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: add .labels property for HTMLButtonElement, HTMLInputElement, HTMLKeygenElement,
+                HTMLMeterElement, HTMLOutputElement, HTMLProgressElement, HTMLSelectElement and HTMLTextAreaElement.
+            </action>
+            <action type="fix" dev="asashour" issue="1723">
+                DomElement: fix .getElementsByTagName().
+            </action>
+            <action type="add" dev="rbri" due-to="Madis P&#x00e4;rn">
+                Improved CloseEvent implementation; properties reason, code and wasClean are available now.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix document.all when called with invalid index (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix table.innerText.
+            </action>
+            <action type="fix" dev="asashour" issue="1576">
+                Fix XML attributes order.
+            </action>
+            <action type="remove" dev="rbri">
+                JavaScript: StaticNodeList removed.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: HTMLCollection and HTMLAllCollection function like access implementation improved (Chrome).
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: wordSpacing property support percent values for FF45.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: HTMLLabelElement.control property added (FF and Chrome).
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: FormData delete, get, getAll, set and has functions added.
+            </action>
+            <action type="update" dev="rbri">
+                History processing changed; now HtmlUnit remembers pages instead of requests.
+            </action>
+            <action type="fix" dev="rbri" issue="1759">
+                Pages are not loaded after History.pushState call.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix XMLHttpRequest CORS handling (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix setting .innerText to null (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
+                Fix handling of empty Cookies (Chrome).
+            </action>
+            <action type="remove" dev="asashour">
+                BrowserVersion: remove deprecated FIREFOX_31.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: limited support for css @keyframes rules added.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CSSRuleList ignores unsupported rules.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: Element.baseURI.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: XMLHttpRequest.overrideMimeType().
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix XMLDocument.getElementsByTagName().
+            </action>
+            <action type="add" dev="rbri" issue="1756">
+                JavaScript: support window.performace.timing.
+            </action>
+            <action type="add" dev="asashour" issue="1755">
+                JavaScript: support HTMLAnchorElement.ping.
+            </action>
+            <action type="add" dev="asashour">
+                Firefox 45 ESR support added.
+            </action>
+            <action type="add" dev="asashour" issue="1736">
+                HtmlPage: add setElementFromPointHandler() for manually handling JavaScript document.elementFromPoint().
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: add value property support for HTMLDataElement (FF only).
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: add initial support for HTMLStyleElement.scoped.
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: add support for HTMLStyleElement.disabled.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: add support for Node.remove().
+            </action>
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: change BrowserVersion.INTERNET_EXPLORER nickname to "IE".
+            </action>
+            <action type="update" dev="asashour">
+                JavaScript: update Date.toLocaleDateString() and .toLocaleTimeString() to use en_US locale.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: simple implementation of SVGPathElement.getTotalLength() added.
+            </action>
+            <action type="fix" dev="rbri" issue="1752">
+                JavaScript: ClassCastException in DOMTokenList#updateAttribute().
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: HTMLCollection to enumerate children names (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
+                XPath: fix attribute case sensitivity (Chrome).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix PopStateEvent.state to be clone (Chrome and IE).
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix Selection.rangeCount for Chrome.
+            </action>
+            <action type="fix" dev="asashour">
+                CSS: Chrome doesn't support 'target' selector or computed 'zIndex' property.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix location.hash.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: HTMLTableElement.innerText should not be read-only (Chrome).
+            </action>
+            <action type="remove" dev="asashour">
+                Remove deprecated WebClient.closeAllWindows(), HttpWebConnection.shutdown(),
+                SgmlPage.createDomDocumentFragment(), XmlPage.getContent(),
+                XmlPage.createXmlElement(), XmlPage.createXmlElementNS() and XmlPage.getXmlElementDescendants().
+            </action>
+            <action type="update" dev="asashour">
+                SubmittableElement: rename getSubmitKeyValuePairs() to getSubmitNameValuePairs().
+            </action>
+        </release>
+        <release version="2.20" date="Feb 28, 2016" description="IE8 is no longer supported, Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: correct calculation of clientWidth and .clientHeight styles.
+            </action>
+            <action type="fix" dev="rbri">
+                WebSocket: fix duplicate cookies sent with requests.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: Doctype properties prefix, localName and namespaceURI returning undefined for Chrome.
+            </action>
+            <action type="fix" dev="rbri" issue="1749" due-to="Adam Afeltowicz">
+                JavaScript: Location should change immediately when calling history.pushState.
+            </action>
+            <action type="fix" dev="mguillem">
+                HtmlPage.asXml(): expand empty I, BUTTON and unknown nodes to make generated XML readable as HTML on browsers.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: FormData.append now supports the optional filename parameter.
+            </action>
+            <action type="update" dev="asashour">
+                BrowserVersion: deprecate INTERNET_EXPLORER_11, use INTERNET_EXPLORER instead.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="1751">
+                JavaScript: FormData constructor should support form parameter.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest.upload is available in IE also.
+            </action>
+            <action type="fix" dev="asashour" issue="1750">
+                HtmlImage: to be serializable.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: HTMLElement.getBoundClientRect throws an error for IE if the element is not connected to a page.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: implement ClientRectList methods.
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: implement Symbol.for.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: set prototype for objects constructed without 'new' keyword.
+            </action>
+            <action type="fix" dev="rbri" issue="1741">
+                Do not explicitly send the port 443 for HTTPS connections.
+            </action>
+            <action type="fix" dev="rbri" issue="1694">
+                Use the right keyCode when simulating enter.
+            </action>
+            <action type="fix" dev="rbri">
+                Setting the text property of an option creates a label attribute if there is no label defined so far.
+            </action>
+            <action type="fix" dev="rbri">
+                Origin attribute for anchors now works (FF, Chrome).
+            </action>
+            <action type="fix" dev="rbri" issue="1742">
+                SVGElements are supporting querySelector() and querySelectorAll().
+            </action>
+            <action type="fix" dev="rbri">
+                id property was missing for SVGElements.
+            </action>
+            <action type="fix" dev="rbri">
+                Element.className no longer trims whitespace for Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                HashChangeEvent.initHashChangeEvent() not supported by Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Applet is no longer supported by Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Implementation of option.text is now in sync with latest Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Properties clientLeft and clientTop are available in Chrome also.
+            </action>
+            <action type="fix" dev="rbri" issue="1740">
+                Add properties name, value, type, valuetype support to HTMLParamElement.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix really weird IE behavior when applying a CSS3 pseudo selector to an detached node.
+                This fixes the 'Invalid selector' output for the :enabled and :checked selector for pages
+                using jQuery.
+            </action>
+            <action type="fix" dev="rbri">
+                Paragraph with style visibility:collapse is invisible in IE11 also.
+            </action>
+            <action type="fix" dev="rbri">
+                Document baseURI property is not available for IE.
+            </action>
+            <action type="fix" dev="mguillem">
+                Improved asynchronously loading of scripts with async attribute.
+            </action>
+            <action type="fix" dev="rbri">
+                Improved simulation of double click.
+            </action>
+            <action type="fix" dev="rbri">
+                Improving null handling when setting the value of text areas and input elements.
+            </action>
+            <action type="fix" dev="rbri">
+                Setting the width of a table column to null now works correct for FF/Chrome also.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix our simulation of setting table caption/tHead/tFoot for Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                For Chrome className returns an empty string if the value of the class attribute is blank.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixed document.all.namedItem for Chrome when parameter is a form name.
+            </action>
+            <action type="fix" dev="rbri">
+                Chrome ignores the target attribute if the href starts with 'javascript:'.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix form processing for urls containing anchors when simulating chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Result of innerText fixed for Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix return value of getAttributeNS when attribute is not defined.
+            </action>
+            <action type="fix" dev="rbri">
+                Option.text returns always the label if defined in Chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                CSS :lang selector now works correct if the lang was defined at the parent.
+            </action>
+            <action type="fix" dev="rbri">
+                Empty form actions are not expanded by FF.
+            </action>
+            <action type="fix" dev="rbri">
+                Type attribute is case sensitive for input elements.
+            </action>
+            <action type="add" dev="rbri">
+                Implementation of Performance.now() added.
+            </action>
+            <action type="fix" dev="rbri">
+                Improved clientHeight calculation when height is set to auto.
+            </action>
+            <action type="fix" dev="rbri">
+                Updates on event handling, mouse-over for option and select elements are more correct now.
+            </action>
+            <action type="fix" dev="rbri">
+                IE never triggers a mouseover event for select options.
+            </action>
+            <action type="fix" dev="rbri">
+                FF triggers a mouseover event for select options even if the option is disabled.
+            </action>
+            <action type="fix" dev="rbri">
+                GAE support is back.
+            </action>
+            <action type="fix" dev="rbri" issue="1730">
+                Function document.open(..) returns the opened document.
+            </action>
+            <action type="fix" dev="rbri">
+                Browsers do not escape double quote and backslash in cookie values.
+            </action>
+            <action type="fix" dev="rbri" issue="1735">
+                Fix for possible StringIndexOutOfBoundsException in HtmlUnitBrowserCompatCookieSpec.
+            </action>
+            <action type="add" dev="rbri">
+                Fix NPE in FormData#append when calling with null or undefined as value.
+            </action>
+            <action type="fix" dev="rbri" issue="1733">
+                Fix redirect handling for status code 301, 302 and 307 (POST); add support for status code 308.
+            </action>
+            <action type="fix" dev="rbri">
+                Bring the implementation of special key support (e.g. VK_DELETE) for password input and textarea control
+                in sync with the input text control.
+            </action>
+            <action type="add" dev="rbri" due-to="mguillem">
+                BrowserVersion BEST_SUPPORTED added. This is (for now) a shortcut for FIREFOX_38.
+            </action>
+            <action type="fix" dev="rbri">
+                Area elements are not focusable if no href attribute defined.
+            </action>
+            <action type="fix" dev="rbri">
+                Anchors are not focusable if no href attribute defined.
+            </action>
+            <action type="fix" dev="rbri" issue="1731" due-to="Joerg Werner">
+                Basic authentication credentials in the URL could get lost.
+            </action>
+            <action type="add" dev="asashour">
+                DefaultCredentialsProvider: to have .removeCredentials().
+            </action>
+            <action type="update" dev="rbri">
+                Dependency to Commons Collections removed.
+            </action>
+            <action type="fix" dev="asashour" issue="1728" due-to="Joerg Werner">
+                HtmlPage: fix base URL with leading whitespace.
+            </action>
+        </release>
+        <release version="2.19" date="Nov 12, 2015" description="Bugfixes, Media query support">
+            <action type="add" dev="asashour">
+                JavaScript: support document.hasFocus().
+            </action>
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: Cache.cacheIfPossible() to return boolean
+                and rename .isDynamicContent() to isCacheableContent().
+            </action>
+            <action type="fix" dev="asashour">
+                CSSStyleSheet: response is cleaned up when it is not cached.
+            </action>
+            <action type="add" dev="rbri" issue="1681" due-to="Adam Afeltowicz">
+                JavaScript: Support for History.pushState() and History.replaceState().
+            </action>
+            <action type="fix" dev="asashour" issue="1723">
+                SgmlPage: fix .getElementsByTagName().
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: Empty dummy implementations for MediaQueryList#addListener and
+                MediaQueryList#removeListener added.
+            </action>
+            <action type="update" dev="asashour">
+                HttpWebConnection: deprecate .shutdown().
+            </action>
+            <action type="update" dev="asashour" issue="1727">
+                INCOMPATIBLE CHANGE: WebConnection to extend AutoCloseable.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: Removing the active element from the DOM tree should reset the
+                activeElement property.
+            </action>
+            <action type="fix" dev="asashour" issue="1726">
+                JavaScript: fix HTMLFormElement.action when the attribute is not defined.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: When an element inside an iframe becomes the active one,
+                the iframe element also becomes the active one of his enclosing document.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: Improved simulation of onfocusin/out events.
+            </action>
+            <action type="fix" dev="asashour" issue="1725">
+                HtmlPage: fix synchronization for .addAutoCloseable().
+            </action>
+            <action type="update" dev="asashour">
+                Enhance performance of DomNode.asText().
+            </action>
+            <action type="fix" dev="asashour" issue="1715">
+                WebSocket: to be closed once the window is closed.
+            </action>
+            <action type="fix" dev="rbri" issue="1702">
+                JavaScript: Missing property HTMLElement.oninput added.
+            </action>
+            <action type="fix" dev="asashour" issue="1724">
+                Correctly handle redirection with broken gzip content.
+            </action>
+            <action type="add" dev="rbri">
+                CSS: support for Media Query feature 'max-resolution', 'min-resolution', and 'resolution' added.
+            </action>
+            <action type="add" dev="rbri">
+                CSS: support for Media Query feature 'max-device-width', 'min-device-width', 'max-height',
+                'min-height', 'max-device-height' and 'min-device-height' added.
+            </action>
+            <action type="add" dev="rbri">
+                CSS: support for Media Query 'not' operator added.
+            </action>
+            <action type="add" dev="rbri">
+                CSS: support for Media Query feature 'orientation'.
+            </action>
+            <action type="fix" dev="asashour" issue="1721">
+                CSS: initial support for Media Query features 'max-width' and 'min-width'.
+            </action>
+            <action type="fix" dev="asashour">
+                JavaScript: fix Promise.resolve() with empty parameters.
+            </action>
+            <action type="update" dev="rbri">
+                JavaScript: XMLHttpRequest.onerror is available in CHROME too.
+            </action>
+            <action type="update" dev="rbri">
+                JavaScript: XMLHttpRequest.onerror handler will be called with a ProgressEvent as parameter.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: support for ProgressEvent properties lengthComputable, loaded, and total added.
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: add minimal WebWorker support.
+            </action>
+            <action type="update" dev="asashour">
+                DomNode and WebWindow: deprecate .getScriptObject().
+            </action>
             <action type="fix" dev="asashour" issue="1699">
                 JavaScript: collections to be iterated using the default Symbol.iterator.
             </action>
