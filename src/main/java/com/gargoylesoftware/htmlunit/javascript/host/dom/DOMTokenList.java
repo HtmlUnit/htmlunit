@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DOMTokenList}.
@@ -215,7 +216,7 @@ public class DOMTokenList extends SimpleScriptable {
     public Object get(final int index, final Scriptable start) {
         final Object value = item(index);
         if (value == null && (!getBrowserVersion().hasFeature(JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE))) {
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
         return value;
     }
