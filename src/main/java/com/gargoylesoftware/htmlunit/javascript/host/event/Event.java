@@ -661,10 +661,11 @@ public class Event extends SimpleScriptable {
         cancelable_ = cancelable;
         if (TYPE_BEFORE_UNLOAD.equals(type) && getBrowserVersion().hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
             try {
-                final Method readMethod = getClass().getMethod("getReturnValue");
-                final Method writeMethod = getClass().getMethod("setReturnValue", Object.class);
+                final Class<?> klass = getClass();
+                final Method readMethod = klass.getMethod("getReturnValue");
+                final Method writeMethod = klass.getMethod("setReturnValue", Object.class);
                 defineProperty("returnValue", null, readMethod, writeMethod, ScriptableObject.EMPTY);
-                if ("Event".equals(getClass().getSimpleName())) {
+                if ("Event".equals(klass.getSimpleName())) {
                     setReturnValue(Boolean.TRUE);
                 }
             }
