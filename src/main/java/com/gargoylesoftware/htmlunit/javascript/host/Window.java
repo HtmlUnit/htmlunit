@@ -1319,7 +1319,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
             if (result instanceof Window) {
                 final WebWindow webWindow = ((Window) result).getWebWindow();
-                result = webWindow.getScriptableObject();
+                result = getProxy(webWindow);
             }
         }
 
