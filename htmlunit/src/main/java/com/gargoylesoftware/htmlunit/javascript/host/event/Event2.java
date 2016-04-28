@@ -14,21 +14,28 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
+import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
+// When this is renamed to Event, change the name in initEvent()
 public class Event2 extends SimpleScriptObject {
 
     /**
@@ -169,8 +176,6 @@ public class Event2 extends SimpleScriptObject {
         target_ = scriptable;
         currentTarget_ = scriptable;
         type_ = type;
-//        setParentScope(scriptable);
-//        setPrototype(getPrototype(getClass()));
 
         if (TYPE_CHANGE.equals(type)) {
             cancelable_ = false;
@@ -232,9 +237,111 @@ public class Event2 extends SimpleScriptObject {
         cancelable_ = cancelable;
     }
 
+    /**
+     * Returns the return value associated with the event.
+     * @return the return value associated with the event
+     */
+    public Object getReturnValue() {
+        return returnValue_;
+    }
+
+    /**
+     * Sets the return value associated with the event.
+     * @param returnValue the return value associated with the event
+     */
+    public void setReturnValue(final Object returnValue) {
+        returnValue_ = returnValue;
+    }
+
+    /**
+     * Initializes this event.
+     * @param type the event type
+     * @param bubbles whether or not the event should bubble
+     * @param cancelable whether or not the event the event should be cancelable
+     */
+    @Function
+    public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
+        type_ = type;
+        bubbles_ = bubbles;
+        cancelable_ = cancelable;
+        if (TYPE_BEFORE_UNLOAD.equals(type) && getBrowserVersion().hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+            try {
+                final MethodHandle getter = virtualHandle("getReturnValue", Object.class);
+                final MethodHandle setter = virtualHandle("setReturnValue", void.class, Object.class);
+                final AccessorProperty property = AccessorProperty.create("returnValue", Attribute.DEFAULT_ATTRIBUTES, 
+                        getter, setter);
+
+                addBoundProperties((Object) this, new AccessorProperty[] {property});
+                if ("Event2".equals(getClass().getSimpleName())) {
+                    setReturnValue(Boolean.TRUE);
+                }
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Returns the event target to which the event was originally dispatched.
+     * @return the event target to which the event was originally dispatched
+     */
+    @Getter
+    public Object getTarget() {
+        return target_;
+    }
+
+    /**
+     * Sets the event target.
+     * @param target the event target
+     */
+    public void setTarget(final Object target) {
+        target_ = target;
+    }
+
+    /**
+     * Returns the event type.
+     * @return the event type
+     */
+    @Getter
+    public String getType() {
+        return type_;
+    }
+
+    /**
+     * Sets the event type.
+     * @param type the event type
+     */
+    @Setter
+    public void setType(final String type) {
+        type_ = type;
+    }
+
+    /**
+     * Returns {@code true} if this event has been aborted via <tt>preventDefault()</tt> in
+     * standards-compliant browsers, or via the event's <tt>returnValue</tt> property in IE, or
+     * by the event handler returning {@code false}.
+     *
+     * @param result the event handler result (if {@code false}, the event is considered aborted)
+     * @return {@code true} if this event has been aborted
+     */
+    public boolean isAborted(final ScriptResult result) {
+        return ScriptResult.isFalse(result) || preventDefault_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Event2.class,
+                    name, MethodType.methodType(rtype, ptypes));
+        }
+        catch (final ReflectiveOperationException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
+        try {
+            return MethodHandles.lookup().findVirtual(Event2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -253,9 +360,23 @@ public class Event2 extends SimpleScriptObject {
         }
     }
 
-    static final class Prototype extends PrototypeObject {
+    public static final class Prototype extends PrototypeObject {
+        public ScriptFunction initEvent;
+
+        public ScriptFunction G$initEvent() {
+            return initEvent;
+        }
+
+        public void S$initEvent(final ScriptFunction function) {
+            this.initEvent = function;
+        }
+
         public String getClassName() {
             return "Event";
+        }
+
+        Prototype() {
+            ScriptUtils.initialize(this);
         }
     }
 }

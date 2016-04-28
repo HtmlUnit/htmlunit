@@ -29,6 +29,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
@@ -361,6 +363,16 @@ public class Window2 extends EventTarget2 {
     @Getter
     public Window2 getSelf() {
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean dispatchEvent(final Event2 event) {
+        event.setTarget(this);
+        final ScriptResult result = fireEvent(event);
+        return !event.isAborted(result);
     }
 
     /**

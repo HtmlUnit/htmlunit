@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_WINDOW_EXECUTE_IF_DITACHED;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -29,6 +30,7 @@ import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -209,6 +211,34 @@ public class EventTarget2 extends SimpleScriptObject {
         return eventListenersContainer_.hasEventHandlers(StringUtils.substring(eventName, 2));
     }
 
+    /**
+     * Dispatches an event into the event system (standards-conformant browsers only). See
+     * <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">the Gecko
+     * DOM reference</a> for more information.
+     *
+     * @param event the event to be dispatched
+     * @return {@code false} if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; {@code true} otherwise
+     */
+    @Function
+    public boolean dispatchEvent(final Event2 event) {
+        event.setTarget(this);
+        final DomElement element = (DomElement) getDomNodeOrNull();
+        ScriptResult result = null;
+        if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
+            try {
+                element.click(event);
+            }
+            catch (final IOException e) {
+                throw new RuntimeException("Error calling click(): " + e.getMessage());
+            }
+        }
+        else {
+            result = fireEvent(event);
+        }
+        return !event.isAborted(result);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(EventTarget2.class,
@@ -232,6 +262,7 @@ public class EventTarget2 extends SimpleScriptObject {
 
     public static final class Prototype extends PrototypeObject {
         public ScriptFunction addEventListener;
+        public ScriptFunction dispatchEvent;
 
         public ScriptFunction G$addEventListener() {
             return this.addEventListener;
@@ -241,6 +272,13 @@ public class EventTarget2 extends SimpleScriptObject {
             this.addEventListener = function;
         }
 
+        public ScriptFunction G$dispatchEvent() {
+            return this.dispatchEvent;
+        }
+
+        public void S$dispatchEvent(final ScriptFunction function) {
+            this.dispatchEvent = function;
+        }
         Prototype() {
             ScriptUtils.initialize(this);
         }

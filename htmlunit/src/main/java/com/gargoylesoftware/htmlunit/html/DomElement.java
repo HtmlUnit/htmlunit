@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
@@ -55,10 +56,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * @author Ahmed Ashour
@@ -808,6 +805,60 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Simulates clicking on this element, returning the page in the window that has the focus
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
+     *
+     * @param event the click event used
+     * @param <P> the page type
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @exception IOException if an IO error occurs
+     */
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final Event2 event) throws IOException {
+        final SgmlPage page = getPage();
+
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return (P) page;
+        }
+
+        // may be different from page when working with "orphaned pages"
+        // (ex: clicking a link in a page that is not active anymore)
+        final Page contentPage = page.getEnclosingWindow().getEnclosedPage();
+
+        boolean stateUpdated = false;
+        boolean changed = false;
+        if (isStateUpdateFirst()) {
+            changed = doClickStateUpdate();
+            stateUpdated = true;
+        }
+
+        final NashornJavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine2();
+//        jsEngine.holdPosponedActions();
+        try {
+            final ScriptResult scriptResult = doClickFireClickEvent(event);
+            final boolean eventIsAborted = event.isAborted(scriptResult);
+
+            final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
+            if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
+                changed = doClickStateUpdate();
+            }
+        }
+        finally {
+            jsEngine.processPostponedActions();
+        }
+
+        if (changed) {
+            doClickFireChangeEvent();
+        }
+
+        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
+    }
+
+    /**
      * This method implements the control state update part of the click action.
      *
      * <p>The default implementation only calls doClickStateUpdate on parent's HtmlElement (if any).
@@ -855,6 +906,15 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the script result
      */
     protected ScriptResult doClickFireClickEvent(final Event event) {
+        return fireEvent(event);
+    }
+
+    /**
+     * This method implements the control onclick handler call during the click action.
+     * @param event the click event used
+     * @return the script result
+     */
+    protected ScriptResult doClickFireClickEvent(final Event2 event) {
         return fireEvent(event);
     }
 

@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 
 /**
  * Wrapper for the HTML element "input".
@@ -211,6 +212,18 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected ScriptResult doClickFireClickEvent(final Event event) {
+        if (!hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
+
+        return super.doClickFireClickEvent(event);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected ScriptResult doClickFireClickEvent(final Event2 event) {
         if (!hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
