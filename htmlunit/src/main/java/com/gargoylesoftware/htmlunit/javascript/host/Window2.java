@@ -308,11 +308,14 @@ public class Window2 extends EventTarget2 {
         return (int) window.getFrames2().getLength();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object get(int key) {
         final HTMLCollection2 frames = getFrames2();
         if (key >= (int) frames.getLength()) {
-            return null;
+            return Undefined.getUndefined();
         }
         return frames.item(Integer.valueOf(key));
     }
@@ -335,8 +338,21 @@ public class Window2 extends EventTarget2 {
         return false;
     }
 
+    /**
+     * Returns the {@code frames} property.
+     * @return the {@code frames} property
+     */
     @Getter
     public Window2 getFrames() {
+        return this;
+    }
+
+    /**
+     * Returns the {@code self} property.
+     * @return the {@code self} property
+     */
+    @Getter
+    public Window2 getSelf() {
         return this;
     }
 
