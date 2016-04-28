@@ -2018,7 +2018,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
-    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
