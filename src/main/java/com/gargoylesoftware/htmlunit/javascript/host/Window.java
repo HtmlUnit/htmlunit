@@ -552,8 +552,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the window property (a reference to <tt>this</tt>)
      */
     @JsxGetter(propertyName = "window")
-    public WindowProxy getWindow_js() {
-        return windowProxy_;
+    public Window getWindow_js() {
+        return this;
     }
 
     /**
@@ -561,8 +561,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return this
      */
     @JsxGetter
-    public WindowProxy getSelf() {
-        return windowProxy_;
+    public Window getSelf() {
+        return this;
     }
 
     /**
@@ -880,8 +880,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the value of the frames property
      */
     @JsxGetter(propertyName = "frames")
-    public WindowProxy getFrames_js() {
-        return windowProxy_;
+    public Window getFrames_js() {
+        return this;
     }
 
     /**
