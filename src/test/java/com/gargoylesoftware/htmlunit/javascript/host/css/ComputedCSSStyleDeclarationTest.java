@@ -1976,4 +1976,40 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "17"})
+    @NotYetImplemented
+    public void iFrameInnerWidth() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var iframe = document.createElement('iframe');\n"
+            + "    document.body.appendChild(iframe);\n"
+            + "    iframe.style.cssText = 'width: 500px; height: 500px;';\n"
+            + "    iframe.contentWindow.location = 'test2.html';\n"
+            + "    var win = iframe.contentWindow;\n"
+            + "    alert(win.innerWidth - win.document.documentElement.clientWidth);\n"
+            + "    iframe.onload = function() {\n"
+            + "      alert(win.innerWidth - win.document.documentElement.clientWidth);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>\n";
+        getMockWebConnection().setDefaultResponse("<html><head>\n"
+                + "<style>\n"
+                + "  body {\n"
+                + "    width: 600px;\n"
+                + "    height: 600px;\n"
+                + "  }\n"
+                + "</style>\n"
+                + "</head>\n"
+                + "<body></body>\n"
+                + "</html>");
+        loadPageWithAlerts2(html);
+    }
 }

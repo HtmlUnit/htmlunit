@@ -8102,10 +8102,12 @@ public class JQuery1x11x3Test extends JQueryTestBase {
 
     /**
      * Test {803=[FF38, FF45], 804=[IE], 805=[CHROME]}.
+     * Root cause: ComputedCSSStyleDeclaration.iFrameInnerWidth
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
