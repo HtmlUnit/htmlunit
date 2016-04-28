@@ -856,6 +856,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
+    /** DOMTokenList index access returns null if index is outside. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE,
+
     /** DOMTokenList uses a enhanced set of whitespace chars. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS,

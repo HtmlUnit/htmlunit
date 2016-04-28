@@ -15,14 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -203,9 +201,9 @@ public class DOMTokenList extends SimpleScriptable {
             return null;
         }
         final String value = getDefaultValue(null);
-        final List<String> values = Arrays.asList(StringUtils.split(value, whitespaceChars()));
-        if (index < values.size()) {
-            return values.get(index);
+        final String[] values = StringUtils.split(value, whitespaceChars());
+        if (index < values.length) {
+            return values[index];
         }
         return null;
     }
@@ -215,7 +213,11 @@ public class DOMTokenList extends SimpleScriptable {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        return item(index);
+        final Object value = item(index);
+        if (value == null && (!getBrowserVersion().hasFeature(JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE))) {
+            return Context.getUndefinedValue();
+        }
+        return value;
     }
 
     private void updateAttribute(final String value) {

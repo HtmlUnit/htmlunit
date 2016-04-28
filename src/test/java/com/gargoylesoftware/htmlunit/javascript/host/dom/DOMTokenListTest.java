@@ -190,7 +190,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "null"})
+    @Alerts(DEFAULT = {"a b", "2", "null", "undefined"},
+            IE = {"a b", "2", "null", "null"})
     public void itemNegative() throws Exception {
         item("a b", -1);
     }
@@ -199,7 +200,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "null"})
+    @Alerts(DEFAULT = {"a b", "2", "null", "undefined"},
+            IE = {"a b", "2", "null", "null"})
     public void itemNegative2() throws Exception {
         item("a b", -123);
     }
@@ -208,7 +210,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "a"})
+    @Alerts({"a b", "2", "a", "a"})
     public void itemFirst() throws Exception {
         item("a b", 0);
     }
@@ -217,7 +219,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "b"})
+    @Alerts({"a b", "2", "b", "b"})
     public void itemLast() throws Exception {
         item("a b", 1);
     }
@@ -226,7 +228,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "null"})
+    @Alerts(DEFAULT = {"a b", "2", "null", "undefined"},
+            IE = {"a b", "2", "null", "null"})
     public void itemOutside() throws Exception {
         item("a b", 13);
     }
@@ -244,6 +247,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    alert(list.length);\n"
             + "    try {\n"
             + "      alert(list.item(" + pos + "));\n"
+            + "      alert(list[" + pos + "]);\n"
             + "    } catch(e) { alert('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
