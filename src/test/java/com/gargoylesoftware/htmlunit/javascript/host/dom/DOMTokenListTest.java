@@ -35,7 +35,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "b", "true", "false", "c d"})
+    @Alerts({"3", "b", "b", "true", "false", "c d"})
     public void various() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -44,6 +44,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    if (list) {\n"
             + "      alert(list.length);\n"
             + "      alert(list.item(1));\n"
+            + "      alert(list[1]);\n"
             + "      alert(list.contains('c'));\n"
             + "      list.add('d');\n"
             + "      list.remove('a');\n"

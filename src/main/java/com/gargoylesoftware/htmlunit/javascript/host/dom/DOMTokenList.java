@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code DOMTokenList}.
@@ -207,6 +208,14 @@ public class DOMTokenList extends SimpleScriptable {
             return values.get(index);
         }
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        return item(index);
     }
 
     private void updateAttribute(final String value) {
