@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -55,6 +56,42 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "  alert(d5);\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUElEQVQ4jWP4TyFgIFsjAwN5BjAwMMA1oxgAkyAGY/UCugQu"
+                + "m/G6gBhnE2UAhiJ8coQUYTOMKC/gDDS6GYBPjORYINoAchITAzbTB84AcgAA8YbvLfsmafwAAAAASUVORK5CYII=",
+            CHROME = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8fjSERg4iIC1dgoE1BRFQeCrcA"
+                + "AIVvHwN4kUse7wBpZNRo1QMgssMecD9YAfTboYROtTqbYSzvGDAtRCYO5rRB7Xj6Az14DRCINTblQZSFL0Fyk2h17xI5BekL"
+                + "YHfV61ee8pnRMQN+rwAAAABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABwSURBVDhP"
+                + "pZPbDsAgCENh///P27qsxhFEGCcxPiht8aLnjTQ43rmMqj5zWQCFGAw+WqBihrnrj8C8YLEG3JtqgcWegSuAgpWjZZvACllc"
+                + "AbpF0Un5Gi1LAbpG7iBMsCsGvx4SoPhIkHHzaB9i8zuLXD7IOwUJXM3pAAAAAElFTkSuQmCC")
+    @NotYetImplemented
+    public void base64WithPlus() throws Exception {
+        final String html = "<html><head><title>foo</title>"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('canvas');\n"
+            + "  var img = document.getElementById('image');\n"
+            + "  canvas.width = img.width;\n"
+            + "  canvas.height = img.height;\n"
+            + "  var ctx = canvas.getContext('2d');\n"
+            + "  ctx.drawImage(img, 0, 0);\n"
+            + "  alert(canvas.toDataURL());\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>"
+            + "  <img id='image' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC'>\n"
+            + "  <canvas id='canvas'></canvas>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

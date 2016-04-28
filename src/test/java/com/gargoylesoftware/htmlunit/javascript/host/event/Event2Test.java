@@ -122,7 +122,7 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test event order for clicking on a entry field.
+     * Test event order for clicking on an entry field.
      * @throws Exception if the test fails
      */
     @Test
