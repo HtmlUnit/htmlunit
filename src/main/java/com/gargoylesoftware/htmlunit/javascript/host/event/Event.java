@@ -68,77 +68,77 @@ public class Event extends SimpleScriptable {
      */
     protected static final String KEY_CURRENT_EVENT = "Event#current";
 
-    /** The submit event type, triggered by "onsubmit" event handlers. */
+    /** The submit event type, triggered by {@code onsubmit} event handlers. */
     public static final String TYPE_SUBMIT = "submit";
 
-    /** The change event type, triggered by "onchange" event handlers. */
+    /** The change event type, triggered by {@code onchange} event handlers. */
     public static final String TYPE_CHANGE = "change";
 
-    /** The load event type, triggered by "onload" event handlers. */
+    /** The load event type, triggered by {@code onload} event handlers. */
     public static final String TYPE_LOAD = "load";
 
-    /** The unload event type, triggered by "onunload" event handlers. */
+    /** The unload event type, triggered by {@code onunload} event handlers. */
     public static final String TYPE_UNLOAD = "unload";
 
-    /** The popstate event type, triggered by "onpopstate" event handlers. */
+    /** The popstate event type, triggered by {@code onpopstate} event handlers. */
     public static final String TYPE_POPSTATE = "popstate";
 
-    /** The focus event type, triggered by "onfocus" event handlers. */
+    /** The focus event type, triggered by {@code onfocus} event handlers. */
     public static final String TYPE_FOCUS = "focus";
 
-    /** The focus in event type, triggered by "onfocusin" event handlers. */
+    /** The focus in event type, triggered by {@code onfocusin} event handlers. */
     public static final String TYPE_FOCUS_IN = "focusin";
 
-    /** The focus out event type, triggered by "onfocusout" event handlers. */
+    /** The focus out event type, triggered by {@code onfocusout} event handlers. */
     public static final String TYPE_FOCUS_OUT = "focusout";
 
-    /** The blur event type, triggered by "onblur" event handlers. */
+    /** The blur event type, triggered by {@code onblur} event handlers. */
     public static final String TYPE_BLUR = "blur";
 
-    /** The key down event type, triggered by "onkeydown" event handlers. */
+    /** The key down event type, triggered by {@code onkeydown} event handlers. */
     public static final String TYPE_KEY_DOWN = "keydown";
 
-    /** The key down event type, triggered by "onkeypress" event handlers. */
+    /** The key down event type, triggered by {@code onkeypress} event handlers. */
     public static final String TYPE_KEY_PRESS = "keypress";
 
-    /** The input event type, triggered by "oninput" event handlers. */
+    /** The input event type, triggered by {@code oninput} event handlers. */
     public static final String TYPE_INPUT = "input";
 
-    /** The key down event type, triggered by "onkeyup" event handlers. */
+    /** The key down event type, triggered by {@code onkeyup} event handlers. */
     public static final String TYPE_KEY_UP = "keyup";
 
-    /** The submit event type, triggered by "onreset" event handlers. */
+    /** The submit event type, triggered by {@code onreset} event handlers. */
     public static final String TYPE_RESET = "reset";
 
-    /** The beforeunload event type, triggered by "onbeforeunload" event handlers. */
+    /** The beforeunload event type, triggered by {@code onbeforeunload} event handlers. */
     public static final String TYPE_BEFORE_UNLOAD = "beforeunload";
 
     /** Triggered after the DOM has loaded but before images etc. */
     public static final String TYPE_DOM_DOCUMENT_LOADED = "DOMContentLoaded";
 
-    /** The event type triggered by "onpropertychange" event handlers. */
+    /** The event type triggered by {@code onpropertychange} event handlers. */
     public static final String TYPE_PROPERTY_CHANGE = "propertychange";
 
-    /** The event type triggered by "onhashchange" event handlers. */
+    /** The event type triggered by {@code onhashchange} event handlers. */
     public static final String TYPE_HASH_CHANGE = "hashchange";
 
-    /** The event type triggered by "onreadystatechange" event handlers. */
+    /** The event type triggered by {@code onreadystatechange} event handlers. */
     public static final String TYPE_READY_STATE_CHANGE = "readystatechange";
 
-    /** The event type triggered by "onerror" event handlers. */
+    /** The event type triggered by {@code onerror} event handlers. */
     public static final String TYPE_ERROR = "error";
 
     /** The message event type, triggered by postMessage. */
     public static final String TYPE_MESSAGE = "message";
 
-    /** The close event type, triggered by "onclose" event handlers. */
+    /** The close event type, triggered by {@code onclose} event handlers. */
     public static final String TYPE_CLOSE = "close";
 
-    /** The open event type, triggered by "onopen" event handlers. */
+    /** The open event type, triggered by {@code onopen} event handlers. */
     public static final String TYPE_OPEN = "open";
 
     /** No event phase. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
@@ -341,7 +341,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jsConstructor(final String type, final ScriptableObject details) {
         boolean bubbles = false;
         boolean cancelable = false;
@@ -386,7 +386,7 @@ public class Event extends SimpleScriptable {
      * Returns the object that fired the event.
      * @return the object that fired the event
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE)})
     public Object getSrcElement() {
         return srcElement_;
     }
@@ -490,8 +490,8 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * Returns whether SHIFT has been pressed during this event or not.
-     * @return whether SHIFT has been pressed during this event or not
+     * Returns whether {@code SHIFT} has been pressed during this event or not.
+     * @return whether {@code SHIFT} has been pressed during this event or not
      */
     public boolean getShiftKey() {
         return shiftKey_;
@@ -594,7 +594,7 @@ public class Event extends SimpleScriptable {
      * called for this event. Otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
     public boolean getDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
