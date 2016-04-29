@@ -6305,7 +6305,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Alerts("0, 2, 2")
     @NotYetImplemented
     public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
-        runTest("ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout");
+        runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
     }
 
     /**
@@ -6315,7 +6315,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts("0, 1, 1")
     public void ajax__jQuery_ajaxSetup___timeout__Number____with_localtimeout() throws Exception {
-        runTest("ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout");
+        runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout");
     }
 
     /**
