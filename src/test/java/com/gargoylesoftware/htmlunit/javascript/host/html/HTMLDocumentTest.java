@@ -594,7 +594,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void prefix() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms.fmLogin);\n"
             + "}\n"
             + "</script></head>\n"
@@ -640,7 +640,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
     private void testLastModified(final List<NameValuePair> responseHeaders) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  alert(typeof document.lastModified);\n"
             + "  var d = new Date(document.lastModified);\n"
             + "  alert(d.toGMTString());\n" // to have results not depending on the user's time zone
@@ -662,7 +662,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts({"true", "true"})
     public void lastModified_noDateHeader() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  var justBeforeLoading = " + System.currentTimeMillis() + ";\n"
             + "  var d = new Date(document.lastModified);\n"
             + "  alert(d.valueOf() >= justBeforeLoading - 1000);\n" // date string format has no ms, take 1s marge
@@ -729,7 +729,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  try {\n"
             + "    document.designMode = 'on';\n"
             + "    var s = window.getSelection();\n"
@@ -786,7 +786,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  if (document.frames)\n"
             + "  {\n"
             + "    alert(document.frames == window.frames);\n"
@@ -813,7 +813,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"undefined", "false"})
     public void frameAccessByName() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  alert(document.foo);\n"
             + "  alert(window.frames[0] == document.foo);\n"
             + "}\n"

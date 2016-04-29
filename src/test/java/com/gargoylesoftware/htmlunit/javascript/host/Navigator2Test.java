@@ -81,7 +81,7 @@ public class Navigator2Test extends SimpleWebTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       alert('" + name + " = ' + window.navigator." + name + ");\n"
                 + "    }\n"
                 + "    </script>\n"

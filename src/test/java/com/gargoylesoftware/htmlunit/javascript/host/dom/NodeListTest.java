@@ -38,7 +38,7 @@ public class NodeListTest extends WebDriverTestCase {
     public void defaultValue() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    alert(document.getElementById('myId').firstChild.childNodes);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -57,7 +57,7 @@ public class NodeListTest extends WebDriverTestCase {
     public void has() throws Exception {
         final String html = "<html><head><title>test</title>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    alert(0 in document.body.parentNode.childNodes);\n"
                 + "  }\n"
                 + "</script>\n"

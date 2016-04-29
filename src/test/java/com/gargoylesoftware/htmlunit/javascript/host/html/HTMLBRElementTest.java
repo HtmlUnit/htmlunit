@@ -98,7 +98,7 @@ public class HTMLBRElementTest extends WebDriverTestCase {
     public void outerHTML() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.getElementById('myId').outerHTML);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"

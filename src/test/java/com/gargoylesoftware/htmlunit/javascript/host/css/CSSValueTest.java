@@ -38,7 +38,7 @@ public class CSSValueTest extends WebDriverTestCase {
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"
-                + "function test(){\n"
+                + "function test() {\n"
                 + "  try {\n"
                 + "    alert(CSSValue);\n"
                 + "    var props = ['CSS_INHERIT', 'CSS_PRIMITIVE_VALUE', 'CSS_VALUE_LIST', 'CSS_CUSTOM'];\n"

@@ -86,7 +86,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void formsAccessor_FormWithNoName() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms.length)\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -107,7 +107,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void formsAccessor_NoForms() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms.length)\n"
             + "    for(var i = 0; i < document.forms.length; i++) {\n"
             + "        alert(document.forms[i].name )\n"
@@ -393,7 +393,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void appendChild() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "  function doTest(){\n"
+            + "  function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
             + "    var div = document.createElement('DIV');\n"
             + "    form.appendChild(div);\n"
@@ -452,7 +452,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void appendChild_textNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "  function doTest(){\n"
+            + "  function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
             + "    var child = document.createTextNode('Some Text');\n"
             + "    form.appendChild(child);\n"
@@ -476,7 +476,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void cloneNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "  function doTest(){\n"
+            + "  function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
             + "    var cloneShallow = form.cloneNode(false);\n"
             + "    alert(cloneShallow!=null);\n"
@@ -503,7 +503,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void insertBefore() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "  function doTest(){\n"
+            + "  function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
             + "    var oldChild = document.getElementById('oldChild');\n"
             + "    var div = document.createElement('DIV');\n"
@@ -1404,7 +1404,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts("foo")
     public void title() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.title)\n"
             + "}\n"
             + "</script></head>\n"
@@ -1483,7 +1483,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined"})
     public void directAccessByName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.myImage.id);\n"
             + "    alert(document.myImage2.length);\n"
             + "    alert(document.myForm.tagName);\n"
@@ -1515,7 +1515,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"[object HTMLCollection]", "2"})
     public void scriptsArray() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script lang='JavaScript'>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "        alert(document.scripts);\n"
             + "        try {\n"
             + "          alert(document.scripts.length);\n" // This line used to blow up
@@ -1555,7 +1555,7 @@ public class DocumentTest extends WebDriverTestCase {
             IE = {"true", "true"})
     public void defaultViewAndParentWindow() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert(document.defaultView == window);\n"
             + "    alert(document.parentWindow == window);\n"
             + "}\n"
@@ -2006,7 +2006,7 @@ public class DocumentTest extends WebDriverTestCase {
               "<html><body>\n"
             + " <span id='s' onclick='\n"
             + "  if(document.fireEvent) {\n"
-            + "    document.onkeydown=function(){alert(\"x\")};\n"
+            + "    document.onkeydown=function() {alert(\"x\")};\n"
             + "    document.fireEvent(\"onkeydown\")\n"
             + "  }\n"
             + " '>abc</span>\n"

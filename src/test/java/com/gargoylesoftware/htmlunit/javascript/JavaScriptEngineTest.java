@@ -923,7 +923,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         prototypeScope("String", "'some string'");
         prototypeScope("Number", "9");
         prototypeScope("Date", "new Date()");
-        prototypeScope("Function", "function(){}");
+        prototypeScope("Function", "function() {}");
         prototypeScope("Array", "[]");
     }
 

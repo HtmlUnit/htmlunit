@@ -45,7 +45,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"in test", "BODY"})
     public void bodyAttributeWhenOpeningBodyGenerated() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert('in test');\n"
             + "    alert(document.getElementById('span1').parentNode.tagName);\n"
             + "}\n"
@@ -64,7 +64,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"2", "3", "text3", "text3", "null"})
     public void lostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert(document.forms[0].childNodes.length);\n"
             + "    alert(document.forms[0].elements.length);\n"
             + "    alert(document.forms[0].elements[2].name);\n"
@@ -128,7 +128,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"DIV", "TABLE"})
     public void div_between_table_and_tr() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  var c1 = document.body.firstChild;\n"
             + "  alert(c1.tagName);\n"
             + "  alert(c1.nextSibling.tagName);\n"

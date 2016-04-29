@@ -1253,7 +1253,7 @@ public class Window3Test extends WebDriverTestCase {
             + "   function test() {\n"
             + "      var s = 'string';\n"
             + "      var f = 'initial';\n"
-            + "      eval('f = function(){alert(s);}');\n"
+            + "      eval('f = function() {alert(s);}');\n"
             + "      invoke(f);\n"
             + "   };\n"
             + "   function invoke(fn) {\n"

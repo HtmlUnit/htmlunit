@@ -219,7 +219,7 @@ public class ScreenTest extends WebDriverTestCase {
     private void testBooleanProperty(final String prop) throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       try {\n"
             + "         alert(window.screen." + prop + ");\n"
             + "       } catch(e) { alert('get exception') }\n"
@@ -240,7 +240,7 @@ public class ScreenTest extends WebDriverTestCase {
     private void testNumericProperty(final String prop) throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       try {\n"
             + "         alert(window.screen." + prop + ");\n"
             + "       } catch(e) { alert('get exception') }\n"

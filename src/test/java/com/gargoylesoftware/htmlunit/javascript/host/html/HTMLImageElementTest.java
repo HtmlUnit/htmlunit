@@ -178,7 +178,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void getSrc() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.getElementById('anImage').src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -197,7 +197,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void getSrc_newImage_srcNotSet() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    var oImg = new Image();\n"
             + "    alert(oImg.src);\n"
             + "}\n"
@@ -216,7 +216,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void setSrc() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    document.getElementById('anImage').src = 'bar.gif';\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -244,7 +244,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void setSrc_newImage() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    var preloadImage = new Image();\n"
             + "    preloadImage.src = 'bar.gif';\n"
             + "    alert(preloadImage.src);\n"
@@ -294,7 +294,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void newImage() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    var i = new Image();\n"
             + "    alert(i.style != null);\n"
             + "    i.style.position = 'relative';\n"

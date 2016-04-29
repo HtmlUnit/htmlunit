@@ -483,7 +483,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     public void alert_NoAlertHandler() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert('foo')}</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
         final HtmlPage firstPage = loadPage(firstContent);
@@ -562,7 +562,7 @@ public class WindowTest extends SimpleWebTestCase {
         });
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -581,7 +581,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     public void confirm_noConfirmHandler() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
@@ -610,7 +610,7 @@ public class WindowTest extends SimpleWebTestCase {
         });
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(prompt('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -636,7 +636,7 @@ public class WindowTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(prompt('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);

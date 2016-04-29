@@ -2203,7 +2203,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void test() throws Exception {
         final String html = "<html><body>"
                 + "<script type='application/javascript'>"
-                + "  window.onerror = function(){ foo.bar() };"
+                + "  window.onerror = function() { foo.bar() };"
                 + "  doit();"
                 + "</script>"
                 + "</body></html>";

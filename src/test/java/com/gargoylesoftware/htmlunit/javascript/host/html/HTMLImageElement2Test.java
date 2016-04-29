@@ -78,7 +78,7 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
             + "  var i = document.createElement('img');\n"
             + "  i.src = '" + URL_SECOND + "';\n"
             + "  i.src = '" + URL_THIRD + "';\n"
-            + "  i.onload = function(){ alert(1); };\n"
+            + "  i.onload = function() { alert(1); };\n"
             + "</script></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
@@ -130,15 +130,15 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
         final String html
             = "<html><body><img id='img' name='img'/><script>\n"
             + "  var i = document.getElementById('img');\n"
-            + "  i.onload = function(){\n"
+            + "  i.onload = function() {\n"
             + "    alert('image one');\n"
-            + "    i.onload = function(){\n"
+            + "    i.onload = function() {\n"
             + "      alert('image two');\n"
             + "    };\n"
             + "    i.src = '" + URL_THIRD + "';\n"
             + "  };\n"
             + "  i.setAttribute('src','" + URL_SECOND + "');\n"
-            + "  var t = setTimeout(function(){clearTimeout(t);}, 500);\n"
+            + "  var t = setTimeout(function() {clearTimeout(t);}, 500);\n"
             + "</script></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();

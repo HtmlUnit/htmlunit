@@ -52,7 +52,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1.textfield1.value);\n"
             + "    alert(document.form1.textfield1.type);\n"
             + "    alert(document.form1.textfield1.name);\n"
@@ -218,7 +218,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     private void testValue(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
 
             + "    document.form1.button1.value = " + value + ";\n"
             + "    document.form1.button2.value = " + value + ";\n"
@@ -322,7 +322,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     private void testValue2(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
 
             + "    document.form1.select1.value = " + value + ";\n"
             + "    document.form1.select2.value = " + value + ";\n"
@@ -485,7 +485,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n";
+            + "function doTest() {\n";
 
         if (value != null) {
             html = html
@@ -719,7 +719,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + " document.form1.textfield1.value = 'blue';\n"
             + "}\n"
             + "</script></head>\n"
@@ -745,7 +745,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + " document.form1.textfield1.select();\n"
             + "}\n"
             + "</script></head>\n"
@@ -801,7 +801,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  var f = document.form1;\n"
             + "  alert(f == f.mySubmit.form);\n"
             + "  alert(f == f.myText.form);\n"
@@ -831,7 +831,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + " document.form1.textfield1.name = 'changed';\n"
             + "}\n"
             + "</script></head><body>\n"

@@ -40,7 +40,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  try {\n"
             + "    alert(CSSPrimitiveValue);\n"
             + "    var props = ['CSS_UNKNOWN', 'CSS_NUMBER', 'CSS_PERCENTAGE', 'CSS_EMS', 'CSS_EXS', 'CSS_PX', "

@@ -307,7 +307,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
             + "<script>\n"
             + "function f() {\n"
             + "  alert('closing');\n"
-            + "  setTimeout(function(){ alert('started in onunload'); }, 0);\n"
+            + "  setTimeout(function() { alert('started in onunload'); }, 0);\n"
             + "}\n"
             + "window.addEventListener('unload', f, true);\n"
             + "</script></head>\n"

@@ -52,7 +52,7 @@ public class NodeTest extends WebDriverTestCase {
     public void hasChildNodes_true() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
-                + "function doTest(){\n"
+                + "function doTest() {\n"
                 + "    alert(document.getElementById('myNode').hasChildNodes());\n"
                 + "}\n"
                 + "</script>\n"
@@ -71,7 +71,7 @@ public class NodeTest extends WebDriverTestCase {
     public void hasChildNodes_false() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
-                + "function doTest(){\n"
+                + "function doTest() {\n"
                 + "    alert(document.getElementById('myNode').hasChildNodes());\n"
                 + "}\n"
                 + "</script>\n"
@@ -114,7 +114,7 @@ public class NodeTest extends WebDriverTestCase {
     public void removeChild() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
             + "    var div = form.firstChild;\n"
             + "    var removedDiv = form.removeChild(div);\n"
@@ -136,7 +136,7 @@ public class NodeTest extends WebDriverTestCase {
     public void removeChildSibling() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
             + "  try {\n"
@@ -161,7 +161,7 @@ public class NodeTest extends WebDriverTestCase {
     public void replaceChild_Normal() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
             + "    var div1 = form.firstChild;\n"
             + "    var div2 = document.getElementById('newChild');\n"
@@ -188,7 +188,7 @@ public class NodeTest extends WebDriverTestCase {
     public void nodeNameIsUppercase() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "function doTest(){\n"
+                + "function doTest() {\n"
                 + "    alert(document.getElementById('myNode').nodeName);\n"
                 + "}\n"
                 + "</script>\n"
@@ -284,7 +284,7 @@ public class NodeTest extends WebDriverTestCase {
     public void nodeType() throws Exception {
         final String html = "<html><head><title>test</title>\n"
                 + "<script>\n"
-                + "function doTest(){\n"
+                + "function doTest() {\n"
                 + "    alert('document: ' + document.nodeType);\n"
                 + "    alert('document.body: ' + document.body.nodeType);\n"
                 + "    alert('body child 1: ' + document.body.childNodes[0].nodeType);\n"
@@ -719,7 +719,7 @@ public class NodeTest extends WebDriverTestCase {
     public void insertBefore_undefinedRef() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
-                + "function doTest(){\n"
+                + "function doTest() {\n"
                 + "  try {\n"
                 + "    var e = document.createElement('div');\n"
                 + "    e.innerHTML='new element';\n"
@@ -902,7 +902,7 @@ public class NodeTest extends WebDriverTestCase {
     public void insertBefore_newElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
-                + "function doTest(){\n"
+                + "function doTest() {\n"
                 + "  try {\n"
                 + "    var e = document.createElement('div');\n"
                 + "    e.innerHTML='new element';\n"

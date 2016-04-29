@@ -362,7 +362,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
-            + "   function test(){\n"
+            + "   function test() {\n"
             + "      var div1 = document.getElementById('div1');\n"
             + "      alert(div1.style.filter);\n"
             + "      var div2 = document.getElementById('div2');\n"

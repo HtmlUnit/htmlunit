@@ -50,7 +50,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domain() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'gargoylesoftware.com';\n"
             + "    alert(document.domain);\n"
@@ -69,7 +69,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Alerts({"localhost", "gargoylesoftware.com"})
     public void domainFromLocalhost() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'gargoylesoftware.com';\n"
             + "    alert(document.domain);\n"
@@ -91,7 +91,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
             + "    alert(document.domain);\n"
@@ -111,7 +111,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'GaRgOyLeSoFtWaRe.CoM';\n"
             + "    alert(document.domain);\n"
@@ -130,7 +130,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Alerts({"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"})
     public void domainLong() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'd4.d3.d2.d1.gargoylesoftware.com';\n"
             + "    alert(document.domain);\n"
@@ -152,7 +152,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Alerts({"localhost", "localhost"})
     public void domainSetSelf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'localhost';\n"
             + "    alert(document.domain);\n"
@@ -171,7 +171,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Test
     public void domainTooShort() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.domain);\n"
             + "    document.domain = 'com';\n"
             + "    alert(document.domain);\n"
@@ -198,7 +198,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             IE = {"www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception"})
     public void domain_set_for_about_blank() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  var domain = document.domain;\n"
             + "  alert(domain);\n"
             + "  var frameDoc = frames[0].document;\n"

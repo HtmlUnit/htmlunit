@@ -78,8 +78,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     public void arguments_prototype() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "var f1 = function(){};\n"
-            + "var f2 = function(){};\n"
+            + "var f1 = function() {};\n"
+            + "var f2 = function() {};\n"
             + "Object.prototype.myFunction = f1;\n"
             + "Array.prototype.myFunction = f2;\n"
             + "var a = (function() { return arguments;})();\n"

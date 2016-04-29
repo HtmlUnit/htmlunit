@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class NoHttpResponseTest {
     private static final String html
         = "<html><body><script>\n"
-        + "  function fillField(){\n"
+        + "  function fillField() {\n"
         + "    document.forms.loginform.textfield.value = 'new value';\n"
         + "  }\n"
         + "</script>\n"
