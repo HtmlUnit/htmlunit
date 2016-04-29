@@ -475,7 +475,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      var ta = document.getElementById('myInput');\n"
-            + "      if (!ta.setSelectionRange) { alert('setSelectionRange not available'); return };\n"
             + "      ta.setSelectionRange(15, 15);\n"
             + "      alert(ta.selectionStart);"
             + "      alert(ta.selectionEnd);"
