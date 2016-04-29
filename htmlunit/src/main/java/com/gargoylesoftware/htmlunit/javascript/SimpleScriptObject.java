@@ -77,8 +77,12 @@ public class SimpleScriptObject extends ScriptObject {
         return className;
     }
 
+    /**
+     * Gets the window that is the top scope for this object.
+     * @return the window associated with this object
+     */
     public Window2 getWindow() {
-        return Global.instance().getWindow();
+        return ((SimpleScriptObject) getDomNodeOrDie().getPage().getScriptObject2()).getWindow();
     }
 
     /**

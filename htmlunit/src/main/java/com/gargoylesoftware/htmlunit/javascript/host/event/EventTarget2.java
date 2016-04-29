@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
@@ -125,7 +126,7 @@ public class EventTarget2 extends SimpleScriptObject {
             final EventListenersContainer2 windowsListeners = window.getEventListenersContainer();
 
             // capturing phase
-//            event.setEventPhase(Event.CAPTURING_PHASE);
+            event.setEventPhase(Event.CAPTURING_PHASE);
             final boolean windowEventIfDetached = getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED);
 
             boolean isAttached = false;
@@ -138,9 +139,9 @@ public class EventTarget2 extends SimpleScriptObject {
 
             if (isAttached || windowEventIfDetached) {
                 result = windowsListeners.executeCapturingListeners(event, args);
-//                if (event.isPropagationStopped()) {
-//                    return result;
-//                }
+                if (event.isPropagationStopped()) {
+                    return result;
+                }
             }
             final List<EventTarget2> eventTargetList = new ArrayList<>();
             EventTarget2 eventTarget = this;
@@ -162,9 +163,9 @@ public class EventTarget2 extends SimpleScriptObject {
                 if (elc != null && isAttached) {
                     final ScriptResult r = elc.executeCapturingListeners(event, args);
                     result = ScriptResult.combine(r, result, ie);
-//                    if (event.isPropagationStopped()) {
-//                        return result;
-//                    }
+                    if (event.isPropagationStopped()) {
+                        return result;
+                    }
                 }
             }
 
@@ -172,7 +173,7 @@ public class EventTarget2 extends SimpleScriptObject {
             final Object[] propHandlerArgs = args;
 
             // bubbling phase
-//            event.setEventPhase(Event.AT_TARGET);
+            event.setEventPhase(Event.AT_TARGET);
             eventTarget = this;
             while (eventTarget != null) {
                 final EventTarget2 jsNode = eventTarget;
@@ -180,16 +181,16 @@ public class EventTarget2 extends SimpleScriptObject {
                 if (elc != null && !(jsNode instanceof Window2) && (isAttached || !(jsNode instanceof HTMLElement2))) {
                     final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
                     result = ScriptResult.combine(r, result, ie);
-//                    if (event.isPropagationStopped()) {
-//                        return result;
-//                    }
+                    if (event.isPropagationStopped()) {
+                        return result;
+                    }
                 }
                 final DomNode domNode = eventTarget.getDomNodeOrNull();
                 eventTarget = null;
                 if (domNode != null && domNode.getParentNode() != null) {
                     eventTarget = (EventTarget2) domNode.getParentNode().getScriptObject2();
                 }
-//                event.setEventPhase(Event.BUBBLING_PHASE);
+                event.setEventPhase(Event.BUBBLING_PHASE);
             }
 
             if (isAttached || windowEventIfDetached) {

@@ -52,6 +52,11 @@ public class Document2 extends Node2 {
         window_ = window;
     }
 
+    @Override
+    public Window2 getWindow() {
+        return window_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Document2.class,

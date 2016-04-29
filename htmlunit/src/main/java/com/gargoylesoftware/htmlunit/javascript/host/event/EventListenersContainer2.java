@@ -31,10 +31,10 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -158,11 +158,11 @@ public class EventListenersContainer2 implements Serializable {
 
     /**
      * Returns event handler property.
-     * @param eventName event name
+     * @param eventType event type
      * @return the handler, or null if not found
      */
-    public Object getEventHandlerProp(final String eventName) {
-        final Handlers handlers = eventHandlers_.get(eventName);
+    public Object getEventHandlerProp(final String eventType) {
+        final Handlers handlers = eventHandlers_.get(eventType);
         if (handlers == null) {
             return null;
         }
@@ -293,13 +293,14 @@ public class EventListenersContainer2 implements Serializable {
 
     /**
      * Returns {@code true} if there are any event handlers for the specified event.
-     * @param eventName the event name (e.g. "click")
+     * @param eventType the event type (e.g. "click")
      * @return {@code true} if there are any event handlers for the specified event, {@code false} otherwise
      */
-    public boolean hasEventHandlers(final String eventName) {
-        final Handlers h = eventHandlers_.get(eventName);
+    public boolean hasEventHandlers(final String eventType) {
+        final Handlers h = eventHandlers_.get(eventType);
         return h != null
-            && (h.handler_ instanceof Function || !h.bubblingHandlers_.isEmpty() || !h.capturingHandlers_.isEmpty());
+            && (h.handler_ instanceof ScriptFunction
+                    || !h.bubblingHandlers_.isEmpty() || !h.capturingHandlers_.isEmpty());
     }
 
     /**

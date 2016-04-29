@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -1233,9 +1234,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             return null;
         }
 
-//        if (!handles(event)) {
-//            return null;
-//        }
+        if (!handles(event)) {
+            return null;
+        }
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);

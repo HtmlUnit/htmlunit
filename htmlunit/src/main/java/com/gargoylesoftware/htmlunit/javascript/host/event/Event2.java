@@ -333,7 +333,7 @@ public class Event2 extends SimpleScriptObject {
         }
         else if (TYPE_LOAD.equals(type)) {
             bubbles_ = false;
-            if (getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
+            if (scriptable.getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
                 cancelable_ = false;
             }
         }
