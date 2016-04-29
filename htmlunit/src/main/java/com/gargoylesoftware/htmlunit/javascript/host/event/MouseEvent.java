@@ -66,28 +66,28 @@ public class MouseEvent extends UIEvent {
     @JsxConstant(@WebBrowser(FF))
     public static final int MOZ_SOURCE_KEYBOARD = 6;
 
-    /** The click event type, triggered by "onclick" event handlers. */
+    /** The click event type, triggered by {@code onclick} event handlers. */
     public static final String TYPE_CLICK = "click";
 
-    /** The dblclick event type, triggered by "ondblclick" event handlers. */
+    /** The dblclick event type, triggered by {@code ondblclick} event handlers. */
     public static final String TYPE_DBL_CLICK = "dblclick";
 
-    /** The mouse over event type, triggered by "onmouseover" event handlers. */
+    /** The mouse over event type, triggered by {@code onmouseover} event handlers. */
     public static final String TYPE_MOUSE_OVER = "mouseover";
 
-    /** The mouse move event type, triggered by "onmousemove" event handlers. */
+    /** The mouse move event type, triggered by {@code onmousemove} event handlers. */
     public static final String TYPE_MOUSE_MOVE = "mousemove";
 
-    /** The mouse out event type, triggered by "onmouseout" event handlers. */
+    /** The mouse out event type, triggered by {@code onmouseout} event handlers. */
     public static final String TYPE_MOUSE_OUT = "mouseout";
 
-    /** The mouse down event type, triggered by "onmousedown" event handlers. */
+    /** The mouse down event type, triggered by {@code onmousedown} event handlers. */
     public static final String TYPE_MOUSE_DOWN = "mousedown";
 
-    /** The mouse up event type, triggered by "onmouseup" event handlers. */
+    /** The mouse up event type, triggered by {@code onmouseup} event handlers. */
     public static final String TYPE_MOUSE_UP = "mouseup";
 
-    /** The context menu event type, triggered by "oncontextmenu" event handlers. */
+    /** The context menu event type, triggered by {@code oncontextmenu} event handlers. */
     public static final String TYPE_CONTEXT_MENU = "contextmenu";
 
     /** The code for left mouse button. */

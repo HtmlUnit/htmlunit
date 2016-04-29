@@ -53,6 +53,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -1005,7 +1007,7 @@ public abstract class HtmlElement extends DomElement {
      * @return true if an event handler has been defined otherwise false
      */
     public final boolean hasEventHandlers(final String eventName) {
-        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
+        final HTMLElement2 jsObj = (HTMLElement2) getScriptObject2();
         return jsObj.hasEventHandlers(eventName);
     }
 
@@ -1015,8 +1017,8 @@ public abstract class HtmlElement extends DomElement {
      * @param eventName the name of the event, such as "onclick" or "onblur", etc
      * @param eventHandler a Rhino JavaScript function
      */
-    public final void setEventHandler(final String eventName, final Function eventHandler) {
-        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
+    public final void setEventHandler(final String eventName, final ScriptFunction eventHandler) {
+        final HTMLElement2 jsObj = (HTMLElement2) getScriptObject2();
         jsObj.setEventHandler(eventName, eventHandler);
     }
 
@@ -1030,7 +1032,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
         final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
-        setEventHandler(eventName, function);
+        //setEventHandler(eventName, function);
         if (LOG.isDebugEnabled()) {
             LOG.debug("Created event handler " + function.getFunctionName()
                     + " for " + eventName + " on " + this);
@@ -1043,7 +1045,7 @@ public abstract class HtmlElement extends DomElement {
      * @param eventName Name of the event such as "onclick" or "onblur", etc
      */
     public final void removeEventHandler(final String eventName) {
-        setEventHandler(eventName, (Function) null);
+        setEventHandler(eventName, (ScriptFunction) null);
     }
 
     /**
