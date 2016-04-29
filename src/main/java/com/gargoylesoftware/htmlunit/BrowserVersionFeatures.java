@@ -219,7 +219,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({@WebBrowser(IE)})
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
@@ -477,14 +477,14 @@ public enum BrowserVersionFeatures {
     HTML_COLOR_EXPAND_ZERO,
 
     /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only. */
-    @BrowserFeature({@WebBrowser(IE)})
+    @BrowserFeature(@WebBrowser(IE))
     HTML_COLOR_RESTRICT,
 
     /** Convert the color (name and hex code) to lower case. */
     @BrowserFeature(@WebBrowser(IE))
     HTML_COLOR_TO_LOWER,
 
-    /** Supports &lt;object&gt; classid attribute. */
+    /** Supports &lt;object&gt; {@code classid} attribute. */
     @BrowserFeature(@WebBrowser(IE))
     HTML_OBJECT_CLASSID,
 

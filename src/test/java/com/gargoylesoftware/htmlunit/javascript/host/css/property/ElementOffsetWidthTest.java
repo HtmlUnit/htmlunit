@@ -174,7 +174,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "240")
-    @NotYetImplemented({FF})
+    @NotYetImplemented(FF)
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }

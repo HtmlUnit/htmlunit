@@ -173,7 +173,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented({FF})
+    @NotYetImplemented(FF)
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }
@@ -750,7 +750,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-18",
             IE = "0")
-    @NotYetImplemented({CHROME, FF, IE})
+    @NotYetImplemented
     public void hr() throws Exception {
         loadPageWithAlerts2(test("hr"));
     }
@@ -979,7 +979,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented({CHROME, FF, IE})
+    @NotYetImplemented
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
