@@ -216,11 +216,11 @@ public class EventListenersContainer implements Serializable {
 
     /**
      * Returns event handler property.
-     * @param eventName event name
+     * @param eventType event type
      * @return the handler, or null if not found
      */
-    public Object getEventHandlerProp(final String eventName) {
-        final Handlers handlers = eventHandlers_.get(eventName);
+    public Object getEventHandlerProp(final String eventType) {
+        final Handlers handlers = eventHandlers_.get(eventType);
         if (handlers == null) {
             return null;
         }
@@ -351,11 +351,11 @@ public class EventListenersContainer implements Serializable {
 
     /**
      * Returns {@code true} if there are any event handlers for the specified event.
-     * @param eventName the event name (e.g. "click")
+     * @param eventType the event type (e.g. "click")
      * @return {@code true} if there are any event handlers for the specified event, {@code false} otherwise
      */
-    public boolean hasEventHandlers(final String eventName) {
-        final Handlers h = eventHandlers_.get(eventName);
+    public boolean hasEventHandlers(final String eventType) {
+        final Handlers h = eventHandlers_.get(eventType);
         return h != null
             && (h.handler_ instanceof Function || !h.bubblingHandlers_.isEmpty() || !h.capturingHandlers_.isEmpty());
     }
