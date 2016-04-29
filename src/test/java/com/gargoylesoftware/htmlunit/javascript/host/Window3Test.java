@@ -79,9 +79,9 @@ public class Window3Test extends WebDriverTestCase {
         final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "    alert(window.opener);\n"
-            + "    alert('one');\n"
-            + "    open('" + URL_SECOND + "', 'foo');\n"
+            + "  alert(window.opener);\n"
+            + "  alert('one');\n"
+            + "  open('" + URL_SECOND + "', 'foo');\n"
             + "}\n"
             + "function callAlert(text) {\n"
             + "    alert(text);\n"
@@ -91,8 +91,8 @@ public class Window3Test extends WebDriverTestCase {
         final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Second</title><script>\n"
             + "function test() {\n"
-            + "    opener.callAlert('two');\n"
-            + "    document.form1.submit();\n"
+            + "  opener.callAlert('two');\n"
+            + "  document.form1.submit();\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<form name='form1' action='" + urlThird + "' method='post'><input type='submit'></form>\n"
@@ -100,7 +100,7 @@ public class Window3Test extends WebDriverTestCase {
         final String thirdContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Third</title><script>\n"
             + "function test() {\n"
-            + "    opener.callAlert('three');\n"
+            + "  opener.callAlert('three');\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

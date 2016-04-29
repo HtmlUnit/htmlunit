@@ -140,7 +140,7 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(new Date(2000, 0, 1).toLocaleDateString());\n"
+            + "  alert(new Date(2000, 0, 1).toLocaleDateString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -180,9 +180,9 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(new Date(2005, 11, 3, 8, 14, 15).toUTCString());\n"
-            + "    alert(new Date(2005, 6, 12, 13, 4, 15).toUTCString());\n"
-            + "    alert(new Date(2005, 6, 3, 17, 14, 5).toUTCString());\n"
+            + "  alert(new Date(2005, 11, 3, 8, 14, 15).toUTCString());\n"
+            + "  alert(new Date(2005, 6, 12, 13, 4, 15).toUTCString());\n"
+            + "  alert(new Date(2005, 6, 3, 17, 14, 5).toUTCString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -200,9 +200,9 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(new Date(2005, 11, 3, 8, 14, 15).toGMTString());\n"
-            + "    alert(new Date(2005, 6, 12, 13, 4, 15).toGMTString());\n"
-            + "    alert(new Date(2005, 6, 3, 17, 14, 5).toGMTString());\n"
+            + "  alert(new Date(2005, 11, 3, 8, 14, 15).toGMTString());\n"
+            + "  alert(new Date(2005, 6, 12, 13, 4, 15).toGMTString());\n"
+            + "  alert(new Date(2005, 6, 3, 17, 14, 5).toGMTString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -218,10 +218,10 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    var date = new Date(2000, 0, 1);\n"
-            + "    for (var x in date) {\n"
-            + "      alert(x);\n"
-            + "    }\n"
+            + "  var date = new Date(2000, 0, 1);\n"
+            + "  for (var x in date) {\n"
+            + "    alert(x);\n"
+            + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -240,12 +240,12 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(new Date(2000, 0, 1).toLocaleTimeString());\n"
-            + "    var date = new Date(2013, 0, 1);\n"
-            + "    date.setHours(7);\n"
-            + "    date.setMinutes(8);\n"
-            + "    date.setSeconds(9);\n"
-            + "    alert(date.toLocaleTimeString());\n"
+            + "  alert(new Date(2000, 0, 1).toLocaleTimeString());\n"
+            + "  var date = new Date(2013, 0, 1);\n"
+            + "  date.setHours(7);\n"
+            + "  date.setMinutes(8);\n"
+            + "  date.setSeconds(9);\n"
+            + "  alert(date.toLocaleTimeString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

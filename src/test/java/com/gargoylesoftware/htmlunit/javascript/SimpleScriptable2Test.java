@@ -251,7 +251,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
         final String html = header
             + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "    alert(document.createElement('div'));\n"
+            + "  alert(document.createElement('div'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
