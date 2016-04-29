@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -2014,7 +2014,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param event the event
      * @return {@code false} if the event can't be applied
      */
-    public boolean handles(final Event event) {
+    public boolean handles(final Event2 event) {
         return true;
     }
 }

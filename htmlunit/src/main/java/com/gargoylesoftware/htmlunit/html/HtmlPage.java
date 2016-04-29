@@ -2277,8 +2277,8 @@ public class HtmlPage extends InteractivePage {
      * {@inheritDoc}
      */
     @Override
-    public boolean handles(final Event event) {
-        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+    public boolean handles(final Event2 event) {
+        if (Event2.TYPE_BLUR.equals(event.getType()) || Event2.TYPE_FOCUS.equals(event.getType())) {
             return true;
         }
         return super.handles(event);

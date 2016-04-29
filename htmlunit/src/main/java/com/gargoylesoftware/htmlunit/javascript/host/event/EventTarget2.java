@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -64,9 +63,16 @@ public class EventTarget2 extends SimpleScriptObject {
         return eventListenersContainer_;
     }
 
+    /**
+     * Allows the registration of event listeners on the event target.
+     * @param type the event type to listen for (like "click")
+     * @param listener the event listener
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
+     */
     @Function
-    public static String addEventListener(final Object self) {
-        return Browser.getCurrent().getFamily().name();
+    public void addEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
+        getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
     /**

@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -29,6 +31,8 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -44,68 +48,215 @@ public class Event2 extends SimpleScriptObject {
      */
     protected static final String KEY_CURRENT_EVENT = "Event#current";
 
-    /** The submit event type, triggered by "onsubmit" event handlers. */
+    /** The submit event type, triggered by {@code onsubmit} event handlers. */
     public static final String TYPE_SUBMIT = "submit";
 
-    /** The change event type, triggered by "onchange" event handlers. */
+    /** The change event type, triggered by {@code onchange} event handlers. */
     public static final String TYPE_CHANGE = "change";
 
-    /** The load event type, triggered by "onload" event handlers. */
+    /** The load event type, triggered by {@code onload} event handlers. */
     public static final String TYPE_LOAD = "load";
 
-    /** The unload event type, triggered by "onunload" event handlers. */
+    /** The unload event type, triggered by {@code onunload} event handlers. */
     public static final String TYPE_UNLOAD = "unload";
 
-    /** The popstate event type, triggered by "onpopstate" event handlers. */
+    /** The popstate event type, triggered by {@code onpopstate} event handlers. */
     public static final String TYPE_POPSTATE = "popstate";
 
-    /** The focus event type, triggered by "onfocus" event handlers. */
+    /** The focus event type, triggered by {@code onfocus} event handlers. */
     public static final String TYPE_FOCUS = "focus";
 
-    /** The focus in event type, triggered by "onfocusin" event handlers. */
+    /** The focus in event type, triggered by {@code onfocusin} event handlers. */
     public static final String TYPE_FOCUS_IN = "focusin";
 
-    /** The focus out event type, triggered by "onfocusout" event handlers. */
+    /** The focus out event type, triggered by {@code onfocusout} event handlers. */
     public static final String TYPE_FOCUS_OUT = "focusout";
 
-    /** The blur event type, triggered by "onblur" event handlers. */
+    /** The blur event type, triggered by {@code onblur} event handlers. */
     public static final String TYPE_BLUR = "blur";
 
-    /** The key down event type, triggered by "onkeydown" event handlers. */
+    /** The key down event type, triggered by {@code onkeydown} event handlers. */
     public static final String TYPE_KEY_DOWN = "keydown";
 
-    /** The key down event type, triggered by "onkeypress" event handlers. */
+    /** The key down event type, triggered by {@code onkeypress} event handlers. */
     public static final String TYPE_KEY_PRESS = "keypress";
 
-    /** The input event type, triggered by "oninput" event handlers. */
+    /** The input event type, triggered by {@code oninput} event handlers. */
     public static final String TYPE_INPUT = "input";
 
-    /** The key down event type, triggered by "onkeyup" event handlers. */
+    /** The key down event type, triggered by {@code onkeyup} event handlers. */
     public static final String TYPE_KEY_UP = "keyup";
 
-    /** The submit event type, triggered by "onreset" event handlers. */
+    /** The submit event type, triggered by {@code onreset} event handlers. */
     public static final String TYPE_RESET = "reset";
 
-    /** The beforeunload event type, triggered by "onbeforeunload" event handlers. */
+    /** The beforeunload event type, triggered by {@code onbeforeunload} event handlers. */
     public static final String TYPE_BEFORE_UNLOAD = "beforeunload";
 
     /** Triggered after the DOM has loaded but before images etc. */
     public static final String TYPE_DOM_DOCUMENT_LOADED = "DOMContentLoaded";
 
-    /** The event type triggered by "onpropertychange" event handlers. */
+    /** The event type triggered by {@code onpropertychange} event handlers. */
     public static final String TYPE_PROPERTY_CHANGE = "propertychange";
 
-    /** The event type triggered by "onhashchange" event handlers. */
+    /** The event type triggered by {@code onhashchange} event handlers. */
     public static final String TYPE_HASH_CHANGE = "hashchange";
 
-    /** The event type triggered by "onreadystatechange" event handlers. */
+    /** The event type triggered by {@code onreadystatechange} event handlers. */
     public static final String TYPE_READY_STATE_CHANGE = "readystatechange";
 
-    /** The event type triggered by "onerror" event handlers. */
+    /** The event type triggered by {@code onerror} event handlers. */
     public static final String TYPE_ERROR = "error";
 
     /** The message event type, triggered by postMessage. */
     public static final String TYPE_MESSAGE = "message";
+
+    /** The close event type, triggered by {@code onclose} event handlers. */
+    public static final String TYPE_CLOSE = "close";
+
+    /** The open event type, triggered by {@code onopen} event handlers. */
+    public static final String TYPE_OPEN = "open";
+
+    /** No event phase. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = {@WebBrowser(CHROME), @WebBrowser(FF)},
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final short NONE = 0;
+
+    /** The first event phase: the capturing phase. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final short CAPTURING_PHASE = 1;
+
+    /** The second event phase: at the event target. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final short AT_TARGET = 2;
+
+    /** The third (and final) event phase: the bubbling phase. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final short BUBBLING_PHASE = 3;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int BLUR = 0x2000;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int CHANGE = 0x8000;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int CLICK = 0x40;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int DBLCLICK = 0x80;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int DRAGDROP = 0x800;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int FOCUS = 0x1000;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int KEYDOWN = 0x100;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int KEYPRESS = 0x400;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int KEYUP = 0x200;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int MOUSEDOWN = 0x1;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int MOUSEDRAG = 0x20;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int MOUSEMOVE = 0x10;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int MOUSEOUT = 0x8;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int MOUSEOVER = 0x4;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int MOUSEUP = 0x2;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(CHROME),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int SELECT = 0x4000;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(FF),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int ALT_MASK = 0x1;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(FF),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int CONTROL_MASK = 0x2;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(FF),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int SHIFT_MASK = 0x4;
+
+    /** Constant. */
+    @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
+            value = @WebBrowser(FF),
+            attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
+    public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
     private Object target_;            // W3C standard read-only equivalent of srcElement.
@@ -318,6 +469,40 @@ public class Event2 extends SimpleScriptObject {
     }
 
     /**
+     * Returns the event target whose event listeners are currently being processed. This
+     * is useful during event capturing and event bubbling.
+     * @return the current event target
+     */
+    @Getter
+    public ScriptObject getCurrentTarget() {
+        return currentTarget_;
+    }
+
+    /**
+     * Sets the current target.
+     * @param target the new value
+     */
+    public void setCurrentTarget(final ScriptObject target) {
+        currentTarget_ = target;
+    }
+
+    /**
+     * Stops the event from propagating.
+     */
+    @Function
+    public void stopPropagation() {
+        stopPropagation_ = true;
+    }
+
+    /**
+     * Indicates if event propagation is stopped.
+     * @return the status
+     */
+    public boolean isPropagationStopped() {
+        return stopPropagation_;
+    }
+
+    /**
      * Returns {@code true} if this event has been aborted via <tt>preventDefault()</tt> in
      * standards-compliant browsers, or via the event's <tt>returnValue</tt> property in IE, or
      * by the event handler returning {@code false}.
@@ -327,6 +512,28 @@ public class Event2 extends SimpleScriptObject {
      */
     public boolean isAborted(final ScriptResult result) {
         return ScriptResult.isFalse(result) || preventDefault_;
+    }
+
+    /**
+     * Returns the current event phase for the event.
+     * @return the current event phase for the event
+     */
+    @Getter
+    public int getEventPhase() {
+        return eventPhase_;
+    }
+
+    /**
+     * Sets the current event phase. Must be one of {@link #CAPTURING_PHASE}, {@link #AT_TARGET} or
+     * {@link #BUBBLING_PHASE}.
+     *
+     * @param phase the phase the event is in
+     */
+    public void setEventPhase(final short phase) {
+        if (phase != CAPTURING_PHASE && phase != AT_TARGET && phase != BUBBLING_PHASE) {
+            throw new IllegalArgumentException("Illegal phase specified: " + phase);
+        }
+        eventPhase_ = phase;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
@@ -358,17 +565,122 @@ public class Event2 extends SimpleScriptObject {
             PrototypeObject.setConstructor(prototype, this);
             setPrototype(prototype);
         }
+
+        public int G$NONE() {
+            return NONE;
+        }
+
+        public int G$CAPTURING_PHASE() {
+            return CAPTURING_PHASE;
+        }
+
+        public int G$AT_TARGET() {
+            return AT_TARGET;
+        }
+
+        public int G$BUBBLING_PHASE() {
+            return BUBBLING_PHASE;
+        }
+
+        public int G$BLUR() {
+            return BLUR;
+        }
+
+        public int G$CHANGE() {
+            return CHANGE;
+        }
+
+        public int G$CLICK() {
+            return CLICK;
+        }
+
+        public int G$DBLCLICK() {
+            return DBLCLICK;
+        }
+
+        public int G$DRAGDROP() {
+            return DRAGDROP;
+        }
+
+        public int G$FOCUS() {
+            return FOCUS;
+        }
+
+        public int G$KEYDOWN() {
+            return KEYDOWN;
+        }
+
+        public int G$KEYPRESS() {
+            return KEYPRESS;
+        }
+
+        public int G$KEYUP() {
+            return KEYUP;
+        }
+
+        public int G$MOUSEDOWN() {
+            return MOUSEDOWN;
+        }
+
+        public int G$MOUSEDRAG() {
+            return MOUSEDRAG;
+        }
+
+        public int G$MOUSEMOVE() {
+            return MOUSEMOVE;
+        }
+
+        public int G$MOUSEOUT() {
+            return MOUSEOUT;
+        }
+
+        public int G$MOUSEOVER() {
+            return MOUSEOVER;
+        }
+
+        public int G$MOUSEUP() {
+            return MOUSEUP;
+        }
+
+        public int G$SELECT() {
+            return SELECT;
+        }
+
+        public int G$ALT_MASK() {
+            return ALT_MASK;
+        }
+
+        public int G$CONTROL_MASK() {
+            return CONTROL_MASK;
+        }
+
+        public int G$SHIFT_MASK() {
+            return SHIFT_MASK;
+        }
+
+        public int G$META_MASK() {
+            return META_MASK;
+        }
     }
 
     public static final class Prototype extends PrototypeObject {
         public ScriptFunction initEvent;
-
+        public ScriptFunction stopPropagation;
+        
         public ScriptFunction G$initEvent() {
             return initEvent;
         }
 
         public void S$initEvent(final ScriptFunction function) {
             this.initEvent = function;
+        }
+
+        public ScriptFunction G$stopPropagation() {
+            return stopPropagation;
+        }
+
+        public void S$stopPropagation(final ScriptFunction function) {
+            this.stopPropagation = function;
         }
 
         public String getClassName() {

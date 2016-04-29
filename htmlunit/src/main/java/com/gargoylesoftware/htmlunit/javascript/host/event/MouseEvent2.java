@@ -18,13 +18,45 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 public class MouseEvent2 extends Event2 {
+
+    /** The click event type, triggered by "onclick" event handlers. */
+    public static final String TYPE_CLICK = "click";
+
+    /** The dblclick event type, triggered by "ondblclick" event handlers. */
+    public static final String TYPE_DBL_CLICK = "dblclick";
+
+    /** The mouse over event type, triggered by "onmouseover" event handlers. */
+    public static final String TYPE_MOUSE_OVER = "mouseover";
+
+    /** The mouse move event type, triggered by "onmousemove" event handlers. */
+    public static final String TYPE_MOUSE_MOVE = "mousemove";
+
+    /** The mouse out event type, triggered by "onmouseout" event handlers. */
+    public static final String TYPE_MOUSE_OUT = "mouseout";
+
+    /** The mouse down event type, triggered by "onmousedown" event handlers. */
+    public static final String TYPE_MOUSE_DOWN = "mousedown";
+
+    /** The mouse up event type, triggered by "onmouseup" event handlers. */
+    public static final String TYPE_MOUSE_UP = "mouseup";
+
+    /** The context menu event type, triggered by "oncontextmenu" event handlers. */
+    public static final String TYPE_CONTEXT_MENU = "contextmenu";
+
+    /** The code for left mouse button. */
+    public static final int BUTTON_LEFT = 0;
+
+    /** The code for middle mouse button. */
+    public static final int BUTTON_MIDDLE = 1;
+
+    /** The code for right mouse button. */
+    public static final int BUTTON_RIGHT = 2;
 
     public static MouseEvent2 constructor(final boolean newObj, final Object self) {
         final MouseEvent2 host = new MouseEvent2();

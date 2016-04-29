@@ -32,7 +32,8 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent2;
 
 /**
  * Wrapper for the HTML element "option".
@@ -422,8 +423,8 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean handles(final Event event) {
-        if (MouseEvent.TYPE_MOUSE_OVER.equals(event.getType())
+    public boolean handles(final Event2 event) {
+        if (MouseEvent2.TYPE_MOUSE_OVER.equals(event.getType())
                 && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION)) {
             return true;
         }

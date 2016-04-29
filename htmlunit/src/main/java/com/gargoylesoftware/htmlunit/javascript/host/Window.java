@@ -2009,16 +2009,9 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Dispatches an event into the event system (standards-conformant browsers only). See
-     * <a href="https://developer.mozilla.org/en-US/docs/DOM/window.dispatchEvent">the Gecko
-     * DOM reference</a> for more information.
-     *
-     * @param event the event to be dispatched
-     * @return {@code false} if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; {@code true} otherwise
+     * {@inheritDoc}
      */
     @Override
-    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);

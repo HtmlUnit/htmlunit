@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_RESULT;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,10 +50,10 @@ public class EventListenersContainer2 implements Serializable {
     private static final Log LOG = LogFactory.getLog(EventListenersContainer2.class);
 
     static class Handlers implements Serializable {
-        private final List<Scriptable> capturingHandlers_ = new ArrayList<>();
-        private final List<Scriptable> bubblingHandlers_ = new ArrayList<>();
+        private final List<ScriptObject> capturingHandlers_ = new ArrayList<>();
+        private final List<ScriptObject> bubblingHandlers_ = new ArrayList<>();
         private Object handler_;
-        List<Scriptable> getHandlers(final boolean useCapture) {
+        List<ScriptObject> getHandlers(final boolean useCapture) {
             if (useCapture) {
                 return capturingHandlers_;
             }
@@ -86,12 +88,12 @@ public class EventListenersContainer2 implements Serializable {
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
      * @return {@code true} if the listener has been added
      */
-    public boolean addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
+    public boolean addEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
         if (null == listener) {
             return true;
         }
 
-        final List<Scriptable> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
+        final List<ScriptObject> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
@@ -118,7 +120,7 @@ public class EventListenersContainer2 implements Serializable {
      * @param useCapture whether to use capture of not
      * @return the handlers list
      */
-    public List<Scriptable> getHandlers(final String eventType, final boolean useCapture) {
+    public List<ScriptObject> getHandlers(final String eventType, final boolean useCapture) {
         final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ROOT));
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
@@ -133,7 +135,7 @@ public class EventListenersContainer2 implements Serializable {
      * @param useCapture to use capture or not
      */
     public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        final List<Scriptable> handlers = getHandlers(type, useCapture);
+        final List<ScriptObject> handlers = getHandlers(type, useCapture);
         if (handlers != null) {
             handlers.remove(listener);
         }
@@ -170,17 +172,17 @@ public class EventListenersContainer2 implements Serializable {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event2 event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-//        if (!event.applies(node)) {
-//            return null;
-//        }
+        if (node == null || !node.handles(event)) {
+            return null;
+        }
         ScriptResult allResult = null;
-        final List<Scriptable> handlers = getHandlers(Event2.getType(event), useCapture);
+        final List<ScriptObject> handlers = getHandlers(Event2.getType(event), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
-//            event.setCurrentTarget(jsNode_);
+            event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
-            final List<Scriptable> handlersToExecute = new ArrayList<>(handlers);
-            for (final Scriptable listener : handlersToExecute) {
+            final List<ScriptObject> handlersToExecute = new ArrayList<>(handlers);
+            for (final ScriptObject listener : handlersToExecute) {
                 ScriptFunction function = null;
                 ScriptObject thisObject = null;
                 if (listener instanceof ScriptFunction) {
@@ -195,22 +197,22 @@ public class EventListenersContainer2 implements Serializable {
 //                    }
 //                }
                 if (function != null) {
-//                    final ScriptResult result =
-//                            page.executeJavaScriptFunctionIfPossible(function, thisObject, args, node);
-//                    if (event.isPropagationStopped()) {
-//                        allResult = result;
-//                    }
-//                    if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
-//                        if (ScriptResult.isFalse(result)) {
-//                            allResult = result;
-//                        }
-//                        else {
-//                            final Object eventReturnValue = event.getReturnValue();
-//                            if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
-//                                allResult = new ScriptResult(Boolean.FALSE, page);
-//                            }
-//                        }
-//                    }
+                    final ScriptResult result =
+                            page.executeJavaScriptFunctionIfPossible(function, thisObject, args, node);
+                    if (event.isPropagationStopped()) {
+                        allResult = result;
+                    }
+                    if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
+                        if (ScriptResult.isFalse(result)) {
+                            allResult = result;
+                        }
+                        else {
+                            final Object eventReturnValue = event.getReturnValue();
+                            if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
+                                allResult = new ScriptResult(Boolean.FALSE, page);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -220,12 +222,12 @@ public class EventListenersContainer2 implements Serializable {
     private ScriptResult executeEventHandler(final Event2 event, final Object[] propHandlerArgs) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-//        if (!event.applies(node)) {
-//            return null;
-//        }
+        if (node != null && !node.handles(event)) {
+            return null;
+        }
         final ScriptFunction handler = getEventHandler(Event2.getType(event));
         if (handler != null) {
-//            event.setCurrentTarget(jsNode_);
+            event.setCurrentTarget(jsNode_);
             final InteractivePage page = (InteractivePage) (node != null
                     ? node.getPage()
                     : jsNode_.getWindow().getWebWindow().getEnclosedPage());
@@ -253,9 +255,9 @@ public class EventListenersContainer2 implements Serializable {
         final DomNode domNode = jsNode_.getDomNodeOrNull();
         if (!(domNode instanceof HtmlBody)) {
             result = executeEventHandler(event, propHandlerArgs);
-//            if (event.isPropagationStopped()) {
-//                return result;
-//            }
+            if (event.isPropagationStopped()) {
+                return result;
+            }
         }
 
         // the registered listeners (if any)
@@ -309,11 +311,11 @@ public class EventListenersContainer2 implements Serializable {
      */
     public ScriptResult executeListeners(final Event2 event, final Object[] args, final Object[] propHandlerArgs) {
         // the registered capturing listeners (if any)
-//        event.setEventPhase(Event.CAPTURING_PHASE);
+        event.setEventPhase(Event.CAPTURING_PHASE);
         ScriptResult result = executeEventListeners(true, event, args);
-//        if (event.isPropagationStopped()) {
-//            return result;
-//        }
+        if (event.isPropagationStopped()) {
+            return result;
+        }
 
         // the handler declared as property (if any)
 //        event.setEventPhase(Event.AT_TARGET);

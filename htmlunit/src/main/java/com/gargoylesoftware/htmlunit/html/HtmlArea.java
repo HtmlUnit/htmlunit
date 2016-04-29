@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
@@ -346,8 +347,8 @@ public class HtmlArea extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean handles(final Event event) {
-        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+    public boolean handles(final Event2 event) {
+        if (Event2.TYPE_BLUR.equals(event.getType()) || Event2.TYPE_FOCUS.equals(event.getType())) {
             return true;
         }
         return super.handles(event);
