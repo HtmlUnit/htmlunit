@@ -128,8 +128,7 @@ public class Window2 extends EventTarget2 {
      * @return the WebWindow
      */
     public WebWindow getWebWindow() {
-        //TODO: get the Global not from thread scope
-        return Global.instance().getDomObject();
+        return ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
     }
 
     @Getter
@@ -266,6 +265,15 @@ public class Window2 extends EventTarget2 {
     }
 
     /**
+     * Returns the value of the window's {@code name} property.
+     * @return the value of the window's {@code name} property
+     */
+    @Getter
+    public String getName() {
+        return getWebWindow().getName();
+    }
+
+    /**
      * Returns the {@code history} property.
      * @return the {@code history} property
      */
@@ -313,7 +321,7 @@ public class Window2 extends EventTarget2 {
      */
     @Getter
     public static int getLength(final Object self) {
-        final Window2 window = (Window2)self;
+        final Window2 window = (Window2) self;
         return (int) window.getFrames2().getLength();
     }
 
@@ -381,7 +389,7 @@ public class Window2 extends EventTarget2 {
      */
     private HTMLCollection2 getFrames2() {
         if (frames_ == null) {
-            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie();
             frames_ = new HTMLCollectionFrames2(page);
         }
         return frames_;

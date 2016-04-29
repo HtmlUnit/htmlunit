@@ -267,8 +267,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         final ScriptContext scriptContext = webWindow.getScriptContext();
         scriptContext.setBindings(new ScriptObjectMirror(global, global), ScriptContext.ENGINE_SCOPE);
         global.setDomObject(webWindow);
-        webWindow.setScriptObject(global);
         initGlobal(scriptContext, getBrowser(webClient_.getBrowserVersion()));
+        webWindow.setScriptObject(global.<Window2>getWindow());
     }
 
     @Override
