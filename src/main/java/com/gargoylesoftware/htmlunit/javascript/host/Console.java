@@ -51,8 +51,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Andrea Martino
  */
 @JsxClasses({
-        @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
-        @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
+        @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME)}),
+        @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
     })
 public class Console extends SimpleScriptable {
 

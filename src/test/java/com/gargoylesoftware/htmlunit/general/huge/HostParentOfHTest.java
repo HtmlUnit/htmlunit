@@ -239,7 +239,7 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void _HTMLCollection_HTMLOptionsCollection() throws Exception {
         test("HTMLCollection", "HTMLOptionsCollection");
     }
@@ -887,7 +887,7 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void _HTMLCollection_HTMLAllCollection() throws Exception {
         test("HTMLCollection", "HTMLAllCollection");
     }

@@ -56,7 +56,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLTableElement() {
     }
 

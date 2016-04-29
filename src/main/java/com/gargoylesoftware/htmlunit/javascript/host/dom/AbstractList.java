@@ -84,7 +84,7 @@ public class AbstractList extends SimpleScriptable implements Function {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public AbstractList() {
     }
 

@@ -34,8 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) }),
-        @JsxClass(className = "DOMRect", browsers = { @WebBrowser(FF) })
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)}),
+        @JsxClass(className = "DOMRect", browsers = { @WebBrowser(FF)})
     })
 public class ClientRect extends SimpleScriptable {
 
@@ -47,7 +47,7 @@ public class ClientRect extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public ClientRect() {
     }
 

@@ -47,7 +47,7 @@ public class Screen extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Screen() {
         bufferDepth_ = 0;
     }
@@ -74,7 +74,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public int getAvailLeft() {
         return 0;
     }
@@ -83,7 +83,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availLeft} property.
      * @param availLeft the {@code availLeft} property
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public void setAvailLeft(final int availLeft) {
         // otherwise ignore
     }
@@ -92,7 +92,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public int getAvailTop() {
         return 0;
     }
@@ -101,7 +101,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availTop} property.
      * @param availTop the {@code availTop} property
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public void setAvailTop(final int availTop) {
         // ignore
     }

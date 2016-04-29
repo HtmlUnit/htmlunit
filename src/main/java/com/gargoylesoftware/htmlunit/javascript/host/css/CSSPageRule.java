@@ -32,7 +32,7 @@ public class CSSPageRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSPageRule() {
     }
 }

@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+        @WebBrowser(EDGE)})
 public class MessageChannel extends SimpleScriptable {
 
     private MessagePort port1_;

@@ -34,7 +34,7 @@ public class IDBRequest extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public IDBRequest() {
     }
 }

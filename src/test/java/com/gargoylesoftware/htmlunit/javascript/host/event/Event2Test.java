@@ -48,7 +48,7 @@ public class Event2Test extends WebDriverTestCase {
                 "[object MouseEvent] click b:true c:true [clickMe] [1]"},
             IE = {"[object Event] change b:true c:false [select] [-]",
                 "[object MouseEvent] click b:true c:true [select] [1]"})
-    @BuggyWebDriver({ CHROME, FF })
+    @BuggyWebDriver({CHROME, FF})
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
     // ChromeDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" instead of "clickMe"
@@ -716,7 +716,7 @@ public class Event2Test extends WebDriverTestCase {
                 "div capturing", "true", "true", "span capturing", "true", "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
                 "div capturing", "false", "false", "span capturing", "false", "true"})
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({CHROME, IE})
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }

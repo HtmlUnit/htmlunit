@@ -116,8 +116,7 @@ public class ScriptableWrapper extends ScriptableObject {
                 response = fromSuper;
             }
             else {
-                final Object byName = invoke(getByNameFallback_,
-                        new Object[] {name});
+                final Object byName = invoke(getByNameFallback_, new Object[] {name});
                 if (byName != null) {
                     response = byName;
                 }

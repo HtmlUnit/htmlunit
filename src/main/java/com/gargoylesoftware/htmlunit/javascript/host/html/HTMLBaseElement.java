@@ -39,7 +39,7 @@ public class HTMLBaseElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLBaseElement() {
     }
 

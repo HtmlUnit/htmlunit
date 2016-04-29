@@ -30,15 +30,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = {@WebBrowser(IE) })
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)}),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = {@WebBrowser(IE)})
     })
 public class CSSGroupingRule extends CSSRule {
 
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSGroupingRule() {
     }
 

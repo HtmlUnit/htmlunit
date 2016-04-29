@@ -156,7 +156,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function foo() {}", "function foo() {}"},
             CHROME = {"undefined", "function foo() {}"},
             FF = {"undefined", "foo error"})
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented({IE, CHROME})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -335,7 +335,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver({ IE, FF, CHROME })
+    @BuggyWebDriver({IE, FF, CHROME})
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  try {\n"

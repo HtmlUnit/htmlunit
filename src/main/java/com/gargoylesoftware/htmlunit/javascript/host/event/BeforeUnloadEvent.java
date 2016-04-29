@@ -50,7 +50,7 @@ public class BeforeUnloadEvent extends Event {
     /**
      * The JavaScript constructor. It seems it is not possible to do it from JavaScript code.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jConstructor() {
         Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
     }

@@ -34,7 +34,7 @@ public class SVGLinearGradientElement extends SVGGradientElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public SVGLinearGradientElement() {
     }
 }

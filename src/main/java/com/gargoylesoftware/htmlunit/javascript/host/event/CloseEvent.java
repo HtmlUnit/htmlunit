@@ -70,7 +70,7 @@ public class CloseEvent extends Event {
      * @param details the event details (optional)
      */
     @Override
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
@@ -108,7 +108,7 @@ public class CloseEvent extends Event {
      * @param reasonCode the reason code
      * @param reason the reason
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public void initCloseEvent(final String type, final boolean bubbles, final boolean cancelable,
             final boolean wasClean, final int reasonCode, final String reason) {
         if (getBrowserVersion().hasFeature(EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS)) {

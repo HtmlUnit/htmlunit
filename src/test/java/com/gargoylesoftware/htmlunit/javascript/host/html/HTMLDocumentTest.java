@@ -703,7 +703,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, fails with FF38
+    @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"})
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
@@ -717,7 +717,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, fails with FF38
+    @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"})
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
@@ -2405,7 +2405,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-"},
             FF = {"uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-"},
             CHROME = {"complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-"})
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

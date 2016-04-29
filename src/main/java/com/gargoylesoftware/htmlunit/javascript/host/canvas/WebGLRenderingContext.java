@@ -932,7 +932,7 @@ public class WebGLRenderingContext extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public WebGLRenderingContext() {
     }
 }

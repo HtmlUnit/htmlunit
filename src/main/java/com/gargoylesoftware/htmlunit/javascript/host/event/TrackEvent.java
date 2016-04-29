@@ -33,7 +33,7 @@ public class TrackEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public TrackEvent() {
     }
 }

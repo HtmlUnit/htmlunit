@@ -43,7 +43,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     @Alerts(FF = {"baz=blah", "foo=bar", "id=f", "name=f"},
             CHROME = {"name=f", "id=f", "foo=bar", "baz=blah"},
             IE = {"name=f", "id=f", "baz=blah", "foo=bar"})

@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE), @WebBrowser(EDGE) })
+        @WebBrowser(IE), @WebBrowser(EDGE)})
 public class HTMLCanvasElement extends HTMLElement {
 
     private Object context_;
@@ -48,7 +48,7 @@ public class HTMLCanvasElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLCanvasElement() {
     }
 

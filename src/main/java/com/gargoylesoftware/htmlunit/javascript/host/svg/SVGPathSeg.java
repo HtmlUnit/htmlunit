@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class SVGPathSeg extends SimpleScriptable {
 
     /** The constant {@code PATHSEG_UNKNOWN}. */
@@ -96,7 +96,7 @@ public class SVGPathSeg extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(FF), @WebBrowser(EDGE)})
     public SVGPathSeg() {
     }
 

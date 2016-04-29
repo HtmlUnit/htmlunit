@@ -416,7 +416,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
                 + "substringData(),"
                 + "wholeText")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void text() throws Exception {
         testString("document.createTextNode('some text'), unknown");
     }
@@ -798,7 +798,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "form,height,hspace,name,object,standby,type,useMap,vspace,"
                 + "width",
             CHROME = {})
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void applet() throws Exception {
         test("applet");
     }
@@ -1228,7 +1228,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,noWrap",
             EDGE = "align,noWrap")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void div() throws Exception {
         test("div");
     }
@@ -1426,7 +1426,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = "profile",
             EDGE = "profile")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void head() throws Exception {
         test("head");
     }
@@ -1613,7 +1613,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,naturalHeight,naturalWidth,src,srcset,useMap,"
                 + "vspace,width,x,"
                 + "y")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void image() throws Exception {
         test("image");
     }
@@ -1802,7 +1802,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,"
                 + "width")
-    @NotYetImplemented({ IE, CHROME, EDGE })
+    @NotYetImplemented({IE, CHROME, EDGE})
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -1997,7 +1997,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "disabled,label",
             IE = "defaultSelected,form,index,label,selected,text,value",
             EDGE = "defaultSelected,disabled,form,index,label,selected,text,value")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -2028,7 +2028,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void output() throws Exception {
         test("output");
     }
@@ -2042,7 +2042,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,clear",
             EDGE = "align,clear")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void p() throws Exception {
         test("p");
     }
@@ -2416,7 +2416,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "insertCell(),rowIndex,sectionRowIndex,"
                 + "vAlign",
             EDGE = "align,bgColor,cells,ch,chOff,deleteCell(),height,insertCell(),rowIndex,sectionRowIndex,vAlign")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void tr() throws Exception {
         test("tr");
     }
@@ -2706,7 +2706,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "getDistributedNodes(),select",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void content() throws Exception {
         test("content");
     }
@@ -2730,7 +2730,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "content",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void template() throws Exception {
         test("template");
     }

@@ -337,7 +337,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"scr1", "scr2"/*, "scr3", "scr4"*/ })
+    @Alerts({"scr1", "scr2"/*, "scr3", "scr4"*/})
     public void writeAddNodesInCorrectPositions() throws Exception {
         final String html = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"

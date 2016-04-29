@@ -76,7 +76,7 @@ public enum BrowserVersionFeatures {
     CSS_DISPLAY_BLOCK,
 
     /** Is display style 'block'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     CSS_DISPLAY_BLOCK2,
 
     /** {@code CSSFontFaceRule.cssText} uses {@code \r\n} to break lines. */
@@ -88,7 +88,7 @@ public enum BrowserVersionFeatures {
     CSS_FONTFACERULE_CSSTEXT_NO_CRLF,
 
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'keygen' tag is always 'inline'. */
@@ -124,7 +124,7 @@ public enum BrowserVersionFeatures {
     CSS_RP_DISPLAY_NONE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
@@ -151,7 +151,7 @@ public enum BrowserVersionFeatures {
     CSS_ZINDEX_TYPE_INTEGER,
 
     /** */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     DIALOGWINDOW_REFERER,
 
     /** DOCTYPE has undefined value for 'prefix'. */
@@ -178,7 +178,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
     /** Triggers "onchange" event handler after "onclick" event handler. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     EVENT_ONCHANGE_AFTER_ONCLICK,
 
     /** Triggers "onclick" event handler for the select only, not for the clicked option. */
@@ -190,7 +190,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLICK_USES_POINTEREVENT,
 
     /** <code>CloseEvent</code> has type '' when created from document.createEvent('CloseEvent'). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     EVENT_ONCLOSE_DEFAULT_TYPE_EMPTY,
 
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
@@ -202,12 +202,12 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     EVENT_ONHASHCHANGE_BUBBLES_FALSE,
 
     /** <code>Event.cancelable</code> is false in 'onload' event handler. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF),
-        @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF),
+        @WebBrowser(IE)})
     EVENT_ONLOAD_CANCELABLE_FALSE,
 
     /** Triggers "onload" event if internal javascript loaded. */
@@ -219,7 +219,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(IE)})
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
@@ -243,11 +243,11 @@ public enum BrowserVersionFeatures {
     EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
 
     /** Supports event type 'BeforeUnloadEvent'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     EVENT_TYPE_BEFOREUNLOADEVENT,
 
     /** Supports event type 'HashChangeEvent'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     EVENT_TYPE_HASHCHANGEEVENT,
 
     /** Supports vendor specific event type 'KeyEvents'. */
@@ -259,7 +259,7 @@ public enum BrowserVersionFeatures {
     EVENT_TYPE_POINTEREVENT,
 
     /** Supports event type 'ProgressEvent'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     EVENT_TYPE_PROGRESSEVENT,
 
     /** For new pages the focus points to the body node. */
@@ -267,15 +267,15 @@ public enum BrowserVersionFeatures {
     FOCUS_BODY_ELEMENT_AT_START,
 
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
     /** Indicates if a form field is directly reachable by its original name once this has been changed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
 
     /** Form elements are able to refer to the for by using the from attribute. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
     /** Form submit forces an real request also if only the hash was changed. */
@@ -299,7 +299,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlAllCollection.item(int) is not supported. */
@@ -315,11 +315,11 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
@@ -330,7 +330,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLBASE_HREF_DEFAULT_EMPTY,
     /** HtmlCollection.item() supports also doubles as index. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
 
     /** HtmlCollection.item[] supports also doubles as index. */
@@ -366,7 +366,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_CHARSET_LOWERCASE,
 
     /** Do a normalization of the charset names. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLDOCUMENT_CHARSET_NORMALIZED,
 
     /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
@@ -378,7 +378,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_FUNCTION_DETACHED,
 
     /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(CHROME)})
     HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
@@ -386,7 +386,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
 
     /** Calls to <code>document.XYZ</code> looks at children with the specified name. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLDOCUMENT_GET_FOR_NAME,
 
     /**
@@ -397,7 +397,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
 
     /** Allows invalid 'align' values. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLELEMENT_ALIGN_INVALID,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
@@ -405,7 +405,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
 
     /** Handle blank source like empty. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(CHROME)})
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
     /** Is document.cretaeElement('image') an HTMLElement. */
@@ -417,7 +417,7 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
     /** Mark the image as invisible if no src attribute defined. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLIMAGE_INVISIBLE_NO_SRC,
 
     /** Clicking an image input submits the value as param if defined. */
@@ -441,7 +441,7 @@ public enum BrowserVersionFeatures {
     HTMLKEYGEN_END_TAG_FORBIDDEN,
 
     /** */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
 
     /** */
@@ -449,15 +449,15 @@ public enum BrowserVersionFeatures {
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Removing the selected attribute, de selects the option. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
     /** Trims the value of the type attribute before to verify it. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLSCRIPT_TRIM_TYPE,
 
     /** Setting defaultValue updates the value also. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
     /** When calculation the value of an text area ie uses a recursive approach. */
@@ -465,11 +465,11 @@ public enum BrowserVersionFeatures {
     HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden}. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     HTMLTRACK_END_TAG_FORBIDDEN,
 
     /** HTML attributes are always lower case. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTML_ATTRIBUTE_LOWER_CASE,
 
     /** Expand #0 to #000000. */
@@ -477,7 +477,7 @@ public enum BrowserVersionFeatures {
     HTML_COLOR_EXPAND_ZERO,
 
     /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only. */
-    @BrowserFeature({ @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(IE)})
     HTML_COLOR_RESTRICT,
 
     /** Convert the color (name and hex code) to lower case. */
@@ -510,15 +510,15 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTTP_COOKIE_START_DATE_1970,
 
     /** Supports redirect via 308 code. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTTP_REDIRECT_308,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
 
     /** Setting the property align of an input element ignores the value
@@ -536,7 +536,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
     /** The anchor pathname detects url's starting with one letter as file url's. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
@@ -548,7 +548,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL,
 
     /** The anchor pathname prefixes file url's with '/'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
@@ -560,11 +560,11 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS,
 
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
@@ -620,11 +620,11 @@ public enum BrowserVersionFeatures {
     JS_CSS_MOZ_CSS_KEYFRAMES_RULE,
 
     /** {@link DateTimeFormat} uses the Ascii digits for {@code ar-DZ} locale. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     JS_DATE_AR_DZ_ASCII_DIGITS,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DATE_LOCALE_DATE_SHORT,
 
     /** {@link DateTimeFormat} uses the Unicode Character {@code 'LEFT-TO-RIGHT MARK'}. */
@@ -648,8 +648,8 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
     /** Javascript function document.createElement accepts only tag names. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME),
+        @WebBrowser(IE)})
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
     /** The browser supports the design mode 'Inherit'. */
@@ -661,7 +661,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
     /** The browser has selection {@code rangeCount}. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
     /** Javascript property document.domain doesn't allow to set domain of {@code about:blank}. */
@@ -669,7 +669,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
     /** If setting the document.location inside onclick() of anchor element should be triggered. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR,
 
     /** createHTMLDucument requires a title. */
@@ -677,11 +677,11 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CORE_3,
 
     /** If document.implementation.hasFeature() supports 'CSS2 1.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
@@ -689,35 +689,35 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
 
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
 
     /** If document.implementation.hasFeature() supports 'CSS3 1.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_1,
 
     /** If document.implementation.hasFeature() supports 'CSS3 2.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_2,
 
     /** If document.implementation.hasFeature() supports 'CSS3 3.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_3,
 
     /** If document.implementation.hasFeature() supports 'CSS 1.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_1,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_2,
 
     /** If document.implementation.hasFeature() supports 'CSS 3.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_3,
 
     /** If document.implementation.hasFeature() supports 'Events 1.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'Events 3.0'. */
@@ -725,19 +725,19 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_HTML_3,
 
     /** If document.implementation.hasFeature() supports 'KeyboardEvents'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS,
 
     /** If document.implementation.hasFeature() supports 'LS'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_LS,
 
     /** If document.implementation.hasFeature() supports 'MouseEvents 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'MouseEvents 2.0'. */
@@ -745,7 +745,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'MutationEvents 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'MutationEvents 2.0'. */
@@ -753,11 +753,11 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS,
 
     /** If document.implementation.hasFeature() supports 'Range 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_1,
 
     /** If document.implementation.hasFeature() supports 'Range 2.0'. */
@@ -765,11 +765,11 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_2,
 
     /** If document.implementation.hasFeature() supports 'Range 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_3,
 
     /** If document.implementation.hasFeature() supports 'StyleSheets 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0'. */
@@ -789,11 +789,11 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS,
 
     /** If document.implementation.hasFeature() supports 'Traversal 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1,
 
     /** If document.implementation.hasFeature() supports 'Traversal 2.0'. */
@@ -801,11 +801,11 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2,
 
     /** If document.implementation.hasFeature() supports 'Traversal 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3,
 
     /** If document.implementation.hasFeature() supports 'UIEvents 2.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'UIEvents 3.0'. */
@@ -813,11 +813,11 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'Validation'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_VALIDATION,
 
     /** If document.implementation.hasFeature() supports 'Views 1.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1,
 
     /** If document.implementation.hasFeature() supports 'Views 2.0'. */
@@ -825,7 +825,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2,
 
     /** If document.implementation.hasFeature() supports 'Views 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3,
 
     /** If document.implementation.hasFeature() supports 'XHTML 1.0'. */
@@ -833,19 +833,19 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_XHTML_1,
 
     /** If document.implementation.hasFeature() supports 'XHTML 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_XHTML_3,
 
     /** If document.implementation.hasFeature() supports 'XML 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_XML_3,
 
     /** If document.implementation.hasFeature() supports 'XPath 3.0'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_XPATH,
 
     /** <code>DOMParser.parseFromString(..)</code> handles an empty String as error. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMPARSER_EMPTY_STRING_IS_ERROR,
 
     /** <code>DOMParser.parseFromString(..)</code> throws an exception if an error occurs. */
@@ -853,7 +853,7 @@ public enum BrowserVersionFeatures {
     JS_DOMPARSER_EXCEPTION_ON_ERROR,
 
     /** {@code DOMParser.parseFromString(..)} creates a document containing a {@code parsererror} element. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
     /** DOMTokenList uses an enhanced set of whitespace chars. */
@@ -889,12 +889,12 @@ public enum BrowserVersionFeatures {
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
 
     /** Indicates that for(x in y) should enumerate the numbers first. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME),
+        @WebBrowser(IE)})
     JS_ENUM_NUMBERS_FIRST,
 
     /** Javascript {@code Error.stackTraceLimit}. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_ERROR_STACK_TRACE_LIMIT,
 
     /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
@@ -934,7 +934,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_USABLE_AS_FUNCTION,
 
     /** Indicates that function is defined even before its declaration, inside a block. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
     /** Indicates if the method toSource exists on the native objects. */
@@ -942,15 +942,15 @@ public enum BrowserVersionFeatures {
     JS_FUNCTION_TOSOURCE,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
     /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
 
     /** Ignore the last line containing uncommented. */
@@ -961,7 +961,7 @@ public enum BrowserVersionFeatures {
      * The complete property returns also true, if the image download was failing
      * or if there was no src at all.
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
 
     /**
@@ -975,7 +975,7 @@ public enum BrowserVersionFeatures {
      * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE,
 
     /**
@@ -1012,7 +1012,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_READONLY_FOR_TABLE,
 
     /** Indicates that innerText setter supports null values. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     JS_INNER_TEXT_VALUE_NULL,
 
     /** Setting the type property of an input converts the type to lowercase. */
@@ -1020,7 +1020,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_TYPE_LOWERCASE,
 
     /** Setting the value of an Input URL to blank will result in an empty value. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_INPUT_SET_VALUE_EMAIL_TRIMMED,
 
     /** Setting the value of an Input Text/Password/TextArea resets the selection. */
@@ -1028,7 +1028,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
 
     /** Setting the value of an Input URL to blank will result in an empty value. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_INPUT_SET_VALUE_URL_TRIMMED,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
@@ -1069,7 +1069,7 @@ public enum BrowserVersionFeatures {
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
     /** Map supports the argument constructor. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_MAP_CONSTRUCTOR_ARGUMENT,
 
     /** Indicates that an empty media list is represented by the string 'all'. */
@@ -1085,7 +1085,7 @@ public enum BrowserVersionFeatures {
     JS_MENU_TYPE_EMPTY,
 
     /** Indicates if the String representation of a native function is without newline. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
     /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
@@ -1101,15 +1101,15 @@ public enum BrowserVersionFeatures {
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
     /** Children are enumerated. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_NODE_LIST_ENUMERATE_CHILDREN,
 
     /** Functions are enumerated. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /**
@@ -1123,7 +1123,7 @@ public enum BrowserVersionFeatures {
      * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
 
     /** element.outerHTML handles null value as string "null". */
@@ -1152,7 +1152,7 @@ public enum BrowserVersionFeatures {
     JS_PHRASE_COMMON_CLASS_NAME,
 
     /** Indicates that the {@link PopStateEvent}.{@code state} is cloned. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_POP_STATE_EVENT_CLONE_STATE,
 
     /** Indicates that the {@link PopStateEvent}.{@code type} has value. */
@@ -1164,7 +1164,7 @@ public enum BrowserVersionFeatures {
     JS_PRE_WIDTH_STRING,
 
     /** Support {@code Reflect}. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(EDGE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(EDGE)})
     JS_REFLECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
@@ -1181,16 +1181,16 @@ public enum BrowserVersionFeatures {
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 
     /** Javascript selectorText property returns selectors in lower case. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_SELECTOR_TEXT_LOWERCASE,
 
     /** Indicates that setting the value to null has no effect. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_SELECT_FILE_THROWS,
 
     /** When expanding the collection by setting the length don't add
      * an empty text node. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
     /** Indicates that select.options.childNodes is a valid property. */
@@ -1202,7 +1202,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
     /** Ignore negative value when setting the length. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** Indicates that select.options returns null if requested index is outside. */
@@ -1214,7 +1214,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
 
     /** Indicates that select.options.remove ignores the call if index is too large. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE,
 
     /** Indicates that select.options[i] throws an exception if the requested index is neagtive. */
@@ -1235,7 +1235,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_GET_FROM_ITEMS,
 
     /** Whether to add to the storage even preserved words. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Stylesheet list contains only active style sheets. */
@@ -1243,7 +1243,7 @@ public enum BrowserVersionFeatures {
     JS_STYLESHEETLIST_ACTIVE_ONLY,
 
     /** Indicates if style.setProperty ignores case when determining the priority. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE,
 
     /** IE supports accessing unsupported style elements via getter
@@ -1278,11 +1278,11 @@ public enum BrowserVersionFeatures {
     JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
 
     /** The width column property has a value of 'null' for null. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_TABLE_COLUMN_WIDTH_NULL_STRING,
 
     /** Calling deleteCell without an index throws an exception. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
     /** Throws an exception if the value for column span is less than one. */
@@ -1308,11 +1308,11 @@ public enum BrowserVersionFeatures {
     /** Setting the property cols throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets cols to 0.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
 
     /** Setting the property {@code rows} throws an exception, if the provided value is less than 0. */
@@ -1322,15 +1322,15 @@ public enum BrowserVersionFeatures {
     /** Setting the property rows throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets rows to 0.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Setting the value processes null as null value. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_TEXT_AREA_SET_VALUE_NULL,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 
     /**
@@ -1341,20 +1341,20 @@ public enum BrowserVersionFeatures {
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
     /** WeakMap supports the argument constructor. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
 
     /** Allow inheriting parent constants
      * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_WEBGL_CONTEXT_EVENT_CONSTANTS,
 
     /** Setting the property width/height to arbitrary values is allowed. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /**
@@ -1407,15 +1407,15 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_TOP_WRITABLE,
 
     /** Supports XML. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_XML,
 
     /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
@@ -1430,7 +1430,7 @@ public enum BrowserVersionFeatures {
     JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY,
 
     /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_XML_SERIALIZER_NON_EMPTY_TAGS,
 
     /** Indicates that <code>XMLSerializer.serializeToString(..)</code> serializes a single CDataSection as escaped
@@ -1491,7 +1491,7 @@ public enum BrowserVersionFeatures {
      * Indicates that all options of a select are deselected,
      * if the select state is changed for an unknown option.
      */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /** Indicates that string.contains() is supported. */
@@ -1499,7 +1499,7 @@ public enum BrowserVersionFeatures {
     STRING_CONTAINS,
 
     /** Indicates that string.trimLeft() and .trimRight() are supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     STRING_TRIM_LEFT_RIGHT,
 
     /**
@@ -1535,7 +1535,7 @@ public enum BrowserVersionFeatures {
      * Indicates, that the browser supports username and password as
      * part of the url (e.g. http://john.smith:secret@localhost).
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     URL_AUTH_CREDENTIALS,
 
     /** Replace only ' ' with %20 when encode the query part of an url. */
@@ -1543,7 +1543,7 @@ public enum BrowserVersionFeatures {
     URL_MINIMAL_QUERY_ENCODING,
 
     /** */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     URL_MISSING_SLASHES,
 
     /** Execute window events. */
@@ -1568,7 +1568,7 @@ public enum BrowserVersionFeatures {
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates if an empty url is allowed as url param for the open method. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates that open() throws an exception in sync mode if 'withCredentials' is set to true. */
@@ -1576,7 +1576,7 @@ public enum BrowserVersionFeatures {
     XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION,
 
     /** Indicates that method overrideMimeType throws if msg was already sent. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
@@ -1595,7 +1595,7 @@ public enum BrowserVersionFeatures {
     XPATH_ATTRIBUTE_CASE_SENSITIVE,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(CHROME)})
     XPATH_SELECTION_NAMESPACES,
 
 }

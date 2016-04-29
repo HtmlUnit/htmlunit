@@ -208,7 +208,7 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
             FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void minimalLineHeightSpace() throws Exception {
         font("1px / 2px xyz", "lineHeight", "normal");
     }
@@ -221,7 +221,7 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "2px", "2px", "1px xyz", "normal normal normal normal 1px / normal xyz", "normal", "normal"},
             FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void minimalLineHeightSpace2() throws Exception {
         font("1px/ 2px xyz", "lineHeight", "normal");
     }

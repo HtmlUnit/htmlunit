@@ -171,74 +171,74 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlAbbreviated.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlAcronym.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlAddress.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(domClass = HtmlAbbreviated.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlAcronym.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlAddress.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlArticle.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlAside.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlBaseFont.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlBidirectionalIsolation.class, browsers = @WebBrowser(CHROME)),
-        @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlBig.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlBold.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlCenter.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) }),
-        @JsxClass(domClass = HtmlCitation.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlCode.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlBig.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlBold.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlCenter.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)}),
+        @JsxClass(domClass = HtmlCitation.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlCode.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlCommand.class, browsers = @WebBrowser(CHROME)),
-        @JsxClass(domClass = HtmlDefinition.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(domClass = HtmlDefinition.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlElement.class,
-            browsers = { @WebBrowser(FF), @WebBrowser(IE) }),
-        @JsxClass(domClass = HtmlEmphasis.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+            browsers = { @WebBrowser(FF), @WebBrowser(IE)}),
+        @JsxClass(domClass = HtmlEmphasis.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(FF)),
         @JsxClass(domClass = HtmlFigure.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlFigureCaption.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlFooter.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlHeader.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
-        @JsxClass(domClass = HtmlItalic.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlKeyboard.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
+        @JsxClass(domClass = HtmlItalic.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlKeyboard.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlLayer.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(FF)),
         @JsxClass(domClass = HtmlMark.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlNav.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
-        @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
+        @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlNoEmbed.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlNoFrames.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
         @JsxClass(domClass = HtmlNoLayer.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlNoScript.class,
-            browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME) }),
-        @JsxClass(domClass = HtmlPlainText.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(CHROME)}),
+        @JsxClass(domClass = HtmlPlainText.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlRt.class, browsers = @WebBrowser(CHROME)),
-        @JsxClass(domClass = HtmlS.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlSample.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(domClass = HtmlS.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlSample.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlSection.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
-        @JsxClass(domClass = HtmlSmall.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlStrike.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlStrong.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlSubscript.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
+        @JsxClass(domClass = HtmlSmall.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlStrike.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlStrong.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlSubscript.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlSummary.class, browsers = @WebBrowser(CHROME)),
-        @JsxClass(domClass = HtmlSuperscript.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlTeletype.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlUnderlined.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(domClass = HtmlSuperscript.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlTeletype.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlUnderlined.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlWordBreak.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) }),
-        @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-        @JsxClass(domClass = HtmlVariable.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE)}),
+        @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(domClass = HtmlVariable.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)})
     })
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
@@ -435,7 +435,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLElement() {
     }
 
@@ -806,7 +806,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the innerText attribute.
      * @return the contents of this node as text
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
     public String getInnerText() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
@@ -932,7 +932,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Replaces all child elements of this element with the supplied text value.
      * @param value the new value for the contents of this element
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
+    @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
     public void setInnerText(final Object value) {
         final String valueString;
         if (value == null && getBrowserVersion().hasFeature(JS_INNER_TEXT_VALUE_NULL)) {
@@ -1117,7 +1117,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE)})
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
@@ -1144,7 +1144,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE)})
     public void insertAdjacentText(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
@@ -1841,7 +1841,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Remove focus from this element.
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public void blur() {
         super.blur();
     }
@@ -2561,7 +2561,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -2579,8 +2579,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the {@code dataset} attribute.
      * @return the {@code dataset} attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
+        @WebBrowser(IE)})
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }
@@ -2654,7 +2654,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param retargetToElement if true, all events are targeted directly to this element;
      * if false, events can also fire at descendants of this element
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public void setCapture(final boolean retargetToElement) {
         // empty
     }
@@ -2663,7 +2663,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public boolean releaseCapture() {
         return true;
     }

@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
 public class HashChangeEvent extends Event {
 
     private String oldURL_ = "";
@@ -75,7 +75,7 @@ public class HashChangeEvent extends Event {
      * {@inheritDoc}
      */
     @Override
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
@@ -110,7 +110,7 @@ public class HashChangeEvent extends Event {
      * Returns the old URL.
      * @return the old URL
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public Object getOldURL() {
         return oldURL_;
     }
@@ -119,7 +119,7 @@ public class HashChangeEvent extends Event {
      * Returns the new URL.
      * @return the new URL
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public Object getNewURL() {
         return newURL_;
     }

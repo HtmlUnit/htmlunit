@@ -302,7 +302,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     /**
      * The constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLDocument() {
     }
 
@@ -755,7 +755,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the base URL to resolve relative URLs.
      * @return the base URL
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getBaseURI() {
         return getPage().getBaseURL().toString();
     }
@@ -928,7 +928,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Retrieves the character set used to encode the document.
      * @return the character set used to encode the document
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
     public String getCharset() {
         String charset = getPage().getPageEncoding();
         if (charset != null) {
@@ -946,7 +946,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Gets the default character set from the current regional language settings.
      * @return the default character set from the current regional language settings
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
     public String getDefaultCharset() {
         return "windows-1252";
     }
@@ -1942,7 +1942,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the head.
      * @param head the head
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
     public void setHead(final ScriptableObject head) {
         //ignore
     }
@@ -1960,7 +1960,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public boolean releaseCapture() {
         return true;
     }

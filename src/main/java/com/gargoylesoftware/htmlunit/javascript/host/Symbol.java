@@ -44,7 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
 public class Symbol extends SimpleScriptable {
 
     static final String ITERATOR_STRING = "Symbol(Symbol.iterator)";
@@ -128,7 +128,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code toPrimitive} static property
      */
-    @JsxStaticGetter({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
     public static Symbol getToPrimitive(final Scriptable thisObj) {
         return getSymbol(thisObj, "toPrimitive");
     }

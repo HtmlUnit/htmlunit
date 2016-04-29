@@ -76,7 +76,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
     // manual test shows, that this is wrong.
     // for Chrome selenium shows only "sUp,dUp," but again
     // manual test are showing something different
-    @BuggyWebDriver({ CHROME, FF })
+    @BuggyWebDriver({CHROME, FF})
     public void onMouse() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

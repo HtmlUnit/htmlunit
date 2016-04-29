@@ -37,7 +37,7 @@ public class CSSMediaRule extends CSSConditionRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSMediaRule() {
     }
 

@@ -79,7 +79,7 @@ public class HTMLImageElement extends HTMLElement {
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jsConstructor() {
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
         final DomElement fake =

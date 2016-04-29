@@ -178,7 +178,7 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * Creates a new empty stylesheet.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public CSSStyleSheet() {
         wrapped_ = new CSSStyleSheetImpl();
         ownerNode_ = null;
@@ -1038,7 +1038,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getRules() {
         return getCssRules();
     }
@@ -1174,7 +1174,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param rule the rule
      * @return always return -1 as of MSDN documentation
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction({@WebBrowser(IE), @WebBrowser(CHROME)})
     public int addRule(final String selector, final String rule) {
         final String completeRule = selector + " {" + rule + "}";
         try {
@@ -1192,7 +1192,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param position the position of the rule to be deleted
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction({@WebBrowser(IE), @WebBrowser(CHROME)})
     public void removeRule(final int position) {
         try {
             wrapped_.deleteRule(fixIndex(position));

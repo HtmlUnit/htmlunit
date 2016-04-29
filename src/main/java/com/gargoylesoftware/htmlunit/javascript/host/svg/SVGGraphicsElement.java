@@ -29,8 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
     })
 public class SVGGraphicsElement extends SVGElement {
 

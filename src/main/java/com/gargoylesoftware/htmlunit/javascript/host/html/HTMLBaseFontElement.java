@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlBaseFont.class, browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlBaseFont.class, browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**

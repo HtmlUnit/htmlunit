@@ -31,13 +31,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMarquee.class, browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(domClass = HtmlMarquee.class, browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public HTMLMarqueeElement() {
     }
 
@@ -46,7 +46,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * @return the {@code width} property
      */
     @Override
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public int getWidth() {
         final String value = getDomNodeOrDie().getAttribute("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
@@ -60,7 +60,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Sets the {@code width} property.
      * @param width the {@code width} property
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public void setWidth(final int width) {
         getDomNodeOrDie().setAttribute("width", Integer.toString(width));
     }
@@ -70,7 +70,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * @return the {@code height} property
      */
     @Override
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public int getHeight() {
         final String value = getDomNodeOrDie().getAttribute("height");
         final Integer intValue = HTMLCanvasElement.getValue(value);
@@ -84,7 +84,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Sets the {@code height} property.
      * @param height the {@code height} property
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public void setHeight(final int height) {
         getDomNodeOrDie().setAttribute("height", Integer.toString(height));
     }

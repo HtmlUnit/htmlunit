@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(EDGE)})
 public class MediaStream extends EventTarget {
 
     /**

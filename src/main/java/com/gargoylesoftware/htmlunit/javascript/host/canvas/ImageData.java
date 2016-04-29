@@ -46,7 +46,7 @@ public class ImageData extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public ImageData() {
         this(null, 0, 0, 0, 0);
     }

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
 public class ScreenOrientation extends EventTarget {
 
     /**

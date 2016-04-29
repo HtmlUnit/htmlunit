@@ -44,7 +44,7 @@ public class CSSStyleRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSStyleRule() {
     }
 
@@ -106,7 +106,7 @@ public class CSSStyleRule extends CSSRule {
      * Returns the readonly property.
      * @return the readonly value.
      */
-    @JsxGetter({ @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(IE)})
     public boolean getReadOnly() {
         return false;
     }

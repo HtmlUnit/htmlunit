@@ -6958,7 +6958,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function InternalError() {\n    [native code]\n}")
-    @NotYetImplemented({ CHROME, IE, EDGE })
+    @NotYetImplemented({CHROME, IE, EDGE})
     public void internalError() throws Exception {
         test("InternalError");
     }

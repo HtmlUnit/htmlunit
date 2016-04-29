@@ -36,16 +36,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlInlineQuotation.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-                @WebBrowser(EDGE) }),
+            @WebBrowser(EDGE)}),
         @JsxClass(domClass = HtmlBlockQuote.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-                @WebBrowser(EDGE) })
+            @WebBrowser(EDGE)})
     })
 public class HTMLQuoteElement extends HTMLElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLQuoteElement() {
     }
 

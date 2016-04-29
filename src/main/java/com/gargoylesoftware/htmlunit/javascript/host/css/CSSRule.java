@@ -45,7 +45,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
@@ -135,7 +135,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSSupportsRule}.
      */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final short SUPPORTS_RULE             = 12;
 
     /**
@@ -157,7 +157,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSRule() {
         stylesheet_ = null;
         rule_ = null;
@@ -231,7 +231,7 @@ public class CSSRule extends SimpleScriptable {
      * Sets the parsable textual representation of the rule.
      * @param cssText the parsable textual representation of the rule
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
     public void setCssText(final String cssText) {
         rule_.setCssText(cssText);
     }

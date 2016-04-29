@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
 public class URLSearchParams extends SimpleScriptable {
 
     /**

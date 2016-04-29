@@ -1200,7 +1200,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "foo4", "script4.js"},
             IE = {"", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js"})
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"

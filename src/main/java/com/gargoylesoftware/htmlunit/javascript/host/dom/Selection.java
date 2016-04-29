@@ -52,7 +52,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Selection() {
     }
 
@@ -164,7 +164,7 @@ public class Selection extends SimpleScriptable {
      * Removes a range from the selection.
      * @param range the range to remove
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public void removeRange(final com.gargoylesoftware.htmlunit.javascript.host.dom.Range range) {
         getRanges().remove(range.toW3C());
     }
@@ -251,7 +251,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode the node within which the focus will be moved
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
     public void extend(final Node parentNode, final int offset) {
         final Range last = getLastRange();
         if (last != null) {

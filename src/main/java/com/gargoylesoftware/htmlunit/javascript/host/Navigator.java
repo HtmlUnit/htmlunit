@@ -49,7 +49,7 @@ public class Navigator extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Navigator() {
     }
 
@@ -157,7 +157,7 @@ public class Navigator extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
      * @return false
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public String getProductSub() {
         return "20100215";
     }
@@ -252,7 +252,7 @@ public class Navigator extends SimpleScriptable {
      * Returns {@code false} always as data tainting support is not enabled in HtmlUnit.
      * @return false
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public boolean taintEnabled() {
         return false;
     }
@@ -291,7 +291,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the vendorSub.
      * @return the vendorSub
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE)})
     public String getVendorSub() {
         return "";
     }

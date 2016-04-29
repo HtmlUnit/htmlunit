@@ -36,7 +36,7 @@ public class HTMLDirectoryElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLDirectoryElement() {
     }
 }

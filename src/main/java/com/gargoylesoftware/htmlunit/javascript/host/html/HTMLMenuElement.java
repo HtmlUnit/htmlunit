@@ -46,7 +46,7 @@ public class HTMLMenuElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLMenuElement() {
         label_ = "";
     }
@@ -55,7 +55,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code type} property.
      * @return the value of the {@code type} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE)})
     @Override
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
@@ -76,7 +76,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code type} property.
      * @param type the value of the {@code type} property
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
     @Override
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {

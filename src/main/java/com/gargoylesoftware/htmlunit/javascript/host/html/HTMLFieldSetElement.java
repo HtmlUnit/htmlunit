@@ -37,7 +37,7 @@ public class HTMLFieldSetElement extends FormChild {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLFieldSetElement() {
     }
 
@@ -63,7 +63,7 @@ public class HTMLFieldSetElement extends FormChild {
      * Returns the {@code name} attribute.
      * @return the {@code name} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getName() {
         return getDomNodeOrDie().getAttribute("name");
     }
@@ -72,7 +72,7 @@ public class HTMLFieldSetElement extends FormChild {
      * Sets the {@code name} attribute.
      * @param name the {@code name} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }

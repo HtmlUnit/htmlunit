@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  * @author Frank Danek
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.CONSTRUCTOR, ElementType.METHOD })
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
 public @interface JsxConstructor {
 
     /**

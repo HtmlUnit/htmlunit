@@ -147,7 +147,7 @@ public class Node extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Node() {
         // Empty.
     }
@@ -372,7 +372,7 @@ public class Node extends EventTarget {
      * Removes the DOM node from its parent.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove">MDN documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE)})
     public void remove() {
         getDomNodeOrDie().remove();
     }
@@ -473,7 +473,7 @@ public class Node extends EventTarget {
      *
      * @return whether this node is the same node as the given one
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE)})
     public boolean isSameNode(final Object other) {
         return other == this;
     }
@@ -682,7 +682,7 @@ public class Node extends EventTarget {
      * @return the parent element
      * @see #getParentNode()
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public Element getParentElement() {
         final Node parent = getParent();
         if (!(parent instanceof Element)) {
@@ -696,7 +696,7 @@ public class Node extends EventTarget {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 21) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 21)})
     public Object getAttributes() {
         return null;
     }

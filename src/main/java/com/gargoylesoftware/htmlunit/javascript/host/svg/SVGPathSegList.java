@@ -28,13 +28,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class SVGPathSegList extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(FF), @WebBrowser(EDGE)})
     public SVGPathSegList() {
     }
 

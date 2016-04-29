@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgAnimateMotion;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgAnimateMotion.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = SvgAnimateMotion.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
 public class SVGAnimateMotionElement extends SVGElement {
 
     /**

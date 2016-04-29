@@ -34,19 +34,19 @@ import com.gargoylesoftware.htmlunit.svg.SvgFilter;
 public class SVGFilterElement extends SVGElement {
 
     /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
     public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
     /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
     public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
     /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
     public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public SVGFilterElement() {
     }
 }

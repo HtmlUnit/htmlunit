@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
 public class PositionError extends SimpleScriptable {
 
     /** The constant for {@code PERMISSION_DENIED}. */

@@ -47,7 +47,7 @@ public class CSSFontFaceRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSFontFaceRule() {
     }
 

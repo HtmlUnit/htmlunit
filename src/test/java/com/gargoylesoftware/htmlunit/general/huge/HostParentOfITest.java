@@ -241,7 +241,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }

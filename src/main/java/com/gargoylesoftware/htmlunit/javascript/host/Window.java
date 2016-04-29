@@ -203,7 +203,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Window() {
     }
 
@@ -347,7 +347,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the current event (used by JavaScript only when emulating IE).
      * @return the current event, or {@code null} if no event is currently available
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
     public Object getEvent() {
         return currentEvent_;
     }
@@ -530,7 +530,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
     public Navigator getClientInformation() {
         return navigator_;
     }
@@ -1646,7 +1646,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxFunction({@WebBrowser(IE), @WebBrowser(FF)})
     public Object showModalDialog(final String url, final Object arguments, final String features) {
         final WebWindow webWindow = getWebWindow();
         final WebClient client = webWindow.getWebClient();
@@ -1945,7 +1945,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * (currently empty implementation)
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void stop() {
         //empty
     }
@@ -1972,7 +1972,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the value of {@code scrollX} property.
      * @return the value of {@code scrollX} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public int getScrollX() {
         return 0;
     }
@@ -1981,7 +1981,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the value of {@code scrollY} property.
      * @return the value of {@code scrollY} property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public int getScrollY() {
         return 0;
     }
@@ -2156,7 +2156,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code styleMedia} property.
      * @return the {@code styleMedia} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public StyleMedia getStyleMedia() {
         final StyleMedia styleMedia = new StyleMedia();
         styleMedia.setParentScope(this);
@@ -2189,7 +2189,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @param showDialog if true, specifies a show Dialog.
      * @return false
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
     public boolean find(final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
@@ -2212,7 +2212,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code offscreenBuffering} property.
      * @return the {@code offscreenBuffering} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public Object getOffscreenBuffering() {
         if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
             return "auto";
@@ -2224,7 +2224,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Returns the {@code crypto} property.
      * @return the {@code crypto} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public Crypto getCrypto() {
         if (crypto_ == null) {
             crypto_ = new Crypto(this);

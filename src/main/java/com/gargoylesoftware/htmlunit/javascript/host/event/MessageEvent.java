@@ -79,7 +79,7 @@ public class MessageEvent extends Event {
      * @param details the event details (optional)
      */
     @Override
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
@@ -127,7 +127,7 @@ public class MessageEvent extends Event {
      * @param source the window object that contains the document that caused the event
      * @param ports the message ports
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45)})
     public void initMessageEvent(
             final String type,
             final boolean canBubble,
@@ -175,7 +175,7 @@ public class MessageEvent extends Event {
      * Retrieves the identifier of the last event.
      * @return the identified of the last event
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public String getLastEventId() {
         return lastEventId_;
     }
@@ -193,7 +193,7 @@ public class MessageEvent extends Event {
      * Returns the {@code ports} property.
      * @return the {@code ports} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45)})
     public Object getPorts() {
         return ports_;
     }

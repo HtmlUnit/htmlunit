@@ -235,7 +235,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that a script can set the disabled property on a DOM node.
      */
     @Test
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void cloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled='true'";
         page_.executeJavaScript(cmd);
@@ -272,7 +272,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * that same attribute on the clone.
      */
     @Test
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void cloneScriptSetDisabledIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);

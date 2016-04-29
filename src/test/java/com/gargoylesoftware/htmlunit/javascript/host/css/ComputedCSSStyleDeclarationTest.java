@@ -1646,7 +1646,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "0px", "20%", "80px", "25%", "100px"})
+    @Alerts({"", "0px", "20%", "80px", "25%", "100px"})
     public void marginLeftRight() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

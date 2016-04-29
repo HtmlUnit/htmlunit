@@ -33,7 +33,7 @@ public class IDBOpenDBRequest extends IDBRequest {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public IDBOpenDBRequest() {
     }
 }

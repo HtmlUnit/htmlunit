@@ -29,13 +29,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-            @WebBrowser(IE), @WebBrowser(EDGE) })
+            @WebBrowser(IE), @WebBrowser(EDGE)})
 public class PerformanceMeasure extends PerformanceEntry {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public PerformanceMeasure() {
     }
 

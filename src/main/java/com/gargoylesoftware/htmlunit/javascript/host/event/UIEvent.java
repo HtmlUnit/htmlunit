@@ -57,7 +57,7 @@ public class UIEvent extends Event {
     /**
      * Creates a new UI event instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public UIEvent() {
     }
 
@@ -138,7 +138,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
-    @JsxFunction({ @WebBrowser(CHROME),  @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(CHROME),  @WebBrowser(FF), @WebBrowser(IE)})
     public void initUIEvent(
             final String type,
             final boolean bubbles,

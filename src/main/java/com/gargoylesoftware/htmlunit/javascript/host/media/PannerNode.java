@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(EDGE)})
 public class PannerNode extends AudioNode {
 
     /**

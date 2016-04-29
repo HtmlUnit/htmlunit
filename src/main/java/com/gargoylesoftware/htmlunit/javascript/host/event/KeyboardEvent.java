@@ -866,7 +866,7 @@ public class KeyboardEvent extends UIEvent {
     /**
      * Creates a new keyboard event instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public KeyboardEvent() {
     }
 

@@ -56,7 +56,7 @@ public class HTMLOptionElement extends FormChild {
      * @param defaultSelected Whether the option is initially selected
      * @param selected the current selection state of the option
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

@@ -50,7 +50,7 @@ public class Attr extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Attr() {
     }
 
@@ -188,7 +188,7 @@ public class Attr extends Node {
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public String getBaseURI() {
         return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }

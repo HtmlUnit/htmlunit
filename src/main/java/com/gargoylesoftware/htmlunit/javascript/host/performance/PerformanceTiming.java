@@ -55,7 +55,7 @@ public class PerformanceTiming extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public PerformanceTiming() {
         final long now = System.currentTimeMillis();
 

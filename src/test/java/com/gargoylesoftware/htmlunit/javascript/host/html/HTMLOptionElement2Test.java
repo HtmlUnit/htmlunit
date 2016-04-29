@@ -154,7 +154,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
             IE = "onchange-select; onclick-select;")
-    @BuggyWebDriver({ CHROME, FF })
+    @BuggyWebDriver({CHROME, FF})
     public void clickOptionEventSequence1() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -195,7 +195,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
             IE = "change-SELECT; click-SELECT;")
-    @BuggyWebDriver({ CHROME, FF })
+    @BuggyWebDriver({CHROME, FF})
     public void clickOptionEventSequence2() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -251,7 +251,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
             IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
-    @BuggyWebDriver({ CHROME, FF })
+    @BuggyWebDriver({CHROME, FF})
     public void clickOptionEventSequence3() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_

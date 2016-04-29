@@ -129,7 +129,7 @@ public class DOMException extends SimpleScriptable {
     /**
      * Default constructor used to build the prototype.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public DOMException() {
         code_ = -1;
         message_ = null;

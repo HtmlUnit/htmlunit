@@ -257,7 +257,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public CSSStyleDeclaration() {
     }
 
@@ -2501,7 +2501,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -2510,7 +2510,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
     public void setOrphans(final String orphans) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {

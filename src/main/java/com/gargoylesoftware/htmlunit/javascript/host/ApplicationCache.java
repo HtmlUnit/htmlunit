@@ -47,28 +47,28 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) }),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)}),
         @JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
     })
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
     public static final short UNCACHED = 0;
     /** The application cache is not in the process of being updated. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
     public static final short IDLE = 1;
     /** The application cache manifest is being fetched and checked for updates. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
     public static final short CHECKING = 2;
     /** Resources are being downloaded to be added to the cache. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
     public static final short DOWNLOADING = 3;
     /** There is a new version of the application cache available. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
     public static final short UPDATEREADY = 4;
     /** The application cache group is now obsolete. */
-    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
     public static final short OBSOLETE = 5;
 
     private short status_ = UNCACHED;
@@ -76,7 +76,7 @@ public class ApplicationCache extends EventTarget {
     /**
      * The constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public ApplicationCache() {
     }
 

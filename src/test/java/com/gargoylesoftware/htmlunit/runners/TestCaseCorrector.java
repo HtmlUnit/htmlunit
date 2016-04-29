@@ -189,7 +189,7 @@ final class TestCaseCorrector {
                     lines.set(i - 1, "    @NotYetImplemented(" + browserSet.iterator().next() + ")");
                 }
                 else if (browserSet.size() > 1) {
-                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browserSet, ", ") + "})");
+                    lines.set(i - 1, "    @NotYetImplemented({" + StringUtils.join(browserSet, ", ") + "})");
                 }
                 else {
                     lines.remove(i - 1);
@@ -203,7 +203,7 @@ final class TestCaseCorrector {
                         it.remove();
                     }
                 }
-                lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(allBrowsers, ", ") + "})");
+                lines.set(i - 1, "    @NotYetImplemented({" + StringUtils.join(allBrowsers, ", ") + "})");
             }
         }
     }
@@ -244,7 +244,7 @@ final class TestCaseCorrector {
                     browsers = browsers.substring(1, browsers.length() - 1).trim();
                 }
                 browsers += ", " + browserString;
-                lines.set(i - 1, "    @NotYetImplemented({ " + browsers + "})");
+                lines.set(i - 1, "    @NotYetImplemented({" + browsers + "})");
             }
         }
         else {

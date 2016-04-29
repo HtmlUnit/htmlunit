@@ -391,7 +391,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"uninitialized", "complete"},
             CHROME = {"complete", "complete"},
             IE = {"loading", "complete"})
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void readyState_IFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

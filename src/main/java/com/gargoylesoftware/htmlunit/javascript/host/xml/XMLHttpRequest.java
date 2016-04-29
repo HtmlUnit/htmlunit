@@ -983,7 +983,7 @@ public class XMLHttpRequest extends EventTarget {
      * Returns the {@code upload} property.
      * @return the {@code upload} property
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public XMLHttpRequestUpload getUpload() {
         final XMLHttpRequestUpload upload = new XMLHttpRequestUpload();
         upload.setParentScope(getParentScope());

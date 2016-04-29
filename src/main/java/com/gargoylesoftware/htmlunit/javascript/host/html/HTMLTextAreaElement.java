@@ -57,7 +57,7 @@ public class HTMLTextAreaElement extends FormField {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLTextAreaElement() {
     }
 
@@ -198,7 +198,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of {@code textLength} attribute.
      * @return the text length
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public int getTextLength() {
         return getValue().length();
     }

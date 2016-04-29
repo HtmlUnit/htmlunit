@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF)})
 public class BatteryManager extends EventTarget {
 
     /**

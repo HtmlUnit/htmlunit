@@ -148,7 +148,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
             IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -671,7 +671,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "false", "false"})
+    @Alerts({"true", "true", "false", "false"})
     public void offsetHeightParentHidden() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

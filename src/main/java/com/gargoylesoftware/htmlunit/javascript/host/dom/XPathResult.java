@@ -39,7 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE)})
 public class XPathResult extends SimpleScriptable {
 
     /**

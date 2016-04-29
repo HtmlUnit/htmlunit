@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(IE),
-        @WebBrowser(EDGE) })
+        @WebBrowser(EDGE)})
 public class TextTrackCue extends EventTarget {
 
     /**

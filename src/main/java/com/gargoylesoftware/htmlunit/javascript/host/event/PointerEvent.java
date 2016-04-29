@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE) })
+@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
 public class PointerEvent extends MouseEvent {
 
     private int pointerId_;

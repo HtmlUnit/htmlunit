@@ -80,7 +80,7 @@ public class Element extends EventNode {
     /**
      * Default constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Element() {
         // Empty.
     }
@@ -150,7 +150,7 @@ public class Element extends EventNode {
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getBaseURI() {
         if ("Element".equals(getClass().getSimpleName()) && getBrowserVersion().hasFeature(JS_ELEMENT_BASE_URL_NULL)) {
             return null;
@@ -411,7 +411,7 @@ public class Element extends EventNode {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
      * @return the child at the given position
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public HTMLCollection getChildren() {
         final DomElement node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(node, false) {
@@ -433,7 +433,7 @@ public class Element extends EventNode {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }

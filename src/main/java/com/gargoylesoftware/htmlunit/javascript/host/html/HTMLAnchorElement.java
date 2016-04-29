@@ -68,7 +68,7 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLAnchorElement() {
     }
 
@@ -585,7 +585,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code origin} attribute.
      * @return the {@code origin} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getOrigin() {
         if (!getDomNodeOrDie().hasAttribute("href")) {
             return "";
@@ -603,7 +603,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code origin} attribute.
      * @param origin {@code origin} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void setOrigin(final String origin) {
         // ignore
     }
@@ -612,7 +612,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code username} attribute.
      * @return the {@code username} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getUsername() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -621,7 +621,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code username} attribute.
      * @param username {@code username} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void setUsername(final String username) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -630,7 +630,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code password} attribute.
      * @return the {@code password} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getPassword() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -639,7 +639,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code password} attribute.
      * @param password {@code password} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void setPassword(final String password) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -648,7 +648,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code download} attribute.
      * @return the {@code download} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getDownload() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -657,7 +657,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code download} attribute.
      * @param download {@code download} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void setDownload(final String download) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -666,7 +666,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code ping} attribute.
      * @return the {@code ping} attribute
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getPing() {
         return ((HtmlAnchor) getDomNodeOrDie()).getPingAttribute();
     }
@@ -675,7 +675,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code ping} attribute.
      * @param ping {@code ping} attribute
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public void setPing(final String ping) {
         getDomNodeOrDie().setAttribute("ping", ping);
     }

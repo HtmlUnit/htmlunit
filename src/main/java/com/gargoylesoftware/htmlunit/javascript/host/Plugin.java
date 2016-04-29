@@ -42,7 +42,7 @@ public class Plugin extends SimpleArray {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Plugin() {
     }
 
@@ -101,7 +101,7 @@ public class Plugin extends SimpleArray {
      * Gets the plugin's version.
      * @return the name
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(FF), @WebBrowser(EDGE)})
     public String getVersion() {
         return version_;
     }

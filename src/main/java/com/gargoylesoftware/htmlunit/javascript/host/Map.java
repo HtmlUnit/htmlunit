@@ -168,7 +168,7 @@ public class Map extends SimpleScriptable {
      * Map object in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object entries() {
         final SimpleScriptable object = new Iterator("Map Iterator", map_.entrySet().iterator());
         object.setParentScope(getParentScope());
@@ -180,7 +180,7 @@ public class Map extends SimpleScriptable {
      * in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object keys() {
         final SimpleScriptable object = new Iterator("Map Iterator", map_.keySet().iterator());
         object.setParentScope(getParentScope());
@@ -192,7 +192,7 @@ public class Map extends SimpleScriptable {
      * in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object values() {
         final SimpleScriptable object = new Iterator("Map Iterator", map_.values().iterator());
         object.setParentScope(getParentScope());

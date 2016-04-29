@@ -141,7 +141,7 @@ public class Set extends SimpleScriptable {
      * in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object values() {
         final SimpleScriptable object = new Iterator("Set Iterator", set_.iterator());
         object.setParentScope(getParentScope());

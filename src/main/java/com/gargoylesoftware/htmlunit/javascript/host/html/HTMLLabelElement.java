@@ -41,7 +41,7 @@ public class HTMLLabelElement extends FormChild {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLLabelElement() {
     }
 
@@ -67,7 +67,7 @@ public class HTMLLabelElement extends FormChild {
     /**
      * @return the HTMLElement to which the given label object is assigned
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public HTMLElement getControl() {
         final String id = getHtmlFor();
         if (StringUtils.isBlank(id)) {

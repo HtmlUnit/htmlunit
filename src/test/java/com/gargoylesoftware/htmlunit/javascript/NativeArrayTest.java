@@ -43,7 +43,7 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9"},
             FF = {"1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9"},
             IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void sort() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

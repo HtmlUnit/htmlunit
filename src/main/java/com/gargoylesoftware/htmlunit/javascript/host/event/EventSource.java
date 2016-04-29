@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF)})
 public class EventSource extends EventTarget {
 
     /** The connection is being established. */

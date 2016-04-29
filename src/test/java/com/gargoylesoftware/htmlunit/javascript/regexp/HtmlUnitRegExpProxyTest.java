@@ -369,7 +369,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({  "[floating=true],floating,=,,true",
+    @Alerts({ "[floating=true],floating,=,,true",
                 "[floating=\"true\"],floating,=,\",true",
                 "[floating=\"true'],floating,=,,\"true'",
                 "[floating=\"true],floating,=,,\"true",

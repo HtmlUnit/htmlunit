@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClasses({
         @JsxClass(isJSObject = false, browsers = @WebBrowser(FF)),
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE) })
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
     })
 public class ClientRectList extends SimpleScriptable {
 
@@ -52,7 +52,7 @@ public class ClientRectList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public ClientRectList() {
         clientRects_ = new ArrayList<>();
     }

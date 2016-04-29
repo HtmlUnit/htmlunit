@@ -54,7 +54,7 @@ public class PerformanceNavigation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public PerformanceNavigation() {
     }
 
@@ -80,7 +80,7 @@ public class PerformanceNavigation extends SimpleScriptable {
      * The {@code toJSON} function.
      * @return the {@code toJSON} object
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public Object toJSON() {
         throw new UnsupportedOperationException();
     }

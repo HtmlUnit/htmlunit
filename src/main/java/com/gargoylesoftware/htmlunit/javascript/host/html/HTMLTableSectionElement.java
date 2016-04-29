@@ -57,7 +57,7 @@ public class HTMLTableSectionElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLTableSectionElement() {
     }
 
@@ -166,7 +166,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param value the new value for the contents of this node
      */
     @Override
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME)})
     public void setInnerText(final Object value) {
         if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
             throw Context.reportRuntimeError("innerText is read-only for tag '"
