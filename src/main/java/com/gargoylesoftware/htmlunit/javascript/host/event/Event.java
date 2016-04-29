@@ -218,7 +218,6 @@ public class Event extends SimpleScriptable {
     public static final int SELECT = 0x4000;
 
     /** Constant. */
-    /** Constant. */
     @JsxConstant(@WebBrowser(FF))
     public static final int ALT_MASK = 0x1;
 
