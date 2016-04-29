@@ -490,6 +490,7 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Returns whether SHIFT has been pressed during this event or not.
      * @return whether SHIFT has been pressed during this event or not
      */
     public boolean getShiftKey() {
@@ -497,41 +498,47 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * @param shiftKey whether SHIFT has been pressed during this event or not
+     * Sets whether {@code SHIFT} key is pressed on not.
+     * @param shiftKey whether {@code SHIFT} has been pressed during this event or not
      */
     protected void setShiftKey(final boolean shiftKey) {
         shiftKey_ = shiftKey;
     }
 
     /**
-     * @return whether CTRL has been pressed during this event or not
+     * Returns whether {@code CTRL} has been pressed during this event or not.
+     * @return whether {@code CTRL} has been pressed during this event or not
      */
     public boolean getCtrlKey() {
         return ctrlKey_;
     }
 
     /**
-     * @param ctrlKey whether CTRL has been pressed during this event or not
+     * Sets whether {@code CTRL} key is pressed on not.
+     * @param ctrlKey whether {@code CTRL} has been pressed during this event or not
      */
     protected void setCtrlKey(final boolean ctrlKey) {
         ctrlKey_ = ctrlKey;
     }
 
     /**
-     * @return whether ALT has been pressed during this event or not
+     * Returns whether {@code ALT} has been pressed during this event or not.
+     * @return whether {@code ALT} has been pressed during this event or not
      */
     public boolean getAltKey() {
         return altKey_;
     }
 
     /**
-     * @param altKey whether ALT has been pressed during this event or not
+     * Sets whether {@code ALT} key is pressed on not.
+     * @param altKey whether {@code ALT} has been pressed during this event or not
      */
     protected void setAltKey(final boolean altKey) {
         altKey_ = altKey;
     }
 
     /**
+     * Returns the current event phase for the event.
      * @return the current event phase for the event
      */
     @JsxGetter
