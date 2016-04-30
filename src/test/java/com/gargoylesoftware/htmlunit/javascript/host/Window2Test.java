@@ -928,14 +928,80 @@ public class Window2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    \n"
+            + " \n"
             + "    Function.prototype.doAlerts = function() {\n"
-            + "      alert(this==o.f);\n"
+            + "      alert(this == o.f);\n"
             + "      alert(this.arguments ? this.arguments.length : 'null');\n"
             + "    }\n"
-            + "    \n"
+            + " \n"
             + "    var o = function() {};\n"
             + "    o.f = function(x, y, z) { this.f.doAlerts(); }\n"
+            + "    o.f('a', 'b');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "[object Arguments]", "null", "true", "[object Arguments]", "[object Arguments]"})
+    public void functionPrototypeArguments2() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + " \n"
+            + "    Function.prototype.doAlerts = function() {\n"
+            + "      alert(this == o.f);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "    }\n"
+            + " \n"
+            + "    var o = function() {};\n"
+            + "    o.f = function(x, y, z) {\n"
+            + "      alert(this == o);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "      this.f.doAlerts();\n"
+            + "    }\n"
+            + "    o.f('a', 'b');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "[object Arguments]", "null", "true", "[object Arguments]", "null"})
+    public void functionPrototypeArguments3() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var o = function() {};\n"
+            + "    o.x = function() {\n"
+            + "      alert(this == o);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "    }\n"
+            + "    o.f = function(x, y, z) {\n"
+            + "      alert(this == o);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "      this.x();\n"
+            + "    }\n"
             + "    o.f('a', 'b');\n"
             + "  }\n"
             + "</script>\n"
