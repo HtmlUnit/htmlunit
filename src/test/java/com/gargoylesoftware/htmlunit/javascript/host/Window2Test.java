@@ -921,7 +921,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "2"})
+    @Alerts({"true", "0", "2", "2", "null"})
     public void functionPrototypeArguments() throws Exception {
         final String html =
               "<html>\n"
@@ -931,11 +931,16 @@ public class Window2Test extends WebDriverTestCase {
             + " \n"
             + "    Function.prototype.doAlerts = function() {\n"
             + "      alert(this == o.f);\n"
+            + "      alert(arguments ? arguments.length : 'null');\n"
             + "      alert(this.arguments ? this.arguments.length : 'null');\n"
             + "    }\n"
             + " \n"
             + "    var o = function() {};\n"
-            + "    o.f = function(x, y, z) { this.f.doAlerts(); }\n"
+            + "    o.f = function(x, y, z) {\n"
+            + "      this.f.doAlerts();\n"
+            + "      alert(arguments ? arguments.length : 'null');\n"
+            + "      alert(this.arguments ? this.arguments.length : 'null');\n"
+            + "    }\n"
             + "    o.f('a', 'b');\n"
             + "  }\n"
             + "</script>\n"
