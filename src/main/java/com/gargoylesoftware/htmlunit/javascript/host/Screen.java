@@ -42,14 +42,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass
 public class Screen extends SimpleScriptable {
 
-    private int bufferDepth_;
-
     /**
      * Creates an instance.
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Screen() {
-        bufferDepth_ = 0;
     }
 
     /**
@@ -130,7 +127,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxGetter(@WebBrowser(IE))
     public int getBufferDepth() {
-        return bufferDepth_;
+        return 0;
     }
 
     /**
