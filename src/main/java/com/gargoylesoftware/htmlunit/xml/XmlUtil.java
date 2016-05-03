@@ -90,6 +90,7 @@ public final class XmlUtil {
         public void error(final SAXParseException exception) {
             // Does nothing as we're not interested in this.
         }
+
         /**
          * Does nothing as we're not interested in this.
          */
@@ -97,6 +98,7 @@ public final class XmlUtil {
         public void fatalError(final SAXParseException exception) {
             // Does nothing as we're not interested in this.
         }
+
         /**
          * Does nothing as we're not interested in this.
          */

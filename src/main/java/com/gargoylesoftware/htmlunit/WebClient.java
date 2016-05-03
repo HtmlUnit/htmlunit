@@ -1726,6 +1726,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 webClient_.setCurrentWindow(webClient_.topLevelWindows_.peek());
             }
         }
+
         /**
          * {@inheritDoc}
          */
@@ -1761,6 +1762,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 webClient_.setCurrentWindow(window);
             }
         }
+
         /**
          * {@inheritDoc}
          */

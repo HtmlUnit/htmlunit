@@ -399,6 +399,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             jsSource_ = string;
             jsFlags_ = "";
         }
+
         /**
          * Converts the current JavaScript RegExp flags to Java Pattern flags.
          * @return the Java Pattern flags
