@@ -63,14 +63,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class StyleSheetList extends SimpleScriptable {
 
     /**
-     * We back the stylesheet list with an {@link HTMLCollection} of styles/links because this list
-     * must be "live".
+     * We back the stylesheet list with an {@link HTMLCollection} of styles/links because this list must be "live".
      */
     private HTMLCollection nodes_;
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
      * Verifies if the provided node is a link node pointing to a stylesheet.
      *
      * @param domNode the mode to check
@@ -82,8 +79,6 @@ public class StyleSheetList extends SimpleScriptable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
      * Verifies if the provided node is a link node pointing to an active stylesheet.
      *
      * @param domNode the mode to check
