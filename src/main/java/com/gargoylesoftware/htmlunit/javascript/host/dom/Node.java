@@ -514,7 +514,7 @@ public class Node extends EventTarget {
      * Returns this node's parent node.
      * @return this node's parent node
      */
-    public Node getParent() {
+    public final Node getParent() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
