@@ -21,6 +21,8 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
@@ -37,6 +39,10 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
@@ -68,10 +74,18 @@ public class Window2 extends EventTarget2 {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
-    private Object controllers_ = new SimpleScriptObject();
+    private Screen2 screen_;
     private Document2 document_;
     private History2 history_;
     private HTMLCollection2 frames_; // has to be a member to have equality (==) working
+    private Object controllers_ = new SimpleScriptObject();
+
+    /**
+     * Cache computed styles when possible, because their calculation is very expensive.
+     * We use a weak hash map because we don't want this cache to be the only reason
+     * nodes are kept around in the JVM, if all other references to them are gone.
+     */
+    private transient WeakHashMap<Element2, Map<String, ComputedCSSStyleDeclaration2>> computedStyles_ = new WeakHashMap<>();
 
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR, value = @WebBrowser(CHROME))
     public static final int TEMPORARY = 0;
@@ -395,6 +409,63 @@ public class Window2 extends EventTarget2 {
         return frames_;
     }
 
+    /**
+     * Returns computed style of the element. Computed style represents the final computed values
+     * of all CSS properties for the element. This method's return value is of the same type as
+     * that of <tt>element.style</tt>, but the value returned by this method is read-only.
+     *
+     * @param element the element
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
+     * @return the computed style
+     */
+    @Function
+    public ComputedCSSStyleDeclaration2 getComputedStyle(final Element2 element, final String pseudoElement) {
+        synchronized (computedStyles_) {
+            final Map<String, ComputedCSSStyleDeclaration2> elementMap = computedStyles_.get(element);
+            if (elementMap != null) {
+                final ComputedCSSStyleDeclaration2 style = elementMap.get(pseudoElement);
+                if (style != null) {
+                    return style;
+                }
+            }
+        }
+
+        final CSSStyleDeclaration2 original = element.getStyle();
+        final ComputedCSSStyleDeclaration2 style = new ComputedCSSStyleDeclaration2(original);
+
+        final StyleSheetList2 sheets = ((HTMLDocument2) element.getOwnerDocument()).getStyleSheets();
+        final boolean trace = LOG.isTraceEnabled();
+        for (int i = 0; i < (int) sheets.getLength(); i++) {
+            final CSSStyleSheet2 sheet = (CSSStyleSheet2) sheets.item(i);
+            if (sheet.isActive() && sheet.isEnabled()) {
+                if (trace) {
+                    LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
+                }
+                sheet.modifyIfNecessary(style, element, pseudoElement);
+            }
+        }
+
+        synchronized (computedStyles_) {
+            Map<String, ComputedCSSStyleDeclaration2> elementMap = computedStyles_.get(element);
+            if (elementMap == null) {
+                elementMap = new WeakHashMap<>();
+                computedStyles_.put(element, elementMap);
+            }
+            elementMap.put(pseudoElement, style);
+        }
+
+        return style;
+    }
+
+    /**
+     * Returns the {@code screen} property.
+     * @return the screen property
+     */
+    @Getter
+    public Screen2 getScreen() {
+        return screen_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -441,6 +512,7 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction btoa;
         public ScriptFunction CollectGarbage;
         public ScriptFunction find;
+        public ScriptFunction getComputedStyle;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -480,6 +552,14 @@ public class Window2 extends EventTarget2 {
 
         public void S$find(final ScriptFunction function) {
             this.find = function;
+        }
+
+        public ScriptFunction G$getComputedStyle() {
+            return getComputedStyle;
+        }
+
+        public void S$getComputedStyle(final ScriptFunction function) {
+            this.getComputedStyle = function;
         }
 
         Prototype() {
@@ -553,7 +633,7 @@ class HTMLCollectionFrames2 extends HTMLCollection2 {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames2.class);
 
     HTMLCollectionFrames2(final HtmlPage page) {
-        super(page, false, "Window.frames");
+        super(page, false);
     }
 
     @Override

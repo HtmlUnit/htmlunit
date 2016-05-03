@@ -18,8 +18,10 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -30,6 +32,19 @@ public class Node2 extends EventTarget2 {
         final Node2 host = new Node2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
+    }
+
+    /**
+     * Returns the owner document.
+     * @return the document
+     */
+    @Getter
+    public Object getOwnerDocument() {
+        final Object document = getDomNodeOrDie().getOwnerDocument();
+        if (document != null) {
+            return ((SgmlPage) document).getScriptObject2();
+        }
+        return null;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement2;
@@ -216,6 +218,10 @@ public class SimpleScriptObject extends ScriptObject {
         }
         else if (domNode instanceof HtmlInlineFrame) {
             host = HTMLIFrameElement2.constructor(true, null);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlDivision) {
+            host = HTMLDivElement2.constructor(true, null);
             host.setDomNode(domNode);
         }
         else {

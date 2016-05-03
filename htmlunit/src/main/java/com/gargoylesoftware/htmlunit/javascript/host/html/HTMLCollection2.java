@@ -69,10 +69,9 @@ public class HTMLCollection2 extends AbstractList2 {
      * @param parentScope parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
-     * @param description a text useful for debugging
      */
-    public HTMLCollection2(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        super(parentScope, attributeChangeSensitive, description);
+    public HTMLCollection2(final DomNode parentScope, final boolean attributeChangeSensitive) {
+        super(parentScope, attributeChangeSensitive);
         List<Object> list = new ArrayList<>();
         for (Object o : computeElements()) {
                 list.add(getScriptObjectForElement(o));

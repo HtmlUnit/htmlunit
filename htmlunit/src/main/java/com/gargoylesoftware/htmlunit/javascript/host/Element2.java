@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -24,21 +26,25 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
-public class Element2 extends EventTarget2 {
+
+public class Element2 extends Node2 {
 
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
-    private CSSStyleDeclaration style_;
+    private CSSStyleDeclaration2 style_;
 
     public static Element2 constructor(final boolean newObj, final Object self) {
         final Element2 host = new Element2();
@@ -71,6 +77,17 @@ public class Element2 extends EventTarget2 {
     }
 
     /**
+     * Callback method which allows different HTML element types to perform custom
+     * initialization of computed styles. For example, body elements in most browsers
+     * have default values for their margins.
+     *
+     * @param style the style to initialize
+     */
+    public void setDefaults(final ComputedCSSStyleDeclaration2 style) {
+        // Empty by default; override as necessary.
+    }
+
+    /**
      * Create the event handler function from the attribute value.
      * @param eventName the event name (ex: "onclick")
      * @param attrValue the attribute value
@@ -91,6 +108,26 @@ public class Element2 extends EventTarget2 {
     @Override
     public DomElement getDomNodeOrDie() {
         return (DomElement) super.getDomNodeOrDie();
+    }
+
+    /**
+     * Returns the style object for this element.
+     * @return the style object for this element
+     */
+    @Getter
+    public CSSStyleDeclaration2 getStyle() {
+        return style_;
+    }
+
+    /**
+     * Sets the styles for this element.
+     * @param style the style of the element
+     */
+    @Setter
+    public void setStyle(final String style) {
+        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            getStyle().setCssText(style);
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

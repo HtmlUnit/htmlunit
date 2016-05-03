@@ -14,59 +14,46 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
-
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Element2;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer2;
+import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class HTMLBodyElement2 extends Element2 {
+public class HTMLLinkElement2 extends HTMLElement2 {
 
-    public static HTMLBodyElement2 constructor(final boolean newObj, final Object self) {
-        final HTMLBodyElement2 host = new HTMLBodyElement2();
+    /**
+     * The associated style sheet (only valid for links of type
+     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     */
+    private CSSStyleSheet2 sheet_;
+
+    public static HTMLLinkElement2 constructor(final boolean newObj, final Object self) {
+        final HTMLLinkElement2 host = new HTMLLinkElement2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
     }
 
     /**
-     * Forwards the events to window.
-     *
-     * {@inheritDoc}
-     *
-     * @see HTMLFrameSetElement2#getEventListenersContainer()
+     * Returns the associated style sheet (only valid for links of type
+     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     * @return the associated style sheet
      */
-    public EventListenersContainer2 getEventListenersContainer() {
-        return getWindow().getEventListenersContainer();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDefaults(final ComputedCSSStyleDeclaration2 style) {
-        if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
-            style.setDefaultLocalStyleAttribute("margin", "8px");
-            style.setDefaultLocalStyleAttribute("padding", "0px");
+    public CSSStyleSheet2 getSheet() {
+        if (sheet_ == null) {
+            sheet_ = CSSStyleSheet2.loadStylesheet(getWindow(), this, (HtmlLink) getDomNodeOrDie(), null);
         }
-        else {
-            style.setDefaultLocalStyleAttribute("margin-left", "8px");
-            style.setDefaultLocalStyleAttribute("margin-right", "8px");
-            style.setDefaultLocalStyleAttribute("margin-top", "8px");
-            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
-        }
+        return sheet_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(HTMLBodyElement2.class,
+            return MethodHandles.lookup().findStatic(HTMLLinkElement2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -76,8 +63,8 @@ public class HTMLBodyElement2 extends Element2 {
 
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLBodyElement", 
-                    staticHandle("constructor", HTMLBodyElement2.class, boolean.class, Object.class),
+            super("HTMLLinkElement", 
+                    staticHandle("constructor", HTMLLinkElement2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -91,7 +78,7 @@ public class HTMLBodyElement2 extends Element2 {
         }
 
         public String getClassName() {
-            return "HTMLBodyElement";
+            return "HTMLLinkElement";
         }
     }
 }

@@ -14,59 +14,65 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
-
+import java.io.StringReader;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Element2;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer2;
+import org.w3c.css.sac.InputSource;
+
+import com.gargoylesoftware.htmlunit.Cache;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class HTMLBodyElement2 extends Element2 {
+public class HTMLStyleElement2 extends HTMLElement2 {
 
-    public static HTMLBodyElement2 constructor(final boolean newObj, final Object self) {
-        final HTMLBodyElement2 host = new HTMLBodyElement2();
+    private CSSStyleSheet2 sheet_;
+
+    public static HTMLStyleElement2 constructor(final boolean newObj, final Object self) {
+        final HTMLStyleElement2 host = new HTMLStyleElement2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
     }
 
     /**
-     * Forwards the events to window.
-     *
-     * {@inheritDoc}
-     *
-     * @see HTMLFrameSetElement2#getEventListenersContainer()
+     * Gets the associated sheet.
+     * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
+     * @return the sheet
      */
-    public EventListenersContainer2 getEventListenersContainer() {
-        return getWindow().getEventListenersContainer();
-    }
+    @Getter
+    public CSSStyleSheet2 getSheet() {
+        if (sheet_ != null) {
+            return sheet_;
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDefaults(final ComputedCSSStyleDeclaration2 style) {
-        if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
-            style.setDefaultLocalStyleAttribute("margin", "8px");
-            style.setDefaultLocalStyleAttribute("padding", "0px");
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        final String css = style.getTextContent();
+
+        final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
+        final org.w3c.dom.css.CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+        final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
+                .getUrl().toExternalForm();
+        if (cached != null) {
+            sheet_ = new CSSStyleSheet2(this, cached, uri);
         }
         else {
-            style.setDefaultLocalStyleAttribute("margin-left", "8px");
-            style.setDefaultLocalStyleAttribute("margin-right", "8px");
-            style.setDefaultLocalStyleAttribute("margin-top", "8px");
-            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
+            final InputSource source = new InputSource(new StringReader(css));
+            sheet_ = new CSSStyleSheet2(this, source, uri);
+            cache.cache(css, sheet_.getWrappedSheet());
         }
+
+        return sheet_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(HTMLBodyElement2.class,
+            return MethodHandles.lookup().findStatic(HTMLStyleElement2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -76,8 +82,8 @@ public class HTMLBodyElement2 extends Element2 {
 
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLBodyElement", 
-                    staticHandle("constructor", HTMLBodyElement2.class, boolean.class, Object.class),
+            super("HTMLStyleElement", 
+                    staticHandle("constructor", HTMLStyleElement2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -91,7 +97,7 @@ public class HTMLBodyElement2 extends Element2 {
         }
 
         public String getClassName() {
-            return "HTMLBodyElement";
+            return "HTMLStyleElement";
         }
     }
 }

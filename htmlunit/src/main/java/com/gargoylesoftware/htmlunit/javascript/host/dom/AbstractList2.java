@@ -58,7 +58,6 @@ public class AbstractList2 extends SimpleScriptObject {
     }
 
     private boolean avoidObjectDetection_ = false;
-    private String description_;
 
     private boolean attributeChangeSensitive_ = true;
 
@@ -92,14 +91,12 @@ public class AbstractList2 extends SimpleScriptObject {
      * @param parentScope parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
-     * @param description a text useful for debugging
      */
-    public AbstractList2(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
+    public AbstractList2(final DomNode parentScope, final boolean attributeChangeSensitive) {
 //        this(parentScope == null ? null : parentScope.getScriptableObject());
         if (parentScope != null) {
             setDomNode(parentScope, false);
         }
-        description_ = description;
         attributeChangeSensitive_ = attributeChangeSensitive;
     }
 
@@ -383,7 +380,7 @@ public class AbstractList2 extends SimpleScriptObject {
      */
     @Override
     public String toString() {
-        return description_;
+        return getClass().getSimpleName() + " for " + getDomNodeOrNull();
     }
 
     /**

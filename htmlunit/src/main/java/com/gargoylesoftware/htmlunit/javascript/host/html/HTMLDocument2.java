@@ -14,17 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,8 +43,8 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent2;
@@ -60,6 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -88,6 +90,16 @@ public class HTMLDocument2 extends Document2 {
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
+
+    private HTMLCollection all_; // has to be a member to have equality (==) working
+    private HTMLCollection forms_; // has to be a member to have equality (==) working
+    private HTMLCollection links_; // has to be a member to have equality (==) working
+    private HTMLCollection images_; // has to be a member to have equality (==) working
+    private HTMLCollection scripts_; // has to be a member to have equality (==) working
+    private HTMLCollection anchors_; // has to be a member to have equality (==) working
+    private HTMLCollection applets_; // has to be a member to have equality (==) working
+    private StyleSheetList2 styleSheets_; // has to be a member to have equality (==) working
+    private HTMLElement2 activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuffer_ = new StringBuilder();
@@ -361,6 +373,21 @@ public class HTMLDocument2 extends Document2 {
         final Event2 event = Event2.constructor(true, getWindow());
         event.eventCreated();
         return event;
+    }
+
+    /**
+     * Retrieves a collection of stylesheet objects representing the style sheets that correspond
+     * to each instance of a Link or
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration} object in the document.
+     *
+     * @return styleSheet collection
+     */
+    @Getter
+    public StyleSheetList2 getStyleSheets() {
+        if (styleSheets_ == null) {
+            styleSheets_ = new StyleSheetList2(this);
+        }
+        return styleSheets_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
