@@ -33,6 +33,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.History2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
@@ -127,7 +129,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("History", new History2.FunctionConstructor(), true);
                 global.put("Node", new Node2.FunctionConstructor(), true);
                 global.put("HTMLInputElement", new HTMLInputElement2.FunctionConstructor(), true);
+                global.put("ComputedCSSStyleDeclaration", new ComputedCSSStyleDeclaration2.FunctionConstructor(), true);
+                global.put("CSSStyleDeclaration", new CSSStyleDeclaration2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
+                setProto(global, "ComputedCSSStyleDeclaration", "CSSStyleDeclaration");
             }
             else {
                 global.put("Window", new Window2.ObjectConstructor(), true);

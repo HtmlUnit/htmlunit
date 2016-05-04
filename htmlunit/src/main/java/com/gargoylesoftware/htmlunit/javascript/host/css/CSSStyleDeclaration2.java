@@ -14,9 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BEHAVIOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.COLOR;
 
 import java.io.Serializable;
 import java.lang.invoke.MethodHandle;
@@ -29,17 +31,26 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -49,6 +60,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 public class CSSStyleDeclaration2 extends SimpleScriptObject {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration2.class);
+    private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
     /** CSS important property constant. */
@@ -90,10 +102,15 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
     }
 
     CSSStyleDeclaration2() {
-        
+        ScriptUtils.initialize(this);
     }
 
-    CSSStyleDeclaration2(final Element2 element) {
+    /**
+     * Creates an instance and sets its parent scope to the one of the provided element.
+     * @param element the element to which this style is bound
+     */
+    public CSSStyleDeclaration2(final Element2 element) {
+        ScriptUtils.initialize(this);
         initialize(element);
     }
 
@@ -279,6 +296,227 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
         jsElement_.getDomNodeOrDie().setAttribute("style", value);
     }
 
+    /**
+     * Gets the {@code color} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getColor() {
+        return getStyleAttribute(COLOR);
+    }
+
+    /**
+     * Sets the {@code color} style attribute.
+     * @param color the new attribute
+     */
+    @Setter
+    public void setColor(final String color) {
+        setStyleAttribute(COLOR.getAttributeName(), color);
+    }
+
+    /**
+     * Sets the specified style attribute.
+     * @param name the attribute name (camel-cased)
+     * @param newValue the attribute value
+     */
+    protected void setStyleAttribute(final String name, final String newValue) {
+        setStyleAttribute(name, newValue, "");
+    }
+
+    /**
+     * Sets the specified style attribute.
+     * @param name the attribute name (camel-cased)
+     * @param newValue the attribute value
+     * @param important important value
+     */
+    protected void setStyleAttribute(final String name, String newValue, final String important) {
+        if (null == newValue || "null".equals(newValue)) {
+            if (getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS)) {
+                //Context.throwAsScriptRuntimeEx(new Exception("Invalid argument."));
+            }
+            newValue = "";
+        }
+        if (styleDeclaration_ != null) {
+            styleDeclaration_.setProperty(name, newValue, important);
+            return;
+        }
+
+        replaceStyleAttribute(name, newValue, important);
+    }
+
+    /**
+     * Replaces the value of the named style attribute. If there is no style attribute with the
+     * specified name, a new one is added. If the specified value is an empty (or all whitespace)
+     * string, this method actually removes the named style attribute.
+     * @param name the attribute name (delimiter-separated, not camel-cased)
+     * @param value the attribute value
+     * @param priority  the new priority of the property; <code>"important"</code>or the empty string if none.
+     */
+    private void replaceStyleAttribute(final String name, final String value, final String priority) {
+        if (StringUtils.isBlank(value)) {
+            removeStyleAttribute(name);
+        }
+        else {
+            final Map<String, StyleElement> styleMap = getStyleMap();
+            final StyleElement old = styleMap.get(name);
+            final long index;
+            if (old != null) {
+                index = old.getIndex();
+            }
+            else {
+                index = getCurrentElementIndex();
+            }
+            final StyleElement element = new StyleElement(name, value, priority,
+                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
+            styleMap.put(name, element);
+            writeToElement(styleMap);
+        }
+    }
+
+    /**
+     * Removes the specified style attribute, returning the value of the removed attribute.
+     * @param name the attribute name (delimiter-separated, not camel-cased)
+     */
+    private String removeStyleAttribute(final String name) {
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.removeProperty(name);
+        }
+
+        final Map<String, StyleElement> styleMap = getStyleMap();
+        final StyleElement value = styleMap.get(name);
+        if (value == null) {
+            return "";
+        }
+        styleMap.remove(name);
+        writeToElement(styleMap);
+        return value.getValue();
+    }
+
+    private void writeToElement(final Map<String, StyleElement> styleMap) {
+        final StringBuilder buffer = new StringBuilder();
+        final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
+        for (final StyleElement e : sortedValues) {
+            if (buffer.length() != 0) {
+                buffer.append(" ");
+            }
+            buffer.append(e.getName());
+            buffer.append(": ");
+            buffer.append(e.getValue());
+
+            final String prio = e.getPriority();
+            if (StringUtils.isNotBlank(prio)) {
+                buffer.append(" !");
+                buffer.append(prio);
+            }
+            buffer.append(";");
+        }
+        jsElement_.getDomNodeOrDie().setAttribute("style", buffer.toString());
+    }
+
+    /**
+     * Gets the RGB equivalent of a CSS color if the provided color is recognized.
+     * @param color the color
+     * @return the provided color if this is not a recognized color keyword, the RGB value
+     * in the form "rgb(x, y, z)" otherwise
+     */
+    public static String toRGBColor(final String color) {
+        final String rgbValue = CSSColors_.get(color.toLowerCase(Locale.ROOT));
+        if (rgbValue != null) {
+            return rgbValue;
+        }
+        return color;
+    }
+
+    /**
+     * Converts the specified length string value into an integer number of pixels. This method does
+     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element2, CssValue)} if you
+     * need percentage support).
+     * @param value the length string value to convert to an integer number of pixels
+     * @return the integer number of pixels corresponding to the specified length string value
+     * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
+     * @see #pixelValue(Element, CssValue)
+     */
+    protected static int pixelValue(final String value) {
+        int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        if (value.length() < 2) {
+            return i;
+        }
+
+        if (value.endsWith("px")) {
+            // nothing to do
+        }
+        else if (value.endsWith("em")) {
+            i = i * 16;
+        }
+        else if (value.endsWith("%")) {
+            i = i * 16 / 100;
+        }
+        else if (value.endsWith("ex")) {
+            i = i * 10;
+        }
+        else if (value.endsWith("in")) {
+            i = i * 150;
+        }
+        else if (value.endsWith("cm")) {
+            i = i * 50;
+        }
+        else if (value.endsWith("mm")) {
+            i = i * 5;
+        }
+        else if (value.endsWith("pt")) {
+            i = i * 2;
+        }
+        else if (value.endsWith("pc")) {
+            i = i * 24;
+        }
+        return i;
+    }
+
+    /**
+     * Converts the specified length CSS attribute value into an integer number of pixels. If the
+     * specified CSS attribute value is a percentage, this method uses the specified value object
+     * to recursively retrieve the base (parent) CSS attribute value.
+     * @param element the element for which the CSS attribute value is to be retrieved
+     * @param value the CSS attribute value which is to be retrieved
+     * @return the integer number of pixels corresponding to the specified length CSS attribute value
+     * @see #pixelValue(String)
+     */
+    protected static int pixelValue(final Element2 element, final CssValue value) {
+        return pixelValue(element, value, false);
+    }
+
+    private static int pixelValue(final Element2 element, final CssValue value, final boolean percentMode) {
+        final String s = value.get(element);
+        if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement2)) {
+            final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
+            final Element2 parent = element.getParentElement();
+            final int absoluteValue = (parent == null)
+                            ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
+            return (int) ((i / 100D) * absoluteValue);
+        }
+        if ("auto".equals(s)) {
+            return value.getDefaultValue();
+        }
+        if (s.isEmpty()) {
+            if (element instanceof HTMLCanvasElement2) {
+                return value.getWindowDefaultValue();
+            }
+
+            // if the call was originated from a percent value we have to go up until
+            // we can provide some kind of base value for percent calculation
+            if (percentMode) {
+                final Element2 parent = element.getParentElement();
+                if (parent == null || parent instanceof HTMLHtmlElement2) {
+                    return value.getWindowDefaultValue();
+                }
+                return pixelValue(parent, value, true);
+            }
+
+            return 0;
+        }
+        return pixelValue(s);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(CSSStyleDeclaration2.class,
@@ -429,6 +667,59 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
             }
             return 1;
         }
+    }
+
+    /**
+     * Encapsulates the retrieval of a style attribute, given a DOM element from which to retrieve it.
+     */
+    protected abstract static class CssValue {
+        private final int defaultValue_;
+        private final int windowDefaultValue_;
+
+        /**
+         * C'tor.
+         * @param defaultValue the default value
+         * @param windowDefaultValue the default value for the window
+         */
+        public CssValue(final int defaultValue, final int windowDefaultValue) {
+            defaultValue_ = defaultValue;
+            windowDefaultValue_ = windowDefaultValue;
+        }
+
+        /**
+         * Gets the default value.
+         * @return the default value
+         */
+        public int getDefaultValue() {
+            return defaultValue_;
+        }
+
+        /**
+         * Gets the default size for the window.
+         * @return the default value for the window
+         */
+        public int getWindowDefaultValue() {
+            return windowDefaultValue_;
+        }
+
+        /**
+         * Returns the CSS attribute value for the specified element.
+         * @param element the element for which the CSS attribute value is to be retrieved
+         * @return the CSS attribute value for the specified element
+         */
+        public final String get(final Element2 element) {
+            final Global global = (Global) element.getWindow().getWebWindow().getScriptObject2();
+            final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
+            final String value = get(style);
+            return value;
+        }
+
+        /**
+         * Returns the CSS attribute value from the specified computed style.
+         * @param style the computed style from which to retrieve the CSS attribute value
+         * @return the CSS attribute value from the specified computed style
+         */
+        public abstract String get(final ComputedCSSStyleDeclaration2 style);
     }
 
 }

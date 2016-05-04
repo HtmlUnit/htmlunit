@@ -59,9 +59,7 @@ public class Element2 extends Node2 {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-//        style_ = new CSSStyleDeclaration(this);
-
-//        setParentScope(getWindow().getDocument());
+        style_ = new CSSStyleDeclaration2(this);
 
         /**
          * Convert JavaScript snippets defined in the attribute map to executable event handlers.
@@ -128,6 +126,21 @@ public class Element2 extends Node2 {
         if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
             getStyle().setCssText(style);
         }
+    }
+
+    /**
+     * Gets the first ancestor instance of {@link Element}. It is mostly identical
+     * to {@link #getParent()} except that it skips non {@link Element} nodes.
+     * @return the parent element
+     * @see #getParent()
+     */
+    @Override
+    public Element2 getParentElement() {
+        Node2 parent = getParent();
+        while (parent != null && !(parent instanceof Element2)) {
+            parent = parent.getParent();
+        }
+        return (Element2) parent;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -93,7 +93,7 @@ public class StyleSheetList2 extends SimpleScriptObject {
      * @param document the owning document
      */
     public StyleSheetList2(final HTMLDocument2 document) {
-        final WebClient webClient = getWindow().getWebWindow().getWebClient();
+        final WebClient webClient = document.getDomNodeOrDie().getPage().getWebClient();
         final boolean cssEnabled = webClient.getOptions().isCssEnabled();
         final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
 

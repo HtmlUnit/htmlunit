@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
@@ -419,9 +420,11 @@ public class Window2 extends EventTarget2 {
      * @return the computed style
      */
     @Function
-    public ComputedCSSStyleDeclaration2 getComputedStyle(final Element2 element, final String pseudoElement) {
-        synchronized (computedStyles_) {
-            final Map<String, ComputedCSSStyleDeclaration2> elementMap = computedStyles_.get(element);
+    public static ComputedCSSStyleDeclaration2 getComputedStyle(final Object self,
+            final Element2 element, final String pseudoElement) {
+        final Window2 window2 = (Window2) self;
+        synchronized (window2.computedStyles_) {
+            final Map<String, ComputedCSSStyleDeclaration2> elementMap = window2.computedStyles_.get(element);
             if (elementMap != null) {
                 final ComputedCSSStyleDeclaration2 style = elementMap.get(pseudoElement);
                 if (style != null) {
@@ -431,7 +434,8 @@ public class Window2 extends EventTarget2 {
         }
 
         final CSSStyleDeclaration2 original = element.getStyle();
-        final ComputedCSSStyleDeclaration2 style = new ComputedCSSStyleDeclaration2(original);
+        final Global global = NashornJavaScriptEngine.getGlobal(window2.getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = new ComputedCSSStyleDeclaration2(global, original);
 
         final StyleSheetList2 sheets = ((HTMLDocument2) element.getOwnerDocument()).getStyleSheets();
         final boolean trace = LOG.isTraceEnabled();
@@ -445,11 +449,11 @@ public class Window2 extends EventTarget2 {
             }
         }
 
-        synchronized (computedStyles_) {
-            Map<String, ComputedCSSStyleDeclaration2> elementMap = computedStyles_.get(element);
+        synchronized (window2.computedStyles_) {
+            Map<String, ComputedCSSStyleDeclaration2> elementMap = window2.computedStyles_.get(element);
             if (elementMap == null) {
                 elementMap = new WeakHashMap<>();
-                computedStyles_.put(element, elementMap);
+                window2.computedStyles_.put(element, elementMap);
             }
             elementMap.put(pseudoElement, style);
         }
