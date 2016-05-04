@@ -109,5 +109,4 @@ public class FileList extends SimpleScriptable {
         }
         return super.has(index, start);
     }
-
 }

@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -783,6 +784,31 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  alert(list.toggle('e'));\n"
             + "  alert(list.length);\n"
             + "  alert(list.contains('e'));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='d1' class='a e'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "false", "true", "false", "false"},
+            IE = {"2", "true", "true", "true", "true"})
+    @NotYetImplemented
+    public void in() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var list = document.getElementById('d1').classList;\n"
+            + "  alert(list.length);\n"
+            + "  alert(-1 in list);\n"
+            + "  alert(0 in list);\n"
+            + "  alert(2 in list);\n"
+            + "  alert(42 in list);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='a e'></div>\n"
