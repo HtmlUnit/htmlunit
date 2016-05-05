@@ -1465,4 +1465,32 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html, getDefaultUrl(), 5000);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.testForm;\n"
+            + "  alert(f.length);\n"
+            + "  alert(-1 in f);\n"
+            + "  alert(0 in f);\n"
+            + "  alert(1 in f);\n"
+            + "  alert(42 in f);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='testForm' action='about:blank'>\n"
+            + "    <input type='submit' id='theButton'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

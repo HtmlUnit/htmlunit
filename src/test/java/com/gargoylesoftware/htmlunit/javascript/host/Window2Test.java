@@ -1790,4 +1790,29 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(window.length);\n"
+            + "  alert(-1 in window);\n"
+            + "  alert(0 in window);\n"
+            + "  alert(1 in window);\n"
+            + "  alert(42 in window);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<frameset rows='50,*' onload='test()'>\n"
+            + "<frame name='frame1' src='about:blank'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -1331,8 +1331,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      */
     @Override
     public Object get(final int index, final Scriptable start) {
+        if (getWebWindow() == null) {
+            return Undefined.instance;
+        }
+
         final HTMLCollection frames = getFrames();
-        if (index >= frames.getLength()) {
+        if (index < 0 || index >= frames.getLength()) {
             return Undefined.instance;
         }
         return frames.item(Integer.valueOf(index));
