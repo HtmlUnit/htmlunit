@@ -53,7 +53,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class CanvasRenderingContext2D extends SimpleScriptable {
 
     private final HTMLCanvasElement canvas_;
-    private final RenderingBackend renderingBackend_;
+    private RenderingBackend renderingBackend_;
 
     /**
      * Default constructor.
@@ -70,16 +70,22 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     public CanvasRenderingContext2D(final HTMLCanvasElement canvas) {
         canvas_ = canvas;
-        final int imageWidth = Math.max(1, canvas.getWidth());
-        final int imageHeight = Math.max(1, canvas.getHeight());
-        if (GAEUtils.isGaeMode()) {
-            renderingBackend_ = new GaeRenderingBackend(imageWidth, imageHeight);
-        }
-        else {
-            renderingBackend_ = new AwtRenderingBackend(imageWidth, imageHeight);
-        }
+        renderingBackend_ = null;
     }
 
+    private RenderingBackend getRenderingBackend() {
+        if (renderingBackend_ == null) {
+            final int imageWidth = Math.max(1, canvas_.getWidth());
+            final int imageHeight = Math.max(1, canvas_.getHeight());
+            if (GAEUtils.isGaeMode()) {
+                renderingBackend_ = new GaeRenderingBackend(imageWidth, imageHeight);
+            }
+            else {
+                renderingBackend_ = new AwtRenderingBackend(imageWidth, imageHeight);
+            }
+        }
+        return renderingBackend_;
+    }
     /**
      * Returns the {@code fillStyle} property.
      * @return the {@code fillStyle} property
@@ -95,7 +101,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxSetter
     public void setFillStyle(final String fillStyle) {
-        renderingBackend_.setFillStyle(fillStyle);
+        getRenderingBackend().setFillStyle(fillStyle);
     }
 
     /**
@@ -315,7 +321,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             if (image instanceof HTMLImageElement) {
                 final ImageReader imageReader =
                         ((HtmlImage) ((HTMLImageElement) image).getDomNodeOrDie()).getImageReader();
-                renderingBackend_.drawImage(imageReader, dxI, dyI);
+                getRenderingBackend().drawImage(imageReader, dxI, dyI);
             }
         }
         catch (final IOException ioe) {
@@ -336,7 +342,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             if (type == null) {
                 type = "png";
             }
-            return "data:" + type + ";base64," + renderingBackend_.encodeToString(type);
+            return "data:" + type + ";base64," + getRenderingBackend().encodeToString(type);
         }
         catch (final IOException ioe) {
             throw Context.throwAsScriptRuntimeEx(ioe);
@@ -379,7 +385,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void fillRect(final int x, final int y, final int w, final int h) {
-        renderingBackend_.fillRect(x, y, w, h);
+        getRenderingBackend().fillRect(x, y, w, h);
     }
 
     /**
@@ -400,7 +406,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public ImageData getImageData(final int sx, final int sy, final int sw, final int sh) {
-        final ImageData imageData = new ImageData(renderingBackend_, sx, sy, sw, sh);
+        final ImageData imageData = new ImageData(getRenderingBackend(), sx, sy, sw, sh);
         imageData.setParentScope(getParentScope());
         imageData.setPrototype(getPrototype(imageData.getClass()));
         return imageData;
