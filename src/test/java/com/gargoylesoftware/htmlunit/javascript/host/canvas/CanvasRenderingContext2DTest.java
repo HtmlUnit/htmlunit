@@ -215,6 +215,37 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"rendering...", "...done"},
+            FF = {"rendering...", "exception"})
+    public void drawImage_invalidImage() throws Exception {
+        try (final InputStream is = getClass().getResourceAsStream("invalid.png")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
+
+        final String html = "<html><body>\n"
+            + "<img id='myImage'>\n"
+            + "<canvas id='myCanvas'></canvas>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var img = document.getElementById('myImage');\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  var context = canvas.getContext('2d');\n"
+            + "  alert('rendering...');\n"
+            + "  context.drawImage(img, 0, 0, 10, 10);\n"
+            + "  alert('...done');\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     private void drawImage(final String fileName) throws Exception {
         try (final InputStream is = getClass().getResourceAsStream(fileName)) {
             final byte[] directBytes = IOUtils.toByteArray(is);
