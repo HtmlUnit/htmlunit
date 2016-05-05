@@ -97,7 +97,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
         if (imageReader.getNumImages(true) != 0) {
             final BufferedImage img = imageReader.read(0);
-            graphics2D_.drawImage(img, dxI, dyI, null);
+            graphics2D_.drawImage(img, dxI, dyI, image_.getWidth(), image_.getHeight(), null);
         }
     }
 
