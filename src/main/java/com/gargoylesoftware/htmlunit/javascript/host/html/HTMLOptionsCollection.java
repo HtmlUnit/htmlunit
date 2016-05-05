@@ -113,7 +113,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        if (index < 0) {
+        if (htmlSelect_ == null || index < 0) {
             return Undefined.instance;
         }
 
