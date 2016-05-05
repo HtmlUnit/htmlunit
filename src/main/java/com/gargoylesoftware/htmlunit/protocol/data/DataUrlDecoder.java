@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
@@ -26,6 +27,8 @@ import org.apache.commons.lang3.StringUtils;
  * Helper to work with data URLs.
  * @see <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC2397</a>
  * @author Marc Guillemot
+ * @author Ronald Brill
+ * @author Carsten Steul
  */
 public class DataUrlDecoder {
     private static final String DEFAULT_CHARSET = "US-ASCII";
@@ -79,7 +82,7 @@ public class DataUrlDecoder {
         final boolean base64 = beforeData.endsWith(";base64");
         byte[] data = url.substring(comma + 1).getBytes(charset);
         if (base64) {
-            data = Base64.decodeBase64(URLCodec.decodeUrl(data));
+            data = Base64.decodeBase64(decodeUrl(data));
         }
         else {
             data = URLCodec.decodeUrl(data);
@@ -135,5 +138,38 @@ public class DataUrlDecoder {
      */
     public String getDataAsString() throws UnsupportedEncodingException {
         return new String(content_, charset_);
+    }
+
+    // adapted from apache commons codec
+    private static byte[] decodeUrl(final byte[] bytes) throws DecoderException {
+        if (bytes == null) {
+            return null;
+        }
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        for (int i = 0; i < bytes.length; i++) {
+            final int b = bytes[i];
+            if (b == '%') {
+                try {
+                    final int u = digit16(bytes[++i]);
+                    final int l = digit16(bytes[++i]);
+                    buffer.write((char) ((u << 4) + l));
+                }
+                catch (final ArrayIndexOutOfBoundsException e) {
+                    throw new DecoderException("Invalid URL encoding: ", e);
+                }
+            }
+            else {
+                buffer.write(b);
+            }
+        }
+        return buffer.toByteArray();
+    }
+
+    private static int digit16(final byte b) throws DecoderException {
+        final int i = Character.digit((char) b, 16);
+        if (i == -1) {
+            throw new DecoderException("Invalid URL encoding: not a valid digit (radix 16): " + b);
+        }
+        return i;
     }
 }

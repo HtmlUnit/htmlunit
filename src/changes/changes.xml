@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
-            <action type="update" dev="mbowler">
+            <action type="fix" dev="rbri" issue="1769" due-to="Carsten Steul">
+                DataUrlDecoder.decodeUrl() no longer replaces '+' with a space character.
+            </action>
+            <action type="update" dev="rbri">
                 Dependency to gsbase library removed.
             </action>
             <action type="add" dev="rbri">
