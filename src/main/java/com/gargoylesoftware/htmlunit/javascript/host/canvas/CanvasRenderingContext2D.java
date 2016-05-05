@@ -86,6 +86,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         }
         return renderingBackend_;
     }
+
     /**
      * Returns the {@code fillStyle} property.
      * @return the {@code fillStyle} property
