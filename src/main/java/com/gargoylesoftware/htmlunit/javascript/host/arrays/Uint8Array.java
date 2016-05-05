@@ -55,7 +55,7 @@ public class Uint8Array extends ArrayBufferViewBase {
      */
     @Override
     protected Object fromArray(final byte[] array, final int offset) {
-        if (offset >= array.length) {
+        if (offset < 0 || offset >= array.length) {
             return Scriptable.NOT_FOUND;
         }
         return array[offset] & 0xFF;

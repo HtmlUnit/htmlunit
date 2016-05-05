@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -89,13 +90,16 @@ public class DOMTokenList extends SimpleScriptable {
         if (getPrototype() == null) {
             return (String) super.getDefaultValue(hint);
         }
-        final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
-        if (attr != null) {
-            String value = attr.getValue();
-            if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT)) {
-                value = StringUtils.join(StringUtils.split(value, whitespaceChars()), ' ');
+        final DomNode node = getDomNodeOrNull();
+        if (node != null) {
+            final DomAttr attr = (DomAttr) node.getAttributes().getNamedItem(attributeName_);
+            if (attr != null) {
+                String value = attr.getValue();
+                if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT)) {
+                    value = StringUtils.join(StringUtils.split(value, whitespaceChars()), ' ');
+                }
+                return value;
             }
-            return value;
         }
         return "";
     }

@@ -147,4 +147,46 @@ public class Int16ArrayTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "815", "undefined", "undefined"})
+    public void index() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = new Int16Array([815]);\n"
+            + "  alert(array[-1]);\n"
+            + "  alert(array[0]);\n"
+            + "  alert(array[1]);\n"
+            + "  alert(array[21]);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = new Int16Array([815]);\n"
+            + "  alert(-1 in array);\n"
+            + "  alert(0 in array);\n"
+            + "  alert(1 in array);\n"
+            + "  alert(42 in array);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

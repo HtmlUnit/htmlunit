@@ -24,6 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -102,6 +103,15 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      */
     protected Object getWithPreemption(final String name) {
         return NOT_FOUND;
+    }
+
+    @Override
+    public boolean has(final int index, final Scriptable start) {
+        final Object found = get(index, start);
+        if (Undefined.instance != found && Scriptable.NOT_FOUND != found) {
+            return true;
+        }
+        return super.has(index, start);
     }
 
     /**

@@ -101,12 +101,4 @@ public class FileList extends SimpleScriptable {
     public Object get(final int index, final Scriptable start) {
         return item(index);
     }
-
-    @Override
-    public boolean has(final int index, final Scriptable start) {
-        if (0 <= index && index < getLength()) {
-            return true;
-        }
-        return super.has(index, start);
-    }
 }

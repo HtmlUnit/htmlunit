@@ -61,7 +61,7 @@ public class Float64Array extends ArrayBufferViewBase {
      */
     @Override
     protected Object fromArray(final byte[] array, final int offset) {
-        if (offset >= array.length) {
+        if (offset < 0 || offset >= array.length) {
             return Scriptable.NOT_FOUND;
         }
         final ByteBuffer buff = ByteBuffer.wrap(array);

@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -798,7 +797,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "false", "true", "false", "false"},
             IE = {"2", "true", "true", "true", "true"})
-    @NotYetImplemented
     public void in() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
