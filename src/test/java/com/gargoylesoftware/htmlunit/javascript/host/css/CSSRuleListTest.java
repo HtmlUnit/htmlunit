@@ -159,4 +159,33 @@ public class CSSRuleListTest extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { font-size: 1234px; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var rules;\n"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
+                + "    else\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    alert(rules.length);\n"
+                + "    alert(-1 in rules);\n"
+                + "    alert(0 in rules);\n"
+                + "    alert(1 in rules);\n"
+                + "    alert(42 in rules);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
