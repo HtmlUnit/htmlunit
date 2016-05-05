@@ -33,6 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -46,7 +47,6 @@ import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
-import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -116,8 +116,24 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(client);
+
+        final List<WebWindowEvent> events = new LinkedList<>();
+        client.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
@@ -129,15 +145,15 @@ public class WebClientTest extends SimpleWebTestCase {
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage)
         });
-        assertEquals(firstExpectedEvents, eventCatcher.getEvents());
+        assertEquals(firstExpectedEvents, events);
 
-        eventCatcher.clear();
+        events.clear();
         final HtmlPage secondPage = anchor.click();
 
         final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage)
         });
-        assertEquals(secondExpectedEvents, eventCatcher.getEvents());
+        assertEquals(secondExpectedEvents, events);
     }
 
     /**
@@ -153,9 +169,25 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
         final String page2Content = "<html><head><title>foo</title></head><body></body></html>";
+
         final WebClient client = getWebClient();
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(client);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        client.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, page1Content);
@@ -176,7 +208,7 @@ public class WebClientTest extends SimpleWebTestCase {
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, null, firstPage),
         });
-        assertEquals(expectedEvents, eventCatcher.getEvents());
+        assertEquals(expectedEvents, events);
     }
 
     /**
@@ -204,8 +236,23 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         assertEquals("first", firstPage.getTitleText());
 
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(client);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        client.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final HtmlInlineFrame frame = firstPage.getHtmlElementById("frame1");
         final HtmlPage thirdPage = (HtmlPage) frame.getEnclosedPage();
@@ -222,8 +269,8 @@ public class WebClientTest extends SimpleWebTestCase {
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
         });
-        assertEquals(expectedEvents.get(0), eventCatcher.getEvents().get(0));
-        assertEquals(expectedEvents, eventCatcher.getEvents());
+        assertEquals(expectedEvents.get(0), events.get(0));
+        assertEquals(expectedEvents, events);
     }
 
     /**

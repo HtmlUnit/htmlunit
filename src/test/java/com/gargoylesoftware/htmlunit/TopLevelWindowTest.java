@@ -17,13 +17,13 @@ package com.gargoylesoftware.htmlunit;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class TopLevelWindowTest extends SimpleWebTestCase {
@@ -46,8 +47,24 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
     @Test
     public void closeTheOnlyWindow() throws Exception {
         final WebClient webClient = getWebClient();
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(webClient);
+
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow windowToClose = webClient.getCurrentWindow();
         ((TopLevelWindow) windowToClose).close();
@@ -55,7 +72,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         final List<WebWindowEvent> expectedEvents = Arrays.asList(
             new WebWindowEvent(windowToClose, WebWindowEvent.CLOSE, null, null)
         );
-        assertEquals(expectedEvents, eventCatcher.getEvents());
+        assertEquals(expectedEvents, events);
 
         // Since this was the only open window, a new window should have
         // been created when this one was closed. Verify this.

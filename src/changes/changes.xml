@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="update" dev="mbowler">
+                Dependency to gsbase library removed.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: Simple impl of URL.createObjectURL and URL.revokeObjectURL added.
             </action>
