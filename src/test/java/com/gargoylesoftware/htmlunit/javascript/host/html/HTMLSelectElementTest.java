@@ -26,7 +26,6 @@ import org.openqa.selenium.interactions.Actions;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -2472,7 +2471,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
             IE = {"1", "true", "true", "true", "true"})
-    @NotYetImplemented(IE)
     public void in() throws Exception {
         final String html =
             "<html>\n"
