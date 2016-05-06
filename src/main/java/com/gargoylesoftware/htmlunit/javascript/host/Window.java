@@ -2066,7 +2066,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    @SuppressWarnings("null")
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
         final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
 

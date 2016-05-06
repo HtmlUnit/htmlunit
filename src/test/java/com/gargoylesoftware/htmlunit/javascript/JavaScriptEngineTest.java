@@ -1304,7 +1304,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
 
-        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final JavaScriptEngine engine = webClient.getJavaScriptEngine();
 
