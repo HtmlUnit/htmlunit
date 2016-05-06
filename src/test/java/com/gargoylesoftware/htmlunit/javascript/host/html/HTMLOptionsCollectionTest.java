@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1114,7 +1111,6 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
             IE = {"1", "true", "true", "true", "true"})
-    @NotYetImplemented(IE)
     public void in() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

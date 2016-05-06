@@ -1205,6 +1205,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
+    /** The 'in' operator returns always true for HtmlOptionsCollection. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_SELECT_OPTIONS_IN_ALWAYS_TRUE,
+
     /** Indicates that select.options returns null if requested index is outside. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
