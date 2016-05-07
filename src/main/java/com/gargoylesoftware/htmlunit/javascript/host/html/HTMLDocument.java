@@ -1255,8 +1255,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns this document's <tt>body</tt> element.
-     * @return this document's <tt>body</tt> element
+     * Returns this document's {@code body} element.
+     * @return this document's {@code body} element
      */
     @JsxGetter
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
@@ -1270,8 +1270,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns this document's <tt>head</tt> element.
-     * @return this document's <tt>head</tt> element
+     * Returns this document's {@code head} element.
+     * @return this document's {@code head} element
      */
     @JsxGetter
     public HTMLElement getHead() {

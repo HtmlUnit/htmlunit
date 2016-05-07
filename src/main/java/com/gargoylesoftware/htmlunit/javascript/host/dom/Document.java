@@ -437,7 +437,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Create a new HTML element with the given tag name.
+     * Creates a new element with the given tag name.
      *
      * @param tagName the tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported

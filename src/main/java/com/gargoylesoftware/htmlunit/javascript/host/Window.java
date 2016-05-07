@@ -602,8 +602,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the location property.
-     * @return the location property
+     * Returns the {@code location} property.
+     * @return the {@code location} property
      */
     @JsxGetter
     public Location getLocation() {
@@ -1237,7 +1237,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Triggers the <tt>onerror</tt> handler, if one has been set.
+     * Triggers the {@code onerror} handler, if one has been set.
      * @param e the error that needs to be reported
      */
     public void triggerOnError(final ScriptException e) {

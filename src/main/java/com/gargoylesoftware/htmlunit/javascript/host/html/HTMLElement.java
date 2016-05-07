@@ -2644,7 +2644,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *
      * @return the default display style
      */
-    public String getDefaultStyleDisplay() {
+    public final String getDefaultStyleDisplay() {
         final HtmlElement htmlElt = getDomNodeOrDie();
         return htmlElt.getDefaultStyleDisplay().value();
     }

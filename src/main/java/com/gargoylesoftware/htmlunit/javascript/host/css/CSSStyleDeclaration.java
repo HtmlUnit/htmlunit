@@ -635,7 +635,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the transformed string
      * @see com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap#decamelize(String)
      */
-    protected static String camelize(final String string) {
+    protected static final String camelize(final String string) {
         if (string == null) {
             return null;
         }

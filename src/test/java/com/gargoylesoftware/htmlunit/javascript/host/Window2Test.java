@@ -871,13 +871,16 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("true")
-    public void thisStrictEquals() throws Exception {
+    @Alerts({"true", "true", "true", "true"})
+    public void thisEquals() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  alert(this === window);\n"
+            + "  alert(window === this);\n"
+            + "  alert(this == window);\n"
+            + "  alert(window == this);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
