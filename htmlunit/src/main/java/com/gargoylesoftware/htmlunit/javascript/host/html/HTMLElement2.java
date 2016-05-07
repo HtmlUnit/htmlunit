@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -23,9 +25,22 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.ClientRect2;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -145,6 +160,378 @@ public class HTMLElement2 extends Element2 {
     @Getter
     public Element2 getParentElement() {
         return super.getParentElement();
+    }
+
+    /**
+     * Returns the default display style.
+     *
+     * @return the default display style
+     */
+    public final String getDefaultStyleDisplay() {
+        final HtmlElement htmlElt = getDomNodeOrDie();
+        return htmlElt.getDefaultStyleDisplay().value();
+    }
+
+    /**
+     * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536433.aspx">MSDN doc</a>
+     * @return an object that specifies the bounds of a collection of TextRectangle objects
+     */
+    @Override
+    public ClientRect2 getBoundingClientRect() {
+        if (!getDomNodeOrDie().isAttachedToPage()
+                && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
+            throw new RuntimeException("Element is not attache to a page");
+        }
+
+        int left = getPosX();
+        int top = getPosY();
+
+        // account for any scrolled ancestors
+        Object parentNode = getOffsetParentInternal(false);
+        while (parentNode != null
+                && (parentNode instanceof HTMLElement)
+                && !(parentNode instanceof HTMLBodyElement)) {
+            final HTMLElement elem = (HTMLElement) parentNode;
+            left -= elem.getScrollLeft();
+            top -= elem.getScrollTop();
+
+            parentNode = elem.getParentNode();
+        }
+
+        final ClientRect2 textRectangle = new ClientRect2(top + getOffsetHeight(), left, left + getOffsetWidth(), top);
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        textRectangle.setProto(global.getPrototype(textRectangle.getClass()));
+        return textRectangle;
+    }
+
+    /**
+     * Returns this element's <tt>offsetWidth</tt>, which is the element width plus the element's padding
+     * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
+     * during mouse events.
+     * @return this element's <tt>offsetWidth</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534304.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     */
+    @Getter
+    public int getOffsetWidth() {
+        if (isDisplayNone() || !getDomNodeOrDie().isAttachedToPage()) {
+            return 0;
+        }
+
+//        final MouseEvent2 event = MouseEvent2.getCurrentMouseEvent();
+//        if (isAncestorOfEventTarget(event)) {
+//            // compute appropriate offset width to pretend mouse event was produced within this element
+//            return event.getClientX() - getPosX() + 50;
+//        }
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getCalculatedWidth(true, true);
+    }
+
+    /**
+     * Returns this element's <tt>offsetHeight</tt>, which is the element height plus the element's padding
+     * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
+     * during mouse events.
+     * @return this element's <tt>offsetHeight</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534199.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     */
+    @Getter
+    public final int getOffsetHeight() {
+        if (isDisplayNone() || !getDomNodeOrDie().isAttachedToPage()) {
+            return 0;
+        }
+//        final MouseEvent2 event = MouseEvent2.getCurrentMouseEvent();
+//        if (isAncestorOfEventTarget(event)) {
+//            // compute appropriate offset height to pretend mouse event was produced within this element
+//            return event.getClientY() - getPosY() + 50;
+//        }
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global,this, null);
+        return style.getCalculatedHeight(true, true);
+    }
+
+    /**
+     * Returns whether the {@code display} is {@code none} or not.
+     * @return whether the {@code display} is {@code none} or not
+     */
+    protected final boolean isDisplayNone() {
+        HTMLElement2 element = this;
+        while (element != null) {
+            final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+            final CSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
+            final String display = style.getDisplay();
+            if (DisplayStyle.NONE.value().equals(display)) {
+                return true;
+            }
+            element = element.getParentHTMLElement();
+        }
+        return false;
+    }
+
+    /**
+     * Returns this element's X position.
+     * @return this element's X position
+     */
+    public int getPosX() {
+        int cumulativeOffset = 0;
+        HTMLElement2 element = this;
+        while (element != null) {
+            cumulativeOffset += element.getOffsetLeft();
+            if (element != this) {
+                final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+                final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
+                cumulativeOffset += style.getBorderLeftValue();
+            }
+            element = element.getOffsetParent();
+        }
+        return cumulativeOffset;
+    }
+
+    /**
+     * Returns this element's Y position.
+     * @return this element's Y position
+     */
+    public int getPosY() {
+        int cumulativeOffset = 0;
+        HTMLElement2 element = this;
+        while (element != null) {
+            cumulativeOffset += element.getOffsetTop();
+            if (element != this) {
+                final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+                final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
+                cumulativeOffset += style.getBorderTopValue();
+            }
+            element = element.getOffsetParent();
+        }
+        return cumulativeOffset;
+    }
+
+    private Object getOffsetParentInternal(final boolean returnNullIfFixed) {
+        DomNode currentElement = getDomNodeOrDie();
+
+        if (currentElement.getParentNode() == null) {
+            return null;
+        }
+
+        Object offsetParent = null;
+        final HTMLElement2 htmlElement = (HTMLElement2) currentElement.getScriptObject2();
+        if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getStyleAttribute(
+                StyleAttributes.Definition.POSITION, true))) {
+            return null;
+        }
+
+        final Global global = NashornJavaScriptEngine.getGlobal(htmlElement.getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, htmlElement, null);
+        final String position = style.getPositionWithInheritance();
+        final boolean staticPos = "static".equals(position);
+
+        final boolean useTables = staticPos;
+
+        while (currentElement != null) {
+
+            final DomNode parentNode = currentElement.getParentNode();
+            if (parentNode instanceof HtmlBody
+                || (useTables && parentNode instanceof HtmlTableDataCell)
+                || (useTables && parentNode instanceof HtmlTable)) {
+                offsetParent = parentNode.getScriptObject2();
+                break;
+            }
+
+            if (parentNode != null && parentNode.getScriptObject2() instanceof HTMLElement2) {
+                final HTMLElement2 parentElement = (HTMLElement2) parentNode.getScriptObject2();
+                final ComputedCSSStyleDeclaration2 parentStyle = Window2.getComputedStyle(global, parentElement, null);
+                final String parentPosition = parentStyle.getPositionWithInheritance();
+                final boolean parentIsStatic = "static".equals(parentPosition);
+                if (!parentIsStatic) {
+                    offsetParent = parentNode.getScriptableObject();
+                    break;
+                }
+            }
+
+            currentElement = currentElement.getParentNode();
+        }
+
+        return offsetParent;
+    }
+
+    /**
+     * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
+     * element relative to the <tt>offsetParent</tt>.
+     *
+     * @return this element's <tt>offsetLeft</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
+     */
+    @Getter
+    public int getOffsetLeft() {
+        if (this instanceof HTMLBodyElement2) {
+            return 0;
+        }
+
+        int left = 0;
+        final HTMLElement2 offsetParent = getOffsetParent();
+
+        // Add the offset for this node.
+        DomNode node = getDomNodeOrDie();
+        HTMLElement2 element = (HTMLElement2) node.getScriptObject2();
+        final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+        ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
+        left += style.getLeft(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if ("absolute".equals(position)) {
+            return left;
+        }
+
+        // Add the offset for the ancestor nodes.
+        node = node.getParentNode();
+        while (node != null && node.getScriptObject2() != offsetParent) {
+            if (node.getScriptObject2() instanceof HTMLElement2) {
+                element = (HTMLElement2) node.getScriptObject2();
+                style = Window2.getComputedStyle(global, element, null);
+                left += style.getLeft(true, true, true);
+            }
+            node = node.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            style = Window2.getComputedStyle(global, offsetParent, null);
+            left += style.getMarginLeftValue();
+            left += style.getPaddingLeftValue();
+        }
+
+        return left;
+    }
+
+    /**
+     * Gets the offset parent or {@code null} if this is not an {@link HTMLElement}.
+     * @return the offset parent or {@code null}
+     */
+    private HTMLElement2 getOffsetParent() {
+        final Object offsetParent = getOffsetParentInternal(false);
+        if (offsetParent instanceof HTMLElement2) {
+            return (HTMLElement2) offsetParent;
+        }
+        return null;
+    }
+
+    /**
+     * Returns the {@code clientLeft} attribute.
+     * @return the {@code clientLeft} attribute
+     */
+    @Getter
+    public int getClientLeft() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getBorderLeftValue();
+    }
+
+    /**
+     * Returns {@code clientTop} attribute.
+     * @return the {@code clientTop} attribute
+     */
+    @Getter
+    public int getClientTop() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getBorderTopValue();
+    }
+
+    /**
+     * Gets the first ancestor instance of {@link HTMLElement}. It is mostly identical
+     * to {@link #getParent()} except that it skips XML nodes.
+     * @return the parent HTML element
+     * @see #getParent()
+     */
+    public HTMLElement2 getParentHTMLElement() {
+        Node2 parent = getParent();
+        while (parent != null && !(parent instanceof HTMLElement2)) {
+            parent = parent.getParent();
+        }
+        return (HTMLElement2) parent;
+    }
+
+    /**
+     * Returns this element's {@code offsetTop}, which is the calculated top position of this
+     * element relative to the {@code offsetParent}.
+     *
+     * @return this element's {@code offsetTop}
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
+     */
+    @Getter
+    public int getOffsetTop() {
+        if (this instanceof HTMLBodyElement2) {
+            return 0;
+        }
+
+        int top = 0;
+        final HTMLElement2 offsetParent = getOffsetParent();
+
+        // Add the offset for this node.
+        DomNode node = getDomNodeOrDie();
+        HTMLElement2 element = (HTMLElement2) node.getScriptObject2();
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
+        top += style.getTop(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if ("absolute".equals(position)) {
+            return top;
+        }
+
+        // Add the offset for the ancestor nodes.
+        node = node.getParentNode();
+        while (node != null && node.getScriptObject2() != offsetParent) {
+            if (node.getScriptObject2() instanceof HTMLElement2) {
+                element = (HTMLElement2) node.getScriptObject2();
+                style = Window2.getComputedStyle(global, element, null);
+                top += style.getTop(false, true, true);
+            }
+            node = node.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            final HTMLElement2 thiz = (HTMLElement2) getDomNodeOrDie().getScriptObject2();
+            style = Window2.getComputedStyle(global, thiz, null);
+            final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
+
+            style = Window2.getComputedStyle(global, offsetParent, null);
+            if (!thisElementHasTopMargin) {
+                top += style.getMarginTopValue();
+            }
+            top += style.getPaddingTopValue();
+        }
+
+        return top;
+    }
+
+    /**
+     * Returns the {@code clientHeight} attribute.
+     * @return the {@code clientHeight} attribute
+     */
+    @Getter
+    public int getClientHeight() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getCalculatedHeight(false, true);
+    }
+
+    /**
+     * Returns the {@code clientWidth} attribute.
+     * @return the {@code clientWidth} attribute
+     */
+    @Getter
+    public int getClientWidth() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global,this, null);
+        return style.getCalculatedWidth(false, true);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

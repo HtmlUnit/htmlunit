@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -30,10 +31,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement2;
@@ -41,8 +46,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement2;
+import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
@@ -180,52 +187,61 @@ public class SimpleScriptObject extends ScriptObject {
      */
     public SimpleScriptObject makeScriptableFor(final DomNode domNode) {
         SimpleScriptObject host = null;
+        final Global global = NashornJavaScriptEngine.getGlobal(domNode.getPage().getEnclosingWindow().getScriptContext());
         if (domNode instanceof HtmlBody) {
-            host = new HTMLBodyElement2();
-            final Global global = Context.getGlobal();
-            if (global != null) {
-                host.setProto(global.getPrototype(host.getClass()));
-            }
+            host = HTMLBodyElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlHtml) {
-            host = new HTMLHtmlElement2();
-            final Global global = Context.getGlobal();
-            if (global != null) {
-                host.setProto(global.getPrototype(host.getClass()));
-            }
+            host = HTMLHtmlElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlForm) {
-            host = HTMLFormElement2.constructor(true, null);
+            host = HTMLFormElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlTextInput) {
-            host = HTMLInputElement2.constructor(true, null);
+            host = HTMLInputElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlFrame) {
-            host = HTMLFrameElement2.constructor(true, null);
+            host = HTMLFrameElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlFrameSet) {
-            host = HTMLFrameSetElement2.constructor(true, null);
+            host = HTMLFrameSetElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlHead) {
-            host = HTMLHeadElement2.constructor(true, null);
+            host = HTMLHeadElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlInlineFrame) {
-            host = HTMLIFrameElement2.constructor(true, null);
+            host = HTMLIFrameElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlDivision) {
-            host = HTMLDivElement2.constructor(true, null);
+            host = HTMLDivElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlTeletype) {
+            host = HTMLElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlStyle) {
+            host = HTMLStyleElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof SvgSvg) {
+            host = SVGSVGElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof DomText) {
+            host = Text2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else {
-            throw new RuntimeException("No ScriptObject found for " + domNode);
+            throw new RuntimeException("No ScriptObject found for " + domNode + " " + domNode.getClass().getName());
         }
         return host;
         // Get the JS class name for the specified DOM node.

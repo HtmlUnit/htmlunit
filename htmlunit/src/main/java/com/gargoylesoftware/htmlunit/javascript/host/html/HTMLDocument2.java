@@ -43,7 +43,12 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
@@ -206,6 +211,7 @@ public class HTMLDocument2 extends Document2 {
 
     public static HTMLDocument2 constructor(final boolean newObj, final Object self) {
         final HTMLDocument2 host = new HTMLDocument2();
+        ScriptUtils.initialize(host);
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
     }
@@ -388,6 +394,52 @@ public class HTMLDocument2 extends Document2 {
             styleSheets_ = new StyleSheetList2(this);
         }
         return styleSheets_;
+    }
+
+    /**
+     * Returns this document's {@code body} element.
+     * @return this document's {@code body} element
+     */
+    @Getter
+    @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
+    public HTMLElement2 getBody() {
+        final HtmlPage page = getPage();
+        final HtmlElement body = page.getBody();
+        if (body != null) {
+            return (HTMLElement2) body.getScriptObject2();
+        }
+        return null;
+    }
+
+    /**
+     * Returns this document's {@code head} element.
+     * @return this document's {@code head} element
+     */
+    @JsxGetter
+    public HTMLElement2 getHead() {
+        final HtmlElement head = getPage().getHead();
+        if (head != null) {
+            return (HTMLElement2) head.getScriptObject2();
+        }
+        return null;
+    }
+
+    /**
+     * Returns this document's title.
+     * @return this document's title
+     */
+    @JsxGetter
+    public String getTitle() {
+        return getPage().getTitleText();
+    }
+
+    /**
+     * Sets this document's title.
+     * @param title the new title
+     */
+    @JsxSetter
+    public void setTitle(final String title) {
+        getPage().setTitleText(title);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

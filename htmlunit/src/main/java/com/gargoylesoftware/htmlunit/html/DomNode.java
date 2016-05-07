@@ -54,15 +54,19 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
@@ -740,13 +744,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             final List<Node> ancestors = getAncestors();
-            final ArrayList<CSSStyleDeclaration> styles = new ArrayList<>(ancestors.size());
+            final ArrayList<CSSStyleDeclaration2> styles = new ArrayList<>(ancestors.size());
 
             for (final Node node : ancestors) {
-                final Object scriptableObject = ((DomNode) node).getScriptableObject();
-                if (scriptableObject instanceof HTMLElement) {
-                    final HTMLElement elem = (HTMLElement) scriptableObject;
-                    final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
+                final Object scriptableObject = ((DomNode) node).getScriptObject2();
+                if (scriptableObject instanceof HTMLElement2) {
+                    final HTMLElement2 elem = (HTMLElement2) scriptableObject;
+                    final Global global = NashornJavaScriptEngine.getGlobal(elem.getWindow().getWebWindow().getScriptContext());
+                    final CSSStyleDeclaration2 style = Window2.getComputedStyle(global, elem, null);
                     if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
                     }
@@ -757,7 +762,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
             for (int i = styles.size() - 1; i >= 0; i--) {
-                final CSSStyleDeclaration style = styles.get(i);
+                final CSSStyleDeclaration2 style = styles.get(i);
                 final String visibility = style.getStyleAttribute(StyleAttributes.Definition.VISIBILITY);
                 if (visibility.length() > 5) {
                     if ("visible".equals(visibility)) {

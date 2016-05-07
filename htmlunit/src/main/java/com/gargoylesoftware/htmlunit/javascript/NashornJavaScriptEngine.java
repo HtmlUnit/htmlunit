@@ -27,21 +27,27 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.InteractivePage;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.History2;
+import com.gargoylesoftware.htmlunit.javascript.host.Location2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -122,16 +128,28 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("Window", new Window2.FunctionConstructor(), true);
                 global.put("Event", new Event2.FunctionConstructor(), true);
                 global.put("HTMLBodyElement", new HTMLBodyElement2.FunctionConstructor(), true);
+                global.put("HTMLDivElement", new HTMLDivElement2.FunctionConstructor(), true);
                 global.put("HTMLHtmlElement", new HTMLHtmlElement2.FunctionConstructor(), true);
+                global.put("HTMLElement", new HTMLElement2.FunctionConstructor(), true);
                 global.put("HTMLDocument", new HTMLDocument2.FunctionConstructor(), true);
                 global.put("Document", new Document2.FunctionConstructor(), true);
                 global.put("Element", new Element2.FunctionConstructor(), true);
+                global.put("Text", new Text2.FunctionConstructor(), true);
+                global.put("CharacterData", new CharacterData2.FunctionConstructor(), true);
                 global.put("History", new History2.FunctionConstructor(), true);
                 global.put("Node", new Node2.FunctionConstructor(), true);
                 global.put("HTMLInputElement", new HTMLInputElement2.FunctionConstructor(), true);
                 global.put("ComputedCSSStyleDeclaration", new ComputedCSSStyleDeclaration2.FunctionConstructor(), true);
                 global.put("CSSStyleDeclaration", new CSSStyleDeclaration2.FunctionConstructor(), true);
+                global.put("Location", new Location2.FunctionConstructor(), true);
                 setProto(global, "Window", "EventTarget");
+                setProto(global, "HTMLDocument", "Document");
+                setProto(global, "HTMLBodyElement", "HTMLElement");
+                setProto(global, "HTMLDivElement", "HTMLElement");
+                setProto(global, "HTMLElement", "Element");
+                setProto(global, "Element", "Node");
+                setProto(global, "Text", "CharacterData");
+                setProto(global, "CharacterData", "Node");
                 setProto(global, "ComputedCSSStyleDeclaration", "CSSStyleDeclaration");
             }
             else {
@@ -167,19 +185,19 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             global.setWindow(window);
 
             try {
-                final String[] fromWindowToGlobal = {"alert", "atob", "btoa", "execScript", "CollectGarbage"};
-                for (final String key : fromWindowToGlobal) {
+                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "execScript", "CollectGarbage"};
+                for (final String key : windowToGlobalFunctions) {
                     global.put(key, window.get(key), true);
                 }
 
-                final String[] fromGlobalToWindow = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
+                final String[] globalToWindowFunctions = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
                         "parseInt", "parseFloat", "encodeURI", "encodeURIComponent", "decodeURI", "decodeURIComponent",
                         "escape", "unescape"};
-                for (final String key : fromGlobalToWindow) {
+                for (final String key : globalToWindowFunctions) {
                     window.put(key, global.get(key), true);
                 }
 
-                final String[] windowProperties = {"top", "controllers", "document", "length"};
+                final String[] windowProperties = {"top", "controllers", "document", "length", "location"};
                 final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
                 for (final String key : windowProperties) {
@@ -254,8 +272,51 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             return engine.eval(sourceCode, page.getEnclosingWindow().getScriptContext());
         }
         catch(final Exception e) {
-            throw new RuntimeException(e);
+            handleJavaScriptException(new ScriptException(page, e, sourceCode), true);
+            return null;
         }
+    }
+
+    /**
+     * Returns the web client that this engine is associated with.
+     * @return the web client
+     */
+    public WebClient getWebClient() {
+        return webClient_;
+    }
+
+    /**
+     * Handles an exception that occurred during execution of JavaScript code.
+     * @param scriptException the exception
+     * @param triggerOnError if true, this triggers the onerror handler
+     */
+    protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
+        // Trigger window.onerror, if it has been set.
+        final InteractivePage page = scriptException.getPage();
+        if (triggerOnError && page != null) {
+            final WebWindow window = page.getEnclosingWindow();
+            if (window != null) {
+                final Window2 w = (Window2) window.getScriptObject2();
+                if (w != null) {
+                    try {
+                        w.triggerOnError(scriptException);
+                    }
+                    catch (final Exception e) {
+                        handleJavaScriptException(new ScriptException(page, e, null), false);
+                    }
+                }
+            }
+        }
+        final JavaScriptErrorListener javaScriptErrorListener = getWebClient().getJavaScriptErrorListener();
+        if (javaScriptErrorListener != null) {
+            javaScriptErrorListener.scriptException(page, scriptException);
+        }
+        // Throw a Java exception if the user wants us to.
+        if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
+            throw scriptException;
+        }
+        // Log the error; ScriptException instances provide good debug info.
+        LOG.info("Caught script exception", scriptException);
     }
 
     @Override

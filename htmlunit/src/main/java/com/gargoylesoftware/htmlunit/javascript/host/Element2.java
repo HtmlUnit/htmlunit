@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -26,12 +26,14 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -143,6 +145,25 @@ public class Element2 extends Node2 {
         return (Element2) parent;
     }
 
+    /**
+     * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536433.aspx">MSDN doc</a>
+     * @return an object that specifies the bounds of a collection of TextRectangle objects
+     */
+    @Function
+    public ClientRect2 getBoundingClientRect() {
+        if (!getDomNodeOrDie().isAttachedToPage()
+                && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
+            throw new RuntimeException("Element is not attache to a page");
+        }
+
+        final ClientRect2 textRectangle = new ClientRect2(1, 1, 1, 1);
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        textRectangle.setProto(global.getPrototype(textRectangle.getClass()));
+
+        return textRectangle;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Element2.class,
@@ -165,6 +186,16 @@ public class Element2 extends Node2 {
     }
 
     public static final class Prototype extends PrototypeObject {
+        public ScriptFunction getBoundingClientRect;
+
+        public ScriptFunction G$getBoundingClientRect() {
+            return getBoundingClientRect;
+        }
+
+        public void S$getBoundingClientRect(final ScriptFunction function) {
+            this.getBoundingClientRect = function;
+        }
+
         Prototype() {
             ScriptUtils.initialize(this);
         }

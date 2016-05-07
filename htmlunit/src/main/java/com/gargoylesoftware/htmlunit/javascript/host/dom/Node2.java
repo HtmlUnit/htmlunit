@@ -23,12 +23,15 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -112,6 +115,94 @@ public class Node2 extends EventTarget2 {
         return makeScriptableFor(domNode);
     }
 
+    /**
+     * Adds a DOM node to the node.
+     * @param childObject the node to add to this node
+     * @return the newly added child node
+     */
+    @Function
+    public Object appendChild(final Object childObject) {
+        Object appendedChild = null;
+        if (childObject instanceof Node2) {
+            final Node2 childNode = (Node2) childObject;
+
+            // is the node allowed here?
+            if (!isNodeInsertable(childNode)) {
+                throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy");
+//                throw new RuntimeException(
+//                    new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+//                        DOMException.HIERARCHY_REQUEST_ERR));
+            }
+
+            // Get XML node for the DOM node passed in
+            final DomNode childDomNode = childNode.getDomNodeOrDie();
+
+            // Get the parent XML node that the child should be added to.
+            final DomNode parentNode = getDomNodeOrDie();
+
+            // Append the child to the parent node
+            parentNode.appendChild(childDomNode);
+            appendedChild = childObject;
+
+            initInlineFrameIfNeeded(childDomNode);
+            for (final DomNode domNode : childDomNode.getDescendants()) {
+                initInlineFrameIfNeeded(domNode);
+            }
+        }
+        return appendedChild;
+    }
+
+    /**
+     * If we have added a new iframe that
+     * had no source attribute, we have to take care the
+     * 'onload' handler is triggered.
+     *
+     * @param childDomNode
+     */
+    private static void initInlineFrameIfNeeded(final DomNode childDomNode) {
+        if (childDomNode instanceof HtmlInlineFrame) {
+            final HtmlInlineFrame frame = (HtmlInlineFrame) childDomNode;
+            if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
+                frame.loadInnerPage();
+            }
+        }
+    }
+
+    /**
+     * Indicates if the node can be inserted.
+     * @param childObject the node
+     * @return {@code false} if it is not allowed here
+     */
+    private static boolean isNodeInsertable(final Node2 childObject) {
+        if (childObject instanceof HTMLHtmlElement2) {
+            final DomNode domNode = childObject.getDomNodeOrDie();
+            return !(domNode.getPage().getDocumentElement() == domNode);
+        }
+        return true;
+    }
+
+    /**
+     * Gets the JavaScript property {@code firstChild} for the node that
+     * contains the current node.
+     * @return the first child node or null if the current node has
+     * no children.
+     */
+    @Getter
+    public Node2 getFirstChild() {
+        return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
+    }
+
+    /**
+     * Gets the JavaScript property {@code lastChild} for the node that
+     * contains the current node.
+     * @return the last child node or null if the current node has
+     * no children.
+     */
+    @Getter
+    public Node2 getLastChild() {
+        return getJavaScriptNode(getDomNodeOrDie().getLastChild());
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Node2.class,
@@ -134,6 +225,16 @@ public class Node2 extends EventTarget2 {
     }
 
     public static final class Prototype extends PrototypeObject {
+        public ScriptFunction appendChild;
+
+        public ScriptFunction G$appendChild() {
+            return appendChild;
+        }
+
+        public void S$appendChild(final ScriptFunction function) {
+            this.appendChild = function;
+        }
+
         Prototype() {
             ScriptUtils.initialize(this);
         }

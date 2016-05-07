@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.html;
+package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -23,18 +23,17 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class HTMLDivElement2 extends HTMLElement2 {
+public class CharacterData2 extends Node2 {
 
-    public static HTMLDivElement2 constructor(final boolean newObj, final Object self) {
-        final HTMLDivElement2 host = new HTMLDivElement2();
-        ScriptUtils.initialize(host);
+    public static CharacterData2 constructor(final boolean newObj, final Object self) {
+        final CharacterData2 host = new CharacterData2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
         return host;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(HTMLDivElement2.class,
+            return MethodHandles.lookup().findStatic(CharacterData2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -44,8 +43,8 @@ public class HTMLDivElement2 extends HTMLElement2 {
 
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLDivElement", 
-                    staticHandle("constructor", HTMLDivElement2.class, boolean.class, Object.class),
+            super("CharacterData", 
+                    staticHandle("constructor", CharacterData2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -59,7 +58,7 @@ public class HTMLDivElement2 extends HTMLElement2 {
         }
 
         public String getClassName() {
-            return "HTMLDivElement2";
+            return "CharacterData";
         }
     }
 }

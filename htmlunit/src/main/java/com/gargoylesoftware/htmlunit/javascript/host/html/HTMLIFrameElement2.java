@@ -18,7 +18,10 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -27,8 +30,24 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
 
     public static HTMLIFrameElement2 constructor(final boolean newObj, final Object self) {
         final HTMLIFrameElement2 host = new HTMLIFrameElement2();
+        ScriptUtils.initialize(host);
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
+    }
+
+    /**
+     * Returns the window the frame contains, if any.
+     * @return the window
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">Gecko DOM Reference</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
+     */
+    @Getter
+    public Window2 getContentWindow() {
+        return (Window2) getFrame().getEnclosedWindow().getScriptObject2();
+    }
+
+    private BaseFrameElement getFrame() {
+        return (BaseFrameElement) getDomNodeOrDie();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

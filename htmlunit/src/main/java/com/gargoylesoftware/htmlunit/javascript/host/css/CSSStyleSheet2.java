@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -92,6 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -169,10 +171,11 @@ public class CSSStyleSheet2 extends StyleSheet2 {
         if (source != null) {
             source.setURI(uri);
         }
-        wrapped_ = parseCSS(source);
+        wrapped_ = parseCSS(element.getWindow(), source);
         uri_ = uri;
         ownerNode_ = element;
-        setProto(Context.getGlobal().getPrototype(getClass()));
+        final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+        setProto(global.getPrototype(getClass()));
     }
 
     /**
@@ -407,10 +410,10 @@ public class CSSStyleSheet2 extends StyleSheet2 {
      * @param source the source from which to retrieve the CSS to be parsed
      * @return the stylesheet parsed from the specified input source
      */
-    private org.w3c.dom.css.CSSStyleSheet parseCSS(final InputSource source) {
+    private org.w3c.dom.css.CSSStyleSheet parseCSS(final Window2 window, final InputSource source) {
         org.w3c.dom.css.CSSStyleSheet ss;
         try {
-            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final ErrorHandler errorHandler = window.getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null, null);
@@ -443,7 +446,7 @@ public class CSSStyleSheet2 extends StyleSheet2 {
             return;
         }
 
-        final BrowserVersion browser = getBrowserVersion();
+        final BrowserVersion browser = style.getBrowserVersion();
         final DomElement e = element.getDomNodeOrDie();
         final int rulesLength = rules.getLength();
         for (int i = 0; i < rulesLength; i++) {

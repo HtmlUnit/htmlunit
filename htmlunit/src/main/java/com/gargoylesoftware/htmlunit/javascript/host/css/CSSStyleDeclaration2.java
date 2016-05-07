@@ -14,12 +14,43 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BEHAVIOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.*;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_STYLE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.COLOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.DISPLAY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FLOAT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.LINE_HEIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_TOP;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -33,6 +64,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +72,9 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
@@ -51,6 +85,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -60,11 +95,25 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 public class CSSStyleDeclaration2 extends SimpleScriptObject {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration2.class);
-    private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
-    private static final Map<String, String> CSSColors_ = new HashMap<>();
 
     /** CSS important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
+
+    private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
+    private static final Pattern URL_PATTERN =
+        Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
+    private static final Pattern POSITION_PATTERN =
+        Pattern.compile("(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex))\\s*"
+                    + "(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
+    private static final Pattern POSITION_PATTERN2 =
+        Pattern.compile("(left|right|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
+    private static final Pattern POSITION_PATTERN3 =
+        Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
+
+    private static final Map<String, String> CSSColors_ = new HashMap<>();
+
+    private static final Map<String, String> CamelizeCache_
+        = Collections.synchronizedMap(new HashMap<String, String>());
 
     /** Used to parse URLs. */
     private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
@@ -315,6 +364,24 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
     }
 
     /**
+     * Gets the {@code display} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getDisplay() {
+        return getStyleAttribute(DISPLAY);
+    }
+
+    /**
+     * Sets the {@code display} style attribute.
+     * @param display the new attribute
+     */
+    @Setter
+    public void setDisplay(final String display) {
+        setStyleAttribute(DISPLAY.getAttributeName(), display);
+    }
+
+    /**
      * Sets the specified style attribute.
      * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
@@ -517,6 +584,1176 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
         return pixelValue(s);
     }
 
+    /**
+     * Gets the value of the specified property of the style.
+     * @param name the style property name
+     * @return empty string if nothing found
+     */
+    @Function
+    public String getPropertyValue(final String name) {
+//        if (name != null && name.contains("-")) {
+//            final Object value = getProperty(this, camelize(name));
+//            if (value instanceof String) {
+//                return (String) value;
+//            }
+//        }
+        return getStyleAttributeImpl(name);
+    }
+
+    /**
+     * Transforms the specified string from delimiter-separated (e.g. <tt>font-size</tt>)
+     * to camel-cased (e.g. <tt>fontSize</tt>).
+     * @param string the string to camelize
+     * @return the transformed string
+     * @see com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap#decamelize(String)
+     */
+    protected static final String camelize(final String string) {
+        if (string == null) {
+            return null;
+        }
+
+        String result = CamelizeCache_.get(string);
+        if (null != result) {
+            return result;
+        }
+
+        // not found in CamelizeCache_; convert and store in cache
+        final int pos = string.indexOf('-');
+        if (pos == -1 || pos == string.length() - 1) {
+            // cache also this strings for performance
+            CamelizeCache_.put(string, string);
+            return string;
+        }
+
+        final StringBuilder buffer = new StringBuilder(string);
+        buffer.deleteCharAt(pos);
+        buffer.setCharAt(pos, Character.toUpperCase(buffer.charAt(pos)));
+
+        int i = pos + 1;
+        while (i < buffer.length() - 1) {
+            if (buffer.charAt(i) == '-') {
+                buffer.deleteCharAt(i);
+                buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
+            }
+            i++;
+        }
+        result = buffer.toString();
+        CamelizeCache_.put(string, result);
+
+        return result;
+    }
+
+    /**
+     * <p>Returns the value of one of the two named style attributes. If both attributes exist,
+     * the value of the attribute that was declared last is returned. If only one of the
+     * attributes exists, its value is returned. If neither attribute exists, an empty string
+     * is returned.</p>
+     *
+     * <p>The second named attribute may be shorthand for a the actual desired property.
+     * The following formats are possible:</p>
+     * <ol>
+     *   <li><tt>top right bottom left</tt>: All values are explicit.</li>
+     *   <li><tt>top right bottom</tt>: Left is implicitly the same as right.</li>
+     *   <li><tt>top right</tt>: Left is implicitly the same as right, bottom is implicitly the same as top.</li>
+     *   <li><tt>top</tt>: Left, bottom and right are implicitly the same as top.</li>
+     * </ol>
+     *
+     * @param name1 the name of the first style attribute
+     * @param name2 the name of the second style attribute
+     * @return the value of one of the two named style attributes
+     */
+    private String getStyleAttribute(final Definition name1, final Definition name2) {
+        final String value;
+        if (styleDeclaration_ != null) {
+            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
+            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
+
+            if ("".equals(value1) && "".equals(value2)) {
+                return "";
+            }
+            if (!"".equals(value1) && "".equals(value2)) {
+                return value1;
+            }
+            value = value2;
+        }
+        else {
+            final StyleElement element1 = getStyleElement(name1.getAttributeName());
+            final StyleElement element2 = getStyleElement(name2.getAttributeName());
+
+            if (element2 == null) {
+                if (element1 == null) {
+                    return "";
+                }
+                return element1.getValue();
+            }
+            if (element1 == null) {
+                value = element2.getValue();
+            }
+            else if (element1.getIndex() > element2.getIndex()) {
+                return element1.getValue();
+            }
+            else {
+                value = element2.getValue();
+            }
+        }
+
+        final String[] values = StringUtils.split(value);
+        if (name1.name().contains("TOP")) {
+            return values[0];
+        }
+        else if (name1.name().contains("RIGHT")) {
+            if (values.length > 1) {
+                return values[1];
+            }
+            return values[0];
+        }
+        else if (name1.name().contains("BOTTOM")) {
+            if (values.length > 2) {
+                return values[2];
+            }
+            return values[0];
+        }
+        else if (name1.name().contains("LEFT")) {
+            if (values.length > 3) {
+                return values[3];
+            }
+            else if (values.length > 1) {
+                return values[1];
+            }
+            else {
+                return values[0];
+            }
+        }
+        else {
+            throw new IllegalStateException("Unsupported definitino: " + name1);
+        }
+    }
+
+    /**
+     * Sets the style attribute which should be treated as an integer in pixels.
+     * @param name the attribute name
+     * @param value the attribute value
+     * @param important important value
+     * @param auto true if auto is supported
+     * @param perecent true if percent is supported
+     * @param thinMedThick thin, medium, thick are supported
+     * @param unitRequired unit is required
+     */
+    private void setStyleLengthAttribute(final String name, String value, final String important,
+                final boolean auto, final boolean percent, final boolean thinMedThick, final boolean unitRequired) {
+        if (StringUtils.isEmpty(value)) {
+            setStyleAttribute(name, value);
+            return;
+        }
+
+        if ((auto && "auto".equals(value))
+                || ("initial".equals(value) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
+                || "inherit".equals(value)) {
+            setStyleAttribute(name, value);
+            return;
+        }
+
+        if ((thinMedThick && "thin".equals(value))
+                || "medium".equals(value)
+                || "thick".equals(value)) {
+            setStyleAttribute(name, value);
+            return;
+        }
+
+        String unit = "px";
+        if (percent && value.endsWith("%")) {
+            unit = value.substring(value.length() - 1);
+            value = value.substring(0, value.length() - 1);
+        }
+        else if (value.endsWith("px")
+            || value.endsWith("em")
+            || value.endsWith("ex")
+            || value.endsWith("px")
+            || value.endsWith("cm")
+            || value.endsWith("mm")
+            || value.endsWith("in")
+            || value.endsWith("pc")
+            || value.endsWith("pc")
+            || value.endsWith("ch")
+            || value.endsWith("vh")
+            || value.endsWith("vw")) {
+            unit = value.substring(value.length() - 2);
+            value = value.substring(0, value.length() - 2);
+        }
+        else if (value.endsWith("rem")
+            || value.endsWith("vmin")
+            || value.endsWith("vmax")) {
+            unit = value.substring(value.length() - 3);
+            value = value.substring(0, value.length() - 3);
+        }
+        else if (unitRequired) {
+            return;
+        }
+
+        try {
+            final float floatValue = Float.parseFloat(value);
+            if (floatValue % 1 == 0) {
+                value = Integer.toString((int) floatValue) + unit;
+            }
+            else {
+                value = Float.toString(floatValue) + unit;
+            }
+
+            setStyleAttribute(name, value, important);
+        }
+        catch (final Exception e) {
+            //ignore
+        }
+    }
+
+    /**
+     * Gets the {@code width} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getWidth() {
+        return getStyleAttribute(WIDTH);
+    }
+
+    /**
+     * Sets the {@code width} style attribute.
+     * @param width the new attribute
+     */
+    @Setter
+    public void setWidth(final String width) {
+        setStyleLengthAttribute(WIDTH.getAttributeName(), width, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code cssFloat} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getCssFloat() {
+        return getStyleAttribute(FLOAT);
+    }
+
+    /**
+     * Sets the {@code cssFloat} style attribute.
+     * @param value the new attribute
+     */
+    @Setter
+    public void setCssFloat(final String value) {
+        setStyleAttribute(FLOAT.getAttributeName(), value);
+    }
+
+    /**
+     * Gets the {@code height} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getHeight() {
+        return getStyleAttribute(HEIGHT);
+    }
+
+    /**
+     * Sets the {@code height} style attribute.
+     * @param height the new attribute
+     */
+    @Setter
+    public void setHeight(final String height) {
+        setStyleLengthAttribute(HEIGHT.getAttributeName(), height, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code fontSize} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getFontSize() {
+        return getStyleAttribute(FONT_SIZE);
+    }
+
+    /**
+     * Sets the {@code fontSize} style attribute.
+     * @param fontSize the new attribute
+     */
+    @Setter
+    public void setFontSize(final String fontSize) {
+        setStyleLengthAttribute(FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, false);
+        updateFont(getFont(), false);
+    }
+
+    /**
+     * Gets the {@code font} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getFont() {
+        return getStyleAttribute(FONT);
+    }
+
+    /**
+     * Sets the {@code font} style attribute.
+     * @param font the new attribute
+     */
+    @Setter
+    public void setFont(final String font) {
+        final String[] details = ComputedFont.getDetails(font, !getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS));
+        if (details != null) {
+            setStyleAttribute(FONT_FAMILY.getAttributeName(), details[ComputedFont.FONT_FAMILY_INDEX]);
+            final String fontSize = details[ComputedFont.FONT_SIZE_INDEX];
+            if (details[ComputedFont.LINE_HEIGHT_INDEX] != null) {
+                setStyleAttribute(LINE_HEIGHT.getAttributeName(), details[ComputedFont.LINE_HEIGHT_INDEX]);
+            }
+            setStyleAttribute(FONT_SIZE.getAttributeName(), fontSize);
+            updateFont(font, true);
+        }
+    }
+
+    private void updateFont(final String font, final boolean force) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        final String[] details = ComputedFont.getDetails(font, !browserVersion.hasFeature(CSS_SET_NULL_THROWS));
+        if (details != null || force) {
+            final StringBuilder newFont = new StringBuilder();
+            newFont.append(getFontSize());
+            String lineHeight = getLineHeight();
+            final String defaultLineHeight = LINE_HEIGHT.getDefaultComputedValue(browserVersion);
+            if (lineHeight.isEmpty()) {
+                lineHeight = defaultLineHeight;
+            }
+
+            if (browserVersion.hasFeature(CSS_ZINDEX_TYPE_INTEGER) || !lineHeight.equals(defaultLineHeight)) {
+                newFont.append('/');
+                if (!lineHeight.equals(defaultLineHeight)) {
+                    newFont.append(lineHeight);
+                }
+                else {
+                    newFont.append(LINE_HEIGHT.getDefaultComputedValue(browserVersion));
+                }
+            }
+
+            newFont.append(' ').append(getFontFamily());
+            setStyleAttribute(FONT.getAttributeName(), newFont.toString());
+        }
+    }
+
+    /**
+     * Gets the {@code fontFamily} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getFontFamily() {
+        return getStyleAttribute(FONT_FAMILY);
+    }
+
+    /**
+     * Sets the {@code fontFamily} style attribute.
+     * @param fontFamily the new attribute
+     */
+    @Setter
+    public void setFontFamily(final String fontFamily) {
+        setStyleAttribute(FONT_FAMILY.getAttributeName(), fontFamily);
+        updateFont(getFont(), false);
+    }
+
+    /**
+     * Gets the {@code lineHeight} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getLineHeight() {
+        return getStyleAttribute(LINE_HEIGHT);
+    }
+
+    /**
+     * Sets the {@code lineHeight} style attribute.
+     * @param lineHeight the new attribute
+     */
+    @Setter
+    public void setLineHeight(final String lineHeight) {
+        setStyleAttribute(LINE_HEIGHT.getAttributeName(), lineHeight);
+        updateFont(getFont(), false);
+    }
+
+    /**
+     * Gets the {@code borderBottomColor} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderBottomColor() {
+        String value = getStyleAttribute(BORDER_BOTTOM_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_BOTTOM, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderBottomColor} style attribute.
+     * @param borderBottomColor the new attribute
+     */
+    @Setter
+    public void setBorderBottomColor(final String borderBottomColor) {
+        setStyleAttribute(BORDER_BOTTOM_COLOR.getAttributeName(), borderBottomColor);
+    }
+
+    /**
+     * Gets the {@code borderBottomStyle} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderBottomStyle() {
+        String value = getStyleAttribute(BORDER_BOTTOM_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderBottomStyle} style attribute.
+     * @param borderBottomStyle the new attribute
+     */
+    @Setter
+    public void setBorderBottomStyle(final String borderBottomStyle) {
+        setStyleAttribute(BORDER_BOTTOM_STYLE.getAttributeName(), borderBottomStyle);
+    }
+
+    /**
+     * Gets the {@code borderBottomWidth} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderBottomWidth() {
+        return getBorderWidth(BORDER_BOTTOM_WIDTH, BORDER_BOTTOM);
+    }
+
+    /**
+     * Sets the {@code borderBottomWidth} style attribute.
+     * @param borderBottomWidth the new attribute
+     */
+    @Setter
+    public void setBorderBottomWidth(final String borderBottomWidth) {
+        setStyleLengthAttribute(BORDER_BOTTOM_WIDTH.getAttributeName(), borderBottomWidth, "",
+                false, false, false, false);
+    }
+
+    /**
+     * Gets the {@code borderLeftColor} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderLeftColor() {
+        String value = getStyleAttribute(BORDER_LEFT_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_LEFT, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderLeftColor} style attribute.
+     * @param borderLeftColor the new attribute
+     */
+    @Setter
+    public void setBorderLeftColor(final String borderLeftColor) {
+        setStyleAttribute(BORDER_LEFT_COLOR.getAttributeName(), borderLeftColor);
+    }
+
+    /**
+     * Gets the {@code borderLeftStyle} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderLeftStyle() {
+        String value = getStyleAttribute(BORDER_LEFT_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_LEFT, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderLeftStyle} style attribute.
+     * @param borderLeftStyle the new attribute
+     */
+    @Setter
+    public void setBorderLeftStyle(final String borderLeftStyle) {
+        setStyleAttribute(BORDER_LEFT_STYLE.getAttributeName(), borderLeftStyle);
+    }
+
+    /**
+     * Gets the {@code borderLeftWidth} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderLeftWidth() {
+        return getBorderWidth(BORDER_LEFT_WIDTH, BORDER_LEFT);
+    }
+
+    /**
+     * Gets the border width for the specified side
+     * @param borderSideWidth the border side width Definition
+     * @param borderside the border side Definition
+     * @return the width, "" if not defined
+     */
+    private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
+        String value = getStyleAttribute(borderSideWidth, false);
+        if (value.isEmpty()) {
+            value = findBorderWidth(getStyleAttribute(borderSide, false));
+            if (value == null) {
+                final String borderWidth = getStyleAttribute(BORDER_WIDTH, false);
+                if (!StringUtils.isEmpty(borderWidth)) {
+                    final String[] values = StringUtils.split(borderWidth);
+                    int index = values.length;
+                    if (borderSideWidth.name().contains("TOP")) {
+                        index = 0;
+                    }
+                    else if (borderSideWidth.name().contains("RIGHT")) {
+                        index = 1;
+                    }
+                    else if (borderSideWidth.name().contains("BOTTOM")) {
+                        index = 2;
+                    }
+                    else if (borderSideWidth.name().contains("LEFT")) {
+                        index = 3;
+                    }
+                    if (index < values.length) {
+                        value = values[index];
+                    }
+                }
+            }
+            if (value == null) {
+                value = findBorderWidth(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderLeftWidth} style attribute.
+     * @param borderLeftWidth the new attribute
+     */
+    @Setter
+    public void setBorderLeftWidth(final String borderLeftWidth) {
+        setStyleLengthAttribute(BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "", false, false, false, false);
+    }
+
+    /**
+     * Gets the {@code borderRightColor} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderRightColor() {
+        String value = getStyleAttribute(BORDER_RIGHT_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_RIGHT, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderRightColor} style attribute.
+     * @param borderRightColor the new attribute
+     */
+    @Setter
+    public void setBorderRightColor(final String borderRightColor) {
+        setStyleAttribute(BORDER_RIGHT_COLOR.getAttributeName(), borderRightColor);
+    }
+
+    /**
+     * Gets the {@code borderRightStyle} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderRightStyle() {
+        String value = getStyleAttribute(BORDER_RIGHT_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_RIGHT, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderRightStyle} style attribute.
+     * @param borderRightStyle the new attribute
+     */
+    @Setter
+    public void setBorderRightStyle(final String borderRightStyle) {
+        setStyleAttribute(BORDER_RIGHT_STYLE.getAttributeName(), borderRightStyle);
+    }
+
+    /**
+     * Gets the {@code borderRightWidth} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderRightWidth() {
+        return getBorderWidth(BORDER_RIGHT_WIDTH, BORDER_RIGHT);
+    }
+
+    /**
+     * Sets the {@code borderRightWidth} style attribute.
+     * @param borderRightWidth the new attribute
+     */
+    @Setter
+    public void setBorderRightWidth(final String borderRightWidth) {
+        setStyleLengthAttribute(BORDER_RIGHT_WIDTH.getAttributeName(), borderRightWidth, "",
+                false, false, false, false);
+    }
+
+    /**
+     * Sets the {@code borderTop} style attribute.
+     * @param borderTop the new attribute
+     */
+    @Setter
+    public void setBorderTop(final String borderTop) {
+        setStyleAttribute(BORDER_TOP.getAttributeName(), borderTop);
+    }
+
+    /**
+     * Gets the {@code borderTopColor} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderTopColor() {
+        String value = getStyleAttribute(BORDER_TOP_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_TOP, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderTopColor} style attribute.
+     * @param borderTopColor the new attribute
+     */
+    @Setter
+    public void setBorderTopColor(final String borderTopColor) {
+        setStyleAttribute(BORDER_TOP_COLOR.getAttributeName(), borderTopColor);
+    }
+
+    /**
+     * Gets the {@code borderTopStyle} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderTopStyle() {
+        String value = getStyleAttribute(BORDER_TOP_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_TOP, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Sets the {@code borderTopStyle} style attribute.
+     * @param borderTopStyle the new attribute
+     */
+    @Setter
+    public void setBorderTopStyle(final String borderTopStyle) {
+        setStyleAttribute(BORDER_TOP_STYLE.getAttributeName(), borderTopStyle);
+    }
+
+    /**
+     * Gets the {@code borderTopWidth} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBorderTopWidth() {
+        return getBorderWidth(BORDER_TOP_WIDTH, BORDER_TOP);
+    }
+
+    /**
+     * Sets the {@code borderTopWidth} style attribute.
+     * @param borderTopWidth the new attribute
+     */
+    @Setter
+    public void setBorderTopWidth(final String borderTopWidth) {
+        setStyleLengthAttribute(BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "", false, false, false, false);
+    }
+
+    /**
+     * Searches for any color notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the color if found, null otherwise
+     */
+    private static String findColor(final String text) {
+        Color tmpColor = com.gargoylesoftware.htmlunit.util.StringUtils.findColorRGB(text);
+        if (tmpColor != null) {
+            return com.gargoylesoftware.htmlunit.util.StringUtils.formatColor(tmpColor);
+        }
+
+        final String[] tokens = StringUtils.split(text, ' ');
+        for (final String token : tokens) {
+            if (isColorKeyword(token)) {
+                return token;
+            }
+
+            tmpColor = com.gargoylesoftware.htmlunit.util.StringUtils.asColorHexadecimal(token);
+            if (tmpColor != null) {
+                return com.gargoylesoftware.htmlunit.util.StringUtils.formatColor(tmpColor);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any URL notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the URL if found, null otherwise
+     */
+    private static String findImageUrl(final String text) {
+        final Matcher m = URL_PATTERN.matcher(text);
+        if (m.find()) {
+            return "url(\"" + m.group(1) + "\")";
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any position notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the position if found, null otherwise
+     */
+    private static String findPosition(final String text) {
+        Matcher m = POSITION_PATTERN.matcher(text);
+        if (m.find()) {
+            return m.group(1) + " " + m.group(3);
+        }
+        m = POSITION_PATTERN2.matcher(text);
+        if (m.find()) {
+            return m.group(1) + " " + m.group(2);
+        }
+        m = POSITION_PATTERN3.matcher(text);
+        if (m.find()) {
+            return m.group(2) + " " + m.group(1);
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any repeat notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the repeat if found, null otherwise
+     */
+    private static String findRepeat(final String text) {
+        if (text.contains("repeat-x")) {
+            return "repeat-x";
+        }
+        if (text.contains("repeat-y")) {
+            return "repeat-y";
+        }
+        if (text.contains("no-repeat")) {
+            return "no-repeat";
+        }
+        if (text.contains("repeat")) {
+            return "repeat";
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any attachment notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the attachment if found, null otherwise
+     */
+    private static String findAttachment(final String text) {
+        if (text.contains("scroll")) {
+            return "scroll";
+        }
+        if (text.contains("fixed")) {
+            return "fixed";
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a border style in the specified text.
+     * @param text the string to search in
+     * @return the border style if found, null otherwise
+     */
+    private static String findBorderStyle(final String text) {
+        for (final String token : StringUtils.split(text, ' ')) {
+            if (isBorderStyle(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a border width in the specified text.
+     * @param text the string to search in
+     * @return the border width if found, null otherwise
+     */
+    private static String findBorderWidth(final String text) {
+        for (final String token : StringUtils.split(text, ' ')) {
+            if (isBorderWidth(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns if the specified token is a reserved color keyword.
+     * @param token the token to check
+     * @return whether the token is a reserved color keyword or not
+     */
+    private static boolean isColorKeyword(final String token) {
+        return CSSColors_.containsKey(token.toLowerCase(Locale.ROOT));
+    }
+
+    /**
+     * Returns if the specified token is a border style.
+     * @param token the token to check
+     * @return whether the token is a border style or not
+     */
+    private static boolean isBorderStyle(final String token) {
+        return "none".equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
+            || "dotted".equalsIgnoreCase(token) || "dashed".equalsIgnoreCase(token)
+            || "solid".equalsIgnoreCase(token) || "double".equalsIgnoreCase(token)
+            || "groove".equalsIgnoreCase(token) || "ridge".equalsIgnoreCase(token)
+            || "inset".equalsIgnoreCase(token) || "outset".equalsIgnoreCase(token);
+    }
+
+    /**
+     * Returns if the specified token is a border width.
+     * @param token the token to check
+     * @return whether the token is a border width or not
+     */
+    private static boolean isBorderWidth(final String token) {
+        return "thin".equalsIgnoreCase(token) || "medium".equalsIgnoreCase(token)
+            || "thick".equalsIgnoreCase(token) || isLength(token);
+    }
+
+    /**
+     * Returns if the specified token is a length.
+     * @param token the token to check
+     * @return whether the token is a length or not
+     */
+    static boolean isLength(String token) {
+        if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
+            || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
+            || token.endsWith("%")) {
+
+            if (token.endsWith("%")) {
+                token = token.substring(0, token.length() - 1);
+            }
+            else {
+                token = token.substring(0, token.length() - 2);
+            }
+            try {
+                Float.parseFloat(token);
+                return true;
+            }
+            catch (final NumberFormatException e) {
+                // Ignore.
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the {@code margin} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getMargin() {
+        return getStyleAttribute(MARGIN);
+    }
+
+    /**
+     * Sets the {@code margin} style attribute.
+     * @param margin the new attribute
+     */
+    @Setter
+    public void setMargin(final String margin) {
+        setStyleAttribute(MARGIN.getAttributeName(), margin);
+    }
+
+    /**
+     * Gets the {@code marginBottom} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getMarginBottom() {
+        return getStyleAttribute(MARGIN_BOTTOM, MARGIN);
+    }
+
+    /**
+     * Sets the {@code marginBottom} style attribute.
+     * @param marginBottom the new attribute
+     */
+    @Setter
+    public void setMarginBottom(final String marginBottom) {
+        setStyleLengthAttribute(MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code marginLeft} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getMarginLeft() {
+        return getStyleAttribute(MARGIN_LEFT, MARGIN);
+    }
+
+    /**
+     * Sets the {@code marginLeft} style attribute.
+     * @param marginLeft the new attribute
+     */
+    @Setter
+    public void setMarginLeft(final String marginLeft) {
+        setStyleLengthAttribute(MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code marginRight} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getMarginRight() {
+        return getStyleAttribute(MARGIN_RIGHT, MARGIN);
+    }
+
+    /**
+     * Sets the {@code marginRight} style attribute.
+     * @param marginRight the new attribute
+     */
+    @Setter
+    public void setMarginRight(final String marginRight) {
+        setStyleLengthAttribute(MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code marginTop} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getMarginTop() {
+        return getStyleAttribute(MARGIN_TOP, MARGIN);
+    }
+
+    /**
+     * Sets the {@code marginTop} style attribute.
+     * @param marginTop the new attribute
+     */
+    @Setter
+    public void setMarginTop(final String marginTop) {
+        setStyleLengthAttribute(MARGIN_TOP.getAttributeName(), marginTop, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code padding} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getPadding() {
+        return getStyleAttribute(PADDING);
+    }
+
+    /**
+     * Sets the {@code padding} style attribute.
+     * @param padding the new attribute
+     */
+    @Setter
+    public void setPadding(final String padding) {
+        setStyleAttribute(PADDING.getAttributeName(), padding);
+    }
+
+    /**
+     * Gets the {@code paddingBottom} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getPaddingBottom() {
+        return getStyleAttribute(PADDING_BOTTOM, PADDING);
+    }
+
+    /**
+     * Sets the {@code paddingBottom} style attribute.
+     * @param paddingBottom the new attribute
+     */
+    @Setter
+    public void setPaddingBottom(final String paddingBottom) {
+        setStyleLengthAttribute(PADDING_BOTTOM.getAttributeName(), paddingBottom, "", false, true, false, false);
+    }
+
+    /**
+     * Gets the {@code paddingLeft} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getPaddingLeft() {
+        return getStyleAttribute(PADDING_LEFT, PADDING);
+    }
+
+    /**
+     * Sets the {@code paddingLeft} style attribute.
+     * @param paddingLeft the new attribute
+     */
+    @Setter
+    public void setPaddingLeft(final String paddingLeft) {
+        setStyleLengthAttribute(PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, false, false);
+    }
+
+    /**
+     * Gets the {@code paddingRight} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getPaddingRight() {
+        return getStyleAttribute(PADDING_RIGHT, PADDING);
+    }
+
+    /**
+     * Sets the {@code paddingRight} style attribute.
+     * @param paddingRight the new attribute
+     */
+    @Setter
+    public void setPaddingRight(final String paddingRight) {
+        setStyleLengthAttribute(PADDING_RIGHT.getAttributeName(), paddingRight, "", false, true, false, false);
+    }
+
+    /**
+     * Gets the {@code paddingTop} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getPaddingTop() {
+        return getStyleAttribute(PADDING_TOP, PADDING);
+    }
+
+    /**
+     * Sets the {@code paddingTop} style attribute.
+     * @param paddingTop the new attribute
+     */
+    @Setter
+    public void setPaddingTop(final String paddingTop) {
+        setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false);
+    }
+
+    /**
+     * Gets the {@code right} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getRight() {
+        return getStyleAttribute(RIGHT);
+    }
+
+    /**
+     * Sets the {@code right} style attribute.
+     * @param right the new attribute
+     */
+    @Setter
+    public void setRight(final String right) {
+        setStyleLengthAttribute(RIGHT.getAttributeName(), right, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code left} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getLeft() {
+        return getStyleAttribute(LEFT);
+    }
+
+    /**
+     * Sets the {@code left} style attribute.
+     * @param left the new attribute
+     */
+    @Setter
+    public void setLeft(final String left) {
+        setStyleLengthAttribute(LEFT.getAttributeName(), left, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code top} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getTop() {
+        return getStyleAttribute(TOP);
+    }
+
+    /**
+     * Sets the {@code top} style attribute.
+     * @param top the new attribute
+     */
+    @Setter
+    public void setTop(final String top) {
+        setStyleLengthAttribute(TOP.getAttributeName(), top, "", true, true, false, false);
+    }
+
+    /**
+     * Gets the {@code bottom} style attribute.
+     * @return the style attribute
+     */
+    @Getter
+    public String getBottom() {
+        return getStyleAttribute(BOTTOM);
+    }
+
+    /**
+     * Sets the {@code bottom} style attribute.
+     * @param bottom the new attribute
+     */
+    @Setter
+    public void setBottom(final String bottom) {
+        setStyleLengthAttribute(BOTTOM.getAttributeName(), bottom, "", true, true, false, false);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(CSSStyleDeclaration2.class,
@@ -539,6 +1776,16 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
     }
 
     public static final class Prototype extends PrototypeObject {
+        public ScriptFunction getPropertyValue;
+
+        public ScriptFunction G$getPropertyValue() {
+            return getPropertyValue;
+        }
+
+        public void S$getPropertyValue(final ScriptFunction function) {
+            this.getPropertyValue = function;
+        }
+
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -708,7 +1955,7 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
          * @return the CSS attribute value for the specified element
          */
         public final String get(final Element2 element) {
-            final Global global = (Global) element.getWindow().getWebWindow().getScriptObject2();
+            final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
             final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
             final String value = get(style);
             return value;

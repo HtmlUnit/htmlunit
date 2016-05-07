@@ -20,7 +20,6 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -28,10 +27,11 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class HTMLBodyElement2 extends Element2 {
+public class HTMLBodyElement2 extends HTMLElement2 {
 
     public static HTMLBodyElement2 constructor(final boolean newObj, final Object self) {
         final HTMLBodyElement2 host = new HTMLBodyElement2();
+        ScriptUtils.initialize(host);
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
     }
@@ -62,6 +62,14 @@ public class HTMLBodyElement2 extends Element2 {
             style.setDefaultLocalStyleAttribute("margin-top", "8px");
             style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getClientWidth() {
+        return super.getClientWidth() + 16;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

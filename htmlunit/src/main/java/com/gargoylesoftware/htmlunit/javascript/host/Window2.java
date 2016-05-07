@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -78,6 +79,7 @@ public class Window2 extends EventTarget2 {
     private Screen2 screen_;
     private Document2 document_;
     private History2 history_;
+    private Location2 location_;
     private HTMLCollection2 frames_; // has to be a member to have equality (==) working
     private Object controllers_ = new SimpleScriptObject();
 
@@ -107,6 +109,8 @@ public class Window2 extends EventTarget2 {
         }
         document_.setWindow(this);
 
+        final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow().getScriptContext());
+        location_ = Location2.constructor(true, global);
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
@@ -128,7 +132,7 @@ public class Window2 extends EventTarget2 {
 
     @Function
     public static void alert(final Object self, final Object o) {
-        final AlertHandler handler = ((WebWindow) ((Global) self).getDomObject()).getWebClient().getAlertHandler();
+        final AlertHandler handler = getWindow(self).getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
             LOG.warn("window.alert(\"" + o + "\") no alert handler installed");
         }
@@ -148,43 +152,43 @@ public class Window2 extends EventTarget2 {
 
     @Getter
     public static int getInnerHeight(final Object self) {
-        final WebWindow webWindow = ((Global) self).getDomObject();
+        final WebWindow webWindow = getWindow(self).getWebWindow();
         return webWindow.getInnerHeight();
     }
 
     @Getter
     public static int getInnerWidth(final Object self) {
-        final WebWindow webWindow = ((Global) self).getDomObject();
+        final WebWindow webWindow = getWindow(self).getWebWindow();
         return webWindow.getInnerWidth();
     }
 
     @Getter
     public static int getOuterHeight(final Object self) {
-        final WebWindow webWindow = ((Global) self).getDomObject();
+        final WebWindow webWindow = getWindow(self).getWebWindow();
         return webWindow.getOuterHeight();
     }
 
     @Getter
     public static int getOuterWidth(final Object self) {
-        final WebWindow webWindow = ((Global) self).getDomObject();
+        final WebWindow webWindow = getWindow(self).getWebWindow();
         return webWindow.getOuterWidth();
     }
 
     @Getter
     public static Object getTop(final Object self) {
-        final WebWindow webWindow = ((Global) self).getDomObject();
+        final WebWindow webWindow = getWindow(self).getWebWindow();
         final WebWindow top = webWindow.getTopWindow();
         return top.getScriptObject2();
     }
 
     @Getter(@WebBrowser(FF))
     public static Object getControllers(final Object self) {
-        return ((Global) self).<Window2>getWindow().controllers_;
+        return getWindow(self).controllers_;
     }
 
     @Setter(@WebBrowser(FF))
     public static void setControllers(final Object self, final Object value) {
-        ((Global) self).<Window2>getWindow().controllers_ = value;
+        getWindow(self).controllers_ = value;
     }
 
     private Object getHandlerForJavaScript(final String eventName) {
@@ -193,7 +197,7 @@ public class Window2 extends EventTarget2 {
 
     @Getter
     public static Object getOnload(final Object self) {
-        final Window2 window = ((Global) self).getWindow();
+        final Window2 window = getWindow(self);
         final Object onload = window.getHandlerForJavaScript("load");
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
@@ -211,7 +215,7 @@ public class Window2 extends EventTarget2 {
 
     @Setter
     public static void setOnload(final Object self, final Object newOnload) {
-        final Window2 window = ((Global) self).getWindow();
+        final Window2 window = getWindow(self);
 //        if (window.getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
 //                && Context.getUndefinedValue().equals(newOnload)) {
 //                throw Context.reportRuntimeError("Invalid onload value: undefined.");
@@ -275,10 +279,16 @@ public class Window2 extends EventTarget2 {
      */
     @Getter
     public static Document2 getDocument(final Object self) {
-        final Window2 window = ((Global) self).getWindow();
-        return window.document_;
+        return getWindow(self).document_;
     }
 
+    private static Window2 getWindow(final Object self) {
+        if (self instanceof Global) {
+            return ((Global) self).getWindow();
+        }
+        return (Window2) self;
+    }
+    
     /**
      * Returns the value of the window's {@code name} property.
      * @return the value of the window's {@code name} property
@@ -422,7 +432,7 @@ public class Window2 extends EventTarget2 {
     @Function
     public static ComputedCSSStyleDeclaration2 getComputedStyle(final Object self,
             final Element2 element, final String pseudoElement) {
-        final Window2 window2 = (Window2) self;
+        final Window2 window2 = getWindow(self);
         synchronized (window2.computedStyles_) {
             final Map<String, ComputedCSSStyleDeclaration2> elementMap = window2.computedStyles_.get(element);
             if (elementMap != null) {
@@ -468,6 +478,33 @@ public class Window2 extends EventTarget2 {
     @Getter
     public Screen2 getScreen() {
         return screen_;
+    }
+
+    /**
+     * Returns the {@code location} property.
+     * @return the {@code location} property
+     */
+    @Getter
+    public static Location2 getLocation(final Object self) {
+        return getWindow(self).location_;
+    }
+
+    /**
+     * Triggers the {@code onerror} handler, if one has been set.
+     * @param e the error that needs to be reported
+     */
+    public void triggerOnError(final ScriptException e) {
+//        final Object o = getOnerror();
+//        if (o instanceof Function) {
+//            final Function f = (Function) o;
+//            final String msg = e.getMessage();
+//            final String url = e.getPage().getUrl().toExternalForm();
+//            final int line = e.getFailingLineNumber();
+//
+//            final int column = e.getFailingColumnNumber();
+//            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
+//            f.call(Context.getCurrentContext(), this, this, args);
+//        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
