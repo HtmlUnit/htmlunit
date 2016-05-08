@@ -406,6 +406,8 @@ public class JavaScriptEngine {
                         ((SimpleScriptable) constructor).setClassName(config.getClassName());
                     }
                     defineConstructor(browserVersion, window, prototype, constructor);
+                    configureStaticFunctions(config, constructor);
+                    configureStaticProperties(config, browserVersion, constructor);
                     configureConstants(config, constructor);
                 }
             }
