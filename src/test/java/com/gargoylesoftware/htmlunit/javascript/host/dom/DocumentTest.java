@@ -527,8 +527,8 @@ public class DocumentTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title>\n"
             + "<script id='script1' type='text/javascript'>\n"
-            + "doTest=function () {\n"
-            + "    alert(top.document.getElementById('script1').type);\n"
+            + "  doTest=function() {\n"
+            + "  alert(top.document.getElementById('script1').type);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -550,8 +550,8 @@ public class DocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String script
-            = "doTest=function () {\n"
-            + "    alert(top.document.getElementById('script1').src);\n"
+            = "doTest = function() {\n"
+            + "  alert(top.document.getElementById('script1').src);\n"
             + "}";
         getMockWebConnection().setResponse(new URL(URL_FIRST + "script/"), script, "text/javascript");
 

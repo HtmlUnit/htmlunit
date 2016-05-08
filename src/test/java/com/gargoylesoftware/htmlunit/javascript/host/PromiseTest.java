@@ -345,7 +345,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "          alert(e);\n"
                 + "       }).then(function(e) {\n"
                 + "          alert('after catch');\n"
-                + "        }, function () {\n"
+                + "        }, function() {\n"
                 + "          alert('failure');\n"
                 + "        });\n"
                 + "      }\n"

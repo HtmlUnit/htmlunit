@@ -900,7 +900,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  alert(window.onbeforeunload);\n"
-            + "  var handle = function () {};\n"
+            + "  var handle = function() {};\n"
             + "  window.onbeforeunload = handle;\n"
             + "  alert(typeof window.onbeforeunload);\n"
             + "  window.onbeforeunload = null;\n"
@@ -1198,8 +1198,8 @@ public class Window2Test extends WebDriverTestCase {
     public void onchange_noHandler() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "alert('onchange' in window);\n"
-            + "alert(window.onchange);\n"
+            + "  alert('onchange' in window);\n"
+            + "  alert(window.onchange);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -1215,9 +1215,9 @@ public class Window2Test extends WebDriverTestCase {
             + "<input id='it'/>\n"
             + "<div id='tester'>Tester</div>\n"
             + "<script>\n"
-            + "window.onchange = function() {\n"
-            + "  alert('changed');\n"
-            + "}\n"
+            + "  window.onchange = function() {\n"
+            + "    alert('changed');\n"
+            + "  }\n"
             + "</script></body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).sendKeys("X");

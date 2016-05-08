@@ -344,7 +344,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the current event (used by JavaScript only when emulating IE).
+     * Returns the current event.
      * @return the current event, or {@code null} if no event is currently available
      */
     @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
@@ -1079,8 +1079,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the onload property. Note that this is not necessarily a function if something else has been set.
-     * @return the onload property
+     * Returns the {@code onload} property. Note that this is not necessarily a function if something else has been set.
+     * @return the {@code onload} property
      */
     @JsxGetter
     public Object getOnload() {
@@ -1099,18 +1099,17 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the onload event handler.
-     * @param newOnload the new handler
+     * Sets the value of the {@code onload} event handler.
+     * @param onload the new handler
      */
     @JsxSetter
-    public void setOnload(final Object newOnload) {
-        getEventListenersContainer().setEventHandlerProp("load", newOnload);
+    public void setOnload(final Object onload) {
+        getEventListenersContainer().setEventHandlerProp("load", onload);
     }
 
     /**
-     * Returns the onclick property (caution this is not necessary a function if something else has
-     * been set).
-     * @return the onclick property
+     * Returns the {@code onclick} property (not necessary a function if something else has been set).
+     * @return the {@code onclick} property
      */
     @JsxGetter
     public Object getOnclick() {
@@ -1118,18 +1117,17 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the onclick event handler.
-     * @param newOnload the new handler
+     * Sets the value of the {@code onclick} event handler.
+     * @param onclick the new handler
      */
     @JsxSetter
-    public void setOnclick(final Object newOnload) {
-        setHandlerForJavaScript("click", newOnload);
+    public void setOnclick(final Object onclick) {
+        setHandlerForJavaScript("click", onclick);
     }
 
     /**
-     * Returns the ondblclick property (caution this is not necessary a function if something else has
-     * been set).
-     * @return the ondblclick property
+     * Returns the {@code ondblclick} property (not necessary a function if something else has been set).
+     * @return the {@code ondblclick} property
      */
     @JsxGetter
     public Object getOndblclick() {
@@ -1137,18 +1135,17 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the ondblclick event handler.
-     * @param newHandler the new handler
+     * Sets the value of the {@code ondblclick} event handler.
+     * @param ondblclick the new handler
      */
     @JsxSetter
-    public void setOndblclick(final Object newHandler) {
-        setHandlerForJavaScript("dblclick", newHandler);
+    public void setOndblclick(final Object ondblclick) {
+        setHandlerForJavaScript("dblclick", ondblclick);
     }
 
     /**
-     * Returns the onhashchange property (caution this is not necessary a function if something else has
-     * been set).
-     * @return the onhashchange property
+     * Returns the {@code onhashchange} property (not necessary a function if something else has been set).
+     * @return the {@code onhashchange} property
      */
     @JsxGetter
     public Object getOnhashchange() {
@@ -1156,12 +1153,12 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the onhashchange event handler.
-     * @param newHandler the new handler
+     * Sets the value of the {@code onhashchange} event handler.
+     * @param onhashchange the new handler
      */
     @JsxSetter
-    public void setOnhashchange(final Object newHandler) {
-        setHandlerForJavaScript(Event.TYPE_HASH_CHANGE, newHandler);
+    public void setOnhashchange(final Object onhashchange) {
+        setHandlerForJavaScript(Event.TYPE_HASH_CHANGE, onhashchange);
     }
 
     /**
@@ -2023,7 +2020,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Getter for the onchange event handler.
+     * Getter for the {@code onchange} event handler.
      * @return the handler
      */
     @JsxGetter
@@ -2032,7 +2029,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Setter for the onchange event handler.
+     * Setter for the {@code onchange} event handler.
      * @param onchange the handler
      */
     @JsxSetter
@@ -2041,7 +2038,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Getter for the onsubmit event handler.
+     * Getter for the {@code onsubmit} event handler.
      * @return the handler
      */
     @JsxGetter
@@ -2050,7 +2047,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Setter for the onsubmit event handler.
+     * Setter for the {@code onsubmit} event handler.
      * @param onsubmit the handler
      */
     @JsxSetter

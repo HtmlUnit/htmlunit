@@ -250,7 +250,7 @@ public class Location extends SimpleScriptable {
             final WebRequest request = new WebRequest(url);
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
 
-            final WebWindow webWindow = getWindow().getWebWindow();
+            final WebWindow webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");
             if (justHistoryAPIPushState) {
                 webWindow.getWebClient().loadDownloadedResponses();

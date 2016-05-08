@@ -139,9 +139,9 @@ public class HtmlPage3Test extends WebDriverTestCase {
     public void onLoadHandler_ScriptNameRead() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
-            + "load=function () {};\n"
-            + "onload=load;\n"
-            + "alert(onload);\n"
+            + "  load = function() {};\n"
+            + "  onload = load;\n"
+            + "  alert(onload);\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
