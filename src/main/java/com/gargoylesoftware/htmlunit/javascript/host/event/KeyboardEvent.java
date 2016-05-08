@@ -826,16 +826,16 @@ public class KeyboardEvent extends UIEvent {
         keyCodeMap.put('*', DOM_VK_8);
         keyCodeMap.put('(', DOM_VK_9);
         keyCodeMap.put(')', DOM_VK_0);
-        //Chrome/IE11 189
+        //Chrome/IE 189
         keyCodeMap.put('-', DOM_VK_HYPHEN_MINUS);
         keyCodeMap.put('_', DOM_VK_HYPHEN_MINUS);
-        //Chrome/IE11 187
+        //Chrome/IE 187
         keyCodeMap.put('+', DOM_VK_EQUALS);
         keyCodeMap.put('[', DOM_VK_OPEN_BRACKET);
         keyCodeMap.put('{', DOM_VK_OPEN_BRACKET);
         keyCodeMap.put(']', DOM_VK_CLOSE_BRACKET);
         keyCodeMap.put('}', DOM_VK_CLOSE_BRACKET);
-        //Chrome/IE11 186
+        //Chrome/IE 186
         keyCodeMap.put(':', DOM_VK_SEMICOLON);
         keyCodeMap.put('\'', DOM_VK_QUOTE);
         keyCodeMap.put('"', DOM_VK_QUOTE);
@@ -847,17 +847,6 @@ public class KeyboardEvent extends UIEvent {
         keyCodeMap.put('?', DOM_VK_SLASH);
         keyCodeMap.put('\\', DOM_VK_BACK_SLASH);
         keyCodeMap.put('|', DOM_VK_BACK_SLASH);
-    }
-
-    /**
-     * Returns whether the specified character can be written only when {@code SHIFT} key is pressed.
-     * @param ch the character
-     * @param shiftKey is shift key pressed
-     * @return whether the specified character can be written only when {@code SHIFT} key is pressed
-     */
-    public static boolean isShiftNeeded(final char ch, final boolean shiftKey) {
-        return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1
-                || (!shiftKey && ch >= 'A' && ch <= 'Z');
     }
 
     private int charCode_;
@@ -948,6 +937,17 @@ public class KeyboardEvent extends UIEvent {
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
+    }
+
+    /**
+     * Returns whether the specified character can be written only when {@code SHIFT} key is pressed.
+     * @param ch the character
+     * @param shiftKey is shift key pressed
+     * @return whether the specified character can be written only when {@code SHIFT} key is pressed
+     */
+    public static boolean isShiftNeeded(final char ch, final boolean shiftKey) {
+        return "~!@#$%^&*()_+{}:\"<>?|".indexOf(ch) != -1
+                || (!shiftKey && ch >= 'A' && ch <= 'Z');
     }
 
     /** We can not accept DOM_VK_A, because is it 'A' or 'a', so the character constructor should be used. */
