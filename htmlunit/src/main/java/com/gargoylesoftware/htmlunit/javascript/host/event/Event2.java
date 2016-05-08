@@ -536,6 +536,81 @@ public class Event2 extends SimpleScriptObject {
         eventPhase_ = phase;
     }
 
+    /**
+     * Sets the event type.
+     * @param eventType the event type
+     */
+    public void setEventType(final String eventType) {
+        type_ = eventType;
+    }
+
+    /**
+     * Returns whether {@code SHIFT} has been pressed during this event or not.
+     * @return whether {@code SHIFT} has been pressed during this event or not
+     */
+    public boolean getShiftKey() {
+        return shiftKey_;
+    }
+
+    /**
+     * Sets whether {@code SHIFT} key is pressed on not.
+     * @param shiftKey whether {@code SHIFT} has been pressed during this event or not
+     */
+    protected void setShiftKey(final boolean shiftKey) {
+        shiftKey_ = shiftKey;
+    }
+
+    /**
+     * Returns whether {@code CTRL} has been pressed during this event or not.
+     * @return whether {@code CTRL} has been pressed during this event or not
+     */
+    public boolean getCtrlKey() {
+        return ctrlKey_;
+    }
+
+    /**
+     * Sets whether {@code CTRL} key is pressed on not.
+     * @param ctrlKey whether {@code CTRL} has been pressed during this event or not
+     */
+    protected void setCtrlKey(final boolean ctrlKey) {
+        ctrlKey_ = ctrlKey;
+    }
+
+    /**
+     * Returns whether {@code ALT} has been pressed during this event or not.
+     * @return whether {@code ALT} has been pressed during this event or not
+     */
+    public boolean getAltKey() {
+        return altKey_;
+    }
+
+    /**
+     * Sets whether {@code ALT} key is pressed on not.
+     * @param altKey whether {@code ALT} has been pressed during this event or not
+     */
+    protected void setAltKey(final boolean altKey) {
+        altKey_ = altKey;
+    }
+
+    /**
+     * Sets the key code.
+     * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
+     */
+    protected void setKeyCode(final Object keyCode) {
+        keyCode_ = keyCode;
+    }
+
+    /**
+     * Returns the key code associated with the event.
+     * @return the key code associated with the event
+     */
+    public Object getKeyCode() {
+        if (keyCode_ == null) {
+            return Integer.valueOf(0);
+        }
+        return keyCode_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Event2.class,

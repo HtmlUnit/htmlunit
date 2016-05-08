@@ -18,12 +18,49 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
-public class PointerEvent2 extends Event2 {
+public class PointerEvent2 extends MouseEvent2 {
+
+    private int pointerId_;
+    private int width_;
+    private int height_;
+    private double pressure_;
+    private int tiltX_;
+    private int tiltY_;
+    private String pointerType_ = "";
+    private boolean isPrimary_;
+
+    /**
+     * Creates a new event instance.
+     */
+    public PointerEvent2() {
+    }
+
+    /**
+     * Creates a new event instance.
+     *
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link #BUTTON_LEFT}, {@link #BUTTON_MIDDLE} or {@link #BUTTON_RIGHT}
+     */
+    public PointerEvent2(final DomNode domNode, final String type, final boolean shiftKey,
+            final boolean ctrlKey, final boolean altKey, final int button) {
+        super(domNode, type, shiftKey, ctrlKey, altKey, button);
+        setDetail(0);
+
+        pointerId_ = 1;
+        width_ = 1;
+        height_ = 1;
+        pointerType_ = "mouse";
+        isPrimary_ = true;
+    }
 
     public static PointerEvent2 constructor(final boolean newObj, final Object self) {
         final PointerEvent2 host = new PointerEvent2();

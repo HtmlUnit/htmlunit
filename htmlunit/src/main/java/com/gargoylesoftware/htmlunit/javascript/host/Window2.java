@@ -14,17 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,7 +38,10 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.TopLevelWindow;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -81,7 +89,10 @@ public class Window2 extends EventTarget2 {
     private History2 history_;
     private Location2 location_;
     private HTMLCollection2 frames_; // has to be a member to have equality (==) working
+    private Event2 currentEvent_;
     private Object controllers_ = new SimpleScriptObject();
+    private Object opener_;
+    private Object top_;
 
     /**
      * Cache computed styles when possible, because their calculation is very expensive.
@@ -110,7 +121,7 @@ public class Window2 extends EventTarget2 {
         document_.setWindow(this);
 
         final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow().getScriptContext());
-        location_ = Location2.constructor(true, global);
+
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
@@ -121,6 +132,17 @@ public class Window2 extends EventTarget2 {
 //            clearEventListenersContainer();
 
             document_.setDomNode(htmlPage);
+
+            location_ = Location2.constructor(true, global);
+            location_.initialize(this);
+
+            final WebWindow webWindow = getWebWindow();
+            if (webWindow instanceof TopLevelWindow) {
+                final WebWindow opener = ((TopLevelWindow) webWindow).getOpener();
+                if (opener != null) {
+                    opener_ = opener.getScriptObject2();
+                }
+            }
         }
     }
 
@@ -193,6 +215,13 @@ public class Window2 extends EventTarget2 {
 
     private Object getHandlerForJavaScript(final String eventName) {
         return getEventListenersContainer().getEventHandlerProp(eventName);
+    }
+
+    private void setHandlerForJavaScript(final String eventName, final Object handler) {
+        if (handler == null || handler instanceof ScriptFunction) {
+            getEventListenersContainer().setEventHandlerProp(eventName, handler);
+        }
+        // Otherwise, fail silently.
     }
 
     @Getter
@@ -297,6 +326,15 @@ public class Window2 extends EventTarget2 {
     public String getName() {
         return getWebWindow().getName();
     }
+
+    /**
+    * Sets the value of the window's {@code name} property.
+    * @param name the value of the window's {@code name} property
+    */
+   @Setter
+   public void setName(final Object name) {
+       getWebWindow().setName(name.toString());
+   }
 
     /**
      * Returns the {@code history} property.
@@ -490,21 +528,301 @@ public class Window2 extends EventTarget2 {
     }
 
     /**
+     * Sets the location property. This will cause a reload of the window.
+     * @param self this object
+     * @param newLocation the URL of the new content
+     * @throws IOException when location loading fails
+     */
+    @Setter
+    public static void setLocation(final Object self, final String newLocation) throws IOException {
+        getWindow(self).location_.setHref(newLocation);
+    }
+
+    /**
      * Triggers the {@code onerror} handler, if one has been set.
      * @param e the error that needs to be reported
      */
     public void triggerOnError(final ScriptException e) {
-//        final Object o = getOnerror();
-//        if (o instanceof Function) {
-//            final Function f = (Function) o;
-//            final String msg = e.getMessage();
-//            final String url = e.getPage().getUrl().toExternalForm();
-//            final int line = e.getFailingLineNumber();
-//
-//            final int column = e.getFailingColumnNumber();
-//            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
-//            f.call(Context.getCurrentContext(), this, this, args);
-//        }
+        final Object o = getOnerror();
+        if (o instanceof ScriptFunction) {
+            final ScriptFunction f = (ScriptFunction) o;
+            final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+
+            final String msg = e.getMessage();
+            final String url = e.getPage().getUrl().toExternalForm();
+            final int line = e.getFailingLineNumber();
+            final int column = e.getFailingColumnNumber();
+
+            ScriptRuntime.apply(f, global,
+                    msg, url, Integer.valueOf(line), Integer.valueOf(column), e);
+        }
+    }
+
+    /**
+     * Returns the value of the window's {@code onerror} property.
+     * @return the value of the window's {@code onerror} property
+     */
+    @Getter
+    public Object getOnerror() {
+        return getHandlerForJavaScript(Event2.TYPE_ERROR);
+    }
+
+    /**
+     * Sets the value of the window's {@code onerror} property.
+     * @param onerror the value of the window's {@code onerror} property
+     */
+    @Setter
+    public void setOnerror(final Object onerror) {
+        setHandlerForJavaScript(Event2.TYPE_ERROR, onerror);
+    }
+
+    /**
+     * Sets the value of the {@code onload} event handler.
+     * @param onload the new handler
+     */
+    @Setter
+    public void setOnload(final Object onload) {
+        getEventListenersContainer().setEventHandlerProp("load", onload);
+    }
+
+    /**
+     * Returns the {@code onclick} property (not necessary a function if something else has been set).
+     * @return the {@code onclick} property
+     */
+    @Getter
+    public Object getOnclick() {
+        return getHandlerForJavaScript("click");
+    }
+
+    /**
+     * Sets the value of the {@code onclick} event handler.
+     * @param onclick the new handler
+     */
+    @Setter
+    public void setOnclick(final Object onclick) {
+        setHandlerForJavaScript("click", onclick);
+    }
+
+    /**
+     * Returns the {@code ondblclick} property (not necessary a function if something else has been set).
+     * @return the {@code ondblclick} property
+     */
+    @Getter
+    public Object getOndblclick() {
+        return getHandlerForJavaScript("dblclick");
+    }
+
+    /**
+     * Sets the value of the {@code ondblclick} event handler.
+     * @param ondblclick the new handler
+     */
+    @Setter
+    public void setOndblclick(final Object ondblclick) {
+        setHandlerForJavaScript("dblclick", ondblclick);
+    }
+
+    /**
+     * Returns the {@code onhashchange} property (not necessary a function if something else has been set).
+     * @return the {@code onhashchange} property
+     */
+    @Getter
+    public Object getOnhashchange() {
+        return getHandlerForJavaScript(Event2.TYPE_HASH_CHANGE);
+    }
+
+    /**
+     * Sets the value of the {@code onhashchange} event handler.
+     * @param onhashchange the new handler
+     */
+    @Setter
+    public void setOnhashchange(final Object onhashchange) {
+        setHandlerForJavaScript(Event2.TYPE_HASH_CHANGE, onhashchange);
+    }
+
+    /**
+     * Returns the value of the window's {@code onbeforeunload} property.
+     * @return the value of the window's {@code onbeforeunload} property
+     */
+    @Getter
+    public Object getOnbeforeunload() {
+        return getHandlerForJavaScript(Event2.TYPE_BEFORE_UNLOAD);
+    }
+
+    /**
+     * Sets the value of the window's {@code onbeforeunload} property.
+     * @param onbeforeunload the value of the window's {@code onbeforeunload} property
+     */
+    @Setter
+    public void setOnbeforeunload(final Object onbeforeunload) {
+        setHandlerForJavaScript(Event2.TYPE_BEFORE_UNLOAD, onbeforeunload);
+    }
+
+    /**
+     * Getter for the {@code onchange} event handler.
+     * @return the handler
+     */
+    @Getter
+    public Object getOnchange() {
+        return getHandlerForJavaScript(Event2.TYPE_CHANGE);
+    }
+
+    /**
+     * Setter for the {@code onchange} event handler.
+     * @param onchange the handler
+     */
+    @Setter
+    public void setOnchange(final Object onchange) {
+        setHandlerForJavaScript(Event2.TYPE_CHANGE, onchange);
+    }
+
+    /**
+     * Getter for the {@code onsubmit} event handler.
+     * @return the handler
+     */
+    @Getter
+    public Object getOnsubmit() {
+        return getHandlerForJavaScript(Event2.TYPE_SUBMIT);
+    }
+
+    /**
+     * Setter for the {@code onsubmit} event handler.
+     * @param onsubmit the handler
+     */
+    @Setter
+    public void setOnsubmit(final Object onsubmit) {
+        setHandlerForJavaScript(Event2.TYPE_SUBMIT, onsubmit);
+    }
+
+    /**
+     * Returns the current event.
+     * @return the current event, or {@code null} if no event is currently available
+     */
+    @Getter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    public Object getEvent() {
+        return currentEvent_;
+    }
+
+    /**
+     * Returns the current event (used internally regardless of the emulation mode).
+     * @return the current event, or {@code null} if no event is currently available
+     */
+    public Event2 getCurrentEvent() {
+        return currentEvent_;
+    }
+
+    /**
+     * Sets the current event.
+     * @param event the current event
+     */
+    public void setCurrentEvent(final Event2 event) {
+        currentEvent_ = event;
+    }
+
+    /**
+     * Opens a new window.
+     *
+     * @param url when a new document is opened, <i>url</i> is a String that specifies a MIME type for the document.
+     *        When a new window is opened, <i>url</i> is a String that specifies the URL to render in the new window
+     * @param name the name
+     * @param features the features
+     * @param replace whether to replace in the history list or no
+     * @return the newly opened window, or {@code null} if popup windows have been disabled
+     * @see com.gargoylesoftware.htmlunit.WebClientOptions#isPopupBlockerEnabled()
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
+     */
+    @Function
+    public ScriptObject open(final Object url, final Object name, final Object features,
+            final Object replace) {
+        String urlString = null;
+        if (url != Undefined.getUndefined()) {
+            urlString = url.toString();
+        }
+        String windowName = "";
+        if (name != Undefined.getUndefined()) {
+            windowName = name.toString();
+        }
+        String featuresString = null;
+        if (features != Undefined.getUndefined()) {
+            featuresString = features.toString();
+        }
+        final WebClient webClient = getWebWindow().getWebClient();
+
+        if (webClient.getOptions().isPopupBlockerEnabled()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Ignoring window.open() invocation because popups are blocked.");
+            }
+            return null;
+        }
+
+        boolean replaceCurrentEntryInBrowsingHistory = false;
+        if (replace != Undefined.getUndefined()) {
+            replaceCurrentEntryInBrowsingHistory = (boolean) replace;
+        }
+        if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(
+                        "window.open: features and replaceCurrentEntryInBrowsingHistory "
+                        + "not implemented: url=[" + urlString
+                        + "] windowName=[" + windowName
+                        + "] features=[" + featuresString
+                        + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
+                        + "]");
+            }
+        }
+
+        // if specified name is the name of an existing window, then hold it
+        if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
+            try {
+                final WebWindow webWindow = webClient.getWebWindowByName(windowName);
+                return webWindow.getScriptObject2();
+            }
+            catch (final WebWindowNotFoundException e) {
+                // nothing
+            }
+        }
+        final URL newUrl = makeUrlForOpenWindow(urlString);
+        final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, getWebWindow());
+        return newWebWindow.getScriptObject2();
+    }
+
+    private URL makeUrlForOpenWindow(final String urlString) {
+        if (urlString.isEmpty()) {
+            return WebClient.URL_ABOUT_BLANK;
+        }
+
+        try {
+            final Page page = getWebWindow().getEnclosedPage();
+            if (page != null && page.isHtmlPage()) {
+                return ((HtmlPage) page).getFullyQualifiedUrl(urlString);
+            }
+            return new URL(urlString);
+        }
+        catch (final MalformedURLException e) {
+            LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            return null;
+        }
+    }
+
+    /**
+     * Sets the {@code opener} property.
+     * @param newValue the new value
+     */
+    @Setter
+    public void setOpener(final Object newValue) {
+        if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
+            && newValue != null && newValue != Undefined.getUndefined() && !(newValue instanceof Window2)) {
+            throw new RuntimeException("Can't set opener to something other than a window!");
+        }
+        opener_ = newValue;
+    }
+
+    /**
+     * Returns the value of the {@code opener} property.
+     * @return the value of the {@code opener}, or {@code null} for a top level window
+     */
+    @Getter
+    public Object getOpener() {
+        return opener_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
@@ -554,6 +872,7 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction CollectGarbage;
         public ScriptFunction find;
         public ScriptFunction getComputedStyle;
+        public ScriptFunction open;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -603,6 +922,14 @@ public class Window2 extends EventTarget2 {
             this.getComputedStyle = function;
         }
 
+        public ScriptFunction G$open() {
+            return open;
+        }
+
+        public void S$open(final ScriptFunction function) {
+            this.open = function;
+        }
+
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -618,7 +945,6 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction btoa;
         public ScriptFunction execScript;
         public ScriptFunction CollectGarbage;
-        
 
         public ScriptFunction G$alert() {
             return this.alert;

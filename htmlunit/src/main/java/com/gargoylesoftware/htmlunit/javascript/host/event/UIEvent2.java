@@ -18,18 +18,78 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 public class UIEvent2 extends Event2 {
 
+    /** Specifies some detail information about the event. */
+    private long detail_;
+
+    /** Whether or not the "meta" key was pressed during the firing of the event. */
+    private boolean metaKey_;
+
+    /**
+     * Creates a new UI event instance.
+     */
+    public UIEvent2() {
+    }
+
+    /**
+     * Creates a new UI event instance.
+     *
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     */
+    public UIEvent2(final DomNode domNode, final String type) {
+        super(domNode, type);
+    }
+
     public static UIEvent2 constructor(final boolean newObj, final Object self) {
         final UIEvent2 host = new UIEvent2();
         host.setProto(Context.getGlobal().getPrototype(host.getClass()));
         return host;
+    }
+
+    /**
+     * Returns whether or not the "meta" key was pressed during the event firing.
+     * @return whether or not the "meta" key was pressed during the event firing
+     */
+    @Getter
+    public boolean getMetaKey() {
+        return metaKey_;
+    }
+
+    /**
+     * @param metaKey whether Meta has been pressed during this event or not
+     */
+    protected void setMetaKey(final boolean metaKey) {
+        metaKey_ = metaKey;
+    }
+
+    /**
+     * Returns some detail information about the event, depending on the event type. For mouse events,
+     * the detail property indicates how many times the mouse has been clicked in the same location for
+     * this event.
+     *
+     * @return some detail information about the event, depending on the event type
+     */
+    @Getter
+    public long getDetail() {
+        return detail_;
+    }
+
+    /**
+     * Sets the detail information for this event.
+     *
+     * @param detail the detail information for this event
+     */
+    protected void setDetail(final long detail) {
+        detail_ = detail;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

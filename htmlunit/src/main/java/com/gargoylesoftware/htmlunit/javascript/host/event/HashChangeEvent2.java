@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONHASHCHANGE_BUBBLES_FALSE;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -25,6 +27,36 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 public class HashChangeEvent2 extends Event2 {
+
+    private String oldURL_ = "";
+    private String newURL_ = "";
+
+    /**
+     * Creates a new event instance.
+     */
+    public HashChangeEvent2() {
+        setEventType("");
+    }
+
+    /**
+     * Creates a new event instance.
+     *
+     * @param scriptable the SimpleScriptObject that triggered the event
+     * @param type the event type
+     * @param oldURL the old URL
+     * @param newURL the new URL
+     */
+    public HashChangeEvent2(final SimpleScriptObject scriptable, final String type,
+            final String oldURL, final String newURL) {
+        super(scriptable, type);
+        oldURL_ = oldURL;
+        newURL_ = newURL;
+
+        if (getBrowserVersion().hasFeature(EVENT_ONHASHCHANGE_BUBBLES_FALSE)) {
+            setBubbles(false);
+        }
+        setCancelable(false);
+    }
 
     public static HashChangeEvent2 constructor(final boolean newObj, final Object self) {
         final HashChangeEvent2 host = new HashChangeEvent2();

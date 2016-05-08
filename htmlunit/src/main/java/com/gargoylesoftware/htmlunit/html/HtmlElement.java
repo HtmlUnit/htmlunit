@@ -51,13 +51,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -544,10 +544,10 @@ public abstract class HtmlElement extends DomElement {
         }
         final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftKey);
 
-        final Event shiftDown;
+        final Event2 shiftDown;
         final ScriptResult shiftDownResult;
         if (isShiftNeeded) {
-            shiftDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, KeyboardEvent.DOM_VK_SHIFT,
+            shiftDown = new KeyboardEvent2(this, Event2.TYPE_KEY_DOWN, KeyboardEvent2.DOM_VK_SHIFT,
                 true, ctrlKey, altKey);
             shiftDownResult = fireEvent(shiftDown);
         }
@@ -556,10 +556,10 @@ public abstract class HtmlElement extends DomElement {
             shiftDownResult = null;
         }
 
-        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
+        final Event2 keyDown = new KeyboardEvent2(this, Event2.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
-        final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
+        final Event2 keyPress = new KeyboardEvent2(this, Event2.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyPressResult = fireEvent(keyPress);
 
         if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
@@ -571,15 +571,15 @@ public abstract class HtmlElement extends DomElement {
         if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput) {
-            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
+            final Event2 input = new KeyboardEvent2(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
             fireEvent(input);
         }
 
-        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
+        final Event2 keyUp = new KeyboardEvent2(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
         fireEvent(keyUp);
 
         if (isShiftNeeded) {
-            final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
+            final Event2 shiftUp = new KeyboardEvent2(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
                 false, ctrlKey, altKey);
             fireEvent(shiftUp);
         }

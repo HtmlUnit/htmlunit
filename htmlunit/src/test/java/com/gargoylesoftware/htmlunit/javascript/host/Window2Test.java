@@ -1127,8 +1127,8 @@ public class Window2Test extends WebDriverTestCase {
     public void onchange_noHandler() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "alert('onchange' in window);\n"
-            + "alert(window.onchange);\n"
+            + "  alert('onchange' in window);\n"
+            + "  alert(window.onchange);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -1144,9 +1144,9 @@ public class Window2Test extends WebDriverTestCase {
             + "<input id='it'/>\n"
             + "<div id='tester'>Tester</div>\n"
             + "<script>\n"
-            + "window.onchange = function() {\n"
-            + "  alert('changed');\n"
-            + "}\n"
+            + "  window.onchange = function() {\n"
+            + "    alert('changed');\n"
+            + "  }\n"
             + "</script></body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).sendKeys("X");
@@ -1201,7 +1201,7 @@ public class Window2Test extends WebDriverTestCase {
 
         // we can't use the usual alert here because of the page change
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        final Object result = jsExecutor.executeScript("return window.name");
+        final Object result = jsExecutor.executeScript("window.name");
 
         assertEquals(getExpectedAlerts()[0], result);
     }

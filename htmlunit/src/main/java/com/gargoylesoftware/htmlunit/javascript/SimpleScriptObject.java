@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -238,6 +239,10 @@ public class SimpleScriptObject extends ScriptObject {
         }
         else if (domNode instanceof DomText) {
             host = Text2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlInput) {
+            host = HTMLInputElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else {

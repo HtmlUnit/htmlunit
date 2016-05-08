@@ -53,9 +53,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -727,16 +728,16 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             }
             ((InteractivePage) page).setFocusedElement(elementToFocus);
 
-            mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            mouseUp(shiftKey, ctrlKey, altKey, MouseEvent2.BUTTON_LEFT);
 
-            final Event event;
+            final Event2 event;
             if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                        ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                event = new PointerEvent2(getEventTargetElement(), MouseEvent2.TYPE_CLICK, shiftKey,
+                        ctrlKey, altKey, MouseEvent2.BUTTON_LEFT);
             }
             else {
-                event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                        ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                event = new MouseEvent2(getEventTargetElement(), MouseEvent2.TYPE_CLICK, shiftKey,
+                        ctrlKey, altKey, MouseEvent2.BUTTON_LEFT);
             }
             return (P) click(event);
         }
@@ -1094,7 +1095,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the page which this element's window contains after the mouse click
      */
     public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
-        return doMouseEvent(MouseEvent.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey, button);
+        return doMouseEvent(MouseEvent2.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
@@ -1179,13 +1180,13 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         final boolean altKey, final int button) {
         final SgmlPage page = getPage();
 
-        final Event event;
+        final Event2 event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
             && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+            event = new PointerEvent2(this, eventType, shiftKey, ctrlKey, altKey, button);
         }
         else {
-            event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+            event = new MouseEvent2(this, eventType, shiftKey, ctrlKey, altKey, button);
         }
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
@@ -1275,7 +1276,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     public void focus() {
         final InteractivePage page = (InteractivePage) getPage();
         page.setFocusedElement(this);
-        final HTMLElement jsElt = (HTMLElement) getScriptableObject();
+        final HTMLElement2 jsElt = (HTMLElement2) getScriptObject2();
         jsElt.setActive();
     }
 

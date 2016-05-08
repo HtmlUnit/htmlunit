@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
@@ -41,7 +43,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -532,6 +536,21 @@ public class HTMLElement2 extends Element2 {
         final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global,this, null);
         return style.getCalculatedWidth(false, true);
+    }
+
+    /**
+     * Sets the object as active without setting focus to the object.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536738.aspx">MSDN documentation</a>
+     */
+    @Function(@WebBrowser(IE))
+    public void setActive() {
+        final Window2 window = getWindow();
+        final HTMLDocument2 document = (HTMLDocument2) Window2.getDocument(window);
+        document.setActiveElement(this);
+        if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
+            final HtmlElement element = getDomNodeOrDie();
+            ((HtmlPage) element.getPage()).setFocusedElement(element);
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

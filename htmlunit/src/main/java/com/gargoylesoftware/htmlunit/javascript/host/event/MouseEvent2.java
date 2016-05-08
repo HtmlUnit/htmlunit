@@ -18,12 +18,13 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class MouseEvent2 extends Event2 {
+public class MouseEvent2 extends UIEvent2 {
 
     /** The click event type, triggered by "onclick" event handlers. */
     public static final String TYPE_CLICK = "click";
@@ -57,6 +58,55 @@ public class MouseEvent2 extends Event2 {
 
     /** The code for right mouse button. */
     public static final int BUTTON_RIGHT = 2;
+
+    /** The event's screen coordinates; initially {@code null} and lazily initialized for performance reasons. */
+    private Integer screenX_, screenY_;
+
+    /** The event's client coordinates; initially {@code null} and lazily initialized for performance reasons. */
+    private Integer clientX_, clientY_;
+
+    /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
+    private int button_;
+
+    /**
+     * Used to build the prototype.
+     */
+    protected MouseEvent2() {
+        screenX_ = Integer.valueOf(0);
+        screenY_ = Integer.valueOf(0);
+        setDetail(1);
+    }
+
+    /**
+     * Creates a new instance.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link #BUTTON_LEFT}, {@link #BUTTON_MIDDLE} or {@link #BUTTON_RIGHT}
+     */
+    public MouseEvent2(final DomNode domNode, final String type, final boolean shiftKey,
+        final boolean ctrlKey, final boolean altKey, final int button) {
+
+        super(domNode, type);
+        setShiftKey(shiftKey);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+        setMetaKey(false);
+
+        if (button != BUTTON_LEFT && button != BUTTON_MIDDLE && button != BUTTON_RIGHT) {
+            throw new IllegalArgumentException("Invalid button code: " + button);
+        }
+        button_ = button;
+
+        if (TYPE_DBL_CLICK.equals(type)) {
+            setDetail(2);
+        }
+        else {
+            setDetail(1);
+        }
+    }
 
     public static MouseEvent2 constructor(final boolean newObj, final Object self) {
         final MouseEvent2 host = new MouseEvent2();

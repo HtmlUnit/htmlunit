@@ -42,13 +42,17 @@ import org.w3c.dom.DOMException;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
@@ -440,6 +444,31 @@ public class HTMLDocument2 extends Document2 {
     @JsxSetter
     public void setTitle(final String title) {
         getPage().setTitleText(title);
+    }
+
+    /**
+     * Sets the specified element as the document's active element.
+     * @see HTMLElement#setActive()
+     * @param element the new active element for this document
+     */
+    public void setActiveElement(final HTMLElement2 element) {
+        // TODO update page focus element also
+
+        activeElement_ = element;
+
+        if (element != null) {
+            // if this is part of an iFrame, make the iFrame tag the
+            // active element of his doc
+            final WebWindow window = element.getDomNodeOrDie().getPage().getEnclosingWindow();
+            if (window instanceof FrameWindow) {
+                final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
+                if (frame instanceof HtmlInlineFrame) {
+                    final Window2 winWithFrame = (Window2) frame.getPage().getEnclosingWindow().getScriptObject2();
+                    ((HTMLDocument2) Window2.getDocument(winWithFrame)).setActiveElement(
+                                (HTMLElement2) frame.getScriptObject2());
+                }
+            }
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

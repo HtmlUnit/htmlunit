@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -505,7 +505,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final SgmlPage page = htmlElement.getPage();
 
-        final JavaScriptEngine engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();
+        final NashornJavaScriptEngine engine = htmlElement.getPage().getWebClient().getJavaScriptEngine2();
         if (engine.isScriptRunning()) {
             return page;
         }

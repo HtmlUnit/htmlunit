@@ -246,6 +246,33 @@ public class EventTarget2 extends SimpleScriptObject {
         return !event.isAborted(result);
     }
 
+    /**
+     * Executes the event on this object only (needed for instance for onload on (i)frame tags).
+     * @param event the event
+     * @return the result
+     * @see #fireEvent(Event)
+     */
+    public ScriptResult executeEventLocally(final Event2 event) {
+        final EventListenersContainer2 eventListenersContainer = getEventListenersContainer();
+        if (eventListenersContainer != null) {
+            final Window2 window = getWindow();
+            final Object[] args = new Object[] {event};
+
+            // handlers declared as property on a node don't receive the event as argument for IE
+            final Object[] propHandlerArgs = args;
+
+            final Event2 previousEvent = window.getCurrentEvent();
+            window.setCurrentEvent(event);
+            try {
+                return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
+            }
+            finally {
+                window.setCurrentEvent(previousEvent); // reset event
+            }
+        }
+        return null;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(EventTarget2.class,
