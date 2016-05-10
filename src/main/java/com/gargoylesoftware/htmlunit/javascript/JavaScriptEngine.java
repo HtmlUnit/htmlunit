@@ -340,7 +340,19 @@ public class JavaScriptEngine {
                 default:
             }
             if (prototype != null && config.isJsObject()) {
-                if (jsConstructor != null) {
+                if (jsConstructor == null) {
+                    final ScriptableObject constructor;
+                    if ("Window".equals(jsClassName)) {
+                        constructor = (ScriptableObject) ScriptableObject.getProperty(window, "constructor");
+                    }
+                    else {
+                        constructor = config.getHostClass().newInstance();
+                        ((SimpleScriptable) constructor).setClassName(config.getClassName());
+                    }
+                    defineConstructor(browserVersion, window, prototype, constructor);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor, browserVersion);
+                }
+                else {
                     final BaseFunction function;
                     if ("Window".equals(jsClassName)) {
                         function = (BaseFunction) ScriptableObject.getProperty(window, "constructor");
@@ -392,23 +404,7 @@ public class JavaScriptEngine {
                         }
                     }
 
-                    configureConstants(config, function);
-                    configureStaticFunctions(config, function);
-                    configureStaticProperties(config, browserVersion, function);
-                }
-                else {
-                    final ScriptableObject constructor;
-                    if ("Window".equals(jsClassName)) {
-                        constructor = (ScriptableObject) ScriptableObject.getProperty(window, "constructor");
-                    }
-                    else {
-                        constructor = config.getHostClass().newInstance();
-                        ((SimpleScriptable) constructor).setClassName(config.getClassName());
-                    }
-                    defineConstructor(browserVersion, window, prototype, constructor);
-                    configureStaticFunctions(config, constructor);
-                    configureStaticProperties(config, browserVersion, constructor);
-                    configureConstants(config, constructor);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, function, browserVersion);
                 }
             }
         }
@@ -561,6 +557,18 @@ public class JavaScriptEngine {
         configureConstantsPropertiesAndFunctions(config, prototype, browserVersion);
 
         return prototype;
+    }
+
+    /**
+     * Configures constants, static properties and static functions on the object.
+     * @param config the configuration for the object
+     * @param scriptable the object to configure
+     */
+    private static void configureConstantsStaticPropertiesAndStaticFunctions(final ClassConfiguration config,
+            final ScriptableObject scriptable, final BrowserVersion browserVersion) {
+        configureConstants(config, scriptable);
+        configureStaticProperties(config, browserVersion, scriptable);
+        configureStaticFunctions(config, scriptable);
     }
 
     /**
