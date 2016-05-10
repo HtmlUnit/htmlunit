@@ -71,6 +71,25 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "function"})
+    public void thisIsWindow2() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  function hello() {\n"
+            + "    var x = 1;\n"
+            + "  } \n"
+            + "  alert(typeof hello);\n"
+            + "  alert(typeof window.hello);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * "window.controllers" is used by some JavaScript libraries to determine if the browser is Gecko based or not.
      * @throws Exception if the test fails
      */
