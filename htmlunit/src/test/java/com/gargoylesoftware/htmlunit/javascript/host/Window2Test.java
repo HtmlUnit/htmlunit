@@ -48,15 +48,23 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Window]", "undefined", "hello"})
+    @Alerts({"[object Window]", "exception", "undefined", "undefined", "hello", "hello", "world", "world"})
     public void thisIsWindow() throws Exception {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  alert(this);\n"
+            + "  try {;\n"
+            + "   alert(abc);\n"
+            + "  } catch(e) {alert('exception')}\n"
             + "  alert(this.abc);\n"
+            + "  alert(this.def);\n"
             + "  this.abc = 'hello';\n"
+            + "  def = 'world';\n"
+            + "  alert(abc);\n"
             + "  alert(this.abc);\n"
+            + "  alert(def);\n"
+            + "  alert(this.def);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
