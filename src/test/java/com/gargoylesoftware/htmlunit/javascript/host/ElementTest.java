@@ -1090,9 +1090,9 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"function Element() {\n    [native code]\n}",
-            "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
-            CHROME = {"function Element() { [native code] }", "[object Object]",
-            "function Element() { [native code] }"},
+                        "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+            CHROME = {"function Element() { [native code] }", "[object Element]",
+                        "function Element() { [native code] }"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented
     public void prototypConstructor() throws Exception {
@@ -1124,9 +1124,9 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"function Element() {\n    [native code]\n}",
-            "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
-            CHROME = {"function Element() { [native code] }", "[object Object]",
-            "function Element() { [native code] }"},
+                        "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+            CHROME = {"function Element() { [native code] }", "[object Element]",
+                        "function Element() { [native code] }"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented
     public void prototypConstructorStandards() throws Exception {
