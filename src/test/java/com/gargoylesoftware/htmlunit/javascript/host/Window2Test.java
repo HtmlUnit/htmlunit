@@ -1845,4 +1845,27 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"a", "b"})
+    public void calledTwice() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  info('a');\n"
+            + "  info('b');\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
