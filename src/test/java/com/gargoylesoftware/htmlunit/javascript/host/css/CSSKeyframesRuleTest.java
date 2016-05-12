@@ -64,7 +64,7 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSKeyframesRule], identifier"},
+    @Alerts(DEFAULT = {"[object CSSKeyframesRule]", "identifier"},
             FF = {"[object MozCSSKeyframesRule]", "identifier"})
     @NotYetImplemented
     public void name() throws Exception {
