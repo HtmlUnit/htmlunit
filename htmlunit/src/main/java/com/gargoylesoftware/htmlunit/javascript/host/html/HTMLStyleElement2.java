@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -36,7 +37,7 @@ public class HTMLStyleElement2 extends HTMLElement2 {
 
     public static HTMLStyleElement2 constructor(final boolean newObj, final Object self) {
         final HTMLStyleElement2 host = new HTMLStyleElement2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
         return host;
     }
 

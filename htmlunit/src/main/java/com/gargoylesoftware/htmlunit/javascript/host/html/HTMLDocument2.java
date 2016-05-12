@@ -69,9 +69,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -216,7 +216,7 @@ public class HTMLDocument2 extends Document2 {
     public static HTMLDocument2 constructor(final boolean newObj, final Object self) {
         final HTMLDocument2 host = new HTMLDocument2();
         ScriptUtils.initialize(host);
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
         return host;
     }
 

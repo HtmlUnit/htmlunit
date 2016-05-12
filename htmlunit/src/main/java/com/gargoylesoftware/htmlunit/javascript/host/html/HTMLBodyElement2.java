@@ -23,7 +23,7 @@ import java.lang.invoke.MethodType;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -32,7 +32,7 @@ public class HTMLBodyElement2 extends HTMLElement2 {
     public static HTMLBodyElement2 constructor(final boolean newObj, final Object self) {
         final HTMLBodyElement2 host = new HTMLBodyElement2();
         ScriptUtils.initialize(host);
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
         return host;
     }
 

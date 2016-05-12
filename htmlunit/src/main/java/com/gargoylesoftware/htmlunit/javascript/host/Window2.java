@@ -112,15 +112,15 @@ public class Window2 extends EventTarget2 {
      * @param enclosedPage the page containing the JavaScript
      */
     public void initialize(final Page enclosedPage) {
+        final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow().getScriptContext());
         if (enclosedPage instanceof XmlPage || enclosedPage instanceof SvgPage) {
 //            document_ = new XMLDocument2();
         }
         else {
-            document_ = HTMLDocument2.constructor(true, null);
+            document_ = HTMLDocument2.constructor(true, global);
         }
         document_.setWindow(this);
 
-        final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow().getScriptContext());
 
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;

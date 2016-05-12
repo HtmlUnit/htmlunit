@@ -932,15 +932,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final Object result = jsExecutor.executeScript("top.__huCatchedAlerts");
 
         if (result != null) {
-            if (driver instanceof HtmlUnitDriver) {
-                return (List<String>) result;
-            }
             if (result instanceof List) {
                 for (final Object alert : (List<Object>) result) {
                     collectedAlerts.add(Context.toString(alert));
                 }
             }
             else if (result instanceof String) {
+                collectedAlerts.add(result.toString());
+            }
+            else if (result instanceof Number) {
                 collectedAlerts.add(result.toString());
             }
             else {

@@ -20,6 +20,7 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -28,7 +29,7 @@ public class HTMLFrameSetElement2 extends HTMLElement2 {
 
     public static HTMLFrameSetElement2 constructor(final boolean newObj, final Object self) {
         final HTMLFrameSetElement2 host = new HTMLFrameSetElement2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
         return host;
     }
 
