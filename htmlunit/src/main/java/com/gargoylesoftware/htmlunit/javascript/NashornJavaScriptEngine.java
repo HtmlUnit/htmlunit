@@ -63,6 +63,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 /**
  * A wrapper for the <a href="http://openjdk.java.net/projects/nashorn/">Nashorn JavaScript engine</a>.
@@ -187,7 +188,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             try {
                 final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "execScript", "CollectGarbage"};
                 for (final String key : windowToGlobalFunctions) {
-                    global.put(key, window.get(key), true);
+                    final Object function = window.get(key);
+                    if (function != Undefined.getUndefined()) {
+                        global.put(key, function, true);
+                    }
                 }
 
                 final String[] globalToWindowFunctions = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
