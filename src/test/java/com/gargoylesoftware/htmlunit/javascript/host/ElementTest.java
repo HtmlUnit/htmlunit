@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -1094,7 +1097,7 @@ public class ElementTest extends WebDriverTestCase {
             CHROME = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1128,7 +1131,7 @@ public class ElementTest extends WebDriverTestCase {
             CHROME = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
