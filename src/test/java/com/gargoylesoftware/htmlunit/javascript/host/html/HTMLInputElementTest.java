@@ -377,18 +377,21 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "password, radio, reset, reset, "
-                + "submit, submit, text, textarea, color, date, text, datetime-local, time, week, month, number, "
-                + "range, search, email, tel, url",
-            FF = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "password, radio, reset, reset, "
-                + "submit, submit, text, textarea, color, text, text, text, text, text, text, number, range, "
-                + "search, email, tel, url",
-            IE = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "password, radio, reset, reset, "
-                + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
-                + "search, email, tel, url"
+    @Alerts(CHROME = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "color", "date", "text",
+                        "datetime-local", "time", "week", "month", "number",
+                        "range", "search", "email", "tel", "url"},
+            FF = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "color", "text", "text",
+                        "text", "text", "text", "text", "number", "range",
+                        "search", "email", "tel", "url"},
+            IE = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "text", "text", "text",
+                        "text", "text", "text", "text", "number", "range",
+                        "search", "email", "tel", "url"}
             )
     @NotYetImplemented
     public void type() throws Exception {
