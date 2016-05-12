@@ -124,7 +124,6 @@ public class WorkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true"},
-            CHROME = {"[object global]", "[object global]", "true"},
             IE = {"[object WorkerGlobalScope]", "[object WorkerGlobalScope]", "true"})
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"

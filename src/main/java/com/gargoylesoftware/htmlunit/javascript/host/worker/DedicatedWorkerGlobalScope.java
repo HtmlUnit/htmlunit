@@ -57,8 +57,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  */
 @JsxClasses({
-        @JsxClass(browsers = @WebBrowser(FF)),
-        @JsxClass(className = "global", browsers = @WebBrowser(CHROME)),
+        @JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(CHROME)}),
         @JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(IE))
     })
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
