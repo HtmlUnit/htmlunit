@@ -927,7 +927,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  alert(window.onbeforeunload);\n"
-            + "  var handle = function () {};\n"
+            + "  var handle = function() {};\n"
             + "  window.onbeforeunload = handle;\n"
             + "  alert(typeof window.onbeforeunload);\n"
             + "  window.onbeforeunload = null;\n"
@@ -951,21 +951,92 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "2"})
+    @Alerts({"true", "0", "2", "2", "null"})
     public void functionPrototypeArguments() throws Exception {
         final String html =
               "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    \n"
+            + " \n"
             + "    Function.prototype.doAlerts = function() {\n"
-            + "      alert(this==o.f);\n"
+            + "      alert(this == o.f);\n"
+            + "      alert(arguments ? arguments.length : 'null');\n"
             + "      alert(this.arguments ? this.arguments.length : 'null');\n"
             + "    }\n"
-            + "    \n"
+            + " \n"
             + "    var o = function() {};\n"
-            + "    o.f = function(x, y, z) { this.f.doAlerts(); }\n"
+            + "    o.f = function(x, y, z) {\n"
+            + "      this.f.doAlerts();\n"
+            + "      alert(arguments ? arguments.length : 'null');\n"
+            + "      alert(this.arguments ? this.arguments.length : 'null');\n"
+            + "    }\n"
+            + "    o.f('a', 'b');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "[object Arguments]", "null", "true", "[object Arguments]", "[object Arguments]"})
+    public void functionPrototypeArguments2() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + " \n"
+            + "    Function.prototype.doAlerts = function() {\n"
+            + "      alert(this == o.f);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "    }\n"
+            + " \n"
+            + "    var o = function() {};\n"
+            + "    o.f = function(x, y, z) {\n"
+            + "      alert(this == o);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "      this.f.doAlerts();\n"
+            + "    }\n"
+            + "    o.f('a', 'b');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "[object Arguments]", "null", "true", "[object Arguments]", "null"})
+    public void functionPrototypeArguments3() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var o = function() {};\n"
+            + "    o.x = function() {\n"
+            + "      alert(this == o);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "    }\n"
+            + "    o.f = function(x, y, z) {\n"
+            + "      alert(this == o);\n"
+            + "      alert(arguments);\n"
+            + "      alert(this.arguments);\n"
+            + "      this.x();\n"
+            + "    }\n"
             + "    o.f('a', 'b');\n"
             + "  }\n"
             + "</script>\n"
@@ -1749,4 +1820,52 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(window.length);\n"
+            + "  alert(-1 in window);\n"
+            + "  alert(0 in window);\n"
+            + "  alert(1 in window);\n"
+            + "  alert(42 in window);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<frameset rows='50,*' onload='test()'>\n"
+            + "<frame name='frame1' src='about:blank'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"a", "b"})
+    public void calledTwice() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  info('a');\n"
+            + "  info('b');\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
