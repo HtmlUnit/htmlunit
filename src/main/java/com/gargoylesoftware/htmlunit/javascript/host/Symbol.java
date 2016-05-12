@@ -148,9 +148,49 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code match} static property
      */
-    @JsxStaticGetter(@WebBrowser(value = FF, minVersion = 45))
+    @JsxStaticGetter({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
     public static Symbol getMatch(final Scriptable thisObj) {
         return getSymbol(thisObj, "match");
+    }
+
+    /**
+     * Returns the {@code hasInstance} static property.
+     * @param thisObj the scriptable
+     * @return the {@code hasInstance} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getHasInstance(final Scriptable thisObj) {
+        return getSymbol(thisObj, "hasInstance");
+    }
+
+    /**
+     * Returns the {@code replace} static property.
+     * @param thisObj the scriptable
+     * @return the {@code replace} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getReplace(final Scriptable thisObj) {
+        return getSymbol(thisObj, "replace");
+    }
+
+    /**
+     * Returns the {@code search} static property.
+     * @param thisObj the scriptable
+     * @return the {@code search} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getSearch(final Scriptable thisObj) {
+        return getSymbol(thisObj, "search");
+    }
+
+    /**
+     * Returns the {@code split} static property.
+     * @param thisObj the scriptable
+     * @return the {@code split} static property
+     */
+    @JsxStaticGetter(@WebBrowser(CHROME))
+    public static Symbol getSplit(final Scriptable thisObj) {
+        return getSymbol(thisObj, "split");
     }
 
     /**
