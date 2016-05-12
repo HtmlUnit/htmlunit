@@ -946,7 +946,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Gets the default character set from the current regional language settings.
      * @return the default character set from the current regional language settings
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxGetter(@WebBrowser(IE))
     public String getDefaultCharset() {
         return "windows-1252";
     }

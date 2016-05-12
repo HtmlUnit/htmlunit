@@ -1923,9 +1923,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding() throws Exception {
         final String html = "<html>\n"
@@ -1948,9 +1947,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding2() throws Exception {
         final String html = "<html>\n"
@@ -1974,9 +1972,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding3() throws Exception {
         final String html = "<html>\n"
@@ -2002,9 +1999,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"UTF-8", "UTF-8", "UTF-8", "windows-1252"},
+    @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
-            FF45 = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding4() throws Exception {
         final String html = "<html>\n"
@@ -2030,9 +2026,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"UTF-8", "UTF-8", "UTF-8", "windows-1252"},
+    @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
-            FF45 = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding5() throws Exception {
         final String html = "<html>\n"
@@ -2058,9 +2053,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"UTF-8", "UTF-8", "UTF-8", "windows-1252"},
+    @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
-            FF45 = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding6() throws Exception {
         final String html = "<html>\n"
