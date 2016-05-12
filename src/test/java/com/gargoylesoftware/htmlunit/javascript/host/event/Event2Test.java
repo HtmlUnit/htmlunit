@@ -712,7 +712,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
                 "true"},
-            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing, false", "true",
+            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "true",
                 "div capturing", "true", "true", "span capturing", "true", "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
                 "div capturing", "false", "false", "span capturing", "false", "true"})
