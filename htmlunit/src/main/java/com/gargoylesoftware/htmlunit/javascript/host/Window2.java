@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards.explicitInstanceOfCheck;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -74,11 +75,13 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
+import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
+import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
 public class Window2 extends EventTarget2 {
 
@@ -353,10 +356,27 @@ public class Window2 extends EventTarget2 {
      * {@inheritDoc}
      */
     @Override
+    protected FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
+        FindProperty prop = super.findProperty(key, deep, start);
+        if (prop == null && getDomNodeOrNull() != null) {
+            final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+            prop = global.findProperty(key, deep);
+        }
+        return prop;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
         final MethodHandle mh = virtualHandle("getArbitraryProperty", Object.class, String.class);
-        return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name));
+        final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
+        return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name),
+                NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
+                getProtoSwitchPoints(name, null),
+                explicitInstanceOfCheck ? null : ClassCastException.class);
     }
 
     @SuppressWarnings("unused")

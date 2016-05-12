@@ -214,7 +214,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
         }
         finally {
-            Context.setGlobal(oldGlobal);
+//            Context.setGlobal(oldGlobal);
         }
     }
 
