@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Ensures all defined Host classes in internet references (e.g. Mozilla Developer Network)
- * are defined in {@link HostClassNameStandardsTest}.
+ * are defined in {@link HostClassNameTest}.
  *
  * @author Ahmed Ashour
  */
