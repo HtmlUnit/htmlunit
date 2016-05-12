@@ -85,7 +85,7 @@ abstract class URLCreator {
             else if ("data".equals(protocol)) {
                 return new URL(null, url, DATA_HANDLER);
             }
-            else  {
+            else {
                 return new URL(null, url, AnyHandler.INSTANCE);
             }
         }

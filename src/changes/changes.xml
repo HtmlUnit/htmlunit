@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="add" dev="asashour" issue="231" system="features">
+                WebClientOptions: .setSSLClientCertificate() supports InputStream.
+            </action>
             <action type="fix" dev="rbri" issue="1769" due-to="Carsten Steul">
                 DataUrlDecoder.decodeUrl() no longer replaces '+' with a space character.
             </action>
