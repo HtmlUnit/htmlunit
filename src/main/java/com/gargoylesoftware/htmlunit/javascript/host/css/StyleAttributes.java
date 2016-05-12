@@ -94,7 +94,7 @@ public final class StyleAttributes {
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"),
-                ffBelow45("stretch"), ff45up("auto"), chrome("stretch")),
+                ffBelow45("stretch"), ff45up("auto"), chrome("normal")),
 
         /** The style property {@code align-content}. */
         ALIGN_CONTENT_("align-content", "align-content", ffBelow45("stretch"), ff45up("auto")),
@@ -597,13 +597,13 @@ public final class StyleAttributes {
         BOX_SIZING_("box-sizing", "box-sizing", ff("content-box")),
 
         /** The style property {@code breakAfter}. */
-        BREAK_AFTER("breakAfter", "break-after", ie("auto")),
+        BREAK_AFTER("breakAfter", "break-after", chrome("auto"), ie("auto")),
 
         /** The style property {@code breakBefore}. */
-        BREAK_BEFORE("breakBefore", "break-before", ie("auto")),
+        BREAK_BEFORE("breakBefore", "break-before", chrome("auto"), ie("auto")),
 
         /** The style property {@code breakInside}. */
-        BREAK_INSIDE("breakInside", "break-inside", ie("auto")),
+        BREAK_INSIDE("breakInside", "break-inside", chrome("auto"), ie("auto")),
 
         /** The style property {@code bufferedRendering}. */
         BUFFERED_RENDERING("bufferedRendering", "buffered-rendering", chrome("auto")),
@@ -652,34 +652,34 @@ public final class StyleAttributes {
         COLOR_RENDERING("colorRendering", "color-rendering", chrome("auto")),
 
         /** The style property {@code columnCount}. */
-        COLUMN_COUNT("columnCount", "column-count", ie("auto")),
+        COLUMN_COUNT("columnCount", "column-count", chrome("auto"), ie("auto")),
 
         /** The style property {@code columnFill}. */
-        COLUMN_FILL("columnFill", "column-fill", ie("balance")),
+        COLUMN_FILL("columnFill", "column-fill", chrome("balance"), ie("balance")),
 
         /** The style property {@code columnGap}. */
-        COLUMN_GAP("columnGap", "column-gap", ie("normal")),
+        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ie("normal")),
 
         /** The style property {@code columnRule}. */
-        COLUMN_RULE("columnRule", "column-rule", ie("")),
+        COLUMN_RULE("columnRule", "column-rule", chrome("0px none rgb(0, 0, 0)"), ie("")),
 
         /** The style property {@code columnRuleColor}. */
-        COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color", ie("rgb(0, 0, 0)")),
+        COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color", chrome("rgb(0, 0, 0)"), ie("rgb(0, 0, 0)")),
 
         /** The style property {@code columnRuleStyle}. */
-        COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", ie("none")),
+        COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", chrome("none"), ie("none")),
 
         /** The style property {@code columnRuleWidth}. */
-        COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", ie("medium")),
+        COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chrome("0px"), ie("medium")),
 
         /** The style property {@code columnSpan}. */
-        COLUMN_SPAN("columnSpan", "column-span", ie("1")),
+        COLUMN_SPAN("columnSpan", "column-span", chrome("none"), ie("1")),
 
         /** The style property {@code columnWidth}. */
-        COLUMN_WIDTH("columnWidth", "column-width", ie("auto")),
+        COLUMN_WIDTH("columnWidth", "column-width", chrome("auto"), ie("auto")),
 
         /** The style property {@code columns}. */
-        COLUMNS("columns", "columns", ie("")),
+        COLUMNS("columns", "columns", chrome("auto auto"), ie("")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chrome(""), ff("none")),
@@ -969,7 +969,7 @@ public final class StyleAttributes {
         JUSTIFY_CONTENT("justifyContent", "justify-content",
                 ffBelow45("flex-start"),
                 ff45up("auto"),
-                ie("flex-start"), chrome("flex-start")),
+                ie("flex-start"), chrome("normal")),
 
         /** The style property {@code justify-content}. */
         JUSTIFY_CONTENT_("justify-content", "justify-content", ffBelow45("flex-start"), ff45up("auto")),
@@ -2576,33 +2576,6 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitColumnBreakInside}. */
         WEBKIT_COLUMN_BREAK_INSIDE("webkitColumnBreakInside", "webkit-column-break-inside", chrome("auto")),
-
-        /** The style property {@code webkitColumnCount}. */
-        WEBKIT_COLUMN_COUNT("webkitColumnCount", "webkit-column-count", chrome("auto")),
-
-        /** The style property {@code webkitColumnGap}. */
-        WEBKIT_COLUMN_GAP("webkitColumnGap", "webkit-column-gap", chrome("normal")),
-
-        /** The style property {@code webkitColumnRule}. */
-        WEBKIT_COLUMN_RULE("webkitColumnRule", "webkit-column-rule", chrome("0px none rgb(0, 0, 0)")),
-
-        /** The style property {@code webkitColumnRuleColor}. */
-        WEBKIT_COLUMN_RULE_COLOR("webkitColumnRuleColor", "webkit-column-rule-color", chrome("rgb(0, 0, 0)")),
-
-        /** The style property {@code webkitColumnRuleStyle}. */
-        WEBKIT_COLUMN_RULE_STYLE("webkitColumnRuleStyle", "webkit-column-rule-style", chrome("none")),
-
-        /** The style property {@code webkitColumnRuleWidth}. */
-        WEBKIT_COLUMN_RULE_WIDTH("webkitColumnRuleWidth", "webkit-column-rule-width", chrome("0px")),
-
-        /** The style property {@code webkitColumnSpan}. */
-        WEBKIT_COLUMN_SPAN("webkitColumnSpan", "webkit-column-span", chrome("none")),
-
-        /** The style property {@code webkitColumnWidth}. */
-        WEBKIT_COLUMN_WIDTH("webkitColumnWidth", "webkit-column-width", chrome("auto")),
-
-        /** The style property {@code webkitColumns}. */
-        WEBKIT_COLUMNS("webkitColumns", "webkit-columns", chrome("auto auto")),
 
         /** The style property {@code webkitFilter}. */
         WEBKIT_FILTER("webkitFilter", "webkit-filter", chrome("none")),
