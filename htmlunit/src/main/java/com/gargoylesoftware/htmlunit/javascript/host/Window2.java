@@ -789,7 +789,7 @@ public class Window2 extends EventTarget2 {
 
         boolean replaceCurrentEntryInBrowsingHistory = false;
         if (replace != Undefined.getUndefined()) {
-            replaceCurrentEntryInBrowsingHistory = (boolean) replace;
+            replaceCurrentEntryInBrowsingHistory = Boolean.parseBoolean(replace.toString());
         }
         if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
             if (LOG.isDebugEnabled()) {
