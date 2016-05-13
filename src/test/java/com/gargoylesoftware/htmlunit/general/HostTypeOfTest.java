@@ -7397,8 +7397,19 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    public void oES_texture_float_linear() throws Exception {
+    public void oes_texture_float_linear() throws Exception {
         test("OES_texture_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @NotYetImplemented(IE)
+    public void oes_element_index_uint() throws Exception {
+        test("OES_element_index_uint");
     }
 
     /**
@@ -7680,6 +7691,28 @@ public class HostTypeOfTest extends WebDriverTestCase {
             EDGE = "function")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @NotYetImplemented(IE)
+    public void angle_instanced_arrays() throws Exception {
+        test("ANGLE_instanced_arrays");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @NotYetImplemented(IE)
+    public void oes_standard_derivatives() throws Exception {
+        test("OES_standard_derivatives");
     }
 
 }
