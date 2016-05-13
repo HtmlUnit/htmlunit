@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ClientRect2;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
@@ -45,6 +46,7 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -72,8 +74,8 @@ public class HTMLElement2 extends Element2 {
     private static int UniqueID_Counter_ = 1;
 
     private final Set<String> behaviors_ = new HashSet<>();
-    private int scrollLeft_;
-    private int scrollTop_;
+    private long scrollLeft_;
+    private long scrollTop_;
     private String uniqueID_;
 
     public static HTMLElement2 constructor(final boolean newObj, final Object self) {
@@ -551,6 +553,86 @@ public class HTMLElement2 extends Element2 {
             final HtmlElement element = getDomNodeOrDie();
             ((HtmlPage) element.getPage()).setFocusedElement(element);
         }
+    }
+
+    /**
+     * Gets the scrollTop value for this element.
+     * @return the scrollTop value for this element
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534618.aspx">MSDN documentation</a>
+     */
+    @Getter
+    public long getScrollTop() {
+        // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
+        // because modifying the CSS style of the element is supposed to affect the attribute value.
+        if (scrollTop_ < 0) {
+            scrollTop_ = 0;
+        }
+        else if (scrollTop_ > 0) {
+            final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(getWindow(), this, null);
+            if (!style.isScrollable(false)) {
+                scrollTop_ = 0;
+            }
+        }
+        return scrollTop_;
+    }
+
+    /**
+     * Sets the scrollTop value for this element.
+     * @param scroll the scrollTop value for this element
+     */
+    @Setter
+    public void setScrollTop(final long scroll) {
+        scrollTop_ = scroll;
+    }
+
+    /**
+     * Gets the scrollLeft value for this element.
+     * @return the scrollLeft value for this element
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534617.aspx">MSDN documentation</a>
+     */
+    @Getter
+    public long getScrollLeft() {
+        // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
+        // because modifying the CSS style of the element is supposed to affect the attribute value.
+        if (scrollLeft_ < 0) {
+            scrollLeft_ = 0;
+        }
+        else if (scrollLeft_ > 0) {
+            final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(getWindow(), this, null);
+            if (!style.isScrollable(true)) {
+                scrollLeft_ = 0;
+            }
+        }
+        return scrollLeft_;
+    }
+
+    /**
+     * Sets the scrollLeft value for this element.
+     * @param scroll the scrollLeft value for this element
+     */
+    @Setter
+    public void setScrollLeft(final long scroll) {
+        scrollLeft_ = scroll;
+    }
+
+    /**
+     * Gets the scrollHeight for this element.
+     * @return a dummy value of 10
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534615.aspx">MSDN documentation</a>
+     */
+    @Getter
+    public int getScrollHeight() {
+        return 10;
+    }
+
+    /**
+     * Gets the scrollWidth for this element.
+     * @return a dummy value of 10
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534619.aspx">MSDN documentation</a>
+     */
+    @Getter
+    public int getScrollWidth() {
+        return 10;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

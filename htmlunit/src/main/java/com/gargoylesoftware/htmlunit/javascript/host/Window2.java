@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
-import static com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards.explicitInstanceOfCheck;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -60,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.gargoylesoftware.js.internal.dynalink.CallSiteDescriptor;
@@ -496,6 +496,7 @@ public class Window2 extends EventTarget2 {
      * of all CSS properties for the element. This method's return value is of the same type as
      * that of <tt>element.style</tt>, but the value returned by this method is read-only.
      *
+     * @param self this object
      * @param element the element
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
      * @return the computed style
@@ -858,6 +859,56 @@ public class Window2 extends EventTarget2 {
         return opener_;
     }
 
+    /**
+     * Scrolls the window content the specified distance.
+     * @param x the horizontal distance to scroll by
+     * @param y the vertical distance to scroll by
+     */
+    @Function
+    public void scrollBy(final int x, final int y) {
+        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+        if (body != null) {
+            body.setScrollLeft(body.getScrollLeft() + x);
+            body.setScrollTop(body.getScrollTop() + y);
+        }
+    }
+
+    /**
+     * Returns the value of {@code pageXOffset} property.
+     * @return the value of {@code pageXOffset} property
+     */
+    @Getter
+    public int getPageXOffset() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of {@code pageYOffset} property.
+     * @return the value of {@code pageYOffset} property
+     */
+    @Getter
+    public int getPageYOffset() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of {@code scrollX} property.
+     * @return the value of {@code scrollX} property
+     */
+    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    public int getScrollX() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of {@code scrollY} property.
+     * @return the value of {@code scrollY} property
+     */
+    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    public int getScrollY() {
+        return 0;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -906,6 +957,7 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction find;
         public ScriptFunction getComputedStyle;
         public ScriptFunction open;
+        public ScriptFunction scrollBy;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -961,6 +1013,14 @@ public class Window2 extends EventTarget2 {
 
         public void S$open(final ScriptFunction function) {
             this.open = function;
+        }
+
+        public ScriptFunction G$scrollBy() {
+            return scrollBy;
+        }
+
+        public void S$scrollBy(final ScriptFunction function) {
+            this.scrollBy = function;
         }
 
         Prototype() {
