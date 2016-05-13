@@ -206,7 +206,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.242", "NPSWF32_21_0_0_242.dll"},
-            FF45 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll"},
+            FF45 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.242", "NPSWF32_21_0_0_242.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "undefined", "pepflashplayer.dll"},
             IE = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.197", "Flash32_21_0_0_197.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
@@ -371,7 +371,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF38 = "20160420141331",
-            FF45 = "20160316151906")
+            FF45 = "20160502160818")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
