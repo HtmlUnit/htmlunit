@@ -287,7 +287,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * The JavaScript function "confirm()".
+     * The JavaScript function {@code confirm}.
      * @param message the message
      * @return true if ok was pressed, false if cancel was pressed
      */
@@ -303,7 +303,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * The JavaScript function "prompt()".
+     * The JavaScript function {@code prompt}.
      * @param message the message
      * @return true if ok was pressed, false if cancel was pressed
      */
@@ -505,9 +505,9 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Cancels a time-out previously set with the <tt>setTimeout</tt> method.
+     * Cancels a time-out previously set with the {@link #setTimeout(Object, int, Object)} method.
      *
-     * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
+     * @param timeoutId identifier for the timeout to clear (returned by {@link #setTimeout(Object, int, Object)})
      */
     @JsxFunction
     public void clearTimeout(final int timeoutId) {
@@ -548,7 +548,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the window property. This is a synonym for "self".
+     * Returns the window property. This is a synonym for {@code self}.
      * @return the window property (a reference to <tt>this</tt>)
      */
     @JsxGetter(propertyName = "window")
@@ -566,8 +566,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the localStorage property.
-     * @return the localStorage property
+     * Returns the {@code localStorage} property.
+     * @return the {@code localStorage} property
      */
     @JsxGetter
     public Storage getLocalStorage() {
@@ -575,8 +575,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the sessionStorage property.
-     * @return the sessionStorage property
+     * Returns the {@code sessionStorage} property.
+     * @return the {@code sessionStorage} property
      */
     @JsxGetter
     public Storage getSessionStorage() {
@@ -611,7 +611,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the location property. This will cause a reload of the window.
+     * Sets the {@code location} property. This will cause a reload of the window.
      * @param newLocation the URL of the new content
      * @throws IOException when location loading fails
      */
@@ -621,8 +621,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the console property.
-     * @return the console property
+     * Returns the {@code console} property.
+     * @return the {@code console} property
      */
     @JsxGetter
     public ScriptableObject getConsole() {
@@ -630,7 +630,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the console.
+     * Sets the {@code console}.
      * @param console the console
      */
     @JsxSetter
@@ -650,7 +650,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Dummy implementation for requestAnimationFrame.
+     * Dummy implementation for {@code requestAnimationFrame}.
      * @param callback the function to call when it's time to update the animation
      * @return an identification id
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
@@ -662,7 +662,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Dummy implementation for cancelAnimationFrame.
+     * Dummy implementation for {@code cancelAnimationFrame}.
      * @param requestId the ID value returned by the call to window.requestAnimationFrame()
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
      */
@@ -673,7 +673,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns the {@code screen} property.
-     * @return the screen property
+     * @return the {@code screen} property
      */
     @JsxGetter
     public Screen getScreen() {
@@ -802,8 +802,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the value of the top property.
-     * @return the value of "top"
+     * Returns the value of the {@code top} property.
+     * @return the value of {@code top}
      */
     @JsxGetter
     public Object getTop() {
@@ -816,7 +816,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the value of the top property.
+     * Sets the value of the {@code top} property.
      * @param o the new value
      */
     @JsxSetter
@@ -1475,9 +1475,10 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Cancels the interval previously started using the setInterval method.
+     * Cancels the interval previously started using the {@link #setInterval(Object, int, Object)} method.
      * Current implementation does nothing.
-     * @param intervalID specifies the interval to cancel as returned by the setInterval method
+     * @param intervalID specifies the interval to cancel as returned by the
+     *        {@link #setInterval(Object, int, Object)} method
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     @JsxFunction
@@ -1489,8 +1490,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the innerWidth.
-     * @return a dummy value
+     * Returns the {@code innerWidth}.
+     * @return the {@code innerWidth}
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
     @JsxGetter
@@ -1499,8 +1500,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the outerWidth.
-     * @return a dummy value
+     * Returns the {@code outerWidth}.
+     * @return the {@code outerWidth}
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
     @JsxGetter
@@ -1509,8 +1510,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the innerHeight.
-     * @return a dummy value
+     * Returns the {@code innerHeight}.
+     * @return the {@code innerHeight}
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
     @JsxGetter
@@ -1519,8 +1520,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Returns the outer height.
-     * @return a dummy value
+     * Returns the {@code outerHeight}.
+     * @return the {@code outerHeight}
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
     @JsxGetter
@@ -1542,7 +1543,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Does nothing special anymore... just like FF.
+     * Does nothing special anymore.
      * @param type the type of events to capture
      * @see Document#captureEvents(String)
      */
@@ -1690,7 +1691,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Gets the controllers. The result doesn't currently matter but it is important to return an
+     * Gets the {@code controllers}. The result doesn't currently matter but it is important to return an
      * object as some JavaScript libraries check it.
      * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
      * @return some object
@@ -1701,7 +1702,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Sets the controllers.
+     * Sets the {@code controllers}.
      * @param value the new value
      */
     @JsxSetter(@WebBrowser(FF))
