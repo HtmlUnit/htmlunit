@@ -833,7 +833,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "143",
+            FF45 = "143",
+            FF38 = "142",
             IE = "145")
     @NotYetImplemented({FF, IE})
     public void isindex() throws Exception {
@@ -1684,7 +1685,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "173",
-            FF = "143",
+            FF45 = "143",
+            FF38 = "142",
             IE = "145")
     @NotYetImplemented
     public void input() throws Exception {

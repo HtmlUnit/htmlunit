@@ -2798,7 +2798,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "detail,initUIEvent(),sourceCapabilities,view,which",
-            FF45 = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
+            FF = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
             IE = "detail,initUIEvent(),view")
     @NotYetImplemented
