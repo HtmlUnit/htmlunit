@@ -28,6 +28,7 @@ public class CharacterData2 extends Node2 {
     public static CharacterData2 constructor(final boolean newObj, final Object self) {
         final CharacterData2 host = new CharacterData2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

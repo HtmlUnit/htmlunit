@@ -29,6 +29,7 @@ public class SVGSVGElement2 extends SVGGraphicsElement2 {
     public static SVGSVGElement2 constructor(final boolean newObj, final Object self) {
         final SVGSVGElement2 host = new SVGSVGElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

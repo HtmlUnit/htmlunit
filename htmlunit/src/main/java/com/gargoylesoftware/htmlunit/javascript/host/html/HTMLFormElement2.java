@@ -44,6 +44,7 @@ public class HTMLFormElement2 extends Element2 {
     public static HTMLFormElement2 constructor(final boolean newObj, final Object self) {
         final HTMLFormElement2 host = new HTMLFormElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

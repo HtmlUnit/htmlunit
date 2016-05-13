@@ -19,6 +19,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -27,7 +28,8 @@ public class HTMLCanvasElement2 extends HTMLElement2 {
 
     public static HTMLCanvasElement2 constructor(final boolean newObj, final Object self) {
         final HTMLCanvasElement2 host = new HTMLCanvasElement2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

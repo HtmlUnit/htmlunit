@@ -50,7 +50,8 @@ public class Element2 extends Node2 {
 
     public static Element2 constructor(final boolean newObj, final Object self) {
         final Element2 host = new Element2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

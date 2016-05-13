@@ -26,6 +26,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
@@ -937,7 +938,8 @@ public class KeyboardEvent2 extends Event2 {
 
     public static KeyboardEvent2 constructor(final boolean newObj, final Object self) {
         final KeyboardEvent2 host = new KeyboardEvent2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

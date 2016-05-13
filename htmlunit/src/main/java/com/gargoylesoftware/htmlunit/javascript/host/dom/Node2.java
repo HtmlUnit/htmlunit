@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
@@ -42,7 +43,8 @@ public class Node2 extends EventTarget2 {
 
     public static Node2 constructor(final boolean newObj, final Object self) {
         final Node2 host = new Node2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

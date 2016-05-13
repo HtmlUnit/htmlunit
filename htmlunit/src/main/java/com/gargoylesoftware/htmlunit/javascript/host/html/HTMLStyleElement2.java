@@ -38,6 +38,7 @@ public class HTMLStyleElement2 extends HTMLElement2 {
     public static HTMLStyleElement2 constructor(final boolean newObj, final Object self) {
         final HTMLStyleElement2 host = new HTMLStyleElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

@@ -29,6 +29,7 @@ public class HTMLHeadElement2 extends HTMLElement2 {
     public static HTMLHeadElement2 constructor(final boolean newObj, final Object self) {
         final HTMLHeadElement2 host = new HTMLHeadElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

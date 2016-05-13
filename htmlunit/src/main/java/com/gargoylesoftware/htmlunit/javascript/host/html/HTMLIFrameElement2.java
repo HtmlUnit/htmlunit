@@ -33,6 +33,7 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
         final HTMLIFrameElement2 host = new HTMLIFrameElement2();
         ScriptUtils.initialize(host);
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

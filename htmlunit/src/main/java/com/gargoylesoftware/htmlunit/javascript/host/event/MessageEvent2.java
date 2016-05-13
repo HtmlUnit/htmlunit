@@ -24,9 +24,10 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -40,7 +41,8 @@ public class MessageEvent2 extends Event2 {
 
     public static MessageEvent2 constructor(final boolean newObj, final Object self) {
         final MessageEvent2 host = new MessageEvent2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 
@@ -83,6 +85,59 @@ public class MessageEvent2 extends Event2 {
         }
     }
 
+    /**
+     * Retrieves the data contained.
+     * @return the data contained
+     */
+    @Getter
+    public Object getData() {
+        return data_;
+    }
+
+    /**
+     * Gets the URI of the document of origin.
+     * @return the origin
+     */
+    @Getter
+    public String getOrigin() {
+        return origin_;
+    }
+
+    /**
+     * Sets the URI of the document of origin.
+     * @param origin the origin
+     */
+    public void setOrigin(final String origin) {
+        origin_ = origin;
+    }
+
+    /**
+     * Retrieves the identifier of the last event.
+     * @return the identified of the last event
+     */
+    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    public String getLastEventId() {
+        return lastEventId_;
+    }
+
+    /**
+     * Retrieves the data contained.
+     * @return the data contained
+     */
+    @Getter
+    public Window2 getSource() {
+        return source_;
+    }
+
+    /**
+     * Returns the {@code ports} property.
+     * @return the {@code ports} property
+     */
+    @Getter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45)})
+    public Object getPorts() {
+        return ports_;
+    }
+
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("MessageEvent", 
@@ -95,6 +150,16 @@ public class MessageEvent2 extends Event2 {
     }
 
     public static final class Prototype extends PrototypeObject {
+        public ScriptFunction initMessageEvent;
+
+        public ScriptFunction G$initMessageEvent() {
+            return initMessageEvent;
+        }
+
+        public void S$initMessageEvent(final ScriptFunction function) {
+            this.initMessageEvent = function;
+        }
+
 
         Prototype() {
             ScriptUtils.initialize(this);

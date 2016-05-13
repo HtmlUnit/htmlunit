@@ -165,7 +165,8 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
 
     public static CSSStyleDeclaration2 constructor(final boolean newObj, final Object self) {
         final CSSStyleDeclaration2 host = new CSSStyleDeclaration2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

@@ -20,6 +20,7 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -50,7 +51,8 @@ public class ClientRect2 extends SimpleScriptObject {
 
     public static ClientRect2 constructor(final boolean newObj, final Object self) {
         final ClientRect2 host = new ClientRect2(0, 0, 0, 0);
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

@@ -193,7 +193,8 @@ public class CSSStyleSheet2 extends StyleSheet2 {
 
     public static CSSStyleSheet2 constructor(final boolean newObj, final Object self) {
         final CSSStyleSheet2 host = new CSSStyleSheet2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

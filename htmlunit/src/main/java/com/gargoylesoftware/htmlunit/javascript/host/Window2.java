@@ -157,7 +157,8 @@ public class Window2 extends EventTarget2 {
 
     public static Window2 constructor(final boolean newObj, final Object self) {
         final Window2 host = new Window2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 
@@ -948,7 +949,8 @@ public class Window2 extends EventTarget2 {
                 return;
             }
         }
-        final MessageEvent2 event = new MessageEvent2();
+        final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+        final MessageEvent2 event = MessageEvent2.constructor(true, global);
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
         event.initMessageEvent(Event2.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
 

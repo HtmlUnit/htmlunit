@@ -28,6 +28,7 @@ public class Text2 extends CharacterData2 {
     public static Text2 constructor(final boolean newObj, final Object self) {
         final Text2 host = new Text2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

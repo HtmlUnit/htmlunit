@@ -29,6 +29,7 @@ public class HTMLDivElement2 extends HTMLElement2 {
         final HTMLDivElement2 host = new HTMLDivElement2();
         ScriptUtils.initialize(host);
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

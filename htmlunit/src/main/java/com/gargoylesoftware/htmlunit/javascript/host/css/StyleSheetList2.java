@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -127,7 +128,8 @@ public class StyleSheetList2 extends SimpleScriptObject {
 
     public static StyleSheetList2 constructor(final boolean newObj, final Object self) {
         final StyleSheetList2 host = new StyleSheetList2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

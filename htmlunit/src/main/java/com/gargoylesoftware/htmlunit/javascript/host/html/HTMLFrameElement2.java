@@ -29,6 +29,7 @@ public class HTMLFrameElement2 extends HTMLElement2 {
     public static HTMLFrameElement2 constructor(final boolean newObj, final Object self) {
         final HTMLFrameElement2 host = new HTMLFrameElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

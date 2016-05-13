@@ -217,6 +217,7 @@ public class HTMLDocument2 extends Document2 {
         final HTMLDocument2 host = new HTMLDocument2();
         ScriptUtils.initialize(host);
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

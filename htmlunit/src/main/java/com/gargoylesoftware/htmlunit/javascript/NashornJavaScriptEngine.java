@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
@@ -74,6 +75,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     private static final Log LOG = LogFactory.getLog(NashornJavaScriptEngine.class);
 
+    private transient ThreadLocal<Boolean> javaScriptRunning_;
+    private transient ThreadLocal<List<PostponedAction>> postponedActions_;
+    private transient boolean holdPostponedActions_;
+
     private final WebClient webClient_;
     final NashornScriptEngine engine = (NashornScriptEngine) new NashornScriptEngineFactory().getScriptEngine();
 
@@ -84,6 +89,13 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
      */
     public NashornJavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
+        initTransientFields();
+    }
+
+    private void initTransientFields() {
+        javaScriptRunning_ = new ThreadLocal<>();
+        postponedActions_ = new ThreadLocal<>();
+        holdPostponedActions_ = false;
     }
 
     private static Browser getBrowser(final BrowserVersion version) {
@@ -128,6 +140,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("EventTarget", new EventTarget2.FunctionConstructor(), true);
                 global.put("Window", new Window2.FunctionConstructor(), true);
                 global.put("Event", new Event2.FunctionConstructor(), true);
+                global.put("MessageEvent", new MessageEvent2.FunctionConstructor(), true);
                 global.put("HTMLBodyElement", new HTMLBodyElement2.FunctionConstructor(), true);
                 global.put("HTMLDivElement", new HTMLDivElement2.FunctionConstructor(), true);
                 global.put("HTMLHtmlElement", new HTMLHtmlElement2.FunctionConstructor(), true);
@@ -152,6 +165,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 setProto(global, "Text", "CharacterData");
                 setProto(global, "CharacterData", "Node");
                 setProto(global, "ComputedCSSStyleDeclaration", "CSSStyleDeclaration");
+                setProto(global, "MessageEvent", "Event");
             }
             else {
                 global.put("Window", new Window2.ObjectConstructor(), true);
@@ -262,23 +276,79 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     @Override
-    public void addPostponedAction(PostponedAction action) {
+    public void addPostponedAction(final PostponedAction action) {
+        List<PostponedAction> actions = postponedActions_.get();
+        if (actions == null) {
+            actions = new ArrayList<>();
+            postponedActions_.set(actions);
+        }
+        actions.add(action);
     }
 
     @Override
     public void processPostponedActions() {
+        doProcessPostponedActions();
+    }
+
+    private void doProcessPostponedActions() {
+        holdPostponedActions_ = false;
+
+        try {
+            getWebClient().loadDownloadedResponses();
+        }
+        catch (final RuntimeException e) {
+            throw e;
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        final List<PostponedAction> actions = postponedActions_.get();
+        if (actions != null) {
+            postponedActions_.set(null);
+            try {
+                for (final PostponedAction action : actions) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Processing PostponedAction " + action);
+                    }
+
+                    // verify that the page that registered this PostponedAction is still alive
+                    if (action.isStillAlive()) {
+                        action.execute();
+                    }
+                }
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
     public Object execute(final InteractivePage page, final String sourceCode, final String sourceName,
             final int startLine) {
-        try {
-            return engine.eval(sourceCode, page.getEnclosingWindow().getScriptContext());
+        final Boolean javaScriptAlreadyRunning = javaScriptRunning_.get();
+        javaScriptRunning_.set(Boolean.TRUE);
+        Object response;
+        synchronized (page) { // 2 scripts can't be executed in parallel for one page
+            if (page != page.getEnclosingWindow().getEnclosedPage()) {
+                return null; // page has been unloaded
+            }
+            try {
+                response = engine.eval(sourceCode, page.getEnclosingWindow().getScriptContext());
+            }
+            catch(final Exception e) {
+                handleJavaScriptException(new ScriptException(page, e, sourceCode), true);
+                return null;
+            }
         }
-        catch(final Exception e) {
-            handleJavaScriptException(new ScriptException(page, e, sourceCode), true);
-            return null;
+
+        // doProcessPostponedActions is synchronized
+        // moved out of the sync block to avoid deadlocks
+        if (!holdPostponedActions_) {
+            doProcessPostponedActions();
         }
+        return response;
     }
 
     /**

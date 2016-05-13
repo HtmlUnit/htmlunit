@@ -69,6 +69,7 @@ public class Location2 extends SimpleScriptObject {
         final Location2 host = new Location2();
         ScriptUtils.initialize(host);
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

@@ -33,6 +33,7 @@ public class HTMLBodyElement2 extends HTMLElement2 {
         final HTMLBodyElement2 host = new HTMLBodyElement2();
         ScriptUtils.initialize(host);
         host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

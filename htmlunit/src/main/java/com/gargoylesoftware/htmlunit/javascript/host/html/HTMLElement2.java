@@ -80,7 +80,8 @@ public class HTMLElement2 extends Element2 {
 
     public static HTMLElement2 constructor(final boolean newObj, final Object self) {
         final HTMLElement2 host = new HTMLElement2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

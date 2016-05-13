@@ -233,7 +233,8 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
 
     public static ComputedCSSStyleDeclaration2 constructor(final boolean newObj, final Object self) {
         final ComputedCSSStyleDeclaration2 host = new ComputedCSSStyleDeclaration2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 

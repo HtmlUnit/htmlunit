@@ -20,6 +20,7 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -28,7 +29,8 @@ public class SVGElement2 extends Element2 {
 
     public static SVGElement2 constructor(final boolean newObj, final Object self) {
         final SVGElement2 host = new SVGElement2();
-        host.setProto(Context.getGlobal().getPrototype(host.getClass()));
+        host.setProto(((Global) self).getPrototype(host.getClass()));
+        ScriptUtils.initialize(host);
         return host;
     }
 
