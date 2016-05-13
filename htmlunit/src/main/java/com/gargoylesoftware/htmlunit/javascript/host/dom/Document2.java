@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -40,7 +41,7 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
@@ -164,6 +165,16 @@ public class Document2 extends Node2 {
     @Getter
     public Location2 getLocation() {
         return Window2.getLocation(window_);
+    }
+
+    /**
+     * Sets the {@code location} property. This will cause a reload of the window.
+     * @param newLocation the URL of the new content
+     * @throws IOException when location loading fails
+     */
+    @Setter
+    public void setLocation(final String newLocation) throws IOException {
+        Window2.getLocation(window_).setHref(newLocation);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

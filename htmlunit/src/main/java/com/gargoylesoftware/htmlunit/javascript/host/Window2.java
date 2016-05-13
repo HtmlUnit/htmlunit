@@ -47,10 +47,11 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
@@ -86,12 +87,18 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 
 public class Window2 extends EventTarget2 {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
+
+    /**
+     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
+     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
+     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
+     */
+    private static final int MIN_TIMER_DELAY = 1;
 
     private Screen2 screen_;
     private Document2 document_;
@@ -868,6 +875,16 @@ public class Window2 extends EventTarget2 {
     }
 
     /**
+     * Scrolls to the specified location on the page.
+     * @param x the horizontal position to scroll to
+     * @param y the vertical position to scroll to
+     */
+    @Function
+    public void scroll(final int x, final int y) {
+        scrollTo(x, y);
+    }
+
+    /**
      * Scrolls the window content the specified distance.
      * @param x the horizontal distance to scroll by
      * @param y the vertical distance to scroll by
@@ -1005,6 +1022,81 @@ public class Window2 extends EventTarget2 {
         // nothing for now
     }
 
+    /**
+     * Scrolls to the specified location on the page.
+     * @param x the horizontal position to scroll to
+     * @param y the vertical position to scroll to
+     */
+    @Function
+    public void scrollTo(final int x, final int y) {
+        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+        if (body != null) {
+            body.setScrollLeft(x);
+            body.setScrollTop(y);
+        }
+    }
+
+    /**
+     * Sets a chunk of JavaScript to be invoked at some specified time later.
+     * The invocation occurs only if the window is opened after the delay
+     * and does not contain an other page than the one that originated the setTimeout.
+     *
+     * @param self this object
+     * @param code specifies the function pointer or string that indicates the code to be executed
+     *        when the specified interval has elapsed
+     * @param timeout specifies the number of milliseconds
+     * @param language specifies language
+     * @return the id of the created timer
+     */
+    @Function
+    public static int setTimeout(final Object self, final Object code, int timeout, final Object language) {
+        if (timeout < MIN_TIMER_DELAY) {
+            timeout = MIN_TIMER_DELAY;
+        }
+        if (code == null) {
+            throw new RuntimeException("Function not provided.");
+        }
+
+        final int id;
+        final Window2 window = getWindow(self);
+        final WebWindow webWindow = window.getWebWindow();
+        final Page page = (Page) window.getDomNodeOrNull();
+        if (code instanceof String) {
+            final String s = (String) code;
+            final String description = "window.setTimeout(" + s + ", " + timeout + ")";
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                    createJavaScriptJob(timeout, null, description, webWindow, s);
+            id = webWindow.getJobManager().addJob(job, page);
+        }
+        else if (code instanceof ScriptFunction) {
+            final ScriptFunction f = (ScriptFunction) code;
+            final String functionName = f.getName();
+
+            final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                    createJavaScriptJob(timeout, null, description, webWindow, f);
+            id = webWindow.getJobManager().addJob(job, page);
+        }
+        else {
+            throw new RuntimeException("Unknown type for function.");
+        }
+        return id;
+    }
+
+    /**
+     * Cancels a time-out previously set with the {@link #setTimeout(Object, int, Object)} method.
+     *
+     * @param self this object
+     * @param timeoutId identifier for the timeout to clear (returned by {@link #setTimeout(Object, int, Object)})
+     */
+    @Function
+    public static void clearTimeout(final Object self, final int timeoutId) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clearTimeout(" + timeoutId + ")");
+        }
+        getWindow(self).getWebWindow().getJobManager().removeJob(timeoutId);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -1053,10 +1145,14 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction find;
         public ScriptFunction getComputedStyle;
         public ScriptFunction open;
+        public ScriptFunction scroll;
         public ScriptFunction scrollBy;
+        public ScriptFunction scrollTo;
         public ScriptFunction postMessage;
         public ScriptFunction requestAnimationFrame;
         public ScriptFunction cancelAnimationFrame;
+        public ScriptFunction setTimeout;
+        public ScriptFunction clearTimeout;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1114,12 +1210,28 @@ public class Window2 extends EventTarget2 {
             this.open = function;
         }
 
+        public ScriptFunction G$scroll() {
+            return scroll;
+        }
+
+        public void S$scroll(final ScriptFunction function) {
+            this.scroll = function;
+        }
+
         public ScriptFunction G$scrollBy() {
             return scrollBy;
         }
 
         public void S$scrollBy(final ScriptFunction function) {
             this.scrollBy = function;
+        }
+
+        public ScriptFunction G$scrollTo() {
+            return scrollTo;
+        }
+
+        public void S$scrollTo(final ScriptFunction function) {
+            this.scrollTo = function;
         }
 
         public ScriptFunction G$postMessage() {
@@ -1144,6 +1256,22 @@ public class Window2 extends EventTarget2 {
 
         public void S$cancelAnimationFrame(final ScriptFunction function) {
             this.cancelAnimationFrame = function;
+        }
+
+        public ScriptFunction G$setTimeout() {
+            return setTimeout;
+        }
+
+        public void S$setTimeout(final ScriptFunction function) {
+            this.setTimeout = function;
+        }
+
+        public ScriptFunction G$clearTimeout() {
+            return clearTimeout;
+        }
+
+        public void S$clearTimeout(final ScriptFunction function) {
+            this.clearTimeout = function;
         }
 
         Prototype() {

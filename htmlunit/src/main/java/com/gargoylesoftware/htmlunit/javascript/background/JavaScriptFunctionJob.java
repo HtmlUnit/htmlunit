@@ -17,18 +17,19 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
- * A {@link JavaScriptJob} created from a {@link Function} object.
+ * A {@link JavaScriptJob} created from a {@link ScriptFunction} object.
+ *
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
 class JavaScriptFunctionJob extends JavaScriptExecutionJob {
 
     /** The JavaScript code to execute. */
-    private final Function function_;
+    private final ScriptFunction function_;
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a function.
@@ -39,17 +40,19 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
      * @param function the JavaScript code to execute
      */
     JavaScriptFunctionJob(final int initialDelay, final Integer period, final String label,
-        final WebWindow window, final Function function) {
+        final WebWindow window, final ScriptFunction function) {
         super(initialDelay, period, label, window);
         function_ = function;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void runJavaScript(final HtmlPage page) {
         final HtmlElement doc = page.getDocumentElement();
-        final Scriptable scriptable = page.getEnclosingWindow().getScriptableObject();
-        page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
+        final ScriptObject scriptObject = page.getEnclosingWindow().getScriptObject2();
+        page.executeJavaScriptFunctionIfPossible(function_, scriptObject, new Object[0], doc);
     }
 
 }

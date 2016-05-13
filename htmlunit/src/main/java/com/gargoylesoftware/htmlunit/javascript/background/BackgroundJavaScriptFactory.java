@@ -19,6 +19,7 @@ import java.net.URL;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -79,7 +80,7 @@ public class BackgroundJavaScriptFactory {
      */
     public JavaScriptFunctionJob createJavaScriptJob(final int initialDelay,
             final Integer period, final String label,
-            final WebWindow window, final Function function) {
+            final WebWindow window, final ScriptFunction function) {
         return new JavaScriptFunctionJob(initialDelay, period, label, window, function);
     }
 

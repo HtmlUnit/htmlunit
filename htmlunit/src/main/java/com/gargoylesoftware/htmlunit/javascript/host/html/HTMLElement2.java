@@ -562,7 +562,7 @@ public class HTMLElement2 extends Element2 {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534618.aspx">MSDN documentation</a>
      */
     @Getter
-    public long getScrollTop() {
+    public Long getScrollTop() {
         // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
         // because modifying the CSS style of the element is supposed to affect the attribute value.
         if (scrollTop_ < 0) {
@@ -592,7 +592,7 @@ public class HTMLElement2 extends Element2 {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534617.aspx">MSDN documentation</a>
      */
     @Getter
-    public long getScrollLeft() {
+    public Long getScrollLeft() {
         // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
         // because modifying the CSS style of the element is supposed to affect the attribute value.
         if (scrollLeft_ < 0) {

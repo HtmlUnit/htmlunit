@@ -494,9 +494,10 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             }
 
             final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
-            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, null, description, webWindow, f);
-            id = webWindow.getJobManager().addJob(job, page);
+//            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+//                    createJavaScriptJob(timeout, null, description, webWindow, f);
+//            id = webWindow.getJobManager().addJob(job, page);
+            id = -1;
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");
@@ -1463,9 +1464,10 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
-            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
-            id = getWebWindow().getJobManager().addJob(job, page);
+//            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+//                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
+//            id = getWebWindow().getJobManager().addJob(job, page);
+            id = -1;
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");
