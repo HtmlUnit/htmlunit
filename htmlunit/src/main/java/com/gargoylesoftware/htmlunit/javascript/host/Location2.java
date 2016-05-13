@@ -287,6 +287,17 @@ public class Location2 extends SimpleScriptObject {
         return window_.getWebWindow().getEnclosedPage().getUrl();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> typeHint) {
+        if (typeHint == String.class) {
+            return getHref();
+        }
+        return super.getDefaultValue(typeHint);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Location2.class,
