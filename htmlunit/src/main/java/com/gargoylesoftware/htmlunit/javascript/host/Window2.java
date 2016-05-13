@@ -399,6 +399,19 @@ public class Window2 extends EventTarget2 {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final Object key) {
+        if (key instanceof Number) {
+            final int index = ((Number) key).intValue();
+            if (index >= 0 && index < ((Number) getFrames2().getLength()).intValue()) {
+                return true;
+            }
+        }
+        return super.has(key);
+    }
+    /**
      * Returns the number of frames contained by this window.
      * @return the number of frames contained by this window
      */
