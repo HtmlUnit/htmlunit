@@ -352,9 +352,10 @@ public class Window2 extends EventTarget2 {
      */
     @Getter
     public static History2 getHistory(final Object self) {
-        final Window2 window = (Window2) self;
+        final Window2 window = getWindow(self);
         if (window.history_ == null) {
-            window.history_ = History2.constructor(true, self);
+            final Global global = NashornJavaScriptEngine.getGlobal(window.getWebWindow().getScriptContext());
+            window.history_ = History2.constructor(true, global);
         }
         return window.history_;
     }
@@ -982,6 +983,28 @@ public class Window2 extends EventTarget2 {
         return port;
     }
 
+    /**
+     * Dummy implementation for {@code requestAnimationFrame}.
+     * @param callback the function to call when it's time to update the animation
+     * @return an identification id
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
+     */
+    @Function
+    public int requestAnimationFrame(final Object callback) {
+        // nothing for now
+        return 1;
+    }
+
+    /**
+     * Dummy implementation for {@code cancelAnimationFrame}.
+     * @param requestId the ID value returned by the call to window.requestAnimationFrame()
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
+     */
+    @Function
+    public void cancelAnimationFrame(final Object requestId) {
+        // nothing for now
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -1032,6 +1055,8 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction open;
         public ScriptFunction scrollBy;
         public ScriptFunction postMessage;
+        public ScriptFunction requestAnimationFrame;
+        public ScriptFunction cancelAnimationFrame;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1103,6 +1128,22 @@ public class Window2 extends EventTarget2 {
 
         public void S$postMessage(final ScriptFunction function) {
             this.postMessage = function;
+        }
+
+        public ScriptFunction G$requestAnimationFrame() {
+            return requestAnimationFrame;
+        }
+
+        public void S$requestAnimationFrame(final ScriptFunction function) {
+            this.requestAnimationFrame = function;
+        }
+
+        public ScriptFunction G$cancelAnimationFrame() {
+            return cancelAnimationFrame;
+        }
+
+        public void S$cancelAnimationFrame(final ScriptFunction function) {
+            this.cancelAnimationFrame = function;
         }
 
         Prototype() {

@@ -23,10 +23,10 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class HTMLDivElement2 extends HTMLElement2 {
+public class HTMLButtonElement2 extends HTMLElement2 {
 
-    public static HTMLDivElement2 constructor(final boolean newObj, final Object self) {
-        final HTMLDivElement2 host = new HTMLDivElement2();
+    public static HTMLButtonElement2 constructor(final boolean newObj, final Object self) {
+        final HTMLButtonElement2 host = new HTMLButtonElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
@@ -34,7 +34,7 @@ public class HTMLDivElement2 extends HTMLElement2 {
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(HTMLDivElement2.class,
+            return MethodHandles.lookup().findStatic(HTMLButtonElement2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -44,8 +44,8 @@ public class HTMLDivElement2 extends HTMLElement2 {
 
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLDivElement", 
-                    staticHandle("constructor", HTMLDivElement2.class, boolean.class, Object.class),
+            super("HTMLButtonElement", 
+                    staticHandle("constructor", HTMLButtonElement2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -59,7 +59,7 @@ public class HTMLDivElement2 extends HTMLElement2 {
         }
 
         public String getClassName() {
-            return "HTMLDivElement2";
+            return "HTMLButtonElement";
         }
     }
 }
