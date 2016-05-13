@@ -47,7 +47,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
@@ -56,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
@@ -82,6 +85,9 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
+
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 public class Window2 extends EventTarget2 {
 
@@ -909,6 +915,71 @@ public class Window2 extends EventTarget2 {
         return 0;
     }
 
+    /**
+     * Posts a message.
+     * @param message the object passed to the window
+     * @param targetOrigin the origin this window must be for the event to be dispatched
+     * @param transfer an optional sequence of Transferable objects
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
+     */
+    @Function
+    public void postMessage(final String message, final String targetOrigin, final Object transfer) {
+        final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
+
+        // TODO: do the same origin check for '/' also
+        if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
+            URL targetURL = null;
+            try {
+                targetURL = new URL(targetOrigin);
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(
+                                "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
+                                + targetOrigin + "' was specified (reason: " + e.getMessage() + ".");
+            }
+
+            if (getPort(targetURL) != getPort(currentURL)) {
+                return;
+            }
+            if (!targetURL.getHost().equals(currentURL.getHost())) {
+                return;
+            }
+            if (!targetURL.getProtocol().equals(currentURL.getProtocol())) {
+                return;
+            }
+        }
+        final MessageEvent2 event = new MessageEvent2();
+        final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
+        event.initMessageEvent(Event2.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
+
+        final NashornJavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine2();
+        final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
+            @Override
+            public void execute() throws Exception {
+                dispatchEvent(event);
+            }
+        };
+        jsEngine.addPostponedAction(action);
+    }
+
+    /**
+     * Returns the port of the specified URL.
+     * @param url the URL
+     * @return the port
+     */
+    public static int getPort(final URL url) {
+        int port = url.getPort();
+        if (port == -1) {
+            if ("http".equals(url.getProtocol())) {
+                port = 80;
+            }
+            else {
+                port = 443;
+            }
+        }
+        return port;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -958,6 +1029,7 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction getComputedStyle;
         public ScriptFunction open;
         public ScriptFunction scrollBy;
+        public ScriptFunction postMessage;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1021,6 +1093,14 @@ public class Window2 extends EventTarget2 {
 
         public void S$scrollBy(final ScriptFunction function) {
             this.scrollBy = function;
+        }
+
+        public ScriptFunction G$postMessage() {
+            return postMessage;
+        }
+
+        public void S$postMessage(final ScriptFunction function) {
+            this.postMessage = function;
         }
 
         Prototype() {
