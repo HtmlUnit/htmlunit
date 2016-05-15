@@ -332,7 +332,10 @@ public class Window2 extends EventTarget2 {
         if (self instanceof Global) {
             return ((Global) self).getWindow();
         }
-        return (Window2) self;
+        if (self instanceof Window2) {
+            return (Window2) self;
+        }
+        return Global.instance().getWindow();
     }
     
     /**

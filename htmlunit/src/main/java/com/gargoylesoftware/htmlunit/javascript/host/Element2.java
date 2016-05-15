@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -39,6 +40,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
 
@@ -99,7 +101,9 @@ public class Element2 extends Node2 {
 //        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
         final Source source = Source.sourceFor(eventName + " event for " + htmlElt
                 + " in " + htmlElt.getPage().getUrl(), attrValue);
-        final ScriptFunction eventHandler = Context.getContext().compileScript(source, Global.instance());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        Context context = ((ScriptObject) global).getContext();
+        final ScriptFunction eventHandler = context.compileScript(source, global);
         setEventHandler(eventName, eventHandler);
     }
 
