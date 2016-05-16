@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -86,6 +87,8 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 public class Window2 extends EventTarget2 {
 
@@ -1132,6 +1135,128 @@ public class Window2 extends EventTarget2 {
         }
     }
 
+    /**
+     * Returns the value of {@code mozInnerScreenX} property.
+     * @return the value of {@code mozInnerScreenX} property
+     */
+    @Getter(@WebBrowser(FF))
+    public int getMozInnerScreenX() {
+        return 11;
+    }
+
+    /**
+     * Returns the value of {@code mozInnerScreenY} property.
+     * @return the value of {@code mozInnerScreenY} property
+     */
+    @Getter(@WebBrowser(FF))
+    public int getMozInnerScreenY() {
+        return 91;
+    }
+
+    /**
+     * Returns the value of {@code mozPaintCount} property.
+     * @return the value of {@code mozPaintCount} property
+     */
+    @Getter(@WebBrowser(FF))
+    public int getMozPaintCount() {
+        return 0;
+    }
+
+    /**
+     * Scrolls the window content down by the specified number of lines.
+     * @param lines the number of lines to scroll down
+     */
+    @Function(@WebBrowser(FF))
+    public void scrollByLines(final int lines) {
+        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+        if (body != null) {
+            body.setScrollTop(body.getScrollTop() + (19 * lines));
+        }
+    }
+
+    /**
+     * Scrolls the window content down by the specified number of pages.
+     * @param pages the number of pages to scroll down
+     */
+    @Function(@WebBrowser(FF))
+    public void scrollByPages(final int pages) {
+        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+        if (body != null) {
+            body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
+        }
+    }
+
+    /**
+     * Returns the {@code innerHeight}.
+     * @return the {@code innerHeight}
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
+     */
+    @Getter
+    public int getInnerHeight() {
+        return getWebWindow().getInnerHeight();
+    }
+
+    /**
+     * Returns the {@code outerHeight}.
+     * @return the {@code outerHeight}
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
+     */
+    @Getter
+    public int getOuterHeight() {
+        return getWebWindow().getOuterHeight();
+    }
+
+    /**
+     * Creates a modal dialog box that displays the specified HTML document.
+     * @param url the URL of the document to load and display
+     * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
+     * @param features string that specifies the window ornaments for the dialog window
+     * @return the value of the {@code returnValue} property as set by the modal dialog's window
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
+     */
+    @Function({@WebBrowser(IE), @WebBrowser(FF)})
+    public Object showModalDialog(final String url, final Object arguments, final String features) {
+        final WebWindow webWindow = getWebWindow();
+        final WebClient client = webWindow.getWebClient();
+        try {
+            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
+            final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
+            // TODO: Theoretically, we shouldn't return until the dialog window has been close()'ed...
+            // But we have to return so that the window can be close()'ed...
+            // Maybe we can use Rhino's continuation support to save state and restart when
+            // the dialog window is close()'ed? Would only work in interpreted mode, though.
+            final ScriptableObject jsDialog = dialog.getScriptableObject();
+            return jsDialog.get("returnValue", jsDialog);
+        }
+        catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Creates a modeless dialog box that displays the specified HTML document.
+     * @param url the URL of the document to load and display
+     * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
+     * @param features string that specifies the window ornaments for the dialog window
+     * @return a reference to the new window object created for the modeless dialog
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
+     */
+    @Function(@WebBrowser(IE))
+    public Object showModelessDialog(final String url, final Object arguments, final String features) {
+        final WebWindow webWindow = getWebWindow();
+        final WebClient client = webWindow.getWebClient();
+        try {
+            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
+            final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
+            final Window jsDialog = (Window) dialog.getScriptableObject();
+            return jsDialog;
+        }
+        catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -1189,6 +1314,10 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction setTimeout;
         public ScriptFunction clearTimeout;
         public ScriptFunction dump;
+        public ScriptFunction scrollByLines;
+        public ScriptFunction scrollByPages;
+        public ScriptFunction showModalDialog;
+        public ScriptFunction showModelessDialog;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1316,6 +1445,38 @@ public class Window2 extends EventTarget2 {
 
         public void S$dump(final ScriptFunction function) {
             this.dump = function;
+        }
+
+        public ScriptFunction G$scrollByLines() {
+            return scrollByLines;
+        }
+
+        public void S$scrollByLines(final ScriptFunction function) {
+            this.scrollByLines = function;
+        }
+
+        public ScriptFunction G$scrollByPages() {
+            return scrollByPages;
+        }
+
+        public void S$scrollByPages(final ScriptFunction function) {
+            this.scrollByPages = function;
+        }
+
+        public ScriptFunction G$showModalDialog() {
+            return showModalDialog;
+        }
+
+        public void S$showModalDialog(final ScriptFunction function) {
+            this.showModalDialog = function;
+        }
+
+        public ScriptFunction G$showModelessDialog() {
+            return showModelessDialog;
+        }
+
+        public void S$showModelessDialog(final ScriptFunction function) {
+            this.showModelessDialog = function;
         }
 
         Prototype() {
