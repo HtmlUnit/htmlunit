@@ -639,7 +639,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Prints messages to the console.
+     * Prints messages to the {@code console}.
      * @param message the message to log
      */
     @JsxFunction(@WebBrowser(FF))
