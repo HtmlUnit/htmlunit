@@ -200,7 +200,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             global.setWindow(window);
 
             try {
-                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "execScript", "CollectGarbage", "setTimeout", "clearTimeout"};
+                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "execScript", "CollectGarbage", "setTimeout", "clearTimeout",
+                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion"};
                 for (final String key : windowToGlobalFunctions) {
                     final Object function = window.get(key);
                     if (function != Undefined.getUndefined()) {

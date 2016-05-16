@@ -1257,6 +1257,46 @@ public class Window2 extends EventTarget2 {
         }
     }
 
+    /**
+     * Gets the name of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
+     * @return "JScript"
+     */
+    @Function(@WebBrowser(IE))
+    public static String ScriptEngine(final Object self) {
+        return "JScript";
+    }
+
+    /**
+     * Gets the build version of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
+     * @return the build version
+     */
+    @Function(@WebBrowser(IE))
+    public static int ScriptEngineBuildVersion(final Object self) {
+        return 12345;
+    }
+
+    /**
+     * Gets the major version of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
+     * @return the major version
+     */
+    @Function(@WebBrowser(IE))
+    public static int ScriptEngineMajorVersion(final Object self) {
+        return getWindow(self).getBrowserVersion().getBrowserVersionNumeric();
+    }
+
+    /**
+     * Gets the minor version of the scripting engine.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
+     * @return the minor version
+     */
+    @Function(@WebBrowser(IE))
+    public static int ScriptEngineMinorVersion(final Object self) {
+        return 0;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -1317,7 +1357,6 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction scrollByLines;
         public ScriptFunction scrollByPages;
         public ScriptFunction showModalDialog;
-        public ScriptFunction showModelessDialog;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1471,14 +1510,6 @@ public class Window2 extends EventTarget2 {
             this.showModalDialog = function;
         }
 
-        public ScriptFunction G$showModelessDialog() {
-            return showModelessDialog;
-        }
-
-        public void S$showModelessDialog(final ScriptFunction function) {
-            this.showModelessDialog = function;
-        }
-
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -1492,8 +1523,41 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction alert;
         public ScriptFunction atob;
         public ScriptFunction btoa;
+        public ScriptFunction open;
+        public ScriptFunction getComputedStyle;
         public ScriptFunction execScript;
         public ScriptFunction CollectGarbage;
+        public ScriptFunction ScriptEngine;
+        public ScriptFunction ScriptEngineBuildVersion;
+        public ScriptFunction ScriptEngineMajorVersion;
+        public ScriptFunction ScriptEngineMinorVersion;
+        public ScriptFunction showModelessDialog;
+        public ScriptFunction setTimeout;
+        public ScriptFunction clearTimeout;
+
+        public ScriptFunction G$setTimeout() {
+            return setTimeout;
+        }
+
+        public void S$setTimeout(final ScriptFunction function) {
+            this.setTimeout = function;
+        }
+
+        public ScriptFunction G$clearTimeout() {
+            return clearTimeout;
+        }
+
+        public void S$clearTimeout(final ScriptFunction function) {
+            this.clearTimeout = function;
+        }
+
+        public ScriptFunction G$showModelessDialog() {
+            return showModelessDialog;
+        }
+
+        public void S$showModelessDialog(final ScriptFunction function) {
+            this.showModelessDialog = function;
+        }
 
         public ScriptFunction G$alert() {
             return this.alert;
@@ -1519,6 +1583,31 @@ public class Window2 extends EventTarget2 {
             this.btoa = function;
         }
 
+        public ScriptFunction G$open() {
+            return open;
+        }
+
+        public void S$open(final ScriptFunction function) {
+            this.open = function;
+        }
+
+        public ScriptFunction G$getComputedStyle() {
+            return getComputedStyle;
+        }
+
+        public void S$getComputedStyle(final ScriptFunction function) {
+            this.getComputedStyle = function;
+        }
+
+        public ScriptFunction postMessage;
+        public ScriptFunction G$postMessage() {
+            return postMessage;
+        }
+
+        public void S$postMessage(final ScriptFunction function) {
+            this.postMessage = function;
+        }
+
         public ScriptFunction G$execScript() {
             return execScript;
         }
@@ -1533,6 +1622,95 @@ public class Window2 extends EventTarget2 {
 
         public void S$CollectGarbage(final ScriptFunction function) {
             this.CollectGarbage = function;
+        }
+
+        public ScriptFunction G$ScriptEngine() {
+            return ScriptEngine;
+        }
+
+        public void S$ScriptEngine(final ScriptFunction function) {
+            this.ScriptEngine = function;
+        }
+
+        public ScriptFunction G$ScriptEngineBuildVersion() {
+            return ScriptEngineBuildVersion;
+        }
+
+        public void S$ScriptEngineBuildVersion(final ScriptFunction function) {
+            this.ScriptEngineBuildVersion = function;
+        }
+
+        public ScriptFunction G$ScriptEngineMajorVersion() {
+            return ScriptEngineMajorVersion;
+        }
+
+        public void S$ScriptEngineMajorVersion(final ScriptFunction function) {
+            this.ScriptEngineMajorVersion = function;
+        }
+
+        public ScriptFunction G$ScriptEngineMinorVersion() {
+            return ScriptEngineMinorVersion;
+        }
+
+        public void S$ScriptEngineMinorVersion(final ScriptFunction function) {
+            this.ScriptEngineMinorVersion = function;
+        }
+
+        public ScriptFunction requestAnimationFrame;
+        public ScriptFunction cancelAnimationFrame;
+
+        public ScriptFunction G$requestAnimationFrame() {
+            return requestAnimationFrame;
+        }
+
+        public void S$requestAnimationFrame(final ScriptFunction function) {
+            this.requestAnimationFrame = function;
+        }
+
+        public ScriptFunction showModalDialog;
+
+        public ScriptFunction G$showModalDialog() {
+            return showModalDialog;
+        }
+
+        public void S$showModalDialog(final ScriptFunction function) {
+            this.showModalDialog = function;
+        }
+
+        public ScriptFunction G$cancelAnimationFrame() {
+            return cancelAnimationFrame;
+        }
+
+        public void S$cancelAnimationFrame(final ScriptFunction function) {
+            this.cancelAnimationFrame = function;
+        }
+
+        public ScriptFunction scroll;
+        public ScriptFunction scrollBy;
+        public ScriptFunction scrollTo;
+
+        public ScriptFunction G$scroll() {
+            return scroll;
+        }
+
+        public void S$scroll(final ScriptFunction function) {
+            this.scroll = function;
+        }
+
+        public ScriptFunction G$scrollBy() {
+            return scrollBy;
+        }
+
+        public void S$scrollBy(final ScriptFunction function) {
+            this.scrollBy = function;
+        }
+
+        public ScriptFunction G$scrollTo() {
+            return scrollTo;
+        }
+
+        public void S$scrollTo(final ScriptFunction function) {
+            this.scrollTo = function;
         }
 
         public ObjectConstructor() {

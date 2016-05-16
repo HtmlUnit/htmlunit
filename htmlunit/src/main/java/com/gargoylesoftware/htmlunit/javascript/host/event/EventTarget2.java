@@ -335,6 +335,15 @@ public class EventTarget2 extends SimpleScriptObject {
             this.addEventListener = function;
         }
 
+        public ScriptFunction dispatchEvent;
+        public ScriptFunction G$dispatchEvent() {
+            return dispatchEvent;
+        }
+
+        public void S$dispatchEvent(final ScriptFunction function) {
+            this.dispatchEvent = function;
+        }
+
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }
