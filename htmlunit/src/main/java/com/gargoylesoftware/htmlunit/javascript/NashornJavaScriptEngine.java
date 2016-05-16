@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.*;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -136,7 +136,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 //            
 //            }
 
-            if (browserFamily == CHROME) {
+            if (browserFamily == CHROME || browserFamily == FF) {
                 global.put("EventTarget", new EventTarget2.FunctionConstructor(), true);
                 global.put("Window", new Window2.FunctionConstructor(), true);
                 global.put("Event", new Event2.FunctionConstructor(), true);

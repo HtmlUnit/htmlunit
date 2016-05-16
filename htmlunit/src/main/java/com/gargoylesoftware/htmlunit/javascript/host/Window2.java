@@ -87,8 +87,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-
 public class Window2 extends EventTarget2 {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
@@ -103,6 +101,7 @@ public class Window2 extends EventTarget2 {
     private Screen2 screen_;
     private Document2 document_;
     private History2 history_;
+    private ScriptObject console_;
     private Location2 location_;
     private HTMLCollection2 frames_; // has to be a member to have equality (==) working
     private Event2 currentEvent_;
@@ -149,10 +148,14 @@ public class Window2 extends EventTarget2 {
 
             document_.setDomNode(htmlPage);
 
+            final WebWindow webWindow = getWebWindow();
+
+            console_ = Console2.constructor(true, global);
+            ((Console2) console_).setWebWindow(webWindow);
+
             location_ = Location2.constructor(true, global);
             location_.initialize(this);
 
-            final WebWindow webWindow = getWebWindow();
             if (webWindow instanceof TopLevelWindow) {
                 final WebWindow opener = ((TopLevelWindow) webWindow).getOpener();
                 if (opener != null) {
@@ -1100,6 +1103,35 @@ public class Window2 extends EventTarget2 {
         getWindow(self).getWebWindow().getJobManager().removeJob(timeoutId);
     }
 
+    /**
+     * Returns the {@code console} property.
+     * @return the {@code console} property
+     */
+    @Getter
+    public ScriptObject getConsole() {
+        return console_;
+    }
+
+    /**
+     * Sets the {@code console}.
+     * @param console the console
+     */
+    @Setter
+    public void setConsole(final ScriptObject console) {
+        console_ = console;
+    }
+
+    /**
+     * Prints messages to the {@code console}.
+     * @param message the message to log
+     */
+    @Function(@WebBrowser(FF))
+    public void dump(final String message) {
+        if (console_ instanceof Console2) {
+            Console2.log(null, console_, new Object[] {message}, null);
+        }
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
@@ -1156,6 +1188,7 @@ public class Window2 extends EventTarget2 {
         public ScriptFunction cancelAnimationFrame;
         public ScriptFunction setTimeout;
         public ScriptFunction clearTimeout;
+        public ScriptFunction dump;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1275,6 +1308,14 @@ public class Window2 extends EventTarget2 {
 
         public void S$clearTimeout(final ScriptFunction function) {
             this.clearTimeout = function;
+        }
+
+        public ScriptFunction G$dump() {
+            return dump;
+        }
+
+        public void S$dump(final ScriptFunction function) {
+            this.dump = function;
         }
 
         Prototype() {
