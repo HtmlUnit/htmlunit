@@ -198,12 +198,12 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("")
-    public void colon() throws Exception {
+    @Alerts("progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)")
+    public void oldIEStyle() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
-                + "(src='rightCorner.gif',sizingMethod='crop'); }\n"
+                + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
                 + "</style>\n"
                 + "<script>\n"
                 + "function test() {\n"
