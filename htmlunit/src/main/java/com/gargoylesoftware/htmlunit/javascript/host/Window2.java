@@ -187,7 +187,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
         else {
 //            handler.handleAlert(document_.getPage(), stringMessage);
-          handler.handleAlert(null, o.toString());
+          handler.handleAlert(null, o == null ? "null" : o.toString());
         }
     }
 
@@ -484,8 +484,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the {@code frames} property
      */
     @Getter
-    public Window2 getFrames() {
-        return this;
+    public static Window2 getFrames(final Object self) {
+        return getWindow(self);
     }
 
     /**
@@ -493,8 +493,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the {@code self} property
      */
     @Getter
-    public Window2 getSelf() {
-        return this;
+    public static Window2 getSelf(final Object self) {
+        return getWindow(self);
     }
 
     /**
@@ -1339,6 +1339,25 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             return true;
         }
         return handler.handleConfirm(window.document_.getPage(), message);
+    }
+
+    /**
+     * Sets the focus to this element.
+     */
+    @Function
+    public static void focus(final Object self) {
+        final WebWindow window = getWindow(self).getWebWindow();
+        window.getWebClient().setCurrentWindow(window);
+    }
+
+    /**
+     * Removes focus from this element.
+     */
+    @Function
+    public static void blur(final Object self) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.blur() not implemented");
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

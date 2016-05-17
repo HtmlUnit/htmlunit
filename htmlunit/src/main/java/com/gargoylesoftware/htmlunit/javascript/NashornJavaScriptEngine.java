@@ -213,7 +213,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                     window.put(key, global.get(key), true);
                 }
 
-                final String[] windowProperties = {"top", "controllers", "document", "length", "location"};
+                final String[] windowProperties = {"top", "controllers", "document", "length", "location", "self"};
                 final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
                 for (final String key : windowProperties) {
