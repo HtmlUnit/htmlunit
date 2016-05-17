@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_H
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -44,8 +46,10 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -309,6 +313,7 @@ public class Location2 extends SimpleScriptObject {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("Location", 

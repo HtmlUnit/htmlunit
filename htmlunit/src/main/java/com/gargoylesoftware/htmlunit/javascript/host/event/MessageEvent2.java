@@ -24,8 +24,10 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
@@ -139,6 +141,7 @@ public class MessageEvent2 extends Event2 {
         return ports_;
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("MessageEvent", 
@@ -152,11 +155,15 @@ public class MessageEvent2 extends Event2 {
 
     public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "MessageEvent";
+            super("MessageEvent");
         }
     }
+
+    @ClassConstructor(@WebBrowser(IE))
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
+        public ObjectConstructor() {
+            super("MessageEvent");
+        }
+    }
+
 }

@@ -61,6 +61,9 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -99,9 +102,11 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -1778,6 +1783,7 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("CSSStyleDeclaration", 
@@ -1791,25 +1797,14 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
 
     public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "CSSStyleDeclaration";
+            super("CSSStyleDeclaration");
         }
     }
 
+    @ClassConstructor(@WebBrowser(IE))
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
-            ScriptUtils.initialize(this);
-        }
-
-        public Object getDefaultValue(final Class<?> typeHint) {
-            return "[object CSSStyleDeclaration]";
-        }
-
-        public String getClassName() {
-            return "CSSStyleDeclaration";
+            super("CSSStyleDeclaration");
         }
     }
 

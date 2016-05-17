@@ -14,11 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.*;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.script.ScriptContext;
 
@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
-import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
@@ -58,6 +57,8 @@ import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
@@ -74,6 +75,29 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     private static final Log LOG = LogFactory.getLog(NashornJavaScriptEngine.class);
+
+    @SuppressWarnings("unchecked")
+    public static final Class<? extends ScriptObject>[] CLASSES_ = new Class[] {
+            CSSStyleDeclaration2.class,
+            CharacterData2.class,
+            ComputedCSSStyleDeclaration2.class,
+            Document2.class,
+            Element2.class,
+            Event2.class,
+            EventTarget2.class,
+            History2.class,
+            HTMLBodyElement2.class,
+            HTMLDivElement2.class,
+            HTMLDocument2.class,
+            HTMLElement2.class,
+            HTMLHtmlElement2.class,
+            HTMLInputElement2.class,
+            Location2.class,
+            MessageEvent2.class,
+            Node2.class,
+            Text2.class,
+            Window2.class
+        };
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
@@ -122,101 +146,57 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         try {
             Context.setGlobal(global);
 
-            final BrowserFamily browserFamily = browser.getFamily();
-//            boolean isConstructor = false;
-//            for (final Method m : enclosingClass.getDeclaredMethods()) {
-//                for (final Constructor constructor : m.getAnnotationsByType(Constructor.class)) {
-//                    if (isSupported(constructor.browsers(), browserFamily, browserVersion)) {
-//                        isConstructor = true;
-//                    }
-//                }
-//            }
-//            if ((isConstructor && PrototypeObject.class.isAssignableFrom(scriptObject.getClass()))
-//                    || (!isConstructor && !PrototypeObject.class.isAssignableFrom(scriptObject.getClass()))) {
-//            
-//            }
-
-            if (browserFamily == CHROME || browserFamily == FF) {
-                global.put("EventTarget", new EventTarget2.FunctionConstructor(), true);
-                global.put("Window", new Window2.FunctionConstructor(), true);
-                global.put("Event", new Event2.FunctionConstructor(), true);
-                global.put("MessageEvent", new MessageEvent2.FunctionConstructor(), true);
-                global.put("HTMLBodyElement", new HTMLBodyElement2.FunctionConstructor(), true);
-                global.put("HTMLDivElement", new HTMLDivElement2.FunctionConstructor(), true);
-                global.put("HTMLHtmlElement", new HTMLHtmlElement2.FunctionConstructor(), true);
-                global.put("HTMLElement", new HTMLElement2.FunctionConstructor(), true);
-                global.put("HTMLDocument", new HTMLDocument2.FunctionConstructor(), true);
-                global.put("Document", new Document2.FunctionConstructor(), true);
-                global.put("Element", new Element2.FunctionConstructor(), true);
-                global.put("Text", new Text2.FunctionConstructor(), true);
-                global.put("CharacterData", new CharacterData2.FunctionConstructor(), true);
-                global.put("History", new History2.FunctionConstructor(), true);
-                global.put("Node", new Node2.FunctionConstructor(), true);
-                global.put("HTMLInputElement", new HTMLInputElement2.FunctionConstructor(), true);
-                global.put("ComputedCSSStyleDeclaration", new ComputedCSSStyleDeclaration2.FunctionConstructor(), true);
-                global.put("CSSStyleDeclaration", new CSSStyleDeclaration2.FunctionConstructor(), true);
-                global.put("Location", new Location2.FunctionConstructor(), true);
-                setProto(global, "Window", "EventTarget");
-                setProto(global, "HTMLDocument", "Document");
-                setProto(global, "HTMLBodyElement", "HTMLElement");
-                setProto(global, "HTMLDivElement", "HTMLElement");
-                setProto(global, "HTMLElement", "Element");
-                setProto(global, "Element", "Node");
-                setProto(global, "Text", "CharacterData");
-                setProto(global, "CharacterData", "Node");
-                setProto(global, "ComputedCSSStyleDeclaration", "CSSStyleDeclaration");
-                setProto(global, "MessageEvent", "Event");
-            }
-            else {
-                global.put("Window", new Window2.ObjectConstructor(), true);
-                global.put("HTMLDocument", new HTMLDocument2.ObjectConstructor(), true);
-                global.put("Document", new Document2.ObjectConstructor(), true);
-                global.put("Node", new Node2.ObjectConstructor(), true);
-                global.put("Event", new Event2.ObjectConstructor(), true);
-                global.put("BeforeUnloadEvent", new BeforeUnloadEvent2(), true);
-                global.put("History", new History2.ObjectConstructor(), true);
-                global.put("HTMLBodyElement", new HTMLBodyElement2.ObjectConstructor(), true);
-                global.put("HTMLDivElement", new HTMLDivElement2.ObjectConstructor(), true);
-                global.put("HTMLElement", new HTMLElement2.ObjectConstructor(), true);
-                global.put("Element", new Element2.ObjectConstructor(), true);
-                global.put("Node", new Node2.ObjectConstructor(), true);
-                global.put("ComputedCSSStyleDeclaration", new ComputedCSSStyleDeclaration2.ObjectConstructor(), true);
-                global.put("CSSStyleDeclaration", new CSSStyleDeclaration2.ObjectConstructor(), true);
-                setProto(global, "Window", new EventTarget2.ObjectConstructor());
-                setProto(global, "HTMLDocument", "Document");
-                setProto(global, "BeforeUnloadEvent", "Event");
-                setProto(global, "HTMLDivElement", "HTMLElement");
-                setProto(global, "HTMLBodyElement", "HTMLElement");
-                setProto(global, "HTMLElement", "Element");
-                setProto(global, "Element", "Node");
-                setProto(global, "ComputedCSSStyleDeclaration", "CSSStyleDeclaration");
-            }
-
-            final String[] toBeRemoved = {"java", "javax", "javafx", "org", "com", "net", "edu", "JavaAdapter",
-                    "JSAdapter", "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit",
-                    "Java", "__noSuchProperty__", "javax.script.filename"};
-            for (final String key : toBeRemoved) {
-                global.remove(key, true);
-            }
-
-            final Window2 window = new Window2();
-            ScriptObject windowProto = Context.getGlobal().getPrototype(window.getClass());
-            if (windowProto == null) {
-                windowProto = (ScriptObject) global.get("Window");
-            }
-            window.setProto(windowProto);
-            ScriptUtils.initialize(window);
-
-            for (final Property p : global.getMap().getProperties()) {
-                //TODO: check "JSAdapter"
-                final String key = p.getKey();
-                window.put(key, global.get(key), true);
-            }
-
-            global.put("window", window, true);
-            global.setWindow(window);
-
             try {
+
+                final Map<String, String> javaSuperMap = new HashMap<>();
+                final Map<String, String> javaJavaScriptMap = new HashMap<>();
+                for (final Class<?> klass : CLASSES_) {
+                    for (final Class<?> inner : klass.getDeclaredClasses()) {
+                        final ClassConstructor constructor = inner.getAnnotation(ClassConstructor.class);
+                        if (isSupported(constructor, browser)) {
+                            final ScriptObject instance = (ScriptObject) inner.newInstance();
+                            String className = instance.getClassName();;
+                            if (instance instanceof ScriptFunction) {
+                                className = ((ScriptFunction) instance).getName();
+                            }
+                            global.put(className, instance, false);
+                            javaSuperMap.put(klass.getName(), klass.getSuperclass().getName());
+                            javaJavaScriptMap.put(klass.getName(), className);
+                        }
+                    }
+                }
+                for (final String javaClassName : javaSuperMap.keySet()) {
+                    final String javaSuperClassName = javaSuperMap.get(javaClassName);
+                    final String superJavaScriptName = javaJavaScriptMap.get(javaSuperClassName);
+                    if (superJavaScriptName != null) {
+                        setProto(global, javaJavaScriptMap.get(javaClassName), superJavaScriptName);
+                    }
+                }
+
+                final String[] toBeRemoved = {"java", "javax", "javafx", "org", "com", "net", "edu", "JavaAdapter",
+                        "JSAdapter", "JavaImporter", "Packages", "arguments", "load", "loadWithNewGlobal", "exit", "quit",
+                        "Java", "__noSuchProperty__", "javax.script.filename"};
+                for (final String key : toBeRemoved) {
+                    global.remove(key, true);
+                }
+
+                final Window2 window = new Window2();
+                ScriptObject windowProto = Context.getGlobal().getPrototype(window.getClass());
+                if (windowProto == null) {
+                    windowProto = (ScriptObject) global.get("Window");
+                }
+                window.setProto(windowProto);
+                ScriptUtils.initialize(window);
+
+                for (final Property p : global.getMap().getProperties()) {
+                    //TODO: check "JSAdapter"
+                    final String key = p.getKey();
+                    window.put(key, global.get(key), true);
+                }
+
+                global.put("window", window, true);
+                global.setWindow(window);
+
                 final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "execScript", "CollectGarbage", "setTimeout", "clearTimeout",
                         "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion"};
                 for (final String key : windowToGlobalFunctions) {
@@ -254,6 +234,20 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         }
     }
 
+    private static boolean isSupported(final ClassConstructor constructor, final Browser browser) {
+        final int version = browser.getVersion();
+        if (constructor != null) {
+            for (final WebBrowser webBrowser : constructor.value()) {
+                if (webBrowser.value() == browser.getFamily()
+                        && webBrowser.minVersion() <= version
+                        && webBrowser.maxVersion() >= version) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @SuppressWarnings("unchecked")
     private static <T> T get(final Object o, final String fieldName) {
         try {
@@ -281,11 +275,6 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             final ScriptObject parentObject = (ScriptObject) global.get(parentName);
             childObject.setProto(parentObject);
         }
-    }
-
-    private void setProto(final Global global, final String childName, final ScriptObject parentObject) {
-        final ScriptObject childObject = (ScriptObject) global.get(childName);
-        childObject.setProto(parentObject);
     }
 
     @Override

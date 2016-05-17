@@ -74,6 +74,9 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDOWS;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -111,7 +114,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -124,8 +126,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -1658,6 +1663,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("ComputedCSSStyleDeclaration", 
@@ -1671,25 +1677,14 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
 
     public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "ComputedCSSStyleDeclaration";
+            super("ComputedCSSStyleDeclaration");
         }
     }
 
-    public static final class ObjectConstructor extends SimpleScriptObject {
+    @ClassConstructor(@WebBrowser(IE))
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
-            ScriptUtils.initialize(this);
-        }
-
-        public Object getDefaultValue(final Class<?> typeHint) {
-            return "[object ComputedCSSStyleDeclaration]";
-        }
-
-        public String getClassName() {
-            return "ComputedCSSStyleDeclaration";
+            super("ComputedCSSStyleDeclaration");
         }
     }
 }

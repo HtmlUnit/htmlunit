@@ -75,6 +75,7 @@ import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
@@ -1319,6 +1320,7 @@ public class Window2 extends EventTarget2 {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("Window", 
@@ -1340,26 +1342,15 @@ public class Window2 extends EventTarget2 {
     }
 
     public static final class Prototype extends SimplePrototypeObject {
-        Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "Window";
+        public Prototype() {
+            super("Window");
         }
     }
 
+    @ClassConstructor(@WebBrowser(IE))
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
-            ScriptUtils.initialize(this);
-        }
-
-        public Object getDefaultValue(final Class<?> typeHint) {
-            return "[object Window]";
-        }
-
-        public String getClassName() {
-            return "Window";
+            super("Window");
         }
     }
 }

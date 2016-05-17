@@ -14,13 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -78,6 +83,13 @@ public class BeforeUnloadEvent2 extends Event2 {
     static final class Prototype extends PrototypeObject {
         public String getClassName() {
             return "BeforeUnloadEvent";
+        }
+    }
+
+    @ClassConstructor(@WebBrowser(IE))
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
+        public ObjectConstructor() {
+            super("BeforeUnloadEvent");
         }
     }
 }
