@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -93,7 +94,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-public class Window2 extends EventTarget2 {
+public class Window2 extends EventTarget2 implements AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
@@ -1298,6 +1299,46 @@ public class Window2 extends EventTarget2 {
     @Function(@WebBrowser(IE))
     public static int ScriptEngineMinorVersion(final Object self) {
         return 0;
+    }
+
+    /**
+     * Closes this window.
+     */
+    @Function(name = "close")
+    public void close_js() {
+        final WebWindow webWindow = getWebWindow();
+        if (webWindow instanceof TopLevelWindow) {
+            ((TopLevelWindow) webWindow).close();
+        }
+        else {
+            webWindow.getWebClient().deregisterWebWindow(webWindow);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() {
+        Symbol2.remove(this);
+    }
+
+    /**
+     * The JavaScript function {@code confirm}.
+     * @param self this object
+     * @param message the message
+     * @return true if ok was pressed, false if cancel was pressed
+     */
+    @Function
+    public static boolean confirm(final Object self, final String message) {
+        final Window2 window = getWindow(self);
+        final ConfirmHandler handler = window.getWebWindow().getWebClient().getConfirmHandler();
+        if (handler == null) {
+            LOG.warn("window.confirm(\""
+                    + message + "\") no confirm handler installed, simulating the OK button");
+            return true;
+        }
+        return handler.handleConfirm(window.document_.getPage(), message);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

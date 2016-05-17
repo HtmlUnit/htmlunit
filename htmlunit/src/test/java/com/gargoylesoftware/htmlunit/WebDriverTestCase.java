@@ -929,7 +929,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-        final Object result = jsExecutor.executeScript("top.__huCatchedAlerts");
+        final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
 
         if (result != null) {
             if (result instanceof List) {
