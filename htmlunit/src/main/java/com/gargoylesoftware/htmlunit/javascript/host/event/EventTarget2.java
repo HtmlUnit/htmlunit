@@ -32,14 +32,14 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -296,25 +296,7 @@ public class EventTarget2 extends SimpleScriptObject {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-        public ScriptFunction addEventListener;
-        public ScriptFunction dispatchEvent;
-
-        public ScriptFunction G$addEventListener() {
-            return this.addEventListener;
-        }
-
-        public void S$addEventListener(final ScriptFunction function) {
-            this.addEventListener = function;
-        }
-
-        public ScriptFunction G$dispatchEvent() {
-            return this.dispatchEvent;
-        }
-
-        public void S$dispatchEvent(final ScriptFunction function) {
-            this.dispatchEvent = function;
-        }
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -324,26 +306,7 @@ public class EventTarget2 extends SimpleScriptObject {
         }
     }
 
-    public static final class ObjectConstructor extends ScriptObject {
-        public ScriptFunction addEventListener;
-
-        public ScriptFunction G$addEventListener() {
-            return this.addEventListener;
-        }
-
-        public void S$addEventListener(final ScriptFunction function) {
-            this.addEventListener = function;
-        }
-
-        public ScriptFunction dispatchEvent;
-        public ScriptFunction G$dispatchEvent() {
-            return dispatchEvent;
-        }
-
-        public void S$dispatchEvent(final ScriptFunction function) {
-            this.dispatchEvent = function;
-        }
-
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }

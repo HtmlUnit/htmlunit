@@ -38,13 +38,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Location2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 public class Document2 extends Node2 {
@@ -199,17 +200,7 @@ public class Document2 extends Node2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-        public ScriptFunction createElement;
-
-        public ScriptFunction G$createElement() {
-            return createElement;
-        }
-
-        public void S$createElement(final ScriptFunction function) {
-            this.createElement = function;
-        }
-
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -219,17 +210,7 @@ public class Document2 extends Node2 {
         }
     }
 
-    public static final class ObjectConstructor extends ScriptObject {
-        public ScriptFunction createElement;
-
-        public ScriptFunction G$createElement() {
-            return createElement;
-        }
-
-        public void S$createElement(final ScriptFunction function) {
-            this.createElement = function;
-        }
-
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }

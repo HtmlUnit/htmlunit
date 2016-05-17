@@ -31,14 +31,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class Node2 extends EventTarget2 {
 
@@ -227,17 +227,7 @@ public class Node2 extends EventTarget2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-        public ScriptFunction appendChild;
-
-        public ScriptFunction G$appendChild() {
-            return appendChild;
-        }
-
-        public void S$appendChild(final ScriptFunction function) {
-            this.appendChild = function;
-        }
-
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -247,16 +237,7 @@ public class Node2 extends EventTarget2 {
         }
     }
 
-    public static final class ObjectConstructor extends ScriptObject {
-        private ScriptFunction appendChild;
-        public ScriptFunction G$appendChild() {
-            return appendChild;
-        }
-
-        public void S$appendChild(final ScriptFunction function) {
-            this.appendChild = function;
-        }
-
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }

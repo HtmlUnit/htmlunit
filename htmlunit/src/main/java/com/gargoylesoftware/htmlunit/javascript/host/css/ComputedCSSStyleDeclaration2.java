@@ -111,6 +111,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -123,10 +124,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
 
@@ -1668,7 +1669,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -1678,7 +1679,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
         }
     }
 
-    public static final class ObjectConstructor extends ScriptObject {
+    public static final class ObjectConstructor extends SimpleScriptObject {
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }

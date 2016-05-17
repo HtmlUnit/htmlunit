@@ -24,6 +24,7 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
@@ -149,18 +150,7 @@ public class MessageEvent2 extends Event2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-        public ScriptFunction initMessageEvent;
-
-        public ScriptFunction G$initMessageEvent() {
-            return initMessageEvent;
-        }
-
-        public void S$initMessageEvent(final ScriptFunction function) {
-            this.initMessageEvent = function;
-        }
-
-
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
         }

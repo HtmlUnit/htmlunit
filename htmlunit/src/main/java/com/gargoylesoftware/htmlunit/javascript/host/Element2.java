@@ -33,6 +33,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
@@ -190,17 +192,7 @@ public class Element2 extends Node2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-        private ScriptFunction getBoundingClientRect;
-
-        public ScriptFunction G$getBoundingClientRect() {
-            return getBoundingClientRect;
-        }
-
-        public void S$getBoundingClientRect(final ScriptFunction function) {
-            this.getBoundingClientRect = function;
-        }
-
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
         }
@@ -210,17 +202,7 @@ public class Element2 extends Node2 {
         }
     }
 
-    public static final class ObjectConstructor extends ScriptObject {
-        private ScriptFunction getBoundingClientRect;
-
-        public ScriptFunction G$getBoundingClientRect() {
-            return getBoundingClientRect;
-        }
-
-        public void S$getBoundingClientRect(final ScriptFunction function) {
-            this.getBoundingClientRect = function;
-        }
-
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }

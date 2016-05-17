@@ -27,6 +27,8 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
@@ -35,7 +37,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -740,65 +741,17 @@ public class Event2 extends SimpleScriptObject {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-        private ScriptFunction initEvent;
-        private ScriptFunction stopPropagation;
-        
-        public ScriptFunction G$initEvent() {
-            return initEvent;
-        }
-
-        public void S$initEvent(final ScriptFunction function) {
-            this.initEvent = function;
-        }
-
-        public ScriptFunction G$stopPropagation() {
-            return stopPropagation;
-        }
-
-        public void S$stopPropagation(final ScriptFunction function) {
-            this.stopPropagation = function;
+    public static final class Prototype extends SimplePrototypeObject {
+        Prototype() {
+            ScriptUtils.initialize(this);
         }
 
         public String getClassName() {
             return "Event";
         }
-
-        Prototype() {
-            ScriptUtils.initialize(this);
-        }
     }
 
-    public static final class ObjectConstructor extends ScriptObject {
-        public ScriptFunction createElement;
-
-        public ScriptFunction G$createElement() {
-            return createElement;
-        }
-
-        public void S$createElement(final ScriptFunction function) {
-            this.createElement = function;
-        }
-
-        private ScriptFunction initEvent;
-        private ScriptFunction stopPropagation;
-        
-        public ScriptFunction G$initEvent() {
-            return initEvent;
-        }
-
-        public void S$initEvent(final ScriptFunction function) {
-            this.initEvent = function;
-        }
-
-        public ScriptFunction G$stopPropagation() {
-            return stopPropagation;
-        }
-
-        public void S$stopPropagation(final ScriptFunction function) {
-            this.stopPropagation = function;
-        }
-
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
         public int G$NONE() {
             return NONE;
         }
@@ -894,6 +847,7 @@ public class Event2 extends SimpleScriptObject {
         public int G$META_MASK() {
             return META_MASK;
         }
+
         public ObjectConstructor() {
             ScriptUtils.initialize(this);
         }
