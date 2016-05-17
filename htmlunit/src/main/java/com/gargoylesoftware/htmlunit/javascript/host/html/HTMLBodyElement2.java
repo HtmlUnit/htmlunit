@@ -26,6 +26,7 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class HTMLBodyElement2 extends HTMLElement2 {
 
@@ -97,6 +98,20 @@ public class HTMLBodyElement2 extends HTMLElement2 {
     public static final class Prototype extends PrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+
+        public String getClassName() {
+            return "HTMLBodyElement";
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object HTMLBodyElement]";
         }
 
         public String getClassName() {

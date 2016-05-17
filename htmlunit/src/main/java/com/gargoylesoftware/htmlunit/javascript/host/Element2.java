@@ -191,7 +191,7 @@ public class Element2 extends Node2 {
     }
 
     public static final class Prototype extends PrototypeObject {
-        public ScriptFunction getBoundingClientRect;
+        private ScriptFunction getBoundingClientRect;
 
         public ScriptFunction G$getBoundingClientRect() {
             return getBoundingClientRect;
@@ -203,6 +203,30 @@ public class Element2 extends Node2 {
 
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+
+        public String getClassName() {
+            return "Element";
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        private ScriptFunction getBoundingClientRect;
+
+        public ScriptFunction G$getBoundingClientRect() {
+            return getBoundingClientRect;
+        }
+
+        public void S$getBoundingClientRect(final ScriptFunction function) {
+            this.getBoundingClientRect = function;
+        }
+
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object Element]";
         }
 
         public String getClassName() {

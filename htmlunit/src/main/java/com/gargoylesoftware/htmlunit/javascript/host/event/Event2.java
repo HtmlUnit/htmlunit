@@ -741,8 +741,8 @@ public class Event2 extends SimpleScriptObject {
     }
 
     public static final class Prototype extends PrototypeObject {
-        public ScriptFunction initEvent;
-        public ScriptFunction stopPropagation;
+        private ScriptFunction initEvent;
+        private ScriptFunction stopPropagation;
         
         public ScriptFunction G$initEvent() {
             return initEvent;
@@ -766,6 +766,144 @@ public class Event2 extends SimpleScriptObject {
 
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        public ScriptFunction createElement;
+
+        public ScriptFunction G$createElement() {
+            return createElement;
+        }
+
+        public void S$createElement(final ScriptFunction function) {
+            this.createElement = function;
+        }
+
+        private ScriptFunction initEvent;
+        private ScriptFunction stopPropagation;
+        
+        public ScriptFunction G$initEvent() {
+            return initEvent;
+        }
+
+        public void S$initEvent(final ScriptFunction function) {
+            this.initEvent = function;
+        }
+
+        public ScriptFunction G$stopPropagation() {
+            return stopPropagation;
+        }
+
+        public void S$stopPropagation(final ScriptFunction function) {
+            this.stopPropagation = function;
+        }
+
+        public int G$NONE() {
+            return NONE;
+        }
+
+        public int G$CAPTURING_PHASE() {
+            return CAPTURING_PHASE;
+        }
+
+        public int G$AT_TARGET() {
+            return AT_TARGET;
+        }
+
+        public int G$BUBBLING_PHASE() {
+            return BUBBLING_PHASE;
+        }
+
+        public int G$BLUR() {
+            return BLUR;
+        }
+
+        public int G$CHANGE() {
+            return CHANGE;
+        }
+
+        public int G$CLICK() {
+            return CLICK;
+        }
+
+        public int G$DBLCLICK() {
+            return DBLCLICK;
+        }
+
+        public int G$DRAGDROP() {
+            return DRAGDROP;
+        }
+
+        public int G$FOCUS() {
+            return FOCUS;
+        }
+
+        public int G$KEYDOWN() {
+            return KEYDOWN;
+        }
+
+        public int G$KEYPRESS() {
+            return KEYPRESS;
+        }
+
+        public int G$KEYUP() {
+            return KEYUP;
+        }
+
+        public int G$MOUSEDOWN() {
+            return MOUSEDOWN;
+        }
+
+        public int G$MOUSEDRAG() {
+            return MOUSEDRAG;
+        }
+
+        public int G$MOUSEMOVE() {
+            return MOUSEMOVE;
+        }
+
+        public int G$MOUSEOUT() {
+            return MOUSEOUT;
+        }
+
+        public int G$MOUSEOVER() {
+            return MOUSEOVER;
+        }
+
+        public int G$MOUSEUP() {
+            return MOUSEUP;
+        }
+
+        public int G$SELECT() {
+            return SELECT;
+        }
+
+        public int G$ALT_MASK() {
+            return ALT_MASK;
+        }
+
+        public int G$CONTROL_MASK() {
+            return CONTROL_MASK;
+        }
+
+        public int G$SHIFT_MASK() {
+            return SHIFT_MASK;
+        }
+
+        public int G$META_MASK() {
+            return META_MASK;
+        }
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object Document]";
+        }
+
+        public String getClassName() {
+            return "Document";
         }
     }
 }

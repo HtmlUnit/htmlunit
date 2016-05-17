@@ -38,6 +38,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class Node2 extends EventTarget2 {
 
@@ -239,6 +240,29 @@ public class Node2 extends EventTarget2 {
 
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+
+        public String getClassName() {
+            return "Node";
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        private ScriptFunction appendChild;
+        public ScriptFunction G$appendChild() {
+            return appendChild;
+        }
+
+        public void S$appendChild(final ScriptFunction function) {
+            this.appendChild = function;
+        }
+
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object Node]";
         }
 
         public String getClassName() {

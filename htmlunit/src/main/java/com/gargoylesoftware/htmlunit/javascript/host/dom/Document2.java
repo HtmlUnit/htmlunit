@@ -44,6 +44,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 public class Document2 extends Node2 {
@@ -211,6 +212,30 @@ public class Document2 extends Node2 {
 
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+
+        public String getClassName() {
+            return "Document";
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        public ScriptFunction createElement;
+
+        public ScriptFunction G$createElement() {
+            return createElement;
+        }
+
+        public void S$createElement(final ScriptFunction function) {
+            this.createElement = function;
+        }
+
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object Document]";
         }
 
         public String getClassName() {

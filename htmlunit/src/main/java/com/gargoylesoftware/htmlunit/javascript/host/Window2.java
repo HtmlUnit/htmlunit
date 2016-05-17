@@ -378,10 +378,6 @@ public class Window2 extends EventTarget2 {
         return window.history_;
     }
 
-    public Object getDefaultValue(final Class<?> typeHint) {
-        return "[object Window]";
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -1344,25 +1340,25 @@ public class Window2 extends EventTarget2 {
     }
 
     public static final class Prototype extends PrototypeObject {
-        public ScriptFunction alert;
-        public ScriptFunction atob;
-        public ScriptFunction btoa;
-        public ScriptFunction CollectGarbage;
-        public ScriptFunction find;
-        public ScriptFunction getComputedStyle;
-        public ScriptFunction open;
-        public ScriptFunction scroll;
-        public ScriptFunction scrollBy;
-        public ScriptFunction scrollTo;
-        public ScriptFunction postMessage;
-        public ScriptFunction requestAnimationFrame;
-        public ScriptFunction cancelAnimationFrame;
-        public ScriptFunction setTimeout;
-        public ScriptFunction clearTimeout;
-        public ScriptFunction dump;
-        public ScriptFunction scrollByLines;
-        public ScriptFunction scrollByPages;
-        public ScriptFunction showModalDialog;
+        private ScriptFunction alert;
+        private ScriptFunction atob;
+        private ScriptFunction btoa;
+        private ScriptFunction CollectGarbage;
+        private ScriptFunction find;
+        private ScriptFunction getComputedStyle;
+        private ScriptFunction open;
+        private ScriptFunction scroll;
+        private ScriptFunction scrollBy;
+        private ScriptFunction scrollTo;
+        private ScriptFunction postMessage;
+        private ScriptFunction requestAnimationFrame;
+        private ScriptFunction cancelAnimationFrame;
+        private ScriptFunction setTimeout;
+        private ScriptFunction clearTimeout;
+        private ScriptFunction dump;
+        private ScriptFunction scrollByLines;
+        private ScriptFunction scrollByPages;
+        private ScriptFunction showModalDialog;
 
         public ScriptFunction G$alert() {
             return alert;
@@ -1526,20 +1522,20 @@ public class Window2 extends EventTarget2 {
     }
 
     public static final class ObjectConstructor extends ScriptObject {
-        public ScriptFunction alert;
-        public ScriptFunction atob;
-        public ScriptFunction btoa;
-        public ScriptFunction open;
-        public ScriptFunction getComputedStyle;
-        public ScriptFunction execScript;
-        public ScriptFunction CollectGarbage;
-        public ScriptFunction ScriptEngine;
-        public ScriptFunction ScriptEngineBuildVersion;
-        public ScriptFunction ScriptEngineMajorVersion;
-        public ScriptFunction ScriptEngineMinorVersion;
-        public ScriptFunction showModelessDialog;
-        public ScriptFunction setTimeout;
-        public ScriptFunction clearTimeout;
+        private ScriptFunction alert;
+        private ScriptFunction atob;
+        private ScriptFunction btoa;
+        private ScriptFunction open;
+        private ScriptFunction getComputedStyle;
+        private ScriptFunction execScript;
+        private ScriptFunction CollectGarbage;
+        private ScriptFunction ScriptEngine;
+        private ScriptFunction ScriptEngineBuildVersion;
+        private ScriptFunction ScriptEngineMajorVersion;
+        private ScriptFunction ScriptEngineMinorVersion;
+        private ScriptFunction showModelessDialog;
+        private ScriptFunction setTimeout;
+        private ScriptFunction clearTimeout;
 
         public ScriptFunction G$setTimeout() {
             return setTimeout;
@@ -1605,7 +1601,8 @@ public class Window2 extends EventTarget2 {
             this.getComputedStyle = function;
         }
 
-        public ScriptFunction postMessage;
+        private ScriptFunction postMessage;
+
         public ScriptFunction G$postMessage() {
             return postMessage;
         }
@@ -1662,8 +1659,8 @@ public class Window2 extends EventTarget2 {
             this.ScriptEngineMinorVersion = function;
         }
 
-        public ScriptFunction requestAnimationFrame;
-        public ScriptFunction cancelAnimationFrame;
+        private ScriptFunction requestAnimationFrame;
+        private ScriptFunction cancelAnimationFrame;
 
         public ScriptFunction G$requestAnimationFrame() {
             return requestAnimationFrame;
@@ -1691,9 +1688,9 @@ public class Window2 extends EventTarget2 {
             this.cancelAnimationFrame = function;
         }
 
-        public ScriptFunction scroll;
-        public ScriptFunction scrollBy;
-        public ScriptFunction scrollTo;
+        private ScriptFunction scroll;
+        private ScriptFunction scrollBy;
+        private ScriptFunction scrollTo;
 
         public ScriptFunction G$scroll() {
             return scroll;

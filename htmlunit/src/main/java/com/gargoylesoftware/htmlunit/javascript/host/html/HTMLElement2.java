@@ -51,6 +51,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class HTMLElement2 extends Element2 {
 
@@ -660,6 +661,29 @@ public class HTMLElement2 extends Element2 {
     public static final class Prototype extends PrototypeObject {
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+
+        public String getClassName() {
+            return "HTMLElement";
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        private ScriptFunction setActive;
+        public ScriptFunction G$setActive() {
+            return setActive;
+        }
+
+        public void S$setActive(final ScriptFunction function) {
+            this.setActive = function;
+        }
+
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object HTMLElement]";
         }
 
         public String getClassName() {

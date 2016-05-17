@@ -169,10 +169,27 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
             else {
                 global.put("Window", new Window2.ObjectConstructor(), true);
-                global.put("Event", new Event2(), true);
+                global.put("HTMLDocument", new HTMLDocument2.ObjectConstructor(), true);
+                global.put("Document", new Document2.ObjectConstructor(), true);
+                global.put("Node", new Node2.ObjectConstructor(), true);
+                global.put("Event", new Event2.ObjectConstructor(), true);
                 global.put("BeforeUnloadEvent", new BeforeUnloadEvent2(), true);
+                global.put("History", new History2.ObjectConstructor(), true);
+                global.put("HTMLBodyElement", new HTMLBodyElement2.ObjectConstructor(), true);
+                global.put("HTMLDivElement", new HTMLDivElement2.ObjectConstructor(), true);
+                global.put("HTMLElement", new HTMLElement2.ObjectConstructor(), true);
+                global.put("Element", new Element2.ObjectConstructor(), true);
+                global.put("Node", new Node2.ObjectConstructor(), true);
+                global.put("ComputedCSSStyleDeclaration", new ComputedCSSStyleDeclaration2.ObjectConstructor(), true);
+                global.put("CSSStyleDeclaration", new CSSStyleDeclaration2.ObjectConstructor(), true);
                 setProto(global, "Window", new EventTarget2.ObjectConstructor());
+                setProto(global, "HTMLDocument", "Document");
                 setProto(global, "BeforeUnloadEvent", "Event");
+                setProto(global, "HTMLDivElement", "HTMLElement");
+                setProto(global, "HTMLBodyElement", "HTMLElement");
+                setProto(global, "HTMLElement", "Element");
+                setProto(global, "Element", "Node");
+                setProto(global, "ComputedCSSStyleDeclaration", "CSSStyleDeclaration");
             }
 
             final String[] toBeRemoved = {"java", "javax", "javafx", "org", "com", "net", "edu", "JavaAdapter",

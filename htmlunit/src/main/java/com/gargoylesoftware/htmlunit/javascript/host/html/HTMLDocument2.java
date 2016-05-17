@@ -76,6 +76,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 public class HTMLDocument2 extends Document2 {
 
@@ -496,10 +497,10 @@ public class HTMLDocument2 extends Document2 {
     }
 
     public static final class Prototype extends PrototypeObject {
-        public ScriptFunction getElementById;
-        public ScriptFunction getElementsByName;
-        public ScriptFunction close;
-        public ScriptFunction createEvent;
+        private ScriptFunction getElementById;
+        private ScriptFunction getElementsByName;
+        private ScriptFunction close;
+        private ScriptFunction createEvent;
 
         public ScriptFunction G$getElementById() {
             return getElementById;
@@ -510,11 +511,11 @@ public class HTMLDocument2 extends Document2 {
         }
 
         public ScriptFunction G$getElementsByName() {
-            return getElementById;
+            return getElementsByName;
         }
 
         public void S$getElementsByName(final ScriptFunction function) {
-            this.getElementById = function;
+            this.getElementsByName = function;
         }
 
         public ScriptFunction G$close() {
@@ -535,6 +536,56 @@ public class HTMLDocument2 extends Document2 {
 
         Prototype() {
             ScriptUtils.initialize(this);
+        }
+
+        public String getClassName() {
+            return "HTMLDocument";
+        }
+    }
+
+    public static final class ObjectConstructor extends ScriptObject {
+        private ScriptFunction getElementById;
+        public ScriptFunction G$getElementById() {
+            return getElementById;
+        }
+
+        public void S$getElementById(final ScriptFunction function) {
+            this.getElementById = function;
+        }
+
+        private ScriptFunction close;
+        public ScriptFunction G$close() {
+            return close;
+        }
+
+        public void S$close(final ScriptFunction function) {
+            this.close = function;
+        }
+
+        private ScriptFunction getElementsByName;
+        public ScriptFunction G$getElementsByName() {
+            return getElementsByName;
+        }
+
+        public void S$getElementsByName(final ScriptFunction function) {
+            this.getElementsByName = function;
+        }
+
+        private ScriptFunction createEvent;
+        public ScriptFunction G$createEvent() {
+            return createEvent;
+        }
+
+        public void S$createEvent(final ScriptFunction function) {
+            this.createEvent = function;
+        }
+
+        public ObjectConstructor() {
+            ScriptUtils.initialize(this);
+        }
+
+        public Object getDefaultValue(final Class<?> typeHint) {
+            return "[object HTMLDocument]";
         }
 
         public String getClassName() {

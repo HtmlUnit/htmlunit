@@ -93,6 +93,13 @@ public class SimpleScriptObject extends ScriptObject {
         return className;
     }
 
+    public Object getDefaultValue(final Class<?> typeHint) {
+        if (typeHint == null || typeHint == String.class) {
+            return "[object " + getClassName() + "]";
+        }
+        return super.getDefaultValue(typeHint);
+    }
+
     /**
      * Gets the window that is the top scope for this object.
      * @return the window associated with this object
