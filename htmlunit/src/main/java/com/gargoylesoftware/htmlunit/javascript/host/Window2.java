@@ -196,7 +196,11 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the WebWindow
      */
     public WebWindow getWebWindow() {
-        return ((HtmlPage) getDomNodeOrDie()).getEnclosingWindow();
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode == null) {
+            return (WebWindow) Global.instance().getDomObject();
+        }
+        return ((HtmlPage) domNode).getEnclosingWindow();
     }
 
     @Getter
