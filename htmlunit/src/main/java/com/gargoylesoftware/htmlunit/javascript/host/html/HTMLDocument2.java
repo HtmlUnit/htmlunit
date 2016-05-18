@@ -54,8 +54,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
@@ -79,6 +77,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -429,7 +428,7 @@ public class HTMLDocument2 extends Document2 {
      * Returns this document's {@code head} element.
      * @return this document's {@code head} element
      */
-    @JsxGetter
+    @Getter
     public HTMLElement2 getHead() {
         final HtmlElement head = getPage().getHead();
         if (head != null) {
@@ -442,7 +441,7 @@ public class HTMLDocument2 extends Document2 {
      * Returns this document's title.
      * @return this document's title
      */
-    @JsxGetter
+    @Getter
     public String getTitle() {
         return getPage().getTitleText();
     }
@@ -451,7 +450,7 @@ public class HTMLDocument2 extends Document2 {
      * Sets this document's title.
      * @param title the new title
      */
-    @JsxSetter
+    @Setter
     public void setTitle(final String title) {
         getPage().setTitleText(title);
     }

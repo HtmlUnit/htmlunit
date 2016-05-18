@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2;
 import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.gargoylesoftware.js.internal.dynalink.CallSiteDescriptor;
@@ -136,7 +137,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public void initialize(final Page enclosedPage) {
         final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow().getScriptContext());
         if (enclosedPage instanceof XmlPage || enclosedPage instanceof SvgPage) {
-//            document_ = new XMLDocument2();
+            document_ = XMLDocument2.constructor(true, global);
         }
         else {
             document_ = HTMLDocument2.constructor(true, global);
@@ -151,7 +152,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             // variable to be the page. If this isn't set then SimpleScriptable.get()
             // won't work properly
             setDomNode(htmlPage);
-//            clearEventListenersContainer();
+            clearEventListenersContainer();
 
             document_.setDomNode(htmlPage);
 

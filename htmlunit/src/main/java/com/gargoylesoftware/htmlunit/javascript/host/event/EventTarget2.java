@@ -280,6 +280,13 @@ public class EventTarget2 extends SimpleScriptObject {
         return null;
     }
 
+    /**
+     * Clears the event listener container.
+     */
+    protected void clearEventListenersContainer() {
+        eventListenersContainer_ = null;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(EventTarget2.class,
