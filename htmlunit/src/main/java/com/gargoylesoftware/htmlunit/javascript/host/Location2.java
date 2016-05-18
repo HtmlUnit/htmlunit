@@ -145,7 +145,7 @@ public class Location2 extends SimpleScriptObject {
      */
     public void setHref(final String newLocation, final boolean justHistoryAPIPushState, final Object state)
             throws IOException {
-        final HtmlPage page = (HtmlPage) window_/*getWindow(getStartingScope())*/.getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) Global.instance().<Window2>getWindow().getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
             page.executeJavaScriptIfPossible(script, "new location value", 1);

@@ -288,14 +288,14 @@ public class CSSStyleSheet2 extends StyleSheet2 {
 
                     case "max-device-width":
                         val = pixelValue((CSSValueImpl) property.getValue());
-                        if (val < scriptable.getWindow().getScreen().getWidth()) {
+                        if (val < Window2.getScreen(scriptable.getWindow()).getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-width":
                         val = pixelValue((CSSValueImpl) property.getValue());
-                        if (val > scriptable.getWindow().getScreen().getWidth()) {
+                        if (val > Window2.getScreen(scriptable.getWindow()).getWidth()) {
                             return false;
                         }
                         break;
@@ -316,35 +316,35 @@ public class CSSStyleSheet2 extends StyleSheet2 {
 
                     case "max-device-height":
                         val = pixelValue((CSSValueImpl) property.getValue());
-                        if (val < scriptable.getWindow().getScreen().getWidth()) {
+                        if (val < Window2.getScreen(scriptable.getWindow()).getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-height":
                         val = pixelValue((CSSValueImpl) property.getValue());
-                        if (val > scriptable.getWindow().getScreen().getWidth()) {
+                        if (val > Window2.getScreen(scriptable.getWindow()).getWidth()) {
                             return false;
                         }
                         break;
 
                     case "resolution":
                         val = resolutionValue((CSSValueImpl) property.getValue());
-                        if (Math.round(val) != scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                        if (Math.round(val) != Window2.getScreen(scriptable.getWindow()).getDeviceXDPI()) {
                             return false;
                         }
                         break;
 
                     case "max-resolution":
                         val = resolutionValue((CSSValueImpl) property.getValue());
-                        if (val < scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                        if (val < Window2.getScreen(scriptable.getWindow()).getDeviceXDPI()) {
                             return false;
                         }
                         break;
 
                     case "min-resolution":
                         val = resolutionValue((CSSValueImpl) property.getValue());
-                        if (val > scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                        if (val > Window2.getScreen(scriptable.getWindow()).getDeviceXDPI()) {
                             return false;
                         }
                         break;

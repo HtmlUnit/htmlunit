@@ -55,8 +55,8 @@ public class Console2 extends SimpleScriptObject {
      * @param args the arguments passed into the method
      */
     @Function
-    public static void log(final Console2 console, final Object... args) {
-        final WebConsole webConsole = console.getWebConsole();
+    public void log(final Object... args) {
+        final WebConsole webConsole = getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.info(args);
@@ -152,81 +152,81 @@ public class Console2 extends SimpleScriptObject {
 //            }
 //        }
 //
-//        /**
-//         * This methods appends the val parameter to the passed StringBuffer.
-//         * FireBug's console prints some object differently if printed at the
-//         * root level or as part of an array or native object. This method tries
-//         * to simulate Firebus's behavior.
-//         *
-//         * @param val
-//         *            the object to be printed
-//         * @param sb
-//         *            the StringBuilder used as destination
-//         * @param level
-//         *            the recursion level. If zero, it mean the object is
-//         *            printed at the console root level. Otherwise, the object
-//         *            is printed as part of an array or a native object.
-//         */
-//        private static void appendValue(final Object val, final StringBuilder sb, final int level) {
-//            if (val instanceof NativeFunction) {
-//                sb.append("(");
-//                // Remove unnecessary new lines and spaces from the function
-//                final Pattern p = Pattern.compile("[ \\t]*\\r?\\n[ \\t]*",
-//                        Pattern.MULTILINE);
-//                final Matcher m = p.matcher(((NativeFunction) val).toString());
-//                sb.append(m.replaceAll(" ").trim());
-//                sb.append(")");
-//            }
-//            else if (val instanceof BaseFunction) {
-//                sb.append("function ");
-//                sb.append(((BaseFunction) val).getFunctionName());
-//                sb.append("() {[native code]}");
-//            }
-//            else if (val instanceof NativeObject) {
-//                appendNativeObject((NativeObject) val, sb, level);
-//            }
-//            else if (val instanceof NativeArray) {
-//                appendNativeArray((NativeArray) val, sb, level);
-//            }
-//            else if (val instanceof Delegator) {
-//                if (level == 0) {
-//                    sb.append("[object ");
-//                    sb.append(((Delegator) val).getDelegee().getClassName());
-//                    sb.append("]");
-//                }
-//                else {
-//                    sb.append("({})");
-//                }
-//            }
-//            else if (val instanceof SimpleScriptable) {
-//                if (level == 0) {
-//                    sb.append("[object ");
-//                    sb.append(((SimpleScriptable) val).getClassName());
-//                    sb.append("]");
-//                }
-//                else {
-//                    sb.append("({})");
-//                }
-//            }
-//            else if (val instanceof String) {
-//                if (level == 0) {
-//                    sb.append((String) val);
-//                }
-//                else {
-//                    // When printing a string as part of an array or native
-//                    // object,
-//                    // enclose it in double quotes and escape its content.
-//                    sb.append(quote((String) val));
-//                }
-//            }
-//            else if (val instanceof Number) {
-//                sb.append(((Number) val).toString());
-//            }
-//            else {
-//                // ?!?
-//                sb.append(val);
-//            }
-//        }
+        /**
+         * This methods appends the val parameter to the passed StringBuffer.
+         * FireBug's console prints some object differently if printed at the
+         * root level or as part of an array or native object. This method tries
+         * to simulate Firebus's behavior.
+         *
+         * @param val
+         *            the object to be printed
+         * @param sb
+         *            the StringBuilder used as destination
+         * @param level
+         *            the recursion level. If zero, it mean the object is
+         *            printed at the console root level. Otherwise, the object
+         *            is printed as part of an array or a native object.
+         */
+        private static void appendValue(final Object val, final StringBuilder sb, final int level) {
+            /*if (val instanceof NativeFunction) {
+                sb.append("(");
+                // Remove unnecessary new lines and spaces from the function
+                final Pattern p = Pattern.compile("[ \\t]*\\r?\\n[ \\t]*",
+                        Pattern.MULTILINE);
+                final Matcher m = p.matcher(((NativeFunction) val).toString());
+                sb.append(m.replaceAll(" ").trim());
+                sb.append(")");
+            }
+            else if (val instanceof BaseFunction) {
+                sb.append("function ");
+                sb.append(((BaseFunction) val).getFunctionName());
+                sb.append("() {[native code]}");
+            }
+            else if (val instanceof NativeObject) {
+                appendNativeObject((NativeObject) val, sb, level);
+            }
+            else if (val instanceof NativeArray) {
+                appendNativeArray((NativeArray) val, sb, level);
+            }
+            else if (val instanceof Delegator) {
+                if (level == 0) {
+                    sb.append("[object ");
+                    sb.append(((Delegator) val).getDelegee().getClassName());
+                    sb.append("]");
+                }
+                else {
+                    sb.append("({})");
+                }
+            }
+            else*/ if (val instanceof SimpleScriptObject) {
+                if (level == 0) {
+                    sb.append("[object ");
+                    sb.append(((SimpleScriptObject) val).getClassName());
+                    sb.append("]");
+                }
+                else {
+                    sb.append("({})");
+                }
+            }
+            else if (val instanceof String) {
+                if (level == 0) {
+                    sb.append((String) val);
+                }
+                else {
+                    // When printing a string as part of an array or native
+                    // object,
+                    // enclose it in double quotes and escape its content.
+                    sb.append(quote((String) val));
+                }
+            }
+            else if (val instanceof Number) {
+                sb.append(((Number) val).toString());
+            }
+            else {
+                // ?!?
+                sb.append(val);
+            }
+        }
 
         /**
          * Even if similar, this is not JSON encoding. This replicates the way
@@ -273,10 +273,10 @@ public class Console2 extends SimpleScriptObject {
             return sb.toString();
         }
 
-//        private static String formatToString(final Object o) {
-//            if (o == null) {
-//                return "null";
-//            }
+        private static String formatToString(final Object o) {
+            if (o == null) {
+                return "null";
+            }
 //            else if (o instanceof NativeFunction) {
 //                return ((NativeFunction) o).toString();
 //            }
@@ -296,18 +296,18 @@ public class Console2 extends SimpleScriptObject {
 //            else if (o instanceof NativeObject) {
 //                return "[object " + ((NativeObject) o).getClassName() + "]";
 //            }
-//            else if (o instanceof SimpleScriptable) {
-//                return "[object " + ((SimpleScriptable) o).getClassName() + "]";
-//            }
-//            else {
-//                return o.toString();
-//            }
-//        }
+            else if (o instanceof SimpleScriptObject) {
+                return "[object " + ((SimpleScriptObject) o).getClassName() + "]";
+            }
+            else {
+                return o.toString();
+            }
+        }
 
         @Override
         public String printObject(final Object o) {
             final StringBuilder sb = new StringBuilder();
-//            appendValue(o, sb, 0);
+            appendValue(o, sb, 0);
             return sb.toString();
         }
 
@@ -323,8 +323,7 @@ public class Console2 extends SimpleScriptObject {
 //                }
 //                return sb.toString();
 //            }
-//            return formatToString(o);
-            return "";
+            return formatToString(o);
         }
 
         @Override

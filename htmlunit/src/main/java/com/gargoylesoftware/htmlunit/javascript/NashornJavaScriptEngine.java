@@ -200,7 +200,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.setWindow(window);
 
                 final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "confirm", "execScript", "CollectGarbage", "setTimeout", "clearTimeout",
-                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion", "prompt"};
+                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion", "showModalDialog", "showModelessDialog", "prompt"};
                 for (final String key : windowToGlobalFunctions) {
                     final Object function = window.get(key);
                     if (function != Undefined.getUndefined()) {
@@ -215,7 +215,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                     window.put(key, global.get(key), true);
                 }
 
-                final String[] windowProperties = {"controllers", "document", "length", "location", "parent", "self", "top"};
+                final String[] windowProperties = {"controllers", "document", "length", "location", "opener", "parent", "self", "top"};
                 final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
                 for (final String key : windowProperties) {

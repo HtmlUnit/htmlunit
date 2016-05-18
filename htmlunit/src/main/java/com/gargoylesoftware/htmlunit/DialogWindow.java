@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -93,14 +94,16 @@ public class DialogWindow extends WebWindowImpl {
     }
 
     @Override
-    public void setScriptObject(ScriptObject scriptObject) {
-        // TODO Auto-generated method stub
-        
+    public void setScriptObject(final ScriptObject scriptObject) {
+        if (scriptObject != null) {
+            scriptObject.addOwnProperty("dialogArguments", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, arguments_);
+        }
+        super.setScriptObject(scriptObject);
     }
 
-    @Override
-    public ScriptObject getScriptObject2() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+//    @Override
+//    public ScriptObject getScriptObject2() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 }

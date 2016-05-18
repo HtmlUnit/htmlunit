@@ -278,16 +278,6 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     }
 
-    @Setter
-    public static void setOnload(final Object self, final Object newOnload) {
-        final Window2 window = getWindow(self);
-//        if (window.getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
-//                && Context.getUndefinedValue().equals(newOnload)) {
-//                throw Context.reportRuntimeError("Invalid onload value: undefined.");
-//            }
-        window.getEventListenersContainer().setEventHandlerProp("load", newOnload);
-    }
-
     /**
      * Creates a base-64 encoded ASCII string from a string of binary data.
      * @param stringToEncode string to encode
@@ -306,28 +296,6 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Function({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public static String atob(final Object self, final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
-    }
-
-    /**
-     * Executes the specified script code as long as the language is {@code JavaScript} or {@code JScript}.
-     * @param script the script code to execute
-     * @param language the language of the specified code ({@code JavaScript} or {@code JScript})
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
-     */
-    @Function(@WebBrowser(value = IE, maxVersion = 8))
-    public void execScript(final String script, final Object language) {
-        final String languageStr = ScriptRuntime.safeToString(language);
-        if (language == Undefined.getUndefined()
-            || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
-            final Global global = Context.getGlobal();
-            Context.getContext().eval(global, script, global, null);
-        }
-        else if ("vbscript".equalsIgnoreCase(languageStr)) {
-            throw ECMAErrors.typeError("VBScript not supported in Window.execScript().");
-        }
-        else {
-            throw ECMAErrors.typeError("Invalid class string");
-        }
     }
 
     /**
@@ -359,24 +327,27 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     
     /**
      * Returns the value of the window's {@code name} property.
+     * @param self this object
      * @return the value of the window's {@code name} property
      */
     @Getter
-    public String getName() {
-        return getWebWindow().getName();
+    public static String getName(final Object self) {
+        return getWindow(self).getWebWindow().getName();
     }
 
     /**
     * Sets the value of the window's {@code name} property.
+     * @param self this object
     * @param name the value of the window's {@code name} property
     */
    @Setter
-   public void setName(final Object name) {
-       getWebWindow().setName(name.toString());
+   public static void setName(final Object self, final Object name) {
+       getWindow(self).getWebWindow().setName(name.toString());
    }
 
     /**
      * Returns the {@code history} property.
+     * @param self this object
      * @return the {@code history} property
      */
     @Getter
@@ -582,15 +553,17 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     /**
      * Returns the {@code screen} property.
+     * @param self this object
      * @return the screen property
      */
     @Getter
-    public Screen2 getScreen() {
-        return screen_;
+    public static Screen2 getScreen(final Object self) {
+        return getWindow(self).screen_;
     }
 
     /**
      * Returns the {@code location} property.
+     * @param self this object
      * @return the {@code location} property
      */
     @Getter
@@ -614,7 +587,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param e the error that needs to be reported
      */
     public void triggerOnError(final ScriptException e) {
-        final Object o = getOnerror();
+        final Object o = getOnerror(this);
         if (o instanceof ScriptFunction) {
             final ScriptFunction f = (ScriptFunction) o;
             final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
@@ -631,146 +604,162 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     /**
      * Returns the value of the window's {@code onerror} property.
+     * @param self this object
      * @return the value of the window's {@code onerror} property
      */
     @Getter
-    public Object getOnerror() {
-        return getHandlerForJavaScript(Event2.TYPE_ERROR);
+    public static Object getOnerror(final Object self) {
+        return getWindow(self).getHandlerForJavaScript(Event2.TYPE_ERROR);
     }
 
     /**
      * Sets the value of the window's {@code onerror} property.
+     * @param self this object
      * @param onerror the value of the window's {@code onerror} property
      */
     @Setter
-    public void setOnerror(final Object onerror) {
-        setHandlerForJavaScript(Event2.TYPE_ERROR, onerror);
+    public static void setOnerror(final Object self, final Object onerror) {
+        getWindow(self).setHandlerForJavaScript(Event2.TYPE_ERROR, onerror);
     }
 
     /**
      * Sets the value of the {@code onload} event handler.
+     * @param self this object
      * @param onload the new handler
      */
     @Setter
-    public void setOnload(final Object onload) {
-        getEventListenersContainer().setEventHandlerProp("load", onload);
+    public static void setOnload(final Object self, final Object onload) {
+        getWindow(self).getEventListenersContainer().setEventHandlerProp("load", onload);
     }
 
     /**
      * Returns the {@code onclick} property (not necessary a function if something else has been set).
+     * @param self this object
      * @return the {@code onclick} property
      */
     @Getter
-    public Object getOnclick() {
-        return getHandlerForJavaScript("click");
+    public static Object getOnclick(final Object self) {
+        return getWindow(self).getHandlerForJavaScript("click");
     }
 
     /**
      * Sets the value of the {@code onclick} event handler.
+     * @param self this object
      * @param onclick the new handler
      */
     @Setter
-    public void setOnclick(final Object onclick) {
-        setHandlerForJavaScript("click", onclick);
+    public static void setOnclick(final Object self, final Object onclick) {
+        getWindow(self).setHandlerForJavaScript("click", onclick);
     }
 
     /**
      * Returns the {@code ondblclick} property (not necessary a function if something else has been set).
+     * @param self this object
      * @return the {@code ondblclick} property
      */
     @Getter
-    public Object getOndblclick() {
-        return getHandlerForJavaScript("dblclick");
+    public static Object getOndblclick(final Object self) {
+        return getWindow(self).getHandlerForJavaScript("dblclick");
     }
 
     /**
      * Sets the value of the {@code ondblclick} event handler.
+     * @param self this object
      * @param ondblclick the new handler
      */
     @Setter
-    public void setOndblclick(final Object ondblclick) {
-        setHandlerForJavaScript("dblclick", ondblclick);
+    public static void setOndblclick(final Object self, final Object ondblclick) {
+        getWindow(self).setHandlerForJavaScript("dblclick", ondblclick);
     }
 
     /**
      * Returns the {@code onhashchange} property (not necessary a function if something else has been set).
+     * @param self this object
      * @return the {@code onhashchange} property
      */
     @Getter
-    public Object getOnhashchange() {
-        return getHandlerForJavaScript(Event2.TYPE_HASH_CHANGE);
+    public static Object getOnhashchange(final Object self) {
+        return getWindow(self).getHandlerForJavaScript(Event2.TYPE_HASH_CHANGE);
     }
 
     /**
      * Sets the value of the {@code onhashchange} event handler.
+     * @param self this object
      * @param onhashchange the new handler
      */
     @Setter
-    public void setOnhashchange(final Object onhashchange) {
-        setHandlerForJavaScript(Event2.TYPE_HASH_CHANGE, onhashchange);
+    public static void setOnhashchange(final Object self, final Object onhashchange) {
+        getWindow(self).setHandlerForJavaScript(Event2.TYPE_HASH_CHANGE, onhashchange);
     }
 
     /**
      * Returns the value of the window's {@code onbeforeunload} property.
+     * @param self this object
      * @return the value of the window's {@code onbeforeunload} property
      */
     @Getter
-    public Object getOnbeforeunload() {
-        return getHandlerForJavaScript(Event2.TYPE_BEFORE_UNLOAD);
+    public static Object getOnbeforeunload(final Object self) {
+        return getWindow(self).getHandlerForJavaScript(Event2.TYPE_BEFORE_UNLOAD);
     }
 
     /**
      * Sets the value of the window's {@code onbeforeunload} property.
+     * @param self this object
      * @param onbeforeunload the value of the window's {@code onbeforeunload} property
      */
     @Setter
-    public void setOnbeforeunload(final Object onbeforeunload) {
-        setHandlerForJavaScript(Event2.TYPE_BEFORE_UNLOAD, onbeforeunload);
+    public static void setOnbeforeunload(final Object self, final Object onbeforeunload) {
+        getWindow(self).setHandlerForJavaScript(Event2.TYPE_BEFORE_UNLOAD, onbeforeunload);
     }
 
     /**
      * Getter for the {@code onchange} event handler.
+     * @param self this object
      * @return the handler
      */
     @Getter
-    public Object getOnchange() {
-        return getHandlerForJavaScript(Event2.TYPE_CHANGE);
+    public static Object getOnchange(final Object self) {
+        return getWindow(self).getHandlerForJavaScript(Event2.TYPE_CHANGE);
     }
 
     /**
      * Setter for the {@code onchange} event handler.
+     * @param self this object
      * @param onchange the handler
      */
     @Setter
-    public void setOnchange(final Object onchange) {
-        setHandlerForJavaScript(Event2.TYPE_CHANGE, onchange);
+    public static void setOnchange(final Object self, final Object onchange) {
+        getWindow(self).setHandlerForJavaScript(Event2.TYPE_CHANGE, onchange);
     }
 
     /**
      * Getter for the {@code onsubmit} event handler.
+     * @param self this object
      * @return the handler
      */
     @Getter
-    public Object getOnsubmit() {
-        return getHandlerForJavaScript(Event2.TYPE_SUBMIT);
+    public static Object getOnsubmit(final Object self) {
+        return getWindow(self).getHandlerForJavaScript(Event2.TYPE_SUBMIT);
     }
 
     /**
      * Setter for the {@code onsubmit} event handler.
+     * @param self this object
      * @param onsubmit the handler
      */
     @Setter
-    public void setOnsubmit(final Object onsubmit) {
-        setHandlerForJavaScript(Event2.TYPE_SUBMIT, onsubmit);
+    public static void setOnsubmit(final Object self, final Object onsubmit) {
+        getWindow(self).setHandlerForJavaScript(Event2.TYPE_SUBMIT, onsubmit);
     }
 
     /**
      * Returns the current event.
+     * @param self this object
      * @return the current event, or {@code null} if no event is currently available
      */
     @Getter({@WebBrowser(IE), @WebBrowser(CHROME)})
-    public Object getEvent() {
-        return currentEvent_;
+    public static Object getEvent(final Object self) {
+        return getWindow(self).currentEvent_;
     }
 
     /**
@@ -802,7 +791,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
     @Function
-    public ScriptObject open(final Object url, final Object name, final Object features,
+    public static ScriptObject open(final Object self, final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
         if (url != Undefined.getUndefined()) {
@@ -816,7 +805,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         if (features != Undefined.getUndefined()) {
             featuresString = features.toString();
         }
-        final WebClient webClient = getWebWindow().getWebClient();
+        final Window2 window = getWindow(self);
+        final WebWindow webWindow = window.getWebWindow();
+        final WebClient webClient = webWindow.getWebClient();
 
         if (webClient.getOptions().isPopupBlockerEnabled()) {
             if (LOG.isDebugEnabled()) {
@@ -844,15 +835,14 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         // if specified name is the name of an existing window, then hold it
         if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
             try {
-                final WebWindow webWindow = webClient.getWebWindowByName(windowName);
-                return webWindow.getScriptObject2();
+                return webClient.getWebWindowByName(windowName).getScriptObject2();
             }
             catch (final WebWindowNotFoundException e) {
                 // nothing
             }
         }
-        final URL newUrl = makeUrlForOpenWindow(urlString);
-        final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, getWebWindow());
+        final URL newUrl = window.makeUrlForOpenWindow(urlString);
+        final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow);
         return newWebWindow.getScriptObject2();
     }
 
@@ -876,34 +866,38 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     /**
      * Sets the {@code opener} property.
+     * @param self this object
      * @param newValue the new value
      */
     @Setter
-    public void setOpener(final Object newValue) {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
+    public static void setOpener(final Object self, final Object newValue) {
+        final Window2 window = getWindow(self);
+        if (window.getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
             && newValue != null && newValue != Undefined.getUndefined() && !(newValue instanceof Window2)) {
             throw new RuntimeException("Can't set opener to something other than a window!");
         }
-        opener_ = newValue;
+        window.opener_ = newValue;
     }
 
     /**
      * Returns the value of the {@code opener} property.
+     * @param self this object
      * @return the value of the {@code opener}, or {@code null} for a top level window
      */
     @Getter
-    public Object getOpener() {
-        return opener_;
+    public static Object getOpener(final Object self) {
+        return getWindow(self).opener_;
     }
 
     /**
      * Scrolls to the specified location on the page.
+     * @param self this object
      * @param x the horizontal position to scroll to
      * @param y the vertical position to scroll to
      */
     @Function
-    public void scroll(final int x, final int y) {
-        scrollTo(x, y);
+    public static void scroll(final Object self, final int x, final int y) {
+        getWindow(self).scrollTo(x, y);
     }
 
     /**
@@ -912,8 +906,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param y the vertical distance to scroll by
      */
     @Function
-    public void scrollBy(final int x, final int y) {
-        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+    public static void scrollBy(final Object self, final int x, final int y) {
+        final HTMLElement2 body = ((HTMLDocument2) getWindow(self).document_).getBody();
         if (body != null) {
             body.setScrollLeft(body.getScrollLeft() + x);
             body.setScrollTop(body.getScrollTop() + y);
@@ -1144,7 +1138,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Function(@WebBrowser(FF))
     public void dump(final String message) {
         if (console_ instanceof Console2) {
-            Console2.log(null, console_, new Object[] {message}, null);
+            ((Console2) console_).log(message);
         }
     }
 
@@ -1221,6 +1215,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     /**
      * Creates a modal dialog box that displays the specified HTML document.
+     * @param self this object
      * @param url the URL of the document to load and display
      * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
      * @param features string that specifies the window ornaments for the dialog window
@@ -1228,27 +1223,29 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @Function({@WebBrowser(IE), @WebBrowser(FF)})
-    public Object showModalDialog(final String url, final Object arguments, final String features) {
-        final WebWindow webWindow = getWebWindow();
+    @Function
+    public static Object showModalDialog(final Object self, final String url, final Object arguments, final String features) {
+        final Window2 window = getWindow(self);
+        final WebWindow webWindow = window.getWebWindow();
         final WebClient client = webWindow.getWebClient();
         try {
-            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
+            final URL completeUrl = ((HtmlPage) window.getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
             // TODO: Theoretically, we shouldn't return until the dialog window has been close()'ed...
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
             // the dialog window is close()'ed? Would only work in interpreted mode, though.
-            final ScriptableObject jsDialog = dialog.getScriptableObject();
-            return jsDialog.get("returnValue", jsDialog);
+            final ScriptObject jsDialog = dialog.getScriptObject2();
+            return jsDialog.getProperty("returnValue").getObjectValue(jsDialog, jsDialog);
         }
-        catch (final IOException e) {
+        catch (final Throwable e) {
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Creates a modeless dialog box that displays the specified HTML document.
+     * @param self this object
      * @param url the URL of the document to load and display
      * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
      * @param features string that specifies the window ornaments for the dialog window
@@ -1256,13 +1253,14 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
      */
     @Function(@WebBrowser(IE))
-    public Object showModelessDialog(final String url, final Object arguments, final String features) {
-        final WebWindow webWindow = getWebWindow();
+    public static Object showModelessDialog(final Object self, final String url, final Object arguments, final String features) {
+        final Window2 window = getWindow(self);
+        final WebWindow webWindow = window.getWebWindow();
         final WebClient client = webWindow.getWebClient();
         try {
-            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
+            final URL completeUrl = ((HtmlPage) window.getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            final Window jsDialog = (Window) dialog.getScriptableObject();
+            final Window2 jsDialog = (Window2) dialog.getScriptObject2();
             return jsDialog;
         }
         catch (final IOException e) {
