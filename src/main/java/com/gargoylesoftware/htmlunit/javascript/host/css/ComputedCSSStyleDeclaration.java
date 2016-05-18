@@ -1116,15 +1116,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public int getContentWidth() {
         int width = 0;
         final DomNode domNode = getDomNodeOrDie();
-        Iterable<DomNode> childs = domNode.getChildren();
+        Iterable<DomNode> children = domNode.getChildren();
         if (domNode instanceof BaseFrameElement) {
             final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                 final HtmlPage htmlPage = (HtmlPage) enclosedPage;
-                childs = htmlPage.getChildren();
+                children = htmlPage.getChildren();
             }
         }
-        for (final DomNode child : childs) {
+        for (final DomNode child : children) {
             if (child.getScriptableObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptableObject();
                 final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);

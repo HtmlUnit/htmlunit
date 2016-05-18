@@ -1132,7 +1132,7 @@ public enum BrowserVersionFeatures {
 
     /** element.outerHTML removes all children from detached node. */
     @BrowserFeature(@WebBrowser(IE))
-    JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED,
+    JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED,
 
     /** element.outerHTML removes all children from detached node. */
     @BrowserFeature(@WebBrowser(CHROME))
