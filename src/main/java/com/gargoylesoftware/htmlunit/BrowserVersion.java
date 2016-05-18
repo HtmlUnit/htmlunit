@@ -18,7 +18,9 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -222,6 +224,92 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setScriptAcceptHeader("*/*");
         // there are other issues with Chrome; a different productSub, etc.
 
+        // default file upload mime types
+        CHROME.registerUploadMimeType("html", "text/html");
+        CHROME.registerUploadMimeType("htm", "text/html");
+        CHROME.registerUploadMimeType("css", "text/css");
+        CHROME.registerUploadMimeType("xml", "text/xml");
+        CHROME.registerUploadMimeType("gif", "image/gif");
+        CHROME.registerUploadMimeType("jpeg", "image/jpeg");
+        CHROME.registerUploadMimeType("jpg", "image/jpeg");
+        CHROME.registerUploadMimeType("webp", "image/webp");
+        CHROME.registerUploadMimeType("mp4", "video/mp4");
+        CHROME.registerUploadMimeType("m4v", "video/mp4");
+        CHROME.registerUploadMimeType("m4a", "audio/x-m4a");
+        CHROME.registerUploadMimeType("mp3", "audio/mp3");
+        CHROME.registerUploadMimeType("ogv", "video/ogg");
+        CHROME.registerUploadMimeType("ogm", "video/ogg");
+        CHROME.registerUploadMimeType("ogg", "audio/ogg");
+        CHROME.registerUploadMimeType("oga", "audio/ogg");
+        CHROME.registerUploadMimeType("opus", "audio/ogg");
+        CHROME.registerUploadMimeType("webm", "video/webm");
+        CHROME.registerUploadMimeType("wav", "audio/wav");
+        CHROME.registerUploadMimeType("flac", "audio/flac");
+        CHROME.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        CHROME.registerUploadMimeType("xht", "application/xhtml+xml");
+        CHROME.registerUploadMimeType("xhtm", "application/xhtml+xml");
+
+        FIREFOX_38.registerUploadMimeType("html", "text/html");
+        FIREFOX_38.registerUploadMimeType("htm", "text/html");
+        FIREFOX_38.registerUploadMimeType("css", "text/css");
+        FIREFOX_38.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_38.registerUploadMimeType("gif", "image/gif");
+        FIREFOX_38.registerUploadMimeType("jpeg", "image/jpeg");
+        FIREFOX_38.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_38.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX_38.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX_38.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_38.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX_38.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX_38.registerUploadMimeType("ogm", "video/x-ogm");
+        FIREFOX_38.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_38.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX_38.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX_38.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_38.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX_38.registerUploadMimeType("flac", "audio/x-flac");
+        FIREFOX_38.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX_38.registerUploadMimeType("xht", "application/xhtml+xml");
+
+        FIREFOX_45.registerUploadMimeType("html", "text/html");
+        FIREFOX_45.registerUploadMimeType("htm", "text/html");
+        FIREFOX_45.registerUploadMimeType("css", "text/css");
+        FIREFOX_45.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_45.registerUploadMimeType("gif", "image/gif");
+        FIREFOX_45.registerUploadMimeType("jpeg", "image/jpeg");
+        FIREFOX_45.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_45.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX_45.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX_45.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_45.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX_45.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX_45.registerUploadMimeType("ogm", "video/x-ogm");
+        FIREFOX_45.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_45.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX_45.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX_45.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_45.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX_45.registerUploadMimeType("flac", "audio/x-flac");
+        FIREFOX_45.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX_45.registerUploadMimeType("xht", "application/xhtml+xml");
+
+        INTERNET_EXPLORER.registerUploadMimeType("html", "text/html");
+        INTERNET_EXPLORER.registerUploadMimeType("htm", "text/html");
+        INTERNET_EXPLORER.registerUploadMimeType("css", "text/css");
+        INTERNET_EXPLORER.registerUploadMimeType("xml", "text/xml");
+        INTERNET_EXPLORER.registerUploadMimeType("gif", "image/gif");
+        INTERNET_EXPLORER.registerUploadMimeType("jpeg", "image/jpeg");
+        INTERNET_EXPLORER.registerUploadMimeType("jpg", "image/jpeg");
+        INTERNET_EXPLORER.registerUploadMimeType("mp4", "video/mp4");
+        INTERNET_EXPLORER.registerUploadMimeType("m4v", "video/mp4");
+        INTERNET_EXPLORER.registerUploadMimeType("m4a", "audio/mp4");
+        INTERNET_EXPLORER.registerUploadMimeType("mp3", "audio/mpeg");
+        INTERNET_EXPLORER.registerUploadMimeType("ogm", "video/x-ogm");
+        INTERNET_EXPLORER.registerUploadMimeType("ogg", "application/ogg");
+        INTERNET_EXPLORER.registerUploadMimeType("wav", "audio/wav");
+        INTERNET_EXPLORER.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
+
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 21.0 r0", "undefined", "pepflashplayer.dll");
@@ -276,6 +364,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String scriptAcceptHeader_;
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
+    private Map<String, String> uploadMimeTypes_ = new HashMap<>();
 
     /**
      * Instantiates one.
@@ -787,6 +876,27 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public void setHeaderNamesOrdered(final String[] headerNames) {
         headerNamesOrdered_ = headerNames;
+    }
+
+    /**
+     * Registers a new mime type for the provided file extension.
+     * @param fileExtension the file extension used to determine the mime type
+     * @param mimeType the mime type to be used when uploading files with this extension
+     */
+    public void registerUploadMimeType(final String fileExtension, final String mimeType) {
+        uploadMimeTypes_.put(fileExtension, mimeType);
+    }
+
+    /**
+     * @param fileExtension the file extension used to determine the mime type
+     * @return the registered mime type for the provided file extension
+     */
+    public String getUploadMimeTypeFor(final String fileExtension) {
+        String mimeType = uploadMimeTypes_.get(fileExtension);
+        if (null == mimeType) {
+            mimeType = "application/octet-stream";
+        }
+        return mimeType;
     }
 
     @Override

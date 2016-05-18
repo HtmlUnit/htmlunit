@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +43,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -62,10 +59,237 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
-            IE = {"CONTENT_TYPE:text/plain", "charset"})
-    @NotYetImplemented(IE)
-    public void contentType() throws Exception {
+    @Alerts({"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeUnknown() throws Exception {
+        contentType("unknown");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/html", "charset"})
+    public void contentTypeHtm() throws Exception {
+        contentType("htm");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/html", "charset"})
+    public void contentTypeHtml() throws Exception {
+        contentType("html");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/css", "charset"})
+    public void contentTypeCss() throws Exception {
+        contentType("css");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/xml", "charset"})
+    public void contentTypeXml() throws Exception {
+        contentType("xml");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:image/gif", "charset"})
+    public void contentTypeGif() throws Exception {
+        contentType("gif");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:image/jpeg", "charset"})
+    public void contentTypeJpeg() throws Exception {
+        contentType("jpeg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:image/jpeg", "charset"})
+    public void contentTypeJpg() throws Exception {
+        contentType("jpg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:image/webp", "charset"},
+            FF = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeWebp() throws Exception {
+        contentType("webp");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:video/mp4", "charset"})
+    public void contentTypeMp4() throws Exception {
+        contentType("mp4");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:video/mp4", "charset"})
+    public void contentTypeM4v() throws Exception {
+        contentType("m4v");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/x-m4a", "charset"},
+            FF = {"CONTENT_TYPE:audio/mp4", "charset"},
+            IE = {"CONTENT_TYPE:audio/mp4", "charset"})
+    public void contentTypeM4a() throws Exception {
+        contentType("m4a");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/mp3", "charset"},
+            FF = {"CONTENT_TYPE:audio/mpeg", "charset"},
+            IE = {"CONTENT_TYPE:audio/mpeg", "charset"})
+    public void contentTypeMp3() throws Exception {
+        contentType("mp3");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeOgv() throws Exception {
+        contentType("ogv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/ogg", "charset"},
+            FF = {"CONTENT_TYPE:video/x-ogm", "charset"},
+            IE = {"CONTENT_TYPE:video/x-ogm", "charset"})
+    public void contentTypeOgm() throws Exception {
+        contentType("ogm");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
+            FF = {"CONTENT_TYPE:video/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/ogg", "charset"})
+    public void contentTypeOgg() throws Exception {
+        contentType("ogg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeOga() throws Exception {
+        contentType("oga");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeOpus() throws Exception {
+        contentType("opus");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/webm", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeWebm() throws Exception {
+        contentType("webm");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:audio/wav", "charset"})
+    public void contentTypeWav() throws Exception {
+        contentType("wav");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/flac", "charset"},
+            FF = {"CONTENT_TYPE:audio/x-flac", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeFlac() throws Exception {
+        contentType("flac");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:application/xhtml+xml", "charset"})
+    public void contentTypeXhtml() throws Exception {
+        contentType("xhtml");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:application/xhtml+xml", "charset"})
+    public void contentTypeXht() throws Exception {
+        contentType("xht");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/xhtml+xml", "charset"},
+            FF = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeXhtm() throws Exception {
+        contentType("xhtm");
+    }
+
+    private void contentType(final String extension) throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", ContentTypeUpload2Servlet.class);
@@ -73,12 +297,19 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
 
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/upload1");
-        String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
-        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
-            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+
+        final File tmpFile = File.createTempFile("htmlunit-test", "." + extension);
+        try {
+            String path = tmpFile.getAbsolutePath();
+            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+                path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+            }
+            driver.findElement(By.name("myInput")).sendKeys(path);
+            driver.findElement(By.id("mySubmit")).click();
         }
-        driver.findElement(By.name("myInput")).sendKeys(path);
-        driver.findElement(By.id("mySubmit")).click();
+        finally {
+            tmpFile.delete();
+        }
 
         final String pageSource = driver.getPageSource();
         assertTrue(pageSource, pageSource.contains(getExpectedAlerts()[0]));
@@ -99,11 +330,13 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
             response.getWriter().write("<html>\n"
-                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
                 + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
-                + "</form></body></html>\n");
+                + "</form>\n"
+                + "</body></html>\n");
         }
     }
 

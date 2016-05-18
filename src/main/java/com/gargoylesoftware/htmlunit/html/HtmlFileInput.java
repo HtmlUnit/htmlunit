@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -122,7 +123,8 @@ public class HtmlFileInput extends HtmlInput {
             // to give finer control to user
             final String contentType;
             if (contentType_ == null) {
-                contentType = getPage().getWebClient().guessContentType(file);
+                final String fileExtension = FilenameUtils.getExtension(file.getName());
+                contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeTypeFor(fileExtension);
             }
             else {
                 contentType = contentType_;
