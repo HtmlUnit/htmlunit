@@ -839,7 +839,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         }
 
         final NashornJavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine2();
-//        jsEngine.holdPosponedActions();
+        jsEngine.holdPosponedActions();
         try {
             final ScriptResult scriptResult = doClickFireClickEvent(event);
             final boolean eventIsAborted = event.isAborted(scriptResult);

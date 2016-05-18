@@ -100,7 +100,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       alert(myNode.title);\n"
                 + "       alert(myNode.getAttribute('title'));\n"
@@ -147,7 +147,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html =
               "<html><body onload='test()'><div id='div' style='color: green;'>abc</div>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var div = document.getElementById('div');\n"
             + "    alert(div.getAttribute('style', 2));\n"
             + "  }\n"
@@ -169,7 +169,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.body.firstChild;\n"
                 + "       if (myNode.attributes.length == 0)\n"
                 + "         alert('0 attribute');\n"
@@ -197,7 +197,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "try {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       alert(myNode.getAttributeNS('myNamespaceURI', 'my:foo'));\n"
@@ -224,7 +224,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined"},
             IE = {"text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined"},
             CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -255,7 +255,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       alert(myNode.title);\n"
             + "       myNode.setAttribute('title', 'b');\n"
@@ -314,7 +314,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "previousSibling=null",
             "specified=true",
             "value=bleh"
-            })
+           })
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
@@ -805,7 +805,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "if (1 > 2 & 3 < 2) willNotHappen('yo');"
             + "</script>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('theScript');\n"
             + "       alert(myNode.innerHTML);\n"
             + "   }\n"
@@ -838,7 +838,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       alert('Old = ' + myNode.innerHTML);\n"
             + "       myNode.innerHTML = 'New  cell value';\n"
@@ -864,7 +864,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       myNode.innerHTML = '<input type=\"checkbox\" name=\"myCb\" checked>';\n"
             + "       alert(myNode.myCb.checked);\n"
@@ -889,7 +889,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       alert('Old = ' + myNode.innerHTML);\n"
             + "       myNode.innerHTML = 'New  cell value &amp; \\u0110 &#272;';\n"
@@ -1122,7 +1122,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       try {\n"
                 + "           alert('Outer = ' + myNode.outerHTML);\n"
@@ -1141,8 +1141,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Childs: 1"})
+    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"},
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Children: 1"})
     public void setOuterHTMLNull() throws Exception {
         final String html = createPageForSetOuterHTML("div", null);
         loadPageWithAlerts2(html);
@@ -1153,7 +1153,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = undefined", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = undefined", "Children: 1"})
     public void setOuterHTMLUndefined() throws Exception {
         final String html = createPageForSetOuterHTML("div", "undefined");
         loadPageWithAlerts2(html);
@@ -1164,7 +1164,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "");
         loadPageWithAlerts2(html);
@@ -1175,7 +1175,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New =   ", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New =   ", "Children: 1"})
     public void setOuterHTMLBlank() throws Exception {
         final String html = createPageForSetOuterHTML("div", "  ");
         loadPageWithAlerts2(html);
@@ -1186,7 +1186,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Children: 1"})
     public void setOuterHTMLAddTextToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
         loadPageWithAlerts2(html);
@@ -1197,7 +1197,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Children: 1"})
     public void setOuterHTMLAddTextToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
         loadPageWithAlerts2(html);
@@ -1208,7 +1208,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1219,7 +1219,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1230,7 +1230,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Children: 1"})
     public void setOuterHTMLAddInlineToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
         loadPageWithAlerts2(html);
@@ -1241,7 +1241,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Children: 1"})
     public void setOuterHTMLAddInlineToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
         loadPageWithAlerts2(html);
@@ -1252,7 +1252,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Children: 1"})
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
         loadPageWithAlerts2(html);
@@ -1269,7 +1269,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var nodeTypes = ['body', 'caption', 'col', 'colgroup', 'head', 'html',\n"
             + "                       'tbody', 'td', 'tfoot', 'th', 'thead', 'tr'];\n"
             + "      for (var i = 0; i < nodeTypes.length; i++) {\n"
@@ -1304,7 +1304,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div>test</div>", "Childs: 1"})
+                    "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1317,7 +1317,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <p>test</p>", "Childs: 1"})
+                    "New = <p>test</p>", "Children: 1"})
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
         loadPageWithAlerts2(html);
@@ -1329,7 +1329,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>", "Children: 1"})
     public void setOuterHTMLAddUnclosedParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<p>test");
         loadPageWithAlerts2(html);
@@ -1342,7 +1342,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <a>test</a>", "Childs: 1"})
+                    "New = <a>test</a>", "Children: 1"})
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
         loadPageWithAlerts2(html);
@@ -1353,7 +1353,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/>");
         loadPageWithAlerts2(html);
@@ -1365,7 +1365,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div><div></div></div>", "Childs: 1"})
+                    "New = <div><div></div></div>", "Children: 1"})
     @NotYetImplemented
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
@@ -1377,7 +1377,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingInline() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span/>");
         loadPageWithAlerts2(html);
@@ -1388,7 +1388,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Childs: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
         loadPageWithAlerts2(html);
@@ -1406,14 +1406,14 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       var innerNode = document.getElementById('innerNode');\n"
             + "       alert('Old = ' + myNode.innerHTML);\n"
             + "       try {\n"
             + "           innerNode.outerHTML = " + newVal + ";\n"
             + "           alert('New = ' + myNode.innerHTML);\n"
-            + "           alert('Childs: ' + myNode.childNodes.length);\n"
+            + "           alert('Children: ' + myNode.childNodes.length);\n"
             + "       } catch(e) {alert('exception'); }\n"
             + "    }\n"
             + "    </script>\n"
@@ -1430,22 +1430,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1"},
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"})
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       document.body.removeChild(myNode);\n"
                 + "       alert('Old = ' + myNode.innerHTML);\n"
                 + "       try {\n"
                 + "           myNode.outerHTML = null;\n"
                 + "           alert('New = ' + myNode.innerHTML);\n"
-                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "           alert('Children: ' + myNode.childNodes.length);\n"
                 + "       } catch(e) {alert('exception'); }\n"
                 + "    }\n"
                 + "    </script>\n"
@@ -1463,22 +1463,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1"},
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"})
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       document.body.removeChild(myNode);\n"
                 + "       alert('Old = ' + myNode.innerHTML);\n"
                 + "       try {\n"
                 + "           myNode.outerHTML = undefined;\n"
                 + "           alert('New = ' + myNode.innerHTML);\n"
-                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "           alert('Children: ' + myNode.childNodes.length);\n"
                 + "       } catch(e) {alert('exception'); }\n"
                 + "    }\n"
                 + "    </script>\n"
@@ -1496,22 +1496,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1"},
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"})
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementEmpty() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       document.body.removeChild(myNode);\n"
                 + "       alert('Old = ' + myNode.innerHTML);\n"
                 + "       try {\n"
                 + "           myNode.outerHTML = '';\n"
                 + "           alert('New = ' + myNode.innerHTML);\n"
-                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "           alert('Children: ' + myNode.childNodes.length);\n"
                 + "       } catch(e) {alert('exception'); }\n"
                 + "    }\n"
                 + "    </script>\n"
@@ -1529,22 +1529,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1"},
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"})
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       document.body.removeChild(myNode);\n"
                 + "       alert('Old = ' + myNode.innerHTML);\n"
                 + "       try {\n"
                 + "           myNode.outerHTML = '';\n"
                 + "           alert('New = ' + myNode.innerHTML);\n"
-                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "           alert('Children: ' + myNode.childNodes.length);\n"
                 + "       } catch(e) {alert('exception'); }\n"
                 + "    }\n"
                 + "    </script>\n"
@@ -1562,22 +1562,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1"},
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0"})
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var myNode = document.getElementById('myNode');\n"
                 + "       document.body.removeChild(myNode);\n"
                 + "       alert('Old = ' + myNode.innerHTML);\n"
                 + "       try {\n"
                 + "           myNode.outerHTML = '<p>test</p>';\n"
                 + "           alert('New = ' + myNode.innerHTML);\n"
-                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "           alert('Children: ' + myNode.childNodes.length);\n"
                 + "       } catch(e) {alert('exception'); }\n"
                 + "    }\n"
                 + "    </script>\n"
@@ -1781,7 +1781,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       alert('Old = ' + myNode.innerText);\n"
             + "       myNode.innerText = 'New cell value';\n"
@@ -3447,7 +3447,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setAttribute_className() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    div.setAttribute('className', 't');\n"
             + "    alert(div.className);\n"
@@ -3467,7 +3467,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setAttribute_class() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    div.setAttribute('class', 't');\n"
             + "    alert(div.className);\n"
@@ -3487,7 +3487,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setAttribute_className_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    div.setAttribute('className', 't');\n"
             + "    alert(div.className);\n"
@@ -3507,7 +3507,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setAttribute_class_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    div.setAttribute('class', 't');\n"
             + "    alert(div.className);\n"
@@ -3529,7 +3529,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var form = document.getElementById('testForm');\n"
                 + "       alert(form.getAttribute('target'));\n"
                 + "       alert(form.target);\n"
@@ -3557,7 +3557,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       var form = document.getElementById('testForm');\n"
                 + "       alert(form.getAttribute('target'));\n"
                 + "       alert(form.target);\n"

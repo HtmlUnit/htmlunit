@@ -743,15 +743,15 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
     public int getContentWidth() {
         int width = 0;
         final DomNode domNode = getDomNodeOrDie();
-        Iterable<DomNode> childs = domNode.getChildren();
+        Iterable<DomNode> children = domNode.getChildren();
         if (domNode instanceof BaseFrameElement) {
             final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                 final HtmlPage htmlPage = (HtmlPage) enclosedPage;
-                childs = htmlPage.getChildren();
+                children = htmlPage.getChildren();
             }
         }
-        for (final DomNode child : childs) {
+        for (final DomNode child : children) {
             if (child.getScriptObject2() instanceof HTMLElement2) {
                 final HTMLElement2 e = (HTMLElement2) child.getScriptObject2();
                 final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow().getScriptContext());

@@ -219,7 +219,7 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     /**
-     * Destroy our childs.
+     * Destroy our children.
      */
     protected void destroyChildren() {
         if (LOG.isDebugEnabled()) {
