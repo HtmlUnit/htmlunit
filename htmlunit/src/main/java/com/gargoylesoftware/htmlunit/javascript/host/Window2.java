@@ -38,8 +38,10 @@ import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -113,6 +115,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     private Location2 location_;
     private HTMLCollection2 frames_; // has to be a member to have equality (==) working
     private Event2 currentEvent_;
+    private String status_ = "";
     private Object controllers_ = new SimpleScriptObject();
     private Object opener_;
     private Object top_;
@@ -181,14 +184,15 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     @Function
-    public static void alert(final Object self, final Object o) {
+    public static void alert(final Object self, final String o) {
         final AlertHandler handler = getWindow(self).getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
             LOG.warn("window.alert(\"" + o + "\") no alert handler installed");
         }
         else {
 //            handler.handleAlert(document_.getPage(), stringMessage);
-          handler.handleAlert(null, o == null ? "null" : o.toString());
+            
+            handler.handleAlert(null, o);
         }
     }
 
@@ -1362,6 +1366,61 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public static void blur(final Object self) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.blur() not implemented");
+        }
+    }
+
+    /**
+     * Returns the value of the {@code parent} property.
+     * @param self this object
+     * @return the value of the {@code parent} property
+     */
+    @Getter
+    public static ScriptObject getParent(final Object self) {
+        final WebWindow parent = getWindow(self).getWebWindow().getParentWindow();
+        return parent.getScriptObject2();
+    }
+
+    /**
+     * The JavaScript function {@code prompt}.
+     * @param self this object
+     * @param message the message
+     * @return true if ok was pressed, false if cancel was pressed
+     */
+    @Function
+    public static String prompt(final Object self, final String message) {
+        final Window2 window = getWindow(self);
+        final PromptHandler handler = window.getWebWindow().getWebClient().getPromptHandler();
+        if (handler == null) {
+            LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            return null;
+        }
+        return handler.handlePrompt(window.document_.getPage(), message);
+    }
+
+    /**
+     * Returns the text from the status line.
+     * @param self this object
+     * @return the status line text
+     */
+    @Getter
+    public static String getStatus(final Object self) {
+        return getWindow(self).status_;
+    }
+
+    /**
+     * Sets the text from the status line.
+     * @param self this object
+     * @param message the status line text
+     */
+    @Setter
+    public static void setStatus(final Object self, final String message) {
+        final Window2 window = getWindow(self);
+        final WebWindow webWindow = window.getWebWindow();
+        window.status_ = message;
+
+        final StatusHandler statusHandler = webWindow.getWebClient().getStatusHandler();
+        if (statusHandler != null) {
+            statusHandler.statusMessageChanged(webWindow.getEnclosedPage(), message);
         }
     }
 

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -64,7 +66,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
  *
  * @author Ahmed Ashour
  */
-public class SimpleScriptObject extends ScriptObject {
+public class SimpleScriptObject extends ScriptObject implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(SimpleScriptObject.class);
 
