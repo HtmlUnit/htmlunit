@@ -944,6 +944,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         }
 
         clone.features_.addAll(features_);
+        clone.uploadMimeTypes_.putAll(uploadMimeTypes_);
 
         return clone;
     }
