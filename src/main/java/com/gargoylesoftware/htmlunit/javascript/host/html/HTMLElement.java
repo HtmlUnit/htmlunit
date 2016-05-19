@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
@@ -2506,16 +2505,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536433.aspx">MSDN doc</a>
-     * @return an object that specifies the bounds of a collection of TextRectangle objects
+     * {@inheritDoc}
      */
     @Override
     public ClientRect getBoundingClientRect() {
-        if (!getDomNodeOrDie().isAttachedToPage()
-                && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
-            throw Context.reportRuntimeError("Element is not attache to a page");
-        }
+        final ClientRect textRectangle = super.getBoundingClientRect();
 
         int left = getPosX();
         int top = getPosY();
@@ -2532,9 +2526,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             parentNode = elem.getParentNode();
         }
 
-        final ClientRect textRectangle = new ClientRect(top + getOffsetHeight(), left, left + getOffsetWidth(), top);
-        textRectangle.setParentScope(getWindow());
-        textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
+        textRectangle.setBottom(top + getOffsetHeight());
+        textRectangle.setLeft(left);
+        textRectangle.setRight(left + getOffsetWidth());
+        textRectangle.setTop(top);
+
         return textRectangle;
     }
 
