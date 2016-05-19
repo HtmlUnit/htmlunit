@@ -292,7 +292,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "var w = window.open('','blah','width=460,height=420');\n"
             + "w.document.write('<html><body><form></form></body></html>');\n"
             + "w.document.close();\n"
@@ -316,7 +316,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "var w = window.open('','blah','width=460,height=420');\n"
             + "var d = w.document;\n"
             + "d.write('<html><body><form></form></body></html>');\n"
@@ -511,7 +511,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @Alerts("outer")
     public void writeInManyTimes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.getElementById('inner').parentNode.id);\n"
             + "}\n"
             + "</script></head>\n"
@@ -557,7 +557,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @Alerts({"outer", "inner1"})
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-             + "function doTest(){\n"
+             + "function doTest() {\n"
              + "    alert(document.getElementById('inner1').parentNode.id);\n"
              + "    alert(document.getElementById('inner2').parentNode.id);\n"
              + "}\n"

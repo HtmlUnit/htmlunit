@@ -44,7 +44,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     public void implicitToStringConversion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(document.links != 'foo')\n"
+            + "  alert(document.links != 'foo')\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -63,7 +63,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     public void toStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(typeof document.links.toString);\n"
+            + "  alert(typeof document.links.toString);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<a href='bla.html'>link</a>\n"
@@ -101,7 +101,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"string 0", "string item", "string length", "string namedItem"},
             CHROME = {"string 0", "string item", "string length", "string myForm", "string namedItem"},
             IE = {"string item", "string length", "string myForm", "string namedItem"})
-    @NotYetImplemented({ IE })
+    @NotYetImplemented(IE)
     public void for_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -135,7 +135,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             IE = {"string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2"})
-    @NotYetImplemented({ IE })
+    @NotYetImplemented(IE)
     public void for_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

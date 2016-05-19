@@ -55,8 +55,9 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            FF45 = {"function", "function", "function", "function", "function", "function"})
+    @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function"},
+            FF38 = {"function", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"function", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void functions() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -397,8 +398,9 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no delete",
-            FF45 = {"myKey", "myKey1"})
+    @Alerts(DEFAULT = {"myKey", "myKey1"},
+            FF38 = "no delete",
+            IE = "no delete")
     public void delete() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -451,8 +453,9 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no get",
-            FF45 = {"myValue", "null", "null", "null", "null"})
+    @Alerts(DEFAULT = {"myValue", "null", "null", "null", "null"},
+            FF38 = "no get",
+            IE = "no get")
     public void get() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -494,8 +497,9 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no getAll",
-            FF45 = {"myValue,myValue2", "", "", "", ""})
+    @Alerts(DEFAULT = {"myValue,myValue2", "", "", "", ""},
+            FF38 = "no getAll",
+            IE = "no getAll")
     public void getAll() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -537,8 +541,9 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no has",
-            FF45 = {"true", "false", "false"})
+    @Alerts(DEFAULT = {"true", "false", "false"},
+            FF38 = "no has",
+            IE = "no has")
     public void has() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

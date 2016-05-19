@@ -52,7 +52,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1.textfield1.value);\n"
             + "    alert(document.form1.textfield1.type);\n"
             + "    alert(document.form1.textfield1.name);\n"
@@ -218,7 +218,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     private void testValue(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
 
             + "    document.form1.button1.value = " + value + ";\n"
             + "    document.form1.button2.value = " + value + ";\n"
@@ -322,7 +322,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     private void testValue2(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
 
             + "    document.form1.select1.value = " + value + ";\n"
             + "    document.form1.select2.value = " + value + ";\n"
@@ -377,18 +377,21 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "password, radio, reset, reset, "
-                + "submit, submit, text, textarea, color, date, text, datetime-local, time, week, month, number, "
-                + "range, search, email, tel, url",
-            FF = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "password, radio, reset, reset, "
-                + "submit, submit, text, textarea, color, text, text, text, text, text, text, number, range, "
-                + "search, email, tel, url",
-            IE = "button, button, checkbox, file, hidden, select-one, select-multiple, "
-                + "password, radio, reset, reset, "
-                + "submit, submit, text, textarea, text, text, text, text, text, text, text, number, range, "
-                + "search, email, tel, url"
+    @Alerts(CHROME = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "color", "date", "text",
+                        "datetime-local", "time", "week", "month", "number",
+                        "range", "search", "email", "tel", "url"},
+            FF = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "color", "text", "text",
+                        "text", "text", "text", "text", "number", "range",
+                        "search", "email", "tel", "url"},
+            IE = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "text", "text", "text",
+                        "text", "text", "text", "text", "number", "range",
+                        "search", "email", "tel", "url"}
             )
     @NotYetImplemented
     public void type() throws Exception {
@@ -485,7 +488,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n";
+            + "function doTest() {\n";
 
         if (value != null) {
             html = html
@@ -600,9 +603,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(document.form1.checkbox1.checked);\n"
-            + "    document.form1.checkbox1.checked = true;\n"
-            + "    alert(document.form1.checkbox1.checked);\n"
+            + "  alert(document.form1.checkbox1.checked);\n"
+            + "  document.form1.checkbox1.checked = true;\n"
+            + "  alert(document.form1.checkbox1.checked);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -631,13 +634,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(document.form1.radio1[0].checked);\n"
-            + "    alert(document.form1.radio1[1].checked);\n"
-            + "    alert(document.form1.radio1[2].checked);\n"
-            + "    document.form1.radio1[1].checked = true;\n"
-            + "    alert(document.form1.radio1[0].checked);\n"
-            + "    alert(document.form1.radio1[1].checked);\n"
-            + "    alert(document.form1.radio1[2].checked);\n"
+            + "  alert(document.form1.radio1[0].checked);\n"
+            + "  alert(document.form1.radio1[1].checked);\n"
+            + "  alert(document.form1.radio1[2].checked);\n"
+            + "  document.form1.radio1[1].checked = true;\n"
+            + "  alert(document.form1.radio1[0].checked);\n"
+            + "  alert(document.form1.radio1[1].checked);\n"
+            + "  alert(document.form1.radio1[2].checked);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -675,15 +678,15 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    alert(document.form1.button1.disabled);\n"
-            + "    alert(document.form1.button2.disabled);\n"
-            + "    alert(document.form1.button3.disabled);\n"
-            + "    document.form1.button1.disabled = true;\n"
-            + "    document.form1.button2.disabled = false;\n"
-            + "    document.form1.button3.disabled = true;\n"
-            + "    alert(document.form1.button1.disabled);\n"
-            + "    alert(document.form1.button2.disabled);\n"
-            + "    alert(document.form1.button3.disabled);\n"
+            + "  alert(document.form1.button1.disabled);\n"
+            + "  alert(document.form1.button2.disabled);\n"
+            + "  alert(document.form1.button3.disabled);\n"
+            + "  document.form1.button1.disabled = true;\n"
+            + "  document.form1.button2.disabled = false;\n"
+            + "  document.form1.button3.disabled = true;\n"
+            + "  alert(document.form1.button1.disabled);\n"
+            + "  alert(document.form1.button2.disabled);\n"
+            + "  alert(document.form1.button3.disabled);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -719,7 +722,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + " document.form1.textfield1.value = 'blue';\n"
             + "}\n"
             + "</script></head>\n"
@@ -745,7 +748,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + " document.form1.textfield1.select();\n"
             + "}\n"
             + "</script></head>\n"
@@ -801,7 +804,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  var f = document.form1;\n"
             + "  alert(f == f.mySubmit.form);\n"
             + "  alert(f == f.myText.form);\n"
@@ -831,7 +834,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + " document.form1.textfield1.name = 'changed';\n"
             + "}\n"
             + "</script></head><body>\n"
@@ -983,8 +986,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             "checkbox: true, true, function, function, , on",
             "radio: true, true, function, function, , on",
             "text: false, false, function, function, , ",
-            "password: false, false, function, function, , "
-        })
+            "password: false, false, function, function, , "})
     public void defaultValues() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1315,8 +1317,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.readOnly);\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  alert(input.readOnly);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<input id='myInput' value='some test' readonly='false'>\n"
@@ -1512,14 +1514,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.selectionStart);"
-            + "    alert(input.selectionEnd);"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  alert(input.selectionStart);"
+            + "  alert(input.selectionEnd);"
 
-            + "    if (!input.setSelectionRange) { alert('input.setSelectionRange not available'); return };\n"
-            + "    input.setSelectionRange(2, 7);\n"
-            + "    alert(input.selectionStart);"
-            + "    alert(input.selectionEnd);"
+            + "  input.setSelectionRange(2, 7);\n"
+            + "  alert(input.selectionStart);"
+            + "  alert(input.selectionEnd);"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

@@ -749,7 +749,7 @@ public class EventTest extends WebDriverTestCase {
             FF = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void document_focus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

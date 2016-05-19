@@ -594,7 +594,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void prefix() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms.fmLogin);\n"
             + "}\n"
             + "</script></head>\n"
@@ -640,7 +640,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
     private void testLastModified(final List<NameValuePair> responseHeaders) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  alert(typeof document.lastModified);\n"
             + "  var d = new Date(document.lastModified);\n"
             + "  alert(d.toGMTString());\n" // to have results not depending on the user's time zone
@@ -662,7 +662,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts({"true", "true"})
     public void lastModified_noDateHeader() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  var justBeforeLoading = " + System.currentTimeMillis() + ";\n"
             + "  var d = new Date(document.lastModified);\n"
             + "  alert(d.valueOf() >= justBeforeLoading - 1000);\n" // date string format has no ms, take 1s marge
@@ -703,7 +703,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, fails with FF38
+    @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"})
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
@@ -717,7 +717,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, fails with FF38
+    @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"})
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
@@ -729,7 +729,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "  try {\n"
             + "    document.designMode = 'on';\n"
             + "    var s = window.getSelection();\n"
@@ -786,7 +786,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  if (document.frames)\n"
             + "  {\n"
             + "    alert(document.frames == window.frames);\n"
@@ -813,7 +813,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"undefined", "false"})
     public void frameAccessByName() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  alert(document.foo);\n"
             + "  alert(window.frames[0] == document.foo);\n"
             + "}\n"
@@ -1923,9 +1923,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding() throws Exception {
         final String html = "<html>\n"
@@ -1948,9 +1947,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding2() throws Exception {
         final String html = "<html>\n"
@@ -1974,9 +1972,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding3() throws Exception {
         final String html = "<html>\n"
@@ -2002,9 +1999,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"UTF-8", "UTF-8", "UTF-8", "windows-1252"},
+    @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
-            FF45 = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding4() throws Exception {
         final String html = "<html>\n"
@@ -2030,9 +2026,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"UTF-8", "UTF-8", "UTF-8", "windows-1252"},
+    @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
-            FF45 = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding5() throws Exception {
         final String html = "<html>\n"
@@ -2058,9 +2053,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"UTF-8", "UTF-8", "UTF-8", "windows-1252"},
+    @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
-            FF45 = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding6() throws Exception {
         final String html = "<html>\n"
@@ -2405,7 +2399,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-"},
             FF = {"uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-"},
             CHROME = {"complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-"})
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -61,7 +61,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void elementsAccessor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1.length)\n"
             + "    for (var i = 0; i < document.form1.length; i++) {\n"
             + "        var element = document.form1.elements[i];\n"
@@ -108,7 +108,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void elementsAccessorOutOfBound() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1[-1]);\n"
             + "    alert(document.form1[2]);\n"
             + "}\n"
@@ -130,7 +130,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void radioButtonArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    var radioArray = document.form1['radio1'];\n"
             + "    alert(radioArray.length)\n"
             + "    for (var i = 0; i < radioArray.length; i++) {\n"
@@ -161,7 +161,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void radioButton_OnlyOne() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1['radio1'].value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -258,7 +258,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     private void enctype(final String encoding) throws Exception {
         String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms[0].encoding);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -326,7 +326,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.forms[0]." + jsProperty + ");\n"
             + "    try {\n"
             + "      document.forms[0]." + jsProperty + "='" + newValue + "';\n"
@@ -398,7 +398,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<input type='radio' name='second' value='1'>\n"
             + "<input type='radio' name='second' value='2' checked>\n"
             + "</form><script>clickAction();\n"
-            + "function clickAction(){\n"
+            + "function clickAction() {\n"
             + "    var value = -1;\n"
             + "    radios = document.forms['whatsnew'].elements['second'];\n"
             + "    for (var i = 0; i < radios.length; i++){\n"
@@ -447,7 +447,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void length() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1.length);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -469,7 +469,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void get() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    alert(document.form1[0].name)\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -659,8 +659,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "    alert(IRForm.IRText.value);\n"
-            + "    alert(IRForm.myField.length);\n"
+            + "  alert(IRForm.IRText.value);\n"
+            + "  alert(IRForm.myField.length);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -687,11 +687,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "    var oForm = document.testForm;\n"
-            + "    alert(oForm.img.tagName);\n"
-            + "    alert(oForm.img1.id);\n"
-            + "    alert(oForm.img2.id);\n"
-            + "    alert(oForm.testSpan == undefined);\n"
+            + "  var oForm = document.testForm;\n"
+            + "  alert(oForm.img.tagName);\n"
+            + "  alert(oForm.img1.id);\n"
+            + "  alert(oForm.img2.id);\n"
+            + "  alert(oForm.testSpan == undefined);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -721,7 +721,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "var Form = {};\n"
             + "function test() {\n"
-            + "    document.getElementById('formId');\n"
+            + "  document.getElementById('formId');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1200,7 +1200,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "foo4", "script4.js"},
             IE = {"", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js"})
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1464,5 +1464,33 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(html2);
 
         loadPageWithAlerts2(html, getDefaultUrl(), 5000);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.testForm;\n"
+            + "  alert(f.length);\n"
+            + "  alert(-1 in f);\n"
+            + "  alert(0 in f);\n"
+            + "  alert(1 in f);\n"
+            + "  alert(42 in f);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='testForm' action='about:blank'>\n"
+            + "    <input type='submit' id='theButton'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

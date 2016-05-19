@@ -75,7 +75,7 @@ public class AttrTest extends WebDriverTestCase {
         final String html
             = "<html><body onload='test()'><div id='div' class='test'></div>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var div = document.getElementById('div');\n"
             + "    alert(div.attributes.id.specified);\n"
             + "    alert(div.attributes.class.specified);\n"

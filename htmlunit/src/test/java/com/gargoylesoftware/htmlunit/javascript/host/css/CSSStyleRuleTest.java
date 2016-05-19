@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -47,7 +48,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
                 + "      rules = document.styleSheets[0].cssRules;\n"
@@ -87,7 +88,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  BODY { margin: 4px; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
                 + "      rules = document.styleSheets[0].cssRules;\n"
@@ -120,7 +121,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
                 + "      rules = document.styleSheets[0].cssRules;\n"
@@ -149,7 +150,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
                 + "      rules = document.styleSheets[0].cssRules;\n"
@@ -182,7 +183,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  #byId { font: 8pt; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "  function test() {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
                 + "    for (var i = 0; i < rules.length; i++)\n"
@@ -198,18 +199,45 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("")
-    public void colon() throws Exception {
+    @Alerts({"1", ""})
+    @NotYetImplemented
+    public void oldIEStyleFilter() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
-                + "(src='rightCorner.gif',sizingMethod='crop'); }\n"
+                + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "function test(){\n"
+                + "function test() {\n"
                 + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
+                + "    alert(rules.length);\n"
+                + "    alert(rules[0].style.filter);\n"
+                + "  } catch(e) { alert('exception'); }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"1", "none"})
+    public void filter() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { filter: none; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var sheet = document.styleSheets[0];\n"
+                + "    var rules = sheet.cssRules || sheet.rules;\n"
+                + "    alert(rules.length);\n"
                 + "    alert(rules[0].style.filter);\n"
                 + "  } catch(e) { alert('exception'); }\n"
                 + "}\n"

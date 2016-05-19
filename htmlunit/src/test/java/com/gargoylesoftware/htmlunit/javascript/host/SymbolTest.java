@@ -45,8 +45,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            FF45 = {"symbol", "Symbol(Symbol.match)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.match)", "true"},
+            FF38 = {"undefined", "undefined", "true"},
             IE = "not supported")
     public void match() throws Exception {
         name("match");
@@ -57,6 +57,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.replace)", "true"},
             IE = "not supported")
     public void replace() throws Exception {
         name("replace");
@@ -67,6 +68,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.search)", "true"},
             IE = "not supported")
     public void search() throws Exception {
         name("search");
@@ -77,6 +79,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.split)", "true"},
             IE = "not supported")
     public void split() throws Exception {
         name("split");
@@ -87,6 +90,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.hasInstance)", "true"},
             IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");

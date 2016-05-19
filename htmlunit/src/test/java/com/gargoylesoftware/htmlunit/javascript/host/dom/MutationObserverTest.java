@@ -37,7 +37,7 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void characterData() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    if (!window.MutationObserver) return;\n"
             + "    var observer = new MutationObserver(function(mutations) {\n"
@@ -70,7 +70,7 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void characterDataNoOldValue() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    if (!window.MutationObserver) return;\n"
             + "    var observer = new MutationObserver(function(mutations) {\n"
@@ -101,7 +101,7 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void characterDataNoSubtree() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    if (!window.MutationObserver) return;\n"
             + "    var observer = new MutationObserver(function(mutations) {\n"
@@ -133,7 +133,7 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void attributes() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    if (!window.MutationObserver) return;\n"
             + "    var observer = new MutationObserver(function(mutations) {\n"

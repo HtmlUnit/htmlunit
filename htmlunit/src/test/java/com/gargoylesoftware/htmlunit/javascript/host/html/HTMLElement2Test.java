@@ -214,7 +214,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"12", "12"},
             CHROME = {"15", "15"},
             IE = {"15", "15"})
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented({CHROME, IE})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -1046,7 +1046,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       alert('Old = ' + myNode.innerHTML);\n"
             + "       myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
@@ -1083,7 +1083,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       var innerNode = document.getElementById('innerNode');\n"
             + "       alert('Old = ' + innerNode.outerHTML);\n"

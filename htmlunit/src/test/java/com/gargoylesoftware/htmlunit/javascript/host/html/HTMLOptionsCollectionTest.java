@@ -376,7 +376,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        alert(oSelect.length);\n"
@@ -488,7 +488,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        var opt = oSelect.options[" + pos + "];\n"
@@ -699,7 +699,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        alert(oSelect.length);\n"
@@ -890,7 +890,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        oSelect.options.remove(" + pos + ");\n"
@@ -1100,6 +1100,35 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "        <option>One</option>\n"
             + "    </select>\n"
             + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
+            IE = {"1", "true", "true", "true", "true"})
+    public void in() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var opts = document.form1.select.options;\n"
+            + "  alert(opts.length);\n"
+            + "  alert(-1 in opts);\n"
+            + "  alert(0 in opts);\n"
+            + "  alert(1 in opts);\n"
+            + "  alert(42 in opts);\n"
+            + "}</script></head>\n"
+
+            + "<body onload='test()'>\n"
+            + "  <form name='form1'>\n"
+            + "    <select name='select'>\n"
+            + "        <option>One</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

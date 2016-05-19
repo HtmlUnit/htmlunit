@@ -172,8 +172,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
-    @NotYetImplemented({ FF})
+    @Alerts(DEFAULT = "0",
+            FF = "240")
+    @NotYetImplemented(FF)
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }
@@ -467,7 +468,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-56",
             FF = "0")
-    @NotYetImplemented({ CHROME, IE})
+    @NotYetImplemented({CHROME, IE})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
@@ -547,7 +548,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "300",
             FF = "0",
             IE = "16")
-    @NotYetImplemented({ CHROME, IE})
+    @NotYetImplemented({CHROME, IE})
     public void embed() throws Exception {
         loadPageWithAlerts2(test("embed"));
     }
@@ -750,7 +751,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-18",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF, IE})
+    @NotYetImplemented
     public void hr() throws Exception {
         loadPageWithAlerts2(test("hr"));
     }
@@ -833,9 +834,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "141",
+            FF45 = "141",
+            FF38 = "140",
             IE = "143")
-    @NotYetImplemented({ FF, IE})
+    @NotYetImplemented({FF, IE})
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -868,10 +870,11 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "149",
-            FF = "110",
+    @Alerts(CHROME = "142",
+            FF45 = "110",
+            FF38 = "116",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF})
+    @NotYetImplemented({CHROME, FF})
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -979,7 +982,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF, IE})
+    @NotYetImplemented
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
@@ -1036,7 +1039,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "80",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF})
+    @NotYetImplemented({CHROME, FF})
     public void meter() throws Exception {
         loadPageWithAlerts2(test("meter"));
     }
@@ -1251,7 +1254,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented({ FF, IE})
+    @NotYetImplemented({FF, IE})
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -1682,7 +1685,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "169",
-            FF = "141",
+            FF45 = "141",
+            FF38 = "140",
             IE = "143")
     @NotYetImplemented
     public void input() throws Exception {

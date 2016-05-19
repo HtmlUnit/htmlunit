@@ -1280,7 +1280,7 @@ public class Window2Test extends WebDriverTestCase {
 
         // we can't use the usual alert here because of the page change
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        final Object result = jsExecutor.executeScript("window.name");
+        final Object result = jsExecutor.executeScript("return window.name");
 
         assertEquals(getExpectedAlerts()[0], result);
     }

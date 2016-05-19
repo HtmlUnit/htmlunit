@@ -264,8 +264,38 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "</html>";
 
         final String css = "div {color:red}";
-
         getMockWebConnection().setDefaultResponse(css, "text/css");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var sheets = document.styleSheets;\n"
+            + "        alert(sheets.length);\n"
+            + "        alert(-1 in sheets);\n"
+            + "        alert(0 in sheets);\n"
+            + "        alert(1 in sheets);\n"
+            + "        alert(42 in sheets);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>abc</body>\n"
+            + "</html>";
+
+        final String css = "div {color:red}";
+        getMockWebConnection().setDefaultResponse(css, "text/css");
+
         loadPageWithAlerts2(html);
     }
 }

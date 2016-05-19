@@ -224,7 +224,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
             IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"

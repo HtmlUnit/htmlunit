@@ -381,7 +381,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var option1 = document.f1.elements['select'][0];\n"
             + "      alert(option1!=null);\n"
             + "    }\n"
@@ -410,7 +410,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var option1 = document.form1.select1.options[0];\n"
             + "      alert(option1.text);\n"
             + "    }\n"
@@ -440,7 +440,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var options = document.form1.select1.options;\n"
             + "      var index = options.length;\n"
             + "      options[index] = new Option('Four','value4');\n"
@@ -474,7 +474,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var oSelect = document.form1.select1;\n"
             + "      var options = oSelect.options;\n"
             + "      var firstSelectedIndex = oSelect.selectedIndex;\n"
@@ -519,7 +519,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var options = document.form1.select1;\n"
             + "      try {\n"
             + "        options.add(new Option('Four','value4'), null);\n"
@@ -556,7 +556,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var oSelect = document.form1.select1;\n"
             + "      try {\n"
             + "        oSelect.add(new Option('Four', 'value4'));\n"
@@ -596,7 +596,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      var oSelect = document.form1.select1;\n"
             + "      try {\n"
             + "        alert(oSelect.length);\n"
@@ -947,7 +947,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        alert(oSelect.length);\n"
@@ -993,7 +993,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.testSelect;\n"
             + "        alert(oSelect.length);\n"
@@ -1347,7 +1347,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function doTest(){\n"
+            + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        alert(oSelect.length);\n"
@@ -1760,7 +1760,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts ({ "0", "true", "false", "false", "0"})
+    @Alerts ({"0", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeZero() throws Exception {
         defaultSelectedValue("0", false);
     }
@@ -1769,7 +1769,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts ({ "0", "false", "false", "false", "-1"})
+    @Alerts ({"0", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeZero_Multi() throws Exception {
         defaultSelectedValue("0", true);
     }
@@ -1844,7 +1844,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
-            + "   function test(){\n"
+            + "   function test() {\n"
             + "      alert(document.getElementById('s').size);\n"
             + "      alert(document.getElementById('a').selected);\n"
             + "      alert(document.getElementById('b').selected);\n"
@@ -2460,6 +2460,38 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "  <select id='e3'>e 3</select><br>\n"
             + "  <label id='l4' for='e4'> what about</label>\n"
             + "  <label> this<select id='e4'>e 4</select></label><br>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
+            IE = {"1", "true", "true", "true", "true"})
+    public void in() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    var options = document.form1.select1.options;\n"
+            + "    alert(options.length);\n"
+            + "    alert(-1 in options);\n"
+            + "    alert(0 in options);\n"
+            + "    alert(1 in options);\n"
+            + "    alert(42 in options);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n2"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "      <option name='option1' value='value1'>One</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

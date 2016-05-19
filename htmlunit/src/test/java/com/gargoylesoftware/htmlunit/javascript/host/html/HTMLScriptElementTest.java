@@ -61,7 +61,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "            alert(document.getElementById('myTextarea').value);\n"
             + "          }\n"
             + "        }\n"
-            + "        script.onload = function () {\n"
+            + "        script.onload = function() {\n"
             + "          document.getElementById('myTextarea').value += 'onload ';\n"
             + "          alert(document.getElementById('myTextarea').value);\n"
             + "        }\n"

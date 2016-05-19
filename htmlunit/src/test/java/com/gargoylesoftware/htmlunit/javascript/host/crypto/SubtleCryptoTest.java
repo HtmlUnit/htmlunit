@@ -44,7 +44,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
                         "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
                         "publicExponent [object Uint8Array]"},
             IE = "undefined")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void rsassa() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -61,7 +61,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "        false, //whether the key is extractable (i.e. can be used in exportKey)\n"
             + "        ['sign', 'verify']\n"
             + "      )\n"
-            + "      .then(function(key){\n"
+            + "      .then(function(key) {\n"
             + "        alert(key.publicKey.type);\n"
             + "        alert(key.publicKey.extractable);\n"
             + "        alert(key.publicKey.usages);\n"
@@ -75,7 +75,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "          alert(x + ' ' + key.publicKey.algorithm[x]);\n"
             + "        }\n"
             + "      })\n"
-            + "      .catch(function(err){\n"
+            + "      .catch(function(err) {\n"
             + "        alert(err);\n"
             + "      });\n"
             + "    }\n"

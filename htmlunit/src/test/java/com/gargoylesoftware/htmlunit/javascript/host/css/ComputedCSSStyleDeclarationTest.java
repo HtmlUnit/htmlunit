@@ -1136,7 +1136,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var d1 = document.getElementById('d1');\n"
             + "    var s1 = window.getComputedStyle(d1, null);\n"
             + "    var d2 = document.getElementById('d2');\n"
@@ -1162,7 +1162,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:10em;height:20em'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
-            + "  function test(){\n"
+            + "  function test() {\n"
             + "    var d1 = document.getElementById('d1');\n"
             + "    var s1 = window.getComputedStyle(d1, null);\n"
             + "    var d2 = document.getElementById('d2');\n"
@@ -1646,7 +1646,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "0px", "20%", "80px", "25%", "100px"})
+    @Alerts({"", "0px", "20%", "80px", "25%", "100px"})
     public void marginLeftRight() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

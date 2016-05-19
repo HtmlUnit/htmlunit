@@ -120,7 +120,7 @@ public class Document2Test extends WebDriverTestCase {
     public void appendChild() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    var span = document.createElement('SPAN');\n"
             + "    var div = document.getElementById('d');\n"
             + "    div.appendChild(span);\n"
@@ -142,7 +142,7 @@ public class Document2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title>"
             + "<script>\n"
-            + "  function doTest(){\n"
+            + "  function doTest() {\n"
             + "    if (!document.getElementsByTagNameNS) { alert('getElementsByTagNameNS not available'); return; };\n"
             + "    alert(document.getElementsByTagNameNS('*', 'html').length);\n"
             + "  }\n"

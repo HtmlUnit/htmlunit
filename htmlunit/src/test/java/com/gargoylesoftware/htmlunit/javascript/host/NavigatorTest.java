@@ -181,7 +181,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
                 + "         alert(window.navigator.plugins[i].name);\n"
                 + "      }\n"
@@ -205,8 +205,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll"},
-            FF45 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.197", "NPSWF32_21_0_0_197.dll"},
+    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.242", "NPSWF32_21_0_0_242.dll"},
+            FF45 = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.242", "NPSWF32_21_0_0_242.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "undefined", "pepflashplayer.dll"},
             IE = {"Shockwave Flash", "Shockwave Flash 21.0 r0", "21.0.0.197", "Flash32_21_0_0_197.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
@@ -215,7 +215,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "       for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
                 + "         var plugin = window.navigator.plugins[i];\n"
                 + "         if ('Shockwave Flash' == window.navigator.plugins[i].name) {\n"
@@ -248,7 +248,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "      try {\n"
                 + "        alert(window.navigator.taintEnabled());\n"
                 + "      } catch(e) { alert('exception'); }\n"
@@ -273,7 +273,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "  <title>test</title>\n"
                 + "  <script>\n"
-                + "    function doTest(){\n"
+                + "    function doTest() {\n"
                 + "      alert(window.navigator." + name + ");\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -370,8 +370,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF38 = "20160315145633",
-            FF45 = "20160316151906")
+            FF38 = "20160420141331",
+            FF45 = "20160502160818")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

@@ -410,7 +410,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "xhr.onreadystatechange = handler;\n"
             + "xhr.open('GET', '/delay200/foo.txt', true);\n"
             + "xhr.send('');\n"
-            + "setTimeout(function(){ alert('in timeout');}, 5);\n"
+            + "setTimeout(function() { alert('in timeout');}, 5);\n"
             + "</script></head><body></body></html>";
 
         getMockWebConnection().setDefaultResponse("hello", "text/plain");
@@ -434,7 +434,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "  xhr.send('');\n"
             + "}\n"
             + "function doTest() {\n"
-            + "  setTimeout(function(){ alert('in timeout');}, 5);\n"
+            + "  setTimeout(function() { alert('in timeout');}, 5);\n"
             + "  wait();\n"
             + "  var xhr2 = new XMLHttpRequest();\n"
             + "  var handler = function() {\n"

@@ -362,7 +362,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
-            + "   function test(){\n"
+            + "   function test() {\n"
             + "      var div1 = document.getElementById('div1');\n"
             + "      alert(div1.style.filter);\n"
             + "      var div2 = document.getElementById('div2');\n"
@@ -1160,8 +1160,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "    var style = document.getElementById('d').style;\n"
-            + "    alert(style." + attribute + ");\n"
+            + "  var style = document.getElementById('d').style;\n"
+            + "  alert(style." + attribute + ");\n"
             + "}\n</script></head>\n"
             + "<body onload='test()'><div id='d' style='" + style + "'>foo</div></body></html>";
 
@@ -2430,21 +2430,21 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
-            + "    var div1 = document.getElementById('div1');\n"
-            + "    alert(div1.style.border);\n"
-            + "    try {\n"
-            + "      div1.style.border = null;\n"
-            + "    } catch (e) {\n"
-            + "      alert('error');\n"
-            + "    }\n"
-            + "    alert(div1.style.border);\n"
-            + "    alert(div1.style.display);\n"
-            + "    try {\n"
-            + "      div1.style.display = null;\n"
-            + "    } catch (e) {\n"
-            + "      alert('error');\n"
-            + "    }\n"
-            + "    alert(div1.style.display);\n"
+            + "  var div1 = document.getElementById('div1');\n"
+            + "  alert(div1.style.border);\n"
+            + "  try {\n"
+            + "    div1.style.border = null;\n"
+            + "  } catch (e) {\n"
+            + "    alert('error');\n"
+            + "  }\n"
+            + "  alert(div1.style.border);\n"
+            + "  alert(div1.style.display);\n"
+            + "  try {\n"
+            + "    div1.style.display = null;\n"
+            + "  } catch (e) {\n"
+            + "    alert('error');\n"
+            + "  }\n"
+            + "  alert(div1.style.display);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2789,4 +2789,29 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "false", "true", "true", "true"},
+            FF = {"1", "false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var node = document.getElementById('div1');\n"
+            + "    var style = node.style;\n"
+            + "    alert(style.length);\n"
+            + "    alert(-1 in style);\n"
+            + "    alert(0 in style);\n"
+            + "    alert(1 in style);\n"
+            + "    alert(42 in style);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' style='color: black'>foo</div>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

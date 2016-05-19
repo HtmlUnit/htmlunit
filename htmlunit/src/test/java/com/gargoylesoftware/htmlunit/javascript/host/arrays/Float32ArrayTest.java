@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Float32ArrayTest extends WebDriverTestCase {
@@ -47,6 +48,48 @@ public class Float32ArrayTest extends WebDriverTestCase {
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "1234567.875", "undefined", "undefined"})
+    public void index() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = new Float32Array([1234567.8901]);\n"
+            + "  alert(array[-1]);\n"
+            + "  alert(array[0]);\n"
+            + "  alert(array[1]);\n"
+            + "  alert(array[21]);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "false"})
+    public void in() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = new Float32Array([1234567.8901]);\n"
+            + "  alert(-1 in array);\n"
+            + "  alert(0 in array);\n"
+            + "  alert(1 in array);\n"
+            + "  alert(42 in array);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

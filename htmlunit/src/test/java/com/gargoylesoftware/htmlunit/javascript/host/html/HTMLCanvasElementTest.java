@@ -133,10 +133,10 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CanvasRenderingContext2D], [object WebGLRenderingContext], "
-            + "[object WebGLRenderingContext], null, null, null",
-            IE = "[object CanvasRenderingContext2D], null, "
-                    + "[object WebGLRenderingContext], null, null, null")
+    @Alerts(DEFAULT = {"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
+                        "[object WebGLRenderingContext]", "null", "null", "null"},
+            IE = {"[object CanvasRenderingContext2D]", "null",
+                        "[object WebGLRenderingContext]", "null", "null", "null"})
     @NotYetImplemented
     public void getContext() throws Exception {
         final String html =

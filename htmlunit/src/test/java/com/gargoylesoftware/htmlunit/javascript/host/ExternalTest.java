@@ -101,7 +101,7 @@ public class ExternalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0"})
-    @BuggyWebDriver({ IE, CHROME }) // fail with missing permission
+    @BuggyWebDriver({IE, CHROME}) // fail with missing permission
     public void isSearchProviderInstalled() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

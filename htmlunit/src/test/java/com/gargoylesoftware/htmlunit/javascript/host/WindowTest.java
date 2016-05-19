@@ -14,18 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -43,6 +45,7 @@ import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
+import com.gargoylesoftware.htmlunit.WebWindowListener;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -95,8 +98,23 @@ public class WindowTest extends SimpleWebTestCase {
             + "<script>alert(self.name)</script>\n"
             + "</body></html>";
 
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -110,17 +128,17 @@ public class WindowTest extends SimpleWebTestCase {
         assertNotSame(firstPage, secondPage);
 
         // Expecting contentChanged, opened, contentChanged
-        assertEquals(3, eventCatcher.getEventCount());
+        assertEquals(3, events.size());
 
-        final WebWindow firstWebWindow = (WebWindow) ((WebWindowEvent) eventCatcher.getEventAt(0)).getSource();
-        final WebWindow secondWebWindow = (WebWindow) ((WebWindowEvent) eventCatcher.getEventAt(2)).getSource();
+        final WebWindow firstWebWindow = (WebWindow) events.get(0).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(2).getSource();
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertEquals("MyNewWindow", secondWebWindow.getName());
 
         assertEquals("First", ((HtmlPage) firstWebWindow.getEnclosedPage()).getTitleText());
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
 
-        final WebWindowEvent changedEvent = (WebWindowEvent) eventCatcher.getEventAt(2);
+        final WebWindowEvent changedEvent = events.get(2);
         assertNull(changedEvent.getOldPage());
         assertEquals("Second", ((HtmlPage) changedEvent.getNewPage()).getTitleText());
 
@@ -256,8 +274,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        final EventCatcher eventCatcher = new EventCatcher();
-
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
@@ -265,7 +281,23 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
@@ -274,9 +306,9 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
         assertEquals("Second", secondPage.getTitleText());
 
-        assertEquals(1, eventCatcher.getEventCount());
+        assertEquals(1, events.size());
 
-        final WebWindow secondWebWindow = (WebWindow) ((WebWindowEvent) eventCatcher.getEventAt(0)).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(0).getSource();
         assertSame(webClient.getCurrentWindow(), firstWebWindow);
         assertSame(firstWebWindow, secondWebWindow);
     }
@@ -483,7 +515,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     public void alert_NoAlertHandler() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert('foo')}</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
         final HtmlPage firstPage = loadPage(firstContent);
@@ -506,12 +538,12 @@ public class WindowTest extends SimpleWebTestCase {
         final String thirdContent
             = "<html><head><title>Third</title><script>\n"
             + "function doAlert() {\n"
-            + "    alert(parent != this);\n"
-            + "    alert(top != this);\n"
-            + "    alert(parent != top);\n"
-            + "    alert(parent.parent == top);\n"
-            + "    alert(parent.frames[0] == this);\n"
-            + "    alert(top.frames[0] == parent);\n"
+            + "  alert(parent != this);\n"
+            + "  alert(top != this);\n"
+            + "  alert(parent != top);\n"
+            + "  alert(parent.parent == top);\n"
+            + "  alert(parent.frames[0] == this);\n"
+            + "  alert(top.frames[0] == parent);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body><a id='clickme' onClick='doAlert()'>foo</a></body></html>";
@@ -562,7 +594,7 @@ public class WindowTest extends SimpleWebTestCase {
         });
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -581,7 +613,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     public void confirm_noConfirmHandler() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
@@ -610,7 +642,7 @@ public class WindowTest extends SimpleWebTestCase {
         });
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(prompt('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -636,7 +668,7 @@ public class WindowTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>\n"
+            = "<html><head><title>First</title><script>function doTest() {alert(prompt('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -730,14 +762,30 @@ public class WindowTest extends SimpleWebTestCase {
 
         assertNotSame(firstWindow, secondWindow);
 
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
+
         secondPage.getHtmlElementById("button").click();
 
         final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[]{
             new WebWindowEvent(secondWindow, WebWindowEvent.CLOSE, secondPage, null)
         });
-        assertEquals(expectedEvents, eventCatcher.getEvents());
+        assertEquals(expectedEvents, events);
 
         assertEquals(1, webClient.getWebWindows().size());
         assertEquals(firstWindow, webClient.getCurrentWindow());
@@ -756,9 +804,9 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(window.status);\n"
-            + "    window.status = 'newStatus';\n"
-            + "    alert(window.status);\n"
+            + "  alert(window.status);\n"
+            + "  window.status = 'newStatus';\n"
+            + "  alert(window.status);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -796,7 +844,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "window.print();\n"
+            + "  window.print();\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -828,8 +876,6 @@ public class WindowTest extends SimpleWebTestCase {
             0x01, 0x00, 0x01, 0x00, 0x00, 0x02, 0x02, 0x44,
             0x01, 0x00, 0x3b});
 
-        final EventCatcher eventCatcher = new EventCatcher();
-
         final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "image/gif", emptyList);
@@ -838,7 +884,23 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
@@ -847,9 +909,9 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
         assertEquals("image/gif", secondPage.getWebResponse().getContentType());
 
-        assertEquals(2, eventCatcher.getEventCount());
+        assertEquals(2, events.size());
 
-        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(0).getSource();
 
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
@@ -873,8 +935,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "Hello World";
 
-        final EventCatcher eventCatcher = new EventCatcher();
-
         final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/plain", emptyList);
@@ -883,7 +943,23 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
@@ -892,9 +968,9 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/plain", secondPage.getWebResponse().getContentType());
 
-        assertEquals(2, eventCatcher.getEventCount());
+        assertEquals(2, events.size());
 
-        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(0).getSource();
 
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
@@ -918,8 +994,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "<junk></junk>\n";
 
-        final EventCatcher eventCatcher = new EventCatcher();
-
         final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/xml", emptyList);
@@ -928,7 +1002,23 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
@@ -937,9 +1027,9 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/xml", secondPage.getWebResponse().getContentType());
 
-        assertEquals(2, eventCatcher.getEventCount());
+        assertEquals(2, events.size());
 
-        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(0).getSource();
 
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
@@ -963,8 +1053,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String secondContent = "var x=1;\n";
 
-        final EventCatcher eventCatcher = new EventCatcher();
-
         final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/javascript", emptyList);
@@ -973,7 +1061,23 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
@@ -982,9 +1086,9 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/javascript", secondPage.getWebResponse().getContentType());
 
-        assertEquals(2, eventCatcher.getEventCount());
+        assertEquals(2, events.size());
 
-        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(0).getSource();
 
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
@@ -1010,8 +1114,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "<p>Hello World</p>\n"
             + "</body></html>";
 
-        final EventCatcher eventCatcher = new EventCatcher();
-
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
@@ -1019,7 +1121,23 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        eventCatcher.listenTo(webClient);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        webClient.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
@@ -1028,16 +1146,16 @@ public class WindowTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/html", secondPage.getWebResponse().getContentType());
 
-        assertEquals(2, eventCatcher.getEventCount());
+        assertEquals(2, events.size());
 
-        final WebWindow secondWebWindow = (WebWindow) eventCatcher.getEventAt(0).getSource();
+        final WebWindow secondWebWindow = (WebWindow) events.get(0).getSource();
 
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertNotSame(firstWebWindow, secondWebWindow);
     }
 
     /**
-     * Basic test for the <tt>showModalDialog</tt> method. See bug 2124916.
+     * Basic test for the <tt>showModalDialog</tt> method. See bug #703.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1091,19 +1209,25 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for the <tt>showModalDialog</tt> method. This tests blocking
-     * until the window gets closed.
+     * Test for the <tt>showModalDialog</tt> method.
+     * This tests blocking until the window gets closed.
+     * Can not currently be tested with WebDriver
+     * https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/284
+     *
+     * To fix this, we need to allow user to interact with the opened dialog before showModalDialog() returns
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"undefined", "sdg", "finished"})
-    @NotYetImplemented
+    @Alerts(DEFAULT = {"undefined", "result", "finished"},
+            CHROME = {"undefined", "not available"})
+    @NotYetImplemented({FF, IE})
     public void showModalDialogWithButton() throws Exception {
         final String html1
             = "<html><head>\n"
             + "  <script>\n"
             + "    function test() {\n"
             + "      alert(window.returnValue);\n"
+            + "      if (!window.showModalDialog) {alert('not available'); return; }\n"
             + "      var res = showModalDialog('myDialog.html', null, 'dialogHeight:300px; dialogLeft:200px;');\n"
             + "      alert(res);\n"
             + "      alert('finished');\n"
@@ -1135,11 +1259,12 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlElement button = page.getHtmlElementById("openDlg");
         button.click();
 
+        // TODO: <button id='closeDlg'> should be clicked
         assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
-     * Basic test for the <tt>showModelessDialog</tt> method. See bug 2124916.
+     * Basic test for the <tt>showModelessDialog</tt> method. See bug #703.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1256,7 +1381,7 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2808901.
+     * Regression test for bug #844.
      * @throws Exception if an error occurs
      */
     @Test
