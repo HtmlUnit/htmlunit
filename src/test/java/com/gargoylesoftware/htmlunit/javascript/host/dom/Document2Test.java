@@ -104,7 +104,7 @@ public class Document2Test extends WebDriverTestCase {
             + "    } catch (err) {\n"
             + "      return false;\n"
             + "    }\n"
-            + " })();\n"
+            + "  })();\n"
             + "  alert(HAS_EXTENDED_CREATE_ELEMENT_SYNTAX)\n"
             + "</script></head><body>\n"
             + "</body></html>";

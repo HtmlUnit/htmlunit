@@ -538,12 +538,12 @@ public class WindowTest extends SimpleWebTestCase {
         final String thirdContent
             = "<html><head><title>Third</title><script>\n"
             + "function doAlert() {\n"
-            + "    alert(parent != this);\n"
-            + "    alert(top != this);\n"
-            + "    alert(parent != top);\n"
-            + "    alert(parent.parent == top);\n"
-            + "    alert(parent.frames[0] == this);\n"
-            + "    alert(top.frames[0] == parent);\n"
+            + "  alert(parent != this);\n"
+            + "  alert(top != this);\n"
+            + "  alert(parent != top);\n"
+            + "  alert(parent.parent == top);\n"
+            + "  alert(parent.frames[0] == this);\n"
+            + "  alert(top.frames[0] == parent);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body><a id='clickme' onClick='doAlert()'>foo</a></body></html>";
@@ -804,9 +804,9 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(window.status);\n"
-            + "    window.status = 'newStatus';\n"
-            + "    alert(window.status);\n"
+            + "  alert(window.status);\n"
+            + "  window.status = 'newStatus';\n"
+            + "  alert(window.status);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -844,7 +844,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "window.print();\n"
+            + "  window.print();\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -1259,7 +1259,7 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlElement button = page.getHtmlElementById("openDlg");
         button.click();
 
-        // TODO: <button id='closeDlg'> should be clicked 
+        // TODO: <button id='closeDlg'> should be clicked
         assertEquals(getExpectedAlerts(), actual);
     }
 
