@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
@@ -96,14 +99,10 @@ public class DialogWindow extends WebWindowImpl {
     @Override
     public void setScriptObject(final ScriptObject scriptObject) {
         if (scriptObject != null) {
+            final Global global = NashornJavaScriptEngine.getGlobal(((Window2) scriptObject).getWebWindow().getScriptContext());
+            global.addOwnProperty("dialogArguments", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, arguments_);
             scriptObject.addOwnProperty("dialogArguments", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, arguments_);
         }
         super.setScriptObject(scriptObject);
     }
-
-//    @Override
-//    public ScriptObject getScriptObject2() {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
 }

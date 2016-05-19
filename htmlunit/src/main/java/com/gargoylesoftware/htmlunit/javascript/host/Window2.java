@@ -1223,7 +1223,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @Function
+    @Function({@WebBrowser(IE), @WebBrowser(FF)})
     public static Object showModalDialog(final Object self, final String url, final Object arguments, final String features) {
         final Window2 window = getWindow(self);
         final WebWindow webWindow = window.getWebWindow();
