@@ -287,6 +287,19 @@ public class EventTarget2 extends SimpleScriptObject {
         eventListenersContainer_ = null;
     }
 
+    /**
+     * Allows the removal of event listeners on the event target.
+     * @param type the event type to listen for (like "click")
+     * @param listener the event listener
+     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
+     * documentation</a>
+     */
+    @Function
+    public void removeEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
+        getEventListenersContainer().removeEventListener(type, listener, useCapture);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(EventTarget2.class,

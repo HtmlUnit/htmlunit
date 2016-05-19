@@ -134,7 +134,7 @@ public class EventListenersContainer2 implements Serializable {
      * @param listener the listener
      * @param useCapture to use capture or not
      */
-    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
+    public void removeEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
         final List<ScriptObject> handlers = getHandlers(type, useCapture);
         if (handlers != null) {
             handlers.remove(listener);
