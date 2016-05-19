@@ -57,14 +57,19 @@ public class ClientRectListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "null"},
-            IE = {"exception", "exception"})
+    @Alerts(DEFAULT = {"[object DOMRect]", "1", "null", "null"},
+            CHROME = {"[object ClientRectList]", "1", "null", "null"},
+            IE = {"[object ClientRectList]", "1", "exception", "exception"})
     public void itemOutside() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var rects = d1.getClientRects();\n"
+
+            + "    alert(rects);\n"
+            + "    alert(rects.length);\n"
+
             + "    try {\n"
             + "      alert(rects.item(1));\n"
             + "    } catch(e) { alert('exception'); }\n"
@@ -84,13 +89,49 @@ public class ClientRectListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "undefined"})
+    @Alerts(DEFAULT = {"[object ClientRectList]", "1", "undefined", "undefined"},
+            FF = {"[object DOMRect]", "1", "undefined", "undefined"})
     public void indexOutside() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var rects = d1.getClientRects();\n"
+
+            + "    alert(rects);\n"
+            + "    alert(rects.length);\n"
+
+            + "    try {\n"
+            + "      alert(rects[1]);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+
+            + "    try {\n"
+            + "      alert(rects[-1]);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object ClientRectList]", "0", "undefined", "undefined"},
+            FF = {"", "0", "undefined", "undefined"})
+    public void empty() throws Exception {
+        final String html =
+            "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var d1 = document.createElement('div');\n"
+            + "    var rects = d1.getClientRects();\n"
+
+            + "    alert(rects);\n"
+            + "    alert(rects.length);\n"
+
             + "    try {\n"
             + "      alert(rects[1]);\n"
             + "    } catch(e) { alert('exception'); }\n"

@@ -2527,13 +2527,11 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object ClientRectList]", "0"},
             FF = {"", "0"})
-    @NotYetImplemented(FF)
     public void getClientRectsDisconnected() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.createElement('div');\n"
-            + "    var rects = d1.getClientRects();\n"
             + "    try {\n"
             + "      alert(d1.getClientRects());\n"
             + "    } catch(e) { alert('exception'); }\n"
