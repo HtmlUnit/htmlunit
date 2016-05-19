@@ -289,6 +289,25 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         contentType("xhtm");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:text/plain", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeText() throws Exception {
+        contentType("text");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/plain", "charset"})
+    public void contentTypeTxt() throws Exception {
+        contentType("txt");
+    }
+
     private void contentType(final String extension) throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);

@@ -248,6 +248,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.registerUploadMimeType("xhtml", "application/xhtml+xml");
         CHROME.registerUploadMimeType("xht", "application/xhtml+xml");
         CHROME.registerUploadMimeType("xhtm", "application/xhtml+xml");
+        CHROME.registerUploadMimeType("txt", "text/plain");
+        CHROME.registerUploadMimeType("text", "text/plain");
 
         FIREFOX_38.registerUploadMimeType("html", "text/html");
         FIREFOX_38.registerUploadMimeType("htm", "text/html");
@@ -270,6 +272,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_38.registerUploadMimeType("flac", "audio/x-flac");
         FIREFOX_38.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_38.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX_38.registerUploadMimeType("txt", "text/plain");
+        FIREFOX_38.registerUploadMimeType("text", "text/plain");
 
         FIREFOX_45.registerUploadMimeType("html", "text/html");
         FIREFOX_45.registerUploadMimeType("htm", "text/html");
@@ -292,6 +296,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_45.registerUploadMimeType("flac", "audio/x-flac");
         FIREFOX_45.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_45.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX_45.registerUploadMimeType("txt", "text/plain");
+        FIREFOX_45.registerUploadMimeType("text", "text/plain");
 
         INTERNET_EXPLORER.registerUploadMimeType("html", "text/html");
         INTERNET_EXPLORER.registerUploadMimeType("htm", "text/html");
@@ -309,6 +315,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER.registerUploadMimeType("wav", "audio/wav");
         INTERNET_EXPLORER.registerUploadMimeType("xhtml", "application/xhtml+xml");
         INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
+        INTERNET_EXPLORER.registerUploadMimeType("txt", "text/plain");
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
