@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -1212,17 +1214,20 @@ public class WindowTest extends SimpleWebTestCase {
      * Can not currently be tested with WebDriver
      * https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/284
      *
+     * To fix this, we need to allow user to interact with the opened dialog before showModalDialog() returns
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"undefined", "result", "finished"})
-    @NotYetImplemented
+    @Alerts(DEFAULT = {"undefined", "result", "finished"},
+            CHROME = {"undefined", "not available"})
+    @NotYetImplemented({FF, IE})
     public void showModalDialogWithButton() throws Exception {
         final String html1
             = "<html><head>\n"
             + "  <script>\n"
             + "    function test() {\n"
             + "      alert(window.returnValue);\n"
+            + "      if (!window.showModalDialog) {alert('not available'); return; }\n"
             + "      var res = showModalDialog('myDialog.html', null, 'dialogHeight:300px; dialogLeft:200px;');\n"
             + "      alert(res);\n"
             + "      alert('finished');\n"
@@ -1254,6 +1259,7 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlElement button = page.getHtmlElementById("openDlg");
         button.click();
 
+        // TODO: <button id='closeDlg'> should be clicked 
         assertEquals(getExpectedAlerts(), actual);
     }
 
