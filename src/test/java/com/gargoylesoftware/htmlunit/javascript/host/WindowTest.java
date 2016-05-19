@@ -1153,7 +1153,7 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Basic test for the <tt>showModalDialog</tt> method. See bug 2124916.
+     * Basic test for the <tt>showModalDialog</tt> method. See bug #703.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1207,12 +1207,15 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for the <tt>showModalDialog</tt> method. This tests blocking
-     * until the window gets closed.
+     * Test for the <tt>showModalDialog</tt> method.
+     * This tests blocking until the window gets closed.
+     * Can not currently be tested with WebDriver
+     * https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/284
+     *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"undefined", "sdg", "finished"})
+    @Alerts({"undefined", "result", "finished"})
     @NotYetImplemented
     public void showModalDialogWithButton() throws Exception {
         final String html1
@@ -1255,7 +1258,7 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Basic test for the <tt>showModelessDialog</tt> method. See bug 2124916.
+     * Basic test for the <tt>showModelessDialog</tt> method. See bug #703.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1372,7 +1375,7 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2808901.
+     * Regression test for bug #844.
      * @throws Exception if an error occurs
      */
     @Test
