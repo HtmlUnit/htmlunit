@@ -1422,6 +1422,36 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
     }
 
+    /**
+     * Does nothing special anymore.
+     * @param type the type of events to capture
+     * @see Document#captureEvents(String)
+     */
+    @Function
+    public static void captureEvents(final Object self, final String type) {
+        // Empty.
+    }
+
+    /**
+     * Indicates if this window is closed.
+     * @return {@code true} if this window is closed
+     */
+    @Getter
+//    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
+    public static Boolean getClosed(final Object self) {
+        final WebWindow webWindow = getWindow(self).getWebWindow();
+        return !webWindow.getWebClient().containsWebWindow(webWindow);
+    }
+
+    /**
+     * Returns the {@code devicePixelRatio} property.
+     * @return the {@code devicePixelRatio} property
+     */
+    @Getter
+    public static int getDevicePixelRatio(final Object self) {
+        return 1;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
