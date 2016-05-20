@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
@@ -48,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement2;
@@ -56,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement2;
@@ -276,6 +280,14 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         }
         else if (domNode instanceof HtmlImage) {
             host = HTMLImageElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlEmbed) {
+            host = HTMLEmbedElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlObject) {
+            host = HTMLObjectElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else {
