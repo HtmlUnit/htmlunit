@@ -29,17 +29,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
-import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
-public class HTMLFormElement2 extends Element2 {
+public class HTMLFormElement2 extends HTMLElement2 {
 
     public static HTMLFormElement2 constructor(final boolean newObj, final Object self) {
         final HTMLFormElement2 host = new HTMLFormElement2();
@@ -128,10 +126,6 @@ public class HTMLFormElement2 extends Element2 {
     protected FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
         final List<HtmlElement> elements = findElements(key);
 
-        if (elements.isEmpty()) {
-            return null;
-        }
-        
         if (elements.size() == 1) {
             addOwnProperty(key, Property.WRITABLE_ENUMERABLE_CONFIGURABLE, getScriptableFor(elements.get(0)));
         }

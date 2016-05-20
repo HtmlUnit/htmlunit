@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
@@ -53,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
@@ -270,6 +272,10 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         }
         else if (domNode instanceof HtmlAnchor) {
             host = HTMLAnchorElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlImage) {
+            host = HTMLImageElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else {

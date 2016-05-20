@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -25,6 +27,9 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -47,10 +52,23 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlMap;
+import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
@@ -60,6 +78,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
@@ -85,8 +104,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -94,8 +111,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 public class Window2 extends EventTarget2 implements AutoCloseable {
 
@@ -392,9 +407,81 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         Object object = getFrameWindowByName(page, name);
         if (object == null) {
+            object = getElementsByName(page, name);
+        }
+        if (object == null) {
+            try {
+                final HtmlElement htmlElement = page.getHtmlElementById(name);
+                if (getBrowserVersion().hasFeature(JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW)
+                        && htmlElement instanceof HtmlFrame) {
+                    final HtmlFrame frame = (HtmlFrame) htmlElement;
+                    object = getScriptableFor(frame.getEnclosedWindow());
+                }
+                else {
+                    object = getScriptableFor(htmlElement);
+                }
+            }
+            catch (final ElementNotFoundException e) {
+            }
+        }
+        if (object == null) {
             object = Undefined.getUndefined();
         }
         return object;
+    }
+
+    private Object getElementsByName(final HtmlPage page, final String name) {
+
+        // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
+        // like getHtmlElementsByName() and getHtmlElementById() as much as possible, so as to avoid XPath
+        // overhead. We only use an XPath-based operation when we have to (where there is more than one
+        // matching element). This optimization appears to improve performance in certain situations by ~15%
+        // vs using XPath-based operations throughout.
+        final List<DomElement> elements = page.getElementsByName(name);
+
+        final boolean includeFormFields = getBrowserVersion().hasFeature(JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME);
+        final Filter filter = new Filter(includeFormFields);
+
+        final Iterator<DomElement> it = elements.iterator();
+        while (it.hasNext()) {
+            if (!filter.matches(it.next())) {
+                it.remove();
+            }
+        }
+
+        if (elements.size() == 0) {
+            return null;
+        }
+
+        if (elements.size() == 1) {
+            return getScriptableFor(elements.get(0));
+        }
+
+        // Null must be changed to '' for proper collection initialization.
+        final String expElementName = "null".equals(name) ? "" : name;
+
+        return new HTMLCollection2(page, true) {
+            @Override
+            protected List<Object> computeElements() {
+                final List<DomElement> expElements = page.getElementsByName(expElementName);
+                final List<Object> result = new ArrayList<>(expElements.size());
+
+                for (DomElement domElement : expElements) {
+                    if (filter.matches(domElement)) {
+                        result.add(domElement);
+                    }
+                }
+                return result;
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                if ("name".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     private static Object getFrameWindowByName(final HtmlPage page, final String name) {
@@ -1505,8 +1592,34 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             super("Window");
         }
     }
-}
 
+    private static final class Filter {
+        private final boolean includeFormFields_;
+
+        private Filter(final boolean includeFormFields) {
+            includeFormFields_ = includeFormFields;
+        }
+
+        private boolean matches(final Object object) {
+            if (object instanceof HtmlEmbed
+                    || object instanceof HtmlForm
+                    || object instanceof HtmlImage
+                    || object instanceof HtmlObject) {
+                return true;
+            }
+            if (includeFormFields_ && (
+                    object instanceof HtmlAnchor
+                    || object instanceof HtmlButton
+                    || object instanceof HtmlInput
+                    || object instanceof HtmlMap
+                    || object instanceof HtmlSelect
+                    || object instanceof HtmlTextArea)) {
+                return true;
+            }
+            return false;
+        }
+    }
+}
 class HTMLCollectionFrames2 extends HTMLCollection2 {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames2.class);
 

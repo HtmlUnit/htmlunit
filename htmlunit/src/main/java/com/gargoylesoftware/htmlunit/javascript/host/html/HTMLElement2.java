@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -635,6 +634,24 @@ public class HTMLElement2 extends Element2 {
     @Getter
     public int getScrollWidth() {
         return 10;
+    }
+
+    /**
+     * Returns the element ID.
+     * @return the ID of this element
+     */
+    @Getter
+    public String getId() {
+        return getDomNodeOrDie().getId();
+    }
+
+    /**
+     * Sets the identifier this element.
+     * @param newId the new identifier of this element
+     */
+    @Setter
+    public void setId(final String newId) {
+        getDomNodeOrDie().setId(newId);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
