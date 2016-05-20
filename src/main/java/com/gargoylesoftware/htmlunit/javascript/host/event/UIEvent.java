@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -99,24 +98,6 @@ public class UIEvent extends Event {
      */
     protected void setDetail(final long detail) {
         detail_ = detail;
-    }
-
-    /**
-     * @return indicates if event propagation is stopped
-     */
-    @Override
-    @JsxGetter
-    public boolean getCancelBubble() {
-        return super.getCancelBubble();
-    }
-
-    /**
-     * @param newValue indicates if event propagation is stopped
-     */
-    @Override
-    @JsxSetter
-    public void setCancelBubble(final boolean newValue) {
-        super.setCancelBubble(newValue);
     }
 
     /**
