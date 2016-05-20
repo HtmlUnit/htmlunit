@@ -827,24 +827,24 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({/*"form1", "form1",*/ "f1"/*, "f1", "input1", "input1", "anchor1", "anchor1", "image1",
-                "image1", "element1", "element1"*/})
+    @Alerts({"form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1",
+                "image1", "element1", "element1"})
     public void elementsById() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-//            + "    alert(window.form1.id);\n"
-//            + "    alert(form1.id);\n"
+            + "    alert(window.form1.id);\n"
+            + "    alert(form1.id);\n"
             + "    alert(window.frame1.name);\n"
-//            + "    alert(frame1.name);\n"
-//            + "    alert(window.input1.id);\n"
-//            + "    alert(input1.id);\n"
-//            + "    alert(window.anchor1.id);\n"
-//            + "    alert(anchor1.id);\n"
-//            + "    alert(window.image1.id);\n"
-//            + "    alert(image1.id);\n"
-//            + "    alert(window.element1.id);\n"
-//            + "    alert(element1.id);\n"
+            + "    alert(frame1.name);\n"
+            + "    alert(window.input1.id);\n"
+            + "    alert(input1.id);\n"
+            + "    alert(window.anchor1.id);\n"
+            + "    alert(anchor1.id);\n"
+            + "    alert(window.image1.id);\n"
+            + "    alert(image1.id);\n"
+            + "    alert(window.element1.id);\n"
+            + "    alert(element1.id);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <form id='form1'></form>\n"

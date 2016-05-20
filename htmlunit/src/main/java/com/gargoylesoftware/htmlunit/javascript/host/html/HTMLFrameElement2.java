@@ -41,7 +41,6 @@ public class HTMLFrameElement2 extends HTMLElement2 {
      */
     @Getter
     public String getName() {
-        System.out.println("get name");
         return getFrame().getNameAttribute();
     }
 
