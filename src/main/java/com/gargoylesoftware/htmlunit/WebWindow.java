@@ -104,17 +104,6 @@ public interface WebWindow extends Serializable {
      * Returns the JavaScript object that corresponds to this element.
      *
      * @return the JavaScript object that corresponds to this element
-     * @deprecated as of 2.19, please use {@link #getScriptableObject()} instead
-     */
-    @Deprecated
-    Object getScriptObject();
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns the JavaScript object that corresponds to this element.
-     *
-     * @return the JavaScript object that corresponds to this element
      */
     ScriptableObject getScriptableObject();
 

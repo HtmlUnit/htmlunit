@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated DomNode.getScriptObject(), WebWindow.getScriptObject()
+                and HtmlPage constructor with 'originatingUrl'.
+            </action>
             <action type="add" dev="rbri" system="features">
                 WebClient: supports a registry of known file extensions used to determine
                 the content type when uploading files.
