@@ -189,10 +189,7 @@ public class HTMLElement2 extends Element2 {
      */
     @Override
     public ClientRect2 getBoundingClientRect() {
-        if (!getDomNodeOrDie().isAttachedToPage()
-                && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
-            throw new RuntimeException("Element is not attache to a page");
-        }
+        final ClientRect2 textRectangle = super.getBoundingClientRect();
 
         int left = getPosX();
         int top = getPosY();
@@ -209,9 +206,10 @@ public class HTMLElement2 extends Element2 {
             parentNode = elem.getParentNode();
         }
 
-        final ClientRect2 textRectangle = new ClientRect2(top + getOffsetHeight(), left, left + getOffsetWidth(), top);
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
-        textRectangle.setProto(global.getPrototype(textRectangle.getClass()));
+        textRectangle.setBottom(top + getOffsetHeight());
+        textRectangle.setLeft(left);
+        textRectangle.setRight(left + getOffsetWidth());
+        textRectangle.setTop(top);
         return textRectangle;
     }
 
