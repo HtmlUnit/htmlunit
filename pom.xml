@@ -873,8 +873,8 @@
         <!-- WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-htmlunit-driver</artifactId>
-            <version>2.52.0</version>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>2.21</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
