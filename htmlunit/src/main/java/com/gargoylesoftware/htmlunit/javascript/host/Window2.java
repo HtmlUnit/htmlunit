@@ -394,7 +394,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Override
     public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
-        final MethodHandle mh = virtualHandle("getArbitraryProperty", Object.class, String.class);
+        final MethodHandle mh = staticHandle("getArbitraryProperty", Object.class, Object.class, String.class);
         final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
         return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name),
                 NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
@@ -403,22 +403,23 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     @SuppressWarnings("unused")
-    private Object getArbitraryProperty(final String name) {
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+    private static Object getArbitraryProperty(final Object self, final String name) {
+        final Window2 window = getWindow(self);
+        final HtmlPage page = (HtmlPage) window.getDomNodeOrDie();
         Object object = getFrameWindowByName(page, name);
         if (object == null) {
-            object = getElementsByName(page, name);
+            object = window.getElementsByName(page, name);
         }
         if (object == null) {
             try {
                 final HtmlElement htmlElement = page.getHtmlElementById(name);
-                if (getBrowserVersion().hasFeature(JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW)
+                if (window.getBrowserVersion().hasFeature(JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW)
                         && htmlElement instanceof HtmlFrame) {
                     final HtmlFrame frame = (HtmlFrame) htmlElement;
-                    object = getScriptableFor(frame.getEnclosedWindow());
+                    object = window.getScriptableFor(frame.getEnclosedWindow());
                 }
                 else {
-                    object = getScriptableFor(htmlElement);
+                    object = window.getScriptableFor(htmlElement);
                 }
             }
             catch (final ElementNotFoundException e) {

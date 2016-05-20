@@ -18,9 +18,11 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -31,6 +33,29 @@ public class HTMLFrameElement2 extends HTMLElement2 {
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
+    }
+
+    /**
+     * Returns the value of the name attribute.
+     * @return the value of this attribute
+     */
+    @Getter
+    public String getName() {
+        System.out.println("get name");
+        return getFrame().getNameAttribute();
+    }
+
+    /**
+     * Sets the value of the name attribute.
+     * @param name the new value
+     */
+    @Setter
+    public void setName(final String name) {
+        getFrame().setNameAttribute(name);
+    }
+
+    private BaseFrameElement getFrame() {
+        return (BaseFrameElement) getDomNodeOrDie();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

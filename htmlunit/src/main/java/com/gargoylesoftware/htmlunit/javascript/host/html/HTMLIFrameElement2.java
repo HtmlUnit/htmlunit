@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -50,6 +50,24 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
 
     private BaseFrameElement getFrame() {
         return (BaseFrameElement) getDomNodeOrDie();
+    }
+
+    /**
+     * Returns the value of the name attribute.
+     * @return the value of this attribute
+     */
+    @Getter
+    public String getName() {
+        return getFrame().getNameAttribute();
+    }
+
+    /**
+     * Sets the value of the name attribute.
+     * @param name the new value
+     */
+    @Setter
+    public void setName(final String name) {
+        getFrame().setNameAttribute(name);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
