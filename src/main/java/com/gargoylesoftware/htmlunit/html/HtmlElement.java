@@ -26,9 +26,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,11 +47,15 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -855,7 +856,8 @@ public abstract class HtmlElement extends DomElement {
     private DomNode getDoTypeNode() {
         DomNode node = null;
         final HTMLElement scriptElement = (HTMLElement) getScriptableObject();
-        if (scriptElement.getIsContentEditable()) {
+        if (scriptElement.getIsContentEditable()
+                || "on".equals(((Document) scriptElement.getOwnerDocument()).getDesignMode())) {
             final DomNodeList<DomNode> children = getChildNodes();
             if (!children.isEmpty()) {
                 final DomNode lastChild = children.get(children.size() - 1);
