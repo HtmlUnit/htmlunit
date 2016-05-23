@@ -556,12 +556,14 @@ public abstract class HtmlElement extends DomElement {
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
-        final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
-        final ScriptResult keyPressResult = fireEvent(keyPress);
+        if (!keyDown.isAborted(keyDownResult)) {
+            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
+            final ScriptResult keyPressResult = fireEvent(keyPress);
 
-        if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
-                && !keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
-            doType(c, shiftKey, ctrlKey, altKey);
+            if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
+                    && !keyPress.isAborted(keyPressResult)) {
+                doType(c, shiftKey, ctrlKey, altKey);
+            }
         }
 
         final WebClient webClient = page.getWebClient();
