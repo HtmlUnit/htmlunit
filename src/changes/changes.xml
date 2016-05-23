@@ -9,7 +9,7 @@
     <body>
         <release version="2.22" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
-                HtmlElement: do not trigger keypress if keydown.preventDefault() is true. 
+                HtmlElement: do not trigger keypress if keydown.preventDefault() is true.
             </action>
             <action type="remove" dev="asashour">
                 Remove deprecated DomNode.getScriptObject(), WebWindow.getScriptObject()
