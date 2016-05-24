@@ -99,7 +99,7 @@ public class Keyboard {
     }
 
     /**
-     * Returns whether typing should start at the text end or not. 
+     * Returns whether typing should start at the text end or not.
      * @return whether typing should start at the text end or not
      */
     public boolean isStartAtEnd() {

@@ -507,7 +507,8 @@ public abstract class HtmlElement extends DomElement {
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    private Page type(final char c, final boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+    private Page type(final char c, final boolean startAtEnd,
+                        final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -703,8 +704,9 @@ public abstract class HtmlElement extends DomElement {
         return page;
     }
 
-    private Page type(final int keyCode, final boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
-        final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
+    private Page type(final int keyCode, final boolean startAtEnd,
+                    final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+                    final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -779,7 +781,8 @@ public abstract class HtmlElement extends DomElement {
      * @param ctrlKey {@code true} if CTRL is pressed during the typing
      * @param altKey {@code true} if ALT is pressed during the typing
      */
-    protected void doType(final char c, boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final char c, final boolean startAtEnd,
+                            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
             ((DomText) domNode).doType(c, startAtEnd, shiftKey, ctrlKey, altKey);
@@ -805,7 +808,8 @@ public abstract class HtmlElement extends DomElement {
      * @param ctrlKey {@code true} if CTRL is pressed during the typing
      * @param altKey {@code true} if ALT is pressed during the typing
      */
-    protected void doType(final int keyCode, final boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final int keyCode, final boolean startAtEnd,
+                            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
             ((DomText) domNode).doType(keyCode, startAtEnd, shiftKey, ctrlKey, altKey);

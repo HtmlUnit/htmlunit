@@ -986,6 +986,7 @@ public final class UrlUtils {
      * @param url1 the first URL
      * @param url2 the second URL
      * @return if they are the same
+     * @throws MalformedURLException in case of error
      */
     public static boolean areSame(URL url1, URL url2) throws MalformedURLException {
         if (url1.getPath().isEmpty()) {

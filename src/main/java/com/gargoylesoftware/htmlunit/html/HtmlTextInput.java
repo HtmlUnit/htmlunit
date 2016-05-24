@@ -56,7 +56,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, boolean startAtEnd,
+    protected void doType(final char c, final boolean startAtEnd,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getValueAttribute().length());

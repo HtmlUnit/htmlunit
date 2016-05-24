@@ -91,6 +91,7 @@
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
 
     <suppress checks="ParameterNumber" files="CanvasRenderingContext2D.java"/>
+    <suppress checks="ParameterNumber" files="HtmlElement.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
     <suppress checks="ParameterNumber" files="KeyboardEvent.java"/>
     <suppress checks="ParameterNumber" files="MessageEvent.java"/>
