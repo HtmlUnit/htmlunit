@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.net.InetAddress;
 import java.net.URL;
 
 import org.junit.Test;
@@ -321,5 +322,48 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     public void relativeBase() throws Exception {
         final String baseUrl = "a/a1/a2";
         assertEquals("b",      UrlUtils.resolveUrl(baseUrl, "../../b"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameFile() throws Exception {
+        assertTrue(UrlUtils.sameFile(null, null));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/bug.htm"), null));
+        assertFalse(UrlUtils.sameFile(null, new URL("http://localhost/bug.html")));
+
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html"), new URL("http://localhost/bug.html")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/bug.htm"), new URL("http://localhost/bug.html")));
+
+        // assertTrue(new URL("http://localhost/bug.html").sameFile(new URL("http://localhost/test/../bug.html")));
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html"),
+                    new URL("http://localhost/test/../bug.html")));
+
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost"), new URL("http://localhost")));
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/"), new URL("http://localhost/")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/"), new URL("http://localhost")));
+
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html?test"),
+                        new URL("http://localhost/bug.html?test")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/bug.html?test"),
+                        new URL("http://localhost/bug.html?rest")));
+
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html#test"),
+                new URL("http://localhost/bug.html#rest")));
+
+        assertTrue(UrlUtils.sameFile(new URL("https://localhost/bug.html"), new URL("https://localhost/bug.html")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost/bug.htm"), new URL("https://localhost/bug.html")));
+
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost:81/bug.html"), new URL("http://localhost:81/bug.html")));
+        assertFalse(UrlUtils.sameFile(new URL("http://localhost:81/bug.htm"), new URL("http://localhost:80/bug.html")));
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html"), new URL("http://localhost:80/bug.html")));
+        assertTrue(UrlUtils.sameFile(new URL("https://localhost:443/bug.html"), new URL("https://localhost/bug.html")));
+
+        // issue #1787
+        final URL u1 = new URL("http://sourceforge.net/");
+        final URL u2 = new URL("http://ch3.sourceforge.net/");
+        assertEquals(InetAddress.getByName(u1.getHost()), InetAddress.getByName(u2.getHost()));
+        assertFalse(UrlUtils.sameFile(u1, u2));
     }
 }

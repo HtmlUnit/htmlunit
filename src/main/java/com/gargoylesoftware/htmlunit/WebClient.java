@@ -337,7 +337,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (page != null) {
             final URL prev = page.getUrl();
             final URL current = webRequest.getUrl();
-            if (current.sameFile(prev)
+            if (UrlUtils.sameFile(current, prev)
                         && current.getRef() != null
                         && !StringUtils.equals(current.getRef(), prev.getRef())) {
                 // We're just navigating to an anchor within the current page.
@@ -2041,7 +2041,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     final URL current = page.getUrl();
                     justHashJump =
                             HttpMethod.GET == request.getHttpMethod()
-                            && url.sameFile(current)
+                            && UrlUtils.sameFile(url, current)
                             && null != url.getRef();
                 }
             }

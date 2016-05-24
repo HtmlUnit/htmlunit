@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1787">
+                Use our own impl of URL.sameFile to avoid exessive number of DNS lookups and
+                and support path normalization before doing the comparison.
+            </action>
             <action type="add" dev="asashour">
                 Keyboard: to have a parameter which allows typing to start at the text end.
             </action>

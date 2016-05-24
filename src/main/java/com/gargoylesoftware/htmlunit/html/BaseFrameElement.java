@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Base class for frame and iframe.
@@ -196,7 +197,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (url.sameFile(window.getEnclosedPage().getUrl())) {
+            if (UrlUtils.sameFile(url, window.getEnclosedPage().getUrl())) {
                 return true;
             }
             if (window == window.getParentWindow()) {
