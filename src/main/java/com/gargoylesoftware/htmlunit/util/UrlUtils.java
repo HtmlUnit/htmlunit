@@ -979,4 +979,21 @@ public final class UrlUtils {
         }
         return false;
     }
+
+    /**
+     * Compares two URLs, after setting {@code path} to {@code /} if empty.
+     *
+     * @param url1 the first URL
+     * @param url2 the second URL
+     * @return if they are the same
+     */
+    public static boolean areSame(URL url1, URL url2) throws MalformedURLException {
+        if (url1.getPath().isEmpty()) {
+            url1 = createNewUrl(url1.getProtocol(), url1.getAuthority(), "/", url1.getRef(), url1.getQuery());
+        }
+        if (url2.getPath().isEmpty()) {
+            url2 = createNewUrl(url2.getProtocol(), url2.getAuthority(), "/", url2.getRef(), url2.getQuery());
+        }
+        return url1.equals(url2);
+    }
 }
