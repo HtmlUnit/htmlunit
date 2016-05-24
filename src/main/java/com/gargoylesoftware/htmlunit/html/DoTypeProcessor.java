@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
- * The process for {@link HtmlElement#doType(char, boolean, boolean, boolean)}.
+ * The process for {@link HtmlElement#doType(char, boolean, boolean, boolean, boolean)}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill

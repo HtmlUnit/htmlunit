@@ -27,6 +27,22 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 public class Keyboard {
 
     private List<Object[]> keys_ = new ArrayList<>();
+    private boolean startAtEnd_;
+
+    /**
+     * Creates a new instance.
+     */
+    public Keyboard() {
+        this(false);
+    }
+
+    /**
+     * Creates a new instance, specifying whether typing should start at the text end or not.
+     * @param startAtEnd whether typing should start at the text end or not
+     */
+    public Keyboard(final boolean startAtEnd) {
+        startAtEnd_ = startAtEnd;
+    }
 
     /**
      * Types the specified character.
@@ -80,5 +96,13 @@ public class Keyboard {
      */
     List<Object[]> getKeys() {
         return keys_;
+    }
+
+    /**
+     * Returns whether typing should start at the text end or not. 
+     * @return whether typing should start at the text end or not
+     */
+    public boolean isStartAtEnd() {
+        return startAtEnd_;
     }
 }

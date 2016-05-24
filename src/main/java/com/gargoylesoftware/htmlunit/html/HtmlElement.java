@@ -480,24 +480,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Simulates typing the specified text while this element has focus.
-     * Note that for some elements, typing '\n' submits the enclosed form.
-     * @param text the text you with to simulate typing
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     * @exception IOException If an IO error occurs
-     * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
-     */
-    @Deprecated
-    public void type(final String text, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
-        for (final char ch : text.toCharArray()) {
-            type(ch, shiftKey, ctrlKey, altKey);
-        }
-    }
-
-    /**
      * Simulates typing the specified character while this element has focus, returning the page contained
      * by this element's window after typing. Note that it may or may not be the same as the original page,
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
@@ -508,7 +490,7 @@ public abstract class HtmlElement extends DomElement {
      * @exception IOException if an IO error occurs
      */
     public Page type(final char c) throws IOException {
-        return type(c, false, false, false);
+        return type(c, false, false, false, false);
     }
 
     /**
@@ -518,16 +500,14 @@ public abstract class HtmlElement extends DomElement {
      * submits the enclosed form.
      *
      * @param c the character you wish to simulate typing
+     * @param startAtEnd whether typing should start at the text end or not
      * @param shiftKey {@code true} if SHIFT is pressed during the typing
      * @param ctrlKey {@code true} if CTRL is pressed during the typing
      * @param altKey {@code true} if ALT is pressed during the typing
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
-     * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
      */
-    @Deprecated
-    // would be private
-    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+    private Page type(final char c, final boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -563,7 +543,7 @@ public abstract class HtmlElement extends DomElement {
 
             if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
                     && !keyPress.isAborted(keyPressResult)) {
-                doType(c, shiftKey, ctrlKey, altKey);
+                doType(c, startAtEnd, shiftKey, ctrlKey, altKey);
             }
         }
 
@@ -609,7 +589,7 @@ public abstract class HtmlElement extends DomElement {
      * @exception IOException if an IO error occurs
      */
     public Page type(final int keyCode) {
-        return type(keyCode, false, false, false, true, true, true);
+        return type(keyCode, false, false, false, false, true, true, true);
     }
 
     /**
@@ -631,9 +611,11 @@ public abstract class HtmlElement extends DomElement {
 
         List<Integer> specialKeys = null;
         final List<Object[]> keys = keyboard.getKeys();
-        for (final Object[] entry : keys) {
+        for (int i = 0; i < keys.size(); i++) {
+            final Object[] entry = keys.get(i);
+            final boolean startAtEnd = i == 0 && keyboard.isStartAtEnd();
             if (entry.length == 1) {
-                type((char) entry[0], shiftPressed, ctrlPressed, altPressed);
+                type((char) entry[0], startAtEnd, shiftPressed, ctrlPressed, altPressed);
             }
             else {
                 final int key = (int) entry[0];
@@ -670,7 +652,8 @@ public abstract class HtmlElement extends DomElement {
 
                         default:
                     }
-                    page = type(key, shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
+                    page = type(key, startAtEnd,
+                            shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
                 }
                 else {
                     switch (key) {
@@ -688,7 +671,8 @@ public abstract class HtmlElement extends DomElement {
 
                         default:
                     }
-                    page = type(key, shiftPressed, ctrlPressed, altPressed, false, false, true);
+                    page = type(key, startAtEnd,
+                            shiftPressed, ctrlPressed, altPressed, false, false, true);
                 }
             }
         }
@@ -711,35 +695,15 @@ public abstract class HtmlElement extends DomElement {
 
                     default:
                 }
-                page = type(key, shiftPressed, ctrlPressed, altPressed, false, false, true);
+                page = type(key, false,
+                        shiftPressed, ctrlPressed, altPressed, false, false, true);
             }
         }
 
         return page;
     }
 
-    /**
-     * Simulates typing the specified character while this element has focus, returning the page contained
-     * by this element's window after typing. Note that it may or may not be the same as the original page,
-     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
-     * submits the enclosed form.
-     *
-     * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
-     *
-     * @param keyCode the key code wish to simulate typing
-     * @param shiftKey {@code true} if SHIFT is pressed during the typing
-     * @param ctrlKey {@code true} if CTRL is pressed during the typing
-     * @param altKey {@code true} if ALT is pressed during the typing
-     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
-     * @deprecated as of 2.18, please use {@link #type(Keyboard)} instead
-     */
-    @Deprecated
-    public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return type(keyCode, shiftKey, ctrlKey, altKey, true, true, true);
-    }
-
-    private Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+    private Page type(final int keyCode, final boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
         final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -777,7 +741,7 @@ public abstract class HtmlElement extends DomElement {
 
         if (keyDown != null && !keyDown.isAborted(keyDownResult)
                 && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
-            doType(keyCode, shiftKey, ctrlKey, altKey);
+            doType(keyCode, startAtEnd, shiftKey, ctrlKey, altKey);
         }
 
         if (this instanceof HtmlTextInput
@@ -810,18 +774,19 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
+     * @param startAtEnd whether typing should start at the text end or not
      * @param shiftKey {@code true} if SHIFT is pressed during the typing
      * @param ctrlKey {@code true} if CTRL is pressed during the typing
      * @param altKey {@code true} if ALT is pressed during the typing
      */
-    protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final char c, boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(c, shiftKey, ctrlKey, altKey);
+            ((DomText) domNode).doType(c, startAtEnd, shiftKey, ctrlKey, altKey);
         }
         else if (domNode instanceof HtmlElement) {
             try {
-                ((HtmlElement) domNode).type(c, shiftKey, ctrlKey, altKey);
+                ((HtmlElement) domNode).type(c, startAtEnd, shiftKey, ctrlKey, altKey);
             }
             catch (final IOException e) {
                 throw new RuntimeException(e);
@@ -835,17 +800,18 @@ public abstract class HtmlElement extends DomElement {
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code wish to simulate typing
+     * @param startAtEnd whether typing should start at the text end or not
      * @param shiftKey {@code true} if SHIFT is pressed during the typing
      * @param ctrlKey {@code true} if CTRL is pressed during the typing
      * @param altKey {@code true} if ALT is pressed during the typing
      */
-    protected void doType(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(keyCode, shiftKey, ctrlKey, altKey);
+            ((DomText) domNode).doType(keyCode, startAtEnd, shiftKey, ctrlKey, altKey);
         }
         else if (domNode instanceof HtmlElement) {
-            ((HtmlElement) domNode).type(keyCode, shiftKey, ctrlKey, altKey);
+            ((HtmlElement) domNode).type(keyCode, startAtEnd, shiftKey, ctrlKey, altKey, true, true, true);
         }
     }
 

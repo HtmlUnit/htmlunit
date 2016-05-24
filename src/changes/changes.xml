@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.22" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                Keyboard: to have a parameter which allows typing to start at the text end.
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.19.
             </action>
@@ -15,8 +18,8 @@
                 HtmlElement: do not trigger keypress if keydown.preventDefault() is true.
             </action>
             <action type="remove" dev="asashour">
-                Remove deprecated DomNode.getScriptObject(), WebWindow.getScriptObject()
-                and HtmlPage constructor with 'originatingUrl'.
+                Remove deprecated DomNode.getScriptObject(), WebWindow.getScriptObject(),
+                HtmlElement.type() methods and HtmlPage constructor with 'originatingUrl'.
             </action>
             <action type="add" dev="rbri" system="features">
                 WebClient: supports a registry of known file extensions used to determine
