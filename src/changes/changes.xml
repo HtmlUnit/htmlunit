@@ -9,7 +9,7 @@
     <body>
         <release version="2.22" date="???" description="Bugfixes">
             <action type="fix" dev="rbri" issue="1787">
-                Use our own impl of URL.sameFile to avoid exessive number of DNS lookups and
+                Use our own implementation of URL.sameFile to avoid excessive number of DNS lookups and
                 and support path normalization before doing the comparison.
             </action>
             <action type="add" dev="asashour">
@@ -39,7 +39,7 @@
                 Dependency to gsbase library removed.
             </action>
             <action type="add" dev="rbri">
-                JavaScript: Simple impl of URL.createObjectURL and URL.revokeObjectURL added.
+                JavaScript: Simple implementation of URL.createObjectURL and URL.revokeObjectURL added.
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: 'in' operator now works for FileList.
