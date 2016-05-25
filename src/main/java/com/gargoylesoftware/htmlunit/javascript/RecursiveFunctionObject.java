@@ -124,9 +124,6 @@ public class RecursiveFunctionObject extends FunctionObject {
                 }
                 break;
 
-            case "Collator":
-            case "DateTimeFormat":
-            case "NumberFormat":
             case "V8BreakIterator":
                 if (getBrowserVersion().hasFeature(JS_INTL_V8_BREAK_ITERATOR)) {
                     return "";

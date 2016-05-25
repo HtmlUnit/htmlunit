@@ -4397,8 +4397,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            EDGE = "function DateTimeFormat() { [native code] }",
+    @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
             FF = "function DateTimeFormat() {\n    [native code]\n}",
             IE = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
     public void intl_DateTimeFormat() throws Exception {
@@ -4437,8 +4436,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            EDGE = "function Collator() { [native code] }",
+    @Alerts(DEFAULT = "function Collator() { [native code] }",
             FF = "function Collator() {\n    [native code]\n}",
             IE = "\nfunction Collator() {\n    [native code]\n}\n")
     public void intl_Collator() throws Exception {
@@ -5726,8 +5724,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            EDGE = "function NumberFormat() { [native code] }",
+    @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
             FF = "function NumberFormat() {\n    [native code]\n}",
             IE = "\nfunction NumberFormat() {\n    [native code]\n}\n")
     public void intl_NumberFormat() throws Exception {
@@ -10424,7 +10421,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PasswordCredential() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void passwordCredential() throws Exception {
         test("PasswordCredential");
     }
@@ -10433,7 +10432,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Credential() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void credential() throws Exception {
         test("Credential");
     }
@@ -10478,7 +10479,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CredentialsContainer() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void credentialsContainer() throws Exception {
         test("CredentialsContainer");
     }
@@ -10487,7 +10490,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FederatedCredential() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void federatedCredential() throws Exception {
         test("FederatedCredential");
     }
