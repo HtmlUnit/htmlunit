@@ -19,13 +19,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACER
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -84,27 +82,8 @@ public class CSSFontFaceRule extends CSSRule {
             cssText = StringUtils.replace(cssText, "{", "{ ");
             cssText = StringUtils.replace(cssText, "}", "; }");
             cssText = StringUtils.replace(cssText, "; ", "; ");
-            final Matcher matcher = REPLACEMENT_2.matcher(cssText);
-            matcher.find();
-            final String url = matcher.group(1);
-            final HtmlPage page = (HtmlPage)
-                    ((CSSStyleSheet) getParentScope()).getWindow().getWebWindow().getEnclosedPage();
-            try {
-                cssText = matcher.replaceFirst("src: url(\"" + page.getFullyQualifiedUrl(url) + "\");");
-            }
-            catch (final Exception e) {
-                switch (url) {
-                    case "//:":
-                        cssText = matcher.replaceFirst("src: url(\"" + "http:///" + "\");");
-                        break;
-
-                    case "//":
-                        cssText = matcher.replaceFirst("src: url(\"" + "http:" + "\");");
-                        break;
-
-                    default:
-                }
-            }
+            cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: $1;");
+            cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
         }
         else {
             cssText = StringUtils.replace(cssText, "{", "{\n  ");

@@ -242,7 +242,6 @@ visibility
 webkitAppRegion
 webkitAppearance
 webkitBackgroundClip
-webkitBackgroundComposite
 webkitBackgroundOrigin
 webkitBorderAfter
 webkitBorderAfterColor

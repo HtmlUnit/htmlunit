@@ -1683,10 +1683,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"},
-            FF = {"", "0px", "", "0px", "50%", "100px", "50%", "100px"},
+    @Alerts(DEFAULT = {"", "0px", "", "0px", "50%", "100px", "50%", "100px"},
             IE = {"", "auto", "", "auto", "", "auto", "", "auto"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({CHROME, FF})
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

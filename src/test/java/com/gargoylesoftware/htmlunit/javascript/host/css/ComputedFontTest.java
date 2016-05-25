@@ -66,8 +66,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "normal normal normal normal 16px / normal 'Times New Roman'",
-                "", "normal", "", "normal", "", "normal", "", "16px", "", "normal", "", "'Times New Roman'"},
+                "", "normal normal normal normal 16px / normal \"Times New Roman\"",
+                "", "normal", "", "normal", "", "normal", "", "16px", "", "normal", "", "\"Times New Roman\""},
             FF = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif"},
             IE = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
@@ -155,8 +155,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal 'Times New Roman'",
-                "", "'Times New Roman'"},
+    @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal \"Times New Roman\"",
+                "", "\"Times New Roman\""},
             FF = {"", "", "", "serif"},
             IE = {"", "", "", "Times New Roman"})
     public void wrongFontFamily() throws Exception {
@@ -179,8 +179,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal 'Times New Roman'",
-            "", "'Times New Roman'", "", "normal normal normal normal 16px / normal abc", "abc", "abc"},
+    @Alerts(DEFAULT = {"", "normal normal normal normal 16px / normal \"Times New Roman\"",
+            "", "\"Times New Roman\"", "", "normal normal normal normal 16px / normal abc", "abc", "abc"},
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
     public void minimalFontFamilyReversed() throws Exception {

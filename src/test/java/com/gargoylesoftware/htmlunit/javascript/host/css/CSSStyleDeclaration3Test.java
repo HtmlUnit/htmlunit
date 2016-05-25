@@ -94,7 +94,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "right bottom", "scroll"},
-            CHROME = {"initial", "initial", "initial", "100% 100%", "initial"})
+            CHROME = {"initial", "initial", "initial", "right bottom", "initial"})
     public void backgroundPosition2() throws Exception {
         background("bottom right");
     }
@@ -104,7 +104,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "10em bottom", "scroll"},
-            CHROME = {"initial", "initial", "initial", "10em 100%", "initial"})
+            CHROME = {"initial", "initial", "initial", "10em bottom", "initial"})
     public void backgroundPosition3() throws Exception {
         background("10em bottom");
     }
@@ -114,7 +114,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "10em center", "scroll"},
-            CHROME = {"initial", "initial", "initial", "10em 50%", "initial"},
+            CHROME = {"initial", "initial", "initial", "10em center", "initial"},
             IE = {"transparent", "none", "repeat", "10em", "scroll"})
     public void backgroundPosition4() throws Exception {
         background("10em center");

@@ -843,7 +843,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                         return (values[0] + ' ' + values[1]).trim();
                     }
                 }
-                if (isInitial || isComputed) {
+                if (isComputed) {
                     final String[] values = value.split(" ");
                     switch (values[0]) {
                         case "left":

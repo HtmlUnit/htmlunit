@@ -682,7 +682,7 @@ public final class StyleAttributes {
         COLUMNS("columns", "columns", chrome("auto auto"), ie("")),
 
         /** The style property {@code content}. */
-        CONTENT("content", "content", ie("normal"), chrome(""), ff("none")),
+        CONTENT("content", "content", ie("normal"), chrome("normal"), ff("none")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none"), ff("none"), ie("none")),
@@ -819,10 +819,10 @@ public final class StyleAttributes {
         FLOOD_OPACITY_("flood-opacity", "flood-opacity", ff("1")),
 
         /** The style property {@code font}. */
-        FONT("font", "font", chrome("normal normal normal normal 16px / normal 'Times New Roman'"), ff(""), ie("")),
+        FONT("font", "font", chrome("normal normal normal normal 16px / normal \"Times New Roman\""), ff(""), ie("")),
 
         /** The style property {@code fontFamily}. */
-        FONT_FAMILY("fontFamily", "font-family", chrome("'Times New Roman'"), ie("Times New Roman"), ff("serif")),
+        FONT_FAMILY("fontFamily", "font-family", chrome("\"Times New Roman\""), ie("Times New Roman"), ff("serif")),
 
         /** The style property {@code font-family}. */
         FONT_FAMILY_("font-family", "font-family", ff("serif")),
@@ -2470,9 +2470,6 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBackgroundClip}. */
         WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip", chrome("border-box")),
-
-        /** The style property {@code webkitBackgroundComposite}. */
-        WEBKIT_BACKGROUND_COMPOSITE("webkitBackgroundComposite", "webkit-background-composite", chrome("source-over")),
 
         /** The style property {@code webkitBackgroundOrigin}. */
         WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin", chrome("padding-box")),
