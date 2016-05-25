@@ -981,24 +981,6 @@ public final class UrlUtils {
     }
 
     /**
-     * Compares two URLs, after setting {@code path} to {@code /} if empty.
-     *
-     * @param url1 the first URL
-     * @param url2 the second URL
-     * @return if they are the same
-     * @throws MalformedURLException in case of error
-     */
-    public static boolean areSame(URL url1, URL url2) throws MalformedURLException {
-        if (url1.getPath().isEmpty()) {
-            url1 = createNewUrl(url1.getProtocol(), url1.getAuthority(), "/", url1.getRef(), url1.getQuery());
-        }
-        if (url2.getPath().isEmpty()) {
-            url2 = createNewUrl(url2.getProtocol(), url2.getAuthority(), "/", url2.getRef(), url2.getQuery());
-        }
-        return url1.equals(url2);
-    }
-
-    /**
      * More or less the same as sameFile(URL, URL) but without
      * resolving the host to an IP address for comparing.
      * Additionally we do some path normalization.
@@ -1038,7 +1020,13 @@ public final class UrlUtils {
 
         // Compare the files.
         String f1 = u1.getFile();
+        if (f1.isEmpty()) {
+            f1 = "/";
+        }
         String f2 = u2.getFile();
+        if (f2.isEmpty()) {
+            f2 = "/";
+        }
         if (f1.indexOf('.') > 0 || f2.indexOf('.') > 0) {
             try {
                 f1 = u1.toURI().normalize().toURL().getFile();

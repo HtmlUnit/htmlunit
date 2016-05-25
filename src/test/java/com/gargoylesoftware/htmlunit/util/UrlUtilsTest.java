@@ -342,7 +342,7 @@ public class UrlUtilsTest extends SimpleWebTestCase {
 
         assertTrue(UrlUtils.sameFile(new URL("http://localhost"), new URL("http://localhost")));
         assertTrue(UrlUtils.sameFile(new URL("http://localhost/"), new URL("http://localhost/")));
-        assertFalse(UrlUtils.sameFile(new URL("http://localhost/"), new URL("http://localhost")));
+        assertTrue(UrlUtils.sameFile(new URL("http://localhost/"), new URL("http://localhost")));
 
         assertTrue(UrlUtils.sameFile(new URL("http://localhost/bug.html?test"),
                         new URL("http://localhost/bug.html?test")));

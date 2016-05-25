@@ -1301,7 +1301,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (webRequest.getProxyHost() == null) {
             final ProxyConfig proxyConfig = getOptions().getProxyConfig();
             if (proxyConfig.getProxyAutoConfigUrl() != null) {
-                if (!UrlUtils.areSame(new URL(proxyConfig.getProxyAutoConfigUrl()), url)) {
+                if (!UrlUtils.sameFile(new URL(proxyConfig.getProxyAutoConfigUrl()), url)) {
                     String content = proxyConfig.getProxyAutoConfigContent();
                     if (content == null) {
                         content = getPage(proxyConfig.getProxyAutoConfigUrl())
