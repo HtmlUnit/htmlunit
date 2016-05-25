@@ -449,24 +449,22 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean startAtEnd,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final char c, final boolean startAtEnd) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getText().length());
         }
-        doTypeProcessor_.doType(getText(), selectionDelegate_, c, shiftKey, ctrlKey, altKey);
+        doTypeProcessor_.doType(getText(), selectionDelegate_, c, this);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean startAtEnd,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final int keyCode, final boolean startAtEnd) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getText().length());
         }
-        doTypeProcessor_.doType(getText(), selectionDelegate_, keyCode, shiftKey, ctrlKey, altKey);
+        doTypeProcessor_.doType(getText(), selectionDelegate_, keyCode, this);
     }
 
     /**

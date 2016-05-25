@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVEN
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -145,6 +144,10 @@ public abstract class HtmlElement extends DomElement {
 
     /** The owning form for lost form children. */
     private HtmlForm owningForm_;
+
+    private boolean shiftPressed_;
+    private boolean ctrlPressed_;
+    private boolean altPressed_;
 
     /**
      * Creates an instance.
@@ -490,7 +493,7 @@ public abstract class HtmlElement extends DomElement {
      * @exception IOException if an IO error occurs
      */
     public Page type(final char c) throws IOException {
-        return type(c, false, false, false, false);
+        return type(c, false);
     }
 
     /**
@@ -501,14 +504,10 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param c the character you wish to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
-     * @param shiftKey {@code true} if SHIFT is pressed during the typing
-     * @param ctrlKey {@code true} if CTRL is pressed during the typing
-     * @param altKey {@code true} if ALT is pressed during the typing
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    private Page type(final char c, final boolean startAtEnd,
-                        final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+    private Page type(final char c, final boolean startAtEnd)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -521,13 +520,13 @@ public abstract class HtmlElement extends DomElement {
         if (page.getFocusedElement() != this) {
             focus();
         }
-        final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftKey);
+        final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftPressed_);
 
         final Event shiftDown;
         final ScriptResult shiftDownResult;
         if (isShiftNeeded) {
             shiftDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, KeyboardEvent.DOM_VK_SHIFT,
-                true, ctrlKey, altKey);
+                true, ctrlPressed_, altPressed_);
             shiftDownResult = fireEvent(shiftDown);
         }
         else {
@@ -535,16 +534,18 @@ public abstract class HtmlElement extends DomElement {
             shiftDownResult = null;
         }
 
-        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey);
+        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
+                shiftPressed_, ctrlPressed_, altPressed_);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
         if (!keyDown.isAborted(keyDownResult)) {
-            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey);
+            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
+                    shiftPressed_, ctrlPressed_, altPressed_);
             final ScriptResult keyPressResult = fireEvent(keyPress);
 
             if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
                     && !keyPress.isAborted(keyPressResult)) {
-                doType(c, startAtEnd, shiftKey, ctrlKey, altKey);
+                doType(c, startAtEnd);
             }
         }
 
@@ -552,16 +553,16 @@ public abstract class HtmlElement extends DomElement {
         if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput) {
-            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftKey, ctrlKey, altKey);
+            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, c, shiftPressed_, ctrlPressed_, altPressed_);
             fireEvent(input);
         }
 
-        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey);
+        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c, shiftPressed_, ctrlPressed_, altPressed_);
         fireEvent(keyUp);
 
         if (isShiftNeeded) {
             final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
-                false, ctrlKey, altKey);
+                false, ctrlPressed_, altPressed_);
             fireEvent(shiftUp);
         }
 
@@ -590,7 +591,7 @@ public abstract class HtmlElement extends DomElement {
      * @exception IOException if an IO error occurs
      */
     public Page type(final int keyCode) {
-        return type(keyCode, false, false, false, false, true, true, true);
+        return type(keyCode, false, true, true, true);
     }
 
     /**
@@ -606,32 +607,27 @@ public abstract class HtmlElement extends DomElement {
     public Page type(final Keyboard keyboard) throws IOException {
         Page page = null;
 
-        boolean shiftPressed = false;
-        boolean ctrlPressed = false;
-        boolean altPressed = false;
-
-        List<Integer> specialKeys = null;
         final List<Object[]> keys = keyboard.getKeys();
         for (int i = 0; i < keys.size(); i++) {
             final Object[] entry = keys.get(i);
             final boolean startAtEnd = i == 0 && keyboard.isStartAtEnd();
             if (entry.length == 1) {
-                type((char) entry[0], startAtEnd, shiftPressed, ctrlPressed, altPressed);
+                type((char) entry[0], startAtEnd);
             }
             else {
                 final int key = (int) entry[0];
                 final boolean pressed = (boolean) entry[1];
                 switch (key) {
                     case KeyboardEvent.DOM_VK_SHIFT:
-                        shiftPressed = pressed;
+                        shiftPressed_ = pressed;
                         break;
 
                     case KeyboardEvent.DOM_VK_CONTROL:
-                        ctrlPressed = pressed;
+                        ctrlPressed_ = pressed;
                         break;
 
                     case KeyboardEvent.DOM_VK_ALT:
-                        altPressed = pressed;
+                        altPressed_ = pressed;
                         break;
 
                     default:
@@ -643,61 +639,17 @@ public abstract class HtmlElement extends DomElement {
                         case KeyboardEvent.DOM_VK_SHIFT:
                         case KeyboardEvent.DOM_VK_CONTROL:
                         case KeyboardEvent.DOM_VK_ALT:
-                            if (specialKeys == null) {
-                                specialKeys = new ArrayList<>(keys.size());
-                            }
-                            specialKeys.add(key);
                             keyPress = false;
                             keyUp = false;
                             break;
 
                         default:
                     }
-                    page = type(key, startAtEnd,
-                            shiftPressed, ctrlPressed, altPressed, true, keyPress, keyUp);
+                    page = type(key, startAtEnd, true, keyPress, keyUp);
                 }
                 else {
-                    switch (key) {
-                        case KeyboardEvent.DOM_VK_SHIFT:
-                        case KeyboardEvent.DOM_VK_CONTROL:
-                        case KeyboardEvent.DOM_VK_ALT:
-                            if (specialKeys != null) {
-                                for (final Iterator<Integer> it = specialKeys.iterator(); it.hasNext();) {
-                                    if (it.next() == key) {
-                                        it.remove();
-                                    }
-                                }
-                            }
-                            break;
-
-                        default:
-                    }
-                    page = type(key, startAtEnd,
-                            shiftPressed, ctrlPressed, altPressed, false, false, true);
+                    page = type(key, startAtEnd, false, false, true);
                 }
-            }
-        }
-
-        if (specialKeys != null) {
-            for (int i = specialKeys.size() - 1; i >= 0; i--) {
-                final int key = specialKeys.get(i);
-                switch (key) {
-                    case KeyboardEvent.DOM_VK_SHIFT:
-                        shiftPressed = false;
-                        break;
-
-                    case KeyboardEvent.DOM_VK_CONTROL:
-                        ctrlPressed = false;
-                        break;
-
-                    case KeyboardEvent.DOM_VK_ALT:
-                        altPressed = false;
-                        break;
-
-                    default:
-                }
-                page = type(key, false,
-                        shiftPressed, ctrlPressed, altPressed, false, false, true);
             }
         }
 
@@ -705,7 +657,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     private Page type(final int keyCode, final boolean startAtEnd,
-                    final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
                     final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -719,7 +670,7 @@ public abstract class HtmlElement extends DomElement {
         final Event keyDown;
         final ScriptResult keyDownResult;
         if (fireKeyDown) {
-            keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
+            keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftPressed_, ctrlPressed_, altPressed_);
             keyDownResult = fireEvent(keyDown);
         }
         else {
@@ -732,7 +683,8 @@ public abstract class HtmlElement extends DomElement {
         final Event keyPress;
         final ScriptResult keyPressResult;
         if (fireKeyPress && browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
-            keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
+            keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode,
+                    shiftPressed_, ctrlPressed_, altPressed_);
 
             keyPressResult = fireEvent(keyPress);
         }
@@ -743,18 +695,20 @@ public abstract class HtmlElement extends DomElement {
 
         if (keyDown != null && !keyDown.isAborted(keyDownResult)
                 && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
-            doType(keyCode, startAtEnd, shiftKey, ctrlKey, altKey);
+            doType(keyCode, startAtEnd);
         }
 
         if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput) {
-            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode, shiftKey, ctrlKey, altKey);
+            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode,
+                    shiftPressed_, ctrlPressed_, altPressed_);
             fireEvent(input);
         }
 
         if (fireKeyUp) {
-            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, shiftKey, ctrlKey, altKey);
+            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode,
+                    shiftPressed_, ctrlPressed_, altPressed_);
             fireEvent(keyUp);
         }
 
@@ -777,19 +731,15 @@ public abstract class HtmlElement extends DomElement {
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
-     * @param shiftKey {@code true} if SHIFT is pressed during the typing
-     * @param ctrlKey {@code true} if CTRL is pressed during the typing
-     * @param altKey {@code true} if ALT is pressed during the typing
      */
-    protected void doType(final char c, final boolean startAtEnd,
-                            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final char c, final boolean startAtEnd) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(c, startAtEnd, shiftKey, ctrlKey, altKey);
+            ((DomText) domNode).doType(c, startAtEnd, this);
         }
         else if (domNode instanceof HtmlElement) {
             try {
-                ((HtmlElement) domNode).type(c, startAtEnd, shiftKey, ctrlKey, altKey);
+                ((HtmlElement) domNode).type(c, startAtEnd);
             }
             catch (final IOException e) {
                 throw new RuntimeException(e);
@@ -804,18 +754,14 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param keyCode the key code wish to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
-     * @param shiftKey {@code true} if SHIFT is pressed during the typing
-     * @param ctrlKey {@code true} if CTRL is pressed during the typing
-     * @param altKey {@code true} if ALT is pressed during the typing
      */
-    protected void doType(final int keyCode, final boolean startAtEnd,
-                            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    protected void doType(final int keyCode, final boolean startAtEnd) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(keyCode, startAtEnd, shiftKey, ctrlKey, altKey);
+            ((DomText) domNode).doType(keyCode, startAtEnd, this);
         }
         else if (domNode instanceof HtmlElement) {
-            ((HtmlElement) domNode).type(keyCode, startAtEnd, shiftKey, ctrlKey, altKey, true, true, true);
+            ((HtmlElement) domNode).type(keyCode, startAtEnd, true, true, true);
         }
     }
 
@@ -1350,5 +1296,29 @@ public abstract class HtmlElement extends DomElement {
         }
 
         return super.handles(event);
+    }
+
+    /**
+     * Returns whether the {@code SHIFT} is currently pressed.
+     * @return whether the {@code SHIFT} is currently pressed
+     */
+    protected boolean isShiftPressed() {
+        return shiftPressed_;
+    }
+
+    /**
+     * Returns whether the {@code CTRL} is currently pressed.
+     * @return whether the {@code CTRL} is currently pressed
+     */
+    public boolean isCtrlPressed() {
+        return ctrlPressed_;
+    }
+
+    /**
+     * Returns whether the {@code ALT} is currently pressed.
+     * @return whether the {@code ALT} is currently pressed
+     */
+    public boolean isAltPressed() {
+        return altPressed_;
     }
 }

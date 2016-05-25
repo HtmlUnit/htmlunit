@@ -66,7 +66,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
-            final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+            final char c, final HtmlElement htmlElement) {
 
         int selectionStart = selectionDelegate.getSelectionStart();
         int selectionEnd = selectionDelegate.getSelectionEnd();
@@ -80,6 +80,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             }
         }
         else if (acceptChar(c)) {
+            final boolean ctrlKey = htmlElement.isCtrlPressed();
             if (ctrlKey && (c == 'C' || c == 'c')) {
                 final String content = newValue.substring(selectionStart, selectionEnd);
                 setClipboardContent(content);
@@ -166,7 +167,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
-            final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+            final int keyCode, final HtmlElement htmlElement) {
 
         final StringBuilder newValue = new StringBuilder(currentValue);
         int selectionStart = selectionDelegate.getSelectionStart();
@@ -174,7 +175,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
 
         final Character ch = SPECIAL_KEYS_MAP_.get(keyCode);
         if (ch != null) {
-            doType(currentValue, selectionDelegate, ch, shiftKey, ctrlKey, altKey);
+            doType(currentValue, selectionDelegate, ch, htmlElement);
             return;
         }
         switch (keyCode) {
@@ -192,7 +193,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 break;
 
             case KeyboardEvent.DOM_VK_RIGHT:
-                if (shiftKey) {
+                if (htmlElement.isShiftPressed()) {
                     selectionEnd++;
                 }
                 else if (selectionStart > 0) {
@@ -205,7 +206,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 break;
 
             case KeyboardEvent.DOM_VK_END:
-                if (shiftKey) {
+                if (htmlElement.isShiftPressed()) {
                     selectionEnd = newValue.length();
                 }
                 else {
@@ -225,7 +226,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 return;
         }
 
-        if (!shiftKey) {
+        if (!htmlElement.isShiftPressed()) {
             selectionEnd = selectionStart;
         }
 
