@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ import java.util.regex.Pattern;
 
 import org.apache.http.client.utils.DateUtils;
 import org.w3c.dom.css.CSSStyleSheet;
+
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * <p>Simple cache implementation which caches compiled JavaScript files and parsed CSS snippets. Caching
@@ -115,18 +118,19 @@ public class Cache implements Serializable {
      * @return whether the response was cached or not
      */
     public boolean cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
-        final boolean wasCached;
         if (isCacheable(request, response)) {
-            final String url = response.getWebRequest().getUrl().toString();
-            final Entry entry = new Entry(url, response, toCache);
+            final URL url = response.getWebRequest().getUrl();
+            if (url == null) {
+                return false;
+            }
+
+            final Entry entry = new Entry(UrlUtils.normalize(url), response, toCache);
             entries_.put(entry.key_, entry);
             deleteOverflow();
-            wasCached = true;
+            return true;
         }
-        else {
-            wasCached = false;
-        }
-        return wasCached;
+
+        return false;
     }
 
     /**
@@ -235,15 +239,9 @@ public class Cache implements Serializable {
      * @return the cached response corresponding to the specified request if any
      */
     public WebResponse getCachedResponse(final WebRequest request) {
-        if (HttpMethod.GET != request.getHttpMethod()) {
-            return null;
-        }
-        final Entry cachedEntry = entries_.get(request.getUrl().toString());
+        final Entry cachedEntry = getCacheEntry(request);
         if (cachedEntry == null) {
             return null;
-        }
-        synchronized (entries_) {
-            cachedEntry.touch();
         }
         return cachedEntry.response_;
     }
@@ -256,17 +254,30 @@ public class Cache implements Serializable {
      * @return the cached object corresponding to the specified request if any
      */
     public Object getCachedObject(final WebRequest request) {
+        final Entry cachedEntry = getCacheEntry(request);
+        if (cachedEntry == null) {
+            return null;
+        }
+        return cachedEntry.value_;
+    }
+
+    private Entry getCacheEntry(final WebRequest request) {
         if (HttpMethod.GET != request.getHttpMethod()) {
             return null;
         }
-        final Entry cachedEntry = entries_.get(request.getUrl().toString());
+
+        final URL url = request.getUrl();
+        if (url == null) {
+            return null;
+        }
+        final Entry cachedEntry = entries_.get(UrlUtils.normalize(url));
         if (cachedEntry == null) {
             return null;
         }
         synchronized (entries_) {
             cachedEntry.touch();
         }
-        return cachedEntry.value_;
+        return cachedEntry;
     }
 
     /**

@@ -1042,4 +1042,40 @@ public final class UrlUtils {
 
         return true;
     }
+
+    /**
+     * Helper that constructs a normalized url string
+     * usable as cache key.
+     *
+     * @param url a URL object
+     * @return the normalized string
+     */
+    public static String normalize(final URL url) {
+        final StringBuilder result = new StringBuilder();
+
+        result.append(url.getProtocol());
+        result.append("://");
+        result.append(url.getHost());
+        result.append(':');
+        result.append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
+
+        // Compare the files.
+        String f = url.getFile();
+        if (f.isEmpty()) {
+            result.append("/");
+        }
+        else {
+            if (f.indexOf('.') > 0) {
+                try {
+                    f = url.toURI().normalize().toURL().getFile();
+                }
+                catch (final Exception e) {
+                    // ignore
+                }
+            }
+            result.append(f);
+        }
+
+        return result.toString();
+    }
 }

@@ -1073,17 +1073,22 @@ public class HtmlPage extends InteractivePage {
         }
 
         final String scriptCode = response.getContentAsString(scriptEncoding);
-        response.cleanUp();
         if (null != scriptCode) {
             final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null) {
                 // cache the script
-                cache.cacheIfPossible(request, response, script);
+                if (cache.cacheIfPossible(request, response, script)) {
+                    // no cleanup if the response is stored inside the cache
+                    return script;
+                }
             }
 
+            response.cleanUp();
             return script;
         }
+
+        response.cleanUp();
         return null;
     }
 

@@ -366,4 +366,35 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         assertEquals(InetAddress.getByName(u1.getHost()), InetAddress.getByName(u2.getHost()));
         assertFalse(UrlUtils.sameFile(u1, u2));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void normalize() throws Exception {
+        assertEquals("http://localhost:80/bug.html", UrlUtils.normalize(new URL("http://localhost/bug.html")));
+        assertEquals("https://localhost:443/bug.html", UrlUtils.normalize(new URL("https://localhost/bug.html")));
+
+        assertEquals("http://localhost:80/test/bug.html",
+                    UrlUtils.normalize(new URL("http://localhost/test/./bug.html")));
+        assertEquals("http://localhost:80/../bug.html", UrlUtils.normalize(new URL("http://localhost/../bug.html")));
+        assertEquals("http://localhost:80/bug.html", UrlUtils.normalize(new URL("http://localhost/test/../bug.html")));
+
+        assertEquals("http://localhost:80/", UrlUtils.normalize(new URL("http://localhost")));
+        assertEquals("http://localhost:80/", UrlUtils.normalize(new URL("http://localhost/")));
+
+        assertEquals("http://localhost:80/bug.html?test",
+                    UrlUtils.normalize(new URL("http://localhost/bug.html?test")));
+        assertEquals("http://localhost:80/bug.html", UrlUtils.normalize(new URL("http://localhost/bug.html#anchor")));
+        assertEquals("http://localhost:80/bug.html?test",
+                    UrlUtils.normalize(new URL("http://localhost/bug.html?test#anchor")));
+
+        assertEquals("http://localhost:80/bug.html", UrlUtils.normalize(new URL("http://localhost:80/bug.html")));
+        assertEquals("http://localhost:81/bug.html", UrlUtils.normalize(new URL("http://localhost:81/bug.html")));
+
+        assertEquals("https://localhost:443/bug.html",
+                    UrlUtils.normalize(new URL("https://localhost:443/bug.html")));
+        assertEquals("https://localhost:8443/bug.html",
+                    UrlUtils.normalize(new URL("https://localhost:8443/bug.html")));
+    }
 }
