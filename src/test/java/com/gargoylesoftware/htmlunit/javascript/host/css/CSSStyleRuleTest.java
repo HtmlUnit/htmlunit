@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -199,6 +200,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", ""})
+    @NotYetImplemented
     public void oldIEStyleFilter() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
