@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,6 +26,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Unit tests for {@link BrowserVersion}.
@@ -237,8 +240,10 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: text/css, */*")
+    @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
+            CHROME = {"1", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
+            IE = {"2", "Accept: text/css, */*"})
+    @NotYetImplemented(CHROME)
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
             = "<html><head>\n"
@@ -254,8 +259,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPage2(html, getDefaultUrl());
 
-        assertEquals(2, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+        final int count = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(count, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[1], acceptHeaderString());
     }
 
     /**
