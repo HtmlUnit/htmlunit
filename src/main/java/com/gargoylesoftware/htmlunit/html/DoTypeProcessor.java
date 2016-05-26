@@ -14,6 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_ADD;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_BACK_SPACE;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DECIMAL;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DELETE;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_DIVIDE;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_END;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_EQUALS;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_HOME;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_LEFT;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_MULTIPLY;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_NUMPAD0;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_NUMPAD9;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_RIGHT;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SEMICOLON;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SEPARATOR;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SPACE;
+import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SUBTRACT;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
@@ -27,8 +45,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
-import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
-
 /**
  * The process for {@link HtmlElement#doType(char, boolean, boolean, boolean, boolean)}.
  *
@@ -46,18 +62,18 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     private DomNode domNode_;
 
     static {
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_ADD, '+');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_DECIMAL, '.');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_DIVIDE, '/');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_EQUALS, '=');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_MULTIPLY, '*');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SEMICOLON, ';');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SEPARATOR, ',');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SPACE, ' ');
-        SPECIAL_KEYS_MAP_.put(KeyboardEvent.DOM_VK_SUBTRACT, '-');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_ADD, '+');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_DECIMAL, '.');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_DIVIDE, '/');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_EQUALS, '=');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_MULTIPLY, '*');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_SEMICOLON, ';');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_SEPARATOR, ',');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_SPACE, ' ');
+        SPECIAL_KEYS_MAP_.put(DOM_VK_SUBTRACT, '-');
 
-        for (int i = KeyboardEvent.DOM_VK_NUMPAD0; i <= KeyboardEvent.DOM_VK_NUMPAD9; i++) {
-            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + (i - KeyboardEvent.DOM_VK_NUMPAD0)));
+        for (int i = DOM_VK_NUMPAD0; i <= DOM_VK_NUMPAD9; i++) {
+            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + (i - DOM_VK_NUMPAD0)));
         }
     }
 
@@ -66,7 +82,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
-            final char c, final HtmlElement htmlElement) {
+            final char c, final HtmlElement element) {
 
         int selectionStart = selectionDelegate.getSelectionStart();
         int selectionEnd = selectionDelegate.getSelectionEnd();
@@ -80,7 +96,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             }
         }
         else if (acceptChar(c)) {
-            final boolean ctrlKey = htmlElement.isCtrlPressed();
+            final boolean ctrlKey = element.isCtrlPressed();
             if (ctrlKey && (c == 'C' || c == 'c')) {
                 final String content = newValue.substring(selectionStart, selectionEnd);
                 setClipboardContent(content);
@@ -96,6 +112,10 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 setClipboardContent(content);
                 newValue.delete(selectionStart, selectionEnd);
                 selectionEnd = selectionStart;
+            }
+            else if (ctrlKey && (c == 'A' || c == 'a')) {
+                selectionStart = 0;
+                selectionEnd = newValue.length();
             }
             else {
                 add(newValue, c, selectionStart, selectionEnd);
@@ -167,7 +187,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
-            final int keyCode, final HtmlElement htmlElement) {
+            final int keyCode, final HtmlElement element) {
 
         final StringBuilder newValue = new StringBuilder(currentValue);
         int selectionStart = selectionDelegate.getSelectionStart();
@@ -175,25 +195,38 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
 
         final Character ch = SPECIAL_KEYS_MAP_.get(keyCode);
         if (ch != null) {
-            doType(currentValue, selectionDelegate, ch, htmlElement);
+            doType(currentValue, selectionDelegate, ch, element);
             return;
         }
         switch (keyCode) {
-            case KeyboardEvent.DOM_VK_BACK_SPACE:
+            case DOM_VK_BACK_SPACE:
                 if (selectionStart > 0) {
                     newValue.deleteCharAt(selectionStart - 1);
                     selectionStart--;
                 }
                 break;
 
-            case KeyboardEvent.DOM_VK_LEFT:
-                if (selectionStart > 0) {
+            case DOM_VK_LEFT:
+                if (element.isCtrlPressed()) {
+                    while (selectionStart > 0 && newValue.charAt(selectionStart - 1) != ' ') {
+                        selectionStart--;
+                    }
+                }
+                else if (selectionStart > 0) {
                     selectionStart--;
                 }
                 break;
 
-            case KeyboardEvent.DOM_VK_RIGHT:
-                if (htmlElement.isShiftPressed()) {
+            case DOM_VK_RIGHT:
+                if (element.isCtrlPressed()) {
+                    if (selectionStart < newValue.length()) {
+                        selectionStart++;
+                    }
+                    while (selectionStart < newValue.length() && newValue.charAt(selectionStart - 1) != ' ') {
+                        selectionStart++;
+                    }
+                }
+                else if (element.isShiftPressed()) {
                     selectionEnd++;
                 }
                 else if (selectionStart > 0) {
@@ -201,12 +234,12 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 }
                 break;
 
-            case KeyboardEvent.DOM_VK_HOME:
+            case DOM_VK_HOME:
                 selectionStart = 0;
                 break;
 
-            case KeyboardEvent.DOM_VK_END:
-                if (htmlElement.isShiftPressed()) {
+            case DOM_VK_END:
+                if (element.isShiftPressed()) {
                     selectionEnd = newValue.length();
                 }
                 else {
@@ -214,7 +247,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 }
                 break;
 
-            case KeyboardEvent.DOM_VK_DELETE:
+            case DOM_VK_DELETE:
                 if (selectionEnd == selectionStart) {
                     selectionEnd++;
                 }
@@ -226,7 +259,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
                 return;
         }
 
-        if (!htmlElement.isShiftPressed()) {
+        if (!element.isShiftPressed()) {
             selectionEnd = selectionStart;
         }
 
