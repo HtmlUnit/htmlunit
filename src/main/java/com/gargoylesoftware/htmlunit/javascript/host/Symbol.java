@@ -198,7 +198,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code species} static property
      */
-    @JsxStaticGetter(@WebBrowser(value = FF, minVersion = 45))
+    @JsxStaticGetter({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
     public static Symbol getSpecies(final Scriptable thisObj) {
         return getSymbol(thisObj, "species");
     }
