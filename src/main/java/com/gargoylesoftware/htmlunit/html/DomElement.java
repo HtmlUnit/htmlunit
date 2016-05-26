@@ -81,7 +81,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     private Map<String, String> namespaces_ = new HashMap<>();
 
     /**
-     * Whether the is Mouse currently over this element or now.
+     * Whether the Mouse is currently over this element or not.
      */
     private boolean mouseOver_;
 
