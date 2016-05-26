@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -27,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = @WebBrowser(FF))
 public class MozCSSKeyframesRule extends CSSRule {
-
-    /**
-     * Default constructor.
-     */
-    @JsxConstructor
-    public MozCSSKeyframesRule() {
-    }
 }

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -7049,7 +7048,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "object")
-    @NotYetImplemented(FF)
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -7407,7 +7405,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @NotYetImplemented(IE)
     public void oes_element_index_uint() throws Exception {
         test("OES_element_index_uint");
     }
@@ -7699,7 +7696,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @NotYetImplemented(IE)
     public void angle_instanced_arrays() throws Exception {
         test("ANGLE_instanced_arrays");
     }
@@ -7710,9 +7706,88 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @NotYetImplemented(IE)
     public void oes_standard_derivatives() throws Exception {
         test("OES_standard_derivatives");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void canvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void rtcStatsReport() throws Exception {
+        test("RTCStatsReport");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void passwordCredential() throws Exception {
+        test("PasswordCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void credential() throws Exception {
+        test("Credential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void intersectionObserver() throws Exception {
+        test("IntersectionObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void intersectionObserverEntry() throws Exception {
+        test("IntersectionObserverEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void credentialsContainer() throws Exception {
+        test("CredentialsContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void federatedCredential() throws Exception {
+        test("FederatedCredential");
     }
 
 }
