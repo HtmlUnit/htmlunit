@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -26,8 +25,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 
 /**
  * Test the host class names.
@@ -9729,7 +9728,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "[object MozCSSKeyframesRule]")
-    @NotYetImplemented(FF)
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -10412,7 +10410,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function RTCStatsReport() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
     public void rtcStatsReport() throws Exception {
         test("RTCStatsReport");
     }
@@ -10423,7 +10420,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PasswordCredential() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void passwordCredential() throws Exception {
         test("PasswordCredential");
     }
@@ -10434,7 +10430,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Credential() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void credential() throws Exception {
         test("Credential");
     }
@@ -10481,7 +10476,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function CredentialsContainer() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void credentialsContainer() throws Exception {
         test("CredentialsContainer");
     }
@@ -10492,7 +10486,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function FederatedCredential() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void federatedCredential() throws Exception {
         test("FederatedCredential");
     }
@@ -10548,7 +10541,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object OES_standard_derivatives]")
-    @NotYetImplemented(IE)
     public void oes_standard_derivatives() throws Exception {
         test("OES_standard_derivatives");
     }
@@ -10568,7 +10560,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object OES_element_index_uint]")
-    @NotYetImplemented(IE)
     public void oes_element_index_uint() throws Exception {
         test("OES_element_index_uint");
     }
@@ -10597,7 +10588,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object ANGLE_instanced_arrays]")
-    @NotYetImplemented(IE)
     public void angle_instanced_arrays() throws Exception {
         test("ANGLE_instanced_arrays");
     }
@@ -10619,4 +10609,35 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void ext_shader_texture_lod() throws Exception {
         test("EXT_shader_texture_lod");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CanvasCaptureMediaStreamTrack() { [native code] }")
+    public void canvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IntersectionObserver() { [native code] }")
+    public void intersectionObserver() throws Exception {
+        test("IntersectionObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IntersectionObserverEntry() { [native code] }")
+    public void intersectionObserverEntry() throws Exception {
+        test("IntersectionObserverEntry");
+    }
+
 }

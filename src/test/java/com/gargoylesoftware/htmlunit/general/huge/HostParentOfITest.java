@@ -3454,6 +3454,26 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
+    public void _OES_standard_derivatives_OES_standard_derivatives() throws Exception {
+        test("OES_standard_derivatives", "OES_standard_derivatives");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _OES_element_index_uint_OES_element_index_uint() throws Exception {
+        test("OES_element_index_uint", "OES_element_index_uint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _OES_texture_float_OES_texture_float() throws Exception {
         test("OES_texture_float", "OES_texture_float");
     }
@@ -3570,4 +3590,65 @@ public class HostParentOfITest extends HostParentOf {
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
+        test("IntersectionObserverEntry", "IntersectionObserverEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IntersectionObserver_IntersectionObserver() throws Exception {
+        test("IntersectionObserver", "IntersectionObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
+        test("MediaStreamTrack", "CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PasswordCredential_PasswordCredential() throws Exception {
+        test("PasswordCredential", "PasswordCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
+        test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _RTCStatsReport_RTCStatsReport() throws Exception {
+        test("RTCStatsReport", "RTCStatsReport");
+    }
+
 }
