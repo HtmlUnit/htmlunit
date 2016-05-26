@@ -59,7 +59,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "function () { [native code] }",
+    @Alerts(DEFAULT = "function Collator() { [native code] }",
             FF = "function Collator() {\n    [native code]\n}",
             IE = "\nfunction Collator() {\n    [native code]\n}\n")
     public void collator() throws Exception {
@@ -70,7 +70,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "function () { [native code] }",
+    @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
             FF = "function DateTimeFormat() {\n    [native code]\n}",
             IE = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
     public void dateTimeFormat() throws Exception {
@@ -81,7 +81,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "function () { [native code] }",
+    @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
             FF = "function NumberFormat() {\n    [native code]\n}",
             IE = "\nfunction NumberFormat() {\n    [native code]\n}\n")
     public void numberFormat() throws Exception {
@@ -93,7 +93,7 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function () { [native code] }")
+            CHROME = "function v8BreakIterator() { [native code] }")
     public void v8BreakIterator() throws Exception {
         test("Intl.v8BreakIterator");
     }

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 
@@ -125,10 +124,7 @@ public class RecursiveFunctionObject extends FunctionObject {
                 break;
 
             case "V8BreakIterator":
-                if (getBrowserVersion().hasFeature(JS_INTL_V8_BREAK_ITERATOR)) {
-                    return "";
-                }
-                break;
+                return "v8BreakIterator";
 
             case "webkitRTCPeerConnection":
                 return "RTCPeerConnection";

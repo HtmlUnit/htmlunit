@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.text.BreakIterator;
 import java.util.Locale;
@@ -37,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME)})
+@JsxClass(browsers = @WebBrowser(CHROME))
 public class V8BreakIterator extends SimpleScriptable {
 
     private transient BreakIterator breakIterator_;
