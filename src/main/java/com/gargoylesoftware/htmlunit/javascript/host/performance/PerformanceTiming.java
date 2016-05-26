@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code PerformanceTiming}.
- * This impl is a simple mock for the moment.
+ * This implementation is a simple mock for the moment.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

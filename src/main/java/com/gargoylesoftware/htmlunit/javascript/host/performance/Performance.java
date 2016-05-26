@@ -60,14 +60,13 @@ public class Performance extends EventTarget {
      */
     @JsxGetter
     public PerformanceTiming getTiming() {
-        if (timing_ != null) {
-            return timing_;
+        if (timing_ == null) {
+            final PerformanceTiming timing = new PerformanceTiming();
+            timing.setParentScope(getParentScope());
+            timing.setPrototype(getPrototype(timing.getClass()));
+            timing_ = timing;
         }
 
-        final PerformanceTiming timing = new PerformanceTiming();
-        timing.setParentScope(getParentScope());
-        timing.setPrototype(getPrototype(timing.getClass()));
-        timing_ = timing;
         return timing_;
     }
 
