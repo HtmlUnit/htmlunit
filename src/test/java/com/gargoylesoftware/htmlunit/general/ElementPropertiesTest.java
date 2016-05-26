@@ -755,7 +755,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,rel,rev,search,shape,target,text,type,"
+                + "port,protocol,referrerpolicy,rel,rev,search,shape,target,text,type,"
                 + "username",
             FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,relList,rev,search,searchParams,shape,target,text,type,"
@@ -769,7 +769,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn")
-    @NotYetImplemented(EDGE)
+    @NotYetImplemented({EDGE, CHROME})
     public void a() throws Exception {
         test("a");
     }
@@ -809,8 +809,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,search,"
-                + "shape,target,username",
+    @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
+                + "protocol,referrerpolicy,search,shape,target,username",
             FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,shape,target,username",
             FF38 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
@@ -1067,7 +1067,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "getContext(),height,toBlob(),toDataURL(),width",
+    @Alerts(CHROME = "captureStream(),getContext(),height,toBlob(),toDataURL(),width",
             FF38 = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             FF45 = "captureStream(),getContext(),height,"
                     + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
@@ -1549,7 +1549,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
-                + "longDesc,marginHeight,marginWidth,name,sandbox,scrolling,src,srcdoc,"
+                + "longDesc,marginHeight,marginWidth,name,referrerpolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
             IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
                 + "hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,security,src,vspace,"
@@ -1582,7 +1582,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
-                + "naturalHeight,naturalWidth,sizes,src,srcset,useMap,vspace,width,x,"
+                + "naturalHeight,naturalWidth,referrerpolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
                 + "height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
@@ -2571,7 +2571,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
                 + "webkitDisplayingFullscreen,webkitDroppedFrameCount,"
-                + "webkitEnterFullscreen(),webkitEnterFullScreen(),"
+                + "webkitEnterFullScreen(),webkitEnterFullscreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF38 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
@@ -2743,7 +2743,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,"
-                + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),keyCode,keyIdentifier,"
+                + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),key,keyCode,keyIdentifier,"
                 + "location,metaKey,repeat,"
                 + "shiftKey",
             FF = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
