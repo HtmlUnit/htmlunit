@@ -81,6 +81,11 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     private Map<String, String> namespaces_ = new HashMap<>();
 
     /**
+     * Whether the is Mouse currently over this element or now.
+     */
+    private boolean mouseOver_;
+
+    /**
      * Creates an instance of a DOM element that can have a namespace.
      *
      * @param namespaceURI the URI that identifies an XML namespace
@@ -1133,6 +1138,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         else {
             currentPage = scriptResult.getNewPage();
         }
+        mouseOver_ = !MouseEvent.TYPE_MOUSE_OUT.equals(eventType);
         return currentPage;
     }
 
@@ -1229,6 +1235,13 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         return false;
     }
 
+    /**
+     * Returns whether the Mouse is currently over this element or not.
+     * @return whether the Mouse is currently over this element or not
+     */
+    public boolean isMouseOver() {
+        return mouseOver_;
+    }
 }
 
 /**

@@ -781,6 +781,9 @@ public class CSSStyleSheet extends StyleSheet {
                 final String ref = element.getPage().getUrl().getRef();
                 return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
 
+            case "hover":
+                return element.isMouseOver();
+
             default:
                 if (value.startsWith("nth-child(")) {
                     final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
