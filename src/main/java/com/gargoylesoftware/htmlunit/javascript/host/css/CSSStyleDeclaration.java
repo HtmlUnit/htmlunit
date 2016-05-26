@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_UNDEFINED_AS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
@@ -2702,7 +2703,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param important may be null
      */
     @JsxFunction
-    public void setProperty(final String name, final String value, final String important) {
+    public void setProperty(final String name, final Object value, final String important) {
         String imp = "";
         if (!StringUtils.isEmpty(important) && !"null".equals(important)) {
             if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
@@ -2728,16 +2729,19 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             setStyleLengthAttribute(name, value, imp, false, true, false, false);
         }
         else if (OUTLINE_WIDTH.getAttributeName().equals(name)) {
-            setOutlineWidth(value);
+            final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
+            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), value, "", false, false, true, requiresUnit);
         }
         else if (WORD_SPACING.getAttributeName().equals(name)) {
-            setWordSpacing(value);
+            setStyleLengthAttribute(WORD_SPACING.getAttributeName(), value, "",
+                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false);
         }
         else if (VERTICAL_ALIGN.getAttributeName().equals(name)) {
-            setVerticalAlign(value);
+            final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
+            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, "", auto, true, false, false);
         }
         else {
-            setStyleAttribute(name, value, imp);
+            setStyleAttribute(name, Context.toString(value), imp);
         }
     }
 
@@ -3287,67 +3291,73 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param thinMedThick thin, medium, thick are supported
      * @param unitRequired unit is required
      */
-    private void setStyleLengthAttribute(final String name, String value, final String important,
+    private void setStyleLengthAttribute(final String name, final Object value, final String important,
                 final boolean auto, final boolean percent, final boolean thinMedThick, final boolean unitRequired) {
-        if (StringUtils.isEmpty(value)) {
-            setStyleAttribute(name, value);
+
+        String valueString = Context.toString(value);
+        if (Undefined.instance == value && getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY)) {
+            valueString = "";
+        }
+
+        if (StringUtils.isEmpty(valueString)) {
+            setStyleAttribute(name, valueString);
             return;
         }
 
-        if ((auto && "auto".equals(value))
-                || ("initial".equals(value) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
-                || "inherit".equals(value)) {
-            setStyleAttribute(name, value);
+        if ((auto && "auto".equals(valueString))
+                || ("initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
+                || "inherit".equals(valueString)) {
+            setStyleAttribute(name, valueString);
             return;
         }
 
-        if ((thinMedThick && "thin".equals(value))
-                || "medium".equals(value)
-                || "thick".equals(value)) {
-            setStyleAttribute(name, value);
+        if ((thinMedThick && "thin".equals(valueString))
+                || "medium".equals(valueString)
+                || "thick".equals(valueString)) {
+            setStyleAttribute(name, valueString);
             return;
         }
 
         String unit = "px";
-        if (percent && value.endsWith("%")) {
-            unit = value.substring(value.length() - 1);
-            value = value.substring(0, value.length() - 1);
+        if (percent && valueString.endsWith("%")) {
+            unit = valueString.substring(valueString.length() - 1);
+            valueString = valueString.substring(0, valueString.length() - 1);
         }
-        else if (value.endsWith("px")
-            || value.endsWith("em")
-            || value.endsWith("ex")
-            || value.endsWith("px")
-            || value.endsWith("cm")
-            || value.endsWith("mm")
-            || value.endsWith("in")
-            || value.endsWith("pc")
-            || value.endsWith("pc")
-            || value.endsWith("ch")
-            || value.endsWith("vh")
-            || value.endsWith("vw")) {
-            unit = value.substring(value.length() - 2);
-            value = value.substring(0, value.length() - 2);
+        else if (valueString.endsWith("px")
+            || valueString.endsWith("em")
+            || valueString.endsWith("ex")
+            || valueString.endsWith("px")
+            || valueString.endsWith("cm")
+            || valueString.endsWith("mm")
+            || valueString.endsWith("in")
+            || valueString.endsWith("pc")
+            || valueString.endsWith("pc")
+            || valueString.endsWith("ch")
+            || valueString.endsWith("vh")
+            || valueString.endsWith("vw")) {
+            unit = valueString.substring(valueString.length() - 2);
+            valueString = valueString.substring(0, valueString.length() - 2);
         }
-        else if (value.endsWith("rem")
-            || value.endsWith("vmin")
-            || value.endsWith("vmax")) {
-            unit = value.substring(value.length() - 3);
-            value = value.substring(0, value.length() - 3);
+        else if (valueString.endsWith("rem")
+            || valueString.endsWith("vmin")
+            || valueString.endsWith("vmax")) {
+            unit = valueString.substring(valueString.length() - 3);
+            valueString = valueString.substring(0, valueString.length() - 3);
         }
         else if (unitRequired) {
             return;
         }
 
         try {
-            final float floatValue = Float.parseFloat(value);
+            final float floatValue = Float.parseFloat(valueString);
             if (floatValue % 1 == 0) {
-                value = Integer.toString((int) floatValue) + unit;
+                valueString = Integer.toString((int) floatValue) + unit;
             }
             else {
-                value = Float.toString(floatValue) + unit;
+                valueString = Float.toString(floatValue) + unit;
             }
 
-            setStyleAttribute(name, value, important);
+            setStyleAttribute(name, valueString, important);
         }
         catch (final Exception e) {
             //ignore

@@ -103,6 +103,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     CSS_LENGTH_INITIAL,
 
+    /** undefined is processed as empty length value. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_LENGTH_UNDEFINED_AS_EMPTY,
+
     /** Is display style of HtmlNoEmbed is 'inline'. */
     @BrowserFeature(@WebBrowser(CHROME))
     CSS_NOEMBED_INLINE,
