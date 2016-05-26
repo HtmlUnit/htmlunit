@@ -593,7 +593,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            FF = "20/12/2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_en_in() throws Exception {
         test("new Intl.DateTimeFormat('en-IN').format(date)");
