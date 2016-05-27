@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.23" date="???" description="Bugfixes">
+        </release>
         <release version="2.22" date="May 27, 2016" description="Bugfixes">
             <action type="fix" dev="rbri" issue="1787">
                 Use our own implementation of URL.sameFile to avoid excessive number of DNS lookups and
