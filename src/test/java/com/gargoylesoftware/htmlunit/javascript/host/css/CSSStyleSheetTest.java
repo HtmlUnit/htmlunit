@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleSheetTest extends WebDriverTestCase {
@@ -1209,5 +1210,33 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, new URL(getDefaultUrl(), "test.html"));
         driver.findElement(By.linkText("second page")).click();
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Test that calling insertRule before retrieving the rules works.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("inserted")
+    public void insertRuleWithoutGetRules() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+                + "function doTest() {\n"
+                + "  var f = document.getElementById('myStyle');\n"
+                + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+                + "  try {\n"
+                + "    if (s.insertRule) {\n"
+                + "      s.insertRule('.testStyle1 { color: red; }', 0);\n"
+                + "    } else {\n"
+                + "      s.addRule('.testStyle1', 'color: red;', 0);\n"
+                + "    }\n"
+                + "    alert('inserted');\n"
+                + "  } catch(err) { alert('exception'); }\n"
+                + "}</script>\n"
+                + "<style id='myStyle'></style>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

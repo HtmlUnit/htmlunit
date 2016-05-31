@@ -135,6 +135,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Guy Burton
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @JsxClass
 public class CSSStyleSheet extends StyleSheet {
@@ -1052,11 +1053,7 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxGetter
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
-        if (cssRules_ == null) {
-            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
-            cssRulesIndexFix_ = new ArrayList<>();
-            refreshCssRules();
-        }
+        initCssRules();
         return cssRules_;
     }
 
@@ -1103,6 +1100,7 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction
     public int insertRule(final String rule, final int position) {
         try {
+            initCssRules();
             final int result = wrapped_.insertRule(rule, fixIndex(position));
             refreshCssRules();
             return result;
@@ -1162,6 +1160,7 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction
     public void deleteRule(final int position) {
         try {
+            initCssRules();
             wrapped_.deleteRule(fixIndex(position));
             refreshCssRules();
         }
@@ -1181,6 +1180,7 @@ public class CSSStyleSheet extends StyleSheet {
     public int addRule(final String selector, final String rule) {
         final String completeRule = selector + " {" + rule + "}";
         try {
+            initCssRules();
             wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
             refreshCssRules();
         }
@@ -1198,6 +1198,7 @@ public class CSSStyleSheet extends StyleSheet {
     @JsxFunction({@WebBrowser(IE), @WebBrowser(CHROME)})
     public void removeRule(final int position) {
         try {
+            initCssRules();
             wrapped_.deleteRule(fixIndex(position));
             refreshCssRules();
         }
@@ -1519,6 +1520,14 @@ public class CSSStyleSheet extends StyleSheet {
             default:
                 LOG.warn("Unhandled CSS condition type '" + condition.getConditionType() + "'. Accepting it silently.");
                 return true;
+        }
+    }
+
+    private void initCssRules() {
+        if (cssRules_ == null) {
+            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
+            cssRulesIndexFix_ = new ArrayList<>();
+            refreshCssRules();
         }
     }
 }
