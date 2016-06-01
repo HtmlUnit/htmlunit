@@ -188,6 +188,7 @@ public class CSSRule extends SimpleScriptable {
                 }
                 LOG.warn("Unknown CSSRule " + rule.getClass().getName()
                         + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+                break;
             default:
                 LOG.warn("CSSRule " + rule.getClass().getName()
                         + " is not yet supported; rule content: '" + rule.getCssText() + "'");
