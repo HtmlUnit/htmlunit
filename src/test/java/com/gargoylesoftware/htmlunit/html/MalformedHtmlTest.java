@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Set of tests for ill formed HTML code.
+ *
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour
@@ -914,5 +915,53 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("frame loaded")
+    @NotYetImplemented
+    public void siblingWithoutContentBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div><span></span></div>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</div>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(1, webDriver.findElements(By.name("main")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void siblingWithContentBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div><span>CONTENT</span></div>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</div>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(0, webDriver.findElements(By.name("main")).size());
     }
 }
