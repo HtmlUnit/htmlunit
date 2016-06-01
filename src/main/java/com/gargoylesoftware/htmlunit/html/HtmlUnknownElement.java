@@ -109,7 +109,7 @@ public class HtmlUnknownElement extends HtmlElement {
                 if (hasFeature(MULTICOL_BLOCK)) {
                     return DisplayStyle.BLOCK;
                 }
-
+                break;
             default:
         }
         return DisplayStyle.INLINE;
