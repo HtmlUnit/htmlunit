@@ -207,32 +207,6 @@ public class ApplicationCache extends EventTarget {
     }
 
     /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "onload")
-     * @param listener the event listener
-     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
-     */
-    @Override
-    @JsxFunction
-    public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        getEventListenersContainer().addEventListener(type, listener, useCapture);
-    }
-
-    /**
-     * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "load")
-     * @param listener the event listener
-     * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
-     * documentation</a>
-     */
-    @JsxFunction
-    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        getEventListenersContainer().removeEventListener(type, listener, useCapture);
-    }
-
-    /**
      * Dispatches an event into the event system (standards-conformant browsers only). See
      * <a href="https://developer.mozilla.org/en-US/docs/DOM/element.dispatchEvent">the Gecko
      * DOM reference</a> for more information.

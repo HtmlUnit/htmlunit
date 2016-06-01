@@ -290,7 +290,7 @@ public class EventTarget extends SimpleScriptable {
      * documentation</a>
      */
     @JsxFunction
-    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
