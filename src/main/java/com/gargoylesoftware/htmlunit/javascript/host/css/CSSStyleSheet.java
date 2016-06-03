@@ -1465,6 +1465,7 @@ public class CSSStyleSheet extends StyleSheet {
                     return isValidSelector(sibling.getSelector(), documentMode, domNode)
                             && isValidSelector(sibling.getSiblingSelector(), documentMode, domNode);
                 }
+            //$FALL-THROUGH$
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff
