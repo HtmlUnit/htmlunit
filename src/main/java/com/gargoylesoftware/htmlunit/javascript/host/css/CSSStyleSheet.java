@@ -1417,7 +1417,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
 
-        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");
+        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'dpi', 'dpcm', or 'dppx' value.");
         return -1;
     }
 
