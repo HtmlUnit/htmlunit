@@ -1290,56 +1290,56 @@ public class CSSStyleSheet extends StyleSheet {
                 final float val;
                 switch (property.getName()) {
                     case "max-width":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-width":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-width":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val < scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-width":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val > scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-height":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-height":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-height":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val < scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-height":
-                        val = pixelValue((CSSValueImpl) property.getValue());
+                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
                         if (val > scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
@@ -1394,12 +1394,33 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
-    private static float pixelValue(final CSSValueImpl cssValue) {
-        if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_PX) {
-            return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
+    private static float pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
+        final int dpi;
+        switch (cssValue.getPrimitiveType()) {
+            case CSSPrimitiveValue.CSS_PX:
+                return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
+            case CSSPrimitiveValue.CSS_EMS:
+                // hard coded default for the moment 16px = 1 em
+                return 16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EMS);
+            case CSSPrimitiveValue.CSS_PERCENTAGE:
+                // hard coded default for the moment 16px = 100%
+                return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_PERCENTAGE);
+            case CSSPrimitiveValue.CSS_EXS:
+                // hard coded default for the moment 16px = 100%
+                return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EXS);
+            case CSSPrimitiveValue.CSS_MM:
+                dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                return (dpi / 25.4f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_MM);
+            case CSSPrimitiveValue.CSS_CM:
+                dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                return (dpi / 254f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_CM);
+            case CSSPrimitiveValue.CSS_PT:
+                dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                return (dpi / 72f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_PT);
+            default:
+                break;
         }
-
-        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px' value.");
+        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px', 'em', '%', 'mm', 'ex', or 'pt' value.");
         return -1;
     }
 
