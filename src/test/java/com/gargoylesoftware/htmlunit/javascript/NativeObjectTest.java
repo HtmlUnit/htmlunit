@@ -23,11 +23,11 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Object is a native JavaScript object and therefore provided by Rhino but some tests are needed here
- * to be sure that we have the expected results (for instance EcmaScript 5 adds methods that are not
- * available in FF2 or FF3).
+ * to be sure that we have the expected results.
  *
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NativeObjectTest extends WebDriverTestCase {
@@ -37,30 +37,19 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"constructor: function", "create: undefined", "defineProperties: undefined", "defineProperty: undefined",
-        "freeze: undefined", "getOwnPropertyDescriptor: undefined", "getOwnPropertyNames: undefined",
-        "getPrototypeOf: undefined", "hasOwnProperty: function", "isExtensible: undefined", "isFrozen: undefined",
-        "isPrototypeOf: function", "isSealed: undefined", "keys: undefined", "preventExtensions: undefined",
-        "propertyIsEnumerable: function", "seal: undefined", "toLocaleString: function", "toString: function",
-        "valueOf: function"})
-    public void methods_common() throws Exception {
-        final String[] methods = {"constructor", "create", "defineProperties", "defineProperty", "freeze",
+    @Alerts({"assign: undefined", "constructor: function", "create: undefined", "defineProperties: undefined",
+        "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
+        "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
+        "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
+        "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
+        "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function",
+        "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"})
+    public void common() throws Exception {
+        final String[] methods = {"assign", "constructor", "create", "defineProperties", "defineProperty", "freeze",
             "getOwnPropertyDescriptor", "getOwnPropertyNames", "getPrototypeOf", "hasOwnProperty", "isExtensible",
             "isFrozen", "isPrototypeOf", "isSealed", "keys", "preventExtensions", "propertyIsEnumerable", "seal",
-            "toLocaleString", "toString", "valueOf"};
-        final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Test for the methods with the different expectations depending on the browsers.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
-            "__lookupSetter__: function"})
-    public void methods_different() throws Exception {
-        final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"};
+            "toLocaleString", "toString", "valueOf", "__defineGetter__", "__defineSetter__",
+            "__lookupGetter__", "__lookupSetter__"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
         loadPageWithAlerts2(html);
     }
@@ -72,9 +61,31 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
             FF = "toSource: function")
-    public void methods_toSource() throws Exception {
+    public void others() throws Exception {
         final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE = {})
+    public void assign() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (Object.assign) {\n"
+            + "    var obj = { a: 1 };\n"
+            + "    var copy = Object.assign({}, obj);\n"
+            + "    alert(copy.a);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

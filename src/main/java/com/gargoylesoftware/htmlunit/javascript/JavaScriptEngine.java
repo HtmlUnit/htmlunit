@@ -68,6 +68,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -466,6 +467,10 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "Function", "toSource");
             removePrototypeProperties(window, "Number", "toSource");
             removePrototypeProperties(window, "String", "toSource");
+        }
+        if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
+            IdFunctionObject object = (IdFunctionObject) ScriptableObject.getProperty(window, "Object");
+            object.delete("assign");
         }
         deleteProperties(window, "isXMLName");
 
