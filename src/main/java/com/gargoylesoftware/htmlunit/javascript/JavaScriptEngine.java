@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_REPEAT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_STARTS_ENDS_WITH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_LEFT_RIGHT;
 
@@ -446,6 +447,9 @@ public class JavaScriptEngine {
         removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
         if (!browserVersion.hasFeature(STRING_INCLUDES)) {
             removePrototypeProperties(window, "String", "includes");
+        }
+        if (!browserVersion.hasFeature(STRING_REPEAT)) {
+            removePrototypeProperties(window, "String", "repeat");
         }
         if (!browserVersion.hasFeature(STRING_STARTS_ENDS_WITH)) {
             removePrototypeProperties(window, "String", "startsWith");

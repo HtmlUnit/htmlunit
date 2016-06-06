@@ -276,4 +276,30 @@ public class NativeStringTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "abc", "abcabc"},
+            IE = "repeat not supported")
+    public void repeat() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('repeat' in String.prototype) {\n"
+            + "    var str = 'abc';\n"
+            + "    alert(str.repeat(0));\n"
+            + "    alert(str.repeat(1));\n"
+            + "    alert(str.repeat(2));\n"
+            + "  } else {\n"
+            + "    alert('repeat not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
