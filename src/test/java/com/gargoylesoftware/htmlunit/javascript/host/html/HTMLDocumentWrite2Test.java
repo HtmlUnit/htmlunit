@@ -229,16 +229,16 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @NotYetImplemented
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeInNewWindowAndReadFormCollection() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
-            + "function test() {"
-            + "  var newWin = window.open('', 'myPopup', '');"
-            + "  var newDoc = newWin.document;"
-            + "  newDoc.write('<html><body><form name=newForm></form></body></html>');"
-            + "  alert(newDoc.forms.length);"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var newWin = window.open('', 'myPopup', '');\n"
+            + "  var newDoc = newWin.document;\n"
+            + "  newDoc.write('<html><body><form name=newForm></form></body></html>');\n"
+            + "  alert(newDoc.forms.length);\n"
             + "}\n"
-            + "</script></head>"
-            + "<body onload='test()'>"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -257,16 +257,16 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             IE = {"1", "§§URL§§"})
     @NotYetImplemented(IE)
     public void urlResolutionInWriteForm() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
-            + "function test() {"
-            + "  var newWin = window.open('', 'myPopup', '');"
-            + "  var d = newWin.document;"
-            + "  d.write('<html><body><form action=foo method=post><input type=submit id=it></form></body></html>');"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var newWin = window.open('', 'myPopup', '');\n"
+            + "  var d = newWin.document;\n"
+            + "  d.write('<html><body><form action=foo method=post><input type=submit id=it></form></body></html>');\n"
             + "  d.close();\n"
             + "}\n"
-            + "</script></head>"
-            + "<body onload='test()'>"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final int startCount = getMockWebConnection().getRequestCount();

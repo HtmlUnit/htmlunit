@@ -347,10 +347,14 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"},
             IE = "exception")
     public void simpleFilter() throws Exception {
-        final String script = "var noScripts = {acceptNode: function(node) {"
-            + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
+        final String script = "var noScripts = {\n"
+            + "  acceptNode: function(node) {\n"
+            + "    if (node.tagName == 'SCRIPT')\n"
+            + "      return NodeFilter.FILTER_REJECT;\n"
             // using number rather that object field causes Rhino to pass a Double
-            + "return 1; // NodeFilter.FILTER_ACCEPT \n}};\n"
+            + "    return 1; // NodeFilter.FILTER_ACCEPT \n"
+            + "  }\n"
+            + "};\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
             + "alert(safeTagName(tw.firstChild()));\n"
@@ -370,9 +374,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Test
     @Alerts({"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"})
     public void simpleFilter_asAFunction() throws Exception {
-        final String script = "var noScripts = function(node) {"
-            + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
-            + "return 1;};\n"
+        final String script = "var noScripts = function(node) {\n"
+            + "  if (node.tagName == 'SCRIPT')\n"
+            + "    return NodeFilter.FILTER_REJECT;\n"
+            + "  return 1;\n"
+            + "};\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
             + "alert(safeTagName(tw.firstChild()));\n"

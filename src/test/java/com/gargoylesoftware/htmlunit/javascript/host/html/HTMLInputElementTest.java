@@ -1287,7 +1287,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  var f = document.getElementById('aFile');\n"
             + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
 
-            + "  try {"
+            + "  try {\n"
             + "    f.type = 'CHECKBOX';\n"
             + "    alert(f.type + ' ' + f.getAttribute('type'));\n"
             + "  } catch(e) { alert('error');}\n"

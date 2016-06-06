@@ -175,7 +175,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function delegateClick() {\n"
-            + "  try {"
+            + "  try {\n"
             + "    document.getElementById(\"link1\").click();\n"
             + "  } catch(e) {}\n"
             + "}\n"

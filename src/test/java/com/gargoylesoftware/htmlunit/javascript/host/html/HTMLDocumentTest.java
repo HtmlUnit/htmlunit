@@ -1652,7 +1652,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  var t = document.createElement('<input name=x>');\n"
             + "  alert(t.tagName);\n"
-            + "} catch(e) {"
+            + "} catch(e) {\n"
             + "  alert('exception');\n"
             + "}\n"
             + "</script>\n"

@@ -510,12 +510,12 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_attributeListenerLock() throws Exception {
-        final String html = "<html><head><script>"
-            + "function foo() {"
-            + "  document.getElementById('aframe').src = '" + URL_FIRST + "';"
-            + "  return false;"
-            + "}</script>"
-            + "<body><iframe src='about:blank' id='aframe'></iframe>"
+        final String html = "<html><head><script>\n"
+            + "function foo() {\n"
+            + "  document.getElementById('aframe').src = '" + URL_FIRST + "';\n"
+            + "  return false;\n"
+            + "}</script>\n"
+            + "<body><iframe src='about:blank' id='aframe'></iframe>\n"
             + "<a href='#' onclick='foo()' id='link'>load iframe</a></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         final WebClient copy = clone(page.getWebClient());

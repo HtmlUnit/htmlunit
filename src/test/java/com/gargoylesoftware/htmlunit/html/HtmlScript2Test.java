@@ -217,8 +217,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
-            + "  var script = document.createElement('script');"
-            + "  try {"
+            + "  var script = document.createElement('script');\n"
+            + "  try {\n"
             + "    script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
             + "    script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
             + "  } catch(e) {\n"
