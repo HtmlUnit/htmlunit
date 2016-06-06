@@ -246,4 +246,34 @@ public class NativeStringTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "false"},
+            FF38 = "includes not supported",
+            IE = "includes not supported")
+    public void includes() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('includes' in String.prototype) {\n"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.includes('to be'));\n"
+            + "    alert(str.includes('question.'));\n"
+            + "    alert(str.includes('To be'));\n"
+            + "    alert(str.includes(str));\n"
+
+            + "    alert(str.includes('test'));\n"
+            + "  } else {\n"
+            + "    alert('includes not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -1506,6 +1506,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     STRING_CONTAINS,
 
+    /** Indicates that string.includes() is supported. */
+    @BrowserFeature({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    STRING_INCLUDES,
+
     /** Indicates that string.startsWith() and .endWith() are supported. */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     STRING_STARTS_ENDS_WITH,

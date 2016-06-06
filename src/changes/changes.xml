@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: string.includes() is not available in IE and FF38.
+            </action>
             <action type="add" dev="asashour" issue="1797">
                 JavaScript: implement Object.assign().
             </action>
