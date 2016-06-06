@@ -88,4 +88,26 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE = {})
+    public void assignUndefined() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (Object.assign) {\n"
+            + "    var obj = { a: 1 };\n"
+            + "    var copy = Object.assign({}, undefined, obj);\n"
+            + "    alert(copy.a);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
