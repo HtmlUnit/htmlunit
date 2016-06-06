@@ -1506,6 +1506,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     STRING_CONTAINS,
 
+    /** Indicates that string.startsWith() and .endWith() are supported. */
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
+    STRING_STARTS_ENDS_WITH,
+
     /** Indicates that string.trimLeft() and .trimRight() are supported. */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     STRING_TRIM_LEFT_RIGHT,

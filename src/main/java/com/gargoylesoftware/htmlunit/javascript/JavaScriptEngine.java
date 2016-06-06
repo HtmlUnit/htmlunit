@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_STARTS_ENDS_WITH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_LEFT_RIGHT;
 
 import java.io.IOException;
@@ -441,6 +442,10 @@ public class JavaScriptEngine {
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
+        if (!browserVersion.hasFeature(STRING_STARTS_ENDS_WITH)) {
+            removePrototypeProperties(window, "String", "startsWith");
+            removePrototypeProperties(window, "String", "endsWith");
+        }
         if (!browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
             removePrototypeProperties(window, "String", "trimLeft");
             removePrototypeProperties(window, "String", "trimRight");

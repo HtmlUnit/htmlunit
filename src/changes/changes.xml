@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: string.startsWith(), and .endsWith() are not available in IE11.
+            </action>
             <action type="update" dev="asashour">
                 BrowserVersion: deprecate FIREFOX_38.
             </action>

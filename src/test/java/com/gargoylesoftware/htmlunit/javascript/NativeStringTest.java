@@ -190,4 +190,60 @@ public class NativeStringTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "false"},
+            IE = "startsWith not supported")
+    public void startsWith() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('startsWith' in String.prototype) {"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.startsWith('To be'));\n"
+            + "    alert(str.startsWith('T'));\n"
+            + "    alert(str.startsWith(str));\n"
+
+            + "    alert(str.startsWith('question.'));\n"
+            + "  } else {\n"
+            + "    alert('startsWith not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "false"},
+            IE = "endsWith not supported")
+    public void endsWith() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('endsWith' in String.prototype) {"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.endsWith('question.'));\n"
+            + "    alert(str.endsWith('.'));\n"
+            + "    alert(str.endsWith(str));\n"
+
+            + "    alert(str.endsWith('the'));\n"
+            + "  } else {\n"
+            + "    alert('endsWith not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
