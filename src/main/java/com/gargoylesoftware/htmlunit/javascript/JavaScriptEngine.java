@@ -469,8 +469,7 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "String", "toSource");
         }
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
-            IdFunctionObject object = (IdFunctionObject) ScriptableObject.getProperty(window, "Object");
-            object.delete("assign");
+            ((IdFunctionObject) ScriptableObject.getProperty(window, "Object")).delete("assign");
         }
         deleteProperties(window, "isXMLName");
 
