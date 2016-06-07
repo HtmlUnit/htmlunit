@@ -381,12 +381,21 @@ public class CodeStyleTest {
     }
 
     /**
-     * Checks the year in LICENSE.txt.
+     * Checks the year in {@code LICENSE.txt}.
      */
     private void licenseYear() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("LICENSE.txt"), TextUtil.DEFAULT_CHARSET);
-        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
-            addFailure("Incorrect year in LICENSE.txt");
+        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), TextUtil.DEFAULT_CHARSET);
+        boolean check = false;
+        for (final String line : lines) {
+            if (line.contains("<property name=\"header\"")) {
+                if (!line.contains("Copyright (c) " + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
+                    addFailure("Incorrect year in LICENSE.txt");
+                }
+                check = true;
+            }
+        }
+        if (!check) {
+            addFailure("Not found \"header\" in checkstyle.xml");
         }
     }
 
