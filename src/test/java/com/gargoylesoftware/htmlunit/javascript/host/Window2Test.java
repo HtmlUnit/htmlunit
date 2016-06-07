@@ -1849,4 +1849,24 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void constructor() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(new Window());\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

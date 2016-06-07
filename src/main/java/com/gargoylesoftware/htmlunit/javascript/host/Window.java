@@ -128,6 +128,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -203,8 +204,22 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Window() {
+    }
+
+    /**
+     * Creates an instance.
+     *
+     * @param cx the current context
+     * @param args the arguments to the ActiveXObject constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
+     */
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) {
+        throw ScriptRuntime.typeError("Illegal constructor");
     }
 
     /**
@@ -2068,7 +2083,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                 targetURL = new URL(targetOrigin);
             }
             catch (final Exception e) {
-                Context.throwAsScriptRuntimeEx(
+                throw Context.throwAsScriptRuntimeEx(
                         new Exception(
                                 "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
                                 + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
