@@ -104,7 +104,6 @@ public class CodeStyleTest {
         //     addFailure("Not used " + className);
         // }
 
-        licenseYear();
         versionYear();
         parentInPom();
     }
@@ -377,16 +376,6 @@ public class CodeStyleTest {
             if (indentation % 4 != 0) {
                 addFailure("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
             }
-        }
-    }
-
-    /**
-     * Checks the year in LICENSE.txt.
-     */
-    private void licenseYear() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("LICENSE.txt"), TextUtil.DEFAULT_CHARSET);
-        if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
-            addFailure("Incorrect year in LICENSE.txt");
         }
     }
 
