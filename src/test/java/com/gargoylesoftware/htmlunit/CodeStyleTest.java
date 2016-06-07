@@ -104,6 +104,7 @@ public class CodeStyleTest {
         //     addFailure("Not used " + className);
         // }
 
+        licenseYear();
         versionYear();
         parentInPom();
     }
@@ -376,6 +377,25 @@ public class CodeStyleTest {
             if (indentation % 4 != 0) {
                 addFailure("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
             }
+        }
+    }
+
+    /**
+     * Checks the year in {@code LICENSE.txt}.
+     */
+    private void licenseYear() throws IOException {
+        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), TextUtil.DEFAULT_CHARSET);
+        boolean check = false;
+        for (final String line : lines) {
+            if (line.contains("<property name=\"header\"")) {
+                if (!line.contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
+                    addFailure("Incorrect year in LICENSE.txt");
+                }
+                check = true;
+            }
+        }
+        if (!check) {
+            addFailure("Not found \"header\" in checkstyle.xml");
         }
     }
 
