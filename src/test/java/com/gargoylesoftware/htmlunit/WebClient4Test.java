@@ -50,7 +50,7 @@ public class WebClient4Test extends WebServerTestCase {
 
         try (final WebClient client = getWebClient()) {
             TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-            assertTrue(textPage.getContent().contains("Gargoyle Software"));
+            assertTrue(textPage.getContent().contains("Apache License"));
 
             try (final WebClient copy = clone(client)) {
                 assertNotNull(copy);
@@ -69,10 +69,10 @@ public class WebClient4Test extends WebServerTestCase {
 
                 final String content = response.getContentAsString();
                 assertNotNull(content);
-                assertTrue(content.contains("Gargoyle Software"));
+                assertTrue(content.contains("Apache License"));
 
                 textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-                assertTrue(textPage.getContent().contains("Gargoyle Software"));
+                assertTrue(textPage.getContent().contains("Apache License"));
             }
         }
     }
