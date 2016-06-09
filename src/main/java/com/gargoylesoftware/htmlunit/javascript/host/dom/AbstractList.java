@@ -112,16 +112,16 @@ public class AbstractList extends SimpleScriptable implements Function {
     /**
      * Creates an instance.
      *
-     * @param domeNode the {@link DomNode}
+     * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      * @param initialElements the initial content for the cache
      */
-    private AbstractList(final DomNode domeNode, final boolean attributeChangeSensitive,
+    private AbstractList(final DomNode domNode, final boolean attributeChangeSensitive,
             final List<Object> initialElements) {
-        if (domeNode != null) {
-            setDomNode(domeNode, false);
-            final ScriptableObject parentScope = domeNode.getScriptableObject();
+        if (domNode != null) {
+            setDomNode(domNode, false);
+            final ScriptableObject parentScope = domNode.getScriptableObject();
             if (parentScope != null) {
                 setParentScope(parentScope);
                 setPrototype(getPrototype(getClass()));
