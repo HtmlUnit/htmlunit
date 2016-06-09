@@ -1736,12 +1736,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the scrollHeight for this element.
-     * @return a dummy value of 10
+     * @return at the moment the same as client height
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534615.aspx">MSDN documentation</a>
      */
     @JsxGetter
     public int getScrollHeight() {
-        return 10;
+        return getClientHeight();
     }
 
     /**
@@ -1751,7 +1751,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getScrollWidth() {
-        return 10;
+        return getClientWidth();
     }
 
     /**

@@ -2877,6 +2877,60 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "false", "true", "true", "true", "true", "true", "true", "true"})
+    public void scrollWidthAndHeight() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    alert(myDiv1.scrollWidth >= myDiv1.clientWidth);\n"
+            + "    alert(myDiv1.scrollHeight >= myDiv1.clientHeight);\n"
+
+            + "    alert(myDiv2.scrollWidth >= myDiv1.scrollWidth);\n"
+            + "    alert(myDiv2.scrollHeight >= myDiv1.scrollHeight);\n"
+            + "    alert(myDiv2.scrollWidth >= myDiv2.clientWidth);\n"
+            + "    alert(myDiv2.scrollHeight >= myDiv2.clientHeight);\n"
+
+            + "    alert(myDiv3.scrollWidth >= myDiv2.scrollWidth);\n"
+            + "    alert(myDiv3.scrollHeight >= myDiv2.scrollHeight);\n"
+            + "    alert(myDiv3.scrollWidth >= myDiv3.clientWidth);\n"
+            + "    alert(myDiv3.scrollHeight >= myDiv3.clientHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv1'/>\n"
+            + "  <div id='myDiv2' style='height: 42px; width: 42px' />\n"
+            + "  <div id='myDiv3' style='height: 7em; width: 7em' />\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void scrollWidthAndHeightDisplayNone() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    alert(myDiv.scrollWidth);\n"
+            + "    alert(myDiv.scrollHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv' style='display: none;' />\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for https://sourceforge.net/tracker/?func=detail&aid=2022578&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
