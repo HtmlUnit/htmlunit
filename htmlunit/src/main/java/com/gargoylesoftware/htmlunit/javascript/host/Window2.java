@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime.UNDEFINED;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -110,6 +111,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
+import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
 public class Window2 extends EventTarget2 implements AutoCloseable {
@@ -394,9 +396,20 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Override
     public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
-        final MethodHandle mh = staticHandle("getArbitraryProperty", Object.class, Object.class, String.class);
+        final boolean scopeAccess = NashornCallSiteDescriptor.isScope(desc);
+
+        final MethodHandle mh;
+        if (scopeAccess) {
+            final FindProperty find = findProperty(NO_SUCH_PROPERTY_NAME, true);
+            mh = getCallMethodHandle((ScriptFunction) find.getObjectValue(), desc.getMethodType(), name);
+        }
+        else {
+            mh = MethodHandles.insertArguments(
+                    staticHandle("getArbitraryProperty", Object.class, Object.class, String.class),
+                    1, name);
+        }
         final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
-        return new GuardedInvocation(MethodHandles.insertArguments(mh, 1, name),
+        return new GuardedInvocation(mh,
                 NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
                 getProtoSwitchPoints(name, null),
                 explicitInstanceOfCheck ? null : ClassCastException.class);
