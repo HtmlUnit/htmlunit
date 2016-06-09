@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors.referenceError;
 import static com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime.UNDEFINED;
 
 import java.io.IOException;
@@ -398,16 +399,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
         final boolean scopeAccess = NashornCallSiteDescriptor.isScope(desc);
 
-        final MethodHandle mh;
-        if (scopeAccess) {
-            final FindProperty find = findProperty(NO_SUCH_PROPERTY_NAME, true);
-            mh = getCallMethodHandle((ScriptFunction) find.getObjectValue(), desc.getMethodType(), name);
-        }
-        else {
-            mh = MethodHandles.insertArguments(
-                    staticHandle("getArbitraryProperty", Object.class, Object.class, String.class),
-                    1, name);
-        }
+        final MethodHandle  mh = MethodHandles.insertArguments(
+                staticHandle("getArbitraryProperty", Object.class, Object.class, String.class, boolean.class),
+                1, name, scopeAccess);
         final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
         return new GuardedInvocation(mh,
                 NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
@@ -416,7 +410,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     @SuppressWarnings("unused")
-    private static Object getArbitraryProperty(final Object self, final String name) {
+    private static Object getArbitraryProperty(final Object self, final String name, final boolean scopeAccess) {
         final Window2 window = getWindow(self);
         final HtmlPage page = (HtmlPage) window.getDomNodeOrDie();
         Object object = getFrameWindowByName(page, name);
@@ -439,6 +433,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             }
         }
         if (object == null) {
+            if (scopeAccess) {
+                throw referenceError("not.defined", name);
+            }
             object = Undefined.getUndefined();
         }
         return object;
