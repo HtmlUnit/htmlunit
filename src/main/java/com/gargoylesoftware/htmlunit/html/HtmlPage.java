@@ -640,7 +640,7 @@ public class HtmlPage extends InteractivePage {
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
         final List<HtmlForm> forms = getDocumentElement().getElementsByAttribute("form", "name", name);
-        if (forms.size() == 0) {
+        if (forms.isEmpty()) {
             throw new ElementNotFoundException("form", "name", name);
         }
         return forms.get(0);

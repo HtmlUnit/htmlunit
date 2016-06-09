@@ -1382,7 +1382,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             }
         }
 
-        if (elements.size() == 0) {
+        if (elements.isEmpty()) {
             return NOT_FOUND;
         }
 

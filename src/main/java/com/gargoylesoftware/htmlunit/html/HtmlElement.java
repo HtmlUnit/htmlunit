@@ -843,8 +843,7 @@ public abstract class HtmlElement extends DomElement {
 
         final List<E> list = getElementsByAttribute(elementName, attributeName, attributeValue);
 
-        final int listSize = list.size();
-        if (listSize == 0) {
+        if (list.isEmpty()) {
             throw new ElementNotFoundException(elementName, attributeName, attributeValue);
         }
 
