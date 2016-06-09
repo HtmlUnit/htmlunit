@@ -132,7 +132,9 @@ public class HTMLAllCollection extends HTMLCollection {
         return !getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
     }
 
-    @JsxFunction
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Object namedItem(final String name) {
         final List<Object> elements = getElements();

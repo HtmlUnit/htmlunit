@@ -55,8 +55,8 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code type} property.
      * @return the value of the {@code type} property
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE)})
     @Override
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE)})
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             return "";
@@ -76,8 +76,8 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code type} property.
      * @param type the value of the {@code type} property
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
     @Override
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             if (StringUtils.isEmpty(type)) {

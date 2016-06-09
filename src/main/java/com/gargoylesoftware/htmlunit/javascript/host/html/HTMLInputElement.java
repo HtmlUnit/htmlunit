@@ -148,7 +148,6 @@ public class HTMLInputElement extends FormField {
      *
      * @param newValue the new value
      */
-    @JsxSetter
     @Override
     public void setValue(final Object newValue) {
         if (null == newValue) {

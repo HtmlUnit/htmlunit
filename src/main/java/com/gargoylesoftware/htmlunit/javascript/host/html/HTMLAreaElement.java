@@ -100,7 +100,6 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * Sets the focus to this element.
      */
-    @JsxFunction
     @Override
     public void focus() {
         // in reality this depends also on the visibility of the area itself

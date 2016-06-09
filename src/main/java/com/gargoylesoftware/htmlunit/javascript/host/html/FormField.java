@@ -95,26 +95,6 @@ public class FormField extends FormChild {
     }
 
     /**
-     * Sets the {@code onchange} event handler for this element.
-     * @param onchange the {@code onchange} event handler for this element
-     */
-    @Override
-    @JsxSetter(@WebBrowser(IE))
-    public void setOnchange(final Object onchange) {
-        setEventHandlerProp("onchange", onchange);
-    }
-
-    /**
-     * Returns the {@code onchange} event handler for this element.
-     * @return the {@code onchange} event handler for this element
-     */
-    @Override
-    @JsxGetter(@WebBrowser(IE))
-    public Function getOnchange() {
-        return getEventHandler("onchange");
-    }
-
-    /**
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override

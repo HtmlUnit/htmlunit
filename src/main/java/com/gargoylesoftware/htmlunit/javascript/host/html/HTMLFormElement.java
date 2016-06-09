@@ -256,26 +256,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the {@code onsubmit} event handler for this element.
-     * @return the {@code onsubmit} event handler for this element
-     */
-    @Override
-    @JsxGetter(@WebBrowser(IE))
-    public Object getOnsubmit() {
-        return getEventHandlerProp("onsubmit");
-    }
-
-    /**
-     * Sets the {@code onsubmit} event handler for this element.
-     * @param onsubmit the {@code onsubmit} event handler for this element
-     */
-    @Override
-    @JsxSetter(@WebBrowser(IE))
-    public void setOnsubmit(final Object onsubmit) {
-        setEventHandlerProp("onsubmit", onsubmit);
-    }
-
-    /**
      * Sets the value of the JavaScript attribute {@code target}.
      * @param target the new value
      */

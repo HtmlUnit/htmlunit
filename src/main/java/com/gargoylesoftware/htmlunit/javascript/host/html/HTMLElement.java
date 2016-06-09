@@ -697,7 +697,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the attribute node for the specified attribute
      */
     @Override
-    @JsxFunction
     public Object getAttributeNode(final String attributeName) {
         return ((NamedNodeMap) getAttributes()).getNamedItem(attributeName);
     }
@@ -2557,7 +2556,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter(@WebBrowser(IE))
     public HTMLCollection getChildren() {
         return super.getChildren();
     }

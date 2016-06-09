@@ -130,7 +130,6 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
-    @JsxSetter
     @Override
     public void setOuterHTML(final Object value) {
         throw Context.reportRuntimeError("outerHTML is read-only for tag '"

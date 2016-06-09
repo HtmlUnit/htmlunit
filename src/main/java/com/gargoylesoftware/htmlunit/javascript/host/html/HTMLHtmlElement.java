@@ -66,7 +66,6 @@ public class HTMLHtmlElement extends HTMLElement {
      * Overwritten to throw an exception.
      * @param value the new value for replacing this node
      */
-    @JsxSetter
     @Override
     public void setOuterHTML(final Object value) {
         throw Context.reportRuntimeError("outerHTML is read-only for tag 'html'");
