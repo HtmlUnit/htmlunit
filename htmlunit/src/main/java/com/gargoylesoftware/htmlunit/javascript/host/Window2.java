@@ -460,7 +460,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             }
         }
 
-        if (elements.size() == 0) {
+        if (elements.isEmpty()) {
             return null;
         }
 
