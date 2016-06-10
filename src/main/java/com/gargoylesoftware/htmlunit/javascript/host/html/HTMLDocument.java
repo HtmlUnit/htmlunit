@@ -329,8 +329,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code forms}.
-     * @return the value of the JavaScript attribute {@code forms}
+     * Returns the value of the JavaScript property {@code forms}.
+     * @return the value of the JavaScript property {@code forms}
      */
     @JsxGetter
     public Object getForms() {
@@ -357,9 +357,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code links}. Refer also to the
+     * Returns the value of the JavaScript property {@code links}. Refer also to the
      * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
-     * @return the value of this attribute
+     * @return the value of this property
      */
     @JsxGetter
     public Object getLinks() {
@@ -412,11 +412,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code anchors}.
+     * Returns the value of the JavaScript property {@code anchors}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
      * Gecko DOM reference</a>
-     * @return the value of this attribute
+     * @return the value of this property
      */
     @JsxGetter
     public Object getAnchors() {
@@ -453,12 +453,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code applets}.
+     * Returns the value of the JavaScript property {@code applets}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
      * MSDN documentation</a>
      * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">
      * Gecko DOM reference</a>
-     * @return the value of this attribute
+     * @return the value of this property
      */
     @JsxGetter
     public Object getApplets() {
@@ -761,8 +761,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the cookie attribute.
-     * @return the cookie attribute
+     * Returns the {@code cookie} property.
+     * @return the {@code cookie} property
      */
     @JsxGetter
     public String getCookie() {
@@ -790,9 +790,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the {@code compatMode} attribute.
+     * Returns the {@code compatMode} property.
      * Note that it is deprecated in Internet Explorer 8 in favor of the {@code documentMode}.
-     * @return the {@code compatMode} attribute
+     * @return the {@code compatMode} property
      */
     @JsxGetter
     public String getCompatMode() {
@@ -802,8 +802,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the {@code documentMode} attribute.
-     * @return the {@code documentMode} attribute
+     * Returns the {@code documentMode} property.
+     * @return the {@code documentMode} property
      */
     @JsxGetter(@WebBrowser(IE))
     public int getDocumentMode() {
@@ -1132,13 +1132,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns all HTML elements that have a "name" attribute with the specified value.
+     * Returns all HTML elements that have a {@code name} attribute with the specified value.
      *
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
      *
      * @param elementName - value of the {@code name} attribute to look for
-     * @return all HTML elements that have a "name" attribute with the specified value
+     * @return all HTML elements that have a {@code name} attribute with the specified value
      */
     @JsxFunction
     public HTMLCollection getElementsByName(final String elementName) {
@@ -1242,7 +1242,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Looks at attributes with the specified name.
+     * Looks at properties with the specified name.
      * {@inheritDoc}
      */
     @Override
@@ -1301,8 +1301,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the {@code bgColor} attribute.
-     * @return the value of the {@code bgColor} attribute
+     * Returns the value of the {@code bgColor} property.
+     * @return the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -1318,8 +1318,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the {@code bgColor} attribute.
-     * @param color the value of the {@code bgColor} attribute
+     * Sets the value of the {@code bgColor} property.
+     * @param color the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -1329,8 +1329,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the {@code alinkColor} attribute.
-     * @return the value of the {@code alinkColor} attribute
+     * Returns the value of the {@code alinkColor} property.
+     * @return the value of the {@code alinkColor} property
      */
     @JsxGetter
     public String getAlinkColor() {
@@ -1345,8 +1345,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the {@code alinkColor} attribute.
-     * @param color the value of the {@code alinkColor} attribute
+     * Sets the value of the {@code alinkColor} property.
+     * @param color the value of the {@code alinkColor} property
      */
     @JsxSetter
     public void setAlinkColor(final String color) {
@@ -1355,8 +1355,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the {@code linkColor} attribute.
-     * @return the value of the {@code linkColor} attribute
+     * Returns the value of the {@code linkColor} property.
+     * @return the value of the {@code linkColor} property
      */
     @JsxGetter
     public String getLinkColor() {
@@ -1371,8 +1371,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the {@code linkColor} attribute.
-     * @param color the value of the {@code linkColor} attribute
+     * Sets the value of the {@code linkColor} property.
+     * @param color the value of the {@code linkColor} property
      */
     @JsxSetter
     public void setLinkColor(final String color) {
@@ -1381,8 +1381,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the {@code vlinkColor} attribute.
-     * @return the value of the {@code vlinkColor} attribute
+     * Returns the value of the {@code vlinkColor} property.
+     * @return the value of the {@code vlinkColor} property
      */
     @JsxGetter
     public String getVlinkColor() {
@@ -1397,8 +1397,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the {@code vlinkColor} attribute.
-     * @param color the value of the {@code vlinkColor} attribute
+     * Sets the value of the {@code vlinkColor} property.
+     * @param color the value of the {@code vlinkColor} property
      */
     @JsxSetter
     public void setVlinkColor(final String color) {
@@ -1407,8 +1407,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the {@code fgColor} attribute.
-     * @return the value of the {@code fgColor} attribute
+     * Returns the value of the {@code fgColor} property.
+     * @return the value of the {@code fgColor} property
      */
     @JsxGetter
     public String getFgColor() {
@@ -1423,8 +1423,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Sets the value of the {@code fgColor} attribute.
-     * @param color the value of the {@code fgColor} attribute
+     * Sets the value of the {@code fgColor} property.
+     * @param color the value of the {@code fgColor} property
      */
     @JsxSetter
     public void setFgColor(final String color) {
@@ -1535,8 +1535,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Returns the value of the {@code scripts} attribute.
-     * @return the value of the {@code scripts} attribute
+     * Returns the value of the {@code scripts} property.
+     * @return the value of the {@code scripts} property
      */
     @JsxGetter
     public Object getScripts() {
