@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -1330,10 +1330,10 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     protected void detach() {
-        final HTMLDocument doc = (HTMLDocument) getPage().getScriptableObject();
+        final HTMLDocument2 doc = (HTMLDocument2) getPage().getScriptObject2();
         final Object activeElement = doc.getActiveElement();
 
-        if (activeElement == getScriptableObject()) {
+        if (activeElement == getScriptObject2()) {
             doc.setActiveElement(null);
             if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
                 ((InteractivePage) getPage()).setFocusedElement(null);
@@ -1347,7 +1347,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         for (DomNode child : getChildNodes()) {
-            if (activeElement == child.getScriptableObject()) {
+            if (activeElement == child.getScriptObject2()) {
                 doc.setActiveElement(null);
                 if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
                     ((InteractivePage) getPage()).setFocusedElement(null);

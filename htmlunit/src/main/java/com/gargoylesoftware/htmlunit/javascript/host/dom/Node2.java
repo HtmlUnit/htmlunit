@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -24,6 +25,7 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
@@ -40,8 +42,10 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 public class Node2 extends EventTarget2 {
 
@@ -253,6 +257,160 @@ public class Node2 extends EventTarget2 {
     public Object getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         return domNode.getPrefix();
+    }
+
+    /**
+     * Add a DOM node as a child to this node before the referenced node.
+     * If the referenced node is null, append to the end.
+     * @param newNode the node to be inserted
+     * @param referenceNode the node before which {@code newNode} is inserted
+     * @return the newly added child node
+     */
+    @Function
+    public Object insertBefore(final Node2 newChild, final Object refChildObject) {
+        Object insertedChild = null;
+
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
+
+            // is the node allowed here?
+            if (!isNodeInsertable(newChild)) {
+                /*throw new DOMException2("Node cannot be inserted at the specified point in the hierarchy",
+                        DOMException.HIERARCHY_REQUEST_ERR);*/
+            }
+            if (newChildNode instanceof DomDocumentFragment) {
+                final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
+                for (final DomNode child : fragment.getChildren()) {
+                    if (!isNodeInsertable((Node2) child.getScriptObject2())) {
+//                        throw asJavaScriptException(
+//                            new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+//                                DOMException.HIERARCHY_REQUEST_ERR));
+                    }
+                }
+            }
+
+            // extract refChild
+            final DomNode refChildNode;
+            if (refChildObject == Undefined.getUndefined()) {
+                if (/*args.length == 2 || */getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
+                    refChildNode = null;
+                }
+                else {
+                    throw new RuntimeException("insertBefore: not enough arguments");
+                    //throw ECMAErrors.error(new RuntimeExc"insertBefore: not enough arguments");
+                }
+            }
+            else if (refChildObject != null) {
+                refChildNode = ((Node2) refChildObject).getDomNodeOrDie();
+            }
+            else {
+                refChildNode = null;
+            }
+
+            final DomNode domNode = getDomNodeOrDie();
+
+            try {
+                domNode.insertBefore(newChildNode, refChildNode);
+            }
+            catch (final org.w3c.dom.DOMException e) {
+//                throw asJavaScriptException(
+//                        new DOMException(e.getMessage(),
+//                            DOMException.HIERARCHY_REQUEST_ERR));
+            }
+            insertedChild = newChild;
+        return insertedChild;
+    }
+
+    /**
+     * Replaces a child DOM node with another DOM node.
+     * @param newChildObject the node to add as a child of this node
+     * @param oldChildObject the node to remove as a child of this node
+     * @return the removed child node
+     */
+    @Function
+    public Object replaceChild(final Object newChildObject, final Object oldChildObject) {
+        Object removedChild = null;
+
+        if (newChildObject instanceof DocumentFragment) {
+            final DocumentFragment fragment = (DocumentFragment) newChildObject;
+            Node2 firstNode = null;
+            final Node2 refChildObject = ((Node2) oldChildObject).getNextSibling();
+            for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
+                if (firstNode == null) {
+                    replaceChild(node.getScriptObject2(), oldChildObject);
+                    firstNode = (Node2) node.getScriptObject2();
+                }
+                else {
+                    insertBefore((Node2) node.getScriptObject2(), refChildObject);
+                }
+            }
+            if (firstNode == null) {
+                removeChild(oldChildObject);
+            }
+            removedChild = oldChildObject;
+        }
+        else if (newChildObject instanceof Node2 && oldChildObject instanceof Node2) {
+            final Node2 newChild = (Node2) newChildObject;
+
+            // is the node allowed here?
+            if (!isNodeInsertable(newChild)) {
+                throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy");
+            }
+
+            // Get XML nodes for the DOM nodes passed in
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
+            final DomNode oldChildNode = ((Node2) oldChildObject).getDomNodeOrDie();
+
+            // Replace the old child with the new child.
+            oldChildNode.replace(newChildNode);
+            removedChild = oldChildObject;
+        }
+
+        return removedChild;
+    }
+
+    /**
+     * Gets the JavaScript property {@code nextSibling} for the node that
+     * contains the current node.
+     * @return the next sibling node or null if the current node has
+     * no next sibling.
+     */
+    @Getter
+    public Node2 getNextSibling() {
+        return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
+    }
+
+    /**
+     * Gets the JavaScript property {@code previousSibling} for the node that
+     * contains the current node.
+     * @return the previous sibling node or null if the current node has
+     * no previous sibling.
+     */
+    @Getter
+    public Node2 getPreviousSibling() {
+        return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
+    }
+
+    /**
+     * Removes a DOM node from this node.
+     * @param childObject the node to remove from this node
+     * @return the removed child node
+     */
+    @Function
+    public Object removeChild(final Object childObject) {
+        if (!(childObject instanceof Node)) {
+            return null;
+        }
+
+        // Get XML node for the DOM node passed in
+        final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
+
+        if (!getDomNodeOrDie().isAncestorOf(childNode)) {
+            throw new RuntimeException("NotFoundError: Failed to execute 'removeChild' on '"
+                        + this + "': The node to be removed is not a child of this node.");
+        }
+        // Remove the child from the parent node
+        childNode.remove();
+        return childObject;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

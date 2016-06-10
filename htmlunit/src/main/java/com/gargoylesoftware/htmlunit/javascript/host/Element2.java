@@ -176,6 +176,16 @@ public class Element2 extends Node2 {
         return textRectangle;
     }
 
+    /**
+     * Removes the specified attribute.
+     * @param namespaceURI the namespace URI of the attribute to remove
+     * @param localName the local name of the attribute to remove
+     */
+    @Function
+    public final void removeAttributeNS(final String namespaceURI, final String localName) {
+        getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Element2.class,

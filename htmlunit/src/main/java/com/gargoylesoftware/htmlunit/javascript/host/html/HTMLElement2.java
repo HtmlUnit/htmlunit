@@ -18,6 +18,7 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -27,9 +28,14 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xml.sax.SAXException;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -42,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
@@ -52,6 +59,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -70,6 +78,11 @@ public class HTMLElement2 extends Element2 {
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
+
+    static final String POSITION_BEFORE_BEGIN = "beforebegin";
+    static final String POSITION_AFTER_BEGIN = "afterbegin";
+    static final String POSITION_BEFORE_END = "beforeend";
+    static final String POSITION_AFTER_END = "afterend";
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -674,6 +687,212 @@ public class HTMLElement2 extends Element2 {
     @Override
     public String getPrefix() {
         return null;
+    }
+
+    /**
+     * Parses the given text as HTML or XML and inserts the resulting nodes into the tree in the position given by the
+     * position argument.
+     * @param position specifies where to insert the nodes, using one of the following values (case-insensitive):
+     *        <code>beforebegin</code>, <code>afterbegin</code>, <code>beforeend</code>, <code>afterend</code>
+     * @param text the text to parse
+     *
+     * @see <a href="http://www.w3.org/TR/DOM-Parsing/#methods-2">W3C Spec</a>
+     * @see <a href="http://domparsing.spec.whatwg.org/#dom-element-insertadjacenthtml">WhatWG Spec</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML"
+     *      >Mozilla Developer Network</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536452.aspx">MSDN</a>
+     */
+    @Function
+    public void insertAdjacentHTML(final String position, final String text) {
+        final Object[] values = getInsertAdjacentLocation(position);
+        final DomNode domNode = (DomNode) values[0];
+        final boolean append = ((Boolean) values[1]).booleanValue();
+
+        // add the new nodes
+        final DomNode proxyDomNode = new ProxyDomNode(domNode.getPage(), domNode, append);
+        parseHtmlSnippet(proxyDomNode, text);
+    }
+
+    /**
+     * Inserts the given element into the element at the location.
+     * @param where specifies where to insert the element, using one of the following values (case-insensitive):
+     *        beforebegin, afterbegin, beforeend, afterend
+     * @param insertedElement the element to be inserted
+     * @return an element object
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
+     */
+    @Function({@WebBrowser(CHROME), @WebBrowser(IE)})
+    public Object insertAdjacentElement(final String where, final Object insertedElement) {
+        if (insertedElement instanceof Node) {
+            final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
+            final Object[] values = getInsertAdjacentLocation(where);
+            final DomNode node = (DomNode) values[0];
+            final boolean append = ((Boolean) values[1]).booleanValue();
+
+            if (append) {
+                node.appendChild(childNode);
+            }
+            else {
+                node.insertBefore(childNode);
+            }
+            return insertedElement;
+        }
+        throw new RuntimeException("Passed object is not an element: " + insertedElement);
+    }
+
+    /**
+     * Inserts the given text into the element at the specified location.
+     * @param where specifies where to insert the text, using one of the following values (case-insensitive):
+     *      beforebegin, afterbegin, beforeend, afterend
+     * @param text the text to insert
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
+     */
+    @Function({@WebBrowser(CHROME), @WebBrowser(IE)})
+    public void insertAdjacentText(final String where, final String text) {
+        final Object[] values = getInsertAdjacentLocation(where);
+        final DomNode node = (DomNode) values[0];
+        final boolean append = ((Boolean) values[1]).booleanValue();
+
+        final DomText domText = new DomText(node.getPage(), text);
+        // add the new nodes
+        if (append) {
+            node.appendChild(domText);
+        }
+        else {
+            node.insertBefore(domText);
+        }
+    }
+
+    /**
+     * Returns where and how to add the new node.
+     * Used by {@link #insertAdjacentHTML(String, String)},
+     * {@link #insertAdjacentElement(String, Object)} and
+     * {@link #insertAdjacentText(String, String)}.
+     * @param where specifies where to insert the element, using one of the following values (case-insensitive):
+     *        beforebegin, afterbegin, beforeend, afterend
+     * @return an array of 1-DomNode:parentNode and 2-Boolean:append
+     */
+    private Object[] getInsertAdjacentLocation(final String where) {
+        final DomNode currentNode = getDomNodeOrDie();
+        final DomNode node;
+        final boolean append;
+
+        // compute the where and how the new nodes should be added
+        if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
+            if (currentNode.getFirstChild() == null) {
+                // new nodes should appended to the children of current node
+                node = currentNode;
+                append = true;
+            }
+            else {
+                // new nodes should be inserted before first child
+                node = currentNode.getFirstChild();
+                append = false;
+            }
+        }
+        else if (POSITION_BEFORE_BEGIN.equalsIgnoreCase(where)) {
+            // new nodes should be inserted before current node
+            node = currentNode;
+            append = false;
+        }
+        else if (POSITION_BEFORE_END.equalsIgnoreCase(where)) {
+            // new nodes should appended to the children of current node
+            node = currentNode;
+            append = true;
+        }
+        else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
+            if (currentNode.getNextSibling() == null) {
+                // new nodes should appended to the children of parent node
+                node = currentNode.getParentNode();
+                append = true;
+            }
+            else {
+                // new nodes should be inserted before current node's next sibling
+                node = currentNode.getNextSibling();
+                append = false;
+            }
+        }
+        else {
+            throw new RuntimeException("Illegal position value: \"" + where + "\"");
+        }
+
+        if (append) {
+            return new Object[] {node, Boolean.TRUE};
+        }
+        return new Object[] {node, Boolean.FALSE};
+    }
+
+    /**
+     * Parses the specified HTML source code, appending the resulting content at the specified target location.
+     * @param target the node indicating the position at which the parsed content should be placed
+     * @param source the HTML code extract to parse
+     */
+    private static void parseHtmlSnippet(final DomNode target, final String source) {
+        try {
+            HTMLParser.parseFragment(target, source);
+        }
+        catch (final IOException e) {
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
+            throw new RuntimeException("Unexpected exception occurred while parsing HTML snippet: "
+                    + e.getMessage());
+        }
+        catch (final SAXException e) {
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
+            throw new RuntimeException("Unexpected exception occurred while parsing HTML snippet: "
+                    + e.getMessage());
+        }
+    }
+
+    /**
+     * ProxyDomNode.
+     */
+    public static class ProxyDomNode extends HtmlDivision {
+
+        private final DomNode target_;
+        private final boolean append_;
+
+        /**
+         * Constructor.
+         * @param page the page
+         * @param target the target
+         * @param append append or no
+         */
+        public ProxyDomNode(final SgmlPage page, final DomNode target, final boolean append) {
+            super(HtmlDivision.TAG_NAME, page, null);
+            target_ = target;
+            append_ = append;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public DomNode appendChild(final org.w3c.dom.Node node) {
+            final DomNode domNode = (DomNode) node;
+            if (append_) {
+                return target_.appendChild(domNode);
+            }
+            target_.insertBefore(domNode);
+            return domNode;
+        }
+
+        /**
+         * Gets wrapped DomNode.
+         * @return the node
+         */
+        public DomNode getDomNode() {
+            return target_;
+        }
+
+        /**
+         * Returns append or not.
+         * @return append or not
+         */
+        public boolean isAppend() {
+            return append_;
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

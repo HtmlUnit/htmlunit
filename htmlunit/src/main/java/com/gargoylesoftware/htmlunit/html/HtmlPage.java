@@ -78,11 +78,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -1773,12 +1773,12 @@ public class HtmlPage extends InteractivePage {
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
             // second try are JavaScript attributes
             // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptableObject();
+            final ScriptObject scriptObject = element.getScriptObject2();
             // we have to make sure the scriptObject has a slot for the given attribute.
             // just using get() may use e.g. getWithPreemption().
-            if (scriptObject.has(attribute, scriptObject)) {
-                final Object jsValue = scriptObject.get(attribute, scriptObject);
-                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+            if (scriptObject.has(attribute)) {
+                final Object jsValue = scriptObject.get(attribute);
+                if (jsValue != null /*&& jsValue != Scriptable.NOT_FOUND*/ && jsValue instanceof String) {
                     value = (String) jsValue;
                 }
             }

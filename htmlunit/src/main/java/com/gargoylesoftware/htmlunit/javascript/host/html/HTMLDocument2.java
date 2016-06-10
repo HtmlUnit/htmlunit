@@ -480,6 +480,23 @@ public class HTMLDocument2 extends Document2 {
         }
     }
 
+    /**
+     * Returns the value of the {@code activeElement} property.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
+     * @return the value of the {@code activeElement} property
+     */
+    @Getter
+    public HTMLElement2 getActiveElement() {
+        if (activeElement_ == null) {
+            final HtmlElement body = getPage().getBody();
+            if (body != null) {
+                activeElement_ = (HTMLElement2) getScriptableFor(body);
+            }
+        }
+
+        return activeElement_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLDocument2.class,

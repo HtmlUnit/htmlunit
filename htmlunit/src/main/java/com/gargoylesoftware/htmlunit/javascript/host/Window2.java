@@ -20,8 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
-import static com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors.referenceError;
-import static com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime.UNDEFINED;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -106,6 +104,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -434,7 +433,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
         if (object == null) {
             if (scopeAccess) {
-                throw referenceError("not.defined", name);
+                throw ECMAErrors.referenceError("not.defined", name);
             }
             object = Undefined.getUndefined();
         }
