@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Location2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
@@ -85,6 +86,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     @SuppressWarnings("unchecked")
     public static final Class<? extends ScriptObject>[] CLASSES_ = new Class[] {
+            Attr2.class,
             CSSStyleDeclaration2.class,
             CharacterData2.class,
             ComputedCSSStyleDeclaration2.class,

@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -44,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
@@ -132,9 +134,8 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
      * @return the DOM node
-     * @exception IllegalStateException If the DOM node could not be found.
      */
-    public DomNode getDomNodeOrDie() throws IllegalStateException {
+    public DomNode getDomNodeOrDie() {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
@@ -212,6 +213,10 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         final Global global = NashornJavaScriptEngine.getGlobal(domNode.getPage().getEnclosingWindow().getScriptContext());
         if (domNode instanceof HtmlBody) {
             host = HTMLBodyElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof DomAttr) {
+            host = Attr2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlHtml) {

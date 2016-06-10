@@ -413,6 +413,75 @@ public class Node2 extends EventTarget2 {
         return childObject;
     }
 
+    /**
+     * Returns the local name of this element.
+     * @return the local name of this element
+     */
+    @Getter
+    public Object getLocalName() {
+        return getDomNodeOrDie().getLocalName();
+    }
+
+    /**
+     * Returns The URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
+     */
+    @Getter
+    public Object getNamespaceURI() {
+        return getDomNodeOrDie().getNamespaceURI();
+    }
+
+    /**
+     * Compares the positions of this node and the provided node within the document.
+     * @param node node object that specifies the node to check
+     * @return how the node is positioned relatively to the reference node.
+     * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
+     * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
+     */
+    @Function
+    public short compareDocumentPosition(final Object node) {
+        if (!(node instanceof Node2)) {
+            throw new RuntimeException("Could not convert JavaScript argument arg 0");
+        }
+        return getDomNodeOrDie().compareDocumentPosition(((Node2) node).getDomNodeOrDie());
+    }
+
+    /**
+     * Merges adjacent TextNode objects to produce a normalized document object model.
+     */
+    @Function
+    public void normalize() {
+        getDomNodeOrDie().normalize();
+    }
+
+    /**
+     * Gets the textContent attribute.
+     * @return the contents of this node as text
+     */
+    @Getter
+    public String getTextContent() {
+        return getDomNodeOrDie().getTextContent();
+    }
+
+    /**
+     * Replace all children elements of this element with the supplied value.
+     * @param value - the new value for the contents of this node
+     */
+    @Setter
+    public void setTextContent(final Object value) {
+        getDomNodeOrDie().setTextContent(value == null ? null : /*Context.toString*/value.toString());
+    }
+
+    /**
+     * Returns the attributes of this XML element.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
+     * @return the attributes of this XML element
+     */
+    @Getter({@WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 21)})
+    public Object getAttributes() {
+        return null;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Node2.class,

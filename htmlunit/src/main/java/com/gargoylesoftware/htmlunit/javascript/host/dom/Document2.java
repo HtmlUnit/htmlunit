@@ -185,6 +185,17 @@ public class Document2 extends Node2 {
         Window2.getLocation(window_).setHref(newLocation);
     }
 
+    /**
+     * Creates a new HTML attribute with the specified name.
+     *
+     * @param attributeName the name of the attribute to create
+     * @return an attribute with the specified name
+     */
+    @Function
+    public Attr2 createAttribute(final String attributeName) {
+        return (Attr2) getPage().createAttribute(attributeName).getScriptObject2();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Document2.class,

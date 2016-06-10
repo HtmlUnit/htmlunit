@@ -30,9 +30,11 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap2;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -50,10 +52,9 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
-
 public class Element2 extends Node2 {
 
-    private NamedNodeMap attributes_;
+    private NamedNodeMap2 attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
     private CSSStyleDeclaration2 style_;
 
@@ -184,6 +185,89 @@ public class Element2 extends Node2 {
     @Function
     public final void removeAttributeNS(final String namespaceURI, final String localName) {
         getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
+    }
+
+    /**
+     * Returns the value of the specified attribute.
+     * @param attributeName attribute name
+     * @param flags IE-specific flags (see the MSDN documentation for more info)
+     * @return the value of the specified attribute, {@code null} if the attribute is not defined
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
+     * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
+     */
+    @Function
+    public Object getAttribute(final String attributeName, final Integer flags) {
+        Object value = getDomNodeOrDie().getAttribute(attributeName);
+
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            value = null;
+        }
+
+        return value;
+    }
+
+    /**
+     * Sets an attribute.
+     *
+     * @param name Name of the attribute to set
+     * @param value Value to set the attribute to
+     */
+    @Function
+    public void setAttribute(final String name, final String value) {
+        getDomNodeOrDie().setAttribute(name, value);
+    }
+
+    /**
+     * Sets the attribute node for the specified attribute.
+     * @param newAtt the attribute to set
+     * @return the replaced attribute node, if any
+     */
+    @Function
+    public Attr2 setAttributeNode(final Attr2 newAtt) {
+        final String name = newAtt.getName();
+
+        final NamedNodeMap2 nodes = getAttributes();
+        final Attr2 replacedAtt = (Attr2) nodes.getNamedItemWithoutSytheticClassAttr(name);
+        if (replacedAtt != null) {
+            replacedAtt.detachFromParent();
+        }
+
+        final DomAttr newDomAttr = newAtt.getDomNodeOrDie();
+        getDomNodeOrDie().setAttributeNode(newDomAttr);
+        return replacedAtt;
+    }
+
+    /**
+     * Returns the attributes of this XML element.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
+     * @return the attributes of this XML element
+     */
+    @Override
+    @Getter
+    public NamedNodeMap2 getAttributes() {
+        if (attributes_ == null) {
+            attributes_ = createAttributesObject();
+        }
+        return attributes_;
+    }
+
+    /**
+     * Creates the JS object for the property attributes. This object will the be cached.
+     * @return the JS object
+     */
+    protected NamedNodeMap2 createAttributesObject() {
+        return new NamedNodeMap2(getDomNodeOrDie());
+    }
+
+    /**
+     * Sets the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param qualifiedName the qualified name of the attribute to look for
+     * @param value the new attribute value
+     */
+    @Function
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
+        getDomNodeOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -38,6 +39,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.DOMException;
@@ -56,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent2;
@@ -495,6 +498,23 @@ public class HTMLDocument2 extends Document2 {
         }
 
         return activeElement_;
+    }
+
+    /**
+     * Creates a new HTML attribute with the specified name.
+     *
+     * @param attributeName the name of the attribute to create
+     * @return an attribute with the specified name
+     */
+    @Override
+    public Attr2 createAttribute(final String attributeName) {
+        String name = attributeName;
+        if (StringUtils.isNotEmpty(name)
+                && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE)) {
+            name = name.toLowerCase();
+        }
+
+        return super.createAttribute(name);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

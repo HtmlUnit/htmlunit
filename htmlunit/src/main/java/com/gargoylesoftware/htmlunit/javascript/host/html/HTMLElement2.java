@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -59,7 +60,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -893,6 +893,55 @@ public class HTMLElement2 extends Element2 {
         public boolean isAppend() {
             return append_;
         }
+    }
+
+    /**
+     * Sets an attribute.
+     * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-F68F082">
+     * the DOM reference</a>
+     *
+     * @param name Name of the attribute to set
+     * @param value Value to set the attribute to
+     */
+    @Override
+    public void setAttribute(String name, final String value) {
+        getDomNodeOrDie().setAttribute(name, value);
+
+        // call corresponding event handler setOnxxx if found
+        if (!name.isEmpty()) {
+            name = name.toLowerCase(Locale.ROOT);
+            if (name.startsWith("on")) {
+//                try {
+                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+//                    final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
+//                    method.invoke(this, new Object[] {new EventHandler(getDomNodeOrDie(), name.substring(2), value)});
+//                }
+//                catch (final NoSuchMethodException e) {
+//                    //silently ignore
+//                }
+//                catch (final IllegalAccessException e) {
+//                    //silently ignore
+//                }
+//                catch (final InvocationTargetException e) {
+//                    throw new RuntimeException(e.getCause());
+//                }
+            }
+        }
+    }
+
+    /**
+     * Removes the specified attribute.
+     * @param attribute the attribute to remove
+     */
+    @Function
+    public void removeAttributeNode(final Attr2 attribute) {
+        final String name = attribute.getName();
+        final Object namespaceUri = attribute.getNamespaceURI();
+        if (namespaceUri instanceof String) {
+            removeAttributeNS((String) namespaceUri, name);
+            return;
+        }
+        removeAttributeNS(null, name);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
