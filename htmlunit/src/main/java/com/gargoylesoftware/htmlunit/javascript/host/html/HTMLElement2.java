@@ -22,6 +22,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -652,6 +653,27 @@ public class HTMLElement2 extends Element2 {
     @Setter
     public void setId(final String newId) {
         getDomNodeOrDie().setId(newId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNodeName() {
+        final DomNode domNode = getDomNodeOrDie();
+        String nodeName = domNode.getNodeName();
+        if (domNode.getHtmlPageOrNull() != null) {
+            nodeName = nodeName.toUpperCase(Locale.ROOT);
+        }
+        return nodeName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPrefix() {
+        return null;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

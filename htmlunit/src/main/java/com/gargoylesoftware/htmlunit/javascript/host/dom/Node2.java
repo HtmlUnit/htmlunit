@@ -38,6 +38,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -206,6 +207,52 @@ public class Node2 extends EventTarget2 {
     @Getter
     public Node2 getLastChild() {
         return getJavaScriptNode(getDomNodeOrDie().getLastChild());
+    }
+
+    /**
+     * Gets the JavaScript property {@code nodeType} for the current node.
+     * @return the node type
+     */
+    @Getter
+    public short getNodeType() {
+        return getDomNodeOrDie().getNodeType();
+    }
+
+    /**
+     * Gets the JavaScript property {@code nodeName} for the current node.
+     * @return the node name
+     */
+    @Getter
+    public String getNodeName() {
+        return getDomNodeOrDie().getNodeName();
+    }
+
+    /**
+     * Gets the JavaScript property {@code nodeValue} for the current node.
+     * @return the node value
+     */
+    @Getter
+    public String getNodeValue() {
+        return getDomNodeOrDie().getNodeValue();
+    }
+
+    /**
+     * Sets the JavaScript property {@code nodeValue} for the current node.
+     * @param newValue the new node value
+     */
+    @Setter
+    public void setNodeValue(final String newValue) {
+        getDomNodeOrDie().setNodeValue(newValue);
+    }
+
+    /**
+     * Returns the namespace prefix.
+     * @return the namespace prefix
+     */
+    @Getter
+    public Object getPrefix() {
+        final DomNode domNode = getDomNodeOrDie();
+        return domNode.getPrefix();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

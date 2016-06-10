@@ -15,9 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -27,27 +26,20 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
 public class HTMLCollection2 extends AbstractList2 {
-
-    /**
-     * Creates an instance.
-     */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) })
-    public HTMLCollection2() {
-    }
 
     /**
      * Gets an empty collection.
@@ -67,6 +59,12 @@ public class HTMLCollection2 extends AbstractList2 {
 
     /**
      * Creates an instance.
+     */
+    public HTMLCollection2() {
+    }
+
+    /**
+     * Creates an instance.
      * @param parentScope parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
@@ -75,7 +73,7 @@ public class HTMLCollection2 extends AbstractList2 {
         super(parentScope, attributeChangeSensitive);
         List<Object> list = new ArrayList<>();
         for (Object o : computeElements()) {
-                list.add(getScriptObjectForElement(o));
+            list.add(getScriptObjectForElement(o));
         }
         
         setArray(new ObjectArrayData(list.toArray(new Object[list.size()]), list.size()));
@@ -102,15 +100,15 @@ public class HTMLCollection2 extends AbstractList2 {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
-    @JsxFunction
+    @Function
     public Object item(final Object index) {
         if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
             final String name = (String) index;
-            final Object result = namedItem(name);
-            return result;
+            return namedItem(name);
         }
 
-        final Object object = get((int) index);
+        final Object object = get(((Number) index).intValue());
+        
 //        if (object == NOT_FOUND) {
 //            return null;
 //        }
@@ -124,7 +122,7 @@ public class HTMLCollection2 extends AbstractList2 {
      * @return the element or elements corresponding to the specified name or id
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
-    @JsxFunction
+    @Function
     public Object namedItem(final String name) {
         final List<Object> elements = getElements();
         for (final Object next : elements) {
@@ -154,6 +152,7 @@ public class HTMLCollection2 extends AbstractList2 {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("HTMLCollection", 
@@ -165,13 +164,9 @@ public class HTMLCollection2 extends AbstractList2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "HTMLCollection";
+            super("HTMLCollection");
         }
     }
 }

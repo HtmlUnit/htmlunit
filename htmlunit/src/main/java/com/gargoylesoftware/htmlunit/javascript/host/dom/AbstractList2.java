@@ -29,10 +29,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
@@ -77,53 +80,47 @@ public class AbstractList2 extends SimpleScriptObject {
 
     /**
      * Creates an instance.
-     * @param parentScope parent scope
-     */
-//    private AbstractList2(final ScriptableObject parentScope) {
-//        if (parentScope != null) {
-//            setParentScope(parentScope);
-//            setPrototype(getPrototype(getClass()));
-//        }
-//    }
-
-    /**
-     * Creates an instance.
-     * @param parentScope parent scope
+     *
+     * @param domeNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      */
-    public AbstractList2(final DomNode parentScope, final boolean attributeChangeSensitive) {
-//        this(parentScope == null ? null : parentScope.getScriptableObject());
-        if (parentScope != null) {
-            setDomNode(parentScope, false);
-        }
-        attributeChangeSensitive_ = attributeChangeSensitive;
+    public AbstractList2(final DomNode domeNode, final boolean attributeChangeSensitive) {
+        this(domeNode, attributeChangeSensitive, null);
     }
 
     /**
-     * Constructs an instance with an initial cache value.
-     * @param parentScope the parent scope, on which we listen for changes
+     * Creates an instance with an initial cache value.
+     *
+     * @param domNode the {@link DomNode}
      * @param initialElements the initial content for the cache
      */
-    protected AbstractList2(final DomNode parentScope, final List<?> initialElements) {
-//        this(parentScope.getScriptableObject());
-        cachedElements_ = new ArrayList<>(initialElements);
+    protected AbstractList2(final DomNode domNode, final List<?> initialElements) {
+        this(domNode, true, new ArrayList<>(initialElements));
     }
 
     /**
-     * Gets an empty collection.
-     * @param window the current scope
-     * @return an empty collection
+     * Creates an instance.
+     *
+     * @param domeNode the {@link DomNode}
+     * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
+     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     * @param initialElements the initial content for the cache
      */
-//    public static AbstractList2 emptyCollection(final Window window) {
-//        final List<Object> list = Collections.emptyList();
-//        return new AbstractList2(window) {
-//            @Override
-//            public List<Object> getElements() {
-//                return list;
-//            }
-//        };
-//    }
+    private AbstractList2(final DomNode domeNode, final boolean attributeChangeSensitive,
+            final List<Object> initialElements) {
+        if (domeNode != null) {
+            setDomNode(domeNode, false);
+            final ScriptObject parentScope = domeNode.getScriptObject2();
+            if (parentScope != null) {
+                final Global global = NashornJavaScriptEngine.getGlobal(domeNode.getPage().getEnclosingWindow().getScriptContext());
+                setProto(global.getPrototype(getClass()));
+                ScriptUtils.initialize(this);
+            }
+        }
+        attributeChangeSensitive_ = attributeChangeSensitive;
+        cachedElements_ = initialElements;
+    }
 
     /**
      * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
