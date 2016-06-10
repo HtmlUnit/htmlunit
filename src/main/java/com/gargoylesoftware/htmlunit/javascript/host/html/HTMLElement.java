@@ -119,7 +119,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
-import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
@@ -698,7 +697,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public Object getAttributeNode(final String attributeName) {
-        return ((NamedNodeMap) getAttributes()).getNamedItem(attributeName);
+        return getAttributes().getNamedItem(attributeName);
     }
 
     /**
@@ -1016,7 +1015,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param target the node indicating the position at which the parsed content should be placed
      * @param source the HTML code extract to parse
      */
-    public static void parseHtmlSnippet(final DomNode target, final String source) {
+    private static void parseHtmlSnippet(final DomNode target, final String source) {
         try {
             HTMLParser.parseFragment(target, source);
         }

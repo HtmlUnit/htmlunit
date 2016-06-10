@@ -180,7 +180,7 @@ public class Attr extends Node {
      * {@inheritDoc}
      */
     @Override
-    public DomAttr getDomNodeOrDie() throws IllegalStateException {
+    public DomAttr getDomNodeOrDie() {
         return (DomAttr) super.getDomNodeOrDie();
     }
 

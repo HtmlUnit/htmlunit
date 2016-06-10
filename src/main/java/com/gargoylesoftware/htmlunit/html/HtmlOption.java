@@ -118,7 +118,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    public void insertBefore(final DomNode newNode) throws IllegalStateException {
+    public void insertBefore(final DomNode newNode) {
         super.insertBefore(newNode);
         if (newNode instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) newNode;

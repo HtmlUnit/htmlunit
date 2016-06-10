@@ -118,9 +118,8 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
      * @return the DOM node
-     * @exception IllegalStateException If the DOM node could not be found.
      */
-    public DomNode getDomNodeOrDie() throws IllegalStateException {
+    public DomNode getDomNodeOrDie() {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);

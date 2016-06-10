@@ -183,10 +183,9 @@ public class HtmlTableRow extends HtmlElement {
 
         /**
          * Removes the cell under the cursor from the current row.
-         * @throws IllegalStateException if there is no current row
          */
         @Override
-        public void remove() throws IllegalStateException {
+        public void remove() {
             if (nextCell_ == null) {
                 throw new IllegalStateException();
             }

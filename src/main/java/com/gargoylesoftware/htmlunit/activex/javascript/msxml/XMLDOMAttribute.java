@@ -208,7 +208,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    public DomAttr getDomNodeOrDie() throws IllegalStateException {
+    public DomAttr getDomNodeOrDie() {
         return (DomAttr) super.getDomNodeOrDie();
     }
 }

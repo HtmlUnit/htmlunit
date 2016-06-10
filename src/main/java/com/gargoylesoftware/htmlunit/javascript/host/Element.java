@@ -139,7 +139,7 @@ public class Element extends EventNode {
      */
     @Override
     @JsxGetter
-    public Object getAttributes() {
+    public NamedNodeMap getAttributes() {
         if (attributes_ == null) {
             attributes_ = createAttributesObject();
         }
@@ -539,7 +539,7 @@ public class Element extends EventNode {
     public Attr setAttributeNode(final Attr newAtt) {
         final String name = newAtt.getName();
 
-        final NamedNodeMap nodes = (NamedNodeMap) getAttributes();
+        final NamedNodeMap nodes = getAttributes();
         final Attr replacedAtt = (Attr) nodes.getNamedItemWithoutSytheticClassAttr(name);
         if (replacedAtt != null) {
             replacedAtt.detachFromParent();

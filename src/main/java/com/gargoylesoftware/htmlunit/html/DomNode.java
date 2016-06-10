@@ -1012,9 +1012,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * part of. If the specified node is this node, this method is a no-op.
      *
      * @param newNode the new node to insert
-     * @throws IllegalStateException if this node is not a child of any other node
      */
-    public void insertBefore(final DomNode newNode) throws IllegalStateException {
+    public void insertBefore(final DomNode newNode) {
         if (previousSibling_ == null) {
             throw new IllegalStateException("Previous sibling for " + this + " is null.");
         }
@@ -1202,9 +1201,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Replaces this node with another node. If the specified node is this node, this
      * method is a no-op.
      * @param newNode the node to replace this one
-     * @throws IllegalStateException if this node is not a child of any other node
      */
-    public void replace(final DomNode newNode) throws IllegalStateException {
+    public void replace(final DomNode newNode) {
         if (newNode != this) {
             final DomNode exParent = parent_;
             final DomNode exNextSibling = nextSibling_;

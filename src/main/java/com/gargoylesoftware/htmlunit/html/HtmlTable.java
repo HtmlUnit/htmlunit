@@ -370,10 +370,9 @@ public class HtmlTable extends HtmlElement {
 
         /**
          * Removes the current row from the underlying table.
-         * @throws IllegalStateException if there is no current element
          */
         @Override
-        public void remove() throws IllegalStateException {
+        public void remove() {
             if (nextRow_ == null) {
                 throw new IllegalStateException();
             }

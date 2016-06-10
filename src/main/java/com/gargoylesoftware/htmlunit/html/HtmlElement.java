@@ -460,9 +460,8 @@ public abstract class HtmlElement extends DomElement {
      * Returns the form which contains this element. If this element is not inside a form, this method
      * throws an {@link IllegalStateException}.
      * @return the form which contains this element
-     * @throws IllegalStateException if the element is not inside a form
      */
-    public HtmlForm getEnclosingFormOrDie() throws IllegalStateException {
+    public HtmlForm getEnclosingFormOrDie() {
         final HtmlForm form = getEnclosingForm();
         if (form == null) {
             throw new IllegalStateException("Element is not contained within a form: " + this);
