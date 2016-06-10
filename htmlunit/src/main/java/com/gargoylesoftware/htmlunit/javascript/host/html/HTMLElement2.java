@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
@@ -28,12 +31,17 @@ import java.lang.invoke.MethodType;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomCharacterData;
+import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -46,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect2;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
@@ -63,7 +72,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -82,6 +90,10 @@ public class HTMLElement2 extends Element2 {
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
+
+    private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
+    private static final Pattern PRINT_NODE_PATTERN = Pattern.compile("  ");
+    private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
 
     static final String POSITION_BEFORE_BEGIN = "beforebegin";
     static final String POSITION_AFTER_BEGIN = "afterbegin";
@@ -992,6 +1004,210 @@ public class HTMLElement2 extends Element2 {
 
         final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append);
         parseHtmlSnippet(proxyDomNode, valueStr);
+    }
+
+    /**
+     * Gets the outerHTML of the node.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
+     * @return the contents of this node as HTML
+     */
+    @Getter
+    public String getOuterHTML() {
+        final StringBuilder buf = new StringBuilder();
+        // we can't rely on DomNode.asXml because it adds indentation and new lines
+        printNode(buf, getDomNodeOrDie(), true);
+        return buf.toString();
+    }
+
+    private void printNode(final StringBuilder buffer, final DomNode node, final boolean html) {
+        if (node instanceof DomComment) {
+            if (html) {
+                // Remove whitespace sequences.
+                final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
+                buffer.append("<!--").append(s).append("-->");
+            }
+        }
+        else if (node instanceof DomCharacterData) {
+            // Remove whitespace sequences, possibly escape XML characters.
+            String s = node.getNodeValue();
+            if (html) {
+                s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
+            }
+            buffer.append(s);
+        }
+        else if (html) {
+            final DomElement element = (DomElement) node;
+            final Element scriptObject = (Element) node.getScriptableObject();
+            final String tag = element.getTagName();
+
+            HTMLElement htmlElement = null;
+            if (scriptObject instanceof HTMLElement) {
+                htmlElement = (HTMLElement) scriptObject;
+            }
+            buffer.append("<").append(tag);
+            // Add the attributes. IE does not use quotes, FF does.
+            for (final DomAttr attr : element.getAttributesMap().values()) {
+                if (!attr.getSpecified()) {
+                    continue;
+                }
+
+                final String name = attr.getName();
+                final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
+                buffer.append(' ').append(name).append("=");
+                buffer.append("\"");
+                buffer.append(value);
+                buffer.append("\"");
+            }
+            buffer.append(">");
+            // Add the children.
+            final boolean isHtml = html
+                    && !(scriptObject instanceof HTMLScriptElement)
+                    && !(scriptObject instanceof HTMLStyleElement);
+            printChildren(buffer, node, isHtml);
+            if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
+                buffer.append("</").append(tag).append(">");
+            }
+        }
+        else {
+            final HtmlElement element = (HtmlElement) node;
+            if ("p".equals(element.getTagName())) {
+                if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
+                    buffer.append("\r\n"); // \r\n because it's to implement something IE specific
+                }
+                else {
+                    int i = buffer.length() - 1;
+                    while (i >= 0 && Character.isWhitespace(buffer.charAt(i))) {
+                        i--;
+                    }
+                    buffer.setLength(i + 1);
+                    buffer.append("\n");
+                }
+            }
+            if (!"script".equals(element.getTagName())) {
+                printChildren(buffer, node, html);
+            }
+        }
+    }
+
+    private void printChildren(final StringBuilder buffer, final DomNode node, final boolean html) {
+        for (final DomNode child : node.getChildren()) {
+            printNode(buffer, child, html);
+        }
+    }
+
+    /**
+     * Gets the innerHTML attribute.
+     * @return the contents of this node as HTML
+     */
+    @Getter
+    public String getInnerHTML() {
+        final DomNode domNode;
+        try {
+            domNode = getDomNodeOrDie();
+        }
+        catch (final IllegalStateException e) {
+            throw new RuntimeException(e);
+        }
+
+        final StringBuilder buf = new StringBuilder();
+
+        final String tagName = getTagName();
+        boolean isPlain = "SCRIPT".equals(tagName);
+
+        isPlain = isPlain || "STYLE".equals(tagName);
+
+        // we can't rely on DomNode.asXml because it adds indentation and new lines
+        printChildren(buf, domNode, !isPlain);
+        return buf.toString();
+    }
+
+    /**
+     * Gets the innerText attribute.
+     * @return the contents of this node as text
+     */
+    @Getter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
+    public String getInnerText() {
+        final StringBuilder buf = new StringBuilder();
+        // we can't rely on DomNode.asXml because it adds indentation and new lines
+        printChildren(buf, getDomNodeOrDie(), false);
+        return buf.toString();
+    }
+
+    /**
+     * Replaces all child elements of this element with the supplied value.
+     * @param value the new value for the contents of this element
+     */
+    @Setter
+    public void setInnerHTML(final Object value) {
+        final DomNode domNode;
+        try {
+            domNode = getDomNodeOrDie();
+        }
+        catch (final IllegalStateException e) {
+            throw new RuntimeException(e);
+        }
+
+        domNode.removeAllChildren();
+
+        final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
+        if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
+
+            final String valueAsString = value.toString();
+            parseHtmlSnippet(domNode, valueAsString);
+        }
+    }
+
+    /**
+     * Replaces all child elements of this element with the supplied text value.
+     * @param value the new value for the contents of this element
+     */
+    @Setter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
+    public void setInnerText(final Object value) {
+        final String valueString;
+        if (value == null && getBrowserVersion().hasFeature(JS_INNER_TEXT_VALUE_NULL)) {
+            valueString = null;
+        }
+        else {
+            valueString = value.toString();
+        }
+        setInnerTextImpl(valueString);
+    }
+
+    /**
+     * The worker for setInnerText.
+     * @param value the new value for the contents of this node
+     */
+    protected void setInnerTextImpl(final String value) {
+        final DomNode domNode = getDomNodeOrDie();
+
+        domNode.removeAllChildren();
+
+        if (value != null && !value.isEmpty()) {
+            domNode.appendChild(new DomText(domNode.getPage(), value));
+        }
+    }
+
+    /**
+     * Removes a DOM node from this node.
+     * @param childObject the node to remove from this node
+     * @return the removed child node
+     */
+    @Function
+    public Object removeChild(final Object childObject) {
+        if (!(childObject instanceof Node2)) {
+            return null;
+        }
+
+        // Get XML node for the DOM node passed in
+        final DomNode childNode = ((Node2) childObject).getDomNodeOrDie();
+
+        if (!getDomNodeOrDie().isAncestorOf(childNode)) {
+            throw new RuntimeException("NotFoundError: Failed to execute 'removeChild' on '"
+                        + this + "': The node to be removed is not a child of this node.");
+        }
+        // Remove the child from the parent node
+        childNode.remove();
+        return childObject;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

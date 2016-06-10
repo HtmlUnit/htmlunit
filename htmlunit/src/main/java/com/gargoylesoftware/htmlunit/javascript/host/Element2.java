@@ -270,6 +270,15 @@ public class Element2 extends Node2 {
         getDomNodeOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
     }
 
+    /**
+     * Returns the tag name of this element.
+     * @return the tag name
+     */
+    @Getter
+    public String getTagName() {
+        return getNodeName();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Element2.class,
