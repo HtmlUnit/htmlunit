@@ -951,7 +951,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         domNode.removeAllChildren();
 
         if (value != null && !value.isEmpty()) {
-            domNode.appendChild(new DomText(domNode.getPage(), Context.toString(value)));
+            domNode.appendChild(new DomText(domNode.getPage(), value));
         }
     }
 
