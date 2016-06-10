@@ -310,7 +310,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    public DomNode getDomNodeOrDie() throws IllegalStateException {
+    public DomNode getDomNodeOrDie() {
         try {
             return super.getDomNodeOrDie();
         }
@@ -1988,7 +1988,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name
      */
-    @JsxFunction
     @Override
     public Attr createAttribute(final String attributeName) {
         String name = attributeName;
