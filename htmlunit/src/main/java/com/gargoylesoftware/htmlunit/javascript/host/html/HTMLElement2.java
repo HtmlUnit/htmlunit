@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -60,6 +63,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -942,6 +946,52 @@ public class HTMLElement2 extends Element2 {
             return;
         }
         removeAttributeNS(null, name);
+    }
+
+    /**
+     * Replaces this element (including all child elements) with the supplied value.
+     * @param value the new value for replacing this element
+     */
+    @Setter
+    public void setOuterHTML(final Object value) {
+        final DomNode domNode = getDomNodeOrDie();
+        final DomNode parent = domNode.getParentNode();
+        if (null == parent) {
+            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED)) {
+                domNode.removeAllChildren();
+            }
+            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
+                throw new RuntimeException("outerHTML is readonly for detached nodes");
+            }
+            return;
+        }
+
+        if (value == null && !getBrowserVersion().hasFeature(JS_OUTER_HTML_NULL_AS_STRING)) {
+            domNode.remove();
+            return;
+        }
+        final String valueStr = value.toString();
+        if (valueStr.isEmpty()) {
+            domNode.remove();
+            return;
+        }
+
+        final DomNode nextSibling = domNode.getNextSibling();
+        domNode.remove();
+
+        final DomNode target;
+        final boolean append;
+        if (nextSibling != null) {
+            target = nextSibling;
+            append = false;
+        }
+        else {
+            target = parent;
+            append = true;
+        }
+
+        final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append);
+        parseHtmlSnippet(proxyDomNode, valueStr);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
