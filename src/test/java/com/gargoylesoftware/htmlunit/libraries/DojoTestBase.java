@@ -80,15 +80,14 @@ public abstract class DojoTestBase extends WebDriverTestCase {
                 status = getResultElementText(webdriver);
             }
 
+            Thread.sleep(100); // to make tests a bit more stable
             final WebElement output = webdriver.findElement(By.id("logBody"));
             final List<WebElement> lines = output.findElements(By.xpath(".//div"));
 
             final StringBuilder result = new StringBuilder();
             for (WebElement webElement : lines) {
                 final String text = webElement.getText();
-                // text = ignore(text, expectedAlerts);
                 if (StringUtils.isNotBlank(text)) {
-                    // result.append(ignore(text, expectedAlerts));
                     result.append(text);
                     result.append("\n");
                 }
@@ -98,17 +97,9 @@ public abstract class DojoTestBase extends WebDriverTestCase {
             expFileName = StringUtils.replace(expFileName, "_", "");
             String expected = loadExpectation(expFileName);
             expected = StringUtils.replace(expected, "\r\n", "\n");
-//            final StringBuilder expectedIgnore = new StringBuilder();
-//
-//            for (String line : expected.split("\n")) {
-//                final String text = ignore(line, expectedAlerts);
-//                if (StringUtils.isNotBlank(text)) {
-//                    expectedIgnore.append(text);
-//                    expectedIgnore.append("\n");
-//                }
-//            }
-//
-            assertEquals(expected, result.toString());
+
+            assertEquals(normalize(expected), normalize(result.toString()));
+            // assertEquals(expected, result.toString());
         }
         catch (final Exception e) {
             e.printStackTrace();
@@ -120,6 +111,55 @@ public abstract class DojoTestBase extends WebDriverTestCase {
         }
     }
 
+    private String normalize(final String text) {
+        StringBuilder normalized = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            if (ch == 'f'
+                    && (text.indexOf("function ", i) == i
+                            || text.indexOf("function(", i) == i)) {
+                if (normalized.toString().endsWith("(")) {
+                    normalized.delete(normalized.length() - 1, normalized.length());
+                }
+                normalized = new StringBuilder(normalized.toString().trim());
+
+                normalized.append("  function...");
+                int count = 1;
+                i = text.indexOf("{", i);
+                while (i < text.length()) {
+                    i++;
+                    ch = text.charAt(i);
+                    if ('{' == ch) {
+                        count++;
+                    }
+                    else if ('}' == ch) {
+                        count--;
+                    }
+                    if (count == 0) {
+                        break;
+                    }
+                }
+                if (normalized.toString().endsWith(")")) {
+                    normalized.delete(normalized.length() - 1, normalized.length());
+                }
+            }
+            else if (ch == 'T' && text.indexOf("TypeError: ", i) == i) {
+                normalized.append("TypeError:...");
+                while (i < text.length()) {
+                    i++;
+                    ch = text.charAt(i);
+                    if ('\r' == ch || '\n' == ch) {
+                        break;
+                    }
+                }
+            }
+            else {
+                normalized.append(ch);
+            }
+        }
+        return normalized.toString();
+    }
 //    private String ignore(final String text, final String[] toIgnore) {
 //        if (StringUtils.isBlank(text)
 //                || text.startsWith("  ")
