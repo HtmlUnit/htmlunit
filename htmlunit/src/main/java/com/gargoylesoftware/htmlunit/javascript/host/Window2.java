@@ -398,7 +398,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
         final boolean scopeAccess = NashornCallSiteDescriptor.isScope(desc);
 
-        final MethodHandle  mh = MethodHandles.insertArguments(
+        final MethodHandle mh = MethodHandles.insertArguments(
                 staticHandle("getArbitraryProperty", Object.class, Object.class, String.class, boolean.class),
                 1, name, scopeAccess);
         final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
@@ -26,6 +27,8 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -37,6 +40,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
 public class HTMLCollection2 extends AbstractList2 {
@@ -140,6 +144,54 @@ public class HTMLCollection2 extends AbstractList2 {
             }
         }
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
+        final List<Object> matchingElements = new ArrayList<>();
+        final boolean searchName = isGetWithPreemptionSearchName();
+        for (final Object next : elements) {
+            if (next instanceof DomElement
+                    && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
+                final String nodeName = ((DomElement) next).getAttribute("name");
+                if (name.equals(nodeName)) {
+                    matchingElements.add(next);
+                }
+            }
+        }
+
+        if (matchingElements.isEmpty()) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
+//                final Double doubleValue = Context.toNumber(name);
+//                if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
+//                    final Object object = get(doubleValue.intValue(), this);
+//                    if (object != null) {
+//                        return object;
+//                    }
+//                }
+            }
+            return Undefined.getUndefined();
+        }
+        else if (matchingElements.size() == 1) {
+            return getScriptObjectForElement(matchingElements.get(0));
+        }
+
+        // many elements => build a sub collection
+        final DomNode domNode = getDomNodeOrNull();
+        final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
+        collection.setAvoidObjectDetection(true);
+        return collection;
+    }
+
+    /**
+     * Returns whether {@link #getWithPreemption(String)} should search by name or not.
+     * @return whether {@link #getWithPreemption(String)} should search by name or not
+     */
+    protected boolean isGetWithPreemptionSearchName() {
+        return true;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

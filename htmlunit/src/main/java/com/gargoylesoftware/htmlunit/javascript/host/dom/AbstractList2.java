@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +37,16 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.js.internal.dynalink.CallSiteDescriptor;
+import com.gargoylesoftware.js.internal.dynalink.linker.GuardedInvocation;
+import com.gargoylesoftware.js.internal.dynalink.linker.LinkRequest;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
+import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * The parent class of {@link NodeList} and {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
@@ -604,4 +614,115 @@ public class AbstractList2 extends SimpleScriptObject {
         }
         return getScriptableFor(object);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
+        final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
+
+        final MethodHandle mh = MethodHandles.insertArguments(
+                virtualHandle("getWithPreemption", Object.class, String.class),
+                1, name);
+        final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
+        return new GuardedInvocation(mh,
+                NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
+                getProtoSwitchPoints(name, null),
+                explicitInstanceOfCheck ? null : ClassCastException.class);
+    }
+
+    /**
+     * Returns the element or elements that match the specified key. If it is the name
+     * of a property, the property value is returned. If it is the id of an element in
+     * the array, that element is returned. Finally, if it is the name of an element or
+     * elements in the array, then all those elements are returned. Otherwise,
+     * {@link Undefined} is returned.
+     */
+    protected Object getWithPreemption(final String name) {
+        // Test to see if we are trying to get the length of this collection?
+        // If so return NOT_FOUND here to let the property be retrieved using the prototype
+        if (/*xpath_ == null || */"length".equals(name)) {
+            return Undefined.getUndefined()/*NOT_FOUND*/;
+        }
+
+        final List<Object> elements = getElements();
+
+        // See if there is an element in the element array with the specified id.
+        final List<Object> matchingElements = new ArrayList<>();
+
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final String id = ((DomElement) next).getId();
+                if (name.equals(id)) {
+                    matchingElements.add(next);
+                }
+            }
+        }
+
+        if (matchingElements.size() == 1) {
+            return getScriptObjectForElement(matchingElements.get(0));
+        }
+        else if (!matchingElements.isEmpty()) {
+            final AbstractList2 collection = create(getDomNodeOrDie(), matchingElements);
+            collection.setAvoidObjectDetection(true);
+            return collection;
+        }
+
+        // no element found by id, let's search by name
+        return getWithPreemptionByName(name, elements);
+    }
+
+    /**
+     * Constructs a new instance with an initial cache value.
+     * @param parentScope the parent scope, on which we listen for changes
+     * @param initialElements the initial content for the cache
+     * @return the newly created instance
+     */
+    protected AbstractList2 create(final DomNode parentScope, final List<?> initialElements) {
+        return new AbstractList2(parentScope, initialElements);
+    }
+
+    /**
+     * Helper for {@link #getWithPreemption(String)} when finding by id doesn't get results.
+     * @param name the property name
+     * @param elements the children elements.
+     * @return {@link Scriptable#NOT_FOUND} if not found
+     */
+    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
+        final List<Object> matchingElements = new ArrayList<>();
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final String nodeName = ((DomElement) next).getAttribute("name");
+                if (name.equals(nodeName)) {
+                    matchingElements.add(next);
+                }
+            }
+        }
+
+        if (matchingElements.isEmpty()) {
+            return Undefined.getUndefined();
+        }
+        else if (matchingElements.size() == 1) {
+            return getScriptObjectForElement(matchingElements.get(0));
+        }
+
+        // many elements => build a sub collection
+        final DomNode domNode = getDomNodeOrNull();
+        final AbstractList2 collection = create(domNode, matchingElements);
+        collection.setAvoidObjectDetection(true);
+        return collection;
+    }
+
+    private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
+        try {
+            return MethodHandles.lookup().findVirtual(AbstractList2.class,
+                    name, MethodType.methodType(rtype, ptypes));
+        }
+        catch (final ReflectiveOperationException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+
 }

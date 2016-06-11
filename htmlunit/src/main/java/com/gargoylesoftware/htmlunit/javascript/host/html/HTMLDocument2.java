@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -49,8 +50,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
@@ -82,9 +85,12 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 public class HTMLDocument2 extends Document2 {
 
@@ -110,13 +116,13 @@ public class HTMLDocument2 extends Document2 {
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
 
-    private HTMLCollection all_; // has to be a member to have equality (==) working
-    private HTMLCollection forms_; // has to be a member to have equality (==) working
-    private HTMLCollection links_; // has to be a member to have equality (==) working
-    private HTMLCollection images_; // has to be a member to have equality (==) working
-    private HTMLCollection scripts_; // has to be a member to have equality (==) working
-    private HTMLCollection anchors_; // has to be a member to have equality (==) working
-    private HTMLCollection applets_; // has to be a member to have equality (==) working
+    private HTMLCollection2 all_; // has to be a member to have equality (==) working
+    private HTMLCollection2 forms_; // has to be a member to have equality (==) working
+    private HTMLCollection2 links_; // has to be a member to have equality (==) working
+    private HTMLCollection2 images_; // has to be a member to have equality (==) working
+    private HTMLCollection2 scripts_; // has to be a member to have equality (==) working
+    private HTMLCollection2 anchors_; // has to be a member to have equality (==) working
+    private HTMLCollection2 applets_; // has to be a member to have equality (==) working
     private StyleSheetList2 styleSheets_; // has to be a member to have equality (==) working
     private HTMLElement2 activeElement_;
 
@@ -515,6 +521,34 @@ public class HTMLDocument2 extends Document2 {
         }
 
         return super.createAttribute(name);
+    }
+
+    /**
+     * Returns the value of the JavaScript attribute {@code forms}.
+     * @return the value of the JavaScript attribute {@code forms}
+     */
+    @Getter
+    public Object getForms() {
+        if (forms_ == null) {
+            final boolean allowFunctionCall = getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
+
+            forms_ = new HTMLCollection2(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlForm && node.getPrefix() == null;
+                }
+
+//                @Override
+//                public Object call(final Context cx, final Scriptable scope,
+//                        final Scriptable thisObj, final Object[] args) {
+//                    if (allowFunctionCall) {
+//                        return super.call(cx, scope, thisObj, args);
+//                    }
+//                    throw Context.reportRuntimeError("TypeError: document.forms is not a function");
+//                }
+            };
+        }
+        return forms_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
