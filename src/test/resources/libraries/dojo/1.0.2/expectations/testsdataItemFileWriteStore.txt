@@ -1,0 +1,93 @@
+ 81 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "tests.data.readOnlyItemFileTestTemplates, with datastore dojo.data.ItemFileWriteStore" has 56 tests to run
+ PASSED test: Identity API: fetchItemByIdentity()
+ PASSED test: Identity API: fetchItemByIdentity() notFound
+ PASSED test: Identity API: getIdentityAttributes()
+ PASSED test: Identity API: fetchItemByIdentity() commentFilteredJson
+ PASSED test: Identity API: fetchItemByIdentity() nullValue
+ PASSED test: Identity API: fetchItemByIdentity() booleanValue
+ PASSED test: Identity API: fetchItemByIdentity() withoutSpecifiedIdInData
+ PASSED test: Identity API: getIdentity()
+ PASSED test: Identity API: getIdentity() withoutSpecifiedId
+ PASSED test: Read API: fetch() all
+ PASSED test: Read API: fetch() one
+ PASSED test: Read API: fetch() shallow
+ PASSED test: Read API: fetch() Multiple
+ PASSED test: Read API: fetch() MultipleMixedFetch
+ PASSED test: Read API: fetch() deep
+ PASSED test: Read API: fetch() one_commentFilteredJson
+ PASSED test: Read API: fetch() withNull
+ PASSED test: Read API: fetch() all_streaming
+ PASSED test: Read API: fetch() paging
+ PASSED test: Read API: fetch() with MultiType Match
+ PASSED test: Read API: fetch() with MultiType, MultiValue Match
+ PASSED test: Read API: getLabel()
+ PASSED test: Read API: getLabelAttributes()
+ PASSED test: Read API: getValue()
+ PASSED test: Read API: getValues()
+ PASSED test: Read API: isItem()
+ PASSED test: Read API: isItem() multistore
+ PASSED test: Read API: hasAttribute()
+ PASSED test: Read API: containsValue()
+ PASSED test: Read API: getAttributes()
+ PASSED test: Read API: getFeatures()
+ PASSED test: Read API: fetch() patternMatch0
+ PASSED test: Read API: fetch() patternMatch1
+ PASSED test: Read API: fetch() patternMatch2
+ PASSED test: Read API: fetch() patternMatch_caseSensitive
+ PASSED test: Read API: fetch() patternMatch_caseInsensitive
+ PASSED test: Read API: fetch() sortNumeric
+ PASSED test: Read API: fetch() sortNumericDescending
+ PASSED test: Read API: fetch() sortNumericWithCount
+ PASSED test: Read API: fetch() sortAlphabetic
+ PASSED test: Read API: fetch() sortAlphabeticDescending
+ PASSED test: Read API: fetch() sortDate
+ PASSED test: Read API: fetch() sortDateDescending
+ PASSED test: Read API: fetch() sortMultiple
+ PASSED test: Read API: fetch() sortMultipleSpecialComparator
+ PASSED test: Read API: fetch() sortAlphabeticWithUndefined
+ PASSED test: Read API: errorCondition_idCollision_inMemory
+ PASSED test: Read API: errorCondition_idCollision_xhr
+ PASSED test: Read API: Date_datatype
+ PASSED test: Read API: custom_datatype_Color_SimpleMapping
+ PASSED test: Read API: custom_datatype_Color_GeneralMapping
+ PASSED test: Read API: hierarchical_data
+ PASSED test: Identity API: no_identifier_specified
+ PASSED test: Identity API: hierarchical_data
+ PASSED test: Read API: functionConformance
+ PASSED test: Identity API: functionConformance
+ ------------------------------------------------------------
+ GROUP "tests.data.ItemFileWriteStore" has 25 tests to run
+ PASSED test: test_getFeatures
+ PASSED test: testWriteAPI_setValue
+ PASSED test: testWriteAPI_setValues
+ PASSED test: testWriteAPI_unsetAttribute
+ PASSED test: testWriteAPI_newItem
+ PASSED test: testWriteAPI_newItem_withParent
+ PASSED test: testWriteAPI_newItem_multiple_withParent
+ PASSED test: testWriteAPI_deleteItem
+ PASSED test: testWriteAPI_isDirty
+ PASSED test: testWriteAPI_revert
+ PASSED test: testWriteAPI_save
+ PASSED test: testWriteAPI_saveVerifyState
+ PASSED test: testWriteAPI_saveEverything
+ PASSED test: testWriteAPI_saveEverything_withDateType
+ PASSED test: testWriteAPI_saveEverything_withCustomColorTypeSimple
+ PASSED test: testWriteAPI_saveEverything_withCustomColorTypeGeneral
+ PASSED test: testWriteAPI_newItem_revert
+ PASSED test: testNotificationAPI_onSet
+ PASSED test: testNotificationAPI_onNew
+ PASSED test: testNotificationAPI_onDelete
+ PASSED test: testReadAPI_functionConformanceToo
+ PASSED test: testWriteAPI_functionConformance
+ PASSED test: testNotificationAPI_functionConformance
+ PASSED test: testIdentityAPI_noIdentifierSpecified
+ PASSED test: testIdentityAPI_noIdentifierSpecified_revert
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      81 tests in 2 groups
+      0 errors
+      0 failures

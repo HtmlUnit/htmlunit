@@ -1,0 +1,102 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.io.iframe" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetText
+     ERROR IN:
+    function ioIframeGetText(t){
+       var d = new doh.Deferred();
+       var td = dojo.io.iframe.send({
+        url: "iframeResponse.text.html",
+        method: "GET",
+        timeoutSeconds: 5,
+        preventCache: true,
+        handle: function(res, ioArgs){
+         if(!(res instanceof Error) && 
+          t.is("iframe succeeded", res)){
+          d.callback(true);
+         }else{
+          d.errback(false);
+         }        
+        }
+       });
+       return d;       
+      }
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetText
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetJson
+     ERROR IN:
+    function ioIframeGetJson(t){
+       var d = new doh.Deferred();
+       var td = dojo.io.iframe.send({
+        url: "iframeResponse.json.html",
+        method: "GET",
+        timeoutSeconds: 5,
+        preventCache: true,
+        handleAs: "json",
+        handle: function(res, ioArgs){
+         if(!(res instanceof Error) && 
+          t.is("blue", res.color)){
+          d.callback(true);
+         }else{
+          d.errback(false);
+         }        
+        }
+       });
+       return d;       
+      }
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetJson
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetJavascript
+     ERROR IN:
+    function ioIframeGetJavascript(t){
+       var d = new doh.Deferred();
+       var td = dojo.io.iframe.send({
+        url: "iframeResponse.js.html",
+        method: "GET",
+        timeoutSeconds: 5,
+        preventCache: true,
+        handleAs: "javascript",
+        handle: function(res, ioArgs){
+         console.log("RES: ", res);
+         if(!(res instanceof Error) && 
+          t.is(42, window.iframeTestingFunction())){
+          d.callback(true);
+         }else{
+          d.errback(false);
+         }        
+        }
+       });
+       return d;       
+      }
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetJavascript
+ Error: test timeout in ../../dojo/tests/io/iframe.html::t::ioIframeGetHtml
+     ERROR IN:
+    function ioIframeGetHtml(t){
+       var d = new doh.Deferred();
+       var td = dojo.io.iframe.send({
+        url: "iframeResponse.html",
+        method: "GET",
+        timeoutSeconds: 5,
+        preventCache: true,
+        handleAs: "html",
+        handle: function(res, ioArgs){
+         if(!(res instanceof Error) && 
+          t.is("SUCCESSFUL HTML response", res.getElementsByTagName("h1")[0].innerHTML)){
+          d.callback(true);
+         }else{
+          d.errback(false);
+         }        
+        }
+       });
+       return d;       
+      }
+ FAILED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetHtml
+ PASSED test: ../../dojo/tests/io/iframe.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 2 groups
+      4 errors
+      0 failures

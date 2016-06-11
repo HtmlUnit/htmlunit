@@ -1,0 +1,23 @@
+ 13 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.lang" has 13 tests to run
+ PASSED test: mixin
+ PASSED test: extend
+ PASSED test: isObject
+ PASSED test: isArray
+ PASSED test: isArrayLike
+ PASSED test: isString
+ PASSED test: partial
+ PASSED test: nestedPartial
+ PASSED test: hitch
+ PASSED test: hitchWithArgs
+ PASSED test: hitchAsPartial
+ PASSED test: _toArray
+ PASSED test: clone
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      13 tests in 1 groups
+      0 errors
+      0 failures

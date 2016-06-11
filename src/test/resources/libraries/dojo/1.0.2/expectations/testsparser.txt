@@ -1,0 +1,32 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.parser" has 1 test to run
+ 18 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 18 tests to run
+ PASSED test: ../../dojo/tests/parser.html::t::testJsId
+ PASSED test: ../../dojo/tests/parser.html::t::testStrProp
+ PASSED test: ../../dojo/tests/parser.html::t::testIntProp
+ PASSED test: ../../dojo/tests/parser.html::t::testArrProp
+ PASSED test: ../../dojo/tests/parser.html::t::testBoolProp
+ PASSED test: ../../dojo/tests/parser.html::t::testDateProp
+ PASSED test: ../../dojo/tests/parser.html::t::testDisabledFlag
+ PASSED test: ../../dojo/tests/parser.html::t::testCheckedFlag
+ PASSED test: ../../dojo/tests/parser.html::t::testFunctionProp
+ PASSED test: ../../dojo/tests/parser.html::t::t.is(4, obj.preambleTestProp);
+ PASSED test: ../../dojo/tests/parser.html::t::t.is(deepTestProp, obj.deepProp);
+ PASSED test: ../../dojo/tests/parser.html::t::testConnect
+ PASSED test: ../../dojo/tests/parser.html::t::testFunctionAssignment
+ PASSED test: ../../dojo/tests/parser.html::t::testSubNodeParse
+ PASSED test: ../../dojo/tests/parser.html::t::testMarkupFactory
+ PASSED test: ../../dojo/tests/parser.html::t::testMarkupFactoryClass
+ PASSED test: ../../dojo/tests/parser.html::t::testDisabledFlag
+ PASSED test: ../../dojo/tests/parser.html::t::testCheckedFlag
+ PASSED test: ../../dojo/tests/parser.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      19 tests in 2 groups
+      0 errors
+      0 failures

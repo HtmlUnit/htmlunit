@@ -1,0 +1,13 @@
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base._loader.loader" has 3 tests to run
+ PASSED test: baseUrl
+ PASSED test: modulePaths
+ PASSED test: moduleUrls
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      3 tests in 1 groups
+      0 errors
+      0 failures

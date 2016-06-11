@@ -15,12 +15,13 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -43,29 +44,262 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"../../dojo/tests/_base/fx.html::t::animateHeight",
-                    "test: format", "test: parse", "test: format_patterns",
-                    "test: format_rounding", "PASSED test: format_perMill",
-                    "test: number_regression_1", "test: number_regression_3",
-                    "test: number_regression_8", "test: number_regression_10",
-                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"},
-            FF38 = {"test: ../../dojo/tests/_base/fx.html::t::animateHeight",
-                    "test: ../../dojo/tests/behavior.html::t::topics",
-                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"},
-            FF45 = {"test: ../../dojo/tests/_base/fx.html::t::animateHeight",
-                    "test: ../../dojo/tests/behavior.html::t::topics",
-                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"},
-            IE = {"test: ../../dojo/tests/_base/html.html::t::sq100nopos",
-                    "../../dojo/tests/_base/html_quirks.html::t::sq100nopos",
-                    "test: ../../dojo/tests/_base/fx.html::t::animateHeight",
-                    "test: format", "test: parse", "test: format_patterns",
-                    "test: format_rounding", "PASSED test: format_perMill",
-                    "test: number_regression_1", "test: number_regression_3",
-                    "test: number_regression_8", "test: number_regression_10",
-                    "test: ../../dojo/tests/behavior.html::t::topics",
-                    "../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout"})
+    public void tests_base_loaderbootstrap() throws Exception {
+        test("tests._base._loader.bootstrap");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_base_loaderloader() throws Exception {
+        test("tests._base._loader.loader");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_base_loaderhostenv_browser() throws Exception {
+        test("tests._base._loader.hostenv_browser");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_basearray() throws Exception {
+        test("tests._base.array");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_baseColor() throws Exception {
+        test("tests._base.Color");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_baselang() throws Exception {
+        test("tests._base.lang");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_basedeclare() throws Exception {
+        test("tests._base.declare");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_baseconnect() throws Exception {
+        test("tests._base.connect");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_baseDeferred() throws Exception {
+        test("tests._base.Deferred");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_basejson() throws Exception {
+        test("tests._base.json");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(IE)
+    public void tests_basehtml() throws Exception {
+        test("tests._base.html");
+        // tests._base.html_rtl
+        // tests._base.html_quirks
+        // tests._base.html_box
+        // tests._base.html_box_quirks
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_basefx() throws Exception {
+        test("tests._base.fx");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_basequery() throws Exception {
+        test("tests._base.query");
+        // tests._base.NodeList
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void tests_basexhr() throws Exception {
+        test("tests._base.xhr");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsi18n() throws Exception {
+        test("tests.i18n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsbackhash() throws Exception {
+        // test("tests.back.hash");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testscldr() throws Exception {
+        test("tests.cldr");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsdatautils() throws Exception {
+        test("tests.data.utils");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsdataItemFileReadStore() throws Exception {
+        test("tests.data.ItemFileReadStore");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsdataItemFileWriteStore() throws Exception {
+        test("tests.data.ItemFileWriteStore");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsdate() throws Exception {
+        test("tests.date");
+        // tests.date.util
+        // tests.date.math
+        // tests.date.locale
+        // tests.date.stamp
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testscurrency() throws Exception {
+        test("tests.currency");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsAdapterRegistry() throws Exception {
+        test("tests.AdapterRegistry");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void testsioscript() throws Exception {
+        test("tests.io.script");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @NotYetImplemented(CHROME)
-    public void dojo() throws Exception {
-        test();
+    public void testsioiframe() throws Exception {
+        test("tests.io.iframe");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void testsrpc() throws Exception {
+        test("tests.rpc");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsstring() throws Exception {
+        test("tests.string");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented({FF, IE})
+    public void testsbehavior() throws Exception {
+        test("tests.behavior");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testsparser() throws Exception {
+        test("tests.parser");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testscolors() throws Exception {
+        test("tests.colors");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void testsfx() throws Exception {
+        test("tests.fx");
     }
 }

@@ -57,12 +57,11 @@ public abstract class DojoTestBase extends WebDriverTestCase {
      */
     abstract String getVersion();
 
-    void test() throws Exception {
+    void test(final String module) throws Exception {
         try {
-            final String[] expectedAlerts = getExpectedAlerts();
 
             final WebDriver webdriver = getWebDriver();
-            final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
+            final String url = "http://localhost:" + PORT + "/util/doh/runner.html?testModule=" + module;
             webdriver.get(url);
 
             final long runTime = 60 * DEFAULT_WAIT_TIME;
@@ -86,27 +85,30 @@ public abstract class DojoTestBase extends WebDriverTestCase {
 
             final StringBuilder result = new StringBuilder();
             for (WebElement webElement : lines) {
-                String text = webElement.getText();
-                text = ignore(text, expectedAlerts);
+                final String text = webElement.getText();
+                // text = ignore(text, expectedAlerts);
                 if (StringUtils.isNotBlank(text)) {
-                    result.append(ignore(text, expectedAlerts));
+                    // result.append(ignore(text, expectedAlerts));
+                    result.append(text);
                     result.append("\n");
                 }
             }
 
-            String expected = loadExpectation();
+            String expFileName = StringUtils.replace(module, ".", "");
+            expFileName = StringUtils.replace(expFileName, "_", "");
+            String expected = loadExpectation(expFileName);
             expected = StringUtils.replace(expected, "\r\n", "\n");
-            final StringBuilder expectedIgnore = new StringBuilder();
-
-            for (String line : expected.split("\n")) {
-                final String text = ignore(line, expectedAlerts);
-                if (StringUtils.isNotBlank(text)) {
-                    expectedIgnore.append(text);
-                    expectedIgnore.append("\n");
-                }
-            }
-
-            assertEquals(expectedIgnore.toString(), result.toString());
+//            final StringBuilder expectedIgnore = new StringBuilder();
+//
+//            for (String line : expected.split("\n")) {
+//                final String text = ignore(line, expectedAlerts);
+//                if (StringUtils.isNotBlank(text)) {
+//                    expectedIgnore.append(text);
+//                    expectedIgnore.append("\n");
+//                }
+//            }
+//
+            assertEquals(expected, result.toString());
         }
         catch (final Exception e) {
             e.printStackTrace();
@@ -118,34 +120,34 @@ public abstract class DojoTestBase extends WebDriverTestCase {
         }
     }
 
-    private String ignore(final String text, final String[] toIgnore) {
-        if (StringUtils.isBlank(text)
-                || text.startsWith("  ")
-                || " WOOHOO!!".equals(text)) {
-            return null;
-        }
+//    private String ignore(final String text, final String[] toIgnore) {
+//        if (StringUtils.isBlank(text)
+//                || text.startsWith("  ")
+//                || " WOOHOO!!".equals(text)) {
+//            return null;
+//        }
+//
+//        // to get the real expectations
+//        if (useRealBrowser()) {
+//            return text;
+//        }
+//        if (text.startsWith(" Error: test timeout")
+//                || text.startsWith(" Error: false")
+//                || text.startsWith(" TypeError:")
+//                || text.startsWith(" doh._AssertFailure:")) {
+//            return null;
+//        }
+//
+//        for (String ignore : toIgnore) {
+//            if (text.contains(ignore)) {
+//                return "ignore";
+//            }
+//        }
+//        return text;
+//    }
 
-        // to get the real expectations
-        if (useRealBrowser()) {
-            return text;
-        }
-        if (text.startsWith(" Error: test timeout")
-                || text.startsWith(" Error: false")
-                || text.startsWith(" TypeError:")
-                || text.startsWith(" doh._AssertFailure:")) {
-            return null;
-        }
-
-        for (String ignore : toIgnore) {
-            if (text.contains(ignore)) {
-                return "ignore";
-            }
-        }
-        return text;
-    }
-
-    private String loadExpectation() throws Exception {
-        final String resourcePrefix = "/" + BASE_FILE_PATH + "/" + getVersion() + "/expected";
+    private String loadExpectation(final String expFileName) throws Exception {
+        final String resourcePrefix = "/" + BASE_FILE_PATH + "/" + getVersion() + "/expectations/" + expFileName;
         return loadExpectation(resourcePrefix, ".txt");
     }
 

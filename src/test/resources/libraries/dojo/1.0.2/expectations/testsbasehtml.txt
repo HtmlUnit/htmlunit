@@ -1,0 +1,142 @@
+ 5 tests to run in 5 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.html" has 1 test to run
+ 57 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 57 tests to run
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(110, dojo.marginBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(110, dojo.marginBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(140, dojo.marginBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100nopos').h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(10, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).l);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(20, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).t);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).w);
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).h);
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsBasic
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsMargin
+ PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(1, dojo.style('sq100nopos', 'opacity'));
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0.1, dojo.style('sq100nopos', 'opacity', 0.1));
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0.8, dojo.style('sq100nopos', 'opacity', 0.8));
+ PASSED test: ../../dojo/tests/_base/html.html::t::t.is('static', dojo.style('sq100nopos', 'position'));
+ PASSED test: ../../dojo/tests/_base/html.html::t::getBgcolor
+ PASSED test: ../../dojo/tests/_base/html.html::t::isDescendant
+ PASSED test: ../../dojo/tests/_base/html.html::t::isDescendantIframe
+ PASSED test: ../../dojo/tests/_base/html.html::t::testClassFunctions
+ PASSED test: ../../dojo/tests/_base/html.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_rtl" has 1 test to run
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 3 tests to run
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::t::coordsWithVertScrollbar
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::t::coordsWithHorzScrollbar
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::t::eventClientXY
+ PASSED test: ../../dojo/tests/_base/html_rtl.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_quirks" has 1 test to run
+ 32 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 32 tests to run
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100nopos').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsBasic
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsMargin
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::sq100nopos
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(110, dojo.marginBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(110, dojo.marginBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100ltpad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100ltpad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').w);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').h);
+ PASSED test: ../../dojo/tests/_base/html_quirks.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_box" has 1 test to run
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 6 tests to run
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTests
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTests
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTestsOverflow
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTestsFloat
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTestsInline
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTestsButtonChild
+ PASSED test: ../../dojo/tests/_base/html_box.html
+ ------------------------------------------------------------
+ GROUP "tests._base.html_box_quirks" has 1 test to run
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 6 tests to run
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTests
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTests
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTestsOverflow
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTestsFloat
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTestsInline
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTestsButtonChild
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      109 tests in 10 groups
+      0 errors
+      0 failures
