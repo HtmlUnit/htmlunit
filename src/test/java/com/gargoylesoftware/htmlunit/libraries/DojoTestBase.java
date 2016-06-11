@@ -160,31 +160,6 @@ public abstract class DojoTestBase extends WebDriverTestCase {
         }
         return normalized.toString();
     }
-//    private String ignore(final String text, final String[] toIgnore) {
-//        if (StringUtils.isBlank(text)
-//                || text.startsWith("  ")
-//                || " WOOHOO!!".equals(text)) {
-//            return null;
-//        }
-//
-//        // to get the real expectations
-//        if (useRealBrowser()) {
-//            return text;
-//        }
-//        if (text.startsWith(" Error: test timeout")
-//                || text.startsWith(" Error: false")
-//                || text.startsWith(" TypeError:")
-//                || text.startsWith(" doh._AssertFailure:")) {
-//            return null;
-//        }
-//
-//        for (String ignore : toIgnore) {
-//            if (text.contains(ignore)) {
-//                return "ignore";
-//            }
-//        }
-//        return text;
-//    }
 
     private String loadExpectation(final String expFileName) throws Exception {
         final String resourcePrefix = "/" + BASE_FILE_PATH + "/" + getVersion() + "/expectations/" + expFileName;
