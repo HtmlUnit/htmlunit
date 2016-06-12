@@ -97,6 +97,7 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.Globalable;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
@@ -114,7 +115,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
-public class Window2 extends EventTarget2 implements AutoCloseable {
+public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
@@ -371,7 +372,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public static History2 getHistory(final Object self) {
         final Window2 window = getWindow(self);
         if (window.history_ == null) {
-            final Global global = NashornJavaScriptEngine.getGlobal(window.getWebWindow().getScriptContext());
+            final Global global = window.getGlobal();
             window.history_ = History2.constructor(true, global);
         }
         return window.history_;
@@ -384,7 +385,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     protected FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
         FindProperty prop = super.findProperty(key, deep, start);
         if (prop == null && getDomNodeOrNull() != null) {
-            final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+            final Global global = getGlobal();
             prop = global.findProperty(key, deep);
         }
         return prop;
@@ -621,7 +622,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
 
         final CSSStyleDeclaration2 original = element.getStyle();
-        final Global global = NashornJavaScriptEngine.getGlobal(window2.getWebWindow().getScriptContext());
+        final Global global = window2.getGlobal();
         final ComputedCSSStyleDeclaration2 style = new ComputedCSSStyleDeclaration2(global, original);
 
         final StyleSheetList2 sheets = ((HTMLDocument2) element.getOwnerDocument()).getStyleSheets();
@@ -687,7 +688,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         final Object o = getOnerror(this);
         if (o instanceof ScriptFunction) {
             final ScriptFunction f = (ScriptFunction) o;
-            final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+            final Global global = getGlobal();
 
             final String msg = e.getMessage();
             final String url = e.getPage().getUrl().toExternalForm();
@@ -1080,7 +1081,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
                 return;
             }
         }
-        final Global global = NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+        final Global global = getGlobal();
         final MessageEvent2 event = MessageEvent2.constructor(true, global);
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
         event.initMessageEvent(Event2.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
@@ -1547,6 +1548,14 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Getter
     public static int getDevicePixelRatio(final Object self) {
         return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Global getGlobal() {
+        return NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -44,6 +46,24 @@ public class HTMLFormElement2 extends HTMLElement2 {
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
+    }
+
+    /**
+     * Returns the value of the property {@code name}.
+     * @return the value of this property
+     */
+    @Getter
+    public String getName() {
+        return getHtmlForm().getNameAttribute();
+    }
+
+    /**
+     * Sets the value of the property {@code name}.
+     * @param name the new value
+     */
+    @Setter
+    public void setName(final String name) {
+        getHtmlForm().setNameAttribute(name);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
