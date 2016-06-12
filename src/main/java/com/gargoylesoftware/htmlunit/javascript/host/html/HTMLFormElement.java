@@ -105,8 +105,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code name}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code name}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getName() {
@@ -114,18 +114,17 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute {@code name}.
+     * Sets the value of the property {@code name}.
      * @param name the new value
      */
     @JsxSetter
     public void setName(final String name) {
-        WebAssert.notNull("name", name);
         getHtmlForm().setNameAttribute(name);
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code elements}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code elements}.
+     * @return the value of this property
      */
     @JsxGetter
     public HTMLCollection getElements() {
@@ -182,10 +181,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code length}.
+     * Returns the value of the property {@code length}.
      * Does not count input {@code type=image} elements
      * (<a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
-     * @return the value of this attribute
+     * @return the value of this property
      */
     @JsxGetter
     public int getLength() {
@@ -195,8 +194,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code action}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code action}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getAction() {
@@ -218,7 +217,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute {@code action}.
+     * Sets the value of the property {@code action}.
      * @param action the new value
      */
     @JsxSetter
@@ -228,8 +227,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code method}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code method}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getMethod() {
@@ -237,8 +236,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute {@code method}.
-     * @param method the new value
+     * Sets the value of the property {@code method}.
+     * @param method the new property
      */
     @JsxSetter
     public void setMethod(final String method) {
@@ -247,8 +246,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code target}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code target}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getTarget() {
@@ -256,7 +255,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute {@code target}.
+     * Sets the value of the property {@code target}.
      * @param target the new value
      */
     @JsxSetter
@@ -266,8 +265,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code enctype}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code enctype}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getEnctype() {
@@ -281,7 +280,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute {@code enctype}.
+     * Sets the value of the property {@code enctype}.
      * @param enctype the new value
      */
     @JsxSetter
@@ -298,8 +297,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the JavaScript attribute {@code encoding}.
-     * @return the value of this attribute
+     * Returns the value of the property {@code encoding}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getEncoding() {
@@ -307,7 +306,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the value of the JavaScript attribute {@code encoding}.
+     * Sets the value of the property {@code encoding}.
      * @param encoding the new value
      */
     @JsxSetter
