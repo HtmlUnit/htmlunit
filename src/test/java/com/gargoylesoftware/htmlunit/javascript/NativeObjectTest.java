@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -108,6 +109,33 @@ public class NativeObjectTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for bug #1799.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    @NotYetImplemented
+    public void setPrototype() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  var v = function() {\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var h = window.XMLHttpRequest;\n"
+            + "      window.XMLHttpRequest = v;\n"
+            + "      window.XMLHttpRequest.prototype = Object.create(h.prototype);\n"
+            + "      var b = 'onerror';\n"
+            + "      window.XMLHttpRequest.prototype[b] = h.prototype[b];\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>\n";
         loadPageWithAlerts2(html);
     }
 }
