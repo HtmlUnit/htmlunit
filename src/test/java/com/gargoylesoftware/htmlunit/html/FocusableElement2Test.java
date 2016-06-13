@@ -255,9 +255,6 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "  function log(x) {\n"
                 + "    document.getElementById('log').value += x + '\\n';\n"
                 + "  }\n"
-                + "  function ff() {\n"
-                + "    log('focus');\n"
-                + "  }\n"
                 + "</script>\n"
 
                 + "</head><body>\n"
@@ -266,7 +263,6 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "<input id='input1' onblur=\"log('blur1')\" onfocus=\"log('focus1')\">\n"
                 + "<input id='input2' onblur=\"log('blur2')\" onfocus=\"log('focus2')\">\n"
                 + "<script>\n"
-                + "  \n"
                 + "  log('input1');\n"
                 + "  document.getElementById('input1').focus();\n"
                 + "  log('div');\n"
