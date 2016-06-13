@@ -297,7 +297,7 @@ public class Location2 extends SimpleScriptObject {
      */
     @Override
     public Object getDefaultValue(final Class<?> typeHint) {
-        if (typeHint == String.class) {
+        if (typeHint == null || typeHint == String.class) {
             return getHref();
         }
         return super.getDefaultValue(typeHint);
