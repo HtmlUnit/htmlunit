@@ -646,7 +646,7 @@ public class ElementTest extends WebDriverTestCase {
             + "      function debug(e) {\n"
             + "        try {\n"
             + "          alert(e);\n"
-            + "        } catch(ex) {alert(ex)};\n"
+            + "        } catch(ex) {alert(ex)}\n"
             + "        alert(e." + methodName + ");\n"
             + "      }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION

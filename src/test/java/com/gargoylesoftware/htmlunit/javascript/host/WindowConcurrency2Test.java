@@ -48,9 +48,9 @@ public class WindowConcurrency2Test extends WebDriverTestCase {
             + "  function doTimeout() {\n"
             + "    document.getElementById('d').innerHTML += 'x';\n"
             + "    count++;\n"
-            + "    if (count > 2) {;\n"
+            + "    if (count > 2) {\n"
             + "      clearInterval(id);\n"
-            + "    };\n"
+            + "    }\n"
             + "  }\n"
 
             + "  var id = setInterval(doTimeout, 0);\n"

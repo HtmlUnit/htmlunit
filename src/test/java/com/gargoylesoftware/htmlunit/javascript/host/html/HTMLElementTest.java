@@ -1691,8 +1691,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  var body = document.body;\n"
             + "  alert('body.isHomePage = ' + body.isHomePage);\n"
 
-            + "  if(!body.addBehavior) { alert('!addBehavior'); };\n"
-            + "  if(!body.removeBehavior) { alert('!removeBehavior'); };\n"
+            + "  if(!body.addBehavior) { alert('!addBehavior'); }\n"
+            + "  if(!body.removeBehavior) { alert('!removeBehavior'); }\n"
 
             + "  var id = body.addBehavior('#default#homePage');\n"
             + "  alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
@@ -3235,7 +3235,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
-            + "  if (!div2.removeNode) { alert('removeNode not available'); return };\n"
+            + "  if (!div2.removeNode) { alert('removeNode not available'); return }\n"
 
             + "  alert(div1.firstChild.id);\n"
             + "  alert(div2.removeNode().firstChild);\n"
@@ -4136,7 +4136,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
-            + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
 
             + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before-end'));\n"
             + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after-end'));\n"
@@ -4188,7 +4188,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    } catch(e) { alert('exception-append'); return }\n"
 
             + "    var outernode = document.getElementById('myNode');\n"
-            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
             + "    outernode.insertAdjacentElement('afterend', newnode);\n"
             + "  }\n"
             + "  function alerter() {\n"
@@ -4219,7 +4219,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    } catch(e) { alert('exception-append'); return }\n"
 
             + "    var outernode = document.getElementById('myNode');\n"
-            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
             + "    outernode.insertAdjacentElement('afterend', newnode);\n"
             + "  }\n"
             + "  function alerter() {\n"
@@ -4245,7 +4245,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
-            + "      if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "      if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
             + "      outernode.insertAdjacentElement('afterend', newnode);\n"
             + "      try {\n"
             + "        tester();\n"
@@ -4280,7 +4280,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
-            + "  if (!oNode.insertAdjacentText) { alert('insertAdjacentText not available'); return };\n"
+            + "  if (!oNode.insertAdjacentText) { alert('insertAdjacentText not available'); return }\n"
             + "  oNode.insertAdjacentText('" + beforeEnd + "', 'before-end');\n"
             + "  oNode.insertAdjacentText('" + afterEnd + "', ' after-end');\n"
             + "  oNode.insertAdjacentText('" + beforeBegin + "', 'before-begin ');\n"

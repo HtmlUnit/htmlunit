@@ -46,7 +46,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd = "\n  } catch(e) { alert('exception') };\n"
+    private static final String contentEnd = "\n  } catch(e) { alert('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -68,7 +68,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') };\n"
+    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -354,7 +354,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             // using number rather that object field causes Rhino to pass a Double
             + "    return 1; // NodeFilter.FILTER_ACCEPT \n"
             + "  }\n"
-            + "};\n"
+            + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
             + "alert(safeTagName(tw.firstChild()));\n"
@@ -378,7 +378,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "  if (node.tagName == 'SCRIPT')\n"
             + "    return NodeFilter.FILTER_REJECT;\n"
             + "  return 1;\n"
-            + "};\n"
+            + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
             + "alert(safeTagName(tw.firstChild()));\n"
@@ -419,7 +419,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "      return NodeFilter.FILTER_REJECT;\n"
             + "    return NodeFilter.FILTER_ACCEPT;\n"
             + "  }\n"
-            + "};\n"
+            + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "alert(safeTagName(tw.firstChild()));\n"
             + "alert(safeTagName(tw.nextSibling()));\n";

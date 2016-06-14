@@ -99,7 +99,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    alert(e.lineNumber);\n"
             + "    alert(e.filename);\n"
             + "    alert('HIERARCHY_REQUEST_ERR: ' + e.HIERARCHY_REQUEST_ERR);\n"
-            + "  };\n"
+            + "  }\n"
             + "  alert(body.childNodes.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'><span>hi</span></body></html>";

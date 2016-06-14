@@ -733,7 +733,7 @@ public class Event2Test extends WebDriverTestCase {
             + "        alert(e.cancelBubble);\n"
             + "        e." + cancelMethod + ";\n"
             + "        alert(e.cancelBubble);\n"
-            + "      };\n"
+            + "      }\n"
             + "    };\n"
             + "  }\n"
             + "  function init() {\n"

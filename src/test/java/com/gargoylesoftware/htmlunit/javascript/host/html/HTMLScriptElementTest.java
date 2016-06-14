@@ -853,7 +853,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "    script.appendChild(source);\n"
               + "  } catch(e) {\n"
               + "    alert(e.message.slice(0,44));\n"
-              + "  };\n"
+              + "  }\n"
               + "</script>\n"
               + "</body></html>";
 
@@ -876,7 +876,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "    script.insertBefore(source, null);\n"
               + "  } catch(e) {\n"
               + "    alert(e.message.slice(0,44));\n"
-              + "  };\n"
+              + "  }\n"
               + "</script>\n"
               + "</body></html>";
 

@@ -54,7 +54,7 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  alert(this);\n"
-            + "  try {;\n"
+            + "  try {\n"
             + "   alert(abc);\n"
             + "  } catch(e) {alert('exception')}\n"
             + "  alert(this.abc);\n"

@@ -56,9 +56,6 @@ public class HtmlPage2Test extends SimpleWebTestCase {
     public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
 
     /**
-     * Different versions of IE behave differently here.
-     * Distinction is made with
-     * {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures#JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW}.
      * @throws Exception if the test fails
      */
     @Test
@@ -78,7 +75,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "  iframesrc += '    } catch (e) {';\n"
             + "  iframesrc += '      alert(\"error\");';\n"
             + "  iframesrc += '    }'\n"
-            + "  iframesrc += '};';\n"
+            + "  iframesrc += '}';\n"
             + "  iframesrc += '</' + 'script>';\n"
             + "  iframesrc += '</head>';\n"
             + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
@@ -131,7 +128,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "  iframesrc += '    } catch (e) {';\n"
             + "  iframesrc += '      alert(\"error\");';\n"
             + "  iframesrc += '    }'\n"
-            + "  iframesrc += '};';\n"
+            + "  iframesrc += '}';\n"
             + "  iframesrc += '</' + 'script>';\n"
             + "  iframesrc += '</head>';\n"
             + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"

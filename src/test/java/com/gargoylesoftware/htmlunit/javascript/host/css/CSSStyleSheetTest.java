@@ -586,10 +586,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='it'>hello</div>\n"
             + "<script>\n"
-            + "var getStyle = function(e) {\n"
-            + "return window.getComputedStyle(e, '');\n"
-            + "};\n"
-            + "alert(getStyle(document.getElementById('it')).zIndex);\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle(e, '');\n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('it')).zIndex);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -616,10 +616,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</div>\n"
             + "</div>\n"
             + "<script>\n"
-            + "var getStyle = function(e) {\n"
-            + "return window.getComputedStyle(e, '');\n"
-            + "};\n"
-            + "alert(getStyle(document.getElementById('it')).zIndex);\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle(e, '');\n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('it')).zIndex);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -643,11 +643,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<div id='it1' class='classA classB'>hello</div>\n"
             + "<div id='it2' class='classA classB'>hello</div>\n"
             + "<script>\n"
-            + "var getStyle = function(e) {\n"
-            + "return window.getComputedStyle(e, '');\n"
-            + "};\n"
-            + "alert(getStyle(document.getElementById('it1')).zIndex);\n"
-            + "alert(getStyle(document.getElementById('it2')).zIndex);\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle(e, '');\n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('it1')).zIndex);\n"
+            + "  alert(getStyle(document.getElementById('it2')).zIndex);\n"
             + "</script>\n"
             + "</body></html>";
 

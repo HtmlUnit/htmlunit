@@ -795,7 +795,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  for (var i = 1; i <= 7; i++) {\n"
             + "    alert(document.getElementById('i' + i).align);\n"
-            + "  };\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

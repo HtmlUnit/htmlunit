@@ -133,22 +133,22 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "        alert(document.getElementById('menu4').getAttribute('type'));\n"
                 + "        alert(document.getElementById('menu5').getAttribute('type'));\n"
 
-                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {alert('ex');};\n"
+                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {alert('ex');}\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {alert('ex');};\n"
+                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {alert('ex');}\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {alert('ex');};\n"
+                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {alert('ex');}\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {alert('ex');};\n"
+                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {alert('ex');}\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = '' } catch(e) {alert('ex');};\n"
+                + "        try { document.getElementById('menu1').type = '' } catch(e) {alert('ex');}\n"
                 + "        alert(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {alert('ex');};\n"
+                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {alert('ex');}\n"
                 + "        alert(document.getElementById('menu1').type);\n"
                 + "      }\n"
                 + "    </script>\n"
