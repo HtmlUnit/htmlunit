@@ -376,11 +376,9 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Alerts("<table><colgroup><col></colgroup></table>")
     public void parsing() throws Exception {
         final String html
-            = "<html><body><div>\n"
-            + "<table><colgroup><col></colgroup></table>\n"
-            + "</div>\n"
+            = "<html><body><div><table><colgroup><col></colgroup></table></div>\n"
             + "<script>\n"
-            + "alert(document.body.firstChild.innerHTML);\n"
+            + "  alert(document.body.firstChild.innerHTML);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

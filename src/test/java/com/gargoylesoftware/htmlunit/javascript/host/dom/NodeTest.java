@@ -208,19 +208,19 @@ public class NodeTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
-            + "var aNode = document.getElementById('myNode');\n"
-            + "alert(aNode.childNodes.length);\n"
-            + "alert(aNode.childNodes[0].nodeName);\n"
-            + "alert(aNode.childNodes[0].childNodes.length);\n"
-            + "alert(aNode.childNodes[0].childNodes[0].nodeName);\n"
-            + "alert(aNode.childNodes[0].childNodes[1].nodeName);\n"
-            + "alert(aNode.childNodes[1].nodeName);\n"
+            + "  var aNode = document.getElementById('myNode');\n"
+            + "  alert(aNode.childNodes.length);\n"
+            + "  alert(aNode.childNodes[0].nodeName);\n"
+            + "  alert(aNode.childNodes[0].childNodes.length);\n"
+            + "  alert(aNode.childNodes[0].childNodes[0].nodeName);\n"
+            + "  alert(aNode.childNodes[0].childNodes[1].nodeName);\n"
+            + "  alert(aNode.childNodes[1].nodeName);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "<div id='myNode'><span>Child Node 1-A"
-            + "<h1>Child Node 1-B</h1></span>\n"
-            + "<h2>Child Node 2-A</h2></div>\n"
+            + "<h1>Child Node 1-B</h1></span>"
+            + "<h2>Child Node 2-A</h2></div>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -767,8 +767,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='myNode'><span>Child Node 1-A</span>\n"
-            + "<h1>Child Node 2-A</h1></div>\n"
+            + "<div id='myNode'><span>Child Node 1-A</span><h1>Child Node 2-A</h1></div>\n"
             + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";
 
@@ -838,8 +837,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='myNode'><h6>Child Node 1-A</h6>\n"
-            + "<h1>Child Node 2-A</h1></div>\n"
+            + "<div id='myNode'><h6>Child Node 1-A</h6><h1>Child Node 2-A</h1></div>\n"
             + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";
 

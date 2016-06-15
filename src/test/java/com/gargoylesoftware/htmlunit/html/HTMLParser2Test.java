@@ -89,8 +89,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><div id='testDiv'>\n"
-            + "<table><tr> <td></td> </tr></table>\n"
+            + "<body onload='test()'><div id='testDiv'><table><tr> <td></td> </tr></table>\n"
             + "</div></body></html>";
 
         loadPageWithAlerts2(html);

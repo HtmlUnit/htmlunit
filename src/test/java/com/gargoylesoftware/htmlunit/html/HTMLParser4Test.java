@@ -45,9 +45,9 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts("TABLE")
     public void table_tfoot() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><body>\n"
+            + "<html><body>"
             + "<table><tr><td>hello</td></tr>\n"
-            + "<tfoot id='tf'><tr><td>foot</td></tr></tfoot>\n"
+            + "<tfoot id='tf'><tr><td>foot</td></tr></tfoot>"
             + "</table>\n"
             + "<script>\n"
             + "alert(document.getElementById('tf').parentNode.nodeName)\n"
@@ -166,7 +166,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'><p>HtmlUnit</p></body>\n"
-            + "</html>\n"
+            + "</html>"
             + "<script>var i = 7;</script>\n";
 
         loadPageWithAlerts2(html);
@@ -215,7 +215,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "     </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "     <span id='foo' id='bla'></span>\n"
+            + "     <span id='foo' id='bla'></span>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

@@ -108,8 +108,8 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         webClient.setJavaScriptErrorListener(javaScriptErrorListener);
 
         // test script exception
-        final String html = "<html><head><title>Throw JavaScript Error</title>\n"
-            + "<script>unknown.foo();</script></head>\n"
+        final String html = "<html><head><title>Throw JavaScript Error</title>"
+            + "<script>unknown.foo();</script></head>"
             + "<body></body></html>";
         loadPage(html);
 

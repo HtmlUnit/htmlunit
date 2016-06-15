@@ -75,9 +75,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<div>\n"
-            + "<form action='foo'>\n"
-            + "<input type='text' name='text1'/>\n"
-            + "<input type='text' name='text2'/>\n"
+            + "<form action='foo'>"
+            + "<input type='text' name='text1'/>"
+            + "<input type='text' name='text2'/>"
             + "</div>\n"
             + "<input type='text' name='text3'/>\n"
             + "</form>\n"
@@ -135,7 +135,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "  alert(c1.nextSibling.tagName);\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body onload='test()'>"
             + "<table><div>hello</div>\n"
             + "<tr><td>world</td></tr></table>\n"
             + "</body></html>";
@@ -239,8 +239,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
-                + "<body id='myBody' onload='test()'>\n"
-                +   "<input width:250px' type='submit' value='button'>\n"
+                + "<body id='myBody' onload='test()'>"
+                +   "<input width:250px' type='submit' value='button'>"
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -261,8 +261,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
-                + "<body id='myBody' onload='test()'>\n"
-                +   "<input width:250px\" type=\"submit\" value=\"button\">\n"
+                + "<body id='myBody' onload='test()'>"
+                +   "<input width:250px\" type=\"submit\" value=\"button\">"
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -301,7 +301,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts("2")
     public void li_div_li() throws Exception {
         final String html = "<html><body>\n"
-            + "<ul id='it'><li>item 1<div>in div</li><li>item2</li></ul>\n"
+            + "<ul id='it'><li>item 1<div>in div</li><li>item2</li></ul>"
             + "<script>\n"
             + "alert(document.getElementById('it').childNodes.length);\n"
             + "</script>\n"
@@ -316,7 +316,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "\uFFFD", "65533"})
     public void entityWithInvalidUTF16Code() throws Exception {
-        final String html = "<html><head><title>&#x1b3d6e;</title></head><body><script>\n"
+        final String html = "<html><head><title>&#x1b3d6e;</title></head><body><script>"
             + "alert(document.title.length);\n"
             + "alert(document.title);\n"
             + "alert(document.title.charCodeAt(0));\n"
@@ -331,7 +331,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts("hello world")
     public void sectionWithUnknownClosingTag() throws Exception {
-        final String html = "<html><body><section id='it'>\n"
+        final String html = "<html><body><section id='it'>"
             + "hello</isslot> world"
             + "</section>\n"
             + "<script>\n"
@@ -431,8 +431,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOC", "1"})
     public void unknownTagInTable() throws Exception {
-        final String html = "<html><body>\n"
-            + "<table id='it'><doc><tr><td>hello</td></tr></doc></table>\n"
+        final String html = "<html><body>"
+            + "<table id='it'><doc><tr><td>hello</td></tr></doc></table>"
             + "<script>\n"
             + "alert(document.body.firstChild.tagName);\n"
             + "alert(document.getElementById('it').rows.length);\n"
@@ -446,8 +446,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOC", "1"})
     public void unknownTagInTbody() throws Exception {
-        final String html = "<html><body>\n"
-            + "<table id='it'><tbody><doc><tr><td>hello</td></tr></doc></tbody></table>\n"
+        final String html = "<html><body>"
+            + "<table id='it'><tbody><doc><tr><td>hello</td></tr></doc></tbody></table>"
             + "<script>\n"
             + "alert(document.body.firstChild.tagName);\n"
             + "alert(document.getElementById('it').rows.length);\n"
@@ -478,14 +478,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "                </td>\n"
                 + "              </tr>\n"
                 + "              </form>\n"
-                + "            </table>\n"
+                + "            </table>"
                 + "          </td>\n"
                 + "        </tr>\n"
                 + "        <tr><td></td></tr>\n"
                 + "      </table>\n"
                 + "    </td>\n"
                 + "  </tr>\n"
-                + "</table>\n"
+                + "</table>"
                 + "<script>\n"
                 + "  alert(document.getElementById('td0').children.length);\n"
                 + "  alert(document.getElementById('td0').children[0].tagName);\n"
@@ -539,7 +539,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "      </tr>\n"
                 + "      <input type='hidden' name='2c' value='c2'>\n"
                 + "    </form>\n"
-                + "  </table>\n"
+                + "  </table>"
                 + "<script>\n"
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
@@ -572,7 +572,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "        </td>\n"
                 + "      </tr>\n"
                 + "    </form>\n"
-                + "  </table>\n"
+                + "  </table>"
                 + "<script>\n"
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
                 + "  alert(document.forms[i].elements.length);\n"
@@ -871,7 +871,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    <tr>\n"
                 + "      <td>content</td>\n"
                 + "    </tr>\n"
-                + "  </table>\n"
+                + "  </table>"
                 + "<script>\n"
                 + "  alert(document.getElementById('caption').innerHTML.replace(/\\s+/g, ''));"
                 + "  alert(document.getElementById('caption').parentNode.tagName);"
