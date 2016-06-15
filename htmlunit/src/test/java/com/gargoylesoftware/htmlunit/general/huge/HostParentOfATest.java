@@ -6412,4 +6412,94 @@ public class HostParentOfATest extends HostParentOf {
         test("FontFaceSet", "FontFaceSet");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CanvasCaptureMediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack", "CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_Credential() throws Exception {
+        test("Credential", "Credential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_FederatedCredential() throws Exception {
+        test("Credential", "FederatedCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_PasswordCredential() throws Exception {
+        test("Credential", "PasswordCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CredentialsContainer_CredentialsContainer() throws Exception {
+        test("CredentialsContainer", "CredentialsContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_CanvasCaptureMediaStreamTrack() throws Exception {
+        test("EventTarget", "CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _FederatedCredential_FederatedCredential() throws Exception {
+        test("FederatedCredential", "FederatedCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CSSRule_MozCSSKeyframesRule() throws Exception {
+        test("CSSRule", "MozCSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _ANGLE_instanced_arrays_ANGLE_instanced_arrays() throws Exception {
+        test("ANGLE_instanced_arrays", "ANGLE_instanced_arrays");
+    }
+
 }

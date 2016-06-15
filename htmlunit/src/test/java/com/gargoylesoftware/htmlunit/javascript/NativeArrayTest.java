@@ -43,7 +43,7 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9"},
             FF = {"1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9"},
             IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void sort() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -157,13 +157,13 @@ public class NativeArrayTest extends WebDriverTestCase {
             + " 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];\n"
             + "var index = 0;"
             + "function test() {\n"
-            + "    var arr = new Array(37);\n"
-            + "    for (var x = 0; x < arr.length; x++) {\n"
-            + "        arr[x] = new Object();\n"
-            + "    }\n"
-            + "    arr.sort(function (a, b) {\n"
-            + "        return results[index++];\n"
-            + "    });\n"
+            + "  var arr = new Array(37);\n"
+            + "  for (var x = 0; x < arr.length; x++) {\n"
+            + "    arr[x] = new Object();\n"
+            + "  }\n"
+            + "  arr.sort(function (a, b) {\n"
+            + "    return results[index++];\n"
+            + "  });\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

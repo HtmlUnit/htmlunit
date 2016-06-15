@@ -39,6 +39,7 @@ public class NamedAttrNodeMapImplTest {
      * Test constructors.
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unused")
     @Test
     public void construction() throws Exception {
         try {

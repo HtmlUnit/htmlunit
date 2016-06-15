@@ -40,7 +40,7 @@ public class DomNode2Test extends WebDriverTestCase {
     public void appendChild_recursive() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
-                + "function test(){\n"
+                + "function test() {\n"
                 + "  var e = document.createElement('div');\n"
                 + "  try {\n"
                 + "    alert(e.appendChild(e) === e);\n"
@@ -64,7 +64,7 @@ public class DomNode2Test extends WebDriverTestCase {
     public void appendChild_recursive_parent() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
-                + "function test(){\n"
+                + "function test() {\n"
                 + "  var e1 = document.createElement('div');\n"
                 + "  var e2 = document.createElement('div');\n"
                 + "  try {\n"

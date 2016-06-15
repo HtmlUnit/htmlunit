@@ -22,6 +22,8 @@ import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
+
 /**
  * Subversion utilities.
  *
@@ -80,7 +82,7 @@ public final class SVN {
                 final String fileName = f.getName().toLowerCase(Locale.ROOT);
                 for (final String extension : EOL_EXTENSIONS_) {
                     if (fileName.endsWith(extension)) {
-                        FileUtils.writeLines(f, FileUtils.readLines(f));
+                        FileUtils.writeLines(f, FileUtils.readLines(f, TextUtil.DEFAULT_CHARSET));
                         break;
                     }
                 }

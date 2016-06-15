@@ -39,12 +39,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 public class HtmlTableRowTest extends SimpleWebTestCase {
 
     private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"
-            + "<table id='table'>"
-            + "<tr id='row'>\n"
-            + "<td id='cell' width='20'>"
-            + "<input type='text' id='foo'/></td>\n"
-            + "</tr>"
-            + "</table>\n"
+            + "<table id='table'><tr id='row'>\n"
+            + "<td id='cell' width='20'><input type='text' id='foo'/></td>\n"
+            + "</tr></table>\n"
             + "</body></html>";
 
     private HtmlPage page_;
@@ -235,7 +232,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that a script can set the disabled property on a DOM node.
      */
     @Test
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void cloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled='true'";
         page_.executeJavaScript(cmd);
@@ -272,7 +269,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * that same attribute on the clone.
      */
     @Test
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void cloneScriptSetDisabledIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);

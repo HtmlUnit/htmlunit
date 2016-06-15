@@ -456,7 +456,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <form>"
+            + "  <form>\n"
             + "    <input type='radio' id='rad1' name='radar' checked>\n"
             + "    <input type='radio' id='rad2' name='radar'>\n"
             + "  </form>\n"
@@ -492,7 +492,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <form>"
+            + "  <form>\n"
             + "    <input type='radio' id='rad1' name='radar'>\n"
             + "    <input type='radio' id='rad2' name='radar'>\n"
             + "  </form>\n"
@@ -526,7 +526,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         final String xml
             = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<body>\n"
-            + "<input type='radio' name='radio' checked='checked'/>"
+            + "<input type='radio' name='radio' checked='checked'/>\n"
             + "</body>\n"
             + "</html>";
 

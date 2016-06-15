@@ -179,7 +179,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second"})
+    @Alerts ({"open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -206,7 +206,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -226,7 +226,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second"})
+    @Alerts ({"open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -255,7 +255,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -275,7 +275,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second"})
+    @Alerts ({"open", "first", "second"})
     public void windowOpenedByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>\n"
             + "<head>\n"
@@ -300,7 +300,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -320,7 +320,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "open", "first", "second"})
+    @Alerts ({"open", "first", "second"})
     public void windowOpenedByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>\n"
             + "<head>\n"
@@ -350,7 +350,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -367,7 +367,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({ "Executed", "later"})
+    @Alerts ({"Executed", "later"})
     // TODO [IE11]ERRORPAGE real IE11 displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"
@@ -394,8 +394,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts("hello")
     public void urlEncodingPercent20() throws Exception {
-        final String html = "<html><body>"
-                + "<script src='a%20b.js'></script>"
+        final String html = "<html><body>\n"
+                + "<script src='a%20b.js'></script>\n"
                 + "</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
@@ -450,9 +450,9 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, content, 200, "OK", "text/javascript", headers);
 
-        final String html = "<html><head>"
-            + "<title>Hello world</title>"
-            + "<script src='" + URL_SECOND + "'></script>"
+        final String html = "<html><head>\n"
+            + "<title>Hello world</title>\n"
+            + "<script src='" + URL_SECOND + "'></script>\n"
             + "</head><body><script>alert(document.title)</script></body></html>";
         loadPageWithAlerts2(html);
     }

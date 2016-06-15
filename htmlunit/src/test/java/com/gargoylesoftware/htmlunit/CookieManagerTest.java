@@ -61,7 +61,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         + "  var c = c.split('; ').sort().join('; ');\n"
         + "  alert(c);\n"
         + "</script>\n"
-        + "</head>"
+        + "</head>\n"
         + "<body></body></html>";
 
     /**
@@ -518,13 +518,13 @@ public class CookieManagerTest extends WebDriverTestCase {
                 + "  function alertCookies() {\n"
                 + "    alert('cookies: ' + document.cookie);\n"
                 + "  }\n"
-                + "</script>"
+                + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"
                 + "  alertCookies();\n"
                 + "  window.setTimeout(alertCookies, 3100);\n"
-                + "</script>"
+                + "</script>\n"
                 + "</body>\n"
                 + "</html>";
 

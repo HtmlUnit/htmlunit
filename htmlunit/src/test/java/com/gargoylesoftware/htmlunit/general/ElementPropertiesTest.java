@@ -416,7 +416,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
                 + "substringData(),"
                 + "wholeText")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void text() throws Exception {
         testString("document.createTextNode('some text'), unknown");
     }
@@ -755,7 +755,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,rel,rev,search,shape,target,text,type,"
+                + "port,protocol,referrerpolicy,rel,rev,search,shape,target,text,type,"
                 + "username",
             FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,relList,rev,search,searchParams,shape,target,text,type,"
@@ -769,7 +769,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn")
-    @NotYetImplemented(EDGE)
+    @NotYetImplemented({EDGE, CHROME})
     public void a() throws Exception {
         test("a");
     }
@@ -798,7 +798,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "form,height,hspace,name,object,standby,type,useMap,vspace,"
                 + "width",
             CHROME = {})
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented({FF, IE})
     public void applet() throws Exception {
         test("applet");
     }
@@ -809,8 +809,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,search,"
-                + "shape,target,username",
+    @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
+                + "protocol,referrerpolicy,search,shape,target,username",
             FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,shape,target,username",
             FF38 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
@@ -1067,7 +1067,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "getContext(),height,toBlob(),toDataURL(),width",
+    @Alerts(CHROME = "captureStream(),getContext(),height,toBlob(),toDataURL(),width",
             FF38 = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             FF45 = "captureStream(),getContext(),height,"
                     + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
@@ -1228,7 +1228,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,noWrap",
             EDGE = "align,noWrap")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void div() throws Exception {
         test("div");
     }
@@ -1426,7 +1426,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = "profile",
             EDGE = "profile")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void head() throws Exception {
         test("head");
     }
@@ -1551,6 +1551,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
                 + "longDesc,marginHeight,marginWidth,name,sandbox,scrolling,src,srcdoc,"
                 + "width",
+            CHROME = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
+                + "longDesc,marginHeight,marginWidth,name,referrerpolicy,sandbox,scrolling,src,srcdoc,"
+                + "width",
             IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
                 + "hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,security,src,vspace,"
                 + "width",
@@ -1584,6 +1587,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
+            CHROME = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
+                + "naturalHeight,naturalWidth,referrerpolicy,sizes,src,srcset,useMap,vspace,width,x,"
+                + "y",
             IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
                 + "height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
@@ -1613,7 +1619,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,naturalHeight,naturalWidth,src,srcset,useMap,"
                 + "vspace,width,x,"
                 + "y")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void image() throws Exception {
         test("image");
     }
@@ -1802,7 +1808,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,"
                 + "width")
-    @NotYetImplemented({ IE, CHROME, EDGE })
+    @NotYetImplemented({IE, CHROME, EDGE})
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -1997,7 +2003,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "disabled,label",
             IE = "defaultSelected,form,index,label,selected,text,value",
             EDGE = "defaultSelected,disabled,form,index,label,selected,text,value")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -2028,7 +2034,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({FF, CHROME})
     public void output() throws Exception {
         test("output");
     }
@@ -2042,7 +2048,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,clear",
             EDGE = "align,clear")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void p() throws Exception {
         test("p");
     }
@@ -2416,7 +2422,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "insertCell(),rowIndex,sectionRowIndex,"
                 + "vAlign",
             EDGE = "align,bgColor,cells,ch,chOff,deleteCell(),height,insertCell(),rowIndex,sectionRowIndex,vAlign")
-    @NotYetImplemented({ IE, EDGE })
+    @NotYetImplemented({IE, EDGE})
     public void tr() throws Exception {
         test("tr");
     }
@@ -2571,7 +2577,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
                 + "webkitDisplayingFullscreen,webkitDroppedFrameCount,"
-                + "webkitEnterFullscreen(),webkitEnterFullScreen(),"
+                + "webkitEnterFullScreen(),webkitEnterFullscreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF38 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
@@ -2706,7 +2712,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "getDistributedNodes(),select",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void content() throws Exception {
         test("content");
     }
@@ -2730,7 +2736,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "content",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void template() throws Exception {
         test("template");
     }
@@ -2743,7 +2749,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,"
-                + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),keyCode,keyIdentifier,"
+                + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),key,keyCode,keyIdentifier,"
                 + "location,metaKey,repeat,"
                 + "shiftKey",
             FF = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
@@ -2798,7 +2804,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "detail,initUIEvent(),sourceCapabilities,view,which",
-            FF45 = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
+            FF = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
             IE = "detail,initUIEvent(),view")
     @NotYetImplemented

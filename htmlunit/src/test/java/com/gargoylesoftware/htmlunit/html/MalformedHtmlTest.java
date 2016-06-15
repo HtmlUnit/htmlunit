@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Set of tests for ill formed HTML code.
+ *
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour
@@ -45,7 +46,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"in test", "BODY"})
     public void bodyAttributeWhenOpeningBodyGenerated() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert('in test');\n"
             + "    alert(document.getElementById('span1').parentNode.tagName);\n"
             + "}\n"
@@ -64,7 +65,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"2", "3", "text3", "text3", "null"})
     public void lostFormChildren() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "    alert(document.forms[0].childNodes.length);\n"
             + "    alert(document.forms[0].elements.length);\n"
             + "    alert(document.forms[0].elements[2].name);\n"
@@ -128,7 +129,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"DIV", "TABLE"})
     public void div_between_table_and_tr() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  var c1 = document.body.firstChild;\n"
             + "  alert(c1.tagName);\n"
             + "  alert(c1.nextSibling.tagName);\n"
@@ -792,7 +793,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "1b", "1a", "1c", "0", "TABLE"},
             IE = {"3", "1a", "1b", "1c", "0", "TABLE"})
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({CHROME, FF})
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -842,14 +843,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "    <form name='form2'>\n"
                 + "    </form>\n"
-                + "  </table>"
+                + "  </table>\n"
                 + "<script>\n"
                 + "  alert(document.form1.elements.length);"
-                + "  for(var j = 0; j < document.form1.elements.length; j++) {"
-                + "    alert(document.form1.elements[j].name);"
-                + "  }"
-                + "  alert(document.form1.children.length);"
-                + "  alert(document.form1.parentNode.tagName);"
+                + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
+                + "    alert(document.form1.elements[j].name);\n"
+                + "  }\n"
+                + "  alert(document.form1.children.length);\n"
+                + "  alert(document.form1.parentNode.tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
@@ -914,5 +915,53 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("frame loaded")
+    @NotYetImplemented
+    public void siblingWithoutContentBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div><span></span></div>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</div>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(1, webDriver.findElements(By.name("main")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void siblingWithContentBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div><span>CONTENT</span></div>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</div>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(0, webDriver.findElements(By.name("main")).size());
     }
 }

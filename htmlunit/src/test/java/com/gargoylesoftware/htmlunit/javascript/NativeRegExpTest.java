@@ -38,7 +38,7 @@ public class NativeRegExpTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
-            + "    alert(new RegExp(undefined).test('AA'));\n"
+            + "  alert(new RegExp(undefined).test('AA'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

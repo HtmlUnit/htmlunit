@@ -979,4 +979,103 @@ public final class UrlUtils {
         }
         return false;
     }
+
+    /**
+     * More or less the same as sameFile(URL, URL) but without
+     * resolving the host to an IP address for comparing.
+     * Additionally we do some path normalization.
+     *
+     * @param u1 a URL object
+     * @param u2 a URL object
+     * @return true if u1 and u2 refer to the same file
+     */
+    public static boolean sameFile(final URL u1, final URL u2) {
+        if (u1 == u2) {
+            return true;
+        }
+        if (u1 == null || u2 == null) {
+            return false;
+        }
+
+        // Compare the protocols.
+        final String p1 = u1.getProtocol();
+        final String p2 = u2.getProtocol();
+        if (!(p1 == p2 || (p1 != null && p1.equalsIgnoreCase(p2)))) {
+            return false;
+        }
+
+        // Compare the ports.
+        final int port1 = (u1.getPort() != -1) ? u1.getPort() : u1.getDefaultPort();
+        final int port2 = (u2.getPort() != -1) ? u2.getPort() : u2.getDefaultPort();
+        if (port1 != port2) {
+            return false;
+        }
+
+        // Compare the hosts.
+        final String h1 = u1.getHost();
+        final String h2 = u2.getHost();
+        if (!(h1 == h2 || (h1 != null && h1.equalsIgnoreCase(h2)))) {
+            return false;
+        }
+
+        // Compare the files.
+        String f1 = u1.getFile();
+        if (f1.isEmpty()) {
+            f1 = "/";
+        }
+        String f2 = u2.getFile();
+        if (f2.isEmpty()) {
+            f2 = "/";
+        }
+        if (f1.indexOf('.') > 0 || f2.indexOf('.') > 0) {
+            try {
+                f1 = u1.toURI().normalize().toURL().getFile();
+                f2 = u2.toURI().normalize().toURL().getFile();
+            }
+            catch (final Exception e) {
+                // ignore
+            }
+        }
+        if (!(f1 == f2 || (f1 != null && f1.equals(f2)))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Helper that constructs a normalized url string
+     * usable as cache key.
+     *
+     * @param url a URL object
+     * @return the normalized string
+     */
+    public static String normalize(final URL url) {
+        final StringBuilder result = new StringBuilder();
+
+        result.append(url.getProtocol());
+        result.append("://");
+        result.append(url.getHost());
+        result.append(':');
+        result.append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
+
+        // Compare the files.
+        String f = url.getFile();
+        if (f.isEmpty()) {
+            result.append("/");
+        }
+        else {
+            if (f.indexOf('.') > 0) {
+                try {
+                    f = url.toURI().normalize().toURL().getFile();
+                }
+                catch (final Exception e) {
+                    // ignore
+                }
+            }
+            result.append(f);
+        }
+
+        return result.toString();
+    }
 }

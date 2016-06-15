@@ -33,6 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -46,7 +47,6 @@ import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
-import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -116,8 +116,24 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(client);
+
+        final List<WebWindowEvent> events = new LinkedList<>();
+        client.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
@@ -129,15 +145,15 @@ public class WebClientTest extends SimpleWebTestCase {
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage)
         });
-        assertEquals(firstExpectedEvents, eventCatcher.getEvents());
+        assertEquals(firstExpectedEvents, events);
 
-        eventCatcher.clear();
+        events.clear();
         final HtmlPage secondPage = anchor.click();
 
         final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage)
         });
-        assertEquals(secondExpectedEvents, eventCatcher.getEvents());
+        assertEquals(secondExpectedEvents, events);
     }
 
     /**
@@ -153,9 +169,25 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
         final String page2Content = "<html><head><title>foo</title></head><body></body></html>";
+
         final WebClient client = getWebClient();
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(client);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        client.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, page1Content);
@@ -176,7 +208,7 @@ public class WebClientTest extends SimpleWebTestCase {
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, null, firstPage),
         });
-        assertEquals(expectedEvents, eventCatcher.getEvents());
+        assertEquals(expectedEvents, events);
     }
 
     /**
@@ -204,8 +236,23 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         assertEquals("first", firstPage.getTitleText());
 
-        final EventCatcher eventCatcher = new EventCatcher();
-        eventCatcher.listenTo(client);
+        final List<WebWindowEvent> events = new LinkedList<>();
+        client.addWebWindowListener(new WebWindowListener() {
+            @Override
+            public void webWindowOpened(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowContentChanged(final WebWindowEvent event) {
+                events.add(event);
+            }
+
+            @Override
+            public void webWindowClosed(final WebWindowEvent event) {
+                events.add(event);
+            }
+        });
 
         final HtmlInlineFrame frame = firstPage.getHtmlElementById("frame1");
         final HtmlPage thirdPage = (HtmlPage) frame.getEnclosedPage();
@@ -222,8 +269,8 @@ public class WebClientTest extends SimpleWebTestCase {
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
         });
-        assertEquals(expectedEvents.get(0), eventCatcher.getEvents().get(0));
-        assertEquals(expectedEvents, eventCatcher.getEvents());
+        assertEquals(expectedEvents.get(0), events.get(0));
+        assertEquals(expectedEvents, events);
     }
 
     /**
@@ -535,7 +582,6 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param useProxy indicates if the test should be performed with a proxy
      * @throws Exception if the test fails
      */
-    @SuppressWarnings("resource")
     private void doTestRedirection(
             final int statusCode,
             final HttpMethod initialRequestMethod,
@@ -1814,7 +1860,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</form></body></html>";
         conn.setResponse(URL_FIRST, html1);
 
-        final String html2 = "<html><head><title>Third</title>"
+        final String html2 = "<html><head><title>Third</title>\n"
                 + "<script type=\"text/javascript\">\n"
                 + "     window.close();\n"
                 + "</script></head></html>";
@@ -1847,7 +1893,7 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html1);
 
         final String html2 = "<html><head><title>Second</title></head>\n"
-                + "<body onUnload='doTest()'>"
+                + "<body onUnload='doTest()'>\n"
                 + "<form name='form1' action='" + URL_THIRD + "'>\n"
                 + "<button id='clickme' type='button' onclick='postBack();'>Submit</button></form>\n"
                 + "<script>\n"
@@ -1861,7 +1907,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</script></body></html>";
         conn.setResponse(URL_SECOND, html2);
 
-        final String html3 = "<html><head><title>Third</title>"
+        final String html3 = "<html><head><title>Third</title>\n"
                 + "<script type=\"text/javascript\">\n"
                 + "     alert('Third page loaded');\n"
                 + "     window.close();\n"
@@ -1967,13 +2013,13 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void maintainJavaScriptParentScope() throws Exception {
-        final String basicContent = "<html><head>"
+        final String basicContent = "<html><head>\n"
                 + "<title>basicContentTitle</title>\n"
                 + "</head><body>\n"
-                + "<p>Hello World</p>"
+                + "<p>Hello World</p>\n"
                 + "</body></html>";
 
-        final String jsContent = "<html><head>"
+        final String jsContent = "<html><head>\n"
                 + "<title>jsContentTitle</title>\n"
                 + "<script>function foo() {alert('Ran Here')}</script>\n"
                 + "<script>function bar() {}</script>\n"
@@ -2015,7 +2061,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection conn = new MockWebConnection();
-        final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>"
+        final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>\n"
                 + "<iframe id='f'></iframe></body></html>";
         conn.setResponse(URL_FIRST, html);
         final URL frameUrl = new URL(URL_FIRST.toExternalForm() + "frame.html");
@@ -2061,7 +2107,6 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void getTopLevelWindows() throws Exception {
-        @SuppressWarnings("resource")
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
@@ -2174,7 +2219,6 @@ public class WebClientTest extends SimpleWebTestCase {
         getMockWebConnection().setResponse(getDefaultUrl(), html);
         getMockWebConnection().setDefaultResponse(html2);
 
-        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final int initialJSThreads = getJavaScriptThreads().size();
         webClient.setWebConnection(getMockWebConnection());
@@ -2201,11 +2245,11 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void test() throws Exception {
-        final String html = "<html><body>"
-                + "<script type='application/javascript'>"
-                + "  window.onerror = function(){ foo.bar() };"
-                + "  doit();"
-                + "</script>"
+        final String html = "<html><body>\n"
+                + "<script type='application/javascript'>\n"
+                + "  window.onerror = function() { foo.bar() };\n"
+                + "  doit();\n"
+                + "</script>\n"
                 + "</body></html>";
 
         final WebClient webClient = getWebClient();

@@ -13,12 +13,13 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.selenium;
+
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -156,7 +157,7 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    public void testAllPrintableKeys() {
+    public void allPrintableKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement result = driver.findElement(By.id("result"));
@@ -191,7 +192,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testHomeAndEndAndPageUpAndPageDownKeys() {
+    public void homeAndEndAndPageUpAndPageDownKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
@@ -207,7 +208,7 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @NotYetImplemented
-    public void testDeleteAndBackspaceKeys() {
+    public void deleteAndBackspaceKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement element = driver.findElement(By.id("keyReporter"));
@@ -327,15 +328,14 @@ public class TypingTest extends SeleniumTest {
     @Test
     @NotYetImplemented
     public void chordControlCutAndPaste() {
-        Assert.fail();
+        fail();
     }
 
     /**
      * A test.
      */
     @Test
-    @NotYetImplemented
-    public void testGenerateKeyPressEventEvenWhenElementPreventsDefault() {
+    public void generateKeyPressEventEvenWhenElementPreventsDefault() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
         final WebElement silent = driver.findElement(By.name("suppress"));
@@ -365,10 +365,10 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @Alerts(DEFAULT = { "keydown (target) keyup (target) keyup (body)",
-            "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing" },
-            CHROME = { "keydown (target) keyup (target) keyup (body)",
-            "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing keyup (body)" })
+    @Alerts(DEFAULT = {"keydown (target) keyup (target) keyup (body)",
+            "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing"},
+            CHROME = {"keydown (target) keyup (target) keyup (body)",
+            "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing keyup (body)"})
     public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
         final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 

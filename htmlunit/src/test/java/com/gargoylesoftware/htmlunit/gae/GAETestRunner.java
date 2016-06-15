@@ -14,19 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.gae;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
+
+import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
  * Test runner for GAE support tests. This runner uses a custom class loader that
@@ -107,20 +109,13 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
      * @return the list of classes in the white list
      */
     private static Set<String> loadWhiteList() {
-        final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt");
-        Assert.assertNotNull(is);
-        List<String> lines;
-        try {
-            lines = IOUtils.readLines(is);
+        try (final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt")) {
+            assertNotNull(is);
+            return new HashSet<>(IOUtils.readLines(is, TextUtil.DEFAULT_CHARSET));
         }
         catch (final IOException e) {
             throw new Error("Failed to load while list content", e);
         }
-        finally {
-            IOUtils.closeQuietly(is);
-        }
-
-        return new HashSet<>(lines);
     }
 
     @Override

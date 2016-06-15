@@ -86,7 +86,7 @@ public class IEWeirdSyntaxTest extends WebDriverTestCase {
             + "function window.onload() {\n"
             + "  alert(1);\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body></body></html>";
         doTestWithEvaluatorExceptionExcept(html);
     }

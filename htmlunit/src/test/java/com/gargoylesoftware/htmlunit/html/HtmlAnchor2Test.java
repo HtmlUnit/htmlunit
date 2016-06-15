@@ -428,7 +428,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts("<a id=\"a\" href=\"#x\">foo</a>")
     public void innerHtmlHrefQuotedEvenInIE() throws Exception {
-        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
+        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>\n"
             + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
 
         loadPageWithAlerts2(html);
@@ -571,8 +571,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Alerts(IE = "click href click doubleClick ",
             CHROME = "click href click href doubleClick ",
             FF = "click href click doubleClick href ")
-    @BuggyWebDriver({ FF, CHROME })
-    @NotYetImplemented({ FF, IE })
+    @BuggyWebDriver({FF, CHROME})
+    @NotYetImplemented({FF, IE})
     public void doubleClick() throws Exception {
         final String html =
               "<html>\n"

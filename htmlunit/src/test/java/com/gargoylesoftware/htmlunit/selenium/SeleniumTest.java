@@ -15,10 +15,8 @@
 package com.gargoylesoftware.htmlunit.selenium;
 
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -26,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class SeleniumTest extends WebDriverTestCase {
 
     /**

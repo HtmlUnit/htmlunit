@@ -78,8 +78,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     public void arguments_prototype() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "var f1 = function(){};\n"
-            + "var f2 = function(){};\n"
+            + "var f1 = function() {};\n"
+            + "var f2 = function() {};\n"
             + "Object.prototype.myFunction = f1;\n"
             + "Array.prototype.myFunction = f2;\n"
             + "var a = (function() { return arguments;})();\n"
@@ -137,7 +137,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function foo() {\n"
             + "    return 1;\n"
-            + "};\n"
+            + "}\n"
             + "alert(foo);\n"
             + "</script></head><body>\n"
             + "</body></html>";
@@ -156,9 +156,9 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "function foo1() {\n"
             + "  for (var i in foo1) {\n"
             + "    alert(i);\n"
-            + "  };\n"
+            + "  }\n"
             + "  alert('foo1 done');\n"
-            + "};\n"
+            + "}\n"
             + "function foo0() {\n"
             + "  foo1();\n"
             + "}\n"
@@ -180,7 +180,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "var ori = $;\n"
             + "function foo() {\n"
             + "  var $ = function $() { return 2; };\n"
-            + "};\n"
+            + "}\n"
             + "foo();\n"
             + "alert(ori == $);\n"
             + "</script></body></html>";

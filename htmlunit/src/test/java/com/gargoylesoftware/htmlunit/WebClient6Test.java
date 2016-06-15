@@ -390,9 +390,9 @@ public class WebClient6Test extends WebDriverTestCase {
             final String redirectUrl, final boolean resendParams) throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><body><form action='redirect.html' method='POST'>"
-                + " <input type='hidden' name='param1' value='paramValue'>"
-                + " <input type='submit' id='postBtn' value='Submit'>"
+                + "<html><body><form action='redirect.html' method='POST'>\n"
+                + " <input type='hidden' name='param1' value='paramValue'>\n"
+                + " <input type='submit' id='postBtn' value='Submit'>\n"
                 + "</form></body></html>";
         final int reqCount = getMockWebConnection().getRequestCount();
 

@@ -142,12 +142,12 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "      document.deliveryChannelForm.submitBtn.disabled = true;\n"
             + "      document.deliveryChannelForm.submit();\n"
             + "    }\n"
-            + "  </script>"
+            + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <form action='test' name='deliveryChannelForm'>\n"
             + "    <input name='submitBtn' type='submit' value='Save' title='Save' onclick='submitForm();'>\n"
-            + "  </form>"
+            + "  </form>\n"
             + "</body>\n"
             + "</html>";
 
@@ -170,11 +170,11 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "  btn.form.submit();\n"
             + "  btn.disabled = true;\n"
             + "}\n"
-            + "</script>"
+            + "</script>\n"
             + "<form method='post' action='test'>\n"
             + "  <input name='text' type='text'>\n"
             + "  <input name='btn' type='submit' onclick='submitForm(this);'>\n"
-            + "</form>"
+            + "</form>\n"
             + "</body></html>";
 
         final MockWebConnection mockWebConnection = getMockWebConnection();

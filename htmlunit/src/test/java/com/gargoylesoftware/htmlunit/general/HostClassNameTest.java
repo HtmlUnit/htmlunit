@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -26,8 +25,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 
 /**
  * Test the host class names.
@@ -4397,8 +4396,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            EDGE = "function DateTimeFormat() { [native code] }",
+    @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
             FF = "function DateTimeFormat() {\n    [native code]\n}",
             IE = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
     public void intl_DateTimeFormat() throws Exception {
@@ -4437,8 +4435,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            EDGE = "function Collator() { [native code] }",
+    @Alerts(DEFAULT = "function Collator() { [native code] }",
             FF = "function Collator() {\n    [native code]\n}",
             IE = "\nfunction Collator() {\n    [native code]\n}\n")
     public void intl_Collator() throws Exception {
@@ -5726,8 +5723,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            EDGE = "function NumberFormat() { [native code] }",
+    @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
             FF = "function NumberFormat() {\n    [native code]\n}",
             IE = "\nfunction NumberFormat() {\n    [native code]\n}\n")
     public void intl_NumberFormat() throws Exception {
@@ -6958,7 +6954,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function InternalError() {\n    [native code]\n}")
-    @NotYetImplemented({ CHROME, IE, EDGE })
+    @NotYetImplemented({CHROME, IE, EDGE})
     public void internalError() throws Exception {
         test("InternalError");
     }
@@ -9732,7 +9728,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "[object MozCSSKeyframesRule]")
-    @NotYetImplemented(FF)
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -10353,6 +10348,296 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function PresentationConnectionCloseEvent() { [native code] }")
     public void presentationConnectionCloseEvent() throws Exception {
         test("PresentationConnectionCloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void oes_vertex_array_object() throws Exception {
+        test("OES_vertex_array_object");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_frag_depth() throws Exception {
+        test("EXT_frag_depth");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLSync() throws Exception {
+        test("WebGLSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void documentTimeline() throws Exception {
+        test("DocumentTimeline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_disjoint_timer_query() throws Exception {
+        test("EXT_disjoint_timer_query");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcIceServer() throws Exception {
+        test("RTCIceServer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function RTCStatsReport() {\n    [native code]\n}")
+    public void rtcStatsReport() throws Exception {
+        test("RTCStatsReport");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PasswordCredential() { [native code] }")
+    public void passwordCredential() throws Exception {
+        test("PasswordCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Credential() { [native code] }")
+    public void credential() throws Exception {
+        test("Credential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGL_draw_buffers() throws Exception {
+        test("WEBGL_draw_buffers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLVertexArrayObjectOES() throws Exception {
+        test("WebGLVertexArrayObjectOES");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLTransformFeedback() throws Exception {
+        test("WebGLTransformFeedback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLQuery() throws Exception {
+        test("WebGLQuery");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CredentialsContainer() { [native code] }")
+    public void credentialsContainer() throws Exception {
+        test("CredentialsContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FederatedCredential() { [native code] }")
+    public void federatedCredential() throws Exception {
+        test("FederatedCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorConcurrentHardware() throws Exception {
+        test("NavigatorConcurrentHardware");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_sRGB() throws Exception {
+        test("EXT_sRGB");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_color_buffer_float() throws Exception {
+        test("EXT_color_buffer_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLTimerQueryEXT() throws Exception {
+        test("WebGLTimerQueryEXT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vrPose() throws Exception {
+        test("VRPose");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object OES_standard_derivatives]")
+    public void oes_standard_derivatives() throws Exception {
+        test("OES_standard_derivatives");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLVertexArrayObject() throws Exception {
+        test("WebGLVertexArrayObject");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object OES_element_index_uint]")
+    public void oes_element_index_uint() throws Exception {
+        test("OES_element_index_uint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationTimeline() throws Exception {
+        test("AnimationTimeline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void webGLSampler() throws Exception {
+        test("WebGLSampler");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object ANGLE_instanced_arrays]")
+    public void angle_instanced_arrays() throws Exception {
+        test("ANGLE_instanced_arrays");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_blend_minmax() throws Exception {
+        test("EXT_blend_minmax");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ext_shader_texture_lod() throws Exception {
+        test("EXT_shader_texture_lod");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CanvasCaptureMediaStreamTrack() { [native code] }")
+    public void canvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IntersectionObserver() { [native code] }")
+    public void intersectionObserver() throws Exception {
+        test("IntersectionObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IntersectionObserverEntry() { [native code] }")
+    public void intersectionObserverEntry() throws Exception {
+        test("IntersectionObserverEntry");
     }
 
 }

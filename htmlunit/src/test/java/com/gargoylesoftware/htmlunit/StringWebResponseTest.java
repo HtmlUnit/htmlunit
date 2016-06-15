@@ -38,8 +38,8 @@ public class StringWebResponseTest extends SimpleWebTestCase {
      */
     @Test
     public void charsetInContent() {
-        final String content = "<html><head>"
-                + "<meta http-equiv='Content-Type' content='text/html; charset=windows-1250' />"
+        final String content = "<html><head>\n"
+                + "<meta http-equiv='Content-Type' content='text/html; charset=windows-1250' />\n"
                 + "</head><body>\u010C\u00CDSLO</body></html>";
         final StringWebResponse webResponse = new StringWebResponse(content, "UTF-8", getDefaultUrl());
 

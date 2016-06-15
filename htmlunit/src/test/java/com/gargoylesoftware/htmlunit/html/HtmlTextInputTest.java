@@ -249,11 +249,11 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
      */
     @Test
     public void type_specialCharacters() throws Exception {
-        final String html = "<html><head></head><body>"
-            + "<form>"
-            + "<input id='t' onkeyup='document.forms[0].lastKey.value = event.keyCode'>"
-            + "<input id='lastKey'>"
-            + "</form>"
+        final String html = "<html><head></head><body>\n"
+            + "<form>\n"
+            + "<input id='t' onkeyup='document.forms[0].lastKey.value = event.keyCode'>\n"
+            + "<input id='lastKey'>\n"
+            + "</form>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final HtmlTextInput t = page.getHtmlElementById("t");

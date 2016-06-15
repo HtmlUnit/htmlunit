@@ -78,8 +78,8 @@ public class XHtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void a4jResponse() throws Exception {
-        final String content = "<html xmlns='http://www.w3.org/1999/xhtml'><head>"
-            + "<script src='//:'></script>"
+        final String content = "<html xmlns='http://www.w3.org/1999/xhtml'><head>\n"
+            + "<script src='//:'></script>\n"
             + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

@@ -164,7 +164,7 @@ public class NativeStringTest extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  if ('contains' in String.prototype) {"
+            + "  if ('contains' in String.prototype) {\n"
             + "    var str = 'To be, or not to be, that is the question.';\n"
             + "    alert(str.contains('To be'));\n"
             + "    alert(str.contains('TO'));\n"
@@ -183,6 +183,118 @@ public class NativeStringTest extends WebDriverTestCase {
             + "    alert(str.contains());\n"
             + "  } else {\n"
             + "    alert('contains not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "false"},
+            IE = "startsWith not supported")
+    public void startsWith() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('startsWith' in String.prototype) {\n"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.startsWith('To be'));\n"
+            + "    alert(str.startsWith('T'));\n"
+            + "    alert(str.startsWith(str));\n"
+
+            + "    alert(str.startsWith('question.'));\n"
+            + "  } else {\n"
+            + "    alert('startsWith not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "false"},
+            IE = "endsWith not supported")
+    public void endsWith() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('endsWith' in String.prototype) {\n"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.endsWith('question.'));\n"
+            + "    alert(str.endsWith('.'));\n"
+            + "    alert(str.endsWith(str));\n"
+
+            + "    alert(str.endsWith('the'));\n"
+            + "  } else {\n"
+            + "    alert('endsWith not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "false"},
+            FF38 = "includes not supported",
+            IE = "includes not supported")
+    public void includes() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('includes' in String.prototype) {\n"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.includes('to be'));\n"
+            + "    alert(str.includes('question.'));\n"
+            + "    alert(str.includes('To be'));\n"
+            + "    alert(str.includes(str));\n"
+
+            + "    alert(str.includes('test'));\n"
+            + "  } else {\n"
+            + "    alert('includes not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "abc", "abcabc"},
+            IE = "repeat not supported")
+    public void repeat() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('repeat' in String.prototype) {\n"
+            + "    var str = 'abc';\n"
+            + "    alert(str.repeat(0));\n"
+            + "    alert(str.repeat(1));\n"
+            + "    alert(str.repeat(2));\n"
+            + "  } else {\n"
+            + "    alert('repeat not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"

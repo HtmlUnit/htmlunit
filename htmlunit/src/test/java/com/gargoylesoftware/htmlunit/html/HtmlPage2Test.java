@@ -56,9 +56,6 @@ public class HtmlPage2Test extends SimpleWebTestCase {
     public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
 
     /**
-     * Different versions of IE behave differently here.
-     * Distinction is made with
-     * {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures#JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW}.
      * @throws Exception if the test fails
      */
     @Test
@@ -71,14 +68,14 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "  var iframesrc = '<html><head>';\n"
             + "  iframesrc += '<script src=\"" + "js.js" + "\"></' + 'script>';\n"
             + "  iframesrc += '<script>';\n"
-            + "  iframesrc += 'function doSquared(){';\n"
+            + "  iframesrc += 'function doSquared() {';\n"
             + "  iframesrc += '    try {';\n"
             + "  iframesrc += '      var y = squared(5);';\n"
             + "  iframesrc += '      alert(y);';\n"
             + "  iframesrc += '    } catch (e) {';\n"
             + "  iframesrc += '      alert(\"error\");';\n"
             + "  iframesrc += '    }'\n"
-            + "  iframesrc += '};';\n"
+            + "  iframesrc += '}';\n"
             + "  iframesrc += '</' + 'script>';\n"
             + "  iframesrc += '</head>';\n"
             + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
@@ -124,14 +121,14 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "  var iframesrc = '<html><head>';\n"
             + "  iframesrc += '<script src=\"" + URL_SECOND + "\"></' + 'script>';\n"
             + "  iframesrc += '<script>';\n"
-            + "  iframesrc += 'function doSquared(){';\n"
+            + "  iframesrc += 'function doSquared() {';\n"
             + "  iframesrc += '    try {';\n"
             + "  iframesrc += '      var y = squared(5);';\n"
             + "  iframesrc += '      alert(y);';\n"
             + "  iframesrc += '    } catch (e) {';\n"
             + "  iframesrc += '      alert(\"error\");';\n"
             + "  iframesrc += '    }'\n"
-            + "  iframesrc += '};';\n"
+            + "  iframesrc += '}';\n"
             + "  iframesrc += '</' + 'script>';\n"
             + "  iframesrc += '</head>';\n"
             + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
@@ -180,7 +177,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "<body onload='init()'>\n"
             + "  <iframe name='f'></iframe>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>second</title></head>"
+        final String secondHtml = "<html><head><title>second</title></head>\n"
             + "<body><p>Form submitted successfully.</p></body></html>";
 
         final WebClient client = getWebClient();
@@ -405,7 +402,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
 
         final String css = "body {color: blue}";
@@ -436,7 +433,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css_without_href() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' /></head></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -460,7 +457,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css_empty_href() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='' /></head></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -510,12 +507,12 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_attributeListenerLock() throws Exception {
-        final String html = "<html><head><script>"
-            + "function foo() {"
-            + "  document.getElementById('aframe').src = '" + URL_FIRST + "';"
-            + "  return false;"
-            + "}</script>"
-            + "<body><iframe src='about:blank' id='aframe'></iframe>"
+        final String html = "<html><head><script>\n"
+            + "function foo() {\n"
+            + "  document.getElementById('aframe').src = '" + URL_FIRST + "';\n"
+            + "  return false;\n"
+            + "}</script>\n"
+            + "<body><iframe src='about:blank' id='aframe'></iframe>\n"
             + "<a href='#' onclick='foo()' id='link'>load iframe</a></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         final WebClient copy = clone(page.getWebClient());

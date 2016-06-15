@@ -286,7 +286,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
             + "<span id='A'></span>\n"
             + "<script>\n"
-            + "  function createIframe(){\n"
+            + "  function createIframe() {\n"
             + "    var frame='<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>';\n"
             + "    document.getElementById('A').innerHTML=frame;\n"
             + "  }\n"

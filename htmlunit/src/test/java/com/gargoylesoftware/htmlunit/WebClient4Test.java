@@ -50,7 +50,7 @@ public class WebClient4Test extends WebServerTestCase {
 
         try (final WebClient client = getWebClient()) {
             TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-            assertTrue(textPage.getContent().contains("Gargoyle Software"));
+            assertTrue(textPage.getContent().contains("Apache License"));
 
             try (final WebClient copy = clone(client)) {
                 assertNotNull(copy);
@@ -69,10 +69,10 @@ public class WebClient4Test extends WebServerTestCase {
 
                 final String content = response.getContentAsString();
                 assertNotNull(content);
-                assertTrue(content.contains("Gargoyle Software"));
+                assertTrue(content.contains("Apache License"));
 
                 textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-                assertTrue(textPage.getContent().contains("Gargoyle Software"));
+                assertTrue(textPage.getContent().contains("Apache License"));
             }
         }
     }
@@ -252,8 +252,8 @@ public class WebClient4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
             res.setContentType("text/html");
             final Writer writer = res.getWriter();
-            writer.write("<html><body><form action='test2'>"
-                    + "<input id='submit' type='submit' value='submit'></input>"
+            writer.write("<html><body><form action='test2'>\n"
+                    + "<input id='submit' type='submit' value='submit'></input>\n"
                     + "</form></body></html>");
         }
     }

@@ -64,7 +64,7 @@ public class GAELoadPageTest {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsyncUse() throws Exception {
+    public void asyncUse() throws Exception {
         final URL secondUrl = new URL(FIRST_URL, "/second/");
 
         final String html =
@@ -74,10 +74,7 @@ public class GAELoadPageTest {
             + "    <script>\n"
             + "      var request;\n"
             + "      function testAsync() {\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request = new XMLHttpRequest();\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        alert(request.readyState);\n"
             + "        request.open('GET', '/second/', true);\n"
@@ -113,7 +110,6 @@ public class GAELoadPageTest {
             final int executedJobs = client.getJavaScriptEngine().pumpEventLoop(1000);
             final String[] alerts = {String.valueOf(XMLHttpRequest.UNSENT),
                 String.valueOf(XMLHttpRequest.OPENED),
-                String.valueOf(XMLHttpRequest.OPENED),
                 String.valueOf(XMLHttpRequest.HEADERS_RECEIVED),
                 String.valueOf(XMLHttpRequest.LOADING),
                 String.valueOf(XMLHttpRequest.DONE), xml};
@@ -126,10 +122,9 @@ public class GAELoadPageTest {
      * Test that a JS job using setInterval is processed on GAE.
      * @throws IOException if fails to get page.
      * @throws FailingHttpStatusCodeException if fails to get page.
-     * @throws InterruptedException if wait fails
      */
     @Test
-    public void setInterval() throws FailingHttpStatusCodeException, IOException, InterruptedException {
+    public void setInterval() throws FailingHttpStatusCodeException, IOException {
         final long timeout = 100L;
         final String html = "<html>\n"
             + "  <body>\n"
@@ -165,7 +160,7 @@ public class GAELoadPageTest {
             executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
             count = (System.currentTimeMillis() - startTime) / timeout;
             count = Math.max(2, count);
-            assertEquals(count , collectedAlerts.size());
+            assertEquals(count, collectedAlerts.size());
             assertEquals(count, executedJobs);
         }
     }

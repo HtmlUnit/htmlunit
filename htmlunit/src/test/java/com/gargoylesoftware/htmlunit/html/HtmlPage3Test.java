@@ -103,9 +103,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"windows-1252", "windows-1252", "windows-1252", "windows-1252"},
+    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
-            FF45 = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
@@ -139,9 +138,9 @@ public class HtmlPage3Test extends WebDriverTestCase {
     public void onLoadHandler_ScriptNameRead() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
-            + "load=function (){};\n"
-            + "onload=load;\n"
-            + "alert(onload);\n"
+            + "  load = function() {};\n"
+            + "  onload = load;\n"
+            + "  alert(onload);\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);

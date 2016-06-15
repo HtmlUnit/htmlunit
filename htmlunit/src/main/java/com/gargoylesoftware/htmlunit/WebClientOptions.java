@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.security.KeyStore;
@@ -89,6 +90,30 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
+     * Sets the SSL client certificate to use. The needed parameters are used to
+     * construct a {@link java.security.KeyStore}.
+     *
+     * If the web server requires Renegotiation, you have to set system property
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
+     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * TLS Renegotiation Issue</a>.
+     *
+     * @param certificateInputStream the input stream which represents the certificate
+     * @param certificatePassword the certificate password
+     * @param certificateType the type of certificate, usually {@code jks} or {@code pkcs12}
+     */
+    public void setSSLClientCertificate(final InputStream certificateInputStream, final String certificatePassword,
+            final String certificateType) {
+        try {
+            sslClientCertificateStore_ = getKeyStore(certificateInputStream, certificatePassword, certificateType);
+            sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Sets the SSL client certificate to use.
      * The needed parameters are used to construct a {@link java.security.KeyStore}.
      *
@@ -99,12 +124,17 @@ public class WebClientOptions implements Serializable {
      *
      * @param certificateUrl the URL which locates the certificate
      * @param certificatePassword the certificate password
-     * @param certificateType the type of certificate, usually "jks" or "pkcs12".
+     * @param certificateType the type of certificate, usually {@code jks} or {@code pkcs12}
      */
     public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
             final String certificateType) {
-        sslClientCertificateStore_ = getKeyStore(certificateUrl, certificatePassword, certificateType);
-        sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
+        try (final InputStream is = certificateUrl.openStream()) {
+            sslClientCertificateStore_ = getKeyStore(is, certificatePassword, certificateType);
+            sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     void setSSLClientCertificateStore(final KeyStore keyStore) {
@@ -442,11 +472,16 @@ public class WebClientOptions implements Serializable {
      *
      * @param sslTrustStoreUrl the URL which locates the trust store
      * @param sslTrustStorePassword the trust store password
-     * @param sslTrustStoreType the type of trust store, usually "jks" or "pkcs12".
+     * @param sslTrustStoreType the type of trust store, usually {@code jks} or {@code pkcs12}
      */
     public void setSSLTrustStore(final URL sslTrustStoreUrl, final String sslTrustStorePassword,
             final String sslTrustStoreType) {
-        sslTrustStore_ = getKeyStore(sslTrustStoreUrl, sslTrustStorePassword, sslTrustStoreType);
+        try (final InputStream is = sslTrustStoreUrl.openStream()) {
+            sslTrustStore_ = getKeyStore(is, sslTrustStorePassword, sslTrustStoreType);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     void setSSLTrustStore(final KeyStore keyStore) {
@@ -461,21 +496,16 @@ public class WebClientOptions implements Serializable {
         return sslTrustStore_;
     }
 
-    private static KeyStore getKeyStore(final URL keystoreURL, final String keystorePassword,
-            final String keystoreType) {
-        if (keystoreURL == null) {
+    private static KeyStore getKeyStore(final InputStream inputStream, final String keystorePassword,
+            final String keystoreType) throws Exception {
+        if (inputStream == null) {
             return null;
         }
 
-        try {
-            final KeyStore keyStore = KeyStore.getInstance(keystoreType);
-            final char[] passwordChars = keystorePassword != null ? keystorePassword.toCharArray() : null;
-            keyStore.load(keystoreURL.openStream(), passwordChars);
-            return keyStore;
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+        final KeyStore keyStore = KeyStore.getInstance(keystoreType);
+        final char[] passwordChars = keystorePassword != null ? keystorePassword.toCharArray() : null;
+        keyStore.load(inputStream, passwordChars);
+        return keyStore;
     }
 
     /**

@@ -60,7 +60,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     public void formsAccessor_FormsAsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    try {\n"
             + "        alert(document.forms[0].id);\n"
             + "        alert(document.forms(0).id);\n"
@@ -87,7 +87,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     public void formsAccessor_FormsAsFunction2() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "function doTest() {\n"
             + "    try {\n"
             + "        alert(document.forms['myName'].id);\n"
             + "        alert(document.forms('myName').id);\n"
@@ -114,7 +114,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     public void asFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  var f1 = document.forms[0];\n"
             + "  try { alert(f1('textfieldid').id) } catch (e) { alert('error') }\n"
             + "  try { alert(f1('textfieldname').name) } catch (e) { alert('error') }\n"
@@ -139,7 +139,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     public void asFunctionFormsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function test(){\n"
+            + "function test() {\n"
             + "  try {\n"
             + "    var f1 = document.forms(0);\n"
             + "    try { alert(f1('textfieldid').id) } catch (e) { alert('error') }\n"

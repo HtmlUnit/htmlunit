@@ -32,7 +32,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     private static String test(final String elementName) {
         return "<!DOCTYPE html><html><head>\n"
                 + "  <script>\n"
-                + "    function test(){\n"
+                + "    function test() {\n"
                 + "      var value = document.createElement('" + elementName + "').outerHTML;\n"
                 + "      while (value && (value.charAt(0) == '\\r' || value.charAt(0) == '\\n')) {\n"
                 + "        value = value.substring(1);\n"

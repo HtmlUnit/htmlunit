@@ -38,10 +38,10 @@ public class FunctionsWrapperTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "    var x = test.toString;\n"
-            + "    x.guid = 1;\n"
-            + "    x[0] = 2;\n"
-            + "    alert(x.guid);\n"
+            + "  var x = test.toString;\n"
+            + "  x.guid = 1;\n"
+            + "  x[0] = 2;\n"
+            + "  alert(x.guid);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

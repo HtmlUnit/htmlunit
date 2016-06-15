@@ -248,7 +248,7 @@ public class CodeStyleTest {
             if ("    }".equals(line) && !nextLine.isEmpty() && !"}".equals(nextLine)) {
                 addFailure("Non-empty line in " + relativePath + ", line: " + (index + 1));
             }
-            if ("    /**".equals(nextLine) && !line.isEmpty()) {
+            if (nextLine.trim().equals("/**") && line.trim().equals("}")) {
                 addFailure("Non-empty line in " + relativePath + ", line: " + (index + 2));
             }
         }
@@ -388,7 +388,7 @@ public class CodeStyleTest {
         boolean check = false;
         for (final String line : lines) {
             if (line.contains("<property name=\"header\"")) {
-                if (!line.contains("Copyright (c) " + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
+                if (!line.contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
                     addFailure("Incorrect year in LICENSE.txt");
                 }
                 check = true;

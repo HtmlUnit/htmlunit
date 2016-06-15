@@ -489,7 +489,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     public void onLoadHandler_BodyName() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
-            + "window.onload=function(){alert('foo')}</script>\n"
+            + "window.onload=function() {alert('foo')}</script>\n"
             + "</head><body></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -527,7 +527,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     public void onLoadHandler_ScriptName() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
-            + "load=function(){alert('foo')};\n"
+            + "load=function() {alert('foo')};\n"
             + "onload=load\n"
             + "</script></head><body></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -582,7 +582,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getPageEncoding_HeaderHasPrecedenceOverMetaTag() throws Exception {
-        final String html = "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>"
+        final String html = "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>\n"
             + "</head><body></body></html>";
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8");
@@ -1260,7 +1260,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<div id='myId'>Hello there!</div>\n"
             + "<script>"
             + "  var x = document.all;"
-            + "  window.onload=function(){alert('foo')};"
+            + "  window.onload=function() {alert('foo')};"
 
             // this tests 3103703
             // we don't store the jobs are pending at the moment of serialization

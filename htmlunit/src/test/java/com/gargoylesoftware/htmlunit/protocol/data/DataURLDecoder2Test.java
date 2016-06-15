@@ -15,7 +15,12 @@
 package com.gargoylesoftware.htmlunit.protocol.data;
 
 import static com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+
+import java.io.ByteArrayInputStream;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
@@ -24,6 +29,8 @@ import org.junit.Test;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Carsten Steul
  */
 public class DataURLDecoder2Test {
 
@@ -49,5 +56,24 @@ public class DataURLDecoder2Test {
 
         decoder = decodeDataURL("data:text/javascript,d5%20%3D%20'five%5Cu0027s'%3B");
         assertEquals("d5 = 'five\\u0027s';", decoder.getDataAsString());
+
+        decoder = decodeDataURL("data:application/octet-stream;base64,a+b/cQ==");
+        assertArrayEquals(new byte[]{107, -26, -1, 113}, decoder.getBytes());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void urlWithPlus() throws Exception {
+        // real browsers are able to show this image
+        final DataUrlDecoder decoder = decodeDataURL(
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAA"
+                + "BlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeN"
+                + "Ge4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC");
+        try (ByteArrayInputStream in = new ByteArrayInputStream(decoder.getBytes());
+                ) {
+            ImageIO.read(in);
+        }
     }
 }

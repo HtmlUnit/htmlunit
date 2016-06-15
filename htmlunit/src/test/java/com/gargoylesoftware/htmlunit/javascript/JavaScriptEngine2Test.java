@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -53,7 +52,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     public void jsRunSingleThreadedBrowserWide() throws Exception {
-        final String html = "<html><head><script>"
+        final String html = "<html><head><script>\n"
             + "function test(prefix) {\n"
             + "  parent.document.getElementById('theArea').value += prefix + ' start\\n';\n"
             + "  var end = new Date().valueOf() + 1 * 1000;\n"
@@ -133,16 +132,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  if (true) {\n"
             + "    goo();\n"
-            + "    function hoo() { alert('in hoo'); };\n"
+            + "    function hoo() { alert('in hoo'); }\n"
             + "    try {\n"
             + "      hoo();\n"
             + "      foo();\n"
             + "    } catch (e) {\n"
             + "      alert('foo error');\n"
             + "    }\n"
-            + "    function foo() { alert('in foo'); };\n"
+            + "    function foo() { alert('in foo'); }\n"
             + "  }\n"
-            + "  function goo() { alert('in goo'); };\n"
+            + "  function goo() { alert('in goo'); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -156,7 +155,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function foo() {}", "function foo() {}"},
             CHROME = {"undefined", "function foo() {}"},
             FF = {"undefined", "foo error"})
-    @NotYetImplemented({ IE, CHROME })
+    @NotYetImplemented({IE, CHROME})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -335,7 +334,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver({ IE, FF, CHROME })
+    @BuggyWebDriver
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  try {\n"

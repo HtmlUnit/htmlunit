@@ -36,7 +36,7 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
     public void asText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
-            + "  <ol id='foo'>"
+            + "  <ol id='foo'>\n"
             + "  <li>first item</li>\n"
             + "  <li>second item</li>\n"
             + "  </ol>\n"

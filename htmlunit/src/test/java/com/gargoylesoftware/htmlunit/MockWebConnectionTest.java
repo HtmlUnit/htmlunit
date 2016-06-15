@@ -34,7 +34,7 @@ public class MockWebConnectionTest extends SimpleWebTestCase {
     public void charset() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>\n"
             + "  <title>Pound Test</title>\n"
             + "</head>\n"
             + "<body>\u00A3</body>\n"

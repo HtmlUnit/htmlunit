@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
@@ -105,6 +107,26 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         final WebClient webClient = getWebClient();
         webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
                 "nopassword", "jks");
+        webClient.getOptions().setUseInsecureSSL(true);
+        webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
+                + ':' + localServer_.getServer().getLocalPort()
+                + "/random/100");
+    }
+
+    /**
+     * Test if a certificate/keystore can be load from an input stream.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void insecureSSL_clientCertificatesInputStream() throws Exception {
+        final WebClient webClient = getWebClient();
+        final InputStream certificateInputStream = getClass().getClassLoader()
+                .getResourceAsStream("insecureSSL.keystore");
+        final byte[] certificateBytes = new byte[2048];
+        certificateInputStream.read(certificateBytes);
+        final InputStream is = new ByteArrayInputStream(certificateBytes);
+        webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
         webClient.getOptions().setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
                 + ':' + localServer_.getServer().getLocalPort()

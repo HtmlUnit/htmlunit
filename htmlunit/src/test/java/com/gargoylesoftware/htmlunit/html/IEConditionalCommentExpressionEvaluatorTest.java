@@ -384,7 +384,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
 
     private void doTest(final String expression) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>"
+            + "<html><head>\n"
             + "<!--[if " + expression + "]><script>alert('cond');</script><![endif]-->\n"
             + "<script>alert('done');</script>\n"
             + "</head><body></body></html>";
