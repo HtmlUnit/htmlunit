@@ -1080,10 +1080,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = 10 + (text.length() * PIXELS_PER_CHAR);
             }
             else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
-                width = 50; // wild guess
+                width = 140; // wild guess
             }
             else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
-                width = 20; // wild guess
+                width = 13;
             }
             else if (node instanceof HtmlTextArea) {
                 width = 100; // wild guess
@@ -1232,7 +1232,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             defaultHeight = 0;
         }
         else if (getElement().getFirstChild() == null) {
-            if (node instanceof HtmlButton
+            if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
+                defaultHeight = 13;
+            }
+            else if (node instanceof HtmlButton
                     || (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput))) {
                 defaultHeight = 20;
             }

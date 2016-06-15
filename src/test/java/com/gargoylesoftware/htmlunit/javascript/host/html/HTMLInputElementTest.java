@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -1778,4 +1780,41 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"169", "17", "169", "17", "13", "13", "13", "13"},
+            FF38 = {"140", "20", "140", "20", "13", "13", "13", "13"},
+            FF45 = {"141", "21", "141", "21", "13", "13", "13", "13"},
+            IE = {"143", "19", "145", "20", "13", "13", "13", "13"})
+    @NotYetImplemented({CHROME, FF45, IE})
+    public void defaultClientWidthHeight() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var elem = document.getElementById('txt');\n"
+                + "    alert(elem.clientWidth);\n"
+                + "    alert(elem.clientHeight);\n"
+                + "    elem = document.getElementById('pw');\n"
+                + "    alert(elem.clientWidth);\n"
+                + "    alert(elem.clientHeight);\n"
+                + "    elem = document.getElementById('chkbx');\n"
+                + "    alert(elem.clientWidth);\n"
+                + "    alert(elem.clientHeight);\n"
+                + "    elem = document.getElementById('radio');\n"
+                + "    alert(elem.clientWidth);\n"
+                + "    alert(elem.clientHeight);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='text' id='txt'>\n"
+                + "  <input type='password' id='pw'>\n"
+                + "  <input type='checkbox' id='chkbx'/>\n"
+                + "  <input type='radio' id='radio'/>\n"
+                + "</form>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
