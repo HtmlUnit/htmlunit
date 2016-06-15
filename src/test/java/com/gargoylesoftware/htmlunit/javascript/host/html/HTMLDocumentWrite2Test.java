@@ -55,7 +55,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
@@ -76,7 +76,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 

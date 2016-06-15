@@ -958,7 +958,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <frame src='" + URL_SECOND + "' name='frame1'>\n"
             + "  <frame src='" + URL_SECOND + "' name='frame2'>\n"
             + "  <frame src='" + URL_SECOND + "' name='frame2'>\n"
-            + "</frameset>"
+            + "</frameset>\n"
             + "</html>";
 
         final String frame = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2069,7 +2069,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <a id='myId' href='test?è=è'>test</a>"
+            + "  <a id='myId' href='test?è=è'>test</a>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
@@ -2088,7 +2088,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<head>\n"
             + "<meta charset='UTF-8'>\n"
             + "</head><body>\n"
-            + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>"
+            + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
@@ -2346,7 +2346,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             IE = "undefined")
     public void baseURI_withBaseTag() throws Exception {
         final String html = "<html><head>\n"
-            + "<base href='http://myotherwebsite.com/foo'>"
+            + "<base href='http://myotherwebsite.com/foo'>\n"
             + "</head>\n"
             + "<body><script>\n"
             + "alert(document.baseURI);\n"
@@ -2363,7 +2363,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             IE = "undefined")
     public void baseURI_withBaseTagInBody() throws Exception {
         final String html = "<html><body>\n"
-            + "<base href='http://myotherwebsite.com/foo'>"
+            + "<base href='http://myotherwebsite.com/foo'>\n"
             + "<script>\n"
             + "alert(document.baseURI);\n"
             + "</script></body></html>";

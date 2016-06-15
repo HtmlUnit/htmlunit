@@ -50,7 +50,7 @@ public class HtmlSpanTest extends SimpleWebTestCase {
     @Test
     public void asText() throws Exception {
         final String html = "<html><head></head><body>\n"
-            + "<span id='outside'>"
+            + "<span id='outside'>\n"
             + "<span>\n"
             + "before\n"
             + "</span>\n"

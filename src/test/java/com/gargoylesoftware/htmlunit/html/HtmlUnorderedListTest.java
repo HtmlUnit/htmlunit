@@ -36,7 +36,7 @@ public class HtmlUnorderedListTest extends SimpleWebTestCase {
     public void asText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
-            + "  <ul id='foo'>"
+            + "  <ul id='foo'>\n"
             + "  <li>first item</li>\n"
             + "  <li>second item</li>\n"
             + "something without li node\n"

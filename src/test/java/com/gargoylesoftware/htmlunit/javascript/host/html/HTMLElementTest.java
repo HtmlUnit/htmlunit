@@ -801,7 +801,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
-            + "    <script id='theScript'>"
+            + "    <script id='theScript'>\n"
             + "if (1 > 2 & 3 < 2) willNotHappen('yo');"
             + "</script>\n"
             + "    <script>\n"
@@ -1008,7 +1008,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      alert(div.innerText);\n"
             + "   }\n"
             + "</script>\n"
-            + "<div id='div'><ul/></div>"
+            + "<div id='div'><ul/></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -2354,7 +2354,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void clientLeftTop() throws Exception {
-        final String html = "<html><body>"
+        final String html = "<html><body>\n"
             + "<div id='div1'>hello</div><script>\n"
             + "  var d1 = document.getElementById('div1');\n"
             + "  alert(d1.clientLeft);\n"
@@ -2374,7 +2374,7 @@ public class HTMLElementTest extends WebDriverTestCase {
               "<!DOCTYPE HTML "
             +      "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
             + "<html>\n"
-            + "<body>"
+            + "<body>\n"
             + "<div id='div1'>hello</div><script>\n"
             + "  var d1 = document.documentElement;\n"
             + "  alert(d1.clientLeft);\n"
@@ -2389,7 +2389,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "4"})
     public void clientLeftTopWithBorder() throws Exception {
-        final String html = "<html><body>"
+        final String html = "<html><body>\n"
             + "<div id='div1' style='border: 4px solid black;'>hello</div><script>\n"
             + "  var d1 = document.getElementById('div1');\n"
             + "  alert(d1.clientLeft);\n"
@@ -2432,8 +2432,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    } catch (e) { alert('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
-            + "<div id='div1'></div></div>"
+            + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>\n"
+            + "<div id='div1'></div></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -2464,12 +2464,12 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='outer' "
                + "style='position: absolute; height: 500px; width: 500px; top: 100px; left: 0px; overflow:auto'>\n"
             + "  <div id='div1' "
-               + "style='position: absolute; height: 100px; width: 100px; top: 100px; left: 100px; z-index:99;'>"
+               + "style='position: absolute; height: 100px; width: 100px; top: 100px; left: 100px; z-index:99;'>\n"
                + "</div>\n"
             + "  <div id='div2' "
               + "style='position: absolute; height: 100px; width: 100px; top: 100px; left: 300px; z-index:99;'></div>\n"
             + "  <div style='position: absolute; top: 1000px;'>way down</div>\n"
-            + "</div>"
+            + "</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -3120,7 +3120,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  alert('>' + div1.className + '<');\n"
             + "  alert('>' + div1.id + '<');\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
             + "<div id=' myId  ' class=' myClass '>\n"
             + "hello"
             + "</div>\n"
@@ -4401,7 +4401,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 

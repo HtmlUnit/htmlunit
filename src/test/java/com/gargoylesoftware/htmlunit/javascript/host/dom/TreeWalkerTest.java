@@ -75,7 +75,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "<a id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
         + "</div>\n"
         + "<p id='theP'>for <br/>TreeWalkers<span>something</span>that is <a>important to me</a></p>\n"
-        + "<span>something <code>codey</code>goes <pre>  here</pre></span>"
+        + "<span>something <code>codey</code>goes <pre>  here</pre></span>\n"
         + "</body></html>";
 
     private void test2(final String script) throws Exception {

@@ -275,8 +275,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
               + "</script></head>\n"
 
               + "  <body>\n"
-              + "    <div id='content'>content</div>"
-              + "    <a id='test' onclick='createIFrame();'>insert frame</a>"
+              + "    <div id='content'>content</div>\n"
+              + "    <a id='test' onclick='createIFrame();'>insert frame</a>\n"
               + "  </body>\n"
               + "</html>";
         final String html2 = "<html><body><script>alert('loaded')</script></body></html>";

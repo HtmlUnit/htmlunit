@@ -843,7 +843,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             CHROME = "PING")
     public void ping() throws Exception {
         final String html
-            = "<html><body>"
+            = "<html><body>\n"
             + "  <a href='" + URL_SECOND + "' ping='test2?h'>clickMe</a>\n"
             + "</body></html>";
 

@@ -505,7 +505,7 @@ public class Event2Test extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "<form id='myForm' action='doesnt_exist.html'>\n"
             + "  <input type='submit' id='mySubmit' value='Continue'></p>\n"
-            + "</form>"
+            + "</form>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
@@ -580,7 +580,7 @@ public class Event2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <input type='checkbox' id='checkbox'/><label for='checkbox'>Checkbox</label>"
+            + "  <input type='checkbox' id='checkbox'/><label for='checkbox'>Checkbox</label>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

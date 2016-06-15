@@ -74,10 +74,10 @@ public class HtmlTable2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "<table id='myTable1'>"
-            + "<td>Two</td>"
-            + "<thead><td>One</td></thead>"
-            + "<thead><tr><td>Three</td></tr></thead>"
+            + "<table id='myTable1'>\n"
+            + "<td>Two</td>\n"
+            + "<thead><td>One</td></thead>\n"
+            + "<thead><tr><td>Three</td></tr></thead>\n"
             + "</table>\n"
             + "</body></html>";
 

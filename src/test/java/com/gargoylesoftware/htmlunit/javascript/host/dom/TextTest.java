@@ -66,7 +66,7 @@ public class TextTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myId'>abcd</div>"
+            + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -85,7 +85,7 @@ public class TextTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myId'>abcd</div>"
+            + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

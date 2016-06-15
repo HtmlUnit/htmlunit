@@ -256,15 +256,15 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void inRange2() throws Exception {
-        final String html = "<html><body>"
-            + "<form name='f'><input name='q' value=''></form>"
-            + "<script>"
+        final String html = "<html><body>\n"
+            + "<form name='f'><input name='q' value=''></form>\n"
+            + "<script>\n"
             + "  try {\n"
             + "    var range = document.f.q.createTextRange();\n"
             + "    var selectionRange = document.selection.createRange();\n"
             + "    alert(range.inRange(selectionRange));\n"
             + "  } catch(e) { alert('exception'); }\n"
-            + "</script>"
+            + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

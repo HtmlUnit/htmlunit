@@ -296,7 +296,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    alert(rules[0].selectorText);\n"
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
-            + "<style id='myStyle'>"
+            + "<style id='myStyle'>\n"
             + "  p { vertical-align:top }\n"
             + "  @unknown div { color: red; }\n"
             + "  div { color: red; }\n"
@@ -328,7 +328,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    alert(rules[0].selectorText);\n"
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
-            + "<style id='myStyle'>"
+            + "<style id='myStyle'>\n"
             + "  p { vertical-align:top }\n"
             + "  @unknown div { color: red; }\n"
             + "  div { color: red; }\n"
@@ -455,7 +455,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<input id='elt3' disabled>\n"
             + "<input id='elt4' type='checkbox'>\n"
             + "<button id='elt5' ></button>\n"
-            + "<select id='elt6' ></select>"
+            + "<select id='elt6' ></select>\n"
             + "<textarea id='elt7' ></textarea>\n";
         doTest(":enabled", htmlSnippet);
     }
@@ -471,7 +471,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<input id='elt3'>\n"
             + "<input id='elt4' type='checkbox' disabled>\n"
             + "<button id='elt5' disabled></button>\n"
-            + "<select id='elt6' disabled></select>"
+            + "<select id='elt6' disabled></select>\n"
             + "<textarea id='elt7' disabled></textarea>\n";
         doTest(":disabled", htmlSnippet);
     }
@@ -536,7 +536,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "#style1 {position: absolute; left: 100px; width: 50px; height: 50px;}\n"
             + "</style>\n"
             + "</head><body onload='doTest()'>\n"
-            + "<div id='style1'>Hello</div>"
+            + "<div id='style1'>Hello</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -563,8 +563,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  div { display: none; }\n"
             + "</style>\n"
             + "</head><body onload='doTest()'>\n"
-            + "<div id='div1'>invisible</div>"
-            + "visible"
+            + "<div id='div1'>invisible</div>\n"
+            + "visible\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

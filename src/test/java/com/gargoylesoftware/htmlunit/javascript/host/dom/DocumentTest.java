@@ -2108,7 +2108,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
@@ -2197,7 +2197,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 

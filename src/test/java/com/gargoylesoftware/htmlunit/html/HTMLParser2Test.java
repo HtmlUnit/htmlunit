@@ -38,7 +38,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     public void qualified_body() throws Exception {
-        final String html = "<html><body>"
+        final String html = "<html><body>\n"
             + "<wicket:body>whatever</wicket:body>\n"
             + "</body></html>";
         loadPage2(html);
@@ -67,8 +67,8 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><div id='testDiv'>"
-            + "<table><tr>before<td></td>after</tr></table>"
+            + "<body onload='test()'><div id='testDiv'>\n"
+            + "<table><tr>before<td></td>after</tr></table>\n"
             + "</div></body></html>";
 
         loadPageWithAlerts2(html);
@@ -89,8 +89,8 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><div id='testDiv'>"
-            + "<table><tr> <td></td> </tr></table>"
+            + "<body onload='test()'><div id='testDiv'>\n"
+            + "<table><tr> <td></td> </tr></table>\n"
             + "</div></body></html>";
 
         loadPageWithAlerts2(html);
@@ -360,7 +360,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head></head>"
+            + "<head></head>\n"
             + "<body>\n"
             + "<ul id='myUl'>\n"
             +   "<var data='f'>\n"
@@ -369,7 +369,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             +     "<li>l</li>\n"
             +   "</var>\n"
             + "</ul>\n"
-            + "<script>"
+            + "<script>\n"
             + "  var tmp = document.getElementById('myUl');\n"
             + "  alert(tmp.innerHTML);\n"
             + "  alert(tmp.childNodes.length);\n"
@@ -389,7 +389,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head></head>"
+            + "<head></head>\n"
             + "<body>\n"
             +  "<a id='myA' href='#'>\n"
             +   "<table>\n"
@@ -398,7 +398,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             +     "</tr>\n"
             +   "</table>\n"
             +  "</a>\n"
-            + "<script>"
+            + "<script>\n"
             + "  var tmp = document.getElementById('myA');\n"
             + "  alert(tmp.innerHTML);\n"
             + "  alert(tmp.childNodes.length);\n"

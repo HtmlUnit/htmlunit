@@ -123,7 +123,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final Writer writer = response.getWriter();
-            writer.write("<html><head><meta http-equiv='Content-Type' content='text/html'></head>"
+            writer.write("<html><head><meta http-equiv='Content-Type' content='text/html'></head>\n"
                 + "<body>Hello World</body></html>");
         }
     }

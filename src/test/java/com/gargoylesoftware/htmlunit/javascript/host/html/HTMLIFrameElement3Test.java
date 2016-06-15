@@ -442,7 +442,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void width_px() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head>"
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var iframe = document.getElementById('myFrame');\n"
@@ -467,7 +467,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void idByName() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>"
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(myFrame);\n"

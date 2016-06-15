@@ -219,7 +219,7 @@ public class NodeTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "<div id='myNode'><span>Child Node 1-A"
-            + "<h1>Child Node 1-B</h1></span>"
+            + "<h1>Child Node 1-B</h1></span>\n"
             + "<h2>Child Node 2-A</h2></div>\n"
             + "</body></html>";
 
@@ -639,7 +639,7 @@ public class NodeTest extends WebDriverTestCase {
             + "      alert(div.compareDocumentPosition(childDiv) & Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
             + "    } catch(e) {alert('exception');}\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -767,7 +767,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='myNode'><span>Child Node 1-A</span>"
+            + "<div id='myNode'><span>Child Node 1-A</span>\n"
             + "<h1>Child Node 2-A</h1></div>\n"
             + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";
@@ -838,7 +838,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='myNode'><h6>Child Node 1-A</h6>"
+            + "<div id='myNode'><h6>Child Node 1-A</h6>\n"
             + "<h1>Child Node 2-A</h1></div>\n"
             + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";

@@ -49,8 +49,8 @@ public class ClientRectTest extends WebDriverTestCase {
             + "    } catch (e) { alert('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
-            + "<div id='div1'></div></div>"
+            + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>\n"
+            + "<div id='div1'></div></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

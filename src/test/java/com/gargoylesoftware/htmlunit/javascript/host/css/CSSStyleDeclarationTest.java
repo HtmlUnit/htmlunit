@@ -560,9 +560,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='div1' style='border: thin'>foo</div>"
-            + "<div id='div2' style='border: medium'>foo</div>"
-            + "<div id='div3' style='border: thick'>foo</div>"
+            + "<div id='div1' style='border: thin'>foo</div>\n"
+            + "<div id='div2' style='border: medium'>foo</div>\n"
+            + "<div id='div3' style='border: thick'>foo</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -2838,7 +2838,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='div1' style='color: black'>foo</div>"
+            + "  <div id='div1' style='color: black'>foo</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

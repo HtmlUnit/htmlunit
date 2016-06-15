@@ -442,11 +442,11 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     @Test
     public void removeOptionsFromSelect() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
-            + "<select name='select' id='theSelect'>"
-            + "<option value='a'>111</option>"
-            + "<option value='b'>222</option>"
-            + "<option value='c'>333</option>"
-            + "<option value='d'>444</option>"
+            + "<select name='select' id='theSelect'>\n"
+            + "<option value='a'>111</option>\n"
+            + "<option value='b'>222</option>\n"
+            + "<option value='c'>333</option>\n"
+            + "<option value='d'>444</option>\n"
             + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);

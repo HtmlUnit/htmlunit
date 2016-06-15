@@ -206,7 +206,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -255,7 +255,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -300,7 +300,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -350,7 +350,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "    window.close();\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>"
+            + "</head>\n"
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
@@ -394,8 +394,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts("hello")
     public void urlEncodingPercent20() throws Exception {
-        final String html = "<html><body>"
-                + "<script src='a%20b.js'></script>"
+        final String html = "<html><body>\n"
+                + "<script src='a%20b.js'></script>\n"
                 + "</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
@@ -450,9 +450,9 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, content, 200, "OK", "text/javascript", headers);
 
-        final String html = "<html><head>"
-            + "<title>Hello world</title>"
-            + "<script src='" + URL_SECOND + "'></script>"
+        final String html = "<html><head>\n"
+            + "<title>Hello world</title>\n"
+            + "<script src='" + URL_SECOND + "'></script>\n"
             + "</head><body><script>alert(document.title)</script></body></html>";
         loadPageWithAlerts2(html);
     }

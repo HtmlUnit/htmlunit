@@ -39,11 +39,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 public class HtmlTableRowTest extends SimpleWebTestCase {
 
     private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"
-            + "<table id='table'>"
+            + "<table id='table'>\n"
             + "<tr id='row'>\n"
-            + "<td id='cell' width='20'>"
+            + "<td id='cell' width='20'>\n"
             + "<input type='text' id='foo'/></td>\n"
-            + "</tr>"
+            + "</tr>\n"
             + "</table>\n"
             + "</body></html>";
 

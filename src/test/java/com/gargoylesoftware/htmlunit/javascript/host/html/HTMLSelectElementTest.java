@@ -1665,9 +1665,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='test'>\n"
-            + "<select id='select1'>"
-            + "<option>a</option>"
-            + "<option selected='selected'>b</option>"
+            + "<select id='select1'>\n"
+            + "<option>a</option>\n"
+            + "<option selected='selected'>b</option>\n"
             + "</select></form>\n"
             + "</body></html>";
 

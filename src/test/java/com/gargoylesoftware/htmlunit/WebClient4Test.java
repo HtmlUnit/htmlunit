@@ -252,8 +252,8 @@ public class WebClient4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
             res.setContentType("text/html");
             final Writer writer = res.getWriter();
-            writer.write("<html><body><form action='test2'>"
-                    + "<input id='submit' type='submit' value='submit'></input>"
+            writer.write("<html><body><form action='test2'>\n"
+                    + "<input id='submit' type='submit' value='submit'></input>\n"
                     + "</form></body></html>");
         }
     }

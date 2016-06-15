@@ -55,8 +55,8 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
             + "<body>\n"
             + "<form id='form1'>\n"
             + "<textarea id='textArea1' onchange='changed(this)' onkeypress='keypressed(this)'></textarea>\n"
-            + "<textarea id='log'></textarea>"
-            + "</form>"
+            + "<textarea id='log'></textarea>\n"
+            + "</form>\n"
             + "</body></html>";
         final HtmlPage page = loadPageWithAlerts(content);
         final HtmlTextArea textArea = page.getHtmlElementById("textArea1");

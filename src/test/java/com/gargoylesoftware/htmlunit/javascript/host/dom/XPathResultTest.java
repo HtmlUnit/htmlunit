@@ -331,8 +331,8 @@ public class XPathResultTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div attr=\"false\">false</span>"
-            + "  <span attr=\"true\">true</span>"
+            + "  <div attr=\"false\">false</span>\n"
+            + "  <span attr=\"true\">true</span>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

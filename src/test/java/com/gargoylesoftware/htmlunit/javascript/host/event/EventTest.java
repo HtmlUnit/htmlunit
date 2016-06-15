@@ -421,7 +421,7 @@ public class EventTest extends WebDriverTestCase {
     public void iframeOnload() throws Exception {
         final String html
             = "<html><head>\n"
-            + "<script>"
+            + "<script>\n"
             + "  function test() {\n"
             + "    alert('called');\n"
             + "  }\n"
@@ -611,7 +611,7 @@ public class EventTest extends WebDriverTestCase {
             + "      alert(e.cancelable);\n"
             + "    } catch(e) { alert('e2-' + '" + eventType + "'); }\n"
             + "  }\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
         loadPageWithAlerts2(html);

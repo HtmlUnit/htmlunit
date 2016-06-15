@@ -428,7 +428,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts("<a id=\"a\" href=\"#x\">foo</a>")
     public void innerHtmlHrefQuotedEvenInIE() throws Exception {
-        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
+        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>\n"
             + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
 
         loadPageWithAlerts2(html);

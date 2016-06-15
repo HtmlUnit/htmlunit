@@ -119,7 +119,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>Title</title>\n"
-            + "<link href='styles.css' type='text/css' rel='stylesheet'>"
+            + "<link href='styles.css' type='text/css' rel='stylesheet'>\n"
             + "</head>\n"
             + "\n"
             + "<body>\n"

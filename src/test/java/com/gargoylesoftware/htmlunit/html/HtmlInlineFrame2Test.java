@@ -109,8 +109,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         final String leftFrame = "<html><head><title>Left Frame</title></head>\n"
                 + "<body>\n"
                 + "  <div id='content'>Body of left frame</div>\n"
-                + "  <a id='link' name='link' href='new_inner.html' target='right'>Click link</a>"
-                + "  <iframe id='id-inner' name='right' width='100' height='100' src='inner.html'></iframe>"
+                + "  <a id='link' name='link' href='new_inner.html' target='right'>Click link</a>\n"
+                + "  <iframe id='id-inner' name='right' width='100' height='100' src='inner.html'></iframe>\n"
                 + "</body>\n"
                 + "</html>";
 

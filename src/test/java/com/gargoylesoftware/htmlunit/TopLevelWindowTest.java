@@ -207,7 +207,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         final History history = window.getHistory();
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>"
+        conn.setResponse(URL_FIRST, "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>\n"
             + "<a name='b' href='#b'>bar</a></body></html>");
         conn.setResponse(URL_SECOND, "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
         conn.setResponse(URL_THIRD, "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
@@ -320,7 +320,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
     @Test
     @Alerts("closing")
     public void setTimeoutDuringOnUnload() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function f() {\n"
             + "  alert('closing');\n"

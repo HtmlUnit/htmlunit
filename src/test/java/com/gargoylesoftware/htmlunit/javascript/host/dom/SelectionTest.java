@@ -242,8 +242,8 @@ public class SelectionTest extends WebDriverTestCase {
     private void tester(final String jsSnippet) throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"
-            + "  <span id='s1'>abc</span>"
-            +   "<span id='s2'>xyz</span>"
+            + "  <span id='s1'>abc</span>\n"
+            +   "<span id='s2'>xyz</span>\n"
             +   "<span id='s3'>foo<span>---</span>foo</span>\n"
 
             + "<script>\n"

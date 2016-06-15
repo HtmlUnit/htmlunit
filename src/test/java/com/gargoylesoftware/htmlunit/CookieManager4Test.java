@@ -249,7 +249,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     public void differentHostsSameDomainCookieFromMeta() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=.htmlunit.org; Path=/'>"
+            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=.htmlunit.org; Path=/'>\n"
             + "</head>\n"
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"

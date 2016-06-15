@@ -177,7 +177,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "<body onload='init()'>\n"
             + "  <iframe name='f'></iframe>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>second</title></head>"
+        final String secondHtml = "<html><head><title>second</title></head>\n"
             + "<body><p>Form submitted successfully.</p></body></html>";
 
         final WebClient client = getWebClient();
@@ -402,7 +402,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
 
         final String css = "body {color: blue}";
@@ -433,7 +433,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css_without_href() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' /></head></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -457,7 +457,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css_empty_href() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='' /></head></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();

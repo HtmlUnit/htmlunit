@@ -499,7 +499,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"Hello window", ""})
     @BuggyWebDriver(IE)
     public void open() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function info(msg) {\n"
             + "    alert(msg);\n"
@@ -533,7 +533,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"Hello window", "New window"})
     @BuggyWebDriver(IE)
     public void openWindowParams() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function info(msg) {\n"
             + "    alert(msg);\n"
@@ -567,7 +567,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"window1", "window2"})
     @BuggyWebDriver(IE)
     public void openWindowParamReplace() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function info(msg) {\n"
             + "    alert(msg);\n"
@@ -1189,7 +1189,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>\n"
             + "<form action='page2' method='post'>\n"
             + "<input id='it' type='submit' onclick='setTimeout(stop, 0)'>\n"
-            + "</form>"
+            + "</form>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -1299,7 +1299,7 @@ public class Window2Test extends WebDriverTestCase {
         setExpectedAlerts(expectedAlerts);
 
         final String html
-            = "<html>"
+            = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -1335,7 +1335,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts("data: hello")
     public void postMessageFromClick() throws Exception {
         final String html
-            = "<html>"
+            = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -1367,7 +1367,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts("sync: false")
     public void postMessageSyncOrAsync() throws Exception {
         final String html
-            = "<html>"
+            = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -1454,7 +1454,7 @@ public class Window2Test extends WebDriverTestCase {
 
     private void postMessage(final String url) throws Exception {
         final String html
-            = "<html>"
+            = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -1833,7 +1833,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts({"a", "b"})
     public void calledTwice() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function info(msg) {\n"
             + "    alert(msg);\n"
@@ -1855,7 +1855,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void constructor() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"

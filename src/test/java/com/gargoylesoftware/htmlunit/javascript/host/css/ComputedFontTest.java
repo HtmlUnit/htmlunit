@@ -123,7 +123,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     }
 
     private void font(final String fontToSet, final String property, final String value) throws Exception {
-        String html = "<html><head>"
+        String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"

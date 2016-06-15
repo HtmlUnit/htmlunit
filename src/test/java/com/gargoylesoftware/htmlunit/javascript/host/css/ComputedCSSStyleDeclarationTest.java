@@ -1002,7 +1002,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<div id='d0'>div 0</div>\n"
             + "<div id='d1' style='background: red'>d</div>\n"
-            + "<div id='d2' style='background: white url(http://htmlunit.sf.net/foo.png) repeat-x fixed top right'>"
+            + "<div id='d2' style='background: white url(http://htmlunit.sf.net/foo.png) repeat-x fixed top right'>\n"
             + "second div</div>\n"
             + "<script>\n"
             + "function getStyle(x) {\n"
@@ -1341,9 +1341,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <style>#div3 { font-family: swiss !important }</style>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "  <div id='div1' style='font-family: roman'>foo</div>"
-            + "  <div id='div2' style='font-family: roman'>foo</div>"
-            + "  <div id='div3' style='font-family: roman !important'>foo</div>"
+            + "  <div id='div1' style='font-family: roman'>foo</div>\n"
+            + "  <div id='div2' style='font-family: roman'>foo</div>\n"
+            + "  <div id='div3' style='font-family: roman !important'>foo</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -1504,7 +1504,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv' class='abc'></div>"
+            + "  <div id='myDiv' class='abc'></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

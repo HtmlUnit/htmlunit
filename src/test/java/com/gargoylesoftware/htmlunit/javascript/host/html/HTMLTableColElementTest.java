@@ -329,7 +329,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             IE = "128")
     public void width_px() throws Exception {
         final String html
-            = "<html><head>"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    myCol.width = '128px';\n"
@@ -353,7 +353,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             IE = {"", "string"})
     public void width_null() throws Exception {
         final String html
-            = "<html><head>"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    myCol.width = null;\n"
@@ -376,8 +376,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Alerts("<table><colgroup><col></colgroup></table>")
     public void parsing() throws Exception {
         final String html
-            = "<html><body><div>"
-            + "<table><colgroup><col></colgroup></table>"
+            = "<html><body><div>\n"
+            + "<table><colgroup><col></colgroup></table>\n"
             + "</div>\n"
             + "<script>\n"
             + "alert(document.body.firstChild.innerHTML);\n"

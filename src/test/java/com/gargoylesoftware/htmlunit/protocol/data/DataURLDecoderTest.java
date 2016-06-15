@@ -37,8 +37,8 @@ public class DataURLDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"one", "two", "three", "four", "five's"})
     public void dataProtocol() throws Exception {
-        final String html = "<html><head><title>foo</title>"
-            + "<script>"
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "var d1, d2, d3, d4, d5;\n"
             + "</script>\n"
             + "<script src=\"data:text/javascript,d1%20%3D%20'one'%3B\"></script>\n"
@@ -77,7 +77,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "AbpF0Un5Gi1LAbpG7iBMsCsGvx4SoPhIkHHzaB9i8zuLXD7IOwUJXM3pAAAAAElFTkSuQmCC")
     @NotYetImplemented
     public void base64WithPlus() throws Exception {
-        final String html = "<html><head><title>foo</title>"
+        final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var canvas = document.getElementById('canvas');\n"
@@ -88,7 +88,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "  ctx.drawImage(img, 0, 0);\n"
             + "  alert(canvas.toDataURL());\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
             + "  <img id='image' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEU"
             + "AAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAA"
             + "AElFTkSuQmCC'>\n"

@@ -52,7 +52,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     public void jsRunSingleThreadedBrowserWide() throws Exception {
-        final String html = "<html><head><script>"
+        final String html = "<html><head><script>\n"
             + "function test(prefix) {\n"
             + "  parent.document.getElementById('theArea').value += prefix + ' start\\n';\n"
             + "  var end = new Date().valueOf() + 1 * 1000;\n"
@@ -132,16 +132,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  if (true) {\n"
             + "    goo();\n"
-            + "    function hoo() { alert('in hoo'); };\n"
+            + "    function hoo() { alert('in hoo'); }\n"
             + "    try {\n"
             + "      hoo();\n"
             + "      foo();\n"
             + "    } catch (e) {\n"
             + "      alert('foo error');\n"
             + "    }\n"
-            + "    function foo() { alert('in foo'); };\n"
+            + "    function foo() { alert('in foo'); }\n"
             + "  }\n"
-            + "  function goo() { alert('in goo'); };\n"
+            + "  function goo() { alert('in goo'); }\n"
             + "</script>\n"
             + "</body></html>";
 

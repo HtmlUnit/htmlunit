@@ -582,7 +582,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getPageEncoding_HeaderHasPrecedenceOverMetaTag() throws Exception {
-        final String html = "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>"
+        final String html = "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>\n"
             + "</head><body></body></html>";
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8");

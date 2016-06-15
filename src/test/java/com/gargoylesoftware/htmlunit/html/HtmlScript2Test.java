@@ -45,7 +45,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Alerts("myValue")
     public void insertBefore() throws Exception {
         final String html
-            = "<html><head><title>Page A</title>"
+            = "<html><head><title>Page A</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var script = document.createElement('script');\n"

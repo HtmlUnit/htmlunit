@@ -43,7 +43,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<style>"
+            + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
@@ -71,7 +71,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void urlSlashSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<style>"
+            + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(//:); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
@@ -97,7 +97,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void urlSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<style>"
+            + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(/:); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
@@ -123,7 +123,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void urlSlashSlash() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<style>"
+            + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(//); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"

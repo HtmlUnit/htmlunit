@@ -1860,7 +1860,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</form></body></html>";
         conn.setResponse(URL_FIRST, html1);
 
-        final String html2 = "<html><head><title>Third</title>"
+        final String html2 = "<html><head><title>Third</title>\n"
                 + "<script type=\"text/javascript\">\n"
                 + "     window.close();\n"
                 + "</script></head></html>";
@@ -1893,7 +1893,7 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html1);
 
         final String html2 = "<html><head><title>Second</title></head>\n"
-                + "<body onUnload='doTest()'>"
+                + "<body onUnload='doTest()'>\n"
                 + "<form name='form1' action='" + URL_THIRD + "'>\n"
                 + "<button id='clickme' type='button' onclick='postBack();'>Submit</button></form>\n"
                 + "<script>\n"
@@ -1907,7 +1907,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</script></body></html>";
         conn.setResponse(URL_SECOND, html2);
 
-        final String html3 = "<html><head><title>Third</title>"
+        final String html3 = "<html><head><title>Third</title>\n"
                 + "<script type=\"text/javascript\">\n"
                 + "     alert('Third page loaded');\n"
                 + "     window.close();\n"
@@ -2013,13 +2013,13 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void maintainJavaScriptParentScope() throws Exception {
-        final String basicContent = "<html><head>"
+        final String basicContent = "<html><head>\n"
                 + "<title>basicContentTitle</title>\n"
                 + "</head><body>\n"
-                + "<p>Hello World</p>"
+                + "<p>Hello World</p>\n"
                 + "</body></html>";
 
-        final String jsContent = "<html><head>"
+        final String jsContent = "<html><head>\n"
                 + "<title>jsContentTitle</title>\n"
                 + "<script>function foo() {alert('Ran Here')}</script>\n"
                 + "<script>function bar() {}</script>\n"
@@ -2061,7 +2061,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection conn = new MockWebConnection();
-        final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>"
+        final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>\n"
                 + "<iframe id='f'></iframe></body></html>";
         conn.setResponse(URL_FIRST, html);
         final URL frameUrl = new URL(URL_FIRST.toExternalForm() + "frame.html");
@@ -2245,11 +2245,11 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void test() throws Exception {
-        final String html = "<html><body>"
-                + "<script type='application/javascript'>"
-                + "  window.onerror = function() { foo.bar() };"
-                + "  doit();"
-                + "</script>"
+        final String html = "<html><body>\n"
+                + "<script type='application/javascript'>\n"
+                + "  window.onerror = function() { foo.bar() };\n"
+                + "  doit();\n"
+                + "</script>\n"
                 + "</body></html>";
 
         final WebClient webClient = getWebClient();

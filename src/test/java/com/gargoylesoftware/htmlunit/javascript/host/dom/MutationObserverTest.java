@@ -55,7 +55,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "    div.firstChild.textContent = 'new';\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
@@ -87,7 +87,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "    div.firstChild.textContent = 'new';\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
@@ -118,7 +118,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "    div.firstChild.textContent = 'new';\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
@@ -151,7 +151,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "    div.dir = 'rtl';\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' dir='ltr'>old</div>\n"
             + "</body></html>";

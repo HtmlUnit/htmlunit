@@ -247,7 +247,7 @@ public class RangeTest extends WebDriverTestCase {
     @Alerts({"abcd", "bc", "null", "null", "ad", "bc"})
     public void extractContents3() throws Exception {
         final String html =
-            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
+            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>\n"
             + "<span id='c'>c</span><span id='d'>d</span></div><script>\n"
             + "  var d = document.getElementById('d');\n"
             + "  var s = document.getElementById('s');\n"
@@ -319,7 +319,7 @@ public class RangeTest extends WebDriverTestCase {
     @Alerts({"abcd", "bc", "null", "null", "ad"})
     public void deleteContents2() throws Exception {
         final String html =
-            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
+            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>\n"
             + "<span id='d'>d</span></div><script>\n"
             + "  var d = document.getElementById('d');\n"
             + "  var s = document.getElementById('s');\n"

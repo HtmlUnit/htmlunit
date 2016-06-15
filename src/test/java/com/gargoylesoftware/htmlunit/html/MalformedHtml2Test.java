@@ -59,7 +59,7 @@ public class MalformedHtml2Test extends SimpleWebTestCase {
      */
     @Test
     public void tableTextOutsideTD() throws Exception {
-        final String html = "<html><body>"
+        final String html = "<html><body>\n"
             + "<table border='1'>\n"
             + "<tr><td>1</td>\n"
             + "<td>2</td>\n"

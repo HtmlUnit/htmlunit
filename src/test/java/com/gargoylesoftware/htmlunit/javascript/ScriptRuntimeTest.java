@@ -48,7 +48,7 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
             + "    };\n"
             + "  for (var x in value) {\n"
             + "   alert(x);\n"
-            + "  };"
+            + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

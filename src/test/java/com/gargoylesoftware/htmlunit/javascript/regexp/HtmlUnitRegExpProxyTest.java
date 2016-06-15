@@ -620,7 +620,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     private static String buildHtml(final String script) {
         return "<html><head><script>function test() {\n"
             + script
-            + "\n}</script>"
+            + "\n}</script>\n"
             + "</head><body onload='test()'></body></html>";
     }
 
