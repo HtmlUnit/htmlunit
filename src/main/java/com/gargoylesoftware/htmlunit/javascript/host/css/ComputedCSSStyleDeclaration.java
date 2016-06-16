@@ -1077,7 +1077,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton
                         || node instanceof HtmlFileInput) {
                 final String text = node.asText();
-                width = 10 + (text.length() * PIXELS_PER_CHAR);
+                // default font for buttons is a bit smaller than the body font size
+                width = 10 + (int) (text.length() * PIXELS_PER_CHAR * 0.9);
             }
             else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
                 width = 140; // wild guess

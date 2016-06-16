@@ -100,6 +100,18 @@ public class HtmlResetInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc} Returns "Reset" if <tt>value</tt> attribute is not defined.
+     */
+    @Override
+    public String asText() {
+        String text = getValueAttribute();
+        if (text == ATTRIBUTE_NOT_DEFINED) {
+            text = DEFAULT_VALUE;
+        }
+        return text;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

@@ -228,7 +228,10 @@ class HtmlSerializer {
             appendHtmlSelect((HtmlSelect) node);
         }
         else if (node instanceof HtmlSubmitInput) {
-            appendHtmlSubmitInput((HtmlSubmitInput) node);
+            doAppend(((HtmlSubmitInput) node).asText());
+        }
+        else if (node instanceof HtmlResetInput) {
+            doAppend(((HtmlResetInput) node).asText());
         }
         else if (node instanceof HtmlCheckBoxInput) {
             final String str;
@@ -408,15 +411,6 @@ class HtmlSerializer {
             appendHtmlTableRow(row);
         }
         return first;
-    }
-
-    private void appendHtmlSubmitInput(final HtmlSubmitInput htmlSubmitInput) {
-        String value = htmlSubmitInput.getValueAttribute();
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            value = "Submit Query";
-        }
-
-        doAppend(value);
     }
 
     /**

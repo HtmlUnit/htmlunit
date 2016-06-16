@@ -106,7 +106,6 @@ public class HtmlSubmitInput extends HtmlInput {
     /**
      * {@inheritDoc} Returns "Submit Query" if <tt>value</tt> attribute is not defined.
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
     @Override
     public String asText() {
         String text = getValueAttribute();

@@ -110,6 +110,19 @@ public class ElementClientWidthTest extends WebDriverTestCase {
                 + "</body></html>";
     }
 
+    private static String testInput(final String type) {
+        return "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(" + VALUE_ + ");\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<input type='" + type + "' id='outer'>\n"
+                + "</body></html>";
+    }
+
     private static String headElementClosesItself(final String tagName) {
         return "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
@@ -1691,6 +1704,144 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @NotYetImplemented({CHROME, FF45, IE})
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12",
+            FF45 = "18",
+            FF38 = "18",
+            IE = "20")
+    @NotYetImplemented
+    public void inputButton() throws Exception {
+        loadPageWithAlerts2(testInput("button"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("13")
+    public void inputCheckbox() throws Exception {
+        loadPageWithAlerts2(testInput("checkbox"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "238",
+            FF45 = "237",
+            FF38 = "235",
+            IE = "262")
+    @NotYetImplemented
+    public void inputFile() throws Exception {
+        loadPageWithAlerts2(testInput("file"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void inputHidden() throws Exception {
+        loadPageWithAlerts2(testInput("hidden"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "169",
+            FF45 = "141",
+            FF38 = "140",
+            IE = "145")
+    @NotYetImplemented({CHROME, FF45, IE})
+    public void inputPassword() throws Exception {
+        loadPageWithAlerts2(testInput("password"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("13")
+    public void inputRadio() throws Exception {
+        loadPageWithAlerts2(testInput("radio"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "91",
+            FF45 = "50",
+            FF38 = "54",
+            IE = "100")
+    @NotYetImplemented
+    public void inputReset() throws Exception {
+        loadPageWithAlerts2(testInput("reset"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "171",
+            FF45 = "141",
+            FF38 = "140",
+            IE = "143")
+    @NotYetImplemented({CHROME, FF45, IE})
+    public void inputSelect() throws Exception {
+        loadPageWithAlerts2(testInput("select"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "56",
+            FF45 = "96",
+            FF38 = "98",
+            IE = "114")
+    @NotYetImplemented
+    public void inputSubmit() throws Exception {
+        loadPageWithAlerts2(testInput("submit"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "169",
+            FF45 = "141",
+            FF38 = "140",
+            IE = "143")
+    @NotYetImplemented({CHROME, FF45, IE})
+    public void inputText() throws Exception {
+        loadPageWithAlerts2(testInput("text"));
     }
 
     /**
