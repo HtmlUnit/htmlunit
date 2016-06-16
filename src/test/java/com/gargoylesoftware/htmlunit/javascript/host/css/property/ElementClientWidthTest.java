@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Unit tests for {@code offsetWidth} of an element.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ElementClientWidthTest extends WebDriverTestCase {
