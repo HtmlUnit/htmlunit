@@ -50,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c.dom.NodeList {
@@ -66,7 +67,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
 
     private String description_;
 
-    private boolean attributeChangeSensitive_ = true;
+    private final boolean attributeChangeSensitive_;
 
     /**
      * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
@@ -84,15 +85,22 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * Creates an instance.
      */
     public XMLDOMNodeList() {
+        attributeChangeSensitive_ = true;
     }
 
     /**
      * Creates an instance.
      * @param parentScope parent scope
+     * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
+     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     * @param description a text useful for debugging
      */
-    private XMLDOMNodeList(final ScriptableObject parentScope) {
+    private XMLDOMNodeList(final ScriptableObject parentScope, final boolean attributeChangeSensitive,
+            final String description) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
+        description_ = description;
+        attributeChangeSensitive_ = attributeChangeSensitive;
     }
 
     /**
@@ -103,10 +111,8 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @param description a text useful for debugging
      */
     public XMLDOMNodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        this(parentScope.getScriptableObject());
+        this(parentScope.getScriptableObject(), attributeChangeSensitive, description);
         setDomNode(parentScope, false);
-        description_ = description;
-        attributeChangeSensitive_ = attributeChangeSensitive;
     }
 
     /**
@@ -115,7 +121,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @param initialElements the initial content for the cache
      */
     protected XMLDOMNodeList(final DomNode parentScope, final List<DomNode> initialElements) {
-        this(parentScope.getScriptableObject());
+        this(parentScope.getScriptableObject(), true, null);
         cachedElements_ = new ArrayList<>(initialElements);
     }
 
@@ -171,7 +177,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      */
     public static XMLDOMNodeList emptyCollection(final MSXMLScriptable parentScope) {
         final List<DomNode> list = Collections.emptyList();
-        return new XMLDOMNodeList(parentScope) {
+        return new XMLDOMNodeList(parentScope, true, null) {
             @Override
             protected List<DomNode> getElements() {
                 return list;
@@ -486,7 +492,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     private static final class DomHtmlAttributeChangeListenerImpl
                                     implements DomChangeListener, HtmlAttributeChangeListener {
 
-        private transient WeakReference<XMLDOMNodeList> nodeList_;
+        private final transient WeakReference<XMLDOMNodeList> nodeList_;
 
         private DomHtmlAttributeChangeListenerImpl(final XMLDOMNodeList nodeList) {
             super();
@@ -536,7 +542,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
                 return;
             }
             if (nodes.attributeChangeSensitive_) {
-                handleChangeOnCache(event);
+                handleChangeOnCache(nodes, event);
             }
         }
 
@@ -545,7 +551,10 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
             if (null == nodes) {
                 return;
             }
+            handleChangeOnCache(nodes, event);
+        }
 
+        private void handleChangeOnCache(final XMLDOMNodeList nodes, final HtmlAttributeChangeEvent event) {
             final EffectOnCache effectOnCache = nodes.getEffectOnCache(event);
             if (EffectOnCache.NONE == effectOnCache) {
                 return;
