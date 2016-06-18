@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -269,7 +270,7 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void testsbehavior() throws Exception {
         test("tests.behavior");
     }
