@@ -366,9 +366,17 @@ public class XMLHttpRequest extends EventTarget {
     @JsxGetter
     public Object getResponseXML() {
         if (webResponse_ == null) {
-            return null; // send() has not been called
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("XMLHttpRequest.responseXML returns null because there "
+                        + "in no web resonse so far (has send() been called?)");
+            }
+            return null;
         }
         if (webResponse_ instanceof NetworkErrorWebResponse) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("XMLHttpRequest.responseXML returns of an network error ("
+                        + ((NetworkErrorWebResponse) webResponse_).getError() + ")");
+            }
             return null;
         }
         final String contentType = webResponse_.getContentType();
@@ -796,7 +804,7 @@ public class XMLHttpRequest extends EventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("IOException: returning a network error response.", e);
             }
-            webResponse_ = new NetworkErrorWebResponse(webRequest_);
+            webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
             setState(HEADERS_RECEIVED, context);
             setState(DONE, context);
             if (async_) {
@@ -1005,10 +1013,12 @@ public class XMLHttpRequest extends EventTarget {
 
     private static final class NetworkErrorWebResponse extends WebResponse {
         private final WebRequest request_;
+        private final IOException error_;
 
-        private NetworkErrorWebResponse(final WebRequest webRequest) {
+        private NetworkErrorWebResponse(final WebRequest webRequest, final IOException error) {
             super(null, null, 0);
             request_ = webRequest;
+            error_ = error;
         }
 
         @Override
@@ -1074,6 +1084,13 @@ public class XMLHttpRequest extends EventTarget {
         @Override
         public WebRequest getWebRequest() {
             return request_;
+        }
+
+        /**
+         * @return the error
+         */
+        public IOException getError() {
+            return error_;
         }
     }
 }
