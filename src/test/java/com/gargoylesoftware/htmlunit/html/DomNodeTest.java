@@ -792,4 +792,32 @@ public class DomNodeTest extends SimpleWebTestCase {
         page.getHtmlElementById("d2-1").mouseOut();
         assertTrue(elem.isDisplayed());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayedMousePath() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + "#d1:hover #d2 { display: none; }\n"
+            + "</style>\n"
+            + "<div id='d1'>hello<div id='d2'>world</div></div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlElement elem1 = page.getHtmlElementById("d1");
+        final HtmlElement elem2 = page.getHtmlElementById("d2");
+
+        assertTrue(elem1.isDisplayed());
+        assertTrue(elem2.isDisplayed());
+
+        elem1.mouseOver();
+        assertTrue(elem1.isDisplayed());
+        assertFalse(elem2.isDisplayed());
+
+        elem1.mouseOut();
+        assertTrue(elem1.isDisplayed());
+        assertTrue(elem2.isDisplayed());
+    }
 }

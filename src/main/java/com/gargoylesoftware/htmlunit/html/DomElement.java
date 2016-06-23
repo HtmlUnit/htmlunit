@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -63,6 +64,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Ronald Brill
  */
 public class DomElement extends DomNamespaceNode implements Element, ElementTraversal {
 
@@ -1138,7 +1140,15 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         else {
             currentPage = scriptResult.getNewPage();
         }
-        mouseOver_ = !MouseEvent.TYPE_MOUSE_OUT.equals(eventType);
+
+        final boolean mouseOver = !MouseEvent.TYPE_MOUSE_OUT.equals(eventType);
+        if (mouseOver_ != mouseOver) {
+            mouseOver_ = mouseOver;
+
+            final SimpleScriptable scriptable = (SimpleScriptable) getScriptableObject();
+            scriptable.getWindow().clearComputedStyles();
+        }
+
         return currentPage;
     }
 
