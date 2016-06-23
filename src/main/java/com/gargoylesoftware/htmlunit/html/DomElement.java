@@ -32,10 +32,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -58,6 +54,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * @author Ahmed Ashour
@@ -1240,7 +1240,15 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return whether the Mouse is currently over this element or not
      */
     public boolean isMouseOver() {
-        return mouseOver_;
+        if (mouseOver_) {
+            return true;
+        }
+        for (DomElement child : getChildElements()) {
+            if (child.isMouseOver()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
