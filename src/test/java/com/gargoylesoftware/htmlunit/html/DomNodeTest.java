@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DomNodeTest extends SimpleWebTestCase {
@@ -728,4 +729,67 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertTrue(page.getElementById("d3").isDisplayed());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayedMouseOver() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + "#d2:hover { display: none; }\n"
+            + "#d3:hover { visibility: hidden; }\n"
+            + "</style>\n"
+            + "<div id='d1'>hello</div>\n"
+            + "<div id='d2'>world</div>\n"
+            + "<div id='d3'>again</div>\n"
+            + "<div id='d4' style='display: none' >important</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertTrue(page.getElementById("d1").isDisplayed());
+
+        HtmlElement elem = page.getHtmlElementById("d2");
+        assertTrue(elem.isDisplayed());
+        elem.mouseOver();
+        assertFalse(elem.isDisplayed());
+        elem.mouseOut();
+        assertTrue(elem.isDisplayed());
+
+        elem = page.getHtmlElementById("d3");
+        assertTrue(elem.isDisplayed());
+        elem.mouseOver();
+        assertFalse(elem.isDisplayed());
+        elem.mouseOut();
+        assertTrue(elem.isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayedMouseOverParent() throws Exception {
+        final String html = "<html><head>\n"
+            + "<style>\n"
+            + "#d1:hover { display: none; }\n"
+            + "#d2:hover { visibility: hidden; }\n"
+            + "</style>\n"
+            + "<div id='d1'><div id='d1-1'>hello</div></div>\n"
+            + "<div id='d2'><div id='d2-1'>world</div></div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        HtmlElement elem = page.getHtmlElementById("d1");
+        assertTrue(elem.isDisplayed());
+        page.getHtmlElementById("d1-1").mouseOver();
+        assertFalse(elem.isDisplayed());
+        page.getHtmlElementById("d1-1").mouseOut();
+        assertTrue(elem.isDisplayed());
+
+        elem = page.getHtmlElementById("d2");
+        assertTrue(elem.isDisplayed());
+        page.getHtmlElementById("d2-1").mouseOver();
+        assertFalse(elem.isDisplayed());
+        page.getHtmlElementById("d2-1").mouseOut();
+        assertTrue(elem.isDisplayed());
+    }
 }
