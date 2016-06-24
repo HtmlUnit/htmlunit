@@ -73,7 +73,7 @@ public final class DomElement2Test extends SimpleWebTestCase {
         assertTrue(page.getElementById("d3").isMouseOver());
         assertFalse(page.getElementById("d4").isMouseOver());
 
-        // page = loadPage(html);
+        page = loadPage(html);
         page.getElementById("d4").mouseOver();
         assertTrue(page.getElementById("d1").isMouseOver());
         assertFalse(page.getElementById("d2").isMouseOver());
