@@ -59,6 +59,10 @@ public class Attachment {
             return null;
         }
         start += "filename=".length();
+        if (start >= disp.length()) {
+            return null;
+        }
+
         int end = disp.indexOf(';', start);
         if (end == -1) {
             end = disp.length();

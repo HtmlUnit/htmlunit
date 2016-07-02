@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class AttachmentTest extends SimpleWebTestCase {
@@ -121,15 +122,24 @@ public class AttachmentTest extends SimpleWebTestCase {
         attachments.clear();
 
         final List<NameValuePair> headers3 = new ArrayList<>();
-        headers3.add(new NameValuePair("Content-Disposition", "attachment"));
-        final byte[] contentb = new byte[] {(byte) 0xCA, (byte) 0xFE, (byte) 0xBA, (byte) 0xBE};
-        conn.setResponse(URL_THIRD, contentb, 200, "OK", "application/x-rubbish", headers3);
-        client.getPage(URL_THIRD);
+        headers3.add(new NameValuePair("Content-Disposition", "attachment; filename="));
+        conn.setResponse(URL_SECOND, content, 200, "OK", "text/plain", headers3);
+        client.getPage(URL_SECOND);
         final Attachment result3 = attachments.get(0);
-        final InputStream result3Stream = result3.getPage().getWebResponse().getContentAsStream();
         assertNull(result3.getSuggestedFilename());
-        assertEquals(result3.getPage().getWebResponse().getContentType(), "application/x-rubbish");
-        HttpWebConnectionTest.assertEquals(new ByteArrayInputStream(contentb), result3Stream);
+        assertEquals(content, ((TextPage) result3.getPage()).getContent());
+        attachments.clear();
+
+        final List<NameValuePair> headers4 = new ArrayList<>();
+        headers4.add(new NameValuePair("Content-Disposition", "attachment"));
+        final byte[] contentb = new byte[] {(byte) 0xCA, (byte) 0xFE, (byte) 0xBA, (byte) 0xBE};
+        conn.setResponse(URL_THIRD, contentb, 200, "OK", "application/x-rubbish", headers4);
+        client.getPage(URL_THIRD);
+        final Attachment result4 = attachments.get(0);
+        final InputStream result4Stream = result4.getPage().getWebResponse().getContentAsStream();
+        assertNull(result4.getSuggestedFilename());
+        assertEquals(result4.getPage().getWebResponse().getContentType(), "application/x-rubbish");
+        HttpWebConnectionTest.assertEquals(new ByteArrayInputStream(contentb), result4Stream);
         attachments.clear();
     }
 
