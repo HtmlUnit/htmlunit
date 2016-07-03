@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes">
+            <action type="change" dev="rbri" issue="1620">
+                New class DefaultJavaScriptErrorListener added. This listener will be always used of no specific listener is defined.
+                The logging of js errors was moved to this class. If you like to have the logging and your own JavaScriptErrorListener
+                than subclass or decorate this.
+            </action>
             <action type="fix" dev="rbri" issue="1065">
                 Computing of the current css styles now takes mouseOver into account.
             </action>

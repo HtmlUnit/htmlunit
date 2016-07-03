@@ -68,7 +68,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
@@ -943,22 +942,13 @@ public class HtmlPage extends InteractivePage {
             }
             if (!"http".equals(protocol) && !"https".equals(protocol)
                     && !"data".equals(protocol) && !"file".equals(protocol)) {
-                LOG.error("Unable to build URL for script src tag ["
-                                + srcAttribute + "] (protocol: '" + protocol + "')");
-                final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
-                if (javaScriptErrorListener != null) {
-                    javaScriptErrorListener.malformedScriptURL(this, srcAttribute,
+                client.getJavaScriptErrorListener().malformedScriptURL(this, srcAttribute,
                         new MalformedURLException("unknown protocol: '" + protocol + "'"));
-                }
                 return JavaScriptLoadResult.NOOP;
             }
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to build URL for script src tag [" + srcAttribute + "]");
-            final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
-            if (javaScriptErrorListener != null) {
-                javaScriptErrorListener.malformedScriptURL(this, srcAttribute, e);
-            }
+            client.getJavaScriptErrorListener().malformedScriptURL(this, srcAttribute, e);
             return JavaScriptLoadResult.NOOP;
         }
 
@@ -967,19 +957,11 @@ public class HtmlPage extends InteractivePage {
             script = loadJavaScriptFromUrl(scriptURL, charset);
         }
         catch (final IOException e) {
-            LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
-            final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
-            if (javaScriptErrorListener != null) {
-                javaScriptErrorListener.loadScriptError(this, scriptURL, e);
-            }
+            client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
             return JavaScriptLoadResult.DOWNLOAD_ERROR;
         }
         catch (final FailingHttpStatusCodeException e) {
-            LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
-            final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
-            if (javaScriptErrorListener != null) {
-                javaScriptErrorListener.loadScriptError(this, scriptURL, e);
-            }
+            client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
             throw e;
         }
 

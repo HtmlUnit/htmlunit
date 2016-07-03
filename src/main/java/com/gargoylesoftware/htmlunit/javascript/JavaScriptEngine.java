@@ -922,10 +922,7 @@ public class JavaScriptEngine {
                 return null;
             }
             catch (final TimeoutError e) {
-                final JavaScriptErrorListener javaScriptErrorListener = getWebClient().getJavaScriptErrorListener();
-                if (javaScriptErrorListener != null) {
-                    javaScriptErrorListener.timeoutError(page_, e.getAllowedTime(), e.getExecutionTime());
-                }
+                getWebClient().getJavaScriptErrorListener().timeoutError(page_, e.getAllowedTime(), e.getExecutionTime());
                 if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
                 }
@@ -1011,10 +1008,7 @@ public class JavaScriptEngine {
                 }
             }
         }
-        final JavaScriptErrorListener javaScriptErrorListener = getWebClient().getJavaScriptErrorListener();
-        if (javaScriptErrorListener != null) {
-            javaScriptErrorListener.scriptException(page, scriptException);
-        }
+        getWebClient().getJavaScriptErrorListener().scriptException(page, scriptException);
         // Throw a Java exception if the user wants us to.
         if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
             throw scriptException;

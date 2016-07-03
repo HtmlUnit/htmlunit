@@ -73,6 +73,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
@@ -717,10 +718,16 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Sets the javascript error listener for this webclient.
+     * When setting to null, the {@link DefaultJavaScriptErrorListener} is used.
      * @param javaScriptErrorListener the new JavaScriptErrorListener or null if none is specified
      */
     public void setJavaScriptErrorListener(final JavaScriptErrorListener javaScriptErrorListener) {
-        javaScriptErrorListener_ = javaScriptErrorListener;
+        if (javaScriptErrorListener == null) {
+            javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
+        }
+        else {
+            javaScriptErrorListener_ = javaScriptErrorListener;
+        }
     }
 
     /**
