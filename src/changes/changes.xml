@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1065">
+                Computing of the current css styles now takes mouseOver into account.
+            </action>
             <action type="fix" dev="rbri">
                 IndexOutofRangeException fixed in com.gargoylesoftware.htmlunit.attachment.Attachment.getSuggestedFilename().
             </action>
