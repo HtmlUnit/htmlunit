@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -29,7 +30,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
  *
  * @author Ronald Brill
  */
-public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener {
+public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, Serializable {
 
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptErrorListener.class);
 
