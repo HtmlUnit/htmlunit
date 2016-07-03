@@ -188,7 +188,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
     private transient MSXMLActiveXObjectFactory msxmlActiveXObjectFactory_;
     private RefreshHandler refreshHandler_ = new NiceRefreshHandler(2);
-    private JavaScriptErrorListener javaScriptErrorListener_;
+    private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
     private WebClientOptions options_ = new WebClientOptions();
     private final StorageHolder storageHolder_ = new StorageHolder();
