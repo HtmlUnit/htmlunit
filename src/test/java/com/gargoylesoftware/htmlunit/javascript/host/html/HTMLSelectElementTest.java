@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class HTMLSelectElementTest extends WebDriverTestCase {
@@ -2490,6 +2491,64 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "      <option name='option1' value='value1'>One</option>\n"
             + "    </select>\n"
             + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "[object HTMLOptionElement]", "2"},
+            IE = {"null", "[object HTMLOptionElement]", "2"})
+    public void addOptionByAssigningViaIndex() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var select = document.getElementById('select1');\n"
+            + "      alert(select[1]);\n"
+            + "      select[1] = new Option('text','value');\n"
+            + "      alert(select[1]);\n"
+            + "      alert(select.options.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <select id='select1'>\n"
+            + "    <option name='option1' value='value1'>One</option>\n"
+            + "  </select>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "[object HTMLOptionElement]", "8"},
+            IE = {"null", "[object HTMLOptionElement]", "8"})
+    public void addOptionByAssigningViaIndex2() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var select = document.getElementById('select1');\n"
+            + "      alert(select[7]);\n"
+            + "      select[7] = new Option('text','value');\n"
+            + "      alert(select[7]);\n"
+            + "      alert(select.options.length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <select id='select1'>\n"
+            + "    <option name='option1' value='value1'>One</option>\n"
+            + "  </select>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

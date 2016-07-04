@@ -45,6 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Carsten Steul
  */
 @JsxClass(domClass = HtmlSelect.class)
 public class HTMLSelectElement extends FormField {
@@ -222,6 +223,9 @@ public class HTMLSelectElement extends FormField {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
+        if (getDomNodeOrNull() == null) {
+            return NOT_FOUND; // typically for the prototype
+        }
         return getOptions().get(index, start);
     }
 
