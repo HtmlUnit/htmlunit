@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1804" due-to="Carsten Steul">
+                ReferenceError after calling Object(FrameWindow).
+            </action>
             <action type="fix" dev="rbri" issue="1803" due-to="Carsten Steul">
                 IllegalStateException adding an option to a select.
             </action>

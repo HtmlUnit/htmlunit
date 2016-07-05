@@ -149,6 +149,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
@@ -2247,6 +2248,15 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @Override
     public void close() {
         Symbol.remove(this);
+    }
+
+    /**
+     * Does nothing.
+     * @param parent the new parent scope
+     */
+    @Override
+    public void setParentScope(final Scriptable parent) {
+        // nothing as the window is the top level scope and its parent scope should stay null
     }
 }
 
