@@ -107,7 +107,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
-                + "<" + tagName + " id='outer'><" + tagName + ">\n"
+                + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
                 + "</body></html>";
     }
 
@@ -381,7 +381,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("300")
-    @NotYetImplemented
     public void canvas() throws Exception {
         loadPageWithAlerts2(test("canvas"));
     }
@@ -851,7 +850,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF45 = "141",
             FF38 = "140",
             IE = "143")
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -1143,6 +1142,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    @NotYetImplemented(CHROME)
     public void noscript() throws Exception {
         loadPageWithAlerts2(test("noscript"));
     }
@@ -1268,7 +1268,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented({FF, IE})
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -1290,9 +1289,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF = "1")
-    @NotYetImplemented
+    @Alerts("0")
+    @NotYetImplemented(CHROME)
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
