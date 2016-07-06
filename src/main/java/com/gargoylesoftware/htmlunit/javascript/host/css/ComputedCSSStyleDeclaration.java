@@ -124,9 +124,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -1035,8 +1032,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final String display = getDisplay();
-        if ("none".equals(display) || ("inline".equals(display) && !(element instanceof HTMLIFrameElement)
-                && !(element instanceof HTMLInputElement) && !(element instanceof HTMLTextAreaElement))) {
+        if ("none".equals(display)) {
             width_ = Integer.valueOf(0);
             return 0;
         }
@@ -1046,7 +1042,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int width;
         final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
-        if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
+
+        // width is ignored for inline elements
+        if (("inline".equals(display) || StringUtils.isEmpty(styleWidth)) && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
             if (element instanceof HTMLCanvasElement) {
                 return 300;

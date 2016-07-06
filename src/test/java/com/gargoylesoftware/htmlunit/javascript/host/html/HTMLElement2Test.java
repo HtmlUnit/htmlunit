@@ -558,6 +558,30 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void offsetHeight_takeFontSizeIntoAccount() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var elem = document.getElementById('myTestDiv');\n"
+                + "    var initial = elem.offsetHeight;\n"
+                + "    alert(initial > 10);\n"
+                + "    elem.style.fontSize = '42px';\n"
+                + "    alert(elem.offsetHeight > initial);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <div id='myTestDiv'>something</div>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Value of offsetWidth is currently wrong when width is a % of the page.
      * @throws Exception if an error occurs
      */
@@ -582,10 +606,15 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("30")
     public void offsetWidth_parentWidthConstrainsChildWidth() throws Exception {
-        final String html = "<html><head><style>#a { width: 30px; }</style></head><body>\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <style>#a { width: 30px; }</style>\n"
+            + "</head>\n"
+            + "<body>\n"
             + "<div id='a'><div id='b'>foo</div></div>\n"
             + "<script>alert(document.getElementById('b').offsetWidth);</script>\n"
-            + "</body></html>";
+            + "</body>\n"
+            + "</html>";
         loadPageWithAlerts2(html);
     }
 
@@ -595,10 +624,15 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("30")
     public void offsetWidth_parentWidthConstrainsChildWidth2() throws Exception {
-        final String html = "<html><head><style>#a{width:30px;} #b{border:2px;padding:3px;}</style></head><body>\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <style>#a{width:30px;} #b{border:2px;padding:3px;}</style>\n"
+            + "</head>\n"
+            + "<body>\n"
             + "<div id='a'><div id='b'>foo</div></div>\n"
             + "<script>alert(document.getElementById('b').offsetWidth);</script>\n"
-            + "</body></html>";
+            + "</body>\n"
+            + "</html>";
         loadPageWithAlerts2(html);
     }
 
@@ -610,7 +644,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0.5", "true"})
     public void offsetWidth_cssFloat_rightOrLeft() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
             + "<div id='withoutFloat1'>hello</div><div>hellohello</div>\n"
             + "<div id='withFloat1' style='float: left'>hello</div><div style='float: left'>hellohello</div>\n"
             + "<script>\n"
@@ -622,7 +658,60 @@ public class HTMLElement2Test extends WebDriverTestCase {
             // but expect it to be big enough to show 10 times "hello" on one line
             + "alert(eltWithoutFloat1.offsetWidth > 10 * eltWithFloat1.offsetWidth);\n"
             + "</script>\n"
-            + "</body></html>";
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "true"})
+    public void offsetWidth_takeContentIntoAccount() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var elem1 = document.getElementById('myTest1');\n"
+                + "    var elem2 = document.getElementById('myTest2');\n"
+                + "    var elem3 = document.getElementById('myTest3');\n"
+                + "    alert(elem1.offsetWidth == 0);\n"
+                + "    alert(elem1.offsetWidth < elem2.offsetWidth);\n"
+                + "    alert(elem2.offsetWidth < elem3.offsetWidth);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <span id='myTest1'></span>\n"
+                + "  <span id='myTest2'>short</span>\n"
+                + "  <span id='myTest3'>loooooooooong</span>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    @NotYetImplemented
+    public void offsetWidth_takeFontSizeIntoAccount() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var elem = document.getElementById('myTestDiv');\n"
+                + "    var initial = elem.offsetWidth;\n"
+                + "    alert(initial > 10);\n"
+                + "    elem.style.fontSize = '42px';\n"
+                + "    alert(elem.offsetWidth > initial);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <span id='myTestDiv'>something</span>\n"
+                + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 
