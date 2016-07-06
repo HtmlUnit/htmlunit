@@ -695,7 +695,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    @NotYetImplemented
     public void offsetWidth_takeFontSizeIntoAccount() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

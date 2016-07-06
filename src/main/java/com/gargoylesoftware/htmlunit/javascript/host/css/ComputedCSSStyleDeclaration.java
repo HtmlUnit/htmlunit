@@ -1131,7 +1131,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width += w;
             }
             else if (child.getScriptableObject() instanceof Text) {
-                width += child.getTextContent().length() * PIXELS_PER_CHAR;
+                final DomNode parent = child.getParentNode();
+                if (parent instanceof HtmlElement) {
+                    final HTMLElement e = (HTMLElement) child.getParentNode().getScriptableObject();
+                    final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
+                    final int height = ComputedHeight.getHeight(getBrowserVersion(), style.getFontSize());
+                    width += child.getTextContent().length() * (int) (height / 1.8f);
+                }
+                else {
+                    width += child.getTextContent().length() * PIXELS_PER_CHAR;
+                }
             }
         }
         return width;
