@@ -54,8 +54,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "appCodeName".
-     * @return the property "appCodeName"
+     * Returns the {@code appCodeName} property.
+     * @return the {@code appCodeName} property
      */
     @JsxGetter
     public String getAppCodeName() {
@@ -63,8 +63,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "appMinorVersion".
-     * @return the property "appMinorVersion"
+     * Returns the {@code appMinorVersion} property.
+     * @return the {@code appMinorVersion} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getAppMinorVersion() {
@@ -72,8 +72,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "appName".
-     * @return the property "appName"
+     * Returns the {@code appName} property.
+     * @return the {@code appName} property
      */
     @JsxGetter
     public String getAppName() {
@@ -81,8 +81,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "appVersion".
-     * @return the property "appVersion"
+     * Returns the {@code appVersion} property.
+     * @return the {@code appVersion} property
      */
     @JsxGetter
     public String getAppVersion() {
@@ -90,12 +90,12 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the language of the browser (for IE).
+     * Returns the language of the browser.
      * @return the language
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBrowserLanguage() {
-        return getBrowserVersion().getBrowserLanguage();
+        return getLanguage();
     }
 
     /**
@@ -108,8 +108,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "cookieEnabled".
-     * @return the property "cookieEnabled"
+     * Returns the {@code cookieEnabled} property.
+     * @return the {@code cookieEnabled} property
      */
     @JsxGetter
     public boolean getCookieEnabled() {
@@ -117,8 +117,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "cpuClass".
-     * @return the property "cpuClass"
+     * Returns the {@code cpuClass} property.
+     * @return the {@code cpuClass} property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getCpuClass() {
@@ -126,8 +126,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "onLine".
-     * @return the property "onLine"
+     * Returns the {@code onLine} property.
+     * @return the {@code onLine} property
      */
     @JsxGetter
     public boolean getOnLine() {
@@ -135,8 +135,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "platform".
-     * @return the property "platform"
+     * Returns the {@code platform} property.
+     * @return the {@code platform} property
      */
     @JsxGetter
     public String getPlatform() {
@@ -163,8 +163,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "systemLanguage".
-     * @return the property "systemLanguage"
+     * Returns the property {@code systemLanguage}.
+     * @return the property {@code systemLanguag}
      */
     @JsxGetter(@WebBrowser(IE))
     public String getSystemLanguage() {
@@ -172,8 +172,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "userAgent".
-     * @return the property "userAgent"
+     * Returns the property {@code userAgent}.
+     * @return the property {@code userAgent}
      */
     @JsxGetter
     public String getUserAgent() {
@@ -181,8 +181,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the property "userLanguage".
-     * @return the property "userLanguage"
+     * Returns the property {@code userLanguage}.
+     * @return the property {@code userLanguage}
      */
     @JsxGetter(@WebBrowser(IE))
     public String getUserLanguage() {
@@ -230,8 +230,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns an empty array because HtmlUnit does not support embedded objects.
-     * @return an empty array
+     * Returns the {@code mimeTypes} property.
+     * @return the {@code mimeTypes} property
      */
     @JsxGetter
     public Object getMimeTypes() {
@@ -270,8 +270,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the buildID.
-     * @return the buildID
+     * Returns the {@code buildID} property.
+     * @return the {@code buildID} property
      */
     @JsxGetter(@WebBrowser(FF))
     public String getBuildID() {
@@ -279,8 +279,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the vendor.
-     * @return the vendor
+     * Returns the {@code vendor} property.
+     * @return the {@code vendor} property
      */
     @JsxGetter
     public String getVendor() {
@@ -288,8 +288,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the vendorSub.
-     * @return the vendorSub
+     * Returns the {@code vendorSub} property.
+     * @return the {@code vendorSub} property
      */
     @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE)})
     public String getVendorSub() {
@@ -297,8 +297,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the doNotTrack.
-     * @return the doNotTrack
+     * Returns the {@code doNotTrack} property.
+     * @return the {@code doNotTrack} property
      */
     @JsxGetter(@WebBrowser(FF))
     public String getDoNotTrack() {
@@ -309,19 +309,8 @@ public class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Returns the msDoNotTrack.
-     * @return the msDoNotTrack
-     */
-    public String getMsDoNotTrack() {
-        if (getWindow().getWebWindow().getWebClient().getOptions().isDoNotTrackEnabled()) {
-            return "1";
-        }
-        return "0";
-    }
-
-    /**
-     * Returns the oscpu.
-     * @return the oscpu
+     * Returns the {@code oscpu} property.
+     * @return the {@code oscpu} property
      */
     @JsxGetter(@WebBrowser(FF))
     public String getOscpu() {
