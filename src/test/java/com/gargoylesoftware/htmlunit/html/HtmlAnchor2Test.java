@@ -628,12 +628,24 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     public void javascriptWithReturn() throws Exception {
-        final String firstHtml
+        final String html
             = "<html><head><title>First</title></head><body>\n"
             + "  <a id='myLink' href='javascript:return true'>hi</a>\n"
             + "</body></html>";
-        final WebDriver webDriver = loadPage2(firstHtml);
+        final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("myLink")).click();
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void javascriptWithReturnWhitespace() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a id='myLink' href='javascript: return true'>hi</a>\n"
+            + "</body></html>";
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("myLink")).click();
+    }
 }
