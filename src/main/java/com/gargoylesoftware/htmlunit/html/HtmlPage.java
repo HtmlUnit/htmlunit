@@ -896,6 +896,9 @@ public class HtmlPage extends InteractivePage {
 
         if (StringUtils.startsWithIgnoreCase(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
+            if (sourceCode.startsWith("return ")) {
+                sourceCode = sourceCode.substring("return ".length());
+            }
         }
 
         final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);

@@ -24,19 +24,19 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By.ById;
 import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlAnchor}.
@@ -622,4 +622,18 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
         assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void javascriptWithReturn() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a id='myLink' href='javascript:return true'>hi</a>\n"
+            + "</body></html>";
+        final WebDriver webDriver = loadPage2(firstHtml);
+        webDriver.findElement(By.id("myLink")).click();
+    }
+
 }

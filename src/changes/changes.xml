@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                Fix handling return statements in URL starting with "javascript:".
+            </action>
             <action type="fix" dev="rbri">
                 Take care of the font size when calculating the offsetWidth for text.
             </action>
