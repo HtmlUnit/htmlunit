@@ -65,7 +65,7 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":")
+            final String protocol = StringUtils.substringBefore(url, ":")
                     .toLowerCase(Locale.ROOT);
 
             if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
@@ -76,8 +76,7 @@ abstract class URLCreator {
             }
             else if ("about".equals(protocol)) {
                 if (WebClient.URL_ABOUT_BLANK != null
-                        && org.apache.commons.lang3.StringUtils.equalsIgnoreCase(
-                                WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
+                        && StringUtils.equalsIgnoreCase(WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
                     return WebClient.URL_ABOUT_BLANK;
                 }
                 return new URL(null, url, ABOUT_HANDLER);
@@ -105,18 +104,16 @@ abstract class URLCreator {
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
             if (WebClient.URL_ABOUT_BLANK != null
-                    && org.apache.commons.lang3.StringUtils.equalsIgnoreCase(
-                            WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
+                    && StringUtils.equalsIgnoreCase(WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
                 return WebClient.URL_ABOUT_BLANK;
             }
-            else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url,
-                    JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            else if (StringUtils.startsWithIgnoreCase(url, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
-            else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "about:")) {
+            else if (StringUtils.startsWithIgnoreCase(url, "about:")) {
                 return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
-            else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "data:")) {
+            else if (StringUtils.startsWithIgnoreCase(url, "data:")) {
                 return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
             else {
