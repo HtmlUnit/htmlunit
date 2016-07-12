@@ -205,10 +205,14 @@ class XmlSerializer {
     protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");
         final DomAttr hrefAttr = map.get("href");
-        if ((null != hrefAttr) && StringUtils.isNotBlank(hrefAttr.getValue())) {
-            final File file = createFile(hrefAttr.getValue(), ".css");
-            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(), TextUtil.DEFAULT_CHARSET);
-            hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
+        if (hrefAttr != null && StringUtils.isNotBlank(hrefAttr.getValue())) {
+            final String protocol = link.getWebRequest().getUrl().getProtocol();
+            if ("http".equals(protocol) || "https".equals(protocol)) {
+                final File file = createFile(hrefAttr.getValue(), ".css");
+                FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(),
+                        TextUtil.DEFAULT_CHARSET);
+                hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
+            }
         }
 
         return map;
@@ -217,7 +221,7 @@ class XmlSerializer {
     protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
         final DomAttr srcAttr = map.get("src");
-        if ((null != srcAttr) && StringUtils.isNotBlank(srcAttr.getValue())) {
+        if (srcAttr != null && StringUtils.isNotBlank(srcAttr.getValue())) {
             final WebResponse response = image.getWebResponse(true);
 
             final File file = createFile(srcAttr.getValue(), "." + getSuffix(response));
