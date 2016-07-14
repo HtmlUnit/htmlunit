@@ -194,13 +194,11 @@ public class ExternalTest {
     }
 
     private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
-        // Needs Java 8
+        // Need Java 8
         return groupId.startsWith("org.eclipse.jetty") && version.startsWith("9.3.")
                 || "com.puppycrawl.tools".equals(groupId)
                         && "checkstyle".equals(artifactId)
-                        && version.startsWith("7.0")
-                // Gives an error with eclipse, to be investigated
-                || "maven-jar-plugin".equals(artifactId) && version.startsWith("3.0");
+                        && version.startsWith("7.0");
     }
 
     private static String getValue(final String line) {
