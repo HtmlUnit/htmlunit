@@ -54,7 +54,7 @@ public class XmlSerializerTest extends SimpleWebTestCase {
         final MockWebConnection connection = getMockWebConnection();
         connection.setResponse(URL_FIRST, html);
         client.setWebConnection(connection);
-        
+
         final HtmlPage page = client.getPage(URL_FIRST);
 
         final File tmpFolder = tmpFolderProvider_.newFolder("hu");
