@@ -1586,9 +1586,13 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the computed style
      */
     @JsxFunction
-    public CSS2Properties getComputedStyle(final Element element, final String pseudoElement) {
+    public CSS2Properties getComputedStyle(final Object element, final String pseudoElement) {
+        if (!(element instanceof Element)) {
+            throw ScriptRuntime.typeError("parameter 1 is not of type 'Element'");
+        }
+        final Element e = (Element) element;
         synchronized (computedStyles_) {
-            final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            final Map<String, CSS2Properties> elementMap = computedStyles_.get(e);
             if (elementMap != null) {
                 final CSS2Properties style = elementMap.get(pseudoElement);
                 if (style != null) {
@@ -1597,18 +1601,18 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             }
         }
 
-        final CSSStyleDeclaration original = element.getStyle();
+        final CSSStyleDeclaration original = e.getStyle();
         final CSS2Properties style = new CSS2Properties(original);
 
-        final StyleSheetList sheets = ((HTMLDocument) element.getOwnerDocument()).getStyleSheets();
+        final StyleSheetList sheets = ((HTMLDocument) e.getOwnerDocument()).getStyleSheets();
         final boolean trace = LOG.isTraceEnabled();
         for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
             if (sheet.isActive() && sheet.isEnabled()) {
                 if (trace) {
-                    LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
+                    LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
                 }
-                sheet.modifyIfNecessary(style, element, pseudoElement);
+                sheet.modifyIfNecessary(style, e, pseudoElement);
             }
         }
 
@@ -1616,7 +1620,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
             if (elementMap == null) {
                 elementMap = new WeakHashMap<>();
-                computedStyles_.put(element, elementMap);
+                computedStyles_.put(e, elementMap);
             }
             elementMap.put(pseudoElement, style);
         }

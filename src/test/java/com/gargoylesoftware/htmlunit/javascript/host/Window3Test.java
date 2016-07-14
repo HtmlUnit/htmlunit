@@ -1533,7 +1533,7 @@ public class Window3Test extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
-            + "      alert(window.devicePixelRatio);\n"
+            + "    alert(window.devicePixelRatio);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -1552,7 +1552,26 @@ public class Window3Test extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
-            + "      alert(window.offscreenBuffering);\n"
+            + "    alert(window.offscreenBuffering);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void getComputedStyle() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      getComputedStyle(void 0);\n"
+            + "    } catch (e) {alert('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
