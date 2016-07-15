@@ -53,7 +53,7 @@ public class Event2Test extends WebDriverTestCase {
     // manually
     // ChromeDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" instead of "clickMe"
     @NotYetImplemented(IE)
-    // No idea why the IE11 fires a MouseEvent here instead of a PointerEvent
+    // No idea why IE fires a MouseEvent here instead of a PointerEvent
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"

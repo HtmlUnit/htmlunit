@@ -300,7 +300,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
     @BuggyWebDriver(IE)
-    // The correct values for IE11 are:
+    // The correct values for IE are:
     //            IE = {"titles", "HEAD", "Outer Html", "DIV", "",
     //                "bodyTitles", "DIV", "",
     //                "innerDiv", "outerDiv"})
@@ -359,7 +359,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
     @BuggyWebDriver(IE)
-    // The correct values for IE11 are:
+    // The correct values for IE are:
     //            IE = {"titles", "HEAD", "Outer Html", "DIV", "",
     //                "bodyTitles", "DIV", "",
     //                "innerDiv", "outerDiv"})

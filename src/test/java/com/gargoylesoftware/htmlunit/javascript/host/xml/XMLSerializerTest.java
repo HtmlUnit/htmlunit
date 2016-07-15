@@ -156,7 +156,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "</body>"
                     + "</html>")
     @NotYetImplemented
-    // IE11 omits the body's ID attribute
+    // IE omits the body's ID attribute
     public void htmlAttributes() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
         setExpectedAlerts();

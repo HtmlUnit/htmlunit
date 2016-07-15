@@ -84,7 +84,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * Messages:
      * CHROME: "A Node was inserted somewhere it doesn't belong."
      * FF: "Node cannot be inserted at the specified point in the hierarchy"
-     * IE11: "HierarchyRequestError"
+     * IE: "HierarchyRequestError"
      */
     public void appendChild_illegal_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

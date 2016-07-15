@@ -249,7 +249,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private void initMSXMLActiveX() {
         msxmlActiveXObjectFactory_ = new MSXMLActiveXObjectFactory();
-        // TODO [IE11] initialize in #init or in #initialize?
+        // TODO [IE] initialize in #init or in #initialize?
         try {
             msxmlActiveXObjectFactory_.init(getBrowserVersion());
         }

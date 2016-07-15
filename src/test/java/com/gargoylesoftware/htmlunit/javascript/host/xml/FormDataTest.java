@@ -112,7 +112,7 @@ public class FormDataTest extends WebDriverTestCase {
         if (!alerts.isEmpty()) {
             String[] lines = alerts.get(0).split("\\n");
             if (lines.length == 2 && lines[0].isEmpty()) {
-                // response of IE11 contains an additional empty line -> remove
+                // response of IE contains an additional empty line -> remove
                 lines = Arrays.copyOfRange(lines, 1, 2);
             }
             assertEquals("Response: " + alerts.get(0) + "; line count", 1, lines.length);

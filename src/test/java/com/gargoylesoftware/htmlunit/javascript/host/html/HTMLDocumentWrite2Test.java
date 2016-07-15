@@ -80,7 +80,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        // [IE11] real IE11 waits for the page to load until infinity
+        // [IE] real IE waits for the page to load until infinity
         if (useRealBrowser() && getBrowserVersion().isIE()) {
             Assert.fail("Blocks real IE");
         }
@@ -227,7 +227,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     @NotYetImplemented
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeInNewWindowAndReadFormCollection() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -288,7 +288,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"<form></form>", "[object HTMLFormElement]"})
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"

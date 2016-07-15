@@ -42,7 +42,7 @@ public class Sarissa0993Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"++++++++++++++++++", "+", "+", "+", "+++", "++", "++++F+++"},
             CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             IE = {"+++++++++++F++++++", "+", "+", "+", "FFF", "FF", "FFFFFFFF"})
-    // TODO [IE11]XML sarissa 0.9.9.3 is not compatible with IE11's new XML stuff
+    // TODO [IE]XML sarissa 0.9.9.3 is not compatible with IE's new XML stuff
     public void sarissa() throws Exception {
         startWebServer("src/test/resources/libraries/sarissa/0.9.9.3", null, null);
         final String url = "http://localhost:" + PORT + "/test/testsarissa.html";

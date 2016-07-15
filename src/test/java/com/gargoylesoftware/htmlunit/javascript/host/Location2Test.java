@@ -733,7 +733,7 @@ public class Location2Test extends WebDriverTestCase {
             assertEquals(new URL(URL_FIRST, "test.html").toExternalForm(), driver.getCurrentUrl());
         }
         finally {
-            // TODO [IE11] when run with real IE11 the window is closed and all following tests are broken
+            // TODO [IE] when run with real IE the window is closed and all following tests are broken
             shutDownAll();
         }
     }

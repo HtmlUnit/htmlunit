@@ -176,7 +176,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true"})
     public void circularImportedStylesheetsComplexCase() throws Exception {
-        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
         final String html = "<html><head>\n"
@@ -229,7 +229,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("42px")
     public void importedStylesheetsLoadedAccordingToMediaType() throws Exception {
-        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
         final String html

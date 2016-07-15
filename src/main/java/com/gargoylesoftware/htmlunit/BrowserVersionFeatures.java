@@ -587,11 +587,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CALL_RESULT_IS_LAST_RETURN_VALUE,
 
-    /** toDataURL for canvas returns the CHROME version of the png. */
+    /** toDataURL for canvas returns the CHROME version of the PNG. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_CANVAS_DATA_URL_CHROME_PNG,
 
-    /** toDataURL for canvas returns the IE11 version of the png. */
+    /** toDataURL for canvas returns the IE version of the PNG. */
     @BrowserFeature(@WebBrowser(IE))
     JS_CANVAS_DATA_URL_IE_PNG,
 
@@ -1366,7 +1366,7 @@ public enum BrowserVersionFeatures {
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /**
-     * The window.ActiveXObject is special in IE11
+     * The window.ActiveXObject is special in IE
      * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx.
      */
     @BrowserFeature(@WebBrowser(IE))
@@ -1487,7 +1487,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     QUERYSELECTORALL_NO_TARGET,
 
-    /** IE11 throws a syntax error if a css3 pseudo selector is used on an detached node. */
+    /** IE throws a syntax error if a css3 pseudo selector is used on an detached node. */
     @BrowserFeature(@WebBrowser(IE))
     QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,
 
@@ -1576,7 +1576,7 @@ public enum BrowserVersionFeatures {
 
     /**
      * Indicates if the port should be ignored during origin check.
-     * For IE11: this is currently a bug, see
+     * For IE: this is currently a bug, see
      * http://connect.microsoft.com/IE/feedback/details/781303/
      * origin-header-is-not-added-to-cors-requests-to-same-domain-but-different-port
      */

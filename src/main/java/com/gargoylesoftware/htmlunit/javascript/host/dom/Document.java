@@ -448,10 +448,6 @@ public class Document extends EventNode {
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
-            // FF3.6 supports document.createElement('div') or supports document.createElement('<div>')
-            // but not document.createElement('<div name="test">')
-            // IE9- supports also document.createElement('<div name="test">')
-            // FF4+ and IE11 don't support document.createElement('<div>')
             if (browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT)
                   && (tagName.contains("<") || tagName.contains(">"))) {
                 LOG.info("createElement: Provided string '"

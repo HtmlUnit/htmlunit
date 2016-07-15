@@ -269,7 +269,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<iframe id='iframe1'></iframe>\n"
             + "</body></html>";
 
-        // [IE11] real IE11 waits for the page to load until infinity
+        // [IE] real IE waits for the page to load until infinity
         if (useRealBrowser() && getBrowserVersion().isIE()) {
             Assert.fail("Blocks real IE");
         }

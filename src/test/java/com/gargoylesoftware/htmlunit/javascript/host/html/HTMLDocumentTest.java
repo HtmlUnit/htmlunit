@@ -616,10 +616,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts({"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
     public void lastModified() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<>();
-        // TODO When ran with the IEDriver the IE11 is in a mysterious state after this test and cannot be restored
+        // TODO When ran with the IEDriver the IE is in a mysterious state after this test and cannot be restored
         // to normal in an automatic way.
         // All following tests will break until you restart your PC.
-        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE11".equals(getBrowserVersion().getNickname()))) {
+        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE".equals(getBrowserVersion().getNickname()))) {
             responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
             testLastModified(responseHeaders);
 
@@ -628,7 +628,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             testLastModified(responseHeaders);
         }
 
-        // but Date is taken, if no Last-Modified header is present (if not IE11)
+        // but Date is taken, if no Last-Modified header is present (if not IE)
         responseHeaders.clear();
         responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
         testLastModified(responseHeaders);
@@ -706,7 +706,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"})
-    // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
+    // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -720,7 +720,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"})
-    // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
+    // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
@@ -1547,7 +1547,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "", "foo=bar", "foo=hello world"})
     public void cookie_write_cookiesEnabled() throws Exception {
-        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
         loadPageWithAlerts2(getCookieWriteHtmlCode());

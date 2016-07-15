@@ -149,7 +149,7 @@ public class NotYetImplementedTest {
         String lastFile = null;
 
         int count = 0;
-        int countIE11 = 0;
+        int countIE = 0;
         int countFF38 = 0;
         int countFF45 = 0;
         int countChrome = 0;
@@ -189,12 +189,8 @@ public class NotYetImplementedTest {
             builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
 
-            if (browser.contains("IE11")) {
-                countIE11++;
-            }
-            if (!browser.contains("IE11")
-                    && browser.contains("IE")) {
-                countIE11++;
+            if (browser.contains("IE")) {
+                countIE++;
             }
 
             if (browser.contains("FF38")) {
@@ -216,7 +212,7 @@ public class NotYetImplementedTest {
                 countEdge++;
             }
             if (browser.contains("All")) {
-                countIE11++;
+                countIE++;
                 countFF38++;
                 countFF45++;
                 countChrome++;
@@ -233,8 +229,8 @@ public class NotYetImplementedTest {
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countIE11)).append("</td>\n");
-        overview.append("    <td>for IE11</td>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countIE)).append("</td>\n");
+        overview.append("    <td>for IE</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

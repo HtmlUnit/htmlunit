@@ -181,7 +181,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts ({"open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
         final String firstContent = "<html>\n"
@@ -228,7 +228,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts ({"open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
         final String firstContent = "<html>\n"
@@ -368,7 +368,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({"Executed", "later"})
-    // TODO [IE11]ERRORPAGE real IE11 displays own error page if response is to small
+    // TODO [IE]ERRORPAGE real IE displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"
                 + "<head>\n"
@@ -412,7 +412,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts("modified")
     public void deflateCompressionGZipCompatible() throws Exception {
-        // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
         doTestDeflateCompression(true);
@@ -426,7 +426,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "modified",
             IE = "Hello world")
     @NotYetImplemented(IE)
-    // IE11 does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
+    // IE does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);
     }

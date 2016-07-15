@@ -97,7 +97,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void orderCookiesByPath_fromJs() throws Exception {
         final String html = "<html><body><script>\n"
             + "document.cookie = 'exampleCookie=rootPath;path=/';\n"

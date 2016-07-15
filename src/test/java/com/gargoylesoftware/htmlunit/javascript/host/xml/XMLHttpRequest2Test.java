@@ -194,7 +194,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"5", "pass", "pass", "pass", "pass"},
             IE = {"1", "exception", "exception", "pass", "pass"})
     @NotYetImplemented(IE)
-    // real IE11 invokes just one request and returns the other two responses from it's cache
+    // real IE invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -225,7 +225,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1"})
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
         testResponseXML("text/xml");
         testResponseXML(null);
@@ -237,7 +237,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_badContentType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -399,7 +399,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"in timeout", "hello"})
     @NotYetImplemented
-    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
@@ -425,7 +425,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"hello", "in timeout"})
     @BuggyWebDriver(IE)
-    // IEDriver catches "in timeout", "hello" but real IE11 gets the correct order
+    // IEDriver catches "in timeout", "hello" but real IE gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"

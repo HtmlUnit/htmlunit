@@ -429,7 +429,7 @@ public class JavaScriptEngine {
             }
         }
 
-        // IE11 ActiveXObject simulation
+        // IE ActiveXObject simulation
         // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
         // DEV Note: this is at the moment the only usage of HiddenFunctionObject
         //           if we need more in the future, we have to enhance our JSX annotations

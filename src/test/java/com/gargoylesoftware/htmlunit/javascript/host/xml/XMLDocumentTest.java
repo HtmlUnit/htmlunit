@@ -424,7 +424,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"book", "exception /title", "exception title"})
     public void selectNodes_fromRoot() throws Exception {
-        // IE11 works only if running alone
+        // IE works only if running alone
         shutDownRealIE();
 
         final String html = "<html><head><script>\n"
@@ -986,7 +986,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object XMLDocument]", "OK"},
             IE = {"[object Document]", "OK"})
     @NotYetImplemented(IE)
-    // Real IE11 seems to generate always an (HTML)Document within an iframe.
+    // Real IE seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

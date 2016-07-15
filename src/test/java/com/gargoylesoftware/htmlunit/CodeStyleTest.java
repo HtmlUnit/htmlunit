@@ -873,13 +873,6 @@ public class CodeStyleTest {
                 }
                 break;
 
-            case "IE":
-                if (previousList.contains("IE11")) {
-                    addFailure("IE must be before specifc IE version in "
-                            + relativePath + ", line: " + (lineIndex + 1));
-                }
-                break;
-
             case "FF":
                 if (previousList.contains("FF38") || previousList.contains("FF45")) {
                     addFailure("FF must be before specifc FF version in "
