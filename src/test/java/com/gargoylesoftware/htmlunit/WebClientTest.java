@@ -1967,16 +1967,18 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         assertTrue(client.getCssErrorHandler() instanceof DefaultCssErrorHandler);
 
+        final MutableInt fatals = new MutableInt();
         final MutableInt errors = new MutableInt();
+        final MutableInt warnings = new MutableInt();
         final StringBuilder errorUri = new StringBuilder();
         final ErrorHandler handler = new ErrorHandler() {
             @Override
             public void warning(final CSSParseException exception) throws CSSException {
-                errors.increment();
+                warnings.increment();
             }
             @Override
             public void fatalError(final CSSParseException exception) throws CSSException {
-                errors.increment();
+                fatals.increment();
             }
             @Override
             public void error(final CSSParseException exception) throws CSSException {
@@ -1995,15 +1997,21 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final HtmlPage page1 = client.getPage(URL_FIRST);
         ((HTMLStyleElement) page1.getBody().getFirstChild().getScriptableObject()).getSheet();
+        assertEquals(0, warnings.intValue());
         assertEquals(0, errors.intValue());
+        assertEquals(0, fatals.intValue());
 
         final HtmlPage page2 = client.getPage(URL_SECOND);
         ((HTMLStyleElement) page2.getBody().getFirstChild().getScriptableObject()).getSheet();
+        assertEquals(0, warnings.intValue());
         assertEquals(0, errors.intValue());
+        assertEquals(0, fatals.intValue());
 
         final HtmlPage page3 = client.getPage(URL_THIRD);
         ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptableObject()).getSheet();
+        assertEquals(1, warnings.intValue());
         assertEquals(2, errors.intValue());
+        assertEquals(0, fatals.intValue());
         assertEquals("http://127.0.0.1:" + PORT + "/third/http://127.0.0.1:" + PORT + "/third/", errorUri.toString());
     }
 
