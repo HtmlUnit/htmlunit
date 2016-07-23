@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.23" date="???" description="Bugfixes">
+        <release version="2.23" date="???" description="Bugfixes, hover styles are supported, DefaultJavaScriptErrorListener added">
+            <action type="update" dev="rbri">
+                CSS: cssparser updated to 0.9.20.
+            </action>
             <action type="fix" dev="asashour">
                 HtmlPage: .save() to handle relevant HtmlLink protocols.
             </action>
