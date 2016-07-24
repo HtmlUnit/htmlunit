@@ -71,8 +71,9 @@ public class History implements Serializable {
 
         private void setUrl(final URL url) {
             webRequest_.setUrl(url);
-            if (page_ != null) {
-                page_.clear();
+            final Page page = getPage();
+            if (page != null) {
+                page.getWebResponse().getWebRequest().setUrl(url);
             }
         }
 
@@ -262,6 +263,7 @@ public class History implements Serializable {
             }
             else {
                 window_.setEnclosedPage(page);
+                page.getWebResponse().getWebRequest().setUrl(entry.getUrl());
             }
 
             final Window jsWindow = (Window) window_.getScriptableObject();
