@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.23" date="???" description="Bugfixes, hover styles are supported, DefaultJavaScriptErrorListener added">
+            <action type="fix" dev="rbri" issue="1805">
+                Do not save any history entries if HistorySizeLimit is less than 1.
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.20.
             </action>

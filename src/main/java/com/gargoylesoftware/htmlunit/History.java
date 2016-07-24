@@ -216,6 +216,11 @@ public class History implements Serializable {
      * @return the created history entry
      */
     protected HistoryEntry addPage(final Page page) {
+        final int sizeLimit = window_.getWebClient().getOptions().getHistorySizeLimit();
+        if (sizeLimit <= 0) {
+            return null;
+        }
+
         final Boolean ignoreNewPages = ignoreNewPages_.get();
         if (ignoreNewPages != null && ignoreNewPages.booleanValue()) {
             return null;
@@ -224,7 +229,6 @@ public class History implements Serializable {
         while (entries_.size() > index_) {
             entries_.remove(index_);
         }
-        final int sizeLimit = window_.getWebClient().getOptions().getHistorySizeLimit();
         while (entries_.size() >= sizeLimit) {
             entries_.remove(0);
             index_--;
