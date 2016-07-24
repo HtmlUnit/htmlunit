@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.lang.ref.SoftReference;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,36 +42,33 @@ public class History implements Serializable {
      * The single entry in the history.
      */
     private static final class HistoryEntry implements Serializable {
-        private final Page page_;
-        private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
+        private final SoftReference<Page> page_;
+        private final WebRequest webRequest_;
         private Object state_;
 
         private HistoryEntry(final Page page) {
-            page_ = page;
-            setUrl(page_.getWebResponse().getWebRequest().getUrl());
+            page_ = new SoftReference<>(page);
+
+            final WebRequest request = page.getWebResponse().getWebRequest();
+            webRequest_ = new WebRequest(request.getUrl(), request.getHttpMethod());
+            webRequest_.setRequestParameters(request.getRequestParameters());
         }
 
-        /**
-         * @return the page
-         */
-        private Page getPage() {
+        private SoftReference<Page> getPage() {
             return page_;
         }
 
-        /**
-         * @return the url
-         */
-        private URL getUrl() {
-            return UrlUtils.toUrlSafe(url_);
+        private WebRequest getWebRequest() {
+            return webRequest_;
         }
 
-        /**
-         * Sets the url.
-         * @param url the url to use
-         */
-        public void setUrl(final URL url) {
-            url_ = url.toExternalForm();
-            page_.getWebResponse().getWebRequest().setUrl(url);
+        private URL getUrl() {
+            return webRequest_.getUrl();
+        }
+
+        private void setUrl(final URL url) {
+            webRequest_.setUrl(url);
+            page_.clear();
         }
 
         /**
@@ -154,8 +152,9 @@ public class History implements Serializable {
     /**
      * Goes back one step in the navigation history, if possible.
      * @return this navigation history, after going back one step
+     * @throws IOException in case of error
      */
-    public History back() {
+    public History back() throws IOException {
         if (index_ > 0) {
             index_--;
             goToUrlAtCurrentIndex();
@@ -166,8 +165,9 @@ public class History implements Serializable {
     /**
      * Goes forward one step in the navigation history, if possible.
      * @return this navigation history, after going forward one step
+     * @throws IOException in case of error
      */
-    public History forward() {
+    public History forward() throws IOException {
         if (index_ < entries_.size() - 1) {
             index_++;
             goToUrlAtCurrentIndex();
@@ -180,8 +180,9 @@ public class History implements Serializable {
      * is positive or negative. If the specified index is <tt>0</tt>, this method reloads the current page.
      * @param relativeIndex the index to move to, relative to the current index
      * @return this navigation history, after going forwards or backwards the specified number of steps
+     * @throws IOException in case of error
      */
-    public History go(final int relativeIndex) {
+    public History go(final int relativeIndex) throws IOException {
         final int i = index_ + relativeIndex;
         if (i < entries_.size() && i >= 0) {
             index_ = i;
@@ -243,15 +244,20 @@ public class History implements Serializable {
      * Loads the URL at the current index into the window to which this navigation history belongs.
      * @throws IOException if an IO error occurs
      */
-    private void goToUrlAtCurrentIndex() {
+    private void goToUrlAtCurrentIndex() throws IOException {
         final Boolean old = ignoreNewPages_.get();
         ignoreNewPages_.set(Boolean.TRUE);
         try {
 
             final HistoryEntry entry = entries_.get(index_);
 
-            window_.setEnclosedPage(entry.getPage());
-            entry.getPage().getWebResponse().getWebRequest().setUrl(entry.getUrl());
+            final Page page = entry.getPage().get();
+            if (page == null) {
+                window_.getWebClient().getPage(window_, entry.getWebRequest(), false);
+            }
+            else {
+                window_.setEnclosedPage(page);
+            }
 
             final Window jsWindow = (Window) window_.getScriptableObject();
             if (jsWindow.hasEventHandlers("onpopstate")) {

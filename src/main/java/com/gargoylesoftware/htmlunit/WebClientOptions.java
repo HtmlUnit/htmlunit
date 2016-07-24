@@ -518,6 +518,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the maximum bytes to have in memory, after which the content is saved to a file.
+     * Set this to zero or -1 to deactivate the history at all.
      * @param maxInMemory maximum bytes in memory
      */
     public void setMaxInMemory(final int maxInMemory) {
