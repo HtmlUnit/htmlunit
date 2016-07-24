@@ -54,8 +54,11 @@ public class History implements Serializable {
             webRequest_.setRequestParameters(request.getRequestParameters());
         }
 
-        private SoftReference<Page> getPage() {
-            return page_;
+        private Page getPage() {
+            if (page_ == null) {
+                return null;
+            }
+            return page_.get();
         }
 
         private WebRequest getWebRequest() {
@@ -253,12 +256,7 @@ public class History implements Serializable {
 
             final HistoryEntry entry = entries_.get(index_);
 
-            Page page = null;
-            final SoftReference<Page> ref = entry.getPage();
-            if (ref != null) {
-                page = ref.get();
-            }
-
+            final Page page = entry.getPage();
             if (page == null) {
                 window_.getWebClient().getPage(window_, entry.getWebRequest(), false);
             }
