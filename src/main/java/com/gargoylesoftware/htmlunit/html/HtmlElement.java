@@ -587,7 +587,6 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param keyCode the key code to simulate typing
      * @return the page that occupies this window after typing
-     * @exception IOException if an IO error occurs
      */
     public Page type(final int keyCode) {
         return type(keyCode, false, true, true, true);

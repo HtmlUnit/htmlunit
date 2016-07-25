@@ -689,7 +689,6 @@ public class HttpWebConnection implements WebConnection {
      * @param is the stream to read
      * @param maxInMemory the maximumBytes to store in memory, after which save to a local file
      * @return a wrapper around the downloaded content
-     * @throws IOException in case of read issues
      */
     public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) {
         if (is == null) {
