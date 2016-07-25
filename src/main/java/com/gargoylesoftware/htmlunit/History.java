@@ -70,10 +70,12 @@ public class History implements Serializable {
         }
 
         private void setUrl(final URL url) {
-            webRequest_.setUrl(url);
-            final Page page = getPage();
-            if (page != null) {
-                page.getWebResponse().getWebRequest().setUrl(url);
+            if (url != null) {
+                webRequest_.setUrl(url);
+                final Page page = getPage();
+                if (page != null) {
+                    page.getWebResponse().getWebRequest().setUrl(url);
+                }
             }
         }
 
@@ -88,7 +90,7 @@ public class History implements Serializable {
          * Sets the state object.
          * @param state the state object to use
          */
-        public void setState(final Object state) {
+        private void setState(final Object state) {
             state_ = state;
         }
     }
@@ -223,15 +225,18 @@ public class History implements Serializable {
      * @return the created history entry
      */
     protected HistoryEntry addPage(final Page page) {
-        final int sizeLimit = window_.getWebClient().getOptions().getHistorySizeLimit();
-        if (sizeLimit <= 0) {
-            return null;
-        }
-
         final Boolean ignoreNewPages = ignoreNewPages_.get();
         if (ignoreNewPages != null && ignoreNewPages.booleanValue()) {
             return null;
         }
+
+        final int sizeLimit = window_.getWebClient().getOptions().getHistorySizeLimit();
+        if (sizeLimit <= 0) {
+            entries_.clear();
+            index_ = -1;
+            return null;
+        }
+
         index_++;
         while (entries_.size() > index_) {
             entries_.remove(index_);
@@ -284,11 +289,10 @@ public class History implements Serializable {
      * @param url the new url to use
      */
     public void replaceState(final Object state, final URL url) {
-        final HistoryEntry entry = entries_.get(index_);
-        entry.setState(state);
-
-        if (url != null) {
+        if (index_ >= 0 && index_ < entries_.size()) {
+            final HistoryEntry entry = entries_.get(index_);
             entry.setUrl(url);
+            entry.setState(state);
         }
     }
 
@@ -302,9 +306,10 @@ public class History implements Serializable {
         final Page page = window_.getEnclosedPage();
         final HistoryEntry entry = addPage(page);
 
-        entry.setUrl(url);
-
-        entry.setState(state);
+        if (entry != null) {
+            entry.setUrl(url);
+            entry.setState(state);
+        }
     }
 
     /**

@@ -375,8 +375,8 @@ public class History2Test extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body onpopstate='popMe(event)' onload='setWindowName()' onbeforeunload='setWindowName()' "
                                                         + "onunload='setWindowName()'>\n"
-                + "  <button id=myId onclick='test()'>Click me</button>\n"
-                + "  <button id=myId2 onclick='test2()'>Click me</button>\n"
+                + "  <button id='myId' onclick='test()'>Click me</button>\n"
+                + "  <button id='myId2' onclick='test2()'>Click me</button>\n"
                 + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
