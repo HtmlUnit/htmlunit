@@ -1052,7 +1052,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
             // Width not explicitly set.
             final String cssFloat = getCssFloat();
-            if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
+            if ("right".equals(cssFloat) || "left".equals(cssFloat)
+                    || "absolute".equals(getStyleAttribute(POSITION, true))) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = node.getTextContent().length() * PIXELS_PER_CHAR;
             }

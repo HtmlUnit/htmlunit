@@ -2878,6 +2878,57 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"true", "true", "true", "true", "true"})
+    public void clientWidthAndHeightPositionAbsolute() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    var absDiv = document.getElementById('myAbsDiv');\n"
+
+            // + "    alert(div.clientWidth +', ' + absDiv.clientWidth);\n"
+            + "    alert(div.clientWidth > 100);\n"
+            + "    alert(absDiv.clientWidth > 10);\n"
+            + "    alert(absDiv.clientWidth < 100);\n"
+
+            // + "    alert(div.clientHeight +', ' + absDiv.clientHeight);\n"
+            + "    alert(div.clientHeight > 10);\n"
+            + "    alert(div.clientHeight == absDiv.clientHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>Test</div>\n"
+            + "  <div id='myAbsDiv' style='position: absolute'>Test</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void clientWidthAndHeightPositionAbsoluteEmpty() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var absDiv = document.getElementById('myAbsDiv');\n"
+            + "    alert(absDiv.clientWidth);\n"
+            + "    alert(absDiv.clientHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myAbsDiv' style='position: absolute'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"true", "true", "false", "true", "true", "true", "true", "true", "true", "true"})
     public void scrollWidthAndHeight() throws Exception {
         final String html =
