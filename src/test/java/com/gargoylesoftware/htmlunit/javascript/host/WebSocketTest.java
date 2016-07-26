@@ -199,9 +199,22 @@ public class WebSocketTest extends WebDriverTestCase {
     @Override
     public void releaseResources() {
         super.releaseResources();
-        for (final Thread thread : Thread.getAllStackTraces().keySet()) {
-            assertFalse("WebSocket threads still running", thread.getName().contains("WebSocket"));
+
+        String lastFailing = null;
+        for (final java.util.Map.Entry<Thread, StackTraceElement[]> entry : Thread.getAllStackTraces().entrySet()) {
+            final Thread thread = entry.getKey();
+            if (thread.getName().contains("WebSocket")) {
+                lastFailing = thread.getName();
+                System.err.println();
+                System.err.println("WebSocket thread named '" + lastFailing + "' still running");
+                final StackTraceElement[] traces = entry.getValue();
+                for (int i = 0; i < traces.length; i++) {
+                    System.err.println(traces[i]);
+                }
+            }
         }
+
+        assertNull("WebSocket thread named '" + lastFailing + "' still running", lastFailing);
     }
 
     /**
