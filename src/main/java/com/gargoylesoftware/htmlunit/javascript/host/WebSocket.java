@@ -30,6 +30,7 @@ import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -108,13 +109,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             setParentScope(window);
             setDomNode(containingPage_.getBody(), false);
 
-            if (containingPage_.getWebClient().getOptions().isUseInsecureSSL()) {
+            final WebClient webClient = window.getWebWindow().getWebClient();
+            if (webClient.getOptions().isUseInsecureSSL()) {
                 client_ = new WebSocketClient(new SslContextFactory(true));
             }
             else {
                 client_ = new WebSocketClient();
             }
-            client_.setCookieStore(new WebSocketCookieStore(window.getWebWindow().getWebClient()));
+            client_.setCookieStore(new WebSocketCookieStore(webClient));
             client_.start();
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);
