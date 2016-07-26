@@ -200,6 +200,19 @@ public class WebSocketTest extends WebDriverTestCase {
     public void releaseResources() {
         super.releaseResources();
 
+        for (final Thread thread : Thread.getAllStackTraces().keySet()) {
+            if (thread.getName().contains("WebSocket")) {
+                try {
+                    // ok found one but let's wait a bit an start a second check before
+                    // pressing the panic button
+                    Thread.sleep(400);
+                }
+                catch (final InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         String lastFailing = null;
         for (final java.util.Map.Entry<Thread, StackTraceElement[]> entry : Thread.getAllStackTraces().entrySet()) {
             final Thread thread = entry.getKey();
