@@ -130,7 +130,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 /**
  * An object for a CSSStyleDeclaration, which is computed.
  *
- * @see com.gargoylesoftware.htmlunit.javascript.host.Window#getComputedStyle(Element, String)
+ * @see com.gargoylesoftware.htmlunit.javascript.host.Window#getComputedStyle(Object, String)
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
