@@ -12,9 +12,12 @@
 
     <!-- Checks that a package.html file exists for each package.     -->
     <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
+
+    <!-- there seems to be conflict between JavaDoc and checkstyle, for further investigations  
     <module name="JavadocPackage">
         <property name="allowLegacy" value="true"/>
     </module>
+    -->
 
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
