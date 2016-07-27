@@ -44,13 +44,13 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
-import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 
 /**
- * The runner for test methods that run with a specific browser ({@link BrowserRunner#Browser}).
+ * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser}).
  *
  * @author Ahmed Ashour
  * @author Frank Danek

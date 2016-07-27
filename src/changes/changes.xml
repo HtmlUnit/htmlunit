@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.23" date="???" description="Bugfixes, hover styles are supported, various layout calculation improvements, DefaultJavaScriptErrorListener added">
+        <release version="2.23" date="July 27, 2016" description="Bugfixes, hover styles are supported, various layout calculation improvements, DefaultJavaScriptErrorListener added">
             <action type="fix" dev="rbri" issue="1669">
                 ClientWidth is not correctly calculated for div with 'position: absolute'.
             </action>
