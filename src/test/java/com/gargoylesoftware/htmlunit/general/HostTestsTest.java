@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
  * Tests the general host tests have all JavaScript objects names defined in all the other tests.
  *
  * This classes parses all the test code, searching for [object some_name], and ensures that
- * {@link HostClassNameTest}, {@link HostClassNameStandardsTest} and {@link HostTypeOfTest} include those objects.
+ * {@link HostClassNameTest} and {@link HostTypeOfTest} include those objects.
  *
  * @author Ahmed Ashour
  */

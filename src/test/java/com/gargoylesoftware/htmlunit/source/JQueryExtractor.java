@@ -54,8 +54,8 @@ import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
  * <ol>
  *   <li>Call {@link #extractExpectations(File, File)}, where <tt>input</tt> is the raw file from the browser</li>
  *   <li>Have a quick look on the output files, and compare them to verify there are only minimal differences</li>
- *   <li>Rename all outputs to browser names e.g. "results.IE8.txt", "results.FF38.txt" etc</li>
- *   <li>Put all outputs in one folder and call {@link #generateTestCases(File)}</li>
+ *   <li>Rename all outputs to browser names e.g. {@code results.IE.txt}, {@code results.FF45.txt}, etc</li>
+ *   <li>Put all outputs in one folder and call {@link #generateTestCases(Class, File)}</li>
  * </ol>
  *
  * @author Ahmed Ashour

@@ -208,7 +208,7 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #testUseProxy()}.
+     * Servlet for {@link #useProxy()}.
      */
     public static class UseProxyHeaderServlet extends HttpServlet {
         /**
@@ -242,7 +242,7 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
-     * First servlet for {@link #testNoContent()}.
+     * First servlet for {@link #noContent()}.
      */
     public static class NoContentServlet1 extends HttpServlet {
         /**
@@ -259,7 +259,7 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
-     * Second servlet for {@link #testNoContent()}.
+     * Second servlet for {@link #noContent()}.
      */
     public static class NoContentServlet2 extends HttpServlet {
         /**
@@ -290,7 +290,7 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #testNotModified()}.
+     * Servlet for {@link #notModified()}.
      */
     public static class NotModifiedServlet extends HttpServlet {
         private boolean first_ = true;
@@ -337,7 +337,7 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #testTimeout()}.
+     * Servlet for {@link #timeout()}.
      */
     public static class DelayDeliverServlet extends HttpServlet {
         /**

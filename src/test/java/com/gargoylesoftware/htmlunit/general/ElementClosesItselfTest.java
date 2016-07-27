@@ -22,7 +22,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Unit tests for an element to close itself, which is defined in {@link org.cyberneko.html.HTMLElements}.
+ * Unit tests for an element to close itself, which is defined in
+ * {@link net.sourceforge.htmlunit.cyberneko.HTMLElements}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

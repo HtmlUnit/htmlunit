@@ -155,7 +155,6 @@ public class BrowserRunner extends Suite {
 
     /**
      * Browser.
-     * @see Browsers
      */
     public enum Browser {
         /** Latest version of Chrome. */

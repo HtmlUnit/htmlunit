@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link IEConditionalCommentExpressionEvaluator}.
+ * Tests for HtmlUnit's support of IE conditional comments.
  * Due to current implementation, conditional comment expressions get evaluated only when the simulated browser is IE.
  *
  * @author Marc Guillemot

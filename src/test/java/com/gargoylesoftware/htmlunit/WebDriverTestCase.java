@@ -269,7 +269,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Closes the real browser drivers.
-     * @see #shutDownRealBrowsersAfterTest()
      */
     private static void shutDownRealBrowsers() {
         for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {

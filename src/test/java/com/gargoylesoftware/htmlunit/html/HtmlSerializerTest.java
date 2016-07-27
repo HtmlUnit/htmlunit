@@ -31,7 +31,7 @@ import org.junit.Test;
 public class HtmlSerializerTest {
 
     /**
-     * Test {@link HtmlSerializer#cleanup(String)}.
+     * Test {@link HtmlSerializer#cleanUp(String)}.
      */
     @Test
     public void cleanUp() {
@@ -84,7 +84,7 @@ public class HtmlSerializerTest {
     }
 
     /**
-     * Test {@link HtmlSerializer#cleanup(String)}.
+     * Test {@link HtmlSerializer#cleanUp(String)}.
      */
     @Test
     public void cleanUpPerformanceWhitespace() {
@@ -105,7 +105,7 @@ public class HtmlSerializerTest {
     }
 
     /**
-     * Test {@link HtmlSerializer#cleanup(String)}.
+     * Test {@link HtmlSerializer#cleanUp(String)}.
      */
     @Test
     public void cleanUpPerformanceManyReplaces() {

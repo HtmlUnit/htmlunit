@@ -30,7 +30,7 @@ public class ErrorOutputCheckerTest extends WebTestCase {
     // no need to specify Rule here as it is specified in {@link WebTestCase}
 
     /**
-     * Test expected to fail because it produces output on {@link System.err}.
+     * Test expected to fail because it produces output on {@link System#err}.
      */
     @Test
     @NotYetImplemented // in fact it IS implemented, but this allows to test that the test fails due to the output

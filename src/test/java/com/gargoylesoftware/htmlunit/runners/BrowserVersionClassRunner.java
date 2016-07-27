@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser}).
+ * The runner for test methods that run with a specific browser ({@link BrowserRunner#Browser}).
  *
  * @author Ahmed Ashour
  * @author Frank Danek

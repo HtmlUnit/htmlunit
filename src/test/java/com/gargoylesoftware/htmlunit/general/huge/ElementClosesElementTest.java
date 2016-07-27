@@ -38,7 +38,8 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for an element to close another element, which is defined in {@link org.cyberneko.html.HTMLElements}.
+ * Tests for an element to close another element, which is defined in
+ * {@link net.sourceforge.htmlunit.cyberneko.HTMLElements}.
  *
  * @author Ahmed Ashour
  */

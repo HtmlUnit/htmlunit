@@ -27,6 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * Utility to handle conversion from HTML code to string.
  * TODO: simplify it (it is just copied from what was available in DomNode and subclasses).
+ *
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
