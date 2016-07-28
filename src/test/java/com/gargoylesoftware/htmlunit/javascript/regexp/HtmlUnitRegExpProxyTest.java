@@ -70,6 +70,123 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         + "assertArrEquals(s.match(re), [s, 'var a = 1;', ';']);\n";
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ab21")
+    public void replaceNormalStringReplace() throws Exception {
+        testEvaluate("'121'.replace('1', 'ab')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xyz121")
+    public void replaceNormalStringEmptySearch() throws Exception {
+        testEvaluate("'121'.replace('', 'xyz')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void replaceNormalStringEmptyReplace() throws Exception {
+        testEvaluate("'121'.replace('21', '')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xyz")
+    public void replaceNormalStringEmptyStringEmptySearch() throws Exception {
+        testEvaluate("''.replace('', 'xyz')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a$c21")
+    public void replaceNormalStringReplaceSingleDollar() throws Exception {
+        testEvaluate("'121'.replace('1', 'a$c')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a$c21")
+    public void replaceNormalStringReplaceDoubleDollar() throws Exception {
+        testEvaluate("'121'.replace('1', 'a$$c')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a121")
+    public void replaceNormalStringReplaceSubstring() throws Exception {
+        testEvaluate("'121'.replace('1', 'a$&')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abaabe")
+    public void replaceNormalStringReplacePreceeding() throws Exception {
+        testEvaluate("'abcde'.replace('cd', 'a$`')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a21")
+    public void replaceNormalStringReplacePreceedingEmpty() throws Exception {
+        testEvaluate("'121'.replace('1', 'a$`')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abaee")
+    public void replaceNormalStringReplaceFollowing() throws Exception {
+        testEvaluate("'abcde'.replace('cd', \"a$'\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("aba")
+    public void replaceNormalStringReplaceFollowingEmpty() throws Exception {
+        testEvaluate("'abcd'.replace('cd', \"a$'\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("aba$0")
+    public void replaceNormalStringReplaceGroupZero() throws Exception {
+        testEvaluate("'abcd'.replace('cd', 'a$0')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("aba$1")
+    public void replaceNormalStringReplaceGroupOne() throws Exception {
+        testEvaluate("'abcd'.replace('cd', 'a$1')");
+    }
+
+    /**
      * Test for bug http://sourceforge.net/p/htmlunit/bugs/513/.
      * @throws Exception if the test fails
      */

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Support the special replacement patterns for the replacement string if replace was called for a string like 'abcd'.replace('cd', 'x$&amp;').
+            </action>
         </release>
         <release version="2.23" date="July 27, 2016" description="Bugfixes, hover styles are supported, various layout calculation improvements, DefaultJavaScriptErrorListener added">
             <action type="fix" dev="rbri" issue="1669">

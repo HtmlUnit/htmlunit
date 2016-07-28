@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REGEXP_GRO
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -50,7 +51,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private static final Log LOG = LogFactory.getLog(HtmlUnitRegExpProxy.class);
 
-    private static final Pattern REPLACE_PATTERN = Pattern.compile("\\$\\$");
     private final RegExpProxy wrapped_;
     private final BrowserVersion browserVersion_;
 
@@ -87,14 +87,14 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         // in a first time just improve replacement with a String (not a function)
         if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
-            String replacement = (String) args[1];
+            final String replacement = (String) args[1];
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
-                replacement = REPLACE_PATTERN.matcher(replacement).replaceAll("\\$");
                 // arg0 should *not* be interpreted as a RegExp
-                return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
+                return doStringReplacement(thisString, (String) arg0, replacement);
             }
-            else if (arg0 instanceof NativeRegExp) {
+
+            if (arg0 instanceof NativeRegExp) {
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
                     final RegExpData reData = new RegExpData(regexp);
@@ -170,6 +170,29 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         return wrappedAction(cx, scope, thisObj, args, actionType);
     }
 
+    private String doStringReplacement(final String originalString,
+                        final String searchString, final String replacement) {
+        if (originalString == null) {
+            return "";
+        }
+
+        final StaticStringMatcher matcher = new StaticStringMatcher(originalString, searchString);
+        if (matcher.start() > -1) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(originalString.substring(0, matcher.start_));
+
+            String localReplacement = replacement;
+            if (replacement.contains("$")) {
+                localReplacement = computeReplacementValue(localReplacement, originalString, matcher, false);
+            }
+
+            sb.append(localReplacement);
+            sb.append(originalString.substring(matcher.end_));
+            return sb.toString();
+        }
+        return originalString;
+    }
+
     private String doReplacement(final String originalString, final String replacement, final Matcher matcher,
         final boolean replaceAll) {
 
@@ -179,7 +202,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             sb.append(originalString, previousIndex, matcher.start());
             String localReplacement = replacement;
             if (replacement.contains("$")) {
-                localReplacement = computeReplacementValue(replacement, originalString, matcher);
+                localReplacement = computeReplacementValue(replacement, originalString, matcher,
+                        browserVersion_.hasFeature(JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH));
             }
             sb.append(localReplacement);
             previousIndex = matcher.end();
@@ -193,8 +217,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         return sb.toString();
     }
 
-    String computeReplacementValue(final String replacement,
-            final String originalString, final Matcher matcher) {
+    String computeReplacementValue(final String replacement, final String originalString,
+            final MatchResult matcher, final boolean group0ReturnsWholeMatch) {
 
         int lastIndex = 0;
         final StringBuilder result = new StringBuilder();
@@ -233,7 +257,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                             ss = matcher.group();
                             break;
                         case '0':
-                            if (browserVersion_.hasFeature(JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH)) {
+                            if (group0ReturnsWholeMatch) {
                                 ss = matcher.group();
                             }
                             break;
@@ -433,4 +457,58 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         return regExpJsToJavaFSM.convert(re);
     }
 
+    /**
+     * Simple helper.
+     */
+    private static final class StaticStringMatcher implements MatchResult {
+        private final String group_;
+        private final int start_;
+        private final int end_;
+
+        private StaticStringMatcher(final String originalString, final String searchString) {
+            final int pos = originalString.indexOf(searchString);
+            group_ = searchString;
+            start_ = pos;
+            end_ = pos + searchString.length();
+        }
+
+        @Override
+        public String group() {
+            return group_;
+        }
+
+        @Override
+        public int start() {
+            return start_;
+        }
+
+        @Override
+        public int end() {
+            return end_;
+        }
+
+        @Override
+        public int start(final int group) {
+            // not used so far
+            return 0;
+        }
+
+        @Override
+        public int end(final int group) {
+            // not used so far
+            return 0;
+        }
+
+        @Override
+        public String group(final int group) {
+            // not used so far
+            return null;
+        }
+
+        @Override
+        public int groupCount() {
+            // not used so far
+            return 0;
+        }
+    }
 }

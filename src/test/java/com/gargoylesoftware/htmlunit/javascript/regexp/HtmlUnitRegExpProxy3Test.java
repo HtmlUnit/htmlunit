@@ -44,20 +44,20 @@ public class HtmlUnitRegExpProxy3Test {
         final Matcher matcher1group = Pattern.compile("(h)").matcher("hello");
         matcher1group.find();
 
-        final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null, BrowserVersion.FIREFOX_38);
+        final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null, BrowserVersion.FIREFOX_45);
 
-        assertEquals("$", proxy.computeReplacementValue("$$", theString, matcher0group));
-        assertEquals("$$x$", proxy.computeReplacementValue("$$$$x$$", theString, matcher0group));
+        assertEquals("$", proxy.computeReplacementValue("$$", theString, matcher0group, false));
+        assertEquals("$$x$", proxy.computeReplacementValue("$$$$x$$", theString, matcher0group, false));
 
-        assertEquals("$1", proxy.computeReplacementValue("$1", theString, matcher0group));
-        assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher0group));
-        assertEquals("h", proxy.computeReplacementValue("$1", theString, matcher1group));
-        assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher1group));
+        assertEquals("$1", proxy.computeReplacementValue("$1", theString, matcher0group, false));
+        assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher0group, false));
+        assertEquals("h", proxy.computeReplacementValue("$1", theString, matcher1group, false));
+        assertEquals("$2", proxy.computeReplacementValue("$2", theString, matcher1group, false));
 
-        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher0group));
-        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group));
-        assertEquals("\\\\$", proxy.computeReplacementValue("\\\\$", theString, matcher1group));
-        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group));
+        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher0group, false));
+        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group, false));
+        assertEquals("\\\\$", proxy.computeReplacementValue("\\\\$", theString, matcher1group, false));
+        assertEquals("$", proxy.computeReplacementValue("$", theString, matcher1group, false));
     }
 
     /**
