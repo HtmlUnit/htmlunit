@@ -131,7 +131,7 @@ public class HttpWebConnection implements WebConnection {
 
     private static final String HACKED_COOKIE_POLICY = "mine";
 
-    // have one per thread because this is (re)configured for every call (see configureHttpProcessor)
+    // have one per thread because this is (re)configured for every call (see configureHttpProcessorBuilder)
     private ThreadLocal<HttpClientBuilder> httpClientBuilder_ = new ThreadLocal<>();
     private final WebClient webClient_;
 
@@ -934,8 +934,6 @@ public class HttpWebConnection implements WebConnection {
      * but with the ability to configure {@code socketFactory}.
      */
     private static PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
-        final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
-
         try {
             PublicSuffixMatcher publicSuffixMatcher = getField(builder, "publicSuffixMatcher");
             if (publicSuffixMatcher == null) {
@@ -987,7 +985,7 @@ public class HttpWebConnection implements WebConnection {
 
             final PoolingHttpClientConnectionManager poolingmgr = new PoolingHttpClientConnectionManager(
                     RegistryBuilder.<ConnectionSocketFactory>create()
-                        .register("http", socketFactory)
+                        .register("http", new SocksConnectionSocketFactory())
                         .register("https", sslSocketFactory)
                         .build(),
                         null,
