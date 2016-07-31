@@ -611,6 +611,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
 
+    /** ClientWidth for text/password input is 143. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_CLIENTWIDTH_INPUT_TEXT_143,
+
+    /** ClientWidth for text/password input is 169. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_CLIENTWIDTH_INPUT_TEXT_169,
+
     /** Supports {@code CSSCharsetRule}. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 38))
     JS_CSSRULELIST_CHARSET_RULE,

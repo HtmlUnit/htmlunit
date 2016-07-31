@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_169;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.AZIMUTH;
@@ -1080,7 +1082,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = 10 + (int) (text.length() * PIXELS_PER_CHAR * 0.9);
             }
             else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
-                width = 140; // wild guess
+                final BrowserVersion browserVersion = getBrowserVersion();
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_143)) {
+                    return 143;
+                }
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_169)) {
+                    return 169;
+                }
+                width = 141; // FF45
             }
             else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
                 width = 13;

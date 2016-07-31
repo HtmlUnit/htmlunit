@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -1696,11 +1697,11 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "169",
+    @Alerts(CHROME = "169",
             FF45 = "141",
             FF38 = "140",
             IE = "143")
-    @NotYetImplemented({CHROME, FF45, IE})
+    @NotYetImplemented(FF38)
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
     }
@@ -1763,11 +1764,11 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "169",
+    @Alerts(CHROME = "169",
             FF45 = "141",
             FF38 = "140",
             IE = "145")
-    @NotYetImplemented({CHROME, FF45, IE})
+    @NotYetImplemented({FF38, IE})
     public void inputPassword() throws Exception {
         loadPageWithAlerts2(testInput("password"));
     }
@@ -1804,11 +1805,11 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "171",
+    @Alerts(CHROME = "171",
             FF45 = "141",
             FF38 = "140",
             IE = "143")
-    @NotYetImplemented({CHROME, FF45, IE})
+    @NotYetImplemented({CHROME, FF38})
     public void inputSelect() throws Exception {
         loadPageWithAlerts2(testInput("select"));
     }
@@ -1838,7 +1839,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF45 = "141",
             FF38 = "140",
             IE = "143")
-    @NotYetImplemented({CHROME, FF45, IE})
+    @NotYetImplemented(FF38)
     public void inputText() throws Exception {
         loadPageWithAlerts2(testInput("text"));
     }
