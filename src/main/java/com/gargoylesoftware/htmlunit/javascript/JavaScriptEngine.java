@@ -233,13 +233,6 @@ public class JavaScriptEngine {
         window.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
         intl.defineProperties(browserVersion);
 
-        if (browserVersion.hasFeature(JS_REFLECT)) {
-            final Reflect reflect = new Reflect();
-            reflect.setParentScope(window);
-            window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
-            reflect.defineProperties();
-        }
-
         // put custom object to be called as very last prototype to call the fallback getter (if any)
         final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
@@ -441,6 +434,13 @@ public class JavaScriptEngine {
                 final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
                 functionObject.addAsConstructor(window, prototype);
             }
+        }
+
+        if (browserVersion.hasFeature(JS_REFLECT)) {
+            final Reflect reflect = new Reflect();
+            reflect.setParentScope(window);
+            window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
+            reflect.defineProperties();
         }
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
