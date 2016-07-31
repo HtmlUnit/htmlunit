@@ -20,12 +20,17 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code Reflect}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(EDGE)})
 public class Reflect extends SimpleScriptable {
@@ -37,4 +42,15 @@ public class Reflect extends SimpleScriptable {
         setClassName("Object");
     }
 
+    /**
+     * The static Reflect.has() method works like the in operator as a function.
+     *
+     * @param target The target object in which to look for the property.
+     * @param propertyKey The name of the property to check.
+     * @return true or false
+     */
+    @JsxStaticFunction
+    public boolean has(final Scriptable target, final String propertyKey) {
+        return ScriptableObject.hasProperty(target, propertyKey);
+    }
 }

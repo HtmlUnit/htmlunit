@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: Reflect.has() implemented.
+            </action>
             <action type="fix" dev="rbri">
                 Support the special replacement patterns for the replacement string if replace was called for a string like 'abcd'.replace('cd', 'x$&amp;').
             </action>
