@@ -603,6 +603,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CLEAR_RESTRICT,
 
+    /** ClientHeight for input is 17. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_CLIENTHIGHT_INPUT_17,
+
     /** ClientRectList toString reports the first item. */
     @BrowserFeature(@WebBrowser(FF))
     JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST,

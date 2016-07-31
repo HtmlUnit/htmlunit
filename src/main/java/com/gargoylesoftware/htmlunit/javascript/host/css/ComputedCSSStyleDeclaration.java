@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_169;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -1253,9 +1254,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
                 defaultHeight = 13;
             }
-            else if (node instanceof HtmlButton
-                    || (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput))) {
+            else if (node instanceof HtmlButton) {
                 defaultHeight = 20;
+            }
+            else if (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput)) {
+                if (getBrowserVersion().hasFeature(JS_CLIENTHIGHT_INPUT_17)) {
+                    defaultHeight = 17;
+                }
+                else {
+                    defaultHeight = 21;
+                }
             }
             else if (node instanceof HtmlSelect) {
                 defaultHeight = 20;
