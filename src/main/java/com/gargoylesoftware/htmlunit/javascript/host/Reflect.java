@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -40,6 +42,22 @@ public class Reflect extends SimpleScriptable {
      */
     public void defineProperties() {
         setClassName("Object");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setParentScope(final Scriptable scope) {
+        super.setParentScope(scope);
+        try {
+            final FunctionObject functionObject = new FunctionObject("has",
+                    getClass().getDeclaredMethod("has", Scriptable.class, String.class), scope);
+            defineProperty("has", functionObject, ScriptableObject.DONTENUM);
+        }
+        catch (final Exception e) {
+            Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
