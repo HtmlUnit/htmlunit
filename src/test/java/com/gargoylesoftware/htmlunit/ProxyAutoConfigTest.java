@@ -124,7 +124,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
      */
     @Test
     public void isInNet() {
-        final boolean isInNet = ProxyAutoConfig.isInNet("www.1234abcd.abc", "", "");
+        final boolean isInNet = ProxyAutoConfig.isInNet("www.1234abcd.abc", "172.16.0.0", "255.240.0.0");
         assertFalse(isInNet);
     }
 }
