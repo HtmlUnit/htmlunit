@@ -198,7 +198,7 @@ public class ExternalTest {
         return groupId.startsWith("org.eclipse.jetty") && version.startsWith("9.3.")
                 || "com.puppycrawl.tools".equals(groupId)
                         && "checkstyle".equals(artifactId)
-                        && version.startsWith("7.0");
+                        && version.startsWith("7.");
     }
 
     private static String getValue(final String line) {
