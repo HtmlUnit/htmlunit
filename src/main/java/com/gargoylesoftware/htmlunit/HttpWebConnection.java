@@ -137,7 +137,8 @@ public class HttpWebConnection implements WebConnection {
     private static final String HACKED_COOKIE_POLICY = "mine";
 
     // have one per thread because this is (re)configured for every call (see configureHttpProcessorBuilder)
-    private ThreadLocal<HttpClientBuilder> httpClientBuilder_ = new ThreadLocal<>();
+    // do not use a ThreadLocal because this in only accessed form this class
+    private static final Map<Thread, HttpClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
     private final WebClient webClient_;
 
     private String virtualHost_;
@@ -206,7 +207,7 @@ public class HttpWebConnection implements WebConnection {
                 // Calling code may catch the StackOverflowError, but due to the leak, the httpClient_ may
                 // come out of connections and throw a ConnectionPoolTimeoutException.
                 // => best solution, discard the HttpClient instance.
-                httpClientBuilder_.set(null);
+                httpClientBuilder_.remove(Thread.currentThread());
                 throw e;
             }
 
@@ -522,7 +523,7 @@ public class HttpWebConnection implements WebConnection {
      * @return the initialized HTTP client
      */
     protected HttpClientBuilder getHttpClientBuilder() {
-        HttpClientBuilder builder = httpClientBuilder_.get();
+        HttpClientBuilder builder = httpClientBuilder_.get(Thread.currentThread());
         if (builder == null) {
             builder = createHttpClient();
 
@@ -534,7 +535,7 @@ public class HttpWebConnection implements WebConnection {
             builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
 
             builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
-            httpClientBuilder_.set(builder);
+            httpClientBuilder_.put(Thread.currentThread(), builder);
         }
 
         return builder;
@@ -975,8 +976,9 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public void close() {
-        if (httpClientBuilder_.get() != null) {
-            httpClientBuilder_.set(null);
+        final Thread current = Thread.currentThread();
+        if (httpClientBuilder_.get(current) != null) {
+            httpClientBuilder_.remove(current);
         }
         if (connectionManager_ != null) {
             connectionManager_.shutdown();
