@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -53,8 +54,10 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScheme;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
+import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
@@ -92,6 +95,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
@@ -124,6 +128,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author John J Murdoch
  * @author Carsten Steul
+ * @author Hartmut Arlt
  */
 public class HttpWebConnection implements WebConnection {
 
@@ -135,12 +140,16 @@ public class HttpWebConnection implements WebConnection {
     private ThreadLocal<HttpClientBuilder> httpClientBuilder_ = new ThreadLocal<>();
     private final WebClient webClient_;
 
-    /** Use single HttpContext, so there is no need to re-send authentication for each and every request. */
-    private final HttpContext httpContext_;
     private String virtualHost_;
     private final CookieSpecProvider htmlUnitCookieSpecProvider_;
     private final WebClientOptions usedOptions_;
     private PoolingHttpClientConnectionManager connectionManager_;
+
+    /** Authentication cache shared among all threads of a web client. */
+    private final AuthCache sharedAuthCache_ = new SynchronizedAuthCache();
+
+    /** Maintains a separate {@link HttpClientContext} object per HttpWebConnection and thread. */
+    private final Map<Thread, HttpClientContext> httpClientContextByThread_ = new WeakHashMap<>();
 
     /**
      * Creates a new HTTP web connection instance.
@@ -149,7 +158,6 @@ public class HttpWebConnection implements WebConnection {
     public HttpWebConnection(final WebClient webClient) {
         webClient_ = webClient;
         htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient.getBrowserVersion());
-        httpContext_ = new HttpClientContext();
         usedOptions_ = new WebClientOptions();
     }
 
@@ -160,6 +168,7 @@ public class HttpWebConnection implements WebConnection {
     public WebResponse getResponse(final WebRequest request) throws IOException {
         final URL url = request.getUrl();
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());
+        final HttpContext httpContext = getHttpContext();
 
         if (connectionManager_ == null) {
             connectionManager_ = createConnectionManager(builder);
@@ -180,13 +189,13 @@ public class HttpWebConnection implements WebConnection {
 
             HttpResponse httpResponse = null;
             try {
-                httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext_);
+                httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
             }
             catch (final SSLPeerUnverifiedException s) {
                 // Try to use only SSLv3 instead
                 if (webClient_.getOptions().isUseInsecureSSL()) {
-                    HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext_, true);
-                    httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext_);
+                    HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
+                    httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
                 }
                 else {
                     throw s;
@@ -230,13 +239,29 @@ public class HttpWebConnection implements WebConnection {
         return new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
     }
 
+    /**
+     * Returns the {@link HttpClientContext} for the current thread. Creates a new one if necessary.
+     */
+    private synchronized HttpContext getHttpContext() {
+        HttpClientContext httpClientContext = httpClientContextByThread_.get(Thread.currentThread());
+        if (httpClientContext == null) {
+            httpClientContext = new HttpClientContext();
+
+            // set the shared authentication cache
+            httpClientContext.setAttribute(HttpClientContext.AUTH_CACHE, sharedAuthCache_);
+
+            httpClientContextByThread_.put(Thread.currentThread(), httpClientContext);
+        }
+        return httpClientContext;
+    }
+
     private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
         final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout());
 
         if (webRequest.getProxyHost() != null) {
             final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
             if (webRequest.isSocksProxy()) {
-                SocksConnectionSocketFactory.setSocksProxy(httpContext_, proxy);
+                SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
             }
             else {
                 requestBuilder.setProxy(proxy);
@@ -262,7 +287,7 @@ public class HttpWebConnection implements WebConnection {
         throws URISyntaxException {
 
         final String charset = webRequest.getCharset();
-
+        final HttpContext httpContext = getHttpContext();
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
@@ -346,7 +371,6 @@ public class HttpWebConnection implements WebConnection {
             final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
             // updating our client to keep the credentials for the next request
             credentialsProvider.setCredentials(authScope, requestUrlCredentials);
-            httpContext_.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
         }
 
         // if someone has set credentials to this request, we have to add this
@@ -356,10 +380,10 @@ public class HttpWebConnection implements WebConnection {
             final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
             // updating our client to keep the credentials for the next request
             credentialsProvider.setCredentials(authScope, requestCredentials);
-            httpContext_.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
         }
         httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-        httpContext_.removeAttribute(HttpClientContext.CREDS_PROVIDER);
+        httpContext.removeAttribute(HttpClientContext.CREDS_PROVIDER);
+        httpContext.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
 
         return httpMethod;
     }
@@ -549,7 +573,7 @@ public class HttpWebConnection implements WebConnection {
 
         builder.setDefaultSocketConfig(createSocketConfigBuilder(timeout).build());
 
-        httpContext_.removeAttribute(HttpClientContext.REQUEST_CONFIG);
+        getHttpContext().removeAttribute(HttpClientContext.REQUEST_CONFIG);
         usedOptions_.setTimeout(timeout);
     }
 
@@ -912,6 +936,37 @@ public class HttpWebConnection implements WebConnection {
             for (final String key : map_.keySet()) {
                 request.setHeader(key, map_.get(key));
             }
+        }
+    }
+
+    /**
+     * An authentication cache that is synchronized.
+     */
+    private static final class SynchronizedAuthCache extends BasicAuthCache {
+
+        @Override
+        public synchronized void put(final HttpHost host, final AuthScheme authScheme) {
+            super.put(host, authScheme);
+        }
+
+        @Override
+        public synchronized AuthScheme get(final HttpHost host) {
+            return super.get(host);
+        }
+
+        @Override
+        public synchronized void remove(final HttpHost host) {
+            super.remove(host);
+        }
+
+        @Override
+        public synchronized void clear() {
+            super.clear();
+        }
+
+        @Override
+        public synchronized String toString() {
+            return super.toString();
         }
     }
 
