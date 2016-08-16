@@ -757,11 +757,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,referrerPolicy,rel,rev,search,shape,target,text,type,"
                 + "username",
+            FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+                    + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
+                    + "username",
             FF38 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,relList,rev,search,searchParams,shape,target,text,type,"
-                + "username",
-            FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
                 + "username",
             IE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
