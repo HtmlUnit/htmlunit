@@ -184,7 +184,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF45
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setVendor("");
-        FIREFOX_45.buildId_ = "20160601155443";
+        FIREFOX_45.buildId_ = "20160725105554";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -327,7 +327,7 @@ public class BrowserVersion implements Serializable, Cloneable {
                 "Shockwave Flash", "swf"));
         FIREFOX_38.getPlugins().add(flash);
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 22.0 r0", "22.0.0.192", "NPSWF32_22_0_0_192.dll");
+                "Shockwave Flash 22.0 r0", "22.0.0.209", "NPSWF32_22_0_0_209.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
