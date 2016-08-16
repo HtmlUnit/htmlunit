@@ -52,6 +52,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"beforeafter", "undefined"},
+            CHROME = {"\nbeforeafter", "undefined", "undefined"},
             FF45 = {"\nbeforeafter", "undefined", "undefined"})
     @NotYetImplemented
     public void htmlTableTextAroundTD() throws Exception {
