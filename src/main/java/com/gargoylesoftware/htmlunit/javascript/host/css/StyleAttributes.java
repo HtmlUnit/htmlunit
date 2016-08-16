@@ -1846,7 +1846,7 @@ public final class StyleAttributes {
         ORIENTATION("orientation", "orientation", chrome("")),
 
         /** The style property {@code orphans}. */
-        ORPHANS("orphans", "orphans", ie("2"), chrome("auto"), ffBelow45("")),
+        ORPHANS("orphans", "orphans", ie("2"), chrome("2"), ffBelow45("")),
 
         /** The style property {@code outline}. */
         OUTLINE("outline", "outline", chrome("rgb(0, 0, 0) none 0px"), ff(""), ie("")),
@@ -2795,7 +2795,7 @@ public final class StyleAttributes {
         WHITE_SPACE_("white-space", "white-space", ff("normal")),
 
         /** The style property {@code widows}. */
-        WIDOWS("widows", "widows", ie("2"), chrome("1"), ffBelow45("")),
+        WIDOWS("widows", "widows", ie("2"), chrome("2"), ffBelow45("")),
 
         /** The style property {@code width}. */
         WIDTH("width", "width", chrome(""), ff(""), ie("")),

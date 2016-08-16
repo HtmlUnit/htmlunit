@@ -2694,7 +2694,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "1", "", "1", "5", "5", "5", "5"},
+    @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
             FF38 = {"", "", "", "", "5", "", "5", ""},
             FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
@@ -2728,7 +2728,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "auto", "", "auto", "5", "5", "5", "5"},
+    @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
             FF38 = {"", "", "", "", "5", "", "5", ""},
             FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
