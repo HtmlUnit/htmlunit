@@ -681,8 +681,11 @@ public final class StyleAttributes {
         /** The style property {@code columns}. */
         COLUMNS("columns", "columns", chrome("auto auto"), ie("")),
 
+        /** The style property {@code contain}. */
+        CONTAIN("contain", "contain", chrome("none")),
+
         /** The style property {@code content}. */
-        CONTENT("content", "content", ie("normal"), chrome("normal"), ff("none")),
+        CONTENT("content", "content", ie("normal"), chrome(""), ff("none")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none"), ff("none"), ie("none")),
@@ -720,6 +723,9 @@ public final class StyleAttributes {
 
         /** The style property {@code cy}. */
         CY("cy", "cy", chrome("0px")),
+
+        /** The style property {@code d}. */
+        D("d", "d", chrome("none")),
 
         /** The style property {@code direction}. */
         DIRECTION("direction", "direction", chrome("ltr"), ff("ltr"), ie("ltr")),
@@ -889,7 +895,7 @@ public final class StyleAttributes {
         FONT_VARIANT_ALTERNATES_("font-variant-alternates", "font-variant-alternates", ff("normal")),
 
         /** The style property {@code fontVariantCaps}. */
-        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff("normal"), chrome("")),
+        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff("normal"), chrome("normal")),
 
         /** The style property {@code font-variant-caps}. */
         FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ff("normal")),
@@ -907,7 +913,7 @@ public final class StyleAttributes {
         FONT_VARIANT_LIGATURES_("font-variant-ligatures", "font-variant-ligatures", ff("normal")),
 
         /** The style property {@code fontVariantNumeric}. */
-        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff("normal"), chrome("")),
+        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff("normal"), chrome("normal")),
 
         /** The style property {@code font-variant-numeric}. */
         FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ff("normal")),
