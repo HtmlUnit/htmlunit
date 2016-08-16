@@ -49,6 +49,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Namespace;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
 import com.gargoylesoftware.htmlunit.javascript.host.Notification;
+import com.gargoylesoftware.htmlunit.javascript.host.PerformanceObserver;
+import com.gargoylesoftware.htmlunit.javascript.host.PerformanceObserverEntryList;
 import com.gargoylesoftware.htmlunit.javascript.host.PermissionStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Permissions;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
@@ -57,7 +59,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
 import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
-import com.gargoylesoftware.htmlunit.javascript.host.ReadableByteStream;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
@@ -199,7 +200,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ApplicationCacheErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AudioProcessingEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.AutocompleteErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeInstallPromptEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BlobEvent;
@@ -421,7 +421,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AppBannerPromptResult.class, ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
         ArrayBufferView.class, ArrayBufferViewBase.class, Attr.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
-        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AutocompleteErrorEvent.class, BarProp.class,
+        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BarProp.class,
         BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
         Blob.class, BlobEvent.class, BroadcastChannel.class, Cache.class, CacheStorage.class,
         CanvasCaptureMediaStream.class, CanvasCaptureMediaStreamTrack.class,
@@ -508,6 +508,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PasswordCredential.class,
         Path2D.class, Performance.class, PerformanceEntry.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceNavigationTiming.class,
+        PerformanceObserver.class, PerformanceObserverEntryList.class,
         PerformanceResourceTiming.class, PerformanceTiming.class,
         PeriodicWave.class, Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
         PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
@@ -515,7 +516,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PresentationConnectionCloseEvent.class, PresentationRequest.class,
         ProcessingInstruction.class, ProgressEvent.class, Promise.class, PromiseRejectionEvent.class,
         Proxy.class, PushManager.class,
-        PushSubscription.class, RadioNodeList.class, Range.class, ReadableByteStream.class, ReadableStream.class,
+        PushSubscription.class, RadioNodeList.class, Range.class, ReadableStream.class,
         Request.class, Response.class, RowContainer.class, RTCCertificate.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnection.class, RTCPeerConnectionIceEvent.class,
         RTCSessionDescription.class, RTCStatsReport.class, Screen.class, ScreenOrientation.class,
