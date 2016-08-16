@@ -445,10 +445,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        if ("wbr".equalsIgnoreCase(domNode.getLocalName())) {
-            endTagForbidden_ = true;
-        }
-        else if ("basefont".equalsIgnoreCase(domNode.getLocalName())) {
+        final String name = domNode.getLocalName();
+        if ("wbr".equalsIgnoreCase(name)
+                || "basefont".equalsIgnoreCase(name)
+                || "keygen".equalsIgnoreCase(name)
+                || "track".equalsIgnoreCase(name)) {
             endTagForbidden_ = true;
         }
     }

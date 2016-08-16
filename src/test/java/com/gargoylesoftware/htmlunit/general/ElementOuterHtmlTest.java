@@ -687,8 +687,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<keygen>",
-            CHROME = "<keygen></keygen>")
+    @Alerts("<keygen>")
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -1166,8 +1165,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<track>",
-            CHROME = "<track></track>")
+    @Alerts("<track>")
     public void track() throws Exception {
         loadPageWithAlerts2(test("track"));
     }
