@@ -889,7 +889,7 @@ public final class StyleAttributes {
         FONT_VARIANT_ALTERNATES_("font-variant-alternates", "font-variant-alternates", ff("normal")),
 
         /** The style property {@code fontVariantCaps}. */
-        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff("normal")),
+        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff("normal"), chrome("")),
 
         /** The style property {@code font-variant-caps}. */
         FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ff("normal")),
@@ -907,7 +907,7 @@ public final class StyleAttributes {
         FONT_VARIANT_LIGATURES_("font-variant-ligatures", "font-variant-ligatures", ff("normal")),
 
         /** The style property {@code fontVariantNumeric}. */
-        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff("normal")),
+        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff("normal"), chrome("")),
 
         /** The style property {@code font-variant-numeric}. */
         FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ff("normal")),

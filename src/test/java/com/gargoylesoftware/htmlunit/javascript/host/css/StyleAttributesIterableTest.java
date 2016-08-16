@@ -106,6 +106,26 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _FONT_VARIANT_CAPS() throws Exception {
+        test("fontVariantCaps");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _FONT_VARIANT_NUMERIC() throws Exception {
+        test("fontVariantNumeric");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _PIXEL_BOTTOM() throws Exception {
