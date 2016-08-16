@@ -8102,8 +8102,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function ReadableByteStream() { [native code] }")
+    @Alerts("exception")
     public void readableByteStream() throws Exception {
         test("ReadableByteStream");
     }
@@ -8384,8 +8383,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function AutocompleteErrorEvent() { [native code] }")
+    @Alerts("exception")
     public void autocompleteErrorEvent() throws Exception {
         test("AutocompleteErrorEvent");
     }
@@ -9815,7 +9813,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceObserverEntryList() { [native code] }")
     public void performanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList");
     }
@@ -9916,7 +9915,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceObserver() { [native code] }")
     public void performanceObserver() throws Exception {
         test("PerformanceObserver");
     }
