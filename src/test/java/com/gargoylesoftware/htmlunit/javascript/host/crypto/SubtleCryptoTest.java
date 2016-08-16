@@ -43,6 +43,12 @@ public class SubtleCryptoTest extends WebDriverTestCase {
                         "private", "false", "sign",
                         "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
                         "publicExponent [object Uint8Array]"},
+            CHROME = {"[object Crypto]", "public", "true", "verify",
+                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                        "publicExponent 1,0,1",
+                        "private", "false", "sign",
+                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                        "publicExponent 1,0,1"},
             IE = "undefined")
     @NotYetImplemented({CHROME, FF})
     public void rsassa() throws Exception {
