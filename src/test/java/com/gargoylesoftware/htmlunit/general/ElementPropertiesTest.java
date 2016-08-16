@@ -460,7 +460,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "accessKey,blur(),click(),contentEditable,dataset,dir,draggable,focus(),hidden,"
                 + "innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
-                + "onautocomplete,onautocompleteerror,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
+                + "onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
                 + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,"
                 + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
@@ -588,7 +588,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "length,"
                 + "localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),name,navigator,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
-                + "onautocomplete,onautocompleteerror,onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,"
+                + "onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,"
                 + "onchange,onclick,onclose,oncontextmenu,oncuechange,ondblclick,ondevicemotion,ondeviceorientation,"
                 + "ondeviceorientationabsolute,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
                 + "ondurationchange,"
@@ -755,14 +755,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,referrerpolicy,rel,rev,search,shape,target,text,type,"
+                + "port,protocol,referrerPolicy,rel,rev,search,shape,target,text,type,"
                 + "username",
-            FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+            FF38 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,relList,rev,search,searchParams,shape,target,text,type,"
                 + "username",
-            FF45 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                    + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
-                    + "username",
+            FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+                + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
+                + "username",
             IE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn",
@@ -810,7 +810,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "alt,coords,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
-                + "protocol,referrerpolicy,search,shape,target,username",
+                + "protocol,referrerPolicy,search,shape,target,username",
             FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,shape,target,username",
             FF38 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
@@ -854,7 +854,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "pause(),paused,play(),playbackRate,played,preload,readyState,"
-                + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,textTracks,"
+                + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,"
                 + "volume,webkitAudioDecodedByteCount,"
                 + "webkitVideoDecodedByteCount",
             FF38 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
@@ -1341,7 +1341,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,reportValidity(),requestAutocomplete(),reset(),submit(),"
+                + "noValidate,reportValidity(),reset(),submit(),"
                 + "target",
             FF = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reset(),submit(),"
@@ -1552,7 +1552,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "longDesc,marginHeight,marginWidth,name,sandbox,scrolling,src,srcdoc,"
                 + "width",
             CHROME = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
-                + "longDesc,marginHeight,marginWidth,name,referrerpolicy,sandbox,scrolling,src,srcdoc,"
+                + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
             IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
                 + "hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,security,src,vspace,"
@@ -1588,7 +1588,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "naturalHeight,naturalWidth,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             CHROME = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
-                + "naturalHeight,naturalWidth,referrerpolicy,sizes,src,srcset,useMap,vspace,width,x,"
+                + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
                 + "height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
@@ -2573,12 +2573,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "pause(),paused,play(),playbackRate,played,"
-                + "poster,preload,readyState,seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,"
+                + "poster,preload,readyState,seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,"
                 + "textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
                 + "webkitDisplayingFullscreen,webkitDroppedFrameCount,"
                 + "webkitEnterFullScreen(),webkitEnterFullscreen(),"
-                + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
+                + "webkitExitFullScreen(),webkitExitFullscreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF38 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
