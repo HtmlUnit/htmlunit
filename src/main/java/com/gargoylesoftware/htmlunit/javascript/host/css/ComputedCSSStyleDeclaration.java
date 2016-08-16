@@ -1062,8 +1062,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             else if ("block".equals(display)) {
                 if (element instanceof HTMLBodyElement) {
-                    final String widthString = element.getWindow().getComputedStyle(element, null).getWidth();
-                    width = Integer.parseInt(widthString.substring(0, widthString.length() - 2));
+                    width = windowWidth - 16;
                 }
                 else {
                     // Block elements take up 100% of the parent's width.
