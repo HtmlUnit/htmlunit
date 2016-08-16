@@ -138,7 +138,7 @@ public class HttpWebConnection implements WebConnection {
 
     // have one per thread because this is (re)configured for every call (see configureHttpProcessorBuilder)
     // do not use a ThreadLocal because this in only accessed form this class
-    private static final Map<Thread, HttpClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
+    private final Map<Thread, HttpClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
     private final WebClient webClient_;
 
     private String virtualHost_;
