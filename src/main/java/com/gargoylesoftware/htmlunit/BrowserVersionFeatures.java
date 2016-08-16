@@ -154,8 +154,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     CSS_ZINDEX_TYPE_INTEGER,
 
-    /** */
-    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
+    /** Add the 'Referer' header to a request triggered by window.showModalDialog. */
+    @BrowserFeature(@WebBrowser(FF))
     DIALOGWINDOW_REFERER,
 
     /** DOCTYPE has undefined value for 'prefix'. */

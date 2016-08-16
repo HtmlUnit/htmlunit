@@ -1098,8 +1098,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "§§URL§§",
-            FF = "§§URL§§")
+    @Alerts(FF = "§§URL§§")
     public void openWindow_refererHeader() throws Exception {
         final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head></head>\n"
