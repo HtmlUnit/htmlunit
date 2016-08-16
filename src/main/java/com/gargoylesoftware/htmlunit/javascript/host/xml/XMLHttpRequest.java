@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEPARATE_HEADERS_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
@@ -708,13 +709,14 @@ public class XMLHttpRequest extends EventTarget {
 
                 // header request-headers
                 final StringBuilder builder = new StringBuilder();
-                final boolean acceptContentType = getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
                 for (final Entry<String, String> header
                         : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
                     final String name = header.getKey().toLowerCase(Locale.ROOT);
-                    if (isPreflightHeader(name, header.getValue(), acceptContentType)) {
+                    if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
-                            builder.append(acceptContentType ? ", " : ",");
+                            final boolean useAdditionalBlank =
+                                    getBrowserVersion().hasFeature(XHR_SEPARATE_HEADERS_BLANK);
+                            builder.append(useAdditionalBlank ? ", " : ",");
                         }
                         builder.append(name);
                     }
@@ -821,10 +823,8 @@ public class XMLHttpRequest extends EventTarget {
         if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.POST) {
             return true;
         }
-        final boolean acceptContentType = getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE);
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT),
-                    header.getValue(), acceptContentType)) {
+            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ROOT), header.getValue())) {
                 return true;
             }
         }
@@ -846,7 +846,7 @@ public class XMLHttpRequest extends EventTarget {
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             final String key = header.getKey().toLowerCase(Locale.ROOT);
-            if (isPreflightHeader(key, header.getValue(), false)
+            if (isPreflightHeader(key, header.getValue())
                     && !headersHeader.contains(key)) {
                 return false;
             }
@@ -857,15 +857,13 @@ public class XMLHttpRequest extends EventTarget {
     /**
      * @param name header name (MUST be lower-case for performance reasons)
      * @param value header value
-     * @param acceptContentType whether to consider {@code content-type} header as preflight or not
      */
-    private static boolean isPreflightHeader(final String name, final String value, final boolean acceptContentType) {
+    private static boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
                 || FormEncodingType.MULTIPART.getName().equals(lcValue)
-                || (!acceptContentType
-                        && ("text/plain".equals(lcValue) || lcValue.startsWith("text/plain;charset=")))) {
+                || ("text/plain".equals(lcValue) || lcValue.startsWith("text/plain;charset="))) {
                 return false;
             }
             return true;

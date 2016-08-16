@@ -1611,6 +1611,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
 
+    /** Chrome uses an additional blank here. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    XHR_SEPARATE_HEADERS_BLANK,
+
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
