@@ -170,6 +170,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     EVENT_BEFOREUNLOAD_AUTO_TYPE,
 
+    /** Chrome maintains a separate state for this. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    EVENT_CANCEL_BUBBLE,
+
     /** Event false result. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_FALSE_RESULT,

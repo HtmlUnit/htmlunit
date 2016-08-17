@@ -700,7 +700,6 @@ public class Event2Test extends WebDriverTestCase {
                 "true"},
             CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
                 "false"})
-    @NotYetImplemented(CHROME)
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
     }
@@ -804,7 +803,6 @@ public class Event2Test extends WebDriverTestCase {
                 "true"},
             CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
                 "false"})
-    @NotYetImplemented(CHROME)
     public void stopImmediatePropagation() throws Exception {
         stopPropagation("stopImmediatePropagation()");
     }

@@ -274,7 +274,7 @@ public class EventListenersContainer implements Serializable {
                     }
                 }
                 if (event.isImmediatePropagationStopped()) {
-                    return allResult;
+                    break;
                 }
             }
         }
