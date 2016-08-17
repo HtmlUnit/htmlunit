@@ -506,6 +506,16 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XMLHttpRequestEventTarget_XMLHttpRequest() throws Exception {
+        test("XMLHttpRequestEventTarget", "XMLHttpRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
