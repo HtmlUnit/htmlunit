@@ -243,6 +243,7 @@ public class Event extends SimpleScriptable {
     private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
     private String propertyName_;
     private boolean stopPropagation_;
+    private boolean stopImmediatePropagation_;
     private Object returnValue_;
     private boolean preventDefault_;
 
@@ -628,6 +629,23 @@ public class Event extends SimpleScriptable {
      */
     public boolean isPropagationStopped() {
         return stopPropagation_;
+    }
+
+    /**
+     * Prevents other listeners of the same event from being called.
+     */
+    @JsxFunction
+    public void stopImmediatePropagation() {
+        stopImmediatePropagation_ = true;
+        stopPropagation();
+    }
+
+    /**
+     * Indicates if event immediate propagation is stopped.
+     * @return the status
+     */
+    public boolean isImmediatePropagationStopped() {
+        return stopImmediatePropagation_;
     }
 
     /**

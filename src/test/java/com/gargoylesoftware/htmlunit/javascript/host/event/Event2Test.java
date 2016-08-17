@@ -794,4 +794,55 @@ public class Event2Test extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * Test for event capturing and bubbling.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"},
+            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "false"})
+    @NotYetImplemented(CHROME)
+    public void stopImmediatePropagation() throws Exception {
+        stopPropagation("stopImmediatePropagation()");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"w", "w 2", "d", "d 2", "s", "w"})
+    public void stopImmediatePropagation_WithMultipleEventHandlers() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  var counter = 0;\n"
+            + "  function t(_s) {\n"
+            + "    return function(e) { alert(_s); counter++; if (counter >= 5) e.stopImmediatePropagation(); };\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    window.addEventListener('click', t('w'), true);\n"
+            + "    window.addEventListener('click', t('w 2'), true);\n"
+            + "    var oDiv = document.getElementById('theDiv');\n"
+            + "    oDiv.addEventListener('click', t('d'), true);\n"
+            + "    oDiv.addEventListener('click', t('d 2'), true);\n"
+            + "    var oSpan = document.getElementById('theSpan');\n"
+            + "    oSpan.addEventListener('click', t('s'), true);\n"
+            + "    oSpan.addEventListener('click', t('s 2'), true);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='init()'>\n"
+            + "<div id='theDiv'>\n"
+            + "<span id='theSpan'>blabla</span>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("theSpan")).click();
+        driver.findElement(By.id("theSpan")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
 }

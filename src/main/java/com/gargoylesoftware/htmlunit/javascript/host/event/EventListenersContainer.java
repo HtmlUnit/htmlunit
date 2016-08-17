@@ -233,6 +233,7 @@ public class EventListenersContainer implements Serializable {
         if (node == null || !node.handles(event)) {
             return null;
         }
+
         ScriptResult allResult = null;
         final List<Scriptable> handlers = getHandlers(event.getType(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
@@ -271,6 +272,9 @@ public class EventListenersContainer implements Serializable {
                             }
                         }
                     }
+                }
+                if (event.isImmediatePropagationStopped()) {
+                    return allResult;
                 }
             }
         }
