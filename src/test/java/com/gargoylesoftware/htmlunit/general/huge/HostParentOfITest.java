@@ -3000,6 +3000,28 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PerformanceObserverEntryList_PerformanceObserverEntryList() throws Exception {
+        test("PerformanceObserverEntryList", "PerformanceObserverEntryList");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PerformanceObserver_PerformanceObserver () throws Exception {
+        test("PerformanceObserver", "PerformanceObserver");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _PerformanceResourceTiming_PerformanceResourceTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceResourceTiming");
@@ -3199,8 +3221,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _ReadableByteStream_ReadableByteStream() throws Exception {
         test("ReadableByteStream", "ReadableByteStream");
     }

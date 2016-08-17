@@ -5540,8 +5540,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _AutocompleteErrorEvent_AutocompleteErrorEvent() throws Exception {
         test("AutocompleteErrorEvent", "AutocompleteErrorEvent");
     }
@@ -5750,8 +5749,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _Event_AutocompleteErrorEvent() throws Exception {
         test("Event", "AutocompleteErrorEvent");
     }
