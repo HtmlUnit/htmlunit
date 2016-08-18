@@ -3013,7 +3013,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _PerformanceObserver_PerformanceObserver () throws Exception {
+    public void _PerformanceObserver_PerformanceObserver() throws Exception {
         test("PerformanceObserver", "PerformanceObserver");
     }
 
