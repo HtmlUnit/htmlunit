@@ -1586,6 +1586,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     WINDOW_EXECUTE_EVENTS,
 
+    /** XMLHttpRequest.getAllResponseHeaders() has a trailing CrLf. */
+    @BrowserFeature(@WebBrowser(IE))
+    XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF,
+
     /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,

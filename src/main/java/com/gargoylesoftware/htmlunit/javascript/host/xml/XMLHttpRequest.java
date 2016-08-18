@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
@@ -455,12 +456,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public String getAllResponseHeaders() {
         if (state_ == UNSENT || state_ == OPENED) {
-            return null;
+            return "";
         }
         if (webResponse_ != null) {
             final StringBuilder buffer = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
+                buffer.append(header.getName()).append(": ").append(header.getValue()).append("\r\n");
+            }
+            if (getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF)) {
+                buffer.append("\r\n");
             }
             return buffer.toString();
         }

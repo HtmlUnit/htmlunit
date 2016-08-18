@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.ByteArrayOutputStream;
@@ -806,5 +807,106 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "</html>";
 
         loadPageWithAlerts2(html, servlets);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "",
+                "Date XYZ GMT\r\n"
+                + "Content-Type: text/xml; charset=ISO-8859-1\r\n"
+                + "Transfer-Encoding: chunked\r\n"
+                + "Server: Jetty(XXX)\r\n"},
+            IE = {"", "",
+                "Date XYZ GMT\r\n"
+                + "Content-Type: text/xml; charset=ISO-8859-1\r\n"
+                + "Transfer-Encoding: chunked\r\n"
+                + "Server: Jetty(XXX)\r\n\r\n"},
+            CHROME = {"", "",
+                "Date XYZ GMT\r\n"
+                + "Server: Jetty(XXX)\r\n"
+                + "Transfer-Encoding: chunked\r\n"
+                + "Content-Type: text/xml; charset=ISO-8859-1\r\n"})
+    @NotYetImplemented(CHROME)
+    public void getAllResponseHeaders() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        var request = new XMLHttpRequest();\n"
+                        + "        try {\n"
+                        + "          alert(request.getAllResponseHeaders());\n"
+                        + "        } catch(e) { alert('exception-created'); }\n"
+
+                        + "        request.open('GET', '" + URL_SECOND + "', false, null, null);\n"
+                        + "        try {\n"
+                        + "          alert(request.getAllResponseHeaders());\n"
+                        + "        } catch(e) { alert('exception-opened'); }\n"
+
+                        + "        request.send();\n"
+                        + "        try {\n"
+                        + "          alert(request.getAllResponseHeaders().replace(/Jetty\\(.*\\)/, 'Jetty(XXX)')"
+                        + "        .replace(/Date.*GMT/, 'Date XYZ GMT'));\n"
+                        + "        } catch(e) { alert('exception-sent'); }\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", "text/xml");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "null", "null",
+            "text/xml; charset=ISO-8859-1", "text/xml; charset=ISO-8859-1",
+            "text/xml; charset=ISO-8859-1", "null"})
+    public void getResponseHeader() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        var request = new XMLHttpRequest();\n"
+                        + "        try {\n"
+                        + "          alert(request.getResponseHeader('Content-Type'));\n"
+                        + "          alert(request.getResponseHeader('unknown'));\n"
+                        + "        } catch(e) { alert('exception-created'); }\n"
+
+                        + "        request.open('GET', '" + URL_SECOND + "', false, null, null);\n"
+                        + "        try {\n"
+                        + "          alert(request.getResponseHeader('Content-Type'));\n"
+                        + "          alert(request.getResponseHeader('unknown'));\n"
+                        + "        } catch(e) { alert('exception-opened'); }\n"
+
+                        + "        request.send();\n"
+                        + "        try {\n"
+                        + "          alert(request.getResponseHeader('Content-Type'));\n"
+                        + "          alert(request.getResponseHeader('content-type'));\n"
+                        + "          alert(request.getResponseHeader('coNTENt-type'));\n"
+                        + "          alert(request.getResponseHeader('unknown'));\n"
+                        + "        } catch(e) { alert('exception-sent'); }\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", "text/xml");
+
+        loadPageWithAlerts2(html);
     }
 }
