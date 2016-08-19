@@ -16,15 +16,19 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link MutationObserver}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MutationObserverTest extends WebDriverTestCase {
@@ -158,4 +162,36 @@ public class MutationObserverTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test case for issue #1811.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"abc"})
+    @NotYetImplemented
+    public void attributeValue() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><script>\n"
+            + "  function test() {\n"
+            + "    if (!window.MutationObserver) return;\n"
+            + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        alert(mutation.target.value);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(document.getElementById('tester'), config);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='tester' value=''>\n"
+            + "  <button id='doIt' onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"x\")'>"
+                        + "DoIt</button>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("tester")).sendKeys("abc");
+        driver.findElement(By.id("doIt")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
 }
