@@ -167,7 +167,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"abc"})
+    @Alerts("abc")
     @NotYetImplemented
     public void attributeValue() throws Exception {
         final String html
