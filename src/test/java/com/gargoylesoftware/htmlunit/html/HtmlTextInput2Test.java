@@ -14,9 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
+import java.util.Collections;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -34,25 +39,275 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlTextInput2Test extends WebDriverTestCase {
 
     /**
+     * Verifies that a asText() returns an empty string.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-", "-", "-"})
+    @NotYetImplemented
+    public void asText() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='text' name='foo' id='foo' value='bla'>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final WebElement input = driver.findElement(By.id("foo"));
+        assertEquals("", input.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void type() throws Exception {
+        final String html = "<html><head></head><body><input type='text' id='t'/></body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+        t.sendKeys("abc");
+        assertEquals("abc", t.getAttribute("value"));
+        t.sendKeys("\b");
+        assertEquals("ab", t.getAttribute("value"));
+        t.sendKeys("\b");
+        assertEquals("a", t.getAttribute("value"));
+        t.sendKeys("\b");
+        assertEquals("", t.getAttribute("value"));
+        t.sendKeys("\b");
+        assertEquals("", t.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeWhileDisabled() throws Exception {
+        final String html = "<html><body><input type='text' id='p' disabled='disabled'/></body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        try {
+            p.sendKeys("abc");
+            fail();
+        }
+        catch (final InvalidElementStateException e) {
+            // as expected
+        }
+        assertEquals("", p.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null"})
+    @NotYetImplemented
+    public void typeDoesNotChangeValueAttribute() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='text' id='t'/>\n"
+                + "  <button id='check' onclick='alert(document.getElementById(\"t\").getAttribute(\"value\"));'>"
+                        + "DoIt</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        final WebElement check = driver.findElement(By.id("check"));
+        check.click();
+
+        t.sendKeys("abc");
+        check.click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"HtmlUnit", "HtmlUnit"})
+    @NotYetImplemented
+    public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='text' id='t' value='HtmlUnit'/>\n"
+                + "  <button id='check' onclick='alert(document.getElementById(\"t\").getAttribute(\"value\"));'>"
+                        + "DoIt</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        final WebElement check = driver.findElement(By.id("check"));
+        check.click();
+
+        t.sendKeys("abc");
+        check.click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault_OnKeyDown() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e && e.target.value.length > 2)\n"
+            + "      e.preventDefault();\n"
+            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('p').onkeydown = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input type='text' id='p'></input>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("abcd");
+        assertEquals("abc", p.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault_OnKeyPress() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e && e.target.value.length > 2)\n"
+            + "      e.preventDefault();\n"
+            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('p').onkeypress = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input type='text' id='p'></input>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("abcd");
+        assertEquals("abc", p.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void typeOnChange() throws Exception {
+        final String html =
+              "<html><head></head><body>\n"
+            + "<input type='text' id='p' value='Hello world'"
+                + " onChange='alert(\"foo\");alert(event.type);'"
+                + " onBlur='alert(\"boo\");alert(event.type);'>\n"
+            + "<button id='b'>some button</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("HtmlUnit");
+
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        final String[] expectedAlerts1 = {"foo", "change", "boo", "blur"};
+        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+
+        // set only the focus but change nothing
+        p.click();
+        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        final String[] expectedAlerts2 = {"foo", "change", "boo", "blur", "boo", "blur"};
+        assertEquals(expectedAlerts2, getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setValueOnChange() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head></head>\n"
+              + "<body>\n"
+              + "  <input type='text' id='t' value='Hello world'"
+                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <button id='b'>some button</button>\n"
+              + "  <button id='set' onclick='document.getElementById(\"t\").value=\"HtmlUnit\"'>setValue</button>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("set")).click();
+
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setDefaultValueOnChange() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head></head>\n"
+              + "<body>\n"
+              + "  <input type='text' id='t' value='Hello world'"
+                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <button id='b'>some button</button>\n"
+              + "  <button id='set' onclick='document.getElementById(\"t\").defaultValue=\"HtmlUnit\"'>"
+                      + "setValue</button>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("set")).click();
+
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('text1');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'text';\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"text\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -68,25 +323,25 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-", "-", "-"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('text1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'text';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"text\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -102,29 +357,31 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault"})
+    @Alerts({"initial-initial-initial", "initial-initial-initial",
+                "newValue-initial-initial", "newValue-initial-initial",
+                "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
+    @NotYetImplemented
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    text.value = 'newValue';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    text.defaultValue = 'newDefault';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -141,29 +398,31 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault"})
+    @Alerts({"initial-initial-initial", "initial-initial-initial",
+                "newValue-initial-initial", "newValue-initial-initial",
+                "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
+    @NotYetImplemented
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    text.value = 'newValue';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    text.defaultValue = 'newDefault';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -179,21 +438,28 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "default-default", "newValue-default", "newValue-newDefault"})
-    public void defaultValue() throws Exception {
+    @Alerts({"initial-initial-initial", "default-default-default",
+                "newValue-default-default", "newValue-attribValue-attribValue",
+                "newValue-newDefault-newDefault"})
+    @NotYetImplemented
+    public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    text.defaultValue = 'default';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
             + "    text.value = 'newValue';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+
+            + "    text.setAttribute('value', 'attribValue');\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+
             + "    text.defaultValue = 'newDefault';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    alert(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

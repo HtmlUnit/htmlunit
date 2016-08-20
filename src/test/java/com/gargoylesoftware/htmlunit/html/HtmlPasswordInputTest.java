@@ -27,6 +27,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -37,6 +38,25 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPasswordInputTest extends WebDriverTestCase {
+
+    /**
+     * Verifies that a asText() returns the value string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void asText() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='password' name='foo' id='foo' value='bla'>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final WebElement input = driver.findElement(By.id("foo"));
+        assertEquals("", input.getText());
+    }
 
     /**
      * @throws Exception if the test fails
@@ -74,6 +94,60 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             // as expected
         }
         assertEquals("", p.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null"})
+    @NotYetImplemented
+    public void typeDoesNotChangeValueAttribute() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='password' id='p'/>\n"
+                + "  <button id='check' onclick='alert(document.getElementById(\"p\").getAttribute(\"value\"));'>"
+                        + "DoIt</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+
+        final WebElement check = driver.findElement(By.id("check"));
+        check.click();
+
+        p.sendKeys("abc");
+        check.click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"HtmlUnit", "HtmlUnit"})
+    @NotYetImplemented
+    public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='password' id='p' value='HtmlUnit'/>\n"
+                + "  <button id='check' onclick='alert(document.getElementById(\"p\").getAttribute(\"value\"));'>"
+                        + "DoIt</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+
+        final WebElement check = driver.findElement(By.id("check"));
+        check.click();
+
+        p.sendKeys("abc");
+        check.click();
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -138,9 +212,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final String html =
               "<html><head></head><body>\n"
             + "<input type='password' id='p' value='Hello world'"
-            + " onChange='alert(\"foo\");alert(event.type);'"
-            + " onBlur='alert(\"boo\");alert(event.type);'"
-            + "><br>\n"
+                + " onChange='alert(\"foo\");alert(event.type);'"
+                + " onBlur='alert(\"boo\");alert(event.type);'>\n"
             + "<button id='b'>some button</button>\n"
             + "</body></html>";
 
@@ -166,25 +239,76 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setValueOnChange() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head></head>\n"
+              + "<body>\n"
+              + "  <input type='password' id='p' value='Hello world'"
+                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <button id='b'>some button</button>\n"
+              + "  <button id='set' onclick='document.getElementById(\"p\").value=\"HtmlUnit\"'>setValue</button>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("set")).click();
+
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void setDefaultValueOnChange() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head></head>\n"
+              + "<body>\n"
+              + "  <input type='password' id='p' value='Hello world'"
+                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <button id='b'>some button</button>\n"
+              + "  <button id='set' onclick='document.getElementById(\"p\").defaultValue=\"HtmlUnit\"'>"
+                      + "setValue</button>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("set")).click();
+
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-", "-", "-"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('password1');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'password';\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"password\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -200,25 +324,25 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-", "-", "-"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('password1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'password';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"password\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -234,29 +358,31 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault"})
+    @Alerts({"initial-initial-initial", "initial-initial-initial",
+                "newValue-initial-initial", "newValue-initial-initial",
+                "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
+    @NotYetImplemented
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var password = document.getElementById('testId');\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.value = 'newValue';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'newDefault';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -273,29 +399,31 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault"})
+    @Alerts({"initial-initial-initial", "initial-initial-initial",
+                "newValue-initial-initial", "newValue-initial-initial",
+                "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
+    @NotYetImplemented
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var password = document.getElementById('testId');\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.value = 'newValue';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'newDefault';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -311,21 +439,28 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "default-default", "newValue-default", "newValue-newdefault"})
-    public void defaultValue() throws Exception {
+    @Alerts({"initial-initial-initial", "default-default-default",
+                "newValue-default-default", "newValue-attribValue-attribValue",
+                "newValue-newDefault-newDefault"})
+    @NotYetImplemented
+    public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var password = document.getElementById('testId');\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'default';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.value = 'newValue';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
-            + "    password.defaultValue = 'newdefault';\n"
-            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+
+            + "    password.setAttribute('value', 'attribValue');\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+
+            + "    password.defaultValue = 'newDefault';\n"
+            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
