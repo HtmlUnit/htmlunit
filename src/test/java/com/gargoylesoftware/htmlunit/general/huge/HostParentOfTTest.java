@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.Collection;
 
 import org.junit.Test;
@@ -22,6 +24,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.google.common.base.Predicate;
 
 /**
@@ -508,6 +511,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(IE)
     public void _XMLHttpRequestEventTarget_XMLHttpRequest() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequest");
     }
