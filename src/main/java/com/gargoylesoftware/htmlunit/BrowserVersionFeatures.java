@@ -1035,6 +1035,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
     JS_INNER_TEXT_VALUE_NULL,
 
+    /** Chrome throws an error if using selectionStart/selectionEnd. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_INPUT_NUMBER_NO_SELECTION,
+
     /** Setting the type property of an input converts the type to lowercase. */
     @BrowserFeature(@WebBrowser(IE))
     JS_INPUT_SET_TYPE_LOWERCASE,

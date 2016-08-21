@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -21,9 +23,10 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 
 /**
- * Wrapper for the HTML element "input" where type is "number".
+ * Wrapper for the HTML element "input" with type is "number".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
 
@@ -147,4 +150,39 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
         selectionDelegate_.setSelectionEnd(selectionEnd);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        if ("value".equals(qualifiedName)) {
+            final SgmlPage page = getPage();
+            if (page != null && page.isHtmlPage()) {
+                int pos = 0;
+                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+                    pos = attributeValue.length();
+                }
+                setSelectionStart(pos);
+                setSelectionEnd(pos);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new HtmlNumberInput(getQualifiedName(), getPage(), getAttributesMap());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultValue(final String defaultValue) {
+        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
+        setDefaultValue(defaultValue, modifyValue);
+    }
 }

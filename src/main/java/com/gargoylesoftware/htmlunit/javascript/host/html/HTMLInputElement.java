@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_NO_SELECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_EMAIL_TRIMMED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_URL_TRIMMED;
@@ -292,6 +293,11 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public int getSelectionStart() {
+        if ("number".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
+            throw Context.reportRuntimeError("Failed to read the 'selectionStart' property from 'HTMLInputElement': "
+                    + "The input element's type ('number') does not support selection.");
+        }
+
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
 
@@ -301,6 +307,11 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setSelectionStart(final int start) {
+        if ("number".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
+            throw Context.reportRuntimeError("Failed to set the 'selectionStart' property on 'HTMLInputElement': "
+                    + "The input element's type ('number') does not support selection.");
+        }
+
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
 
@@ -310,6 +321,11 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public int getSelectionEnd() {
+        if ("number".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
+            throw Context.reportRuntimeError("Failed to read the 'selectionEnd' property from 'HTMLInputElement': "
+                    + "The input element's type ('number') does not support selection.");
+        }
+
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
 
@@ -319,6 +335,11 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setSelectionEnd(final int end) {
+        if ("number".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
+            throw Context.reportRuntimeError("Failed to set the 'selectionEnd' property on 'HTMLInputElement': "
+                    + "The input element's type ('number') does not support selection.");
+        }
+
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }
 
