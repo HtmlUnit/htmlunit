@@ -14,19 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,25 +33,17 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpWebConnection;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -67,363 +51,289 @@ import com.gargoylesoftware.htmlunit.util.KeyDataPair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class HtmlFileInputTest extends WebServerTestCase {
+public class HtmlFileInputTest extends WebDriverTestCase {
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void fileInput() throws Exception {
-        String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
-        testFileInput(path);
-        final File file = new File(new URI(path));
-        testFileInput(file.getCanonicalPath());
-
-        if (path.startsWith("file:")) {
-            path = path.substring("file:".length());
-        }
-        while (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-        if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-            testFileInput(URLDecoder.decode(path.replace('/', '\\'), "UTF-8"));
-        }
-        testFileInput("file:/" + path);
-        testFileInput("file://" + path);
-        testFileInput("file:///" + path);
-    }
-
-    private void testFileInput(final String fileURL) throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image'>\n"
-            + "  <input type='submit' id='clickMe'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = f.getInputByName("image");
-        fileInput.setValueAttribute(fileURL);
-        firstPage.getHtmlElementById("clickMe").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair.getFile());
-        assertTrue(pair.getFile().length() != 0);
+    @Alerts({"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeUnknown() throws Exception {
+        contentType("unknown");
     }
 
     /**
-     * Tests setData method.
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void setValueAttributeAndSetDataDummyFile() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image'>\n"
-            + "  <input type='submit' id='mySubmit'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = f.getInputByName("image");
-        fileInput.setValueAttribute("dummy.txt");
-        fileInput.setContentType("text/csv");
-        fileInput.setData("My file data".getBytes());
-        firstPage.getHtmlElementById("mySubmit").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-
-        assertNotNull(pair.getData());
-        assertTrue(pair.getData().length > 10);
-
-        final HttpEntity httpEntity = post(client, webConnection);
-
-        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            httpEntity.writeTo(out);
-
-            assertTrue(out.toString().contains(
-                    "Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
-        }
+    @Alerts({"CONTENT_TYPE:text/html", "charset"})
+    public void contentTypeHtm() throws Exception {
+        contentType("htm");
     }
 
     /**
-     * Tests setData method.
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void setValueAttributeAndSetDataRealFile() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image'>\n"
-            + "  <input type='submit' id='mySubmit'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = f.getInputByName("image");
-        final String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
-        fileInput.setValueAttribute(path);
-        fileInput.setData("My file data".getBytes());
-        firstPage.getHtmlElementById("mySubmit").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-
-        assertNotNull(pair.getData());
-        assertTrue(pair.getData().length > 10);
-
-        final HttpEntity httpEntity = post(client, webConnection);
-
-        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            httpEntity.writeTo(out);
-
-            if (getBrowserVersion().isIE()) {
-                final Pattern pattern = Pattern
-                        .compile("Content-Disposition: form-data; name=\"image\";"
-                                + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
-                final Matcher matcher = pattern.matcher(out.toString());
-                assertTrue(matcher.find());
-            }
-            else {
-                assertTrue(out.toString()
-                        .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
-            }
-        }
+    @Alerts({"CONTENT_TYPE:text/html", "charset"})
+    public void contentTypeHtml() throws Exception {
+        contentType("html");
     }
 
     /**
-     * Tests setData method.
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void setDataOnly() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image'>\n"
-            + "  <input type='submit' id='mySubmit'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = f.getInputByName("image");
-        fileInput.setData("My file data".getBytes());
-        firstPage.getHtmlElementById("mySubmit").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-
-        assertNull(pair.getData());
-
-        final HttpEntity httpEntity = post(client, webConnection);
-
-        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            httpEntity.writeTo(out);
-
-            assertTrue(out.toString()
-                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
-        }
+    @Alerts({"CONTENT_TYPE:text/css", "charset"})
+    public void contentTypeCss() throws Exception {
+        contentType("css");
     }
 
     /**
-     * Helper that does some nasty magic.
-     */
-    private static HttpEntity post(final WebClient client,
-            final MockWebConnection webConnection)
-            throws NoSuchMethodException, IllegalAccessException,
-            InvocationTargetException {
-        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod",
-                WebRequest.class, HttpClientBuilder.class);
-        makeHttpMethod.setAccessible(true);
-
-        final HttpWebConnection con = new HttpWebConnection(client);
-
-        final Method getHttpClientBuilderMethod = HttpWebConnection.class.getDeclaredMethod("getHttpClientBuilder");
-        getHttpClientBuilderMethod.setAccessible(true);
-        final HttpClientBuilder builder = (HttpClientBuilder) getHttpClientBuilderMethod.invoke(con);
-
-        final HttpPost httpPost = (HttpPost) makeHttpMethod.invoke(con, webConnection.getLastWebRequest(), builder);
-        final HttpEntity httpEntity = httpPost.getEntity();
-        return httpEntity;
-    }
-
-    /**
-     * Verifies that content is provided for a not filled file input.
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void emptyField() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image' />\n"
-            + "  <input type='submit' id='clickMe'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        firstPage.getHtmlElementById("clickMe").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertEquals("image", pair.getName());
-        assertNull(pair.getFile());
+    @Alerts({"CONTENT_TYPE:text/xml", "charset"})
+    public void contentTypeXml() throws Exception {
+        contentType("xml");
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void contentType() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image' />\n"
-            + "  <input type='submit' name='mysubmit'/>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = f.getInputByName("image");
-
-        final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
-
-        fileInput.setValueAttribute(fileURL.toExternalForm());
-        f.getInputByName("mysubmit").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair.getFile());
-        assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
-
-        fileInput.setContentType("text/webtest");
-        f.getInputByName("mysubmit").click();
-        final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair2.getFile());
-        assertEquals("text/webtest", pair2.getMimeType());
+    @Alerts({"CONTENT_TYPE:image/gif", "charset"})
+    public void contentTypeGif() throws Exception {
+        contentType("gif");
     }
 
     /**
-     * Test HttpClient for uploading a file with non-ASCII name, if it works it means HttpClient has fixed its bug.
-     *
-     * Test for http://issues.apache.org/jira/browse/HTTPCLIENT-293,
-     * which is related to http://sourceforge.net/p/htmlunit/bugs/535/
-     *
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void uploadFileWithNonASCIIName_HttpClient() throws Exception {
-        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
-        final File file = new File(new URI(path));
-        assertTrue(file.exists());
-
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload2", Upload2Servlet.class);
-
-        startWebServer("./", null, servlets);
-        final HttpPost filePost = new HttpPost("http://localhost:" + PORT + "/upload2");
-
-        final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
-            .setCharset(Charset.forName("UTF-8"));
-        builder.addPart("myInput", new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
-
-        filePost.setEntity(builder.build());
-
-        final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
-        final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
-
-        try (final InputStream content = httpResponse.getEntity().getContent()) {
-            final String response = new String(IOUtils.toByteArray(content));
-            //this is the value with ASCII encoding
-            assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
-        }
+    @Alerts({"CONTENT_TYPE:image/jpeg", "charset"})
+    public void contentTypeJpeg() throws Exception {
+        contentType("jpeg");
     }
 
     /**
-     * Test uploading a file with non-ASCII name.
-     *
-     * Test for http://sourceforge.net/p/htmlunit/bugs/535/
-     *
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void uploadFileWithNonASCIIName() throws Exception {
+    @Alerts({"CONTENT_TYPE:image/jpeg", "charset"})
+    public void contentTypeJpg() throws Exception {
+        contentType("jpg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:image/webp", "charset"},
+            FF = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeWebp() throws Exception {
+        contentType("webp");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:video/mp4", "charset"})
+    public void contentTypeMp4() throws Exception {
+        contentType("mp4");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:video/mp4", "charset"})
+    public void contentTypeM4v() throws Exception {
+        contentType("m4v");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/x-m4a", "charset"},
+            FF = {"CONTENT_TYPE:audio/mp4", "charset"},
+            IE = {"CONTENT_TYPE:audio/mp4", "charset"})
+    public void contentTypeM4a() throws Exception {
+        contentType("m4a");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/mp3", "charset"},
+            FF = {"CONTENT_TYPE:audio/mpeg", "charset"},
+            IE = {"CONTENT_TYPE:audio/mpeg", "charset"})
+    public void contentTypeMp3() throws Exception {
+        contentType("mp3");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeOgv() throws Exception {
+        contentType("ogv");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/ogg", "charset"},
+            FF = {"CONTENT_TYPE:video/x-ogm", "charset"},
+            IE = {"CONTENT_TYPE:video/x-ogm", "charset"})
+    public void contentTypeOgm() throws Exception {
+        contentType("ogm");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
+            FF = {"CONTENT_TYPE:video/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/ogg", "charset"})
+    public void contentTypeOgg() throws Exception {
+        contentType("ogg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeOga() throws Exception {
+        contentType("oga");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeOpus() throws Exception {
+        contentType("opus");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/webm", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeWebm() throws Exception {
+        contentType("webm");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:audio/wav", "charset"})
+    public void contentTypeWav() throws Exception {
+        contentType("wav");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/flac", "charset"},
+            FF = {"CONTENT_TYPE:audio/x-flac", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeFlac() throws Exception {
+        contentType("flac");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:application/xhtml+xml", "charset"})
+    public void contentTypeXhtml() throws Exception {
+        contentType("xhtml");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:application/xhtml+xml", "charset"})
+    public void contentTypeXht() throws Exception {
+        contentType("xht");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/xhtml+xml", "charset"},
+            FF = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeXhtm() throws Exception {
+        contentType("xhtm");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:text/plain", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypeText() throws Exception {
+        contentType("text");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/plain", "charset"})
+    public void contentTypeTxt() throws Exception {
+        contentType("txt");
+    }
+
+    private void contentType(final String extension) throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
-        servlets.put("/upload2", Upload2Servlet.class);
-        startWebServer("./", null, servlets);
+        servlets.put("/upload2", ContentTypeUpload2Servlet.class);
+        startWebServer("./", new String[0], servlets);
 
-        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
-        final File file = new File(new URI(path));
-        assertTrue(file.exists());
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
 
-        final WebClient client = getWebClient();
-        final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
+        final File tmpFile = File.createTempFile("htmlunit-test", "." + extension);
+        try {
+            String path = tmpFile.getAbsolutePath();
+            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+                path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+            }
+            driver.findElement(By.name("myInput")).sendKeys(path);
+            driver.findElement(By.id("mySubmit")).click();
+        }
+        finally {
+            tmpFile.delete();
+        }
 
-        final HtmlForm form = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = form.getInputByName("myInput");
-        fileInput.setValueAttribute(path);
-
-        final HtmlSubmitInput submitInput = form.getInputByValue("Upload");
-        final HtmlPage secondPage = submitInput.click();
-
-        final String response = secondPage.getWebResponse().getContentAsString();
-
-        //this is the value with UTF-8 encoding
-        final String expectedResponse = "6A94 6848 D30C C77C 30D5 30A1 30A4 30EB 645 644 641 2E 74 78 74 <br>myInput";
-
-        assertTrue("Invalid Response: " + response, response.endsWith(expectedResponse));
+        final String pageSource = driver.getPageSource();
+        assertTrue(pageSource, pageSource.contains(getExpectedAlerts()[0]));
+        assertFalse(pageSource, pageSource.contains(getExpectedAlerts()[1]));
     }
 
     /**
@@ -440,18 +350,20 @@ public class HtmlFileInputTest extends WebServerTestCase {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
             response.getWriter().write("<html>\n"
-                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
                 + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
-                + "</form></body></html>\n");
+                + "</form>\n"
+                + "</body></html>\n");
         }
     }
 
     /**
      * Servlet for '/upload2'.
      */
-    public static class Upload2Servlet extends HttpServlet {
+    public static class ContentTypeUpload2Servlet extends HttpServlet {
 
         /**
          * {@inheritDoc}
@@ -467,12 +379,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
                     final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
                     for (final FileItem item : upload.parseRequest(request)) {
                         if ("myInput".equals(item.getFieldName())) {
-                            final String path = item.getName();
-                            for (final char ch : path.toCharArray()) {
-                                writer.write(Integer.toHexString(ch).toUpperCase(Locale.ROOT) + " ");
-                            }
-                            writer.write("<br>");
-                            writer.write(item.getFieldName());
+                            writer.write("CONTENT_TYPE:" + item.getContentType());
                         }
                     }
                 }
@@ -487,61 +394,355 @@ public class HtmlFileInputTest extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * Prints request content to the response.
      */
-    @Test
-    public void mutiple() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload1", Multiple1Servlet.class);
-        servlets.put("/upload2", HtmlFileInput2Test.PrintRequestServlet.class);
-        startWebServer("./", null, servlets);
-
-        final String filename1 = "HtmlFileInputTest_one.txt";
-        final String path1 = getClass().getResource(filename1).toExternalForm();
-        final File file1 = new File(new URI(path1));
-        assertTrue(file1.exists());
-
-        final String filename2 = "HtmlFileInputTest_two.txt";
-        final String path2 = getClass().getResource(filename2).toExternalForm();
-        final File file2 = new File(new URI(path2));
-        assertTrue(file2.exists());
-
-        final WebClient client = getWebClient();
-        final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
-
-        final HtmlForm form = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = form.getInputByName("myInput");
-        fileInput.setValueAttribute(new String[] {path1, path2});
-
-        final HtmlSubmitInput submitInput = form.getInputByValue("Upload");
-        final HtmlPage secondPage = submitInput.click();
-
-        final String response = secondPage.getWebResponse().getContentAsString();
-
-        assertTrue(response.contains("HtmlFileInputTest_one.txt"));
-        assertTrue(response.contains("First"));
-        assertTrue(response.contains("HtmlFileInputTest_two.txt"));
-        assertTrue(response.contains("Second"));
-    }
-
-    /**
-     * Servlet for '/upload1'.
-     */
-    public static class Multiple1Servlet extends HttpServlet {
+    public static class PrintRequestServlet extends HttpServlet {
 
         /**
          * {@inheritDoc}
          */
         @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            response.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            response.getWriter().write("<html>\n"
-                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
-                + "Name: <input name='myInput' type='file' multiple><br>\n"
-                + "<input type='submit' value='Upload' id='mySubmit'>\n"
-                + "</form></body></html>\n");
+            final Writer writer = response.getWriter();
+            final BufferedReader reader = request.getReader();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+            }
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeHeader() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", ContentTypeHeaderUpload2Servlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
+        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+        }
+        driver.findElement(By.name("myInput")).sendKeys(path);
+        driver.findElement(By.id("mySubmit")).click();
+        final String source = driver.getPageSource();
+        assertTrue(source.contains("CONTENT_TYPE:"));
+        assertFalse(source.contains("charset"));
+    }
+
+    /**
+     * Servlet for '/upload2'.
+     */
+    public static class ContentTypeHeaderUpload2Servlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write("CONTENT_TYPE:" + request.getContentType());
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
+    public void empty() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", PrintRequestServlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.findElement(By.id("mySubmit")).click();
+
+        String pageSource = driver.getPageSource();
+        // hack for selenium
+        int count = 0;
+        while (count < 100 && StringUtils.isEmpty(pageSource)) {
+            pageSource = driver.getPageSource();
+            count++;
+        }
+
+        final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
+        assertTrue(pageSource, matcher.find());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+            IE = "Content-Disposition: form-data; name=\"myInput\";"
+                        + " filename=\".*test-classes[\\\\/]realm\\.properties\"")
+    public void realFile() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", PrintRequestServlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
+        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+        }
+        driver.findElement(By.name("myInput")).sendKeys(path);
+        driver.findElement(By.id("mySubmit")).click();
+
+        String pageSource = driver.getPageSource();
+        // hack for selenium
+        int count = 0;
+        while (count < 100 && StringUtils.isEmpty(pageSource)) {
+            pageSource = driver.getPageSource();
+            count++;
+        }
+
+        final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
+        assertTrue(pageSource, matcher.find());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void chunked() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", ChunkedUpload2Servlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.findElement(By.id("mySubmit")).click();
+        assertFalse(driver.getPageSource().contains("chunked"));
+    }
+
+    /**
+     * Servlet for '/upload2'.
+     */
+    public static class ChunkedUpload2Servlet extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write("TRANSFER_ENCODING:" + request.getHeader("TRANSFER-ENCODING"));
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-", "-", "-"})
+    public void defaultValues() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('file1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'file';\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"file\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='file1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-", "-", "-"})
+    public void defaultValuesAfterClone() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('file1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    input = input.cloneNode(false);\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'file';\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"file\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='file1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-initial", "-initial", "-newDefault", "-newDefault"})
+    public void resetByClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var file = document.getElementById('testId');\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    file.defaultValue = 'newDefault';\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='testId' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-initial", "-initial", "-newDefault", "-newDefault"})
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var file = document.getElementById('testId');\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    file.defaultValue = 'newDefault';\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-initial", "-default"})
+    public void defaultValue() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var file = document.getElementById('testId');\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    file.defaultValue = 'default';\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("changed")
+    public void firingOnchange() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form onchange='alert(\"changed\")'>\n"
+            + "  <input type='file' id='file1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
+        tmpFile.delete();
+        driver.findElement(By.tagName("body")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void nonZeroWidthHeight() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var file = document.getElementById('testId');\n"
+                + "    alert(file.clientWidth > 2);\n"
+                + "    alert(file.clientHeight > 2);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='file' id='testId'>\n"
+                + "</form>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 }
