@@ -503,7 +503,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0", CHROME = "exception")
+    @Alerts(DEFAULT = "0",
+            CHROME = "exception")
     @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         final String html =
