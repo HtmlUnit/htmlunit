@@ -93,22 +93,22 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-", "-", "-"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('image1');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'image';\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"image\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -124,25 +124,25 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-", "-", "-"})
-    public void defaultValuesAfterclone() throws Exception {
+    @Alerts({"--null", "--null", "--null"})
+    public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('image1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'image';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"image\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -158,29 +158,30 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault"})
+    @Alerts({"initial-initial-initial", "initial-initial-initial",
+                "newValue-newValue-newValue", "newValue-newValue-newValue",
+                "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.value = 'newValue';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'newDefault';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -197,29 +198,30 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
-                "newDefault-newDefault", "newDefault-newDefault"})
+    @Alerts({"initial-initial-initial", "initial-initial-initial",
+                "newValue-newValue-newValue", "newValue-newValue-newValue",
+                "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.value = 'newValue';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'newDefault';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -235,21 +237,54 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault"})
-    public void defaultValue() throws Exception {
+    @Alerts({"initial-initial-initial", "default-default-default",
+                "newValue-newValue-newValue", "attribValue-attribValue-attribValue",
+                "newDefault-newDefault-newDefault"})
+    public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'default';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.value = 'newValue';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+
+            + "    image.setAttribute('value', 'attribValue');\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+
             + "    image.defaultValue = 'newDefault';\n"
-            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='image' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"textLength not available"},
+            FF = {"7"})
+    public void textLength() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    if(text.textLength) {\n"
+            + "      alert(text.textLength);\n"
+            + "    } else {\n"
+            + "      alert('textLength not available');\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
