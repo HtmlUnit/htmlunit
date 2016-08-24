@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -115,7 +116,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if (source.isEmpty()) {
+        if (source.isEmpty() || StringUtils.startsWithIgnoreCase(source, WebClient.ABOUT_SCHEME)) {
             source = WebClient.ABOUT_BLANK;
         }
 

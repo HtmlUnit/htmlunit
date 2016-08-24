@@ -180,8 +180,10 @@ public class WebClient implements Serializable, AutoCloseable {
     /** target "_top". */
     private static final String TARGET_TOP = "_top";
 
+    /** "about:". */
+    public static final String ABOUT_SCHEME = "about:";
     /** "about:blank". */
-    public static final String ABOUT_BLANK = "about:blank";
+    public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
     /** URL for "about:blank". */
     public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
 
@@ -1142,7 +1144,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private static WebResponse makeWebResponseForAboutUrl(final URL url) {
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
-        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, "about:"))) {
+        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, WebClient.ABOUT_SCHEME))) {
             throw new IllegalArgumentException(url + " is not supported, only about:blank is supported now.");
         }
         return new StringWebResponse("", URL_ABOUT_BLANK);

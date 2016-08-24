@@ -110,7 +110,7 @@ abstract class URLCreator {
             else if (StringUtils.startsWithIgnoreCase(url, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
-            else if (StringUtils.startsWithIgnoreCase(url, "about:")) {
+            else if (StringUtils.startsWithIgnoreCase(url, WebClient.ABOUT_SCHEME)) {
                 return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
             else if (StringUtils.startsWithIgnoreCase(url, "data:")) {

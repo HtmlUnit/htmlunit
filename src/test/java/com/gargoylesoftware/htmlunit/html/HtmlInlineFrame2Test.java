@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -24,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -191,5 +195,39 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_THIRD, thirdContent, "text/javascript");
 
         loadPageWithAlerts2(firstContent);
+    }
+
+    /**
+     * Looks like url's with the about schema are always behave
+     * like 'about:blank'.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "about:blank",
+            CHROME = "about://unsupported",
+            IE = "exception")
+    @NotYetImplemented({CHROME, IE})
+    public void aboutSrc() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var frame = document.getElementById('tstFrame');\n"
+            + "    try {"
+            + "      alert(frame.contentWindow.location.href);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='tstFrame' src='about://unsupported'></iframe>\n"
+            + "  <button id='test' onclick='test()'>Test</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("test")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }
