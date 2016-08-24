@@ -14,17 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for general scriptable objects in the browser context.
  *
  * @author Jake Cobb
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ScriptableObjectTest extends WebDriverTestCase {
@@ -59,4 +64,40 @@ public class ScriptableObjectTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "symbol", "symbol", "1", "c"},
+            IE = "not defined")
+    @NotYetImplemented({FF, CHROME})
+    public void getOwnPropertySymbols() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + "  if (Object.getOwnPropertySymbols) {\n"
+
+                + "    var obj = {};\n"
+                + "    var a = Symbol('a');\n"
+                + "    var b = Symbol.for('b');\n"
+
+                + "    obj[a] = 'localSymbol';\n"
+                + "    obj[b] = 'globalSymbol';\n"
+                + "    obj['c'] = 'something else';\n"
+
+                + "    var objectSymbols = Object.getOwnPropertySymbols(obj);\n"
+                + "    alert(objectSymbols.length);\n"
+                + "    alert(typeof objectSymbols[0]);\n"
+                + "    alert(typeof objectSymbols[1]);\n"
+
+                + "    var objectNames = Object.getOwnPropertyNames(obj);\n"
+                + "    alert(objectNames.length);\n"
+                + "    alert(objectNames[0]);\n"
+
+                + "  } else { alert('not defined'); }\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 }
