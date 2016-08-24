@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.net.URL;
 import java.security.KeyStore;
 
@@ -52,6 +53,7 @@ public class WebClientOptions implements Serializable {
     private String sslInsecureProtocol_;
     private int maxInMemory_ = 500 * 1024;
     private int historySizeLimit_ = 50;
+    private InetAddress localAddress;
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
@@ -539,5 +541,27 @@ public class WebClientOptions implements Serializable {
      */
     public void setHistorySizeLimit(final int historySizeLimit) {
         historySizeLimit_ = historySizeLimit;
+    }
+
+    /**
+     * Returns local address to be used for request execution.
+     *
+     * On machines with multiple network interfaces, this parameter can be used to select the network interface
+     * from which the connection originates.
+     *
+     * Default: {@code null}
+     */
+    public InetAddress getLocalAddress() {
+        return localAddress;
+    }
+
+    /**
+     * Sets the local address to be used for request execution.
+     *
+     * On machines with multiple network interfaces, this parameter can be used to select the network interface
+     * from which the connection originates.
+     */
+    public void setLocalAddress(final InetAddress localAddress) {
+        this.localAddress = localAddress;
     }
 }

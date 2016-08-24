@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -257,7 +258,8 @@ public class HttpWebConnection implements WebConnection {
     }
 
     private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
-        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout());
+        final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
+        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout(), localAddress);
 
         if (webRequest.getProxyHost() != null) {
             final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
@@ -569,7 +571,8 @@ public class HttpWebConnection implements WebConnection {
     }
 
     private void configureTimeout(final HttpClientBuilder builder, final int timeout) {
-        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(timeout);
+        final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
+        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(timeout, localAddress);
         builder.setDefaultRequestConfig(requestBuilder.build());
 
         builder.setDefaultSocketConfig(createSocketConfigBuilder(timeout).build());
@@ -578,10 +581,11 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setTimeout(timeout);
     }
 
-    private static RequestConfig.Builder createRequestConfigBuilder(final int timeout) {
+    private static RequestConfig.Builder createRequestConfigBuilder(final int timeout, final InetAddress localAddress) {
         final RequestConfig.Builder requestBuilder = RequestConfig.custom()
                 .setCookieSpec(HACKED_COOKIE_POLICY)
                 .setRedirectsEnabled(false)
+                .setLocalAddress(localAddress)
 
                 // timeout
                 .setConnectTimeout(timeout)
