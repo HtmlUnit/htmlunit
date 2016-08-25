@@ -331,6 +331,5 @@ public class HtmlElement2Test extends WebDriverTestCase {
         final String xml = "<html xmlns=\"http://www.w3.org/1999/xhtml\"></html>";
         getMockWebConnection().setResponse(URL_SECOND, xml, "application/xml");
         loadPageWithAlerts2(html);
-        
     }
 }
