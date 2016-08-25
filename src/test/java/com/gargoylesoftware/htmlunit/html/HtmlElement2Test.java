@@ -306,4 +306,31 @@ public class HtmlElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("suppress")).sendKeys("s");
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object HTMLHtmlElement]", "null"})
+    public void detach() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.onload = function () {\n"
+            + "        var xml = xhr.responseXML;\n"
+            + "        alert(xml.documentElement);\n"
+            + "        xml.removeChild(xml.firstChild);\n"
+            + "        alert(xml.documentElement);\n"
+            + "    }\n"
+            + "    xhr.open('GET', '" + URL_SECOND + "');\n"
+            + "    xhr.send();\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>\n";
+
+        final String xml = "<html xmlns=\"http://www.w3.org/1999/xhtml\"></html>";
+        getMockWebConnection().setResponse(URL_SECOND, xml, "application/xml");
+        loadPageWithAlerts2(html);
+        
+    }
 }

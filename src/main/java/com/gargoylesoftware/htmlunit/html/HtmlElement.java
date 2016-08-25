@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -1245,24 +1246,13 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     protected void detach() {
-        final HTMLDocument doc = (HTMLDocument) getPage().getScriptableObject();
-        final Object activeElement = doc.getActiveElement();
+        final ScriptableObject document = getPage().getScriptableObject();
 
-        if (activeElement == getScriptableObject()) {
-            doc.setActiveElement(null);
-            if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                ((InteractivePage) getPage()).setFocusedElement(null);
-            }
-            else {
-                ((InteractivePage) getPage()).setElementWithFocus(null);
-            }
+        if (document instanceof HTMLDocument) {
+            final HTMLDocument doc = (HTMLDocument) document;
+            final Object activeElement = doc.getActiveElement();
 
-            super.detach();
-            return;
-        }
-
-        for (DomNode child : getChildNodes()) {
-            if (activeElement == child.getScriptableObject()) {
+            if (activeElement == getScriptableObject()) {
                 doc.setActiveElement(null);
                 if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
                     ((InteractivePage) getPage()).setFocusedElement(null);
@@ -1270,12 +1260,23 @@ public abstract class HtmlElement extends DomElement {
                 else {
                     ((InteractivePage) getPage()).setElementWithFocus(null);
                 }
+            }
+            else {
+                for (DomNode child : getChildNodes()) {
+                    if (activeElement == child.getScriptableObject()) {
+                        doc.setActiveElement(null);
+                        if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                            ((InteractivePage) getPage()).setFocusedElement(null);
+                        }
+                        else {
+                            ((InteractivePage) getPage()).setElementWithFocus(null);
+                        }
 
-                super.detach();
-                return;
+                        break;
+                    }
+                }
             }
         }
-
         super.detach();
     }
 
