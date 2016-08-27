@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
 
@@ -29,11 +29,15 @@ import org.w3c.css.sac.SiblingSelector;
 import org.w3c.css.sac.SimpleSelector;
 
 /**
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+ *
  * Calculates a selector's specificity.
  * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
+public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
     private static final Log LOG = LogFactory.getLog(SelectorSpecificity.class);
 
     /**
@@ -46,7 +50,11 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializab
     private int fieldC_;
     private int fieldD_;
 
-    SelectorSpecificity(final Selector selector) {
+    /**
+     * Ctor.
+     * @param selector the selector to read from
+     */
+    public SelectorSpecificity(final Selector selector) {
         readSelectorSpecificity(selector);
     }
 
@@ -57,7 +65,7 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializab
         fieldD_ = d;
     }
 
-    void readSelectorSpecificity(final Selector selector) {
+    private void readSelectorSpecificity(final Selector selector) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return;
