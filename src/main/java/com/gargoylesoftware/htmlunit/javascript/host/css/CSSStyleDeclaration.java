@@ -150,6 +150,7 @@ import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -1001,9 +1002,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderBottomWidth the new attribute
      */
     @JsxSetter
-    public void setBorderBottomWidth(final String borderBottomWidth) {
+    public void setBorderBottomWidth(final Object borderBottomWidth) {
         setStyleLengthAttribute(BORDER_BOTTOM_WIDTH.getAttributeName(), borderBottomWidth, "",
-                false, false, false, false);
+                false, false, false, false, false);
     }
 
     /**
@@ -1118,8 +1119,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderLeftWidth the new attribute
      */
     @JsxSetter
-    public void setBorderLeftWidth(final String borderLeftWidth) {
-        setStyleLengthAttribute(BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "", false, false, false, false);
+    public void setBorderLeftWidth(final Object borderLeftWidth) {
+        setStyleLengthAttribute(BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "",
+                false, false, false, false, false);
     }
 
     /**
@@ -1192,9 +1194,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderRightWidth the new attribute
      */
     @JsxSetter
-    public void setBorderRightWidth(final String borderRightWidth) {
+    public void setBorderRightWidth(final Object borderRightWidth) {
         setStyleLengthAttribute(BORDER_RIGHT_WIDTH.getAttributeName(), borderRightWidth, "",
-                false, false, false, false);
+                false, false, false, false, false);
     }
 
     /**
@@ -1276,8 +1278,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderTopWidth the new attribute
      */
     @JsxSetter
-    public void setBorderTopWidth(final String borderTopWidth) {
-        setStyleLengthAttribute(BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "", false, false, false, false);
+    public void setBorderTopWidth(final Object borderTopWidth) {
+        setStyleLengthAttribute(BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "",
+                false, false, false, false, false);
     }
 
     /**
@@ -1294,8 +1297,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param bottom the new attribute
      */
     @JsxSetter
-    public void setBottom(final String bottom) {
-        setStyleLengthAttribute(BOTTOM.getAttributeName(), bottom, "", true, true, false, false);
+    public void setBottom(final Object bottom) {
+        setStyleLengthAttribute(BOTTOM.getAttributeName(), bottom, "", true, true, false, false, false);
     }
 
     /**
@@ -1384,8 +1387,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontSize the new attribute
      */
     @JsxSetter
-    public void setFontSize(final String fontSize) {
-        setStyleLengthAttribute(FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, false);
+    public void setFontSize(final Object fontSize) {
+        setStyleLengthAttribute(FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, false, false);
         updateFont(getFont(), false);
     }
 
@@ -1495,8 +1498,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param height the new attribute
      */
     @JsxSetter
-    public void setHeight(final String height) {
-        setStyleLengthAttribute(HEIGHT.getAttributeName(), height, "", true, true, false, false);
+    public void setHeight(final Object height) {
+        setStyleLengthAttribute(HEIGHT.getAttributeName(), height, "", true, true, false, false, false);
     }
 
     /**
@@ -1513,8 +1516,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param left the new attribute
      */
     @JsxSetter
-    public void setLeft(final String left) {
-        setStyleLengthAttribute(LEFT.getAttributeName(), left, "", true, true, false, false);
+    public void setLeft(final Object left) {
+        setStyleLengthAttribute(LEFT.getAttributeName(), left, "", true, true, false, false, false);
     }
 
     /**
@@ -1540,8 +1543,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param letterSpacing the new attribute
      */
     @JsxSetter
-    public void setLetterSpacing(final String letterSpacing) {
-        setStyleLengthAttribute(LETTER_SPACING.getAttributeName(), letterSpacing, "", false, false, false, false);
+    public void setLetterSpacing(final Object letterSpacing) {
+        setStyleLengthAttribute(LETTER_SPACING.getAttributeName(), letterSpacing, "",
+                false, false, false, false, false);
     }
 
     /**
@@ -1576,8 +1580,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginBottom the new attribute
      */
     @JsxSetter
-    public void setMarginBottom(final String marginBottom) {
-        setStyleLengthAttribute(MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, false, false);
+    public void setMarginBottom(final Object marginBottom) {
+        setStyleLengthAttribute(MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, false, false, false);
     }
 
     /**
@@ -1594,8 +1598,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginLeft the new attribute
      */
     @JsxSetter
-    public void setMarginLeft(final String marginLeft) {
-        setStyleLengthAttribute(MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, false, false);
+    public void setMarginLeft(final Object marginLeft) {
+        setStyleLengthAttribute(MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, false, false, false);
     }
 
     /**
@@ -1612,8 +1616,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginRight the new attribute
      */
     @JsxSetter
-    public void setMarginRight(final String marginRight) {
-        setStyleLengthAttribute(MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, false, false);
+    public void setMarginRight(final Object marginRight) {
+        setStyleLengthAttribute(MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, false, false, false);
     }
 
     /**
@@ -1630,8 +1634,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginTop the new attribute
      */
     @JsxSetter
-    public void setMarginTop(final String marginTop) {
-        setStyleLengthAttribute(MARGIN_TOP.getAttributeName(), marginTop, "", true, true, false, false);
+    public void setMarginTop(final Object marginTop) {
+        setStyleLengthAttribute(MARGIN_TOP.getAttributeName(), marginTop, "", true, true, false, false, false);
     }
 
     /**
@@ -1648,8 +1652,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param maxHeight the new attribute
      */
     @JsxSetter
-    public void setMaxHeight(final String maxHeight) {
-        setStyleLengthAttribute(MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, false, false);
+    public void setMaxHeight(final Object maxHeight) {
+        setStyleLengthAttribute(MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, false, false, false);
     }
 
     /**
@@ -1666,8 +1670,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param maxWidth the new attribute
      */
     @JsxSetter
-    public void setMaxWidth(final String maxWidth) {
-        setStyleLengthAttribute(MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, false, false);
+    public void setMaxWidth(final Object maxWidth) {
+        setStyleLengthAttribute(MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, false, false, false);
     }
 
     /**
@@ -1684,8 +1688,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param minHeight the new attribute
      */
     @JsxSetter
-    public void setMinHeight(final String minHeight) {
-        setStyleLengthAttribute(MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, false, false);
+    public void setMinHeight(final Object minHeight) {
+        setStyleLengthAttribute(MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, false, false, false);
     }
 
     /**
@@ -1702,8 +1706,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param minWidth the new attribute
      */
     @JsxSetter
-    public void setMinWidth(final String minWidth) {
-        setStyleLengthAttribute(MIN_WIDTH.getAttributeName(), minWidth, "", true, true, false, false);
+    public void setMinWidth(final Object minWidth) {
+        setStyleLengthAttribute(MIN_WIDTH.getAttributeName(), minWidth, "", true, true, false, false, false);
     }
 
     /**
@@ -1925,9 +1929,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param outlineWidth the new attribute
      */
     @JsxSetter
-    public void setOutlineWidth(final String outlineWidth) {
+    public void setOutlineWidth(final Object outlineWidth) {
         final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
-        setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), outlineWidth, "", false, false, true, requiresUnit);
+        setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), outlineWidth, "",
+                false, false, true, requiresUnit, false);
     }
 
     /**
@@ -1962,8 +1967,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingBottom the new attribute
      */
     @JsxSetter
-    public void setPaddingBottom(final String paddingBottom) {
-        setStyleLengthAttribute(PADDING_BOTTOM.getAttributeName(), paddingBottom, "", false, true, false, false);
+    public void setPaddingBottom(final Object paddingBottom) {
+        setStyleLengthAttribute(PADDING_BOTTOM.getAttributeName(), paddingBottom, "", false, true, false, false, false);
     }
 
     /**
@@ -1980,8 +1985,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingLeft the new attribute
      */
     @JsxSetter
-    public void setPaddingLeft(final String paddingLeft) {
-        setStyleLengthAttribute(PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, false, false);
+    public void setPaddingLeft(final Object paddingLeft) {
+        setStyleLengthAttribute(PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, false, false, false);
     }
 
     /**
@@ -1998,8 +2003,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingRight the new attribute
      */
     @JsxSetter
-    public void setPaddingRight(final String paddingRight) {
-        setStyleLengthAttribute(PADDING_RIGHT.getAttributeName(), paddingRight, "", false, true, false, false);
+    public void setPaddingRight(final Object paddingRight) {
+        setStyleLengthAttribute(PADDING_RIGHT.getAttributeName(), paddingRight, "", false, true, false, false, false);
     }
 
     /**
@@ -2016,8 +2021,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingTop the new attribute
      */
     @JsxSetter
-    public void setPaddingTop(final String paddingTop) {
-        setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false);
+    public void setPaddingTop(final Object paddingTop) {
+        setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false, false);
     }
 
     /**
@@ -2268,8 +2273,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param right the new attribute
      */
     @JsxSetter
-    public void setRight(final String right) {
-        setStyleLengthAttribute(RIGHT.getAttributeName(), right, "", true, true, false, false);
+    public void setRight(final Object right) {
+        setStyleLengthAttribute(RIGHT.getAttributeName(), right, "", true, true, false, false, false);
     }
 
     /**
@@ -2412,8 +2417,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textIndent the new attribute
      */
     @JsxSetter
-    public void setTextIndent(final String textIndent) {
-        setStyleLengthAttribute(TEXT_INDENT.getAttributeName(), textIndent, "", false, true, false, false);
+    public void setTextIndent(final Object textIndent) {
+        setStyleLengthAttribute(TEXT_INDENT.getAttributeName(), textIndent, "", false, true, false, false, false);
     }
 
     /**
@@ -2430,8 +2435,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param top the new attribute
      */
     @JsxSetter
-    public void setTop(final String top) {
-        setStyleLengthAttribute(TOP.getAttributeName(), top, "", true, true, false, false);
+    public void setTop(final Object top) {
+        setStyleLengthAttribute(TOP.getAttributeName(), top, "", true, true, false, false, false);
     }
 
     /**
@@ -2448,9 +2453,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param verticalAlign the new attribute
      */
     @JsxSetter
-    public void setVerticalAlign(final String verticalAlign) {
+    public void setVerticalAlign(final Object verticalAlign) {
         final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
-        setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), verticalAlign, "", auto, true, false, false);
+        setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), verticalAlign, "", auto, true, false, false, false);
     }
 
     /**
@@ -2467,8 +2472,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param width the new attribute
      */
     @JsxSetter
-    public void setWidth(final String width) {
-        setStyleLengthAttribute(WIDTH.getAttributeName(), width, "", true, true, false, false);
+    public void setWidth(final Object width) {
+        setStyleLengthAttribute(WIDTH.getAttributeName(), width, "", true, true, false, false, false);
     }
 
     /**
@@ -2563,9 +2568,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param wordSpacing the new attribute
      */
     @JsxSetter
-    public void setWordSpacing(final String wordSpacing) {
+    public void setWordSpacing(final Object wordSpacing) {
         setStyleLengthAttribute(WORD_SPACING.getAttributeName(), wordSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false);
+                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false, false);
     }
 
     /**
@@ -2721,25 +2726,31 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         if (LENGTH_PROPERTIES_FFFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, false, false, false);
+            setStyleLengthAttribute(name, value, imp, false, false, false, false,
+                    getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (LENGTH_PROPERTIES_TTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, true, true, false, false);
+            setStyleLengthAttribute(name, value, imp, true, true, false, false,
+                    getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (LENGTH_PROPERTIES_FTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, true, false, false);
+            setStyleLengthAttribute(name, value, imp, false, true, false, false,
+                    getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (OUTLINE_WIDTH.getAttributeName().equals(name)) {
             final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
-            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), value, "", false, false, true, requiresUnit);
+            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), value, "", false, false, true, requiresUnit,
+                    getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (WORD_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(WORD_SPACING.getAttributeName(), value, "",
-                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false);
+                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false,
+                    getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (VERTICAL_ALIGN.getAttributeName().equals(name)) {
             final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
-            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, "", auto, true, false, false);
+            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, "", auto, true, false, false,
+                    getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else {
             setStyleAttribute(name, Context.toString(value), imp);
@@ -3167,15 +3178,25 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param value the attribute value
      * @param important important value
      * @param auto true if auto is supported
-     * @param perecent true if percent is supported
      * @param thinMedThick thin, medium, thick are supported
      * @param unitRequired unit is required
+     * @param undefinedAsEmpty TODO
+     * @param perecent true if percent is supported
+     * @param undefinedAsEmpty true if undefined should be handled like an empty string
      */
     private void setStyleLengthAttribute(final String name, final Object value, final String important,
-                final boolean auto, final boolean percent, final boolean thinMedThick, final boolean unitRequired) {
+                final boolean auto, final boolean percent, final boolean thinMedThick, final boolean unitRequired,
+                final boolean undefinedAsEmpty) {
+
+        if (ScriptRuntime.NaNobj == value) {
+            return;
+        }
 
         String valueString = Context.toString(value);
-        if (Undefined.instance == value && getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY)) {
+        if (undefinedAsEmpty && Undefined.instance == value) {
+            valueString = "";
+        }
+        else  if (null == value) {
             valueString = "";
         }
 
