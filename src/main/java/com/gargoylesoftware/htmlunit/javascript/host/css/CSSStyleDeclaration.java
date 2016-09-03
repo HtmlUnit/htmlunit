@@ -3251,6 +3251,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
         try {
             final float floatValue = Float.parseFloat(valueString);
+            if (Float.isNaN(floatValue)) {
+                return;
+            }
+
             if (floatValue % 1 == 0) {
                 valueString = Integer.toString((int) floatValue) + unit;
             }
