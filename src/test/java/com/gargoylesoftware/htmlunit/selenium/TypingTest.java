@@ -45,7 +45,6 @@ public class TypingTest extends SeleniumTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void shouldBeAbleToUseArrowKeys() throws Exception {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -59,7 +58,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void shouldReportKeyCodeOfArrowKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -92,7 +90,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void shouldReportKeyCodeOfArrowKeysUpDownEvents() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -176,7 +173,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void testArrowKeysAndPageUpAndDown() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -191,7 +187,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void homeAndEndAndPageUpAndPageDownKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -227,7 +222,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void specialSpaceKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -241,7 +235,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void numberpadKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
