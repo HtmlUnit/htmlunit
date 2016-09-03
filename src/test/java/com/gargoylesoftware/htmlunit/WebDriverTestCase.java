@@ -67,7 +67,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
+import org.openqa.selenium.htmlunit.PatchedHtmlUnitKeyboard;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
@@ -342,6 +344,37 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws IOException in case of exception
      */
     protected WebDriver buildWebDriver() throws IOException {
+        // Yes, you are right, having a local inner class is strange
+        // but because of visibility problems i need this construct
+        // to patch the HtmlUnitDriver for the moment.
+        final class PatchedHtmlUnitDriver extends HtmlUnitDriver {
+            private Keyboard originalKeyboard_;
+            private Keyboard keyboard_;
+
+            private PatchedHtmlUnitDriver(final boolean enableJavascript) {
+                super(enableJavascript);
+                originalKeyboard_ = getKeyboard();
+            }
+
+            @Override
+            protected WebClient newWebClient(final BrowserVersion browserVersion) {
+                return webClient_;
+            }
+
+            @Override
+            protected WebElement newHtmlUnitWebElement(final DomElement element) {
+                return new FixedWebDriverHtmlUnitWebElement(this, element);
+            }
+
+            @Override
+            public Keyboard getKeyboard() {
+                if (keyboard_ == null || originalKeyboard_ != super.getKeyboard()) {
+                    keyboard_ = new PatchedHtmlUnitKeyboard(this);
+                }
+                return keyboard_;
+            }
+        }
+
         if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {
@@ -388,17 +421,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
         }
-        return new HtmlUnitDriver(true) {
-            @Override
-            protected WebClient newWebClient(final BrowserVersion browserVersion) {
-                return webClient_;
-            }
-
-            @Override
-            protected WebElement newHtmlUnitWebElement(final DomElement element) {
-                return new FixedWebDriverHtmlUnitWebElement(this, element);
-            }
-        };
+        return new PatchedHtmlUnitDriver(true);
     }
 
     /**
