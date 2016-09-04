@@ -3192,74 +3192,85 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
-        String valueString = Context.toString(value);
-        if (undefinedAsEmpty && Undefined.instance == value) {
-            valueString = "";
-        }
-        else  if (null == value) {
-            valueString = "";
-        }
-
-        if (StringUtils.isEmpty(valueString)) {
-            setStyleAttribute(name, valueString);
-            return;
-        }
-
-        if ((auto && "auto".equals(valueString))
-                || ("initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
-                || "inherit".equals(valueString)) {
-            setStyleAttribute(name, valueString);
-            return;
-        }
-
-        if ((thinMedThick && "thin".equals(valueString))
-                || "medium".equals(valueString)
-                || "thick".equals(valueString)) {
-            setStyleAttribute(name, valueString);
-            return;
-        }
-
+        final double doubleValue;
         String unit = "px";
-        if (percent && valueString.endsWith("%")) {
-            unit = valueString.substring(valueString.length() - 1);
-            valueString = valueString.substring(0, valueString.length() - 1);
+        if (value instanceof Number) {
+            if (unitRequired) {
+                return;
+            }
+            doubleValue = ((Number) value).doubleValue();
         }
-        else if (valueString.endsWith("px")
-            || valueString.endsWith("em")
-            || valueString.endsWith("ex")
-            || valueString.endsWith("px")
-            || valueString.endsWith("cm")
-            || valueString.endsWith("mm")
-            || valueString.endsWith("in")
-            || valueString.endsWith("pc")
-            || valueString.endsWith("pc")
-            || valueString.endsWith("ch")
-            || valueString.endsWith("vh")
-            || valueString.endsWith("vw")) {
-            unit = valueString.substring(valueString.length() - 2);
-            valueString = valueString.substring(0, valueString.length() - 2);
-        }
-        else if (valueString.endsWith("rem")
-            || valueString.endsWith("vmin")
-            || valueString.endsWith("vmax")) {
-            unit = valueString.substring(valueString.length() - 3);
-            valueString = valueString.substring(0, valueString.length() - 3);
-        }
-        else if (unitRequired) {
-            return;
-        }
+        else {
+            String valueString = Context.toString(value);
+            if (undefinedAsEmpty && Undefined.instance == value) {
+                valueString = "";
+            }
+            else  if (null == value) {
+                valueString = "";
+            }
 
-        try {
-            final float floatValue = Float.parseFloat(valueString);
-            if (Float.isNaN(floatValue)) {
+            if (StringUtils.isEmpty(valueString)) {
+                setStyleAttribute(name, valueString);
                 return;
             }
 
-            if (floatValue % 1 == 0) {
-                valueString = Integer.toString((int) floatValue) + unit;
+            if ((auto && "auto".equals(valueString))
+                    || ("initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
+                    || "inherit".equals(valueString)) {
+                setStyleAttribute(name, valueString);
+                return;
+            }
+
+            if ((thinMedThick && "thin".equals(valueString))
+                    || "medium".equals(valueString)
+                    || "thick".equals(valueString)) {
+                setStyleAttribute(name, valueString);
+                return;
+            }
+
+            if (percent && valueString.endsWith("%")) {
+                unit = valueString.substring(valueString.length() - 1);
+                valueString = valueString.substring(0, valueString.length() - 1);
+            }
+            else if (valueString.endsWith("px")
+                || valueString.endsWith("em")
+                || valueString.endsWith("ex")
+                || valueString.endsWith("px")
+                || valueString.endsWith("cm")
+                || valueString.endsWith("mm")
+                || valueString.endsWith("in")
+                || valueString.endsWith("pc")
+                || valueString.endsWith("pc")
+                || valueString.endsWith("ch")
+                || valueString.endsWith("vh")
+                || valueString.endsWith("vw")) {
+                unit = valueString.substring(valueString.length() - 2);
+                valueString = valueString.substring(0, valueString.length() - 2);
+            }
+            else if (valueString.endsWith("rem")
+                || valueString.endsWith("vmin")
+                || valueString.endsWith("vmax")) {
+                unit = valueString.substring(valueString.length() - 3);
+                valueString = valueString.substring(0, valueString.length() - 3);
+            }
+            else if (unitRequired) {
+                return;
+            }
+
+            doubleValue = Context.toNumber(valueString);
+        }
+
+        try {
+            if (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) {
+                return;
+            }
+
+            final String valueString;
+            if (doubleValue % 1 == 0) {
+                valueString = Integer.toString((int) doubleValue) + unit;
             }
             else {
-                valueString = Float.toString(floatValue) + unit;
+                valueString = Double.toString(doubleValue) + unit;
             }
 
             setStyleAttribute(name, valueString, important);
