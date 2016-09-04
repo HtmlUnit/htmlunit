@@ -2739,17 +2739,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         else if (OUTLINE_WIDTH.getAttributeName().equals(name)) {
             final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
-            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), value, "", false, false, true, requiresUnit,
+            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), value, imp, false, false, true, requiresUnit,
                     getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (WORD_SPACING.getAttributeName().equals(name)) {
-            setStyleLengthAttribute(WORD_SPACING.getAttributeName(), value, "",
+            setStyleLengthAttribute(WORD_SPACING.getAttributeName(), value, imp,
                     false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false,
                     getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else if (VERTICAL_ALIGN.getAttributeName().equals(name)) {
             final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
-            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, "", auto, true, false, false,
+            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, imp, auto, true, false, false,
                     getBrowserVersion().hasFeature(CSS_LENGTH_UNDEFINED_AS_EMPTY));
         }
         else {
@@ -3210,21 +3210,21 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             }
 
             if (StringUtils.isEmpty(valueString)) {
-                setStyleAttribute(name, valueString);
+                setStyleAttribute(name, valueString, important);
                 return;
             }
 
             if ((auto && "auto".equals(valueString))
                     || ("initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
                     || "inherit".equals(valueString)) {
-                setStyleAttribute(name, valueString);
+                setStyleAttribute(name, valueString, important);
                 return;
             }
 
             if ((thinMedThick && "thin".equals(valueString))
                     || "medium".equals(valueString)
                     || "thick".equals(valueString)) {
-                setStyleAttribute(name, valueString);
+                setStyleAttribute(name, valueString, important);
                 return;
             }
 
