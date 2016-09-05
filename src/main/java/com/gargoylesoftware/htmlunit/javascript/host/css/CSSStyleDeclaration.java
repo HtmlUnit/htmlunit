@@ -1865,11 +1865,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
         final String trimedOpacity = opacity.trim();
         try {
-            final float value = Float.parseFloat(trimedOpacity);
+            final double value = Double.parseDouble(trimedOpacity);
             if (value % 1 == 0) {
                 return Integer.toString((int) value);
             }
-            return Float.toString(value);
+            return Double.toString(value);
         }
         catch (final NumberFormatException e) {
             // ignore wrong value
@@ -1882,19 +1882,37 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param opacity the new attribute
      */
     @JsxSetter
-    public void setOpacity(final String opacity) {
-        if (opacity.isEmpty()) {
-            setStyleAttribute(OPACITY.getAttributeName(), opacity);
+    public void setOpacity(final Object opacity) {
+        if (ScriptRuntime.NaNobj == opacity) {
+            return;
         }
 
-        final String trimedOpacity = opacity.trim();
-        try {
-            Float.parseFloat(trimedOpacity);
-            setStyleAttribute(OPACITY.getAttributeName(), trimedOpacity);
+        final double doubleValue;
+        if (opacity instanceof Number) {
+            doubleValue = ((Number) opacity).doubleValue();
         }
-        catch (final NumberFormatException e) {
-            // ignore wrong value
+        else {
+            String valueString = Context.toString(opacity);
+
+            if (valueString.isEmpty()) {
+                setStyleAttribute(OPACITY.getAttributeName(), valueString);
+                return;
+            }
+
+            valueString = valueString.trim();
+            try {
+                doubleValue = Double.parseDouble(valueString);
+            }
+            catch (final NumberFormatException e) {
+                // ignore wrong value
+                return;
+            }
         }
+
+        if (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) {
+            return;
+        }
+        setStyleAttribute(OPACITY.getAttributeName(), Double.toString(doubleValue));
     }
 
     /**
@@ -3008,7 +3026,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 token = token.substring(0, token.length() - 2);
             }
             try {
-                Float.parseFloat(token);
+                Double.parseDouble(token);
                 return true;
             }
             catch (final NumberFormatException e) {

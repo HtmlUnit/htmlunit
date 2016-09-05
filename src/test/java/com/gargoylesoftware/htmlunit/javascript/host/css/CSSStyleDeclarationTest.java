@@ -410,7 +410,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(" 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ")
+    @Alerts(" 0.5 0.4 0.33333 -3 3 8 7 7 7 7 7 ")
     public void setOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d'>d</div>\n"
@@ -431,6 +431,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "d.style.opacity = '8';\n"
             + "s += d.style.opacity + ' ';\n"
             + "d.style.opacity = ' 7 ';\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = NaN;\n"
             + "s += d.style.opacity + ' ';\n"
             + "d.style.opacity = '10px';\n"
             + "s += d.style.opacity + ' ';\n"
