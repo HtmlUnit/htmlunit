@@ -171,7 +171,16 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix flipX() {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        result.setA(fieldA_ * -1);
+        result.setB(fieldB_ * -1);
+        result.setC(fieldC_);
+        result.setD(fieldD_);
+        result.setE(fieldE_);
+        result.setF(fieldF_);
+
+        return result;
     }
 
     /**
@@ -180,7 +189,16 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix flipY() {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        result.setA(fieldA_);
+        result.setB(fieldB_);
+        result.setC(fieldC_ * -1);
+        result.setD(fieldD_ * -1);
+        result.setE(fieldE_);
+        result.setF(fieldF_);
+
+        return result;
     }
 
     /**
@@ -189,7 +207,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix inverse() {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        return new SVGMatrix(getWindow());
     }
 
     /**
@@ -230,7 +248,16 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix scale(final double factor) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        result.setA(fieldA_ * factor);
+        result.setB(fieldB_ * factor);
+        result.setC(fieldC_ * factor);
+        result.setD(fieldD_ * factor);
+        result.setE(fieldE_);
+        result.setF(fieldF_);
+
+        return result;
     }
 
     /**

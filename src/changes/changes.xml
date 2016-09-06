@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Simple impl for SVGMatrix flipX/flipY/scale added.
+            </action>
             <action type="fix" dev="rbri" issue="1813">
                 JavaScript: CSSStyleDeclaration fix handling of null and NaN for length properties.
             </action>

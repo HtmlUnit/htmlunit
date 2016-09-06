@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -111,6 +112,74 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  alert(typeof m.skewX);\n"
             + "  alert(typeof m.skewY);\n"
             + "  alert(typeof m.translate);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-1, -2, 3, 4, 5, 6"})
+    public void flipX() throws Exception {
+        transformTest("flipX()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1, 2, -3, -4, 5, 6"})
+    public void flipY() throws Exception {
+        transformTest("flipY()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"-2, 1, 1.5, -0.5, 1, -2"})
+    @NotYetImplemented
+    public void inverse() throws Exception {
+        transformTest("inverse()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3, 6, 9, 12, 5, 6"})
+    public void scale() throws Exception {
+        transformTest("scale(3)");
+    }
+
+    private void transformTest(final String transforamtion) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
+            + "  </svg>\n"
+            + "<script>\n"
+            + "function alertFields(m) {\n"
+            + "  var fields = ['a', 'b', 'c', 'd', 'e', 'f'];\n"
+            + "  for (var i = 0; i < fields.length; i++) {\n"
+            + "    fields[i] = m[fields[i]];\n"
+            + "  }\n"
+            + "  alert(fields.join(', '));\n"
+            + "}\n"
+            + "var svg =  document.getElementById('myId');\n"
+            + "try {\n"
+            + "  var m = svg.createSVGMatrix();\n"
+            + "  m.a = 1;\n"
+            + "  m.b = 2;\n"
+            + "  m.c = 3;\n"
+            + "  m.d = 4;\n"
+            + "  m.e = 5;\n"
+            + "  m.f = 6;\n"
+            + "  m = m." + transforamtion + ";\n"
+            + "  alertFields(m);\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
