@@ -101,19 +101,20 @@ class XPathAdapter {
      */
     private static String preProcessXPath(String xpath, final boolean caseSensitive,
             final boolean attributeCaseSensitive) {
-        final char[] charArray = xpath.toCharArray();
         if (!caseSensitive) {
+            final char[] charArray = xpath.toCharArray();
             processOutsideBrackets(charArray);
-        }
-        xpath = new String(charArray);
+            xpath = new String(charArray);
 
-        if (!attributeCaseSensitive) {
-            final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
-            while (matcher.find()) {
-                final String attribute = matcher.group(1);
-                xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
+            if (!attributeCaseSensitive) {
+                final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
+                while (matcher.find()) {
+                    final String attribute = matcher.group(1);
+                    xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
+                }
             }
         }
+
         return xpath;
     }
 
