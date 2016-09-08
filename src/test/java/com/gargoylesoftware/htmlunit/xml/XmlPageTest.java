@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +32,11 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 
 /**
  * Tests for {@link XmlPage}.
@@ -44,6 +47,20 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class XmlPageTest extends WebServerTestCase {
+
+    /**
+     * Test for issue #1817.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final WebClient webClient = new WebClient();
+        final String content = "<msg></msg>";
+        final StringWebResponse response = new StringWebResponse(content, new URL("http://www.test.com"));
+        final XmlPage xmlPage = new XmlPage(response, webClient.getCurrentWindow());
+
+        assertEquals("todo", ((DomElement) xmlPage.getFirstByXPath("/msg")).asText());
+    }
 
     /**
      * Tests namespace.
@@ -256,6 +273,32 @@ public class XmlPageTest extends WebServerTestCase {
              + "</foo>";
         final XmlPage xmlPage = testDocument(html, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
+    }
+
+    /**
+     * Test for issue #1820.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void xpathAttribute() throws Exception {
+        final String html
+            = "<?xml version=\"1.0\"?>\n"
+             + "<foo>\n"
+             + "    <MARKGR INTREGN=\"1289218\" BILING=\"Y\" OOCD=\"CH\" INTREGD=\"20160111\">\n"
+             + "    </MARKGR>\n"
+             + "</foo>";
+        final XmlPage xmlPage = testDocument(html, "text/xml");
+
+        assertEquals(1, xmlPage.getByXPath("//MARKGR").size());
+        assertNotNull(xmlPage.getFirstByXPath("//MARKGR"));
+
+        assertEquals(0, xmlPage.getByXPath("//markgr").size());
+        assertNull(xmlPage.getFirstByXPath("//markgr"));
+
+        // assertEquals(1, xmlPage.getByXPath("//markgr/@intregn").size());
+        assertEquals(1, xmlPage.getByXPath("//MARKGR/@INTREGN").size());
+        // assertEquals(1, xmlPage.getByXPath("//MARKGR/@intregn").size());
+        // assertNotNull("c", xmlPage.getFirstByXPath("//MARKGR/@INTREGN"));
     }
 
     /**

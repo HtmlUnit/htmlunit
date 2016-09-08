@@ -17,14 +17,15 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEPARATE_HEADERS_BLANK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -218,14 +219,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
             final Object[] params = new Event[] {event};
-            if (!browser.hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+            final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
+            if (lengthComputable) {
                 event.setLengthComputable(true);
             }
 
             if (webResponse_ != null) {
                 final long contentLength = webResponse_.getContentLength();
                 event.setLoaded(contentLength);
-                if (!browser.hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+                if (lengthComputable) {
                     event.setTotal(contentLength);
                 }
             }
@@ -346,7 +348,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webResponse_ != null) {
             final String encoding = webResponse_.getContentCharset();
             String defaultEncoding = null;
-            if (getBrowserVersion().hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE)) {
+            if (getBrowserVersion().hasFeature(XHR_USE_DEFAULT_CHARSET_FROM_PAGE)) {
                 defaultEncoding = ((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset();
             }
             if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {

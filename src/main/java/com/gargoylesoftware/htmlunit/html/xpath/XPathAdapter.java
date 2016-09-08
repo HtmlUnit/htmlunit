@@ -105,13 +105,13 @@ class XPathAdapter {
             final char[] charArray = xpath.toCharArray();
             processOutsideBrackets(charArray);
             xpath = new String(charArray);
+        }
 
-            if (!attributeCaseSensitive) {
-                final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
-                while (matcher.find()) {
-                    final String attribute = matcher.group(1);
-                    xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
-                }
+        if (!attributeCaseSensitive) {
+            final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
+            while (matcher.find()) {
+                final String attribute = matcher.group(1);
+                xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
             }
         }
 

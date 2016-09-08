@@ -1607,6 +1607,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
 
+    /** ProgressEvent.lengthComputable is true. */
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
+    XHR_LENGTH_COMPUTABLE,
+
     /** A cross origin request to {@code about:blank} is not allowed. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
@@ -1626,6 +1630,10 @@ public enum BrowserVersionFeatures {
     /** Chrome uses an additional blank here. */
     @BrowserFeature(@WebBrowser(CHROME))
     XHR_SEPARATE_HEADERS_BLANK,
+
+    /** Indicates that the request uses the charset from the requesting page. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    XHR_USE_DEFAULT_CHARSET_FROM_PAGE,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(@WebBrowser(IE))
