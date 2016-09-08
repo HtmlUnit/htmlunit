@@ -1048,9 +1048,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1240px", "auto"},
-            FF = {"1242px", "auto"})
-    @NotYetImplemented
+    @Alerts({"111px", "auto"})
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1062,8 +1060,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "     alert(cs2.width);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "  <div id='myDiv1'></div>\n"
-            + "  <div id='myDiv2' style='display:none'/>\n"
+            + "  <div style='width: 111px'>\n"
+            + "    <div id='myDiv1'></div>\n"
+            + "    <div id='myDiv2' style='display:none'/>\n"
+            + "  </div>\n"
             + "</body></html>";
         loadPageWithAlerts2(content);
     }
