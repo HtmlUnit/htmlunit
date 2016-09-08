@@ -51,12 +51,11 @@ public class XmlPageTest extends WebServerTestCase {
      */
     @Test
     public void asText() throws Exception {
-        // final WebClient webClient = new WebClient();
         // final String content = "<msg></msg>";
         // final StringWebResponse response = new StringWebResponse(content, new URL("http://www.test.com"));
-        // final XmlPage xmlPage = new XmlPage(response, webClient.getCurrentWindow());
+        // final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
 
-        // TODO assertEquals("todo", ((DomElement) xmlPage.getFirstByXPath("/msg")).asText());
+        // assertEquals("todo", ((DomElement) xmlPage.getFirstByXPath("/msg")).asText());
     }
 
     /**
