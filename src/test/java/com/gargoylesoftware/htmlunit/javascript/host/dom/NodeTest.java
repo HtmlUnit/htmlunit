@@ -48,6 +48,30 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({"[object HTMLSpanElement]", "[object Text]", "null"})
+    public void lastChild() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "function doTest() {\n"
+                + "    alert(document.getElementById('myNode').lastChild);\n"
+                + "    alert(document.getElementById('onlyTextNode').lastChild);\n"
+                + "    alert(document.getElementById('emptyNode').lastChild);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "  <div id='myNode'>hello world<span>Child Node</span></div>\n"
+                + "  <div id='onlyTextNode'>hello</div>\n"
+                + "  <div id='emptyNode'></div>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
     @Alerts("true")
     public void hasChildNodes_true() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
