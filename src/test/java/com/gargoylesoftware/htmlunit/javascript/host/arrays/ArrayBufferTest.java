@@ -106,7 +106,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception"})
+    @Alerts("exception")
     @NotYetImplemented
     public void sliceInvalidStartIndexTrue() throws Exception {
         sliceInvalidIndex("true");
@@ -134,7 +134,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0"})
+    @Alerts("0")
     public void sliceInvalidEndIndexNumberString() throws Exception {
         sliceInvalidIndex("4, '4'");
     }
@@ -143,7 +143,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0"})
+    @Alerts("0")
     public void sliceInvalidEndIndexString() throws Exception {
         sliceInvalidIndex("4, 'four'");
     }
@@ -152,7 +152,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0"})
+    @Alerts("0")
     public void sliceInvalidEndIndexTrue() throws Exception {
         sliceInvalidIndex("4, true");
     }
@@ -161,7 +161,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0"})
+    @Alerts("0")
     public void sliceInvalidEndIndexNaN() throws Exception {
         sliceInvalidIndex("4, NaN");
     }
@@ -170,7 +170,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0"})
+    @Alerts("0")
     public void sliceInvalidEndIndexNull() throws Exception {
         sliceInvalidIndex("4, null");
     }
