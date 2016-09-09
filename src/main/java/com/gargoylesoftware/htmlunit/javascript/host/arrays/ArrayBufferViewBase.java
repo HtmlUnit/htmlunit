@@ -138,7 +138,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      */
     @Override
     public void put(final int index, final Scriptable start, final Object value) {
-        getBuffer().setBytes(index * getBytesPerElement() + getByteOffset(), toArray((Number) value));
+        getBuffer().setBytes(index * getBytesPerElement() + getByteOffset(), toArray(Context.toNumber(value)));
     }
 
     /**

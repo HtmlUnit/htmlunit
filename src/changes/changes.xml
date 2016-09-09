@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Value processing fixed for our FloatXX/IntXX Array constructor. The conversion for
+                the values of the provided array works now; there is no longer a NPE.
+            </action>
             <action type="fix" dev="rbri" issue="1820">
                 XPath attribute query has to take care of case for xml files.
             </action>
