@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ArrayBufferViewTest extends WebDriverTestCase {
@@ -107,6 +108,7 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -158,5 +160,4 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
-
 }

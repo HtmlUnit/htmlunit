@@ -30,6 +30,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass(isJSObject = false)
 public class ArrayBufferViewBase extends ArrayBufferView {
