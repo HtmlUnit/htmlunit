@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -73,6 +74,121 @@ public class ArrayBufferTest extends WebDriverTestCase {
             + "    x[1] = 6789;\n"
             + "    alert(x[1]);\n"
             + "    alert(y[0]);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "1234", "0"})
+    public void sliceInvalidStartIndexNumberString() throws Exception {
+        sliceInvalidIndex("'4'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "0", "1234", "0"})
+    public void sliceInvalidStartIndexString() throws Exception {
+        sliceInvalidIndex("'four'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"exception"})
+    @NotYetImplemented
+    public void sliceInvalidStartIndexTrue() throws Exception {
+        sliceInvalidIndex("true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "0", "1234", "0"})
+    public void sliceInvalidStartIndexNaN() throws Exception {
+        sliceInvalidIndex("NaN");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "0", "1234", "0"})
+    public void sliceInvalidStartIndexNull() throws Exception {
+        sliceInvalidIndex("null");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0"})
+    public void sliceInvalidEndIndexNumberString() throws Exception {
+        sliceInvalidIndex("4, '4'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0"})
+    public void sliceInvalidEndIndexString() throws Exception {
+        sliceInvalidIndex("4, 'four'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0"})
+    public void sliceInvalidEndIndexTrue() throws Exception {
+        sliceInvalidIndex("4, true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0"})
+    public void sliceInvalidEndIndexNaN() throws Exception {
+        sliceInvalidIndex("4, NaN");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0"})
+    public void sliceInvalidEndIndexNull() throws Exception {
+        sliceInvalidIndex("4, null");
+    }
+
+    private void sliceInvalidIndex(final String index) throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var buffer = new ArrayBuffer(12);\n"
+            + "    var x = new Int32Array(buffer);\n"
+            + "    x[1] = 1234;\n"
+            + "    var slice = buffer.slice(" + index + ");\n"
+            + "    var y = new Int32Array(slice);\n"
+            + "    alert(y.length);\n"
+            + "    for(var i = 0; i < y.length; i++) {\n"
+            + "      alert(y[i]);\n"
+            + "    }\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"

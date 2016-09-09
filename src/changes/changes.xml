@@ -9,6 +9,9 @@
     <body>
         <release version="2.24" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Parameter processing fixed for our FloatXX/IntXX Array slice.
+            </action>
+            <action type="fix" dev="rbri">
                 Value processing fixed for our FloatXX/IntXX Array constructor. The conversion for
                 the values of the provided array works now; there is no longer a NPE.
             </action>

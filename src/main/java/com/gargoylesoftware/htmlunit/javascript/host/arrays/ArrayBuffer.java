@@ -20,6 +20,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -60,11 +61,20 @@ public class ArrayBuffer extends SimpleScriptable {
      * @return the newly created ArrayBuffer
      */
     @JsxFunction
-    public ArrayBuffer slice(final int begin, Object end) {
+    public ArrayBuffer slice(final int begin, final Object end) {
+        double endNumber;
         if (end == Undefined.instance) {
-            end = getByteLength();
+            endNumber = getByteLength();
         }
-        final byte[] byteArray = new byte[((Number) end).intValue() - begin];
+        else {
+            endNumber = Context.toNumber(end);
+        }
+
+        if (Double.isNaN(endNumber) || Double.isInfinite(endNumber) || endNumber < begin) {
+            endNumber = begin;
+        }
+
+        final byte[] byteArray = new byte[(int) endNumber - begin];
         System.arraycopy(bytes_, begin, byteArray, 0, byteArray.length);
         final ArrayBuffer arrayBuffer = new ArrayBuffer();
         arrayBuffer.bytes_ = byteArray;
