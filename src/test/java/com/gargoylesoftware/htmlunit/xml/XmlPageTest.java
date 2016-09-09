@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
  * Tests for {@link XmlPage}.
@@ -291,10 +292,11 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(0, xmlPage.getByXPath("//markgr").size());
         assertNull(xmlPage.getFirstByXPath("//markgr"));
 
-        // assertEquals(1, xmlPage.getByXPath("//markgr/@intregn").size());
         assertEquals(1, xmlPage.getByXPath("//MARKGR/@INTREGN").size());
-        // assertEquals(1, xmlPage.getByXPath("//MARKGR/@intregn").size());
-        // assertNotNull("c", xmlPage.getFirstByXPath("//MARKGR/@INTREGN"));
+        assertTrue(xmlPage.getFirstByXPath("//MARKGR/@INTREGN") instanceof DomAttr);
+
+        assertEquals(0, xmlPage.getByXPath("//MARKGR/@intregn").size());
+        assertNull(xmlPage.getFirstByXPath("//MARKGR/@intregn"));
     }
 
     /**
