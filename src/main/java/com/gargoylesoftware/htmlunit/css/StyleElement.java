@@ -55,8 +55,8 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
         name_ = name;
         value_ = value;
         priority_ = priority;
-        index_ = index;
         specificity_ = specificity;
+        index_ = index;
     }
 
     /**
@@ -65,17 +65,8 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      * @param value the style element's value
      * @param index the style element's index
      */
-    protected StyleElement(final String name, final String value, final long index) {
+    public StyleElement(final String name, final String value, final long index) {
         this(name, value, "", SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
-    }
-
-    /**
-     * Creates a new default instance.
-     * @param name the style element's name
-     * @param value the style element's value
-     */
-    public StyleElement(final String name, final String value) {
-        this(name, value, Long.MIN_VALUE);
     }
 
     /**
@@ -119,18 +110,6 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     }
 
     /**
-     * Returns {@code true} if this style element contains a default value. This method isn't
-     * currently used anywhere because default style elements are applied before non-default
-     * style elements, so the natural ordering results in correct precedence rules being applied
-     * (i.e. default style elements don't override non-default style elements) without the need
-     * for special checks.
-     * @return {@code true} if this style element contains a default value
-     */
-    public boolean isDefault() {
-        return index_ == Long.MIN_VALUE;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -146,7 +125,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
         if (e != null) {
             final long styleIndex = e.index_;
             // avoid conversion to long
-            return (index_ < styleIndex) ? -1 : (index_ == styleIndex) ? 0 : 1;
+            return Long.compare(index_, styleIndex);
         }
         return 1;
     }
