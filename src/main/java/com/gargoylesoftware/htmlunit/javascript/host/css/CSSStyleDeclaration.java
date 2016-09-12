@@ -126,9 +126,7 @@ import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.css.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -225,10 +223,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
     private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
-
-    /** Cache for the styles. */
-    private String styleString_ = new String();
-    private Map<String, StyleElement> styleMap_;
 
     static {
         CSSColors_.put("aqua", "rgb(0, 255, 255)");
@@ -495,35 +489,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
-        replaceStyleAttribute(name, newValue, important);
-    }
-
-    /**
-     * Replaces the value of the named style attribute. If there is no style attribute with the
-     * specified name, a new one is added. If the specified value is an empty (or all whitespace)
-     * string, this method actually removes the named style attribute.
-     * @param name the attribute name (delimiter-separated, not camel-cased)
-     * @param value the attribute value
-     * @param priority  the new priority of the property; <code>"important"</code>or the empty string if none.
-     */
-    private void replaceStyleAttribute(final String name, final String value, final String priority) {
-        if (StringUtils.isBlank(value)) {
-            removeStyleAttribute(name);
-        }
-        else {
-            final Map<String, StyleElement> styleMap = getStyleMap();
-            final StyleElement old = styleMap.get(name);
-            final StyleElement element;
-            if (old == null) {
-                element = new StyleElement(name, value, priority, SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
-            }
-            else {
-                element = new StyleElement(name, value, priority,
-                        SelectorSpecificity.FROM_STYLE_ATTRIBUTE, old.getIndex());
-            }
-            styleMap.put(name, element);
-            jsElement_.getDomNodeOrDie().writeStyleToElement(styleMap);
-        }
+        jsElement_.getDomNodeOrDie().replaceStyleAttribute(name, newValue, important);
     }
 
     /**
@@ -535,14 +501,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return styleDeclaration_.removeProperty(name);
         }
 
-        final Map<String, StyleElement> styleMap = getStyleMap();
-        final StyleElement value = styleMap.get(name);
-        if (value == null) {
-            return "";
-        }
-        styleMap.remove(name);
-        jsElement_.getDomNodeOrDie().writeStyleToElement(styleMap);
-        return value.getValue();
+        return jsElement_.getDomNodeOrDie().removeStyleAttribute(name);
     }
 
     /**
@@ -555,38 +514,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         if (jsElement_ == null) {
             return Collections.emptyMap();
         }
-        final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
-        if (styleString_ == styleAttribute) {
-            return styleMap_;
-        }
-
-        final Map<String, StyleElement> styleMap = new LinkedHashMap<>();
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
-            styleMap_ = styleMap;
-            styleString_ = styleAttribute;
-            return styleMap_;
-        }
-
-        for (final String token : StringUtils.split(styleAttribute, ';')) {
-            final int index = token.indexOf(":");
-            if (index != -1) {
-                final String key = token.substring(0, index).trim().toLowerCase(Locale.ROOT);
-                String value = token.substring(index + 1).trim();
-                String priority = "";
-                if (StringUtils.endsWithIgnoreCase(value, "!important")) {
-                    priority = StyleElement.PRIORITY_IMPORTANT;
-                    value = value.substring(0, value.length() - 10);
-                    value = value.trim();
-                }
-                final StyleElement element = new StyleElement(key, value, priority,
-                        SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
-                styleMap.put(key, element);
-            }
-        }
-
-        styleMap_ = styleMap;
-        styleString_ = styleAttribute;
-        return styleMap_;
+        return jsElement_.getDomNodeOrDie().getStyleMap();
     }
 
     /**

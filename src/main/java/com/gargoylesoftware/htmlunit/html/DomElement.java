@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.css.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -84,6 +85,10 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<>();
+
+    /** Cache for the styles. */
+    private String styleString_ = new String();
+    private Map<String, StyleElement> styleMap_;
 
     /**
      * Whether the Mouse is currently over this element or not.
@@ -166,6 +171,97 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     @Override
     public boolean hasAttribute(final String attributeName) {
         return attributes_.containsKey(attributeName);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Replaces the value of the named style attribute. If there is no style attribute with the
+     * specified name, a new one is added. If the specified value is an empty (or all whitespace)
+     * string, this method actually removes the named style attribute.
+     * @param name the attribute name (delimiter-separated, not camel-cased)
+     * @param value the attribute value
+     * @param priority  the new priority of the property; <code>"important"</code>or the empty string if none.
+     */
+    public void replaceStyleAttribute(final String name, final String value, final String priority) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            removeStyleAttribute(name);
+            return;
+        }
+
+        final Map<String, StyleElement> styleMap = getStyleMap();
+        final StyleElement old = styleMap.get(name);
+        final StyleElement element;
+        if (old == null) {
+            element = new StyleElement(name, value, priority, SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
+        }
+        else {
+            element = new StyleElement(name, value, priority,
+                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE, old.getIndex());
+        }
+        styleMap.put(name, element);
+        writeStyleToElement(styleMap);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Removes the specified style attribute, returning the value of the removed attribute.
+     * @param name the attribute name (delimiter-separated, not camel-cased)
+     * @return the removed value
+     */
+    public String removeStyleAttribute(final String name) {
+        final Map<String, StyleElement> styleMap = getStyleMap();
+        final StyleElement value = styleMap.get(name);
+        if (value == null) {
+            return "";
+        }
+        styleMap.remove(name);
+        writeStyleToElement(styleMap);
+        return value.getValue();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns a sorted map containing style elements, keyed on style element name. We use a
+     * {@link LinkedHashMap} map so that results are deterministic and are thus testable.
+     *
+     * @return a sorted map containing style elements, keyed on style element name
+     */
+    public Map<String, StyleElement> getStyleMap() {
+        final String styleAttribute = getAttribute("style");
+        if (styleString_ == styleAttribute) {
+            return styleMap_;
+        }
+
+        final Map<String, StyleElement> styleMap = new LinkedHashMap<>();
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
+            styleMap_ = styleMap;
+            styleString_ = styleAttribute;
+            return styleMap_;
+        }
+
+        for (final String token : org.apache.commons.lang3.StringUtils.split(styleAttribute, ';')) {
+            final int index = token.indexOf(":");
+            if (index != -1) {
+                final String key = token.substring(0, index).trim().toLowerCase(Locale.ROOT);
+                String value = token.substring(index + 1).trim();
+                String priority = "";
+                if (org.apache.commons.lang3.StringUtils.endsWithIgnoreCase(value, "!important")) {
+                    priority = StyleElement.PRIORITY_IMPORTANT;
+                    value = value.substring(0, value.length() - 10);
+                    value = value.trim();
+                }
+                final StyleElement element = new StyleElement(key, value, priority,
+                                                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
+                styleMap.put(key, element);
+            }
+        }
+
+        styleMap_ = styleMap;
+        styleString_ = styleAttribute;
+        return styleMap_;
     }
 
     /**
