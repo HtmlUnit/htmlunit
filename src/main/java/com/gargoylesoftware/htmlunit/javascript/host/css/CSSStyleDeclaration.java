@@ -169,9 +169,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
-    /** CSS important property constant. */
-    protected static final String PRIORITY_IMPORTANT = "important";
-
     private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
     private static final Pattern URL_PATTERN =
         Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
@@ -583,7 +580,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 String value = token.substring(index + 1).trim();
                 String priority = "";
                 if (StringUtils.endsWithIgnoreCase(value, "!important")) {
-                    priority = PRIORITY_IMPORTANT;
+                    priority = StyleElement.PRIORITY_IMPORTANT;
                     value = value.substring(0, value.length() - 10);
                     value = value.trim();
                 }
@@ -2731,16 +2728,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         String imp = "";
         if (!StringUtils.isEmpty(important) && !"null".equals(important)) {
             if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
-                if (!PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
+                if (!StyleElement.PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
                     return;
                 }
             }
             else {
-                if (!PRIORITY_IMPORTANT.equals(important)) {
+                if (!StyleElement.PRIORITY_IMPORTANT.equals(important)) {
                     return;
                 }
             }
-            imp = PRIORITY_IMPORTANT;
+            imp = StyleElement.PRIORITY_IMPORTANT;
         }
 
         if (LENGTH_PROPERTIES_FFFF.contains(name)) {

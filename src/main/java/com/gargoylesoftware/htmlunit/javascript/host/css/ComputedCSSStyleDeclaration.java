@@ -279,10 +279,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private void applyLocalStyleAttribute(final String name, final String newValue, final String priority,
             final SelectorSpecificity specificity) {
-        if (!PRIORITY_IMPORTANT.equals(priority)) {
+        if (!StyleElement.PRIORITY_IMPORTANT.equals(priority)) {
             final StyleElement existingElement = localModifications_.get(name);
             if (existingElement != null) {
-                if (PRIORITY_IMPORTANT.equals(existingElement.getPriority())) {
+                if (StyleElement.PRIORITY_IMPORTANT.equals(existingElement.getPriority())) {
                     return; // can't override a !important rule by a normal rule. Ignore it!
                 }
                 else if (specificity.compareTo(existingElement.getSpecificity()) < 0) {
@@ -325,8 +325,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
 
             // replace if !IMPORTANT
-            if (PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
-                if (PRIORITY_IMPORTANT.equals(existent.getPriority())) {
+            if (StyleElement.PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
+                if (StyleElement.PRIORITY_IMPORTANT.equals(existent.getPriority())) {
                     if (existent.getSpecificity().compareTo(localStyleMod.getSpecificity()) < 0) {
                         return localStyleMod;
                     }

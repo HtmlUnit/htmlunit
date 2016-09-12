@@ -33,6 +33,9 @@ import java.io.Serializable;
  * @author Frank Danek
  */
 public class StyleElement implements Comparable<StyleElement>, Serializable {
+    /** CSS important property constant. */
+    public static final String PRIORITY_IMPORTANT = "important";
+
     private final String name_;
     private final String value_;
     private final String priority_;
