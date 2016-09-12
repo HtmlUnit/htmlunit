@@ -230,9 +230,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private String styleString_ = new String();
     private Map<String, StyleElement> styleMap_;
 
-    /** The current style element index. */
-    private long currentElementIndex_;
-
     static {
         CSSColors_.put("aqua", "rgb(0, 255, 255)");
         CSSColors_.put("black", "rgb(0, 0, 0)");
@@ -516,15 +513,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         else {
             final Map<String, StyleElement> styleMap = getStyleMap();
             final StyleElement old = styleMap.get(name);
-            final long index;
-            if (old != null) {
-                index = old.getIndex();
+            final StyleElement element;
+            if (old == null) {
+                element = new StyleElement(name, value, priority, SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
             }
             else {
-                index = getCurrentElementIndex();
+                element = new StyleElement(name, value, priority,
+                        SelectorSpecificity.FROM_STYLE_ATTRIBUTE, old.getIndex());
             }
-            final StyleElement element = new StyleElement(name, value, priority,
-                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
             styleMap.put(name, element);
             jsElement_.getDomNodeOrDie().writeStyleToElement(styleMap);
         }
@@ -583,7 +579,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                     value = value.trim();
                 }
                 final StyleElement element = new StyleElement(key, value, priority,
-                        SelectorSpecificity.FROM_STYLE_ATTRIBUTE, getCurrentElementIndex());
+                        SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
                 styleMap.put(key, element);
             }
         }
@@ -591,18 +587,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         styleMap_ = styleMap;
         styleString_ = styleAttribute;
         return styleMap_;
-    }
-
-    /**
-     * Returns the current style element index. An index is assigned to each style element so that
-     * we can determine which style elements have precedence over others.
-     *
-     * This method also takes care of incrementing the index for the next use.
-     *
-     * @return the current style element index
-     */
-    protected long getCurrentElementIndex() {
-        return currentElementIndex_++;
     }
 
     /**

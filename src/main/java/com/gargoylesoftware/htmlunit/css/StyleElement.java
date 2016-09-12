@@ -36,6 +36,9 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     /** CSS important property constant. */
     public static final String PRIORITY_IMPORTANT = "important";
 
+    /** The current style element index. */
+    private static long ElementIndex_ = 0;
+
     private final String name_;
     private final String value_;
     private final String priority_;
@@ -63,10 +66,21 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      * Creates a new instance.
      * @param name the style element's name
      * @param value the style element's value
-     * @param index the style element's index
+     * @param priority the style element's priority like "important"
+     * @param specificity the specificity of the rule providing this style information
      */
-    public StyleElement(final String name, final String value, final long index) {
-        this(name, value, "", SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
+    public StyleElement(final String name, final String value, final String priority,
+            final SelectorSpecificity specificity) {
+        this(name, value, priority, specificity, ElementIndex_++);
+    }
+
+    /**
+     * Creates a new instance.
+     * @param name the style element's name
+     * @param value the style element's value
+     */
+    public StyleElement(final String name, final String value) {
+        this(name, value, "", SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
     }
 
     /**

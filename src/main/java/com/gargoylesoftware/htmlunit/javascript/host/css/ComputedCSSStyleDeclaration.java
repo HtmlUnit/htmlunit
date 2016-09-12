@@ -290,7 +290,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
             }
         }
-        final StyleElement element = new StyleElement(name, newValue, priority, specificity, getCurrentElementIndex());
+        final StyleElement element = new StyleElement(name, newValue, priority, specificity);
         localModifications_.put(name, element);
     }
 
@@ -303,7 +303,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param newValue the value of the style attribute to set
      */
     public void setDefaultLocalStyleAttribute(final String name, final String newValue) {
-        final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
+        final StyleElement element = new StyleElement(name, newValue);
         localModifications_.put(name, element);
     }
 
