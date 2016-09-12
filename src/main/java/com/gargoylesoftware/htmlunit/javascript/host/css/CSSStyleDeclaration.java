@@ -114,8 +114,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -528,7 +526,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final StyleElement element = new StyleElement(name, value, priority,
                     SelectorSpecificity.FROM_STYLE_ATTRIBUTE, index);
             styleMap.put(name, element);
-            writeToElement(styleMap);
+            jsElement_.getDomNodeOrDie().writeStyleToElement(styleMap);
         }
     }
 
@@ -547,7 +545,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return "";
         }
         styleMap.remove(name);
-        writeToElement(styleMap);
+        jsElement_.getDomNodeOrDie().writeStyleToElement(styleMap);
         return value.getValue();
     }
 
@@ -593,27 +591,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         styleMap_ = styleMap;
         styleString_ = styleAttribute;
         return styleMap_;
-    }
-
-    private void writeToElement(final Map<String, StyleElement> styleMap) {
-        final StringBuilder buffer = new StringBuilder();
-        final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
-        for (final StyleElement e : sortedValues) {
-            if (buffer.length() != 0) {
-                buffer.append(" ");
-            }
-            buffer.append(e.getName());
-            buffer.append(": ");
-            buffer.append(e.getValue());
-
-            final String prio = e.getPriority();
-            if (StringUtils.isNotBlank(prio)) {
-                buffer.append(" !");
-                buffer.append(prio);
-            }
-            buffer.append(";");
-        }
-        jsElement_.getDomNodeOrDie().setAttribute("style", buffer.toString());
     }
 
     /**

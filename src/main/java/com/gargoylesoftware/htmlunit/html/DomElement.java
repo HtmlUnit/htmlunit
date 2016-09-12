@@ -31,6 +31,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,6 +49,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -398,6 +401,32 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             return attributes_.get(qualifiedName);
         }
         return null;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param styleMap the styles
+     */
+    public void writeStyleToElement(final Map<String, StyleElement> styleMap) {
+        final StringBuilder buffer = new StringBuilder();
+        final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
+        for (final StyleElement e : sortedValues) {
+            if (buffer.length() != 0) {
+                buffer.append(" ");
+            }
+            buffer.append(e.getName());
+            buffer.append(": ");
+            buffer.append(e.getValue());
+
+            final String prio = e.getPriority();
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(prio)) {
+                buffer.append(" !");
+                buffer.append(prio);
+            }
+            buffer.append(";");
+        }
+        setAttribute("style", buffer.toString());
     }
 
     /**
