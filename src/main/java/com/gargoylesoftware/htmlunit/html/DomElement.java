@@ -524,8 +524,6 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         }
         final String value = buffer.toString();
         setAttribute("style", value);
-        // update the marker also, there is no need to re parse
-        styleString_ = value;
     }
 
     /**
