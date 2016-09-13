@@ -69,7 +69,7 @@ public class ExternalTest {
                 }
             }
             assertVersion("org.sonatype.oss", "oss-parent", "9");
-            assertChromeDriver("2.23");
+            assertChromeDriver("2.24");
         }
     }
 
