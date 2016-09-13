@@ -352,11 +352,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the StyleElement or null if not found
      */
     protected StyleElement getStyleElement(final String name) {
-        final Map<String, StyleElement> map = getStyleMap();
-        if (map != null) {
-            return map.get(name);
+        if (jsElement_ == null) {
+            return null;
         }
-        return null;
+        return jsElement_.getDomNodeOrDie().getStyleElement(name);
     }
 
     /**
@@ -367,13 +366,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the StyleElement or null if not found
      */
     private StyleElement getStyleElementCaseInSensitive(final String name) {
-        final Map<String, StyleElement> map = getStyleMap();
-        for (final Map.Entry<String, StyleElement> entry : map.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase(name)) {
-                return entry.getValue();
-            }
+        if (jsElement_ == null) {
+            return null;
         }
-        return null;
+        return jsElement_.getDomNodeOrDie().getStyleElementCaseInSensitive(name);
     }
 
     /**
@@ -1628,14 +1624,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return Undefined.instance;
         }
 
-        final int size = getStyleMap().size();
+        final Map<String, StyleElement> style = getStyleMap();
+        final int size = style.size();
         if (index >= size) {
             if (getBrowserVersion().hasFeature(JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED)) {
                 return Undefined.instance;
             }
             return "";
         }
-        return getStyleMap().keySet().toArray(new String[size])[index];
+        return style.keySet().toArray(new String[size])[index];
     }
 
     /**

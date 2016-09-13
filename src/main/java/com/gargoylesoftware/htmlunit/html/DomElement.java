@@ -224,6 +224,41 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
+     * Determines the StyleElement for the given name.
+     *
+     * @param name the name of the requested StyleElement
+     * @return the StyleElement or null if not found
+     */
+    public StyleElement getStyleElement(final String name) {
+        final Map<String, StyleElement> map = getStyleMap();
+        if (map != null) {
+            return map.get(name);
+        }
+        return null;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Determines the StyleElement for the given name.
+     * This ignores the case of the name.
+     *
+     * @param name the name of the requested StyleElement
+     * @return the StyleElement or null if not found
+     */
+    public StyleElement getStyleElementCaseInSensitive(final String name) {
+        final Map<String, StyleElement> map = getStyleMap();
+        for (final Map.Entry<String, StyleElement> entry : map.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(name)) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns a sorted map containing style elements, keyed on style element name. We use a
      * {@link LinkedHashMap} map so that results are deterministic and are thus testable.
      *
