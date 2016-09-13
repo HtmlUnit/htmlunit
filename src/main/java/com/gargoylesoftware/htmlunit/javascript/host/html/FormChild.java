@@ -39,5 +39,4 @@ public class FormChild extends HTMLElement {
         }
         return (HTMLFormElement) getScriptableFor(form);
     }
-
 }

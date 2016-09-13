@@ -2553,4 +2553,26 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLFormElement]")
+    public void form() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <select id='a'>\n"
+            + "      <option name='option1' value='value1'>One</option>\n"
+            + "    </select>\n"
+            + "  </form>"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a').form);\n"
+            + "  </script>"
+            + "</body>"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

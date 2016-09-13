@@ -1816,4 +1816,24 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLFormElement]")
+    public void form() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='a'>\n"
+            + "  </form>"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a').form);\n"
+            + "  </script>"
+            + "</body>"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }
