@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,13 +44,17 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     public void htmlFor() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            = "<html>\n"
+            + "<head><title>First</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
             + "    document.getElementById('label1').htmlFor = 'checkbox1';\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "<label id='label1'>My Label</label>\n"
-            + "<input type='checkbox' id='checkbox1'><br>\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <label id='label1'>My Label</label>\n"
+            + "  <input type='checkbox' id='checkbox1'>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -151,7 +158,9 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLFormElement]")
+    @Alerts(DEFAULT = "[object HTMLFormElement]",
+            CHROME = "null")
+    @NotYetImplemented(CHROME)
     public void form() throws Exception {
         final String html
             = "<html>\n"
