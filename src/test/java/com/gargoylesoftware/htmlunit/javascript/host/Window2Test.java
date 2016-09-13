@@ -659,7 +659,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "89", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "93", "true", "true", "16"},
             FF = {"true", "true", "94", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
@@ -683,7 +683,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"679", "1256", "662", "1239"},
+    @Alerts(CHROME = {"675", "1256", "658", "1239"},
             FF = {"674", "1258", "657", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented

@@ -154,9 +154,16 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
         final String html
-            = "<html><body><form><label id='a'>a</label></form><script>\n"
-            + "alert(document.getElementById('a').form);\n"
-            + "</script></body></html>";
+            = "<html>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <label id='a'>a</label>"
+            + "  </form>"
+            + "  <script>\n"
+            + "    alert(document.getElementById('a').form);\n"
+            + "  </script>"
+            + "</body>"
+            + "</html>";
         loadPageWithAlerts2(html);
     }
 }

@@ -2079,10 +2079,10 @@ public final class StyleAttributes {
         RUBY_POSITION_("ruby-position", "ruby-position", ff("over")),
 
         /** The style property {@code rx}. */
-        RX("rx", "rx", chrome("0px")),
+        RX("rx", "rx", chrome("auto")),
 
         /** The style property {@code ry}. */
-        RY("ry", "ry", chrome("0px")),
+        RY("ry", "ry", chrome("auto")),
 
         /** The style property {@code scrollBehavior}. */
         SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff("auto")),
@@ -2369,6 +2369,9 @@ public final class StyleAttributes {
         /** The style property {@code text-shadow}. */
         TEXT_SHADOW_("text-shadow", "text-shadow", ff("none")),
 
+        /** The style property {@code textShadow}. */
+        TEXT_SIZE_ADJUST("textSizeAdjust", "text-size-adjust", chrome("auto")),
+
         /** The style property {@code textTransform}. */
         TEXT_TRANSFORM("textTransform", "text-transform", chrome("none"), ff("none"), ie("none")),
 
@@ -2579,9 +2582,6 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitColumnBreakInside}. */
         WEBKIT_COLUMN_BREAK_INSIDE("webkitColumnBreakInside", "webkit-column-break-inside", chrome("auto")),
-
-        /** The style property {@code webkitFilter}. */
-        WEBKIT_FILTER("webkitFilter", "webkit-filter", chrome("none")),
 
         /** The style property {@code webkitFontSizeDelta}. */
         WEBKIT_FONT_SIZE_DELTA("webkitFontSizeDelta", "webkit-font-size-delta", chrome("")),

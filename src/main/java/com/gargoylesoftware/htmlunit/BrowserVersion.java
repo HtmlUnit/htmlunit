@@ -147,9 +147,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36",
         51, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
@@ -316,18 +316,18 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 22.0 r0", "undefined", "pepflashplayer.dll");
+                "Shockwave Flash 23.0 r0", "undefined", "pepflashplayer.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 22.0 r0", "22.0.0.192", "NPSWF32_22_0_0_192.dll");
+                "Shockwave Flash 23.0 r0", "23.0.0.162", "NPSWF32_23_0_0_162.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_38.getPlugins().add(flash);
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 22.0 r0", "22.0.0.209", "NPSWF32_22_0_0_209.dll");
+                "Shockwave Flash 23.0 r0", "23.0.0.162", "NPSWF32_23_0_0_162.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
