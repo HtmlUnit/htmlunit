@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -79,5 +80,19 @@ public class HTMLLabelElement extends FormChild {
             return null;
         }
         return (HTMLElement) ((HtmlElement) elem).getScriptableObject();
+    }
+
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    @Override
+    public HTMLFormElement getForm() {
+        if (getBrowserVersion().hasFeature(JS_LABEL_FORM_NULL)) {
+            return null;
+        }
+        return super.getForm();
     }
 }
