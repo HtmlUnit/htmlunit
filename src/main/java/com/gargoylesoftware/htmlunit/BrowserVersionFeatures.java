@@ -1422,7 +1422,7 @@ public enum BrowserVersionFeatures {
      * Difference of window.outer/inner height is 89.
      */
     @BrowserFeature(@WebBrowser(CHROME))
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_89,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93,
 
     /**
      * Difference of window.outer/inner height is 94.

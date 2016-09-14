@@ -1238,9 +1238,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        final int windowHeight = getElement().getWindow().getWebWindow().getInnerHeight();
+        final Element elem = getElement();
+        final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
 
-        if (getElement() instanceof HTMLBodyElement) {
+        if (elem instanceof HTMLBodyElement) {
             height2_ = windowHeight;
             return windowHeight;
         }
@@ -1251,7 +1252,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (node instanceof HtmlDivision && node.getTextContent().trim().isEmpty()) {
             defaultHeight = 0;
         }
-        else if (getElement().getFirstChild() == null) {
+        else if (elem.getFirstChild() == null) {
             if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
                 defaultHeight = 13;
             }
@@ -1286,9 +1287,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
 
-        final int defaultWindowHeight = getElement() instanceof HTMLCanvasElement ? 150 : windowHeight;
+        final int defaultWindowHeight = elem instanceof HTMLCanvasElement ? 150 : windowHeight;
 
-        int height = pixelValue(getElement(), new CssValue(defaultHeight, defaultWindowHeight) {
+        int height = pixelValue(elem, new CssValue(defaultHeight, defaultWindowHeight) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 final Element element = style.getElement();
                 if (element instanceof HTMLBodyElement) {
