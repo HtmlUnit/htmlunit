@@ -102,6 +102,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.css.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -565,8 +566,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final Element elem = getElement();
+        final DomElement domElem = elem.getDomNodeOrDie();
         boolean changeValueIfEmpty = false;
-        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
+        if (!domElem.isAttachedToPage()) {
             final BrowserVersion browserVersion = getBrowserVersion();
             if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
@@ -577,8 +579,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         final String value = super.getStyleAttribute(DISPLAY, false);
         if (StringUtils.isEmpty(value)) {
-            if (elem instanceof HTMLElement) {
-                final String defaultValue = ((HTMLElement) elem).getDefaultStyleDisplay();
+            if (domElem instanceof HtmlElement) {
+                final String defaultValue = ((HtmlElement) domElem).getDefaultStyleDisplay().value();
                 if (changeValueIfEmpty) {
                     switch (defaultValue) {
                         case "inline":
