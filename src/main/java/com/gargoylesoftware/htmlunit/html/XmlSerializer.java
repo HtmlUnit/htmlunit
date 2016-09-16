@@ -48,7 +48,7 @@ class XmlSerializer {
     private final StringBuilder indent_ = new StringBuilder();
     private File outputDir_;
 
-    public void save(final HtmlPage page, final File file) throws IOException {
+    public void save(final SgmlPage page, final File file) throws IOException {
         String fileName = file.getName();
         if (!fileName.endsWith(".htm") && !fileName.endsWith(".html")) {
             fileName += ".html";
@@ -63,12 +63,11 @@ class XmlSerializer {
     }
 
     /**
-     * Converts an HTML element to XML.
      * @param node a node
-     * @return the text representation according to the setting of this serializer
+     * @return the xml representation according to the setting of this serializer
      * @throws IOException in case of problem saving resources
      */
-    public String asXml(final HtmlElement node) throws IOException {
+    public String asXml(final DomElement node) throws IOException {
         buffer_.setLength(0);
         indent_.setLength(0);
         final SgmlPage page = node.getPage();
