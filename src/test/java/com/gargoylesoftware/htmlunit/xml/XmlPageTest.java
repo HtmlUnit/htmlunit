@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
  * Tests for {@link XmlPage}.
@@ -61,6 +62,17 @@ public class XmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void asTextOnlyText() throws Exception {
+        final StringWebResponse response = new StringWebResponse("<msg>abc</msg>", new URL("http://www.test.com"));
+        final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
+
+        assertEquals("abc", ((DomText) xmlPage.getFirstByXPath("/msg/text()")).asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void asTextComplex() throws Exception {
         final String xml
                 = "<msg>1"
@@ -72,6 +84,18 @@ public class XmlPageTest extends WebServerTestCase {
                 + "</h2>o"
                 + "</msg>";
         asText(xml, "1h1h2h3txto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextPart() throws Exception {
+        final String xml
+                = "<outer>outer"
+                + "<msg><h1>h1</h1></msg>"
+                + "xy</outer>";
+        asText(xml, "h1");
     }
 
     /**
@@ -87,7 +111,7 @@ public class XmlPageTest extends WebServerTestCase {
         final StringWebResponse response = new StringWebResponse(xml, new URL("http://www.test.com"));
         final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
 
-        assertEquals(expected, ((DomElement) xmlPage.getFirstByXPath("/msg")).asText());
+        assertEquals(expected, ((DomElement) xmlPage.getFirstByXPath("//msg")).asText());
     }
 
     /**

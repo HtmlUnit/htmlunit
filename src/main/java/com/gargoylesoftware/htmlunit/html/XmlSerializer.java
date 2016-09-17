@@ -117,7 +117,12 @@ class XmlSerializer {
     public String asText(final DomNode node) {
         buffer_.setLength(0);
 
-        printText(node);
+        if (node instanceof DomText) {
+            buffer_.append(((DomText) node).getData());
+        }
+        else {
+            printText(node);
+        }
 
         final String response = buffer_.toString();
         buffer_.setLength(0);
