@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,10 +32,12 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 
 /**
  * Tests for {@link XmlPage}.
@@ -47,16 +50,44 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 public class XmlPageTest extends WebServerTestCase {
 
     /**
-     * Test for issue #1817.
      * @throws Exception if the test fails
      */
     @Test
     public void asText() throws Exception {
-        // final String content = "<msg></msg>";
-        // final StringWebResponse response = new StringWebResponse(content, new URL("http://www.test.com"));
-        // final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
+        asText("<msg>abc</msg>", "abc");
+    }
 
-        // assertEquals("todo", ((DomElement) xmlPage.getFirstByXPath("/msg")).asText());
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextComplex() throws Exception {
+        final String xml
+                = "<msg>1"
+                + "<h1>h1</h1>"
+                + "<h2>h2"
+                + "<h3>h3</h3>"
+                + "<h3></h3>"
+                + "txt"
+                + "</h2>o"
+                + "</msg>";
+        asText(xml, "1h1h2h3txto");
+    }
+
+    /**
+     * Test for issue #1817.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextEmpty() throws Exception {
+        asText("<msg></msg>", "");
+    }
+
+    private void asText(final String xml, final String expected) throws Exception {
+        final StringWebResponse response = new StringWebResponse(xml, new URL("http://www.test.com"));
+        final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
+
+        assertEquals(expected, ((DomElement) xmlPage.getFirstByXPath("/msg")).asText());
     }
 
     /**

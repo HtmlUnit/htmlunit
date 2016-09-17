@@ -110,6 +110,32 @@ class XmlSerializer {
     }
 
     /**
+     * @param node a node
+     * @return the text representation according to the setting of this serializer
+     * @throws IOException in case of problem saving resources
+     */
+    public String asText(final DomNode node) {
+        buffer_.setLength(0);
+
+        printText(node);
+
+        final String response = buffer_.toString();
+        buffer_.setLength(0);
+        return response;
+    }
+
+    protected void printText(final DomNode node) {
+        for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof DomText) {
+                buffer_.append(((DomText) child).getData());
+            }
+            else {
+                printText(child);
+            }
+        }
+    }
+
+    /**
      * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
      * and its attributes in XML format.
      * @param node the node whose opening tag is to be printed
