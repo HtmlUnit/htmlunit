@@ -78,7 +78,30 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "function", "function", "function", "function"})
+    @Alerts(FF38 = {"window.console.timeStamp not available"},
+            IE = {"window.console.timeStamp not available"})
+    public void timeStamp() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  if (window.console && window.console.timeStamp) {\n"
+            + "    console.timeStamp();\n"
+            + "    console.timeStamp('ready');\n"
+            + "  } else { alert('window.console.timeStamp not available');}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function"},
+            FF38 = {"function", "function", "function", "function", "function", "undefined"},
+            IE = {"function", "function", "function", "function", "function", "undefined"})
     public void methods() throws Exception {
         final String html
             = "<html>\n"
@@ -90,6 +113,7 @@ public class ConsoleTest extends WebDriverTestCase {
             + "    alert(typeof console.warn);\n"
             + "    alert(typeof console.error);\n"
             + "    alert(typeof console.debug);\n"
+            + "    alert(typeof console.timeStamp);\n"
             + "  } else { alert('window.console not available');}\n"
             + "</script>\n"
             + "</body></html>";

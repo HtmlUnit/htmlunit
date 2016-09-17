@@ -266,6 +266,14 @@ public class Console extends SimpleScriptable {
     }
 
     /**
+     * Because there is no timeline in HtmlUnit this does nothing.
+     * @param label the label
+     */
+    @JsxFunction({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    public void timeStamp(final String label) {
+    }
+
+    /**
      * This class is the default formatter used by Console.
      */
     private static class ConsoleFormatter implements Formatter {
