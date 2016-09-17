@@ -844,4 +844,11 @@ public class HtmlForm extends HtmlElement {
         isPreventDefault_ = true;
     }
 
+    /**
+     * Browsers have problems with self closing form tags.
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

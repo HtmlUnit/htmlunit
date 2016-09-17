@@ -1348,4 +1348,32 @@ public class HtmlFormTest extends SimpleWebTestCase {
         urlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
             getDefaultUrl() + "test.html?hi");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml_emptyTag() throws Exception {
+        final String html =
+            "<html><body>\n"
+            + "<form></form>\n"
+            + "<div>test</div>\n"
+            + "</body></html>";
+
+        final String xml =
+            "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+            + "<html>\r\n"
+            + "  <head/>\r\n"
+            + "  <body>\r\n"
+            + "    <form>\r\n"
+            + "    </form>\r\n"
+            + "    <div>\r\n"
+            + "      test\r\n"
+            + "    </div>\r\n"
+            + "  </body>\r\n"
+            + "</html>\r\n";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(xml, page.asXml());
+    }
 }
