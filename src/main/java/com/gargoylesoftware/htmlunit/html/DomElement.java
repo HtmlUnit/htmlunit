@@ -328,15 +328,15 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         printOpeningTagContentAsXml(printWriter);
 
         if (hasChildren || isEmptyXmlTagExpanded()) {
-            printWriter.print(">");
-            printWriter.print("\r\n");
+            printWriter.print(">\r\n");
             printChildrenAsXml(indent, printWriter);
-            printWriter.print(indent + "</" + getTagName() + ">");
-            printWriter.print("\r\n");
+            printWriter.print(indent);
+            printWriter.print("</");
+            printWriter.print(getTagName());
+            printWriter.print(">\r\n");
         }
         else {
-            printWriter.print("/>");
-            printWriter.print("\r\n");
+            printWriter.print("/>\r\n");
         }
     }
 
