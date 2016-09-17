@@ -85,4 +85,21 @@ public class PerformanceTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void methods() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(typeof performance.now);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
