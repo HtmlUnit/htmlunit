@@ -77,6 +77,7 @@ public class HtmlScript extends HtmlElement {
     private static final String SLASH_SLASH_COLON = "//:";
 
     private boolean executed_;
+    private boolean createdByJavascript_;
 
     /**
      * Creates an instance of HtmlScript
@@ -568,5 +569,26 @@ public class HtmlScript extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.NONE;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
     }
 }

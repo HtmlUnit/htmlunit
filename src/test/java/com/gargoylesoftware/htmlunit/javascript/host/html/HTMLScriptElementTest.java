@@ -1070,6 +1070,32 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"undefined", "append", "append done", "from script", "undefined"})
+    public void asyncOnLoad() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + "  var script = document.createElement('script');\n"
+                + "  alert(script.readyState);\n"
+                + "  script.src = 'js.js';\n"
+                + "  script.async = true;\n"
+                + "  script.onload = function () {\n"
+                + "    alert(this.readyState);\n"
+                + "  };\n"
+                + "  alert('append');\n"
+                + "  document.body.appendChild(script);\n"
+                + "  alert('append done');\n"
+                + "</script>\n"
+                + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js.js"), "alert('from script');");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"false", "null", "true", "", "true", "", "false", "null"})
     public void asyncProperty() throws Exception {
         final String html = "<html>\n"

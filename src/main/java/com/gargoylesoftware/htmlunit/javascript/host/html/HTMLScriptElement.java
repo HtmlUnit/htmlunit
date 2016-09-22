@@ -34,6 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 /**
  * The JavaScript object that represents an {@code HTMLScriptElement}.
  *
@@ -178,8 +180,12 @@ public class HTMLScriptElement extends HTMLElement {
      * @see DomNode#READY_STATE_COMPLETE
      */
     @JsxGetter(@WebBrowser(IE))
-    public String getReadyState() {
-        return getDomNodeOrDie().getReadyState();
+    public Object getReadyState() {
+        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        if (tmpScript.wasCreatedByJavascript()) {
+            return Undefined.instance;
+        }
+        return tmpScript.getReadyState();
     }
 
     /**
