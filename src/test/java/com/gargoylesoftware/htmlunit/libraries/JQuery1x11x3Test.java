@@ -5786,7 +5786,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented(IE)
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain");
     }
@@ -5797,7 +5796,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(IE)
     public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain");
     }
@@ -5808,7 +5806,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE)
     public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain");
     }
@@ -5819,7 +5816,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE)
     public void ajax__jQuery_ajax_____JSONP___POST___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - POST - Cross Domain");
     }
@@ -5830,7 +5826,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE)
     public void ajax__jQuery_ajax_____JSONP___Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Cross Domain");
     }
@@ -6131,7 +6126,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE)
     public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Cross_Domain() throws Exception {
         runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain");
     }
