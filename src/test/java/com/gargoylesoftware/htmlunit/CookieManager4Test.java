@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -119,9 +120,9 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Alerts("c1=1; c2=2")
     public void domain() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
-        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=.htmlunit.org; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=htmlunit.org; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=.htmlunit.org:" + PORT + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 "text/html", responseHeader);
 
@@ -134,13 +135,104 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("c1=1; c2=2")
+    public void domainDuplicate() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=" + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
+                "text/html", responseHeader);
+
+        final URL firstUrl = new URL(URL_HOST1);
+
+        loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c1=1; c2=2")
+    public void domainDuplicateLeadingDot() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN + "; Path=/"));
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
+                "text/html", responseHeader);
+
+        final URL firstUrl = new URL(URL_HOST1);
+
+        loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void domainDuplicateLeadingDotSend() throws Exception {
+        final String html = "<html><body>\n"
+                + "<a href='next.html'>next page</a>\n"
+                + "</body></html>";
+
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN + "; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN + "; Path=/"));
+
+        getMockWebConnection().setDefaultResponse(html, 200, "Ok", "text/html", responseHeader);
+
+        final WebDriver webDriver = getWebDriver();
+        webDriver.manage().deleteAllCookies();
+
+        loadPageWithAlerts2(new URL(URL_HOST1));
+        WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertNull(lastRequest.getAdditionalHeaders().get("Cookie"));
+
+        webDriver.findElement(By.linkText("next page")).click();
+        lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals("c1=1; c2=2", lastRequest.getAdditionalHeaders().get("Cookie"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void domainDuplicateLeadingDotRedirect() throws Exception {
+        final String html = "<html><body>\n"
+                + "<a href='next.html'>next page</a>\n"
+                + "</body></html>";
+
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN
+                                                + "; path=/; expires=Fri, 04-Feb-2022 09:00:32 GMT"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN
+                                                + "; path=/; expires=Fri, 04-Feb-2022 09:00:32 GMT"));
+
+        getMockWebConnection().setDefaultResponse(html, 200, "Ok", "text/html", responseHeader);
+
+        responseHeader.add(new NameValuePair("Location", URL_HOST1 + "next.html"));
+        getMockWebConnection().setResponse(new URL(URL_HOST1), "redirect", 301, "Ok", "text/html", responseHeader);
+
+        final WebDriver webDriver = getWebDriver();
+        webDriver.manage().deleteAllCookies();
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        loadPageWithAlerts2(new URL(URL_HOST1));
+        assertEquals(2, getMockWebConnection().getRequestCount() - startCount);
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals("c1=1; c2=2", lastRequest.getAdditionalHeaders().get("Cookie"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("c4=4")
     public void domain2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1.htmlunit.org; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2.htmlunit.org; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1." + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2." + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + DOMAIN + "; Path=/"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
 
         final String html = "<html>\n"
@@ -168,9 +260,9 @@ public class CookieManager4Test extends WebDriverTestCase {
     public void domain3() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1.htmlunit.org; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2.htmlunit.org; Path=/"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1." + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2." + DOMAIN + "; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + DOMAIN + "; Path=/"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
 
         final String html = "<html>\n"
@@ -197,7 +289,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Alerts("cross-domain=1")
     public void differentHostsSameDomain() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        responseHeader1.add(new NameValuePair("Set-Cookie", "cross-domain=1; Domain=.htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cross-domain=1; Domain=." + DOMAIN + "; Path=/"));
 
         final String html = "<html>\n"
             + "<head></head>\n"
@@ -228,7 +320,7 @@ public class CookieManager4Test extends WebDriverTestCase {
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
             + "<script>\n"
-            + "  document.cookie='cross-domain=1; Domain=.htmlunit.org; Path=/';\n"
+            + "  document.cookie='cross-domain=1; Domain=." + DOMAIN + "; Path=/';\n"
             + "  location.replace('" + URL_HOST2 + "');\n"
             + "</script>\n"
             + "</body>\n"
@@ -249,7 +341,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     public void differentHostsSameDomainCookieFromMeta() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=.htmlunit.org; Path=/'>\n"
+            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=." + DOMAIN + "; Path=/'>\n"
             + "</head>\n"
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
