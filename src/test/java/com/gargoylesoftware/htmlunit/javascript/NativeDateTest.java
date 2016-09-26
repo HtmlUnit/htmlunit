@@ -159,9 +159,9 @@ public class NativeDateTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  if (new Date().toISOString) {\n"
-            + "    alert(new Date(2005, 11, 3, 8, 14, 15).toISOString());\n"
-            + "    alert(new Date(2005, 6, 12, 13, 4, 15).toISOString());\n"
-            + "    alert(new Date(2005, 6, 3, 17, 14, 5).toISOString());\n"
+            + "    alert(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toISOString());\n"
+            + "    alert(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toISOString());\n"
+            + "    alert(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toISOString());\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -180,9 +180,9 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  alert(new Date(2005, 11, 3, 8, 14, 15).toUTCString());\n"
-            + "  alert(new Date(2005, 6, 12, 13, 4, 15).toUTCString());\n"
-            + "  alert(new Date(2005, 6, 3, 17, 14, 5).toUTCString());\n"
+            + "  alert(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toUTCString());\n"
+            + "  alert(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toUTCString());\n"
+            + "  alert(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toUTCString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -200,9 +200,9 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  alert(new Date(2005, 11, 3, 8, 14, 15).toGMTString());\n"
-            + "  alert(new Date(2005, 6, 12, 13, 4, 15).toGMTString());\n"
-            + "  alert(new Date(2005, 6, 3, 17, 14, 5).toGMTString());\n"
+            + "  alert(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toGMTString());\n"
+            + "  alert(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toGMTString());\n"
+            + "  alert(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toGMTString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
