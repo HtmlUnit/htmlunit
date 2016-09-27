@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -404,6 +406,32 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "  alert(tmp.innerHTML);\n"
             + "  alert(tmp.childNodes.length);\n"
             + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Issue #1825.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = "<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>",
+            FF = "<iframe></div></body></html></iframe>")
+    @NotYetImplemented(FF)
+    public void selfClosingIframe() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('myDiv');\n"
+            + "  alert(tmp.innerHTML);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'><iframe/></div>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
