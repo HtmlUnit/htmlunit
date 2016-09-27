@@ -330,4 +330,38 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         drawImage("1x1red_24_bit_depth.png");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"exception", "0", "true", "true"})
+    public void measureText() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var canvas = document.getElementById('myCanvas');\n"
+            + "        if (canvas.getContext){\n"
+            + "          ctx = canvas.getContext('2d');\n"
+            + "          try {\n"
+            + "            alert(ctx.measureText());\n"
+            + "          } catch(e) { alert('exception'); }\n"
+
+            + "          var metrics = ctx.measureText('');\n"
+            + "          alert(metrics.width);\n"
+
+            + "          metrics = ctx.measureText('a');\n"
+            + "          alert(metrics.width > 5);\n"
+
+            + "          metrics = ctx.measureText('abc');\n"
+            + "          alert(metrics.width > 10);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

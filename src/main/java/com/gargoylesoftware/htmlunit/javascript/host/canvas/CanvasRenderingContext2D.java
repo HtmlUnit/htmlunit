@@ -51,6 +51,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
+    /** The number of (horizontal) pixels to assume that each character occupies. */
+    private static final int PIXELS_PER_CHAR = 10;
 
     private final HTMLCanvasElement canvas_;
     private RenderingBackend renderingBackend_;
@@ -448,11 +450,26 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Dummy placeholder.
+     * Calculate TextMetrics for the given text.
+     * @param text the text to measure
+     * @return the text metrics
      */
     @JsxFunction
-    public void measureText() {
-        //empty
+    public TextMetrics measureText(final Object text) {
+        if (text == null || Undefined.instance == text) {
+            throw Context.throwAsScriptRuntimeEx(
+                    new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
+        }
+
+        final String textValue = Context.toString(text);
+
+        // TODO take font into account
+        final int width = textValue.length() * PIXELS_PER_CHAR;
+
+        final TextMetrics metrics = new TextMetrics(width);
+        metrics.setParentScope(getParentScope());
+        metrics.setPrototype(getPrototype(metrics.getClass()));
+        return metrics;
     }
 
     /**

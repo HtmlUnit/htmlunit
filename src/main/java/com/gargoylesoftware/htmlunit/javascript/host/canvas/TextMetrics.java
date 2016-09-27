@@ -21,20 +21,38 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code TextMetrics}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class TextMetrics extends SimpleScriptable {
+
+    private final int width_;
 
     /**
      * Default constructor.
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public TextMetrics() {
+        width_ = 0;
+    }
+
+    TextMetrics(final int width) {
+        width_ = width;
+    }
+
+    /**
+     * Returns the {@code width} property.
+     * @return the {@code width} property
+     */
+    @JsxGetter
+    public int getWidth() {
+        return width_;
     }
 }
