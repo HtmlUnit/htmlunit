@@ -504,10 +504,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Dummy placeholder.
+     * Renders a rectangle.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
      */
     @JsxFunction
-    public void rect() {
+    public void rect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
