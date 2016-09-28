@@ -44,7 +44,21 @@ public class GaeRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void clearRect(final int x, final int y, final int w, final int h) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void fillRect(final int x, final int y, final int w, final int h) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void strokeRect(final int x, final int y, final int w, final int h) {
     }
 
     /**

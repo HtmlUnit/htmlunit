@@ -46,8 +46,11 @@ public class AwtRenderingBackend implements RenderingBackend {
      * @param imageHeight the height
      */
     public AwtRenderingBackend(final int imageWidth, final int imageHeight) {
-        image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
+        image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D_ = image_.createGraphics();
+        graphics2D_.setBackground(new Color(0f, 0f, 0f, 0f));
+        graphics2D_.setColor(Color.black);
+        graphics2D_.clearRect(0, 0, imageWidth, imageHeight);
     }
 
     /**
@@ -86,8 +89,24 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void clearRect(final int x, final int y, final int w, final int h) {
+        graphics2D_.clearRect(x, y, w, h);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void fillRect(final int x, final int y, final int w, final int h) {
         graphics2D_.fillRect(x, y, w, h);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void strokeRect(final int x, final int y, final int w, final int h) {
+        graphics2D_.drawRect(x, y, w, h);
     }
 
     /**

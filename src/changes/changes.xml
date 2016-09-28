@@ -9,6 +9,15 @@
     <body>
         <release version="2.24" date="???" description="Bugfixes">
             <action type="add" dev="rbri">
+                JavaScript: CanvasRenderingContext2D simple implementation for clearRect, fillRect, strokeRect.
+            </action>
+            <action type="add" dev="rbri">
+                JavaScript: CanvasRenderingContext2D support for transparency added.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CanvasRenderingContext2D background color fixed.
+            </action>
+            <action type="add" dev="rbri">
                 JavaScript: simple implementation of CanvasRenderingContext2D.measureText() added
             </action>
             <action type="fix" dev="rbri" issue="1824">

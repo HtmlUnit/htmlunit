@@ -40,7 +40,25 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
+    void clearRect(final int x, final int y, final int w, final int h);
+
+    /**
+     * Paints the specified rectangular area.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
+     */
     void fillRect(final int x, final int y, final int w, final int h);
+
+    /**
+     * Paints the specified rectangular area.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
+     */
+    void strokeRect(final int x, final int y, final int w, final int h);
 
     /**
      * Draws images onto the context.
