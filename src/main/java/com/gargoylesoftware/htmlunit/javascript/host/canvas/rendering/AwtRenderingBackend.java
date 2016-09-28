@@ -144,8 +144,12 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public String encodeToString(final String type) throws IOException {
+        String imageType = type;
+        if (imageType != null && imageType.startsWith("image/")) {
+            imageType = imageType.substring(6);
+        }
         try (final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            ImageIO.write(image_, type, bos);
+            ImageIO.write(image_, imageType, bos);
 
             final byte[] imageBytes = bos.toByteArray();
             return new String(new Base64().encode(imageBytes));

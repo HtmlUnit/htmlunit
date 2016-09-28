@@ -33,7 +33,7 @@ public class CanvasRenderingContext2D2Test2 extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("data:png;base64,"
+    @Alerts("data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAHklEQVR42mNgGErgPxUwhoGUOmjUQBoYSNVY"
                 + "pgoAANSxK9UjCpiOAAAAAElFTkSuQmCC")
     public void strokeRect() throws Exception {
@@ -59,7 +59,7 @@ public class CanvasRenderingContext2D2Test2 extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("data:png;base64,"
+    @Alerts("data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAFklEQVR42mNgGErgP4V41MChYODg"
                 + "BADEpF+hx8ArfgAAAABJRU5ErkJggg==")
     public void fillRect() throws Exception {
@@ -85,7 +85,7 @@ public class CanvasRenderingContext2D2Test2 extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("data:png;base64,"
+    @Alerts("data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVR42mNgGErgP4WYfgaS64NRAwcr"
                 + "AACGL0e5EdSE/gAAAABJRU5ErkJggg==")
     public void clearRect() throws Exception {

@@ -343,7 +343,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     public String toDataURL(String type) {
         try {
             if (type == null) {
-                type = "png";
+                type = "image/png";
             }
             return "data:" + type + ";base64," + getRenderingBackend().encodeToString(type);
         }
