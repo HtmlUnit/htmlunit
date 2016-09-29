@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -462,4 +463,41 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         assertEquals("Hi Folks!", content);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>\n"
+            + "before<iframe id='iframe1' src='" + URL_SECOND + "'></iframe>after\n"
+            + "</body></html>";
+        final String secondContent = "<html><head></head><body>Second content</body></html>";
+        final WebClient client = getWebClientWithMockWebConnection();
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("First\r\nbefore\r\nSecond content\r\nafter", page.asText());
+    }
+
+    /**
+     * see issue #1825.
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts("1\r\n2")
+    public void brokenIframe() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>"
+                + "1<div>2<iframe/>3</div>4"
+                + "</body>\n"
+                + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(getExpectedAlerts()[0], page.asText());
+    }
 }

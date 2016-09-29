@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -269,6 +271,9 @@ class HtmlSerializer {
         else if (node instanceof HtmlPreformattedText) {
             appendHtmlPreformattedText((HtmlPreformattedText) node);
         }
+        else if (node instanceof HtmlInlineFrame) {
+            appendHtmlInlineFrame((HtmlInlineFrame) node);
+        }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
             return;
         }
@@ -467,6 +472,17 @@ class HtmlSerializer {
             text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             doAppend(text);
+            doAppendBlockSeparator();
+        }
+    }
+
+    private void appendHtmlInlineFrame(final HtmlInlineFrame htmlInlineFrame) {
+        if (isVisible(htmlInlineFrame)) {
+            doAppendBlockSeparator();
+            final Page page = htmlInlineFrame.getEnclosedPage();
+            if (page instanceof SgmlPage) {
+                doAppend(((SgmlPage) page).asText());
+            }
             doAppendBlockSeparator();
         }
     }
