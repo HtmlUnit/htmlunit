@@ -414,8 +414,12 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>",
-            FF = "<iframe></div></body></html></iframe>")
+    @Alerts(DEFAULT = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+                            "1", "IFRAME", "null", "1",
+                            "3", "#text", "</div></body></html>"},
+            FF = {"<iframe></div></body></html></iframe>", "1",
+                            "1", "IFRAME", "null", "1",
+                            "3", "#text", "</div></body></html>"})
     @NotYetImplemented(FF)
     public void selfClosingIframe() throws Exception {
         final String html = "<html><head>\n"
@@ -424,6 +428,19 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "try {\n"
             + "  var tmp = document.getElementById('myDiv');\n"
             + "  alert(tmp.innerHTML);\n"
+            + "  alert(tmp.childNodes.length);\n"
+
+            + "  var child = tmp.childNodes[0];\n"
+            + "  alert(child.nodeType);\n"
+            + "  alert(child.nodeName);\n"
+            + "  alert(child.nodeValue);\n"
+
+            + "  alert(child.childNodes.length);\n"
+            + "  var child2 = child.childNodes[0];\n"
+            + "  alert(child2.nodeType);\n"
+            + "  alert(child2.nodeName);\n"
+            + "  alert(child2.nodeValue);\n"
+
             + "} catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
