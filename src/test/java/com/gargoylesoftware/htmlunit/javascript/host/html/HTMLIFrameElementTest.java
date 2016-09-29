@@ -122,7 +122,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(index);
 
-        assertEquals("", page.getElementById("content").asText());
+        assertEquals("frame content", page.getElementById("content").asText());
         // check frame on page
         List<FrameWindow> frames = page.getFrames();
         assertEquals(1, frames.size());
