@@ -9,7 +9,7 @@
     <body>
         <release version="2.24" date="???" description="Bugfixes">
             <action type="fix" dev="rbri" issue="1824">
-                asText() now includes the content of iframe elements
+                asText() now includes the content of iframe elements.
             </action>
             <action type="add" dev="rbri">
                 JavaScript: CanvasRenderingContext2D simple implementation for clearRect, fillRect, strokeRect.
