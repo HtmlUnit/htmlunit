@@ -221,8 +221,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void clearRect(final double x, final double y, final double w, final double h) {
-        getRenderingBackend().clearRect((int) x, (int) y, (int) w, (int) h);
+    public void clearRect(final int x, final int y, final int w, final int h) {
+        getRenderingBackend().clearRect(x, y, w, h);
     }
 
     /**
@@ -581,8 +581,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void strokeRect(final double x, final double y, final double w, final double h) {
-        getRenderingBackend().strokeRect((int) x, (int) y, (int) w, (int) h);
+    public void strokeRect(final int x, final int y, final int w, final int h) {
+        getRenderingBackend().strokeRect(x, y, w, h);
     }
 
     /**
