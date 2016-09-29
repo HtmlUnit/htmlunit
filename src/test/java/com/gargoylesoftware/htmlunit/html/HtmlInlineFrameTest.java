@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -489,7 +488,6 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts("1\r\n2")
     public void brokenIframe() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
@@ -499,6 +497,6 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals(getExpectedAlerts()[0], page.asText());
+        assertEquals("1" + LINE_SEPARATOR + "2", page.asText());
     }
 }
