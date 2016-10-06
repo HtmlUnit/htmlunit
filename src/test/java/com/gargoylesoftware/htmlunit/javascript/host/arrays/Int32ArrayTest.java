@@ -26,7 +26,9 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
- */
+ * @author Ronald Brill
+ * @author Michael Rimov
+*/
 @RunWith(BrowserRunner.class)
 public class Int32ArrayTest extends WebDriverTestCase {
 
@@ -89,6 +91,29 @@ public class Int32ArrayTest extends WebDriverTestCase {
             + "  alert(0 in array);\n"
             + "  alert(1 in array);\n"
             + "  alert(42 in array);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "4", "undefined"})
+    public void nullValueInArray() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = [];\n"
+            + "  array[2] = 4;\n"
+            + "  var nativeArray = new Int32Array(array);\n"
+            + "  alert(nativeArray[0]);\n"
+            + "  alert(nativeArray[1]);\n"
+            + "  alert(nativeArray[2]);\n"
+            + "  alert(nativeArray[3]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

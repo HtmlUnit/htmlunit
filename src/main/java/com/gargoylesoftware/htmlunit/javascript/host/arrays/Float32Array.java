@@ -28,6 +28,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
+ * @author Michael Rimov
  */
 @JsxClass
 public class Float32Array extends ArrayBufferViewBase {
@@ -52,7 +54,7 @@ public class Float32Array extends ArrayBufferViewBase {
     protected byte[] toArray(final Number number) {
         final ByteBuffer buff = ByteBuffer.allocate(BYTES_PER_ELEMENT);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putFloat(number.floatValue());
+        buff.putFloat(number != null ? number.floatValue() : Float.NaN);
         return buff.array();
     }
 

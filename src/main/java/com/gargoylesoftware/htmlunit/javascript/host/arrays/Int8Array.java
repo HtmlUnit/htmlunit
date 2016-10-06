@@ -25,6 +25,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
+ * @author Michael Rimov
  */
 @JsxClass
 public class Int8Array extends ArrayBufferViewBase {
@@ -47,7 +49,7 @@ public class Int8Array extends ArrayBufferViewBase {
      */
     @Override
     protected byte[] toArray(final Number number) {
-        return new byte[] {number.byteValue()};
+        return new byte[] {number != null ? number.byteValue() : 0 };
     }
 
     /**

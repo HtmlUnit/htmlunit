@@ -25,6 +25,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Michael Rimov
  */
 @JsxClass
 public class Uint8ClampedArray extends ArrayBufferViewBase {
@@ -47,7 +48,7 @@ public class Uint8ClampedArray extends ArrayBufferViewBase {
      */
     @Override
     protected byte[] toArray(Number number) {
-        if (number.intValue() < 0) {
+        if (number == null || number.intValue() < 0) {
             number = 0;
         }
         else if (number.intValue() > 255) {
