@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link HTMLSelectElement}.
+ * Tests for {@link HTMLScriptElement}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
