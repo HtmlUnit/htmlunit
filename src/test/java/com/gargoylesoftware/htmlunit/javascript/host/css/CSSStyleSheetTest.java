@@ -492,6 +492,40 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         doTest(":checked", htmlSnippet);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false", "true", "false", "false", "false", "true", "true"},
+            CHROME = {"false", "false", "false", "false", "false", "false", "false", "false"})
+    public void css3_required() throws Exception {
+        final String htmlSnippet =
+            "  <input id='elt2' required>\n"
+            + "  <input id='elt3' type='text'>\n"
+            + "  <select id='elt4'></select>\n"
+            + "  <textarea id='elt5'></textarea>\n"
+            + "  <textarea id='elt6' required=false></textarea>\n"
+            + "  <textarea id='elt7' required=true></textarea>\n";
+        doTest(":required", htmlSnippet);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false", "false", "true", "true", "true", "false", "false"},
+            CHROME = {"false", "false", "false", "false", "false", "false", "false", "false"})
+    public void css3_optional() throws Exception {
+        final String htmlSnippet =
+            "  <input id='elt2' required>\n"
+            + "  <input id='elt3' type='text'>\n"
+            + "  <select id='elt4'></select>\n"
+            + "  <textarea id='elt5'></textarea>\n"
+            + "  <textarea id='elt6' required=false></textarea>\n"
+            + "  <textarea id='elt7' required=true></textarea>\n";
+        doTest(":optional", htmlSnippet);
+    }
+
     private void doTest(final String cssSelector, final String htmlSnippet) throws Exception {
         final String html = "<html id='elt0'><head><title>First</title>\n"
                 + "<style>\n"

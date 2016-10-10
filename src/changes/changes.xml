@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="add" dev="rbri" issue="1829">
+                CSS: Support for css pseudo classes 'required' and 'optional' added.
+            </action>
             <action type="fix" dev="rbri" issue="1828" due-to="Michael Rimov">
                 NPE in native arrays if typed array has a null value.
             </action>

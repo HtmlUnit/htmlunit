@@ -88,11 +88,14 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -170,7 +173,8 @@ public class CSSStyleSheet extends StyleSheet {
     private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
-            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty"));
+            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
+            "optional", "required"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -710,6 +714,18 @@ public class CSSStyleSheet extends StyleSheet {
                 return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
                         || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
                                 || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
+
+            case "required":
+                return (element instanceof HtmlInput
+                            || element instanceof HtmlSelect
+                            || element instanceof HtmlTextArea)
+                        && element.hasAttribute("required");
+
+            case "optional":
+                return (element instanceof HtmlInput
+                            || element instanceof HtmlSelect
+                            || element instanceof HtmlTextArea)
+                        && !element.hasAttribute("required");
 
             case "first-child":
                 for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
