@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * A JavaScript object for {@code HtmlTemplate}.
+ * The JavaScript object {@code HTMLTemplateElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
