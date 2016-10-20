@@ -75,8 +75,7 @@ public class ExternalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "AddSearchProvider defined",
-            CHROME = "no AddSearchProvider")
+    @Alerts("AddSearchProvider defined")
     public void addSearchProvider() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

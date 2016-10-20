@@ -55,7 +55,7 @@ public class External extends SimpleScriptable {
     /**
      * Empty implementation.
      */
-    @JsxFunction({@WebBrowser(IE), @WebBrowser(FF)})
+    @JsxFunction
     public void AddSearchProvider() {
         // dummy
     }
