@@ -22,11 +22,14 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "template".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTemplate extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "template";
+
+    private DomDocumentFragment domDocumentFragment_;
 
     /**
      * Creates a new instance.
@@ -38,6 +41,8 @@ public class HtmlTemplate extends HtmlElement {
     HtmlTemplate(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        domDocumentFragment_ = new DomDocumentFragment(page);
     }
 
     /**
@@ -46,5 +51,24 @@ public class HtmlTemplate extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.NONE;
+    }
+
+    /**
+     * @return the associated document fragment
+     */
+    public DomDocumentFragment getContent() {
+        return domDocumentFragment_;
+    }
+
+    /**
+     * Parsing of the children is done, we can move our children to the content.
+     */
+    @Override
+    protected void onAllChildrenAddedToPage(final boolean postponed) {
+        while (getFirstChild() != null) {
+            final DomNode child = getFirstChild();
+            child.basicRemove();
+            domDocumentFragment_.appendChild(child);
+        }
     }
 }

@@ -838,6 +838,35 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("\n  <ul>{{for people}}\n    <li>Name: {{:name}}</li>\n  {{/for}}</ul>\n")
+    public void specialScriptType() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script id='template' type='text/x-jsrender'>\n"
+            + "  <ul>{{for people}}\n"
+            + "    <li>Name: {{:name}}</li>\n"
+            + "  {{/for}}</ul>\n"
+            + "</script>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  script = document.getElementById('template');\n"
+            + "  alert(script.innerHTML);\n"
+            + "}\n"
+            + "</script>\n"
+
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test exception throw by IE when calling <code>appendChild</code>.
      * @throws Exception if the test fails
      */

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: missing property content added for template elements.
+            </action>
             <action type="add" dev="rbri" issue="1829">
                 CSS: Support for css pseudo classes 'required' and 'optional' added.
             </action>

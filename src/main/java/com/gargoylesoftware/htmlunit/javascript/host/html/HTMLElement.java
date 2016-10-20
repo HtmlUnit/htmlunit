@@ -787,7 +787,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             Context.throwAsScriptRuntimeEx(e);
             return "";
         }
+        return getInnerHTML(domNode);
+    }
 
+    /**
+     * Helper for getInnerHtml (to be reuses bei HTMLTemplate.
+     * @param domNode the node
+     * @return the contents of this node as HTML
+     */
+    protected String getInnerHTML(final DomNode domNode) {
         final StringBuilder buf = new StringBuilder();
 
         final String tagName = getTagName();
@@ -825,6 +833,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         return buf.toString();
     }
 
+    /**
+     * Helper for getting code back from nodes.
+     * @param buffer the buffer to write to
+     * @param node the node to be serialized
+     * @param html flag
+     */
     private void printChildren(final StringBuilder buffer, final DomNode node, final boolean html) {
         for (final DomNode child : node.getChildren()) {
             printNode(buffer, child, html);
