@@ -2738,7 +2738,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "content",
             IE = "",
             EDGE = "")
-    @NotYetImplemented({CHROME, FF})
     public void template() throws Exception {
         test("template");
     }
