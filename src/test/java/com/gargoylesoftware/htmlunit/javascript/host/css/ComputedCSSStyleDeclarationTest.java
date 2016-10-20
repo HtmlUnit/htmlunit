@@ -1389,6 +1389,24 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("0")
+    public void offsetHeight_displayNone() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' style='display: none'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "18",
             FF = "20")
     public void offsetHeight_with_content() throws Exception {
@@ -2010,6 +2028,32 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body></body>\n"
                 + "</html>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "", "auto" })
+    @NotYetImplemented
+    public void getHeightInvisible() throws Exception {
+        final String html = "<html><head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var node = document.getElementById('outer');\n"
+              + "    var style = node.style;\n"
+              + "    alert(style.height);\n"
+              + "    var style = window.getComputedStyle(node, null);\n"
+              + "    alert(style.height);\n" + "  }\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body onload='test()'>\n"
+              + "  <div id='outer' style='display: none'>\n"
+              + "    <div>line 1</div>\n"
+              + "    <div>line 2</div>\n"
+              + "  </div>\n"
+              + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
