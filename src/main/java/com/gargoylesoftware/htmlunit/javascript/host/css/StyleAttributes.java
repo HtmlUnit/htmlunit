@@ -2447,6 +2447,9 @@ public final class StyleAttributes {
         /** The style property {@code unicodeRange}. */
         UNICODE_RANGE("unicodeRange", "unicode-range", chrome("")),
 
+        /** The style property {@code userSelect}. */
+        USER_SELECT("userSelect", "user-select", chrome("text")),
+
         /** The style property {@code userZoom}. */
         USER_ZOOM("userZoom", "user-zoom", chrome("")),
 
@@ -2787,9 +2790,6 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitUserModify}. */
         WEBKIT_USER_MODIFY("webkitUserModify", "webkit-user-modify", chrome("read-only")),
-
-        /** The style property {@code webkitUserSelect}. */
-        WEBKIT_USER_SELECT("webkitUserSelect", "webkit-user-select", chrome("text")),
 
         /** The style property {@code webkitWritingMode}. */
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chrome("horizontal-tb")),
