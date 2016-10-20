@@ -62,9 +62,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "0", "cdefg"},
-            CHROME = {"0", "1", "1", "cdefg"})
-    @NotYetImplemented(CHROME)
+    @Alerts({"0", "0", "0", "cdefg"})
     public void inputSelectionsAreIndependent() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<input id='i' value='abcdefghi'/>\n"
