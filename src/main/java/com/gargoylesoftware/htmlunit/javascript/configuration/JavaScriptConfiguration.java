@@ -271,7 +271,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItem;
 import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItemList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
-import com.gargoylesoftware.htmlunit.javascript.host.file.FileError;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileReader;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
@@ -445,7 +444,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
         EventTarget.class, EXT_texture_filter_anisotropic.class, External.class, FederatedCredential.class,
-        File.class, FileError.class, FileList.class,
+        File.class, FileList.class,
         FileReader.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
         FontFaceSet.class, FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class,
         GamepadButton.class, GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,

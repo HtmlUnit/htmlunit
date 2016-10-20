@@ -5400,6 +5400,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function BroadcastChannel() { [native code] }",
             FF = "function BroadcastChannel() {\n    [native code]\n}")
     public void broadcastChannel() throws Exception {
         test("BroadcastChannel");
@@ -5613,8 +5614,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function FileError() { [native code] }")
+    @Alerts("exception")
     public void fileError() throws Exception {
         test("FileError");
     }
@@ -8867,8 +8867,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SVGZoomEvent() { [native code] }",
+            CHROME = "exception",
             FF = "function SVGZoomEvent() {\n    [native code]\n}",
             IE = "[object SVGZoomEvent]")
+    @NotYetImplemented(CHROME)
     public void svgZoomEvent() throws Exception {
         test("SVGZoomEvent");
     }
