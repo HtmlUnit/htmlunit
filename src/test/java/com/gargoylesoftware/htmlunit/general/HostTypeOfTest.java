@@ -5386,8 +5386,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void fileError() throws Exception {
         test("FileError");
     }
@@ -5730,6 +5729,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF = "function")
     public void broadcastChannel() throws Exception {
         test("BroadcastChannel");
@@ -6269,7 +6269,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             FF = "function",
             IE = "object")
     public void svgZoomEvent() throws Exception {

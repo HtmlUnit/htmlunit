@@ -8870,7 +8870,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "function SVGZoomEvent() {\n    [native code]\n}",
             IE = "[object SVGZoomEvent]")
-    @NotYetImplemented(CHROME)
     public void svgZoomEvent() throws Exception {
         test("SVGZoomEvent");
     }
