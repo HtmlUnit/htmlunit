@@ -94,7 +94,7 @@ public final class StyleAttributes {
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"),
-                ffBelow45("stretch"), ff45up("auto"), chrome("normal")),
+                ffBelow45("stretch"), ff45up("auto"), chrome("stretch")),
 
         /** The style property {@code align-content}. */
         ALIGN_CONTENT_("align-content", "align-content", ffBelow45("stretch"), ff45up("auto")),
@@ -975,7 +975,7 @@ public final class StyleAttributes {
         JUSTIFY_CONTENT("justifyContent", "justify-content",
                 ffBelow45("flex-start"),
                 ff45up("auto"),
-                ie("flex-start"), chrome("normal")),
+                ie("flex-start"), chrome("flex-start")),
 
         /** The style property {@code justify-content}. */
         JUSTIFY_CONTENT_("justify-content", "justify-content", ffBelow45("flex-start"), ff45up("auto")),
