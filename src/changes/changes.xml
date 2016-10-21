@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.7.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang to 3.5.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: missing property content added for template elements.
             </action>
