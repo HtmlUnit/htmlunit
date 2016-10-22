@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NODE_LIST_FOR_DUPLICATES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
@@ -36,6 +37,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -228,5 +231,16 @@ public class HTMLAllCollection extends HTMLCollection {
     @Override
     protected boolean supportsParanteses() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
+        if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_NODE_LIST_FOR_DUPLICATES)) {
+            return new NodeList(parentScope, initialElements);
+        }
+        return super.create(parentScope, initialElements);
     }
 }

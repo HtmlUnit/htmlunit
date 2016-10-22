@@ -318,6 +318,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
+    /** HtmlCollection returns a node list for duplicate id's. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLALLCOLLECTION_NODE_LIST_FOR_DUPLICATES,
+
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
@@ -505,10 +509,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
-
-    /** Ignore empty cookie. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    HTTP_COOKIE_IGNORE_EMPTY,
 
     /** Indicates that the start date for two digits cookies is 1970
      * instead of 2000 (Two digits years are interpreted as 20xx
