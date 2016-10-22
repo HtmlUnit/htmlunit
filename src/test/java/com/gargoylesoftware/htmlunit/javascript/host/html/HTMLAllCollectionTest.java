@@ -53,8 +53,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-button2",
-            CHROME = "null")
+    @Alerts("-button2")
     public void namedItem_ByName_formWithoutId() throws Exception {
         namedItem("'button2'");
     }
@@ -63,8 +62,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b3-button3",
-            CHROME = "null")
+    @Alerts("b3-button3")
     public void namedItem_ByName() throws Exception {
         namedItem("'button3'");
     }
@@ -84,8 +82,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"coll 2", "b5_1-button5", "b5_2-button5"},
-            IE = "b5_1-button5",
-            CHROME = "null")
+            IE = "b5_1-button5")
     public void namedItem_DuplicateName() throws Exception {
         namedItem("'button5'");
     }
@@ -95,7 +92,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"coll 2", "b6-button6", "button6-button6_2"},
-            CHROME = {"button6-button6_2"},
+            CHROME = {"coll 2", "button6-button6_2", "b6-button6"},
             IE = "b6-button6")
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("'button6'");
@@ -225,8 +222,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            CHROME = "undefined")
+    @Alerts("b2-button2")
     public void item_ByName() throws Exception {
         item("'button2'");
     }
@@ -354,8 +350,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            CHROME = "undefined")
+    @Alerts("b2-button2")
     public void arrayIndex_ByName() throws Exception {
         arrayIndex("'button2'");
     }
@@ -472,8 +467,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            CHROME = "undefined")
+    @Alerts("b2-button2")
     public void functionIndex_ByName() throws Exception {
         functionIndex("'button2'");
     }

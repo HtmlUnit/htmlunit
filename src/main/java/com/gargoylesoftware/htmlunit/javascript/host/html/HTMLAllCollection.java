@@ -14,13 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -32,13 +32,10 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -102,6 +99,10 @@ public class HTMLAllCollection extends HTMLCollection {
             browser = getBrowserVersion();
         }
 
+        if (numb < 0) {
+            return itemNotFound(browser);
+        }
+
         if (!browser.hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
                 && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
             return itemNotFound(browser);
@@ -109,10 +110,7 @@ public class HTMLAllCollection extends HTMLCollection {
 
         final Object object = get(numb.intValue(), this);
         if (object == NOT_FOUND) {
-            if (browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME) && index instanceof Number && numb >= 0) {
-                return null;
-            }
-            return itemNotFound(browser);
+            return null;
         }
         return object;
     }
@@ -128,14 +126,6 @@ public class HTMLAllCollection extends HTMLCollection {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isGetWithPreemptionSearchName() {
-        return !getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public final Object namedItem(final String name) {
         final List<Object> elements = getElements();
 
@@ -143,7 +133,8 @@ public class HTMLAllCollection extends HTMLCollection {
         final List<DomElement> matching = new ArrayList<>();
 
         final BrowserVersion browser = getBrowserVersion();
-        final boolean idFirst = browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
+
+        final boolean idFirst = browser.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST);
         if (idFirst) {
             for (final Object next : elements) {
                 if (next instanceof DomElement) {
@@ -154,10 +145,11 @@ public class HTMLAllCollection extends HTMLCollection {
                 }
             }
         }
+
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
-                if ((!idFirst || (elem instanceof HtmlForm)) && name.equals(elem.getAttribute("name"))) {
+                if (name.equals(elem.getAttribute("name"))) {
                     matching.add(elem);
                 }
                 else if (!idFirst && name.equals(elem.getId())) {
@@ -165,6 +157,7 @@ public class HTMLAllCollection extends HTMLCollection {
                 }
             }
         }
+
         if (matching.size() == 1
                 || (matching.size() > 1
                         && browser.hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
@@ -236,16 +229,4 @@ public class HTMLAllCollection extends HTMLCollection {
     protected boolean supportsParanteses() {
         return true;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
-        if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME)) {
-            return new NodeList(parentScope, initialElements);
-        }
-        return super.create(parentScope, initialElements);
-    }
-
 }

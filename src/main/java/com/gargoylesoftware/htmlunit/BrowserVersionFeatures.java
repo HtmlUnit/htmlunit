@@ -302,10 +302,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
 
-    /** HtmlAllCollection.item does not check the name, only the id. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
-
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
