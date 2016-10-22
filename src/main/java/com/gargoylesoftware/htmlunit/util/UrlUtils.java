@@ -495,7 +495,7 @@ public final class UrlUtils {
     private static URL createNewUrl(final String protocol, final String authority,
             final String path, final String ref, final String query) throws MalformedURLException {
 
-        // pre-compute length of StringBuffer
+        // pre-compute length of StringBuilder
         int len = protocol.length() + 1;
         if (authority != null && !authority.isEmpty()) {
             len += 2 + authority.length();
