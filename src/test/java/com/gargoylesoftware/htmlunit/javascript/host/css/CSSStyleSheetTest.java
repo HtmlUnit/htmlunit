@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.lang.reflect.Field;
@@ -610,7 +611,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "60",
-            CHROME = "auto")
+            CHROME = "0")
+    @NotYetImplemented(CHROME)
     public void rulePriority_specificity() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -636,7 +638,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "60",
-        CHROME = "auto")
+            CHROME = "0")
+    @NotYetImplemented(CHROME)
     public void rulePriority_specificity2() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -666,7 +669,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"10", "10"},
-            CHROME = {"auto", "auto"})
+            CHROME = {"0", "0"})
+    @NotYetImplemented(CHROME)
     public void rulePriority_position() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
