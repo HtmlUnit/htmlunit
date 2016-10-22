@@ -266,7 +266,7 @@ public class WebConsole implements Serializable {
             return "null";
         }
 
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         final LinkedList<Object> args = new LinkedList<>(Arrays.asList(objs));
 
         final Formatter formatter = getFormatter();

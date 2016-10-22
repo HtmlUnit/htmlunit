@@ -406,7 +406,7 @@ public class Console extends SimpleScriptable {
          * @param s the string to be quoted
          */
         private static String quote(final CharSequence s) {
-            final StringBuffer sb = new StringBuffer();
+            final StringBuilder sb = new StringBuilder();
             sb.append("\"");
             for (int i = 0; i < s.length(); i++) {
                 final char ch = s.charAt(i);
