@@ -384,7 +384,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "gzip, deflate",
-            CHROME = "gzip, deflate, sdch")
+            CHROME = "gzip, deflate, sdch, br")
     @NotYetImplemented(CHROME)
     public void acceptEncodingHeader() throws Exception {
         final String html
