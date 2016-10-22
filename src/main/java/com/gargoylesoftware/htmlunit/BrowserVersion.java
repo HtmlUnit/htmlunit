@@ -147,9 +147,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36",
         51, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
@@ -184,7 +184,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF45
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setVendor("");
-        FIREFOX_45.buildId_ = "20160725105554";
+        FIREFOX_45.buildId_ = "20160905130425";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -316,24 +316,24 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 23.0 r0", "undefined", "pepflashplayer.dll");
+                "Shockwave Flash 23.0 r0", "undefined", "internal-not-yet-present");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 23.0 r0", "23.0.0.162", "NPSWF32_23_0_0_162.dll");
+                "Shockwave Flash 23.0 r0", "23.0.0.185", "NPSWF32_23_0_0_185.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_38.getPlugins().add(flash);
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 23.0 r0", "23.0.0.162", "NPSWF32_23_0_0_162.dll");
+                "Shockwave Flash 23.0 r0", "23.0.0.185", "NPSWF32_23_0_0_185.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 22.0 r0", "22.0.0.192", "Flash32_22_0_0_192.ocx");
+                "Shockwave Flash 23.0 r0", "23.0.0.185", "Flash32_23_0_0_185.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.getPlugins().add(flash);

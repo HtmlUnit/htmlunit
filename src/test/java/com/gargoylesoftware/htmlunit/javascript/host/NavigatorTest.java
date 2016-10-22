@@ -205,10 +205,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.162", "NPSWF32_23_0_0_162.dll"},
-            FF45 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.162", "NPSWF32_23_0_0_162.dll"},
-            CHROME = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "undefined", "pepflashplayer.dll"},
-            IE = {"Shockwave Flash", "Shockwave Flash 22.0 r0", "22.0.0.192", "Flash32_22_0_0_192.ocx"},
+    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.185", "NPSWF32_23_0_0_185.dll"},
+            FF45 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.185", "NPSWF32_23_0_0_185.dll"},
+            CHROME = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "undefined", "internal-not-yet-present"},
+            IE = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.185", "Flash32_23_0_0_185.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
@@ -371,7 +371,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF38 = "20160420141331",
-            FF45 = "20160725105554")
+            FF45 = "20160905130425")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
