@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,7 +24,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Unit tests for {@link BrowserVersion}.
@@ -241,9 +238,64 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
+            IE = {"2", "Accept: text/css, */*"})
+    public void acceptHeaderCssEmptyType() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <link href='test.css' rel='stylesheet' type=''>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    var b = document.body;\n"
+            + "    window.getComputedStyle(b, null);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final int requests = getMockWebConnection().getRequestCount();
+        loadPage2(html, getDefaultUrl());
+
+        final int count = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(count, getMockWebConnection().getRequestCount() - requests);
+        assertEquals(getExpectedAlerts()[1], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
+            IE = {"2", "Accept: text/css, */*"})
+    public void acceptHeaderCssBlankType() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <link href='test.css' rel='stylesheet' type=' '>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    var b = document.body;\n"
+            + "    window.getComputedStyle(b, null);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final int requests = getMockWebConnection().getRequestCount();
+        loadPage2(html, getDefaultUrl());
+
+        final int count = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(count, getMockWebConnection().getRequestCount() - requests);
+        assertEquals(getExpectedAlerts()[1], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
             CHROME = {"1", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
             IE = {"2", "Accept: text/css, */*"})
-    @NotYetImplemented(CHROME)
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
             = "<html><head>\n"
@@ -257,10 +309,41 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+
+        final int requests = getMockWebConnection().getRequestCount();
         loadPage2(html, getDefaultUrl());
 
         final int count = Integer.parseInt(getExpectedAlerts()[0]);
-        assertEquals(count, getMockWebConnection().getRequestCount());
+        assertEquals(count, getMockWebConnection().getRequestCount() - requests);
+        assertEquals(getExpectedAlerts()[1], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
+            CHROME = {"1", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
+            IE = {"2", "Accept: text/css, */*"})
+    public void acceptHeaderCssWrongType() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <link href='test.css' rel='stylesheet' type='css'>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    var b = document.body;\n"
+            + "    window.getComputedStyle(b, null);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final int requests = getMockWebConnection().getRequestCount();
+        loadPage2(html, getDefaultUrl());
+
+        final int count = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(count, getMockWebConnection().getRequestCount() - requests);
         assertEquals(getExpectedAlerts()[1], acceptHeaderString());
     }
 

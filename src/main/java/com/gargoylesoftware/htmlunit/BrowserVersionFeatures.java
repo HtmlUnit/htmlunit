@@ -448,6 +448,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLKEYGEN_END_TAG_FORBIDDEN,
 
+    /** If the type is present for a link only use if type is text/css. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
+
     /** */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
