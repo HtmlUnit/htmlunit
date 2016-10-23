@@ -607,7 +607,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }
