@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgTSpan;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgTSpan.class)
-public class SVGTSpanElement extends SVGTextContentElement {
+public class SVGTSpanElement extends SVGTextPositioningElement {
 
     /**
      * Creates an instance.

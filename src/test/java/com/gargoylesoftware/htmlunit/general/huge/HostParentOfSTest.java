@@ -113,6 +113,46 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGAnimationElement_SVGAnimateElement() throws Exception {
+        test("SVGAnimationElement", "SVGAnimateElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGAnimationElement_SVGAnimateMotionElement() throws Exception {
+        test("SVGAnimationElement", "SVGAnimateMotionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGAnimationElement_SVGAnimateTransformElement() throws Exception {
+        test("SVGAnimationElement", "SVGAnimateTransformElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SVGAnimationElement_SVGSetElement() throws Exception {
+        test("SVGAnimationElement", "SVGSetElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _SVGCircleElement_SVGCircleElement() throws Exception {
         test("SVGCircleElement", "SVGCircleElement");
@@ -642,6 +682,24 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGTextPathElement_SVGTextPathElement() throws Exception {
         test("SVGTextPathElement", "SVGTextPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _SVGTextPositioningElement_SVGTSpanElement() throws Exception {
+        test("SVGTextPositioningElement", "SVGTSpanElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _SVGTextPositioningElement_SVGTextElement() throws Exception {
+        test("SVGTextPositioningElement", "SVGTextElement");
     }
 
     /**
@@ -2346,7 +2404,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
     public void _SVGZoomEvent_SVGZoomEvent() throws Exception {
         test("SVGZoomEvent", "SVGZoomEvent");
     }

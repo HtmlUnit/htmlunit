@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgAnimate;
  * @author Frank Danek
  */
 @JsxClass(domClass = SvgAnimate.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
-public class SVGAnimateElement extends SVGElement {
+public class SVGAnimateElement extends SVGAnimationElement {
 
     /**
      * Creates an instance.

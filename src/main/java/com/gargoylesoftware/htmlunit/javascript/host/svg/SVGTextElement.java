@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgText;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgText.class)
-public class SVGTextElement extends SVGTextContentElement {
+public class SVGTextElement extends SVGTextPositioningElement {
 
     /**
      * Creates an instance.
