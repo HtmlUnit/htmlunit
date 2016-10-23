@@ -314,13 +314,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLALLCOLLECTION_INTEGER_INDEX,
 
-    /** HtmlCollection returns the first hit instead of a collection if many elements found. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
-
     /** HtmlCollection returns a node list for duplicate id's. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLALLCOLLECTION_NODE_LIST_FOR_DUPLICATES,
+
+    /** HtmlCollection returns the first hit instead of a collection if many elements found. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
