@@ -149,6 +149,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /** The driver cache for real browsers. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_REAL_BROWSERS = new HashMap<>();
+    private static final Map<BrowserVersion, Integer> WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT = new HashMap<>();
 
     private static Server STATIC_SERVER_;
     // second server for cross-origin tests.
@@ -231,6 +232,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
 
                 WEB_DRIVERS_REAL_BROWSERS.put(browserVersion, driver);
+                WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(browserVersion, 0);
+            }
+            else {
+                // there seems to be a memory leak at least with FF;
+                // we have to restart sometimes
+                Integer count = WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.get(browserVersion);
+                if (null == count) {
+                    count = -1;
+                }
+                count += 1;
+                if (count > 1000) {
+                    shutDownReal(browserVersion);
+                }
+                else {
+                    WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(browserVersion, count);
+                }
             }
         }
         else {
@@ -265,6 +282,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             driver.quit();
         }
         WEB_DRIVERS_REAL_BROWSERS.clear();
+        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.clear();
         stopWebServers();
         LAST_TEST_MockWebConnection_ = null;
     }
@@ -283,17 +301,27 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         WEB_DRIVERS_REAL_BROWSERS.clear();
+        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.clear();
+    }
+
+    /**
+     * Closes the real browser drivers.
+     * @param browser the real browser to close
+     */
+    protected void shutDownReal(final BrowserVersion browser) {
+        final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(browser);
+        if (driver != null) {
+            driver.quit();
+            WEB_DRIVERS_REAL_BROWSERS.remove(browser);
+            WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(browser);
+        }
     }
 
     /**
      * Closes the real IE browser drivers.
      */
     protected void shutDownRealIE() {
-        final WebDriver driver = WEB_DRIVERS_REAL_BROWSERS.get(INTERNET_EXPLORER);
-        if (driver != null) {
-            driver.quit();
-            WEB_DRIVERS_REAL_BROWSERS.remove(INTERNET_EXPLORER);
-        }
+        shutDownReal(INTERNET_EXPLORER);
     }
 
     /**
@@ -1041,6 +1069,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             catch (final NoSuchWindowException e) {
                                 LOG.error("Error switching to browser window; quit browser.", e);
                                 WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
+                                WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(getBrowserVersion());
                                 driver.quit();
                                 return;
                             }
