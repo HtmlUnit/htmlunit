@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -27,15 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class InputEvent extends Event {
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int SCROLL_PAGE_DOWN = 0x8000;
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final short SCROLL_PAGE_UP = 0xFFFF8000;
+public class InputEvent extends UIEvent {
 
     /**
      * Default constructor.

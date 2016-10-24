@@ -86,6 +86,16 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _UIEvent_InputEvent() throws Exception {
+        test("UIEvent", "InputEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _UIEvent_UIEvent() throws Exception {
         test("UIEvent", "UIEvent");
