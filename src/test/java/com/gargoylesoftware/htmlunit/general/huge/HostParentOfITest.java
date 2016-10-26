@@ -137,9 +137,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    @NotYetImplemented(FF)
+    @Alerts("true")
     public void _Location_Location() throws Exception {
         test("Location", "Location");
     }
@@ -152,6 +150,17 @@ public class HostParentOfITest extends HostParentOf {
     @Alerts("true")
     public void _MediaList_MediaList() throws Exception {
         test("MediaList", "MediaList");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MediaStream_LocalMediaStream() throws Exception {
+        test("MediaStream", "LocalMediaStream");
     }
 
     /**
@@ -2548,6 +2557,18 @@ public class HostParentOfITest extends HostParentOf {
             FF = "true")
     public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription", "mozRTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    @NotYetImplemented(FF45)
+    public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
+        test("RTCIceCandidate", "mozRTCIceCandidate");
     }
 
     /**

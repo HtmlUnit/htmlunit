@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.Collection;
 
 import org.junit.Test;
@@ -22,6 +26,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.google.common.base.Predicate;
 
 /**
@@ -670,6 +675,16 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _SVGTextContentElement_SVGAltGlyphElement() throws Exception {
+        test("SVGTextContentElement", "SVGAltGlyphElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _SVGTextElement_SVGTextElement() throws Exception {
         test("SVGTextElement", "SVGTextElement");
@@ -682,6 +697,16 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGTextPathElement_SVGTextPathElement() throws Exception {
         test("SVGTextPathElement", "SVGTextPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _SVGTextPositioningElement_SVGAltGlyphElement() throws Exception {
+        test("SVGTextPositioningElement", "SVGAltGlyphElement");
     }
 
     /**
@@ -2385,7 +2410,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented({FF, IE})
     public void _SVGUnitTypes_SVGUnitTypes() throws Exception {
         test("SVGUnitTypes", "SVGUnitTypes");
     }
@@ -2537,6 +2564,16 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _SVGGraphicsElement_SVGAltGlyphElement() throws Exception {
+        test("SVGGraphicsElement", "SVGAltGlyphElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _SVGGraphicsElement_SVGCircleElement() throws Exception {
@@ -2547,8 +2584,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
     public void _SVGGraphicsElement_SVGClipPathElement() throws Exception {
         test("SVGGraphicsElement", "SVGClipPathElement");
     }
@@ -2755,5 +2793,4 @@ public class HostParentOfSTest extends HostParentOf {
     public void _SourceBuffer_SourceBuffer() throws Exception {
         test("SourceBuffer", "SourceBuffer");
     }
-
 }

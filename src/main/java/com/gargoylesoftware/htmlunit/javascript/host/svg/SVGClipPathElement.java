@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgClipPath.class)
-public class SVGClipPathElement extends SVGGraphicsElement {
+public class SVGClipPathElement extends SVGElement {
 
     /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
     @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
