@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Many minor js class hierarchy fixes and missing constants added for IE.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.7.
             </action>

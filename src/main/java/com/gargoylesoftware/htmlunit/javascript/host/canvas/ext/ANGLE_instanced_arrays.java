@@ -18,15 +18,21 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code ANGLE_instanced_arrays}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class ANGLE_instanced_arrays extends SimpleScriptable {
+
+    /** The constant {@code VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE}. */
+    @JsxConstant
+    public static final int VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 35070;
 
     /**
      * Default constructor.

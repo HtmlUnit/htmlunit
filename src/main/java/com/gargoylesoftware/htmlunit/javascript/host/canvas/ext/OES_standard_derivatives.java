@@ -18,15 +18,21 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code OES_standard_derivatives}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class OES_standard_derivatives extends SimpleScriptable {
+
+    /** The constant {@code FRAGMENT_SHADER_DERIVATIVE_HINT_OES}. */
+    @JsxConstant
+    public static final int FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 35723;
 
     /**
      * Default constructor.

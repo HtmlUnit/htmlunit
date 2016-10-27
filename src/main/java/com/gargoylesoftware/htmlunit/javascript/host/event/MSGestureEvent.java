@@ -17,15 +17,33 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code MSGestureEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class MSGestureEvent extends Event {
+
+    /** The constant {@code MSGESTURE_FLAG_BEGIN}. */
+    @JsxConstant
+    public static final int MSGESTURE_FLAG_BEGIN = 1;
+    /** The constant {@code MSGESTURE_FLAG_CANCEL}. */
+    @JsxConstant
+    public static final int MSGESTURE_FLAG_CANCEL = 4;
+    /** The constant {@code MSGESTURE_FLAG_END}. */
+    @JsxConstant
+    public static final int MSGESTURE_FLAG_END = 2;
+    /** The constant {@code MSGESTURE_FLAG_INERTIA}. */
+    @JsxConstant
+    public static final int MSGESTURE_FLAG_INERTIA = 8;
+    /** The constant {@code MSGESTURE_FLAG_NONE}. */
+    @JsxConstant
+    public static final int MSGESTURE_FLAG_NONE = 0;
 
     /**
      * Creates an instance.

@@ -5520,6 +5520,16 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _EventTarget_LocalMediaStream() throws Exception {
+        test("EventTarget", "LocalMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_MediaDevices() throws Exception {

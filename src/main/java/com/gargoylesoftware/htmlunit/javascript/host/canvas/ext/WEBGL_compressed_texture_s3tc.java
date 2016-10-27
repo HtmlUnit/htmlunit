@@ -18,15 +18,30 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code WEBGL_compressed_texture_s3tc}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class WEBGL_compressed_texture_s3tc extends SimpleScriptable {
+
+    /** The constant {@code COMPRESSED_RGBA_S3TC_DXT1_EXT}. */
+    @JsxConstant
+    public static final int COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777;
+    /** The constant {@code COMPRESSED_RGBA_S3TC_DXT3_EXT}. */
+    @JsxConstant
+    public static final int COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778;
+    /** The constant {@code COMPRESSED_RGBA_S3TC_DXT5_EXT}. */
+    @JsxConstant
+    public static final int COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779;
+    /** The constant {@code COMPRESSED_RGB_S3TC_DXT1_EXT}. */
+    @JsxConstant
+    public static final int COMPRESSED_RGB_S3TC_DXT1_EXT = 33776;
 
     /**
      * Default constructor.

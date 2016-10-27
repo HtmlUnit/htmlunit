@@ -18,15 +18,24 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code EXT_texture_filter_anisotropic}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class EXT_texture_filter_anisotropic extends SimpleScriptable {
+
+    /** The constant {@code MAX_TEXTURE_MAX_ANISOTROPY_EXT}. */
+    @JsxConstant
+    public static final int MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047;
+    /** The constant {@code TEXTURE_MAX_ANISOTROPY_EXT}. */
+    @JsxConstant
+    public static final int TEXTURE_MAX_ANISOTROPY_EXT = 34046;
 
     /**
      * Default constructor.
