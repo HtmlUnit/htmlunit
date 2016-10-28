@@ -205,10 +205,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.185", "NPSWF32_23_0_0_185.dll"},
-            FF45 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.185", "NPSWF32_23_0_0_185.dll"},
+    @Alerts(FF38 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.205", "NPSWF32_23_0_0_205.dll"},
+            FF45 = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.205", "NPSWF32_23_0_0_205.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "undefined", "internal-not-yet-present"},
-            IE = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.185", "Flash32_23_0_0_185.ocx"},
+            IE = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.205", "Flash32_23_0_0_205.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
