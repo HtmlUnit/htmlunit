@@ -141,4 +141,19 @@ public class HtmlUnitScriptable extends ScriptableObject {
     public Object getDefaultValue(final Class<?> typeHint) {
         return "[object " + getClassName() + "]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void put(final String name, final Scriptable start, final Object value) {
+        try {
+            super.put(name, start, value);
+        }
+        catch (final IllegalArgumentException e) {
+        	// is it the right place or should Rhino throw a RuntimeError instead of an IllegalArgumentException?  
+            throw Context.reportRuntimeError("'set "
+                + name + "' called on an object that does not implement interface " + this.getClassName());
+        }
+    }
 }

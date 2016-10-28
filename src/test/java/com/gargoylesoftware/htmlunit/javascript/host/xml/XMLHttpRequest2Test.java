@@ -909,4 +909,40 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception catched")
+    public void createFromPrototypeAndDefineProperty() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var f = function() {};\n"
+            + "f.prototype = Object.create(window.XMLHttpRequest.prototype);\n"
+            + "try {\n"
+            + "  f.prototype['onerror'] = function() {};\n"
+            + "  alert('no exception');\n"
+            + "} catch(e) { alert('exception catched'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception for onerror")
+    @NotYetImplemented
+    public void readPropertyFromPrototypeShouldThrow() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var p = 'onerror';\n"
+            + "try {\n"
+            + "  var x = window.XMLHttpRequest.prototype[p];\n"
+            + "  alert('read ' + p);\n"
+            + "} catch(e) { alert('exception for ' + p); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
