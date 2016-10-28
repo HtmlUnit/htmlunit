@@ -69,7 +69,7 @@ public class ExternalTest {
                 }
             }
             assertVersion("org.sonatype.oss", "oss-parent", "9");
-            assertChromeDriver("2.24");
+            assertChromeDriver("2.25");
         }
     }
 
@@ -199,6 +199,7 @@ public class ExternalTest {
                 || "com.puppycrawl.tools".equals(groupId)
                         && "checkstyle".equals(artifactId)
                         && version.startsWith("7.")
+                || groupId.startsWith("org.tmatesoft.svnkit") && version.startsWith("1.8.14")
                 || groupId.startsWith("org.seleniumhq.selenium") && version.startsWith("3.");
     }
 
