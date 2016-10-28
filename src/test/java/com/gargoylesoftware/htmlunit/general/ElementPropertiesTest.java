@@ -770,7 +770,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn")
-    @NotYetImplemented({EDGE, CHROME})
+    @NotYetImplemented(EDGE)
     public void a() throws Exception {
         test("a");
     }

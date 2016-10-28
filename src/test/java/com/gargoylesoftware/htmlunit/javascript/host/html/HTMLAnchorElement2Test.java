@@ -793,6 +793,91 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined-null", "undefined-", "undefined-  \t ",
+                        "undefined-no-referrer", "undefined-origin",
+                        "undefined-unsafe-url", "undefined-unknown"},
+            CHROME = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
+                        "origin-origin", "unsafe-url-unsafe-url", "-unknown"})
+    public void referrerPolicy() throws Exception {
+        final String html =
+                "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "         for(i=0; i<7; i++) {\n"
+                + "           var a = document.getElementById('a'+i);\n"
+                + "           alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "    <a id='a0'>a0</a>\n"
+                + "    <a id='a1' referrerPolicy=''>a1</a>\n"
+                + "    <a id='a2' referrerPolicy='  \t '>a2</a>\n"
+                + "    <a id='a3' referrerPolicy='no-referrer'>a3</a>\n"
+                + "    <a id='a4' referrerPolicy='origin'>a4</a>\n"
+                + "    <a id='a5' referrerPolicy='unsafe-url'>a5</a>\n"
+                + "    <a id='a6' referrerPolicy='unknown'>a6</a>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined-origin", "unknown-origin", "no-referrer-origin",
+                        "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
+                        "NO-reFerrer- ", "NO-reFerrer-unknown"},
+            CHROME = {"origin-origin", "-unknown", "no-referrer-no-referrer",
+                        "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"})
+    public void setReferrerPolicy() throws Exception {
+        final String html =
+                "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "         var a = document.getElementById('tester');\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.referrerPolicy = 'unknown';\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.referrerPolicy = 'no-referrer';\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.referrerPolicy = '';\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.referrerPolicy = 'NO-reFerrer';\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.setAttribute('referrerPolicy', 'origin');\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.setAttribute('referrerPolicy', ' ');\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+
+                + "         a.setAttribute('referrerPolicy', 'unknown');\n"
+                + "         alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "    <a id='tester' referrerPolicy='origin'>a4</a>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

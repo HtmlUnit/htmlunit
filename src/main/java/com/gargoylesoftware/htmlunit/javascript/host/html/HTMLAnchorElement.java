@@ -27,6 +27,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -63,6 +65,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass(domClass = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
+    private static final List<String> REFERRER_POLICIES = Arrays.asList("no-referrer", "origin", "unsafe-url");
 
     /**
      * The constructor.
@@ -187,6 +190,15 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
+     * Returns the value of the rev property.
+     * @return the rev property
+     */
+    @JsxGetter
+    public String getRev() {
+        return ((HtmlAnchor) getDomNodeOrDie()).getRevAttribute();
+    }
+
+    /**
      * Sets the rev property.
      * @param rel rev attribute value
      */
@@ -197,11 +209,28 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the value of the rev property.
-     * @return the rev property
+     * @return the referrerPolicy property
      */
-    @JsxGetter
-    public String getRev() {
-        return ((HtmlAnchor) getDomNodeOrDie()).getRevAttribute();
+    @JsxGetter(@WebBrowser(CHROME))
+    public String getReferrerPolicy() {
+        String attrib = ((HtmlAnchor) getDomNodeOrDie()).getAttribute("referrerPolicy");
+        if (StringUtils.isEmpty(attrib)) {
+            return "";
+        }
+        attrib = attrib.toLowerCase(Locale.ROOT);
+        if (REFERRER_POLICIES.contains(attrib)) {
+            return attrib;
+        }
+        return "";
+    }
+
+    /**
+     * Sets the rev property.
+     * @param referrerPolicy referrerPolicy attribute value
+     */
+    @JsxSetter(@WebBrowser(CHROME))
+    public void setReferrerPolicy(final String referrerPolicy) {
+        getDomNodeOrDie().setAttribute("referrerPolicy", referrerPolicy);
     }
 
     /**
