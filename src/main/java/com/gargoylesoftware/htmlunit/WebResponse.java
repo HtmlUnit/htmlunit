@@ -185,6 +185,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as a string, using the charset/encoding specified in the server response.
      * @return the response content as a string, using the charset/encoding specified in the server response
+     * or null if the content retrieval was failing
      */
     public String getContentAsString() {
         return getContentAsString(getContentCharset());
@@ -195,7 +196,7 @@ public class WebResponse implements Serializable {
      * rather than the charset/encoding specified in the server response. If the specified
      * charset/encoding is not supported then the default system encoding is used.
      * @param encoding the charset/encoding to use to convert the response content into a string
-     * @return the response content as a string
+     * @return the response content as a string or null if the content retrieval was failing
      */
     public String getContentAsString(final String encoding) {
         return getContentAsString(encoding, null);
@@ -207,7 +208,7 @@ public class WebResponse implements Serializable {
      * charset/encoding is not supported then the provided default encoding is used.
      * @param encoding the charset/encoding to use to convert the response content into a string
      * @param defaultEncoding the default encoding to use if the specified {@code encode} is not supported
-     * @return the response content as a string
+     * @return the response content as a string or null if the content retrieval was failing
      */
     public String getContentAsString(final String encoding, final String defaultEncoding) {
         try (final InputStream in = responseData_.getInputStream()) {

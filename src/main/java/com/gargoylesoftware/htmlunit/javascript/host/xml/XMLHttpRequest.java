@@ -354,7 +354,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {
                 defaultEncoding = encoding;
             }
-            return webResponse_.getContentAsString(encoding, defaultEncoding);
+            final String content = webResponse_.getContentAsString(encoding, defaultEncoding);
+            if (content == null) {
+                return "";
+            }
+            return content;
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");

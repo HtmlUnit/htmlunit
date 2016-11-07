@@ -210,7 +210,11 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             throw Context.reportRuntimeError("Unspecified error (request not sent).");
         }
         if (webResponse_ != null) {
-            return webResponse_.getContentAsString();
+            final String content = webResponse_.getContentAsString();
+            if (content == null) {
+                return "";
+            }
+            return content;
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("XMLHTTPRequest.responseText was retrieved before the response was available.");
