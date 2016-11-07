@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CRED
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -718,8 +719,9 @@ public class HttpWebConnection implements WebConnection {
      * @param is the stream to read
      * @param maxInMemory the maximumBytes to store in memory, after which save to a local file
      * @return a wrapper around the downloaded content
+     * @throws IOException in case of read issues
      */
-    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) {
+    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) throws IOException {
         if (is == null) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
@@ -746,9 +748,9 @@ public class HttpWebConnection implements WebConnection {
             LOG.warn("Connection was closed while reading from stream.", e);
             return new DownloadedContent.InMemory(bos.toByteArray());
         }
-        catch (final IOException e) {
+        catch (final EOFException e) {
             // this might happen with broken gzip content
-            LOG.warn("Exception while reading from stream.", e);
+            LOG.warn("EOFException while reading from stream.", e);
             return new DownloadedContent.InMemory(bos.toByteArray());
         }
         finally {
