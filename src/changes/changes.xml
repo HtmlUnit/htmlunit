@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1833">
+                HtmlImage.saveAs(File) no longer parses the image.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: throw JS runtime exception instead of Java IllegalArgumentException when method is called on incorrect objects.
             </action>

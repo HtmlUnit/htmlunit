@@ -21,7 +21,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INV
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
@@ -30,6 +32,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -518,8 +521,17 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an IO error occurs
      */
     public void saveAs(final File file) throws IOException {
-        final ImageReader reader = getImageReader();
-        ImageIO.write(reader.read(0), reader.getFormatName(), file);
+        downloadImageIfNeeded();
+        if (null != imageWebResponse_) {
+            final InputStream inputStream = imageWebResponse_.getContentAsStream();
+            if (null != inputStream) {
+                try (final FileOutputStream fileOut = new FileOutputStream(file)) {
+                    IOUtils.copy(imageWebResponse_.getContentAsStream(), fileOut);
+                } finally {
+                    IOUtils.closeQuietly(inputStream);
+                }
+            }
+        }
     }
 
     /**

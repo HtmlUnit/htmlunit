@@ -14,13 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -159,5 +166,35 @@ public class HtmlImageTest extends SimpleWebTestCase {
         img = page.getHtmlElementById("img4");
         expected = "<img id=\"img4\" src=\"foo.png\" width=\"11em\" height=\"17%\"/>";
         assertEquals(expected, img.asXml().trim());
+    }
+
+    /**
+     * Test case for issue #1833.
+     * Simply save the image without any parsing.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void saveAsNotSupportedImageType() throws Exception {
+        try (final InputStream is = getClass().getClassLoader().
+                getResourceAsStream("testfiles/not_supported_type.jpg")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <img id='myImage' src='img.jpg' >\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final HtmlImage img = page.getHtmlElementById("myImage");
+        final File tempFile = File.createTempFile("img", ".tmp");
+        img.saveAs(tempFile);
+        FileUtils.deleteQuietly(tempFile);
     }
 }
