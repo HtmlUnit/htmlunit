@@ -74,7 +74,7 @@ public interface DownloadedContent extends Serializable {
      */
     class OnFile implements DownloadedContent {
         private final File file_;
-        private boolean temporary_;
+        private final boolean temporary_;
 
         /**
          * @param file the file
