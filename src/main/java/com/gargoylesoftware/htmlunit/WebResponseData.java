@@ -91,10 +91,6 @@ public class WebResponseData implements Serializable {
                 final List<NameValuePair> headers) throws IOException {
 
         InputStream stream = downloadedContent_.getInputStream();
-        if (stream == null) {
-            return null;
-        }
-
         if (downloadedContent.isEmpty()) {
             return stream;
         }
