@@ -1810,7 +1810,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         rectList.setParentScope(getWindow());
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
-        if (getDomNodeOrDie().isAttachedToPage()) {
+        if (!isDisplayNone() && getDomNodeOrDie().isAttachedToPage()) {
             final ClientRect rect = new ClientRect(0, 0, 1, 1);
             rect.setParentScope(getWindow());
             rect.setPrototype(getPrototype(rect.getClass()));

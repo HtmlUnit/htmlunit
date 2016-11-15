@@ -2548,6 +2548,40 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"[object ClientRectList]", "0", "[object ClientRectList]", "0"},
+            FF = {"", "0", "", "0"})
+    public void getClientRectsDisplayNone() throws Exception {
+        final String html =
+            "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    display(d1);\n"
+            + "    var d2 = document.getElementById('div2');\n"
+            + "    display(d2);\n"
+            + "  }\n"
+            + "\n"
+            + "  function display(elem) {\n"
+            + "    try {\n"
+            + "      alert(elem.getClientRects());\n"
+            + "    } catch(e) { alert('exception'); }\n"
+
+            + "    try {\n"
+            + "      alert(elem.getClientRects().length);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' style='display: none'>\n"
+            + "    <div id='div2' />\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"null", "null"})
     public void innerHTML_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

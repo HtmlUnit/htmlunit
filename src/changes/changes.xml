@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1834">
+                JavaScript: HTMLElement.getClientRects() returns an empty list for "display: none".
+            </action>
             <action type="fix" dev="rbri" issue="1833">
                 HtmlImage.saveAs(File) no longer parses the image.
             </action>
