@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -145,10 +144,9 @@ public class AsteriskTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
-    @NotYetImplemented
+    @Alerts("null")
     public void test12() throws Exception {
-        test("'a0.b2.c3'.match(/[xyz]*1/");
+        test("'a0.b2.c3'.match(/[xyz]*1/)");
     }
 
     private void test(final String script) throws Exception {
