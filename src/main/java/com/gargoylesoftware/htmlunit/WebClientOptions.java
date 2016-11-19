@@ -53,6 +53,7 @@ public class WebClientOptions implements Serializable {
     private String sslInsecureProtocol_;
     private int maxInMemory_ = 500 * 1024;
     private int historySizeLimit_ = 50;
+    private int historyPageCacheLimit_ = Integer.MAX_VALUE;
     private InetAddress localAddress_;
 
     /**
@@ -536,11 +537,34 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the History size limit.
+     * Sets the History size limit. HtmlUnit uses SoftReferences&lt;Page&gt; for
+     * storing the pages that are part of the history. If you like to fine tune this
+     * you can use {@link #getHistoryPageCacheLimit()} to limit the number of page references
+     * stored by the history.
      * @param historySizeLimit maximum number of pages in history
      */
     public void setHistorySizeLimit(final int historySizeLimit) {
         historySizeLimit_ = historySizeLimit;
+    }
+
+    /**
+     * Returns the maximum number of {@link Page pages} to cache in history.
+     * @return the maximum number of pages to cache in history
+     */
+    public int getHistoryPageCacheLimit() {
+        return historyPageCacheLimit_;
+    }
+
+    /**
+     * Sets the maximum number of {@link Page pages} to cache in history.
+     * If this value is smaller than the {{@link #getHistorySizeLimit()} than
+     * HtmlUnit will only use soft references for the first historyPageCacheLimit
+     * entries in the history. For older entries only the url is saved; the page
+     * will be retrieved on demand.
+     * @param historyPageCacheLimit maximum number of pages to cache in history
+     */
+    public void setHistoryPageCacheLimit(final int historyPageCacheLimit) {
+        historyPageCacheLimit_ = historyPageCacheLimit;
     }
 
     /**

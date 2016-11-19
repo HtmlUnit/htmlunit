@@ -42,7 +42,7 @@ public class History implements Serializable {
      * The single entry in the history.
      */
     private static final class HistoryEntry implements Serializable {
-        private final transient SoftReference<Page> page_;
+        private transient SoftReference<Page> page_;
         private final WebRequest webRequest_;
         private Object state_;
 
@@ -59,6 +59,10 @@ public class History implements Serializable {
                 return null;
             }
             return page_.get();
+        }
+
+        private void clearPage() {
+            page_ = null;
         }
 
         private WebRequest getWebRequest() {
@@ -248,6 +252,11 @@ public class History implements Serializable {
 
         final HistoryEntry entry = new HistoryEntry(page);
         entries_.add(entry);
+
+        final int cacheLimit = Math.max(window_.getWebClient().getOptions().getHistoryPageCacheLimit(), 0);
+        if (entries_.size() > cacheLimit) {
+            entries_.get(entries_.size() - cacheLimit - 1).clearPage();
+        }
         return entry;
     }
 

@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * Tests for {@link History} with {@link WebClient}.
  *
  * @author Madis Pärn
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends SimpleWebTestCase {
@@ -52,4 +53,101 @@ public class History2Test extends SimpleWebTestCase {
         loadPageWithAlerts(content);
     }
 
+    /**
+     * Tests going back in history should use the page cache.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void historyCacheSize() throws Exception {
+        final String content = "<html><head><title></title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        getMockWebConnection().setDefaultResponse(content);
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        webClient.getOptions().setHistorySizeLimit(5);
+
+        final TopLevelWindow window = (TopLevelWindow) webClient.getCurrentWindow();
+        final History history = window.getHistory();
+
+        loadPage(content);
+        loadPage(content);
+        loadPage(content);
+        loadPage(content);
+        history.back();
+        history.back();
+        history.back();
+        history.back();
+
+        assertEquals(4, getMockWebConnection().getRequestCount() - startCount);
+    }
+
+    /**
+     * Tests going back in history should use the page cache, but we have
+     * to respect the HistoryPageCacheLimit.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void historyPageCacheLimit() throws Exception {
+        final String content = "<html><head><title></title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        getMockWebConnection().setDefaultResponse(content);
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        webClient.getOptions().setHistorySizeLimit(5);
+        webClient.getOptions().setHistoryPageCacheLimit(2);
+
+        final TopLevelWindow window = (TopLevelWindow) webClient.getCurrentWindow();
+        final History history = window.getHistory();
+
+        loadPage(content);
+        loadPage(content);
+        loadPage(content);
+        loadPage(content);
+        history.back();
+        history.back();
+        history.back();
+
+        assertEquals(6, getMockWebConnection().getRequestCount() - startCount);
+    }
+
+    /**
+     * Tests going back in history should use the page cache, but we have
+     * to respect the HistoryPageCacheLimit.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void historyPageCacheLimitZero() throws Exception {
+        final String content = "<html><head><title></title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        getMockWebConnection().setDefaultResponse(content);
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        webClient.getOptions().setHistorySizeLimit(5);
+        webClient.getOptions().setHistoryPageCacheLimit(0);
+
+        final TopLevelWindow window = (TopLevelWindow) webClient.getCurrentWindow();
+        final History history = window.getHistory();
+
+        loadPage(content);
+        loadPage(content);
+        loadPage(content);
+        loadPage(content);
+        history.back();
+        history.back();
+        history.back();
+
+        assertEquals(7, getMockWebConnection().getRequestCount() - startCount);
+    }
 }
