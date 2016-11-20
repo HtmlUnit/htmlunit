@@ -175,6 +175,9 @@
             </action>
         </release>
         <release version="2.22" date="May 27, 2016" description="Bugfixes, Chrome is best supported">
+            <action type="fix" dev="rbri" issue="1748">
+                JavaScript: Implementation for DOMImplementation.createHTMLDocument() added.
+            </action>
             <action type="fix" dev="rbri" issue="1787">
                 Use our own implementation of URL.sameFile to avoid excessive number of DNS lookups and
                 and support path normalization before doing the comparison.
