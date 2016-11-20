@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="add" dev="rbri" issue="1836">
+                WebClientOptions: add 'HistoryPageCacheLimit' to allow specifying the number
+                of page references stored in history. If this value is smaller than the
+                configured HistorySizeLimit than HtmlUnit will only use soft references
+                for the first historyPageCacheLimit entries in the history. For older
+                entries only the url is saved; the page will be (re)retrieved on demand.
+            </action>
             <action type="fix" dev="rbri" issue="1834">
                 JavaScript: HTMLElement.getClientRects() returns an empty list for "display: none".
             </action>
