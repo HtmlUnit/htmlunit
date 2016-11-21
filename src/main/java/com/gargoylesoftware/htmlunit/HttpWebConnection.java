@@ -708,7 +708,7 @@ public class HttpWebConnection implements WebConnection {
     protected DownloadedContent downloadResponseBody(final HttpResponse httpResponse) throws IOException {
         final HttpEntity httpEntity = httpResponse.getEntity();
         if (httpEntity == null) {
-            return new DownloadedContent.InMemory(new byte[] {});
+            return new DownloadedContent.InMemory(null);
         }
 
         return downloadContent(httpEntity.getContent(), webClient_.getOptions().getMaxInMemory());
@@ -723,7 +723,7 @@ public class HttpWebConnection implements WebConnection {
      */
     public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) throws IOException {
         if (is == null) {
-            return new DownloadedContent.InMemory(new byte[] {});
+            return new DownloadedContent.InMemory(null);
         }
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
