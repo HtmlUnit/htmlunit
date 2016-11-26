@@ -63,7 +63,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
@@ -572,24 +571,10 @@ public class Document extends EventNode {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final String prefix;
-        if (namespaceURI != null && !"*".equals(namespaceURI)) {
-            prefix = XmlUtil.lookupPrefix(getPage().getDocumentElement(), Context.toString(namespaceURI));
-        }
-        else {
-            prefix = null;
-        }
-
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
-                if (!localName.equals(node.getLocalName())) {
-                    return false;
-                }
-                if (prefix == null) {
-                    return true;
-                }
-                return true;
+                return localName.equals(node.getLocalName());
             }
         };
 
