@@ -285,7 +285,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
             case Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_PARSE_INT_RADIX_10);
+                return true;
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST);
             default:

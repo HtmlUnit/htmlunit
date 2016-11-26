@@ -704,10 +704,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
-    /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
-
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
@@ -740,14 +736,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1,
 
-    /** If document.implementation.hasFeature() supports 'Events 3.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
-
-    /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_HTML_3,
-
     /** If document.implementation.hasFeature() supports 'KeyboardEvents'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS,
@@ -755,22 +743,6 @@ public enum BrowserVersionFeatures {
     /** If document.implementation.hasFeature() supports 'LS'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_LS,
-
-    /** If document.implementation.hasFeature() supports 'MouseEvents 1.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1,
-
-    /** If document.implementation.hasFeature() supports 'MouseEvents 2.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2,
-
-    /** If document.implementation.hasFeature() supports 'MutationEvents 1.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1,
-
-    /** If document.implementation.hasFeature() supports 'MutationEvents 2.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
@@ -780,10 +752,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_1,
 
-    /** If document.implementation.hasFeature() supports 'Range 2.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_RANGE_2,
-
     /** If document.implementation.hasFeature() supports 'Range 3.0'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_3,
@@ -792,45 +760,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
 
-    /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0,
-
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2'. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2,
-
-    /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#Shape 1.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0,
-
-    /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#Shape 1.2'. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS,
 
-    /** If document.implementation.hasFeature() supports 'Traversal 1.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1,
-
-    /** If document.implementation.hasFeature() supports 'Traversal 2.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2,
-
-    /** If document.implementation.hasFeature() supports 'Traversal 3.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3,
-
     /** If document.implementation.hasFeature() supports 'UIEvents 2.0'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2,
-
-    /** If document.implementation.hasFeature() supports 'UIEvents 3.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'Validation'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
@@ -840,25 +780,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1,
 
-    /** If document.implementation.hasFeature() supports 'Views 2.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2,
-
     /** If document.implementation.hasFeature() supports 'Views 3.0'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3,
-
-    /** If document.implementation.hasFeature() supports 'XHTML 1.0'. */
-    @BrowserFeature
-    JS_DOMIMPLEMENTATION_FEATURE_XHTML_1,
-
-    /** If document.implementation.hasFeature() supports 'XHTML 3.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_XHTML_3,
-
-    /** If document.implementation.hasFeature() supports 'XML 3.0'. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
-    JS_DOMIMPLEMENTATION_FEATURE_XML_3,
 
     /** If document.implementation.hasFeature() supports 'XPath 3.0'. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
@@ -1169,10 +1093,6 @@ public enum BrowserVersionFeatures {
     /** If {@code true}, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
-
-    /** Indicates that parseInt() should have radix 10 by default. */
-    @BrowserFeature
-    JS_PARSE_INT_RADIX_10,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -39,7 +40,8 @@ public @interface BrowserFeature {
     WebBrowser[] value() default {
         @WebBrowser(IE),
         @WebBrowser(FF),
-        @WebBrowser(CHROME)
+        @WebBrowser(CHROME),
+        @WebBrowser(EDGE)
     };
 }
 
