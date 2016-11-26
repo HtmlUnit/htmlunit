@@ -54,7 +54,7 @@ public class CommentTest extends WebDriverTestCase {
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<div id='it'><!--comment-->after</div>"
+            + "<div id='it'><!--comment-->after</div>\n"
             + "<script>\n"
             + "var node = document.getElementById('it');\n"
             + "alert(node.textContent);\n"
@@ -72,7 +72,7 @@ public class CommentTest extends WebDriverTestCase {
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<div id='it'><!--comment-->after</div>"
+            + "<div id='it'><!--comment-->after</div>\n"
             + "<script>\n"
             + "var node = document.getElementById('it');\n"
             + "alert(node.innerText);\n"
@@ -84,7 +84,7 @@ public class CommentTest extends WebDriverTestCase {
     private void property(final String property) throws Exception {
         final String html
             = "<html><body>\n"
-            + "<div id='it'><!--abcdefg-->after</div>"
+            + "<div id='it'><!--abcdefg-->after</div>\n"
             + "<script>\n"
             + "var node = document.getElementById('it');\n"
             + "alert(node.firstChild." + property + ");\n"

@@ -144,8 +144,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
     public void selectsIdConditionWithSpecialChars() throws Exception {
         final String html =
                 "<html><body><style></style>\n"
-              + "<div id='d:e'></div>"
-              + "<div id='d-e'></div>"
+              + "<div id='d:e'></div>\n"
+              + "<div id='d-e'></div>\n"
               + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
@@ -222,7 +222,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void brokenExternalCSS() throws Exception {
-        final String html = "<html><head>"
+        final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "body { font-weight: 900\\9; }");

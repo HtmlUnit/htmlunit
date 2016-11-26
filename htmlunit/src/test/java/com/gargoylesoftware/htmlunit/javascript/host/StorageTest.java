@@ -149,7 +149,7 @@ public class StorageTest extends WebDriverTestCase {
             + "      alert(globalStorage['" + URL_FIRST.getHost() + "']);\n"
             + "      alert(globalStorage['otherHost']);\n"
             + "    }\n"
-            + "    catch(e) {alert('error')};"
+            + "    catch(e) {alert('error')}"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";

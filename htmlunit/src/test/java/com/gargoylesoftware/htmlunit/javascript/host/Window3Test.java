@@ -122,8 +122,8 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body><script language='JavaScript'>\n"
             + "if (typeof top.frames['anyXXXname'] == 'undefined') {\n"
-            + "alert('one');\n"
-            + "};\n"
+            + "  alert('one');\n"
+            + "}\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
@@ -499,7 +499,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <frame src='" + URL_SECOND + "' name='frame1'>\n"
             + "  <frame src='" + URL_SECOND + "' name='frame2'>\n"
             + "  <frame src='" + URL_SECOND + "' name='frame2'>\n"
-            + "</frameset>"
+            + "</frameset>\n"
             + "</html>";
 
         final String frame = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -874,7 +874,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<frameset onload='test()'>\n"
             + "  <frame src='" + URL_SECOND + "' id='frame1' name='f1'>\n"
-            + "</frameset>"
+            + "</frameset>\n"
             + "</html>";
 
         final String frame = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1193,7 +1193,7 @@ public class Window3Test extends WebDriverTestCase {
             + "      var f = 'initial';\n"
             + "      eval('f = function() {alert(s);}');\n"
             + "      invoke(f);\n"
-            + "   };\n"
+            + "   }\n"
             + "   function invoke(fn) {\n"
             + "      fn();\n"
             + "   }\n"

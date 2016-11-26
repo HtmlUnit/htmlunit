@@ -56,7 +56,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "<div id='myId'><span>a</span><span>b</span><span>c</span></div>\n"
             + "</body></html>";
 
@@ -92,7 +92,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "<div id='myId'><span>a</span><p>b</p><span>c</span></div>\n"
             + "</body></html>";
 
@@ -129,7 +129,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='test()'>"
+            + "<body onload='test()'>\n"
             + "<div id='myId'><span>abc</span><p>def</p><span>ghi</span></div>\n"
             + "</body></html>";
 

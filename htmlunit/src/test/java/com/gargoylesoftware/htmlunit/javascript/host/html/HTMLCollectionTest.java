@@ -82,7 +82,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all.length);\n"
-            + "    try {"
+            + "    try {\n"
             + "      document.appendChild(document.createElement('div'));\n"
             + "      alert(document.all.length);\n"
             + "    } catch (e) { alert('exception') }\n"

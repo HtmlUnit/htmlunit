@@ -801,9 +801,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
-            + "    <script id='theScript'>"
-            + "if (1 > 2 & 3 < 2) willNotHappen('yo');"
-            + "</script>\n"
+            + "    <script id='theScript'>if (1 > 2 & 3 < 2) willNotHappen('yo');</script>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
             + "       var myNode = document.getElementById('theScript');\n"
@@ -1691,8 +1689,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  var body = document.body;\n"
             + "  alert('body.isHomePage = ' + body.isHomePage);\n"
 
-            + "  if(!body.addBehavior) { alert('!addBehavior'); };\n"
-            + "  if(!body.removeBehavior) { alert('!removeBehavior'); };\n"
+            + "  if(!body.addBehavior) { alert('!addBehavior'); }\n"
+            + "  if(!body.removeBehavior) { alert('!removeBehavior'); }\n"
 
             + "  var id = body.addBehavior('#default#homePage');\n"
             + "  alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
@@ -2527,13 +2525,11 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object ClientRectList]", "0"},
             FF = {"", "0"})
-    @NotYetImplemented(FF)
     public void getClientRectsDisconnected() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.createElement('div');\n"
-            + "    var rects = d1.getClientRects();\n"
             + "    try {\n"
             + "      alert(d1.getClientRects());\n"
             + "    } catch(e) { alert('exception'); }\n"
@@ -2879,6 +2875,80 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "false", "true", "true", "true", "true", "true", "true", "true"})
+    public void scrollWidthAndHeight() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    alert(myDiv1.scrollWidth >= myDiv1.clientWidth);\n"
+            + "    alert(myDiv1.scrollHeight >= myDiv1.clientHeight);\n"
+
+            + "    alert(myDiv2.scrollWidth >= myDiv1.scrollWidth);\n"
+            + "    alert(myDiv2.scrollHeight >= myDiv1.scrollHeight);\n"
+            + "    alert(myDiv2.scrollWidth >= myDiv2.clientWidth);\n"
+            + "    alert(myDiv2.scrollHeight >= myDiv2.clientHeight);\n"
+
+            + "    alert(myDiv3.scrollWidth >= myDiv2.scrollWidth);\n"
+            + "    alert(myDiv3.scrollHeight >= myDiv2.scrollHeight);\n"
+            + "    alert(myDiv3.scrollWidth >= myDiv3.clientWidth);\n"
+            + "    alert(myDiv3.scrollHeight >= myDiv3.clientHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv1'/>\n"
+            + "  <div id='myDiv2' style='height: 42px; width: 42px' />\n"
+            + "  <div id='myDiv3' style='height: 7em; width: 7em' />\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void scrollWidthAndHeightDisplayNone() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    alert(myDiv.scrollWidth);\n"
+            + "    alert(myDiv.scrollHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv' style='display: none;' />\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void scrollWidthAndHeightDetached() throws Exception {
+        final String html =
+              "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.createElement('div');\n"
+            + "    alert(myDiv.scrollWidth);\n"
+            + "    alert(myDiv.scrollHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for https://sourceforge.net/tracker/?func=detail&aid=2022578&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
@@ -3163,7 +3233,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
-            + "  if (!div2.removeNode) { alert('removeNode not available'); return };\n"
+            + "  if (!div2.removeNode) { alert('removeNode not available'); return }\n"
 
             + "  alert(div1.firstChild.id);\n"
             + "  alert(div2.removeNode().firstChild);\n"
@@ -4064,7 +4134,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
-            + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
 
             + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before-end'));\n"
             + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after-end'));\n"
@@ -4116,7 +4186,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    } catch(e) { alert('exception-append'); return }\n"
 
             + "    var outernode = document.getElementById('myNode');\n"
-            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
             + "    outernode.insertAdjacentElement('afterend', newnode);\n"
             + "  }\n"
             + "  function alerter() {\n"
@@ -4147,7 +4217,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    } catch(e) { alert('exception-append'); return }\n"
 
             + "    var outernode = document.getElementById('myNode');\n"
-            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
             + "    outernode.insertAdjacentElement('afterend', newnode);\n"
             + "  }\n"
             + "  function alerter() {\n"
@@ -4173,7 +4243,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
-            + "      if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "      if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
             + "      outernode.insertAdjacentElement('afterend', newnode);\n"
             + "      try {\n"
             + "        tester();\n"
@@ -4208,7 +4278,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
-            + "  if (!oNode.insertAdjacentText) { alert('insertAdjacentText not available'); return };\n"
+            + "  if (!oNode.insertAdjacentText) { alert('insertAdjacentText not available'); return }\n"
             + "  oNode.insertAdjacentText('" + beforeEnd + "', 'before-end');\n"
             + "  oNode.insertAdjacentText('" + afterEnd + "', ' after-end');\n"
             + "  oNode.insertAdjacentText('" + beforeBegin + "', 'before-begin ');\n"

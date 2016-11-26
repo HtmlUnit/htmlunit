@@ -42,7 +42,7 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts("here")
     public void goShouldIgnoreOutOfBoundIndex() throws Exception {
-        final String html = "<html><body><script>"
+        final String html = "<html><body><script>\n"
                 + "history.go(1);\n"
                 + "alert('here');\n"
                 + "</script></body></html>";

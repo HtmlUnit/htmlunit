@@ -102,16 +102,16 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeFrameWindow() throws Exception {
-        final String index = "<html><head></head><body>"
-                + "<div id='content'>"
-                + "  <iframe name='content' src='second/'></iframe>"
-                + "</div>"
+        final String index = "<html><head></head><body>\n"
+                + "<div id='content'>\n"
+                + "  <iframe name='content' src='second/'></iframe>\n"
+                + "</div>\n"
                 + "<button id='clickId' "
                 +     "onClick=\"document.getElementById('content').innerHTML = 'new content';\">Item</button>\n"
                 + "</body></html>";
 
-        final String frame1 = "<html><head></head><body>"
-                + "<p>frame content</p>"
+        final String frame1 = "<html><head></head><body>\n"
+                + "<p>frame content</p>\n"
                 + "</body></html>";
 
         final WebClient webClient = getWebClient();

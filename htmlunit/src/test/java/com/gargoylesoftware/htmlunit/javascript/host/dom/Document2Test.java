@@ -140,13 +140,12 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts("1")
     public void getElementByTagNameNS_includesHtml() throws Exception {
         final String html
-            = "<html><head><title>foo</title>"
+            = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function doTest() {\n"
-            + "    if (!document.getElementsByTagNameNS) { alert('getElementsByTagNameNS not available'); return; };\n"
             + "    alert(document.getElementsByTagNameNS('*', 'html').length);\n"
             + "  }\n"
-            + "</script>"
+            + "</script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "  <p>hello world</p>\n"
@@ -176,7 +175,6 @@ public class Document2Test extends WebDriverTestCase {
     private void importNode(final boolean deep) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    if (!document.importNode) { alert('importNode not available'); return; };\n"
             + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
             + "    alert(node.id);\n"
             + "    alert(node.parentNode);\n"
@@ -204,11 +202,10 @@ public class Document2Test extends WebDriverTestCase {
                 "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\"><div id='child'> </div></html>",
                 200, "OK", "text/xml");
 
-        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>"
+        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "   if (!document.importNode) { alert('importNode not available'); return; };\n"
-            + "   if (!document.evaluate) { alert('evaluate not available'); return; };\n"
+            + "   if (!document.evaluate) { alert('evaluate not available'); return; }\n"
             + "   var xmlhttp = new XMLHttpRequest();\n"
             + "   xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
             + "   xmlhttp.send();\n"
@@ -243,15 +240,14 @@ public class Document2Test extends WebDriverTestCase {
     public void importNodesWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
-                "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\">"
+                "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
                 + "<div id='child'><div id='child2'><div id='child3'>-</div></div></div></html>",
                 200, "OK", "text/xml");
 
-        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>"
+        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "   if (!document.importNode) { alert('importNode not available'); return; };\n"
-            + "   if (!document.evaluate) { alert('evaluate not available'); return; };\n"
+            + "   if (!document.evaluate) { alert('evaluate not available'); return; }\n"
             + "   var xmlhttp = new XMLHttpRequest();\n"
             + "   xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
             + "   xmlhttp.send();\n"
@@ -338,11 +334,11 @@ public class Document2Test extends WebDriverTestCase {
 
                 + "  <a id='insert' "
                         + "onclick=\"insertText("
-                        + "'<html><head></head><body>first frame text</body></html>');\" href=\"#\">"
+                        + "'<html><head></head><body>first frame text</body></html>');\" href=\"#\">\n"
                         + "insert text to frame</a>\n"
                 + "  <a id= 'update' "
                         + "onclick=\"insertText("
-                        + "'<html><head></head><body>another frame text</body></html>');\" href=\"#\">"
+                        + "'<html><head></head><body>another frame text</body></html>');\" href=\"#\">\n"
                         + "change frame text again</a><br>\n"
                 + "  <iframe id='innerFrame' name='innerFrame' src='frame1.html'></iframe>\n"
 
@@ -405,7 +401,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      alert(div.outerHTML);\n"
             + "      alert(div.innerHTML);\n"
             + "      alert(div.innerText);\n"
-            + "   };\n"
+            + "   }\n"
             + "</script>\n"
             + "<div id='div'></div>\n"
             + "</body></html>";

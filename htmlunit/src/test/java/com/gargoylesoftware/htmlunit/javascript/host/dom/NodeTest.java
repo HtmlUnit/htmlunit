@@ -141,7 +141,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  var div2 = document.getElementById('div2');\n"
             + "  try {\n"
             + "    div1.removeChild(div2);\n"
-            + "  } catch(e) { alert('exception') };\n"
+            + "  } catch(e) { alert('exception') }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -208,19 +208,19 @@ public class NodeTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
-            + "var aNode = document.getElementById('myNode');\n"
-            + "alert(aNode.childNodes.length);\n"
-            + "alert(aNode.childNodes[0].nodeName);\n"
-            + "alert(aNode.childNodes[0].childNodes.length);\n"
-            + "alert(aNode.childNodes[0].childNodes[0].nodeName);\n"
-            + "alert(aNode.childNodes[0].childNodes[1].nodeName);\n"
-            + "alert(aNode.childNodes[1].nodeName);\n"
+            + "  var aNode = document.getElementById('myNode');\n"
+            + "  alert(aNode.childNodes.length);\n"
+            + "  alert(aNode.childNodes[0].nodeName);\n"
+            + "  alert(aNode.childNodes[0].childNodes.length);\n"
+            + "  alert(aNode.childNodes[0].childNodes[0].nodeName);\n"
+            + "  alert(aNode.childNodes[0].childNodes[1].nodeName);\n"
+            + "  alert(aNode.childNodes[1].nodeName);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "<div id='myNode'><span>Child Node 1-A"
             + "<h1>Child Node 1-B</h1></span>"
-            + "<h2>Child Node 2-A</h2></div>\n"
+            + "<h2>Child Node 2-A</h2></div>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -313,7 +313,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  try {\n"
             + "    oField.attachEvent('onclick', foo1);\n"
             + "    oField.attachEvent('onclick', foo2);\n"
-            + "  } catch(e) { alert('exception') };\n"
+            + "  } catch(e) { alert('exception') }\n"
             + "}\n"
             + "function foo1() {alert('in foo1');}\n"
             + "function foo2() {alert('in foo2');}\n"
@@ -390,11 +390,11 @@ public class NodeTest extends WebDriverTestCase {
             + "  var htmlNode = document.documentElement;\n"
             + "  var body = document.body;\n"
             + "  alert(body.childNodes.length);\n"
-            + "  try { body.appendChild(htmlNode); } catch(e) { alert('exception'); };\n"
+            + "  try { body.appendChild(htmlNode); } catch(e) { alert('exception'); }\n"
             + "  alert(body.childNodes.length);\n"
-            + "  try { body.insertBefore(htmlNode, body.firstChild); } catch(e) { alert('exception'); };\n"
+            + "  try { body.insertBefore(htmlNode, body.firstChild); } catch(e) { alert('exception'); }\n"
             + "  alert(body.childNodes.length);\n"
-            + "  try { body.replaceChild(htmlNode, body.firstChild); } catch(e) { alert('exception'); };\n"
+            + "  try { body.replaceChild(htmlNode, body.firstChild); } catch(e) { alert('exception'); }\n"
             + "  alert(body.childNodes.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'><span>hi</span></body></html>";
@@ -639,7 +639,7 @@ public class NodeTest extends WebDriverTestCase {
             + "      alert(div.compareDocumentPosition(childDiv) & Node.DOCUMENT_POSITION_CONTAINED_BY);\n"
             + "    } catch(e) {alert('exception');}\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
@@ -767,8 +767,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='myNode'><span>Child Node 1-A</span>"
-            + "<h1>Child Node 2-A</h1></div>\n"
+            + "<div id='myNode'><span>Child Node 1-A</span><h1>Child Node 2-A</h1></div>\n"
             + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";
 
@@ -838,8 +837,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='myNode'><h6>Child Node 1-A</h6>"
-            + "<h1>Child Node 2-A</h1></div>\n"
+            + "<div id='myNode'><h6>Child Node 1-A</h6><h1>Child Node 2-A</h1></div>\n"
             + "<h2 id='sibingNode'>Sibling</h2>\n"
             + "</body></html>";
 
@@ -1062,7 +1060,7 @@ public class NodeTest extends WebDriverTestCase {
             + "      function test() {\n"
             + "        try {\n"
             + "          parent.document.body.attachEvent('onclick', handler);\n"
-            + "        } catch(e) { alert('exception') };\n"
+            + "        } catch(e) { alert('exception') }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

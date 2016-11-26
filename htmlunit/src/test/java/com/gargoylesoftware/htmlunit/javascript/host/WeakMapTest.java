@@ -58,7 +58,7 @@ public class WeakMapTest extends WebDriverTestCase {
     public void setNonObject() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    if (window.WeakMap) {"
+            + "    if (window.WeakMap) {\n"
             + "      var kvArray = [[{}, 'value1'], [window, 'value2']];\n"
             + "      var myMap = new WeakMap(kvArray);\n"
             + "      try {\n"

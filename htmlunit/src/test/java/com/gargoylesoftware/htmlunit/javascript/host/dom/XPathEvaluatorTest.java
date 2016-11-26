@@ -85,8 +85,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "  </soap:Envelope>';\n"
 
             + "  function test() {\n"
-            + "    if (window.XPathEvaluator) {"
-            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');"
+            + "    if (window.XPathEvaluator) {\n"
+            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');\n"
             + "      var xpe = new XPathEvaluator();\n"
             + "      var nsResolver = xpe.createNSResolver(doc.documentElement);\n"
             + "      try {\n"

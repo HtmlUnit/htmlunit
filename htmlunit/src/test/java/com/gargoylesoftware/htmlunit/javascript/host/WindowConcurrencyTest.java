@@ -187,7 +187,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "  function test() {\n"
             + "    count = 0;\n"
             + "    id = setInterval(callback, 100);\n"
-            + "  };\n"
+            + "  }\n"
             + "  function callback() {\n"
             + "    count++;\n"
             + "    clearInterval(id);\n"
@@ -271,7 +271,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "  var id;\n"
             + "  function test() {\n"
             + "    id = setTimeout(callback, 1);\n"
-            + "  };\n"
+            + "  }\n"
             + "  function callback() {\n"
             + "    alert(id != 0);\n"
             + "    clearTimeout(id);\n"
@@ -347,7 +347,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "    window.timeoutId = set" + x + "(f, 10);\n"
             + "  }\n"
             + "</script></head><body>\n"
-            + "<span id='clickMe' onclick='test()'>click me</span>"
+            + "<span id='clickMe' onclick='test()'>click me</span>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"started", "finished"};
@@ -526,13 +526,13 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
      */
     @Test
     public void cleanSetTimeout() throws Exception {
-        final String page1 = "<html><body>"
+        final String page1 = "<html><body>\n"
             + "<a id=it href='" + URL_SECOND.toString() + "'>link</a>\n"
             + "</body></html>";
 
         final String html = "<html><body>\n"
-            + "<form action='foo2' name='waitform'></form>"
-            + "<script>"
+            + "<form action='foo2' name='waitform'></form>\n"
+            + "<script>\n"
             + "function foo() {\n"
             + "  setTimeout('foo()', 10);\n"
             + "}\n"

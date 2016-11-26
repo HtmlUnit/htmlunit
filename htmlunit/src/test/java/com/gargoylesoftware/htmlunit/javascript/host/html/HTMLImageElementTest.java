@@ -338,7 +338,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "  for (var i = 1; i <= 13; i++) {\n"
             + "    alert(document.getElementById('i' + i).align);\n"
-            + "  };\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

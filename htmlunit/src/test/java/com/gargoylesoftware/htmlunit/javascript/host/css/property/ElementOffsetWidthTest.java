@@ -545,10 +545,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "300",
-            FF = "0",
+    @Alerts(DEFAULT = "0",
             IE = "16")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented(IE)
     public void embed() throws Exception {
         loadPageWithAlerts2(test("embed"));
     }

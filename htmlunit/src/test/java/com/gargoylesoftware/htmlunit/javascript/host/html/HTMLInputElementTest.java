@@ -896,7 +896,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>\n"
             + "</form>\n"
             + "<script>\n"
-            + "document.getElementById('text1').onchange= function(event) { alert(this.value) };\n"
+            + "document.getElementById('text1').onchange = function(event) { alert(this.value) };\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1287,7 +1287,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  var f = document.getElementById('aFile');\n"
             + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
 
-            + "  try {"
+            + "  try {\n"
             + "    f.type = 'CHECKBOX';\n"
             + "    alert(f.type + ' ' + f.getAttribute('type'));\n"
             + "  } catch(e) { alert('error');}\n"
@@ -1351,7 +1351,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "  for (var i = 1; i <= 7; i++) {\n"
             + "    alert(document.getElementById('i' + i).align);\n"
-            + "  };\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

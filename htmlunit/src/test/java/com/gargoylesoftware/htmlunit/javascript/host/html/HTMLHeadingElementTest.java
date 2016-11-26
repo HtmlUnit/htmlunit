@@ -47,7 +47,7 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "  for (var i = 1; i <= 6; i++) {\n"
             + "    alert(document.getElementById('h' + i).align);\n"
-            + "  };\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

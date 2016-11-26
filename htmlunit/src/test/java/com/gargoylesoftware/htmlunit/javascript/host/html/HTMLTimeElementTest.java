@@ -50,8 +50,8 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
-            + "    <p>start <time id='time1'>20:00</time></p>"
-            + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>"
+            + "    <p>start <time id='time1'>20:00</time></p>\n"
+            + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>\n"
             + "  </body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
@@ -83,8 +83,8 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
-            + "    <p>start <time id='time1'>20:00</time></p>"
-            + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>"
+            + "    <p>start <time id='time1'>20:00</time></p>\n"
+            + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>\n"
             + "  </body>\n"
             + "</html>";
         loadPageWithAlerts2(html);

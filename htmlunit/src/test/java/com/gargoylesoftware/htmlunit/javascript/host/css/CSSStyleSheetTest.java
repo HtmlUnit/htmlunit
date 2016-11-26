@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleSheetTest extends WebDriverTestCase {
@@ -295,7 +296,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    alert(rules[0].selectorText);\n"
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
-            + "<style id='myStyle'>"
+            + "<style id='myStyle'>\n"
             + "  p { vertical-align:top }\n"
             + "  @unknown div { color: red; }\n"
             + "  div { color: red; }\n"
@@ -327,7 +328,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    alert(rules[0].selectorText);\n"
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
-            + "<style id='myStyle'>"
+            + "<style id='myStyle'>\n"
             + "  p { vertical-align:top }\n"
             + "  @unknown div { color: red; }\n"
             + "  div { color: red; }\n"
@@ -454,7 +455,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<input id='elt3' disabled>\n"
             + "<input id='elt4' type='checkbox'>\n"
             + "<button id='elt5' ></button>\n"
-            + "<select id='elt6' ></select>"
+            + "<select id='elt6' ></select>\n"
             + "<textarea id='elt7' ></textarea>\n";
         doTest(":enabled", htmlSnippet);
     }
@@ -470,7 +471,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<input id='elt3'>\n"
             + "<input id='elt4' type='checkbox' disabled>\n"
             + "<button id='elt5' disabled></button>\n"
-            + "<select id='elt6' disabled></select>"
+            + "<select id='elt6' disabled></select>\n"
             + "<textarea id='elt7' disabled></textarea>\n";
         doTest(":disabled", htmlSnippet);
     }
@@ -535,7 +536,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "#style1 {position: absolute; left: 100px; width: 50px; height: 50px;}\n"
             + "</style>\n"
             + "</head><body onload='doTest()'>\n"
-            + "<div id='style1'>Hello</div>"
+            + "<div id='style1'>Hello</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -562,8 +563,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  div { display: none; }\n"
             + "</style>\n"
             + "</head><body onload='doTest()'>\n"
-            + "<div id='div1'>invisible</div>"
-            + "visible"
+            + "<div id='div1'>invisible</div>\n"
+            + "visible\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -585,10 +586,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='it'>hello</div>\n"
             + "<script>\n"
-            + "var getStyle = function(e) {\n"
-            + "return window.getComputedStyle(e, '');\n"
-            + "};\n"
-            + "alert(getStyle(document.getElementById('it')).zIndex);\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle(e, '');\n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('it')).zIndex);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -615,10 +616,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</div>\n"
             + "</div>\n"
             + "<script>\n"
-            + "var getStyle = function(e) {\n"
-            + "return window.getComputedStyle(e, '');\n"
-            + "};\n"
-            + "alert(getStyle(document.getElementById('it')).zIndex);\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle(e, '');\n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('it')).zIndex);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -642,11 +643,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<div id='it1' class='classA classB'>hello</div>\n"
             + "<div id='it2' class='classA classB'>hello</div>\n"
             + "<script>\n"
-            + "var getStyle = function(e) {\n"
-            + "return window.getComputedStyle(e, '');\n"
-            + "};\n"
-            + "alert(getStyle(document.getElementById('it1')).zIndex);\n"
-            + "alert(getStyle(document.getElementById('it2')).zIndex);\n"
+            + "  var getStyle = function(e) {\n"
+            + "    return window.getComputedStyle(e, '');\n"
+            + "  };\n"
+            + "  alert(getStyle(document.getElementById('it1')).zIndex);\n"
+            + "  alert(getStyle(document.getElementById('it2')).zIndex);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1209,5 +1210,33 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, new URL(getDefaultUrl(), "test.html"));
         driver.findElement(By.linkText("second page")).click();
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * Test that calling insertRule before retrieving the rules works.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("inserted")
+    public void insertRuleWithoutGetRules() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+                + "function doTest() {\n"
+                + "  var f = document.getElementById('myStyle');\n"
+                + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+                + "  try {\n"
+                + "    if (s.insertRule) {\n"
+                + "      s.insertRule('.testStyle1 { color: red; }', 0);\n"
+                + "    } else {\n"
+                + "      s.addRule('.testStyle1', 'color: red;', 0);\n"
+                + "    }\n"
+                + "    alert('inserted');\n"
+                + "  } catch(err) { alert('exception'); }\n"
+                + "}</script>\n"
+                + "<style id='myStyle'></style>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

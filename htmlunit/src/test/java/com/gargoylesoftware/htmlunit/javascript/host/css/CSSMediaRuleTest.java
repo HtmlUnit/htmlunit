@@ -39,7 +39,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
 
-            + "<style>"
+            + "<style>\n"
             + "  @media screen, print { p { background-color:#FFFFFF; }};"
             + "</style>\n"
 
@@ -72,7 +72,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
 
-            + "<style>"
+            + "<style>\n"
             + "  @media only screen and (color), print { p { background-color:#FFFFFF; }};"
             + "</style>\n"
 

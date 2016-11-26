@@ -123,6 +123,7 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "true"},
+            CHROME = {"symbol", "Symbol(Symbol.species)", "true"},
             FF45 = {"symbol", "Symbol(Symbol.species)", "true"},
             IE = "not supported")
     public void species() throws Exception {
@@ -210,7 +211,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    try {"
+            + "    try {\n"
             + "      alert(Symbol());\n"
             + "      alert(Symbol('foo'));\n"
             + "      alert(Symbol.iterator);\n"
@@ -237,7 +238,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    try {"
+            + "    try {\n"
             + "      alert(typeof Symbol);\n"
             + "      alert(typeof Symbol());\n"
             + "      alert(typeof Symbol('foo'));\n"
@@ -265,7 +266,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    try {"
+            + "    try {\n"
             + "      alert(Symbol('bar') === Symbol('bar'));\n"
             + "      alert(Symbol.for('bar') === Symbol.for('bar'));\n"
 
@@ -297,7 +298,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    try {"
+            + "    try {\n"
             + "      alert(Symbol.for('global') === globSym);\n"
             + "      alert(Symbol('global') === globSym);\n"
             + "    } catch(e) {alert('exception')}\n"
@@ -323,10 +324,10 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    try {"
+            + "    try {\n"
             + "      new Symbol();\n"
             + "    } catch(e) {alert('exception')}\n"
-            + "    try {"
+            + "    try {\n"
             + "      new Symbol('foo');\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
@@ -351,10 +352,10 @@ public class SymbolTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    try {"
+            + "    try {\n"
             + "      new Symbol();\n"
             + "    } catch(e) {alert('exception')}\n"
-            + "    try {"
+            + "    try {\n"
             + "      new Symbol('foo');\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"

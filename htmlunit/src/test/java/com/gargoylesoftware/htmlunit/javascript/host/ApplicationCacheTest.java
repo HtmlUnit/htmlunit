@@ -117,7 +117,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    if (window.applicationCache) {;\n"
+            + "    if (window.applicationCache) {\n"
             + "      window.applicationCache." + handler + " = function(e) {};\n"
             + "      var handler = window.applicationCache." + handler + ".toString();\n"
 
@@ -143,7 +143,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    if (window.applicationCache) {;\n"
+            + "    if (window.applicationCache) {\n"
             + "      alert(window.applicationCache.addEventListener == null);\n"
             + "      alert(window.applicationCache.removeEventListener == null);\n"
             + "      alert(window.applicationCache.dispatchEvent == null);\n"

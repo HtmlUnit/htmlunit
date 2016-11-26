@@ -141,7 +141,7 @@ public class HTMLDListElementTest extends WebDriverTestCase {
                 + "        document.getElementById('dl1').type = 'I';\n"
                 + "        alert(document.getElementById('dl1').type);\n"
 
-                + "        try { document.getElementById('dl1').type = 'u' } catch(e) {alert('exception');};\n"
+                + "        try { document.getElementById('dl1').type = 'u' } catch(e) {alert('exception');}\n"
                 + "        alert(document.getElementById('dl1').type);\n"
                 + "      }\n"
                 + "    </script>\n"

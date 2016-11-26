@@ -311,7 +311,7 @@ public class PromiseTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"end", "in then"},
             IE = "exception")
     public void then() throws Exception {
-        final String html = "<html><body><script>"
+        final String html = "<html><body><script>\n"
             + "try {\n"
             + "  var p = Promise.resolve(void 0);\n"
             + "  p.then(function() { alert('in then'); });\n"

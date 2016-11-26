@@ -94,7 +94,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Alerts("beforeSpace afterSpace")
     public void asText() throws Exception {
         final String html = "<html><head></head><body>\n"
-            + "<div id='foo'><span>beforeSpace</span><span> </span><span>afterSpace</span></div>"
+            + "<div id='foo'><span>beforeSpace</span><span> </span><span>afterSpace</span></div>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);

@@ -101,7 +101,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "function doTest() {\n"
             + "    document.getElementById('label1').htmlFor = 'checkbox1';\n"
             + "}\n"
-            + "function delegateClick() {"
+            + "function delegateClick() {\n"
             + "  try {\n"
             + "    document.getElementById('label1').click();\n"
             + "  } catch (e) {}\n"

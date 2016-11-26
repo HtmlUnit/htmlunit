@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.Keyboard;
 
 /**
  * Tests that when DOM events such as "onclick" have access
@@ -51,15 +52,17 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     public void eventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
-        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, "true,false,false", "false,false,false");
-        testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, "true,false,false");
-        testEventOnKeyDown_Shift_Ctrl_Alt(false, true,  false, "true,true,false", "false,true,false");
-        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, true, "true,false,true", "false,false,true");
-        testEventOnKeyDown_Shift_Ctrl_Alt(true,  true,  true, "true,true,true");
+        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, "false,false,false");
+        testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, "true,false,false", "true,false,false");
+        testEventOnKeyDown_Shift_Ctrl_Alt(false, true,  false, "false,true,false", "false,true,false");
+        testEventOnKeyDown_Shift_Ctrl_Alt(false, false, true, "false,false,true", "false,false,true");
+        testEventOnKeyDown_Shift_Ctrl_Alt(true,  true,  true, "false,true,false", "false,true,true",
+                "true,true,true", "true,true,true");
     }
 
-    private void testEventOnKeyDown_Shift_Ctrl_Alt(final boolean shiftKey,
-            final boolean ctrlKey, final boolean altKey, final String... expectedAlerts) throws Exception {
+    private void testEventOnKeyDown_Shift_Ctrl_Alt(
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+            final String... expectedAlerts) throws Exception {
         final String content
             = "<html>\n"
             + "<head></head>\n"
@@ -76,7 +79,27 @@ public class Event3Test extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.getHtmlElementById("clickId").type('A', shiftKey, ctrlKey, altKey);
+        final Keyboard keyboard = new Keyboard();
+        if (ctrlKey) {
+            keyboard.press(KeyboardEvent.DOM_VK_CONTROL);
+        }
+        if (altKey) {
+            keyboard.press(KeyboardEvent.DOM_VK_ALT);
+        }
+        if (shiftKey) {
+            keyboard.press(KeyboardEvent.DOM_VK_SHIFT);
+        }
+        keyboard.type('a');
+        if (ctrlKey) {
+            keyboard.release(KeyboardEvent.DOM_VK_CONTROL);
+        }
+        if (altKey) {
+            keyboard.release(KeyboardEvent.DOM_VK_ALT);
+        }
+        if (shiftKey) {
+            keyboard.release(KeyboardEvent.DOM_VK_SHIFT);
+        }
+        page.getHtmlElementById("clickId").type(keyboard);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

@@ -38,7 +38,7 @@ public class EventTargetTest extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myId');\n"
-            + "    if (div.attachEvent) {"
+            + "    if (div.attachEvent) {\n"
             + "      div.attachEvent('onclick', clickFn = function() {\n"
             + "        alert('called!');\n"
             + "      });\n"

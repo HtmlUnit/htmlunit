@@ -214,7 +214,7 @@ public class AttrTest extends WebDriverTestCase {
             + "  alert(elem.getAttributeNode('name'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
-            + "<div id='myDiv'></div>"
+            + "<div id='myDiv'></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -236,7 +236,7 @@ public class AttrTest extends WebDriverTestCase {
             + "  alert(elem.attributes.getNamedItem('name'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
-            + "<div id='myDiv'></div>"
+            + "<div id='myDiv'></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

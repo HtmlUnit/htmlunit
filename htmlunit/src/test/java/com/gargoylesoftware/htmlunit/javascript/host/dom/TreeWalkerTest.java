@@ -46,7 +46,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd = "\n  } catch(e) { alert('exception') };\n"
+    private static final String contentEnd = "\n  } catch(e) { alert('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -68,14 +68,14 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') };\n"
+    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
         + "<a id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
         + "</div>\n"
         + "<p id='theP'>for <br/>TreeWalkers<span>something</span>that is <a>important to me</a></p>\n"
-        + "<span>something <code>codey</code>goes <pre>  here</pre></span>"
+        + "<span>something <code>codey</code>goes <pre>  here</pre></span>\n"
         + "</body></html>";
 
     private void test2(final String script) throws Exception {
@@ -347,10 +347,14 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"},
             IE = "exception")
     public void simpleFilter() throws Exception {
-        final String script = "var noScripts = {acceptNode: function(node) {"
-            + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
+        final String script = "var noScripts = {\n"
+            + "  acceptNode: function(node) {\n"
+            + "    if (node.tagName == 'SCRIPT')\n"
+            + "      return NodeFilter.FILTER_REJECT;\n"
             // using number rather that object field causes Rhino to pass a Double
-            + "return 1; // NodeFilter.FILTER_ACCEPT \n}};\n"
+            + "    return 1; // NodeFilter.FILTER_ACCEPT \n"
+            + "  }\n"
+            + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
             + "alert(safeTagName(tw.firstChild()));\n"
@@ -370,9 +374,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Test
     @Alerts({"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"})
     public void simpleFilter_asAFunction() throws Exception {
-        final String script = "var noScripts = function(node) {"
-            + "if (node.tagName == 'SCRIPT') return NodeFilter.FILTER_REJECT;"
-            + "return 1;};\n"
+        final String script = "var noScripts = function(node) {\n"
+            + "  if (node.tagName == 'SCRIPT')\n"
+            + "    return NodeFilter.FILTER_REJECT;\n"
+            + "  return 1;\n"
+            + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
             + "alert(safeTagName(tw.firstChild()));\n"
@@ -413,7 +419,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "      return NodeFilter.FILTER_REJECT;\n"
             + "    return NodeFilter.FILTER_ACCEPT;\n"
             + "  }\n"
-            + "};\n"
+            + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "alert(safeTagName(tw.firstChild()));\n"
             + "alert(safeTagName(tw.nextSibling()));\n";

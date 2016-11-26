@@ -60,7 +60,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "  for (var i = 1; i <= 7; i++) {\n"
             + "    alert(document.getElementById('c' + i).align);\n"
-            + "  };\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -329,7 +329,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             IE = "128")
     public void width_px() throws Exception {
         final String html
-            = "<html><head>"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    myCol.width = '128px';\n"
@@ -353,7 +353,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             IE = {"", "string"})
     public void width_null() throws Exception {
         final String html
-            = "<html><head>"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    myCol.width = null;\n"
@@ -376,11 +376,9 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Alerts("<table><colgroup><col></colgroup></table>")
     public void parsing() throws Exception {
         final String html
-            = "<html><body><div>"
-            + "<table><colgroup><col></colgroup></table>"
-            + "</div>\n"
+            = "<html><body><div><table><colgroup><col></colgroup></table></div>\n"
             + "<script>\n"
-            + "alert(document.body.firstChild.innerHTML);\n"
+            + "  alert(document.body.firstChild.innerHTML);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

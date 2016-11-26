@@ -615,7 +615,7 @@ public class Location2Test extends WebDriverTestCase {
             + "<script>\n"
             + " if ('onhashchange' in window) { alert('supported') }\n"
             + " function locationHashChanged(event) {\n"
-            + "  if (event) {"
+            + "  if (event) {\n"
             + "    alert('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
             + "  } else {\n"
             + "    alert('onhashchange -');\n"
@@ -746,7 +746,7 @@ public class Location2Test extends WebDriverTestCase {
     public void refererHeaderWhenSettingLocation() throws Exception {
         final String html = "<html><head><title>Base</title></head>\n"
                 + "<body>\n"
-                + "  <a id='link' href='content.html' target='content'>Link</a>"
+                + "  <a id='link' href='content.html' target='content'>Link</a>\n"
                 + "  <a id='jsLink' href='#' onclick=\"javascript:window.location='content.html';\">jsLink</a>\n"
                 + "</body></html>";
 
@@ -793,7 +793,7 @@ public class Location2Test extends WebDriverTestCase {
 
         final String menu = "<html><head><title>Menu</title></head>\n"
                 + "<body>\n"
-                + "  <a id='link' href='content.html' target='content'>Link</a>"
+                + "  <a id='link' href='content.html' target='content'>Link</a>\n"
                 + "  <a id='jsLink' href='#' onclick=\"javascript:top.content.location='content.html';\">jsLink</a>\n"
                 + "</body></html>";
 

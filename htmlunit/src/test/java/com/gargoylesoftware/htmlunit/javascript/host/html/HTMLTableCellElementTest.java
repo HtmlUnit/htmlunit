@@ -554,7 +554,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             "<html><body>\n"
             + "<table><tr>\n"
             + "<td style='padding:0' id='it'></td>\n"
-            + "<td style='display: none'>t</td>"
+            + "<td style='display: none'>t</td>\n"
             + "</tr></table>\n"
             + "<script>\n"
             + "var it = document.getElementById('it');\n"

@@ -362,7 +362,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<div id='styleTest' style='position: absolute; left: 400px; top: 50px; padding: 10px 20px 30px 40px;'>"
+            + "<div id='styleTest' style='position: absolute; left: 400px; top: 50px; padding: 10px 20px 30px 40px;'>\n"
             + "<div id='innerDiv'></div>TEST</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

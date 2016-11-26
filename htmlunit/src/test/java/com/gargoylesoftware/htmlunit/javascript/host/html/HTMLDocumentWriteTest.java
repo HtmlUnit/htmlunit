@@ -170,8 +170,8 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             "<html><head><title>Test</title></head><body>\n"
             + "<script>\n"
             + "  function foo() { var d = document.write; d(4); }\n"
-            + "  try {"
-            + "    foo();"
+            + "  try {\n"
+            + "    foo();\n"
             + "  } catch (e) { alert('exception occurred'); document.write(4); }\n"
             + "</script>\n"
             + "</body></html>";

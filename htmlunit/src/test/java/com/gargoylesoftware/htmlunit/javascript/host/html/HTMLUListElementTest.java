@@ -142,7 +142,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
                 + "        document.getElementById('u1').type = 'I';\n"
                 + "        alert(document.getElementById('u1').type);\n"
 
-                + "        try { document.getElementById('u1').type = 'u' } catch(e) {alert('exception');};\n"
+                + "        try { document.getElementById('u1').type = 'u' } catch(e) {alert('exception');}\n"
                 + "        alert(document.getElementById('u1').type);\n"
                 + "      }\n"
                 + "    </script>\n"

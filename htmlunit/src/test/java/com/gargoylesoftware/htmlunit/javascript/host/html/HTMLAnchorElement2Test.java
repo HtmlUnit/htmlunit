@@ -95,7 +95,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var a = document.getElementById('link');\n"
-            + "    if (!a.attachEvent) { alert('attachEvent not available'); return };\n"
+            + "    if (!a.attachEvent) { alert('attachEvent not available'); return }\n"
             + "    a.attachEvent('onclick', handler);\n"
             + "  }\n"
             + "  function handler() {\n"
@@ -175,7 +175,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function delegateClick() {\n"
-            + "  try {"
+            + "  try {\n"
             + "    document.getElementById(\"link1\").click();\n"
             + "  } catch(e) {}\n"
             + "}\n"
@@ -843,7 +843,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             CHROME = "PING")
     public void ping() throws Exception {
         final String html
-            = "<html><body>"
+            = "<html><body>\n"
             + "  <a href='" + URL_SECOND + "' ping='test2?h'>clickMe</a>\n"
             + "</body></html>";
 

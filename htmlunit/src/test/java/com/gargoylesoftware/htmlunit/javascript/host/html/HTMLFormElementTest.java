@@ -1308,7 +1308,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + " alert(typeof form.onchange);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
-            + "<form onchange='cat=true'></form>"
+            + "<form onchange='cat=true'></form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

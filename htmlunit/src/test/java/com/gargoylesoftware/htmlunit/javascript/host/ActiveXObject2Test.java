@@ -93,7 +93,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             + "<head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      if ('ActiveXObject' in window) {"
+            + "      if ('ActiveXObject' in window) {\n"
             + "        new ActiveXObject('InternetExplorer.Application');\n"
             + "      } else {\n"
             + "        alert('ActiveXObject undefined');\n"
