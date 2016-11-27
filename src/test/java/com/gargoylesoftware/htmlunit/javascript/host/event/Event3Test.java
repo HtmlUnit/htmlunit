@@ -173,7 +173,7 @@ public class Event3Test extends SimpleWebTestCase {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function t(_s) {\n"
-            + "     return function() { alert(_s) };\n"
+            + "  return function() { alert(_s) };\n"
             + "}\n"
             + "function init() {\n"
             + "  window.attachEvent('onclick', t('window bubbling'));\n"

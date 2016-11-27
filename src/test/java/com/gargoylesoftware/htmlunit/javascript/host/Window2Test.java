@@ -1891,7 +1891,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "<script>\n"
                 + "  function test2() {\n"
                 + "    alert('test2 alert');\n"
-                + "  };\n"
+                + "  }\n"
                 + "  window.top.test1();\n"
                 + "  alert(test2 === undefined);\n"
                 + "</script>\n"
