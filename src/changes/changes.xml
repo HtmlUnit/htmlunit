@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1839">
+                Ignore the charset when checking the content type header for CORS requests.
+            </action>
             <action type="add" dev="rbri" issue="1836">
                 WebClientOptions: add 'HistoryPageCacheLimit' to allow specifying the number
                 of page references stored in history. If this value is smaller than the

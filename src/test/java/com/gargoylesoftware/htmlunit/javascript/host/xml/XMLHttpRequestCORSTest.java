@@ -323,6 +323,54 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
+    //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
+    public void preflightUrlEncoded() throws Exception {
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
+    //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
+    public void preflightUrlEncoded_contentTypeWithCharset() throws Exception {
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded;charset=utf-8");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
+    //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
+    public void preflightMultipart() throws Exception {
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
+            IE = {"4", "200", "null", "null", "null", "null"})
+    //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
+    public void preflightMultipart_contentTypeWithCharset() throws Exception {
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data;charset=utf-8");
+    }
+
+    /**
      * Seems that "Access-Control-Allow-Methods" is not considered by FF.
      *
      * @throws Exception if the test fails.

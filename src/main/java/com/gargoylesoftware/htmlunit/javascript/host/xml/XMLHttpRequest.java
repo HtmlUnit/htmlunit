@@ -870,9 +870,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
-            if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
-                || FormEncodingType.MULTIPART.getName().equals(lcValue)
-                || ("text/plain".equals(lcValue) || lcValue.startsWith("text/plain;charset="))) {
+            if (lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
+                || lcValue.startsWith(FormEncodingType.MULTIPART.getName())
+                || lcValue.startsWith("text/plain")) {
                 return false;
             }
             return true;
