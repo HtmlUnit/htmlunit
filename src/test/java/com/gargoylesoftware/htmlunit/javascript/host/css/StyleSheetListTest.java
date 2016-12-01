@@ -248,7 +248,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "        alert(document.styleSheets.length);\n"
 
             + "        var linkTag = document.createElement ('link');\n"
-            + "        linkTag.href = 'new.css'\n"
+            + "        linkTag.href = 'new.css';\n"
             + "        linkTag.rel = 'stylesheet';\n"
             + "        var head = document.getElementsByTagName ('head')[0];\n"
             + "        head.appendChild (linkTag);\n"

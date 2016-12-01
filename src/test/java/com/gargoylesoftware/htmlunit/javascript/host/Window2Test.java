@@ -861,7 +861,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  var myEvent;\n"
             + "  var listener = function(x) {\n"
             + "    alert(x == myEvent);\n"
-            + "    x.foo = 'I was here'\n"
+            + "    x.foo = 'I was here';\n"
             + "  }\n"
             + "  window.addEventListener('click', listener, false);\n"
             + "  myEvent = document.createEvent('HTMLEvents');\n"

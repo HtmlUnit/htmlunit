@@ -632,7 +632,7 @@ public class EventTest extends WebDriverTestCase {
             + "  var myEvent;\n"
             + "  var listener = function(x) {\n"
             + "    alert(x == myEvent);\n"
-            + "    x.foo = 'I was here'\n"
+            + "    x.foo = 'I was here';\n"
             + "  }\n"
             + "  \n"
             + "  e.addEventListener('click', listener, false);\n"

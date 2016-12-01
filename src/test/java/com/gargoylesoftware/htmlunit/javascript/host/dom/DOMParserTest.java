@@ -307,7 +307,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var text = '<elementWithChildren>' + '<![CDATA[sampl<<< >>e data]]>' + '<!--a sample comment-->'\n"
             + "      + '<elementWithChildren/>' + '<?target processing instruction data?>' + 'sample text node'\n"
-            + "      + '</elementWithChildren>'\n"
+            + "      + '</elementWithChildren>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"

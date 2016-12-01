@@ -35,7 +35,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     private void testMatch(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str = '" + string + "'\n;"
+            + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
             + "    alert(str.match(myRegExp));\n"
             + "    alert('$n');\n"
@@ -191,7 +191,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     private void testSearch(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str = '" + string + "'\n;"
+            + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
             + "    alert(str.search(myRegExp));\n"
             + "    alert('$n');\n"
@@ -339,7 +339,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     private void testReplace(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str = '" + string + "'\n;"
+            + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
             + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
             + "    alert('$n');\n"

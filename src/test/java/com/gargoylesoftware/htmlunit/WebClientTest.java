@@ -898,7 +898,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void redirectViaJavaScriptDuringInitialPageLoad() throws Exception {
         final String firstContent = "<html><head><title>First</title><script>\n"
-                + "location.href='" + URL_SECOND + "'\n"
+                + "location.href='" + URL_SECOND + "';\n"
                 + "</script></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 

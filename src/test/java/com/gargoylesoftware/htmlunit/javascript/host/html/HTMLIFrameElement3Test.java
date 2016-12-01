@@ -625,9 +625,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "  <script>\n"
             + "    function doTest() {\n"
             + "      var myFrame = document.createElement('iframe');\n"
-            + "      myFrame.id = 'idMyFrame'\n"
-            + "      myFrame.src = 'about:blank'\n"
-            + "      document.body.appendChild(myFrame)\n"
+            + "      myFrame.id = 'idMyFrame';\n"
+            + "      myFrame.src = 'about:blank';\n"
+            + "      document.body.appendChild(myFrame);\n"
 
             + "      var docDomain = document.domain;\n"
             + "      var myFrameDomain = myFrame.contentDocument.domain;\n"

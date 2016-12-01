@@ -404,7 +404,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final String html = "<html><head></head><body>\n"
                 + "<div id='it'>here</div><script>\n"
                 + "  var s = document.createElement('script');\n"
-                + "  s.src = 'foo.js'\n"
+                + "  s.src = 'foo.js';\n"
                 + "  document.body.appendChild(s);\n"
                 + "</script></body></html>";
 

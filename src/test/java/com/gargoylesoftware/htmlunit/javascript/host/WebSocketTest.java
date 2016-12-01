@@ -60,7 +60,7 @@ public class WebSocketTest extends WebDriverTestCase {
     public void initial() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var location = 'ws://localhost:" + PORT + "/'\n"
+            + "    var location = 'ws://localhost:" + PORT + "/';\n"
             + "    var ws = new WebSocket(location);\n"
             + "    alert(ws.url);\n"
             + "    alert(ws.protocol);\n"
@@ -82,7 +82,7 @@ public class WebSocketTest extends WebDriverTestCase {
     public void binaryType() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var location = 'ws://localhost:" + PORT + "/'\n"
+            + "    var location = 'ws://localhost:" + PORT + "/';\n"
             + "    var ws = new WebSocket(location);\n"
             + "    alert(ws.binaryType);\n"
 

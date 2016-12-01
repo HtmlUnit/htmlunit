@@ -38,7 +38,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
     private void testExec(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str = '" + string + "'\n;"
+            + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
             + "    alert(myRegExp.exec(str));\n"
             + "    alert('$n');\n"
@@ -197,7 +197,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
     private void testTest(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str = '" + string + "'\n;"
+            + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
             + "    alert(myRegExp.test(str));\n"
             + "    alert('$n');\n"

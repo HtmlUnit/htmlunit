@@ -126,7 +126,7 @@ public class RangeTest extends WebDriverTestCase {
             + "  var element = document.getElementById(id);\n"
             + "  var range = element.ownerDocument.createRange();\n"
             + "  range.selectNode(element);\n"
-            + "  var str = '<tr>  <td>new</td></tr>'\n" // space between <tr> and <td> important here!
+            + "  var str = '<tr>  <td>new</td></tr>';\n" // space between <tr> and <td> is important!
             + "  var fragment = range.createContextualFragment(str);\n"
             + "  alert(fragment.firstChild);\n"
             + "}\n"

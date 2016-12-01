@@ -40,7 +40,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         + "  var s = '[';\n"
         + "  for (var i = 0; i < _arr.length; i++)\n"
         + "  {\n"
-        + "    if (i != 0) s += ', '\n"
+        + "    if (i != 0) s += ', ';\n"
         + "    s += _arr[i];\n"
         + "  }\n"
         + "  s += ']';\n"
