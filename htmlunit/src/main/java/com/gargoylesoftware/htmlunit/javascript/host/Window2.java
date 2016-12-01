@@ -229,6 +229,16 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     @Override
+    public DomNode getDomNodeOrDie() {
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode == null) {
+            final String clazz = getClass().getName();
+            throw new IllegalStateException("DomNode has not been set for this SimpleScriptObject: " + clazz);
+        }
+        return domNode;
+    }
+
+    @Override
     public Window2 getWindow() {
         return this;
     }

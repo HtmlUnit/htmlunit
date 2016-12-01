@@ -221,8 +221,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 global.put("window", global, true);
                 global.setWindow(window);
 
-                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "cancelAnimationFrame", "captureEvents", "close", "confirm", "execScript", "find", "focus", "clearTimeout", "CollectGarbage", "getComputedStyle", "open", "prompt", "postMessage", "requestAnimationFrame", "setTimeout",
-                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion", "scroll", "scrollBy", "scrollTo", "showModalDialog", "showModelessDialog"};
+                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "cancelAnimationFrame",
+                        "captureEvents", "close", "confirm", "execScript", "find", "focus", "clearTimeout",
+                        "CollectGarbage", "dump", "getComputedStyle", "open", "prompt", "postMessage",
+                        "requestAnimationFrame", "setTimeout",
+                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion",
+                        "scroll", "scrollBy", "scrollByLines", "scrollByPages", "scrollTo", "showModalDialog", "showModelessDialog"};
                 for (final String key : windowToGlobalFunctions) {
                     final Object function = window.get(key);
                     if (function != Undefined.getUndefined()) {
@@ -237,7 +241,11 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 //                    window.put(key, global.get(key), true);
 //                }
 
-                final String[] windowProperties = {"closed", "controllers", "devicePixelRatio", "document", "frames", "history", "innerHeight", "innerWidth", "length", "location", "name", "onbeforeunload", "onchange", "onclick", "onerror", "onload", "onsubmit", "opener", "outerHeight", "outerWidth", "pageXOffset", "pageYOffset", "parent", "scrollX", "scrollY", "self", "status", "top"};
+                final String[] windowProperties = {"closed", "controllers", "devicePixelRatio", "document", "frames",
+                        "history", "innerHeight", "innerWidth", "length", "location", "name", "onbeforeunload", "onchange",
+                        "onclick", "onerror", "onload", "onsubmit", "opener", "outerHeight", "outerWidth", "pageXOffset",
+                        "pageYOffset", "parent", "scrollX", "scrollY", "self", "status", "top", "mozInnerScreenX",
+                        "mozInnerScreenY", "mozPaintCount"};
                 final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
                 for (final String key : windowProperties) {

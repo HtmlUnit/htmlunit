@@ -99,7 +99,7 @@ public class DialogWindow extends WebWindowImpl {
     @Override
     public void setScriptObject(final ScriptObject scriptObject) {
         if (scriptObject != null) {
-            final Global global = NashornJavaScriptEngine.getGlobal(((Window2) scriptObject).getWebWindow().getScriptContext());
+            final Global global = (Global) scriptObject;
             global.addOwnProperty("dialogArguments", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, arguments_);
             scriptObject.addOwnProperty("dialogArguments", Property.WRITABLE_ENUMERABLE_CONFIGURABLE, arguments_);
         }
