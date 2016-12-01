@@ -33,7 +33,6 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
         final HTMLIFrameElement2 host = new HTMLIFrameElement2();
         ScriptUtils.initialize(host);
         host.setProto(((Global) self).getPrototype(host.getClass()));
-        ScriptUtils.initialize(host);
         return host;
     }
 
@@ -44,8 +43,8 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
      */
     @Getter
-    public Window2 getContentWindow() {
-        return (Window2) getFrame().getEnclosedWindow().getScriptObject2();
+    public Object getContentWindow() {
+        return getFrame().getEnclosedWindow().getScriptObject2();
     }
 
     private BaseFrameElement getFrame() {

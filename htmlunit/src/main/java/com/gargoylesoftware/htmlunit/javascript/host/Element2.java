@@ -111,8 +111,16 @@ public class Element2 extends Node2 {
                 + " in " + htmlElt.getPage().getUrl(), attrValue);
         final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
         Context context = ((ScriptObject) global).getContext();
-        final ScriptFunction eventHandler = context.compileScript(source, global);
-        setEventHandler(eventName, eventHandler);
+
+        final Global oldGlobal = Context.getGlobal();
+        try {
+            Context.setGlobal(global);
+            final ScriptFunction eventHandler = context.compileScript(source, global);
+            setEventHandler(eventName, eventHandler);
+        }
+        finally {
+            Context.setGlobal(oldGlobal);
+        }
     }
 
     /**

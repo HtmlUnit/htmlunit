@@ -169,7 +169,11 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         WebAssert.notNull("domNode", domNode);
         domNode_ = domNode;
         if (assignScriptObject) {
-            domNode_.setScriptableObject(this);
+            Object object = this;
+            if (object instanceof Window2) {
+                object = ((Window2) object).getGlobal();
+            }
+            domNode_.setScriptableObject(object);
         }
     }
 

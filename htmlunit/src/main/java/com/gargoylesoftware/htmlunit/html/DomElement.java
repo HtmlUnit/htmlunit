@@ -58,6 +58,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 
 /**
  * @author Ahmed Ashour
@@ -1244,7 +1246,26 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         }
         final EventTarget2 jsElt = (EventTarget2) getScriptObject2();
 
-        final ScriptResult result = jsElt.fireEvent(event);
+        final Global global = NashornJavaScriptEngine.getGlobal(
+                jsElt.getWindow().getWebWindow().getScriptContext());
+        final Global oldGlobal = Context.getGlobal();
+        final boolean globalChanged = oldGlobal != global;
+        try {
+            if (globalChanged) {
+                Context.setGlobal(global);
+            }
+
+            final ScriptResult result = jsElt.fireEvent(event);
+            if (event.isAborted(result)) {
+                preventDefault();
+            }
+            return result;
+        }
+        finally {
+            if (globalChanged) {
+                Context.setGlobal(oldGlobal);
+            }
+        }
 //        final ContextAction action = new ContextAction() {
 //            @Override
 //            public Object run(final Context cx) {
@@ -1257,7 +1278,6 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 //        if (event.isAborted(result)) {
 //            preventDefault();
 //        }
-        return result;
     }
 
     /**

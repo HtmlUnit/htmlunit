@@ -37,6 +37,8 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
@@ -79,8 +81,15 @@ public class EventTarget2 extends SimpleScriptObject {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
     @Function
-    public void addEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
-        getEventListenersContainer().addEventListener(type, listener, useCapture);
+    public static void addEventListener(final ScriptObject object, final String type, final ScriptObject listener, final boolean useCapture) {
+        final EventTarget2 eventTarget;
+        if (object instanceof EventTarget2) {
+            eventTarget = (EventTarget2) object;
+        }
+        else {
+            eventTarget = ((Global) object).<Window2>getWindow();
+        }
+        eventTarget.getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
     /**
@@ -235,9 +244,20 @@ public class EventTarget2 extends SimpleScriptObject {
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Function
-    public boolean dispatchEvent(final Event2 event) {
-        event.setTarget(this);
-        final DomElement element = (DomElement) getDomNodeOrNull();
+    public static boolean dispatchEvent(final Object object, final Event2 event) {
+        if (object instanceof Global) {
+            return Window2.dispatchEvent(((Global) object).getWindow(), event);
+        }
+        final EventTarget2 eventTarget;
+        if (object instanceof EventTarget2) {
+            eventTarget = (EventTarget2) object;
+        }
+        else {
+            HTMLDocument2 document = (HTMLDocument2) Window2.getDocument((Global) object);
+            eventTarget = document.getBody();
+        }
+        event.setTarget(eventTarget);
+        final DomElement element = (DomElement) eventTarget.getDomNodeOrNull();
         ScriptResult result = null;
         if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
             try {
@@ -248,7 +268,7 @@ public class EventTarget2 extends SimpleScriptObject {
             }
         }
         else {
-            result = fireEvent(event);
+            result = eventTarget.fireEvent(event);
         }
         return !event.isAborted(result);
     }
@@ -296,8 +316,15 @@ public class EventTarget2 extends SimpleScriptObject {
      * documentation</a>
      */
     @Function
-    public void removeEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
-        getEventListenersContainer().removeEventListener(type, listener, useCapture);
+    public static void removeEventListener(final ScriptObject object, final String type, final ScriptObject listener, final boolean useCapture) {
+        final EventTarget2 eventTarget;
+        if (object instanceof EventTarget2) {
+            eventTarget = (EventTarget2) object;
+        }
+        else {
+            eventTarget = ((Global) object).<Window2>getWindow();
+        }
+        eventTarget.getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -169,6 +169,13 @@ public class EventListenersContainer2 implements Serializable {
         return handlers.handler_;
     }
 
+    private ScriptObject getTarget() {
+        if (jsNode_ instanceof Window2) {
+            return ((Window2) jsNode_).getGlobal();
+        }
+        return jsNode_;
+    }
+
     private ScriptResult executeEventListeners(final boolean useCapture, final Event2 event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
@@ -178,7 +185,7 @@ public class EventListenersContainer2 implements Serializable {
         ScriptResult allResult = null;
         final List<ScriptObject> handlers = getHandlers(Event2.getType(event), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
-            event.setCurrentTarget(jsNode_);
+            event.setCurrentTarget(getTarget());
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
             final List<ScriptObject> handlersToExecute = new ArrayList<>(handlers);
@@ -227,14 +234,14 @@ public class EventListenersContainer2 implements Serializable {
         }
         final ScriptFunction handler = getEventHandler(Event2.getType(event));
         if (handler != null) {
-            event.setCurrentTarget(jsNode_);
+            event.setCurrentTarget(getTarget());
             final InteractivePage page = (InteractivePage) (node != null
                     ? node.getPage()
                     : jsNode_.getWindow().getWebWindow().getEnclosedPage());
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Executing " + Event2.getType(event) + " handler for " + node);
             }
-            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_,
+            return page.executeJavaScriptFunctionIfPossible(handler, getTarget(),
                     propHandlerArgs, page);
         }
         return null;

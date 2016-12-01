@@ -97,7 +97,6 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.objects.Globalable;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
@@ -105,6 +104,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -115,7 +115,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
-public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
+public class Window2 extends EventTarget2 implements AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window2.class);
 
@@ -125,7 +125,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
      */
     private static final int MIN_TIMER_DELAY = 1;
-
+    private WebWindow webWindow_;
     private Screen2 screen_;
     private Document2 document_;
     private History2 history_;
@@ -169,10 +169,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
-            // Windows don't have corresponding DomNodes so set the domNode
-            // variable to be the page. If this isn't set then SimpleScriptable.get()
-            // won't work properly
-            setDomNode(htmlPage);
+            setWebWindow(htmlPage.getEnclosingWindow());
             clearEventListenersContainer();
 
             document_.setDomNode(htmlPage);
@@ -219,39 +216,25 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the WebWindow
      */
     public WebWindow getWebWindow() {
-        final DomNode domNode = getDomNodeOrNull();
-        if (domNode == null) {
-            return (WebWindow) Global.instance().getDomObject();
-        }
-        return ((HtmlPage) domNode).getEnclosingWindow();
+        return webWindow_;
+    }
+
+    public void setWebWindow(final WebWindow webWindow_) {
+        this.webWindow_ = webWindow_;
+    }
+
+    @Override
+    public DomNode getDomNodeOrNull() {
+        return (HtmlPage) getWebWindow().getEnclosedPage();
+    }
+
+    @Override
+    public Window2 getWindow() {
+        return this;
     }
 
     @Getter
-    public static int getInnerHeight(final Object self) {
-        final WebWindow webWindow = getWindow(self).getWebWindow();
-        return webWindow.getInnerHeight();
-    }
-
-    @Getter
-    public static int getInnerWidth(final Object self) {
-        final WebWindow webWindow = getWindow(self).getWebWindow();
-        return webWindow.getInnerWidth();
-    }
-
-    @Getter
-    public static int getOuterHeight(final Object self) {
-        final WebWindow webWindow = getWindow(self).getWebWindow();
-        return webWindow.getOuterHeight();
-    }
-
-    @Getter
-    public static int getOuterWidth(final Object self) {
-        final WebWindow webWindow = getWindow(self).getWebWindow();
-        return webWindow.getOuterWidth();
-    }
-
-    @Getter
-    public static Object getTop(final Object self) {
+    public static Object getTop(final Global self) {
         final WebWindow webWindow = getWindow(self).getWebWindow();
         final WebWindow top = webWindow.getTopWindow();
         return top.getScriptObject2();
@@ -320,7 +303,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * An undocumented IE function.
      */
     @Function(@WebBrowser(IE))
-    public void CollectGarbage() {
+    public static void CollectGarbage(final Object self) {
         // Empty.
     }
 
@@ -384,7 +367,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
     @Override
     protected FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
         FindProperty prop = super.findProperty(key, deep, start);
-        if (prop == null && getDomNodeOrNull() != null) {
+        if (prop == null && getWebWindow() != null) {
             final Global global = getGlobal();
             prop = global.findProperty(key, deep);
         }
@@ -400,7 +383,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
         final boolean scopeAccess = NashornCallSiteDescriptor.isScope(desc);
 
         final MethodHandle mh = MethodHandles.insertArguments(
-                staticHandle("getArbitraryProperty", Object.class, Object.class, String.class, boolean.class),
+                staticHandle("getArbitraryProperty", Object.class, Global.class, String.class, boolean.class),
                 1, name, scopeAccess);
         final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
         return new GuardedInvocation(mh,
@@ -410,9 +393,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
     }
 
     @SuppressWarnings("unused")
-    private static Object getArbitraryProperty(final Object self, final String name, final boolean scopeAccess) {
+    private static Object getArbitraryProperty(final Global self, final String name, final boolean scopeAccess) {
         final Window2 window = getWindow(self);
-        final HtmlPage page = (HtmlPage) window.getDomNodeOrDie();
+        final HtmlPage page = (HtmlPage) window.getWebWindow().getEnclosedPage();
         Object object = getFrameWindowByName(page, name);
         if (object == null) {
             object = window.getElementsByName(page, name);
@@ -517,13 +500,14 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
         }
         return super.has(key);
     }
+
     /**
      * Returns the number of frames contained by this window.
      * @return the number of frames contained by this window
      */
     @Getter
     public static int getLength(final Object self) {
-        final Window2 window = (Window2) self;
+        final Window2 window = getWindow(self);
         return (int) window.getFrames2().getLength();
     }
 
@@ -551,7 +535,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return false
      */
     @Function({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public boolean find(final String search, final boolean caseSensitive,
+    public static boolean find(final Object self, final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
         return false;
@@ -562,8 +546,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the {@code frames} property
      */
     @Getter
-    public static Window2 getFrames(final Object self) {
-        return getWindow(self);
+    public static Global getFrames(final Global self) {
+        return self;
     }
 
     /**
@@ -571,17 +555,16 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the {@code self} property
      */
     @Getter
-    public static Window2 getSelf(final Object self) {
-        return getWindow(self);
+    public static Global getSelf(final Global self) {
+        return self;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean dispatchEvent(final Event2 event) {
-        event.setTarget(this);
-        final ScriptResult result = fireEvent(event);
+    public static boolean dispatchEvent(final Window2 self, final Event2 event) {
+        event.setTarget(self);
+        final ScriptResult result = self.fireEvent(event);
         return !event.isAborted(result);
     }
 
@@ -591,7 +574,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      */
     private HTMLCollection2 getFrames2() {
         if (frames_ == null) {
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             frames_ = new HTMLCollectionFrames2(page);
         }
         return frames_;
@@ -695,8 +678,15 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
             final int line = e.getFailingLineNumber();
             final int column = e.getFailingColumnNumber();
 
-            ScriptRuntime.apply(f, global,
-                    msg, url, Integer.valueOf(line), Integer.valueOf(column), e);
+            final Global oldGlobal = Context.getGlobal();
+            try {
+                Context.setGlobal(global);
+                ScriptRuntime.apply(f, global,
+                        msg, url, Integer.valueOf(line), Integer.valueOf(column), e);
+            }
+            finally {
+                Context.setGlobal(oldGlobal);
+            }
         }
     }
 
@@ -995,7 +985,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      */
     @Function
     public static void scroll(final Object self, final int x, final int y) {
-        getWindow(self).scrollTo(x, y);
+        scrollTo(self, x, y);
     }
 
     /**
@@ -1017,7 +1007,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code pageXOffset} property
      */
     @Getter
-    public int getPageXOffset() {
+    public static int getPageXOffset(final Global self) {
         return 0;
     }
 
@@ -1026,7 +1016,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code pageYOffset} property
      */
     @Getter
-    public int getPageYOffset() {
+    public static int getPageYOffset(final Global self) {
         return 0;
     }
 
@@ -1035,7 +1025,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code scrollX} property
      */
     @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
-    public int getScrollX() {
+    public static int getScrollX(final Global self) {
         return 0;
     }
 
@@ -1044,7 +1034,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code scrollY} property
      */
     @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
-    public int getScrollY() {
+    public static int getScrollY(final Global self) {
         return 0;
     }
 
@@ -1056,8 +1046,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @Function
-    public void postMessage(final String message, final String targetOrigin, final Object transfer) {
-        final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
+    public static void postMessage(final Global self, final String message, final String targetOrigin, final Object transfer) {
+        final Window2 window = getWindow(self);
+        final URL currentURL = window.getWebWindow().getEnclosedPage().getUrl();
 
         // TODO: do the same origin check for '/' also
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
@@ -1081,16 +1072,24 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
                 return;
             }
         }
-        final Global global = getGlobal();
+        final Global global = self;
         final MessageEvent2 event = MessageEvent2.constructor(true, global);
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
-        event.initMessageEvent(Event2.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
+        event.initMessageEvent(Event2.TYPE_MESSAGE, false, false, message, origin, "", window, transfer);
 
-        final NashornJavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine2();
-        final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
+        final NashornJavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getJavaScriptEngine2();
+        final PostponedAction action = new PostponedAction(window.getWebWindow().getEnclosedPage()) {
             @Override
             public void execute() throws Exception {
-                dispatchEvent(event);
+                final Global oldGlobal = Context.getGlobal();
+                try {
+                    Context.setGlobal(global);
+
+                    dispatchEvent(global, event);
+                }
+                finally {
+                    Context.setGlobal(oldGlobal);
+                }
             }
         };
         jsEngine.addPostponedAction(action);
@@ -1121,7 +1120,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
      */
     @Function
-    public int requestAnimationFrame(final Object callback) {
+    public static int requestAnimationFrame(final Object self, final Object callback) {
         // nothing for now
         return 1;
     }
@@ -1132,7 +1131,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
      */
     @Function
-    public void cancelAnimationFrame(final Object requestId) {
+    public static void cancelAnimationFrame(final Object self, final Object requestId) {
         // nothing for now
     }
 
@@ -1142,8 +1141,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @param y the vertical position to scroll to
      */
     @Function
-    public void scrollTo(final int x, final int y) {
-        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+    public static void scrollTo(final Object self, final int x, final int y) {
+        final HTMLElement2 body = ((HTMLDocument2) getWindow(self).document_).getBody();
         if (body != null) {
             body.setScrollLeft(x);
             body.setScrollTop(y);
@@ -1216,8 +1215,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the {@code console} property
      */
     @Getter
-    public ScriptObject getConsole() {
-        return console_;
+    public static ScriptObject getConsole(final Global self) {
+        return getWindow(self).console_;
     }
 
     /**
@@ -1225,8 +1224,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @param console the console
      */
     @Setter
-    public void setConsole(final ScriptObject console) {
-        console_ = console;
+    public static void setConsole(final Global self, final ScriptObject console) {
+        getWindow(self).console_ = console;
     }
 
     /**
@@ -1234,7 +1233,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @param message the message to log
      */
     @Function(@WebBrowser(FF))
-    public void dump(final String message) {
+    public static void dump(final Global self, final String message) {
+        final Object console_ = getWindow(self).console_;
         if (console_ instanceof Console2) {
             ((Console2) console_).log(message);
         }
@@ -1245,7 +1245,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code mozInnerScreenX} property
      */
     @Getter(@WebBrowser(FF))
-    public int getMozInnerScreenX() {
+    public static int getMozInnerScreenX(final Global self) {
         return 11;
     }
 
@@ -1254,7 +1254,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code mozInnerScreenY} property
      */
     @Getter(@WebBrowser(FF))
-    public int getMozInnerScreenY() {
+    public static int getMozInnerScreenY(final Global self) {
         return 91;
     }
 
@@ -1263,7 +1263,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @return the value of {@code mozPaintCount} property
      */
     @Getter(@WebBrowser(FF))
-    public int getMozPaintCount() {
+    public static int getMozPaintCount(final Global self) {
         return 0;
     }
 
@@ -1272,8 +1272,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @param lines the number of lines to scroll down
      */
     @Function(@WebBrowser(FF))
-    public void scrollByLines(final int lines) {
-        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+    public static void scrollByLines(final Global self, final int lines) {
+        final HTMLElement2 body = ((HTMLDocument2) getWindow(self).document_).getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (19 * lines));
         }
@@ -1284,10 +1284,11 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @param pages the number of pages to scroll down
      */
     @Function(@WebBrowser(FF))
-    public void scrollByPages(final int pages) {
-        final HTMLElement2 body = ((HTMLDocument2) document_).getBody();
+    public static void scrollByPages(final Global self, final int pages) {
+        final Window2 window = getWindow(self);
+        final HTMLElement2 body = ((HTMLDocument2) window.document_).getBody();
         if (body != null) {
-            body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
+            body.setScrollTop(body.getScrollTop() + (getInnerHeight(self) * pages));
         }
     }
 
@@ -1297,8 +1298,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
     @Getter
-    public int getInnerHeight() {
-        return getWebWindow().getInnerHeight();
+    public static int getInnerHeight(final Global self) {
+        return getWindow(self).getWebWindow().getInnerHeight();
     }
 
     /**
@@ -1307,8 +1308,28 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
     @Getter
-    public int getOuterHeight() {
-        return getWebWindow().getOuterHeight();
+    public static int getOuterHeight(final Global self) {
+        return getWindow(self).getWebWindow().getOuterHeight();
+    }
+
+    /**
+     * Returns the {@code innerWidth}.
+     * @return the {@code innerWidth}
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
+     */
+    @Getter
+    public static int getInnerWidth(final Global self) {
+        return getWindow(self).getWebWindow().getInnerWidth();
+    }
+
+    /**
+     * Returns the {@code outerWidth}.
+     * @return the {@code outerWidth}
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
+     */
+    @Getter
+    public static int getOuterWidth(final Global self) {
+        return getWindow(self).getWebWindow().getOuterWidth();
     }
 
     /**
@@ -1410,8 +1431,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * Closes this window.
      */
     @Function(name = "close")
-    public void close_js() {
-        final WebWindow webWindow = getWebWindow();
+    public static void close_js(final Global self) {
+        final WebWindow webWindow = getWindow(self).getWebWindow();
         if (webWindow instanceof TopLevelWindow) {
             ((TopLevelWindow) webWindow).close();
         }
@@ -1450,9 +1471,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
      * Sets the focus to this element.
      */
     @Function
-    public static void focus(final Object self) {
-        final WebWindow window = getWindow(self).getWebWindow();
-        window.getWebClient().setCurrentWindow(window);
+    public static void focus(final Object self, final Object two) {
+        final WebWindow webWindow = getWindow(self).getWebWindow();
+        webWindow.getWebClient().setCurrentWindow(webWindow);
     }
 
     /**
@@ -1551,9 +1572,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the global.
+     * @return the global
      */
-    @Override
     public Global getGlobal() {
         return NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
     }
@@ -1561,16 +1582,6 @@ public class Window2 extends EventTarget2 implements AutoCloseable, Globalable {
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Window2.class,
-                    name, MethodType.methodType(rtype, ptypes));
-        }
-        catch (final ReflectiveOperationException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
-        try {
-            return MethodHandles.lookup().findVirtual(Window2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {

@@ -481,7 +481,7 @@ public class HTMLDocument2 extends Document2 {
             if (window instanceof FrameWindow) {
                 final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
                 if (frame instanceof HtmlInlineFrame) {
-                    final Window2 winWithFrame = (Window2) frame.getPage().getEnclosingWindow().getScriptObject2();
+                    final Window2 winWithFrame = ((Global) frame.getPage().getEnclosingWindow().getScriptObject2()).getWindow();
                     ((HTMLDocument2) Window2.getDocument(winWithFrame)).setActiveElement(
                                 (HTMLElement2) frame.getScriptObject2());
                 }

@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class Window2Test extends WebDriverTestCase {
@@ -53,18 +54,18 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
-//            + "  alert(this);\n"
-//            + "  try {\n"
-//            + "   alert(abc);\n"
-//            + "  } catch(e) {alert('exception')}\n"
-//            + "  alert(this.abc);\n"
-//            + "  alert(this.def);\n"
-//            + "  this.abc = 'hello';\n"
+            + "  alert(this);\n"
+            + "  try {\n"
+            + "   alert(abc);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  alert(this.abc);\n"
+            + "  alert(this.def);\n"
+            + "  this.abc = 'hello';\n"
             + "  def = 'world';\n"
-//            + "  alert(abc);\n"
-//            + "  alert(this.abc);\n"
+            + "  alert(abc);\n"
+            + "  alert(this.abc);\n"
             + "  alert(def);\n"
-            + "  alert(self.def);\n"
+            + "  alert(this.def);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -682,7 +683,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"679", "1256", "662", "1239"},
+    @Alerts(CHROME = {"675", "1256", "658", "1239"},
             FF = {"674", "1258", "657", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
@@ -860,7 +861,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  var myEvent;\n"
             + "  var listener = function(x) {\n"
             + "    alert(x == myEvent);\n"
-            + "    x.foo = 'I was here'\n"
+            + "    x.foo = 'I was here';\n"
             + "  }\n"
             + "  window.addEventListener('click', listener, false);\n"
             + "  myEvent = document.createEvent('HTMLEvents');\n"
@@ -1858,8 +1859,9 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    x = 'hi';\n"
-            + "    alert(window.x);\n"
+            + "    try {\n"
+            + "      alert(new Window());\n"
+            + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1868,4 +1870,37 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "test2 alert"})
+    public void objectCallOnFrameWindow() throws Exception {
+        final String firstContent = "<html><head>\n"
+                + "<script>\n"
+                + "  function test1() {\n"
+                + "    alert(window.frames[0].test2 === undefined);\n"
+                + "    Object(window.frames[0]);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
+                + "</body></html>\n";
+        final String secondContent = "<html><head>\n"
+                + "<script>\n"
+                + "  function test2() {\n"
+                + "    alert('test2 alert');\n"
+                + "  };\n"
+                + "  window.top.test1();\n"
+                + "  alert(test2 === undefined);\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test2()'>\n"
+                + "</body></html>\n";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        loadPageWithAlerts2(firstContent);
+    }
 }

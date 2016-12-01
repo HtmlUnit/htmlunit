@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.History2;
@@ -181,6 +182,13 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                         }
                     }
                 }
+                final Object eventTarget = global.get("EventTarget");
+                if (eventTarget instanceof ScriptFunction) {
+                    final ScriptFunction parentFunction = (ScriptFunction) eventTarget;
+                    final PrototypeObject parentPrototype = (PrototypeObject) parentFunction.getPrototype();
+                    global.setProto(parentPrototype);
+                }
+
                 for (final String javaClassName : javaSuperMap.keySet()) {
                     final String javaSuperClassName = javaSuperMap.get(javaClassName);
                     final String superJavaScriptName = javaJavaScriptMap.get(javaSuperClassName);
@@ -204,17 +212,17 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 window.setProto(windowProto);
                 ScriptUtils.initialize(window);
 
-                for (final Property p : global.getMap().getProperties()) {
-                    //TODO: check "JSAdapter"
-                    final String key = p.getKey();
-                    window.put(key, global.get(key), true);
-                }
+//                for (final Property p : global.getMap().getProperties()) {
+//                    //TODO: check "JSAdapter"
+//                    final String key = p.getKey();
+//                    window.put(key, global.get(key), true);
+//                }
 
-                global.put("window", window, true);
+                global.put("window", global, true);
                 global.setWindow(window);
 
-                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "confirm", "execScript", "CollectGarbage", "setTimeout", "clearTimeout",
-                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion", "showModalDialog", "showModelessDialog", "prompt"};
+                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "cancelAnimationFrame", "captureEvents", "close", "confirm", "execScript", "find", "focus", "clearTimeout", "CollectGarbage", "getComputedStyle", "open", "prompt", "postMessage", "requestAnimationFrame", "setTimeout",
+                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion", "scroll", "scrollBy", "scrollTo", "showModalDialog", "showModelessDialog"};
                 for (final String key : windowToGlobalFunctions) {
                     final Object function = window.get(key);
                     if (function != Undefined.getUndefined()) {
@@ -222,14 +230,14 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                     }
                 }
 
-                final String[] globalToWindowFunctions = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
-                        "parseInt", "parseFloat", "encodeURI", "encodeURIComponent", "decodeURI", "decodeURIComponent",
-                        "escape", "unescape"};
-                for (final String key : globalToWindowFunctions) {
-                    window.put(key, global.get(key), true);
-                }
+//                final String[] globalToWindowFunctions = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
+//                        "parseInt", "parseFloat", "encodeURI", "encodeURIComponent", "decodeURI", "decodeURIComponent",
+//                        "escape", "unescape"};
+//                for (final String key : globalToWindowFunctions) {
+//                    window.put(key, global.get(key), true);
+//                }
 
-                final String[] windowProperties = {"controllers", "document", "length", "location", "opener", "parent", "self", "top"};
+                final String[] windowProperties = {"closed", "controllers", "devicePixelRatio", "document", "frames", "history", "innerHeight", "innerWidth", "length", "location", "name", "onbeforeunload", "onchange", "onclick", "onerror", "onload", "onsubmit", "opener", "outerHeight", "outerWidth", "pageXOffset", "pageYOffset", "parent", "scrollX", "scrollY", "self", "status", "top"};
                 final PropertyMap propertyMap = window.getMap();
                 final List<Property> list = new ArrayList<>();
                 for (final String key : windowProperties) {
@@ -246,7 +254,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
         }
         finally {
-//            Context.setGlobal(oldGlobal);
+            Context.setGlobal(oldGlobal);
         }
     }
 
@@ -393,7 +401,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
-                final Window2 w = (Window2) window.getScriptObject2();
+                final Window2 w = ((Global) window.getScriptObject2()).getWindow();
                 if (w != null) {
                     try {
                         w.triggerOnError(scriptException);
@@ -429,9 +437,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         final Global global = engine.createNashornGlobal();
         final ScriptContext scriptContext = webWindow.getScriptContext();
         scriptContext.setBindings(new ScriptObjectMirror(global, global), ScriptContext.ENGINE_SCOPE);
-        global.setDomObject(webWindow);
         initGlobal(scriptContext, getBrowser(webClient_.getBrowserVersion()));
-        webWindow.setScriptObject(global.<Window2>getWindow());
+        global.<Window2>getWindow().setWebWindow(webWindow);
+        webWindow.setScriptObject(global);
     }
 
     @Override
