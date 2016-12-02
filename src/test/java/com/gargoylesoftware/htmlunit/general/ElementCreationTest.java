@@ -1583,8 +1583,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void command() throws Exception {
         test("command");
     }

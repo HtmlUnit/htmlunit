@@ -73,7 +73,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlBold;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
-import com.gargoylesoftware.htmlunit.html.HtmlCommand;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
@@ -185,7 +184,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
         @JsxClass(domClass = HtmlCenter.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)}),
         @JsxClass(domClass = HtmlCitation.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlCode.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
-        @JsxClass(domClass = HtmlCommand.class, browsers = @WebBrowser(CHROME)),
         @JsxClass(domClass = HtmlDefinition.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
         @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
