@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -31,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class PointerEvent extends MouseEvent {
 
     private int pointerId_;
@@ -46,7 +47,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * Creates a new event instance.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public PointerEvent() {
     }
 

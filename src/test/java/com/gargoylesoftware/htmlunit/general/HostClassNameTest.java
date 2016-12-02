@@ -2139,6 +2139,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function PointerEvent() { [native code] }",
             IE = "[object PointerEvent]",
             EDGE = "function PointerEvent() { [native code] }")
     public void pointerEvent() throws Exception {
@@ -5235,6 +5236,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function PannerNode() { [native code] }",
             FF = "function PannerNode() {\n    [native code]\n}",
             EDGE = "function PannerNode() { [native code] }")
     public void pannerNode() throws Exception {
@@ -6709,6 +6711,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function StereoPannerNode() { [native code] }",
             FF = "function StereoPannerNode() {\n    [native code]\n}",
             EDGE = "function StereoPannerNode() { [native code] }")
     public void stereoPannerNode() throws Exception {
@@ -7270,6 +7273,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStream() { [native code] }",
             FF = "function MediaStream() {\n    [native code]\n}",
             EDGE = "function MediaStream() { [native code] }")
     public void mediaStream() throws Exception {
@@ -9716,6 +9720,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaDeviceInfo() { [native code] }",
             FF45 = "function MediaDeviceInfo() {\n    [native code]\n}")
     public void mediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo");
