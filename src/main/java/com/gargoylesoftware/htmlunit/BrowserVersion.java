@@ -147,10 +147,10 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
-        51, "Chrome", null);
+        + " (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",
+        55, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(
