@@ -2090,7 +2090,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "object",
-            CHROME = "undefined",
+            CHROME = "function",
             FF = "undefined")
     public void pointerEvent() throws Exception {
         test("PointerEvent");
@@ -4915,6 +4915,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF = "function")
     public void pannerNode() throws Exception {
         test("PannerNode");
@@ -5064,6 +5065,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF = "function")
     public void mediaStream() throws Exception {
         test("MediaStream");
@@ -5771,6 +5773,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF = "function")
     public void stereoPannerNode() throws Exception {
         test("StereoPannerNode");
@@ -7663,6 +7666,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF45 = "function")
     public void mediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo");
