@@ -2640,6 +2640,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "width", "", "undefined"},
+            CHROME = {"1", "width", "undefined", "undefined"},
             FF = {"1", "width", "undefined", "undefined"})
     public void length() throws Exception {
         final String html = "<html><head>\n"
@@ -2976,6 +2977,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "false", "true", "true", "true"},
+            CHROME = {"1", "false", "true", "false", "false"},
             FF = {"1", "false", "true", "false", "false"})
     public void in() throws Exception {
         final String html = "<html><head>\n"

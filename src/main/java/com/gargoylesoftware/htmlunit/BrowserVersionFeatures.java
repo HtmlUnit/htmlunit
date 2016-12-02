@@ -1210,7 +1210,7 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that trying to access the style property with a wrong index returns undefined
      * instead of "". */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
 
     /** The width cell height does not return negative values. */
