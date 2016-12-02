@@ -971,7 +971,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public static void setOpener(final Object self, final Object newValue) {
         final Window2 window = getWindow(self);
         if (window.getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && newValue != Undefined.getUndefined() && !(newValue instanceof Window2)) {
+            && newValue != null && newValue != Undefined.getUndefined() && !(newValue instanceof Global)) {
             throw new RuntimeException("Can't set opener to something other than a window!");
         }
         window.opener_ = newValue;
@@ -1389,8 +1389,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         try {
             final URL completeUrl = ((HtmlPage) window.getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            final Window2 jsDialog = (Window2) dialog.getScriptObject2();
-            return jsDialog;
+            return dialog.getScriptObject2();
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
