@@ -1891,7 +1891,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "<script>\n"
                 + "  function test2() {\n"
                 + "    alert('test2 alert');\n"
-                + "  };\n"
+                + "  }\n"
                 + "  window.top.test1();\n"
                 + "  alert(test2 === undefined);\n"
                 + "</script>\n"
@@ -1903,4 +1903,31 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(firstContent);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
+            FF = {"[object WindowPrototype]", "[object WindowProperties]", "[object EventTargetPrototype]",
+                "[object Object]"},
+            IE = "exception")
+    @NotYetImplemented
+    public void __proto__() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      for (var p = this.__proto__; p != null; p = p.__proto__) {\n"
+            + "        alert(p);\n"
+            + "      }\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

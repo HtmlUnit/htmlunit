@@ -359,6 +359,8 @@ public class EventTarget2 extends SimpleScriptObject {
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
             super("EventTarget");
+            ScriptUtils.initialize(this);
+            setProto(new Prototype());
         }
     }
 

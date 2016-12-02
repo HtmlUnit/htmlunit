@@ -59,6 +59,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2;
+import com.gargoylesoftware.js.host.MyEventTarget;
+import com.gargoylesoftware.js.host.MyWindow;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngine;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -164,7 +166,6 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             Context.setGlobal(global);
 
             try {
-
                 final Map<String, String> javaSuperMap = new HashMap<>();
                 final Map<String, String> javaJavaScriptMap = new HashMap<>();
                 for (final Class<?> klass : CLASSES_) {
@@ -187,6 +188,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                     final ScriptFunction parentFunction = (ScriptFunction) eventTarget;
                     final PrototypeObject parentPrototype = (PrototypeObject) parentFunction.getPrototype();
                     global.setProto(parentPrototype);
+                }
+                else {
+                    global.put("Window", new Window2.ObjectConstructor(), true);
+                    global.setProto(new EventTarget2.ObjectConstructor());
                 }
 
                 for (final String javaClassName : javaSuperMap.keySet()) {
