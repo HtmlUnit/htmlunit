@@ -1074,36 +1074,36 @@ public class WebClientTest extends SimpleWebTestCase {
     private static HtmlPage getPageForKeyboardTest(
             final WebClient webClient, final String[] tabIndexValues) throws Exception {
 
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append("<html><head><title>First</title></head><body>")
+        final StringBuilder builder = new StringBuilder();
+        builder.append("<html><head><title>First</title></head><body>")
                 .append("<form name='form1' method='post' onsubmit='return false;'>");
 
         for (int i = 0; i < tabIndexValues.length; i++) {
-            buffer.append("<input type='submit' name='submit");
-            buffer.append(i);
-            buffer.append("' id='submit");
-            buffer.append(i);
-            buffer.append("'");
+            builder.append("<input type='submit' name='submit");
+            builder.append(i);
+            builder.append("' id='submit");
+            builder.append(i);
+            builder.append("'");
             if (tabIndexValues[i] != null) {
-                buffer.append(" tabindex='");
-                buffer.append(tabIndexValues[i]);
-                buffer.append("'");
+                builder.append(" tabindex='");
+                builder.append(tabIndexValues[i]);
+                builder.append("'");
             }
-            buffer.append(" onblur='alert(\"blur-" + i + "\")'");
-            buffer.append(" onfocus='alert(\"focus-" + i + "\")'");
-            buffer.append(" accesskey='" + (char) ('a' + i) + "'");
-            buffer.append(">\n");
+            builder.append(" onblur='alert(\"blur-" + i + "\")'");
+            builder.append(" onfocus='alert(\"focus-" + i + "\")'");
+            builder.append(" accesskey='" + (char) ('a' + i) + "'");
+            builder.append(">\n");
         }
-        buffer.append("<div id='div1'>foo</div>\n"); // something that isn't tabbable
+        builder.append("<div id='div1'>foo</div>\n"); // something that isn't tabbable
 
         // Elements that are tabbable but are disabled
-        buffer.append("<button name='button1' id='button1' disabled onclick='alert(\"buttonPushed\")' ");
-        buffer.append("accesskey='1'>foo</button>\n");
+        builder.append("<button name='button1' id='button1' disabled onclick='alert(\"buttonPushed\")' ");
+        builder.append("accesskey='1'>foo</button>\n");
 
-        buffer.append("</form></body></html>");
+        builder.append("</form></body></html>");
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, buffer.toString());
+        webConnection.setResponse(URL_FIRST, builder.toString());
         webClient.setWebConnection(webConnection);
 
         return webClient.getPage(URL_FIRST);

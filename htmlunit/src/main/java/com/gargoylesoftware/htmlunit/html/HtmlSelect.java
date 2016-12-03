@@ -521,18 +521,18 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             options = getSelectedOptions();
         }
 
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
             final HtmlOption currentOption = i.next();
             if (currentOption != null) {
-                buffer.append(currentOption.asText());
+                builder.append(currentOption.asText());
             }
             if (i.hasNext()) {
-                buffer.append("\n");
+                builder.append("\n");
             }
         }
 
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**

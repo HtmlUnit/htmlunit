@@ -181,12 +181,12 @@ public class XMLSerializerTest extends WebDriverTestCase {
     private static String constructPageContent(final String serializationText) {
         final String escapedText = serializationText.replace("\n", "\\n");
 
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append(
+        final StringBuilder builder = new StringBuilder();
+        builder.append(
               "<html><head><title>foo</title><script>\n"
             + "  function test() {\n");
 
-        buffer.append("    var text = '").append(escapedText).append("';\n").append(
+        builder.append("    var text = '").append(escapedText).append("';\n").append(
               "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "    var xml = " + XMLDocumentTest.callSerializeXMLDocumentToString("doc") + ";\n"
             + "    var ta = document.getElementById('myTextArea');\n"
@@ -202,7 +202,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>");
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**

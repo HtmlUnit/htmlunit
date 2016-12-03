@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -85,12 +86,9 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 public class HTMLDocument2 extends Document2 {
 
@@ -116,6 +114,13 @@ public class HTMLDocument2 extends Document2 {
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
 
+    /**
+     * Static counter for {@link #uniqueID_}.
+     */
+    private static int UniqueID_Counter_ = 1;
+
+    private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
+
     private HTMLCollection2 all_; // has to be a member to have equality (==) working
     private HTMLCollection2 forms_; // has to be a member to have equality (==) working
     private HTMLCollection2 links_; // has to be a member to have equality (==) working
@@ -127,7 +132,7 @@ public class HTMLDocument2 extends Document2 {
     private HTMLElement2 activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
-    private final StringBuilder writeBuffer_ = new StringBuilder();
+    private final StringBuilder writeBuilder_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
     private String uniqueID_;
@@ -345,10 +350,10 @@ public class HTMLDocument2 extends Document2 {
         else {
             final HtmlPage page = getPage();
             final URL url = page.getUrl();
-            final StringWebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
+            final StringWebResponse webResponse = new StringWebResponse(writeBuilder_.toString(), url);
             webResponse.setFromJavascript(true);
             writeInCurrentDocument_ = true;
-            writeBuffer_.setLength(0);
+            writeBuilder_.setLength(0);
 
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
@@ -549,6 +554,272 @@ public class HTMLDocument2 extends Document2 {
             };
         }
         return forms_;
+    }
+
+    /**
+     * JavaScript function "open".
+     *
+     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * a good description of the semantics of open(), write(), writeln() and close().
+     *
+     * @param url when a new document is opened, <i>url</i> is a String that specifies a MIME type for the document.
+     *        When a new window is opened, <i>url</i> is a String that specifies the URL to render in the new window
+     * @param name the name
+     * @param features the features
+     * @param replace whether to replace in the history list or no
+     * @return a reference to the new document object.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536652.aspx">MSDN documentation</a>
+     */
+    @Function
+    public Object open(final Object url, final Object name, final Object features,
+            final Object replace) {
+        // Any open() invocations are ignored during the parsing stage, because write() and
+        // writeln() invocations will directly append content to the current insertion point.
+        final HtmlPage page = getPage();
+        if (page.isBeingParsed()) {
+            LOG.warn("Ignoring call to open() during the parsing stage.");
+            return null;
+        }
+
+        // We're not in the parsing stage; OK to continue.
+        if (!writeInCurrentDocument_) {
+            LOG.warn("Function open() called when document is already open.");
+        }
+        writeInCurrentDocument_ = false;
+        if (getWindow().getWebWindow() instanceof FrameWindow
+                && WebClient.ABOUT_BLANK.equals(getPage().getUrl().toExternalForm())) {
+            final URL enclosingUrl = ((FrameWindow) getWindow().getWebWindow()).getEnclosingPage().getUrl();
+            getPage().getWebResponse().getWebRequest().setUrl(enclosingUrl);
+        }
+        return this;
+    }
+
+    /**
+     * JavaScript function "write" may accept a variable number of arguments.
+     * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
+     * @param args the arguments passed into the method
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536782.aspx">MSDN documentation</a>
+     */
+    @Function
+    public void write(final Object... args) {
+        write(concatArgsAsString(args));
+    }
+
+    private boolean executionExternalPostponed_;
+
+    /**
+     * This a hack!!! A cleaner way is welcome.
+     * Handle a case where document.write is simply ignored.
+     * See HTMLDocumentWrite2Test.write_fromScriptAddedWithAppendChild_external.
+     * @param executing indicates if executing or not
+     */
+    public void setExecutingDynamicExternalPosponed(final boolean executing) {
+        executionExternalPostponed_ = executing;
+    }
+
+    /**
+     * JavaScript function "write".
+     *
+     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * a good description of the semantics of open(), write(), writeln() and close().
+     *
+     * @param content the content to write
+     */
+    protected void write(final String content) {
+        // really strange: if called from an external script loaded as postponed action, write is ignored!!!
+        if (executionExternalPostponed_) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("skipping write for external posponed: " + content);
+            }
+            return;
+        }
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("write: " + content);
+        }
+
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        if (!page.isBeingParsed()) {
+            writeInCurrentDocument_ = false;
+        }
+
+        // Add content to the content buffer.
+        writeBuilder_.append(content);
+
+        // If open() was called; don't write to doc yet -- wait for call to close().
+        if (!writeInCurrentDocument_) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("wrote content to buffer");
+            }
+            scheduleImplicitClose();
+            return;
+        }
+        final String bufferedContent = writeBuilder_.toString();
+        if (!canAlreadyBeParsed(bufferedContent)) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("write: not enough content to parse it now");
+            }
+            return;
+        }
+
+        writeBuilder_.setLength(0);
+        page.writeInParsedStream(bufferedContent);
+    }
+
+    private void scheduleImplicitClose() {
+        if (!closePostponedAction_) {
+            closePostponedAction_ = true;
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+            final WebWindow enclosingWindow = page.getEnclosingWindow();
+            page.getWebClient().getJavaScriptEngine2().addPostponedAction(new PostponedAction(page) {
+                @Override
+                public void execute() throws Exception {
+                    if (writeBuilder_.length() != 0) {
+                        close();
+                    }
+                    closePostponedAction_ = false;
+                }
+
+                @Override
+                public boolean isStillAlive() {
+                    return !enclosingWindow.isClosed();
+                }
+            });
+        }
+    }
+
+    /**
+     * Indicates if the content is a well formed HTML snippet that can already be parsed to be added to the DOM.
+     *
+     * @param content the HTML snippet
+     * @return {@code false} if it not well formed
+     */
+    static boolean canAlreadyBeParsed(final String content) {
+        // all <script> must have their </script> because the parser doesn't close automatically this tag
+        // All tags must be complete, that is from '<' to '>'.
+        ParsingStatus tagState = ParsingStatus.OUTSIDE;
+        int tagNameBeginIndex = 0;
+        int scriptTagCount = 0;
+        boolean tagIsOpen = true;
+        char stringBoundary = 0;
+        boolean stringSkipNextChar = false;
+        int index = 0;
+        char openingQuote = 0;
+        for (final char currentChar : content.toCharArray()) {
+            switch (tagState) {
+                case OUTSIDE:
+                    if (currentChar == '<') {
+                        tagState = ParsingStatus.START;
+                        tagIsOpen = true;
+                    }
+                    else if (scriptTagCount > 0 && (currentChar == '\'' || currentChar == '"')) {
+                        tagState = ParsingStatus.IN_STRING;
+                        stringBoundary = currentChar;
+                        stringSkipNextChar = false;
+                    }
+                    break;
+                case START:
+                    if (currentChar == '/') {
+                        tagIsOpen = false;
+                        tagNameBeginIndex = index + 1;
+                    }
+                    else {
+                        tagNameBeginIndex = index;
+                    }
+                    tagState = ParsingStatus.IN_NAME;
+                    break;
+                case IN_NAME:
+                    if (Character.isWhitespace(currentChar) || currentChar == '>') {
+                        final String tagName = content.substring(tagNameBeginIndex, index);
+                        if ("script".equalsIgnoreCase(tagName)) {
+                            if (tagIsOpen) {
+                                scriptTagCount++;
+                            }
+                            else if (scriptTagCount > 0) {
+                                // Ignore extra close tags for now. Let the parser deal with them.
+                                scriptTagCount--;
+                            }
+                        }
+                        if (currentChar == '>') {
+                            tagState = ParsingStatus.OUTSIDE;
+                        }
+                        else {
+                            tagState = ParsingStatus.INSIDE;
+                        }
+                    }
+                    else if (!Character.isLetter(currentChar)) {
+                        tagState = ParsingStatus.OUTSIDE;
+                    }
+                    break;
+                case INSIDE:
+                    if (currentChar == openingQuote) {
+                        openingQuote = 0;
+                    }
+                    else if (openingQuote == 0) {
+                        if (currentChar == '\'' || currentChar == '"') {
+                            openingQuote = currentChar;
+                        }
+                        else if (currentChar == '>' && openingQuote == 0) {
+                            tagState = ParsingStatus.OUTSIDE;
+                        }
+                    }
+                    break;
+                case IN_STRING:
+                    if (stringSkipNextChar) {
+                        stringSkipNextChar = false;
+                    }
+                    else {
+                        if (currentChar == stringBoundary) {
+                            tagState = ParsingStatus.OUTSIDE;
+                        }
+                        else if (currentChar == '\\') {
+                            stringSkipNextChar = true;
+                        }
+                    }
+                    break;
+                default:
+                    // nothing
+            }
+            index++;
+        }
+        if (scriptTagCount > 0 || tagState != ParsingStatus.OUTSIDE) {
+            if (LOG.isDebugEnabled()) {
+                final StringBuilder message = new StringBuilder();
+                message.append("canAlreadyBeParsed() retruns false for content: '");
+                message.append(StringUtils.abbreviateMiddle(content, ".", 100));
+                message.append("' (scriptTagCount: " + scriptTagCount);
+                message.append(" tagState: " + tagState);
+                message.append(")");
+                LOG.debug(message.toString());
+            }
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * JavaScript function "writeln" may accept a variable number of arguments.
+     * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
+     * @param args the arguments passed into the method
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536783.aspx">MSDN documentation</a>
+     */
+    @Function
+    public void writeln(final Object... args) {
+        write(concatArgsAsString(args) + "\n");
+    }
+
+    /**
+     * Converts the arguments to strings and concatenate them.
+     * @param args the JavaScript arguments
+     * @return the string concatenation
+     */
+    private static String concatArgsAsString(final Object... args) {
+        final StringBuilder builder = new StringBuilder();
+        for (final Object arg : args) {
+            builder.append(arg);
+        }
+        return builder.toString();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

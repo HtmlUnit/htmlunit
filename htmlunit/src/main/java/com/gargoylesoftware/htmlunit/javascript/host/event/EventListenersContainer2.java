@@ -34,9 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 /**
  * Container for event listener.
@@ -148,7 +146,7 @@ public class EventListenersContainer2 implements Serializable {
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
         Object handler = value;
-        if (Undefined.instance == value) {
+        if (Undefined.getUndefined() == value) {
             handler = null;
         }
 

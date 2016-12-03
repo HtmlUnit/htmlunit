@@ -163,7 +163,7 @@ public final class MozillaTestGenerator {
             return line.substring(p0, p1);
         }
         else if (line.startsWith("String([")) {
-            final StringBuilder buffer = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             char terminator = line.charAt("String([".length());
             int p0 = "String([\"".length();
             if (terminator != '"' && terminator != '\'') {
@@ -185,10 +185,10 @@ public final class MozillaTestGenerator {
                     i = p1 - 1;
                     p1 = p0;
                 }
-                if (buffer.length() != 0) {
-                    buffer.append(',');
+                if (builder.length() != 0) {
+                    builder.append(',');
                 }
-                buffer.append(line.substring(p0, p1));
+                builder.append(line.substring(p0, p1));
                 if (terminator != '"' && terminator != '\'') {
                     break;
                 }
@@ -198,7 +198,7 @@ public final class MozillaTestGenerator {
                 terminator = line.charAt(i + 2);
                 p0 = i + 3;
             }
-            return buffer.toString();
+            return builder.toString();
         }
         else {
             return line.substring(0, line.indexOf(','));

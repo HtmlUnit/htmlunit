@@ -479,24 +479,24 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
     }
 
     private void writeToElement(final Map<String, StyleElement> styleMap) {
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
         for (final StyleElement e : sortedValues) {
-            if (buffer.length() != 0) {
-                buffer.append(" ");
+            if (builder.length() != 0) {
+                builder.append(" ");
             }
-            buffer.append(e.getName());
-            buffer.append(": ");
-            buffer.append(e.getValue());
+            builder.append(e.getName());
+            builder.append(": ");
+            builder.append(e.getValue());
 
             final String prio = e.getPriority();
             if (StringUtils.isNotBlank(prio)) {
-                buffer.append(" !");
-                buffer.append(prio);
+                builder.append(" !");
+                builder.append(prio);
             }
-            buffer.append(";");
+            builder.append(";");
         }
-        jsElement_.getDomNodeOrDie().setAttribute("style", buffer.toString());
+        jsElement_.getDomNodeOrDie().setAttribute("style", builder.toString());
     }
 
     /**
@@ -644,19 +644,19 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
             return string;
         }
 
-        final StringBuilder buffer = new StringBuilder(string);
-        buffer.deleteCharAt(pos);
-        buffer.setCharAt(pos, Character.toUpperCase(buffer.charAt(pos)));
+        final StringBuilder builder = new StringBuilder(string);
+        builder.deleteCharAt(pos);
+        builder.setCharAt(pos, Character.toUpperCase(builder.charAt(pos)));
 
         int i = pos + 1;
-        while (i < buffer.length() - 1) {
-            if (buffer.charAt(i) == '-') {
-                buffer.deleteCharAt(i);
-                buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
+        while (i < builder.length() - 1) {
+            if (builder.charAt(i) == '-') {
+                builder.deleteCharAt(i);
+                builder.setCharAt(i, Character.toUpperCase(builder.charAt(i)));
             }
             i++;
         }
-        result = buffer.toString();
+        result = builder.toString();
         CamelizeCache_.put(string, result);
 
         return result;

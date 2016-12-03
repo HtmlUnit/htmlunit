@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
@@ -1581,6 +1581,42 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     /**
+     * Does nothing.
+     * @param x the horizontal position
+     * @param y the vertical position
+     */
+    @Function
+    public static void moveTo(final Global self, final int x, final int y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.moveTo() not implemented");
+        }
+    }
+
+    /**
+     * Does nothing.
+     * @param x the horizontal position
+     * @param y the vertical position
+     */
+    @Function
+    public static void moveBy(final Global self, final int x, final int y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.moveBy() not implemented");
+        }
+    }
+
+    /**
+     * Returns the {@code offscreenBuffering} property.
+     * @return the {@code offscreenBuffering} property
+     */
+    @Getter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    public static Object getOffscreenBuffering(final Global self) {
+        if (getWindow(self).getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
+            return "auto";
+        }
+        return true;
+    }
+
+    /**
      * Returns the global.
      * @return the global
      */
@@ -1659,6 +1695,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
     }
 }
+
 class HTMLCollectionFrames2 extends HTMLCollection2 {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames2.class);
 

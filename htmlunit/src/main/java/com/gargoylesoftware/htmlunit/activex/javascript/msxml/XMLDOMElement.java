@@ -100,12 +100,12 @@ public class XMLDOMElement extends XMLDOMNode {
      */
     @Override
     public String getText() {
-        final StringBuilder buffer = new StringBuilder();
-        toText(getDomNodeOrDie(), buffer);
-        if (buffer.length() > 0 && buffer.charAt(buffer.length() - 1) == '\n') {
-            return buffer.substring(0, buffer.length() - 1);
+        final StringBuilder builder = new StringBuilder();
+        toText(getDomNodeOrDie(), builder);
+        if (builder.length() > 0 && builder.charAt(builder.length() - 1) == '\n') {
+            return builder.substring(0, builder.length() - 1);
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**
@@ -121,7 +121,7 @@ public class XMLDOMElement extends XMLDOMNode {
         super.setText(value);
     }
 
-    private void toText(final DomNode node, final StringBuilder buffer) {
+    private void toText(final DomNode node, final StringBuilder builder) {
         switch (node.getNodeType()) {
             case Node.DOCUMENT_TYPE_NODE:
             case Node.NOTATION_NODE:
@@ -130,7 +130,7 @@ public class XMLDOMElement extends XMLDOMNode {
             case Node.CDATA_SECTION_NODE:
             case Node.COMMENT_NODE:
             case Node.PROCESSING_INSTRUCTION_NODE:
-                buffer.append(node.getNodeValue());
+                builder.append(node.getNodeValue());
                 break;
             default:
         }
@@ -139,20 +139,20 @@ public class XMLDOMElement extends XMLDOMNode {
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
                     lastWasElement = true;
-                    toText(child, buffer);
+                    toText(child, builder);
                     break;
 
                 case Node.TEXT_NODE:
                 case Node.CDATA_SECTION_NODE:
                     if (StringUtils.isBlank(child.getNodeValue())) {
                         if (lastWasElement) {
-                            buffer.append(' ');
+                            builder.append(' ');
                         }
                         lastWasElement = false;
                         break;
                     }
                     lastWasElement = false;
-                    buffer.append(child.getNodeValue());
+                    builder.append(child.getNodeValue());
                     break;
                 default:
                     lastWasElement = false;

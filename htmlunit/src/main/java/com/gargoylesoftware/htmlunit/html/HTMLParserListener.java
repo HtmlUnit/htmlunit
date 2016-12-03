@@ -86,19 +86,19 @@ class SimpleHTMLParserListener implements HTMLParserListener {
 
     private static String format(final String message, final URL url, final String html,
             final int line, final int column) {
-        final StringBuilder buffer = new StringBuilder(message);
-        buffer.append(" (");
-        buffer.append(url.toExternalForm());
-        buffer.append(" ");
-        buffer.append(line);
-        buffer.append(":");
-        buffer.append(column);
+        final StringBuilder builder = new StringBuilder(message);
+        builder.append(" (");
+        builder.append(url.toExternalForm());
+        builder.append(" ");
+        builder.append(line);
+        builder.append(":");
+        builder.append(column);
         if (null != html) {
-            buffer.append(" htmlSnippet: '");
-            buffer.append(html);
-            buffer.append("'");
+            builder.append(" htmlSnippet: '");
+            builder.append(html);
+            builder.append("'");
         }
-        buffer.append(")");
-        return buffer.toString();
+        builder.append(")");
+        return builder.toString();
     }
 }

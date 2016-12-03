@@ -450,11 +450,11 @@ public class XMLHttpRequest extends EventTarget {
             return null;
         }
         if (webResponse_ != null) {
-            final StringBuilder buffer = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
+                builder.append(header.getName()).append(": ").append(header.getValue()).append("\n");
             }
-            return buffer.toString();
+            return builder.toString();
         }
 
         LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
