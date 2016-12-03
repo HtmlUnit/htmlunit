@@ -726,12 +726,12 @@ public class Event extends SimpleScriptable {
      */
     @Override
     public String toString() {
-        final StringBuilder buffer = new StringBuilder("Event ");
-        buffer.append(getType());
-        buffer.append(" (");
-        buffer.append("Current Target: ");
-        buffer.append(currentTarget_);
-        buffer.append(");");
-        return buffer.toString();
+        final StringBuilder builder = new StringBuilder("Event ");
+        builder.append(getType());
+        builder.append(" (");
+        builder.append("Current Target: ");
+        builder.append(currentTarget_);
+        builder.append(");");
+        return builder.toString();
     }
 }

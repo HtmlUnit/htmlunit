@@ -430,16 +430,16 @@ public class WebRequest implements Serializable {
      */
     @Override
     public String toString() {
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append(getClass().getSimpleName());
-        buffer.append("[<");
-        buffer.append("url=\"" + url_ + '"');
-        buffer.append(", " + httpMethod_);
-        buffer.append(", " + encodingType_);
-        buffer.append(", " + requestParameters_);
-        buffer.append(", " + additionalHeaders_);
-        buffer.append(", " + credentials_);
-        buffer.append(">]");
-        return buffer.toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getClass().getSimpleName());
+        builder.append("[<");
+        builder.append("url=\"" + url_ + '"');
+        builder.append(", " + httpMethod_);
+        builder.append(", " + encodingType_);
+        builder.append(", " + requestParameters_);
+        builder.append(", " + additionalHeaders_);
+        builder.append(", " + credentials_);
+        builder.append(">]");
+        return builder.toString();
     }
 }

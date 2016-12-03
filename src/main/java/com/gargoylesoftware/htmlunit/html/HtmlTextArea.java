@@ -100,31 +100,31 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     private String readValue() {
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
-                buffer.append(((DomText) node).getData());
+                builder.append(((DomText) node).getData());
             }
         }
         // if content starts with new line, it is ignored (=> for the parser?)
-        if (buffer.length() != 0 && buffer.charAt(0) == '\n') {
-            buffer.deleteCharAt(0);
+        if (builder.length() != 0 && builder.charAt(0) == '\n') {
+            builder.deleteCharAt(0);
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     private String readValueIE() {
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         for (final DomNode node : getDescendants()) {
             if (node instanceof DomText) {
-                buffer.append(((DomText) node).getData());
+                builder.append(((DomText) node).getData());
             }
         }
         // if content starts with new line, it is ignored (=> for the parser?)
-        if (buffer.length() != 0 && buffer.charAt(0) == '\n') {
-            buffer.deleteCharAt(0);
+        if (builder.length() != 0 && builder.charAt(0) == '\n') {
+            builder.deleteCharAt(0);
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**

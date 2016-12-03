@@ -538,19 +538,19 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return string;
         }
 
-        final StringBuilder buffer = new StringBuilder(string);
-        buffer.deleteCharAt(pos);
-        buffer.setCharAt(pos, Character.toUpperCase(buffer.charAt(pos)));
+        final StringBuilder builder = new StringBuilder(string);
+        builder.deleteCharAt(pos);
+        builder.setCharAt(pos, Character.toUpperCase(builder.charAt(pos)));
 
         int i = pos + 1;
-        while (i < buffer.length() - 1) {
-            if (buffer.charAt(i) == '-') {
-                buffer.deleteCharAt(i);
-                buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
+        while (i < builder.length() - 1) {
+            if (builder.charAt(i) == '-') {
+                builder.deleteCharAt(i);
+                builder.setCharAt(i, Character.toUpperCase(builder.charAt(i)));
             }
             i++;
         }
-        result = buffer.toString();
+        result = builder.toString();
         CamelizeCache_.put(string, result);
 
         return result;

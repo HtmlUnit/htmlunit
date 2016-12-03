@@ -99,16 +99,16 @@ public final class DOMStringMap extends SimpleScriptable {
             return string;
         }
 
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
             final char ch = string.charAt(i);
             if (Character.isUpperCase(ch)) {
-                buffer.append('-').append(Character.toLowerCase(ch));
+                builder.append('-').append(Character.toLowerCase(ch));
             }
             else {
-                buffer.append(ch);
+                builder.append(ch);
             }
         }
-        return buffer.toString();
+        return builder.toString();
     }
 }

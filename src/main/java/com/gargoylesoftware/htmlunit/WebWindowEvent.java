@@ -142,31 +142,31 @@ public final class WebWindowEvent extends EventObject {
      */
     @Override
     public String toString() {
-        final StringBuilder buffer = new StringBuilder(80);
-        buffer.append("WebWindowEvent(source=[");
-        buffer.append(getSource());
-        buffer.append("] type=[");
+        final StringBuilder builder = new StringBuilder(80);
+        builder.append("WebWindowEvent(source=[");
+        builder.append(getSource());
+        builder.append("] type=[");
         switch (type_) {
             case OPEN:
-                buffer.append("OPEN");
+                builder.append("OPEN");
                 break;
             case CLOSE:
-                buffer.append("CLOSE");
+                builder.append("CLOSE");
                 break;
             case CHANGE:
-                buffer.append("CHANGE");
+                builder.append("CHANGE");
                 break;
             default:
-                buffer.append(type_);
+                builder.append(type_);
                 break;
         }
-        buffer.append("] oldPage=[");
-        buffer.append(getOldPage());
-        buffer.append("] newPage=[");
-        buffer.append(getNewPage());
-        buffer.append("])");
+        builder.append("] oldPage=[");
+        builder.append(getOldPage());
+        builder.append("] newPage=[");
+        builder.append(getNewPage());
+        builder.append("])");
 
-        return buffer.toString();
+        return builder.toString();
     }
 
     /** @return the event type */

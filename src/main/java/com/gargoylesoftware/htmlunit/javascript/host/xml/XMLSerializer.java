@@ -124,7 +124,7 @@ public class XMLSerializer extends SimpleScriptable {
             root = root.getFirstChild();
         }
         if (root instanceof Element) {
-            final StringBuilder buffer = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             final DomNode node = root.getDomNodeOrDie();
             final SgmlPage page = node.getPage();
             final boolean isHtmlPage = page != null && page.isHtmlPage();
@@ -133,9 +133,9 @@ public class XMLSerializer extends SimpleScriptable {
             if (isHtmlPage) {
                 forcedNamespace = "http://www.w3.org/1999/xhtml";
             }
-            toXml(1, node, buffer, forcedNamespace);
+            toXml(1, node, builder, forcedNamespace);
 
-            return buffer.toString();
+            return builder.toString();
         }
         if (root instanceof CDATASection
             && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
@@ -149,10 +149,9 @@ public class XMLSerializer extends SimpleScriptable {
     }
 
     private void toXml(final int indent,
-            final DomNode node, final StringBuilder buffer,
-            final String foredNamespace) {
+            final DomNode node, final StringBuilder builder, final String foredNamespace) {
         final String nodeName = node.getNodeName();
-        buffer.append('<').append(nodeName);
+        builder.append('<').append(nodeName);
 
         String optionalPrefix = "";
         final String namespaceURI = node.getNamespaceURI();
@@ -170,36 +169,36 @@ public class XMLSerializer extends SimpleScriptable {
             }
         }
         else if (foredNamespace != null) {
-            buffer.append(" xmlns=\"").append(foredNamespace).append('"');
+            builder.append(" xmlns=\"").append(foredNamespace).append('"');
             optionalPrefix = " ";
         }
 
         final NamedNodeMap attributesMap = node.getAttributes();
         for (int i = 0; i < attributesMap.getLength(); i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);
-            buffer.append(' ').append(attrib.getQualifiedName()).append('=')
+            builder.append(' ').append(attrib.getQualifiedName()).append('=')
                 .append('"').append(attrib.getValue()).append('"');
         }
         boolean startTagClosed = false;
         for (final DomNode child : node.getChildren()) {
             if (!startTagClosed) {
-                buffer.append(optionalPrefix).append('>');
+                builder.append(optionalPrefix).append('>');
                 startTagClosed = true;
             }
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    toXml(indent + 1, child, buffer, null);
+                    toXml(indent + 1, child, builder, null);
                     break;
 
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
                     value = StringUtils.escapeXmlChars(value);
-                    buffer.append(value);
+                    builder.append(value);
                     break;
 
                 case Node.CDATA_SECTION_NODE:
                 case Node.COMMENT_NODE:
-                    buffer.append(child.asXml());
+                    builder.append(child.asXml());
                     break;
 
                 default:
@@ -210,20 +209,20 @@ public class XMLSerializer extends SimpleScriptable {
             final String tagName = nodeName.toLowerCase(Locale.ROOT);
             final boolean nonEmptyTagsSupported = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_NON_EMPTY_TAGS);
             if (nonEmptyTagsSupported && NON_EMPTY_TAGS.contains(tagName)) {
-                buffer.append('>');
-                buffer.append("</").append(nodeName).append('>');
+                builder.append('>');
+                builder.append("</").append(nodeName).append('>');
             }
             else {
-                buffer.append(optionalPrefix);
-                if (buffer.charAt(buffer.length() - 1) != ' '
+                builder.append(optionalPrefix);
+                if (builder.charAt(builder.length() - 1) != ' '
                     && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING)) {
-                    buffer.append(" ");
+                    builder.append(" ");
                 }
-                buffer.append("/>");
+                builder.append("/>");
             }
         }
         else {
-            buffer.append('<').append('/').append(nodeName).append('>');
+            builder.append('<').append('/').append(nodeName).append('>');
         }
     }
 

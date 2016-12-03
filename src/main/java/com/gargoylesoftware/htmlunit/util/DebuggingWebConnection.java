@@ -194,20 +194,20 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final URL url = response.getWebRequest().getUrl();
         LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
 
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
-        buffer.append("fileName: '" + f.getName() + "', ");
-        buffer.append("contentType: '" + response.getContentType() + "', ");
-        buffer.append("method: '" + request.getHttpMethod().name() + "', ");
+        final StringBuilder bduiler = new StringBuilder();
+        bduiler.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
+        bduiler.append("fileName: '" + f.getName() + "', ");
+        bduiler.append("contentType: '" + response.getContentType() + "', ");
+        bduiler.append("method: '" + request.getHttpMethod().name() + "', ");
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
-            buffer.append("postParameters: " + nameValueListToJsMap(request.getRequestParameters()) + ", ");
+            bduiler.append("postParameters: " + nameValueListToJsMap(request.getRequestParameters()) + ", ");
         }
-        buffer.append("url: '" + escapeJSString(url.toString()) + "', ");
-        buffer.append("loadTime: " + response.getLoadTime() + ", ");
-        buffer.append("responseSize: " + length + ", ");
-        buffer.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
-        buffer.append("};\n");
-        appendToJSFile(buffer.toString());
+        bduiler.append("url: '" + escapeJSString(url.toString()) + "', ");
+        bduiler.append("loadTime: " + response.getLoadTime() + ", ");
+        bduiler.append("responseSize: " + length + ", ");
+        bduiler.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
+        bduiler.append("};\n");
+        appendToJSFile(bduiler.toString());
     }
 
     static String escapeJSString(final String string) {
@@ -310,13 +310,13 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (headers == null || headers.isEmpty()) {
             return "{}";
         }
-        final StringBuilder buffer = new StringBuilder("{");
+        final StringBuilder bduiler = new StringBuilder("{");
         for (final NameValuePair header : headers) {
-            buffer.append("'" + header.getName() + "': '" + escapeJSString(header.getValue()) + "', ");
+            bduiler.append("'" + header.getName() + "': '" + escapeJSString(header.getValue()) + "', ");
         }
-        buffer.delete(buffer.length() - 2, buffer.length());
-        buffer.append("}");
-        return buffer.toString();
+        bduiler.delete(bduiler.length() - 2, bduiler.length());
+        bduiler.append("}");
+        return bduiler.toString();
     }
 
     /**

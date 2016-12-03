@@ -1306,19 +1306,19 @@ public class HtmlPage extends InteractivePage {
                 LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
                 return;
             }
-            final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
-            if (StringUtils.isBlank(buffer.toString())) {
+            final StringBuilder builder = new StringBuilder(refreshString.substring(index + 4));
+            if (StringUtils.isBlank(builder.toString())) {
                 //content='10; URL=' is treated as content='10'
                 url = getUrl();
             }
             else {
-                if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
-                    buffer.deleteCharAt(0);
+                if (builder.charAt(0) == '"' || builder.charAt(0) == 0x27) {
+                    builder.deleteCharAt(0);
                 }
-                if (buffer.charAt(buffer.length() - 1) == '"' || buffer.charAt(buffer.length() - 1) == 0x27) {
-                    buffer.deleteCharAt(buffer.length() - 1);
+                if (builder.charAt(builder.length() - 1) == '"' || builder.charAt(builder.length() - 1) == 0x27) {
+                    builder.deleteCharAt(builder.length() - 1);
                 }
-                final String urlString = buffer.toString();
+                final String urlString = builder.toString();
                 try {
                     url = getFullyQualifiedUrl(urlString);
                 }
@@ -1826,12 +1826,12 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     public String toString() {
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append("HtmlPage(");
-        buffer.append(getUrl());
-        buffer.append(")@");
-        buffer.append(hashCode());
-        return buffer.toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append("HtmlPage(");
+        builder.append(getUrl());
+        builder.append(")@");
+        builder.append(hashCode());
+        return builder.toString();
     }
 
     /**

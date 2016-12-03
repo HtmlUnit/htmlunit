@@ -540,24 +540,24 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @param styleMap the styles
      */
     public void writeStyleToElement(final Map<String, StyleElement> styleMap) {
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
         for (final StyleElement e : sortedValues) {
-            if (buffer.length() != 0) {
-                buffer.append(" ");
+            if (builder.length() != 0) {
+                builder.append(" ");
             }
-            buffer.append(e.getName());
-            buffer.append(": ");
-            buffer.append(e.getValue());
+            builder.append(e.getName());
+            builder.append(": ");
+            builder.append(e.getValue());
 
             final String prio = e.getPriority();
             if (org.apache.commons.lang3.StringUtils.isNotBlank(prio)) {
-                buffer.append(" !");
-                buffer.append(prio);
+                builder.append(" !");
+                builder.append(prio);
             }
-            buffer.append(";");
+            builder.append(";");
         }
-        final String value = buffer.toString();
+        final String value = builder.toString();
         setAttribute("style", value);
     }
 

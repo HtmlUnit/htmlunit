@@ -833,22 +833,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Helper for getting code back from nodes.
-     * @param buffer the buffer to write to
+     * @param builder the buffer to write to
      * @param node the node to be serialized
      * @param html flag
      */
-    private void printChildren(final StringBuilder buffer, final DomNode node, final boolean html) {
+    private void printChildren(final StringBuilder builder, final DomNode node, final boolean html) {
         for (final DomNode child : node.getChildren()) {
-            printNode(buffer, child, html);
+            printNode(builder, child, html);
         }
     }
 
-    private void printNode(final StringBuilder buffer, final DomNode node, final boolean html) {
+    private void printNode(final StringBuilder builder, final DomNode node, final boolean html) {
         if (node instanceof DomComment) {
             if (html) {
                 // Remove whitespace sequences.
                 final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
-                buffer.append("<!--").append(s).append("-->");
+                builder.append("<!--").append(s).append("-->");
             }
         }
         else if (node instanceof DomCharacterData) {
@@ -857,7 +857,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (html) {
                 s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
             }
-            buffer.append(s);
+            builder.append(s);
         }
         else if (html) {
             final DomElement element = (DomElement) node;
@@ -868,7 +868,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (scriptObject instanceof HTMLElement) {
                 htmlElement = (HTMLElement) scriptObject;
             }
-            buffer.append("<").append(tag);
+            builder.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 if (!attr.getSpecified()) {
@@ -877,38 +877,38 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                buffer.append(' ').append(name).append("=");
-                buffer.append("\"");
-                buffer.append(value);
-                buffer.append("\"");
+                builder.append(' ').append(name).append("=");
+                builder.append("\"");
+                builder.append(value);
+                builder.append("\"");
             }
-            buffer.append(">");
+            builder.append(">");
             // Add the children.
             final boolean isHtml = html
                     && !(scriptObject instanceof HTMLScriptElement)
                     && !(scriptObject instanceof HTMLStyleElement);
-            printChildren(buffer, node, isHtml);
+            printChildren(builder, node, isHtml);
             if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
-                buffer.append("</").append(tag).append(">");
+                builder.append("</").append(tag).append(">");
             }
         }
         else {
             final HtmlElement element = (HtmlElement) node;
             if ("p".equals(element.getTagName())) {
                 if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
-                    buffer.append("\r\n"); // \r\n because it's to implement something IE specific
+                    builder.append("\r\n"); // \r\n because it's to implement something IE specific
                 }
                 else {
-                    int i = buffer.length() - 1;
-                    while (i >= 0 && Character.isWhitespace(buffer.charAt(i))) {
+                    int i = builder.length() - 1;
+                    while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
                         i--;
                     }
-                    buffer.setLength(i + 1);
-                    buffer.append("\n");
+                    builder.setLength(i + 1);
+                    builder.append("\n");
                 }
             }
             if (!"script".equals(element.getTagName())) {
-                printChildren(buffer, node, html);
+                printChildren(builder, node, html);
             }
         }
     }

@@ -311,11 +311,11 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             throw Context.reportRuntimeError("Unspecified error (request not sent).");
         }
         if (webResponse_ != null) {
-            final StringBuilder buffer = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                buffer.append(header.getName()).append(": ").append(header.getValue()).append("\r\n");
+                builder.append(header.getName()).append(": ").append(header.getValue()).append("\r\n");
             }
-            return buffer.append("\r\n").toString();
+            return builder.append("\r\n").toString();
         }
 
         LOG.error("XMLHTTPRequest.getAllResponseHeaders() was called without a response available (readyState: "

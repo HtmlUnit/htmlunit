@@ -35,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  */
 class HtmlSerializer {
-    private final StringBuilder buffer_ = new StringBuilder();
+    private final StringBuilder builder_ = new StringBuilder();
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
     protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
     private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
@@ -61,10 +61,10 @@ class HtmlSerializer {
      */
     public String asText(final DomNode node) {
         appletEnabled_ = node.getPage().getWebClient().getOptions().isAppletEnabled();
-        buffer_.setLength(0);
+        builder_.setLength(0);
         appendNode(node);
-        final String response = buffer_.toString();
-        buffer_.setLength(0);
+        final String response = builder_.toString();
+        builder_.setLength(0);
         return cleanUp(response);
     }
 
@@ -98,35 +98,35 @@ class HtmlSerializer {
         }
         text = trim(text);
 
-        final StringBuilder buffer = new StringBuilder(text.length());
+        final StringBuilder builder = new StringBuilder(text.length());
 
         boolean whitespace = false;
         for (final char ch : text.toCharArray()) {
 
             // Translate non-breaking space to regular space.
             if (ch == (char) 160) {
-                buffer.append(' ');
+                builder.append(' ');
                 whitespace = false;
             }
             else {
                 if (whitespace) {
                     if (!isSpace(ch)) {
-                        buffer.append(ch);
+                        builder.append(ch);
                         whitespace = false;
                     }
                 }
                 else {
                     if (isSpace(ch)) {
                         whitespace = true;
-                        buffer.append(' ');
+                        builder.append(' ');
                     }
                     else {
-                        buffer.append(ch);
+                        builder.append(ch);
                     }
                 }
             }
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     private static boolean isSpace(final char ch) {
@@ -300,19 +300,19 @@ class HtmlSerializer {
     }
 
     private void doAppendBlockSeparator() {
-        buffer_.append(AS_TEXT_BLOCK_SEPARATOR);
+        builder_.append(AS_TEXT_BLOCK_SEPARATOR);
     }
 
     private void doAppend(final String str) {
-        buffer_.append(str);
+        builder_.append(str);
     }
 
     private void doAppendNewLine() {
-        buffer_.append(AS_TEXT_NEW_LINE);
+        builder_.append(AS_TEXT_NEW_LINE);
     }
 
     private void doAppendTab() {
-        buffer_.append(AS_TEXT_TAB);
+        builder_.append(AS_TEXT_TAB);
     }
 
     private void appendHtmlUnorderedList(final HtmlUnorderedList htmlUnorderedList) {

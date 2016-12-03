@@ -495,11 +495,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the string concatenation
      */
     private static String concatArgsAsString(final Object[] args) {
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         for (final Object arg : args) {
-            buffer.append(Context.toString(arg));
+            builder.append(Context.toString(arg));
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**
@@ -770,23 +770,23 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         final URL url = page.getUrl();
 
-        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         final Set<Cookie> cookies = page.getWebClient().getCookies(url);
         for (final Cookie cookie : cookies) {
             if (cookie.isHttpOnly()) {
                 continue;
             }
-            if (buffer.length() != 0) {
-                buffer.append("; ");
+            if (builder.length() != 0) {
+                builder.append("; ");
             }
             if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
-                buffer.append(cookie.getName());
-                buffer.append("=");
+                builder.append(cookie.getName());
+                builder.append("=");
             }
-            buffer.append(cookie.getValue());
+            builder.append(cookie.getValue());
         }
 
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**

@@ -44,7 +44,7 @@ class XmlSerializer {
     private static final String FILE_SEPARATOR = "/";
     private static final Pattern CREATE_FILE_PATTERN = Pattern.compile(".*/");
 
-    private final StringBuilder buffer_ = new StringBuilder();
+    private final StringBuilder builder_ = new StringBuilder();
     private final StringBuilder indent_ = new StringBuilder();
     private File outputDir_;
 
@@ -68,43 +68,43 @@ class XmlSerializer {
      * @throws IOException in case of problem saving resources
      */
     public String asXml(final DomElement node) throws IOException {
-        buffer_.setLength(0);
+        builder_.setLength(0);
         indent_.setLength(0);
         final SgmlPage page = node.getPage();
         if (null != page && page.isHtmlPage()) {
             final String charsetName = page.getPageEncoding();
             if (charsetName != null && node instanceof HtmlHtml) {
-                buffer_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
+                builder_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
             }
         }
         printXml(node);
-        final String response = buffer_.toString();
-        buffer_.setLength(0);
+        final String response = builder_.toString();
+        builder_.setLength(0);
         return response;
     }
 
     protected void printXml(final DomElement node) throws IOException {
         if (!isExcluded(node)) {
             final boolean hasChildren = node.getFirstChild() != null;
-            buffer_.append(indent_).append('<');
+            builder_.append(indent_).append('<');
             printOpeningTag(node);
 
             if (!hasChildren && !node.isEmptyXmlTagExpanded()) {
-                buffer_.append("/>").append('\n');
+                builder_.append("/>").append('\n');
             }
             else {
-                buffer_.append(">").append('\n');
+                builder_.append(">").append('\n');
                 for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
                     indent_.append("  ");
                     if (child instanceof DomElement) {
                         printXml((DomElement) child);
                     }
                     else {
-                        buffer_.append(child);
+                        builder_.append(child);
                     }
                     indent_.setLength(indent_.length() - 2);
                 }
-                buffer_.append(indent_).append("</").append(node.getTagName()).append('>').append('\n');
+                builder_.append(indent_).append("</").append(node.getTagName()).append('>').append('\n');
             }
         }
     }
@@ -115,24 +115,24 @@ class XmlSerializer {
      * @throws IOException in case of problem saving resources
      */
     public String asText(final DomNode node) {
-        buffer_.setLength(0);
+        builder_.setLength(0);
 
         if (node instanceof DomText) {
-            buffer_.append(((DomText) node).getData());
+            builder_.append(((DomText) node).getData());
         }
         else {
             printText(node);
         }
 
-        final String response = buffer_.toString();
-        buffer_.setLength(0);
+        final String response = builder_.toString();
+        builder_.setLength(0);
         return response;
     }
 
     protected void printText(final DomNode node) {
         for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof DomText) {
-                buffer_.append(((DomText) child).getData());
+                builder_.append(((DomText) child).getData());
             }
             else {
                 printText(child);
@@ -147,16 +147,16 @@ class XmlSerializer {
      * @throws IOException in case of problem saving resources
      */
     protected void printOpeningTag(final DomElement node) throws IOException {
-        buffer_.append(node.getTagName());
+        builder_.append(node.getTagName());
         final Map<String, DomAttr> attributes = readAttributes(node);
 
         for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            buffer_.append(" ");
-            buffer_.append(entry.getKey());
-            buffer_.append("=\"");
+            builder_.append(" ");
+            builder_.append(entry.getKey());
+            builder_.append("=\"");
             final String value = entry.getValue().getNodeValue();
-            buffer_.append(com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
-            buffer_.append('"');
+            builder_.append(com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
+            builder_.append('"');
         }
     }
 

@@ -57,21 +57,21 @@ public class XMLSerializer {
             root = root.getFirstChild();
         }
         if (root instanceof XMLDOMElement) {
-            final StringBuilder buffer = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             final DomNode node = root.getDomNodeOrDie();
 
-            toXml(1, node, buffer);
+            toXml(1, node, builder);
 
-            buffer.append("\r\n");
-            return buffer.toString();
+            builder.append("\r\n");
+            return builder.toString();
         }
         return root.getDomNodeOrDie().asXml();
     }
 
     private void toXml(final int indent,
-            final DomNode node, final StringBuilder buffer) {
+            final DomNode node, final StringBuilder builder) {
         final String nodeName = node.getNodeName();
-        buffer.append('<').append(nodeName);
+        builder.append('<').append(nodeName);
 
         final String optionalPrefix = "";
         final String namespaceURI = node.getNamespaceURI();
@@ -92,48 +92,48 @@ public class XMLSerializer {
         final NamedNodeMap attributesMap = node.getAttributes();
         for (int i = 0; i < attributesMap.getLength(); i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);
-            buffer.append(' ').append(attrib.getQualifiedName()).append('=')
+            builder.append(' ').append(attrib.getQualifiedName()).append('=')
                 .append('"').append(attrib.getValue()).append('"');
         }
         boolean startTagClosed = false;
         for (final DomNode child : node.getChildren()) {
             if (!startTagClosed) {
-                buffer.append(optionalPrefix).append('>');
+                builder.append(optionalPrefix).append('>');
                 startTagClosed = true;
             }
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    toXml(indent + 1, child, buffer);
+                    toXml(indent + 1, child, builder);
                     break;
 
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
                     value = StringUtils.escapeXmlChars(value);
                     if (preserveWhiteSpace_) {
-                        buffer.append(value.replace("\n", "\r\n"));
+                        builder.append(value.replace("\n", "\r\n"));
                     }
                     else if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
-                        buffer.append("\r\n");
+                        builder.append("\r\n");
                         final DomNode sibling = child.getNextSibling();
                         if (sibling != null && sibling.getNodeType() == Node.ELEMENT_NODE) {
                             for (int i = 0; i < indent; i++) {
-                                buffer.append('\t');
+                                builder.append('\t');
                             }
                         }
                     }
                     else {
-                        buffer.append(value.replace("\n", "\r\n"));
+                        builder.append(value.replace("\n", "\r\n"));
                     }
                     break;
 
                 case Node.CDATA_SECTION_NODE:
                 case Node.COMMENT_NODE:
-                    if (!preserveWhiteSpace_ && buffer.charAt(buffer.length() - 1) == '\n') {
+                    if (!preserveWhiteSpace_ && builder.charAt(builder.length() - 1) == '\n') {
                         for (int i = 0; i < indent; i++) {
-                            buffer.append('\t');
+                            builder.append('\t');
                         }
                     }
-                    buffer.append(child.asXml());
+                    builder.append(child.asXml());
                     break;
 
                 default:
@@ -141,15 +141,15 @@ public class XMLSerializer {
             }
         }
         if (!startTagClosed) {
-            buffer.append(optionalPrefix).append("/>");
+            builder.append(optionalPrefix).append("/>");
         }
         else {
-            if (!preserveWhiteSpace_ && buffer.charAt(buffer.length() - 1) == '\n') {
+            if (!preserveWhiteSpace_ && builder.charAt(builder.length() - 1) == '\n') {
                 for (int i = 0; i < indent - 1; i++) {
-                    buffer.append('\t');
+                    builder.append('\t');
                 }
             }
-            buffer.append('<').append('/').append(nodeName).append('>');
+            builder.append('<').append('/').append(nodeName).append('>');
         }
     }
 
