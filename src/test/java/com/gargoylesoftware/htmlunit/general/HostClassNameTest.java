@@ -10646,4 +10646,12 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("IntersectionObserverEntry");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowProperties() throws Exception {
+        test("WindowProperties");
+    }
 }

@@ -7793,4 +7793,12 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("FederatedCredential");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void windowProperties() throws Exception {
+        test("WindowProperties");
+    }
 }
