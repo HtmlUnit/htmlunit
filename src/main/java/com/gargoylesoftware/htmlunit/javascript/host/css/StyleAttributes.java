@@ -1810,7 +1810,7 @@ public final class StyleAttributes {
         OBJECT_POSITION_("object-position", "object-position", ff("50% 50%")),
 
         /** The style property {@code offset}. */
-        OFFSET_("offset", "offset", chrome("none 0px auto 0deg")),
+        OFFSET("offset", "offset", chrome("none 0px auto 0deg")),
 
         /** The style property {@code offsetBlockEnd}. */
         OFFSET_BLOCK_END("offsetBlockEnd", "offset-block-end", ff45up("")),
@@ -1825,7 +1825,7 @@ public final class StyleAttributes {
         OFFSET_BLOCK_START_("offset-block-start", "offset-block-start", ff45up("")),
 
         /** The style property {@code offsetDistance}. */
-        OFFSET_DISTANCE_("offsetDistance", "offsetDistance", chrome("0px")),
+        OFFSET_DISTANCE("offsetDistance", "offsetDistance", chrome("0px")),
 
         /** The style property {@code offsetInlineEnd}. */
         OFFSET_INLINE_END("offsetInlineEnd", "offset-inline-end", ff45up("")),
@@ -1840,10 +1840,10 @@ public final class StyleAttributes {
         OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start", ff45up("")),
 
         /** The style property {@code offsetPath}. */
-        OFFSET_PATH_("offsetPath", "offsetPath", chrome("none")),
+        OFFSET_PATH("offsetPath", "offsetPath", chrome("none")),
 
         /** The style property {@code offsetRotation}. */
-        OFFSET_ROTATION_("offsetRotation", "offsetRotation", chrome("auto 0deg")),
+        OFFSET_ROTATION("offsetRotation", "offsetRotation", chrome("auto 0deg")),
 
         /** The style property {@code opacity}. */
         OPACITY("opacity", "opacity", chrome("1"), ff(""), ie("")),
