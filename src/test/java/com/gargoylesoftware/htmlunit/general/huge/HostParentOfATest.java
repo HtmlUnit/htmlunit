@@ -580,6 +580,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            CHROME = "false",
             IE = "false")
     public void _AudioContext_OfflineAudioContext() throws Exception {
         test("AudioContext", "OfflineAudioContext");
@@ -640,6 +641,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _AudioNode_PannerNode() throws Exception {
         test("AudioNode", "PannerNode");
@@ -1044,6 +1046,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _AudioNode_StereoPannerNode() throws Exception {
         test("AudioNode", "StereoPannerNode");
@@ -1189,16 +1192,6 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _AudioContext_webkitAudioContext() throws Exception {
         test("AudioContext", "webkitAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _AudioContext_webkitOfflineAudioContext() throws Exception {
-        test("AudioContext", "webkitOfflineAudioContext");
     }
 
     /**
