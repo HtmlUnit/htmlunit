@@ -244,6 +244,7 @@ public abstract class InteractivePage extends SgmlPage {
         }
 
         final Object result = ScriptRuntime.apply(function, thisObject, args);
+        getWebClient().getJavaScriptEngine2().processPostponedActions();
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
