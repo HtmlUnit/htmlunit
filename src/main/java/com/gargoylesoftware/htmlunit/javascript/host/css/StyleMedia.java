@@ -36,7 +36,7 @@ import com.steadystate.css.dom.MediaListImpl;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(CHROME)),
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME)),
         @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
     })
 public class StyleMedia extends SimpleScriptable {

@@ -53,7 +53,6 @@ public final class ClassConfiguration {
     private Member jsConstructor_;
     private final Class<?>[] domClasses_;
     private final boolean jsObject_;
-    private final boolean definedInStandardsMode_;
     private final String className_;
 
     /**
@@ -62,11 +61,10 @@ public final class ClassConfiguration {
      * @param hostClass - the class implementing this functionality
      * @param domClasses the DOM classes that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
-     * @param definedInStandardsMode should be defined in only Standards Mode
      * @param className the class name, can be null
      */
     public ClassConfiguration(final Class<? extends HtmlUnitScriptable> hostClass, final Class<?>[] domClasses,
-            final boolean jsObject, final boolean definedInStandardsMode, final String className) {
+            final boolean jsObject, final String className) {
         final Class<?> superClass = hostClass.getSuperclass();
         if (superClass != SimpleScriptable.class) {
             extendedClassName_ = superClass.getSimpleName();
@@ -77,7 +75,6 @@ public final class ClassConfiguration {
         hostClass_ = hostClass;
         hostClassSimpleName_ = hostClass_.getSimpleName();
         jsObject_ = jsObject;
-        definedInStandardsMode_ = definedInStandardsMode;
         domClasses_ = domClasses;
         if (className == null) {
             className_ = getHostClass().getSimpleName();
@@ -247,14 +244,6 @@ public final class ClassConfiguration {
      */
     public boolean isJsObject() {
         return jsObject_;
-    }
-
-    /**
-     * Returns whether the class should be defined in only Standards Mode.
-     * @return defineInStandardsMode
-     */
-    public boolean isDefinedInStandardsMode() {
-        return definedInStandardsMode_;
     }
 
     /**

@@ -513,34 +513,6 @@ public class JavaScriptEngine {
     }
 
     /**
-     * Define properties in Standards Mode.
-     *
-     * @param page the page
-     */
-    public void definePropertiesInStandardsMode(final HtmlPage page) {
-        final Window window = ((HTMLDocument) page.getScriptableObject()).getWindow();
-        final BrowserVersion browserVersion = window.getBrowserVersion();
-        for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final String jsClassName = config.getClassName();
-            if (config.isDefinedInStandardsMode()) {
-                final Scriptable prototype = window.getPrototype(jsClassName);
-                if ("Window".equals(jsClassName)) {
-                    defineConstructor(browserVersion, window, window, new Window());
-                }
-                else if (!config.isJsObject()) {
-                    try {
-                        final ScriptableObject constructor = config.getHostClass().newInstance();
-                        defineConstructor(browserVersion, window, prototype, constructor);
-                    }
-                    catch (final Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
      * Removes prototype properties.
      * @param scope the scope
      * @param className the class for which properties should be removed

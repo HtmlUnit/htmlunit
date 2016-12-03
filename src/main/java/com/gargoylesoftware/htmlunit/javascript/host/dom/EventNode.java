@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClass(isJSObject = false)
 public class EventNode extends Node {
 
     /**

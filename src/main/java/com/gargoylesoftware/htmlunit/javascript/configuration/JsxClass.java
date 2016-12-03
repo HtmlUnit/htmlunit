@@ -46,12 +46,6 @@ public @interface JsxClass {
     boolean isJSObject() default true;
 
     /**
-     * Should be defined in only Standards Mode.
-     * @return whether is defined in Standards Mode only
-     */
-    boolean isDefinedInStandardsMode() default true;
-
-    /**
      * The class name.
      * @return the class name
      */

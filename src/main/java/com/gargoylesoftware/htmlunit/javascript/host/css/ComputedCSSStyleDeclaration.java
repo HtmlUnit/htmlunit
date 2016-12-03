@@ -143,7 +143,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(FF))
+@JsxClass(isJSObject = false, browsers = @WebBrowser(FF))
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Denotes a value which should be returned as is. */

@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Daniel Gredler
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
+@JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
 public class NamespaceCollection extends SimpleScriptable implements Function {
 
     /** The HTML document to which this namespace collection belongs. */

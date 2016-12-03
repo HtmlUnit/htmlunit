@@ -33,7 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClass(isJSObject = false)
 public class SimpleArray extends SimpleScriptable implements ScriptableWithFallbackGetter {
     private final List<Object> elements_ = new ArrayList<>();
 

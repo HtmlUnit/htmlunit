@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Daniel Gredler
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClass(isJSObject = false)
 public class FormChild extends HTMLElement {
 
     /**

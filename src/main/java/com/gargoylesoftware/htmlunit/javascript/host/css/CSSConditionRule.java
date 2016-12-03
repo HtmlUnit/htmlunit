@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(EDGE) }),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = {@WebBrowser(IE) })
+        @JsxClass(isJSObject = false, browsers = {@WebBrowser(IE) })
     })
 public class CSSConditionRule extends CSSGroupingRule {
 

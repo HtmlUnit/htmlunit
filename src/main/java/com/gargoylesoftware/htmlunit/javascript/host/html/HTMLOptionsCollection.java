@@ -62,7 +62,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
     })
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
 

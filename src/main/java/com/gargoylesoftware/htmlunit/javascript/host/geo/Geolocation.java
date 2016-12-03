@@ -54,8 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  */
 @JsxClasses({
         @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)}),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-            browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
+        @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
     })
 public class Geolocation extends SimpleScriptable {
 

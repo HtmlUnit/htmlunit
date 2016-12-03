@@ -39,7 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClass(isJSObject = false)
 public class RowContainer extends HTMLElement {
 
     private HTMLCollection rows_; // has to be a member to have equality (==) working

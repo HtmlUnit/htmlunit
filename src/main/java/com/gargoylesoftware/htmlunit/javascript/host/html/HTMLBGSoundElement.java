@@ -30,8 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlBackgroundSound.class, browsers = { @WebBrowser(IE)}),
-        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = HtmlBackgroundSound.class,
-            browsers = @WebBrowser(FF))
+        @JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, browsers = @WebBrowser(FF))
     })
 public class HTMLBGSoundElement extends HTMLElement {
 

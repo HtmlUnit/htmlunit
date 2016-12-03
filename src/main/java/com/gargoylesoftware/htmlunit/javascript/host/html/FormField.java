@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClass(isJSObject = false)
 public class FormField extends FormChild {
 
     /**

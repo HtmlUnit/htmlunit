@@ -29,7 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClass(isJSObject = false)
 public class HTMLListElement extends HTMLElement {
 
     /**

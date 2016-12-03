@@ -124,7 +124,6 @@ public abstract class AbstractJavaScriptConfiguration {
                 final Set<Class<?>> domClasses = new HashSet<>();
 
                 boolean isJsObject = false;
-                boolean isDefinedInStandardsMode = false;
                 String className = null;
                 for (int i = 0; i < jsxClassValues.length; i++) {
                     final JsxClass jsxClass = jsxClassValues[i];
@@ -135,9 +134,6 @@ public abstract class AbstractJavaScriptConfiguration {
                         if (jsxClass.isJSObject()) {
                             isJsObject = true;
                         }
-                        if (jsxClass.isDefinedInStandardsMode()) {
-                            isDefinedInStandardsMode = true;
-                        }
                         if (!jsxClass.className().isEmpty()) {
                             className = jsxClass.className();
                         }
@@ -146,7 +142,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 final ClassConfiguration classConfiguration =
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
-                                isDefinedInStandardsMode, className);
+                                className);
 
                 process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
                 return classConfiguration;
@@ -167,7 +163,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
                 final ClassConfiguration classConfiguration
                     = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
-                            jsxClass.isDefinedInStandardsMode(), className);
+                            className);
 
                 process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
                 return classConfiguration;
