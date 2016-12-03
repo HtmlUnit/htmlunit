@@ -1246,8 +1246,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         }
         final EventTarget2 jsElt = (EventTarget2) getScriptObject2();
 
-        final Global global = NashornJavaScriptEngine.getGlobal(
-                jsElt.getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(jsElt.getWindow().getWebWindow());
         final Global oldGlobal = Context.getGlobal();
         final boolean globalChanged = oldGlobal != global;
         try {

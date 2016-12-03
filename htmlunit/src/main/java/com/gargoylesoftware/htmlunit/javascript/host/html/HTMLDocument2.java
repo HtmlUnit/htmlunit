@@ -402,7 +402,7 @@ public class HTMLDocument2 extends Document2 {
             throw new RuntimeException(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                 "Event Type is not supported: " + eventType));
         }
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final Event2 event = Event2.constructor(true, global);
         event.eventCreated();
         return event;

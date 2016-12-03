@@ -157,9 +157,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         return new Browser(family, (int) version.getBrowserVersionNumeric());
     }
 
-    private void initGlobal(final ScriptContext scriptContext, final Browser browser) {
+    private void initGlobal(final WebWindow webWindow, final Browser browser) {
         Browser.setCurrent(browser);
-        final Global global = getGlobal(scriptContext);
+        final Global global = getGlobal(webWindow);
         final Global oldGlobal = Context.getGlobal();
         try {
             Context.setGlobal(global);
@@ -406,7 +406,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     public void registerWindowAndMaybeStartEventLoop(WebWindow webWindow) {
     }
 
-    public static Global getGlobal(final ScriptContext context) {
+    public static Global getGlobal(final WebWindow webWindow) {
+        final ScriptContext context = webWindow.getScriptContext();
         return get(context.getBindings(ScriptContext.ENGINE_SCOPE), "sobj");
     }
 
@@ -415,7 +416,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         final Global global = engine.createNashornGlobal();
         final ScriptContext scriptContext = webWindow.getScriptContext();
         scriptContext.setBindings(new ScriptObjectMirror(global, global), ScriptContext.ENGINE_SCOPE);
-        initGlobal(scriptContext, getBrowser(webClient_.getBrowserVersion()));
+        initGlobal(webWindow, getBrowser(webClient_.getBrowserVersion()));
         global.<Window2>getWindow().setWebWindow(webWindow);
         webWindow.setScriptObject(global);
     }

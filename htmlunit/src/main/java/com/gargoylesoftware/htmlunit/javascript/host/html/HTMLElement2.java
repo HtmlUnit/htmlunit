@@ -261,7 +261,7 @@ public class HTMLElement2 extends Element2 {
 //            // compute appropriate offset width to pretend mouse event was produced within this element
 //            return event.getClientX() - getPosX() + 50;
 //        }
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
         return style.getCalculatedWidth(true, true);
     }
@@ -284,7 +284,7 @@ public class HTMLElement2 extends Element2 {
 //            // compute appropriate offset height to pretend mouse event was produced within this element
 //            return event.getClientY() - getPosY() + 50;
 //        }
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global,this, null);
         return style.getCalculatedHeight(true, true);
     }
@@ -296,7 +296,7 @@ public class HTMLElement2 extends Element2 {
     protected final boolean isDisplayNone() {
         HTMLElement2 element = this;
         while (element != null) {
-            final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+            final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
             final CSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
             final String display = style.getDisplay();
             if (DisplayStyle.NONE.value().equals(display)) {
@@ -317,7 +317,7 @@ public class HTMLElement2 extends Element2 {
         while (element != null) {
             cumulativeOffset += element.getOffsetLeft();
             if (element != this) {
-                final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
                 cumulativeOffset += style.getBorderLeftValue();
             }
@@ -336,7 +336,7 @@ public class HTMLElement2 extends Element2 {
         while (element != null) {
             cumulativeOffset += element.getOffsetTop();
             if (element != this) {
-                final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
                 cumulativeOffset += style.getBorderTopValue();
             }
@@ -359,7 +359,7 @@ public class HTMLElement2 extends Element2 {
             return null;
         }
 
-        final Global global = NashornJavaScriptEngine.getGlobal(htmlElement.getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(htmlElement.getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, htmlElement, null);
         final String position = style.getPositionWithInheritance();
         final boolean staticPos = "static".equals(position);
@@ -414,7 +414,7 @@ public class HTMLElement2 extends Element2 {
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
         HTMLElement2 element = (HTMLElement2) node.getScriptObject2();
-        final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
         ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
         left += style.getLeft(true, false, false);
 
@@ -462,7 +462,7 @@ public class HTMLElement2 extends Element2 {
      */
     @Getter
     public int getClientLeft() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
         return style.getBorderLeftValue();
     }
@@ -473,7 +473,7 @@ public class HTMLElement2 extends Element2 {
      */
     @Getter
     public int getClientTop() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
         return style.getBorderTopValue();
     }
@@ -513,7 +513,7 @@ public class HTMLElement2 extends Element2 {
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
         HTMLElement2 element = (HTMLElement2) node.getScriptObject2();
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
         top += style.getTop(true, false, false);
 
@@ -555,7 +555,7 @@ public class HTMLElement2 extends Element2 {
      */
     @Getter
     public int getClientHeight() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
         return style.getCalculatedHeight(false, true);
     }
@@ -566,7 +566,7 @@ public class HTMLElement2 extends Element2 {
      */
     @Getter
     public int getClientWidth() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global,this, null);
         return style.getCalculatedWidth(false, true);
     }

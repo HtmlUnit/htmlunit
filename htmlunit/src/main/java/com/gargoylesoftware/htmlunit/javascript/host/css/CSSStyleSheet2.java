@@ -174,7 +174,7 @@ public class CSSStyleSheet2 extends StyleSheet2 {
         wrapped_ = parseCSS(element.getWindow(), source);
         uri_ = uri;
         ownerNode_ = element;
-        final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
         setProto(global.getPrototype(getClass()));
     }
 

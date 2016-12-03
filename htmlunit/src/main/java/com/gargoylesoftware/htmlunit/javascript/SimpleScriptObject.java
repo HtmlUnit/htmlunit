@@ -214,7 +214,7 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
      */
     public SimpleScriptObject makeScriptableFor(final DomNode domNode) {
         SimpleScriptObject host = null;
-        final Global global = NashornJavaScriptEngine.getGlobal(domNode.getPage().getEnclosingWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(domNode.getPage().getEnclosingWindow());
         if (domNode instanceof HtmlBody) {
             host = HTMLBodyElement2.constructor(true, global);
             host.setDomNode(domNode);

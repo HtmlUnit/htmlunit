@@ -750,7 +750,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 final Object scriptableObject = ((DomNode) node).getScriptObject2();
                 if (scriptableObject instanceof HTMLElement2) {
                     final HTMLElement2 elem = (HTMLElement2) scriptableObject;
-                    final Global global = NashornJavaScriptEngine.getGlobal(elem.getWindow().getWebWindow().getScriptContext());
+                    final Global global = elem.getWindow().getGlobal();
                     final CSSStyleDeclaration2 style = Window2.getComputedStyle(global, elem, null);
                     if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;

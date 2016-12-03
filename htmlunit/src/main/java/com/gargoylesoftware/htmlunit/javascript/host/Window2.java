@@ -156,7 +156,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param enclosedPage the page containing the JavaScript
      */
     public void initialize(final Page enclosedPage) {
-        final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(enclosedPage.getEnclosingWindow());
         if (enclosedPage instanceof XmlPage || enclosedPage instanceof SvgPage) {
             document_ = XMLDocument2.constructor(true, global);
         }
@@ -1621,7 +1621,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the global
      */
     public Global getGlobal() {
-        return NashornJavaScriptEngine.getGlobal(getWebWindow().getScriptContext());
+        return NashornJavaScriptEngine.getGlobal(getWebWindow());
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

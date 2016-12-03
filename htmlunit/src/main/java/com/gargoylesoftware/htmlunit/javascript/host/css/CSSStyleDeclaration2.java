@@ -1968,7 +1968,7 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
          * @return the CSS attribute value for the specified element
          */
         public final String get(final Element2 element) {
-            final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+            final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
             final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, element, null);
             final String value = get(style);
             return value;

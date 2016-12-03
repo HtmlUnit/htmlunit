@@ -123,7 +123,7 @@ public class AbstractList2 extends SimpleScriptObject {
             setDomNode(domeNode, false);
             final ScriptObject parentScope = domeNode.getScriptObject2();
             if (parentScope != null) {
-                final Global global = NashornJavaScriptEngine.getGlobal(domeNode.getPage().getEnclosingWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(domeNode.getPage().getEnclosingWindow());
                 setProto(global.getPrototype(getClass()));
                 ScriptUtils.initialize(this);
             }

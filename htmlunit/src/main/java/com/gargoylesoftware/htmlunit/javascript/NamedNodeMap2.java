@@ -50,7 +50,7 @@ public class NamedNodeMap2 extends SimpleScriptObject {
      * @param element the owning element
      */
     public NamedNodeMap2(final DomElement element) {
-        final Global global = NashornJavaScriptEngine.getGlobal(element.getPage().getEnclosingWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(element.getPage().getEnclosingWindow());
         setProto(global.getPrototype(getClass()));
         ScriptUtils.initialize(this);
 

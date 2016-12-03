@@ -560,7 +560,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
             }
             else if ("block".equals(display)) {
                 if (element instanceof HTMLBodyElement2) {
-                    final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow().getScriptContext());
+                    final Global global = NashornJavaScriptEngine.getGlobal(element.getWindow().getWebWindow());
                     final String widthString = Window2.getComputedStyle(global, element, null).getWidth();
                     width = Integer.parseInt(widthString.substring(0, widthString.length() - 2));
                 }
@@ -754,7 +754,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
         for (final DomNode child : children) {
             if (child.getScriptObject2() instanceof HTMLElement2) {
                 final HTMLElement2 e = (HTMLElement2) child.getScriptObject2();
-                final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, e, null);
                 final int w = style.getCalculatedWidth(true, true);
                 width += w;
@@ -868,7 +868,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 final Object scriptObj = child.getScriptObject2();
                 if (scriptObj instanceof HTMLElement2) {
                     final HTMLElement2 e = (HTMLElement2) scriptObj;
-                    final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow().getScriptContext());
+                    final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow());
                     final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, e, null);
                     final String pos = style.getPositionWithInheritance();
                     if ("static".equals(pos) || "relative".equals(pos)) {
@@ -1240,7 +1240,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 p = "static";
             }
             else {
-                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
                 p = style.getPositionWithInheritance();
             }
@@ -1290,14 +1290,14 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
         else if ("absolute".equals(p) && !"auto".equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement2 parent = (HTMLElement2) getElement().getParentElement();
-            final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+            final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
             final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
             final int parentWidth = style.getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
         else if ("fixed".equals(p) && !"auto".equals(r)) {
             final HTMLElement2 parent = (HTMLElement2) getElement().getParentElement();
-            final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+            final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
             final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, getElement(), null);
             final ComputedCSSStyleDeclaration2 parentStyle = Window2.getComputedStyle(global, parent, null);
             left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
@@ -1305,7 +1305,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement2 parent = (HTMLElement2) getElement().getParentElement();
-            final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+            final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
             final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
             left = pixelValue(style.getLeftWithInheritance());
         }
@@ -1315,7 +1315,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
                 if (n.getScriptObject2() instanceof HTMLElement2) {
                     final HTMLElement2 e = (HTMLElement2) n.getScriptObject2();
-                    final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow().getScriptContext());
+                    final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow());
                     final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, e, null);
                     final String d = style.getDisplay();
                     if ("block".equals(d)) {
@@ -1368,7 +1368,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 left = "auto";
             }
             else {
-                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
                 left = style.getLeftWithInheritance();
             }
@@ -1388,7 +1388,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 right = "auto";
             }
             else {
-                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
                 right = style.getRightWithInheritance();
             }
@@ -1417,7 +1417,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 while (prev != null && !prevHadComputedTop) {
                     if (prev instanceof HtmlElement) {
                         final HTMLElement2 e = (HTMLElement2) ((HtmlElement) prev).getScriptObject2();
-                        final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow().getScriptContext());
+                        final Global global = NashornJavaScriptEngine.getGlobal(e.getWindow().getWebWindow());
                         final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, e, null);
                         int prevTop = 0;
                         if (style.top_ == null) {
@@ -1514,7 +1514,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 top = "auto";
             }
             else {
-                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
                 top = style.getTopWithInheritance();
             }
@@ -1534,7 +1534,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
                 bottom = "auto";
             }
             else {
-                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow().getScriptContext());
+                final Global global = NashornJavaScriptEngine.getGlobal(parent.getWindow().getWebWindow());
                 final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, parent, null);
                 bottom = style.getBottomWithInheritance();
             }

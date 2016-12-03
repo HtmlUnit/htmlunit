@@ -109,7 +109,7 @@ public class Element2 extends Node2 {
 //        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
         final Source source = Source.sourceFor(eventName + " event for " + htmlElt
                 + " in " + htmlElt.getPage().getUrl(), attrValue);
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         Context context = ((ScriptObject) global).getContext();
 
         final Global oldGlobal = Context.getGlobal();
@@ -179,7 +179,7 @@ public class Element2 extends Node2 {
         }
 
         final ClientRect2 textRectangle = new ClientRect2(1, 1, 1, 1);
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow().getScriptContext());
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         textRectangle.setProto(global.getPrototype(textRectangle.getClass()));
 
         return textRectangle;

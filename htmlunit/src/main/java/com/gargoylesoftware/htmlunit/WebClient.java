@@ -1029,8 +1029,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
-        final ScriptContext scriptContext = newPage.getEnclosingWindow().getScriptContext();
-        final Global global = NashornJavaScriptEngine.getGlobal(scriptContext);
+        final Global global = NashornJavaScriptEngine.getGlobal(newPage.getEnclosingWindow());
         global.<Window2>getWindow().initialize(newPage);
     }
 
@@ -1748,7 +1747,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
                     final HTMLElement2 htmlElement = (HTMLElement2) frameElement.getScriptObject2();
-                    final Global global = NashornJavaScriptEngine.getGlobal(htmlElement.getWindow().getWebWindow().getScriptContext());
+                    final Global global = NashornJavaScriptEngine.getGlobal(htmlElement.getWindow().getWebWindow());
                     final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, htmlElement, null);
                     use = (style.getCalculatedWidth(false, false) != 0)
                         && (style.getCalculatedHeight(false, false) != 0);
