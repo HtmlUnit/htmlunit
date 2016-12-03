@@ -833,7 +833,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Helper for getting code back from nodes.
-     * @param builder the buffer to write to
+     * @param builder the builder to write to
      * @param node the node to be serialized
      * @param html flag
      */

@@ -197,7 +197,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private HTMLElement activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
-    private final StringBuilder writeBuffer_ = new StringBuilder();
+    private final StringBuilder writeBuilder_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
     private String uniqueID_;
@@ -542,7 +542,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         throw Context.reportRuntimeError("Function can't be used detached from document");
     }
 
-    private boolean executionExternalPostponed_ = false;
+    private boolean executionExternalPostponed_;
 
     /**
      * This a hack!!! A cleaner way is welcome.
@@ -581,7 +581,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Add content to the content buffer.
-        writeBuffer_.append(content);
+        writeBuilder_.append(content);
 
         // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {
@@ -591,7 +591,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             scheduleImplicitClose();
             return;
         }
-        final String bufferedContent = writeBuffer_.toString();
+        final String bufferedContent = writeBuilder_.toString();
         if (!canAlreadyBeParsed(bufferedContent)) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("write: not enough content to parse it now");
@@ -599,7 +599,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return;
         }
 
-        writeBuffer_.setLength(0);
+        writeBuilder_.setLength(0);
         page.writeInParsedStream(bufferedContent);
     }
 
@@ -611,7 +611,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
                 @Override
                 public void execute() throws Exception {
-                    if (writeBuffer_.length() != 0) {
+                    if (writeBuilder_.length() != 0) {
                         close();
                     }
                     closePostponedAction_ = false;
@@ -1045,10 +1045,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         else {
             final HtmlPage page = getPage();
             final URL url = page.getUrl();
-            final StringWebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
+            final StringWebResponse webResponse = new StringWebResponse(writeBuilder_.toString(), url);
             webResponse.setFromJavascript(true);
             writeInCurrentDocument_ = true;
-            writeBuffer_.setLength(0);
+            writeBuilder_.setLength(0);
 
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
