@@ -16,6 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -23,16 +28,27 @@ import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -64,6 +80,40 @@ public class HTMLFormElement2 extends HTMLElement2 {
     @Setter
     public void setName(final String name) {
         getHtmlForm().setNameAttribute(name);
+    }
+
+    /**
+     * Returns the value of the property {@code target}.
+     * @return the value of this property
+     */
+    @Getter
+    public String getTarget() {
+        return getHtmlForm().getTargetAttribute();
+    }
+
+    /**
+     * Submits the form (at the end of the current script execution).
+     */
+    @Function
+    public void submit() {
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+        final WebClient webClient = page.getWebClient();
+
+        final String action = getHtmlForm().getActionAttribute().trim();
+        if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            final String js = action.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
+            webClient.getJavaScriptEngine().execute(page, js, "Form action", 0);
+        }
+        else {
+            // download should be done ASAP, response will be loaded into a window later
+            final WebRequest request = getHtmlForm().getWebRequest(null);
+            final String target = page.getResolvedTarget(getTarget());
+            final boolean forceDownload = webClient.getBrowserVersion().hasFeature(JS_FORM_SUBMIT_FORCES_DOWNLOAD);
+            final boolean checkHash =
+                    !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
+            webClient.download(page.getEnclosingWindow(),
+                        target, request, checkHash, forceDownload, "JS form.submit()");
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
@@ -160,6 +210,7 @@ public class HTMLFormElement2 extends HTMLElement2 {
         return super.findProperty(key, deep, start);
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("HTMLFormElement", 
@@ -171,13 +222,16 @@ public class HTMLFormElement2 extends HTMLElement2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
+            super("HTMLFormElement");
         }
+    }
 
-        public String getClassName() {
-            return "HTMLFormElement";
+    @ClassConstructor(@WebBrowser(IE))
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
+        public ObjectConstructor() {
+            super("HTMLFormElement");
         }
     }
 }

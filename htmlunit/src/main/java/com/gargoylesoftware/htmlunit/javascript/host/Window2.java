@@ -126,6 +126,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     private static final int MIN_TIMER_DELAY = 1;
     private WebWindow webWindow_;
+    private boolean isProxy_;
     private Screen2 screen_;
     private Document2 document_;
     private History2 history_;
@@ -328,7 +329,11 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     private static Window2 getWindow(final Object self) {
         if (self instanceof Global) {
-            return ((Global) self).getWindow();
+            Window2 window = ((Global) self).getWindow();
+            if (window.isProxy_) {
+                window = ((Global) window.getWebWindow().getScriptObject2()).getWindow();
+            }
+            return window;
         }
         if (self instanceof Window2) {
             return (Window2) self;
@@ -933,7 +938,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         // if specified name is the name of an existing window, then hold it
         if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
             try {
-                return webClient.getWebWindowByName(windowName).getScriptObject2();
+                final Global global = (Global) webClient.getWebWindowByName(windowName).getScriptObject2();
+                global.<Window2>getWindow().isProxy_ = true;
+                return global;
             }
             catch (final WebWindowNotFoundException e) {
                 // nothing
@@ -941,7 +948,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
         final URL newUrl = window.makeUrlForOpenWindow(urlString);
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow);
-        return newWebWindow.getScriptObject2();
+        final Global global = (Global) newWebWindow.getScriptObject2();
+        global.<Window2>getWindow().isProxy_ = true;
+        return global;
     }
 
     private URL makeUrlForOpenWindow(final String urlString) {

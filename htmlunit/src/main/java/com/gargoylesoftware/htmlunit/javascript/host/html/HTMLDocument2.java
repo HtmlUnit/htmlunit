@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
@@ -31,6 +33,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -52,12 +55,16 @@ import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -77,6 +84,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent2;
+import com.gargoylesoftware.js.internal.dynalink.CallSiteDescriptor;
+import com.gargoylesoftware.js.internal.dynalink.linker.GuardedInvocation;
+import com.gargoylesoftware.js.internal.dynalink.linker.LinkRequest;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
@@ -89,6 +99,9 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
+import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
+import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
 public class HTMLDocument2 extends Document2 {
 
@@ -820,6 +833,83 @@ public class HTMLDocument2 extends Document2 {
             builder.append(arg);
         }
         return builder.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
+        final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
+        final boolean scopeAccess = NashornCallSiteDescriptor.isScope(desc);
+
+        final MethodHandle mh = MethodHandles.insertArguments(
+                staticHandle("getArbitraryProperty", Object.class, HTMLDocument2.class, String.class, boolean.class),
+                1, name, scopeAccess);
+        final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
+        return new GuardedInvocation(mh,
+                NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
+                getProtoSwitchPoints(name, null),
+                explicitInstanceOfCheck ? null : ClassCastException.class);
+    }
+
+    @SuppressWarnings("unused")
+    private static Object getArbitraryProperty(final HTMLDocument2 self, final String name, final boolean scopeAccess) {
+        final HtmlPage page = (HtmlPage) self.getDomNodeOrNull();
+
+        final boolean forIDAndOrName = self.getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
+        final boolean alsoFrames = self.getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
+        final HTMLCollection2 collection = new HTMLCollection2(page, true) {
+            @Override
+            protected List<Object> computeElements() {
+                final List<DomElement> elements;
+                if (forIDAndOrName) {
+                    elements = page.getElementsByIdAndOrName(name);
+                }
+                else {
+                    elements = page.getElementsByName(name);
+                }
+                final List<Object> matchingElements = new ArrayList<>();
+                for (final DomElement elt : elements) {
+                    if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
+                            || (alsoFrames && elt instanceof BaseFrameElement)) {
+                        matchingElements.add(elt);
+                    }
+                }
+                return matchingElements;
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final String attributeName = event.getName();
+                if ("name".equals(attributeName)) {
+                    return EffectOnCache.RESET;
+                }
+                else if (forIDAndOrName && "id".equals(attributeName)) {
+                    return EffectOnCache.RESET;
+                }
+
+                return EffectOnCache.NONE;
+            }
+
+            @Override
+            protected SimpleScriptObject getScriptableFor(final Object object) {
+                if (alsoFrames && object instanceof BaseFrameElement) {
+                    return (SimpleScriptObject) ((BaseFrameElement) object).getEnclosedWindow().getScriptObject2();
+                }
+                return super.getScriptableFor(object);
+            }
+        };
+
+        final int length = (Integer) collection.getLength();
+        if (length == 0) {
+            return Undefined.getUndefined();
+        }
+        else if (length == 1) {
+            return collection.item(Integer.valueOf(0));
+        }
+
+        return collection;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

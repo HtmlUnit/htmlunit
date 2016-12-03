@@ -21,7 +21,10 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.net.MalformedURLException;
 
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
@@ -30,6 +33,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstru
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -58,6 +62,27 @@ public class HTMLImageElement2 extends HTMLElement2 {
     @Setter
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
+    }
+
+    /**
+     * Returns the value of the {@code src} attribute.
+     * @return the value of the {@code src} attribute
+     */
+    @Getter
+    public String getSrc() {
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        final String src = img.getSrcAttribute();
+        if ("".equals(src)) {
+            return src;
+        }
+        try {
+            final HtmlPage page = (HtmlPage) img.getPage();
+            return page.getFullyQualifiedUrl(src).toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            final String msg = "Unable to create fully qualified URL for src attribute of image " + e.getMessage();
+            throw new RuntimeException(msg);
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

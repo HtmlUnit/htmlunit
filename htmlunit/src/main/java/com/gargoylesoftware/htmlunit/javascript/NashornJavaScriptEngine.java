@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
@@ -75,7 +75,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 /**
  * A wrapper for the <a href="http://openjdk.java.net/projects/nashorn/">Nashorn JavaScript engine</a>.
@@ -103,6 +102,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             HTMLDocument2.class,
             HTMLElement2.class,
             HTMLEmbedElement2.class,
+            HTMLFormElement2.class,
             HTMLFrameElement2.class,
             HTMLHtmlElement2.class,
             HTMLIFrameElement2.class,
