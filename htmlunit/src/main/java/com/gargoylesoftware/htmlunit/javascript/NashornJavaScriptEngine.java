@@ -377,12 +377,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         // Trigger window.onerror, if it has been set.
         final InteractivePage page = scriptException.getPage();
         if (triggerOnError && page != null) {
-            final WebWindow window = page.getEnclosingWindow();
-            if (window != null) {
-                final Window2 w = ((Global) window.getScriptObject2()).getWindow();
-                if (w != null) {
+            final WebWindow webWindow = page.getEnclosingWindow();
+            if (webWindow != null) {
+                final Window2 window = webWindow.getGlobal().getWindow();
+                if (window != null) {
                     try {
-                        w.triggerOnError(scriptException);
+                        window.triggerOnError(scriptException);
                     }
                     catch (final Exception e) {
                         handleJavaScriptException(new ScriptException(page, e, null), false);

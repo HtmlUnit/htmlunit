@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -308,14 +309,12 @@ class PopupPseudoWebWindow implements WebWindow {
     }
 
     @Override
-    public ScriptObject getScriptObject2() {
-        // TODO Auto-generated method stub
+    public Global getGlobal() {
         return null;
     }
 
     @Override
     public ScriptContext getScriptContext() {
-        // TODO Auto-generated method stub
         return null;
     }
 

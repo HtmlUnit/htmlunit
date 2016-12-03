@@ -43,8 +43,8 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
      */
     @Getter
-    public Object getContentWindow() {
-        return getFrame().getEnclosedWindow().getScriptObject2();
+    public Global getContentWindow() {
+        return getFrame().getEnclosedWindow().getGlobal();
     }
 
     private BaseFrameElement getFrame() {

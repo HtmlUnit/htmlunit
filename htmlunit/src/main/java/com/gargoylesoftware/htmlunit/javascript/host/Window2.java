@@ -186,7 +186,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             if (webWindow instanceof TopLevelWindow) {
                 final WebWindow opener = ((TopLevelWindow) webWindow).getOpener();
                 if (opener != null) {
-                    opener_ = opener.getScriptObject2();
+                    opener_ = opener.getGlobal();
                 }
             }
         }
@@ -245,10 +245,10 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     @Getter
-    public static Object getTop(final Global self) {
+    public static Global getTop(final Global self) {
         final WebWindow webWindow = getWindow(self).getWebWindow();
         final WebWindow top = webWindow.getTopWindow();
-        return top.getScriptObject2();
+        return top.getGlobal();
     }
 
     @Getter(@WebBrowser(FF))
@@ -331,7 +331,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         if (self instanceof Global) {
             Window2 window = ((Global) self).getWindow();
             if (window.isProxy_) {
-                window = ((Global) window.getWebWindow().getScriptObject2()).getWindow();
+                window = window.getWebWindow().getGlobal().getWindow();
             }
             return window;
         }
@@ -493,9 +493,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         };
     }
 
-    private static Object getFrameWindowByName(final HtmlPage page, final String name) {
+    private static Global getFrameWindowByName(final HtmlPage page, final String name) {
         try {
-            return page.getFrameByName(name).getScriptObject2();
+            return page.getFrameByName(name).getGlobal();
         }
         catch (final ElementNotFoundException e) {
             return null;
@@ -938,7 +938,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         // if specified name is the name of an existing window, then hold it
         if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
             try {
-                final Global global = (Global) webClient.getWebWindowByName(windowName).getScriptObject2();
+                final Global global = webClient.getWebWindowByName(windowName).getGlobal();
                 global.<Window2>getWindow().isProxy_ = true;
                 return global;
             }
@@ -948,7 +948,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
         final URL newUrl = window.makeUrlForOpenWindow(urlString);
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow);
-        final Global global = (Global) newWebWindow.getScriptObject2();
+        final Global global = newWebWindow.getGlobal();
         global.<Window2>getWindow().isProxy_ = true;
         return global;
     }
@@ -1373,7 +1373,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
             // the dialog window is close()'ed? Would only work in interpreted mode, though.
-            final ScriptObject jsDialog = dialog.getScriptObject2();
+            final ScriptObject jsDialog = dialog.getGlobal();
             return jsDialog.getProperty("returnValue").getObjectValue(jsDialog, jsDialog);
         }
         catch (final Throwable e) {
@@ -1391,14 +1391,14 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
      */
     @Function(@WebBrowser(IE))
-    public static Object showModelessDialog(final Object self, final String url, final Object arguments, final String features) {
+    public static Global showModelessDialog(final Object self, final String url, final Object arguments, final String features) {
         final Window2 window = getWindow(self);
         final WebWindow webWindow = window.getWebWindow();
         final WebClient client = webWindow.getWebClient();
         try {
             final URL completeUrl = ((HtmlPage) window.getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            return dialog.getScriptObject2();
+            return dialog.getGlobal();
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
@@ -1510,9 +1510,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of the {@code parent} property
      */
     @Getter
-    public static ScriptObject getParent(final Object self) {
+    public static Global getParent(final Object self) {
         final WebWindow parent = getWindow(self).getWebWindow().getParentWindow();
-        return parent.getScriptObject2();
+        return parent.getGlobal();
     }
 
     /**
@@ -1611,6 +1611,40 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.moveBy() not implemented");
         }
+    }
+
+    /**
+     * Does nothing.
+     * @param width the width offset
+     * @param height the height offset
+     */
+    @Function
+    public static void resizeBy(final Global self, final int width, final int height) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.resizeBy() not implemented");
+        }
+    }
+
+    /**
+     * Does nothing.
+     * @param width the width of the Window in pixel after resize
+     * @param height the height of the Window in pixel after resize
+     */
+    @Function
+    public static void resizeTo(final Global self, final int width, final int height) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("window.resizeTo() not implemented");
+        }
+    }
+
+    /**
+     * Should implement the stop() function on the window object.
+     * (currently empty implementation)
+     * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
+     */
+    @Function({@WebBrowser(CHROME), @WebBrowser(FF)})
+    public static void stop(final Global self) {
+        //empty
     }
 
     /**
@@ -1727,7 +1761,7 @@ class HTMLCollectionFrames2 extends HTMLCollection2 {
             window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
         }
 
-        return window.getScriptObject2();
+        return window.getGlobal();
     }
 
 //    @Override

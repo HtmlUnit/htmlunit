@@ -499,7 +499,7 @@ public class HTMLDocument2 extends Document2 {
             if (window instanceof FrameWindow) {
                 final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
                 if (frame instanceof HtmlInlineFrame) {
-                    final Window2 winWithFrame = ((Global) frame.getPage().getEnclosingWindow().getScriptObject2()).getWindow();
+                    final Window2 winWithFrame = frame.getPage().getEnclosingWindow().getGlobal().getWindow();
                     ((HTMLDocument2) Window2.getDocument(winWithFrame)).setActiveElement(
                                 (HTMLElement2) frame.getScriptObject2());
                 }
@@ -890,14 +890,6 @@ public class HTMLDocument2 extends Document2 {
                 }
 
                 return EffectOnCache.NONE;
-            }
-
-            @Override
-            protected SimpleScriptObject getScriptableFor(final Object object) {
-                if (alsoFrames && object instanceof BaseFrameElement) {
-                    return (SimpleScriptObject) ((BaseFrameElement) object).getEnclosedWindow().getScriptObject2();
-                }
-                return super.getScriptableFor(object);
             }
         };
 

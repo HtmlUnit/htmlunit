@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
  * A {@link JavaScriptJob} created from a {@link ScriptFunction} object.
@@ -51,8 +51,8 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
     @Override
     protected void runJavaScript(final HtmlPage page) {
         final HtmlElement doc = page.getDocumentElement();
-        final ScriptObject scriptObject = page.getEnclosingWindow().getScriptObject2();
-        page.executeJavaScriptFunctionIfPossible(function_, scriptObject, new Object[0], doc);
+        final Global global = page.getEnclosingWindow().getGlobal();
+        page.executeJavaScriptFunctionIfPossible(function_, global, new Object[0], doc);
     }
 
 }

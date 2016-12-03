@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -54,7 +54,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private transient ScriptableObject scriptObject_;
-    private transient ScriptObject scriptObject2_;
+    private transient ScriptObject global_;
     private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
@@ -161,7 +161,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
     @Override
     public void setScriptObject(ScriptObject scriptObject) {
-        this.scriptObject2_ = scriptObject;
+        this.global_ = scriptObject;
     }
 
     /**
@@ -184,8 +184,8 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public ScriptObject getScriptObject2() {
-        return scriptObject2_;
+    public Global getGlobal() {
+        return (Global) global_;
     }
     /**
      * {@inheritDoc}

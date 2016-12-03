@@ -1210,7 +1210,7 @@ public class HtmlPage extends InteractivePage {
 
         // Execute the specified event on the document element.
         final WebWindow window = getEnclosingWindow();
-        if (window.getScriptObject2() != null) {
+        if (window.getGlobal() != null) {
             final HtmlElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;

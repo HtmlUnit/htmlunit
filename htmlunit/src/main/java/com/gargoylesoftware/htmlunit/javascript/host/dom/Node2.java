@@ -112,10 +112,6 @@ public class Node2 extends EventTarget2 {
      * @return the JavaScript object or NOT_FOUND
      */
     protected SimpleScriptObject getScriptableFor(final Object object) {
-        if (object instanceof WebWindow) {
-            return (SimpleScriptObject) ((WebWindow) object).getScriptObject2();
-        }
-
         final DomNode domNode = (DomNode) object;
 
         final Object scriptObject = domNode.getScriptObject2();

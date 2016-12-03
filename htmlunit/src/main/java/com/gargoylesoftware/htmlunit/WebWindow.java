@@ -19,6 +19,7 @@ import java.io.Serializable;
 import javax.script.ScriptContext;
 
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -138,7 +139,7 @@ public interface WebWindow extends Serializable {
      *
      * @return the JavaScript object that corresponds to this element
      */
-    ScriptObject getScriptObject2();
+    Global getGlobal();
 
     ScriptContext getScriptContext();
 
