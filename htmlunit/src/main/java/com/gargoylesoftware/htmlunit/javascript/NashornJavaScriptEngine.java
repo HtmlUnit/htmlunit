@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -214,50 +216,16 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                 window.setProto(windowProto);
                 ScriptUtils.initialize(window);
 
-//                for (final Property p : global.getMap().getProperties()) {
-//                    //TODO: check "JSAdapter"
-//                    final String key = p.getKey();
-//                    window.put(key, global.get(key), true);
-//                }
-
                 global.put("window", global, true);
                 global.setWindow(window);
 
-                final String[] windowToGlobalFunctions = {"alert", "atob", "btoa", "cancelAnimationFrame",
-                        "captureEvents", "close", "confirm", "execScript", "find", "focus", "clearTimeout",
-                        "CollectGarbage", "dump", "getComputedStyle", "open", "prompt", "postMessage",
-                        "requestAnimationFrame", "setTimeout",
-                        "ScriptEngine", "ScriptEngineBuildVersion", "ScriptEngineMajorVersion", "ScriptEngineMinorVersion",
-                        "scroll", "scrollBy", "scrollByLines", "scrollByPages", "scrollTo", "showModalDialog", "showModelessDialog"};
-                for (final String key : windowToGlobalFunctions) {
-                    final Object function = window.get(key);
-                    if (function != Undefined.getUndefined()) {
-                        global.put(key, function, true);
-                    }
+                for (final Property property : windowProto.getMap().getProperties()) {
+                    final Object value = property.getObjectValue(windowProto, windowProto);
+                    global.put(property.getKey(), value, true);
                 }
 
-//                final String[] globalToWindowFunctions = {"RegExp", "NaN", "isNaN", "Infinity", "isFinite", "eval", "print",
-//                        "parseInt", "parseFloat", "encodeURI", "encodeURIComponent", "decodeURI", "decodeURIComponent",
-//                        "escape", "unescape"};
-//                for (final String key : globalToWindowFunctions) {
-//                    window.put(key, global.get(key), true);
-//                }
-
-                final String[] windowProperties = {"closed", "controllers", "devicePixelRatio", "document", "frames",
-                        "history", "innerHeight", "innerWidth", "length", "location", "name", "onbeforeunload", "onchange",
-                        "onclick", "onerror", "onload", "onsubmit", "opener", "outerHeight", "outerWidth", "pageXOffset",
-                        "pageYOffset", "parent", "scrollX", "scrollY", "self", "status", "top", "mozInnerScreenX",
-                        "mozInnerScreenY", "mozPaintCount"};
-                final PropertyMap propertyMap = window.getMap();
-                final List<Property> list = new ArrayList<>();
-                for (final String key : windowProperties) {
-                    final Property property = propertyMap.findProperty(key);
-                    if (property != null) {
-                        list.add(property);
-                    }
-                }
-
-                global.setMap(global.getMap().addAll(PropertyMap.newMap(list)));
+                final List<Property> windowProperties = Arrays.asList(window.getMap().getProperties());
+                global.setMap(global.getMap().addAll(PropertyMap.newMap(windowProperties)));
             }
             catch(final Exception e) {
                 throw new RuntimeException(e);
