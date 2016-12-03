@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
@@ -1247,11 +1246,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object getWithFallback(final String name) {
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_NAME)
-            || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME)) {
-            return getIt(name);
-        }
-        return NOT_FOUND;
+        return getIt(name);
     }
 
     /**

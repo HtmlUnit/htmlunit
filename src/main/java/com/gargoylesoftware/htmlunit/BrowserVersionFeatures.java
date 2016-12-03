@@ -393,10 +393,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
 
-    /** Calls to <code>document.XYZ</code> looks at children with the specified name. */
-    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
-    HTMLDOCUMENT_GET_FOR_NAME,
-
     /**
      * Calls to <code>document.XYZ</code> should first look at standard functions before looking at elements
      * named <code>XYZ</code>.
