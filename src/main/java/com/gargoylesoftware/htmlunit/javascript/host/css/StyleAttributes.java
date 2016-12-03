@@ -942,7 +942,7 @@ public final class StyleAttributes {
         HEIGHT("height", "height", chrome(""), ff(""), ie("")),
 
         /** The style property {@code hyphens}. */
-        HYPHENS("hyphens", "hyphens", ff45up("manual")),
+        HYPHENS("hyphens", "hyphens", ff45up("manual"), chrome("manual")),
 
         /** The style property {@code imageOrientation}. */
         IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff("0deg")),
@@ -1215,15 +1215,6 @@ public final class StyleAttributes {
 
         /** The style property {@code motion}. */
         MOTION("motion", "motion", chrome("none 0px auto 0deg")),
-
-        /** The style property {@code motionOffset}. */
-        MOTION_OFFSET("motionOffset", "motion-offset", chrome("0px")),
-
-        /** The style property {@code motionPath}. */
-        MOTION_PATH("motionPath", "motion-path", chrome("none")),
-
-        /** The style property {@code motionRotation}. */
-        MOTION_ROTATION("motionRotation", "motion-rotation", chrome("auto 0deg")),
 
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
@@ -1818,6 +1809,9 @@ public final class StyleAttributes {
         /** The style property {@code object-position}. */
         OBJECT_POSITION_("object-position", "object-position", ff("50% 50%")),
 
+        /** The style property {@code offset}. */
+        OFFSET_("offset", "offset", chrome("none 0px auto 0deg")),
+
         /** The style property {@code offsetBlockEnd}. */
         OFFSET_BLOCK_END("offsetBlockEnd", "offset-block-end", ff45up("")),
 
@@ -1830,6 +1824,9 @@ public final class StyleAttributes {
         /** The style property {@code offset-block-start}. */
         OFFSET_BLOCK_START_("offset-block-start", "offset-block-start", ff45up("")),
 
+        /** The style property {@code offsetDistance}. */
+        OFFSET_DISTANCE_("offsetDistance", "offsetDistance", chrome("0px")),
+
         /** The style property {@code offsetInlineEnd}. */
         OFFSET_INLINE_END("offsetInlineEnd", "offset-inline-end", ff45up("")),
 
@@ -1841,6 +1838,12 @@ public final class StyleAttributes {
 
         /** The style property {@code offset-inline-start}. */
         OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start", ff45up("")),
+
+        /** The style property {@code offsetPath}. */
+        OFFSET_PATH_("offsetPath", "offsetPath", chrome("none")),
+
+        /** The style property {@code offsetRotation}. */
+        OFFSET_ROTATION_("offsetRotation", "offsetRotation", chrome("auto 0deg")),
 
         /** The style property {@code opacity}. */
         OPACITY("opacity", "opacity", chrome("1"), ff(""), ie("")),
@@ -2573,9 +2576,6 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBoxReflect}. */
         WEBKIT_BOX_REFLECT("webkitBoxReflect", "webkit-box-reflect", chrome("none")),
-
-        /** The style property {@code webkitClipPath}. */
-        WEBKIT_CLIP_PATH("webkitClipPath", "webkit-clip-path", chrome("none")),
 
         /** The style property {@code webkitColumnBreakAfter}. */
         WEBKIT_COLUMN_BREAK_AFTER("webkitColumnBreakAfter", "webkit-column-break-after", chrome("auto")),
