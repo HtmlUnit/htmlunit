@@ -308,6 +308,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             IE = {"4", "200", "null", "null", "null", "null"})
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
+
+        shutDownAll();
     }
 
     /**
@@ -320,6 +322,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
+
+        shutDownAll();
     }
 
     /**
@@ -332,6 +336,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightUrlEncoded() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded");
+
+        shutDownAll();
     }
 
     /**
@@ -344,6 +350,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightUrlEncoded_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded;charset=utf-8");
+
+        shutDownAll();
     }
 
     /**
@@ -356,6 +364,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightMultipart() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data");
+
+        shutDownAll();
     }
 
     /**
@@ -368,6 +378,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightMultipart_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data;charset=utf-8");
+
+        shutDownAll();
     }
 
     /**
@@ -382,6 +394,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_methods() throws Exception {
         doPreflightTestAllowedMethods(null, "text/plain");
+
+        shutDownAll();
     }
 
     private void doPreflightTestAllowedMethods(final String allowedMethods, final String contentType)
