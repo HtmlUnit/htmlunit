@@ -1476,13 +1476,13 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             final String s = (String) code;
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                 createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, s);
-            id = getWebWindow().getJobManager().addJob(job, page);
+            id = w.getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                 createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
-            id = getWebWindow().getJobManager().addJob(job, page);
+            id = w.getJobManager().addJob(job, page);
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");
