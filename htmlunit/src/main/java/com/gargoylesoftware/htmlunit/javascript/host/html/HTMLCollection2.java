@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTIO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
@@ -218,6 +220,13 @@ public class HTMLCollection2 extends AbstractList2 {
 
     public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
+            super("HTMLCollection");
+        }
+    }
+
+    @ClassConstructor(@WebBrowser(IE))
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
+        public ObjectConstructor() {
             super("HTMLCollection");
         }
     }

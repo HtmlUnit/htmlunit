@@ -22,21 +22,19 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement2.Prototype;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
-public class HTMLTextAreaElement2 extends HTMLElement2 {
+public class HTMLMapElement2 extends HTMLElement2 {
 
-    public static HTMLTextAreaElement2 constructor(final boolean newObj, final Object self) {
-        final HTMLTextAreaElement2 host = new HTMLTextAreaElement2();
+    public static HTMLMapElement2 constructor(final boolean newObj, final Object self) {
+        final HTMLMapElement2 host = new HTMLMapElement2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
@@ -44,7 +42,7 @@ public class HTMLTextAreaElement2 extends HTMLElement2 {
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(HTMLTextAreaElement2.class,
+            return MethodHandles.lookup().findStatic(HTMLMapElement2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -55,8 +53,8 @@ public class HTMLTextAreaElement2 extends HTMLElement2 {
     @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLTextAreaElement", 
-                    staticHandle("constructor", HTMLTextAreaElement2.class, boolean.class, Object.class),
+            super("HTMLMapElement", 
+                    staticHandle("constructor", HTMLMapElement2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -66,14 +64,14 @@ public class HTMLTextAreaElement2 extends HTMLElement2 {
 
     public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            super("HTMLTextAreaElement");
+            super("HTMLMapElement");
         }
     }
 
     @ClassConstructor(@WebBrowser(IE))
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         public ObjectConstructor() {
-            super("HTMLTextAreaElement");
+            super("HTMLMapElement");
         }
     }
 }

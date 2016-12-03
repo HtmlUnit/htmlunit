@@ -1660,6 +1660,17 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     /**
+     * Loads the new HTML document corresponding to the specified URL.
+     * @param url the location of the new HTML document to load
+     * @throws IOException if loading the specified location fails
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536638%28VS.85%29.aspx">MSDN Documentation</a>
+     */
+    @Function(@WebBrowser(IE))
+    public static void navigate(final Global self, final String url) throws IOException {
+        getLocation(self).assign(url);
+    }
+
+    /**
      * Returns the global.
      * @return the global
      */

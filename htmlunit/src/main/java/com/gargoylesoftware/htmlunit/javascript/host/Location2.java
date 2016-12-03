@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
@@ -290,6 +291,17 @@ public class Location2 extends SimpleScriptObject {
      */
     private URL getUrl() {
         return window_.getWebWindow().getEnclosedPage().getUrl();
+    }
+
+    /**
+     * Loads the new HTML document corresponding to the specified URL.
+     * @param url the location of the new HTML document to load
+     * @throws IOException if loading the specified location fails
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
+     */
+    @Function
+    public void assign(final String url) throws IOException {
+        setHref(url);
     }
 
     /**

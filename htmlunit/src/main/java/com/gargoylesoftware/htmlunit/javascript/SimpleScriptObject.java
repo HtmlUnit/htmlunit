@@ -39,10 +39,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlMap;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
@@ -61,9 +64,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement2;
 import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
@@ -193,7 +199,10 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
      * @param object a {@link DomNode} or a {@link WebWindow}
      * @return the JavaScript object or NOT_FOUND
      */
-    protected SimpleScriptObject getScriptableFor(final Object object) {
+    protected ScriptObject getScriptableFor(final Object object) {
+        if (object instanceof WebWindow) {
+            return ((WebWindow) object).getGlobal();
+        }
         final DomNode domNode = (DomNode) object;
 
         final Object scriptObject = domNode.getScriptObject2();
@@ -289,6 +298,18 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         }
         else if (domNode instanceof HtmlEmbed) {
             host = HTMLEmbedElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlMap) {
+            host = HTMLMapElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlSelect) {
+            host = HTMLSelectElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlTextArea) {
+            host = HTMLTextAreaElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlObject) {
