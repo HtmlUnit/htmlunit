@@ -308,6 +308,18 @@ public class Location2 extends SimpleScriptObject {
     }
 
     /**
+     * Reloads the window using the specified URL via a postponed action.
+     * @param url the new URL to use to reload the window
+     * @throws IOException if loading the specified location fails
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536712.aspx">MSDN Documentation</a>
+     */
+    @Function
+    public void replace(final String url) throws IOException {
+        window_.getWebWindow().getHistory().removeCurrent();
+        setHref(url);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

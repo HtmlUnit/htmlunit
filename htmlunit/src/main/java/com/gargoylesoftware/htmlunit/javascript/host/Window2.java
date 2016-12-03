@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import javax.management.RuntimeErrorException;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -245,7 +247,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     @Getter
-    public static Global getTop(final Global self) {
+    public static Global getTop(final Object self) {
         final WebWindow webWindow = getWindow(self).getWebWindow();
         final WebWindow top = webWindow.getTopWindow();
         return top.getGlobal();
@@ -561,7 +563,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the {@code frames} property
      */
     @Getter
-    public static Global getFrames(final Global self) {
+    public static Object getFrames(final Object self) {
         return self;
     }
 
@@ -570,16 +572,16 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the {@code self} property
      */
     @Getter
-    public static Global getSelf(final Global self) {
+    public static Object getSelf(final Object self) {
         return self;
     }
 
     /**
      * {@inheritDoc}
      */
-    public static boolean dispatchEvent(final Window2 self, final Event2 event) {
+    public static boolean dispatchEvent(final Object self, final Event2 event) {
         event.setTarget(self);
-        final ScriptResult result = self.fireEvent(event);
+        final ScriptResult result = getWindow(self).fireEvent(event);
         return !event.isAborted(result);
     }
 
@@ -1026,7 +1028,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code pageXOffset} property
      */
     @Getter
-    public static int getPageXOffset(final Global self) {
+    public static int getPageXOffset(final Object self) {
         return 0;
     }
 
@@ -1035,7 +1037,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code pageYOffset} property
      */
     @Getter
-    public static int getPageYOffset(final Global self) {
+    public static int getPageYOffset(final Object self) {
         return 0;
     }
 
@@ -1044,7 +1046,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code scrollX} property
      */
     @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
-    public static int getScrollX(final Global self) {
+    public static int getScrollX(final Object self) {
         return 0;
     }
 
@@ -1053,7 +1055,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code scrollY} property
      */
     @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
-    public static int getScrollY(final Global self) {
+    public static int getScrollY(final Object self) {
         return 0;
     }
 
@@ -1065,7 +1067,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @Function
-    public static void postMessage(final Global self, final String message, final String targetOrigin, final Object transfer) {
+    public static void postMessage(final Object self, final String message, final String targetOrigin, final Object transfer) {
         final Window2 window = getWindow(self);
         final URL currentURL = window.getWebWindow().getEnclosedPage().getUrl();
 
@@ -1091,7 +1093,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
                 return;
             }
         }
-        final Global global = self;
+        final Global global = window.getGlobal();
         final MessageEvent2 event = MessageEvent2.constructor(true, global);
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
         event.initMessageEvent(Event2.TYPE_MESSAGE, false, false, message, origin, "", window, transfer);
@@ -1234,7 +1236,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the {@code console} property
      */
     @Getter
-    public static ScriptObject getConsole(final Global self) {
+    public static ScriptObject getConsole(final Object self) {
         return getWindow(self).console_;
     }
 
@@ -1243,7 +1245,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param console the console
      */
     @Setter
-    public static void setConsole(final Global self, final ScriptObject console) {
+    public static void setConsole(final Object self, final ScriptObject console) {
         getWindow(self).console_ = console;
     }
 
@@ -1252,7 +1254,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param message the message to log
      */
     @Function(@WebBrowser(FF))
-    public static void dump(final Global self, final String message) {
+    public static void dump(final Object self, final String message) {
         final Object console_ = getWindow(self).console_;
         if (console_ instanceof Console2) {
             ((Console2) console_).log(message);
@@ -1264,7 +1266,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code mozInnerScreenX} property
      */
     @Getter(@WebBrowser(FF))
-    public static int getMozInnerScreenX(final Global self) {
+    public static int getMozInnerScreenX(final Object self) {
         return 11;
     }
 
@@ -1273,7 +1275,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code mozInnerScreenY} property
      */
     @Getter(@WebBrowser(FF))
-    public static int getMozInnerScreenY(final Global self) {
+    public static int getMozInnerScreenY(final Object self) {
         return 91;
     }
 
@@ -1282,7 +1284,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the value of {@code mozPaintCount} property
      */
     @Getter(@WebBrowser(FF))
-    public static int getMozPaintCount(final Global self) {
+    public static int getMozPaintCount(final Object self) {
         return 0;
     }
 
@@ -1291,7 +1293,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param lines the number of lines to scroll down
      */
     @Function(@WebBrowser(FF))
-    public static void scrollByLines(final Global self, final int lines) {
+    public static void scrollByLines(final Object self, final int lines) {
         final HTMLElement2 body = ((HTMLDocument2) getWindow(self).document_).getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (19 * lines));
@@ -1303,7 +1305,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param pages the number of pages to scroll down
      */
     @Function(@WebBrowser(FF))
-    public static void scrollByPages(final Global self, final int pages) {
+    public static void scrollByPages(final Object self, final int pages) {
         final Window2 window = getWindow(self);
         final HTMLElement2 body = ((HTMLDocument2) window.document_).getBody();
         if (body != null) {
@@ -1317,7 +1319,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
     @Getter
-    public static int getInnerHeight(final Global self) {
+    public static int getInnerHeight(final Object self) {
         return getWindow(self).getWebWindow().getInnerHeight();
     }
 
@@ -1327,7 +1329,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
     @Getter
-    public static int getOuterHeight(final Global self) {
+    public static int getOuterHeight(final Object self) {
         return getWindow(self).getWebWindow().getOuterHeight();
     }
 
@@ -1337,7 +1339,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
     @Getter
-    public static int getInnerWidth(final Global self) {
+    public static int getInnerWidth(final Object self) {
         return getWindow(self).getWebWindow().getInnerWidth();
     }
 
@@ -1347,7 +1349,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
     @Getter
-    public static int getOuterWidth(final Global self) {
+    public static int getOuterWidth(final Object self) {
         return getWindow(self).getWebWindow().getOuterWidth();
     }
 
@@ -1449,7 +1451,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * Closes this window.
      */
     @Function(name = "close")
-    public static void close_js(final Global self) {
+    public static void close_js(final Object self) {
         final WebWindow webWindow = getWindow(self).getWebWindow();
         if (webWindow instanceof TopLevelWindow) {
             ((TopLevelWindow) webWindow).close();
@@ -1595,7 +1597,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param y the vertical position
      */
     @Function
-    public static void moveTo(final Global self, final int x, final int y) {
+    public static void moveTo(final Object self, final int x, final int y) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.moveTo() not implemented");
         }
@@ -1607,7 +1609,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param y the vertical position
      */
     @Function
-    public static void moveBy(final Global self, final int x, final int y) {
+    public static void moveBy(final Object self, final int x, final int y) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.moveBy() not implemented");
         }
@@ -1619,7 +1621,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param height the height offset
      */
     @Function
-    public static void resizeBy(final Global self, final int width, final int height) {
+    public static void resizeBy(final Object self, final int width, final int height) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.resizeBy() not implemented");
         }
@@ -1631,7 +1633,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param height the height of the Window in pixel after resize
      */
     @Function
-    public static void resizeTo(final Global self, final int width, final int height) {
+    public static void resizeTo(final Object self, final int width, final int height) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.resizeTo() not implemented");
         }
@@ -1643,7 +1645,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
     @Function({@WebBrowser(CHROME), @WebBrowser(FF)})
-    public static void stop(final Global self) {
+    public static void stop(final Object self) {
         //empty
     }
 
@@ -1652,7 +1654,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return the {@code offscreenBuffering} property
      */
     @Getter({@WebBrowser(CHROME), @WebBrowser(IE)})
-    public static Object getOffscreenBuffering(final Global self) {
+    public static Object getOffscreenBuffering(final Object self) {
         if (getWindow(self).getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
             return "auto";
         }
@@ -1666,8 +1668,65 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536638%28VS.85%29.aspx">MSDN Documentation</a>
      */
     @Function(@WebBrowser(IE))
-    public static void navigate(final Global self, final String url) throws IOException {
+    public static void navigate(final Object self, final String url) throws IOException {
         getLocation(self).assign(url);
+    }
+
+    /**
+     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536749.aspx">MSDN documentation</a>
+     * @param code specifies the function pointer or string that indicates the code to be executed
+     *        when the specified interval has elapsed
+     * @param timeout specifies the number of milliseconds
+     * @param language specifies language
+     * @return the id of the created interval
+     */
+    @Function
+    public static int setInterval(final Object global, final Object code, int timeout, final Object language) {
+        if (timeout < MIN_TIMER_DELAY) {
+            timeout = MIN_TIMER_DELAY;
+        }
+        final Window2 window = getWindow(global);
+        final int id;
+        
+        final WebWindow w = window.getWebWindow();
+        final Page page = (Page) window.getDomNodeOrNull();
+        final String description = "window.setInterval(" + timeout + ")";
+        if (code == null) {
+            throw new RuntimeException("Function not provided.");
+        }
+        else if (code instanceof String) {
+            final String s = (String) code;
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, s);
+            id = w.getJobManager().addJob(job, page);
+        }
+        else if (code instanceof ScriptFunction) {
+            final ScriptFunction f = (ScriptFunction) code;
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
+            id = w.getJobManager().addJob(job, page);
+        }
+        else {
+            throw new RuntimeException("Unknown type for function.");
+        }
+        return id;
+    }
+
+    /**
+     * Cancels the interval previously started using the {@link #setInterval(Object, int, Object)} method.
+     * Current implementation does nothing.
+     * @param intervalID specifies the interval to cancel as returned by the
+     *        {@link #setInterval(Object, int, Object)} method
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
+     */
+    @Function
+    public static void clearInterval(final Object self, final int intervalID) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clearInterval(" + intervalID + ")");
+        }
+        getWindow(self).getWebWindow().getJobManager().removeJob(intervalID);
     }
 
     /**
