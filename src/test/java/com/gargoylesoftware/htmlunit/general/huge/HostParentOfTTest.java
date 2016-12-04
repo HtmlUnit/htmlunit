@@ -166,6 +166,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             IE = "true")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
