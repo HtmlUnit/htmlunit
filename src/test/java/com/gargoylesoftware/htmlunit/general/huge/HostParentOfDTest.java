@@ -1670,6 +1670,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             IE = "true")
     public void _Event_PointerEvent() throws Exception {
         test("Event", "PointerEvent");
@@ -2856,6 +2857,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _EventTarget_PannerNode() throws Exception {
         test("EventTarget", "PannerNode");
@@ -4515,6 +4517,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _EventTarget_StereoPannerNode() throws Exception {
         test("EventTarget", "StereoPannerNode");
@@ -5217,6 +5220,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _EventTarget_MediaStream() throws Exception {
         test("EventTarget", "MediaStream");
