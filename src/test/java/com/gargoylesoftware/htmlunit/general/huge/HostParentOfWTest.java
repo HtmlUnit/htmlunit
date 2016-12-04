@@ -433,28 +433,8 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _webkitAudioContext_OfflineAudioContext() throws Exception {
-        test("webkitAudioContext", "OfflineAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     public void _webkitAudioContext_webkitAudioContext() throws Exception {
         test("webkitAudioContext", "webkitAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _webkitAudioContext_webkitOfflineAudioContext() throws Exception {
-        test("webkitAudioContext", "webkitOfflineAudioContext");
     }
 
     /**
@@ -635,6 +615,16 @@ public class HostParentOfWTest extends HostParentOf {
             CHROME = "true")
     public void _webkitIDBTransaction_webkitIDBTransaction() throws Exception {
         test("webkitIDBTransaction", "webkitIDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitMediaStream_MediaStream() throws Exception {
+        test("webkitMediaStream", "MediaStream");
     }
 
     /**
