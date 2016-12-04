@@ -169,7 +169,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         assertEquals("new page should load", "Third", newPage.getTitleText());
         assertEquals("frame should be gone", 0, newPage.getFrames().size());
 
-        mgr.waitForJobs(10000);
+        mgr.waitForJobs(10_000);
         assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());
     }
 

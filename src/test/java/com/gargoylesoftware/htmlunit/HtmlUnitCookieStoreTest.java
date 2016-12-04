@@ -85,7 +85,7 @@ public class HtmlUnitCookieStoreTest {
     public void clearExpired() {
         mgr_.addCookie(new Cookie("localhost", "myname", "myvalue"));
         final Cookie cookie = new Cookie("localhost", "myname2", "myvalue2", null,
-                new Date(System.currentTimeMillis() + 10000), false);
+                new Date(System.currentTimeMillis() + 10_000), false);
         mgr_.addCookie(cookie);
 
         assertTrue(store_.clearExpired(new Date(System.currentTimeMillis() + 20_000)));

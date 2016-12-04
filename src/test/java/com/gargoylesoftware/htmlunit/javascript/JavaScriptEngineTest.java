@@ -1264,7 +1264,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        webClient.waitForBackgroundJavaScript(10000);
+        webClient.waitForBackgroundJavaScript(10_000);
         assertEquals("New title", page.getTitleText());
 
         assertEquals(1, jsExceptions.size());

@@ -75,6 +75,6 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public double now() {
-        return System.nanoTime() / 1000000d;
+        return System.nanoTime() / 1_000_000d;
     }
 }

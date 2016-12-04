@@ -200,7 +200,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
         loadPage(client_, html, actual);
-        assertEquals(0, client_.waitForBackgroundJavaScript(10000));
+        assertEquals(0, client_.waitForBackgroundJavaScript(10_000));
         assertEquals(expected, actual);
         assertMaxTestRunTime(5000);
     }
