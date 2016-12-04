@@ -219,6 +219,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             IE = "true")
     public void _MouseEvent_PointerEvent() throws Exception {
         test("MouseEvent", "PointerEvent");
@@ -2021,9 +2022,21 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _MediaStream_MediaStream() throws Exception {
         test("MediaStream", "MediaStream");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaStream_webkitMediaStream() throws Exception {
+        test("MediaStream", "webkitMediaStream");
     }
 
     /**
@@ -2672,6 +2685,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF45 = "true")
     public void _MediaDeviceInfo_MediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo", "MediaDeviceInfo");
