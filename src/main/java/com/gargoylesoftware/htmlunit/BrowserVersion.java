@@ -184,7 +184,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF45
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setVendor("");
-        FIREFOX_45.buildId_ = "20161031153904";
+        FIREFOX_45.buildId_ = "20161129180326";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
