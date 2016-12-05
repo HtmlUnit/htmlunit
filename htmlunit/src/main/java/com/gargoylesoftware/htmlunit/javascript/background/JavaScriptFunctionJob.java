@@ -18,6 +18,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 /**
@@ -51,8 +52,15 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
     @Override
     protected void runJavaScript(final HtmlPage page) {
         final HtmlElement doc = page.getDocumentElement();
+        final Global oldGlobal = Context.getGlobal();
         final Global global = page.getEnclosingWindow().getGlobal();
-        page.executeJavaScriptFunctionIfPossible(function_, global, new Object[0], doc);
+        try {
+            Context.setGlobal(global);
+            page.executeJavaScriptFunctionIfPossible(function_, global, new Object[0], doc);
+        }
+        finally {
+            Context.setGlobal(oldGlobal);
+        }
     }
 
 }

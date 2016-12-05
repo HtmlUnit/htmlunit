@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.History2;
@@ -128,6 +130,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     private transient boolean holdPostponedActions_;
 
     private final WebClient webClient_;
+    /** The JavaScriptExecutor corresponding to all windows of this Web client */
+    private transient JavaScriptExecutor javaScriptExecutor_;
+
     final NashornScriptEngine engine = (NashornScriptEngine) new NashornScriptEngineFactory().getScriptEngine();
 
     /**
@@ -410,6 +415,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     @Override
     public void registerWindowAndMaybeStartEventLoop(WebWindow webWindow) {
+        if (javaScriptExecutor_ == null) {
+            javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
+        }
+        javaScriptExecutor_.addWindow(webWindow);
     }
 
     public static Global getGlobal(final WebWindow webWindow) {
