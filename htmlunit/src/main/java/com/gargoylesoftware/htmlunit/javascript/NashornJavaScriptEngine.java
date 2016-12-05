@@ -447,6 +447,17 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     @Override
     public void shutdown() {
+        if (javaScriptExecutor_ != null) {
+            javaScriptExecutor_.shutdown();
+            javaScriptExecutor_ = null;
+        }
+        if (postponedActions_ != null) {
+            postponedActions_.remove();
+        }
+        if (javaScriptRunning_ != null) {
+            javaScriptRunning_.remove();
+        }
+        holdPostponedActions_ = false;
     }
 
     @Override
