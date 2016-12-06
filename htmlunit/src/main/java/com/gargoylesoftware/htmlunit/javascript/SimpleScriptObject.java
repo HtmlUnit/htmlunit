@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlMap;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -68,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement2;
@@ -306,6 +308,10 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         }
         else if (domNode instanceof HtmlSelect) {
             host = HTMLSelectElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlSpan) {
+            host = HTMLSpanElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlTextArea) {

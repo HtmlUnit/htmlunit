@@ -18,18 +18,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,6 +47,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Tests for {@link Window} that use background jobs.
@@ -354,21 +357,37 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(client_, html, collectedAlerts);
-        final Function mySpecialFunction = new BaseFunction() {
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                if (Thread.currentThread().isInterrupted()) {
-                    throw new RuntimeException("My thread is already interrupted");
-                }
-                return null;
-            }
-        };
-        final ScriptableObject window = page.getEnclosingWindow().getScriptableObject();
-        ScriptableObject.putProperty(window, "mySpecialFunction", mySpecialFunction);
+        final Global oldGlobal = Context.getGlobal();
+        final Global global = page.getEnclosingWindow().getGlobal();
+        try {
+            Context.setGlobal(global);
+            final ScriptFunction mySpecialFunction
+                = new ScriptFunction("mySpecialFunction", staticHandle("mySpecialFunction", void.class, Object.class), null) {
+            };
+            global.put("mySpecialFunction", mySpecialFunction, true);
+        }
+        finally {
+            Context.setGlobal(oldGlobal);
+        }
         page.getHtmlElementById("clickMe").click();
         client_.waitForBackgroundJavaScript(5000);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    public static void mySpecialFunction(final Object notNeeded) {
+        if (Thread.currentThread().isInterrupted()) {
+            throw new RuntimeException("My thread is already interrupted");
+        }
+    }
+
+    private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
+        try {
+            return MethodHandles.lookup().findStatic(WindowConcurrencyTest.class,
+                    name, MethodType.methodType(rtype, ptypes));
+        }
+        catch (final ReflectiveOperationException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     /**
