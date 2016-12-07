@@ -904,6 +904,24 @@ public class HTMLDocument2 extends Document2 {
         return collection;
     }
 
+    /**
+     * Returns the value of the {@code all} property.
+     * @return the value of the {@code all} property
+     */
+    @Getter
+    public HTMLCollection2 getAll() {
+        if (all_ == null) {
+            all_ = new HTMLAllCollection2(getDomNodeOrDie()) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return true;
+                }
+            };
+            all_.setAvoidObjectDetection(true);
+        }
+        return all_;
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLDocument2.class,

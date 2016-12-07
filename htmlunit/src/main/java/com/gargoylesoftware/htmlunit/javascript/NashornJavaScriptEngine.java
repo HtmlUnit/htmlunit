@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement2;
@@ -65,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngine;
@@ -102,6 +104,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             Event2.class,
             EventTarget2.class,
             History2.class,
+            HTMLAllCollection2.class,
             HTMLBodyElement2.class,
             HTMLCollection2.class,
             HTMLDivElement2.class,
@@ -119,6 +122,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             HTMLSelectElement2.class,
             HTMLSpanElement2.class,
             HTMLTextAreaElement2.class,
+            HTMLTitleElement2.class,
             Location2.class,
             MessageEvent2.class,
             Node2.class,
