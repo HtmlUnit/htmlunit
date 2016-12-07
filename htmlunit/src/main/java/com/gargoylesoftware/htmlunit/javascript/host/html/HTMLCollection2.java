@@ -42,6 +42,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
@@ -175,7 +176,7 @@ public class HTMLCollection2 extends AbstractList2 {
 //                    }
 //                }
             }
-            return Undefined.getUndefined();
+            return ScriptRuntime.UNDEFINED;
         }
         else if (matchingElements.size() == 1) {
             return getScriptObjectForElement(matchingElements.get(0));

@@ -45,6 +45,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 public class Node2 extends EventTarget2 {
@@ -286,7 +287,7 @@ public class Node2 extends EventTarget2 {
 
             // extract refChild
             final DomNode refChildNode;
-            if (refChildObject == Undefined.getUndefined()) {
+            if (refChildObject == ScriptRuntime.UNDEFINED) {
                 if (/*args.length == 2 || */getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
                     refChildNode = null;
                 }

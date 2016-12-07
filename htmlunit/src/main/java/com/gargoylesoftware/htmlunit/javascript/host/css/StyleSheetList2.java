@@ -42,6 +42,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.steadystate.css.dom.MediaListImpl;
 
@@ -152,7 +153,7 @@ public class StyleSheetList2 extends SimpleScriptObject {
     @Function
     public Object item(final int index) {
         if (index < 0 || index >= (int) getLength()) {
-            return Undefined.getUndefined();
+            return ScriptRuntime.UNDEFINED;
         }
 
         final HTMLElement2 element = (HTMLElement2) nodes_.item(Integer.valueOf(index));

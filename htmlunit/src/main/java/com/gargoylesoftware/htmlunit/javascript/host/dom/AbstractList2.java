@@ -43,6 +43,7 @@ import com.gargoylesoftware.js.internal.dynalink.linker.LinkRequest;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
@@ -643,7 +644,7 @@ public class AbstractList2 extends SimpleScriptObject {
         // Test to see if we are trying to get the length of this collection?
         // If so return NOT_FOUND here to let the property be retrieved using the prototype
         if (/*xpath_ == null || */"length".equals(name)) {
-            return Undefined.getUndefined()/*NOT_FOUND*/;
+            return ScriptRuntime.UNDEFINED/*NOT_FOUND*/;
         }
 
         final List<Object> elements = getElements();
@@ -701,7 +702,7 @@ public class AbstractList2 extends SimpleScriptObject {
         }
 
         if (matchingElements.isEmpty()) {
-            return Undefined.getUndefined();
+            return ScriptRuntime.UNDEFINED;
         }
         else if (matchingElements.size() == 1) {
             return getScriptObjectForElement(matchingElements.get(0));

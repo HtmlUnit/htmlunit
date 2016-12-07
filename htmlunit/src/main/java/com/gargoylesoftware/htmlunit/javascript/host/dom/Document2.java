@@ -52,6 +52,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 public class Document2 extends Node2 {
@@ -99,7 +100,7 @@ public class Document2 extends Node2 {
      */
     @Function
     public Object createElement(String tagName) {
-        Object result = Undefined.getUndefined();
+        Object result = ScriptRuntime.UNDEFINED;
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
@@ -149,7 +150,7 @@ public class Document2 extends Node2 {
             }
             final Object jsElement = getScriptableFor(element);
 
-            if (jsElement == Undefined.getUndefined()) {
+            if (jsElement == ScriptRuntime.UNDEFINED) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("createElement(" + tagName
                         + ") cannot return a result as there isn't a JavaScript object for the element "

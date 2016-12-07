@@ -436,7 +436,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             if (scopeAccess) {
                 throw ECMAErrors.referenceError("not.defined", name);
             }
-            object = Undefined.getUndefined();
+            object = ScriptRuntime.UNDEFINED;
         }
         return object;
     }
@@ -535,7 +535,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public Object get(int key) {
         final HTMLCollection2 frames = getFrames2();
         if (key >= (int) frames.getLength()) {
-            return Undefined.getUndefined();
+            return ScriptRuntime.UNDEFINED;
         }
         return frames.item(Integer.valueOf(key));
     }
@@ -899,15 +899,15 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public static ScriptObject open(final Object self, final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
-        if (url != Undefined.getUndefined()) {
+        if (url != ScriptRuntime.UNDEFINED) {
             urlString = url.toString();
         }
         String windowName = "";
-        if (name != Undefined.getUndefined()) {
+        if (name != ScriptRuntime.UNDEFINED) {
             windowName = name.toString();
         }
         String featuresString = null;
-        if (features != Undefined.getUndefined()) {
+        if (features != ScriptRuntime.UNDEFINED) {
             featuresString = features.toString();
         }
         final Window2 window = getWindow(self);
@@ -922,7 +922,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
 
         boolean replaceCurrentEntryInBrowsingHistory = false;
-        if (replace != Undefined.getUndefined()) {
+        if (replace != ScriptRuntime.UNDEFINED) {
             replaceCurrentEntryInBrowsingHistory = Boolean.parseBoolean(replace.toString());
         }
         if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
@@ -982,7 +982,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public static void setOpener(final Object self, final Object newValue) {
         final Window2 window = getWindow(self);
         if (window.getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && newValue != Undefined.getUndefined() && !(newValue instanceof Global)) {
+            && newValue != null && newValue != ScriptRuntime.UNDEFINED && !(newValue instanceof Global)) {
             throw new RuntimeException("Can't set opener to something other than a window!");
         }
         window.opener_ = newValue;

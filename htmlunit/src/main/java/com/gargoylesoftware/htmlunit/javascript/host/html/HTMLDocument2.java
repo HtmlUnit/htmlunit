@@ -99,6 +99,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
@@ -895,7 +896,7 @@ public class HTMLDocument2 extends Document2 {
 
         final int length = (Integer) collection.getLength();
         if (length == 0) {
-            return Undefined.getUndefined();
+            return ScriptRuntime.UNDEFINED;
         }
         else if (length == 1) {
             return collection.item(Integer.valueOf(0));
