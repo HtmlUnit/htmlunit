@@ -1202,16 +1202,17 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Firefox supports document.all, but it is "hidden".
+     * {@code document.all} is "hidden".
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"false", "false"})
-    public void all_AsBoolean() throws Exception {
+    @Alerts({"false", "false", "undefined"})
+    public void all() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.all ? true : false);\n"
-            + "    alert(Boolean(document.all));\n"
+            + "  alert(document.all ? true : false);\n"
+            + "  alert(Boolean(document.all));\n"
+            + "  alert(typeof document.all);\n"
             + "}\n"
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
@@ -2194,6 +2195,37 @@ public class DocumentTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      alert('oninput' in document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "42"})
+    @NotYetImplemented
+    public void documentDefineProperty() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.testProp);\n"
+
+            + "      Object.defineProperty(document, 'testProp', {\n"
+            + "        value: 42,\n"
+            + "        writable: true,\n"
+            + "        enumerable: true,\n"
+            + "        configurable: true\n"
+            + "      });\n"
+            + "      alert(document.testProp);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

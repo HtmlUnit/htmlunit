@@ -134,13 +134,13 @@ public class AbstractList2 extends SimpleScriptObject {
     }
 
     /**
-     * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
+     * Only needed to make collections like <tt>document.all</tt> available but "invisible".
      * {@inheritDoc}
      */
-//    @Override
-//    public boolean avoidObjectDetection() {
-//        return avoidObjectDetection_;
-//    }
+    @Override
+    public boolean avoidObjectDetection() {
+        return avoidObjectDetection_;
+    }
 
     /**
      * @param newValue the new value
