@@ -1202,16 +1202,17 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Firefox supports document.all, but it is "hidden".
+     * {@code document.all} is "hidden".
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"false", "false"})
-    public void all_AsBoolean() throws Exception {
+    @Alerts({"false", "false", "undefined"})
+    public void all() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.all ? true : false);\n"
-            + "    alert(Boolean(document.all));\n"
+            + "  alert(document.all ? true : false);\n"
+            + "  alert(Boolean(document.all));\n"
+            + "  alert(typeof document.all);\n"
             + "}\n"
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
