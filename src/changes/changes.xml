@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Missing clear property added for headline tags (IE only).
+            </action>
             <action type="fix" dev="rbri" issue="1839">
                 Ignore the charset when checking the content type header for CORS requests.
             </action>

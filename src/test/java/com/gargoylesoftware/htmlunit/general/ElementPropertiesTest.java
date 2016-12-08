@@ -1456,7 +1456,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE = "align,clear")
-    @NotYetImplemented(IE)
     public void h1() throws Exception {
         test("h1");
     }
@@ -1469,7 +1468,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE = "align,clear")
-    @NotYetImplemented(IE)
     public void h2() throws Exception {
         test("h2");
     }
@@ -1482,7 +1480,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE = "align,clear")
-    @NotYetImplemented(IE)
     public void h3() throws Exception {
         test("h3");
     }
@@ -1495,7 +1492,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE = "align,clear")
-    @NotYetImplemented(IE)
     public void h4() throws Exception {
         test("h4");
     }
@@ -1508,7 +1504,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE = "align,clear")
-    @NotYetImplemented(IE)
     public void h5() throws Exception {
         test("h5");
     }
@@ -1521,7 +1516,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "align",
             IE = "align,clear")
-    @NotYetImplemented(IE)
     public void h6() throws Exception {
         test("h6");
     }

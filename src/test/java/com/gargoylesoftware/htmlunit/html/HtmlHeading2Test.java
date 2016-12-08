@@ -120,4 +120,63 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                        "undefined", "left", "none", "right", "all", "2", "abc", "8"},
+            IE = {"", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
+                   "", ""})
+    public void clear() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<h1 id='h1'>h1</h1>\n"
+            + "<h2 id='h2' clear='left'>h2</h2>\n"
+            + "<h3 id='h3' clear='all'>h3</h3>\n"
+            + "<h4 id='h4' clear='right'>h4</h4>\n"
+            + "<h5 id='h5' clear='none'>h5</h5>\n"
+            + "<h6 id='h6' clear='2'>h6</h6>\n"
+            + "<h1 id='h7' clear='foo'>h7</h1>\n"
+            + "<script>\n"
+            + "function set(h, value) {\n"
+            + "  try {\n"
+            + "    h.clear = value;\n"
+            + "  } catch(e) {\n"
+            + "    alert('!');\n"
+            + "  }\n"
+            + "}\n"
+            + "var h1 = document.getElementById('h1');\n"
+            + "var h2 = document.getElementById('h2');\n"
+            + "var h3 = document.getElementById('h3');\n"
+            + "var h4 = document.getElementById('h4');\n"
+            + "var h5 = document.getElementById('h5');\n"
+            + "var h6 = document.getElementById('h6');\n"
+            + "var h7 = document.getElementById('h7');\n"
+            + "alert(h1.clear);\n"
+            + "alert(h2.clear);\n"
+            + "alert(h3.clear);\n"
+            + "alert(h4.clear);\n"
+            + "alert(h5.clear);\n"
+            + "alert(h6.clear);\n"
+            + "alert(h7.clear);\n"
+            + "set(h1, 'left');\n"
+            + "set(h2, 'none');\n"
+            + "set(h3, 'right');\n"
+            + "set(h4, 'all');\n"
+            + "set(h5, 2);\n"
+            + "set(h6, 'abc');\n"
+            + "set(h7, '8');\n"
+            + "alert(h1.clear);\n"
+            + "alert(h2.clear);\n"
+            + "alert(h3.clear);\n"
+            + "alert(h4.clear);\n"
+            + "alert(h5.clear);\n"
+            + "alert(h6.clear);\n"
+            + "alert(h7.clear);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

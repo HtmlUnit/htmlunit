@@ -14,9 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLEAR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
@@ -31,10 +35,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * The JavaScript object {@code HTMLHeadingElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClasses({
         @JsxClass(domClass = HtmlHeading1.class),
@@ -45,6 +52,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         @JsxClass(domClass = HtmlHeading6.class)
     })
 public class HTMLHeadingElement extends HTMLElement {
+
+    /** Valid values for the {@link #getClear() clear} property. */
+    private static final String[] VALID_CLEAR_VALUES = new String[] {"left", "right", "all", "none"};
 
     /**
      * Creates an instance.
@@ -69,5 +79,30 @@ public class HTMLHeadingElement extends HTMLElement {
     @JsxSetter
     public void setAlign(final String align) {
         setAlign(align, false);
+    }
+
+    /**
+     * Returns the value of the {@code clear} property.
+     * @return the value of the {@code clear} property
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getClear() {
+        final String clear = getDomNodeOrDie().getAttribute("clear");
+        if (getBrowserVersion().hasFeature(JS_CLEAR_RESTRICT) && !ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
+            return "";
+        }
+        return clear;
+    }
+
+    /**
+     * Sets the value of the {@code clear} property.
+     * @param clear the value of the {@code clear} property
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setClear(final String clear) {
+        if (getBrowserVersion().hasFeature(JS_CLEAR_RESTRICT) && !ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
+            throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
+        }
+        getDomNodeOrDie().setAttribute("clear", clear);
     }
 }
