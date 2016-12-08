@@ -1811,6 +1811,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 }
 
+@ScriptClass
 class HTMLCollectionFrames2 extends HTMLCollection2 {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames2.class);
 
