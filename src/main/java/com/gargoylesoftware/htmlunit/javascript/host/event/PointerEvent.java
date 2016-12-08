@@ -25,12 +25,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * JavaScript object representing the PointerEvent.
  * @see <a href="http://www.w3.org/TR/pointerevents/">W3C Spec</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/ie/hh772103.aspx">MSDN</a>
  *
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class PointerEvent extends MouseEvent {
@@ -45,10 +52,67 @@ public class PointerEvent extends MouseEvent {
     private boolean isPrimary_;
 
     /**
-     * Creates a new event instance.
+     * Default constructor.
+     */
+    public PointerEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     * @param cx the current context
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
-    public PointerEvent() {
+    public static Scriptable jsConstructor(
+            final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) {
+        final PointerEvent event = new PointerEvent();
+        if (args.length != 0) {
+            event.setType(Context.toString(args[0]));
+            event.setBubbles(false);
+            event.setCancelable(false);
+            event.width_ = 1;
+            event.height_ = 1;
+        }
+
+        if (args.length > 1) {
+            final NativeObject object = (NativeObject) args[1];
+            event.setBubbles((boolean) getValue(object, "bubbles", event.getBubbles()));
+            event.pointerId_ = (int) getValue(object, "pointerId", event.pointerId_);
+            event.width_ = (int) getValue(object, "width", event.width_);
+            event.height_ = (int) getValue(object, "height", event.height_);
+            event.pressure_ = (double) getValue(object, "pressure", event.pressure_);
+            event.tiltX_ = (int) getValue(object, "tiltX", event.tiltX_);
+            event.tiltY_ = (int) getValue(object, "tiltY", event.tiltY_);
+            event.pointerType_ = (String) getValue(object, "pointerType", event.pointerType_);
+            event.isPrimary_ = (boolean) getValue(object, "isPrimary", event.isPrimary_);
+        }
+        return event;
+    }
+
+    private static Object getValue(final ScriptableObject object, final String name, final Object defaulValue) {
+        Object value = object.get(name);
+        if (value != null) {
+            if (defaulValue instanceof String) {
+                value = String.valueOf(value);
+            }
+            else if (defaulValue instanceof Double) {
+                value = (double) Context.toNumber(value);
+            }
+            else if (defaulValue instanceof Number) {
+                value = (int) Context.toNumber(value);
+            }
+            else {
+                value = Context.toBoolean(value);
+            }
+        }
+        else {
+            value = defaulValue;
+        }
+        return value;
     }
 
     /**
