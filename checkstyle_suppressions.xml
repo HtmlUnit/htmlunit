@@ -20,7 +20,9 @@
     <suppress checks="FileLength" files="HostClassNameTest.java"/>
     <suppress checks="FileLength" files="HostClassNameStandardsTest.java"/>
     <suppress checks="FileLength" files="HostParentOfATest.java"/>
+    <suppress checks="FileLength" files="HostParentOfDTest.java"/>
     <suppress checks="FileLength" files="HostParentOfITest.java"/>
+    <suppress checks="FileLength" files="HostParentOfMTest.java"/>
     <suppress checks="FileLength" files="HostParentOfSTest.java"/>
     <suppress checks="FileLength" files="HostTypeOfTest.java"/>
     <suppress checks="FileLength" files="HTMLDocument.java"/>
@@ -85,10 +87,14 @@
 
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
     <suppress checks="MethodName" files="HostParentOfATest.java"/>
+    <suppress checks="MethodName" files="HostParentOfDTest.java"/>
     <suppress checks="MethodName" files="HostParentOfHTest.java"/>
     <suppress checks="MethodName" files="HostParentOfITest.java"/>
+    <suppress checks="MethodName" files="HostParentOfMTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfPTest.java"/>
     <suppress checks="MethodName" files="HostParentOfSTest.java"/>
     <suppress checks="MethodName" files="HostParentOfTTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfWTest.java"/>
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
 
     <suppress checks="ParameterNumber" files="CanvasRenderingContext2D.java"/>

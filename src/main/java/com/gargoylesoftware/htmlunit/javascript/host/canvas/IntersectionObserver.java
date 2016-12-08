@@ -67,6 +67,7 @@ public class IntersectionObserver extends SimpleScriptable {
 
     /**
      * Takes records.
+     * @return the records
      */
     @JsxFunction
     public Object takeRecords() {
