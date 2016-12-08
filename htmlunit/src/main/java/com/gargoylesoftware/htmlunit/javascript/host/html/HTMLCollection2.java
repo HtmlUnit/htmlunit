@@ -86,6 +86,15 @@ public class HTMLCollection2 extends AbstractList2 {
         setArray(new ObjectArrayData(list.toArray(new Object[list.size()]), list.size()));
     }
 
+    /**
+     * Constructs an instance with an initial cache value.
+     * @param domNode the parent scope, on which we listen for changes
+     * @param initialElements the initial content for the cache
+     */
+    HTMLCollection2(final DomNode domNode, final List<?> initialElements) {
+        super(domNode, initialElements);
+    }
+
     public static HTMLCollection2 constructor(final boolean newObj, final Object self) {
         final HTMLCollection2 host = new HTMLCollection2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
@@ -107,7 +116,6 @@ public class HTMLCollection2 extends AbstractList2 {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
-    @Function
     public Object item(final Object index) {
         if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
             final String name = (String) index;

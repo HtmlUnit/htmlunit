@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -26,24 +30,19 @@ import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.javascript.host.Window2;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
-import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 public class HTMLAllCollection2 extends HTMLCollection2 {
 
@@ -63,6 +62,116 @@ public class HTMLAllCollection2 extends HTMLCollection2 {
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
+    }
+
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    @Override
+    public Object item(final Object index) {
+        Double numb;
+
+        final BrowserVersion browser;
+        if (index instanceof String) {
+            final String name = (String) index;
+            final Object result = namedItem(name);
+            if (null != result && ScriptRuntime.UNDEFINED != result) {
+                return result;
+            }
+            numb = Double.NaN;
+
+            browser = getBrowserVersion();
+            if (!browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
+                numb = ((Number) index).doubleValue();
+            }
+            if (/*ScriptRuntime*/Double.NaN == numb || numb.isNaN()) {
+                return itemNotFound(browser);
+            }
+        }
+        else {
+            numb = ((Number) index).doubleValue();
+            browser = getBrowserVersion();
+        }
+
+        if (numb < 0) {
+            return itemNotFound(browser);
+        }
+
+        if (!browser.hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
+                && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
+            return itemNotFound(browser);
+        }
+
+        final Object object = get(numb.intValue());
+//        if (object == NOT_FOUND) {
+//            return null;
+//        }
+        return object;
+    }
+
+    private static Object itemNotFound(final BrowserVersion browser) {
+        if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
+            return null;
+        }
+        return ScriptRuntime.UNDEFINED;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Object namedItem(final String name) {
+        final List<Object> elements = getElements();
+
+        // See if there is an element in the element array with the specified id.
+        final List<DomElement> matching = new ArrayList<>();
+
+        final BrowserVersion browser = getBrowserVersion();
+
+        final boolean idFirst = browser.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST);
+        if (idFirst) {
+            for (final Object next : elements) {
+                if (next instanceof DomElement) {
+                    final DomElement elem = (DomElement) next;
+                    if (name.equals(elem.getId())) {
+                        matching.add(elem);
+                    }
+                }
+            }
+        }
+
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final DomElement elem = (DomElement) next;
+                if (name.equals(elem.getAttribute("name"))) {
+                    matching.add(elem);
+                }
+                else if (!idFirst && name.equals(elem.getId())) {
+                    matching.add(elem);
+                }
+            }
+        }
+
+        if (matching.size() == 1
+                || (matching.size() > 1
+                        && browser.hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
+            return getScriptObjectForElement(matching.get(0));
+        }
+        if (matching.isEmpty()) {
+            if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
+                return null;
+            }
+            return ScriptRuntime.UNDEFINED;
+        }
+
+        // many elements => build a sub collection
+        final DomNode domNode = getDomNodeOrNull();
+        final HTMLCollection2 collection = new HTMLCollection2(domNode, matching);
+        collection.setAvoidObjectDetection(true);
+        return collection;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

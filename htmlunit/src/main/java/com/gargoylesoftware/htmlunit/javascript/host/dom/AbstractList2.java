@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -32,7 +33,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -42,6 +42,7 @@ import com.gargoylesoftware.js.internal.dynalink.linker.GuardedInvocation;
 import com.gargoylesoftware.js.internal.dynalink.linker.LinkRequest;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
@@ -124,7 +125,7 @@ public class AbstractList2 extends SimpleScriptObject {
             setDomNode(domeNode, false);
             final ScriptObject parentScope = domeNode.getScriptObject2();
             if (parentScope != null) {
-                final Global global = NashornJavaScriptEngine.getGlobal(domeNode.getPage().getEnclosingWindow());
+                final Global global = domeNode.getPage().getEnclosingWindow().getGlobal();
                 setProto(global.getPrototype(getClass()));
                 ScriptUtils.initialize(this);
             }
@@ -371,17 +372,33 @@ public class AbstractList2 extends SimpleScriptObject {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
-//    @JsxFunction
-//    public Object item(final Object index) {
-//        final Object object = getIt(index);
-//        if (object == NOT_FOUND) {
-//            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
-//                return null;
-//            }
-//            return Context.getUndefinedValue();
-//        }
-//        return object;
-//    }
+    @Function
+    public Object item(final Object index) {
+        final Object object = getIt(index);
+        if (object == null) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
+                return null;
+            }
+            return ScriptRuntime.UNDEFINED;
+        }
+        return object;
+    }
+
+    /**
+     * Private helper that retrieves the item or items corresponding to the specified
+     * index or key.
+     * @param o the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     */
+    private Object getIt(final Object o) {
+        if (o instanceof Number) {
+            final Number n = (Number) o;
+            final int i = n.intValue();
+            return get(i);
+        }
+        final String key = String.valueOf(o);
+        return get(key);
+    }
 
     /**
      * {@inheritDoc}

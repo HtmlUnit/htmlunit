@@ -918,6 +918,8 @@ public class HTMLDocument2 extends Document2 {
                     return true;
                 }
             };
+            all_.setProto(getWindow().getGlobal().getPrototype(all_.getClass()));
+            ScriptUtils.initialize(all_);
             all_.setAvoidObjectDetection(true);
         }
         return all_;
