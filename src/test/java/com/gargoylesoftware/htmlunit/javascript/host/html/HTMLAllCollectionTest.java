@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -582,6 +583,31 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      alert(document.all);\n"
             + "      alert(HTMLAllCollection);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function () {}",
+            FF = "function () {\n}",
+            IE = "[object Object]")
+    @NotYetImplemented
+    public void proto() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(HTMLAllCollection.__proto__);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script>\n"
