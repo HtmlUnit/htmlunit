@@ -48,7 +48,8 @@ public class IntersectionObserver extends SimpleScriptable {
     }
 
     /**
-     * Removes the target from observation
+     * Removes the target from observation.
+     *
      * @param target the target
      */
     @JsxFunction
@@ -58,7 +59,6 @@ public class IntersectionObserver extends SimpleScriptable {
 
     /**
      * Disconnects.
-     * @param target the target
      */
     @JsxFunction
     public void disconnect() {
@@ -66,8 +66,7 @@ public class IntersectionObserver extends SimpleScriptable {
     }
 
     /**
-     * Disconnects.
-     * @param target the target
+     * Takes records.
      */
     @JsxFunction
     public Object takeRecords() {
