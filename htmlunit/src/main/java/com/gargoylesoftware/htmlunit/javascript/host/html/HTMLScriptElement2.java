@@ -20,9 +20,11 @@ import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class HTMLScriptElement2 extends HTMLElement2 {
 
     public static HTMLScriptElement2 constructor(final boolean newObj, final Object self) {
