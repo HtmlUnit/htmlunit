@@ -19,7 +19,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
  * A JavaScript object for {@code IntersectionObserver}.
@@ -34,5 +36,41 @@ public class IntersectionObserver extends SimpleScriptable {
      */
     @JsxConstructor
     public IntersectionObserver() {
+    }
+
+    /**
+     * Observes the target.
+     * @param target the target
+     */
+    @JsxFunction
+    public void observe(final Element target) {
+        //nothing
+    }
+
+    /**
+     * Removes the target from observation
+     * @param target the target
+     */
+    @JsxFunction
+    public void unobserve(final Element target) {
+        //nothing
+    }
+
+    /**
+     * Disconnects.
+     * @param target the target
+     */
+    @JsxFunction
+    public void disconnect() {
+        //nothing
+    }
+
+    /**
+     * Disconnects.
+     * @param target the target
+     */
+    @JsxFunction
+    public Object takeRecords() {
+        return null;
     }
 }
