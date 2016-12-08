@@ -193,18 +193,16 @@ public class AbstractList2 extends SimpleScriptObject {
 //    }
 
     /**
-     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
      * {@inheritDoc}
      */
-//    @Override
-//    public final Object get(final int index, final Scriptable start) {
-//        final AbstractList2 array = (AbstractList2) start;
-//        final List<Object> elements = array.getElements();
-//        if (index >= 0 && index < elements.size()) {
-//            return getScriptableForElement(elements.get(index));
-//        }
-//        return NOT_FOUND;
-//    }
+    @Override
+    public final Object get(final int index) {
+        final List<Object> elements = getElements();
+        if (index >= 0 && index < elements.size()) {
+            return getScriptObjectForElement(elements.get(index));
+        }
+        return null;
+    }
 
     @Override
     protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
