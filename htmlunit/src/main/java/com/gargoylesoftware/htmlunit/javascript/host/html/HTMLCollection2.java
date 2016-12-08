@@ -39,6 +39,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -46,6 +47,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
+@ScriptClass(nullProto = true)
 public class HTMLCollection2 extends AbstractList2 {
 
     /**

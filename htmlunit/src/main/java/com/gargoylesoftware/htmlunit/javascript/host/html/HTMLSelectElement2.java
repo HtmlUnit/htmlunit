@@ -27,10 +27,12 @@ import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class HTMLSelectElement2 extends HTMLElement2 {
 
     public static HTMLSelectElement2 constructor(final boolean newObj, final Object self) {

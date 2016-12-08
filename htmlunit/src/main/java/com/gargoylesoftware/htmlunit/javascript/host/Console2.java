@@ -28,9 +28,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class Console2 extends SimpleScriptObject {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();

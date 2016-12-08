@@ -76,6 +76,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
@@ -189,12 +190,14 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                         final ClassConstructor constructor = inner.getAnnotation(ClassConstructor.class);
                         if (isSupported(constructor, browser)) {
                             final ScriptObject instance = (ScriptObject) inner.newInstance();
-                            String className = instance.getClassName();;
+                            String className = instance.getClassName();
                             if (instance instanceof ScriptFunction) {
                                 className = ((ScriptFunction) instance).getName();
                             }
                             global.put(className, instance, false);
-                            javaSuperMap.put(klass.getName(), klass.getSuperclass().getName());
+                            if (!isNullProto(klass)) {
+                                javaSuperMap.put(klass.getName(), klass.getSuperclass().getName());
+                            }
                             javaJavaScriptMap.put(klass.getName(), className);
                         }
                     }
@@ -265,6 +268,11 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             }
         }
         return false;
+    }
+
+    private static boolean isNullProto(final Class<?> enclosingClass) {
+        ScriptClass scriptClass = enclosingClass.getAnnotation(ScriptClass.class);
+        return scriptClass == null || scriptClass.nullProto();
     }
 
     @SuppressWarnings("unchecked")

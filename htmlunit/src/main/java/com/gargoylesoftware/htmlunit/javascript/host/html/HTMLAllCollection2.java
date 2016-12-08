@@ -38,12 +38,13 @@ import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
+@ScriptClass(nullProto = true)
 public class HTMLAllCollection2 extends HTMLCollection2 {
 
     private HTMLAllCollection2() {

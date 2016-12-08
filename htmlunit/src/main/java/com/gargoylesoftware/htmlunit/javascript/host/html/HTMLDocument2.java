@@ -94,6 +94,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
@@ -104,6 +105,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
+@ScriptClass
 public class HTMLDocument2 extends Document2 {
 
     private static final Log LOG = LogFactory.getLog(HTMLDocument2.class);
