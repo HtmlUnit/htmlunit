@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -56,6 +59,7 @@ public class PointerEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = {"[object PointerEvent]", "click", "false", "false",
                             "0", "1", "1", "0", "0", "0", "", "false"})
+    @NotYetImplemented(CHROME)
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -79,6 +83,7 @@ public class PointerEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = {"[object PointerEvent]", "click", "true", "false",
                             "2", "1", "1", "0", "0", "0", "mouse", "false"})
+    @NotYetImplemented(CHROME)
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
