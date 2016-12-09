@@ -2085,7 +2085,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "width",
             IE = "cite,clear,width")
-    @NotYetImplemented(IE)
     public void pre() throws Exception {
         test("pre");
     }
