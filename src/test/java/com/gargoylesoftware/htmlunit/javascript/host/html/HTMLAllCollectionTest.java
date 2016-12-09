@@ -603,12 +603,10 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @NotYetImplemented
     public void proto() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(HTMLAllCollection.__proto__);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(HTMLAllCollection.__proto__);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
