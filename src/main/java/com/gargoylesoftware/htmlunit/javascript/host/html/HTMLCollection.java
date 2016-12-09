@@ -130,7 +130,7 @@ public class HTMLCollection extends AbstractList {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (supportsParanteses()) {
+        if (supportsParentheses()) {
             return super.call(cx, scope, thisObj, args);
         }
 
@@ -138,10 +138,11 @@ public class HTMLCollection extends AbstractList {
     }
 
     /**
-     * To be overwritten.
+     * Is parentheses supported.
+     *
      * @return true or false
      */
-    protected boolean supportsParanteses() {
+    protected boolean supportsParentheses() {
         return getBrowserVersion().hasFeature(HTMLCOLLECTION_SUPPORTS_PARANTHESES);
     }
 

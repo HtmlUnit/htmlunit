@@ -227,7 +227,7 @@ public class HTMLAllCollection extends HTMLCollection {
      * {@inheritDoc}
      */
     @Override
-    protected boolean supportsParanteses() {
+    protected boolean supportsParentheses() {
         return true;
     }
 
