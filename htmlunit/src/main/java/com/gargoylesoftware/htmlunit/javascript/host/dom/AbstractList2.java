@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -728,6 +728,25 @@ public class AbstractList2 extends SimpleScriptObject {
         final AbstractList2 collection = create(domNode, matchingElements);
         collection.setAvoidObjectDetection(true);
         return collection;
+    }
+
+    /**
+     * To be used a function-like call, when for example {@code document.all(1)} is used.
+     *
+     * @param index the index
+     */
+    public Object call(final Object index) {
+        if (index == null) {
+            throw new RuntimeException("Zero arguments; need an index or a key.");
+        }
+        final Object object = getIt(index);
+        if (object == null) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+                return null;
+            }
+            return ScriptRuntime.UNDEFINED;
+        }
+        return object;
     }
 
     private static MethodHandle virtualHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -384,7 +384,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * {@inheritDoc}
      */
     @Override
-    protected FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
+    public FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
         FindProperty prop = super.findProperty(key, deep, start);
         if (prop == null && getWebWindow() != null) {
             final Global global = getGlobal();
