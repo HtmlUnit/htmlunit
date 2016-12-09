@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
+import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect2;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -1210,6 +1211,19 @@ public class HTMLElement2 extends Element2 {
         // Remove the child from the parent node
         childNode.remove();
         return childObject;
+    }
+
+    /**
+     * Sets the focus to this element.
+     */
+    @Function
+    public void focus() {
+        final HtmlElement domNode = getDomNodeOrDie();
+        if (domNode instanceof SubmittableElement) {
+            domNode.focus();
+        }
+
+        // no action otherwise!
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
