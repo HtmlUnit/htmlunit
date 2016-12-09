@@ -337,6 +337,7 @@ public enum BrowserVersionFeatures {
     /** Base tag href attribute is empty if not defined. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLBASE_HREF_DEFAULT_EMPTY,
+
     /** HtmlCollection.item() supports also doubles as index. */
     @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
