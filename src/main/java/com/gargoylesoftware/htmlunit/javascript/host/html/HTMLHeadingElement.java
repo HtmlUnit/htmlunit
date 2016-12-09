@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLEAR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -88,7 +87,7 @@ public class HTMLHeadingElement extends HTMLElement {
     @JsxGetter(@WebBrowser(IE))
     public String getClear() {
         final String clear = getDomNodeOrDie().getAttribute("clear");
-        if (getBrowserVersion().hasFeature(JS_CLEAR_RESTRICT) && !ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
+        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
             return "";
         }
         return clear;
@@ -100,7 +99,7 @@ public class HTMLHeadingElement extends HTMLElement {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setClear(final String clear) {
-        if (getBrowserVersion().hasFeature(JS_CLEAR_RESTRICT) && !ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
+        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
             throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
         }
         getDomNodeOrDie().setAttribute("clear", clear);
