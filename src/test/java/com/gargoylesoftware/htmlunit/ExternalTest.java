@@ -195,11 +195,13 @@ public class ExternalTest {
 
     private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
         // Need Java 8
-        return groupId.startsWith("org.eclipse.jetty") && version.startsWith("9.4.")
+        return groupId.startsWith("org.eclipse.jetty")
+                        && (version.startsWith("9.3.") || version.startsWith("9.4."))
                 || "com.puppycrawl.tools".equals(groupId)
                         && "checkstyle".equals(artifactId)
                         && version.startsWith("7.")
-                || groupId.startsWith("org.tmatesoft.svnkit") && version.startsWith("1.8.14")
+                || groupId.startsWith("org.tmatesoft.svnkit")
+                        && (version.startsWith("1.8.13") || version.startsWith("1.8.14"))
                 || groupId.startsWith("org.seleniumhq.selenium") && version.startsWith("3.");
     }
 
