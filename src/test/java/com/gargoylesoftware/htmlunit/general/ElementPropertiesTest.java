@@ -2050,7 +2050,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,clear",
             EDGE = "align,clear")
-    @NotYetImplemented({IE, EDGE})
+    @NotYetImplemented(EDGE)
     public void p() throws Exception {
         test("p");
     }
