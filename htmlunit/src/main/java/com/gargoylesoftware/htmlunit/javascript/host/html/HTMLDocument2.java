@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
@@ -48,6 +48,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.DOMException;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -64,7 +66,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -97,9 +98,12 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
+import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
@@ -157,6 +161,7 @@ public class HTMLDocument2 extends Document2 {
     private int documentMode_ = -1;
 
     private boolean closePostponedAction_;
+    private boolean allAsFunction_;
 
     /** Initializes the supported event type map. */
     static {
@@ -905,6 +910,31 @@ public class HTMLDocument2 extends Document2 {
         }
 
         return collection;
+    }
+
+    @Override
+    protected GuardedInvocation findGetMethod(final CallSiteDescriptor desc, final LinkRequest request, final String operator) {
+        final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
+        if ("all".equals(name)) {
+            allAsFunction_ = "getMethod".equals(operator);
+        }
+        return super.findGetMethod(desc, request, operator);
+    }
+
+    public FindProperty findProperty(final String key, final boolean deep, final ScriptObject start) {
+        if ("all".equals(key) && deep && allAsFunction_) {
+            final ScriptObject myProto = getProto();
+            final FindProperty find = myProto == null ? null : myProto.findProperty(key, true, start);
+            if (find != null) {
+                return find;
+            }
+        }
+        return super.findProperty(key, deep, start);
+    }
+
+    @Function
+    public Object all(final Object index) {
+        return getAll().call(index);
     }
 
     /**

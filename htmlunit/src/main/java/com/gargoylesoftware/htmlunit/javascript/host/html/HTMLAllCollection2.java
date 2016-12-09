@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -43,6 +45,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 @ScriptClass(nullProto = true)
 public class HTMLAllCollection2 extends HTMLCollection2 {
@@ -86,9 +89,9 @@ public class HTMLAllCollection2 extends HTMLCollection2 {
 
             browser = getBrowserVersion();
             if (!browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
-                numb = ((Number) index).doubleValue();
+                numb = toDouble(name);
             }
-            if (/*ScriptRuntime*/Double.NaN == numb || numb.isNaN()) {
+            if (Double.NaN == numb) {
                 return itemNotFound(browser);
             }
         }
@@ -111,6 +114,15 @@ public class HTMLAllCollection2 extends HTMLCollection2 {
 //            return null;
 //        }
         return object;
+    }
+
+    private static Double toDouble(final String str) {
+        try {
+            return Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe) {
+            return Double.NaN;
+        }
     }
 
     private static Object itemNotFound(final BrowserVersion browser) {
@@ -173,6 +185,58 @@ public class HTMLAllCollection2 extends HTMLCollection2 {
         final HTMLCollection2 collection = new HTMLCollection2(domNode, matching);
         collection.setAvoidObjectDetection(true);
         return collection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object call(Object index) {
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES)) {
+            if (index == null) {
+                throw new RuntimeException("Zero arguments; need an index or a key.");
+            }
+
+            if (index instanceof Number) {
+                return null;
+            }
+        }
+
+        boolean nullIfNotFound = false;
+        if (browser.hasFeature(BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX)) {
+            if (index instanceof Number) {
+                final double val = ((Number) index).doubleValue();
+                if (val != (int) val) {
+                    return ScriptRuntime.UNDEFINED;
+                }
+                if (val >= 0) {
+                    nullIfNotFound = true;
+                }
+            }
+            else {
+                final String val = String.valueOf(index);
+                try {
+                    index = Integer.parseInt(val);
+                }
+                catch (final NumberFormatException e) {
+                    // ignore
+                }
+            }
+        }
+
+        final Object value = super.call(index);
+        if (nullIfNotFound && value == ScriptRuntime.UNDEFINED) {
+            return null;
+        }
+        return value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsParanteses() {
+        return true;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

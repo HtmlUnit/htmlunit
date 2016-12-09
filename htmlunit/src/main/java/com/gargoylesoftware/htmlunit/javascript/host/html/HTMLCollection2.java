@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
@@ -207,6 +207,27 @@ public class HTMLCollection2 extends AbstractList2 {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object call(final Object index) {
+        if (supportsParanteses()) {
+            return super.call(index);
+        }
+
+        throw new RuntimeException("TypeError - HTMLCollection does nont support function like access");
+    }
+
+    /**
+     * Is parentheses supported.
+     *
+     * @return true or false
+     */
+    protected boolean supportsParanteses() {
+        return getBrowserVersion().hasFeature(HTMLCOLLECTION_SUPPORTS_PARANTHESES);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLCollection2.class,
@@ -220,7 +241,7 @@ public class HTMLCollection2 extends AbstractList2 {
     @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLCollection", 
+            super("HTMLCollection",
                     staticHandle("constructor", HTMLCollection2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
