@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
@@ -226,6 +227,47 @@ public class Document2 extends Node2 {
         }
 
         return collection;
+    }
+
+    /**
+     * Create a new DOM text node with the given data.
+     *
+     * @param newData the string value for the text node
+     * @return the new text node or NOT_FOUND if there is an error
+     */
+    @Function
+    public Object createTextNode(final String newData) {
+        Object result = null;
+        try {
+            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
+            final Object jsElement = getScriptableFor(domNode);
+
+            if (jsElement == null) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("createTextNode(" + newData
+                            + ") cannot return a result as there isn't a JavaScript object for the DOM node "
+                            + domNode.getClass().getName());
+                }
+            }
+            else {
+                result = jsElement;
+            }
+        }
+        catch (final ElementNotFoundException e) {
+            // Just fall through - result is already set to NOT_FOUND
+        }
+        return result;
+    }
+
+    /**
+     * Does nothing special anymore.
+     *
+     * @param type the type of events to capture
+     * @see Window#captureEvents(String)
+     */
+    @Function
+    public void captureEvents(final String type) {
+        // Empty.
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
