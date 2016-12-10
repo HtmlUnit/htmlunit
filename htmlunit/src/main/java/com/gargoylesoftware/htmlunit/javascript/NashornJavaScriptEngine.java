@@ -198,7 +198,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
                             }
                             global.put(className, instance, false);
                             if (!isNullProto(klass)) {
-                                javaSuperMap.put(klass.getName(), klass.getSuperclass().getName());
+                                javaSuperMap.put(klass.getName(), getSuperScriptClassName(klass));
                             }
                             javaJavaScriptMap.put(klass.getName(), className);
                         }
@@ -256,6 +256,17 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         finally {
             Context.setGlobal(oldGlobal);
         }
+    }
+
+    private static String getSuperScriptClassName(final Class<?> klass) {
+        Class<?> superClass;
+        for (superClass = klass.getSuperclass();
+                superClass.getAnnotation(ScriptClass.class) == null; superClass = superClass.getSuperclass()) {
+            if (superClass == ScriptObject.class) {
+                return "";
+            }
+        }
+        return superClass.getName();
     }
 
     private static boolean isSupported(final ClassConstructor constructor, final Browser browser) {

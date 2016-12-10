@@ -47,7 +47,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.gargoylesoftware.js.nashorn.internal.runtime.arrays.ObjectArrayData;
 
-@ScriptClass(nullProto = true)
+@ScriptClass
 public class HTMLCollection2 extends AbstractList2 {
 
     /**
