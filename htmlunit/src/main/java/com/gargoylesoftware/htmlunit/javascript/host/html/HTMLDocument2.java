@@ -996,6 +996,14 @@ public class HTMLDocument2 extends Document2 {
         return anchors_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object appendChild(final Object childObject) {
+        throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy.");
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLDocument2.class,

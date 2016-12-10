@@ -22,6 +22,8 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -43,14 +45,15 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 @ScriptClass
 public class Node2 extends EventTarget2 {
+
+    /** "Live" child nodes collection; has to be a member to have equality (==) working. */
+    private NodeList2 childNodes_;
 
     public static Node2 constructor(final boolean newObj, final Object self) {
         final Node2 host = new Node2();
@@ -479,6 +482,29 @@ public class Node2 extends EventTarget2 {
     @Getter({@WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 21)})
     public Object getAttributes() {
         return null;
+    }
+
+    /**
+     * Returns the child nodes of the current element.
+     * @return the child nodes of the current element
+     */
+    @Getter
+    public NodeList2 getChildNodes() {
+        if (childNodes_ == null) {
+            final DomNode node = getDomNodeOrDie();
+            childNodes_ = new NodeList2(node, false) {
+                @Override
+                protected List<Object> computeElements() {
+                    final List<Object> response = new ArrayList<>();
+                    for (final DomNode child : node.getChildren()) {
+                        response.add(child);
+                    }
+
+                    return response;
+                }
+            };
+        }
+        return childNodes_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

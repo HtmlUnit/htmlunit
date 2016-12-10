@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
@@ -127,6 +128,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             Location2.class,
             MessageEvent2.class,
             Node2.class,
+            NodeList2.class,
             Text2.class,
             Window2.class,
             XMLDocument2.class

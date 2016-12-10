@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
@@ -41,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Location2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
@@ -54,7 +56,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 
 @ScriptClass
 public class Document2 extends Node2 {
@@ -197,6 +198,34 @@ public class Document2 extends Node2 {
     @Function
     public Attr2 createAttribute(final String attributeName) {
         return (Attr2) getPage().createAttribute(attributeName).getScriptObject2();
+    }
+
+    /**
+     * Returns all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
+     */
+    @Function
+    public HTMLCollection2 getElementsByTagName(final String tagName) {
+        final HTMLCollection2 collection;
+        if ("*".equals(tagName)) {
+            collection = new HTMLCollection2(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return true;
+                }
+            };
+        }
+        else {
+            collection = new HTMLCollection2(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return tagName.equalsIgnoreCase(node.getNodeName());
+                }
+            };
+        }
+
+        return collection;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
