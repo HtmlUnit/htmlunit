@@ -458,7 +458,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "1-1#DL", "0-1#DT", "1-1#DL", "0-1#DT"})
-    @NotYetImplemented
     public void dlShouldCloseDt() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
