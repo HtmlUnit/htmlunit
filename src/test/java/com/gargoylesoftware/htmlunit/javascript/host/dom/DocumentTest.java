@@ -410,7 +410,7 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Verifies that <tt>document.appendChild()</tt> works in IE and doesn't work in FF.
+     * Verifies that <tt>document.appendChild()</tt>doesn't work.
      * @throws Exception if an error occurs
      */
     @Test
@@ -425,12 +425,12 @@ public class DocumentTest extends WebDriverTestCase {
             + "      var div = document.createElement('div');\n"
             + "      div.innerHTML = 'test';\n"
             + "      try {\n"
-            + "        alert(document.childNodes.length); // 1\n"
-            + "        document.appendChild(div); // Error in FF\n"
-            + "        alert(document.childNodes.length); // 2\n"
-            + "        alert(document.childNodes[0].tagName); // HTML\n"
-            + "        alert(document.childNodes[1].tagName); // DIV\n"
-            + "        alert(document.getElementsByTagName('div').length); // 1\n"
+            + "        alert(document.childNodes.length);\n"
+            + "        document.appendChild(div); // Error\n"
+            + "        alert(document.childNodes.length);\n"
+            + "        alert(document.childNodes[0].tagName);\n"
+            + "        alert(document.childNodes[1].tagName);\n"
+            + "        alert(document.getElementsByTagName('div').length);\n"
             + "      } catch(ex) {\n"
             + "        alert('exception');\n"
             + "      }\n"

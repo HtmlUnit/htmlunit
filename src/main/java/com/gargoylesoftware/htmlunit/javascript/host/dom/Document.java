@@ -339,7 +339,8 @@ public class Document extends EventNode {
     }
 
     /**
-     * Does nothing special anymore... just like FF.
+     * Does nothing special anymore.
+     *
      * @param type the type of events to capture
      * @see Window#captureEvents(String)
      */

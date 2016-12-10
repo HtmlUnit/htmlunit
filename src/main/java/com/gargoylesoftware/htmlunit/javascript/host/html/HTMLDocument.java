@@ -1083,7 +1083,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object appendChild(final Object childObject) {
-        // Firefox does not allow insertion at the document level.
         throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
     }
 
