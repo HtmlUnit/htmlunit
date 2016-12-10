@@ -16,16 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.Locale;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
@@ -381,39 +375,6 @@ public class EventNode extends Node {
     @JsxSetter
     public void setOninput(final Object onchange) {
         setEventHandlerProp("oninput", onchange);
-    }
-
-    /**
-     * Fires a specified event on this element (IE only). See the
-     * <a href="http://msdn.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
-     * for more information.
-     * @param type specifies the name of the event to fire.
-     * @param event specifies the event object from which to obtain event object properties.
-     * @return {@code true} if the event fired successfully, {@code false} if it was canceled
-     */
-    public boolean fireEvent(final String type, Event event) {
-        if (event == null) {
-            event = new MouseEvent();
-        }
-
-        // Create the event, whose class will depend on the type specified.
-        final String cleanedType = StringUtils.removeStart(type.toLowerCase(Locale.ROOT), "on");
-        if (MouseEvent.isMouseEvent(cleanedType)) {
-            event.setPrototype(getPrototype(MouseEvent.class));
-        }
-        else {
-            event.setPrototype(getPrototype(Event.class));
-        }
-        event.setParentScope(getWindow());
-
-        // These four properties have predefined values, independent of the template.
-        event.setCancelBubble(false);
-        event.setReturnValue(Boolean.TRUE);
-        event.setSrcElement(this);
-        event.setEventType(cleanedType);
-
-        fireEvent(event);
-        return ((Boolean) event.getReturnValue()).booleanValue();
     }
 
 }
