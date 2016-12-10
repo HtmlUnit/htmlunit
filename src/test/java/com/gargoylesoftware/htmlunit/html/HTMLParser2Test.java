@@ -451,4 +451,43 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Issue #1842.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"2", "1-1#DL", "0-1#DT", "1-1#DL", "0-1#DT"})
+    @NotYetImplemented
+    public void dlShouldCloseDt() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('myBody');\n"
+            + "  alert(tmp.childNodes.length);\n"
+
+            + "  var child = tmp.childNodes[0];\n"
+            + "  alert(child.childNodes.length + '-' + child.nodeType + '#' +child.nodeName);\n"
+
+            + "  var child2 = child.childNodes[0];\n"
+            + "  alert(child2.childNodes.length + '-' + child2.nodeType + '#' +child2.nodeName);\n"
+
+            + "  var child = tmp.childNodes[1];\n"
+            + "  alert(child.childNodes.length + '-' + child.nodeType + '#' +child.nodeName);\n"
+
+            + "  var child2 = child.childNodes[0];\n"
+            + "  alert(child2.childNodes.length + '-' + child2.nodeType + '#' +child2.nodeName);\n"
+
+            + "} catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onload='test()'>"
+            + "<DL><DT></DL>"
+            + "<DL><DT></DL>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
