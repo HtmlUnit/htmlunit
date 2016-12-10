@@ -29,12 +29,12 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap2;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -54,7 +54,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
 @ScriptClass
-public class Element2 extends Node2 {
+public class Element2 extends EventNode2 {
 
     private NamedNodeMap2 attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)

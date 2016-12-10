@@ -507,6 +507,18 @@ public class Node2 extends EventTarget2 {
         return childNodes_;
     }
 
+    /**
+     * Clones this node.
+     *
+     * @param deep if {@code true}, recursively clones all descendants
+     * @return the newly cloned node
+     */
+    @Function
+    public Object cloneNode(final boolean deep) {
+        final DomNode clonedNode = getDomNodeOrDie().cloneNode(deep);
+        return getJavaScriptNode(clonedNode);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Node2.class,

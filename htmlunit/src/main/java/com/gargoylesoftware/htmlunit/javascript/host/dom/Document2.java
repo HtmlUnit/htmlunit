@@ -59,7 +59,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 @ScriptClass
-public class Document2 extends Node2 {
+public class Document2 extends EventNode2 {
 
     private static final Log LOG = LogFactory.getLog(Document.class);
     private static final Pattern TAG_NAME_PATTERN = Pattern.compile("\\w+");

@@ -126,6 +126,20 @@ public class EventTarget2 extends SimpleScriptObject {
     }
 
     /**
+     * Gets the property defined as event handler (not necessary a Function if something else has been set).
+     * @param eventName the event name (e.g. "onclick")
+     * @return the property
+     */
+    protected Object getEventHandlerProp(final String eventName) {
+        if (eventListenersContainer_ == null) {
+            return null;
+        }
+
+        final String name = StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2);
+        return eventListenersContainer_.getEventHandlerProp(name);
+    }
+
+    /**
      * Fires the event on the node with capturing and bubbling phase.
      * @param event the event
      * @return the result
