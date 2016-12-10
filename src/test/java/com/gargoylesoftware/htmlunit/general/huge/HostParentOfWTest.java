@@ -432,10 +432,30 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("false")
+    @NotYetImplemented(CHROME)
+    public void _webkitAudioContext_OfflineAudioContext() throws Exception {
+        test("webkitAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
     public void _webkitAudioContext_webkitAudioContext() throws Exception {
         test("webkitAudioContext", "webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(CHROME)
+    public void _webkitAudioContext_webkitOfflineAudioContext() throws Exception {
+        test("webkitAudioContext", "OfflineAudioContext");
     }
 
     /**
