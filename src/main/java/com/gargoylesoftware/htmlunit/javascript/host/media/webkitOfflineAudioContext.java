@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code webkitOfflineAudioContext}.
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class webkitOfflineAudioContext extends OfflineAudioContext {
+public class webkitOfflineAudioContext extends EventTarget {
 
     /**
      * Creates an instance.

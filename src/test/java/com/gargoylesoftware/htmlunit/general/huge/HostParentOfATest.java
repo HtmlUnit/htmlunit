@@ -401,6 +401,37 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            CHROME = "false",
+            IE = "false")
+    @NotYetImplemented(CHROME)
+    public void _AudioContext_OfflineAudioContext() throws Exception {
+        test("AudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioContext_webkitAudioContext() throws Exception {
+        test("AudioContext", "webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void _AudioContext_webkitOfflineAudioContext() throws Exception {
+        test("AudioContext", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
             IE = "false")
     public void _AudioDestinationNode_AudioDestinationNode() throws Exception {
         test("AudioDestinationNode", "AudioDestinationNode");
@@ -573,18 +604,6 @@ public class HostParentOfATest extends HostParentOf {
         IE = "true")
     public void _ClientRectList_ClientRectList() throws Exception {
         test("ClientRectList", "ClientRectList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _AudioContext_OfflineAudioContext() throws Exception {
-        test("AudioContext", "OfflineAudioContext");
     }
 
     /**
@@ -1183,17 +1202,6 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _AnimationEvent_WebKitAnimationEvent() throws Exception {
         test("AnimationEvent", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _AudioContext_webkitAudioContext() throws Exception {
-        test("AudioContext", "webkitAudioContext");
     }
 
     /**
