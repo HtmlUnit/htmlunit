@@ -423,6 +423,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("false")
+    @NotYetImplemented(CHROME)
     public void _AudioContext_webkitOfflineAudioContext() throws Exception {
         test("AudioContext", "webkitOfflineAudioContext");
     }
