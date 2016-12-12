@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngine;
 import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -131,7 +132,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             NodeList2.class,
             Text2.class,
             Window2.class,
-            XMLDocument2.class
+            XMLDocument2.class,
+            XMLHttpRequest2.class
         };
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;

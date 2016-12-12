@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlRp;
 import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Location2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
@@ -263,11 +264,25 @@ public class Document2 extends EventNode2 {
      * Does nothing special anymore.
      *
      * @param type the type of events to capture
-     * @see Window#captureEvents(String)
+     * @see Window2#captureEvents(String)
      */
     @Function
     public void captureEvents(final String type) {
         // Empty.
+    }
+
+    /**
+     * Gets the JavaScript property {@code documentElement} for the document.
+     * @return the root node for the document
+     */
+    @Getter
+    public Element2 getDocumentElement() {
+        final Object documentElement = getPage().getDocumentElement();
+        if (documentElement == null) {
+            // for instance with an XML document with parsing error
+            return null;
+        }
+        return (Element2) getScriptableFor(documentElement);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -43,6 +43,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 // When this is renamed to Event, change the name in initEvent()
 @ScriptClass
@@ -344,6 +345,31 @@ public class Event2 extends SimpleScriptObject {
                 cancelable_ = false;
             }
         }
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+//    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    public void jsConstructor(final String type, final ScriptObject details) {
+        boolean bubbles = false;
+        boolean cancelable = false;
+
+        if (details != null /*&& !ScriptRuntime.UNDEFINED.equals(details)*/) {
+            final Boolean detailBubbles = (Boolean) details.get("bubbles");
+            if (detailBubbles != null) {
+                bubbles = detailBubbles.booleanValue();
+            }
+
+            final Boolean detailCancelable = (Boolean) details.get("cancelable");
+            if (detailCancelable != null) {
+                cancelable = detailCancelable.booleanValue();
+            }
+        }
+        initEvent(type, bubbles, cancelable);
     }
 
     @Getter

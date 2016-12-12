@@ -19,6 +19,7 @@ import java.net.URL;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -94,6 +95,18 @@ public class BackgroundJavaScriptFactory {
     public JavaScriptJob createJavascriptXMLHttpRequestJob(final ContextFactory contextFactory,
             final ContextAction action) {
         return new JavascriptXMLHttpRequestJob(contextFactory, action);
+    }
+
+    /**
+     * Creates a new job for XMLHttpRequestProcessing.
+     * @param contextFactory the ContextFactory
+     * @param action the action
+     *
+     * @return JavaScriptJob the created job
+     */
+    public JavaScriptJob createJavascriptXMLHttpRequestJob(final Global global,
+            final GlobalAction action) {
+        return new JavascriptXMLHttpRequestJob2(global, action);
     }
 
     /**

@@ -1550,6 +1550,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     WINDOW_EXECUTE_EVENTS,
 
+    /** XMLHttpRequest.getAllResponseHeaders() has a trailing CrLf. */
+    @BrowserFeature(@WebBrowser(IE))
+    XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF,
+
     /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
@@ -1562,6 +1566,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
+
+    /** ProgressEvent.lengthComputable is true. */
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
+    XHR_LENGTH_COMPUTABLE,
 
     /** A cross origin request to {@code about:blank} is not allowed. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1578,6 +1586,14 @@ public enum BrowserVersionFeatures {
     /** Indicates that method overrideMimeType throws if msg was already sent. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
+
+    /** Chrome uses an additional blank here. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    XHR_SEPARATE_HEADERS_BLANK,
+
+    /** Indicates that the request uses the charset from the requesting page. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    XHR_USE_DEFAULT_CHARSET_FROM_PAGE,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(@WebBrowser(IE))

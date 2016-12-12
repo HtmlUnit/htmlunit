@@ -29,6 +29,7 @@ import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -85,6 +86,15 @@ public class NamedNodeMap2 extends SimpleScriptObject {
         }
 
         return null;
+    }
+
+    /**
+     * Returns the number of attributes in this named node map.
+     * @return the number of attributes in this named node map
+     */
+    @Getter(name = "length")
+    public int getLength_js() {
+        return attributes_.getLength();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

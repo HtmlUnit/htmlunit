@@ -1004,6 +1004,15 @@ public class HTMLDocument2 extends Document2 {
         throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy.");
     }
 
+    /**
+     * Gets the default character set from the current regional language settings.
+     * @return the default character set from the current regional language settings
+     */
+    @Getter(@WebBrowser(IE))
+    public String getDefaultCharset() {
+        return "windows-1252";
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLDocument2.class,
