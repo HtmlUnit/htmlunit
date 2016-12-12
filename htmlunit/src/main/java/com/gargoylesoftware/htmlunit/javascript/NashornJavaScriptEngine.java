@@ -303,19 +303,18 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     private void setProto(final Global global, final String childName, final String parentName) {
-        final Object child = global.get(childName);
-        if (child instanceof ScriptFunction) {
-            final ScriptFunction childFunction = (ScriptFunction) global.get(childName);
+        final ScriptObject child = (ScriptObject) global.get(childName);
+        final ScriptObject parent = (ScriptObject) global.get(parentName);
+        if (child instanceof ScriptFunction && parent instanceof ScriptFunction) {
+            final ScriptFunction childFunction = (ScriptFunction) child;
             final PrototypeObject childPrototype = (PrototypeObject) childFunction.getPrototype();
-            final ScriptFunction parentFunction = (ScriptFunction) global.get(parentName);
+            final ScriptFunction parentFunction = (ScriptFunction) parent;
             final PrototypeObject parentPrototype = (PrototypeObject) parentFunction.getPrototype();
             childPrototype.setProto(parentPrototype);
             childFunction.setProto(parentFunction);
         }
         else {
-            final ScriptObject childObject = (ScriptObject) global.get(childName);
-            final ScriptObject parentObject = (ScriptObject) global.get(parentName);
-            childObject.setProto(parentObject);
+            child.setProto(parent);
         }
     }
 
