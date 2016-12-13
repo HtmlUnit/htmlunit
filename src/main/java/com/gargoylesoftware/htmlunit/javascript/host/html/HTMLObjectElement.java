@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -45,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlObject.class)
-public class HTMLObjectElement extends FormChild implements Wrapper {
+public class HTMLObjectElement extends HTMLElement implements Wrapper {
 
     private Scriptable wrappedActiveX_;
 
@@ -280,4 +281,17 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
         getDomNodeOrDie().setAttribute("name", name);
     }
 
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
+    }
 }

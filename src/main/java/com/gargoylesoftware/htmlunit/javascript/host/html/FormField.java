@@ -33,7 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  */
 @JsxClass(isJSObject = false)
-public class FormField extends FormChild {
+public class FormField extends HTMLElement {
 
     /**
      * Sets the associated DOM node and sets the enclosing form as parent scope of the current element.
@@ -106,5 +106,19 @@ public class FormField extends FormChild {
     @JsxSetter
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
+    }
+
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
     }
 }

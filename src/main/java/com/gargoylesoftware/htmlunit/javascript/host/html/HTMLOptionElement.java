@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlOptionGroup;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -47,7 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlOption.class)
-public class HTMLOptionElement extends FormChild {
+public class HTMLOptionElement extends HTMLElement {
 
     /**
      * JavaScript constructor.
@@ -261,5 +262,19 @@ public class HTMLOptionElement extends FormChild {
                 setSelected(false);
             }
         }
+    }
+
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
     }
 }

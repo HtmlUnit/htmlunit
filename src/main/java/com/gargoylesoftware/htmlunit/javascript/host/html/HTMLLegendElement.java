@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlLegend;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -32,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlLegend.class)
-public class HTMLLegendElement extends FormChild {
+public class HTMLLegendElement extends HTMLElement {
 
     /**
      * Creates an instance.
@@ -59,4 +60,17 @@ public class HTMLLegendElement extends FormChild {
         setAlign(align, false);
     }
 
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
+    }
 }

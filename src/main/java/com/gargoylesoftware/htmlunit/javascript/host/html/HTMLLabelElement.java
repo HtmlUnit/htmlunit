@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -37,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlLabel.class)
-public class HTMLLabelElement extends FormChild {
+public class HTMLLabelElement extends HTMLElement {
 
     /**
      * Creates an instance.
@@ -88,11 +89,14 @@ public class HTMLLabelElement extends FormChild {
      * @return the value of the JavaScript {@code form} attribute
      */
     @JsxGetter
-    @Override
     public HTMLFormElement getForm() {
         if (getBrowserVersion().hasFeature(JS_LABEL_FORM_NULL)) {
             return null;
         }
-        return super.getForm();
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
     }
 }

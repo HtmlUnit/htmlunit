@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlFieldSet;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -32,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlFieldSet.class)
-public class HTMLFieldSetElement extends FormChild {
+public class HTMLFieldSetElement extends HTMLElement {
 
     /**
      * Creates an instance.
@@ -77,4 +78,17 @@ public class HTMLFieldSetElement extends FormChild {
         getDomNodeOrDie().setAttribute("name", name);
     }
 
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
+    }
 }
