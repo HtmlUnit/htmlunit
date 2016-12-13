@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -295,6 +296,18 @@ public class Document2 extends EventNode2 {
     public Object createComment(final String comment) {
         final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
         return getScriptableFor(domNode);
+    }
+
+    /**
+     * Creates a new document fragment.
+     * @return a newly created document fragment
+     */
+    @Function
+    public Object createDocumentFragment() {
+        final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDocumentFragment();
+        final DocumentFragment2 node = DocumentFragment2.constructor(true, Global.instance());
+        node.setDomNode(fragment);
+        return getScriptableFor(fragment);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

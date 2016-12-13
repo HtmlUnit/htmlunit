@@ -12,65 +12,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.html;
+package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_VALUE_NULL;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
-import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
-import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 @ScriptClass
-public class HTMLTextAreaElement2 extends FormField2 {
+public class DocumentFragment2 extends CharacterData2 {
 
-    public static HTMLTextAreaElement2 constructor(final boolean newObj, final Object self) {
-        final HTMLTextAreaElement2 host = new HTMLTextAreaElement2();
+    public static DocumentFragment2 constructor(final boolean newObj, final Object self) {
+        final DocumentFragment2 host = new DocumentFragment2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
     }
 
-    /**
-     * Returns the value of the {@code value} attribute.
-     * @return the value of the {@code value} attribute
-     */
-    @Override
-    public String getValue() {
-        return ((HtmlTextArea) getDomNodeOrDie()).getText();
-    }
-
-    /**
-     * Sets the value of the {@code value} attribute.
-     * @param value the new value
-     */
-    @Override
-    public void setValue(final Object value) {
-        if (null == value && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_VALUE_NULL)) {
-            ((HtmlTextArea) getDomNodeOrDie()).setText("");
-            return;
-        }
-
-        ((HtmlTextArea) getDomNodeOrDie()).setText(value.toString());
-    }
-
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(HTMLTextAreaElement2.class,
+            return MethodHandles.lookup().findStatic(DocumentFragment2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -81,8 +52,8 @@ public class HTMLTextAreaElement2 extends FormField2 {
     @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("HTMLTextAreaElement", 
-                    staticHandle("constructor", HTMLTextAreaElement2.class, boolean.class, Object.class),
+            super("DocumentFragment", 
+                    staticHandle("constructor", DocumentFragment2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -90,16 +61,13 @@ public class HTMLTextAreaElement2 extends FormField2 {
         }
     }
 
-    public static final class Prototype extends SimplePrototypeObject {
+    public static final class Prototype extends PrototypeObject {
         Prototype() {
-            super("HTMLTextAreaElement");
+            ScriptUtils.initialize(this);
         }
-    }
 
-    @ClassConstructor(@WebBrowser(IE))
-    public static final class ObjectConstructor extends SimpleObjectConstructor {
-        public ObjectConstructor() {
-            super("HTMLTextAreaElement");
+        public String getClassName() {
+            return "DocumentFragment";
         }
     }
 }

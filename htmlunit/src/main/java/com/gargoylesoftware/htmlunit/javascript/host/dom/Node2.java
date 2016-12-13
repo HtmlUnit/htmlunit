@@ -220,7 +220,7 @@ public class Node2 extends EventTarget2 {
      * @return the node type
      */
     @Getter
-    public short getNodeType() {
+    public Short getNodeType() {
         return getDomNodeOrDie().getNodeType();
     }
 
@@ -517,6 +517,16 @@ public class Node2 extends EventTarget2 {
     public Object cloneNode(final boolean deep) {
         final DomNode clonedNode = getDomNodeOrDie().cloneNode(deep);
         return getJavaScriptNode(clonedNode);
+    }
+
+    /**
+     * Gets the JavaScript property {@code parentNode} for the node that
+     * contains the current node.
+     * @return the parent node
+     */
+    @Getter
+    public Object getParentNode() {
+        return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
