@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
@@ -1224,6 +1225,22 @@ public class HTMLElement2 extends Element2 {
         }
 
         // no action otherwise!
+    }
+
+    /**
+     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}.
+     * @param element the element to read the attributes from
+     * @return the attributes
+     */
+    protected AttributesImpl readAttributes(final HtmlElement element) {
+        final AttributesImpl attributes = new AttributesImpl();
+        for (final DomAttr entry : element.getAttributesMap().values()) {
+            final String name = entry.getName();
+            final String value = entry.getValue();
+            attributes.addAttribute(null, name, name, null, value);
+        }
+
+        return attributes;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
