@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -283,6 +284,17 @@ public class Document2 extends EventNode2 {
             return null;
         }
         return (Element2) getScriptableFor(documentElement);
+    }
+
+    /**
+     * Creates a new Comment.
+     * @param comment the comment text
+     * @return the new Comment
+     */
+    @Function
+    public Object createComment(final String comment) {
+        final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
+        return getScriptableFor(domNode);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

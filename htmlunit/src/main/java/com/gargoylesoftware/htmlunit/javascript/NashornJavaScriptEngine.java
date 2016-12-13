@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Comment2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList2;
@@ -101,6 +102,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             Attr2.class,
             CSSStyleDeclaration2.class,
             CharacterData2.class,
+            Comment2.class,
             ComputedCSSStyleDeclaration2.class,
             Document2.class,
             Element2.class,

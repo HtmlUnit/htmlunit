@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -53,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Comment2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
@@ -232,6 +234,10 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         }
         else if (domNode instanceof DomAttr) {
             host = Attr2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof DomComment) {
+            host = Comment2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof HtmlHtml) {
