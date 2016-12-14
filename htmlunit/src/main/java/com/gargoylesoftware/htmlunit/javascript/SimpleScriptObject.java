@@ -221,6 +221,19 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleScriptObject clone() {
+        try {
+            return (SimpleScriptObject) super.clone();
+        }
+        catch (final Exception e) {
+            throw new IllegalStateException("Clone not supported");
+        }
+    }
+
+    /**
      * Builds a new the JavaScript object that corresponds to the specified object.
      * @param domNode the DOM node for which a JS object should be created
      * @return the JavaScript object

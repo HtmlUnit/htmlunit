@@ -21,9 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTIO
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -31,12 +28,14 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * An interactive SGML page, which is able to handle JavaScript events.
@@ -184,7 +183,7 @@ public abstract class InteractivePage extends SgmlPage {
     public InteractivePage cloneNode(final boolean deep) {
         // we need the ScriptObject clone before cloning the kids.
         final InteractivePage result = (InteractivePage) super.cloneNode(false);
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
+        final SimpleScriptObject jsObjClone = ((SimpleScriptObject) getScriptObject2()).clone();
         jsObjClone.setDomNode(result);
 
         // if deep, clone the kids too, and re initialize parts of the clone
