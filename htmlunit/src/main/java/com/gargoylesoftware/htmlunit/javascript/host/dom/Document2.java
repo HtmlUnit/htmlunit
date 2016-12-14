@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
@@ -42,9 +44,11 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRp;
 import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Location2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
@@ -343,6 +347,64 @@ public class Document2 extends EventNode2 {
     @Getter
     public Global getDefaultView() {
         return getWindow().getGlobal();
+    }
+
+    /**
+     * Returns a value which indicates whether or not the document can be edited.
+     * @return a value which indicates whether or not the document can be edited
+     */
+    @Getter
+    public String getDesignMode() {
+        if (designMode_ == null) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
+                designMode_ = "inherit";
+            }
+            else {
+                designMode_ = "off";
+            }
+        }
+        return designMode_;
+    }
+
+    /**
+     * Sets a value which indicates whether or not the document can be edited.
+     * @param mode a value which indicates whether or not the document can be edited
+     */
+    @Setter
+    public void setDesignMode(final String mode) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
+        if (inherit) {
+            if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
+                throw new RuntimeException("Invalid document.designMode value '" + mode + "'.");
+            }
+
+            if ("on".equalsIgnoreCase(mode)) {
+                designMode_ = "on";
+            }
+            else if ("off".equalsIgnoreCase(mode)) {
+                designMode_ = "off";
+            }
+            else if ("inherit".equalsIgnoreCase(mode)) {
+                designMode_ = "inherit";
+            }
+        }
+        else {
+            if ("on".equalsIgnoreCase(mode)) {
+                designMode_ = "on";
+                final SgmlPage page = getPage();
+                if (page != null && page.isHtmlPage()
+                        && getBrowserVersion().hasFeature(JS_DOCUMENT_SELECTION_RANGE_COUNT)) {
+                    final HtmlPage htmlPage = (HtmlPage) page;
+                    final DomNode child = htmlPage.getBody().getFirstChild();
+                    final DomNode rangeNode = child == null ? htmlPage.getBody() : child;
+                    htmlPage.setSelectionRange(new SimpleRange(rangeNode, 0));
+                }
+            }
+            else if ("off".equalsIgnoreCase(mode)) {
+                designMode_ = "off";
+            }
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
