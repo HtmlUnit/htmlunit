@@ -14,18 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class UIEvent2 extends Event2 {
 
     /** Specifies some detail information about the event. */
@@ -62,7 +71,7 @@ public class UIEvent2 extends Event2 {
      * @return whether or not the "meta" key was pressed during the event firing
      */
     @Getter
-    public boolean getMetaKey() {
+    public Boolean getMetaKey() {
         return metaKey_;
     }
 
@@ -94,6 +103,27 @@ public class UIEvent2 extends Event2 {
         detail_ = detail;
     }
 
+    /**
+     * Implementation of the DOM Level 3 Event method for initializing the UI event.
+     *
+     * @param type the event type
+     * @param bubbles can the event bubble
+     * @param cancelable can the event be canceled
+     * @param view the view to use for this event
+     * @param detail the detail to set for the event
+     */
+    @Function({@WebBrowser(CHROME),  @WebBrowser(FF), @WebBrowser(IE)})
+    public void initUIEvent(
+            final String type,
+            final boolean bubbles,
+            final boolean cancelable,
+            final Object view,
+            final int detail) {
+        initEvent(type, bubbles, cancelable);
+        // Ignore the view parameter; we always use the window.
+        setDetail(detail);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(UIEvent2.class,
@@ -104,6 +134,7 @@ public class UIEvent2 extends Event2 {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("UIEvent", 
@@ -115,14 +146,9 @@ public class UIEvent2 extends Event2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "UIEvent";
+            super("UIEvent");
         }
     }
 }

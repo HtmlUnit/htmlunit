@@ -581,9 +581,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     /**
      * {@inheritDoc}
      */
-    public static boolean dispatchEvent(final Object self, final Event2 event) {
-        event.setTarget(self);
-        final ScriptResult result = getWindow(self).fireEvent(event);
+    public static boolean dispatchEvent(final EventTarget2 target, final Event2 event) {
+        event.setTarget(target);
+        final ScriptResult result = target.getWindow().fireEvent(event);
         return !event.isAborted(result);
     }
 

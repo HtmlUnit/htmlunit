@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
@@ -960,8 +961,8 @@ public final class HTMLParser {
                 final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
                 if (to.getAttributes().getNamedItem(attrName) == null) {
                     to.setAttribute(attrName, attrs.getValue(i));
-                    if (attrName.startsWith("on") && to.getScriptableObject() instanceof HTMLBodyElement) {
-                        final HTMLBodyElement jsBody = (HTMLBodyElement) to.getScriptableObject();
+                    if (attrName.startsWith("on") && to.getScriptObject2() instanceof HTMLBodyElement2) {
+                        final HTMLBodyElement2 jsBody = (HTMLBodyElement2) to.getScriptObject2();
                         jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
                     }
                 }

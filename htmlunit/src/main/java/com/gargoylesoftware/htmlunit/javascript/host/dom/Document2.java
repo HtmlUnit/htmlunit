@@ -35,8 +35,10 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
@@ -308,6 +310,30 @@ public class Document2 extends EventNode2 {
         final DocumentFragment2 node = DocumentFragment2.constructor(true, Global.instance());
         node.setDomNode(fragment);
         return getScriptableFor(fragment);
+    }
+
+    /**
+     * Creates a new HTML element with the given tag name, and name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @return the new HTML element, or NOT_FOUND if the tag is not supported
+     */
+    @Function
+    public Object createElementNS(final String namespaceURI, final String qualifiedName) {
+        final org.w3c.dom.Element element;
+        if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
+            throw new RuntimeException("XUL not available");
+        }
+
+        if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
+                || HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
+            element = getPage().createElementNS(namespaceURI, qualifiedName);
+        }
+        else {
+            element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
+        }
+        return getScriptableFor(element);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

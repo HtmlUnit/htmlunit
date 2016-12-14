@@ -19,7 +19,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.script.ScriptContext;
 import javax.script.SimpleScriptContext;
@@ -61,6 +63,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private String name_ = "";
     private final History history_ = new History(this);
     private boolean closed_;
+    private Map<Object, Object> threadLocalMap;
 
     private int innerHeight_;
     private int outerHeight_;
@@ -369,4 +372,19 @@ public abstract class WebWindowImpl implements WebWindow {
     public ScriptContext getScriptContext() {
         return scriptContext_;
     }
+
+    public final Object getThreadLocal(final Object key) {
+        if (threadLocalMap == null) {
+            return null;
+        }
+        return threadLocalMap.get(key);
+    }
+
+    public synchronized final void putThreadLocal(final Object key, final Object value) {
+        if (threadLocalMap == null) {
+            threadLocalMap = new HashMap<>();
+        }
+        threadLocalMap.put(key, value);
+    }
+
 }

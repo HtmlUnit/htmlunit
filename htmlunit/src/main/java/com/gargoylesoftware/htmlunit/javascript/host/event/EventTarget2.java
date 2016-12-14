@@ -148,10 +148,10 @@ public class EventTarget2 extends SimpleScriptObject {
         final Window2 window = getWindow();
         final Object[] args = new Object[] {event};
 
-//        event.startFire();
+        event.startFire();
         ScriptResult result = null;
-//        final Event previousEvent = window.getCurrentEvent();
-//        window.setCurrentEvent(event);
+        final Event2 previousEvent = window.getCurrentEvent();
+        window.setCurrentEvent(event);
 
         try {
             // window's listeners
@@ -231,8 +231,8 @@ public class EventTarget2 extends SimpleScriptObject {
             }
         }
         finally {
-//            event.endFire();
-//            window.setCurrentEvent(previousEvent); // reset event
+            event.endFire();
+            window.setCurrentEvent(previousEvent); // reset event
         }
 
         return result;

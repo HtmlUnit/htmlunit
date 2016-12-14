@@ -50,6 +50,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
@@ -130,9 +132,11 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             HTMLTitleElement2.class,
             Location2.class,
             MessageEvent2.class,
+            MouseEvent2.class,
             Node2.class,
             NodeList2.class,
             Text2.class,
+            UIEvent2.class,
             Window2.class,
             XMLDocument2.class,
             XMLHttpRequest2.class

@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -422,9 +423,15 @@ public class HTMLDocument2 extends Document2 {
                 "Event Type is not supported: " + eventType));
         }
         final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
-        final Event2 event = Event2.constructor(true, global);
-        event.eventCreated();
-        return event;
+        try {
+            final Event2 event = (Event2) clazz.getMethod("constructor", boolean.class, Object.class)
+                .invoke(null, true, global);
+            event.eventCreated();
+            return event;
+        }
+        catch (final InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     /**

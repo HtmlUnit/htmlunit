@@ -23,10 +23,12 @@ import java.lang.invoke.MethodType;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class HashChangeEvent2 extends Event2 {
 
     private String oldURL_ = "";
@@ -42,14 +44,14 @@ public class HashChangeEvent2 extends Event2 {
     /**
      * Creates a new event instance.
      *
-     * @param scriptable the SimpleScriptObject that triggered the event
+     * @param target the event target
      * @param type the event type
      * @param oldURL the old URL
      * @param newURL the new URL
      */
-    public HashChangeEvent2(final SimpleScriptObject scriptable, final String type,
+    public HashChangeEvent2(final EventTarget2 target, final String type,
             final String oldURL, final String newURL) {
-        super(scriptable, type);
+        super(target, type);
         oldURL_ = oldURL;
         newURL_ = newURL;
 

@@ -21,10 +21,12 @@ import java.lang.invoke.MethodType;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class MutationEvent2 extends Event2 {
 
     public static MutationEvent2 constructor(final boolean newObj, final Object self) {

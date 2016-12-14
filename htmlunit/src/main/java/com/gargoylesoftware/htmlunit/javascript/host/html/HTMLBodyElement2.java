@@ -22,6 +22,7 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer2;
@@ -79,6 +80,20 @@ public class HTMLBodyElement2 extends HTMLElement2 {
     @Override
     public int getClientWidth() {
         return super.getClientWidth() + 16;
+    }
+
+    /**
+     * Creates the event handler from the attribute value. This has to be done no matter which browser
+     * is simulated to handle ill-formed HTML code with many body (possibly generated) elements.
+     * @param attributeName the attribute name
+     * @param value the value
+     */
+    public void createEventHandlerFromAttribute(final String attributeName, final String value) {
+        // when many body tags are found while parsing, attributes of
+        // different tags are added and should create an event handler when needed
+        if (attributeName.toLowerCase(Locale.ROOT).startsWith("on")) {
+            createEventHandler(attributeName, value);
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

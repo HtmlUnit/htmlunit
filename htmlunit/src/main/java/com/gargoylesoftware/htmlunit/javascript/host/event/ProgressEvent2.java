@@ -22,11 +22,13 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
+@ScriptClass
 public class ProgressEvent2 extends Event2 {
 
     private boolean lengthComputable_;
@@ -99,11 +101,11 @@ public class ProgressEvent2 extends Event2 {
 
     /**
      * Creates a new event instance.
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the event target
      * @param type the event type
      */
-    public ProgressEvent2(final SimpleScriptObject scriptable, final String type) {
-        super(scriptable, type);
+    public ProgressEvent2(final EventTarget2 target, final String type) {
+        super(target, type);
     }
 
     /**

@@ -23,10 +23,13 @@ import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.Brows
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.LinkedList;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
@@ -43,7 +46,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 // When this is renamed to Event, change the name in initEvent()
 @ScriptClass
@@ -266,7 +268,7 @@ public class Event2 extends SimpleScriptObject {
     public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
-    private Object target_;            // W3C standard read-only equivalent of srcElement.
+    private EventTarget2 target_;      // W3C standard read-only equivalent of srcElement.
     private ScriptObject currentTarget_; // Changes during event capturing and bubbling.
     private String type_ = "";         // The event type.
     private Object keyCode_;           // Key code for a keypress
@@ -321,19 +323,19 @@ public class Event2 extends SimpleScriptObject {
      * @param type the event type
      */
     public Event2(final DomNode domNode, final String type) {
-        this((SimpleScriptObject) domNode.getScriptObject2(), type);
+        this((EventTarget2) domNode.getScriptObject2(), type);
         setDomNode(domNode, false);
     }
 
     /**
      * Creates a new event instance.
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the target
      * @param type the event type
      */
-    public Event2(final SimpleScriptObject scriptable, final String type) {
-        srcElement_ = scriptable;
-        target_ = scriptable;
-        currentTarget_ = scriptable;
+    public Event2(final EventTarget2 target, final String type) {
+        srcElement_ = target;
+        target_ = target;
+        currentTarget_ = target;
         type_ = type;
 
         if (TYPE_CHANGE.equals(type)) {
@@ -341,7 +343,7 @@ public class Event2 extends SimpleScriptObject {
         }
         else if (TYPE_LOAD.equals(type)) {
             bubbles_ = false;
-            if (scriptable.getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
+            if (target.getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
                 cancelable_ = false;
             }
         }
@@ -471,7 +473,7 @@ public class Event2 extends SimpleScriptObject {
      * @return the event target to which the event was originally dispatched
      */
     @Getter
-    public Object getTarget() {
+    public EventTarget2 getTarget() {
         return target_;
     }
 
@@ -479,7 +481,7 @@ public class Event2 extends SimpleScriptObject {
      * Sets the event target.
      * @param target the event target
      */
-    public void setTarget(final Object target) {
+    public void setTarget(final EventTarget2 target) {
         target_ = target;
     }
 
@@ -642,6 +644,32 @@ public class Event2 extends SimpleScriptObject {
             return Integer.valueOf(0);
         }
         return keyCode_;
+    }
+
+    /**
+     * Called when the event starts being fired.
+     */
+    @SuppressWarnings("unchecked")
+    public void startFire() {
+        final WebWindow webWindow = getWindow().getWebWindow();
+        LinkedList<Event2> events = (LinkedList<Event2>) webWindow.getThreadLocal(KEY_CURRENT_EVENT);
+        if (events == null) {
+            events = new LinkedList<>();
+            webWindow.putThreadLocal(KEY_CURRENT_EVENT, events);
+        }
+        events.add(this);
+    }
+
+    @Override
+    public Window2 getWindow() {
+        return getTarget().getWindow();
+    }
+    /**
+     * Called when the event being fired ends.
+     */
+    @SuppressWarnings("unchecked")
+    public void endFire() {
+        ((LinkedList<Event2>) getWindow().getWebWindow().getThreadLocal(KEY_CURRENT_EVENT)).removeLast();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

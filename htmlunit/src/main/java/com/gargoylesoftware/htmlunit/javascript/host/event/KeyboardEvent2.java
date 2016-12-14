@@ -28,12 +28,14 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Attribute;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class KeyboardEvent2 extends Event2 {
 
     /** Constant for {@code DOM_KEY_LOCATION_STANDARD}. */

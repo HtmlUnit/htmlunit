@@ -318,4 +318,14 @@ class PopupPseudoWebWindow implements WebWindow {
         return null;
     }
 
+    @Override
+    public Object getThreadLocal(Object key) {
+        throw new RuntimeException("Not supported");
+    }
+
+    @Override
+    public void putThreadLocal(Object key, Object value) {
+        throw new RuntimeException("Not supported");
+    }
+
 }

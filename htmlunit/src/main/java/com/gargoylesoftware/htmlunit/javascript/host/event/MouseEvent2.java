@@ -14,17 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
+@ScriptClass
 public class MouseEvent2 extends UIEvent2 {
 
     /** The click event type, triggered by "onclick" event handlers. */
@@ -116,6 +124,55 @@ public class MouseEvent2 extends UIEvent2 {
         return host;
     }
 
+    /**
+     * Implementation of the DOM Level 2 Event method for initializing the mouse event.
+     *
+     * @param type the event type
+     * @param bubbles can the event bubble
+     * @param cancelable can the event be canceled
+     * @param view the view to use for this event
+     * @param detail the detail to set for the event
+     * @param screenX the initial value of screenX
+     * @param screenY the initial value of screenY
+     * @param clientX the initial value of clientX
+     * @param clientY the initial value of clientY
+     * @param ctrlKey is the control key pressed
+     * @param altKey is the alt key pressed
+     * @param shiftKey is the shift key pressed
+     * @param metaKey is the meta key pressed
+     * @param button what mouse button is pressed
+     * @param relatedTarget is there a related target for the event
+     */
+    @Function
+    public void initMouseEvent(
+            final String type,
+            final boolean bubbles,
+            final boolean cancelable,
+            final Object view,
+            final int detail,
+            final int screenX,
+            final int screenY,
+            final int clientX,
+            final int clientY,
+            final boolean ctrlKey,
+            final boolean altKey,
+            final boolean shiftKey,
+            final boolean metaKey,
+            final int button,
+            final Object relatedTarget) {
+        initUIEvent(type, bubbles, cancelable, view, detail);
+        screenX_ = Integer.valueOf(screenX);
+        screenY_ = Integer.valueOf(screenY);
+        clientX_ = Integer.valueOf(clientX);
+        clientY_ = Integer.valueOf(clientY);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+        setShiftKey(shiftKey);
+        setMetaKey(metaKey);
+        button_ = button;
+        // Ignore the relatedTarget parameter; we don't support it yet.
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(MouseEvent2.class,
@@ -126,6 +183,7 @@ public class MouseEvent2 extends UIEvent2 {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("MouseEvent", 
@@ -137,14 +195,9 @@ public class MouseEvent2 extends UIEvent2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
-
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "MouseEvent";
+            super("MouseEvent");
         }
     }
 }
