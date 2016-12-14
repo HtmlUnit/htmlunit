@@ -82,6 +82,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
@@ -136,9 +137,10 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     private History2 history_;
     private ScriptObject console_;
     private Location2 location_;
-    private HTMLCollection2 frames_; // has to be a member to have equality (==) working
+    private Selection2 selection_;
     private Event2 currentEvent_;
     private String status_ = "";
+    private HTMLCollection2 frames_; // has to be a member to have equality (==) working
     private Object controllers_ = new SimpleScriptObject();
     private Object opener_;
     private Object top_;
@@ -1737,6 +1739,36 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     public Global getGlobal() {
         return NashornJavaScriptEngine.getGlobal(getWebWindow());
+    }
+
+    /**
+     * Returns the current selection.
+     * @return the current selection
+     */
+    @Function
+    public static Selection2 getSelection(final Object self) {
+        final Window2 window = getWindow(self);
+        final WebWindow webWindow = window.getWebWindow();
+        // return null if the window is in a frame that is not displayed
+        if (webWindow instanceof FrameWindow) {
+            final FrameWindow frameWindow = (FrameWindow) webWindow;
+            if (window.getBrowserVersion().hasFeature(JS_WINDOW_SELECTION_NULL_IF_INVISIBLE)
+                    && !frameWindow.getFrameElement().isDisplayed()) {
+                return null;
+            }
+        }
+        return window.getSelectionImpl();
+    }
+
+    /**
+     * Returns the current selection.
+     * @return the current selection
+     */
+    public Selection2 getSelectionImpl() {
+        if (selection_ == null) {
+            selection_ = Selection2.constructor(true, getGlobal());
+        }
+        return selection_;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

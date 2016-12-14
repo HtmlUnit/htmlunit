@@ -1020,6 +1020,15 @@ public class HTMLDocument2 extends Document2 {
         return "windows-1252";
     }
 
+    /**
+     * Gets the window in which this document is contained.
+     * @return the window
+     */
+    @Getter(@WebBrowser(IE))
+    public Global getParentWindow() {
+        return getWindow().getGlobal();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLDocument2.class,

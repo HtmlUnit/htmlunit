@@ -16,13 +16,21 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
 import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.List;
 
-import com.gargoylesoftware.htmlunit.html.DomCharacterData;
+import org.w3c.dom.ranges.Range;
+
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
@@ -32,38 +40,41 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 @ScriptClass
-public class CharacterData2 extends Node2 {
+public class Selection2 extends SimpleScriptObject {
 
-    public static CharacterData2 constructor(final boolean newObj, final Object self) {
-        final CharacterData2 host = new CharacterData2();
+    public static Selection2 constructor(final boolean newObj, final Object self) {
+        final Selection2 host = new Selection2();
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
     }
 
     /**
-     * Gets the JavaScript property {@code data} for this character data.
-     * @return the String of data
+     * Returns the number of ranges in the selection.
+     * @return the number of ranges in the selection
      */
     @Getter
-    public Object getData() {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        return domCharacterData.getData();
+    public int getRangeCount() {
+        return getRanges().size();
+    }
+
+    @Override
+    public Window2 getWindow() {
+        return Global.instance().getWindow();
     }
 
     /**
-     * Gets the number of character in the character data.
-     * @return the number of characters
+     * Returns the current HtmlUnit DOM selection ranges.
+     * @return the current HtmlUnit DOM selection ranges
      */
-    @Getter(name = "length")
-    public int getLength_js() {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        return domCharacterData.getLength();
+    private List<Range> getRanges() {
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        return page.getSelectionRanges();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
-            return MethodHandles.lookup().findStatic(CharacterData2.class,
+            return MethodHandles.lookup().findStatic(Selection2.class,
                     name, MethodType.methodType(rtype, ptypes));
         }
         catch (final ReflectiveOperationException e) {
@@ -74,8 +85,8 @@ public class CharacterData2 extends Node2 {
     @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
-            super("CharacterData", 
-                    staticHandle("constructor", CharacterData2.class, boolean.class, Object.class),
+            super("Selection", 
+                    staticHandle("constructor", Selection2.class, boolean.class, Object.class),
                     null);
             final Prototype prototype = new Prototype();
             PrototypeObject.setConstructor(prototype, this);
@@ -83,13 +94,16 @@ public class CharacterData2 extends Node2 {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
+            super("Selection");
         }
+    }
 
-        public String getClassName() {
-            return "CharacterData";
+    @ClassConstructor(@WebBrowser(IE))
+    public static final class ObjectConstructor extends SimpleObjectConstructor {
+        public ObjectConstructor() {
+            super("Selection");
         }
     }
 }

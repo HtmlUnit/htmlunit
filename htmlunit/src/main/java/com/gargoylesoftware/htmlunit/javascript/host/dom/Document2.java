@@ -336,6 +336,15 @@ public class Document2 extends EventNode2 {
         return getScriptableFor(element);
     }
 
+    /**
+     * Gets the window in which this document is contained.
+     * @return the window
+     */
+    @Getter
+    public Global getDefaultView() {
+        return getWindow().getGlobal();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Document2.class,
