@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -99,11 +98,11 @@ public class ProgressEvent extends Event {
 
     /**
      * Creates a new event instance.
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the event target
      * @param type the event type
      */
-    public ProgressEvent(final SimpleScriptable scriptable, final String type) {
-        super(scriptable, type);
+    public ProgressEvent(final EventTarget target, final String type) {
+        super(target, type);
     }
 
     /**

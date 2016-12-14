@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -54,14 +53,14 @@ public class HashChangeEvent extends Event {
     /**
      * Creates a new event instance.
      *
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the event target
      * @param type the event type
      * @param oldURL the old URL
      * @param newURL the new URL
      */
-    public HashChangeEvent(final SimpleScriptable scriptable, final String type,
+    public HashChangeEvent(final EventTarget target, final String type,
             final String oldURL, final String newURL) {
-        super(scriptable, type);
+        super(target, type);
         oldURL_ = oldURL;
         newURL_ = newURL;
 

@@ -234,7 +234,7 @@ public class Event extends SimpleScriptable {
     public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
-    private Object target_;            // W3C standard read-only equivalent of srcElement.
+    private EventTarget target_;       // W3C standard read-only equivalent of srcElement.
     private Scriptable currentTarget_; // Changes during event capturing and bubbling.
     private String type_ = "";         // The event type.
     private Object keyCode_;           // Key code for a keypress
@@ -280,21 +280,21 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
-        this((SimpleScriptable) domNode.getScriptableObject(), type);
+        this((EventTarget) domNode.getScriptableObject(), type);
         setDomNode(domNode, false);
     }
 
     /**
      * Creates a new event instance.
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the target
      * @param type the event type
      */
-    public Event(final SimpleScriptable scriptable, final String type) {
-        srcElement_ = scriptable;
-        target_ = scriptable;
-        currentTarget_ = scriptable;
+    public Event(final EventTarget target, final String type) {
+        srcElement_ = target;
+        target_ = target;
+        currentTarget_ = target;
         type_ = type;
-        setParentScope(scriptable);
+        setParentScope(target);
         setPrototype(getPrototype(getClass()));
 
         if (TYPE_CHANGE.equals(type)) {
@@ -413,7 +413,7 @@ public class Event extends SimpleScriptable {
      * Sets the event target.
      * @param target the event target
      */
-    public void setTarget(final Object target) {
+    public void setTarget(final EventTarget target) {
         target_ = target;
     }
 

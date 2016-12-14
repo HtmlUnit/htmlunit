@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -77,11 +76,11 @@ public class UIEvent extends Event {
 
     /**
      * Creates a new event instance.
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the event target
      * @param type the event type
      */
-    public UIEvent(final SimpleScriptable scriptable, final String type) {
-        super(scriptable, type);
+    public UIEvent(final EventTarget target, final String type) {
+        super(target, type);
     }
 
     /**

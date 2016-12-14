@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -67,12 +66,12 @@ public class PopStateEvent extends Event {
     /**
      * Creates a new event instance.
      *
-     * @param scriptable the SimpleScriptable that triggered the event
+     * @param target the event target
      * @param type the event type
      * @param state the state object
      */
-    public PopStateEvent(final SimpleScriptable scriptable, final String type, final Object state) {
-        super(scriptable, type);
+    public PopStateEvent(final EventTarget target, final String type, final Object state) {
+        super(target, type);
         if (state instanceof NativeObject && getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_CLONE_STATE)) {
             final NativeObject old = (NativeObject) state;
             final NativeObject newState = new NativeObject();
