@@ -1029,6 +1029,20 @@ public class HTMLDocument2 extends Document2 {
         return getWindow().getGlobal();
     }
 
+    /**
+     * Returns the element for the specified x coordinate and the specified y coordinate.
+     * The current implementation always returns the &lt;body&gt; element.
+     *
+     * @param x the x offset, in pixels
+     * @param y the y offset, in pixels
+     * @return the element for the specified x coordinate and the specified y coordinate
+     */
+    @Function
+    public Object elementFromPoint(final int x, final int y) {
+        final HtmlElement element = getPage().getElementFromPoint(x, y);
+        return element == null ? null : element.getScriptableObject();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLDocument2.class,

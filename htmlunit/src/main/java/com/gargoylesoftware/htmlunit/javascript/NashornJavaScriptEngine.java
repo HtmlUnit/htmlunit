@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text2;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
@@ -72,6 +73,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -131,6 +133,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             HTMLSpanElement2.class,
             HTMLTextAreaElement2.class,
             HTMLTitleElement2.class,
+            HTMLUnknownElement2.class,
             Location2.class,
             MessageEvent2.class,
             MouseEvent2.class,
@@ -141,7 +144,8 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             UIEvent2.class,
             Window2.class,
             XMLDocument2.class,
-            XMLHttpRequest2.class
+            XMLHttpRequest2.class,
+            XPathResult2.class
         };
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;

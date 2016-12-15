@@ -111,7 +111,7 @@ public class XPathResult extends SimpleScriptable {
     @JsxConstant
     public static final int FIRST_ORDERED_NODE_TYPE = 9;
 
-    private List<? extends Object> result_;
+    private List<?> result_;
     private int resultType_;
 
     /**
@@ -130,7 +130,7 @@ public class XPathResult extends SimpleScriptable {
      * @param result the evaluation result
      * @param type If a specific type is specified, then the result will be returned as the corresponding type
      */
-    void init(final List<? extends Object> result, final int type) {
+    void init(final List<?> result, final int type) {
         result_ = result;
         resultType_ = -1;
         if (result_.size() == 1) {

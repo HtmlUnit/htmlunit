@@ -1243,6 +1243,26 @@ public class HTMLElement2 extends Element2 {
         return attributes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLocalName() {
+        final DomNode domNode = getDomNodeOrDie();
+        if (domNode.getHtmlPageOrNull() != null) {
+            final String prefix = domNode.getPrefix();
+            if (prefix != null) {
+                // create string builder only if needed (performance)
+                final StringBuilder localName = new StringBuilder(prefix.toLowerCase(Locale.ROOT));
+                localName.append(':');
+                localName.append(domNode.getLocalName().toLowerCase(Locale.ROOT));
+                return localName.toString();
+            }
+            return domNode.getLocalName().toLowerCase(Locale.ROOT);
+        }
+        return domNode.getLocalName();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(HTMLElement2.class,

@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xml.utils.PrefixResolver;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -51,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Location2;
+import com.gargoylesoftware.htmlunit.javascript.host.ScriptFunctionPrefixResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
@@ -117,10 +119,6 @@ public class Document2 extends EventNode2 {
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
-            // FF3.6 supports document.createElement('div') or supports document.createElement('<div>')
-            // but not document.createElement('<div name="test">')
-            // IE9- supports also document.createElement('<div name="test">')
-            // FF4+ and IE11 don't support document.createElement('<div>')
             if (browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT)
                   && (tagName.contains("<") || tagName.contains(">"))) {
                 LOG.info("createElement: Provided string '"
@@ -405,6 +403,35 @@ public class Document2 extends EventNode2 {
                 designMode_ = "off";
             }
         }
+    }
+
+    /**
+     * Evaluates an XPath expression string and returns a result of the specified type if possible.
+     * @param expression the XPath expression string to be parsed and evaluated
+     * @param contextNode the context node for the evaluation of this XPath expression
+     * @param resolver the resolver permits translation of all prefixes, including the XML namespace prefix,
+     *        within the XPath expression into appropriate namespace URIs.
+     * @param type If a specific type is specified, then the result will be returned as the corresponding type
+     * @param result the result object which may be reused and returned by this method
+     * @return the result of the evaluation of the XPath expression
+     */
+    @Function({@WebBrowser(FF), @WebBrowser(CHROME)})
+    public XPathResult2 evaluate(final String expression, final Node2 contextNode,
+            final Object resolver, final int type, final Object result) {
+        XPathResult2 xPathResult = (XPathResult2) result;
+        if (xPathResult == null) {
+            xPathResult = XPathResult2.constructor(true, getWindow().getGlobal());
+        }
+
+        PrefixResolver prefixResolver = null;
+        if (resolver instanceof ScriptFunction) {
+            prefixResolver = new ScriptFunctionPrefixResolver((ScriptFunction) resolver, getWindow().getGlobal());
+        }
+        else if (resolver instanceof PrefixResolver) {
+            prefixResolver = (PrefixResolver) resolver;
+        }
+        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
+        return xPathResult;
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

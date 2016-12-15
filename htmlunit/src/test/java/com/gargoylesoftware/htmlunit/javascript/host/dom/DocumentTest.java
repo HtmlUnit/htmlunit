@@ -2210,7 +2210,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"undefined", "42"})
-    @NotYetImplemented
     public void documentDefineProperty() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

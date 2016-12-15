@@ -78,6 +78,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement2;
 import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
@@ -347,6 +348,10 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
         }
         else if (domNode instanceof HtmlObject) {
             host = HTMLObjectElement2.constructor(true, global);
+            host.setDomNode(domNode);
+        }
+        else if (domNode instanceof HtmlElement) {
+            host = HTMLUnknownElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
         else if (domNode instanceof DomElement) {
