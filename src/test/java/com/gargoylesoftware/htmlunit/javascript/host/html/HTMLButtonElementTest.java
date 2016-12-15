@@ -19,11 +19,15 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLButtonElement}.
@@ -299,5 +303,103 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "</body>"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("mouse over [btn]")
+    public void mouseOver() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function dumpEvent(event) {\n"
+            + "      // target\n"
+            + "      var eTarget;\n"
+            + "      if (event.target) {\n"
+            + "        eTarget = event.target;\n"
+            + "      } else if (event.srcElement) {\n"
+            + "        eTarget = event.srcElement;\n"
+            + "      }\n"
+            + "      // defeat Safari bug\n"
+            + "      if (eTarget.nodeType == 3) {\n"
+            + "        eTarget = eTarget.parentNode;\n"
+            + "      }\n"
+            + "      var msg = 'mouse over';\n"
+            + "      if (eTarget.name) {\n"
+            + "        msg = msg + ' [' + eTarget.name + ']';\n"
+            + "      } else {\n"
+            + "        msg = msg + ' [' + eTarget.id + ']';\n"
+            + "      }\n"
+            + "      alert(msg);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <button id='btn' onmouseover='dumpEvent(event);'>button</button><br>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("btn")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF45 = "mouse over [disabledBtn]")
+    public void mouseOverDiabled() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function dumpEvent(event) {\n"
+            + "      // target\n"
+            + "      var eTarget;\n"
+            + "      if (event.target) {\n"
+            + "        eTarget = event.target;\n"
+            + "      } else if (event.srcElement) {\n"
+            + "        eTarget = event.srcElement;\n"
+            + "      }\n"
+            + "      // defeat Safari bug\n"
+            + "      if (eTarget.nodeType == 3) {\n"
+            + "        eTarget = eTarget.parentNode;\n"
+            + "      }\n"
+            + "      var msg = 'mouse over';\n"
+            + "      if (eTarget.name) {\n"
+            + "        msg = msg + ' [' + eTarget.name + ']';\n"
+            + "      } else {\n"
+            + "        msg = msg + ' [' + eTarget.id + ']';\n"
+            + "      }\n"
+            + "      alert(msg);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <button id='disabledBtn' onmouseover='dumpEvent(event);' disabled>disabled button</button><br>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("disabledBtn")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

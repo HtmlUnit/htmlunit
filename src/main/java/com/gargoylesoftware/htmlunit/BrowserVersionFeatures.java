@@ -185,6 +185,11 @@ public enum BrowserVersionFeatures {
     /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
+
+    /** Mouse events are triggered on disabled elements also. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    EVENT_MOUSE_ON_DISABLED,
+
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     EVENT_ONCHANGE_AFTER_ONCLICK,

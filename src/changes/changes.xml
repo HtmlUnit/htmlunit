@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: FF45 triggers mouse events also for disabled buttons.
+            </action>
             <action type="fix" dev="rbri" issue="1842">
                 DL tag should close containing tags.
             </action>
