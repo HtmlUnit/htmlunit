@@ -204,5 +204,46 @@ public class XPathResult2 extends SimpleScriptObject {
         public ObjectConstructor() {
             super("XPathResult");
         }
+
+        public int G$ANY_TYPE() {
+            return ANY_TYPE;
+        }
+
+        public int G$NUMBER_TYPE() {
+            return NUMBER_TYPE;
+        }
+
+        public int G$STRING_TYPE() {
+            return STRING_TYPE;
+        }
+
+        public int G$BOOLEAN_TYPE() {
+            return BOOLEAN_TYPE;
+        }
+
+        public int G$UNORDERED_NODE_ITERATOR_TYPE() {
+            return UNORDERED_NODE_ITERATOR_TYPE;
+        }
+
+        public int G$ORDERED_NODE_ITERATOR_TYPE() {
+            return ORDERED_NODE_ITERATOR_TYPE;
+        }
+
+        public int G$UNORDERED_NODE_SNAPSHOT_TYPE() {
+            return UNORDERED_NODE_SNAPSHOT_TYPE;
+        }
+
+        public int G$ORDERED_NODE_SNAPSHOT_TYPE() {
+            return ORDERED_NODE_SNAPSHOT_TYPE;
+        }
+
+        public int G$ANY_UNORDERED_NODE_TYPE() {
+            return ANY_UNORDERED_NODE_TYPE;
+        }
+
+        public int G$FIRST_ORDERED_NODE_TYPE() {
+            return FIRST_ORDERED_NODE_TYPE;
+        }
+
     }
 }
