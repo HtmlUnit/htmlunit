@@ -128,9 +128,9 @@ public class DocumentTest extends WebDriverTestCase {
     public void formArray() throws Exception {
         final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
-            + "    function doSubmit(formName){\n"
-            + "        var form = document.forms[formName];\n" // This line used to blow up
-            + "        form.submit()\n"
+            + "function doSubmit(formName){\n"
+            + "  var form = document.forms[formName];\n"
+            + "  form.submit()\n"
             + "}\n"
             + "</SCRIPT></head><body><form name='formName' method='POST' "
             + "action='" + URL_SECOND + "'>\n"

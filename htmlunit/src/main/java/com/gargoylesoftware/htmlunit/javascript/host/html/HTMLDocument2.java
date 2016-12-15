@@ -854,11 +854,10 @@ public class HTMLDocument2 extends Document2 {
     @Override
     public GuardedInvocation noSuchProperty(final CallSiteDescriptor desc, final LinkRequest request) {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
-        final boolean scopeAccess = NashornCallSiteDescriptor.isScope(desc);
 
         final MethodHandle mh = MethodHandles.insertArguments(
-                staticHandle("getArbitraryProperty", Object.class, HTMLDocument2.class, String.class, boolean.class),
-                1, name, scopeAccess);
+                staticHandle("getArbitraryProperty", Object.class, HTMLDocument2.class, String.class),
+                1, name);
         final boolean explicitInstanceOfCheck = NashornGuards.explicitInstanceOfCheck(desc, request);
         return new GuardedInvocation(mh,
                 NashornGuards.getMapGuard(getMap(), explicitInstanceOfCheck),
@@ -867,7 +866,7 @@ public class HTMLDocument2 extends Document2 {
     }
 
     @SuppressWarnings("unused")
-    private static Object getArbitraryProperty(final HTMLDocument2 self, final String name, final boolean scopeAccess) {
+    private static Object getArbitraryProperty(final HTMLDocument2 self, final String name) {
         final HtmlPage page = (HtmlPage) self.getDomNodeOrNull();
 
         final boolean forIDAndOrName = self.getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
@@ -1041,6 +1040,38 @@ public class HTMLDocument2 extends Document2 {
     public Object elementFromPoint(final int x, final int y) {
         final HtmlElement element = getPage().getElementFromPoint(x, y);
         return element == null ? null : element.getScriptableObject();
+    }
+
+    /**
+     * Executes a command.
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419.aspx">MSDN documentation</a>
+     * @param cmd the command identifier
+     * @param userInterface display a user interface if the command supports one
+     * @param value the string, number, or other value to assign (possible values depend on the command)
+     * @return {@code true} if the command was successful, {@code false} otherwise
+     */
+    @Function
+    public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
+        if (!hasCommand(cmd, false)) {
+            return false;
+        }
+        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        return true;
+    }
+
+    private boolean hasCommand(final String cmd, final boolean includeBold) {
+        if (null == cmd) {
+            return false;
+        }
+
+        final String cmdLC = cmd.toLowerCase(Locale.ROOT);
+        if (getBrowserVersion().isIE()) {
+            return EXECUTE_CMDS_IE.contains(cmdLC);
+        }
+        if (getBrowserVersion().isChrome()) {
+            return EXECUTE_CMDS_CHROME.contains(cmdLC) || (includeBold && "bold".equalsIgnoreCase(cmd));
+        }
+        return EXECUTE_CMDS_FF.contains(cmdLC);
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
