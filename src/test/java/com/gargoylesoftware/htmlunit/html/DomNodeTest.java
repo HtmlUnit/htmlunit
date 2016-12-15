@@ -665,7 +665,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body><div id='div1'/><div id='div2'/></body></html>";
         final HtmlPage page = loadPage(content);
         for (final HtmlElement element : page.getHtmlElementDescendants()) {
-            final List<? extends Object> foundElements = page.getByXPath(element.getCanonicalXPath());
+            final List<?> foundElements = page.getByXPath(element.getCanonicalXPath());
             assertEquals(1, foundElements.size());
             assertSame(element, foundElements.get(0));
         }
