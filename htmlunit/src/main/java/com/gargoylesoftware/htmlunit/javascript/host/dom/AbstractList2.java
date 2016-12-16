@@ -68,7 +68,7 @@ public class AbstractList2 extends SimpleScriptObject {
         RESET
     }
 
-    private boolean avoidObjectDetection_ = false;
+    private boolean avoidObjectDetection_;
 
     private boolean attributeChangeSensitive_ = true;
 
@@ -172,20 +172,15 @@ public class AbstractList2 extends SimpleScriptObject {
 //    }
 
     /**
-     * Private helper that retrieves the item or items corresponding to the specified
-     * index or key.
-     * @param o the index or key corresponding to the element or elements to return
-     * @return the element or elements corresponding to the specified index or key
+     * {@inheritDoc}
      */
-//    private Object getIt(final Object o) {
-//        if (o instanceof Number) {
-//            final Number n = (Number) o;
-//            final int i = n.intValue();
-//            return get(i, this);
-//        }
-//        final String key = String.valueOf(o);
-//        return get(key, this);
-//    }
+    @Override
+    public Object get(final Object key) {
+        if (key instanceof String) {
+            return getWithPreemption((String) key);
+        }
+        return super.get(key);
+    }
 
     /**
      * {@inheritDoc}
