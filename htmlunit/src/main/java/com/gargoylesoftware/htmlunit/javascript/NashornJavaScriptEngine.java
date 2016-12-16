@@ -92,6 +92,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
 /**
  * A wrapper for the <a href="http://openjdk.java.net/projects/nashorn/">Nashorn JavaScript engine</a>.
@@ -384,6 +385,16 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         }
     }
 
+    public Object execute(final InteractivePage page, final ScriptFunction script) {
+        try {
+            return engine.evalImpl(script, page.getEnclosingWindow().getScriptContext());
+        }
+        catch (final Exception e) {
+            handleJavaScriptException(new ScriptException(page, e, script.safeToString()), true);
+            return null;
+        }
+    }
+
     @Override
     public Object execute(final InteractivePage page, final String sourceCode, final String sourceName,
             final int startLine) {
@@ -397,7 +408,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             try {
                 response = engine.eval(sourceCode, page.getEnclosingWindow().getScriptContext());
             }
-            catch(final Exception e) {
+            catch (final Exception e) {
                 handleJavaScriptException(new ScriptException(page, e, sourceCode), true);
                 return null;
             }
@@ -409,6 +420,29 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
             doProcessPostponedActions();
         }
         return response;
+    }
+
+    /**
+     * Compiles the specified JavaScript code in the context of a given HTML page.
+     *
+     * @param page the page that the code will execute within
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name that will be displayed on error conditions
+     * @param startLine the line at which the script source starts
+     * @return the result of executing the specified code
+     */
+    public ScriptFunction compile(final InteractivePage page, final String sourceCode,
+            final String sourceName, final int startLine) {
+        final Global global = page.getEnclosingWindow().getGlobal();
+        final Global oldGlobal = Context.getGlobal();
+        try {
+            Context.setGlobal(global);
+
+            return global.getContext().compileScript(Source.sourceFor("<eval>", sourceCode), global);
+        }
+        finally {
+            Context.setGlobal(oldGlobal);
+        }
     }
 
     /**

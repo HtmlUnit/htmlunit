@@ -14,15 +14,29 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.*;
+import static com.gargoylesoftware.htmlunit.html.DomElement.*;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
+
 
 @ScriptClass
 public class HTMLScriptElement2 extends HTMLElement2 {
@@ -32,6 +46,180 @@ public class HTMLScriptElement2 extends HTMLElement2 {
         host.setProto(((Global) self).getPrototype(host.getClass()));
         ScriptUtils.initialize(host);
         return host;
+    }
+
+    /**
+     * Returns the {@code src} property.
+     * @return the {@code src} property
+     */
+    @Getter
+    public String getSrc() {
+        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        String src = tmpScript.getSrcAttribute();
+        if (ATTRIBUTE_NOT_DEFINED == src) {
+            return src;
+        }
+        try {
+            final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
+            src = expandedSrc.toString();
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+        return src;
+    }
+
+    /**
+     * Sets the {@code src} property.
+     * @param src the {@code src} property
+     */
+    @Setter
+    public void setSrc(final String src) {
+        getDomNodeOrDie().setAttribute("src", src);
+    }
+
+    /**
+     * Returns the {@code text} property.
+     * @return the {@code text} property
+     */
+    @Getter
+    public String getText() {
+        final StringBuilder scriptCode = new StringBuilder();
+        for (final DomNode node : getDomNodeOrDie().getChildren()) {
+            if (node instanceof DomText) {
+                final DomText domText = (DomText) node;
+                scriptCode.append(domText.getData());
+            }
+        }
+        return scriptCode.toString();
+    }
+
+    /**
+     * Sets the {@code text} property.
+     * @param text the {@code text} property
+     */
+    @Setter
+    public void setText(final String text) {
+        final HtmlElement htmlElement = getDomNodeOrDie();
+        htmlElement.removeAllChildren();
+        final DomNode textChild = new DomText(htmlElement.getPage(), text);
+        htmlElement.appendChild(textChild);
+
+        final HtmlScript tmpScript = (HtmlScript) htmlElement;
+        tmpScript.executeScriptIfNeeded();
+    }
+
+    /**
+     * Returns the {@code type} property.
+     * @return the {@code type} property
+     */
+    @Getter
+    public String getType() {
+        return getDomNodeOrDie().getAttribute("type");
+    }
+
+    /**
+     * Sets the {@code type} property.
+     * @param type the {@code type} property
+     */
+    @Setter
+    public void setType(final String type) {
+        getDomNodeOrDie().setAttribute("type", type);
+    }
+
+    /**
+     * Returns the event handler that fires on every state change.
+     * @return the event handler that fires on every state change
+     */
+    @Getter(@WebBrowser(IE))
+    public Object getOnreadystatechange() {
+        return getEventHandlerProp("onreadystatechange");
+    }
+
+    /**
+     * Sets the event handler that fires on every state change.
+     * @param handler the event handler that fires on every state change
+     */
+    @Setter(@WebBrowser(IE))
+    public void setOnreadystatechange(final Object handler) {
+        setEventHandlerProp("onreadystatechange", handler);
+    }
+
+    /**
+     * Returns the event handler that fires on load.
+     * @return the event handler that fires on load
+     */
+    @Getter
+    public Object getOnload() {
+        return getEventHandlerProp("onload");
+    }
+
+    /**
+     * Sets the event handler that fires on load.
+     * @param handler the event handler that fires on load
+     */
+    @Setter
+    public void setOnload(final Object handler) {
+        setEventHandlerProp("onload", handler);
+    }
+
+    /**
+     * Returns the ready state of the script. This is an IE-only property.
+     * @return the ready state of the script
+     * @see DomNode#READY_STATE_UNINITIALIZED
+     * @see DomNode#READY_STATE_LOADING
+     * @see DomNode#READY_STATE_LOADED
+     * @see DomNode#READY_STATE_INTERACTIVE
+     * @see DomNode#READY_STATE_COMPLETE
+     */
+    @Getter(@WebBrowser(IE))
+    public Object getReadyState() {
+        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        if (tmpScript.wasCreatedByJavascript()) {
+            return ScriptRuntime.UNDEFINED;
+        }
+        return tmpScript.getReadyState();
+    }
+
+    /**
+     * Overwritten for special IE handling.
+     *
+     * @param childObject the node to add to this node
+     * @return the newly added child node
+     */
+    @Override
+    public Object appendChild(final Object childObject) {
+        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        final boolean wasEmpty = tmpScript.getFirstChild() == null;
+        final Object result = super.appendChild(childObject);
+
+        if (wasEmpty) {
+            tmpScript.executeScriptIfNeeded();
+        }
+        return result;
+    }
+
+    /**
+     * Returns the {@code async} property.
+     * @return the {@code async} property
+     */
+    @Getter
+    public Boolean getAsync() {
+        return getDomNodeOrDie().hasAttribute("async");
+    }
+
+    /**
+     * Sets the {@code async} property.
+     * @param async the {@code async} property
+     */
+    @Setter
+    public void setAsync(final boolean async) {
+        if (async) {
+            getDomNodeOrDie().setAttribute("async", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("async");
+        }
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

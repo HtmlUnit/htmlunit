@@ -67,7 +67,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -79,7 +78,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -979,7 +978,7 @@ public class HtmlPage extends InteractivePage {
             return JavaScriptLoadResult.NOOP;
         }
 
-        final Script script;
+        final ScriptFunction script;
         try {
             script = loadJavaScriptFromUrl(scriptURL, charset);
         }
@@ -1004,7 +1003,7 @@ public class HtmlPage extends InteractivePage {
             return JavaScriptLoadResult.COMPILATION_ERROR;
         }
 
-        client.getJavaScriptEngine().execute(this, script);
+        client.getJavaScriptEngine2().execute(this, script);
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -1020,7 +1019,7 @@ public class HtmlPage extends InteractivePage {
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Script loadJavaScriptFromUrl(final URL url, final String charset) throws IOException,
+    private ScriptFunction loadJavaScriptFromUrl(final URL url, final String charset) throws IOException,
         FailingHttpStatusCodeException {
 
         String scriptEncoding = charset;
@@ -1043,8 +1042,8 @@ public class HtmlPage extends InteractivePage {
         // now we can look into the cache with the fixed request for
         // a cached script
         final Object cachedScript = cache.getCachedObject(request);
-        if (cachedScript instanceof Script) {
-            return (Script) cachedScript;
+        if (cachedScript instanceof ScriptFunction) {
+            return (ScriptFunction) cachedScript;
         }
 
         client.printContentIfNecessary(response);
@@ -1092,8 +1091,8 @@ public class HtmlPage extends InteractivePage {
         final String scriptCode = response.getContentAsString(scriptEncoding);
         response.cleanUp();
         if (null != scriptCode) {
-            final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
-            final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
+            final NashornJavaScriptEngine javaScriptEngine = client.getJavaScriptEngine2();
+            final ScriptFunction script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null) {
                 // cache the script
                 cache.cacheIfPossible(request, response, script);

@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRp;
 import com.gargoylesoftware.htmlunit.html.HtmlRt;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
@@ -155,6 +156,9 @@ public class Document2 extends EventNode2 {
             }
             else if (element instanceof HtmlRt) {
                 ((HtmlRt) element).markAsCreatedByJavascript();
+            }
+            else if (element instanceof HtmlScript) {
+                ((HtmlScript) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlUnknownElement) {
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();
