@@ -1665,7 +1665,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<script>\n"
             + "  function closeIt(event) {\n"
-            + "     event.returnValue = '" + expectedMessage + "';\n"
+            + "    event.returnValue = '" + expectedMessage + "';\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onbeforeunload='closeIt(event)'>\n"

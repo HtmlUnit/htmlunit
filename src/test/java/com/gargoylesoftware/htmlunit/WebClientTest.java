@@ -1831,9 +1831,9 @@ public class WebClientTest extends SimpleWebTestCase {
         final String html2 = "<html><head><title>Second</title></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<script>\n"
-                + "     function doTest() {\n"
-                + "         window.close();\n"
-                + "    }\n"
+                + "  function doTest() {\n"
+                + "    window.close();\n"
+                + "  }\n"
                 + "</script></body></html>";
         conn.setDefaultResponse(html2);
 
@@ -1898,11 +1898,11 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "<button id='clickme' type='button' onclick='postBack();'>Submit</button></form>\n"
                 + "<script>\n"
                 + "    function doTest() {\n"
-                + "         window.close();\n"
+                + "      window.close();\n"
                 + "    }\n"
                 + "    function postBack() {\n"
-                + "         var frm  = document.forms[0];\n"
-                + "         frm.submit();\n"
+                + "      var frm = document.forms[0];\n"
+                + "      frm.submit();\n"
                 + "    }\n"
                 + "</script></body></html>";
         conn.setResponse(URL_SECOND, html2);

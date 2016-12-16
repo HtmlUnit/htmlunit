@@ -45,7 +45,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "     alert(new DOMParser());\n"
+            + "      alert(new DOMParser());\n"
             + "    } catch (e) {alert('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

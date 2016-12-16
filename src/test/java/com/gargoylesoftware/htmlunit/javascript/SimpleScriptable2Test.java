@@ -59,7 +59,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "     document.body = 123456;\n"
+            + "      document.body = 123456;\n"
             + "    } catch (e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

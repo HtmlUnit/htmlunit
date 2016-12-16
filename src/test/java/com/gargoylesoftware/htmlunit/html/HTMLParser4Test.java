@@ -97,7 +97,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<script>var i = 7;</script>\n"
             + "<html>\n"
             + "  <head>\n"
-            + "     <title>first</title>\n"
+            + "    <title>first</title>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <script>\n"
@@ -125,7 +125,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "     <title>first</title>\n"
+            + "    <title>first</title>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <script>\n"
@@ -153,7 +153,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "     <title>first</title>\n"
+            + "    <title>first</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
             + "        var headChildren = document.getElementsByTagName('body')[0].childNodes;\n"

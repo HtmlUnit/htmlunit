@@ -112,7 +112,8 @@ public class History2Test extends WebDriverTestCase {
                 + "    }\n"
                 + "  }\n"
 
-                + "  function test2() {\n" + "    if (window.history.pushState) {\n"
+                + "  function test2() {\n"
+                + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi2: 'there2' };\n"
                 + "      window.history.pushState(stateObj, 'page 3', 'bar2.html');\n"
                 + "    }\n"
@@ -214,7 +215,8 @@ public class History2Test extends WebDriverTestCase {
                 + "    }\n"
                 + "  }\n"
 
-                + "  function test2() {\n" + "    if (window.history.pushState) {\n"
+                + "  function test2() {\n"
+                + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi2: 'there2' };\n"
                 + "      window.history.pushState(stateObj, 'page 3', 'bar2.html');\n"
                 + "    }\n"

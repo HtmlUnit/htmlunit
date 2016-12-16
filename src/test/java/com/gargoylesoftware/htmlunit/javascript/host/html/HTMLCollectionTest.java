@@ -112,7 +112,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    }\n"
             + "    arr.sort();\n"
             + "    for (i = 0; i < arr.length; i++) {\n"
-            + "       alert(arr[i]);\n"
+            + "      alert(arr[i]);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

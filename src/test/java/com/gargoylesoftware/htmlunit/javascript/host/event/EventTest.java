@@ -530,7 +530,7 @@ public class EventTest extends WebDriverTestCase {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
-            + "        dump(e);\n"
+            + "      dump(e);\n"
             + "    }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
@@ -546,10 +546,10 @@ public class EventTest extends WebDriverTestCase {
     public void timeStamp() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
-            + "    function test(e) {\n"
-            + "        alert(e);\n"
-            + "        alert(typeof e.timeStamp);\n"
-            + "    }\n"
+            + "  function test(e) {\n"
+            + "    alert(e);\n"
+            + "    alert(typeof e.timeStamp);\n"
+            + "  }\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
@@ -764,12 +764,12 @@ public class EventTest extends WebDriverTestCase {
                 + "  function handler(e) {\n"
                 + "    var src = e.srcElement;\n"
                 + "    if (!src)\n"
-                + "       src = e.target;\n"
+                + "      src = e.target;\n"
                 + "    log(e.type + ' ' + src.nodeName);\n"
                 + "    log('handler: activeElement ' + document.activeElement.nodeName);\n"
                 + "  }\n"
                 + "  function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    document.getElementById('log').value += x + '\\n';\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -815,7 +815,7 @@ public class EventTest extends WebDriverTestCase {
                 + "  function handler(e) {\n"
                 + "    var src = e.srcElement;\n"
                 + "    if (!src)\n"
-                + "       src = e.target;\n"
+                + "      src = e.target;\n"
                 + "    log(e.type + ' ' + src.nodeName);\n"
                 + "  }\n"
                 + "  function log(x) {\n"

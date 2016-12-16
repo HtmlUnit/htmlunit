@@ -48,7 +48,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
-            + "   document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
+            + "    document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

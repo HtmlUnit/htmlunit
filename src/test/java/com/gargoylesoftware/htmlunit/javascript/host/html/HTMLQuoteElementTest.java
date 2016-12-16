@@ -41,7 +41,7 @@ public class HTMLQuoteElementTest extends WebDriverTestCase {
             + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "      alert(document.createElement('blockquote').__proto__ == document.createElement('q').__proto__);\n"
+            + "    alert(document.createElement('blockquote').__proto__ == document.createElement('q').__proto__);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

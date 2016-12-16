@@ -118,7 +118,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         final String thirdHtml = "<html>\n"
             + "<body onload=\"alert('third ' + window.parent.frames['third'].document.frm)\">\n"
             + "  <form name='frm' id='frm'>\n"
-            + "      <input type='text' id='one' name='one' value='something'>\n"
+            + "    <input type='text' id='one' name='one' value='something'>\n"
             + "  </form>\n"
             + "</body></html>";
 

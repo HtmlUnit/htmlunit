@@ -150,7 +150,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "  req.send('');\n"
             + "  alert('before long loop');\n"
             + "  for (var i = 0; i < 5000; i++) {\n"
-            + "     j = j + 1;\n"
+            + "    j = j + 1;\n"
             + "  }\n"
             + "  alert('after long loop');\n"
             + "}\n"

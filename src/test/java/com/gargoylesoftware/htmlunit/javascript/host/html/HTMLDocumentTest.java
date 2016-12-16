@@ -1577,20 +1577,20 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     public void cookie_write2() throws Exception {
         final String html =
               "<html>\n"
-            + "    <head>\n"
-            + "        <script>\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie='a';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie='';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie='b';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie='';\n"
-            + "            alert(document.cookie);\n"
-            + "        </script>\n"
-            + "    </head>\n"
-            + "    <body>abc</body>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      alert(document.cookie);\n"
+            + "      document.cookie='a';\n"
+            + "      alert(document.cookie);\n"
+            + "      document.cookie='';\n"
+            + "      alert(document.cookie);\n"
+            + "      document.cookie='b';\n"
+            + "      alert(document.cookie);\n"
+            + "      document.cookie='';\n"
+            + "      alert(document.cookie);\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body>abc</body>\n"
             + "</html>";
 
         loadPageWithAlerts2(html);
@@ -1604,16 +1604,16 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     public void cookie_write_valueOnly() throws Exception {
         final String html =
               "<html>\n"
-            + "    <head>\n"
-            + "        <script>\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie='a';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie='=b';\n"
-            + "            alert(document.cookie);\n"
-            + "        </script>\n"
-            + "    </head>\n"
-            + "    <body>abc</body>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      alert(document.cookie);\n"
+            + "      document.cookie='a';\n"
+            + "      alert(document.cookie);\n"
+            + "      document.cookie='=b';\n"
+            + "      alert(document.cookie);\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body>abc</body>\n"
             + "</html>";
 
         loadPageWithAlerts2(html);

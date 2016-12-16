@@ -465,13 +465,13 @@ public class Event2Test extends WebDriverTestCase {
     public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
-            + "    function test(e) {\n"
-            + "        alert(typeof e);\n"
-            + "        alert(e.shiftKey);\n"
-            + "        alert(e.ctrlKey);\n"
-            + "        alert(e.altKey);\n"
-            + "        alert(e.metaKey);\n"
-            + "    }\n"
+            + "  function test(e) {\n"
+            + "    alert(typeof e);\n"
+            + "    alert(e.shiftKey);\n"
+            + "    alert(e.ctrlKey);\n"
+            + "    alert(e.altKey);\n"
+            + "    alert(e.metaKey);\n"
+            + "  }\n"
             + "</script>\n"
             + "<div id='div' onclick='test(event)'>abc</div>\n"
             + "</body></html>";

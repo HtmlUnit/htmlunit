@@ -62,7 +62,7 @@ public class NodeFilterTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  try {\n"
-            + "      alert(NodeFilter.SHOW_ALL);\n"
+            + "    alert(NodeFilter.SHOW_ALL);\n"
             + "  } catch(e) { alert('exception');}\n"
             + "</script></head>\n"
             + "<body></body></html>";

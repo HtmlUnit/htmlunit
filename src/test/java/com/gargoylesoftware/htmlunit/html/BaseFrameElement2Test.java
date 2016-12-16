@@ -50,7 +50,7 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
             + "    alert('posted');\n"
             + "  }\n"
             + "  function handler() {\n"
-            + "      alert('called');\n"
+            + "    alert('called');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

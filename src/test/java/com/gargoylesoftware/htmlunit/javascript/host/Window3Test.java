@@ -1188,13 +1188,13 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
-            + "      var s = 'string';\n"
-            + "      var f = 'initial';\n"
-            + "      eval('f = function() {alert(s);}');\n"
-            + "      invoke(f);\n"
+            + "     var s = 'string';\n"
+            + "     var f = 'initial';\n"
+            + "     eval('f = function() {alert(s);}');\n"
+            + "     invoke(f);\n"
             + "   }\n"
             + "   function invoke(fn) {\n"
-            + "      fn();\n"
+            + "     fn();\n"
             + "   }\n"
             + "</script></body></html>";
 

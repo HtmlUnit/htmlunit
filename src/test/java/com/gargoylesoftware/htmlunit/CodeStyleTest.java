@@ -896,9 +896,11 @@ public class CodeStyleTest {
             String next = lines.get(i + 1).trim();
             if (line.startsWith("+ \"") && next.startsWith("+ \"")) {
                 line = line.substring(3);
+                final String lineTrimmed = line.trim();
                 next = next.substring(3);
-                if ((line.startsWith("<") && next.trim().startsWith("<") || line.startsWith("try") || line.startsWith("for")
-                        || line.startsWith("function") || line.startsWith("if"))) {
+                if ((lineTrimmed.startsWith("<") && next.trim().startsWith("<") || lineTrimmed.startsWith("try")
+                        || lineTrimmed.startsWith("for") || lineTrimmed.startsWith("function")
+                        || lineTrimmed.startsWith("if"))) {
                     final int difference = getInitialSpaces(next) - getInitialSpaces(line);
                     if (difference > 2) {
                         addFailure("Too many spaces in " + relativePath + ", line: " + (i + 2));

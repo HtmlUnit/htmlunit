@@ -309,12 +309,12 @@ public class LocationTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String mainContent
-            = " <html>\n"
-            + " <frameset rows='100,*'>\n"
-            + "     <frame name='menu' src='menu.html'/>\n"
-            + "     <frame name='content' src='content.html'/>\n"
-            + " </frameset>\n"
-            + " </html>";
+            = "<html>\n"
+            + "  <frameset rows='100,*'>\n"
+            + "    <frame name='menu' src='menu.html'/>\n"
+            + "    <frame name='content' src='content.html'/>\n"
+            + "  </frameset>\n"
+            + "</html>";
         final String frameMenu =
             "<html><body>\n"
             + "<a href='#' id='myLink' target='content' "

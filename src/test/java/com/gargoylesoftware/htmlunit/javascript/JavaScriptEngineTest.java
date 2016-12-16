@@ -521,8 +521,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String jsContent
             = "function testNestedMethod() {\n"
-            + "    if (testLocalVariable == null)\n"
-            + "        testLocalVariable = 'foo';\n"
+            + "  if (testLocalVariable == null)\n"
+            + "    testLocalVariable = 'foo';\n"
             + "} ";
 
         webConnection.setResponse(URL_FIRST, htmlContent);
@@ -595,7 +595,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title><script src='./test.js'></script>\n"
             + "</head><body>\n"
-            + "    <script>externalMethod()</script>\n"
+            + "  <script>externalMethod()</script>\n"
             + "</body></html>";
 
         final String jsContent
