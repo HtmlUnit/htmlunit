@@ -49,7 +49,7 @@ public class ClickableElement2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
-            + "    <input type='button' id='textfield1' onfocus='alert(1)'>\n"
+            + "  <input type='button' id='textfield1' onfocus='alert(1)'>\n"
             + "</form>\n"
             + "</body></html>";
 

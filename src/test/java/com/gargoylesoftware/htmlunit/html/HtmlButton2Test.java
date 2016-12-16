@@ -333,7 +333,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
-            + "    <button name='button' id='button' value='pushme'>PushMe</button>\n"
+            + "  <button name='button' id='button' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body'></body></html>";

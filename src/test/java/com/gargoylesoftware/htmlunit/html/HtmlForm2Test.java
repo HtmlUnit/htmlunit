@@ -61,17 +61,17 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    try {\n"
-            + "        alert(document.forms[0].id);\n"
-            + "        alert(document.forms(0).id);\n"
-            + "    } catch (err) {\n"
-            + "        alert('TypeError');\n"
-            + "    }\n"
+            + "  try {\n"
+            + "    alert(document.forms[0].id);\n"
+            + "    alert(document.forms(0).id);\n"
+            + "  } catch (err) {\n"
+            + "    alert('TypeError');\n"
+            + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form id='myForm'>\n"
-            + "    <input type='text' name='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield1' value='foo' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -88,17 +88,17 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    try {\n"
-            + "        alert(document.forms['myName'].id);\n"
-            + "        alert(document.forms('myName').id);\n"
-            + "    } catch (err) {\n"
-            + "        alert('TypeError');\n"
-            + "    }\n"
+            + "  try {\n"
+            + "    alert(document.forms['myName'].id);\n"
+            + "    alert(document.forms('myName').id);\n"
+            + "  } catch (err) {\n"
+            + "    alert('TypeError');\n"
+            + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form id='myForm' name='myName'>\n"
-            + "    <input type='text' name='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield1' value='foo' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -167,7 +167,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
             + "</head>\n"
             + "<body>\n"
-            + "   <a href='bug.html?k\u00F6nig' id='myLink'>Click me</a>\n"
+            + "  <a href='bug.html?k\u00F6nig' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
         final URL url = getDefaultUrl();
@@ -291,11 +291,11 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<form id='form1' method='get' action='foo'>\n"
-            + "    <input name='field1' value='val1'/>\n"
-            + "    <form>\n"
-            + "    <input name='field2' value='val2'/>\n"
-            + "    <input type='submit' id='submitButton'/>\n"
-            + "    </form>\n"
+            + "  <input name='field1' value='val1'/>\n"
+            + "  <form>\n"
+            + "  <input name='field2' value='val2'/>\n"
+            + "  <input type='submit' id='submitButton'/>\n"
+            + "  </form>\n"
             + "</form></body></html>";
 
         loadPageWithAlerts2(html);

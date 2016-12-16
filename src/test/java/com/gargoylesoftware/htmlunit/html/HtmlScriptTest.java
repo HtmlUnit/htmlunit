@@ -106,7 +106,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<script id='script1'>\n"
-            + "    alert('hello');\n"
+            + "  alert('hello');\n"
             + "</script></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);

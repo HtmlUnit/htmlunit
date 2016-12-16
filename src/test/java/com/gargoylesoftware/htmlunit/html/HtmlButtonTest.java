@@ -46,7 +46,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
-            + "    <button type='button' name='button' id='button' "
+            + "  <button type='button' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
 
@@ -70,7 +70,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
-            + "    <button type='submit' name='button' id='button' "
+            + "  <button type='submit' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -93,7 +93,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
-            + "    <button type='submit' name='button' id='button' value='foo'"
+            + "  <button type='submit' name='button' id='button' value='foo'"
             + "    >Push me</button>\n"
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -125,7 +125,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
-            + "    <button name='button' id='button' value='pushme'>PushMe</button>\n"
+            + "  <button name='button' id='button' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);

@@ -54,10 +54,10 @@ public class AttrTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"
-            + "    <select name='select1' id='testSelect'>\n"
-            + "        <option name='option1' value='foo'>One</option>\n"
-            + "        <option>Two</option>\n"
-            + "    </select>\n"
+            + "  <select name='select1' id='testSelect'>\n"
+            + "    <option name='option1' value='foo'>One</option>\n"
+            + "    <option>Two</option>\n"
+            + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -100,10 +100,10 @@ public class AttrTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"
-            + "    <select name='select1' id='testSelect'>\n"
-            + "        <option name='option1' value='foo'>One</option>\n"
-            + "        <option>Two</option>\n"
-            + "    </select>\n"
+            + "  <select name='select1' id='testSelect'>\n"
+            + "    <option name='option1' value='foo'>One</option>\n"
+            + "    <option>Two</option>\n"
+            + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
 

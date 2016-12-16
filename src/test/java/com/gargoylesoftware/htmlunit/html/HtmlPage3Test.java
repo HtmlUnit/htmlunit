@@ -122,8 +122,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "<table><tr><td>\n"
             + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</td></tr></table>\n"
             + "</body></html>";
@@ -232,10 +232,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body><script>\n"
-            + "    document.write(\"<input id='sendemail'>\");\n"
-            + "    alert(document.getElementById('sendemail'));\n"
-            + "    document.write(\"<input name='sendemail2'>\");\n"
-            + "    alert(document.getElementsByName('sendemail2').length);\n"
+            + "  document.write(\"<input id='sendemail'>\");\n"
+            + "  alert(document.getElementById('sendemail'));\n"
+            + "  document.write(\"<input name='sendemail2'>\");\n"
+            + "  alert(document.getElementsByName('sendemail2').length);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }

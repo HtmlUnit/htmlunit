@@ -46,7 +46,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='radio' name='radio' id='radio'>Check me</input>\n"
+            + "  <input type='radio' name='radio' id='radio'>Check me</input>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);
@@ -67,7 +67,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='radio' name='radio' id='radio'"
+            + "  <input type='radio' name='radio' id='radio'"
             + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
             + "</form></body></html>";
 
@@ -90,7 +90,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='radio' name='radio' id='radio'"
+            + "  <input type='radio' name='radio' id='radio'"
             + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
             + "</form></body></html>";
 
@@ -115,11 +115,11 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<script type='text/javascript'>\n"
-            + "    function itemOnClickHandler() {\n"
-            + "        var oneItem = document.getElementById('oneItem');\n"
-            + "        var twoItems = document.getElementById('twoItems');\n"
-            + "        alert('oneItem.checked: ' + oneItem.checked + ' twoItems.checked: ' + twoItems.checked);\n"
-            + "    }\n"
+            + "  function itemOnClickHandler() {\n"
+            + "    var oneItem = document.getElementById('oneItem');\n"
+            + "    var twoItems = document.getElementById('twoItems');\n"
+            + "    alert('oneItem.checked: ' + oneItem.checked + ' twoItems.checked: ' + twoItems.checked);\n"
+            + "  }\n"
             + "</script>\n"
             + "<form name='testForm'>\n"
             + "Number of items:"

@@ -85,22 +85,22 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     // DOM processing instructions do not support attributes
     public void attributes_complete_xmlDecl() throws Exception {
         final String html = ""
-            + "  function test() {\n"
+            + "function test() {\n"
             + ACTIVEX_CHECK
-            + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
-            + "    var instr = doc.createProcessingInstruction("
+            + "  var doc = " + callCreateXMLDOMDocument() + ";\n"
+            + "  var instr = doc.createProcessingInstruction("
             + "'xml', 'version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"');\n"
-            + "    doc.appendChild(instr);\n"
-            + "    try {\n"
-            + "      alert(instr.attributes.length);\n"
-            + "      var attr = instr.attributes[0];\n"
-            + "      alert(attr.nodeName + '=' + attr.nodeValue);\n"
-            + "      attr = instr.attributes[1];\n"
-            + "      alert(attr.nodeName + '=' + attr.nodeValue);\n"
-            + "      attr = instr.attributes[2];\n"
-            + "      alert(attr.nodeName + '=' + attr.nodeValue);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "  }\n"
+            + "  doc.appendChild(instr);\n"
+            + "  try {\n"
+            + "    alert(instr.attributes.length);\n"
+            + "    var attr = instr.attributes[0];\n"
+            + "    alert(attr.nodeName + '=' + attr.nodeValue);\n"
+            + "    attr = instr.attributes[1];\n"
+            + "    alert(attr.nodeName + '=' + attr.nodeValue);\n"
+            + "    attr = instr.attributes[2];\n"
+            + "    alert(attr.nodeName + '=' + attr.nodeValue);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
         loadPageWithAlerts2(createTestHTML(html));

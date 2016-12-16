@@ -47,8 +47,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frame src='' id='frame1'>\n"
-            + "    <frame src='about:blank' id='frame2'>\n"
+            + "  <frame src='' id='frame1'>\n"
+            + "  <frame src='about:blank' id='frame2'>\n"
             + "</frameset></html>";
         final HtmlPage page = loadPage(html);
 
@@ -72,8 +72,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frame id='frame1'>\n"
-            + "    <frame onload='alert(this.tagName)' id='frame2'>\n"
+            + "  <frame id='frame1'>\n"
+            + "  <frame onload='alert(this.tagName)' id='frame2'>\n"
             + "</frameset></html>";
         final String[] expectedAlerts = {"FRAME"};
 
@@ -99,8 +99,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frame src='' name='frame1' id='frame1'>\n"
-            + "    <frame onload=\"frame1.document.open();frame1.document.write("
+            + "  <frame src='' name='frame1' id='frame1'>\n"
+            + "  <frame onload=\"frame1.document.open();frame1.document.write("
             + "'<html><head><title>generated</title></head><body>generated</body></html>');"
             + "frame1.document.close()\"  id='frame2'>\n"
             + "</frameset></html>";
@@ -127,7 +127,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='100%'>\n"
-            + "    <frame src='foo.txt'>\n"
+            + "  <frame src='foo.txt'>\n"
             + "</frameset></html>";
         webConnection.setDefaultResponse("foo", 200, "OK", "text/plain");
         webConnection.setResponse(URL_FIRST, html);
@@ -194,7 +194,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final String frame1 = "<html><head><title>1</title></head>\n"
             + "<body>1"
             + "<script>\n"
-            + "   parent.frames['f2'].location.href = '3.html';\n"
+            + "  parent.frames['f2'].location.href = '3.html';\n"
             + "</script>\n"
             + "</body></html>";
 

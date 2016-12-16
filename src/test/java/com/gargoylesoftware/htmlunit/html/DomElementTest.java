@@ -40,8 +40,8 @@ public final class DomElementTest extends WebDriverTestCase {
     public void getElementsByTagName() throws Exception {
         final String html = "<html><head><script>\n"
                 + "function test() {\n"
-                + "    alert(document.f1.getElementsByTagName('input').length);\n"
-                + "    alert(document.f1.getElementsByTagName('INPUT').length);\n"
+                + "  alert(document.f1.getElementsByTagName('input').length);\n"
+                + "  alert(document.f1.getElementsByTagName('INPUT').length);\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"

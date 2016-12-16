@@ -316,7 +316,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
             + "<optgroup label='group1'>\n"
-            + "    <option value='option3'>Option3</option>\n"
+            + "  <option value='option3'>Option3</option>\n"
             + "</optgroup>\n"
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
@@ -361,13 +361,13 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     public void  getOptionByValue() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
-            + "    <option value='option1'>s1o1</option>\n"
-            + "    <option value='option2'>s1o2</option>\n"
+            + "  <option value='option1'>s1o1</option>\n"
+            + "  <option value='option2'>s1o2</option>\n"
             + "</select>\n"
             + "<select name='select2'>\n"
-            + "    <option value='option1'>s2o1</option>\n"
-            + "    <option value='option2'>s2o2</option>\n"
-            + "    <option>s2o3</option>\n"
+            + "  <option value='option1'>s2o1</option>\n"
+            + "  <option value='option2'>s2o2</option>\n"
+            + "  <option>s2o3</option>\n"
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
@@ -604,8 +604,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' onchange='location=\"about:blank\"'>\n"
-            + "     <option id='option1'>Option1</option>\n"
-            + "     <option id='option2' selected>Number Two</option>\n"
+            + "   <option id='option1'>Option1</option>\n"
+            + "   <option id='option2' selected>Number Two</option>\n"
             + "</select>\n"
             + "</form></body></html>";
 
@@ -625,8 +625,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' onchange='window.open(\"about:blank\", \"_blank\")'>\n"
-            + "     <option id='option1'>Option1</option>\n"
-            + "     <option id='option2' selected>Number Two</option>\n"
+            + "   <option id='option1'>Option1</option>\n"
+            + "   <option id='option2' selected>Number Two</option>\n"
             + "</select>\n"
             + "</form></body></html>";
 
@@ -687,13 +687,13 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     public void getOptionByText() throws Exception {
         final String html = "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
-            + "    <option value='option1'>s1o1</option>\n"
-            + "    <option value='option2'>s1o2</option>\n"
+            + "  <option value='option1'>s1o1</option>\n"
+            + "  <option value='option2'>s1o2</option>\n"
             + "</select>\n"
             + "<select name='select2'>\n"
-            + "    <option value='option1'>s2o1</option>\n"
-            + "    <option value='option2'>s2o2</option>\n"
-            + "    <option>s2o3</option>\n"
+            + "  <option value='option1'>s2o1</option>\n"
+            + "  <option value='option2'>s2o2</option>\n"
+            + "  <option>s2o3</option>\n"
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";

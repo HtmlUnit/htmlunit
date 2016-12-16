@@ -245,7 +245,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     public void onloadInNavigatedFrame() throws Exception {
         final String html = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frame src='frame1.html' id='frame1'>\n"
+            + "  <frame src='frame1.html' id='frame1'>\n"
             + "</frameset></html>";
 
         final String firstHtml = "<html><body>\n"

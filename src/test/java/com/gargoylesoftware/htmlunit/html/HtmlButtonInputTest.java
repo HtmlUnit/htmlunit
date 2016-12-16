@@ -41,7 +41,7 @@ public class HtmlButtonInputTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
-            + "    <input type='button' name='button' id='button' "
+            + "  <input type='button' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
 

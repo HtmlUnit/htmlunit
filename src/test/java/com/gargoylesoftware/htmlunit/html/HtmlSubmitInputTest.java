@@ -76,7 +76,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\"); return false;'>\n"
-            + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
+            + "  <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
             + "</form></body></html>";
 
         final WebDriver webDriver = loadPage2(html);

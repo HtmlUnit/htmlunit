@@ -139,8 +139,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <input type='text' name='textfield' value='*'/>\n"
-            + "    <input type='submit' name='button' value='foo'/>\n"
+            + "  <input type='text' name='textfield' value='*'/>\n"
+            + "  <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -166,8 +166,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='put'>\n"
-            + "    <input type='text' name='textfield' value='*'/>\n"
-            + "    <input type='submit' name='button' id='button' value='foo'/>\n"
+            + "  <input type='text' name='textfield' value='*'/>\n"
+            + "  <input type='submit' name='button' id='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -548,8 +548,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <input type='text' name='textfield'/>\n"
-            + "    <input type='submit' name='button' value='foo'/>\n"
+            + "  <input type='text' name='textfield'/>\n"
+            + "  <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -575,8 +575,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <input type='text' id='textfield' value='blah'/>\n"
-            + "    <input type='submit' name='button' value='foo'/>\n"
+            + "  <input type='text' id='textfield' value='blah'/>\n"
+            + "  <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -601,8 +601,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <input type='text' id='textfield' value='blah' name='textfield' />\n"
-            + "    <button type='submit' id='button' value='Go'>Go</button>\n"
+            + "  <input type='text' id='textfield' value='blah' name='textfield' />\n"
+            + "  <button type='submit' id='button' value='Go'>Go</button>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -625,12 +625,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <table><tr><td>\n"
-            + "        <input type='text' name='textfield' value='blah'/>\n"
-            + "        </td><td>\n"
-            + "        <input type='submit' name='button' value='foo'/>\n"
-            + "        </td></tr>\n"
-            + "     </table>\n"
+            + "  <table><tr><td>\n"
+            + "    <input type='text' name='textfield' value='blah'/>\n"
+            + "    </td><td>\n"
+            + "    <input type='submit' name='button' value='foo'/>\n"
+            + "    </td></tr>\n"
+            + "  </table>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -657,8 +657,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <input type='text' name='textfield' value='blah' disabled />\n"
-            + "    <input type='submit' name='button' value='foo'/>\n"
+            + "  <input type='text' name='textfield' value='blah' disabled />\n"
+            + "  <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -684,9 +684,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
     public void submit_IgnoresResetControls() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "    <button type='reset' name='buttonreset' value='buttonreset'/>\n"
-            + "    <input type='reset' name='reset' value='reset'/>\n"
-            + "    <input type='submit' name='submit' value='submit'/>\n"
+            + "  <button type='reset' name='buttonreset' value='buttonreset'/>\n"
+            + "  <input type='reset' name='reset' value='reset'/>\n"
+            + "  <input type='submit' name='submit' value='submit'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -712,17 +712,17 @@ public class HtmlFormTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
             + "function setFormat() {\n"
-            + "    if (document.form1.Format.checked) {\n"
-            + "        document.form1.Format.value='html';\n"
-            + "    } else {\n"
-            + "        document.form1.Format.value='plain';\n"
-            + "    }\n"
+            + "  if (document.form1.Format.checked) {\n"
+            + "    document.form1.Format.value='html';\n"
+            + "  } else {\n"
+            + "    document.form1.Format.value='plain';\n"
+            + "  }\n"
             + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<form name='form1' id='form1' method='post'>\n"
-            + "    <input type=checkbox name=Format value='' onclick='setFormat()'>\n"
-            + "    <input type='submit' name='button' value='foo'/>\n"
+            + "  <input type=checkbox name=Format value='' onclick='setFormat()'>\n"
+            + "  <input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
 
         final HtmlPage page1 = loadPage(html);
@@ -760,11 +760,11 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='submit' name='button' value='xxx'/>\n"
-            + "    <input type='text' name='textfield' value='foo'/>\n"
-            + "    <input type='submit' name='button1' value='foo'/>\n"
-            + "    <input type='reset' name='button2' value='foo'/>\n"
-            + "    <input type='submit' name='button' value='bar'/>\n"
+            + "  <input type='submit' name='button' value='xxx'/>\n"
+            + "  <input type='text' name='textfield' value='foo'/>\n"
+            + "  <input type='submit' name='button1' value='foo'/>\n"
+            + "  <input type='reset' name='button2' value='foo'/>\n"
+            + "  <input type='submit' name='button' value='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -800,9 +800,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <textarea id='ta1_1' name='ta1'>hello</textarea>\n"
-            + "    <textarea id='ta1_2' name='ta1'>world</textarea>\n"
-            + "    <textarea id='ta2_1' name='ta2'>!</textarea>\n"
+            + "  <textarea id='ta1_1' name='ta1'>hello</textarea>\n"
+            + "  <textarea id='ta1_2' name='ta1'>world</textarea>\n"
+            + "  <textarea id='ta2_1' name='ta2'>!</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -833,9 +833,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <button id='b1_1' name='b1' value='hello' type='button'/>\n"
-            + "    <button id='b1_2' name='b1' value='world' type='button'/>\n"
-            + "    <button id='b2_1' name='b2' value='!' type='button'/>\n"
+            + "  <button id='b1_1' name='b1' value='hello' type='button'/>\n"
+            + "  <button id='b1_2' name='b1' value='world' type='button'/>\n"
+            + "  <button id='b2_1' name='b2' value='!' type='button'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -864,7 +864,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
-            + "    <input type='submit' name='button' value='push me'/>\n"
+            + "  <input type='submit' name='button' value='push me'/>\n"
             + "</form></body></html>";
         final WebClient client = getWebClientWithMockWebConnection();
 
@@ -913,8 +913,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String html
             = "<html><body><form name='form' action='action.html'>\n"
             + "<select name='select'>\n"
-            + "     <option>first value</option>\n"
-            + "     <option selected>second value</option>\n"
+            + "  <option>first value</option>\n"
+            + "  <option selected>second value</option>\n"
             + "</select>\n"
             + "<input type='submit' id='mySubmit'>\n"
             + "</form></body></html>";
@@ -1250,15 +1250,15 @@ public class HtmlFormTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<div>\n"
             + "<form id='form1' method='get' action='foo'>\n"
-            + "    <input name='field1' value='val1'/>\n"
-            + "    <input name='field2' value='val2'/>\n"
-            + "    <input type='radio' name='radio1' value='val2'/>\n"
-            + "    <input type='submit' id='submitButton'/>\n"
+            + "  <input name='field1' value='val1'/>\n"
+            + "  <input name='field2' value='val2'/>\n"
+            + "  <input type='radio' name='radio1' value='val2'/>\n"
+            + "  <input type='submit' id='submitButton'/>\n"
             + "</div>\n"
-            + "    <input name='field3' value='val1'/>\n"
-            + "    <input name='field4' value='val2'/>\n"
-            + "    <input type='radio' name='radio1' value='val3'/>\n"
-            + "    <input type='submit' id='submitButton'/>\n"
+            + "  <input name='field3' value='val1'/>\n"
+            + "  <input name='field4' value='val2'/>\n"
+            + "  <input type='radio' name='radio1' value='val3'/>\n"
+            + "  <input type='submit' id='submitButton'/>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);

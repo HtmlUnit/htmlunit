@@ -45,8 +45,8 @@ public class XHtmlPageTest extends SimpleWebTestCase {
         final String html
             = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             + "<!DOCTYPE html PUBLIC \n"
-            + "    \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
-            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
             + "<body><DIV>foo</DIV></body>\n"
             + "</html>";

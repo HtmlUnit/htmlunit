@@ -47,7 +47,7 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
-            + "    <input type='checkbox' name='checkbox' id='checkbox' "
+            + "  <input type='checkbox' name='checkbox' id='checkbox' "
             + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>\n"
             + "</form></body></html>";
 
@@ -77,7 +77,7 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' name='form1'>\n"
-            + "    <input type='checkbox' name='checkbox' id='checkbox' "
+            + "  <input type='checkbox' name='checkbox' id='checkbox' "
             + "onClick='document.form1.submit()'>Check me</input>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
@@ -98,7 +98,7 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
+            + "  <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);

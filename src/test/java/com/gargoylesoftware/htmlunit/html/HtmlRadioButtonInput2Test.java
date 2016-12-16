@@ -684,7 +684,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='radio' name='radio' id='radio'>Check me</input>\n"
+            + "  <input type='radio' name='radio' id='radio'>Check me</input>\n"
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement radio = driver.findElement(By.id("radio"));

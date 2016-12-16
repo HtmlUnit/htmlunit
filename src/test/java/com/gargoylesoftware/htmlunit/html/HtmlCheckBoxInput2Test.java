@@ -600,7 +600,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
+            + "  <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement checkbox = driver.findElement(By.id("checkbox"));

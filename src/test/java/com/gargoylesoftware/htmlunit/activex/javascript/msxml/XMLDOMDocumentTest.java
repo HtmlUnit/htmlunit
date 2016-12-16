@@ -336,8 +336,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
         final String xml = ""
             + "<!--comment-->\n"
             + "<foo>\n"
-            + "    <foofoo name='first'>something</foofoo>\n"
-            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "  <foofoo name='first'>something</foofoo>\n"
+            + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
         tester("debug(doc.documentElement);\n", xml);
@@ -366,8 +366,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     public void documentElement_element() throws Exception {
         final String xml = ""
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.documentElement);\n", xml);
@@ -383,8 +383,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
         final String xml = ""
              + "<?apache include file=\"header.html\" ?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.documentElement);\n", xml);
@@ -400,8 +400,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
         final String xml = ""
              + "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.documentElement);\n", xml);
@@ -441,8 +441,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     public void firstChild_element() throws Exception {
         final String xml = ""
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.firstChild);\n", xml);
@@ -460,8 +460,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
         final String xml = ""
              + "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.firstChild);\n", xml);
@@ -477,8 +477,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
         final String xml = ""
              + "<?apache include file=\"header.html\" ?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.firstChild);\n", xml);
@@ -508,8 +508,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
         final String xml = ""
             + "<!--comment-->\n"
             + "<foo>\n"
-            + "    <foofoo name='first'>something</foofoo>\n"
-            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "  <foofoo name='first'>something</foofoo>\n"
+            + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
         tester("debug(doc.firstChild);\n", xml);
@@ -568,8 +568,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     public void lastChild_element() throws Exception {
         final String xml = ""
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         tester("debug(doc.lastChild);\n", xml);
@@ -586,8 +586,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     public void lastChild_xmlDeclaration() throws Exception {
         final String xml = ""
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>"
              + "<?xml version=\"1.0\"?>\n";
 
@@ -603,8 +603,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     public void lastChild_processingInstruction() throws Exception {
         final String xml = ""
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>"
              + "<?apache include file=\"header.html\" ?>\n";
 
@@ -635,8 +635,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     public void lastChild_comment() throws Exception {
         final String xml = ""
             + "<foo>\n"
-            + "    <foofoo name='first'>something</foofoo>\n"
-            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "  <foofoo name='first'>something</foofoo>\n"
+            + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>"
             + "<!--comment-->\n";
 

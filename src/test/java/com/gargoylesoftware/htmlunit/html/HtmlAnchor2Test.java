@@ -606,7 +606,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
             + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
             + "</head>\n"
             + "<body>\n"
-            + "   <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
+            + "  <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html, "text/html", "UTF-8");

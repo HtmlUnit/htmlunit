@@ -37,12 +37,12 @@ public class CSSStyleDeclaration4Test extends SimpleWebTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var node = document.getElementById('div1');\n"
-            + "    var style = node.style;\n"
-            + "    alert(style.color);\n"
-            + "    style.color = 'pink';\n"
-            + "    alert(style.color);\n"
-            + "    alert(node.getAttribute('style'));\n"
+            + "  var node = document.getElementById('div1');\n"
+            + "  var style = node.style;\n"
+            + "  alert(style.color);\n"
+            + "  style.color = 'pink';\n"
+            + "  alert(style.color);\n"
+            + "  alert(node.getAttribute('style'));\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 

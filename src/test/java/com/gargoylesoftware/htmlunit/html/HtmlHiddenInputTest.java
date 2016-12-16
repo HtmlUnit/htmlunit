@@ -45,7 +45,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='hidden' name='foo' id='foo' value='bla'>\n"
+            + "  <input type='hidden' name='foo' id='foo' value='bla'>\n"
             + "</form></body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);

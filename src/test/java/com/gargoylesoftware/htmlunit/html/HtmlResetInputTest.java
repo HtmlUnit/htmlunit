@@ -47,8 +47,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
             + "<input type='radio' name='radioButton' value='bar'/>\n"
             + "<input type='checkbox' name='checkBox' value='check'/>\n"
             + "<select id='select1'>\n"
-            + "    <option id='option1' selected value='1'>Option1</option>\n"
-            + "    <option id='option2' value='2'>Option2</option>\n"
+            + "  <option id='option1' selected value='1'>Option1</option>\n"
+            + "  <option id='option2' value='2'>Option2</option>\n"
             + "</select>\n"
             + "<textarea id='textarea1'>Foobar</textarea>\n"
             + "<isindex prompt='Enter some text' id='isindex1'>\n"
@@ -117,7 +117,7 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
-            + "    <button type='reset' name='button' id='button' "
+            + "  <button type='reset' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();

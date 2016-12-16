@@ -48,7 +48,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <input type='text' name='foo' id='foo' value='bla'>\n"
+            + "  <input type='text' name='foo' id='foo' value='bla'>\n"
             + "</form></body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
@@ -554,14 +554,14 @@ public class HtmlTextInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myTextInput' value='Bonjour' type='text'>\n"
             + "<script>\n"
-            + "    var input = document.getElementById('myTextInput');\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.value = 'Hello there';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.selectionStart = " + selectionStart + ";\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  var input = document.getElementById('myTextInput');\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.value = 'Hello there';\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.selectionStart = " + selectionStart + ";\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.selectionEnd = " + selectionEnd + ";\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -579,23 +579,23 @@ public class HtmlTextInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myTextInput' value='Hello' type='text'>\n"
             + "<script>\n"
-            + "    var input = document.getElementById('myTextInput');\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  var input = document.getElementById('myTextInput');\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
 
-            + "    input.selectionStart = 4;\n"
-            + "    input.selectionEnd = 5;\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.value = 'abcdefghif';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.selectionStart = 4;\n"
+            + "  input.selectionEnd = 5;\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.value = 'abcdefghif';\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
 
-            + "    input.value = 'abcd';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.value = 'abcd';\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
 
-            + "    input.selectionStart = 0;\n"
-            + "    input.selectionEnd = 4;\n"
+            + "  input.selectionStart = 0;\n"
+            + "  input.selectionEnd = 4;\n"
 
-            + "    input.value = 'a';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  input.value = 'a';\n"
+            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

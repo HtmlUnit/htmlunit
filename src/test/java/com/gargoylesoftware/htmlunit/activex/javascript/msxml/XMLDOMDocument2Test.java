@@ -390,13 +390,13 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
             IE = "7")
     public void loadXML_XMLSpaceAttribute() throws Exception {
         final String html = ""
-            + "  function test() {\n"
+            + "function test() {\n"
             + ACTIVEX_CHECK
-            + "    var text='<root xml:space=\\'preserve\\'>This t"
+            + "  var text='<root xml:space=\\'preserve\\'>This t"
             + "<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>';\n"
-            + "    var doc = " + callLoadXMLDOMDocumentFromString("text") + ";\n"
-            + "    alert(doc.documentElement.childNodes.length);\n"
-            + "  }\n"
+            + "  var doc = " + callLoadXMLDOMDocumentFromString("text") + ";\n"
+            + "  alert(doc.documentElement.childNodes.length);\n"
+            + "}\n"
             + LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
         loadPageWithAlerts2(createTestHTML(html));
     }
@@ -525,16 +525,16 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
             IE = "1")
     public void xpathWithNamespaces() throws Exception {
         final String html = ""
-            + "  function test() {\n"
+            + "function test() {\n"
             + ACTIVEX_CHECK
-            + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
-            + "    try {\n"
-            + "      alert(doc.selectNodes('//soap:book').length);\n"
-            + "    } catch (e) {\n"
-            + "      alert(doc.evaluate('count(//book)', doc.documentElement, "
+            + "  var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
+            + "  try {\n"
+            + "    alert(doc.selectNodes('//soap:book').length);\n"
+            + "  } catch (e) {\n"
+            + "    alert(doc.evaluate('count(//book)', doc.documentElement, "
             + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
-            + "    }\n"
             + "  }\n"
+            + "}\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         final String xml
@@ -559,21 +559,21 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
             IE = "1")
     public void selectionNamespaces() throws Exception {
         final String html = ""
-            + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+            + "var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
                             + "xmlns:ns1=\"http://www.example.com/ns1\"';\n"
-            + "  function test() {\n"
+            + "function test() {\n"
             + ACTIVEX_CHECK
-            + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
-            + "    doc.setProperty('SelectionNamespaces', selectionNamespaces);"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
-            + "    try {\n"
-            + "      alert(doc.selectNodes('/s:Envelope/ns1:books/s:book').length);\n"
-            + "    } catch (e) {\n"
-            + "      alert(doc.evaluate('count(//book)', doc.documentElement, "
+            + "  var doc = " + callCreateXMLDOMDocument() + ";\n"
+            + "  doc.setProperty('SelectionNamespaces', selectionNamespaces);"
+            + "  doc.async = false;\n"
+            + "  doc.load('" + URL_SECOND + "');\n"
+            + "  try {\n"
+            + "    alert(doc.selectNodes('/s:Envelope/ns1:books/s:book').length);\n"
+            + "  } catch (e) {\n"
+            + "    alert(doc.evaluate('count(//book)', doc.documentElement, "
             + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
-            + "    }\n"
             + "  }\n"
+            + "}\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
         final String xml = ""

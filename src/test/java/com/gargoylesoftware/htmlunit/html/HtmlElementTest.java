@@ -928,7 +928,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
-            + "    <input type='text' id='textfield1' onfocus='alert(1)'>\n"
+            + "  <input type='text' id='textfield1' onfocus='alert(1)'>\n"
             + "</form>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"1"};
@@ -946,7 +946,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     public void asText() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "    <title>test</title>\n"
+            + "  <title>test</title>\n"
             + "</head>\n"
             + "<body>Welcome\n"
             + "<div style='visibility:hidden'>to the big</div>\n"
@@ -967,7 +967,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     public void asTextOverridingVisibility() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "    <title>test</title>\n"
+            + "  <title>test</title>\n"
             + "</head>\n"
             + "<body>Welcome\n"
             + "<p style='visibility:hidden'>hidden text\n"
@@ -987,7 +987,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     public void asTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "    <title>test</title>\n"
+            + "  <title>test</title>\n"
             + "</head>\n"
             + "<body>Welcome\n"
             + "<p style='visibility:collapse'>hidden text\n"
@@ -1163,7 +1163,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     public void asXml() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "    <title>test</title>\n"
+            + "  <title>test</title>\n"
             + "</head>\n"
             + "<body>Welcome\n"
             + "<div id='div1' onclick=\"alert('hello')\">click me</div>\n"

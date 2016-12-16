@@ -74,11 +74,11 @@ public class ClientRectTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<style>.full { width:100%; }</style>\n"
             + "<div class='foo bar'>\n"
-            + "    <form action='javascript:void(0)' method='post'>\n"
-            + "        <div class='full'>\n"
-            + "            <input class='full' type='text' id='myInput'>\n"
-            + "        </div>\n"
-            + "    </form>\n"
+            + "  <form action='javascript:void(0)' method='post'>\n"
+            + "    <div class='full'>\n"
+            + "      <input class='full' type='text' id='myInput'>\n"
+            + "    </div>\n"
+            + "  </form>\n"
             + "</div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
