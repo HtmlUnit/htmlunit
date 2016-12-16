@@ -128,9 +128,9 @@ public class DocumentTest extends WebDriverTestCase {
     public void formArray() throws Exception {
         final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
-            + "    function doSubmit(formName){\n"
-            + "        var form = document.forms[formName];\n" // This line used to blow up
-            + "        form.submit()\n"
+            + "function doSubmit(formName){\n"
+            + "  var form = document.forms[formName];\n"
+            + "  form.submit()\n"
             + "}\n"
             + "</SCRIPT></head><body><form name='formName' method='POST' "
             + "action='" + URL_SECOND + "'>\n"
@@ -202,9 +202,9 @@ public class DocumentTest extends WebDriverTestCase {
             + "  alert(document.anchors.length);\n"
             + "  alert(document.anchors == oCol);\n"
             + "  if (document.anchors[0].name)\n"
-            + "   alert('name: ' + document.anchors[0].name);\n"
+            + "    alert('name: ' + document.anchors[0].name);\n"
             + "  else\n"
-            + "   alert('id: ' + document.anchors[0].id);\n"
+            + "    alert('id: ' + document.anchors[0].id);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -1466,9 +1466,9 @@ public class DocumentTest extends WebDriverTestCase {
             + "<input type='text' name='findMe'>\n"
             + "<input type='text' id='findMe2' name='byId'>\n"
             + "<script>\n"
-            + "var o = document.getElementById('findMe');\n"
-            + "alert(o ? o.name : 'null');\n"
-            + "alert(document.getElementById('findMe2').name);\n"
+            + "  var o = document.getElementById('findMe');\n"
+            + "  alert(o ? o.name : 'null');\n"
+            + "  alert(document.getElementById('findMe2').name);\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
@@ -1485,13 +1485,13 @@ public class DocumentTest extends WebDriverTestCase {
     public void directAccessByName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.myImage.id);\n"
-            + "    alert(document.myImage2.length);\n"
-            + "    alert(document.myForm.tagName);\n"
-            + "    alert(document.myAnchor);\n"
-            + "    alert(document.myInput);\n"
-            + "    alert(document.myInputImage);\n"
-            + "    alert(document.myButton);\n"
+            + "  alert(document.myImage.id);\n"
+            + "  alert(document.myImage2.length);\n"
+            + "  alert(document.myForm.tagName);\n"
+            + "  alert(document.myAnchor);\n"
+            + "  alert(document.myInput);\n"
+            + "  alert(document.myInputImage);\n"
+            + "  alert(document.myButton);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -1516,12 +1516,12 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"[object HTMLCollection]", "2"})
     public void scriptsArray() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script lang='JavaScript'>\n"
-            + "    function doTest() {\n"
-            + "        alert(document.scripts);\n"
-            + "        try {\n"
-            + "          alert(document.scripts.length);\n" // This line used to blow up
-            + "        }\n"
-            + "        catch (e) { alert('exception occured') }\n"
+            + "  function doTest() {\n"
+            + "    alert(document.scripts);\n"
+            + "    try {\n"
+            + "      alert(document.scripts.length);\n" // This line used to blow up
+            + "    }\n"
+            + "    catch (e) { alert('exception occured') }\n"
             + "}\n"
             + "</script></head><body onload='doTest();'>\n"
             + "<script>var scriptTwo = 1;</script>\n"
@@ -1557,8 +1557,8 @@ public class DocumentTest extends WebDriverTestCase {
     public void defaultViewAndParentWindow() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "    alert(document.defaultView == window);\n"
-            + "    alert(document.parentWindow == window);\n"
+            + "  alert(document.defaultView == window);\n"
+            + "  alert(document.parentWindow == window);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html> ";
@@ -1574,9 +1574,9 @@ public class DocumentTest extends WebDriverTestCase {
     public void put() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
-                + "alert(document.foo);\n"
-                + "if (!document.foo) document.foo = 123;\n"
-                + "alert(document.foo);\n"
+                + "  alert(document.foo);\n"
+                + "  if (!document.foo) document.foo = 123;\n"
+                + "  alert(document.foo);\n"
                 + "</script>\n"
                 + "</form>\n" + "</body>\n" + "</html>";
 
@@ -1721,21 +1721,21 @@ public class DocumentTest extends WebDriverTestCase {
     public void createEvent_FF_Target() throws Exception {
         final String html =
               "<html>\n"
-            + "    <body onload='test()'>\n"
-            + "        <div id='d' onclick='alert(event.target)'>abc</div>\n"
-            + "        <script>\n"
-            + "            function test() {\n"
-            + "                try {\n"
-            + "                    var event = document.createEvent('MouseEvents');\n"
-            + "                    alert(event.target);\n"
-            + "                    event.initMouseEvent('click', true, true, window,\n"
-            + "                        1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
-            + "                    alert(event.target);\n"
-            + "                    document.getElementById('d').dispatchEvent(event);\n"
-            + "                } catch (e) { alert('exception') }\n"
-            + "            }\n"
-            + "        </script>\n"
-            + "    </body>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='d' onclick='alert(event.target)'>abc</div>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var event = document.createEvent('MouseEvents');\n"
+            + "          alert(event.target);\n"
+            + "          event.initMouseEvent('click', true, true, window,\n"
+            + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
+            + "          alert(event.target);\n"
+            + "          document.getElementById('d').dispatchEvent(event);\n"
+            + "        } catch (e) { alert('exception') }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
     }
