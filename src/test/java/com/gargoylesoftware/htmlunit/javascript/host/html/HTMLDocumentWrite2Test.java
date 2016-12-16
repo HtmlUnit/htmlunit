@@ -181,7 +181,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "    actionwindow.close();\n"
             + "  }\n"
             + "</script></head><body>\n"
-            + "    <input value='Click Me' type=button onclick='performAction()'>\n"
+            + "  <input value='Click Me' type=button onclick='performAction()'>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
@@ -512,7 +512,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void writeInManyTimes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.getElementById('inner').parentNode.id);\n"
+            + "  alert(document.getElementById('inner').parentNode.id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -558,8 +558,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
              + "function doTest() {\n"
-             + "    alert(document.getElementById('inner1').parentNode.id);\n"
-             + "    alert(document.getElementById('inner2').parentNode.id);\n"
+             + "  alert(document.getElementById('inner1').parentNode.id);\n"
+             + "  alert(document.getElementById('inner2').parentNode.id);\n"
              + "}\n"
              + "</script></head>\n"
              + "<body onload='doTest()'>\n"

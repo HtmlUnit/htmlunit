@@ -136,7 +136,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function foo() {\n"
-            + "    return 1;\n"
+            + "  return 1;\n"
             + "}\n"
             + "alert(foo);\n"
             + "</script></head><body>\n"

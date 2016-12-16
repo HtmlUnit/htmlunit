@@ -494,14 +494,14 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    document.form1.textfield1.value = 1;\n"
-            + "    alert(document.form1.textfield1.value)\n"
+            + "  document.form1.textfield1.value = 1;\n"
+            + "  alert(document.form1.textfield1.value)\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
 

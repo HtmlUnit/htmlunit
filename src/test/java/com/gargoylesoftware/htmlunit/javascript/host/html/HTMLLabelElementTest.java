@@ -104,7 +104,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    document.getElementById('label1').htmlFor = 'checkbox1';\n"
+            + "  document.getElementById('label1').htmlFor = 'checkbox1';\n"
             + "}\n"
             + "function delegateClick() {\n"
             + "  try {\n"

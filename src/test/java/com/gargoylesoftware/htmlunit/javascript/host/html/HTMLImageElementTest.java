@@ -179,7 +179,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.getElementById('anImage').src);\n"
+            + "  alert(document.getElementById('anImage').src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<img src='foo.gif' id='anImage'/>\n"
@@ -198,8 +198,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function doTest() {\n"
-            + "    var oImg = new Image();\n"
-            + "    alert(oImg.src);\n"
+            + "  var oImg = new Image();\n"
+            + "  alert(oImg.src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -217,7 +217,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function doTest() {\n"
-            + "    document.getElementById('anImage').src = 'bar.gif';\n"
+            + "  document.getElementById('anImage').src = 'bar.gif';\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<img src='foo.gif' id='anImage'/>\n"
@@ -245,9 +245,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function doTest() {\n"
-            + "    var preloadImage = new Image();\n"
-            + "    preloadImage.src = 'bar.gif';\n"
-            + "    alert(preloadImage.src);\n"
+            + "  var preloadImage = new Image();\n"
+            + "  preloadImage.src = 'bar.gif';\n"
+            + "  alert(preloadImage.src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -295,12 +295,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function doTest() {\n"
-            + "    var i = new Image();\n"
-            + "    alert(i.style != null);\n"
-            + "    i.style.position = 'relative';\n"
-            + "    alert(i.style.position);\n"
-            + "    alert(i.border);\n"
-            + "    alert(i.alt);\n"
+            + "  var i = new Image();\n"
+            + "  alert(i.style != null);\n"
+            + "  i.style.position = 'relative';\n"
+            + "  alert(i.style.position);\n"
+            + "  alert(i.border);\n"
+            + "  alert(i.alt);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";

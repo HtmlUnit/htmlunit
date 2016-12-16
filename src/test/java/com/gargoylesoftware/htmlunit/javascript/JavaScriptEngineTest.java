@@ -111,13 +111,13 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    document.form1.textfield1.value='blue'"
+            + "  document.form1.textfield1.value='blue'"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
         final List<String> collectedAlerts = null;
@@ -660,7 +660,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>First</title><script>\n"
             + "function showFoo(foo) {\n"
-            + "    alert('Foo is: |' + foo + '|');\n"
+            + "  alert('Foo is: |' + foo + '|');\n"
             + "}\n"
             + "</script>\n"
             + "</head><body><form name='form1'>\n"
@@ -701,10 +701,10 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "myDate = 'foo';\n"
             + "function doUnqualifiedVariableAccess() {\n"
-            + "    alert('unqualified: ' + myDate);\n"
+            + "  alert('unqualified: ' + myDate);\n"
             + "}\n"
             + "function doQualifiedVariableAccess() {\n"
-            + "    alert('qualified: ' + window.myDate);\n"
+            + "  alert('qualified: ' + window.myDate);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"

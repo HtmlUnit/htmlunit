@@ -56,7 +56,7 @@ public class Location2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(top.document.location);\n"
+            + "  alert(top.document.location);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -108,7 +108,7 @@ public class Location2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(top.document.location.href);\n"
+            + "   alert(top.document.location.href);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -126,13 +126,13 @@ public class Location2Test extends WebDriverTestCase {
     public void about_blank_attributes() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var location = frames[0].document.location;\n"
-            + "    alert(location.hash);\n"
-            + "    alert(location.href);\n"
-            + "    alert(location.pathname);\n"
-            + "    alert(location.port);\n"
-            + "    alert(location.protocol);\n"
-            + "    alert(location.search);\n"
+            + "  var location = frames[0].document.location;\n"
+            + "  alert(location.hash);\n"
+            + "  alert(location.href);\n"
+            + "  alert(location.pathname);\n"
+            + "  alert(location.port);\n"
+            + "  alert(location.protocol);\n"
+            + "  alert(location.search);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<iframe src='about:blank'></iframe></body></html>";
@@ -298,7 +298,7 @@ public class Location2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    location.replace('" + URL_SECOND + "');\n"
+            + "  location.replace('" + URL_SECOND + "');\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -323,7 +323,7 @@ public class Location2Test extends WebDriverTestCase {
         final String secondContent
             = "<html><head><title>Second Page</title><script>\n"
             + "function doTest() {\n"
-            + "    location.replace('" + URL_THIRD + "');\n"
+            + "  location.replace('" + URL_THIRD + "');\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -353,7 +353,7 @@ public class Location2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    location.replace('" + URL_SECOND + "');\n"
+            + "  location.replace('" + URL_SECOND + "');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -378,7 +378,7 @@ public class Location2Test extends WebDriverTestCase {
         final String firstContent
             = "<html><head><title>First Page</title><script>\n"
             + "function doTest() {\n"
-            + "    location.replace('" + URL_SECOND + "');\n"
+            + "  location.replace('" + URL_SECOND + "');\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";

@@ -57,7 +57,7 @@ public class NotificationTest extends WebDriverTestCase {
     public void permission() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
-            + "    alert(Notification.permission);\n"
+            + "  alert(Notification.permission);\n"
             + "} catch(e) { alert('exception');}\n"
             + "</script></body></html>";
 
@@ -73,7 +73,7 @@ public class NotificationTest extends WebDriverTestCase {
     public void minimalUsage() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
-            + "    new Notification('Hello here');\n"
+            + "  new Notification('Hello here');\n"
             + "} catch(e) { alert('exception');}\n"
             + "</script></body></html>";
 

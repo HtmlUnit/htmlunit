@@ -53,8 +53,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' method='get' action='" + URL_SECOND + "'>\n"
-            + "    <input type='button' name='button1' />\n"
-            + "    <input type='button' name='button2' />\n"
+            + "  <input type='button' name='button1' />\n"
+            + "  <input type='button' name='button2' />\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -80,8 +80,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' method='get' action='javascript:alert(\"javaScript\")'>\n"
-            + "    <input type='button' name='button1' />\n"
-            + "    <input type='button' name='button2' />\n"
+            + "  <input type='button' name='button1' />\n"
+            + "  <input type='button' name='button2' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -104,8 +104,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' method='get' action='  javascript:alert(\"javaScript\")'>\n"
-            + "    <input type='button' name='button1' />\n"
-            + "    <input type='button' name='button2' />\n"
+            + "  <input type='button' name='button1' />\n"
+            + "  <input type='button' name='button2' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -128,8 +128,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' method='get' action='javaSCript:alert(\"javaScript\")'>\n"
-            + "    <input type='button' name='button1' />\n"
-            + "    <input type='button' name='button2' />\n"
+            + "  <input type='button' name='button1' />\n"
+            + "  <input type='button' name='button2' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -172,7 +172,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' method='get' action='" + URL_SECOND + "' target='MyNewWindow'>\n"
-            + "    <input type='button' name='button1' />\n"
+            + "  <input type='button' name='button1' />\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -198,7 +198,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<form name='form1' method='get' action='" + URL_SECOND + "' onsubmit=\"this.action = 'foo.html'\">\n"
-            + "    <input type='submit' />\n"
+            + "  <input type='submit' />\n"
             + "</form>\n"
             + "<a href='javascript:document.form1.submit()' id='link1'>Click me</a>\n"
             + "</body></html>";
@@ -224,8 +224,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' method='get' action='" + URL_SECOND + "'>\n"
-            + "    <button type='submit' name='button1' id='button1'/>\n"
-            + "    <button type='submit' name='button2' />\n"
+            + "  <button type='submit' name='button1' id='button1'/>\n"
+            + "  <button type='submit' name='button2' />\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent

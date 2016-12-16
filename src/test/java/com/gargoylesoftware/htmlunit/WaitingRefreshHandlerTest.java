@@ -33,11 +33,11 @@ public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void refreshOnJavascriptThread() throws Exception {
-        final String firstContent = " <html>\n"
+        final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "function doRedirect() {\n"
-            + "    window.location.href='" + URL_SECOND + "';\n"
+            + "  window.location.href='" + URL_SECOND + "';\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

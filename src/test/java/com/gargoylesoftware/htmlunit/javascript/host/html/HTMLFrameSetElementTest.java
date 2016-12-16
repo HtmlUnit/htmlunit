@@ -64,8 +64,8 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
-            + "    <frame name='top' src='" + URL_SECOND + "' />\n"
-            + "    <frame name='bottom' src='about:blank' />\n"
+            + "  <frame name='top' src='" + URL_SECOND + "' />\n"
+            + "  <frame name='bottom' src='about:blank' />\n"
             + "</frameset>\n"
             + "</html>";
 
@@ -73,9 +73,9 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
             "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
-            + "    alert(parent.document.getElementById('fs').rows);\n"
-            + "    parent.document.getElementById('fs').rows = '*,*';\n"
-            + "    alert(parent.document.getElementById('fs').rows);\n"
+            + "  alert(parent.document.getElementById('fs').rows);\n"
+            + "  parent.document.getElementById('fs').rows = '*,*';\n"
+            + "  alert(parent.document.getElementById('fs').rows);\n"
             + "}</script>\n"
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";

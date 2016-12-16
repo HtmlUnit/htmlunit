@@ -122,8 +122,8 @@ public class ThreadTest extends TestCase {
             final String html
                 = "<html><head><title>foo</title><script>\n"
                 + "function doTest() {\n"
-                + "    document.form1.textfield1.focus();\n"
-                + "    alert('past focus');\n"
+                + "  document.form1.textfield1.focus();\n"
+                + "  alert('past focus');\n"
                 + "}\n"
                 + "</script></head><body onload='doTest()'>\n"
                 + "<p>hello world</p>\n"

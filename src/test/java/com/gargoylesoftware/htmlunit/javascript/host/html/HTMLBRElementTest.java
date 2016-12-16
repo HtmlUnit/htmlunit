@@ -99,7 +99,7 @@ public class HTMLBRElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.getElementById('myId').outerHTML);\n"
+            + "  alert(document.getElementById('myId').outerHTML);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "  <br id='myId'>\n"

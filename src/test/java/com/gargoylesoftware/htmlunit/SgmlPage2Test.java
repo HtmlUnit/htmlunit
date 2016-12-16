@@ -38,8 +38,8 @@ public final class SgmlPage2Test extends WebDriverTestCase {
     public void getElementsByTagName() throws Exception {
         final String html = "<html><head><script>\n"
                 + "function test() {\n"
-                + "    alert(document.getElementsByTagName('h1').length);\n"
-                + "    alert(document.getElementsByTagName('H1').length);\n"
+                + "  alert(document.getElementsByTagName('h1').length);\n"
+                + "  alert(document.getElementsByTagName('H1').length);\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"

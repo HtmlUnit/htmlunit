@@ -49,9 +49,9 @@ public class Node2Test extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    var a = document.getElementById('a');\n"
-            + "    var b = document.getElementById('b');\n"
-            + "    a.replaceChild(b, b);\n"
+            + "  var a = document.getElementById('a');\n"
+            + "  var b = document.getElementById('b');\n"
+            + "  a.replaceChild(b, b);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'><div id='a'><div id='b'/></div></html>";
         final HtmlPage page = loadPageWithAlerts(html);

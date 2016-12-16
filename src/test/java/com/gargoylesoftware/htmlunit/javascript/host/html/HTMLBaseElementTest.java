@@ -77,7 +77,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "    <base id='b1' href='http://somehost/images/' />\n"
+            + "  <base id='b1' href='http://somehost/images/' />\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

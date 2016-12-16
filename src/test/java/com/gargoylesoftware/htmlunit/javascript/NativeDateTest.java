@@ -43,9 +43,9 @@ public class NativeDateTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(new Date(1887, 2, 1).getYear());\n"
-            + "    alert(new Date(1984, 2, 1).getYear());\n"
-            + "    alert(new Date(2009, 2, 1).getYear());\n"
+            + "  alert(new Date(1887, 2, 1).getYear());\n"
+            + "  alert(new Date(1984, 2, 1).getYear());\n"
+            + "  alert(new Date(2009, 2, 1).getYear());\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";

@@ -52,8 +52,8 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  return x - y;\n"
             + "}\n"
             + "function doTest() {\n"
-            + "    var t = [1, 5, 2, 1, 9];\n"
-            + "    t.sort(compare);\n"
+            + "  var t = [1, 5, 2, 1, 9];\n"
+            + "  t.sort(compare);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";

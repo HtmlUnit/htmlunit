@@ -53,8 +53,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frame id='frame1'>\n"
-            + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
+            + "  <frame id='frame1'>\n"
+            + "  <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
             + "</frameset></html>";
 
         loadPageWithAlerts2(html);

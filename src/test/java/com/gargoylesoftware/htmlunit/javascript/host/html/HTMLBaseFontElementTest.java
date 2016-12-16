@@ -166,7 +166,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "    <basefont id='b1' color='red' face='swiss' size='4' />\n"
+            + "  <basefont id='b1' color='red' face='swiss' size='4' />\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

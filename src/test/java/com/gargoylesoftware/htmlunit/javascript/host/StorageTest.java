@@ -179,7 +179,7 @@ public class StorageTest extends WebDriverTestCase {
 
         final String html2 = "<html><body><script>\n"
             + "try {\n"
-            + "    alert(localStorage.getItem('hello'));\n"
+            + "  alert(localStorage.getItem('hello'));\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
         getMockWebConnection().setResponse(getDefaultUrl(), html2);

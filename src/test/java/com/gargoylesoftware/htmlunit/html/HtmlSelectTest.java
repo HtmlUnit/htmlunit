@@ -604,8 +604,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' onchange='location=\"about:blank\"'>\n"
-            + "   <option id='option1'>Option1</option>\n"
-            + "   <option id='option2' selected>Number Two</option>\n"
+            + "  <option id='option1'>Option1</option>\n"
+            + "  <option id='option2' selected>Number Two</option>\n"
             + "</select>\n"
             + "</form></body></html>";
 
@@ -625,8 +625,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' onchange='window.open(\"about:blank\", \"_blank\")'>\n"
-            + "   <option id='option1'>Option1</option>\n"
-            + "   <option id='option2' selected>Number Two</option>\n"
+            + "  <option id='option1'>Option1</option>\n"
+            + "  <option id='option2' selected>Number Two</option>\n"
             + "</select>\n"
             + "</form></body></html>";
 

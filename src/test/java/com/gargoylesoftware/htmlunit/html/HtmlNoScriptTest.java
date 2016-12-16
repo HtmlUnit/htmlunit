@@ -72,9 +72,9 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "    <div id='myDiv'><noscript>\n"
-            + "        <input type='text' name='button'/>\n"
-            + "      </noscript></div>\n"
+            + "  <div id='myDiv'><noscript>\n"
+            + "    <input type='text' name='button'/>\n"
+            + "  </noscript></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

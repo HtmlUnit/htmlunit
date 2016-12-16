@@ -120,7 +120,7 @@ public class Event3Test extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "    <button name='button' type='button' id='button'>Push me</button>\n"
+            + "  <button name='button' type='button' id='button'>Push me</button>\n"
             + "</form>\n"
             + "<script>\n"
             + "function handler(_e) {\n"

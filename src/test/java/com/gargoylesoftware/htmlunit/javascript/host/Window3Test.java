@@ -84,7 +84,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  open('" + URL_SECOND + "', 'foo');\n"
             + "}\n"
             + "function callAlert(text) {\n"
-            + "    alert(text);\n"
+            + "  alert(text);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -1270,7 +1270,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<input type='button' id='myButton' value='Click Me' onclick='test(this)'>\n"
             + "<script>\n"
             + "function test(f) {\n"
-            + "   alert(eval('f.tagName'));\n"
+            + "  alert(eval('f.tagName'));\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -1318,8 +1318,8 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
-            + "    var bottomFrame = window.top.frames['bottom'];\n"
-            + "    bottomFrame.location = 'about:blank';\n"
+            + "  var bottomFrame = window.top.frames['bottom'];\n"
+            + "  bottomFrame.location = 'about:blank';\n"
             + "}</script>\n"
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";
