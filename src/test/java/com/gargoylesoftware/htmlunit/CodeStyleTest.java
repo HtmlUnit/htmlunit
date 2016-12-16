@@ -889,8 +889,6 @@ public class CodeStyleTest {
      * Verifies that no extra leading spaces (in test code).
      */
     private void spaces(final List<String> lines, final String relativePath) {
-        String simpleName = relativePath.substring(0, relativePath.length() - 5);
-        simpleName = simpleName.substring(simpleName.lastIndexOf(File.separator) + 1);
         for (int i = 0; i + 1 < lines.size(); i++) {
             String line = lines.get(i).trim();
             String next = lines.get(i + 1).trim();
@@ -898,9 +896,9 @@ public class CodeStyleTest {
                 line = line.substring(3);
                 final String lineTrimmed = line.trim();
                 next = next.substring(3);
-                if ((lineTrimmed.startsWith("<") && next.trim().startsWith("<") || lineTrimmed.startsWith("try")
+                if (lineTrimmed.startsWith("<") && next.trim().startsWith("<") || lineTrimmed.startsWith("try")
                         || lineTrimmed.startsWith("for") || lineTrimmed.startsWith("function")
-                        || lineTrimmed.startsWith("if"))) {
+                        || lineTrimmed.startsWith("if")) {
                     final int difference = getInitialSpaces(next) - getInitialSpaces(line);
                     if (difference > 2) {
                         addFailure("Too many spaces in " + relativePath + ", line: " + (i + 2));
