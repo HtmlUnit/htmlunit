@@ -185,13 +185,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
-    private HTMLCollection all_; // has to be a member to have equality (==) working
-    private HTMLCollection forms_; // has to be a member to have equality (==) working
-    private HTMLCollection links_; // has to be a member to have equality (==) working
-    private HTMLCollection images_; // has to be a member to have equality (==) working
-    private HTMLCollection scripts_; // has to be a member to have equality (==) working
-    private HTMLCollection anchors_; // has to be a member to have equality (==) working
-    private HTMLCollection applets_; // has to be a member to have equality (==) working
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
     private HTMLElement activeElement_;
 
@@ -333,26 +326,21 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public Object getForms() {
-        if (forms_ == null) {
-            final boolean allowFunctionCall = getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlForm && node.getPrefix() == null;
+            }
 
-            forms_ = new HTMLCollection(getDomNodeOrDie(), false) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlForm && node.getPrefix() == null;
+            @Override
+            public Object call(final Context cx, final Scriptable scope,
+                    final Scriptable thisObj, final Object[] args) {
+                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+                    return super.call(cx, scope, thisObj, args);
                 }
-
-                @Override
-                public Object call(final Context cx, final Scriptable scope,
-                        final Scriptable thisObj, final Object[] args) {
-                    if (allowFunctionCall) {
-                        return super.call(cx, scope, thisObj, args);
-                    }
-                    throw Context.reportRuntimeError("TypeError: document.forms is not a function");
-                }
-            };
-        }
-        return forms_;
+                throw Context.reportRuntimeError("TypeError: document.forms is not a function");
+            }
+        };
     }
 
     /**
@@ -362,25 +350,22 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public Object getLinks() {
-        if (links_ == null) {
-            links_ = new HTMLCollection(getDomNodeOrDie(), true) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return (node instanceof HtmlAnchor || node instanceof HtmlArea)
+        return new HTMLCollection(getDomNodeOrDie(), true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return (node instanceof HtmlAnchor || node instanceof HtmlArea)
                         && ((HtmlElement) node).hasAttribute("href");
-                }
+            }
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    final HtmlElement node = event.getHtmlElement();
-                    if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
-                        return EffectOnCache.RESET;
-                    }
-                    return EffectOnCache.NONE;
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final HtmlElement node = event.getHtmlElement();
+                if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
+                    return EffectOnCache.RESET;
                 }
-            };
-        }
-        return links_;
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     /**
@@ -419,36 +404,31 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public Object getAnchors() {
-        if (anchors_ == null) {
-            final boolean checkId = getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID);
-
-            anchors_ = new HTMLCollection(getDomNodeOrDie(), true) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    if (!(node instanceof HtmlAnchor)) {
-                        return false;
-                    }
-                    final HtmlAnchor anchor = (HtmlAnchor) node;
-                    if (checkId) {
-                        return anchor.hasAttribute("name") || anchor.hasAttribute("id");
-                    }
-                    return anchor.hasAttribute("name");
+        return new HTMLCollection(getDomNodeOrDie(), true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (!(node instanceof HtmlAnchor)) {
+                    return false;
                 }
+                final HtmlAnchor anchor = (HtmlAnchor) node;
+                if (getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID)) {
+                    return anchor.hasAttribute("name") || anchor.hasAttribute("id");
+                }
+                return anchor.hasAttribute("name");
+            }
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    final HtmlElement node = event.getHtmlElement();
-                    if (!(node instanceof HtmlAnchor)) {
-                        return EffectOnCache.NONE;
-                    }
-                    if ("name".equals(event.getName()) || "id".equals(event.getName())) {
-                        return EffectOnCache.RESET;
-                    }
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final HtmlElement node = event.getHtmlElement();
+                if (!(node instanceof HtmlAnchor)) {
                     return EffectOnCache.NONE;
                 }
-            };
-        }
-        return anchors_;
+                if ("name".equals(event.getName()) || "id".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     /**
@@ -461,15 +441,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public Object getApplets() {
-        if (applets_ == null) {
-            applets_ = new HTMLCollection(getDomNodeOrDie(), false) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlApplet;
-                }
-            };
-        }
-        return applets_;
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlApplet;
+            }
+        };
     }
 
     /**
@@ -883,15 +860,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public Object getImages() {
-        if (images_ == null) {
-            images_ = new HTMLCollection(getDomNodeOrDie(), false) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlImage;
-                }
-            };
-        }
-        return images_;
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlImage;
+            }
+        };
     }
 
     /**
@@ -978,16 +952,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public HTMLCollection getAll() {
-        if (all_ == null) {
-            all_ = new HTMLAllCollection(getDomNodeOrDie()) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return true;
-                }
-            };
-            all_.setAvoidObjectDetection(true);
-        }
-        return all_;
+        return new HTMLAllCollection(getDomNodeOrDie()) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return true;
+            }
+
+            @Override
+            public boolean avoidObjectDetection() {
+                return true;
+            }
+        };
     }
 
     /**
@@ -1534,15 +1509,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public Object getScripts() {
-        if (scripts_ == null) {
-            scripts_ = new HTMLCollection(getDomNodeOrDie(), false) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlScript;
-                }
-            };
-        }
-        return scripts_;
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlScript;
+            }
+        };
     }
 
     /**
