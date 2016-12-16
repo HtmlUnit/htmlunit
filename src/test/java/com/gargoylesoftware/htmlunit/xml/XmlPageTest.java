@@ -145,8 +145,8 @@ public class XmlPageTest extends WebServerTestCase {
         final String content
             = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         final XmlPage xmlPage = testDocument(content, "text/xml");
@@ -219,9 +219,9 @@ public class XmlPageTest extends WebServerTestCase {
         final String content
             = "<?xml version=\"1.0\"?>\n"
             + "<foo>\n"
-            + "    <foofoo invalid\n"
-            + "    <foofoo name='first'>something</foofoo>\n"
-            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "  <foofoo invalid\n"
+            + "  <foofoo name='first'>something</foofoo>\n"
+            + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
         webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
@@ -320,8 +320,8 @@ public class XmlPageTest extends WebServerTestCase {
         final String html
             = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
         final XmlPage xmlPage = testDocument(html, "text/xml");
         assertEquals(1, xmlPage.getByXPath("//foofoo[@name='first']").size());
@@ -336,8 +336,8 @@ public class XmlPageTest extends WebServerTestCase {
         final String html
             = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <MARKGR INTREGN=\"1289218\" BILING=\"Y\" OOCD=\"CH\" INTREGD=\"20160111\">\n"
-             + "    </MARKGR>\n"
+             + "  <MARKGR INTREGN=\"1289218\" BILING=\"Y\" OOCD=\"CH\" INTREGD=\"20160111\">\n"
+             + "  </MARKGR>\n"
              + "</foo>";
         final XmlPage xmlPage = testDocument(html, "text/xml");
 

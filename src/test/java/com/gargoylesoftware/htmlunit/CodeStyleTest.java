@@ -159,6 +159,7 @@ public class CodeStyleTest {
                 alerts(lines, relativePath);
                 className(lines, relativePath);
                 classNameUsed(lines, classNames, relativePath);
+                spaces(lines, relativePath);
             }
         }
     }
@@ -882,6 +883,40 @@ public class CodeStyleTest {
 
             default:
         }
+    }
+
+    /**
+     * Verifies that no extra leading spaces (in test code).
+     */
+    private void spaces(final List<String> lines, final String relativePath) {
+        String simpleName = relativePath.substring(0, relativePath.length() - 5);
+        simpleName = simpleName.substring(simpleName.lastIndexOf(File.separator) + 1);
+        for (int i = 0; i + 1 < lines.size(); i++) {
+            String line = lines.get(i).trim();
+            String next = lines.get(i + 1).trim();
+            if (line.startsWith("+ \"") && next.startsWith("+ \"")) {
+                line = line.substring(3);
+                next = next.substring(3);
+                if ((line.startsWith("<") && next.trim().startsWith("<") || line.startsWith("try") || line.startsWith("for")
+                        || line.startsWith("function") || line.startsWith("if"))) {
+                    final int difference = getInitialSpaces(next) - getInitialSpaces(line);
+                    if (difference > 2) {
+                        addFailure("Too many spaces in " + relativePath + ", line: " + (i + 2));
+                    }
+                    else if (difference == 1) {
+                        addFailure("Add one more space in " + relativePath + ", line: " + (i + 2));
+                    }
+                }
+            }
+        }
+    }
+
+    private static int getInitialSpaces(final String s) {
+        int spaces = 0;
+        while (spaces < s.length() && s.charAt(spaces) == ' ') {
+            spaces++;
+        }
+        return spaces;
     }
 
     /**

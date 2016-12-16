@@ -1085,8 +1085,8 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "    <div id='d' class='x'>foo bar</div>\n"
-            + "  </body>\n"
+            + "  <div id='d' class='x'>foo bar</div>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageWithAlerts2(html);
@@ -1525,7 +1525,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<head><title>First</title></head>\n"
             + "<body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='location=\"" + URL_SECOND + "\";'>Click me</a>\n"
+            + "  <a id='link' onClick='location=\"" + URL_SECOND + "\";'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -1555,7 +1555,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<head><title>First</title></head>\n"
             + "<body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.location=\"" + URL_SECOND + "\";'>Click me</a>\n"
+            + "  <a id='link' onClick='window.location=\"" + URL_SECOND + "\";'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -1585,7 +1585,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<head><title>First</title></head>\n"
             + "<body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='document.location=\"" + URL_SECOND + "\";'>Click me</a>\n"
+            + "  <a id='link' onClick='document.location=\"" + URL_SECOND + "\";'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent

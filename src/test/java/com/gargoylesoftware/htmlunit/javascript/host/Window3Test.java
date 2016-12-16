@@ -199,11 +199,11 @@ public class Window3Test extends WebDriverTestCase {
         final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frameset rows='30%,70%'>\n"
-            + "        <frame src='" + URL_SECOND + "' name='second'>\n"
-            + "        <frame src='" + urlThird + "' name='third'>\n"
-            + "    </frameset>\n"
-            + "    <frame src='" + urlFourth + "' name='fourth'>\n"
+            + "  <frameset rows='30%,70%'>\n"
+            + "    <frame src='" + URL_SECOND + "' name='second'>\n"
+            + "    <frame src='" + urlThird + "' name='third'>\n"
+            + "  </frameset>\n"
+            + "  <frame src='" + urlFourth + "' name='fourth'>\n"
             + "</frameset></html>";
         getMockWebConnection().setResponse(URL_FIRST, firstContent);
 
@@ -261,11 +261,11 @@ public class Window3Test extends WebDriverTestCase {
         final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frameset rows='30%,70%'>\n"
-            + "        <frame src='" + URL_SECOND + "' name='second'>\n"
-            + "        <frame src='" + urlThird + "' name='third'>\n"
-            + "    </frameset>\n"
-            + "    <frame src='" + urlFourth + "' name='fourth'>\n"
+            + "  <frameset rows='30%,70%'>\n"
+            + "    <frame src='" + URL_SECOND + "' name='second'>\n"
+            + "    <frame src='" + urlThird + "' name='third'>\n"
+            + "  </frameset>\n"
+            + "  <frame src='" + urlFourth + "' name='fourth'>\n"
             + "</frameset></html>";
         getMockWebConnection().setResponse(URL_FIRST, firstContent);
 
@@ -1164,10 +1164,10 @@ public class Window3Test extends WebDriverTestCase {
             + "<script>\n"
             + "var docPatate = 'patate';\n"
             + "function test() {\n"
-            + " var f = document.forms['formtest'];\n"
-            + " alert(eval(\"document.forms['formtest'].element.value\"));\n"
-            + " alert(f.element.value);\n"
-            + " alert(eval('f.element.value'));\n"
+            + "  var f = document.forms['formtest'];\n"
+            + "  alert(eval(\"document.forms['formtest'].element.value\"));\n"
+            + "  alert(f.element.value);\n"
+            + "  alert(eval('f.element.value'));\n"
             + "}\n"
             + "test();\n"
             + "</script>\n"
@@ -1309,8 +1309,8 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>First</title></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
-            + "    <frame name='top' src='" + URL_SECOND + "' />\n"
-            + "    <frame name='bottom' src='about:blank' />\n"
+            + "  <frame name='top' src='" + URL_SECOND + "' />\n"
+            + "  <frame name='bottom' src='about:blank' />\n"
             + "</frameset>\n"
             + "</html>";
 

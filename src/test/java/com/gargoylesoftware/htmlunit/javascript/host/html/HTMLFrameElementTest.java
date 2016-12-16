@@ -47,8 +47,8 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
-            + "    <frame id='frame1'>\n"
-            + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
+            + "  <frame id='frame1'>\n"
+            + "  <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
             + "</frameset></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);

@@ -1515,7 +1515,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
-                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "  <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
                 + "</body>\n"
                 + "</html>";
         loadPageWithAlerts2(html);
@@ -1548,7 +1548,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
-                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "  <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
                 + "</body>\n"
                 + "</html>";
         loadPageWithAlerts2(html);
@@ -1581,7 +1581,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
-                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "  <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
                 + "</body>\n"
                 + "</html>";
         loadPageWithAlerts2(html);
@@ -1830,17 +1830,17 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void removeAttribute_property() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "    <title>Test</title>\n"
-            + "    <script>\n"
-            + "    function doTest() {\n"
-            + "       var myDiv = document.getElementById('aDiv');\n"
-            + "       myDiv.foo = 'hello';\n"
-            + "       alert(myDiv.foo);\n"
-            + "       alert(myDiv.getAttribute('foo'));\n"
-            + "       myDiv.removeAttribute('foo');\n"
-            + "       alert(myDiv.foo);\n"
-            + "    }\n"
-            + "    </script>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "  function doTest() {\n"
+            + "    var myDiv = document.getElementById('aDiv');\n"
+            + "    myDiv.foo = 'hello';\n"
+            + "    alert(myDiv.foo);\n"
+            + "    alert(myDiv.getAttribute('foo'));\n"
+            + "    myDiv.removeAttribute('foo');\n"
+            + "    alert(myDiv.foo);\n"
+            + "  }\n"
+            + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'><div id='aDiv' name='removeMe'>\n"
             + "</div></body>\n"

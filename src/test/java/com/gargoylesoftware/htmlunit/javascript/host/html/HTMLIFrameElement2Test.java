@@ -79,12 +79,11 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     public void documentWrite_onLoad() throws Exception {
         final String html =
               "<html>\n"
-            + "  <body>\n"
-            + "    <script>\n"
-            + "      document.write(\"<iframe id='i' onload='alert(\\\"loaded\\\");' src='" + URL_SECOND + "'>"
-                                        + "</iframe>\");\n"
-            + "    </script>\n"
-            + "  </body>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "document.write(\"<iframe id='i' onload='alert(\\\"loaded\\\");' src='" + URL_SECOND + "'></iframe>\");\n"
+            + "</script>\n"
+            + "</body>\n"
             + "</html>";
         final String html2 = "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);

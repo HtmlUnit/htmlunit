@@ -41,8 +41,8 @@ public class HtmlLabelTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + " <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
-            + " <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
+            + "  <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
+            + "  <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -66,9 +66,9 @@ public class HtmlLabelTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + " <input type='checkbox' name='checkbox' id='testCheckbox'/>\n"
-            + " <label for='testCheckbox' id='testLabel1'>Check me</label>\n"
-            + " <label for='notExisting' id='testLabel2'>Check me too</label>\n"
+            + "  <input type='checkbox' name='checkbox' id='testCheckbox'/>\n"
+            + "  <label for='testCheckbox' id='testLabel1'>Check me</label>\n"
+            + "  <label for='notExisting' id='testLabel2'>Check me too</label>\n"
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);

@@ -47,8 +47,8 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<frameset id='fs' cols='20%,*' onload='test()'>\n"
-            + "    <frame name='left' src='about:blank' />\n"
-            + "    <frame name='right' src='about:blank' />\n"
+            + "  <frame name='left' src='about:blank' />\n"
+            + "  <frame name='right' src='about:blank' />\n"
             + "</frameset>\n"
             + "</html>";
 

@@ -189,7 +189,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String firstContent
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='*' onload='" + jsExpr + "'>\n"
-            + "    <frame name='Frame1' src='subdir/frame.html'>\n"
+            + "  <frame name='Frame1' src='subdir/frame.html'>\n"
             + "</frameset></html>";
         final String defaultContent
             = "<html><head><script>alert(location)</script></head></html>";

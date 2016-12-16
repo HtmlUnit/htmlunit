@@ -94,10 +94,10 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
             = "<html><body>\n"
             + "<iframe src='fooIFrame.html'></iframe>\n"
             + "<form name='form1' action='http://first' method='post'>\n"
-            + "    <select name='select1' onchange='this.form.submit()'>\n"
-            + "        <option value='option1' selected='true' name='option1'>One</option>\n"
-            + "        <option value='option2' name='option2'>Two</option>\n"
-            + "    </select>\n"
+            + "  <select name='select1' onchange='this.form.submit()'>\n"
+            + "    <option value='option1' selected='true' name='option1'>One</option>\n"
+            + "    <option value='option2' name='option2'>Two</option>\n"
+            + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
 

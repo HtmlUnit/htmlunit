@@ -89,8 +89,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -225,8 +225,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -338,8 +338,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -353,8 +353,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -516,7 +516,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "<script>var testLocalVariable = new Array();</script>\n"
             + "</head><body onload='testNestedMethod();' >\n"
             + "<form name='form1' method='POST' action='../foo' >\n"
-            + "    <input type='submit' value='Login' name='loginButton'>\n"
+            + "  <input type='submit' value='Login' name='loginButton'>\n"
             + "</form></body></html>";
 
         final String jsContent
@@ -544,8 +544,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "var f2 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
             + "</script></head>\n"
             + "<frameset border='0' frameborder='0' framespacing='0' rows='100,*'>\n"
-            + "    <frame id='frame1' src='javascript:parent.f1'/>\n"
-            + "    <frame id='frame2' src='javascript:parent.f2'/>\n"
+            + "  <frame id='frame1' src='javascript:parent.f1'/>\n"
+            + "  <frame id='frame2' src='javascript:parent.f2'/>\n"
             + "</frameset></html>";
 
         final List<String> emptyList = Collections.emptyList();
@@ -860,8 +860,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
              + "</script></head><body>\n"
              + "<p>hello world</p>\n"
              + "<form name='form1'>\n"
-             + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-             + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+             + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+             + "  <input type='text' name='textfield2' id='textfield2'/>\n"
              + "</form>\n"
              + "</body></html>";
     }

@@ -724,14 +724,14 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + " document.form1.textfield1.value = 'blue';\n"
+            + "  document.form1.textfield1.value = 'blue';\n"
             + "}\n"
             + "</script></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' onsubmit='doTest()'>\n"
-            + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + " <input type='submit' id='clickMe'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='submit' id='clickMe'/>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -750,14 +750,14 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + " document.form1.textfield1.select();\n"
+            + "  document.form1.textfield1.select();\n"
             + "}\n"
             + "</script></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' onsubmit='doTest()'>\n"
-            + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + " <input type='submit' id='clickMe'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='submit' id='clickMe'/>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -836,13 +836,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + " document.form1.textfield1.name = 'changed';\n"
+            + "  document.form1.textfield1.name = 'changed';\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1' onsubmit='doTest()'>\n"
-            + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + " <input type='submit' name='button1' id='clickMe' value='pushme' />\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='submit' name='button1' id='clickMe' value='pushme' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -865,7 +865,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + " <input type='text' name='text1' onchange='alert(this.value)'>\n"
+            + "  <input type='text' name='text1' onchange='alert(this.value)'>\n"
             + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>\n"
             + "</form>\n"
             + "</body></html>";
@@ -893,7 +893,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + " <input type='text' name='text1' id='text1'>\n"
+            + "  <input type='text' name='text1' id='text1'>\n"
             + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>\n"
             + "</form>\n"
             + "<script>\n"

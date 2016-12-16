@@ -301,8 +301,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
         final String xml =
                "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
@@ -337,8 +337,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
         final String xml =
                "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
@@ -364,8 +364,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
         final String xml =
                "<?apache include file=\"header.html\" ?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
@@ -398,8 +398,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
         final String xml =
                "<?apache include file=\"header.html\" ?>\n"
              + "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "  <foofoo name='first'>something</foofoo>\n"
+             + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
@@ -480,8 +480,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
         final String xml =
               "<!--comment-->\n"
             + "<foo>\n"
-            + "    <foofoo name='first'>something</foofoo>\n"
-            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "  <foofoo name='first'>something</foofoo>\n"
+            + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
@@ -514,8 +514,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
         final String xml =
               "<!--comment-->\n"
             + "<foo>\n"
-            + "    <foofoo name='first'>something</foofoo>\n"
-            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "  <foofoo name='first'>something</foofoo>\n"
+            + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");

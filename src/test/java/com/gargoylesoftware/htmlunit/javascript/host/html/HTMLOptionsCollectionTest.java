@@ -939,17 +939,17 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "<body onload='test()'>\n"
             + "<form name='form1'>\n"
-            + "    <select name='select0'></select>\n"
+            + "  <select name='select0'></select>\n"
 
-            + "    <select name='select1'>\n"
-            + "        <option>One</option>\n"
-            + "    </select>\n"
+            + "  <select name='select1'>\n"
+            + "    <option>One</option>\n"
+            + "  </select>\n"
 
-            + "    <select name='select3'>\n"
-            + "        <option>One</option>\n"
-            + "        <option>Two</option>\n"
-            + "        <option>Three</option>\n"
-            + "    </select>\n"
+            + "  <select name='select3'>\n"
+            + "    <option>One</option>\n"
+            + "    <option>Two</option>\n"
+            + "    <option>Three</option>\n"
+            + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -1094,11 +1094,11 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "<body onload='test()'>\n"
             + "<form name='form1'>\n"
-            + "    <select name='select0'></select>\n"
+            + "  <select name='select0'></select>\n"
 
-            + "    <select name='select1'>\n"
-            + "        <option>One</option>\n"
-            + "    </select>\n"
+            + "  <select name='select1'>\n"
+            + "    <option>One</option>\n"
+            + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
 

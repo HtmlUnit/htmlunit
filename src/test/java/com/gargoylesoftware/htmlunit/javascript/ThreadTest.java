@@ -128,7 +128,7 @@ public class ThreadTest extends TestCase {
                 + "</script></head><body onload='doTest()'>\n"
                 + "<p>hello world</p>\n"
                 + "<form name='form1'>\n"
-                + "    <input type='text' name='textfield1' id='textfield1' value='foo'>\n"
+                + "  <input type='text' name='textfield1' id='textfield1' value='foo'>\n"
                 + "</form>\n"
                 + "</body></html>";
 

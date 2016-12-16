@@ -255,7 +255,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + " function onSubmit() { alert('hi!'); return false; }\n"
             + "</script></head><body>\n"
             + "<form onsubmit='return onSubmit();'>\n"
-            + " <input type='submit' id='clickMe' />\n"
+            + "  <input type='submit' id='clickMe' />\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -274,12 +274,12 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
     public void assignedOnsubmit() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + " function onSubmit() { alert('hi!'); return false; }\n"
-            + " function init() { document.myForm.onsubmit = onSubmit; }\n"
-            + " window.onload = init;\n"
+            + "  function onSubmit() { alert('hi!'); return false; }\n"
+            + "  function init() { document.myForm.onsubmit = onSubmit; }\n"
+            + "  window.onload = init;\n"
             + "</script></head><body>\n"
             + "<form name='myForm'>\n"
-            + " <input type='submit' id='clickMe' />\n"
+            + "  <input type='submit' id='clickMe' />\n"
             + "</form>\n"
             + "</body></html>";
 

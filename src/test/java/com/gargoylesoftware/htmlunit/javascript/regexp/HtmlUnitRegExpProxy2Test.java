@@ -46,7 +46,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     private static final String src_ = "var re = new RegExp(str, 'img');\n"
         + "var s = text.replace(re, '');\n"
         + "if (s != expected)\n"
-        + " throw 'Expected >' + expected + '< but got >' + s + '<';";
+        + "  throw 'Expected >' + expected + '< but got >' + s + '<';";
 
     private static final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
             + "  if (_arr == null) return null;\n"

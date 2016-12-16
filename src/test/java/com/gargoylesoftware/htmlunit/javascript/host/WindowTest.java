@@ -89,7 +89,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"MyNewWindow\").focus(); "
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"MyNewWindow\").focus(); "
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -159,7 +159,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title><base target='MyNewWindow'></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' href='" + URL_SECOND + "'>Click me</a>\n"
+            + "  <a id='link' href='" + URL_SECOND + "'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -268,7 +268,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_self\"); "
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_self\"); "
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -864,7 +864,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -929,7 +929,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -988,7 +988,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1047,7 +1047,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1106,7 +1106,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "  <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";

@@ -108,7 +108,7 @@ public class Location2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "   alert(top.document.location.href);\n"
+            + "  alert(top.document.location.href);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -624,7 +624,7 @@ public class Location2Test extends WebDriverTestCase {
             + " window.onhashchange = locationHashChanged;\n"
             + "</script>\n"
             + "<body>\n"
-            + " <a id='click' href='#1'>change hash</a>\n"
+            + "  <a id='click' href='#1'>change hash</a>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -674,7 +674,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + " <button id='click' onclick='location.hash=1'>change hash</button>\n"
+            + "  <button id='click' onclick='location.hash=1'>change hash</button>\n"
             + "</body></html>";
 
         expandExpectedAlertsVariables(getDefaultUrl());

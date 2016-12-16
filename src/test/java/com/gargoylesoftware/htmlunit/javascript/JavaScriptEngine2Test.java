@@ -442,8 +442,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -552,7 +552,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
             + "function doTest() {\n"
-            + " alert('1')\n"
+            + "  alert('1')\n"
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
