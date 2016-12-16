@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
@@ -864,7 +865,6 @@ public class HTMLDocument2 extends Document2 {
                 explicitInstanceOfCheck ? null : ClassCastException.class);
     }
 
-    @SuppressWarnings("unused")
     private static Object getArbitraryProperty(final HTMLDocument2 self, final String name) {
         final HtmlPage page = (HtmlPage) self.getDomNodeOrNull();
 
@@ -920,6 +920,10 @@ public class HTMLDocument2 extends Document2 {
         final String name = desc.getNameToken(CallSiteDescriptor.NAME_OPERAND);
         if ("all".equals(name)) {
             allAsFunction_ = "getMethod".equals(operator);
+        }
+        if (!getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS)
+                && getArbitraryProperty(this, name) != ScriptRuntime.UNDEFINED) {
+            return noSuchProperty(desc, request);
         }
         return super.findGetMethod(desc, request, operator);
     }
