@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -105,7 +106,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornCallSiteDescriptor;
 import com.gargoylesoftware.js.nashorn.internal.runtime.linker.NashornGuards;
 
 @ScriptClass
@@ -321,23 +321,22 @@ public class HTMLDocument2 extends Document2 {
         final String expElementName = "null".equals(elementName) ? "" : elementName;
 
         final HtmlPage page = getPage();
-//        final HTMLCollection2 collection = new HTMLCollection2(page, true) {
-//            @Override
-//            protected List<Object> computeElements() {
-//                return new ArrayList<Object>(page.getElementsByName(expElementName));
-//            }
-//
-//            @Override
-//            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-//                if ("name".equals(event.getName())) {
-//                    return EffectOnCache.RESET;
-//                }
-//                return EffectOnCache.NONE;
-//            }
-//        };
-//
-//        return collection;
-        return null;
+        final HTMLCollection2 collection = new HTMLCollection2(page, true) {
+            @Override
+            protected List<Object> computeElements() {
+                return new ArrayList<Object>(page.getElementsByName(expElementName));
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                if ("name".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
+
+        return collection;
     }
 
     /**
@@ -1072,6 +1071,31 @@ public class HTMLDocument2 extends Document2 {
             return EXECUTE_CMDS_CHROME.contains(cmdLC) || (includeBold && "bold".equalsIgnoreCase(cmd));
         }
         return EXECUTE_CMDS_FF.contains(cmdLC);
+    }
+
+    /**
+     * Returns the value of the JavaScript property {@code links}. Refer also to the
+     * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
+     * @return the value of this property
+     */
+    @Getter
+    public Object getLinks() {
+        return new HTMLCollection2(getDomNodeOrDie(), true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return (node instanceof HtmlAnchor || node instanceof HtmlArea)
+                        && ((HtmlElement) node).hasAttribute("href");
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final HtmlElement node = event.getHtmlElement();
+                if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

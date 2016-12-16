@@ -758,5 +758,24 @@ public class AbstractList2 extends SimpleScriptObject {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean equivalentValues(final Object other) {
+        if (other == this) {
+            return true;
+        }
+        else if (other instanceof AbstractList2) {
+            final AbstractList2 otherArray = (AbstractList2) other;
+            final DomNode domNode = getDomNodeOrNull();
+            final DomNode domNodeOther = otherArray.getDomNodeOrNull();
+            return getClass() == other.getClass()
+                    && domNode == domNodeOther
+                    && getElements().equals(otherArray.getElements());
+        }
+
+        return super.equivalentValues(other);
+    }
 
 }

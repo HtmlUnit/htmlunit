@@ -438,6 +438,39 @@ public class Document2 extends EventNode2 {
         return xPathResult;
     }
 
+    /**
+     * Returns a list of elements with the given tag name belonging to the given namespace.
+     * @param namespaceURI the namespace URI of elements to look for
+     * @param localName is either the local name of elements to look for or the special value "*",
+     *                  which matches all elements.
+     * @return a live NodeList of found elements in the order they appear in the tree
+     */
+    @Function
+    public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
+        final HTMLCollection2 collection = new HTMLCollection2(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return localName.equals(node.getLocalName());
+            }
+        };
+
+        return collection;
+    }
+
+    /**
+     * Returns the value of the {@code images} property.
+     * @return the value of the {@code images} property
+     */
+    @Getter
+    public Object getImages() {
+        return new HTMLCollection2(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlImage;
+            }
+        };
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Document2.class,
