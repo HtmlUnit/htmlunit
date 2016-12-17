@@ -1940,6 +1940,25 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("mouse over [tester]")
     @BuggyWebDriver(IE)
+    public void mouseOverFile() throws Exception {
+        mouseOver("<input id='tester' type='file' onmouseover='dumpEvent(event);'>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF45 = "mouse over [tester]")
+    public void mouseOverFileDisabled() throws Exception {
+        mouseOver("<input id='tester' type='file' onmouseover='dumpEvent(event);' disabled >");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("mouse over [tester]")
+    @BuggyWebDriver(IE)
     public void mouseOverCheckbox() throws Exception {
         mouseOver("<input id='tester' type='checkbox' onmouseover='dumpEvent(event);' value='HtmlUnit'>");
     }
