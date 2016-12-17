@@ -1383,6 +1383,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "o-mouse over [option1]",
+            FF45 = {"o-mouse over [option1]", "s-mouse over [option1]"},
             IE = {})
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
