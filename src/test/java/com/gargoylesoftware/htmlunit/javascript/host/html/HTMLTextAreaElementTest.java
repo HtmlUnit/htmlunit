@@ -21,10 +21,13 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -711,5 +714,67 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "</body>"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("mouse over [tester]")
+    @BuggyWebDriver(IE)
+    public void mouseOverTextarea() throws Exception {
+        mouseOver("<textarea id='tester' onmouseover='dumpEvent(event);'>HtmlUnit</textarea>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF45 = "mouse over [tester]")
+    public void mouseOverTextareaDisabled() throws Exception {
+        mouseOver("<textarea id='tester' onmouseover='dumpEvent(event);' disabled >HtmlUnit</textarea>");
+    }
+
+    private void mouseOver(final String element) throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function dumpEvent(event) {\n"
+            + "      // target\n"
+            + "      var eTarget;\n"
+            + "      if (event.target) {\n"
+            + "        eTarget = event.target;\n"
+            + "      } else if (event.srcElement) {\n"
+            + "        eTarget = event.srcElement;\n"
+            + "      }\n"
+            + "      // defeat Safari bug\n"
+            + "      if (eTarget.nodeType == 3) {\n"
+            + "        eTarget = eTarget.parentNode;\n"
+            + "      }\n"
+            + "      var msg = 'mouse over';\n"
+            + "      if (eTarget.name) {\n"
+            + "        msg = msg + ' [' + eTarget.name + ']';\n"
+            + "      } else {\n"
+            + "        msg = msg + ' [' + eTarget.id + ']';\n"
+            + "      }\n"
+            + "      alert(msg);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    " + element + "\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("tester")));
+        actions.perform();
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }
