@@ -715,6 +715,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */
