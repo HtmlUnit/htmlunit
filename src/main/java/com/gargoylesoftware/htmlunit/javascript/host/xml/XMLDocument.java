@@ -254,7 +254,7 @@ public class XMLDocument extends Document {
     public HTMLCollection getElementsByTagName(final String tagName) {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild == null) {
-            return HTMLCollection.emptyCollection(getWindow());
+            return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
 
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {

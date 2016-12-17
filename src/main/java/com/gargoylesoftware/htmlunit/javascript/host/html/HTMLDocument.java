@@ -185,7 +185,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
-    private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
     private HTMLElement activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
@@ -1117,7 +1116,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         if ("null".equals(elementName)) {
-            return HTMLCollection.emptyCollection(getWindow());
+            return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
         // Null must me changed to '' for proper collection initialization.
         final String expElementName = "null".equals(elementName) ? "" : elementName;
@@ -1536,10 +1535,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public StyleSheetList getStyleSheets() {
-        if (styleSheets_ == null) {
-            styleSheets_ = new StyleSheetList(this);
-        }
-        return styleSheets_;
+        return new StyleSheetList(this);
     }
 
     /**

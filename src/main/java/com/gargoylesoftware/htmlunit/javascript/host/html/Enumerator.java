@@ -52,7 +52,7 @@ public class Enumerator extends SimpleScriptable {
     @JsxConstructor
     public void jsConstructor(final Object o) {
         if (Undefined.instance == o) {
-            collection_ = HTMLCollection.emptyCollection(getWindow());
+            collection_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
         else if (getBrowserVersion().hasFeature(JS_ENUMERATOR_CONSTRUCTOR_THROWS)) {
             throw Context.reportRuntimeError("TypeError: object is not enumerable");

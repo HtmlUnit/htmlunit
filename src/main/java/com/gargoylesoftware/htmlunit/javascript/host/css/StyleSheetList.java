@@ -144,7 +144,7 @@ public class StyleSheetList extends SimpleScriptable {
             };
         }
         else {
-            nodes_ = HTMLCollection.emptyCollection(getWindow());
+            nodes_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
     }
 
@@ -194,5 +194,13 @@ public class StyleSheetList extends SimpleScriptable {
             return item(index);
         }
         return super.get(index, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object equivalentValues(final Object value) {
+        return getClass() == value.getClass() && getDomNodeOrDie() == ((StyleSheetList) value).getDomNodeOrDie();
     }
 }

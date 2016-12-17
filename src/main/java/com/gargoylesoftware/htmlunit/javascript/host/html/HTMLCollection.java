@@ -36,13 +36,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -65,22 +63,13 @@ public class HTMLCollection extends AbstractList {
     /**
      * IE provides a way of enumerating through some element collections; this counter supports that functionality.
      */
-    private int currentIndex_ = 0;
+    private int currentIndex_;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLCollection() {
-    }
-
-    /**
-     * Creates an instance.
-     * @param parentScope parent scope
-     */
-    private HTMLCollection(final ScriptableObject parentScope) {
-        setParentScope(parentScope);
-        setPrototype(getPrototype(getClass()));
     }
 
     /**
@@ -104,12 +93,12 @@ public class HTMLCollection extends AbstractList {
 
     /**
      * Gets an empty collection.
-     * @param window the current scope
+     * @param domNode the DOM node
      * @return an empty collection
      */
-    public static HTMLCollection emptyCollection(final Window window) {
+    public static HTMLCollection emptyCollection(final DomNode domNode) {
         final List<Object> list = Collections.emptyList();
-        return new HTMLCollection(window) {
+        return new HTMLCollection(domNode, false) {
             @Override
             public List<Object> getElements() {
                 return list;
