@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_INPUT_DISPLAY_INLINE_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -491,6 +493,18 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     protected boolean propagateClickStateUpdateToParent() {
         return !hasFeature(HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (event instanceof MouseEvent && hasFeature(EVENT_MOUSE_ON_DISABLED)) {
+            return true;
+        }
+
+        return super.handles(event);
     }
 
     /**
