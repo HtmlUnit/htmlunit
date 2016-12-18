@@ -317,11 +317,11 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("dummy.txt")
+    @Alerts("onchange")
     public void fileInput_fireOnChange() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<form>\n"
-            + "  <input type='file' name='myFile' id='myFile' onchange='alert(this.value)'/>\n"
+            + "  <input type='file' name='myFile' id='myFile' onchange='alert(\"onchange\")'/>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
