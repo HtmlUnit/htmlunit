@@ -179,7 +179,7 @@ public class HTMLCollection2 extends AbstractList2 {
         if (matchingElements.isEmpty()) {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
 //                final Double doubleValue = Context.toNumber(name);
-//                if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
+//                if (!doubleValue.isNaN()) {
 //                    final Object object = get(doubleValue.intValue(), this);
 //                    if (object != null) {
 //                        return object;

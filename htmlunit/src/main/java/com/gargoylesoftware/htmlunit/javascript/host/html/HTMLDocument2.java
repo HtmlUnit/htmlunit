@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
@@ -141,14 +142,6 @@ public class HTMLDocument2 extends Document2 {
 
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
-    private HTMLCollection2 all_; // has to be a member to have equality (==) working
-    private HTMLCollection2 forms_; // has to be a member to have equality (==) working
-    private HTMLCollection2 links_; // has to be a member to have equality (==) working
-    private HTMLCollection2 images_; // has to be a member to have equality (==) working
-    private HTMLCollection2 scripts_; // has to be a member to have equality (==) working
-    private HTMLCollection2 anchors_; // has to be a member to have equality (==) working
-    private HTMLCollection2 applets_; // has to be a member to have equality (==) working
-    private StyleSheetList2 styleSheets_; // has to be a member to have equality (==) working
     private HTMLElement2 activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
@@ -443,10 +436,7 @@ public class HTMLDocument2 extends Document2 {
      */
     @Getter
     public StyleSheetList2 getStyleSheets() {
-        if (styleSheets_ == null) {
-            styleSheets_ = new StyleSheetList2(this);
-        }
-        return styleSheets_;
+        return new StyleSheetList2(this);
     }
 
     /**
@@ -560,26 +550,21 @@ public class HTMLDocument2 extends Document2 {
      */
     @Getter
     public Object getForms() {
-        if (forms_ == null) {
-            final boolean allowFunctionCall = getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
+        return new HTMLCollection2(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlForm && node.getPrefix() == null;
+            }
 
-            forms_ = new HTMLCollection2(getDomNodeOrDie(), false) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return node instanceof HtmlForm && node.getPrefix() == null;
-                }
-
-//                @Override
-//                public Object call(final Context cx, final Scriptable scope,
-//                        final Scriptable thisObj, final Object[] args) {
-//                    if (allowFunctionCall) {
-//                        return super.call(cx, scope, thisObj, args);
-//                    }
-//                    throw Context.reportRuntimeError("TypeError: document.forms is not a function");
+//            @Override
+//            public Object call(final Context cx, final Scriptable scope,
+//                    final Scriptable thisObj, final Object[] args) {
+//                if (allowFunctionCall) {
+//                    return super.call(cx, scope, thisObj, args);
 //                }
-            };
-        }
-        return forms_;
+//                throw Context.reportRuntimeError("TypeError: document.forms is not a function");
+//            }
+        };
     }
 
     /**
@@ -950,18 +935,16 @@ public class HTMLDocument2 extends Document2 {
      */
     @Getter
     public HTMLCollection2 getAll() {
-        if (all_ == null) {
-            all_ = new HTMLAllCollection2(getDomNodeOrDie()) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return true;
-                }
-            };
-            all_.setProto(getWindow().getGlobal().getPrototype(all_.getClass()));
-            ScriptUtils.initialize(all_);
-            all_.setAvoidObjectDetection(true);
-        }
-        return all_;
+        return new HTMLAllCollection2(getDomNodeOrDie()) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return true;
+            }
+            @Override
+            public boolean avoidObjectDetection() {
+                return true;
+            }
+        };
     }
 
     /**
@@ -973,36 +956,31 @@ public class HTMLDocument2 extends Document2 {
      */
     @Getter
     public Object getAnchors() {
-        if (anchors_ == null) {
-            final boolean checkId = getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID);
-
-            anchors_ = new HTMLCollection2(getDomNodeOrDie(), true) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    if (!(node instanceof HtmlAnchor)) {
-                        return false;
-                    }
-                    final HtmlAnchor anchor = (HtmlAnchor) node;
-                    if (checkId) {
-                        return anchor.hasAttribute("name") || anchor.hasAttribute("id");
-                    }
-                    return anchor.hasAttribute("name");
+        return new HTMLCollection2(getDomNodeOrDie(), true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (!(node instanceof HtmlAnchor)) {
+                    return false;
                 }
+                final HtmlAnchor anchor = (HtmlAnchor) node;
+                if (getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID)) {
+                    return anchor.hasAttribute("name") || anchor.hasAttribute("id");
+                }
+                return anchor.hasAttribute("name");
+            }
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    final HtmlElement node = event.getHtmlElement();
-                    if (!(node instanceof HtmlAnchor)) {
-                        return EffectOnCache.NONE;
-                    }
-                    if ("name".equals(event.getName()) || "id".equals(event.getName())) {
-                        return EffectOnCache.RESET;
-                    }
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final HtmlElement node = event.getHtmlElement();
+                if (!(node instanceof HtmlAnchor)) {
                     return EffectOnCache.NONE;
                 }
-            };
-        }
-        return anchors_;
+                if ("name".equals(event.getName()) || "id".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     /**
@@ -1100,6 +1078,56 @@ public class HTMLDocument2 extends Document2 {
                 return EffectOnCache.NONE;
             }
         };
+    }
+
+    /**
+     * Returns the ready state of the document. This is an IE-only property.
+     * @return the ready state of the document
+     * @see DomNode#READY_STATE_UNINITIALIZED
+     * @see DomNode#READY_STATE_LOADING
+     * @see DomNode#READY_STATE_LOADED
+     * @see DomNode#READY_STATE_INTERACTIVE
+     * @see DomNode#READY_STATE_COMPLETE
+     */
+    @Getter
+    public String getReadyState() {
+        return getDomNodeOrDie().getReadyState();
+    }
+
+    /**
+     * Returns the value of the {@code referrer} property.
+     * @return the value of the {@code referrer} property
+     */
+    @Getter
+    public String getReferrer() {
+        final String referrer = getPage().getWebResponse().getWebRequest().getAdditionalHeaders().get("Referer");
+        if (referrer == null) {
+            return "";
+        }
+        return referrer;
+    }
+
+    /**
+     * Returns the value of the {@code scripts} property.
+     * @return the value of the {@code scripts} property
+     */
+    @Getter
+    public Object getScripts() {
+        return new HTMLCollection2(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlScript;
+            }
+        };
+    }
+
+    /**
+     * Returns the value of the {@code URL} property.
+     * @return the value of the {@code URL} property
+     */
+    @Getter(name = "URL")
+    public String getURL() {
+        return getPage().getUrl().toExternalForm();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

@@ -20,9 +20,9 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Element2;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -270,10 +270,10 @@ class HtmlSerializer {
         }
         else {
             final boolean block;
-            final ScriptableObject scriptableObject = node.getScriptableObject();
-            if (scriptableObject instanceof Element && !(node instanceof HtmlBody)) {
-                final Element element = (Element) scriptableObject;
-                final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+            final ScriptObject scriptableObject = node.getScriptObject2();
+            if (scriptableObject instanceof Element2 && !(node instanceof HtmlBody)) {
+                final Element2 element = (Element2) scriptableObject;
+                final String display = Window2.getComputedStyle(element.getWindow(), element, null).getDisplay(true);
                 block = "block".equals(display);
             }
             else {

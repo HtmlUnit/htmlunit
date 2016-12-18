@@ -730,11 +730,8 @@ public class AbstractList2 extends SimpleScriptObject {
             throw new RuntimeException("Zero arguments; need an index or a key.");
         }
         final Object object = getIt(index);
-        if (object == null) {
-            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
-                return null;
-            }
-            return ScriptRuntime.UNDEFINED;
+        if (object == ScriptRuntime.UNDEFINED && getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+            return null;
         }
         return object;
     }

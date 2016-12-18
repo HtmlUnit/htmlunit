@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -36,16 +38,19 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
+import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Undefined;
 import com.steadystate.css.dom.MediaListImpl;
 
+@ScriptClass
 public class StyleSheetList2 extends SimpleScriptObject {
 
     /**
@@ -95,6 +100,8 @@ public class StyleSheetList2 extends SimpleScriptObject {
      * @param document the owning document
      */
     public StyleSheetList2(final HTMLDocument2 document) {
+        setProto(document.getWindow().getGlobal().getPrototype(getClass()));
+        ScriptUtils.initialize(this);
         final WebClient webClient = document.getDomNodeOrDie().getPage().getWebClient();
         final boolean cssEnabled = webClient.getOptions().isCssEnabled();
         final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
@@ -171,6 +178,14 @@ public class StyleSheetList2 extends SimpleScriptObject {
         return sheet;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean equivalentValues(final Object value) {
+        return getClass() == value.getClass() && getDomNodeOrNull() == ((StyleSheetList2) value).getDomNodeOrNull();
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(StyleSheetList2.class,
@@ -181,6 +196,7 @@ public class StyleSheetList2 extends SimpleScriptObject {
         }
     }
 
+    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static final class FunctionConstructor extends ScriptFunction {
         public FunctionConstructor() {
             super("StyleSheetList", 
@@ -192,13 +208,10 @@ public class StyleSheetList2 extends SimpleScriptObject {
         }
     }
 
-    public static final class Prototype extends PrototypeObject {
+    public static final class Prototype extends SimplePrototypeObject {
         Prototype() {
-            ScriptUtils.initialize(this);
-        }
-
-        public String getClassName() {
-            return "StyleSheetList";
+            super("StyleSheetList");
         }
     }
+
 }
