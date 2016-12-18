@@ -1243,8 +1243,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            CHROME = {"undefined", "undefined", "null"},
+    @Alerts(DEFAULT = {"undefined", "undefined", "null"},
             FF = {"null", "null", "null"},
             IE = {"undefined", "null", "undefined"})
     public void all_NotExisting() throws Exception {

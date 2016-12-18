@@ -91,7 +91,7 @@ public class HTMLAllCollection extends HTMLCollection {
             if (!browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
                 numb = ScriptRuntime.toNumber(index);
             }
-            if (ScriptRuntime.NaN == numb || numb.isNaN()) {
+            if (numb.isNaN()) {
                 return itemNotFound(browser);
             }
         }
