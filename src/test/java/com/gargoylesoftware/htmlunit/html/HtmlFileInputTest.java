@@ -14,14 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -48,7 +44,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -578,52 +573,72 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({FF, CHROME})
+    @Alerts(DEFAULT = {"exception", "-Hello world-Hello world"},
+            IE = "-Hello world-Hello world")
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
-              + "<head></head>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var input = document.getElementById(\"f\")\n"
+              + "    try{\n"
+              + "      input.value=\"HtmlUnit\";\n"
+              + "    } catch(e) { alert('exception'); }\n"
+              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "  }\n"
+              + "</script>\n"
               + "<body>\n"
               + "  <input type='file' id='f' value='Hello world'"
                     + " onChange='alert(\"foo\");alert(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
-              + "  <button id='set' onclick='document.getElementById(\"f\").value=\"HtmlUnit\"'>setValue</button>\n"
+              + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("-HtmlUnit-HtmlUnit")
     public void setDefaultValueOnChange() throws Exception {
         final String html =
               "<html>\n"
-              + "<head></head>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var input = document.getElementById(\"f\")\n"
+              + "    try{\n"
+              + "      input.defaultValue=\"HtmlUnit\";\n"
+              + "    } catch(e) { alert('exception'); }\n"
+              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</head>\n"
               + "<body>\n"
               + "  <input type='file' id='f' value='Hello world'"
                     + " onChange='alert(\"foo\");alert(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
-              + "  <button id='set' onclick='document.getElementById(\"f\").defaultValue=\"HtmlUnit\"'>"
-                      + "setValue</button>\n"
+              + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -631,7 +646,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"--null", "--null", "--null"})
-    @NotYetImplemented
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -663,7 +677,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"--null", "--null", "--null"})
-    @NotYetImplemented
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -698,12 +711,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-initial-initial", "-initial-initial",
-                    "exception", "-initial-initial",
+                    "exception", "-initial-initial", "-initial-initial",
                     "-newDefault-newDefault", "-newDefault-newDefault"},
             IE = {"-initial-initial", "-initial-initial",
                     "-initial-initial", "-initial-initial",
                     "-newDefault-newDefault", "-newDefault-newDefault"})
-    @NotYetImplemented
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -716,8 +728,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "      alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
             + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
@@ -744,12 +756,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-initial-initial", "-initial-initial",
-                "exception", "-initial-initial",
+                "exception", "-initial-initial", "-initial-initial",
                 "-newDefault-newDefault", "-newDefault-newDefault"},
             IE = {"-initial-initial", "-initial-initial",
                 "-initial-initial", "-initial-initial",
                 "-newDefault-newDefault", "-newDefault-newDefault"})
-    @NotYetImplemented
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -762,8 +773,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "      alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
             + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
@@ -789,12 +800,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-initial-initial", "-default-default",
-                        "exception", "-attribValue-attribValue",
+                        "exception", "-default-default", "-attribValue-attribValue",
                         "-newDefault-newDefault"},
             IE = {"-initial-initial", "-default-default",
                     "-default-default", "-attribValue-attribValue",
                     "-newDefault-newDefault"})
-    @NotYetImplemented
     public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -807,8 +817,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "      alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.setAttribute('value', 'attribValue');\n"
             + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"

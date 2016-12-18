@@ -237,6 +237,9 @@ public class HTMLInputElement extends FormField {
             return;
         }
         super.setAttribute(name, value);
+        if ("file".equalsIgnoreCase(getType())) {
+            setDefaultValue(value);
+        }
     }
 
     /**
@@ -545,6 +548,17 @@ public class HTMLInputElement extends FormField {
      * {@inheritDoc}
      */
     @Override
+    public String getValue() {
+        if ("file".equalsIgnoreCase(getType())) {
+            return ATTRIBUTE_NOT_DEFINED;
+        }
+        return super.getValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void click() throws IOException {
         final HtmlInput domNode = getDomNodeOrDie();
         final boolean originalState = domNode.isChecked();
@@ -652,7 +666,7 @@ public class HTMLInputElement extends FormField {
     @JsxGetter
     public Object getFiles() {
         if (getDomNodeOrDie() instanceof HtmlFileInput) {
-            final FileList list = new FileList(HtmlFileInput.splitFiles(getValue()));
+            final FileList list = new FileList(HtmlFileInput.splitFiles(super.getValue()));
             list.setParentScope(getParentScope());
             list.setPrototype(getPrototype(list.getClass()));
             return list;

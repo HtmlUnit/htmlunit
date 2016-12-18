@@ -18,7 +18,6 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -58,29 +57,12 @@ public class HtmlFileInput extends HtmlInput {
      */
     HtmlFileInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, addValueIfNeeded(page, attributes));
+        super(qualifiedName, page, attributes);
 
-        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            if ("value".equalsIgnoreCase(entry.getKey())) {
-                setDefaultValue(entry.getValue().getNodeValue(), false);
-            }
+        final DomAttr valueAttrib = attributes.get("value");
+        if (valueAttrib != null) {
+            setDefaultValue(valueAttrib.getNodeValue(), false);
         }
-    }
-
-    /**
-     * Add missing attribute if needed by fixing attribute map rather to add it afterwards as this second option
-     * triggers the instantiation of the script object at a time where the DOM node has not yet been added to its
-     * parent.
-     */
-    private static Map<String, DomAttr> addValueIfNeeded(final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
-
-        // we need a copy here because we have to check attributes later again
-        final Map<String, DomAttr> result = new HashMap<>(attributes);
-        final DomAttr newAttr = new DomAttr(page, null, "value", "", true);
-        result.put("value", newAttr);
-
-        return result;
     }
 
     /**
@@ -170,25 +152,6 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
-     * {@inheritDoc} This method <b>does nothing</b> for file input elements.
-     * @see SubmittableElement#reset()
-     */
-    @Override
-    public void reset() {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc} Overridden so that this does not set the value attribute when emulating
-     * Netscape browsers.
-     * @see HtmlInput#setDefaultValue(String)
-     */
-    @Override
-    public void setDefaultValue(final String defaultValue) {
-        setDefaultValue(defaultValue, false);
-    }
-
-    /**
      * Sets the content type value that should be sent together with the uploaded file.
      * If content type is not explicitly set, HtmlUnit will try to guess it from the file content.
      * @param contentType the content type ({@code null} resets it)
@@ -204,6 +167,14 @@ public class HtmlFileInput extends HtmlInput {
      */
     public String getContentType() {
         return contentType_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String asText() {
+        return "";
     }
 
     /**
@@ -226,6 +197,7 @@ public class HtmlFileInput extends HtmlInput {
             }
             builder.append(p);
         }
+        setDefaultValue(builder.toString());
         return super.setValueAttribute(builder.toString());
     }
 
