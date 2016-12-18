@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_NO_PARAMETER;
-
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -47,15 +45,7 @@ public class EventHandler extends BaseFunction {
         node_ = node;
         eventName_ = eventName;
 
-        final String functionSignature;
-        if (node.getPage().getEnclosingWindow().getWebClient()
-                .getBrowserVersion().hasFeature(JS_EVENT_NO_PARAMETER)) {
-            functionSignature = "function " + eventName + "()";
-        }
-        else {
-            functionSignature = "function " + eventName + "(event)";
-        }
-        jsSnippet_ = functionSignature + " {" + jsSnippet + "\n}";
+        jsSnippet_ = "function " + eventName + "(event) {" + jsSnippet + "\n}";
 
         final ScriptableObject w = node.getPage().getEnclosingWindow().getScriptableObject();
         final Scriptable function = (Scriptable) w.get("Function", w);

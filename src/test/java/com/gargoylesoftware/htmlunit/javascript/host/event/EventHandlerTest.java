@@ -33,8 +33,8 @@ public class EventHandlerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void event_caller() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+    public void caller() throws Exception {
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(test.caller);\n"
             + "  }\n"
@@ -43,6 +43,6 @@ public class EventHandlerTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final String alert = getCollectedAlerts(driver).get(0);
-        assertTrue(alert.contains("function onload("));
+        assertTrue(alert.contains("function onload(event)"));
     }
 }

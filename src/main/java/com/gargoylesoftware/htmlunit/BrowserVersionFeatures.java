@@ -847,10 +847,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
-    /** Do not send parameter in event handlers. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_EVENT_NO_PARAMETER,
-
     /** Executes the window event listeners if the node is detached from the document. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_EVENT_WINDOW_EXECUTE_IF_DITACHED,
