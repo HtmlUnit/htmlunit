@@ -201,6 +201,6 @@ public class StyleSheetList extends SimpleScriptable {
      */
     @Override
     protected Object equivalentValues(final Object value) {
-        return getClass() == value.getClass() && getDomNodeOrDie() == ((StyleSheetList) value).getDomNodeOrDie();
+        return getClass() == value.getClass() && getDomNodeOrNull() == ((StyleSheetList) value).getDomNodeOrNull();
     }
 }
