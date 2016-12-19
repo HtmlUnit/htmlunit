@@ -1796,6 +1796,28 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "onload",
+            IE = "undefined")
+    @NotYetImplemented(IE)
+    public void caller() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var c = arguments.callee.caller;"
+            + "        alert(c ? c.name : c);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("exception")
     public void createEventObject_IE() throws Exception {
         final String html =
