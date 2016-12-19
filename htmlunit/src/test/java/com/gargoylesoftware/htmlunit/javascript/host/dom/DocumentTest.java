@@ -1243,8 +1243,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            CHROME = {"undefined", "undefined", "null"},
+    @Alerts(DEFAULT = {"undefined", "undefined", "null"},
             FF = {"null", "null", "null"},
             IE = {"undefined", "null", "undefined"})
     public void all_NotExisting() throws Exception {
@@ -1417,8 +1416,7 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Test the ReadyState which is an IE feature.
-     * FF supports this since 3.6.
+     * Test the ReadyState.
      * http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
@@ -1665,8 +1663,8 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "object", "[object Event]", "false"})
-    public void createEvent_FF_Event() throws Exception {
-        createEvent_FF("Event");
+    public void createEvent_Event() throws Exception {
+        createEvent("Event");
     }
 
     /**
@@ -1674,8 +1672,8 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "object", "[object Event]", "false"})
-    public void createEvent_FF_Events() throws Exception {
-        createEvent_FF("Events");
+    public void createEvent_Events() throws Exception {
+        createEvent("Events");
     }
 
     /**
@@ -1683,8 +1681,8 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "object", "[object Event]", "false"})
-    public void createEvent_FF_HTMLEvents() throws Exception {
-        createEvent_FF("HTMLEvents");
+    public void createEvent_HTMLEvents() throws Exception {
+        createEvent("HTMLEvents");
     }
 
     /**
@@ -1692,11 +1690,11 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void createEvent_FF_Bogus() throws Exception {
-        createEvent_FF("Bogus");
+    public void createEvent_Bogus() throws Exception {
+        createEvent("Bogus");
     }
 
-    private void createEvent_FF(final String eventType) throws Exception {
+    private void createEvent(final String eventType) throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
             + "try {\n"
@@ -1718,7 +1716,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "null", "[object HTMLDivElement]"})
-    public void createEvent_FF_Target() throws Exception {
+    public void createEvent_target() throws Exception {
         final String html =
               "<html>\n"
             + "  <body onload='test()'>\n"
@@ -1733,6 +1731,82 @@ public class DocumentTest extends WebDriverTestCase {
             + "          alert(event.target);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
             + "        } catch (e) { alert('exception') }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    @NotYetImplemented
+    public void createEvent_overridden() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='d' onclick='alert(onload.toString().indexOf(\"hi\") != -1)'"
+            + " onload='alert(\"hi\")'>abc</div>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var event = document.createEvent('MouseEvents');\n"
+            + "          event.initMouseEvent('click', true, true, window,\n"
+            + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
+            + "          document.getElementById('d').dispatchEvent(event);\n"
+            + "        } catch (e) { alert('exception') }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "test",
+            IE = "null")
+    @NotYetImplemented
+    public void createEvent_caller() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='d' onclick='var c = arguments.callee.caller; alert(c ? c.name : c)'>abc</div>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var event = document.createEvent('MouseEvents');\n"
+            + "          event.initMouseEvent('click', true, true, window,\n"
+            + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
+            + "          document.getElementById('d').dispatchEvent(event);\n"
+            + "        } catch (e) { alert('exception') }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "onload",
+            IE = "undefined")
+    @NotYetImplemented(IE)
+    public void caller() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var c = arguments.callee.caller;"
+            + "        alert(c ? c.name : c);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -1855,8 +1929,8 @@ public class DocumentTest extends WebDriverTestCase {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body onload='test()'>\n"
             + "<script>\n"
-            + "  var selection = document.selection; // IE\n"
-            + "  if(!selection) selection = window.getSelection(); // FF\n"
+            + "  var selection = document.selection;\n"
+            + "  if(!selection) selection = window.getSelection();\n"
             + "  function test() {\n"
             + "    alert(selection.rangeCount);\n"
             + "    document.designMode='on';\n"
@@ -2210,6 +2284,9 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"undefined", "42"})
+    @NotYetImplemented
+    // works with Nashorn because we don't use DocumentProxy
+    // fails with Rhino because DocumentProxy is not ScriptableObject
     public void documentDefineProperty() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
