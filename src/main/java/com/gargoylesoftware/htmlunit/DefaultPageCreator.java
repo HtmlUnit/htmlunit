@@ -82,6 +82,10 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class DefaultPageCreator implements PageCreator, Serializable {
 
+    private final byte[] markerUTF8_ = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
+    private final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
+    private final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
+
     /**
      * The different supported page types.
      */
@@ -186,9 +190,6 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     protected String determineContentType(final String contentType, final InputStream contentAsStream)
         throws IOException {
-        final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-        final byte[] markerUTF16BE = {(byte) 0xfe, (byte) 0xff};
-        final byte[] markerUTF16LE = {(byte) 0xff, (byte) 0xfe};
 
         try {
             if (!StringUtils.isEmpty(contentType)) {
@@ -204,8 +205,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             if (asAsciiString.contains("<HTML")) {
                 return "text/html";
             }
-            else if (startsWith(bytes, markerUTF8) || startsWith(bytes, markerUTF16BE)
-                    || startsWith(bytes, markerUTF16LE)) {
+            else if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
+                    || startsWith(bytes, markerUTF16LE_)) {
                 return "text/plain";
             }
             else if (isBinary(bytes)) {
