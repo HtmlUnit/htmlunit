@@ -17,7 +17,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     </properties>
-
+<parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>9</version>
+</parent>
     <build>
         <plugins>
             <plugin>
@@ -40,7 +44,6 @@
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
-                    <headerLocation>${project.build.directory}/../LICENSE.txt</headerLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
@@ -66,10 +69,6 @@
                         <manifestEntries>
                             <Url>${project.url}</Url>
                             <Build-Time>${maven.build.timestamp}</Build-Time>
-
-                            <!-- Following entries should be passed by CruiseControl on the CI server -->
-                            <SVN-Revision>${svnrevision}</SVN-Revision>
-                            <Build-Number>${label}</Build-Number>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -142,7 +141,6 @@
 <fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
     <local-check-config name="HtmlUnit" location="checkstyle.xml" type="project" description="HtmlUnit">
         <property name="checkstyle.suppressions.file" value="$${project_loc}/checkstyle_suppressions.xml"/>
-        <property name="checkstyle.header.file" value="$${project_loc}/LICENSE.txt"/>
         <additional-data name="protect-config-file" value="false"/>
     </local-check-config>
     <fileset name="all" enabled="true" check-config-name="HtmlUnit" local="true">
