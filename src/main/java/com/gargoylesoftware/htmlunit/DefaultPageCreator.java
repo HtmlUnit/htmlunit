@@ -82,9 +82,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class DefaultPageCreator implements PageCreator, Serializable {
 
-    private final byte[] markerUTF8_ = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-    private final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
-    private final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
+    private static final byte[] markerUTF8_ = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
+    private static final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
+    private static final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
 
     /**
      * The different supported page types.
