@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -131,7 +132,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("function foo() {\n    return 1;\n}")
+    @Alerts("function foo() {\n  return 1;\n}")
+    @NotYetImplemented
     public void functionToString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
