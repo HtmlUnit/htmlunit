@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -82,7 +83,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -2310,5 +2310,16 @@ public class HtmlPage extends InteractivePage {
             return getBody();
         }
         return elementFromPointHandler_.getElementFromPoint(this, x, y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void setEndLocation(final int endLineNumber, final int endColumnNumber) {
+        super.setEndLocation(endLineNumber, endColumnNumber);
+        for (final HtmlElement htmlElement : getHtmlElementDescendants()) {
+            ((Element2) htmlElement.getScriptObject2()).createEventHandlers();
+        }
     }
 }

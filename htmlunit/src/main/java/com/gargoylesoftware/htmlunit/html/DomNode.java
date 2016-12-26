@@ -210,7 +210,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param endLineNumber the line number where the DOM node ends
      * @param endColumnNumber the column number where the DOM node ends
      */
-    void setEndLocation(final int endLineNumber, final int endColumnNumber) {
+    protected void setEndLocation(final int endLineNumber, final int endColumnNumber) {
         endLineNumber_ = endLineNumber;
         endColumnNumber_ = endColumnNumber;
     }

@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
@@ -242,7 +244,11 @@ public abstract class InteractivePage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final Object result = ScriptRuntime.apply(function, thisObject, args);
+        ScriptObject object = htmlElementScope.getScriptObject2();
+        object = ((HTMLDocument2) object).getBody();
+
+        ScriptFunction function2 = (ScriptFunction) object.get("on" + ((Event2)args[0]).getType());
+        final Object result = ScriptRuntime.apply(function2, object, args);
         getWebClient().getJavaScriptEngine2().processPostponedActions();
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }

@@ -51,6 +51,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
 @ScriptClass
@@ -76,11 +77,14 @@ public class Element2 extends EventNode2 {
         super.setDomNode(domNode);
         style_ = new CSSStyleDeclaration2(this);
 
-        /**
-         * Convert JavaScript snippets defined in the attribute map to executable event handlers.
-         * Should be called only on construction.
-         */
-        final DomElement htmlElt = (DomElement) domNode;
+    }
+
+    /**
+     * Convert JavaScript snippets defined in the attribute map to executable event handlers.
+     * Should be called only on construction.
+     */
+    public void createEventHandlers() {
+        final DomElement htmlElt = getDomNodeOrDie();
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = attr.getName();
             if (eventName.toLowerCase(Locale.ROOT).startsWith("on")) {
@@ -105,22 +109,23 @@ public class Element2 extends EventNode2 {
      * @param eventName the event name (ex: "onclick")
      * @param attrValue the attribute value
      */
-    protected void createEventHandler(final String eventName, final String attrValue) {
+    protected void createEventHandler(final String eventName, String attrValue) {
         final DomElement htmlElt = getDomNodeOrDie();
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
-//        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
+        attrValue = "function " + eventName + "(event) {" + attrValue + "\n}";
         final Source source = Source.sourceFor(eventName + " event for " + htmlElt
                 + " in " + htmlElt.getPage().getUrl(), attrValue);
+
         final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
         Context context = ((ScriptObject) global).getContext();
-
         final Global oldGlobal = Context.getGlobal();
         final boolean globalChanged = oldGlobal != global;
         try {
             if (globalChanged) {
                 Context.setGlobal(global);
             }
-            final ScriptFunction eventHandler = context.compileScript(source, global);
+            final ScriptFunction eventHandler = context.compileScript(source, this);
+            ScriptRuntime.apply(eventHandler, this);
             setEventHandler(eventName, eventHandler);
         }
         finally {
