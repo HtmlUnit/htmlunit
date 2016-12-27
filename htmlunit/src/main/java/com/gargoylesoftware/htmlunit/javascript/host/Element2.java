@@ -36,9 +36,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
 import com.gargoylesoftware.js.nashorn.SimplePrototypeObject;
@@ -120,10 +120,10 @@ public class Element2 extends EventNode2 {
 
         ScriptObject thisObject = this;
         final Global global = getWindow().getWebWindow().getGlobal();
-        if (thisObject instanceof HTMLBodyElement2) {
+        if (thisObject instanceof HTMLBodyElement2 || thisObject instanceof HTMLFrameSetElement2) {
             thisObject = global;
         }
-        Context context = ((ScriptObject) global).getContext();
+        Context context = global.getContext();
         final Global oldGlobal = Context.getGlobal();
         final boolean globalChanged = oldGlobal != global;
         try {
