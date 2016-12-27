@@ -36,6 +36,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.SimpleObjectConstructor;
@@ -116,7 +118,11 @@ public class Element2 extends EventNode2 {
         final Source source = Source.sourceFor(eventName + " event for " + htmlElt
                 + " in " + htmlElt.getPage().getUrl(), attrValue);
 
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
+        ScriptObject thisObject = this;
+        final Global global = getWindow().getWebWindow().getGlobal();
+        if (thisObject instanceof HTMLBodyElement2) {
+            thisObject = global;
+        }
         Context context = ((ScriptObject) global).getContext();
         final Global oldGlobal = Context.getGlobal();
         final boolean globalChanged = oldGlobal != global;
@@ -124,8 +130,8 @@ public class Element2 extends EventNode2 {
             if (globalChanged) {
                 Context.setGlobal(global);
             }
-            final ScriptFunction eventHandler = context.compileScript(source, this);
-            ScriptRuntime.apply(eventHandler, this);
+            final ScriptFunction eventHandler = context.compileScript(source, thisObject);
+            ScriptRuntime.apply(eventHandler, thisObject);
             setEventHandler(eventName, eventHandler);
         }
         finally {
