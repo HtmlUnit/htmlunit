@@ -31,11 +31,9 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -245,10 +243,16 @@ public abstract class InteractivePage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        ScriptRuntime.apply(function, thisObject);
+        ScriptFunction functionToCall;
+        if (function.getName().isEmpty()) {
+            functionToCall = function;
+        }
+        else {
+            ScriptRuntime.apply(function, thisObject);
+            functionToCall = (ScriptFunction) thisObject.get("on" + ((Event2)args[0]).getType());
+        }
 
-        ScriptFunction function2 = (ScriptFunction) thisObject.get("on" + ((Event2)args[0]).getType());
-        final Object result = ScriptRuntime.apply(function2, thisObject, args);
+        final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
         getWebClient().getJavaScriptEngine2().processPostponedActions();
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
