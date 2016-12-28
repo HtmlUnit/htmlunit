@@ -456,4 +456,92 @@ public class WebClient3Test extends WebDriverTestCase {
             + "</head><body><script>alert(document.title)</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts ("executed")
+    public void javascriptContentDetectorWithoutContentType() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", null);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts (DEFAULT = "executed",
+             IE = "")
+    @NotYetImplemented(IE)
+    public void javascriptContentDetectorWithoutContentType500() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("<script>alert('executed')</script>", 500, "OK", null);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts ("executed")
+    public void javascriptContentDetectorWithoutContentTypeWhitespace() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse(" \t \r\n \n   <script>alert('executed')</script>", 200, "OK", null);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void javascriptContentDetectorWithoutContentTypeTextBefore() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("Attention<script>alert('executed')</script>", 200, "OK", null);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts ("executed")
+    public void javascriptContentDetectorWithoutContentUppercase() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("<SCRIPT>alert('executed')</SCRIPT>", 200, "OK", null);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts ("executed")
+    public void javascriptContentDetectorWithoutContentMixedCase() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("<scRIPt>alert('executed')</scRIPt>", 200, "OK", null);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void javascriptContentDetectorContentTypeTextPlain() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", "text/plain");
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @NotYetImplemented
+    public void javascriptContentDetectorContentTypeApplicationJavascript() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", "application/javascript");
+        loadPageWithAlerts2(URL_FIRST);
+    }
 }

@@ -1550,7 +1550,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertTrue(TextPage.class.isInstance(client.getPage(URL_FIRST)));
 
         webConnection.setResponse(URL_FIRST, "", "Text/JavaScript");
-        assertTrue(JavaScriptPage.class.isInstance(client.getPage(URL_FIRST)));
+        assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
     }
 
     /**

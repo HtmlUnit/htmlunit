@@ -75,6 +75,7 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -997,6 +998,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<>();
+
+        // do not throw an exception if we ask for collected alerts for non html pages
+        // see com.gargoylesoftware.htmlunit.WebClient3Test.javascriptContentDetectorContentTypeTextPlain()
+        if (driver instanceof HtmlUnitDriver) {
+            final Page page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            if (!(page instanceof HtmlPage)) {
+                return collectedAlerts;
+            }
+        }
+
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
         final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");

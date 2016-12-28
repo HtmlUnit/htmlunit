@@ -161,7 +161,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return createHtmlPage(webResponse, webWindow);
 
             case JAVASCRIPT:
-                return createJavaScriptPage(webResponse, webWindow);
+                return createHtmlPage(webResponse, webWindow);
 
             case XML:
                 final SgmlPage sgmlPage = createXmlPage(webResponse, webWindow);
@@ -208,6 +208,9 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             else if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
                     || startsWith(bytes, markerUTF16LE_)) {
                 return "text/plain";
+            }
+            else if (asAsciiString.trim().startsWith("<SCRIPT>")) {
+                return "application/javascript";
             }
             else if (isBinary(bytes)) {
                 return "application/octet-stream";
@@ -280,19 +283,6 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     protected XHtmlPage createXHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         return HTMLParser.parseXHtml(webResponse, webWindow);
-    }
-
-    /**
-     * Creates a JavaScriptPage for this WebResponse.
-     *
-     * @param webResponse the page's source
-     * @param webWindow the WebWindow to place the JavaScriptPage in
-     * @return the newly created JavaScriptPage
-     */
-    protected JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
-        final JavaScriptPage newPage = new JavaScriptPage(webResponse, webWindow);
-        webWindow.setEnclosedPage(newPage);
-        return newPage;
     }
 
     /**
