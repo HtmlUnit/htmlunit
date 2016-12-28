@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1845" due-to="Rob Kodey">
+                Conversion of ordered list to text has to take care of all children not only list items.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: FF45 triggers mouse events also for disabled buttons and input elements.
             </action>

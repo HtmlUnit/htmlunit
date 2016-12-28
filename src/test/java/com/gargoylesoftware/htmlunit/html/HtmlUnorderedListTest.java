@@ -35,12 +35,13 @@ public class HtmlUnorderedListTest extends SimpleWebTestCase {
     @Test
     public void asText() throws Exception {
         final String html = "<html><head>\n"
-            + "</head><body>\n"
+            + "</head>\n"
+            + "<body>\n"
             + "  <ul id='foo'>\n"
-            + "  <li>first item</li>\n"
-            + "  <li>second item</li>\n"
+            + "    <li>first item</li>\n"
+            + "    <li>second item</li>\n"
             + "something without li node\n"
-            + "  <li>third item</li>\n"
+            + "    <li>third item</li>\n"
             + "  </ul>\n"
             + "</body></html>";
 
@@ -62,8 +63,9 @@ public class HtmlUnorderedListTest extends SimpleWebTestCase {
     @Test
     public void asXml() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
-            + "<ul id='myNode'></ul>\n"
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <ul id='myNode'></ul>\n"
             + "foo\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);

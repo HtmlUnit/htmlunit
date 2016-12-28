@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Rob Kodey
  */
 class HtmlSerializer {
     private final StringBuilder builder_ = new StringBuilder();
@@ -449,16 +450,18 @@ class HtmlSerializer {
         boolean first = true;
         int i = 1;
         for (final DomNode item : htmlOrderedList.getChildren()) {
-            if (!(item instanceof HtmlListItem)) {
-                continue;
-            }
             if (!first) {
                 doAppendBlockSeparator();
             }
             first = false;
-            doAppend(Integer.toString(i++));
-            doAppend(". ");
-            appendChildren(item);
+            if (item instanceof HtmlListItem) {
+                doAppend(Integer.toString(i++));
+                doAppend(". ");
+                appendChildren(item);
+            }
+            else {
+                appendNode(item);
+            }
         }
         doAppendBlockSeparator();
     }

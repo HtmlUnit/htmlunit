@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlOrderedListTest extends SimpleWebTestCase {
@@ -37,15 +38,20 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "  <ol id='foo'>\n"
-            + "  <li>first item</li>\n"
-            + "  <li>second item</li>\n"
+            + "    <li>first item</li>\n"
+            + "    <li>second item</li>\n"
+            + "something without li node\n"
+            + "    <li>third item</li>\n"
             + "  </ol>\n"
             + "  </table>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
-        final String expectedText = "1. first item" + LINE_SEPARATOR + "2. second item";
+        final String expectedText = "1. first item"
+                            + LINE_SEPARATOR + "2. second item"
+                            + LINE_SEPARATOR + "something without li node"
+                            + LINE_SEPARATOR + "3. third item";
 
         assertEquals(expectedText, node.asText());
         assertEquals(expectedText, page.asText());
