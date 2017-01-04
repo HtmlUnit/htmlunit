@@ -120,4 +120,30 @@ public class Float32ArrayTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"NaN", "1", "0", "17"})
+    public void specialValueInArray() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = [];\n"
+            + "  array[0] = NaN;\n"
+            + "  array[1] = true;\n"
+            + "  array[2] = false;\n"
+            + "  array[3] = '17';\n"
+            + "  var nativeArray = new Float32Array(array);\n"
+            + "  alert(nativeArray[0]);\n"
+            + "  alert(nativeArray[1]);\n"
+            + "  alert(nativeArray[2]);\n"
+            + "  alert(nativeArray[3]);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
