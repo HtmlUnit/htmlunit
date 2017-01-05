@@ -228,13 +228,15 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "0")
     public void constructorStringParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var myMap = new Map('test');\n"
+            + "    alert(myMap.size);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"
@@ -249,13 +251,15 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "0")
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var myMap = new Map(new Set('test'));\n"
+            + "    alert(myMap.size);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"
