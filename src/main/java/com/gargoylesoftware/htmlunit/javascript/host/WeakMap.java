@@ -68,12 +68,14 @@ public class WeakMap extends SimpleScriptable {
                             }
                         }
                         else {
-                            throw Context.reportRuntimeError("TypeError: object is not iterable");
+                            throw Context.reportRuntimeError("TypeError: object is not iterable ("
+                                            + entryObject.getClass().getName() + ")");
                         }
                     }
                 }
                 else {
-                    throw Context.reportRuntimeError("TypeError: object is not iterable");
+                    throw Context.reportRuntimeError("TypeError: object is not iterable ("
+                                            + iterable.getClass().getName() + ")");
                 }
             }
         }

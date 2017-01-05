@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
@@ -66,8 +67,15 @@ public class Set extends SimpleScriptable {
                         add(array.get(i));
                     }
                 }
+                else if (iterable instanceof ArrayBufferViewBase) {
+                    final ArrayBufferViewBase array = (ArrayBufferViewBase) iterable;
+                    for (int i = 0; i < array.getLength(); i++) {
+                        add(array.get(i));
+                    }
+                }
                 else {
-                    throw Context.reportRuntimeError("TypeError: object is not iterable");
+                    throw Context.reportRuntimeError("TypeError: object is not iterable ("
+                                + iterable.getClass().getName() + ")");
                 }
             }
         }

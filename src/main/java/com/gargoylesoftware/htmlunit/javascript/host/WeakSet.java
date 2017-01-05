@@ -63,7 +63,8 @@ public class WeakSet extends SimpleScriptable {
                 }
             }
             else {
-                throw Context.reportRuntimeError("TypeError: object is not iterable");
+                throw Context.reportRuntimeError("TypeError: object is not iterablee ("
+                                                    + iterable.getClass().getName() + ")");
             }
         }
     }
