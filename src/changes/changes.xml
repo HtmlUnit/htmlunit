@@ -9,6 +9,9 @@
     <body>
         <release version="2.24" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: the Map constructor accepts maps.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: the set constructor accepts array buffers, string, sets and maps.
             </action>
             <action type="update" dev="rbri">

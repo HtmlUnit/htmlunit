@@ -78,6 +78,10 @@ public class Map extends SimpleScriptable {
                         }
                     }
                 }
+                else if (iterable instanceof Map) {
+                    final Map map = (Map) iterable;
+                    map_.putAll(map.map_);
+                }
                 else {
                     throw Context.reportRuntimeError("TypeError: object is not iterable ("
                                 + iterable.getClass().getName() + ")");
