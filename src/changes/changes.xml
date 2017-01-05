@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: the set constructor accepts array buffers also.
+            </action>
             <action type="update" dev="rbri">
                 Class JavasScriptPage removed. Rela browsers are handling this page as simple htmlpage
                 containing only a script tag in the header.
