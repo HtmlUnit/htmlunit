@@ -73,6 +73,27 @@ public class Set extends SimpleScriptable {
                         add(array.get(i));
                     }
                 }
+                else if (iterable instanceof String) {
+                    final String string = (String) iterable;
+                    for (int i = 0; i < string.length(); i++) {
+                        add(String.valueOf(string.charAt(i)));
+                    }
+                }
+                else if (iterable instanceof Set) {
+                    final Set set = (Set) iterable;
+                    for (Object object : set.set_) {
+                        add(object);
+                    }
+                }
+                else if (iterable instanceof Map) {
+                    final Iterator iterator = (Iterator) ((Map) iterable).entries();
+
+                    SimpleScriptable object = (SimpleScriptable) iterator.next();
+                    while (Undefined.instance != object.get("value", null)) {
+                        add(object);
+                        object = (SimpleScriptable) iterator.next();
+                    }
+                }
                 else {
                     throw Context.reportRuntimeError("TypeError: object is not iterable ("
                                 + iterable.getClass().getName() + ")");

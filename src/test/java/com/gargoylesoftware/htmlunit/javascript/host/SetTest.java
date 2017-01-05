@@ -153,4 +153,81 @@ public class SetTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "true", "false"},
+            IE = {"0", "false", "false"})
+    public void constructorStringParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var mySet = new Set('test');\n"
+            + "    alert(mySet.size);\n"
+            + "    alert(mySet.has('t'));\n"
+            + "    alert(mySet.has('x'));\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "true", "false"},
+            IE = {"0", "false", "false"})
+    public void constructorSetParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var mySet = new Set(new Set('test'));\n"
+            + "    alert(mySet.size);\n"
+            + "    alert(mySet.has('t'));\n"
+            + "    alert(mySet.has('x'));\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "false", "false"},
+            IE = {"0", "false", "false"})
+    public void constructorMapParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var kvArray = [['key1', 'value1'], ['key2', 'value2']];\n"
+            + "  var myMap = new Map(kvArray);\n"
+            + "  try {\n"
+            + "    var mySet = new Set(myMap);\n"
+            + "    alert(mySet.size);\n"
+            + "    alert(mySet.has('key1'));\n"
+            + "    alert(mySet.has('value2'));\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
