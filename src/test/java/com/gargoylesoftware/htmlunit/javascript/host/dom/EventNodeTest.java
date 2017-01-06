@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +25,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -118,6 +122,41 @@ public class EventNodeTest extends WebDriverTestCase {
         driver.findElement(By.id("testInput")).click();
         driver.findElement(By.id("testImage")).click();
         driver.findElement(By.id("testTextarea")).click();
+        final String expected = getExpectedAlerts()[0];
+        assertEquals(expected, driver.findElement(By.id("myTextarea")).getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "mousedown label,focus text,mouseup label,click label,click text,",
+            CHROME = "mousedown label,mouseup label,click label,focus text,click text,",
+            IE = "mousedown label,mouseup label,click label,click text,focus text,")
+    @NotYetImplemented({FF, IE})
+    public void clickEventsLabel() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function log(text) {\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.value += text + ',';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body>\n"
+            + "  <label id='testLabel' for='testInput'"
+            + " onfocus=\"log('will not be triggered')\" onmousedown=\"log('mousedown label')\""
+            + " onclick=\"log('click label')\" onmouseup=\"log('mouseup label')\">test label</label>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='testInput' onmousedown=\"log('mousedown text')\""
+            + " onclick=\"log('click text')\" onmouseup=\"log('mouseup text')\" onfocus=\"log('focus text')\">\n"
+            + "  </form>\n"
+            + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("testLabel")).click();
+
         final String expected = getExpectedAlerts()[0];
         assertEquals(expected, driver.findElement(By.id("myTextarea")).getAttribute("value"));
     }

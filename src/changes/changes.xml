@@ -9,6 +9,9 @@
     <body>
         <release version="2.24" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Do not trigger mouse events for the associated element when clicking a label.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: the Map constructor accepts maps.
             </action>
             <action type="fix" dev="rbri">

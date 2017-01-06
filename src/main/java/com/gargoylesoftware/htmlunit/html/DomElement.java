@@ -870,9 +870,29 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
+
+        return click(shiftKey, ctrlKey, altKey, true);
+    }
+
+    /**
+     * Simulates clicking on this element, returning the page in the window that has the focus
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
+     *
+     * @param shiftKey {@code true} if SHIFT is pressed during the click
+     * @param ctrlKey {@code true} if CTRL is pressed during the click
+     * @param altKey {@code true} if ALT is pressed during the click
+     * @param triggerMouseEvents if true trigger the mouse events also
+     * @param <P> the page type
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @exception IOException if an IO error occurs
+     */
+    @SuppressWarnings("unchecked")
+    protected <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+            final boolean triggerMouseEvents) throws IOException {
 
         // make enclosing window the current one
         final SgmlPage page = getPage();
@@ -884,7 +904,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
         }
 
         synchronized (page) {
-            mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            if (triggerMouseEvents) {
+                mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            }
 
             // give focus to current element (if possible) or only remove it from previous one
             DomElement elementToFocus = null;
@@ -896,7 +918,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
             }
             ((InteractivePage) page).setFocusedElement(elementToFocus);
 
-            mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            if (triggerMouseEvents) {
+                mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            }
 
             final Event event;
             if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
