@@ -1707,6 +1707,27 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void getPageJavascriptProtocolTextPage() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse("some text", "plain/text");
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        Page page = webClient.getPage(URL_FIRST);
+
+        page = webClient.getPage("javascript:void(alert(document.location))");
+        assertEquals("about:blank", page.getUrl());
+        assertEquals(new String[] {"about:blank"}, collectedAlerts);
+        collectedAlerts.clear();
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

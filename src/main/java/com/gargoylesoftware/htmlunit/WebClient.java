@@ -1228,7 +1228,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private WebResponse makeWebResponseForJavaScriptUrl(final WebWindow webWindow, final URL url,
         final String charset) throws FailingHttpStatusCodeException, IOException {
 
-        final HtmlPage page;
+        HtmlPage page = null;
         if (webWindow instanceof FrameWindow) {
             final FrameWindow frameWindow = (FrameWindow) webWindow;
             page = (HtmlPage) frameWindow.getEnclosedPage();
@@ -1239,9 +1239,14 @@ public class WebClient implements Serializable, AutoCloseable {
                 // Starting with a JavaScript URL; quickly fill an "about:blank".
                 currentPage = getPage(webWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
             }
-            page = (HtmlPage) currentPage;
+            else if (currentPage instanceof HtmlPage) {
+                page = (HtmlPage) currentPage;
+            }
         }
 
+        if (page == null) {
+            page = getPage(webWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
+        }
         final ScriptResult r = page.executeJavaScriptIfPossible(url.toExternalForm(), "JavaScript URL", 1);
         if ((r.getJavaScriptResult() == null) || ScriptResult.isUndefined(r)) {
             // No new WebResponse to produce.
