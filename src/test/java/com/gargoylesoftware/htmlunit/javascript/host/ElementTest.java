@@ -1156,4 +1156,70 @@ public class ElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0-0", "0-1", "2-5"})
+    public void childElementCount() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    info(document.getElementById('emptyDiv'));\n"
+            + "    info(document.getElementById('whitespaceDiv'));\n"
+            + "    info(document.getElementById('testDiv'));\n"
+            + "  }\n"
+            + "  function info(e) {\n"
+            + "    alert(e.childElementCount + '-' + e.childNodes.length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='emptyDiv'></div>\n"
+            + "  <div id='whitespaceDiv'>\n"
+            + "  </div>\n"
+            + "  <div id='testDiv'>\n"
+            + "    <div>first</div>\n"
+            + "    <div>\n"
+            + "      <span>second</span>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1-2", "3-7"})
+    public void childElementCountTable() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    info(document.getElementById('myTable'));\n"
+            + "    info(document.getElementById('myTr'));\n"
+            + "  }\n"
+            + "  function info(e) {\n"
+            + "    alert(e.childElementCount + '-' + e.childNodes.length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <table id='myTable'>\n"
+            + "    <tr id='myTr'>\n"
+            + "      <td>first</td>\n"
+            + "      <td><div>second</div></td>\n"
+            + "      <td>\n"
+            + "        third\n"
+            + "      </td>\n"
+            + "    </tr>\n"
+            + "  </table>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
