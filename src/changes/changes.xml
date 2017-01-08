@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                CSS: cssparser updated to 0.9.21.
+            </action>
             <action type="fix" dev="rbri">
                 Do not trigger mouse events for the associated element when clicking a label.
             </action>

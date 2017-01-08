@@ -792,7 +792,7 @@
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.21-SNAPSHOT</version>
+            <version>0.9.21</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
