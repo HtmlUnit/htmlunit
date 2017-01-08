@@ -1823,7 +1823,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      *   <li><em>Universal</em> (i.e. "*"): Affected by the removal of SN from the document.</li>
      *   <li><em>Type</em> (i.e. "div"): Affected by the removal of SN from the document.</li>
      *   <li><em>Descendant</em> (i.e. "div span"): Affected by changes to SN or to any of its ancestors.</li>
-     *   <li><em>Child</em> (i.e. "div > span"): Affected by changes to SN or to its parent.</li>
+     *   <li><em>Child</em> (i.e. "div &gt; span"): Affected by changes to SN or to its parent.</li>
      *   <li><em>Adjacent Sibling</em> (i.e. "table + p"): Affected by changes to SN or its previous sibling.</li>
      *   <li><em>Attribute</em> (i.e. "div.up, div[class~=up]"): Affected by changes to an attribute of SN.</li>
      *   <li><em>ID</em> (i.e. "#header): Affected by changes to the <tt>id</tt> attribute of SN.</li>

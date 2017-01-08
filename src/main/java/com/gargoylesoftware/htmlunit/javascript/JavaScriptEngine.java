@@ -77,9 +77,10 @@ import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>
- * that provides browser specific features.<br/>
- * Like all classes in this package, this class is not intended for direct use
- * and may change without notice.
+ * that provides browser specific features.
+ *
+ * <p>Like all classes in this package, this class is not intended for direct use
+ * and may change without notice.</p>
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
@@ -113,8 +114,8 @@ public class JavaScriptEngine {
 
     /**
      * Key used to place the scope in which the execution of some JavaScript code
-     * started as thread local attribute in current context.<br/>
-     * This is needed to resolve some relative locations relatively to the page
+     * started as thread local attribute in current context.
+     * <p>This is needed to resolve some relative locations relatively to the page
      * in which the script is executed and not to the page which location is changed.
      */
     public static final String KEY_STARTING_SCOPE = "startingScope";
@@ -830,8 +831,8 @@ public class JavaScriptEngine {
     }
 
     /**
-     * Indicates if JavaScript is running in current thread.<br/>
-     * This allows code to know if there own evaluation is has been triggered by some JS code.
+     * Indicates if JavaScript is running in current thread.
+     * <p>This allows code to know if there own evaluation is has been triggered by some JS code.
      * @return {@code true} if JavaScript is running
      */
     public boolean isScriptRunning() {

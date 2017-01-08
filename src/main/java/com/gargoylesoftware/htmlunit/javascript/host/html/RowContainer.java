@@ -132,7 +132,7 @@ public class RowContainer extends HTMLElement {
 
     /**
      * Inserts a new row at the given position.
-     * @param index the index where the row should be inserted (0 <= index <= nbRows)
+     * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
      * @return the inserted row
      */
     public Object insertRow(final int index) {

@@ -1481,7 +1481,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * default IE behavior implementation.
      * @param v1 the first of the two version numbers to compare
      * @param v2 the second of the two version numbers to compare
-     * @return -1 if v1 < v2, 0 if v1 = v2, and 1 if v1 > v2
+     * @return -1 if v1 is less than v2, 0 if v1 equals v2, and 1 if v1 is more than v2
      */
     public int compareVersions(final String v1, final String v2) {
         final int i = v1.compareTo(v2);

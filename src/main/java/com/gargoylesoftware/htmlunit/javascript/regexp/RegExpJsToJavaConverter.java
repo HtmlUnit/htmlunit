@@ -20,10 +20,10 @@ import java.util.Stack;
 
 /**
  * Translates JavaScript RegExp to Java RegExp.<br>
- * // [...\b...] -> [...\cH...]
- * // [...[...] -> [...\[...]
- * // [^\\1] -> .
- * // back reference in character classes are simply ignored by browsers [...ab\5cd...] -> [...abcd...]
+ * // [...\b...] to [...\cH...]
+ * // [...[...] to [...\[...]
+ * // [^\\1] to .
+ * // back reference in character classes are simply ignored by browsers [...ab\5cd...] to [...abcd...]
  * // characters escaped without need should be "un-escaped"
  * Escape curly braces that are not used in an expression
  * like "{n}", "{n,}" or "{n,m}" (where n and m are positive integers).

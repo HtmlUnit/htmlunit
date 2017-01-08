@@ -284,11 +284,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * <p>According to <a href="http://msdn.microsoft.com/en-us/library/ms535921.aspx">the
      * Microsoft DHTML reference page for the JavaScript add() method of the options collection</a>,
      * the index parameter is specified as follows:
-     * <dl>
+     * <p>
      * <i>Optional. Integer that specifies the index position in the collection where the element is
      * placed. If no value is given, the method places the element at the end of the collection.</i>
-     * </dl>
-     * </p>
      *
      * @param newOptionObject the DomNode to insert in the collection
      * @param beforeOptionObject An optional parameter which specifies the index position in the

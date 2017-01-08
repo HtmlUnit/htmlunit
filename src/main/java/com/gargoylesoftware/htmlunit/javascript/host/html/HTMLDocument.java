@@ -1463,7 +1463,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *        will fail
      * </li>
      * </ol>
-     * </p>
+     * <p>
      * TODO This code could be modified to understand country domain suffixes.
      * The domain www.bbc.co.uk should be trimmable only down to bbc.co.uk
      * trimming to co.uk should not be possible.
@@ -1698,7 +1698,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Indicates if the command is supported.
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536681.aspx">MSDN documentation</a>
      * @param cmd the command identifier
-     * @return <code>true></code> if the command is supported
+     * @return {@code true} if the command is supported
      */
     @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
