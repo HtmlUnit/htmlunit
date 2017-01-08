@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.24" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                XmlPage: to ignore ByteOrderMark at the beginning of file.
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.21.
             </action>

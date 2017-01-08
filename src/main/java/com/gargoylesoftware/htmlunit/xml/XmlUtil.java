@@ -30,6 +30,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.DeferredDocumentImpl;
@@ -136,7 +137,8 @@ public final class XmlUtil {
         }
 
         factory.setNamespaceAware(true);
-        final InputStreamReader reader = new InputStreamReader(webResponse.getContentAsStream(),
+        final InputStreamReader reader = new InputStreamReader(
+                new BOMInputStream(webResponse.getContentAsStream()),
                 webResponse.getContentCharset());
 
         // we have to do the blank input check and the parsing in one step

@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -381,4 +382,13 @@ public class XmlPageTest extends WebServerTestCase {
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void bom() throws Exception {
+        asText(new String(ByteOrderMark.UTF_8.getBytes()) + "<msg>abc</msg>", "abc");
+    }
+
 }
