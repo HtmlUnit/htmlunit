@@ -26,6 +26,7 @@ import javax.servlet.Servlet;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import org.eclipse.jetty.http.MimeTypes;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
@@ -82,7 +83,9 @@ public abstract class WebServerTestCase extends WebTestCase {
 
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resourceBase);
-        resourceHandler.getMimeTypes().addMimeMapping("js", "application/javascript");
+        final MimeTypes mimeTypes = new MimeTypes();
+        mimeTypes.addMimeMapping("js", "application/javascript");
+        resourceHandler.setMimeTypes(mimeTypes);
 
         final HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
