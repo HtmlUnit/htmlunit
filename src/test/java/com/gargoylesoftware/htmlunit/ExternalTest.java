@@ -198,8 +198,7 @@ public class ExternalTest {
                 // 1.8.13: missing many dependencies
                 // 1.8.14: https://issues.tmatesoft.com/issue/SVNKIT-692
                 || groupId.startsWith("org.tmatesoft.svnkit")
-                    && (version.startsWith("1.8.13") || version.startsWith("1.8.14"))
-                || groupId.startsWith("org.seleniumhq.selenium") && version.startsWith("3.");
+                    && (version.startsWith("1.8.13") || version.startsWith("1.8.14"));
     }
 
     private static String getValue(final String line) {
