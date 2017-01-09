@@ -29,6 +29,6 @@ public interface CharacterDataChangeListener extends Serializable {
      *
      * @param event the character data change event
      */
-    void characterDataChanged(final CharacterDataChangeEvent event);
+    void characterDataChanged(CharacterDataChangeEvent event);
 
 }

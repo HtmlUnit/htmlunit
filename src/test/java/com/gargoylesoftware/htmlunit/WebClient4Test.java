@@ -48,11 +48,11 @@ public class WebClient4Test extends WebServerTestCase {
     public void serialization_afterUse() throws Exception {
         startWebServer("./");
 
-        try (final WebClient client = getWebClient()) {
+        try (WebClient client = getWebClient()) {
             TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
             assertTrue(textPage.getContent().contains("Apache License"));
 
-            try (final WebClient copy = clone(client)) {
+            try (WebClient copy = clone(client)) {
                 assertNotNull(copy);
 
                 final WebWindow window = copy.getCurrentWindow();

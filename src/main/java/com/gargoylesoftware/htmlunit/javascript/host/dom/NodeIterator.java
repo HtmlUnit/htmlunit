@@ -182,7 +182,8 @@ public class NodeIterator extends SimpleScriptable {
                     node = follow;
                 }
             }
-        } while (node != null && (!(isNodeVisible(node)) || !isAccepted(node)));
+        }
+        while (node != null && (!(isNodeVisible(node)) || !isAccepted(node)));
 
         //apply filter here and loop
 

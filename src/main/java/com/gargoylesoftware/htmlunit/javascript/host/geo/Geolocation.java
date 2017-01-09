@@ -149,7 +149,7 @@ public class Geolocation extends SimpleScriptable {
                 LOG.info("Invoking URL: " + url);
             }
 
-            try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45)) {
+            try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45)) {
                 final Page page = webClient.getPage(url);
                 final String content = page.getWebResponse().getContentAsString();
                 if (LOG.isDebugEnabled()) {
@@ -245,7 +245,7 @@ public class Geolocation extends SimpleScriptable {
     private static List<String> runCommand(final String command) throws IOException {
         final List<String> list = new ArrayList<>();
         final Process p = Runtime.getRuntime().exec(command);
-        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line);

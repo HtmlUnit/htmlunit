@@ -195,7 +195,7 @@ public class ScriptException extends RuntimeException {
             return "<no source>";
         }
 
-        try (final BufferedReader reader = new BufferedReader(new StringReader(scriptSourceCode_))) {
+        try (BufferedReader reader = new BufferedReader(new StringReader(scriptSourceCode_))) {
             for (int i = 0; i < lineNumber - 1; i++) {
                 reader.readLine();
             }

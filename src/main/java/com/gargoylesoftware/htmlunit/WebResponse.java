@@ -145,7 +145,7 @@ public class WebResponse implements Serializable {
      *         or {@code null} if none was specified
      */
     public String getContentCharsetOrNull() {
-        try (final InputStream is = getContentAsStream()) {
+        try (InputStream is = getContentAsStream()) {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
         }
         catch (final IOException e) {
@@ -211,7 +211,7 @@ public class WebResponse implements Serializable {
      * @return the response content as a string or null if the content retrieval was failing
      */
     public String getContentAsString(final String encoding, final String defaultEncoding) {
-        try (final InputStream in = responseData_.getInputStream()) {
+        try (InputStream in = responseData_.getInputStream()) {
             if (null == in) {
                 return null;
             }

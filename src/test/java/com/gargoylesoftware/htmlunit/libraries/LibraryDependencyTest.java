@@ -80,7 +80,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
     }
 
     private String getContent(final String resourceName) throws IOException {
-        try (final InputStream in = getClass().getClassLoader().getResourceAsStream(resourceName)) {
+        try (InputStream in = getClass().getClassLoader().getResourceAsStream(resourceName)) {
             return IOUtils.toString(in, TextUtil.DEFAULT_CHARSET);
         }
     }

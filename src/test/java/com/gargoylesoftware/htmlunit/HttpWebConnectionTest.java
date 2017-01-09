@@ -145,8 +145,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             }
         }
 
-        try (final InputStream expectedBuf = new BufferedInputStream(expected)) {
-            try (final InputStream actualBuf = new BufferedInputStream(actual)) {
+        try (InputStream expectedBuf = new BufferedInputStream(expected)) {
+            try (InputStream actualBuf = new BufferedInputStream(actual)) {
 
                 final byte[] expectedArray = new byte[2048];
                 final byte[] actualArray = new byte[2048];
@@ -269,7 +269,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "something",
                 "text/plain", encoding);
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
-        try (final HttpWebConnection webConnection = new HttpWebConnection(getWebClient())) {
+        try (HttpWebConnection webConnection = new HttpWebConnection(getWebClient())) {
             webConnection.buildFilePart(pair, builder);
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

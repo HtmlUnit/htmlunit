@@ -27,5 +27,5 @@ public interface AlertHandler {
      * @param page the page on which the alert occurred
      * @param message the message in the alert
      */
-    void handleAlert(final Page page, final String message);
+    void handleAlert(Page page, String message);
 }

@@ -31,7 +31,7 @@ public interface RenderingBackend {
      * Sets the {@code fillStyle} property.
      * @param fillStyle the {@code fillStyle} property
      */
-    void setFillStyle(final String fillStyle);
+    void setFillStyle(String fillStyle);
 
     /**
      * Paints the specified rectangular area.
@@ -40,7 +40,7 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
-    void clearRect(final int x, final int y, final int w, final int h);
+    void clearRect(int x, int y, int w, int h);
 
     /**
      * Paints the specified rectangular area.
@@ -49,7 +49,7 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
-    void fillRect(final int x, final int y, final int w, final int h);
+    void fillRect(int x, int y, int w, int h);
 
     /**
      * Paints the specified rectangular area.
@@ -58,7 +58,7 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
-    void strokeRect(final int x, final int y, final int w, final int h);
+    void strokeRect(int x, int y, int w, int h);
 
     /**
      * Draws images onto the context.
@@ -68,7 +68,7 @@ public interface RenderingBackend {
      * @param dyI the y coordinate of the starting point (top left)
      * @throws IOException in case o problems
      */
-    void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException;
+    void drawImage(ImageReader imageReader, int dxI, int dyI) throws IOException;
 
     /**
      * Creates a byte array containing the (4) color values of all pixels.
@@ -79,7 +79,7 @@ public interface RenderingBackend {
      * @param sy start point y
      * @return the bytes
      */
-    byte[] getBytes(final int width, final int height, final int sx, final int sy);
+    byte[] getBytes(int width, int height, int sx, int sy);
 
     /**
      * Constructs a base64 encoded string out of the image data.
@@ -88,5 +88,5 @@ public interface RenderingBackend {
      * @return the base64 encoded string
      * @throws IOException in case o problems
      */
-    String encodeToString(final String type) throws IOException;
+    String encodeToString(String type) throws IOException;
 }

@@ -63,7 +63,7 @@ public class MemoryLeakTest extends SimpleWebTestCase {
     protected void windowLeaks() throws Exception {
         final MemoryLeakDetector detector = new MemoryLeakDetector();
 
-        try (final WebClient client = new WebClient()) {
+        try (WebClient client = new WebClient()) {
             detector.register("w", client.getCurrentWindow());
 
             final MockWebConnection conn = new MockWebConnection();

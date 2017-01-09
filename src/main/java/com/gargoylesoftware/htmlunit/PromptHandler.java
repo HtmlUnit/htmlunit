@@ -28,5 +28,5 @@ public interface PromptHandler {
      * @param message the message in the prompt
      * @return the value typed in or null if the user pressed cancel
      */
-    String handlePrompt(final Page page, final String message);
+    String handlePrompt(Page page, String message);
 }

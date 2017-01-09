@@ -41,7 +41,7 @@ public interface WebWindow extends Serializable {
      *
      * @param name the new window name
      */
-    void setName(final String name);
+    void setName(String name);
 
     /**
      * Returns the currently loaded page or null if no page has been loaded.
@@ -55,7 +55,7 @@ public interface WebWindow extends Serializable {
      *
      * @param page the new page or null if there is no page (ie empty window)
      */
-    void setEnclosedPage(final Page page);
+    void setEnclosedPage(Page page);
 
     /**
      * Returns the window that contains this window. If this is a top
@@ -96,7 +96,7 @@ public interface WebWindow extends Serializable {
      *
      * @param scriptObject the JavaScript object
      */
-    void setScriptableObject(final ScriptableObject scriptObject);
+    void setScriptableObject(ScriptableObject scriptObject);
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -132,7 +132,7 @@ public interface WebWindow extends Serializable {
      * Sets the width (in pixels) of the browser window viewport including, if rendered, the vertical scrollbar.
      * @param innerWidth the inner width
      */
-    void setInnerWidth(final int innerWidth);
+    void setInnerWidth(int innerWidth);
 
     /**
      * Returns the width of the outside of the browser window.
@@ -148,7 +148,7 @@ public interface WebWindow extends Serializable {
      * window chrome and window resizing borders/handles.
      * @param outerWidth the outer width
      */
-    void setOuterWidth(final int outerWidth);
+    void setOuterWidth(int outerWidth);
 
     /**
      * Returns the height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
@@ -160,7 +160,7 @@ public interface WebWindow extends Serializable {
      * Sets the height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
      * @param innerHeight the inner height
      */
-    void setInnerHeight(final int innerHeight);
+    void setInnerHeight(int innerHeight);
 
     /**
      * Returns the height in pixels of the whole browser window.
@@ -176,5 +176,5 @@ public interface WebWindow extends Serializable {
      * window chrome and window resizing borders/handles.
      * @param outerHeight the outer height
      */
-    void setOuterHeight(final int outerHeight);
+    void setOuterHeight(int outerHeight);
 }

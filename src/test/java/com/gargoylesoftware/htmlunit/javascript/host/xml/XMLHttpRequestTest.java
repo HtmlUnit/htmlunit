@@ -1350,7 +1350,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String string = "'\u9EC4'";
         final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
-        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"))) {
             final String output = reader.readLine();
             assertNotNull(output);
             assertEquals(39, output.codePointAt(0));

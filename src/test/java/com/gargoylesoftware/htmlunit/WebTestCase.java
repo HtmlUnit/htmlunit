@@ -667,8 +667,8 @@ public abstract class WebTestCase {
 
             final File expectedLog = new File(outFile.getParentFile(), outFile.getName() + suffix);
 
-            try (final FileOutputStream fos = new FileOutputStream(expectedLog)) {
-                try (final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            try (FileOutputStream fos = new FileOutputStream(expectedLog)) {
+                try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                     oos.writeObject(generateTest_expectedAlerts_);
                 }
             }

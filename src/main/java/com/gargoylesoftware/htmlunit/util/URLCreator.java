@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Marc Guillemot
  */
 abstract class URLCreator {
-    abstract URL toUrlUnsafeClassic(final String url) throws MalformedURLException;
+    abstract URL toUrlUnsafeClassic(String url) throws MalformedURLException;
     abstract String getProtocol(URL url);
 
     protected URL toNormalUrl(final String url) throws MalformedURLException {

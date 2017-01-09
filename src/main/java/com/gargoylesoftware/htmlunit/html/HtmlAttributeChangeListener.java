@@ -30,7 +30,7 @@ public interface HtmlAttributeChangeListener extends Serializable {
      *
      * @param event the attribute change event
      */
-    void attributeAdded(final HtmlAttributeChangeEvent event);
+    void attributeAdded(HtmlAttributeChangeEvent event);
 
     /**
      * Notification that an existing attribute has been removed from the HtmlElement.
@@ -38,13 +38,13 @@ public interface HtmlAttributeChangeListener extends Serializable {
      *
      * @param event the attribute change event
      */
-    void attributeRemoved(final HtmlAttributeChangeEvent event);
+    void attributeRemoved(HtmlAttributeChangeEvent event);
 
     /**
      * Notification that an attribute on the HtmlElement has been replaced. Called after the attribute is replaced.
      *
      * @param event the attribute change event
      */
-    void attributeReplaced(final HtmlAttributeChangeEvent event);
+    void attributeReplaced(HtmlAttributeChangeEvent event);
 
 }

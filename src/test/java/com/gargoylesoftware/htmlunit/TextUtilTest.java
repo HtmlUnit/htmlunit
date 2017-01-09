@@ -59,8 +59,8 @@ public class TextUtilTest extends SimpleWebTestCase {
             final String input = entry[0];
             final String expectedResult = entry[1];
 
-            try (final InputStream inputStream = TextUtil.toInputStream(input, encoding)) {
-                try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, encoding))) {
+            try (InputStream inputStream = TextUtil.toInputStream(input, encoding)) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, encoding))) {
                     assertEquals(expectedResult, reader.readLine());
                 }
             }

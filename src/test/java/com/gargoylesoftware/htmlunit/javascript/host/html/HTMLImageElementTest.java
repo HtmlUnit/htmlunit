@@ -452,7 +452,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+        try (FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
             final byte[] directBytes = IOUtils.toByteArray(fis);
 
             final MockWebConnection webConnection = getMockWebConnection();
@@ -494,7 +494,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+        try (FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
             final byte[] directBytes = IOUtils.toByteArray(fis);
             final MockWebConnection webConnection = getMockWebConnection();
             final List<NameValuePair> emptyList = Collections.emptyList();
@@ -535,7 +535,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+        try (FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
             final byte[] directBytes = IOUtils.toByteArray(fis);
             final MockWebConnection webConnection = getMockWebConnection();
             final List<NameValuePair> emptyList = Collections.emptyList();
@@ -588,7 +588,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true", "true"},
             IE = {"false", "false", "false", "true"})
     public void complete() throws Exception {
-        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             final URL urlImage = new URL(URL_SECOND, "img.jpg");

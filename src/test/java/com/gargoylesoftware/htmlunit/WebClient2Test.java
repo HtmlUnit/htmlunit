@@ -151,12 +151,12 @@ public class WebClient2Test extends SimpleWebTestCase {
     @Test
     public void serialization_pageLoad() throws Exception {
         final String page1Content = "<html><body>hello 1</body></html>";
-        try (final WebClient client = getWebClient()) {
+        try (WebClient client = getWebClient()) {
             final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
             assertEquals("hello 1", page1.asText());
 
             final String page2Content = "<html><body>hello 2</body></html>";
-            try (final WebClient copy = clone(client)) {
+            try (WebClient copy = clone(client)) {
                 final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
                 assertEquals("hello 2", page2.asText());
             }

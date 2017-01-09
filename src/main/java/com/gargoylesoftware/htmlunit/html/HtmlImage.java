@@ -523,8 +523,8 @@ public class HtmlImage extends HtmlElement {
     public void saveAs(final File file) throws IOException {
         downloadImageIfNeeded();
         if (null != imageWebResponse_) {
-            try (final InputStream inputStream = imageWebResponse_.getContentAsStream();
-                 final FileOutputStream fileOut = new FileOutputStream(file)) {
+            try (InputStream inputStream = imageWebResponse_.getContentAsStream();
+                FileOutputStream fileOut = new FileOutputStream(file)) {
                 IOUtils.copy(imageWebResponse_.getContentAsStream(), fileOut);
             }
         }
@@ -564,7 +564,7 @@ public class HtmlImage extends HtmlElement {
         protected void finalize() throws Throwable {
             if (imageReader_ != null) {
                 try {
-                    try (final ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
+                    try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
                         // nothing
                     }
                 }

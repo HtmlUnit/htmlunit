@@ -104,7 +104,7 @@ public class SocksProxyTest extends WebServerTestCase {
 
     private static void assumeSocksProxyInUse() {
         try {
-            try (final Socket socket = new Socket(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT)) {
+            try (Socket socket = new Socket(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT)) {
                 // nothing
             }
         }

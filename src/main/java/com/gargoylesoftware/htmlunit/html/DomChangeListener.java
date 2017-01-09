@@ -29,13 +29,13 @@ public interface DomChangeListener extends Serializable {
      *
      * @param event the node addition event
      */
-    void nodeAdded(final DomChangeEvent event);
+    void nodeAdded(DomChangeEvent event);
 
     /**
      * Notification that a new node was deleted. Called after the node is deleted.
      *
      * @param event the node deletion event
      */
-    void nodeDeleted(final DomChangeEvent event);
+    void nodeDeleted(DomChangeEvent event);
 
 }

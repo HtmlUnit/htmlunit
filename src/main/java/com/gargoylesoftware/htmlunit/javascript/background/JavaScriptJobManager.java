@@ -62,13 +62,13 @@ public interface JavaScriptJobManager extends Serializable {
      * @param page the page which is trying to add the job
      * @return the ID assigned to the job
      */
-    int addJob(final JavaScriptJob job, final Page page);
+    int addJob(JavaScriptJob job, Page page);
 
     /**
      * Removes the specified job from the execution queue. This doesn't interrupt the job if it is currently running.
      * @param id the ID of the job to be removed from the execution queue
      */
-    void removeJob(final int id);
+    void removeJob(int id);
 
     /**
      * Removes all jobs from the execution queue. This doesn't interrupt any jobs that may be currently running.
@@ -80,7 +80,7 @@ public interface JavaScriptJobManager extends Serializable {
      * currently executing.
      * @param id the ID of the job to be stopped
      */
-    void stopJob(final int id);
+    void stopJob(int id);
 
     /**
      * Blocks until all active jobs have finished executing. If a job is scheduled to begin executing after
@@ -91,7 +91,7 @@ public interface JavaScriptJobManager extends Serializable {
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
      *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
-    int waitForJobs(final long timeoutMillis);
+    int waitForJobs(long timeoutMillis);
 
     /**
      * Blocks until all jobs scheduled to start executing before <tt>(now + delayMillis)</tt> have finished executing.
@@ -103,7 +103,7 @@ public interface JavaScriptJobManager extends Serializable {
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
      *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
-    int waitForJobsStartingBefore(final long delayMillis);
+    int waitForJobsStartingBefore(long delayMillis);
 
     /**
      * Blocks until all jobs scheduled to start executing before <tt>(now + delayMillis)</tt> have finished executing.
@@ -116,7 +116,7 @@ public interface JavaScriptJobManager extends Serializable {
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
      *         method returns; will be <tt>0</tt> if there are no jobs left to execute
      */
-    int waitForJobsStartingBefore(final long delayMillis, JavaScriptJobFilter filter);
+    int waitForJobsStartingBefore(long delayMillis, JavaScriptJobFilter filter);
 
     /**
      * Shuts down this job manager and stops all of its jobs.
@@ -141,7 +141,7 @@ public interface JavaScriptJobManager extends Serializable {
      * @param job the job to run
      * @return returns true if the job was run.
      */
-    boolean runSingleJob(final JavaScriptJob job);
+    boolean runSingleJob(JavaScriptJob job);
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

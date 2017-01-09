@@ -74,7 +74,7 @@ public class ExternalTest {
     }
 
     private static void assertChromeDriver(final String version) throws Exception {
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             final AbstractPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, version);
@@ -101,7 +101,7 @@ public class ExternalTest {
             }
             assertNotNull(version);
             if (version.contains("SNAPSHOT")) {
-                try (final WebClient webClient = getWebClient()) {
+                try (WebClient webClient = getWebClient()) {
                     final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
                             + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
                     final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
@@ -124,7 +124,7 @@ public class ExternalTest {
         if (!url.endsWith("/")) {
             url += "/";
         }
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
             final HtmlPage page = webClient.getPage(url);
             for (final HtmlAnchor anchor : page.getAnchors()) {
@@ -214,7 +214,7 @@ public class ExternalTest {
      * Returns if now we are in different week than the last finished build one.
      */
     private static boolean isDifferentWeek() throws Exception {
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             HtmlPage page = webClient.getPage("https://ci.canoo.com/teamcity/viewLog.html"
                     + "?buildTypeId=HtmlUnit_FastBuild&buildId=lastSuccessful");
             page = page.getAnchorByText("Log in as guest").click();

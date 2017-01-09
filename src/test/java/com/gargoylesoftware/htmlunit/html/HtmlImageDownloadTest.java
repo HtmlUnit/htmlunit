@@ -163,8 +163,8 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     public void serialize() throws Exception {
         final HtmlImage htmlImage = getHtmlElementToTest("image1");
         htmlImage.getImageReader();
-        try (final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            try (final ObjectOutputStream out = new ObjectOutputStream(baos)) {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            try (ObjectOutputStream out = new ObjectOutputStream(baos)) {
                 out.writeObject(htmlImage);
             }
         }

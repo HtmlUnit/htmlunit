@@ -179,7 +179,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final Properties properties = new Properties();
                 final File file = new File("test.properties");
                 if (file.exists()) {
-                    try (final FileInputStream in = new FileInputStream(file)) {
+                    try (FileInputStream in = new FileInputStream(file)) {
                         properties.load(in);
                     }
 

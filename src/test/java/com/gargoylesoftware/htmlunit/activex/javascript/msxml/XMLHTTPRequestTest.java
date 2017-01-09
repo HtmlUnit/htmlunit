@@ -1492,7 +1492,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
         }
 
         private static void bounce(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-            try (final Writer writer = resp.getWriter()) {
+            try (Writer writer = resp.getWriter()) {
                 writer.write(req.getMethod() + " " + req.getServerName() + req.getRequestURI()
                     + "?" + req.getQueryString() + ',' + req.getContentLength());
             }

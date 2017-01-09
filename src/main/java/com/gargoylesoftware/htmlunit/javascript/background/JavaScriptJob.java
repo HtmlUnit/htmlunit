@@ -33,7 +33,7 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
      * Sets the job ID.
      * @param id the job ID
      */
-    void setId(final Integer id);
+    void setId(Integer id);
 
     /**
      * Returns the target execution time of the job.
@@ -45,7 +45,7 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
      * Sets the target execution time of the job.
      * @param targetExecutionTime the new target execution time.
      */
-    void setTargetExecutionTime(final long targetExecutionTime);
+    void setTargetExecutionTime(long targetExecutionTime);
 
     /**
      * Returns the amount of time to wait between executions of this job (may be {@code null}).

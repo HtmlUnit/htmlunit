@@ -96,8 +96,8 @@ public final class JQueryExtractor {
      * @throws IOException if an error occurs
      */
     public static void extractExpectations(final File input, final File output) throws IOException {
-        try (final BufferedReader reader = new BufferedReader(new FileReader(input))) {
-            try (final BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
                 int testNumber = 1;
                 String line;
                 while ((line = reader.readLine()) != null) {

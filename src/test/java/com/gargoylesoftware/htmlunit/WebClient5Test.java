@@ -44,7 +44,7 @@ public class WebClient5Test extends WebTestCase {
      */
     @Test
     public void addRequestHeader_Cookie() throws Exception {
-        try (final WebClient wc = new WebClient()) {
+        try (WebClient wc = new WebClient()) {
             wc.addRequestHeader("Cookie", "some_value");
             fail("Should have thrown an exception ");
         }
@@ -60,7 +60,7 @@ public class WebClient5Test extends WebTestCase {
     @Test
     public void getPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
-        try (final WebClient wc = new WebClient() {
+        try (WebClient wc = new WebClient() {
             @Override
             @SuppressWarnings("unchecked")
             public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {

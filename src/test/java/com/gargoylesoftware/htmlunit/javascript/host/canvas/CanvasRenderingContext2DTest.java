@@ -162,7 +162,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC"})
     @NotYetImplemented
     public void drawImage() throws Exception {
-        try (final InputStream is = getClass().getResourceAsStream("html.png")) {
+        try (InputStream is = getClass().getResourceAsStream("html.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
             getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
@@ -222,7 +222,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"rendering...", "...done"},
             FF = {"rendering...", "exception"})
     public void drawImage_invalidImage() throws Exception {
-        try (final InputStream is = getClass().getResourceAsStream("invalid.png")) {
+        try (InputStream is = getClass().getResourceAsStream("invalid.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
             getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
@@ -247,7 +247,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     }
 
     private void drawImage(final String fileName) throws Exception {
-        try (final InputStream is = getClass().getResourceAsStream(fileName)) {
+        try (InputStream is = getClass().getResourceAsStream(fileName)) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
             getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);

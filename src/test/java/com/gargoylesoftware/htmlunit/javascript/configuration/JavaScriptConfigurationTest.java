@@ -189,7 +189,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
                     jarPath = jarPath.replace("%20", " ");
                 }
-                try (final JarFile jarFile = new JarFile(jarPath)) {
+                try (JarFile jarFile = new JarFile(jarPath)) {
                     for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
                         final String entryName = entries.nextElement().getName();
                         if (entryName.endsWith(".class")) {

@@ -134,7 +134,7 @@ public class ThreadTest extends TestCase {
 
             final List<String> collectedAlerts = new ArrayList<>();
 
-            try (final WebClient webClient = new WebClient()) {
+            try (WebClient webClient = new WebClient()) {
                 webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
                 final MockWebConnection connection = new MockWebConnection();
                 connection.setDefaultResponse(html);

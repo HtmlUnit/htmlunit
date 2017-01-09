@@ -86,7 +86,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     }
 
     private void loadImage(final String src) throws Exception {
-        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
             final List<NameValuePair> emptyList = Collections.emptyList();
@@ -158,7 +158,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     }
 
     private void isDisplayed(final String src) throws Exception {
-        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
             final List<NameValuePair> emptyList = Collections.emptyList();
@@ -182,7 +182,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "§§URL§§abcd/img.gif"})
     public void lineBreaksInUrl() throws Exception {
-        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();

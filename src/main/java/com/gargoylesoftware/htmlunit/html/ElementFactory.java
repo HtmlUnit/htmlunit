@@ -37,7 +37,7 @@ public interface ElementFactory {
      *        if no attributes specified
      * @return the newly created and initialized element
      */
-    DomElement createElement(final SgmlPage page, final String tagName, final Attributes attributes);
+    DomElement createElement(SgmlPage page, String tagName, Attributes attributes);
 
     /**
      * Creates an element according to this factory's specification. Note that even though this method
@@ -50,8 +50,7 @@ public interface ElementFactory {
      *        if no attributes specified
      * @return the newly created and initialized element
      */
-    DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
-        final Attributes attributes);
+    DomElement createElementNS(SgmlPage page, String namespaceURI, String qualifiedName, Attributes attributes);
 
     /**
      * Creates an element according to this factory's specification. Note that even though this method
@@ -65,6 +64,6 @@ public interface ElementFactory {
      * @param checkBrowserCompatibility if true and the page doesn't support this element, return null
      * @return the newly created and initialized element
      */
-    DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
-        final Attributes attributes, final boolean checkBrowserCompatibility);
+    DomElement createElementNS(SgmlPage page, String namespaceURI, String qualifiedName, Attributes attributes,
+            boolean checkBrowserCompatibility);
 }

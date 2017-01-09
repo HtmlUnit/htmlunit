@@ -56,7 +56,7 @@ public final class HostExtractor {
      */
     public static void main(final String[] args) throws Exception {
         final Set<String> set = new HashSet<>();
-        try (final WebClient webClient = new WebClient(BrowserVersion.CHROME)) {
+        try (WebClient webClient = new WebClient(BrowserVersion.CHROME)) {
             if (args.length > 1) {
                 final ProxyConfig proxyConfig = new ProxyConfig(args[0], Integer.parseInt(args[1]));
                 proxyConfig.addHostsToProxyBypass("localhost");

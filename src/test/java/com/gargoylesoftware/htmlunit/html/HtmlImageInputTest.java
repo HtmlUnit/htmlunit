@@ -370,7 +370,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§abcd/img.gif")
     public void lineBreaksInUrl() throws Exception {
-        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();

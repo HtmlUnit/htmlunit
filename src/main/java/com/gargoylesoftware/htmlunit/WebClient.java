@@ -1207,7 +1207,7 @@ public class WebClient implements Serializable, AutoCloseable {
             contentType = "application/xhtml+xml";
         }
         if (contentType == null) {
-            try (final InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+            try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
             }
             catch (final IOException e) {

@@ -32,6 +32,6 @@ public interface WebConnection extends AutoCloseable {
      * @return the response to the request defined by the specified request
      * @exception IOException if an IO error occurs
      */
-    WebResponse getResponse(final WebRequest request) throws IOException;
+    WebResponse getResponse(WebRequest request) throws IOException;
 
 }

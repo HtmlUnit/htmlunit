@@ -131,7 +131,7 @@ public class WebClientOptions implements Serializable {
      */
     public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
             final String certificateType) {
-        try (final InputStream is = certificateUrl.openStream()) {
+        try (InputStream is = certificateUrl.openStream()) {
             sslClientCertificateStore_ = getKeyStore(is, certificatePassword, certificateType);
             sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
         }
@@ -479,7 +479,7 @@ public class WebClientOptions implements Serializable {
      */
     public void setSSLTrustStore(final URL sslTrustStoreUrl, final String sslTrustStorePassword,
             final String sslTrustStoreType) {
-        try (final InputStream is = sslTrustStoreUrl.openStream()) {
+        try (InputStream is = sslTrustStoreUrl.openStream()) {
             sslTrustStore_ = getKeyStore(is, sslTrustStorePassword, sslTrustStoreType);
         }
         catch (final Exception e) {

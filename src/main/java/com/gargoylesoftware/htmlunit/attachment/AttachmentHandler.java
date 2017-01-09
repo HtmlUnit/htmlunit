@@ -45,6 +45,6 @@ public interface AttachmentHandler {
      * Handles the specified attached page.
      * @param page an attached page, which doesn't get loaded inline
      */
-    void handleAttachment(final Page page);
+    void handleAttachment(Page page);
 
 }

@@ -47,8 +47,8 @@ public interface HTMLParserListener {
      * @param column the column of the problem
      * @param key the key identifying the "type" of problem
      */
-    void error(final String message, final URL url, final String html,
-            final int line, final int column, final String key);
+    void error(String message, URL url, String html,
+            int line, int column, String key);
 
     /**
      * Called when the HTML parser reports a warning.
@@ -59,8 +59,8 @@ public interface HTMLParserListener {
      * @param column the column of the problem
      * @param key the key identifying the "type" of problem
      */
-    void warning(final String message, final URL url, final String html,
-            final int line, final int column, final String key);
+    void warning(String message, URL url, String html,
+            int line, int column, String key);
 }
 
 /**

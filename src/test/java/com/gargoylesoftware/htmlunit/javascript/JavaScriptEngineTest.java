@@ -421,7 +421,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String jsContent = "function doTest() { alert('gZip'); }";
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        try (final GZIPOutputStream gzipper = new GZIPOutputStream(bytes)) {
+        try (GZIPOutputStream gzipper = new GZIPOutputStream(bytes)) {
             gzipper.write(jsContent.getBytes("ASCII"));
         }
 
@@ -449,7 +449,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void externalScriptEmptyGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
-        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
             bytes.write("".getBytes("ASCII"));
 
             final List<NameValuePair> headers = new ArrayList<>();
@@ -477,7 +477,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void externalScriptBrokenGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
-        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
             final String jsContent = "function doTest() { alert('gZip'); }";
             bytes.write(jsContent.getBytes("ASCII"));
 
@@ -1349,7 +1349,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 + "<body onload='setTimeout(test, 50);'>\n"
                 + "</body></html>";
 
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             final List<String> collectedAlerts = new ArrayList<>();
             webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -1398,7 +1398,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             }
         };
 
-        try (final WebClient client = new WebClient(browser)) {
+        try (WebClient client = new WebClient(browser)) {
             client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
         }
     }
@@ -1421,7 +1421,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             webClient.setWebConnection(webConnection);
 
             final WebWindow window1 = webClient.getCurrentWindow();

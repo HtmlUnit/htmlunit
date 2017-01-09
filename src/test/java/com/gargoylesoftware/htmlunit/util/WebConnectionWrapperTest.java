@@ -56,7 +56,7 @@ public class WebConnectionWrapperTest extends SimpleWebTestCase {
             }
         };
 
-        try (final WebConnectionWrapper wrapper = new WebConnectionWrapper(realConnection)) {
+        try (WebConnectionWrapper wrapper = new WebConnectionWrapper(realConnection)) {
             assertSame(response, wrapper.getResponse(wrs));
         }
     }

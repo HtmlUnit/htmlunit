@@ -149,7 +149,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         map.put("/two.js", BigJavaScriptServlet2.class);
         map.put("/three.css", BigJavaScriptServlet3.class);
         startWebServer(".", null, map);
-        try (final WebClient client = getWebClient()) {
+        try (WebClient client = getWebClient()) {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);
             final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");

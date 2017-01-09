@@ -134,7 +134,8 @@ public class WebSocketTest extends WebDriverTestCase {
         int counter = 0;
         do {
             Thread.sleep(100);
-        } while (chatE.getText().isEmpty() && counter++ < 10);
+        }
+        while (chatE.getText().isEmpty() && counter++ < 10);
 
         assertEquals(firstResponse, chatE.getText());
 
@@ -143,7 +144,8 @@ public class WebSocketTest extends WebDriverTestCase {
         counter = 0;
         do {
             Thread.sleep(100);
-        } while (!chatE.getText().contains(secondResponse) && counter++ < 10);
+        }
+        while (!chatE.getText().contains(secondResponse) && counter++ < 10);
 
         assertEquals(firstResponse + "\n" + secondResponse, chatE.getText());
     }
@@ -247,7 +249,8 @@ public class WebSocketTest extends WebDriverTestCase {
         int counter = 0;
         do {
             Thread.sleep(100);
-        } while (chatE.getText().isEmpty() && counter++ < 10);
+        }
+        while (chatE.getText().isEmpty() && counter++ < 10);
 
         final String[] expected = getExpectedAlerts();
         assertEquals(expected[0], chatE.getText());
@@ -257,7 +260,8 @@ public class WebSocketTest extends WebDriverTestCase {
         counter = 0;
         do {
             Thread.sleep(100);
-        } while (!chatE.getText().contains(expected[1]) && counter++ < 10);
+        }
+        while (!chatE.getText().contains(expected[1]) && counter++ < 10);
 
         assertEquals(expected[0] + "\n" + expected[1], chatE.getText());
     }
@@ -340,7 +344,8 @@ public class WebSocketTest extends WebDriverTestCase {
             Thread.sleep(100);
 
             text = logElement.getAttribute("value").trim().replaceAll("\r", "");
-        } while (text.length() > 0 && counter++ < 10);
+        }
+        while (text.length() > 0 && counter++ < 10);
 
         assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
@@ -350,7 +355,8 @@ public class WebSocketTest extends WebDriverTestCase {
         int counter = 0;
         do {
             Thread.sleep(100);
-        } while (!domE.isDisplayed() && counter++ < 10);
+        }
+        while (!domE.isDisplayed() && counter++ < 10);
 
         assertEquals("Node should be visible, domId: " + domId, true, domE.isDisplayed());
     }

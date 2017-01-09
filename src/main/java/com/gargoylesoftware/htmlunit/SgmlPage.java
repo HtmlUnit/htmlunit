@@ -174,7 +174,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * @return an element, the type of which depends on the specified tag name
      */
     @Override
-    public abstract Element createElement(final String tagName);
+    public abstract Element createElement(String tagName);
 
     /**
      * Create a new Element with the given namespace and qualified name.
@@ -183,7 +183,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * @return the new element
      */
     @Override
-    public abstract Element createElementNS(final String namespaceURI, final String qualifiedName);
+    public abstract Element createElementNS(String namespaceURI, String qualifiedName);
 
     /**
      * Returns the page encoding.

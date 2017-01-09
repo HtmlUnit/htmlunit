@@ -28,5 +28,5 @@ public interface IncorrectnessListener {
      * @param message the explanation of the incorrectness
      * @param origin the object that encountered this incorrectness
      */
-    void notify(final String message, final Object origin);
+    void notify(String message, Object origin);
 }

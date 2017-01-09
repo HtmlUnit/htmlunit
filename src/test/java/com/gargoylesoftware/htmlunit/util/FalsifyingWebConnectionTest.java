@@ -65,7 +65,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
         // create a WebConnection that filters google-analytics scripts
         // c'tor configures connection on the web client
-        try (final FalsifyingWebConnection connection = new FalsifyingWebConnection(webClient) {
+        try (FalsifyingWebConnection connection = new FalsifyingWebConnection(webClient) {
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
                 if ("www.google-analytics.com".equals(request.getUrl().getHost())) {
@@ -113,7 +113,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
         // create a WebConnection that filters google-analytics scripts
         // c'tor configures connection on the web client
-        try (final FalsifyingWebConnection connection = new FalsifyingWebConnection(webClient) {
+        try (FalsifyingWebConnection connection = new FalsifyingWebConnection(webClient) {
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
                 if (request.getUrl().getPath().endsWith(".js")) {

@@ -105,7 +105,7 @@ public class UrlFetchWebConnection implements WebConnection {
                 final String charset = webRequest.getCharset();
                 connection.addRequestProperty("Content-Type", FormEncodingType.URL_ENCODED.getName());
 
-                try (final OutputStream outputStream = connection.getOutputStream()) {
+                try (OutputStream outputStream = connection.getOutputStream()) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
                     final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
                     final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
@@ -137,7 +137,7 @@ public class UrlFetchWebConnection implements WebConnection {
             }
 
             final byte[] byteArray;
-            try (final InputStream is = responseCode < 400
+            try (InputStream is = responseCode < 400
                     ? connection.getInputStream() : connection.getErrorStream()) {
                 byteArray = IOUtils.toByteArray(is);
             }

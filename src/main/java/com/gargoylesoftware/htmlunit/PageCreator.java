@@ -35,7 +35,7 @@ public interface PageCreator {
      * @exception IOException If an io problem occurs
      * @return the new page
      */
-    Page createPage(final WebResponse webResponse, final WebWindow webWindow)
+    Page createPage(WebResponse webResponse, WebWindow webWindow)
         throws IOException;
 }
 

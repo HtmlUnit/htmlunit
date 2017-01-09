@@ -29,5 +29,5 @@ public interface ConfirmHandler {
      * @return {@code true} if we are simulating clicking the OK button,
      *         {@code false} if we are simulating clicking the Cancel button
      */
-    boolean handleConfirm(final Page page, final String message);
+    boolean handleConfirm(Page page, String message);
 }

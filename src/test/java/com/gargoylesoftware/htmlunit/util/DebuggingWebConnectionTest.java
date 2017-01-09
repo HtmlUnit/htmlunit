@@ -95,7 +95,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
     @Test
     public void gzip() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos)) {
+        try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos)) {
             IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
         }
 
@@ -106,7 +106,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
             responseHeaders);
 
         final String dirName = "test-" + getClass().getSimpleName();
-        try (final DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName)) {
+        try (DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName)) {
 
             final WebRequest request = new WebRequest(getDefaultUrl());
             final WebResponse response = dwc.getResponse(request); // was throwing here

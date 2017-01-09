@@ -233,7 +233,7 @@ public final class HTMLParser {
             throw new ObjectInstantiationException("Error setting HTML parser feature", e);
         }
 
-        try (final InputStream content = webResponse.getContentAsStream()) {
+        try (InputStream content = webResponse.getContentAsStream()) {
             final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
 
             page.registerParsingStart();

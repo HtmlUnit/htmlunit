@@ -33,7 +33,7 @@ public interface SelectionDelegate extends Serializable {
      * Sets the start position of the selected text in the owner element.
      * @param selectionStart the start position of the selected text in the owner element
      */
-    void setSelectionStart(final int selectionStart);
+    void setSelectionStart(int selectionStart);
 
     /**
      * Returns the end position of the selected text in the owner element.
@@ -45,5 +45,5 @@ public interface SelectionDelegate extends Serializable {
      * Sets the end position of the selected text in the owner element.
      * @param selectionEnd the end position of the selected text in the owner element
      */
-    void setSelectionEnd(final int selectionEnd);
+    void setSelectionEnd(int selectionEnd);
 }

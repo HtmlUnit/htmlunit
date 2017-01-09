@@ -182,8 +182,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final String extension = chooseExtension(response.getContentType());
         final File f = createFile(request.getUrl(), extension);
         int length = 0;
-        try (final InputStream input = response.getContentAsStream()) {
-            try (final OutputStream output = new FileOutputStream(f)) {
+        try (InputStream input = response.getContentAsStream()) {
+            try (OutputStream output = new FileOutputStream(f)) {
                 length = IOUtils.copy(input, output);
             }
             catch (final EOFException e) {
@@ -262,7 +262,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     private void appendToJSFile(final String str) throws IOException {
-        try (final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true)) {
+        try (FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true)) {
             jsFileWriter.write(str);
         }
     }

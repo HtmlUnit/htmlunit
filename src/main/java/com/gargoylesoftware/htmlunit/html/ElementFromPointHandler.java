@@ -32,5 +32,5 @@ public interface ElementFromPointHandler {
      * @param y the y offset, in pixels
      * @return the element for the specified x coordinate and the specified y coordinate
      */
-    HtmlElement getElementFromPoint(final HtmlPage htmlPage, final int x, final int y);
+    HtmlElement getElementFromPoint(HtmlPage htmlPage, int x, int y);
 }

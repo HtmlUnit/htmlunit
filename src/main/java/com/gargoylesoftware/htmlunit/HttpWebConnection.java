@@ -736,7 +736,7 @@ public class HttpWebConnection implements WebConnection {
                     // we have exceeded the max for memory, let's write everything to a temporary file
                     final File file = File.createTempFile("htmlunit", ".tmp");
                     file.deleteOnExit();
-                    try (final FileOutputStream fos = new FileOutputStream(file)) {
+                    try (FileOutputStream fos = new FileOutputStream(file)) {
                         bos.writeTo(fos); // what we have already read
                         IOUtils.copyLarge(is, fos); // what remains from the server response
                     }

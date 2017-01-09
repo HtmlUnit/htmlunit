@@ -55,7 +55,7 @@ public class WebConsole implements Serializable {
          *
          * @param message log this message
          */
-        void trace(final Object message);
+        void trace(Object message);
 
         /**
          * Is debug logging currently enabled?
@@ -73,7 +73,7 @@ public class WebConsole implements Serializable {
          *
          * @param message log this message
          */
-        void debug(final Object message);
+        void debug(Object message);
 
         /**
          * Is info logging currently enabled?
@@ -91,7 +91,7 @@ public class WebConsole implements Serializable {
          *
          * @param message log this message
          */
-        void info(final Object message);
+        void info(Object message);
 
         /**
          * Is warn logging currently enabled?
@@ -109,7 +109,7 @@ public class WebConsole implements Serializable {
          *
          * @param message log this message
          */
-        void warn(final Object message);
+        void warn(Object message);
 
         /**
          * Is error logging currently enabled?
@@ -127,7 +127,7 @@ public class WebConsole implements Serializable {
          *
          * @param message log this message
          */
-        void error(final Object message);
+        void error(Object message);
     }
 
     /**

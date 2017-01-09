@@ -905,9 +905,9 @@ public class JavaScriptEngine {
             }
         }
 
-        protected abstract Object doRun(final Context cx);
+        protected abstract Object doRun(Context cx);
 
-        protected abstract String getSourceCode(final Context cx);
+        protected abstract String getSourceCode(Context cx);
     }
 
     private void doProcessPostponedActions() {

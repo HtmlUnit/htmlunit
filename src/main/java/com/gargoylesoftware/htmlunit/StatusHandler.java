@@ -26,6 +26,6 @@ public interface StatusHandler {
      * @param page the page on which the status change occurred
      * @param message the new status message
      */
-    void statusMessageChanged(final Page page, final String message);
+    void statusMessageChanged(Page page, String message);
 
 }

@@ -149,8 +149,8 @@ class MiniServer extends Thread {
             started_.set(true);
             LOG.info("Starting listening on port " + port_);
             while (!shutdown_) {
-                try (final Socket s = serverSocket_.accept()) {
-                    try (final BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()))) {
+                try (Socket s = serverSocket_.accept()) {
+                    try (BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()))) {
 
                         final CharBuffer cb = CharBuffer.allocate(5000);
                         br.read(cb);
@@ -165,7 +165,7 @@ class MiniServer extends Thread {
                             s.getOutputStream().close();
                         }
                         else {
-                            try (final PrintWriter pw = new PrintWriter(s.getOutputStream())) {
+                            try (PrintWriter pw = new PrintWriter(s.getOutputStream())) {
                                 pw.println("HTTP/1.0 " + responseData.getStatusCode() + " "
                                         + responseData.getStatusMessage());
                                 for (final NameValuePair header : responseData.getHeaders()) {

@@ -39,7 +39,7 @@ public final class AbstractPageTest extends WebServerTestCase {
      */
     @Test
     public void onlyCacheToCleanUpWebResponse() throws Exception {
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             webClient.getOptions().setMaxInMemory(3);
 
             final List<NameValuePair> headers = new ArrayList<>();

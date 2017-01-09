@@ -205,8 +205,8 @@ class XmlSerializer {
                 ((HtmlPage) enclosedPage).save(file);
             }
             else {
-                try (final InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
-                    try (final FileOutputStream fos = new FileOutputStream(file)) {
+                try (InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
+                    try (FileOutputStream fos = new FileOutputStream(file)) {
                         IOUtils.copyLarge(is, fos);
                     }
                 }

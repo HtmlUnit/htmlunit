@@ -32,5 +32,5 @@ public interface ScriptableWithFallbackGetter extends Scriptable {
      * @param name the name of the requested property
      * @return the object value, {@link Scriptable#NOT_FOUND} if nothing is found
      */
-    Object getWithFallback(final String name);
+    Object getWithFallback(String name);
 }

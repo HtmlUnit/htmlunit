@@ -3058,7 +3058,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
          * @param style the computed style from which to retrieve the CSS attribute value
          * @return the CSS attribute value from the specified computed style
          */
-        public abstract String get(final ComputedCSSStyleDeclaration style);
+        public abstract String get(ComputedCSSStyleDeclaration style);
     }
 
     /**

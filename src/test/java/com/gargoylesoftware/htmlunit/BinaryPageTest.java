@@ -66,7 +66,7 @@ public class BinaryPageTest extends WebServerTestCase {
             final int length = 1000;
             response.setContentLength(length);
             final byte[] buffer = new byte[1024];
-            try (final OutputStream out = response.getOutputStream()) {
+            try (OutputStream out = response.getOutputStream()) {
                 for (int i = length / buffer.length; i >= 0; i--) {
                     out.write(buffer);
                 }
@@ -102,7 +102,7 @@ public class BinaryPageTest extends WebServerTestCase {
             response.setHeader("Transfer-Encoding", "chunked");
             final int length = 60 * 1024 * 1024;
             final byte[] buffer = new byte[1024];
-            try (final OutputStream out = response.getOutputStream()) {
+            try (OutputStream out = response.getOutputStream()) {
                 for (int i = length / buffer.length; i >= 0; i--) {
                     out.write(buffer);
                 }

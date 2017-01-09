@@ -159,7 +159,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             httpEntity.writeTo(out);
 
             assertTrue(out.toString().contains(
@@ -203,7 +203,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             httpEntity.writeTo(out);
 
             if (getBrowserVersion().isIE()) {
@@ -253,7 +253,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final HttpEntity httpEntity = post(client, webConnection);
 
-        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             httpEntity.writeTo(out);
 
             assertTrue(out.toString()
@@ -383,7 +383,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
         final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
 
-        try (final InputStream content = httpResponse.getEntity().getContent()) {
+        try (InputStream content = httpResponse.getEntity().getContent()) {
             final String response = new String(IOUtils.toByteArray(content));
             //this is the value with ASCII encoding
             assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));

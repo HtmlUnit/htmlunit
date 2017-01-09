@@ -33,7 +33,7 @@ public interface JavaScriptErrorListener {
      * @param page the page that causes the problem
      * @param scriptException the occurred script exception
      */
-    void scriptException(final InteractivePage page, final ScriptException scriptException);
+    void scriptException(InteractivePage page, ScriptException scriptException);
 
     /**
      * Informs about a javascript timeout error.
@@ -42,7 +42,7 @@ public interface JavaScriptErrorListener {
      * @param allowedTime the max time allowed for the execution
      * @param executionTime the already consumed time
      */
-    void timeoutError(final InteractivePage page, final long allowedTime, final long executionTime);
+    void timeoutError(InteractivePage page, long allowedTime, long executionTime);
 
     /**
      * Informs about a malformed url referencing to to script.
@@ -51,8 +51,8 @@ public interface JavaScriptErrorListener {
      * @param url the malformed url
      * @param malformedURLException the occurred exception
      */
-    void malformedScriptURL(final InteractivePage page, final String url,
-            final MalformedURLException malformedURLException);
+    void malformedScriptURL(InteractivePage page, String url,
+            MalformedURLException malformedURLException);
 
     /**
      * Informs about an exception during load of an javascript file refereed from a page.
@@ -61,5 +61,5 @@ public interface JavaScriptErrorListener {
      * @param scriptUrl the url to load the script from
      * @param exception the occurred exception
      */
-    void loadScriptError(final InteractivePage page, final URL scriptUrl, final Exception exception);
+    void loadScriptError(InteractivePage page, URL scriptUrl, Exception exception);
 }

@@ -242,7 +242,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
         final WebClient webClient = getWebClientWithMockWebConnection();
-        try (final FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
+        try (FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
             final byte[] directBytes = IOUtils.toByteArray(fis);
             final MockWebConnection webConnection = getMockWebConnection();
 
@@ -356,7 +356,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final String frameRightContent = "<html><head><title>Third</title></head><body>frame right</body></html>";
         final String iframeContent  = "<html><head><title>Iframe</title></head><body>iframe</body></html>";
 
-        try (final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             final MockWebConnection webConnection = getMockWebConnection();

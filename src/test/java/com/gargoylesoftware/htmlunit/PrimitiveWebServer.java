@@ -70,7 +70,7 @@ public class PrimitiveWebServer {
                             }
                         }
                         requests_.add(writer.toString());
-                        try (final OutputStream out = socket.getOutputStream()) {
+                        try (OutputStream out = socket.getOutputStream()) {
                             out.write(defaultResponse_);
                         }
                     }

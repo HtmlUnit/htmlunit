@@ -148,7 +148,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         if (imageType != null && imageType.startsWith("image/")) {
             imageType = imageType.substring(6);
         }
-        try (final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             ImageIO.write(image_, imageType, bos);
 
             final byte[] imageBytes = bos.toByteArray();

@@ -29,5 +29,5 @@ public interface AppletConfirmHandler {
      * @param applet the applet the browser likes to start
      * @return true if starting is allowed
      */
-    boolean confirm(final HtmlApplet applet);
+    boolean confirm(HtmlApplet applet);
 }

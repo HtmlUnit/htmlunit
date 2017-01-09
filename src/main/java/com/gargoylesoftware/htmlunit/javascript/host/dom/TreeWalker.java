@@ -268,7 +268,8 @@ public class TreeWalker extends SimpleScriptable {
 
         do {
             newNode = newNode.getParent();
-        } while (newNode != null && !isNodeVisible(newNode) && newNode != root_);
+        }
+        while (newNode != null && !isNodeVisible(newNode) && newNode != root_);
 
         if (newNode == null || !isNodeVisible(newNode)) {
             return null;

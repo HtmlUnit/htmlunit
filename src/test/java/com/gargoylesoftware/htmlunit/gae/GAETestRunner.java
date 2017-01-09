@@ -109,7 +109,7 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
      * @return the list of classes in the white list
      */
     private static Set<String> loadWhiteList() {
-        try (final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt")) {
+        try (InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt")) {
             assertNotNull(is);
             return new HashSet<>(IOUtils.readLines(is, TextUtil.DEFAULT_CHARSET));
         }

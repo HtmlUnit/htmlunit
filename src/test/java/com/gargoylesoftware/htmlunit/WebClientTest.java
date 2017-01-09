@@ -1165,7 +1165,7 @@ public class WebClientTest extends SimpleWebTestCase {
         // Create the client.
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
-        try (final WebClient webClient = new WebClient(getBrowserVersion(),
+        try (WebClient webClient = new WebClient(getBrowserVersion(),
                 defaultProxyHost, defaultProxyPort)) {
 
             // Configure the mock web connection.
@@ -1228,7 +1228,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
-        try (final WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort)) {
+        try (WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort)) {
 
             webClient.getOptions().getProxyConfig().addHostsToProxyBypass("hostToByPass");
 
@@ -1265,7 +1265,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final String html = "<html><head><title>Hello World</title>\n"
                 + "<script language='javascript' type='text/javascript' src='foo.js'></script>\n"
                 + "</head><body></body></html>";
-        try (final WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort)) {
+        try (WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort)) {
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setResponse(URL_FIRST, html);
             webConnection.setResponse(new URL(URL_FIRST, "foo.js"), "", "text/javascript");
@@ -2315,7 +2315,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void closeToClearCache() throws Exception {
         final Cache cache = createMock(Cache.class);
-        try (final WebClient webClient = getWebClient()) {
+        try (WebClient webClient = getWebClient()) {
             webClient.setCache(cache);
             cache.clear();
             expectLastCall().atLeastOnce();

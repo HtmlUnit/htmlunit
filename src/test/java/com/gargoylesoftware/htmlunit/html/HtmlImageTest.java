@@ -176,7 +176,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
      */
     @Test
     public void saveAsNotSupportedImageType() throws Exception {
-        try (final InputStream is = getClass().getClassLoader().
+        try (InputStream is = getClass().getClassLoader().
                 getResourceAsStream("testfiles/not_supported_type.jpg")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");

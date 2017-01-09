@@ -812,7 +812,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         final StringWriter stringWriter = new StringWriter();
-        try (final PrintWriter printWriter = new PrintWriter(stringWriter)) {
+        try (PrintWriter printWriter = new PrintWriter(stringWriter)) {
             if (charsetName != null && this instanceof HtmlHtml) {
                 printWriter.print("<?xml version=\"1.0\" encoding=\"");
                 printWriter.print(charsetName);

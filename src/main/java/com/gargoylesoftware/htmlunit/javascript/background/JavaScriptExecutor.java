@@ -31,7 +31,7 @@ public interface JavaScriptExecutor extends Runnable, Serializable {
      * Register a window with the eventLoop.
      * @param newWindow the new web window
      */
-    void addWindow(final WebWindow newWindow);
+    void addWindow(WebWindow newWindow);
 
     /**
      * Notes that this thread has been shutdown.
@@ -44,5 +44,5 @@ public interface JavaScriptExecutor extends Runnable, Serializable {
      * @param timeoutMillis the timeout in milliseconds
      * @return the number of jobs executed
      */
-    int pumpEventLoop(final long timeoutMillis);
+    int pumpEventLoop(long timeoutMillis);
 }
