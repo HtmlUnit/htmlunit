@@ -778,8 +778,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml; charset=UTF-8", "gzip", "45"},
-            IE = {"<xml><content>blah</content></xml>", "text/xml; charset=UTF-8", "null", "null"})
+    @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"},
+            IE = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "null", "null"})
     @NotYetImplemented(IE)
     public void encodedXml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
@@ -815,19 +815,19 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "",
                 "Date XYZ GMT\r\n"
-                + "Content-Type: text/xml; charset=ISO-8859-1\r\n"
+                + "Content-Type: text/xml;charset=iso-8859-1\r\n"
                 + "Transfer-Encoding: chunked\r\n"
                 + "Server: Jetty(XXX)\r\n"},
             IE = {"", "",
                 "Date XYZ GMT\r\n"
-                + "Content-Type: text/xml; charset=ISO-8859-1\r\n"
+                + "Content-Type: text/xml;charset=iso-8859-1\r\n"
                 + "Transfer-Encoding: chunked\r\n"
                 + "Server: Jetty(XXX)\r\n\r\n"},
             CHROME = {"", "",
                 "Date XYZ GMT\r\n"
                 + "Server: Jetty(XXX)\r\n"
                 + "Transfer-Encoding: chunked\r\n"
-                + "Content-Type: text/xml; charset=ISO-8859-1\r\n"})
+                + "Content-Type: text/xml;charset=iso-8859-1\r\n"})
     @NotYetImplemented(CHROME)
     public void getAllResponseHeaders() throws Exception {
         final String html =
@@ -869,8 +869,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "null", "null", "null",
-            "text/xml; charset=ISO-8859-1", "text/xml; charset=ISO-8859-1",
-            "text/xml; charset=ISO-8859-1", "null"})
+            "text/xml;charset=iso-8859-1", "text/xml;charset=iso-8859-1",
+            "text/xml;charset=iso-8859-1", "null"})
     public void getResponseHeader() throws Exception {
         final String html =
                 "<html>\n"

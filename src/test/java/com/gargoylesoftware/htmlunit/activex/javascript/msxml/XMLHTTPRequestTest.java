@@ -626,7 +626,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = {"exception-created",
                    "exception-opened",
                    "Date XYZ GMT\r\n"
-                   + "Content-Type: text/xml; charset=ISO-8859-1\r\n"
+                   + "Content-Type: text/xml;charset=iso-8859-1\r\n"
                    + "Transfer-Encoding: chunked\r\nServer: Jetty(XXX)\r\n\r\n"})
     public void getAllResponseHeaders() throws Exception {
         final String test = ""
@@ -656,11 +656,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"exception-created",
                    "exception-opened",
-                   "text/xml; charset=ISO-8859-1",
+                   "text/xml;charset=iso-8859-1",
                    "exception-getNull",
                    "exception-getEmpty",
                    "",
-                   "text/xml; charset=ISO-8859-1"})
+                   "text/xml;charset=iso-8859-1"})
     public void getResponseHeader() throws Exception {
         final String test = ""
             + "try {\n"
