@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Amit Manjhi
  * @author Ronald Brill
  * @author Carsten Steul
- * @see MemoryLeakTest
  */
 class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 

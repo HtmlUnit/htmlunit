@@ -45,7 +45,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *      <th>Type of page</th>
  *    </tr>
  *    <tr>
- *      <td>text/html</td>
+ *      <td>text/html<br>
+ *          text/javascript</td>
  *      <td>{@link HtmlPage}</td>
  *    </tr>
  *    <tr>
@@ -55,12 +56,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *      *+xml
  *      </td>
  *      <td>{@link XmlPage}, or an {@link XHtmlPage} if an XHTML namespace is used</td>
- *    </tr>
- *    <tr>
- *      <td>text/javascript<br>
- *      application/x-javascript
- *      </td>
- *      <td>{@link JavaScriptPage}</td>
  *    </tr>
  *    <tr>
  *      <td>text/*</td>
