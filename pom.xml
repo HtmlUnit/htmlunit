@@ -48,7 +48,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>6.19</version>
+                        <version>7.4</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -919,7 +919,7 @@
         <dependency>
             <groupId>org.tmatesoft.svnkit</groupId>
             <artifactId>svnkit</artifactId>
-            <version>1.8.12</version>
+            <version>1.8.13</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
