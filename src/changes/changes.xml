@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.24" date="???" description="Bugfixes">
+        <release version="2.24" date="January 9, 2017" description="Bugfixes">
             <action type="update" dev="asashour">
                 XmlPage: to ignore ByteOrderMark at the beginning of file.
             </action>
@@ -24,7 +24,7 @@
                 JavaScript: the set constructor accepts array buffers, string, sets and maps.
             </action>
             <action type="update" dev="rbri">
-                Class JavasScriptPage removed. Rela browsers are handling this page as simple htmlpage
+                Class JavasScriptPage removed. Real browsers are handling this page as simple HtmlPage
                 containing only a script tag in the header.
             </action>
             <action type="fix" dev="rbri" issue="1844">
