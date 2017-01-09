@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.25" date="???" description="Bugfixes">
+        </release>
         <release version="2.24" date="January 9, 2017" description="Bugfixes">
             <action type="update" dev="asashour">
                 XmlPage: to ignore ByteOrderMark at the beginning of file.
