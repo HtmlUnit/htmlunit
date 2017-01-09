@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.25" date="???" description="Bugfixes">
+        <release version="2.25" date="???" description="Java 8, Bugfixes">
+            <action type="update" dev="asashour">
+                Mandate Java 8 as a minimum requirement.
+            </action>
         </release>
         <release version="2.24" date="January 9, 2017" description="Bugfixes">
             <action type="update" dev="asashour">
