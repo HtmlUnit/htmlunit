@@ -16,12 +16,19 @@ package com.gargoylesoftware.htmlunit;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
@@ -51,4 +58,45 @@ public final class SgmlPageTest extends WebServerTestCase {
             webClient.getPage(URL_FIRST);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByTagNameAsterisk() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form><input type='button' name='button1' value='pushme'></form>\n"
+            + "<div>a</div> <div>b</div> <div>c</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final DomNodeList<DomElement> elements = page.getElementsByTagName("*");
+
+        assertEquals(9, elements.getLength());
+        validateDomNodeList(elements);
+
+        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
+        page.getBody().appendChild(newDiv);
+        assertEquals(10, elements.getLength());
+        validateDomNodeList(elements);
+    }
+
+    private <E extends DomNode> void validateDomNodeList(final DomNodeList<E> nodes) {
+        assertEquals(nodes.getLength(), nodes.size());
+        final Iterator<E> nodesIterator = nodes.iterator();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            assertEquals(nodes.item(i), nodes.get(i));
+            assertEquals(nodes.item(i), nodesIterator.next());
+            assertEquals(i, nodes.indexOf(nodes.item(i)));
+        }
+        assertEquals(false, nodesIterator.hasNext());
+        final ListIterator<E> nodesListIterator = nodes.listIterator();
+        assertEquals(nodes.item(0), nodesListIterator.next());
+        assertEquals(nodes.item(1), nodesListIterator.next());
+        assertEquals(nodes.item(1), nodesListIterator.previous());
+    }
+
 }

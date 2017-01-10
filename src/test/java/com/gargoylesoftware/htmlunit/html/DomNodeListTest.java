@@ -88,4 +88,5 @@ public class DomNodeListTest extends SimpleWebTestCase {
         assertEquals(nodes.item(1), nodesListIterator.next());
         assertEquals(nodes.item(1), nodesListIterator.previous());
     }
+
 }
