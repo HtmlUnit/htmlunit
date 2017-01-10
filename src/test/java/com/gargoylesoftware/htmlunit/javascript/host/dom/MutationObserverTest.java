@@ -21,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -164,7 +163,6 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("abc")
-    @NotYetImplemented
     public void attributeValue() throws Exception {
         final String html
             = "<html>\n"

@@ -122,7 +122,10 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
 
             final NativeArray array = new NativeArray(new Object[] {mutationRecord});
             ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-            function_.call(Context.getCurrentContext(), scope, this, new Object[] {array});
+            final Context context = Context.getCurrentContext();
+            if (context != null) {
+                function_.call(context, scope, this, new Object[] {array});
+            }
         }
     }
 
@@ -159,10 +162,13 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                 if (attributeOldValue_) {
                     mutationRecord.setOldValue(event.getValue());
                 }
-
+                
                 final NativeArray array = new NativeArray(new Object[] {mutationRecord});
                 ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-                function_.call(Context.getCurrentContext(), scope, this, new Object[] {array});
+                final Context context = Context.getCurrentContext();
+                if (context != null) {
+                    function_.call(context, scope, this, new Object[] {array});
+                }
             }
         }
     }

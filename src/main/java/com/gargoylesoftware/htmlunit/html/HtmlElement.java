@@ -193,27 +193,49 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.removeMappedElement(this);
         }
 
+        final HtmlAttributeChangeEvent event = beforeFireAttributeChange(qualifiedName, attributeValue,
+                oldAttributeValue);
+
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        fireAttributeChangeImpl(htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
+        fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
     }
 
-    private void fireAttributeChangeImpl(final HtmlPage htmlPage, final boolean mappedElement,
+    private HtmlAttributeChangeEvent beforeFireAttributeChange(final String qualifiedName, final String attributeValue,
+            final String oldAttributeValue) {
+        final HtmlAttributeChangeEvent event;
+        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
+            synchronized (attributeListeners_) {
+                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                    listener.attributeAdded(event);
+                }
+            }
+        }
+        else {
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
+            synchronized (attributeListeners_) {
+                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                    listener.attributeReplaced(event);
+                }
+            }
+        }
+        return event;
+    }
+
+    private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event, final HtmlPage htmlPage, final boolean mappedElement,
             final String qualifiedName, final String attributeValue, final String oldAttributeValue) {
         if (mappedElement) {
             htmlPage.addMappedElement(this);
         }
 
-        final HtmlAttributeChangeEvent htmlEvent;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
-            fireHtmlAttributeAdded(htmlEvent);
-            htmlPage.fireHtmlAttributeAdded(htmlEvent);
+            fireHtmlAttributeAdded(event);
+            htmlPage.fireHtmlAttributeAdded(event);
         }
         else {
-            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
-            fireHtmlAttributeReplaced(htmlEvent);
-            htmlPage.fireHtmlAttributeReplaced(htmlEvent);
+            fireHtmlAttributeReplaced(event);
+            htmlPage.fireHtmlAttributeReplaced(event);
         }
     }
 
@@ -238,9 +260,12 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.removeMappedElement(this);
         }
 
+        final HtmlAttributeChangeEvent event = beforeFireAttributeChange(qualifiedName, attribute.getValue(),
+                oldAttributeValue);
+
         final Attr result = super.setAttributeNode(attribute);
 
-        fireAttributeChangeImpl(htmlPage, mappedElement, qualifiedName, attribute.getValue(), oldAttributeValue);
+        fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attribute.getValue(), oldAttributeValue);
 
         return result;
     }
@@ -312,11 +337,6 @@ public abstract class HtmlElement extends DomElement {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
-        synchronized (attributeListeners_) {
-            for (final HtmlAttributeChangeListener listener : attributeListeners_) {
-                listener.attributeAdded(event);
-            }
-        }
         final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeAdded(event);
@@ -335,11 +355,6 @@ public abstract class HtmlElement extends DomElement {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
-        synchronized (attributeListeners_) {
-            for (final HtmlAttributeChangeListener listener : attributeListeners_) {
-                listener.attributeReplaced(event);
-            }
-        }
         final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeReplaced(event);
