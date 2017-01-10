@@ -629,10 +629,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_CLIENTWIDTH_INPUT_TEXT_169,
 
-    /** Supports {@code CSSCharsetRule}. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 38))
-    JS_CSSRULELIST_CHARSET_RULE,
-
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature(@WebBrowser(FF))
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
@@ -954,7 +950,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_READONLY_FOR_TABLE,
 
     /** Indicates that innerText setter supports null values. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_INNER_TEXT_VALUE_NULL,
 
     /** Chrome throws an error if using selectionStart/selectionEnd. */
