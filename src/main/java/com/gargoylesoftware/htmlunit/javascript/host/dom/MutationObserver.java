@@ -162,7 +162,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                 if (attributeOldValue_) {
                     mutationRecord.setOldValue(event.getValue());
                 }
-                
+
                 final NativeArray array = new NativeArray(new Object[] {mutationRecord});
                 ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
                 final Context context = Context.getCurrentContext();

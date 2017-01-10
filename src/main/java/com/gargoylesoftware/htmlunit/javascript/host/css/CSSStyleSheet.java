@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSRULELIST_CHARSET_RULE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
@@ -1144,14 +1143,12 @@ public class CSSStyleSheet extends StyleSheet {
         cssRules_.clearRules();
         cssRulesIndexFix_.clear();
 
-        final boolean ignoreCharsetRules = !getBrowserVersion().hasFeature(JS_CSSRULELIST_CHARSET_RULE);
-
         final org.w3c.dom.css.CSSRuleList ruleList = getWrappedSheet().getCssRules();
         final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
         int pos = 0;
         for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext();) {
             final org.w3c.dom.css.CSSRule rule = it.next();
-            if (ignoreCharsetRules && rule instanceof org.w3c.dom.css.CSSCharsetRule) {
+            if (rule instanceof org.w3c.dom.css.CSSCharsetRule) {
                 cssRulesIndexFix_.add(pos);
                 continue;
             }

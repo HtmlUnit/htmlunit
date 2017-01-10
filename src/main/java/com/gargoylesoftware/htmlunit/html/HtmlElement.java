@@ -209,7 +209,7 @@ public abstract class HtmlElement extends DomElement {
 
     private static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue) {
-        Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
+        final Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
@@ -230,7 +230,8 @@ public abstract class HtmlElement extends DomElement {
         }
     }
 
-    private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event, final HtmlPage htmlPage, final boolean mappedElement,
+    private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event,
+            final HtmlPage htmlPage, final boolean mappedElement,
             final String qualifiedName, final String attributeValue, final String oldAttributeValue) {
         if (mappedElement) {
             htmlPage.addMappedElement(this);
