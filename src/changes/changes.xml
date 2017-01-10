@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.25" date="???" description="Java 8, Bugfixes">
+            <action type="add" dev="asashour" system="features" issue="239">
+                DomNode: implement .getUserData() and .setUserData().
+            </action>
             <action type="update" dev="asashour">
                 Mandate Java 8 as a minimum requirement.
             </action>

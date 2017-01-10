@@ -177,6 +177,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private Collection<DomChangeListener> domListeners_;
     private List<DomChangeListener> domListenersList_;
+    private Map<String, Object> userData_;
 
     /**
      * Creates a new instance.
@@ -670,20 +671,25 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public Object getUserData(final String key) {
-        throw new UnsupportedOperationException("DomNode.getUserData is not yet implemented.");
+        Object value = null;
+        if (userData_ != null) {
+            value = userData_.get(key);
+        }
+        return value;
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
-        throw new UnsupportedOperationException("DomNode.setUserData is not yet implemented.");
+        if (userData_ == null) {
+            userData_ = new HashMap<>();
+        }
+        return userData_.put(key, data);
     }
 
     /**
