@@ -193,34 +193,41 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.removeMappedElement(this);
         }
 
-        final HtmlAttributeChangeEvent event = beforeFireAttributeChange(qualifiedName, attributeValue,
-                oldAttributeValue);
+        final HtmlAttributeChangeEvent event;
+        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
+        }
+        else {
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
+        }
+        notifyAttributeChangeListeners(event, this, oldAttributeValue);
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
         fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
     }
 
-    private HtmlAttributeChangeEvent beforeFireAttributeChange(final String qualifiedName, final String attributeValue,
-            final String oldAttributeValue) {
-        final HtmlAttributeChangeEvent event;
+    private static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
+            final HtmlElement element, final String oldAttributeValue) {
+        Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
-            synchronized (attributeListeners_) {
-                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+            synchronized (listeners) {
+                for (final HtmlAttributeChangeListener listener : listeners) {
                     listener.attributeAdded(event);
                 }
             }
         }
         else {
-            event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
-            synchronized (attributeListeners_) {
-                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+            synchronized (listeners) {
+                for (final HtmlAttributeChangeListener listener : listeners) {
                     listener.attributeReplaced(event);
                 }
             }
         }
-        return event;
+        final DomNode parentNode = element.getParentNode();
+        if (parentNode instanceof HtmlElement) {
+            notifyAttributeChangeListeners(event, (HtmlElement) parentNode, oldAttributeValue);
+        }
     }
 
     private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event, final HtmlPage htmlPage, final boolean mappedElement,
@@ -260,8 +267,14 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.removeMappedElement(this);
         }
 
-        final HtmlAttributeChangeEvent event = beforeFireAttributeChange(qualifiedName, attribute.getValue(),
-                oldAttributeValue);
+        final HtmlAttributeChangeEvent event;
+        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, attribute.getValue());
+        }
+        else {
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
+        }
+        notifyAttributeChangeListeners(event, this, oldAttributeValue);
 
         final Attr result = super.setAttributeNode(attribute);
 
