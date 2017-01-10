@@ -36,11 +36,15 @@ public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern WEB_DRIVER_CHROME_MSG =
-            Pattern.compile("Starting ChromeDriver 2.27.440174 ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
-                    + "Only local connections are allowed\\.\r?\n");
+            Pattern.compile("Starting ChromeDriver 2\\.27\\.440174 ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
+                    + "Only local connections are allowed\\.\r?\n"
+                    + "(.*ProtocolHandshake createSession\r?\n"
+                    + "INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end\r?\n"
+                    + ".*ProtocolHandshake createSession\r?\n"
+                    + "INFO: Detected dialect: OSS\r?\n)?");
     private static final Pattern WEB_DRIVER_IE_MSG =
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
-                    + "2.53.1.0\r?\n"
+                    + "2\\.53\\.1\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n");
 
@@ -68,9 +72,11 @@ public class ErrorOutputChecker implements TestRule {
     private void verifyNoOutput() {
         if (baos_.size() != 0) {
             String output = baos_.toString();
+
             // remove webdriver message
             output = WEB_DRIVER_CHROME_MSG.matcher(output).replaceAll("");
             output = WEB_DRIVER_IE_MSG.matcher(output).replaceAll("");
+
             if (!output.isEmpty()) {
                 if (output.contains("ChromeDriver")) {
                     throw new RuntimeException("Outdated ChromeDriver version: " + output);

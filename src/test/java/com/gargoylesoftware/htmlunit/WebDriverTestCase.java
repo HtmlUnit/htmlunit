@@ -429,6 +429,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
                 return new InternetExplorerDriver();
             }
+
             if (BrowserVersion.CHROME == getBrowserVersion()) {
                 if (CHROME_SERVICE_ == null) {
                     final ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
@@ -443,24 +444,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
                 return new ChromeDriver(CHROME_SERVICE_);
             }
+
             if (BrowserVersion.EDGE == getBrowserVersion()) {
                 if (EDGE_BIN_ != null) {
                     System.setProperty("webdriver.edge.driver", EDGE_BIN_);
                 }
                 return new EdgeDriver();
             }
-            if (!getBrowserVersion().isFirefox()) {
-                throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
+
+            if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
+                // disable the new marionette interface because it requires ff47 or more
+                System.setProperty("webdriver.firefox.marionette", "false");
+
+                if (FF45_BIN_ != null) {
+                    return new FirefoxDriver(new FirefoxBinary(new File(FF45_BIN_)), new FirefoxProfile());
+                }
+                return new FirefoxDriver();
             }
 
-            String ffBinary = null;
-            if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
-                ffBinary = FF45_BIN_;
-            }
-            if (ffBinary != null) {
-                return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
-            }
-            return new FirefoxDriver();
+            throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
         }
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
