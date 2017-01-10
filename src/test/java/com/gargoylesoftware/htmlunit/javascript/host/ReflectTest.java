@@ -34,7 +34,6 @@ public class ReflectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false", "true"},
-            FF38 = "no Reflect",
             IE = "no Reflect")
     public void has() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"

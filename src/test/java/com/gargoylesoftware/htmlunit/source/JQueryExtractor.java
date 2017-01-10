@@ -75,7 +75,6 @@ public final class JQueryExtractor {
     public static void main(final String[] args) throws Exception {
         final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
 
-        // final String browser = "FF38";
         final String browser = "FF45";
         // final String browser = "CHROME";
         // final String browser = "IE";

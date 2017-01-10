@@ -396,8 +396,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF38 = "false")
+    @Alerts("true")
     public void _TextTrackCue_TextTrackCue() throws Exception {
         test("TextTrackCue", "TextTrackCue");
     }
@@ -407,7 +406,6 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _TextTrackCue_VTTCue() throws Exception {
         test("TextTrackCue", "VTTCue");

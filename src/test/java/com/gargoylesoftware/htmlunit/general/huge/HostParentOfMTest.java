@@ -1849,8 +1849,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF38 = "false")
+    @Alerts("true")
     public void _MessageChannel_MessageChannel() throws Exception {
         test("MessageChannel", "MessageChannel");
     }
@@ -2164,7 +2163,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaSource_MediaSource() throws Exception {
         test("MediaSource", "MediaSource");
@@ -2272,28 +2270,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF38 = "true")
-    public void _MozMmsMessage_MozMmsMessage() throws Exception {
-        test("MozMmsMessage", "MozMmsMessage");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF38 = "true")
-    public void _MozMobileMessageThread_MozMobileMessageThread() throws Exception {
-        test("MozMobileMessageThread", "MozMobileMessageThread");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
         test("MozSettingsEvent", "MozSettingsEvent");
@@ -2304,19 +2280,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF38 = "true")
-    public void _MozSmsMessage_MozSmsMessage() throws Exception {
-        test("MozSmsMessage", "MozSmsMessage");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaKeyMessageEvent_MediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent", "MediaKeyMessageEvent");
@@ -2328,7 +2292,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaKeySession_MediaKeySession() throws Exception {
         test("MediaKeySession", "MediaKeySession");
@@ -2340,7 +2303,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaKeyStatusMap_MediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap", "MediaKeyStatusMap");
@@ -2352,7 +2314,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaKeySystemAccess_MediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess", "MediaKeySystemAccess");
@@ -2364,7 +2325,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaKeys_MediaKeys() throws Exception {
         test("MediaKeys", "MediaKeys");
@@ -2450,7 +2410,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent", "MediaEncryptedEvent");

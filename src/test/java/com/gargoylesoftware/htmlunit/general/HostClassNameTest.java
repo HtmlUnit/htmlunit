@@ -191,8 +191,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF38 = "[object CSSCharsetRule]")
+    @Alerts("exception")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
@@ -4034,8 +4033,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF38 = "[object MozMobileMessageThread]")
+    @Alerts("exception")
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
     }
@@ -6542,8 +6540,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF38 = "[object MozMmsMessage]")
+    @Alerts("exception")
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
     }
@@ -7855,8 +7852,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF38 = "[object MozSmsMessage]")
+    @Alerts("exception")
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
     }

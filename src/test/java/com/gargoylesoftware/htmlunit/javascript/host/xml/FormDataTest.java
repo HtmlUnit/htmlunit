@@ -36,8 +36,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -56,7 +56,6 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function"},
-            FF38 = {"function", "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"function", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void functions() throws Exception {
         final String html
@@ -399,7 +398,6 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"myKey", "myKey1"},
-            FF38 = "no delete",
             IE = "no delete")
     public void delete() throws Exception {
         final String html
@@ -454,7 +452,6 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"myValue", "null", "null", "null", "null"},
-            FF38 = "no get",
             IE = "no get")
     public void get() throws Exception {
         final String html
@@ -498,7 +495,6 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"myValue,myValue2", "", "", "", ""},
-            FF38 = "no getAll",
             IE = "no getAll")
     public void getAll() throws Exception {
         final String html
@@ -542,7 +538,6 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false", "false"},
-            FF38 = "no has",
             IE = "no has")
     public void has() throws Exception {
         final String html

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.general.huge;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -12121,7 +12120,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2")
-    @NotYetImplemented({FF45, FF38, EDGE})
+    @NotYetImplemented({FF45, EDGE})
     public void _command_isindex() throws Exception {
         test("command", "isindex");
     }
@@ -12452,7 +12451,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1")
-    @NotYetImplemented({FF45, EDGE, FF38})
+    @NotYetImplemented({FF45, EDGE})
     public void _command_plaintext() throws Exception {
         test("command", "plaintext");
     }
@@ -55317,7 +55316,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1")
-    @NotYetImplemented({FF38, IE, FF45, EDGE})
+    @NotYetImplemented({IE, FF45, EDGE})
     public void _isindex_nextid() throws Exception {
         test("isindex", "nextid");
     }
@@ -55757,7 +55756,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1")
-    @NotYetImplemented({FF38, IE, FF45, EDGE})
+    @NotYetImplemented({IE, FF, EDGE})
     public void _isindex_title() throws Exception {
         test("isindex", "title");
     }
@@ -56026,7 +56025,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({FF45, FF38, IE})
+    @NotYetImplemented({FF45, IE})
     public void _nextid_isindex() throws Exception {
         test("nextid", "isindex");
     }
@@ -56086,7 +56085,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({FF45, FF38, IE})
+    @NotYetImplemented({FF45, IE})
     public void _optgroup_isindex() throws Exception {
         test("optgroup", "isindex");
     }
@@ -56098,7 +56097,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "2",
             FF = "2")
-    @NotYetImplemented({FF45, FF38, IE})
+    @NotYetImplemented({FF45, IE})
     public void _option_isindex() throws Exception {
         test("option", "isindex");
     }

@@ -775,8 +775,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"something", "null"},
-            CHROME = {"something", "0"},
-            FF38 = {"something", "innerText not supported"})
+            CHROME = {"something", "0"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -808,8 +807,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"something", "0"},
-            FF38 = {"something", "innerText not supported"})
+    @Alerts({"something", "0"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

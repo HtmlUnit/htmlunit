@@ -113,17 +113,6 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
-     * Firefox 38 ESR.
-     * @since 2.17
-     * @deprecated as of 2.23, please use {@link #FIREFOX_45}
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_38 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0",
-        38, "FF38", null);
-
-    /**
      * Firefox 45 ESR.
      * @since 2.21
      */
@@ -170,17 +159,6 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /** Register plugins for the browser versions. */
     static {
-        // FF38
-        FIREFOX_38.initDefaultFeatures();
-        FIREFOX_38.setVendor("");
-        FIREFOX_38.buildId_ = "20160420141331";
-        FIREFOX_38.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
-        FIREFOX_38.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_38.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
-        FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
-
         // FF45
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setVendor("");
@@ -248,30 +226,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.registerUploadMimeType("txt", "text/plain");
         CHROME.registerUploadMimeType("text", "text/plain");
 
-        FIREFOX_38.registerUploadMimeType("html", "text/html");
-        FIREFOX_38.registerUploadMimeType("htm", "text/html");
-        FIREFOX_38.registerUploadMimeType("css", "text/css");
-        FIREFOX_38.registerUploadMimeType("xml", "text/xml");
-        FIREFOX_38.registerUploadMimeType("gif", "image/gif");
-        FIREFOX_38.registerUploadMimeType("jpeg", "image/jpeg");
-        FIREFOX_38.registerUploadMimeType("jpg", "image/jpeg");
-        FIREFOX_38.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX_38.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX_38.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_38.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX_38.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX_38.registerUploadMimeType("ogm", "video/x-ogm");
-        FIREFOX_38.registerUploadMimeType("ogg", "video/ogg");
-        FIREFOX_38.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX_38.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX_38.registerUploadMimeType("webm", "video/webm");
-        FIREFOX_38.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_38.registerUploadMimeType("flac", "audio/x-flac");
-        FIREFOX_38.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX_38.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_38.registerUploadMimeType("txt", "text/plain");
-        FIREFOX_38.registerUploadMimeType("text", "text/plain");
-
         FIREFOX_45.registerUploadMimeType("html", "text/html");
         FIREFOX_45.registerUploadMimeType("htm", "text/html");
         FIREFOX_45.registerUploadMimeType("css", "text/css");
@@ -321,11 +275,6 @@ public class BrowserVersion implements Serializable, Cloneable {
                 "Shockwave Flash", "swf"));
         CHROME.getPlugins().add(flash);
 
-        flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 23.0 r0", "23.0.0.207", "NPSWF32_23_0_0_207.dll");
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        FIREFOX_38.getPlugins().add(flash);
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 23.0 r0", "23.0.0.207", "NPSWF32_23_0_0_207.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",

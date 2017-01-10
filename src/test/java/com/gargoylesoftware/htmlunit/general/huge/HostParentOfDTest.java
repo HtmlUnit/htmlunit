@@ -4101,7 +4101,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _EventTarget_MediaSource() throws Exception {
         test("EventTarget", "MediaSource");
@@ -4404,7 +4403,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _EventTarget_MediaKeySession() throws Exception {
         test("EventTarget", "MediaKeySession");
@@ -4415,7 +4413,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _Event_MediaKeyMessageEvent() throws Exception {
         test("Event", "MediaKeyMessageEvent");
@@ -4696,7 +4693,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _EventTarget_TextTrackCue() throws Exception {
         test("EventTarget", "TextTrackCue");
@@ -4878,7 +4874,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _Event_MediaEncryptedEvent() throws Exception {
         test("Event", "MediaEncryptedEvent");
@@ -4899,7 +4894,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _FontFace_FontFace() throws Exception {
         test("FontFace", "FontFace");
@@ -5251,7 +5245,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _EventTarget_SourceBuffer() throws Exception {
         test("EventTarget", "SourceBuffer");
@@ -5262,7 +5255,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _EventTarget_SourceBufferList() throws Exception {
         test("EventTarget", "SourceBufferList");

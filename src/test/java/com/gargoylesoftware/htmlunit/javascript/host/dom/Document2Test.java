@@ -380,16 +380,11 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<p>a & b</p> &amp; \u0162 \" '",
+    @Alerts({"<p>a & b</p> &amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '",
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '"},
-            FF38 = {"<p>a & b</p> &amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '",
-                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
-                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "undefined"})
+                        "<p>a & b</p> &amp; \u0162 \" '"})
     public void createTextNodeWithHtml() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  function test() {\n"
@@ -414,8 +409,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
-            FF38 = {"error", "error", "false", "false", "false"},
-            FF45 = {"false", "false", "false", "false", "false"})
+            FF = {"false", "false", "false", "false", "false"})
     @NotYetImplemented(FF)
     public void queryCommandEnabled() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"

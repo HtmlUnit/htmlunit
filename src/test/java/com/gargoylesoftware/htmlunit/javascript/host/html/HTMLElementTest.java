@@ -974,8 +974,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true"},
-            FF38 = {"true", "true", "false"})
+    @Alerts({"true", "true", "true"})
     public void outerHTMLinNewDiv() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  function test() {\n"
@@ -995,8 +994,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<div id=\"div\"><ul></ul></div>", "<ul></ul>", ""},
-            FF38 = {"<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined"})
+    @Alerts({"<div id=\"div\"><ul></ul></div>", "<ul></ul>", ""})
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  function test() {\n"
@@ -1016,8 +1014,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", ""},
-            FF38 = {"<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined"})
+    @Alerts({"<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", ""})
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  function test() {\n"
@@ -1770,8 +1767,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"Old = Old\ninnerText", "New = New cell value"},
-            FF38 = {"Old = undefined", "New = New cell value"},
-            FF45 = {"Old = Old\n\ninnerText", "New = New cell value"},
+            FF = {"Old = Old\n\ninnerText", "New = New cell value"},
             IE = {"Old = Old \r\ninnerText", "New = New cell value"})
     @NotYetImplemented(FF45)
     public void getSetInnerTextSimple() throws Exception {

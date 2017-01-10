@@ -224,7 +224,6 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _RTCSessionDescription_RTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "RTCSessionDescription");
@@ -332,7 +331,6 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _Request_Request() throws Exception {
         test("Request", "Request");
@@ -344,7 +342,6 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _Response_Response() throws Exception {
         test("Response", "Response");
@@ -560,7 +557,6 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _RTCCertificate_RTCCertificate() throws Exception {
         test("RTCCertificate", "RTCCertificate");

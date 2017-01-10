@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -703,7 +702,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
+    @BuggyWebDriver(IE)
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"})
     // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
@@ -717,7 +716,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({IE, FF38}) // tested with FF8, fails with FF38
+    @BuggyWebDriver(IE)
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"})
     // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
@@ -1923,7 +1922,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
-            FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding() throws Exception {
         final String html = "<html>\n"
@@ -1947,7 +1945,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
-            FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding2() throws Exception {
         final String html = "<html>\n"
@@ -1972,7 +1969,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
-            FF38 = {"windows-1252", "windows-1252", "undefined", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void encoding3() throws Exception {
         final String html = "<html>\n"
@@ -1999,7 +1995,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
-            FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding4() throws Exception {
         final String html = "<html>\n"
@@ -2026,7 +2021,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
-            FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding5() throws Exception {
         final String html = "<html>\n"
@@ -2053,7 +2047,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"UTF-8", "UTF-8", "UTF-8", "undefined"},
-            FF38 = {"UTF-8", "UTF-8", "undefined", "undefined"},
             IE = {"UTF-8", "utf-8", "utf-8", "windows-1252"})
     public void encoding6() throws Exception {
         final String html = "<html>\n"

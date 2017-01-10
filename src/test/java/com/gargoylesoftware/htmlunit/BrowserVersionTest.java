@@ -31,7 +31,6 @@ public class BrowserVersionTest extends WebTestCase {
      */
     @Test
     public void getBrowserVersionNumeric() {
-        assertEquals(38, BrowserVersion.FIREFOX_38.getBrowserVersionNumeric());
         assertEquals(45, BrowserVersion.FIREFOX_45.getBrowserVersionNumeric());
         assertEquals(11, BrowserVersion.INTERNET_EXPLORER.getBrowserVersionNumeric());
         assertEquals(55, BrowserVersion.CHROME.getBrowserVersionNumeric());
@@ -43,7 +42,7 @@ public class BrowserVersionTest extends WebTestCase {
      */
     @Test
     public void testClone() {
-        final BrowserVersion ff = BrowserVersion.FIREFOX_38;
+        final BrowserVersion ff = BrowserVersion.FIREFOX_45;
         final BrowserVersion clone = ff.clone();
 
         assertFalse(ff == clone);

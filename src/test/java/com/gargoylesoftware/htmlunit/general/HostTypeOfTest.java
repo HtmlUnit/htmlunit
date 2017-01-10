@@ -178,8 +178,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "object")
+    @Alerts("undefined")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
@@ -3688,8 +3687,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "object")
+    @Alerts("undefined")
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
     }
@@ -3919,8 +3917,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "object")
+    @Alerts("undefined")
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
     }
@@ -4584,8 +4581,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "object")
+    @Alerts("undefined")
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
     }
@@ -5357,10 +5353,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF38 = "function",
-            CHROME = "function",
-            FF45 = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void cryptoKey() throws Exception {
         test("CryptoKey");
     }
@@ -7183,7 +7177,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF38 = "undefined",
             IE = "undefined")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
@@ -7481,7 +7474,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF38 = "undefined",
             IE = "undefined")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");

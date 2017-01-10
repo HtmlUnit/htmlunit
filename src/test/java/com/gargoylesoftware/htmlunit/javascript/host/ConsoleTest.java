@@ -78,8 +78,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF38 = {"window.console.timeStamp not available"},
-            IE = {"window.console.timeStamp not available"})
+    @Alerts(IE = {"window.console.timeStamp not available"})
     public void timeStamp() throws Exception {
         final String html
             = "<html>\n"
@@ -100,7 +99,6 @@ public class ConsoleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function"},
-            FF38 = {"function", "function", "function", "function", "function", "undefined"},
             IE = {"function", "function", "function", "function", "function", "undefined"})
     public void methods() throws Exception {
         final String html

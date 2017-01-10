@@ -109,9 +109,6 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     }
 
     /**
-     * FF38 had a strange bug when using attrib names with uppercase letters.
-     * see https://bugzilla.mozilla.org/show_bug.cgi?id=1169384; fixed in 38.1.0
-     *
      * @throws Exception if the test fails
      */
     @Test

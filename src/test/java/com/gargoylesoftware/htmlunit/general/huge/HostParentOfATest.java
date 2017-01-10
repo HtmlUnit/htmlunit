@@ -124,16 +124,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF38 = "true")
-    public void _CSSCharsetRule_CSSCharsetRule() throws Exception {
-        test("CSSCharsetRule", "CSSCharsetRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _CSSFontFaceRule_CSSFontFaceRule() throws Exception {
         test("CSSFontFaceRule", "CSSFontFaceRule");
@@ -268,16 +258,6 @@ public class HostParentOfATest extends HostParentOf {
             IE = "true")
     public void _Coordinates_Coordinates() throws Exception {
         test("Coordinates", "Coordinates");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF38 = "true")
-    public void _CSSRule_CSSCharsetRule() throws Exception {
-        test("CSSRule", "CSSCharsetRule");
     }
 
     /**
@@ -1158,7 +1138,6 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _CacheStorage_CacheStorage() throws Exception {
         test("CacheStorage", "CacheStorage");
@@ -1169,7 +1148,6 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF38 = "false",
             IE = "false")
     public void _Cache_Cache() throws Exception {
         test("Cache", "Cache");

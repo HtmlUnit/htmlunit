@@ -125,7 +125,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.crypto.CryptoKey;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSConditionRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCounterStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
@@ -368,10 +367,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidat
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsMessage;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageThread;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozPowerManager;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsMessage;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceEntry;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceMark;
@@ -429,7 +425,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ClientRectList.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
         ConvolverNode.class, Coordinates.class, Credential.class, CredentialsContainer.class, Crypto.class,
-        CryptoKey.class, CSS.class, CSS2Properties.class, CSSCharsetRule.class, CSSConditionRule.class,
+        CryptoKey.class, CSS.class, CSS2Properties.class, CSSConditionRule.class,
         CSSCounterStyleRule.class, CSSFontFaceRule.class, CSSGroupingRule.class, CSSImportRule.class,
         CSSKeyframeRule.class, CSSKeyframesRule.class, CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class,
         CSSPrimitiveValue.class, CSSRule.class, CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class,
@@ -495,10 +491,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MozContactChangeEvent.class, MozCSSKeyframesRule.class, MozMmsMessage.class,
-        MozMobileMessageThread.class, MozPowerManager.class, mozRTCIceCandidate.class,
+        MouseWheelEvent.class, MozContactChangeEvent.class, MozCSSKeyframesRule.class,
+        MozPowerManager.class, mozRTCIceCandidate.class,
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
-        MozSmsMessage.class, MSGestureEvent.class,
+        MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
         NamespaceCollection.class, Navigator.class, Node.class, NodeFilter.class, NodeIterator.class,
         NodeList.class, Notification.class, OES_element_index_uint.class, OES_standard_derivatives.class,

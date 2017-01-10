@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -2851,9 +2850,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF38 = {"", "", "", "", "5", "", "5", ""},
-            FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
-    @NotYetImplemented(FF38)
+            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void widows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2885,9 +2882,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF38 = {"", "", "", "", "5", "", "5", ""},
             FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
-    @NotYetImplemented(FF38)
     public void orphans() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

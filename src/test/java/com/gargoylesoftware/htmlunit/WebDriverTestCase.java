@@ -127,14 +127,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * All browsers supported.
      */
-    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_38,
-        BrowserVersion.FIREFOX_45, BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
+        BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
 
     /**
      * Browsers which run by default.
      */
-    public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_38,
-        BrowserVersion.FIREFOX_45, BrowserVersion.INTERNET_EXPLORER};
+    public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
+            BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
@@ -142,7 +142,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String CHROME_BIN_;
     private static String EDGE_BIN_;
     private static String IE_BIN_;
-    private static String FF38_BIN_;
     private static String FF45_BIN_;
 
     /** The driver cache. */
@@ -193,7 +192,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
-                    FF38_BIN_ = properties.getProperty("ff38.bin");
                     FF45_BIN_ = properties.getProperty("ff45.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
@@ -456,9 +454,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             String ffBinary = null;
-            if (BrowserVersion.FIREFOX_38 == getBrowserVersion()) {
-                ffBinary = FF38_BIN_;
-            }
             if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
                 ffBinary = FF45_BIN_;
             }

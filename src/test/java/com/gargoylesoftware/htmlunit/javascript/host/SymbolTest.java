@@ -46,7 +46,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.match)", "true"},
-            FF38 = {"undefined", "undefined", "true"},
             IE = "not supported")
     public void match() throws Exception {
         name("match");

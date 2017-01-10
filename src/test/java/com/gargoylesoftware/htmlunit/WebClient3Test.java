@@ -124,7 +124,6 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented
-    // FF38 works with real browser
     public void escapeRequestQuery2a() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 

@@ -175,8 +175,8 @@ public class CSSRule extends SimpleScriptable {
                 return new CSSStyleRule(stylesheet, (org.w3c.dom.css.CSSStyleRule) rule);
             case IMPORT_RULE:
                 return new CSSImportRule(stylesheet, (org.w3c.dom.css.CSSImportRule) rule);
-            case CHARSET_RULE:
-                return new CSSCharsetRule(stylesheet, (org.w3c.dom.css.CSSCharsetRule) rule);
+//            case CHARSET_RULE:
+//                return new CSSCharsetRule(stylesheet, (org.w3c.dom.css.CSSCharsetRule) rule);
             case MEDIA_RULE:
                 return new CSSMediaRule(stylesheet, (org.w3c.dom.css.CSSMediaRule) rule);
             case FONT_FACE_RULE:

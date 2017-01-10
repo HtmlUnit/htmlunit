@@ -252,7 +252,6 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "true", "false"},
-            FF38 = "includes not supported",
             IE = "includes not supported")
     public void includes() throws Exception {
         final String html
