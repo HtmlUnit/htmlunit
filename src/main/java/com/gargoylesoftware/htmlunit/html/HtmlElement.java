@@ -195,6 +195,11 @@ public abstract class HtmlElement extends DomElement {
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
+        fireAttributeChangeImpl(htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
+    }
+
+    private void fireAttributeChangeImpl(final HtmlPage htmlPage, final boolean mappedElement,
+            final String qualifiedName, final String attributeValue, final String oldAttributeValue) {
         if (mappedElement) {
             htmlPage.addMappedElement(this);
         }
@@ -235,21 +240,7 @@ public abstract class HtmlElement extends DomElement {
 
         final Attr result = super.setAttributeNode(attribute);
 
-        if (mappedElement) {
-            htmlPage.addMappedElement(this);
-        }
-
-        final HtmlAttributeChangeEvent htmlEvent;
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, attribute.getValue());
-            fireHtmlAttributeAdded(htmlEvent);
-            htmlPage.fireHtmlAttributeAdded(htmlEvent);
-        }
-        else {
-            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
-            fireHtmlAttributeReplaced(htmlEvent);
-            htmlPage.fireHtmlAttributeReplaced(htmlEvent);
-        }
+        fireAttributeChangeImpl(htmlPage, mappedElement, qualifiedName, attribute.getValue(), oldAttributeValue);
 
         return result;
     }
