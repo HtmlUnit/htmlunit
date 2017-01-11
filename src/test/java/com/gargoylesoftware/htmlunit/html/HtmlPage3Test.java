@@ -28,6 +28,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -381,4 +382,28 @@ public class HtmlPage3Test extends WebDriverTestCase {
     public void basePathWhitespaceOnly()  throws Exception {
         basePath(" \t\n ", "http://localhost:" + PORT + "/second/path");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HTML")
+    @NotYetImplemented
+    public void htmlPage() throws Exception {
+        final String content
+            = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+            + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\""
+            + " onclick=\"alert(document.getElementById('rect'))\"/>\n"
+            + "<head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.documentElement.tagName);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body>\n"
+            + "</svg>";
+
+        loadPageWithAlerts2(content);
+    }
+
 }
