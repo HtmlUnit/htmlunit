@@ -56,7 +56,7 @@ public class NodeFilter extends SimpleScriptable {
 
     /** Show all nodes. */
     @JsxConstant
-    public static final int SHOW_ALL = org.w3c.dom.traversal.NodeFilter.SHOW_ALL;
+    public static final long SHOW_ALL = 0xFFFFFFFFL;
 
     /** Show Element nodes. */
     @JsxConstant

@@ -26,7 +26,7 @@ import org.w3c.dom.traversal.TreeWalker;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
+
 /**
  * Tests for {@link DomTreeWalker}.
  *
@@ -55,7 +55,8 @@ public final class DomTreeWalkerTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
             final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-            final TreeWalker walker = page.createTreeWalker(page.getDocumentElement(), NodeFilter.SHOW_ALL, null, true);
+            final TreeWalker walker = page.createTreeWalker(page.getDocumentElement(),
+                    org.w3c.dom.traversal.NodeFilter.SHOW_ALL, null, true);
             assertThat(walker.firstChild(), instanceOf(HtmlHead.class));
         }
     }

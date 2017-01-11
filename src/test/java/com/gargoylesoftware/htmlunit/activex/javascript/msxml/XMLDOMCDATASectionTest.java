@@ -285,9 +285,6 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = "")
-    @NotYetImplemented(IE)
-    // Xerxes is the problem here as they drop empty CDATA sections. So <root> has no children and our test fails.
-    // see: https://issues.apache.org/jira/browse/XERCESJ-1033
     public void nodeValue_empty() throws Exception {
         final String xml = ""
             + "<root>"

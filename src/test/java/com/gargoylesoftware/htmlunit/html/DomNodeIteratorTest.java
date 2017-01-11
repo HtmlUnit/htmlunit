@@ -26,7 +26,7 @@ import org.w3c.dom.traversal.NodeIterator;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
+
 /**
  * Tests for {@link DomNodeIterator}.
  *
@@ -55,7 +55,8 @@ public final class DomNodeIteratorTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
             final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-            final NodeIterator iterator = page.createNodeIterator(page.getDocumentElement(), NodeFilter.SHOW_ALL, null,
+            final NodeIterator iterator = page.createNodeIterator(page.getDocumentElement(),
+                    org.w3c.dom.traversal.NodeFilter.SHOW_ALL, null,
                     true);
             assertThat(iterator.nextNode(), instanceOf(HtmlHtml.class));
         }
