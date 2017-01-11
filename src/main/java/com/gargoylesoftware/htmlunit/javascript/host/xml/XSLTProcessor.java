@@ -117,8 +117,11 @@ public class XSLTProcessor extends SimpleScriptable {
             Source xmlSource = new DOMSource(source.getDomNodeOrDie());
             final Source xsltSource = new DOMSource(style_.getDomNodeOrDie());
 
+            //DocumentBuilderFactory.newInstance()
+            final DocumentBuilderFactory factory
+                = new com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl();
             final org.w3c.dom.Document containerDocument =
-                DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+                factory.newDocumentBuilder().newDocument();
             final org.w3c.dom.Element containerElement = containerDocument.createElement("container");
             containerDocument.appendChild(containerElement);
 
