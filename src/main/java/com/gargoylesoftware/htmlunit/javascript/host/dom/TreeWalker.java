@@ -101,10 +101,11 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxGetter
     public long getWhatToShow() {
-        if (walker_.getWhatToShow() == NodeFilter.SHOW_ALL) {
-            return 0xFFFFFFFFL;
+        long whatToShow = walker_.getWhatToShow();
+        if (whatToShow == org.w3c.dom.traversal.NodeFilter.SHOW_ALL) {
+            whatToShow = 0xFFFFFFFFL;
         }
-        return walker_.getWhatToShow();
+        return whatToShow;
     }
 
     /**

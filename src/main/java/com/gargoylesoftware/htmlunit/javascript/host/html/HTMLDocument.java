@@ -1650,21 +1650,22 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             boolean expandEntityReferences) throws DOMException {
 
         // seems that Rhino doesn't like long as parameter type
-        final int whatToShowI = Double.valueOf(whatToShow).intValue();
+        final int whatToShowI = (int) Double.valueOf(whatToShow).longValue();
 
         if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
             expandEntityReferences = false;
         }
 
-        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter);
+        final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
+        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, filterFunctionOnly);
         final TreeWalker t = new TreeWalker(getPage(), root, whatToShowI, filterWrapper, expandEntityReferences);
         t.setParentScope(getWindow(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
     }
 
-    private org.w3c.dom.traversal.NodeFilter createFilterWrapper(final Scriptable filter) {
-        final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
+    private org.w3c.dom.traversal.NodeFilter createFilterWrapper(final Scriptable filter,
+            final boolean filterFunctionOnly) {
         org.w3c.dom.traversal.NodeFilter filterWrapper = null;
         if (filter != null) {
             filterWrapper = new org.w3c.dom.traversal.NodeFilter() {
@@ -1942,7 +1943,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public NodeIterator createNodeIterator(final Node root, final int whatToShow, final Scriptable filter) {
-        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter);
+        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
         final NodeIterator iterator = new NodeIterator(getPage(), root, whatToShow, filterWrapper);
         iterator.setParentScope(getParentScope());
         iterator.setPrototype(getPrototype(iterator.getClass()));
