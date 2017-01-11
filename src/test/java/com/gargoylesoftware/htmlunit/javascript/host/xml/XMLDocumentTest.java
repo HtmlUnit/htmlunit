@@ -93,7 +93,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
             + "      xmlDoc.async = false;\n"
             + "      xmlDoc.loadXML(xml);\n"
-            + "      return xmlDoc;"
+            + "      return xmlDoc;\n"
             + "    }\n"
             + "  }\n";
 

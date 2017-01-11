@@ -33,7 +33,6 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -247,15 +246,6 @@ public class XmlPage extends SgmlPage {
     @Override
     public Element getElementById(final String elementId) {
         throw new UnsupportedOperationException("XmlPage.getElementById is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
-        throw new UnsupportedOperationException("XmlPage.getElementsByTagNameNS is not yet implemented.");
     }
 
     /**

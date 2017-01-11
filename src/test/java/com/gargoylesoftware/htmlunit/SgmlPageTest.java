@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -97,6 +98,31 @@ public final class SgmlPageTest extends WebServerTestCase {
         assertEquals(nodes.item(0), nodesListIterator.next());
         assertEquals(nodes.item(1), nodesListIterator.next());
         assertEquals(nodes.item(1), nodesListIterator.previous());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByTagNameNSAsterisk() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form><input type='button' name='button1' value='pushme'></form>\n"
+            + "<div>a</div> <div>b</div> <div>c</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final DomNodeList<DomElement> elements = page.getElementsByTagNameNS(HTMLParser.XHTML_NAMESPACE, "*");
+
+        assertEquals(9, elements.getLength());
+        validateDomNodeList(elements);
+
+        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
+        page.getBody().appendChild(newDiv);
+        assertEquals(10, elements.getLength());
+        validateDomNodeList(elements);
     }
 
 }

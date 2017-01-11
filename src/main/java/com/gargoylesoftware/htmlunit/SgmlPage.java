@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -297,6 +298,37 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
                     final String localName = elem.getLocalName();
                     if ("*".equals(tagName) || localName.equals(tagName)
                             || (!caseSensitive && localName.equalsIgnoreCase(tagName))) {
+                        res.add(elem);
+                    }
+                }
+                return res;
+            }
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
+        return new AbstractDomNodeList<DomElement>(this) {
+            @Override
+            protected List<DomElement> provideElements() {
+                final List<DomElement> res = new LinkedList<>();
+                final Comparator<String> comparator;
+
+                if (hasCaseSensitiveTagNames()) {
+                    comparator = Comparator.nullsFirst(String::compareTo);
+                }
+                else {
+                    comparator = Comparator.nullsFirst(String::compareToIgnoreCase);
+                }
+
+                for (final DomElement elem : getDomElementDescendants()) {
+                    final String localName = elem.getLocalName();
+
+                    if (("*".equals(namespaceURI) || comparator.compare(namespaceURI, elem.getNamespaceURI()) == 0)
+                            && ("*".equals(localName) || comparator.compare(localName, elem.getLocalName()) == 0)) {
                         res.add(elem);
                     }
                 }

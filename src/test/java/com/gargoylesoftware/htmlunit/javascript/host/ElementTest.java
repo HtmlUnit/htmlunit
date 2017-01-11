@@ -248,6 +248,37 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"1", "2", "3"})
+    public void getElementsByTagNameNSAsterisk() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
+            + "    try {\n"
+            + "      alert(doc.documentElement.getElementsByTagNameNS('http://myNS', '*').length);\n"
+            + "      alert(doc.documentElement.getElementsByTagNameNS(null, '*').length);\n"
+            + "      alert(doc.documentElement.getElementsByTagNameNS('*', '*').length);\n"
+            + "    } catch (e) { alert('exception'); }\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

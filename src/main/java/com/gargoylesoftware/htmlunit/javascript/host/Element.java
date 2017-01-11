@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import org.w3c.css.sac.CSSException;
 
@@ -265,7 +266,8 @@ public class Element extends EventNode {
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
-                return localName.equals(node.getLocalName());
+                return ("*".equals(namespaceURI) || Objects.equals(namespaceURI, node.getNamespaceURI()))
+                        && ("*".equals(localName) || Objects.equals(localName, node.getLocalName()));
             }
         };
 

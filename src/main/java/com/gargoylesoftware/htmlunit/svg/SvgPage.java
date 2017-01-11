@@ -20,7 +20,6 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -138,15 +137,6 @@ public class SvgPage extends InteractivePage {
     @Override
     public DomElement getElementById(final String elementId) {
         return getFirstByXPath("//*[@id='" + elementId + "']");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
-        throw new UnsupportedOperationException("SvgPage.getElementsByTagNameNS is not yet implemented.");
     }
 
     /**

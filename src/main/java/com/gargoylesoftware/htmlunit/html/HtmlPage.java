@@ -565,15 +565,6 @@ public class HtmlPage extends InteractivePage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
-     */
-    @Override
-    public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public DomElement getElementById(final String elementId) {
