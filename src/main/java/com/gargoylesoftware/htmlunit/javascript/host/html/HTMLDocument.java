@@ -1125,7 +1125,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final HTMLCollection collection = new HTMLCollection(page, true) {
             @Override
             protected List<Object> computeElements() {
-                return new ArrayList<Object>(page.getElementsByName(expElementName));
+                return new ArrayList<>(page.getElementsByName(expElementName));
             }
 
             @Override
@@ -1649,16 +1649,28 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             boolean expandEntityReferences) throws DOMException {
 
-        final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
-
         // seems that Rhino doesn't like long as parameter type
-        final long whatToShowL = Double.valueOf(whatToShow).longValue();
-        NodeFilter filterWrapper = null;
+        final int whatToShowI = Double.valueOf(whatToShow).intValue();
+
+        if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
+            expandEntityReferences = false;
+        }
+
+        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter);
+        final TreeWalker t = new TreeWalker(getPage(), root, whatToShowI, filterWrapper, expandEntityReferences);
+        t.setParentScope(getWindow(this));
+        t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
+        return t;
+    }
+
+    private org.w3c.dom.traversal.NodeFilter createFilterWrapper(final Scriptable filter) {
+        final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
+        org.w3c.dom.traversal.NodeFilter filterWrapper = null;
         if (filter != null) {
-            filterWrapper = new NodeFilter() {
+            filterWrapper = new org.w3c.dom.traversal.NodeFilter() {
                 @Override
-                public short acceptNode(final Node n) {
-                    final Object[] args = new Object[] {n};
+                public short acceptNode(final org.w3c.dom.Node n) {
+                    final Object[] args = new Object[] {((DomNode) n).getScriptableObject()};
                     final Object response;
                     if (filter instanceof Callable) {
                         response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
@@ -1673,15 +1685,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 }
             };
         }
-
-        if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
-            expandEntityReferences = false;
-        }
-
-        final TreeWalker t = new TreeWalker(root, whatToShowL, filterWrapper, expandEntityReferences);
-        t.setParentScope(getWindow(this));
-        t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
-        return t;
+        return filterWrapper;
     }
 
     @SuppressWarnings("unchecked")
@@ -1937,8 +1941,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new NodeIterator object
      */
     @JsxFunction
-    public NodeIterator createNodeIterator(final Node root, final double whatToShow, final Scriptable filter) {
-        final NodeIterator iterator = new NodeIterator(root, whatToShow, filter);
+    public NodeIterator createNodeIterator(final Node root, final int whatToShow, final Scriptable filter) {
+        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter);
+        final NodeIterator iterator = new NodeIterator(getPage(), root, whatToShow, filterWrapper);
         iterator.setParentScope(getParentScope());
         iterator.setPrototype(getPrototype(iterator.getClass()));
         return iterator;

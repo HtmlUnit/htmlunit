@@ -113,7 +113,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
             cells_ = new HTMLCollection(row, false) {
                 @Override
                 protected List<Object> computeElements() {
-                    return new ArrayList<Object>(row.getCells());
+                    return new ArrayList<>(row.getCells());
                 }
             };
         }

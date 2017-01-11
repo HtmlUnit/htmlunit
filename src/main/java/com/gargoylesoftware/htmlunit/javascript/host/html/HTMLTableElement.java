@@ -166,7 +166,7 @@ public class HTMLTableElement extends RowContainer {
             tBodies_ = new HTMLCollection(table, false) {
                 @Override
                 protected List<Object> computeElements() {
-                    return new ArrayList<Object>(table.getBodies());
+                    return new ArrayList<>(table.getBodies());
                 }
             };
         }

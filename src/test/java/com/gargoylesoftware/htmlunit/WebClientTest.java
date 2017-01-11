@@ -582,6 +582,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param useProxy indicates if the test should be performed with a proxy
      * @throws Exception if the test fails
      */
+    @SuppressWarnings("resource")
     private void doTestRedirection(
             final int statusCode,
             final HttpMethod initialRequestMethod,
@@ -2136,6 +2137,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void getTopLevelWindows() throws Exception {
+        @SuppressWarnings("resource")
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
@@ -2248,6 +2250,7 @@ public class WebClientTest extends SimpleWebTestCase {
         getMockWebConnection().setResponse(getDefaultUrl(), html);
         getMockWebConnection().setDefaultResponse(html2);
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final int initialJSThreads = getJavaScriptThreads().size();
         webClient.setWebConnection(getMockWebConnection());

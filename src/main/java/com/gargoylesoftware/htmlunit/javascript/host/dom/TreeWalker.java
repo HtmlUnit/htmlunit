@@ -21,6 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import org.w3c.dom.DOMException;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -43,11 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass
 public class TreeWalker extends SimpleScriptable {
 
-    private Node root_;
-    private Node currentNode_;
-    private long whatToShow_;
-    private NodeFilter filter_;
-    private boolean expandEntityReferences_;
+    private DomTreeWalker walker_;
 
     /**
      * Creates an instance.
@@ -59,6 +58,7 @@ public class TreeWalker extends SimpleScriptable {
     /**
      * Creates an instance.
      *
+     * @param page the page
      * @param root The root node of the TreeWalker. Must not be
      *          {@code null}.
      * @param whatToShow Flag specifying which types of nodes appear in the
@@ -71,19 +71,15 @@ public class TreeWalker extends SimpleScriptable {
      * @throws DOMException on attempt to create a TreeWalker with a root that
      *          is {@code null}.
      */
-    public TreeWalker(final Node root,
-                      final long whatToShow,
-                      final NodeFilter filter,
+    public TreeWalker(final SgmlPage page, final Node root,
+                      final int whatToShow,
+                      final org.w3c.dom.traversal.NodeFilter filter,
                       final boolean expandEntityReferences) throws DOMException {
         if (root == null) {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "root must not be null"));
         }
-        root_ = root;
-        whatToShow_ = whatToShow;
-        filter_ = filter;
-        expandEntityReferences_ = expandEntityReferences;
-        currentNode_ = root_;
+        walker_ = page.createTreeWalker(root.getDomNodeOrDie(), whatToShow, filter, expandEntityReferences);
     }
 
     /**
@@ -93,7 +89,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxGetter
     public Node getRoot() {
-        return root_;
+        return getNodeOrNull(walker_.getRoot());
     }
 
     /**
@@ -105,10 +101,10 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxGetter
     public long getWhatToShow() {
-        if (whatToShow_ != NodeFilter.SHOW_ALL) {
-            return 1;
+        if (walker_.getWhatToShow() == NodeFilter.SHOW_ALL) {
+            return 0xFFFFFFFFL;
         }
-        return whatToShow_;
+        return walker_.getWhatToShow();
     }
 
     /**
@@ -117,8 +113,9 @@ public class TreeWalker extends SimpleScriptable {
      * @return the filter used to screen nodes
      */
     @JsxGetter
-    public NodeFilter getFilter() {
-        return filter_;
+    public Object getFilter() {
+        //TODO: we should return the original filter
+        return walker_.getFilter();
     }
 
     /**
@@ -128,7 +125,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxGetter(@WebBrowser(IE))
     public boolean getExpandEntityReferences() {
-        return expandEntityReferences_;
+        return walker_.getExpandEntityReferences();
     }
 
     /**
@@ -138,7 +135,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxGetter
     public Node getCurrentNode() {
-        return currentNode_;
+        return getNodeOrNull(walker_.getCurrentNode());
     }
 
     /**
@@ -155,7 +152,7 @@ public class TreeWalker extends SimpleScriptable {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "currentNode cannot be set to null");
         }
-        currentNode_ = currentNode;
+        walker_.setCurrentNode(currentNode.getDomNodeOrDie());
     }
 
     /**
@@ -196,60 +193,6 @@ public class TreeWalker extends SimpleScriptable {
     }
 
     /**
-     * Test whether a specified node is visible in the logical view of a
-     * TreeWalker, based solely on the whatToShow constant.
-     *
-     * @param n The node to check to see if it should be shown or not
-     * @return a constant to determine whether the node is accepted, rejected,
-     *          or skipped.
-     */
-    private short acceptNode(final Node n) {
-        final int flag = getFlagForNode(n);
-
-        if ((whatToShow_ & flag) != 0) {
-            return NodeFilter.FILTER_ACCEPT;
-        }
-        // Skip, don't reject.
-        return NodeFilter.FILTER_SKIP;
-    }
-
-    /* Returns whether the node is visible by the TreeWalker. */
-    private boolean isNodeVisible(final Node n) {
-        if (acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
-            if (filter_ == null || filter_.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
-                if (!expandEntityReferences_) {
-                    if (n.getParent() != null && n.getParent().getNodeType() == Node.ENTITY_REFERENCE_NODE) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /* Returns whether the node is rejected by the TreeWalker. */
-    private boolean isNodeRejected(final Node n) {
-        if (acceptNode(n) == NodeFilter.FILTER_REJECT) {
-            return true;
-        }
-        if (filter_ != null && filter_.acceptNode(n) == NodeFilter.FILTER_REJECT) {
-            return true;
-        }
-        if (!expandEntityReferences_) {
-            if (n.getParent() != null && n.getParent().getNodeType() == Node.ENTITY_REFERENCE_NODE) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /* Returns whether the node is skipped by the TreeWalker. */
-    private boolean isNodeSkipped(final Node n) {
-        return !isNodeVisible(n) && !isNodeRejected(n);
-    }
-
-    /**
      * Moves to and returns the closest visible ancestor node of the current
      * node. If the search for parentNode attempts to step upward from the
      * TreeWalker's root node, or if it fails to find a visible ancestor node,
@@ -260,90 +203,14 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxFunction
     public Node parentNode() {
-        if (currentNode_ == root_) {
-            return null;
-        }
-
-        Node newNode = currentNode_;
-
-        do {
-            newNode = newNode.getParent();
-        }
-        while (newNode != null && !isNodeVisible(newNode) && newNode != root_);
-
-        if (newNode == null || !isNodeVisible(newNode)) {
-            return null;
-        }
-        currentNode_ = newNode;
-        return newNode;
+        return getNodeOrNull(walker_.parentNode());
     }
 
-    /**
-     * Recursively find the logical node occupying the same position as this
-     * _actual_ node. It could be the same node, a different node, or null
-     * depending on filtering.
-     *
-     * @param n The actual node we are trying to find the "equivalent" of
-     * @param lookLeft If true, traverse the tree in the left direction. If
-     *          false, traverse the tree to the right.
-     * @return the logical node in the same position as n
-     */
-    private Node getEquivalentLogical(final Node n, final boolean lookLeft) {
-        // Base cases
-        if (n == null) {
+    private static Node getNodeOrNull(final DomNode domNode) {
+        if (domNode == null) {
             return null;
         }
-        if (isNodeVisible(n)) {
-            return n;
-        }
-
-        // If a node is skipped, try getting one of its descendants
-        if (isNodeSkipped(n)) {
-            final Node child;
-            if (lookLeft) {
-                child = getEquivalentLogical(n.getLastChild(), lookLeft);
-            }
-            else {
-                child = getEquivalentLogical(n.getFirstChild(), lookLeft);
-            }
-
-            if (child != null) {
-                return child;
-            }
-        }
-
-        // If this node is rejected or has no descendants that will work, go
-        // to its sibling.
-        return getSibling(n, lookLeft);
-    }
-
-    // Helper method for getEquivalentLogical
-    private Node getSibling(final Node n, final boolean lookLeft) {
-        if (n == null) {
-            return null;
-        }
-
-        if (isNodeVisible(n)) {
-            return null;
-        }
-
-        final Node sibling;
-        if (lookLeft) {
-            sibling = n.getPreviousSibling();
-        }
-        else {
-            sibling = n.getNextSibling();
-        }
-
-        if (sibling == null) {
-            // If this node has no logical siblings at or below it's "level", it might have one above
-            if (n == root_) {
-                return null;
-            }
-            return getSibling(n.getParent(), lookLeft);
-
-        }
-        return getEquivalentLogical(sibling, lookLeft);
+        return (Node) domNode.getScriptableObject();
     }
 
     /**
@@ -356,13 +223,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxFunction
     public Node firstChild() {
-        final Node newNode = getEquivalentLogical(currentNode_.getFirstChild(), false);
-
-        if (newNode != null) {
-            currentNode_ = newNode;
-        }
-
-        return newNode;
+        return getNodeOrNull(walker_.firstChild());
     }
 
     /**
@@ -375,13 +236,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxFunction
     public Node lastChild() {
-        final Node newNode = getEquivalentLogical(currentNode_.getLastChild(), true);
-
-        if (newNode != null) {
-            currentNode_ = newNode;
-        }
-
-        return newNode;
+        return getNodeOrNull(walker_.lastChild());
     }
 
     /**
@@ -394,17 +249,7 @@ public class TreeWalker extends SimpleScriptable {
       */
     @JsxFunction
     public Node previousSibling() {
-        if (currentNode_ == root_) {
-            return null;
-        }
-
-        final Node newNode = getEquivalentLogical(currentNode_.getPreviousSibling(), true);
-
-        if (newNode != null) {
-            currentNode_ = newNode;
-        }
-
-        return newNode;
+        return getNodeOrNull(walker_.previousSibling());
     }
 
      /**
@@ -417,17 +262,7 @@ public class TreeWalker extends SimpleScriptable {
       */
     @JsxFunction
     public Node nextSibling() {
-        if (currentNode_ == root_) {
-            return null;
-        }
-
-        final Node newNode = getEquivalentLogical(currentNode_.getNextSibling(), false);
-
-        if (newNode != null) {
-            currentNode_ = newNode;
-        }
-
-        return newNode;
+        return getNodeOrNull(walker_.nextSibling());
     }
 
     /**
@@ -442,45 +277,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxFunction
     public Node previousNode() {
-        final Node newNode = getPreviousNode(currentNode_);
-
-        if (newNode != null) {
-            currentNode_ = newNode;
-        }
-
-        return newNode;
-    }
-
-    /**
-     * Helper method to get the previous node in document order (preorder
-     * traversal) from the given node.
-     */
-    private Node getPreviousNode(final Node n) {
-        if (n == root_) {
-            return null;
-        }
-        final Node left = getEquivalentLogical(n.getPreviousSibling(), true);
-        if (left == null) {
-            final Node parent = n.getParent();
-            if (parent == null) {
-                return null;
-            }
-            if (isNodeVisible(parent)) {
-                return parent;
-            }
-        }
-
-        Node follow = left;
-        if (follow != null) {
-            while (follow.hasChildNodes()) {
-                final Node toFollow = getEquivalentLogical(follow.getLastChild(), true);
-                if (toFollow == null) {
-                    break;
-                }
-                follow = toFollow;
-            }
-        }
-        return follow;
+        return getNodeOrNull(walker_.previousNode());
     }
 
     /**
@@ -495,45 +292,7 @@ public class TreeWalker extends SimpleScriptable {
      */
     @JsxFunction
     public Node nextNode() {
-        final Node leftChild = getEquivalentLogical(currentNode_.getFirstChild(), false);
-        if (leftChild != null) {
-            currentNode_ = leftChild;
-            return leftChild;
-        }
-        final Node rightSibling = getEquivalentLogical(currentNode_.getNextSibling(), false);
-        if (rightSibling != null) {
-            currentNode_ = rightSibling;
-            return rightSibling;
-        }
-
-        final Node uncle = getFirstUncleNode(currentNode_);
-        if (uncle != null) {
-            currentNode_ = uncle;
-            return uncle;
-        }
-
-        return null;
+        return getNodeOrNull(walker_.nextNode());
     }
 
-    /**
-     * Helper method to get the first uncle node in document order (preorder
-     * traversal) from the given node.
-     */
-    private Node getFirstUncleNode(final Node n) {
-        if (n == root_ || n == null) {
-            return null;
-        }
-
-        final Node parent = n.getParent();
-        if (parent == null) {
-            return null;
-        }
-
-        final Node uncle = getEquivalentLogical(parent.getNextSibling(), false);
-        if (uncle != null) {
-            return uncle;
-        }
-
-        return getFirstUncleNode(parent);
-    }
 }

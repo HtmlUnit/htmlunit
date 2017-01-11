@@ -40,92 +40,80 @@ public class NodeFilter extends SimpleScriptable {
      * Accept the node.
      */
     @JsxConstant
-    public static final short FILTER_ACCEPT = 1;
+    public static final short FILTER_ACCEPT = org.w3c.dom.traversal.NodeFilter.FILTER_ACCEPT;
 
     /**
      * Reject the node.
      */
     @JsxConstant
-    public static final short FILTER_REJECT = 2;
+    public static final short FILTER_REJECT = org.w3c.dom.traversal.NodeFilter.FILTER_REJECT;
 
     /**
      * Skip the node.
      */
     @JsxConstant
-    public static final short FILTER_SKIP = 3;
+    public static final short FILTER_SKIP = org.w3c.dom.traversal.NodeFilter.FILTER_SKIP;
 
     /** Show all nodes. */
     @JsxConstant
-    public static final long SHOW_ALL = 0xFFFFFFFFL;
+    public static final int SHOW_ALL = org.w3c.dom.traversal.NodeFilter.SHOW_ALL;
 
     /** Show Element nodes. */
     @JsxConstant
-    public static final int SHOW_ELEMENT = 0x1;
+    public static final int SHOW_ELEMENT = org.w3c.dom.traversal.NodeFilter.SHOW_ELEMENT;
 
     /** Show Attr nodes. Only useful when creating a TreeWalker with an
      * attribute node as its root. */
     @JsxConstant
-    public static final int SHOW_ATTRIBUTE = 0x2;
+    public static final int SHOW_ATTRIBUTE = org.w3c.dom.traversal.NodeFilter.SHOW_ATTRIBUTE;
 
     /** Show Text nodes. */
     @JsxConstant
-    public static final int SHOW_TEXT = 0x4;
+    public static final int SHOW_TEXT = org.w3c.dom.traversal.NodeFilter.SHOW_TEXT;
 
     /** Show CDATASection nodes. */
     @JsxConstant
-    public static final int SHOW_CDATA_SECTION = 0x8;
+    public static final int SHOW_CDATA_SECTION = org.w3c.dom.traversal.NodeFilter.SHOW_CDATA_SECTION;
 
     /** Show EntityReference nodes. */
     @JsxConstant
-    public static final int SHOW_ENTITY_REFERENCE = 0x10;
+    public static final int SHOW_ENTITY_REFERENCE = org.w3c.dom.traversal.NodeFilter.SHOW_ENTITY_REFERENCE;
 
     /** Show Entity nodes. */
     @JsxConstant
-    public static final int SHOW_ENTITY = 0x20;
+    public static final int SHOW_ENTITY = org.w3c.dom.traversal.NodeFilter.SHOW_ENTITY;
 
     /** Show ProcessingInstruction nodes. */
     @JsxConstant
-    public static final int SHOW_PROCESSING_INSTRUCTION = 0x40;
+    public static final int SHOW_PROCESSING_INSTRUCTION = org.w3c.dom.traversal.NodeFilter.SHOW_PROCESSING_INSTRUCTION;
 
     /** Show Comment nodes. */
     @JsxConstant
-    public static final int SHOW_COMMENT = 0x80;
+    public static final int SHOW_COMMENT = org.w3c.dom.traversal.NodeFilter.SHOW_COMMENT;
 
     /** Show Document nodes. */
     @JsxConstant
-    public static final int SHOW_DOCUMENT = 0x100;
+    public static final int SHOW_DOCUMENT = org.w3c.dom.traversal.NodeFilter.SHOW_DOCUMENT;
 
     /** Show DocumentType nodes. */
     @JsxConstant
-    public static final int SHOW_DOCUMENT_TYPE = 0x200;
+    public static final int SHOW_DOCUMENT_TYPE = org.w3c.dom.traversal.NodeFilter.SHOW_DOCUMENT_TYPE;
 
     /** Show DocumentFragment nodes. */
     @JsxConstant
-    public static final int SHOW_DOCUMENT_FRAGMENT = 0x400;
+    public static final int SHOW_DOCUMENT_FRAGMENT = org.w3c.dom.traversal.NodeFilter.SHOW_DOCUMENT_FRAGMENT;
 
     /**
      * Show Notation nodes. Only useful when creating a TreeWalker with a
      * Notation node as its root.
      */
     @JsxConstant
-    public static final int SHOW_NOTATION = 0x800;
+    public static final int SHOW_NOTATION = org.w3c.dom.traversal.NodeFilter.SHOW_NOTATION;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public NodeFilter() {
-    }
-
-    /**
-     * Test whether a specified node is visible in the logical view of a
-     * TreeWalker. This is not normally called directly from user code.
-     *
-     * @param n The node to check to see if it passes the filter or not.
-     * @return a constant to determine whether the node is accepted, rejected,
-     *          or skipped.
-     */
-    public short acceptNode(final Node n) {
-        return FILTER_ACCEPT;
     }
 }

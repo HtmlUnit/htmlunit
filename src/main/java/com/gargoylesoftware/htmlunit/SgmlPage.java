@@ -21,10 +21,14 @@ import java.util.List;
 
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.Text;
+import org.w3c.dom.traversal.DocumentTraversal;
+import org.w3c.dom.traversal.NodeFilter;
 
 import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
@@ -33,8 +37,10 @@ import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeIterator;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
 
 /**
  * A basic class of Standard Generalized Markup Language (SGML), e.g. HTML and XML.
@@ -42,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public abstract class SgmlPage extends DomNode implements Page, Document {
+public abstract class SgmlPage extends DomNode implements Page, Document, DocumentTraversal {
 
     private DocumentType documentType_;
     private final WebResponse webResponse_;
@@ -323,4 +329,21 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
         return new DomComment(this, data);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomTreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter,
+            final boolean entityReferenceExpansion) throws DOMException {
+        return new DomTreeWalker((DomNode) root, whatToShow, filter, entityReferenceExpansion);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter,
+            final boolean entityReferenceExpansion) throws DOMException {
+        return new DomNodeIterator((DomNode) root, whatToShow, filter, entityReferenceExpansion);
+    }
 }

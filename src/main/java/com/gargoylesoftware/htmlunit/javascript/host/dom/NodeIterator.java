@@ -18,16 +18,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeIterator;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code NodeIterator}.
@@ -37,11 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class NodeIterator extends SimpleScriptable {
 
-    private Node root_;
-    private long whatToShow_;
-    private Scriptable filter_;
-    private Node referenceNode_;
-    private boolean pointerBeforeReferenceNode_;
+    private DomNodeIterator iterator_;
 
     /**
      * Creates an instance.
@@ -51,60 +46,54 @@ public class NodeIterator extends SimpleScriptable {
     }
 
     /**
+     * Creates a new instance.
+     *
+     * @param page the page
+     * @param root The root node at which to begin the {@link NodeIterator}'s traversal
+     * @param whatToShow an optional long representing a bitmask created by combining
+     * the constant properties of {@link NodeFilter}
+     * @param filter an object implementing the {@link NodeFilter} interface
+     */
+    public NodeIterator(final SgmlPage page, final Node root, final int whatToShow,
+            final org.w3c.dom.traversal.NodeFilter filter) {
+        iterator_ = page.createNodeIterator(root.getDomNodeOrDie(), whatToShow, filter, true);
+    }
+
+    /**
      * Returns the root node.
      * @return the root node
      */
     @JsxGetter
     public Node getRoot() {
-        return root_;
+        return getNodeOrNull(iterator_.getRoot());
+    }
+
+    private static Node getNodeOrNull(final DomNode domNode) {
+        if (domNode == null) {
+            return null;
+        }
+        return (Node) domNode.getScriptableObject();
     }
 
     /**
      * Returns the types of nodes being presented.
      * @return combined bitmask of {@link NodeFilter}
      */
-    public double getWhatToShow() {
-        return whatToShow_;
+    public long getWhatToShow() {
+        if (iterator_.getWhatToShow() == NodeFilter.SHOW_ALL) {
+            return 0xFFFFFFFFL;
+        }
+        return iterator_.getWhatToShow();
     }
 
     /**
      * Returns the filter.
      * @return the filter
      */
-    public Scriptable getFilter() {
-        return filter_;
-    }
-
-    /**
-     * Returns the {@link Node} to which the iterator is anchored.
-     * @return the reference node
-     */
-    public Node getReferenceNode() {
-        return referenceNode_;
-    }
-
-    /**
-     * Returns whether the {@link NodeIterator} is anchored before, or after the node.
-     * @return whether it is anchored before or after the node
-     */
-    public boolean isPointerBeforeReferenceNode() {
-        return pointerBeforeReferenceNode_;
-    }
-
-    /**
-     * Creates a new instance.
-     *
-     * @param root The root node at which to begin the {@link NodeIterator}'s traversal
-     * @param whatToShow an optional long representing a bitmask created by combining
-     * the constant properties of {@link NodeFilter}
-     * @param filter an object implementing the {@link NodeFilter} interface
-     */
-    public NodeIterator(final Node root, final double whatToShow, final Scriptable filter) {
-        root_ = root;
-        referenceNode_ = root;
-        whatToShow_ = Double.valueOf(whatToShow).longValue();
-        filter_ = filter;
-        pointerBeforeReferenceNode_ = true;
+    @JsxGetter
+    public Object getFilter() {
+        //TODO: we should return the original filter
+        return iterator_.getFilter();
     }
 
     /**
@@ -112,6 +101,7 @@ public class NodeIterator extends SimpleScriptable {
      */
     @JsxFunction
     public void detach() {
+        iterator_.detach();
     }
 
     /**
@@ -120,7 +110,7 @@ public class NodeIterator extends SimpleScriptable {
      */
     @JsxFunction
     public Node nextNode() {
-        return traverse(true);
+        return getNodeOrNull(iterator_.nextNode());
     }
 
     /**
@@ -129,144 +119,6 @@ public class NodeIterator extends SimpleScriptable {
      */
     @JsxFunction
     public Node previousNode() {
-        return traverse(false);
-    }
-
-    private Node traverse(final boolean next) {
-        Node node = referenceNode_;
-        boolean beforeNode = pointerBeforeReferenceNode_;
-        do {
-            if (next) {
-                if (beforeNode) {
-                    beforeNode = false;
-                }
-                else {
-                    final Node leftChild = getChild(node, true);
-                    if (leftChild != null) {
-                        node = leftChild;
-                    }
-                    else {
-                        final Node rightSibling = getSibling(node, false);
-                        if (rightSibling != null) {
-                            node = rightSibling;
-                        }
-                        else {
-                            node = getFirstUncleNode(node);
-                        }
-                    }
-                }
-            }
-            else {
-                if (!beforeNode) {
-                    beforeNode = true;
-                }
-                else {
-                    final Node left = getSibling(node, true);
-                    if (left == null) {
-                        final Node parent = node.getParent();
-                        if (parent == null) {
-                            node = null;
-                        }
-                    }
-
-                    Node follow = left;
-                    if (follow != null) {
-                        while (follow.hasChildNodes()) {
-                            final Node toFollow = getChild(follow, false);
-                            if (toFollow == null) {
-                                break;
-                            }
-                            follow = toFollow;
-                        }
-                    }
-                    node = follow;
-                }
-            }
-        }
-        while (node != null && (!(isNodeVisible(node)) || !isAccepted(node)));
-
-        //apply filter here and loop
-
-        referenceNode_ = node;
-        pointerBeforeReferenceNode_ = beforeNode;
-        return node;
-    }
-
-    private boolean isNodeVisible(final Node node) {
-        return (whatToShow_ & TreeWalker.getFlagForNode(node)) != 0;
-    }
-
-    private boolean isAccepted(final Node node) {
-        if (filter_ == null) {
-            return true;
-        }
-        Function function = null;
-        if (filter_ instanceof Function) {
-            function = (Function) filter_;
-        }
-        final Object acceptNode = filter_.get("acceptNode", filter_);
-        if (acceptNode instanceof Function) {
-            function = (Function) acceptNode;
-        }
-        if (function != null) {
-            final double value = Context.toNumber(function.call(Context.getCurrentContext(), getParentScope(),
-                    this, new Object[] {node}));
-            return value == NodeFilter.FILTER_ACCEPT;
-        }
-        return true;
-    }
-
-    /**
-     * Helper method to get the first uncle node in document order (preorder
-     * traversal) from the given node.
-     */
-    private Node getFirstUncleNode(final Node node) {
-        if (node == root_ || node == null) {
-            return null;
-        }
-
-        final Node parent = node.getParent();
-        if (parent == null) {
-            return null;
-        }
-
-        final Node uncle = getSibling(parent, false);
-        if (uncle != null) {
-            return uncle;
-        }
-
-        return getFirstUncleNode(parent);
-    }
-
-    private static Node getChild(final Node node, final boolean lookLeft) {
-        if (node == null) {
-            return null;
-        }
-
-        final Node child;
-        if (lookLeft) {
-            child = node.getFirstChild();
-        }
-        else {
-            child = node.getLastChild();
-        }
-
-        return child;
-    }
-
-    private static Node getSibling(final Node node, final boolean lookLeft) {
-        if (node == null) {
-            return null;
-        }
-
-        final Node sibling;
-        if (lookLeft) {
-            sibling = node.getPreviousSibling();
-        }
-        else {
-            sibling = node.getNextSibling();
-        }
-
-        return sibling;
+        return getNodeOrNull(iterator_.previousNode());
     }
 }

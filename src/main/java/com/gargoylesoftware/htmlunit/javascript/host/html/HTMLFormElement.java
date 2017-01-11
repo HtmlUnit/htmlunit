@@ -402,7 +402,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final HTMLCollection collection = new HTMLCollection(getHtmlForm(), elements) {
             @Override
             protected List<Object> computeElements() {
-                return new ArrayList<Object>(findElements(name));
+                return new ArrayList<>(findElements(name));
             }
         };
         return collection;

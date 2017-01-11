@@ -111,7 +111,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
         }
     }
 
-    private String normalize(final String text) {
+    private static String normalize(final String text) {
         StringBuilder normalized = new StringBuilder();
 
         for (int i = 0; i < text.length(); i++) {
