@@ -130,7 +130,9 @@ public final class XmlUtil {
     public static Document buildDocument(final WebResponse webResponse)
         throws IOException, SAXException, ParserConfigurationException {
 
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        // DocumentBuilderFactory.newInstance()
+        final DocumentBuilderFactory factory
+            = new com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl();
 
         if (webResponse == null) {
             return factory.newDocumentBuilder().newDocument();
