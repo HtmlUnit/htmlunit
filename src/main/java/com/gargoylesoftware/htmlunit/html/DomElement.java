@@ -39,7 +39,6 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
-import org.w3c.dom.ElementTraversal;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
@@ -70,7 +69,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
  */
-public class DomElement extends DomNamespaceNode implements Element, ElementTraversal {
+public class DomElement extends DomNamespaceNode implements Element {
 
     private static final Log LOG = LogFactory.getLog(DomElement.class);
 
@@ -672,9 +671,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the first child element node of this element. null if this element has no child elements.
+     * @return the first child element node of this element. null if this element has no child elements
      */
-    @Override
     public DomElement getFirstElementChild() {
         final Iterator<DomElement> i = getChildElements().iterator();
         if (i.hasNext()) {
@@ -684,9 +683,9 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the last child element node of this element. null if this element has no child elements.
+     * @return the last child element node of this element. null if this element has no child elements
      */
-    @Override
     public DomElement getLastElementChild() {
         DomElement lastChild = null;
         final Iterator<DomElement> i = getChildElements().iterator();
@@ -697,9 +696,11 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the previous sibling element node of this element.
+     * null if this element has no element sibling nodes that come before this one in the document tree.
+     * @return the previous sibling element node of this element.
+     * null if this element has no element sibling nodes that come before this one in the document tree
      */
-    @Override
     public DomElement getPreviousElementSibling() {
         DomNode node = getPreviousSibling();
         while (node != null && !(node instanceof DomElement)) {
@@ -709,9 +710,11 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the next sibling element node of this element.
+     * null if this element has no element sibling nodes that come after this one in the document tree.
+     * @return the next sibling element node of this element.
+     * null if this element has no element sibling nodes that come after this one in the document tree
      */
-    @Override
     public DomElement getNextElementSibling() {
         DomNode node = getNextSibling();
         while (node != null && !(node instanceof DomElement)) {
@@ -721,9 +724,11 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the current number of element nodes that are children of this element.
+     * 0 if this element has no child nodes that are of nodeType 1.
+     * @return the current number of element nodes that are children of this element.
+     * 0 if this element has no child nodes that are of nodeType 1
      */
-    @Override
     public int getChildElementCount() {
         int counter = 0;
         final Iterator<DomElement> i = getChildElements().iterator();
