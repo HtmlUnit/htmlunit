@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
@@ -58,12 +59,16 @@ public class SvgScriptTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGScriptElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgScript.class.isInstance(page.getElementById("myId")));
-            }
-            else {
-                assertTrue(HtmlScript.class.isInstance(page.getElementById("myId")));
-            }
+            assertType(getExpectedAlerts()[0], page.getElementById("myId"));
+        }
+    }
+
+    private void assertType(final String expectedAlert, final DomElement element) {
+        if ("[object SVGScriptElement]".equals(expectedAlert)) {
+            assertTrue(SvgScript.class.isInstance(element));
+        }
+        else {
+            assertTrue(HtmlScript.class.isInstance(element));
         }
     }
 
@@ -89,12 +94,8 @@ public class SvgScriptTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGScriptElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgScript.class.isInstance(page.getElementById("myId")));
-            }
-            else {
-                assertTrue(HtmlScript.class.isInstance(page.getElementById("myId")));
-            }
+            assertType(getExpectedAlerts()[0], page.getElementById("id1"));
+            assertType(getExpectedAlerts()[1], page.getElementById("id2"));
         }
     }
 }

@@ -532,7 +532,7 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
-        return HTMLParser.getElementFactory(this, namespaceURI, qualifiedName)
+        return HTMLParser.getElementFactory(this, namespaceURI, qualifiedName, true)
             .createElementNS(this, namespaceURI, qualifiedName, null, true);
     }
 

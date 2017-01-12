@@ -66,7 +66,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
-public class HtmlScript extends HtmlElement {
+public class HtmlScript extends HtmlElement implements ScriptElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlScript.class);
 
@@ -92,13 +92,9 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute {@code charset}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute {@code charset}
-     * or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
+    @Override
     public final String getCharsetAttribute() {
         return getAttribute("charset");
     }
@@ -128,13 +124,9 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute {@code src}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute {@code src}
-     * or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
+    @Override
     public final String getSrcAttribute() {
         return getSrcAttributeNormalized();
     }
@@ -376,7 +368,7 @@ public class HtmlScript extends HtmlElement {
 
     private void executeEvent(final String type) {
         final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
-        final Event event = new Event(HtmlScript.this, type);
+        final Event event = new Event(this, type);
         script.executeEventLocally(event);
     }
 
@@ -590,5 +582,21 @@ public class HtmlScript extends HtmlElement {
      */
     public boolean wasCreatedByJavascript() {
         return createdByJavascript_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isExecuted() {
+        return executed_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setExecuted(final boolean executed) {
+        executed_ = executed;
     }
 }

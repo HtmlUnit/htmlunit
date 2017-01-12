@@ -342,10 +342,11 @@ public final class HTMLParser {
      * @param page the page
      * @param namespaceURI the namespace URI
      * @param qualifiedName the qualified name
+     * @param insideHtml is the node inside HTML or not
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
-            final String qualifiedName) {
+            final String qualifiedName, final boolean insideHtml) {
         if (SVG_NAMESPACE.equals(namespaceURI)) {
             return SVG_FACTORY;
         }
@@ -536,7 +537,7 @@ public final class HTMLParser {
             }
             // add a head if none was there
             else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head");
+                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head", true);
                 final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
                 headParsed_ = HeadParsed.SYNTHESIZED;
@@ -565,7 +566,7 @@ public final class HTMLParser {
                 tagLower = "select";
                 qName = "select";
             }
-            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName);
+            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, isInsideHtml());
             final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts, true);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
@@ -987,6 +988,16 @@ public final class HTMLParser {
             final HTMLEventInfo info = (augs == null) ? null
                     : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
             return info != null ? info.isSynthesized() : false;
+        }
+
+        private boolean isInsideHtml() {
+            boolean html = true;
+            for (DomNode node = currentNode_; node != null; node = node.getParentNode()) {
+                if (!(node instanceof HtmlElement)) {
+                    html = false;
+                }
+            }
+            return html;
         }
     }
 }
