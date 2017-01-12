@@ -28,6 +28,7 @@ import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -38,7 +39,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
  * An interactive SGML page, which is able to handle JavaScript events.
  *
  * @author Ahmed Ashour
+ * @deprecated as of 2.25, please use {@link HtmlPage} instead
  */
+@Deprecated
 public abstract class InteractivePage extends SgmlPage {
 
     private DomElement elementWithFocus_;

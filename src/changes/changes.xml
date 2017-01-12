@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.25" date="???" description="Java 8, Bugfixes">
+        <release version="2.25" date="???" description="Java 8, SvgPage removed, Bugfixes">
+            <action type="update" dev="asashour" issue="1830">
+                Deprecate InteractivePage, use HtmlPage instead.
+            </action>
+            <action type="remove" dev="asashour" issue="1830">
+                INCOMPATIBLE CHANGE: remove SvgPage.
+            </action>
             <action type="add" dev="asashour" system="features" issue="240">
                 SgmlPage to implement DocumentTraversal.
             </action>

@@ -120,7 +120,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
-import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -728,7 +727,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         windowProxy_ = new WindowProxy(webWindow_);
 
         final Page enclosedPage = webWindow.getEnclosedPage();
-        if (enclosedPage instanceof XmlPage || enclosedPage instanceof SvgPage) {
+        if (enclosedPage instanceof XmlPage) {
             document_ = new XMLDocument();
         }
         else {

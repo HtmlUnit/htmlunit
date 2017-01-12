@@ -1664,7 +1664,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         return t;
     }
 
-    private org.w3c.dom.traversal.NodeFilter createFilterWrapper(final Scriptable filter,
+    private static org.w3c.dom.traversal.NodeFilter createFilterWrapper(final Scriptable filter,
             final boolean filterFunctionOnly) {
         org.w3c.dom.traversal.NodeFilter filterWrapper = null;
         if (filter != null) {

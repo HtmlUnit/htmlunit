@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
-import com.gargoylesoftware.htmlunit.svg.SvgPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -316,21 +315,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     protected SgmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         SgmlPage page = new XmlPage(webResponse, webWindow);
-        if (isSvg(page)) {
-            page = new SvgPage(webResponse, page.getDocumentElement(), webWindow);
-        }
         webWindow.setEnclosedPage(page);
         return page;
     }
 
-    /**
-     * Returns whether the specified {@code page} is {@link SvgPage} or not.
-     * @param page the page
-     * @return whether the specified {@code page} is {@link SvgPage} or not
-     */
-    protected boolean isSvg(final SgmlPage page) {
-        final DomElement documentElement = page.getDocumentElement();
-        return documentElement != null && "svg".equals(documentElement.getTagName())
-                && HTMLParser.SVG_NAMESPACE.equals(documentElement.getNamespaceURI());
-    }
 }
