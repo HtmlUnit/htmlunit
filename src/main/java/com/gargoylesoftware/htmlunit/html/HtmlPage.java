@@ -59,10 +59,10 @@ import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.History;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -129,7 +129,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Joerg Werner
  */
-public class HtmlPage extends SgmlPage {
+public class HtmlPage extends InteractivePage {
 
     private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
