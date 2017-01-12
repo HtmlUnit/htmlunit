@@ -314,7 +314,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @throws IOException if the page could not be created
      */
     protected SgmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        SgmlPage page = new XmlPage(webResponse, webWindow);
+        final SgmlPage page = new XmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
         return page;
     }
