@@ -62,6 +62,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
     public void setExecuted(final boolean executed) {
         executed_ = executed;
     }
+
     /**
      * {@inheritDoc}
      */
