@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
- * Wrapper for the SVG element "foreignObject".
+ * Wrapper for the SVG element {@code foreignObject}.
  *
  * @author Ahmed Ashour
  */

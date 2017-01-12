@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
- * Wrapper for the SVG element "g".
+ * Wrapper for the SVG element {@code g}.
  *
  * @author Ahmed Ashour
  */

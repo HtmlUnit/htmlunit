@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.ScriptElementSupport;
 
 /**
- * Wrapper for the SVG element "script".
+ * Wrapper for the SVG element {@code script}.
  *
  * @author Ahmed Ashour
  */

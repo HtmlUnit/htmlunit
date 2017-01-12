@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
- * Wrapper for the SVG element "feBlend".
+ * Wrapper for the SVG element {@code feBlend}.
  *
  * @author Ahmed Ashour
  */

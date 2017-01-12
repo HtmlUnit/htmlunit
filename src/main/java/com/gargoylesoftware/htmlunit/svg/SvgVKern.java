@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
- * Wrapper for the SVG element "vkern".
+ * Wrapper for the SVG element {@code vkern}.
  *
  * @author Frank Danek
  */
