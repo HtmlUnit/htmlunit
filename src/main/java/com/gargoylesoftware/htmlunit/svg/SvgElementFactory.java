@@ -105,7 +105,6 @@ public class SvgElementFactory implements ElementFactory {
                         .newInstance(namespaceURI, qualifiedName, page, attributeMap);
             }
             catch (final Exception e) {
-                e.printStackTrace();
                 throw new IllegalStateException(e);
             }
         }

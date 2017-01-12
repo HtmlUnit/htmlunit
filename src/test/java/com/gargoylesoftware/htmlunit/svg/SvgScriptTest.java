@@ -21,6 +21,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -53,6 +54,37 @@ public class SvgScriptTest extends WebDriverTestCase {
             + "    <script id='myId'></script>\n"
             + "  </svg>\n"
             + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            if ("[object SVGScriptElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgScript.class.isInstance(page.getElementById("myId")));
+            }
+            else {
+                assertTrue(HtmlScript.class.isInstance(page.getElementById("myId")));
+            }
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object SVGScriptElement]", "[object HTMLScriptElement]"})
+    @NotYetImplemented
+    public void htmlOrSvg() throws Exception {
+        final String html = "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+            + "<script id='id1'>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('id1'));\n"
+            + "    alert(document.getElementById('id2'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <script id='id2'></script>\n"
+            + "</body>\n"
+            + "</svg>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
