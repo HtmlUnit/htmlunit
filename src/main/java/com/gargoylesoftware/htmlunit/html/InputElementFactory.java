@@ -150,6 +150,10 @@ public final class InputElementFactory implements ElementFactory {
                 result = new HtmlDateTimeLocalInput(qualifiedName, page, attributeMap);
                 break;
 
+            case "email":
+                result = new HtmlEmailInput(qualifiedName, page, attributeMap);
+                break;
+
             case "month":
                 result = new HtmlMonthInput(qualifiedName, page, attributeMap);
                 break;
@@ -166,8 +170,16 @@ public final class InputElementFactory implements ElementFactory {
                 result = new HtmlSearchInput(qualifiedName, page, attributeMap);
                 break;
 
+            case "tel":
+                result = new HtmlTelInput(qualifiedName, page, attributeMap);
+                break;
+
             case "time":
                 result = new HtmlTimeInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "url":
+                result = new HtmlUrlInput(qualifiedName, page, attributeMap);
                 break;
 
             case "week":
