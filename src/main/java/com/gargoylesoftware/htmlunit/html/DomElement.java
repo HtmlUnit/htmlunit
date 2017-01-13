@@ -43,6 +43,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -902,7 +903,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final SgmlPage page = getPage();
         page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
-        if (!(page instanceof HtmlPage)
+        if (!(page instanceof InteractivePage)
                 || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
             return (P) page;
         }
@@ -920,7 +921,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             else if (this instanceof HtmlOption) {
                 elementToFocus = ((HtmlOption) this).getEnclosingSelect();
             }
-            ((HtmlPage) page).setFocusedElement(elementToFocus);
+            ((InteractivePage) page).setFocusedElement(elementToFocus);
 
             if (triggerMouseEvents) {
                 mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
@@ -1402,7 +1403,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Sets the focus on this element.
      */
     public void focus() {
-        final HtmlPage page = (HtmlPage) getPage();
+        final InteractivePage page = (InteractivePage) getPage();
         page.setFocusedElement(this);
         final HTMLElement jsElt = (HTMLElement) getScriptableObject();
         jsElt.setActive();
@@ -1412,7 +1413,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Removes focus from this element.
      */
     public void blur() {
-        ((HtmlPage) getPage()).setFocusedElement(null);
+        ((InteractivePage) getPage()).setFocusedElement(null);
     }
 
     /**

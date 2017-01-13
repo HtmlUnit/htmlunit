@@ -28,6 +28,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,6 +44,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -53,12 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Tests for the {@link JavaScriptEngine}.
@@ -1023,7 +1024,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         /** {@inheritDoc} */
         @Override
         public Object execute(
-                final HtmlPage page, final String sourceCode,
+                final InteractivePage page, final String sourceCode,
                 final String sourceName, final int startLine) {
             scriptExecutionCount_++;
             return super.execute(page, sourceCode, sourceName, startLine);
@@ -1031,14 +1032,14 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         /** {@inheritDoc} */
         @Override
-        public Object execute(final HtmlPage page, final Script script) {
+        public Object execute(final InteractivePage page, final Script script) {
             scriptExecuteScriptCount_++;
             return super.execute(page, script);
         }
 
         /** {@inheritDoc} */
         @Override
-        public Script compile(final HtmlPage page, final String sourceCode,
+        public Script compile(final InteractivePage page, final String sourceCode,
                 final String sourceName, final int startLine) {
             scriptCompileCount_++;
             return super.compile(page, sourceCode, sourceName, startLine);
@@ -1047,7 +1048,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         /** {@inheritDoc} */
         @Override
         public Object callFunction(
-                final HtmlPage page, final Function javaScriptFunction,
+                final InteractivePage page, final Function javaScriptFunction,
                 final Scriptable thisObject, final Object[] args,
                 final DomNode htmlElementScope) {
             scriptCallCount_++;
@@ -1183,14 +1184,14 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setJavaScriptEngine(new JavaScriptEngine(client) {
             @Override
-            public Object execute(final HtmlPage htmlPage, final String sourceCode,
+            public Object execute(final InteractivePage htmlPage, final String sourceCode,
                     final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);
                 return null;
             }
             @Override
             public Object callFunction(
-                    final HtmlPage htmlPage, final Function javaScriptFunction,
+                    final InteractivePage htmlPage, final Function javaScriptFunction,
                     final Scriptable thisObject, final Object[] args,
                     final DomNode htmlElement) {
                 return null;

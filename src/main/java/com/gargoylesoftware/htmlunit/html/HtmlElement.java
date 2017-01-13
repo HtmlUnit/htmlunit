@@ -40,6 +40,7 @@ import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -1274,10 +1275,10 @@ public abstract class HtmlElement extends DomElement {
             if (activeElement == getScriptableObject()) {
                 doc.setActiveElement(null);
                 if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                    ((HtmlPage) getPage()).setFocusedElement(null);
+                    ((InteractivePage) getPage()).setFocusedElement(null);
                 }
                 else {
-                    ((HtmlPage) getPage()).setElementWithFocus(null);
+                    ((InteractivePage) getPage()).setElementWithFocus(null);
                 }
             }
             else {
@@ -1285,10 +1286,10 @@ public abstract class HtmlElement extends DomElement {
                     if (activeElement == child.getScriptableObject()) {
                         doc.setActiveElement(null);
                         if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                            ((HtmlPage) getPage()).setFocusedElement(null);
+                            ((InteractivePage) getPage()).setFocusedElement(null);
                         }
                         else {
-                            ((HtmlPage) getPage()).setElementWithFocus(null);
+                            ((InteractivePage) getPage()).setElementWithFocus(null);
                         }
 
                         break;

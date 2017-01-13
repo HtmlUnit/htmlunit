@@ -26,11 +26,11 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -216,23 +216,23 @@ class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
     private final StringBuilder malformedScriptURLErrors_ = new StringBuilder();
 
     @Override
-    public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
+    public void loadScriptError(final InteractivePage page, final URL scriptUrl, final Exception exception) {
         loadScriptErrors_.append(scriptUrl + ", " + exception);
     }
 
     @Override
-    public void malformedScriptURL(final HtmlPage page, final String url,
+    public void malformedScriptURL(final InteractivePage page, final String url,
             final MalformedURLException malformedURLException) {
         malformedScriptURLErrors_.append(url + ", " + malformedURLException);
     }
 
     @Override
-    public void scriptException(final HtmlPage page, final ScriptException scriptException) {
+    public void scriptException(final InteractivePage page, final ScriptException scriptException) {
         scriptExceptions_.append(scriptException.toString());
     }
 
     @Override
-    public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
+    public void timeoutError(final InteractivePage page, final long allowedTime, final long executionTime) {
         timeoutErrors_.append("Timeout allowed: " + allowedTime);
     }
 

@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A listener for JavaScript exceptions.
@@ -33,7 +33,7 @@ public interface JavaScriptErrorListener {
      * @param page the page that causes the problem
      * @param scriptException the occurred script exception
      */
-    void scriptException(HtmlPage page, ScriptException scriptException);
+    void scriptException(InteractivePage page, ScriptException scriptException);
 
     /**
      * Informs about a javascript timeout error.
@@ -42,7 +42,7 @@ public interface JavaScriptErrorListener {
      * @param allowedTime the max time allowed for the execution
      * @param executionTime the already consumed time
      */
-    void timeoutError(HtmlPage page, long allowedTime, long executionTime);
+    void timeoutError(InteractivePage page, long allowedTime, long executionTime);
 
     /**
      * Informs about a malformed url referencing to to script.
@@ -51,7 +51,7 @@ public interface JavaScriptErrorListener {
      * @param url the malformed url
      * @param malformedURLException the occurred exception
      */
-    void malformedScriptURL(HtmlPage page, String url,
+    void malformedScriptURL(InteractivePage page, String url,
             MalformedURLException malformedURLException);
 
     /**
@@ -61,5 +61,5 @@ public interface JavaScriptErrorListener {
      * @param scriptUrl the url to load the script from
      * @param exception the occurred exception
      */
-    void loadScriptError(HtmlPage page, URL scriptUrl, Exception exception);
+    void loadScriptError(InteractivePage page, URL scriptUrl, Exception exception);
 }

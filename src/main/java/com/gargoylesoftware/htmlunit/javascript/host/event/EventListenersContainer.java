@@ -24,19 +24,20 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlBody;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.InteractivePage;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Container for event listener.
@@ -289,7 +290,7 @@ public class EventListenersContainer implements Serializable {
         final Function handler = getEventHandler(event.getType());
         if (handler != null) {
             event.setCurrentTarget(jsNode_);
-            final HtmlPage page = (HtmlPage) (node != null
+            final InteractivePage page = (InteractivePage) (node != null
                     ? node.getPage()
                     : jsNode_.getWindow().getWebWindow().getEnclosedPage());
             if (LOG.isDebugEnabled()) {

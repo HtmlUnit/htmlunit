@@ -898,8 +898,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 newnode.appendChild(child.cloneNode(true));
             }
         }
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
-        jsObjClone.setDomNode(newnode);
 
         return newnode;
     }

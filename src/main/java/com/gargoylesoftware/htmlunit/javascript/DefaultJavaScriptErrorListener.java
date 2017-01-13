@@ -21,8 +21,8 @@ import java.net.URL;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Default implementation of {@link JavaScriptErrorListener} that does only
@@ -35,21 +35,21 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptErrorListener.class);
 
     @Override
-    public void scriptException(final HtmlPage page, final ScriptException scriptException) {
+    public void scriptException(final InteractivePage page, final ScriptException scriptException) {
     }
 
     @Override
-    public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
+    public void timeoutError(final InteractivePage page, final long allowedTime, final long executionTime) {
     }
 
     @Override
-    public void malformedScriptURL(final HtmlPage page, final String url,
+    public void malformedScriptURL(final InteractivePage page, final String url,
                 final MalformedURLException malformedURLException) {
         LOG.error("Unable to build URL for script src tag [" + url + "]", malformedURLException);
     }
 
     @Override
-    public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
+    public void loadScriptError(final InteractivePage page, final URL scriptUrl, final Exception exception) {
         LOG.error("Error loading JavaScript from [" + scriptUrl + "].", exception);
     }
 
