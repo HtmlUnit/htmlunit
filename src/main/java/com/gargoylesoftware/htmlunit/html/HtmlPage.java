@@ -2007,7 +2007,7 @@ public class HtmlPage extends InteractivePage {
     @Override
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
-
+        result.elementWithFocus_ = null;
         result.idMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
         result.nameMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
 
@@ -2019,7 +2019,6 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     public HtmlPage cloneNode(final boolean deep) {
-        // we need the ScriptObject clone before cloning the kids.
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
 
         // if deep, clone the kids too, and re initialize parts of the clone
@@ -2028,6 +2027,7 @@ public class HtmlPage extends InteractivePage {
                 result.attributeListeners_ = null;
             }
             result.afterLoadActions_ = new ArrayList<>();
+            result.selectionRanges_ = new ArrayList<>(3);
             result.frameElements_ = new TreeSet<>(documentPositionComparator);
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));
