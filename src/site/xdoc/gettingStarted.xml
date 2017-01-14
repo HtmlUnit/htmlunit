@@ -31,7 +31,6 @@
             <source><![CDATA[
 @Test
 public void homePage() throws Exception {
-    final WebClient webClient = new WebClient();
     try (final WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
         Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
@@ -81,6 +80,19 @@ public void getElements() throws Exception {
         final HtmlPage page = webClient.getPage("http://some_url");
         final HtmlDivision div = page.getHtmlElementById("some_div_id");
         final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
+    }
+}]]></source>
+            <p>
+                A simple way for finding elements might be to find all elements of a specific type.
+            </p>
+            <source><![CDATA[
+@Test
+public void getElements() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://some_url");
+        NodeList inputs = page.getElementsByTagName("input");
+        final Iterator<E> nodesIterator = nodes.iterator();
+        // now iterate
     }
 }]]></source>
             <p>
