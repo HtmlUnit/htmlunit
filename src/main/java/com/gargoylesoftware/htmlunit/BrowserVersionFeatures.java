@@ -442,17 +442,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 
-    /** HTMLInputElement: {@code file} value to be {@code fakepath}. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    HTMLINPUT_FILE_VALUE_FAKEPATH,
-
-    /** HTMLInputElement: {@code file} value to be only the file name. */
-    @BrowserFeature(@WebBrowser(FF))
-    HTMLINPUT_FILE_VALUE_NO_PATH,
-
     /** HTMLInputElement: {@code files} to be {@code undefined}. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLINPUT_FILES_UNDEFINED,
+
+    /** HTMLInputElement: type {@code file} value to be {@code fakepath}. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLINPUT_FILE_VALUE_FAKEPATH,
+
+    /** HTMLInputElement: type {@code file} value to be only the file name. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLINPUT_FILE_VALUE_NO_PATH,
 
     /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen} have no end tag. */
     @BrowserFeature(@WebBrowser(IE))

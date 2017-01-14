@@ -3011,7 +3011,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 54, 54")
-    @NotYetImplemented
     public void selector__attributes() throws Exception {
         runTest("selector: attributes");
     }

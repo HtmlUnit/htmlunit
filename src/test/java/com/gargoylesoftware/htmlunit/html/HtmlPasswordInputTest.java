@@ -101,7 +101,6 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "null"})
-    @NotYetImplemented
     public void typeDoesNotChangeValueAttribute() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
@@ -128,7 +127,6 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"HtmlUnit", "HtmlUnit"})
-    @NotYetImplemented
     public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
@@ -361,7 +359,6 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Alerts({"initial-initial-initial", "initial-initial-initial",
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
-    @NotYetImplemented
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -402,7 +399,6 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Alerts({"initial-initial-initial", "initial-initial-initial",
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
-    @NotYetImplemented
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

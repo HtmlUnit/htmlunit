@@ -101,7 +101,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "null"})
-    @NotYetImplemented
     public void typeDoesNotChangeValueAttribute() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
@@ -128,7 +127,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1234", "1234"})
-    @NotYetImplemented
     public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
@@ -361,7 +359,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts({"1234-1234-1234", "1234-1234-1234",
                 "5678-1234-1234", "5678-1234-1234",
                 "5678-2345-2345", "5678-2345-2345"})
-    @NotYetImplemented
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -402,7 +399,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts({"1234-1234-1234", "1234-1234-1234",
                 "5678-1234-1234", "5678-1234-1234",
                 "5678-2345-2345", "5678-2345-2345"})
-    @NotYetImplemented
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
