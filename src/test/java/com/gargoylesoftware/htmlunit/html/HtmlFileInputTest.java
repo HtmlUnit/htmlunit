@@ -1052,7 +1052,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "§§DRIVER§§:\\fakepath\\pom.xml--null",
+    @Alerts(DEFAULT = "§§DRIVE_LETTER§§:\\fakepath\\pom.xml--null",
             FF = "pom.xml--null",
             IE = "§§PATH§§--null")
     public void value2() throws Exception {
@@ -1079,7 +1079,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         setExpectedAlerts(getExpectedAlerts()[0].replace("§§PATH§§", absolutePath));
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-            setExpectedAlerts(getExpectedAlerts()[0].replace("§§DRIVER§§", absolutePath.substring(0, 1)));
+            setExpectedAlerts(getExpectedAlerts()[0].replace("§§DRIVE_LETTER§§", absolutePath.substring(0, 1)));
         }
         else {
             //TODO: check other operating systems
