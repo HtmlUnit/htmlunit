@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, Bugfixes">
+            <action type="fix" dev="asashour">
+                HTMLInputElement: fix .value for file types.
+            </action>
             <action type="fix" dev="rbri">
                 Minor java code issue from our get started page fixed; sample for using getElementsByTagName added.
             </action>

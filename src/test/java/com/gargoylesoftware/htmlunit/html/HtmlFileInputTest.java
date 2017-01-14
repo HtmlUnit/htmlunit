@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1046,4 +1047,44 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "§§DRIVER§§:\\fakepath\\pom.xml--null",
+            FF = "pom.xml--null",
+            IE = "§§PATH§§--null")
+    public void value2() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var input = document.getElementById('f');\n"
+              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body>\n"
+              + "  <input type='file' id='f'>\n"
+              + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
+              + "</body></html>";
+
+        final String absolutePath = new File("pom.xml").getAbsolutePath();
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("f")).sendKeys(absolutePath);
+        driver.findElement(By.id("clickMe")).click();
+
+        setExpectedAlerts(getExpectedAlerts()[0].replace("§§PATH§§", absolutePath));
+        if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
+            setExpectedAlerts(getExpectedAlerts()[0].replace("§§DRIVER§§", absolutePath.substring(0, 1)));
+        }
+        else {
+            //TODO: check other operating systems
+        }
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
 }

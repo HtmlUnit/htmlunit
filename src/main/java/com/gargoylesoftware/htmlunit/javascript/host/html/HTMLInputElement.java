@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_NO_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_NO_SELECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
@@ -28,6 +29,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -36,6 +38,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
@@ -549,10 +552,36 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     public String getValue() {
+        String value = super.getValue();
         if ("file".equalsIgnoreCase(getType())) {
-            return ATTRIBUTE_NOT_DEFINED;
+            if (value == getDefaultValue()) {
+                value = ATTRIBUTE_NOT_DEFINED;
+            }
+            else if (value.contains(File.separator)) {
+                if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")
+                        && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+                    value = value.substring(0, 3) + "fakepath" + value.substring(value.lastIndexOf(File.separator));
+                }
+                else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
+                    value = value.substring(value.lastIndexOf(File.separator) + 1);
+                }
+            }
         }
-        return super.getValue();
+        return value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getAttribute(final String attributeName, final Integer flags) {
+        if ("value".equalsIgnoreCase(attributeName)) {
+            if (getDefaultValue().isEmpty()) {
+                return null;
+            }
+            return getDefaultValue();
+        }
+        return super.getAttribute(attributeName, flags);
     }
 
     /**
