@@ -176,8 +176,8 @@ public class Element extends EventNode {
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
     @JsxFunction
-    public Object getAttribute(final String attributeName, final Integer flags) {
-        Object value = getDomNodeOrDie().getAttribute(attributeName);
+    public String getAttribute(final String attributeName, final Integer flags) {
+        String value = getDomNodeOrDie().getAttribute(attributeName);
 
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             value = null;

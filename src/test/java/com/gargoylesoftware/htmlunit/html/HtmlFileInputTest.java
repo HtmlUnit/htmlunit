@@ -1087,4 +1087,28 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"--null", "--"})
+    public void setAttribute() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var input = document.createElement('input');\n"
+              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    input.setAttribute('value', '');\n"
+              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body onload='test()'>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

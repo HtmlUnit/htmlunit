@@ -123,7 +123,7 @@ public class HTMLInputElement extends FormField {
             // create a new one only if we have a new type
             if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(newType)) {
                 final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
-                    .createElement(input.getPage(), "input", attributes);
+                        .createElement(input.getPage(), "input", attributes);
 
                 if (input.wasCreatedByJavascript()) {
                     newInput.markAsCreatedByJavascript();
@@ -574,14 +574,18 @@ public class HTMLInputElement extends FormField {
      * {@inheritDoc}
      */
     @Override
-    public Object getAttribute(final String attributeName, final Integer flags) {
+    public String getAttribute(final String attributeName, final Integer flags) {
+        final String superAttribute = super.getAttribute(attributeName, flags);
         if ("value".equalsIgnoreCase(attributeName)) {
-            if (getDefaultValue().isEmpty()) {
+            if ((superAttribute == null || !superAttribute.isEmpty())
+                    && getDefaultValue().isEmpty()) {
                 return null;
             }
-            return getDefaultValue();
+            if (!"file".equals(getType())) {
+                return getDefaultValue();
+            }
         }
-        return super.getAttribute(attributeName, flags);
+        return superAttribute;
     }
 
     /**
@@ -603,7 +607,7 @@ public class HTMLInputElement extends FormField {
         final boolean newState = domNode.isChecked();
 
         if (originalState != newState
-            && (domNode instanceof HtmlRadioButtonInput || domNode instanceof HtmlCheckBoxInput)) {
+                && (domNode instanceof HtmlRadioButtonInput || domNode instanceof HtmlCheckBoxInput)) {
             domNode.fireEvent(Event.TYPE_CHANGE);
         }
     }
