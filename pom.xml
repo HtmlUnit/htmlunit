@@ -923,12 +923,6 @@
             <version>1.8.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.4.01</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <distributionManagement>
         <site>
