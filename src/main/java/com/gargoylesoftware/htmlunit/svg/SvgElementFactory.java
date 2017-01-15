@@ -88,10 +88,11 @@ public class SvgElementFactory implements ElementFactory {
      * {@inheritDoc}
      */
     @Override
-    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
+    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, String qualifiedName,
             final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
+        qualifiedName = qualifiedName.toLowerCase();
         String tagName = qualifiedName;
         if (tagName.indexOf(':') != -1) {
             tagName = tagName.substring(tagName.indexOf(':') + 1);
@@ -137,5 +138,14 @@ public class SvgElementFactory implements ElementFactory {
             }
         }
         return attributeMap;
+    }
+
+    /**
+     * Returns whether the specified name is a valid SVG tag name.
+     * @param tagName the tag name
+     * @return whether the specified name is a valid SVG tag name or not
+     */
+    public boolean isSupported(final String tagName) {
+        return ELEMENTS_.containsKey(tagName.toLowerCase());
     }
 }

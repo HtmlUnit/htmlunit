@@ -1421,7 +1421,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"DIV,DIV,http://www.w3.org/1999/xhtml,null,div", "svg,svg,http://www.w3.org/2000/svg,null,svg",
             "g,g,http://www.w3.org/2000/svg,null,g", "svg,svg,http://www.w3.org/2000/svg,null,svg"})
-    @NotYetImplemented
     public void variousNames() throws Exception {
         final String html =
             "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "

@@ -96,7 +96,7 @@ public final class HTMLParser {
     /**
      * The SVG factory.
      */
-    public static final ElementFactory SVG_FACTORY = new SvgElementFactory();
+    public static final SvgElementFactory SVG_FACTORY = new SvgElementFactory();
 
     private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
 
@@ -347,7 +347,7 @@ public final class HTMLParser {
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final boolean insideHtml) {
-        if (SVG_NAMESPACE.equals(namespaceURI)) {
+        if (SVG_NAMESPACE.equals(namespaceURI) || SVG_FACTORY.isSupported(qualifiedName)) {
             return SVG_FACTORY;
         }
         if (namespaceURI == null || namespaceURI.isEmpty()
@@ -567,6 +567,9 @@ public final class HTMLParser {
                 qName = "select";
             }
             final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, isInsideHtml());
+            if (factory == SVG_FACTORY) {
+                namespaceURI = SVG_NAMESPACE;
+            }
             final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts, true);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
