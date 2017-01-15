@@ -25,7 +25,6 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -184,9 +183,8 @@ public class HtmlFileInput extends HtmlInput {
      * We may follow WebDriver solution, once made,
      * see https://code.google.com/p/selenium/issues/detail?id=2239
      * @param paths the list of paths of the files to upload
-     * @return the page contained by this element's window after the value is set
      */
-    public Page setValueAttribute(final String[] paths) {
+    public void setValueAttribute(final String[] paths) {
         if (getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
             throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
         }
@@ -198,7 +196,7 @@ public class HtmlFileInput extends HtmlInput {
             builder.append(p);
         }
         setDefaultValue(builder.toString());
-        return super.setValueAttribute(builder.toString());
+        super.setValueAttribute(builder.toString());
     }
 
 }

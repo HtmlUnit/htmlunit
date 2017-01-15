@@ -91,13 +91,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param newValue the new content
      * @return the page contained by this element's window after the value is set
      */
-    public Page setValueAttribute(final String newValue) {
+    public void setValueAttribute(final String newValue) {
         WebAssert.notNull("newValue", newValue);
         setAttribute("value", newValue);
-
-        final Page page = executeOnChangeHandlerIfAppropriate(this);
-        valueAtFocus_ = getInternalValue();
-        return page;
     }
 
     /**
