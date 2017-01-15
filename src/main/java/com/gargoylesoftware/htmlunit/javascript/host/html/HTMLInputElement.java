@@ -235,12 +235,12 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     public void setAttribute(final String name, final String value) {
-        if ("type".equals(name)) {
+        if ("type".equalsIgnoreCase(name)) {
             setType(value);
             return;
         }
         super.setAttribute(name, value);
-        if ("value".equals(name)) {
+        if ("value".equalsIgnoreCase(name)) {
             setDefaultValue(value);
         }
     }
