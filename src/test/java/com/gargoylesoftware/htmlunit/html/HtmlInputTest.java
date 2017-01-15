@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -122,7 +125,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void onChangeHandler() throws Exception {
+    public void setValueAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -136,7 +139,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         input.setValueAttribute("foo");
-        assertEquals(new String[] {"changed"}, collectedAlerts);
+        assertNotEquals(Arrays.asList("changed").toString(), collectedAlerts.toString());
     }
 
     /**

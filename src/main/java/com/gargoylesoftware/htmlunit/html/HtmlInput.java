@@ -85,11 +85,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Sets the content of the {@code value} attribute, executing onchange handlers if appropriate.
-     * This method returns the page contained by this element's window after the value is set,
-     * which may or may not be the same as the original page.
-     * @param newValue the new content
-     * @return the page contained by this element's window after the value is set
+     * Sets the content of the {@code value} attribute.
+     *
+     * @param newValue the new value
      */
     public void setValueAttribute(final String newValue) {
         WebAssert.notNull("newValue", newValue);
