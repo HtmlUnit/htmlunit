@@ -558,9 +558,8 @@ public class HTMLInputElement extends FormField {
                 value = ATTRIBUTE_NOT_DEFINED;
             }
             else if (value.contains(File.separator)) {
-                if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")
-                        && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
-                    value = value.substring(0, 3) + "fakepath" + value.substring(value.lastIndexOf(File.separator));
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+                    value = "C:\\fakepath\\" + value.substring(value.lastIndexOf(File.separator) + 1);
                 }
                 else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
                     value = value.substring(value.lastIndexOf(File.separator) + 1);

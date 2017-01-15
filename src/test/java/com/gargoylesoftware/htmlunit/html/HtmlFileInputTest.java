@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1052,7 +1051,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "§§DRIVE_LETTER§§:\\fakepath\\pom.xml--null",
+    @Alerts(DEFAULT = "C:\\fakepath\\pom.xml--null",
             FF = "pom.xml--null",
             IE = "§§PATH§§--null")
     public void value2() throws Exception {
@@ -1078,12 +1077,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("clickMe")).click();
 
         setExpectedAlerts(getExpectedAlerts()[0].replace("§§PATH§§", absolutePath));
-        if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-            setExpectedAlerts(getExpectedAlerts()[0].replace("§§DRIVE_LETTER§§", absolutePath.substring(0, 1)));
-        }
-        else {
-            //TODO: check other operating systems
-        }
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
