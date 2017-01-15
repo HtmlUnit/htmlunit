@@ -356,10 +356,10 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <svg>\n"
-            + "    <g id='rectangles'>"
-            + "      <rect x='1' y='11' width='8' height='8'/>"
-            + "    </g>"
-            + "  </svg>"
+            + "    <g id='rectangles'>\n"
+            + "      <rect x='1' y='11' width='8' height='8'/>\n"
+            + "    </g>\n"
+            + "  </svg>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
