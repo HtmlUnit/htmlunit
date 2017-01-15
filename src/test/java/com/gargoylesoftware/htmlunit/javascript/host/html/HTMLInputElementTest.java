@@ -2032,4 +2032,28 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"Test-Test-Test", "text1-text1-text1"})
+    public void getAttribute() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  input.setAttribute('value', 'text1');\n"
+            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='Test'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

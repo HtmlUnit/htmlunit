@@ -240,9 +240,7 @@ public class HTMLInputElement extends FormField {
             return;
         }
         super.setAttribute(name, value);
-        if ("file".equalsIgnoreCase(getType())) {
-            setDefaultValue(value);
-        }
+        setDefaultValue(value);
     }
 
     /**
