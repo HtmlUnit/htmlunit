@@ -1414,4 +1414,41 @@ public class HTMLElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("button2")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"DIV,DIV,http://www.w3.org/1999/xhtml,null,div", "svg,svg,http://www.w3.org/2000/svg,null,svg",
+            "g,g,http://www.w3.org/2000/svg,null,g", "svg,svg,http://www.w3.org/2000/svg,null,svg"})
+    @NotYetImplemented
+    public void variousNames() throws Exception {
+        final String html =
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    debug(document.getElementById('myDiv'));\n"
+            + "    debug(document.getElementById('mySVG'));\n"
+            + "    debug(document.getElementById('myG'));\n"
+            + "    debug(document.getElementById('mySVGWithNS'));\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id=myDiv>test</div>\n"
+            + "  <svg id='mySVG'>\n"
+            + "    <G id='myG'></G>\n"
+            + "  </svg>\n"
+            + "  <svg id='mySVGWithNS' xmlns='http://www.w3.org/2017/svg'>\n"
+            + "  </svg>\n"
+            + "</body></html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 }
