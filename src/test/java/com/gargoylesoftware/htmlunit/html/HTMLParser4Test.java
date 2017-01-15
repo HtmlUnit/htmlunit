@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLParser4Test extends WebDriverTestCase {
@@ -282,6 +283,82 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<script id='script1'>alert(1)</script>\n"
             + "<app:script id='script2'>alert(2)</app:script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * See issue #1830.
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"[object HTMLHeadElement]",
+                "HEAD,HEAD,http://www.w3.org/1999/xhtml,null,head",
+                "[object HTMLBodyElement]", "BODY,BODY,http://www.w3.org/1999/xhtml,null,body"})
+    @NotYetImplemented
+    public void namespace_svg() throws Exception {
+        final String html =
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+            + "<html xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    elem = document.getElementsByTagName('head')[0];\n"
+            + "    debug(elem);\n"
+            + "    elem = document.getElementsByTagName('body')[0];\n"
+            + "    debug(elem);\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e);\n"
+            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * See issue #1830.
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"[object HTMLHeadElement]",
+                "HEAD,HEAD,http://www.w3.org/1999/xhtml,null,head",
+                "[object HTMLBodyElement]", "BODY,BODY,http://www.w3.org/1999/xhtml,null,body",
+                "[object SVGGElement]", "g,g,http://www.w3.org/2000/svg,null,g"})
+    @NotYetImplemented
+    public void svg_withoutNamespace() throws Exception {
+        final String html =
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    elem = document.getElementsByTagName('head')[0];\n"
+            + "    debug(elem);\n"
+            + "    elem = document.getElementsByTagName('body')[0];\n"
+            + "    debug(elem);\n"
+            + "    elem = document.getElementById('rectangles');\n"
+            + "    debug(elem);\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e);\n"
+            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg>\n"
+            + "    <g id='rectangles'>"
+            + "      <rect x='1' y='11' width='8' height='8'/>"
+            + "    </g>"
+            + "  </svg>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
