@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_URL_TRIMMED;
+
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
@@ -37,4 +41,14 @@ public class HtmlUrlInput extends HtmlInput {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(String newValue) {
+        if (StringUtils.isBlank(newValue) && hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+            newValue = "";
+        }
+        super.setValueAttribute(newValue);
+    }
 }

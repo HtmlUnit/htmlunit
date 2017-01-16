@@ -969,7 +969,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_INPUT_SET_TYPE_LOWERCASE,
 
-    /** Setting the value of an Input URL to blank will result in an empty value. */
+    /** Setting the value of an Input Date to blank will result in an empty value. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_INPUT_SET_VALUE_DATE_SUPPORTED,
+
+    /** Setting the value of an Input Email to blank will result in an empty value. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_INPUT_SET_VALUE_EMAIL_TRIMMED,
 

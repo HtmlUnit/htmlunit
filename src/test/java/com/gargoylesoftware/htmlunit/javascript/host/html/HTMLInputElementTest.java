@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -76,13 +77,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"error fileupload1", "abc", "abc", "abc", "", "abc", /*"foo", "",*/ "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "abc", /*"#000000", "abc", "abc", "abc", "abc", "abc",
+                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "abc", "abc", /*"abc", "abc", "abc",
                         "abc", "", "50",*/ "abc", "abc", "abc", "abc"},
             CHROME = {"error fileupload1", "abc", "abc", "abc", "", "abc", /*"", "",*/ "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "abc", /*"#000000", "", "abc", "", "", "",
+                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", /*"", "", "",
                         "", "", "50",*/ "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", /*"", "",*/ "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "abc", /*"abc", "abc", "abc", "abc", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", /*"abc", "abc", "abc",
                     "abc", "", "50",*/ "abc", "abc", "abc", "abc"})
     @Test
     public void setValueString() throws Exception {
@@ -105,13 +106,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"", "", "", "", "", /*"foo", "",*/ "", "",
-                        "", "", "", "", "", "", /*"#000000", "", "", "", "", "",
+                        "", "", "", "", "", "", "#000000", "", "", /*"", "", "",
                         "", "", "50",*/ "", "", "", ""},
             CHROME = {"", "", "", "", "", /*"", "",*/ "", "",
-                        "", "", "", "", "", "", /*"#000000", "", "", "", "", "",
+                        "", "", "", "", "", "", "#000000", "", "", /*"", "", "",
                         "", "", "50",*/ "", "", "", ""},
             IE = {"", "", "", "", "", /*"", "",*/ "", "",
-                    "", "", "", "", "", "", /*"", "", "", "", "", "",
+                    "", "", "", "", "", "", "", "", "", /*"", "", "",
                     "", "", "50",*/ "", "", "", ""})
     @Test
     public void setValueEmptyString() throws Exception {
@@ -134,13 +135,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"error fileupload1", "  ", "  ", "  ", "", "  ", /*"foo", "",*/ "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", /*"#000000", "  ", "  ", "  ", "  ", "  ",
+                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "  ", "  ", /*"  ", "  ", "  ",
                         "  ", "", "50",*/ "  ", "", "  ", ""},
             CHROME = {"error fileupload1", "  ", "  ", "  ", "", "  ", /*"", "",*/ "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", /*"#000000", "", "  ", "", "", "",
+                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", /*"", "", "",
                         "", "", "50",*/ "  ", "", "  ", ""},
             IE = {"  ", "  ", "  ", "", "  ", /*"", "",*/ "  ", "  ",
-                    "  ", "  ", "  ", "  ", "  ", "  ", /*"  ", "  ", "  ", "  ", "  ", "  ",
+                    "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", /*"  ", "  ", "  ",
                     "  ", "", "50",*/ "  ",  "  ", "  ", "  "})
     @Test
     public void setValueBlankString() throws Exception {
@@ -163,13 +164,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"error fileupload1", "12", "12", "12", "", "12", /*"foo", "",*/ "12", "12",
-                        "12", "12", "12", "12", "12", "12", /*"#000000", "12", "12", "12", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "#000000", "12", "12", /*"12", "12", "12",
                         "12", "12", "12",*/ "12", "12", "12", "12"},
             CHROME = {"error fileupload1", "12", "12", "12", "", "12", /*"", "",*/ "12", "12",
-                        "12", "12", "12", "12", "12", "12", /*"#000000", "", "12", "", "", "",
+                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", /*"", "", "",
                         "", "12", "12",*/ "12", "12", "12", "12"},
             IE = {"12", "12", "12", "", "12", /*"", "",*/ "12", "12",
-                    "12", "12", "12", "12", "12", "12", /*"12", "12", "12", "12", "12", "12",
+                    "12", "12", "12", "12", "12", "12", "12", "12", "12", /*"12", "12", "12",
                     "12", "12", "12",*/ "12", "12", "12", "12"})
     @Test
     public void setValueNumber() throws Exception {
@@ -183,7 +184,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             CHROME = {"", "", "#000000", "", "12", "", "", "", "", "12", "12"},
             IE = {"", "", "12", "12", "12", "12", "12", "12", "12", "12", "12"})
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, IE})
     public void setValueNumber2() throws Exception {
         testValue2("12");
     }
@@ -192,13 +193,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"", "null", "", "", "", /*"foo", "",*/ "", "",
-                        "", "null", "", "null", "", "", /* "#000000", "", "", "", "", "",
+                        "", "null", "", "null", "", "", "#000000", "", "", /*"", "", "",
                         "", "", "50",*/ "", "", "", ""},
             CHROME = {"", "null", "", "", "", /*"", "",*/ "", "",
-                        "", "null", "", "null", "", "", /* "#000000", "", "", "", "", "",
+                        "", "null", "", "null", "", "", "#000000", "", "", /*"", "", "",
                         "", "", "50",*/ "", "", "", ""},
             IE = {"", "null", "", "", "", /*"", "",*/ "", "",
-                    "", "null", "", "null", "", "null", /*"", "", "", "", "", "",
+                    "", "null", "", "null", "", "null", "", "", "", /*"", "", "",
                     "", "", "50",*/ "", "", "", ""})
     @Test
     public void setValueNull() throws Exception {
@@ -266,9 +267,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  alert(document.form1.submit2.value);\n"
             + "  alert(document.form1.textInput1.value);\n"
             + "  alert(document.form1.textarea1.value);\n"
-            // + "  alert(document.form1.color1.value);\n"
-            // + "  alert(document.form1.date1.value);\n"
-            // + "  alert(document.form1.datetime1.value);\n"
+             + "  alert(document.form1.color1.value);\n"
+             + "  alert(document.form1.date1.value);\n"
+             + "  alert(document.form1.datetime1.value);\n"
             // + "  alert(document.form1.datetimeLocal1.value);\n"
             // + "  alert(document.form1.time1.value);\n"
             // + "  alert(document.form1.week1.value);\n"

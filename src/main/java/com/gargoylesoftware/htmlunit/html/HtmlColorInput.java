@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
+
+import java.awt.Color;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -35,6 +38,35 @@ public class HtmlColorInput extends HtmlInput {
     HtmlColorInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED && !hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+            setValueAttribute("#" + Integer.toHexString(Color.black.getRGB()).substring(2));
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(final String newValue) {
+        if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START) || isValid(newValue)) {
+            super.setValueAttribute(newValue);
+        }
+    }
+
+    private static boolean isValid(final String value) {
+        boolean valid = false;
+        if (value.length() == 7 && value.charAt(0) == '#') {
+            try {
+                new Color(
+                        Integer.valueOf(value.substring(1, 3), 16),
+                        Integer.valueOf(value.substring(3, 5), 16),
+                        Integer.valueOf(value.substring(5, 7), 16));
+                valid = true;
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+        }
+        return valid;
+    }
 }
