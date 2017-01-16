@@ -150,10 +150,10 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
         final String test = ""
             + "alert(list.length);\n"
             + "debug(list.nextNode());\n"
-            + "list.reset();"
+            + "list.reset();\n"
             + "debug(list.nextNode());\n"
             + "debug(list.nextNode());\n"
-            + "list.reset();"
+            + "list.reset();\n"
             + "debug(list.nextNode());\n";
 
         tester(test);

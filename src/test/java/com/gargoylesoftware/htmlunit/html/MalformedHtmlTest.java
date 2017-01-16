@@ -845,7 +845,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </table>\n"
                 + "<script>\n"
-                + "  alert(document.form1.elements.length);"
+                + "  alert(document.form1.elements.length);\n"
                 + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
                 + "    alert(document.form1.elements[j].name);\n"
                 + "  }\n"
@@ -873,8 +873,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </tr>\n"
                 + "  </table>"
                 + "<script>\n"
-                + "  alert(document.getElementById('caption').innerHTML.replace(/\\s+/g, ''));"
-                + "  alert(document.getElementById('caption').parentNode.tagName);"
+                + "  alert(document.getElementById('caption').innerHTML.replace(/\\s+/g, ''));\n"
+                + "  alert(document.getElementById('caption').parentNode.tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);

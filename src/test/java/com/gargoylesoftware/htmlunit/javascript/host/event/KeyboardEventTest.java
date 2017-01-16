@@ -138,7 +138,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);"
+            + "  alert(e.keyCode);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body>\n"

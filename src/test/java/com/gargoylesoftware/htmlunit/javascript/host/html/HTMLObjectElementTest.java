@@ -55,7 +55,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var obj = document.all.id1;"
+            + "    var obj = document.all.id1;\n"
             + "    alert(obj.MESSAGE);\n"
             + "    if (obj.GetMessage) {\n"
             + "      alert(obj.GetMessage());\n"

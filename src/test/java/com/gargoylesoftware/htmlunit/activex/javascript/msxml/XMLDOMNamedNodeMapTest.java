@@ -255,10 +255,10 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
         final String test = ""
             + "alert(attrs.length);\n"
             + "debug(attrs.nextNode());\n"
-            + "attrs.reset();"
+            + "attrs.reset();\n"
             + "debug(attrs.nextNode());\n"
             + "debug(attrs.nextNode());\n"
-            + "attrs.reset();"
+            + "attrs.reset();\n"
             + "debug(attrs.nextNode());\n";
 
         tester(test, "<blah name1='y1' name2='y2'/>");

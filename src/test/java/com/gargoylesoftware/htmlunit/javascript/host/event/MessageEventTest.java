@@ -139,7 +139,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "  e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
             + "  dump(e);\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');"
+            + "  alert('no initMessageEvent');\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";

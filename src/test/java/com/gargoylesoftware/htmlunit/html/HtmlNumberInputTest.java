@@ -510,8 +510,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "    alert(getSelection(document.getElementById('text1')).length);\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
-            + "    if (!('selectionStart' in element)) { alert('no selectionStart'); }\n"
-            + "    if (!('selectionEnd' in element)) { alert('no selectionEnd'); }\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "    } catch(e) { alert('exception'); }\n"
@@ -565,8 +563,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "<input id='myTextInput' value='1234567' type='number'>\n"
             + "<script>\n"
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  if (!('selectionStart' in input)) { alert('no selectionStart'); }\n"
-            + "  if (!('selectionEnd' in input)) { alert('no selectionEnd'); }\n"
 
             + "  try {\n"
             + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
@@ -609,8 +605,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "<input id='myTextInput' value='1234567' type='number'>\n"
             + "<script>\n"
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  if (!('selectionStart' in input)) { alert('no selectionStart'); }\n"
-            + "  if (!('selectionEnd' in input)) { alert('no selectionEnd'); }\n"
 
             + "  try {\n"
             + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"

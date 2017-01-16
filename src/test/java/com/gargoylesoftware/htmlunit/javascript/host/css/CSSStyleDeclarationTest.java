@@ -479,7 +479,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    var div1 = document.getElementById('div1');\n"
             + "    alert(typeof div1.style.removeExpression);\n"
             + "    div1.style.setExpression('title','id');\n"
-            + "    div1.style.removeExpression('title');"
+            + "    div1.style.removeExpression('title');\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"

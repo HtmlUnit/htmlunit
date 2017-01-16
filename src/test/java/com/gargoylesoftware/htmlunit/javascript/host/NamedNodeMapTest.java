@@ -187,7 +187,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "    var node = document.createAttribute('myattr');\n"
             + "    var elem = document.getElementById('tester');\n"
             + "    elem.attributes.setNamedItem(node);\n"
-            + "    var item = elem.attributes.getNamedItem('myAttr');"
+            + "    var item = elem.attributes.getNamedItem('myAttr');\n"
             + "    if (item) {\n"
             + "      alert(item.nodeName);\n"
             + "    } else {\n"

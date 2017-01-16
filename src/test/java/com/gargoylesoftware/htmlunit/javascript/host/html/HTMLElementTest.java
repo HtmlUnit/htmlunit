@@ -2702,7 +2702,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    } catch(e) { alert('ex setExpression'); }\n"
 
             + "    try {\n"
-            + "      div1.removeExpression('title');"
+            + "      div1.removeExpression('title');\n"
             + "    } catch(e) { alert('ex removeExpression'); }\n"
 
             + "  }\n"

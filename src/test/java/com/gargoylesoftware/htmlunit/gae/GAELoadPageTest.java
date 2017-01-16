@@ -129,7 +129,7 @@ public class GAELoadPageTest {
         final String html = "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
-            + "      setInterval(\"alert('hello')\", " + timeout + ");"
+            + "      setInterval(\"alert('hello')\", " + timeout + ");\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
@@ -176,8 +176,8 @@ public class GAELoadPageTest {
         final String html = "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
-            + "      setTimeout(\"alert('hello')\", 0);"
-            + "      setTimeout(\"alert('hello again')\", " + timeout + ");"
+            + "      setTimeout(\"alert('hello')\", 0);\n"
+            + "      setTimeout(\"alert('hello again')\", " + timeout + ");\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";

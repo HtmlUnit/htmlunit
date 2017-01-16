@@ -1260,9 +1260,9 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String content =
               "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
-            + "<script>"
-            + "  var x = document.all;"
-            + "  window.onload=function() {alert('foo')};"
+            + "<script>\n"
+            + "  var x = document.all;\n"
+            + "  window.onload=function() {alert('foo')};\n"
 
             // this tests 3103703
             // we don't store the jobs are pending at the moment of serialization

@@ -303,7 +303,7 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts({"null", "text1"})
     public void activeElement() throws Exception {
         final String html = "<html><head><script>\n"
-            + "  alert(document.activeElement);"
+            + "  alert(document.activeElement);\n"
             + "  function test() {\n"
             + "    alert(document.activeElement.id);\n"
             + "  }\n"

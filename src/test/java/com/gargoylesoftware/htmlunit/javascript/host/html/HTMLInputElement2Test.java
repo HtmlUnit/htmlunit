@@ -48,7 +48,7 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
             + "  input.setSelectionRange(2, 7);\n"
-            + "  alert('hello');"
+            + "  alert('hello');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

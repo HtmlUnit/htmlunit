@@ -564,7 +564,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
             + "function test() {\n"
             + ACTIVEX_CHECK
             + "  var doc = " + callCreateXMLDOMDocument() + ";\n"
-            + "  doc.setProperty('SelectionNamespaces', selectionNamespaces);"
+            + "  doc.setProperty('SelectionNamespaces', selectionNamespaces);\n"
             + "  doc.async = false;\n"
             + "  doc.load('" + URL_SECOND + "');\n"
             + "  try {\n"

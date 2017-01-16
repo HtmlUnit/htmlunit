@@ -178,7 +178,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    canvas.height = img.height;\n"
             + "    if (canvas.getContext) {\n"
             + "      var context = canvas.getContext('2d');\n"
-            + "      alert(canvas.toDataURL());"
+            + "      alert(canvas.toDataURL());\n"
             + "      context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
             + "      alert(canvas.toDataURL());\n"
             + "    }\n"

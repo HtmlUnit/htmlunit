@@ -223,7 +223,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  var frame=parent.frames['myFrame'];\n"
             + "  writeFrame(frame);\n"
             + "  writeForm(frame);\n"
-            + "  alert(frame.document.getElementById('myInput').name);"
+            + "  alert(frame.document.getElementById('myInput').name);\n"
             + "}\n"
 
             + "loadFrame();\n"

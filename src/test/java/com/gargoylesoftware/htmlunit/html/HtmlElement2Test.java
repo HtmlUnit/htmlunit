@@ -98,7 +98,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "  }\n"
             + "  function handler() {\n"
             + "    alert(1);\n"
-            + "    document.getElementById('input1').dir='rtl';"
+            + "    document.getElementById('input1').dir='rtl';\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

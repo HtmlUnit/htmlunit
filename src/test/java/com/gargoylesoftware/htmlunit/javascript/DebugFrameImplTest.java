@@ -75,9 +75,9 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
     public void withCallable() throws Exception {
         final String content = "<html><head><title>debug test</title>\n"
             + "<script>\n"
-            + "  var counter = 0;"
-            + "  window.__defineGetter__('foo', function(a) { return counter++ });"
-            + "  alert(window.foo);"
+            + "  var counter = 0;\n"
+            + "  window.__defineGetter__('foo', function(a) { return counter++ });\n"
+            + "  alert(window.foo);\n"
             + "</script></head><body></body></html>";
         final WebConnection old = client_.getWebConnection();
         try {

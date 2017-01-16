@@ -145,7 +145,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    document.documentElement.parentNode.removeChild(document.documentElement);"
+            + "    document.documentElement.parentNode.removeChild(document.documentElement);\n"
             + "    alert(document.title);\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "}\n"

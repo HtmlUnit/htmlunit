@@ -279,7 +279,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    for (var x in document) {\n"
             + "      if (x == 'getElementById')\n"
-            + "        alert('found');"
+            + "        alert('found');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -667,8 +667,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void ecmaReservedKeywords() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "  var o = {float: 123};"
-            + "  alert(o.float);"
+            + "  var o = {float: 123};\n"
+            + "  alert(o.float);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 

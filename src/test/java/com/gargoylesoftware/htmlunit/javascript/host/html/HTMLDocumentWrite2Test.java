@@ -564,12 +564,12 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
              + "</script></head>\n"
              + "<body onload='doTest()'>\n"
              + "<script>\n"
-             + "document.write('<div id=\"outer\">');"
-             + "document.write('<br id=\"br1\">');"
-             + "document.write('<div id=\"inner1\"/>');"
-             + "document.write('<hr id=\"hr1\"/>');"
-             + "document.write('<div id=\"inner2\"/>');"
-             + "document.write('</div>');"
+             + "document.write('<div id=\"outer\">');\n"
+             + "document.write('<br id=\"br1\">');\n"
+             + "document.write('<div id=\"inner1\"/>');\n"
+             + "document.write('<hr id=\"hr1\"/>');\n"
+             + "document.write('<div id=\"inner2\"/>');\n"
+             + "document.write('</div>');\n"
              + "</script>\n"
              + "</body></html>";
 

@@ -1438,7 +1438,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    alert(div1.offsetHeight == 0);\n"
-            + "    div1.className = 'v-loading-indicator';"
+            + "    div1.className = 'v-loading-indicator';\n"
             + "    alert(div1.offsetHeight == 0);\n"
             + "  }\n"
             + "</script>\n"

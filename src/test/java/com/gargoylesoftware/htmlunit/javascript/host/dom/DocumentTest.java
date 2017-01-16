@@ -2143,7 +2143,7 @@ public class DocumentTest extends WebDriverTestCase {
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
         final String html = "<html><head><script>\n"
-            + "  alert(document.activeElement);"
+            + "  alert(document.activeElement);\n"
             + "  function test() {\n"
             + "    alert(document.activeElement.id);\n"
             + "    var inp = document.getElementById('text2');\n"

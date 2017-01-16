@@ -114,7 +114,7 @@ public class NativeErrorTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
-            + "  alert(Error.stackTraceLimit)\n;"
+            + "  alert(Error.stackTraceLimit);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

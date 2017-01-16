@@ -872,8 +872,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               "<html><head><script>\n"
             + "  function test() {\n"
             + "    var element = document.getElementById('text1');\n"
-            + "    if (!('selectionStart' in element)) { alert('no selectionStart'); }\n"
-            + "    if (!('selectionEnd' in element)) { alert('no selectionEnd'); }\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "    } catch(e) { alert('exception'); }\n"
@@ -933,8 +931,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "<input id='myTextInput' value='Bonjour' type='file'>\n"
             + "<script>\n"
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  if (!('selectionStart' in input)) { alert('no selectionStart'); }\n"
-            + "  if (!('selectionEnd' in input)) { alert('no selectionEnd'); }\n"
 
             + "  try {\n"
             + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
@@ -977,8 +973,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "<input id='myTextInput' value='Hello' type='file'>\n"
             + "<script>\n"
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  if (!('selectionStart' in input)) { alert('no selectionStart'); }\n"
-            + "  if (!('selectionEnd' in input)) { alert('no selectionEnd'); }\n"
 
             + "  try {\n"
             + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"

@@ -97,7 +97,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "  alert(request.readyState);\n"
             + "  if (request.readyState == 4) {\n"
             + "    if (request.responseText.length == 0)\n"
-            + "      alert('" + MSG_NO_CONTENT + "');"
+            + "      alert('" + MSG_NO_CONTENT + "');\n"
             + "    else\n"
             + "      throw 'Unexpected content, should be zero length but is: \"' + request.responseText + '\"';\n"
             + "  }\n"

@@ -110,7 +110,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
             + "    xmlDoc.async = false;\n"
             + "    xmlDoc.loadXML(xml);\n"
-            + "    return xmlDoc;"
+            + "    return xmlDoc;\n"
             + "  }\n";
 
     /**
@@ -921,7 +921,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "  if ('ActiveXObject' in window) {\n"
             + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.setProperty('SelectionNamespaces', selectionNamespaces);"
+            + "    doc.setProperty('SelectionNamespaces', selectionNamespaces);\n"
             + "    doc.async = false;\n"
             + "    doc.load('" + URL_SECOND + "');\n"
             + "    try {\n"
@@ -997,7 +997,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      if(xml.getElementsByTagName) {\n"
             + "        alert(xml.getElementsByTagName('status')[0].textContent);\n"
             + "      }\n"
-            + "    };"
+            + "    };\n"
             + "    ifr.src = '" + URL_SECOND + "';\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
