@@ -462,7 +462,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param attributeValue the value of the attribute
      */
     @Override
-    public final void setAttribute(final String attributeName, final String attributeValue) {
+    public void setAttribute(final String attributeName, final String attributeValue) {
         setAttributeNS(null, attributeName, attributeValue);
     }
 

@@ -366,7 +366,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                         "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
                         "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
-    @NotYetImplemented
     public void setValueAttribute() throws Exception {
         testAttribute("value", "", "abc");
     }

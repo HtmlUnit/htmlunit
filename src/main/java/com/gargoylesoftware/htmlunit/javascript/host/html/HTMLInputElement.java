@@ -94,9 +94,7 @@ public class HTMLInputElement extends FormField {
     public String getType() {
         String type = getDomNodeOrDie().getTypeAttribute();
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
-            type = type.toLowerCase(Locale.ROOT);
-        }
+        type = type.toLowerCase(Locale.ROOT);
         if (!InputElementFactory.isSupported(type)) {
             type = "text";
         }
@@ -112,6 +110,9 @@ public class HTMLInputElement extends FormField {
 
                 default:
             }
+        }
+        if ("color".equals(type) && browserVersion.hasFeature(HTMLINPUT_FILES_UNDEFINED)) {
+            type = "text";
         }
         return type;
     }

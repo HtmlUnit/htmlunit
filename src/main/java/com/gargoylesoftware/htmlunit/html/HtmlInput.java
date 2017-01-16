@@ -85,13 +85,26 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttribute(final String attributeName, final String attributeValue) {
+        if ("value".equals(attributeName)) {
+            setValueAttribute(attributeValue);
+        }
+        else {
+            super.setAttribute(attributeName, attributeValue);
+        }
+    }
+
+    /**
      * Sets the content of the {@code value} attribute.
      *
      * @param newValue the new value
      */
     public void setValueAttribute(final String newValue) {
         WebAssert.notNull("newValue", newValue);
-        setAttribute("value", newValue);
+        super.setAttribute("value", newValue);
     }
 
     /**
