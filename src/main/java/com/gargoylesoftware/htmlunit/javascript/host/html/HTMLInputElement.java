@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FIL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_NO_SELECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -91,7 +92,28 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getType() {
-        return getDomNodeOrDie().getTypeAttribute().toLowerCase(Locale.ROOT);
+        String type = getDomNodeOrDie().getTypeAttribute();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
+            type = type.toLowerCase(Locale.ROOT);
+        }
+        if (!InputElementFactory.isSupported(type)) {
+            type = "text";
+        }
+        else if (!browserVersion.hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {
+            switch (type) {
+                case "date":
+                case "time":
+                case "datetime-local":
+                case "month":
+                case "week":
+                    type = "text";
+                    break;
+
+                default:
+            }
+        }
+        return type;
     }
 
     /**
@@ -158,7 +180,7 @@ public class HTMLInputElement extends FormField {
             return;
         }
 
-        String val = Context.toString(newValue);
+        final String val = Context.toString(newValue);
         final BrowserVersion browserVersion = getBrowserVersion();
         if (StringUtils.isNotEmpty(val) && "file".equalsIgnoreCase(getType())) {
             if (browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {

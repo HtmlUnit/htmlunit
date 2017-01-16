@@ -193,4 +193,42 @@ public final class InputElementFactory implements ElementFactory {
         }
         return result;
     }
+
+    /**
+     * Returns whether the specified type is supported or not.
+     * @param type the type
+     * @return whether the specified type is supported or not
+     */
+    public static boolean isSupported(final String type) {
+        boolean supported = false;
+        switch (type) {
+            case "text":
+            case "submit":
+            case "checkbox":
+            case "radio":
+            case "hidden":
+            case "password":
+            case "image":
+            case "reset":
+            case "button":
+            case "file":
+            case "color":
+            case "date":
+            case "datetime-local":
+            case "email":
+            case "month":
+            case "number":
+            case "range":
+            case "search":
+            case "tel":
+            case "time":
+            case "url":
+            case "week":
+                supported = true;
+                break;
+
+            default:
+        }
+        return supported;
+    }
 }

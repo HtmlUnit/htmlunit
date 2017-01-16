@@ -281,7 +281,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                         "text", "text", "text", "text", "number", "range",
                         "search", "email", "tel", "url"}
             )
-    @NotYetImplemented
     public void type() throws Exception {
         testAttribute("type", "", null);
     }
