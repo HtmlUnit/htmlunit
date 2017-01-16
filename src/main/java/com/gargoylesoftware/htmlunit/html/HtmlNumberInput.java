@@ -185,4 +185,18 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
         final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(final String newValue) {
+        try {
+            Integer.parseInt(newValue);
+            super.setValueAttribute(newValue);
+        }
+        catch (final NumberFormatException e) {
+            // ignore
+        }
+    }
 }

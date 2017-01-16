@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -25,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlWeekInput extends HtmlInput {
 
+    private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-'W'ww");
     /**
      * Creates an instance.
      *
@@ -37,4 +42,19 @@ public class HtmlWeekInput extends HtmlInput {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(final String newValue) {
+        try {
+            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {
+                FORMATTER_.parse(newValue);
+            }
+            super.setValueAttribute(newValue);
+        }
+        catch (final DateTimeParseException e) {
+            // ignore
+        }
+    }
 }

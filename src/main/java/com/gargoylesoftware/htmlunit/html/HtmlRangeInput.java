@@ -35,6 +35,22 @@ public class HtmlRangeInput extends HtmlInput {
     HtmlRangeInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+        setValueAttribute("50");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(final String newValue) {
+        try {
+            final int value = Integer.parseInt(newValue);
+            if (value >= 0 && value <= 100) {
+                super.setValueAttribute(newValue);
+            }
+        }
+        catch (final NumberFormatException e) {
+            // ignore
+        }
+    }
 }
