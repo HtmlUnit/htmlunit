@@ -347,7 +347,10 @@ public final class HTMLParser {
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final boolean insideHtml) {
-        if (SVG_NAMESPACE.equals(namespaceURI) || SVG_FACTORY.isSupported(qualifiedName)) {
+        final String qualifiedNameLower = qualifiedName.toLowerCase(Locale.ROOT);
+        if (SVG_NAMESPACE.equals(namespaceURI)
+                || (SVG_FACTORY.isSupported(qualifiedNameLower))
+                && !ELEMENT_FACTORIES.containsKey(qualifiedNameLower)) {
             return SVG_FACTORY;
         }
         if (namespaceURI == null || namespaceURI.isEmpty()

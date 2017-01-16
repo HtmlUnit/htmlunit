@@ -332,7 +332,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "HEAD,HEAD,http://www.w3.org/1999/xhtml,null,head",
                 "[object HTMLBodyElement]", "BODY,BODY,http://www.w3.org/1999/xhtml,null,body",
                 "[object SVGGElement]", "g,g,http://www.w3.org/2000/svg,null,g"})
-    @NotYetImplemented
     public void svg_withoutNamespace() throws Exception {
         final String html =
             "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "

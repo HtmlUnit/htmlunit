@@ -16,10 +16,8 @@ package com.gargoylesoftware.htmlunit.svg;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG_UNKNOWN_ARE_DOM;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -38,7 +36,6 @@ import com.gargoylesoftware.htmlunit.html.ElementFactory;
  */
 public class SvgElementFactory implements ElementFactory {
 
-    private static List<String> IN_HTML_ALSO_ = Arrays.asList("a", "title", "script");
     private static Class<?>[] CLASSES_ = {SvgAltGlyph.class, SvgAltGlyphDef.class, SvgAltGlyphItem.class,
         SvgAnchor.class, SvgAnimate.class, SvgAnimateColor.class, SvgAnimateMotion.class, SvgAnimateTransform.class,
         SvgCircle.class, SvgClipPath.class, SvgColorProfile.class, SvgCursor.class, SvgDefs.class, SvgDesc.class,
@@ -145,11 +142,10 @@ public class SvgElementFactory implements ElementFactory {
 
     /**
      * Returns whether the specified name is a valid SVG tag name.
-     * @param tagName the tag name
+     * @param tagNameLowerCase the tag name in lower case
      * @return whether the specified name is a valid SVG tag name or not
      */
-    public boolean isSupported(final String tagName) {
-        return ELEMENTS_.containsKey(tagName.toLowerCase())
-                && !IN_HTML_ALSO_.contains(tagName.toLowerCase());
+    public boolean isSupported(final String tagNameLowerCase) {
+        return ELEMENTS_.containsKey(tagNameLowerCase);
     }
 }
