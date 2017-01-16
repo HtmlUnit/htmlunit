@@ -2276,4 +2276,27 @@ public class HtmlPage extends InteractivePage {
         }
         return elementFromPointHandler_.getElementFromPoint(this, x, y);
     }
+
+    /**
+     * Returns the element with the focus or null if no element has the focus.
+     * @return the element with focus or null
+     * @see #setFocusedElement(DomElement)
+     */
+    @Override
+    public DomElement getFocusedElement() {
+        return super.getFocusedElement();
+    }
+
+    /**
+     * Moves the focus to the specified element. This will trigger any relevant JavaScript
+     * event handlers.
+     *
+     * @param newElement the element that will receive the focus, use {@code null} to remove focus from any element
+     * @return true if the specified element now has the focus
+     * @see #getFocusedElement()
+     */
+    @Override
+    public boolean setFocusedElement(final DomElement newElement) {
+        return super.setFocusedElement(newElement);
+    }
 }
