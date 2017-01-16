@@ -297,7 +297,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     public <P extends Page> P setSelectedAttribute(final String optionValue,
             final boolean isSelected, final boolean invokeOnFocus) {
         try {
-            final boolean attributeOnly = hasFeature(JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE);
+            final boolean attributeOnly = hasFeature(JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE)
+                    && !optionValue.isEmpty();
             final HtmlOption selected;
             if (attributeOnly) {
                 selected = getOptionByValueStrict(optionValue);

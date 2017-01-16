@@ -1728,7 +1728,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverButton() throws Exception {
         mouseOver("<input id='tester' type='button' onmouseover='dumpEvent(event);' value='HtmlUnit'>");
     }
@@ -1842,7 +1841,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverCheckbox() throws Exception {
         mouseOver("<input id='tester' type='checkbox' onmouseover='dumpEvent(event);' value='HtmlUnit'>");
     }
@@ -1861,7 +1859,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverRadio() throws Exception {
         mouseOver("<input id='tester' type='radio' onmouseover='dumpEvent(event);' value='HtmlUnit'>");
     }
