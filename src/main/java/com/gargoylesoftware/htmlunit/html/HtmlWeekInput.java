@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 public class HtmlWeekInput extends HtmlInput {
 
     private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-'W'ww");
+
     /**
      * Creates an instance.
      *

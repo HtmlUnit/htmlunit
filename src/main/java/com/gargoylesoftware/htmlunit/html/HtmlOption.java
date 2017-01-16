@@ -103,7 +103,8 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         }
         final HtmlSelect select = getEnclosingSelect();
         if (select != null) {
-            if (!select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
+            if (hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION)
+                    && !select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
                 selected = true;
             }
             select.setSelectedAttribute(this, selected, invokeOnFocus);
