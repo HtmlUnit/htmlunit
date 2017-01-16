@@ -192,7 +192,9 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            Long.parseLong(newValue);
+            if (!newValue.isEmpty()) {
+                Long.parseLong(newValue);
+            }
             super.setValueAttribute(newValue);
         }
         catch (final NumberFormatException e) {

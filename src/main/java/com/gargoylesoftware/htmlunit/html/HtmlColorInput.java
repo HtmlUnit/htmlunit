@@ -69,4 +69,12 @@ public class HtmlColorInput extends HtmlInput {
         }
         return valid;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return false;
+    }
 }

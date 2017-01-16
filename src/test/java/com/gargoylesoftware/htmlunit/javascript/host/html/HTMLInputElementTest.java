@@ -1447,7 +1447,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "§§URL§§"})
-    @NotYetImplemented
     public void submitRequired() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1477,18 +1476,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true"})
-    @NotYetImplemented
     public void checkValidity() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
             + "function checkStatus() {\n"
             + "  var elem = document.getElementById('myInput');\n"
-            + "  if (elem.checkValidity) {\n"
-            + "    alert(elem.checkValidity());\n"
-            + "  } else {\n"
-            + "    alert('checkValidity not supported');\n"
-            + "  }\n"
+            + "  alert(elem.checkValidity());\n"
             + "}\n"
             + "</script></head>\n"
             + "<body>\n"

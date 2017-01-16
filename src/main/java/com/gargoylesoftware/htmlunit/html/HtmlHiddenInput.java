@@ -72,4 +72,12 @@ public class HtmlHiddenInput extends HtmlInput {
     public boolean mayBeDisplayed() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return false;
+    }
 }

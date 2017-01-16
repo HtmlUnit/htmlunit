@@ -108,6 +108,9 @@ public class HtmlForm extends HtmlElement {
         if (webClient.getOptions().isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
+                if (!areChildrenValid()) {
+                    return htmlPage;
+                }
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
                 if (isPreventDefault_) {
                     // null means 'nothing executed'
@@ -140,6 +143,17 @@ public class HtmlForm extends HtmlElement {
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
         webClient.download(webWindow, target, request, checkHash, false, "JS form.submit()");
         return htmlPage;
+    }
+
+    private boolean areChildrenValid() {
+        boolean valid = true;
+        for (HtmlElement element : getFormHtmlElementDescendants()) {
+            if (element instanceof HtmlInput && !((HtmlInput) element).isValid()) {
+                valid = false;
+                break;
+            }
+        }
+        return valid;
     }
 
     /**

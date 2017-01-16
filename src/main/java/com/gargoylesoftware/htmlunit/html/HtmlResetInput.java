@@ -129,4 +129,12 @@ public class HtmlResetInput extends HtmlInput {
     protected boolean propagateClickStateUpdateToParent() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return false;
+    }
 }

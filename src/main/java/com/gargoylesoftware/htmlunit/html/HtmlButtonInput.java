@@ -61,4 +61,12 @@ public class HtmlButtonInput extends HtmlInput {
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return false;
+    }
 }

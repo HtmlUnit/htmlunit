@@ -799,4 +799,12 @@ public class HTMLInputElement extends FormField {
         return labels_;
     }
 
+    /**
+     * Checks whether the element has any constraints and whether it satisfies them.
+     * @return if the element is valid
+     */
+    @JsxFunction
+    public boolean checkValidity() {
+        return getDomNodeOrDie().isValid();
+    }
 }

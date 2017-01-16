@@ -53,4 +53,12 @@ public class HtmlRangeInput extends HtmlInput {
             // ignore
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return false;
+    }
 }
