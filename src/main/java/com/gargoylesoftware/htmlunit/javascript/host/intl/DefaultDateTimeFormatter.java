@@ -79,8 +79,7 @@ class DefaultDateTimeFormatter implements AbstractDateTimeFormatter {
                 chronology_ = ThaiBuddhistChronology.INSTANCE;
                 break;
 
-                default:
-
+            default:
         }
     }
 

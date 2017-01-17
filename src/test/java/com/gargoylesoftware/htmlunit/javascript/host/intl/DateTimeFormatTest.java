@@ -94,12 +94,35 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     }
 
     /**
+     * Test not supported locale.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12/20/2012",
+        IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
+    public void format_ban() throws Exception {
+        test("new Intl.DateTimeFormat('ban').format(date)");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
             IE = "\u200e20\u200e\u002f\u200e12\u200e\u002f\u200e2012")
-    @NotYetImplemented
+    public void format_id() throws Exception {
+        test("new Intl.DateTimeFormat('id').format(date)");
+    }
+
+    /**
+     * Test the fallback language, in this case {@code Indonesian}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "20/12/2012",
+            IE = "\u200e20\u200e\u002f\u200e12\u200e\u002f\u200e2012")
     public void format_ban_id() throws Exception {
         test("new Intl.DateTimeFormat(['ban', 'id']).format(date)");
     }

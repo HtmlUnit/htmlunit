@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -95,6 +96,7 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_45_FORMATS_.put("hi", ddSlash);
         FF_45_FORMATS_.put("hr", ddDotBlankDot);
         FF_45_FORMATS_.put("hu", yyyyDotBlankDot);
+        FF_45_FORMATS_.put("id", ddSlash);
         FF_45_FORMATS_.put("in", ddSlash);
         FF_45_FORMATS_.put("is", ddDot);
         FF_45_FORMATS_.put("it", ddSlash);
@@ -217,7 +219,7 @@ public class DateTimeFormat extends SimpleScriptable {
     public DateTimeFormat() {
     }
 
-    private DateTimeFormat(final String locale, final BrowserVersion browserVersion) {
+    private DateTimeFormat(final String[] locales, final BrowserVersion browserVersion) {
         final Map<String, String> formats;
         if (browserVersion.isChrome()) {
             formats = CHROME_FORMATS_;
@@ -228,14 +230,18 @@ public class DateTimeFormat extends SimpleScriptable {
         else {
             formats = FF_45_FORMATS_;
         }
-        String pattern = formats.get(locale);
-        if (pattern == null && locale.indexOf('-') != -1) {
-            pattern = formats.get(locale.substring(0,  locale.indexOf('-')));
-        }
-        if (pattern == null) {
-            if ("no-NO-NY".equals(locale)) {
-                throw ScriptRuntime.rangeError("Invalid language tag: " + locale);
+
+        String locale = "";
+        String pattern = null;
+
+        for (String l : locales) {
+            pattern = getPattern(formats, l);
+            if (pattern != null) {
+                locale = l;
             }
+        }
+
+        if (pattern == null) {
             pattern = formats.get("");
         }
         if (!browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK) && !locale.startsWith("ar")) {
@@ -250,6 +256,16 @@ public class DateTimeFormat extends SimpleScriptable {
         }
     }
 
+    private static String getPattern(final Map<String, String> formats, final String locale) {
+        if ("no-NO-NY".equals(locale)) {
+            throw ScriptRuntime.rangeError("Invalid language tag: " + locale);
+        }
+        String pattern = formats.get(locale);
+        if (pattern == null && locale.indexOf('-') != -1) {
+            pattern = formats.get(locale.substring(0, locale.indexOf('-')));
+        }
+        return pattern;
+    }
     /**
      * JavaScript constructor.
      * @param cx the current context
@@ -261,15 +277,24 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
-        final String locale;
+        final String[] locales;
         if (args.length != 0) {
-            locale = Context.toString(args[0]);
+            if (args[0] instanceof NativeArray) {
+                final NativeArray array = (NativeArray) args[0];
+                locales = new String[(int) array.getLength()];
+                for (int i = 0; i < locales.length; i++) {
+                    locales[i] = Context.toString(array.get(i));
+                }
+            }
+            else {
+                locales = new String[] {Context.toString(args[0])};
+            }
         }
         else {
-            locale = "";
+            locales = new String[] {""};
         }
         final Window window = getWindow(ctorObj);
-        final DateTimeFormat format = new DateTimeFormat(locale, window.getBrowserVersion());
+        final DateTimeFormat format = new DateTimeFormat(locales, window.getBrowserVersion());
         format.setParentScope(window);
         format.setPrototype(window.getPrototype(format.getClass()));
         return format;
