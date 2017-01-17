@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunnerWithParame
  *    &#064;Test
  *    &#064;Alerts("some alert")
  *    &#064;Default
- *    public void test() {
+ *    public void test() throws Exception {
  *       loadPageWithAlerts2("some HTML with " + param1 + " " + param2);
  *    }
  *
@@ -85,14 +85,14 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunnerWithParame
  *    &#064;Test
  *    &#064;Alerts("another alert")
  *    &#064;NotYetImplemented
- *    public void _3_2() {
+ *    public void _3_2() throws Exception {
  *       loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
  *    }
  *
  *    &#064;Test
  *    &#064;Alerts("another alert")
  *    &#064;NotYetImplemented
- *    public void anotherTest() {
+ *    public void anotherTest() throws Exception {
  *       loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
  *    }
  * }

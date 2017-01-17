@@ -143,8 +143,40 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "Donnerstag, 20. Dezember 2012 n. Chr., 04:00:00",
+            IE = "\u200EDonnerstag\u200E,"
+                + " \u200E20\u200E. \u200EDezember\u200E \u200E2012\u200E \u200E04\u200E:\u200E00\u200E:\u200E00")
+    @NotYetImplemented
+    public void format_weekday_long_all() throws Exception {
+        test("var options = { weekday: 'long', era: 'long', year: 'numeric', month: 'long', day: 'numeric',"
+                + " hour: 'numeric', minute: 'numeric', second: 'numeric' };",
+                "new Intl.DateTimeFormat('de-DE', options).format(date)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "\u0627\u0644\u062E\u0645\u064A\u0633\u060C \u0662\u0660 \u062F\u064A\u0633\u0645\u0628\u0631"
+                + "\u060C \u0662\u0660\u0661\u0662 \u0645\u064A\u0644\u0627\u062F\u064A \u0664:\u0660\u0660:\u0660"
+                + "\u0660 \u0635",
+            IE = "\u200F\u0627\u0644\u062E\u0645\u064A\u0633\u200F,"
+                + " \u200F\u0660\u0667\u200F \u200F\u0635\u0641\u0631\u200F,"
+                + " \u200F\u0661\u0664\u0663\u0664\u200F \u200E\u0660\u0664\u200E:\u200E\u0660\u0660\u200E:\u200E"
+                + "\u0660\u0660\u200E \u200E\u0635")
+    @NotYetImplemented
+    public void format_weekday_long_all_ar() throws Exception {
+        test("var options = { weekday: 'long', era: 'long', year: 'numeric', month: 'long', day: 'numeric',"
+                + " hour: 'numeric', minute: 'numeric', second: 'numeric' };",
+                "new Intl.DateTimeFormat('ar', options).format(date)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "Thursday, December 20, 2012, GMT",
-            IE = "\u200eThursday‎, ‎December‎ ‎20‎, ‎2012")
+            IE = "\u200eThursdayÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ, ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂDecemberÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ20ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ, ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ2012")
     @NotYetImplemented
     public void format_utc_short() throws Exception {
         test("var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };",
@@ -158,7 +190,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "4:00:00 am GMT+1",
-            IE = "‎4‎:‎00‎:‎00‎ ‎AM")
+            IE = "ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ4ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ:ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ00ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ:ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ00ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂAM")
     @NotYetImplemented
     public void format_detailed() throws Exception {
         test("options = {",

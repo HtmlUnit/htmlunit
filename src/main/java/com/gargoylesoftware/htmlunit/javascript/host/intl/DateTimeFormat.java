@@ -266,6 +266,7 @@ public class DateTimeFormat extends SimpleScriptable {
         }
         return pattern;
     }
+
     /**
      * JavaScript constructor.
      * @param cx the current context
