@@ -656,10 +656,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void submitOnEnterWithoutForm() throws Exception {
-        // this seem to be a bug in Selenium
-        // real browsers simply ignore the missing form
         final String html =
             "<html>\n"
             + "<body>\n"

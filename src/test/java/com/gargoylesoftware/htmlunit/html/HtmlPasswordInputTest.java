@@ -438,7 +438,6 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Alerts({"initial-initial-initial", "default-default-default",
                 "newValue-default-default", "newValue-attribValue-attribValue",
                 "newValue-newDefault-newDefault"})
-    @NotYetImplemented
     public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

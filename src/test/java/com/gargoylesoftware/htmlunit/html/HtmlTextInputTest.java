@@ -437,7 +437,6 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Alerts({"initial-initial-initial", "default-default-default",
                 "newValue-default-default", "newValue-attribValue-attribValue",
                 "newValue-newDefault-newDefault"})
-    @NotYetImplemented
     public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -624,10 +623,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void submitOnEnterWithoutForm() throws Exception {
-        // this seem to be a bug in Selenium
-        // real browsers simply ignore the missing form
         final String html =
             "<html>\n"
             + "<body>\n"

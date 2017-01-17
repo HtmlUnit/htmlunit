@@ -75,6 +75,8 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -128,13 +130,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * All browsers supported.
      */
     public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-        BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+            BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
 
     /**
      * Browsers which run by default.
      */
     public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-                                                                BrowserVersion.INTERNET_EXPLORER};
+            BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
@@ -187,8 +189,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         browsersValue = "hu";
                     }
                     BROWSERS_PROPERTIES_
-                        = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
-                                .toLowerCase(Locale.ROOT).split(",")));
+                    = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
+                            .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
@@ -437,8 +439,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         builder.usingDriverExecutable(new File(CHROME_BIN_));
                     }
                     CHROME_SERVICE_ = builder
-                        .usingAnyFreePort()
-                        .build();
+                            .usingAnyFreePort()
+                            .build();
 
                     CHROME_SERVICE_.start();
                 }
@@ -608,7 +610,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
          */
         @Override
         protected void service(final HttpServletRequest request, final HttpServletResponse response)
-            throws ServletException, IOException {
+                throws ServletException, IOException {
 
             try {
                 doService(request, response);
@@ -625,7 +627,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         private static void doService(final HttpServletRequest request, final HttpServletResponse response)
-            throws Exception {
+                throws Exception {
             String url = request.getRequestURL().toString();
             if (LOG.isDebugEnabled()) {
                 LOG.debug(request.getMethod() + " " + url);
@@ -857,7 +859,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime)
-        throws Exception {
+            throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
 
@@ -886,7 +888,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of failure
      */
     protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
-        throws Exception {
+            throws Exception {
         List<String> actualAlerts = null;
 
         try {
@@ -1170,6 +1172,17 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
         catch (final IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void submit() {
+        if (element instanceof HtmlInput) {
+            final HtmlForm form = ((HtmlElement) element).getEnclosingForm();
+            if (form == null) {
+                return;
+            }
+        }
+        super.submit();
     }
 
     @Override
