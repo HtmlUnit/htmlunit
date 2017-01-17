@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -305,7 +302,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664",
             FF45 = "\u0667\u200F/\u0662\u200F/\u0661\u0664\u0663\u0664 \u0647\u0640")
-    @NotYetImplemented({IE, FF45})
     public void format_ar_sa() throws Exception {
         test("new Intl.DateTimeFormat('ar-SA').format(date)");
     }
@@ -316,7 +312,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664")
-    @NotYetImplemented(IE)
     public void format_ar_sd() throws Exception {
         test("new Intl.DateTimeFormat('ar-SD').format(date)");
     }
@@ -1332,9 +1327,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "exception")
-    @NotYetImplemented
+    @Alerts("exception")
     public void format_no_no_ny() throws Exception {
         test("new Intl.DateTimeFormat('no-NO-NY').format(date)");
     }
@@ -1567,7 +1560,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20/12/2555",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2555")
-    @NotYetImplemented
     public void format_th() throws Exception {
         test("new Intl.DateTimeFormat('th').format(date)");
     }
@@ -1578,7 +1570,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20/12/2555",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2555")
-    @NotYetImplemented
     public void format_th_th() throws Exception {
         test("new Intl.DateTimeFormat('th-TH').format(date)");
     }

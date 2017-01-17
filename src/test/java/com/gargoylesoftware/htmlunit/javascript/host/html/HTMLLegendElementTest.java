@@ -108,7 +108,6 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "top"},
             IE = {"center", "error", "center", "error", "center", "left", "right", "bottom", "top"})
-    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

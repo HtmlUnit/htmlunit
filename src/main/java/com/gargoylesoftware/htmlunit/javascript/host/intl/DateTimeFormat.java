@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -115,6 +116,7 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_45_FORMATS_.put("sq", ddSlash);
         FF_45_FORMATS_.put("sr", ddDotBlankDot);
         FF_45_FORMATS_.put("sv", yyyyDash);
+        FF_45_FORMATS_.put("th", ddSlash);
         FF_45_FORMATS_.put("tr", ddDot);
         FF_45_FORMATS_.put("uk", ddDot);
         FF_45_FORMATS_.put("vi", ddSlash);
@@ -125,6 +127,7 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.putAll(FF_45_FORMATS_);
         IE_FORMATS_.putAll(FF_45_FORMATS_);
 
+        FF_45_FORMATS_.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         FF_45_FORMATS_.put("en-CA", yyyyDash);
         FF_45_FORMATS_.put("en-PH", ddSlash);
         FF_45_FORMATS_.put("es-US", ddSlash);
@@ -154,11 +157,11 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("sr", ddDotDot);
         CHROME_FORMATS_.put("mk", yyyyDash);
 
-        IE_FORMATS_.put("ar", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
+        IE_FORMATS_.put("ar", rightToLeft);
         IE_FORMATS_.put("ar-AE", rightToLeft);
         IE_FORMATS_.put("ar-BH", rightToLeft);
         IE_FORMATS_.put("ar-DZ", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ar-LY", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
+        IE_FORMATS_.put("ar-LY", rightToLeft);
         IE_FORMATS_.put("ar-MA", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
         IE_FORMATS_.put("ar-TN", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
         IE_FORMATS_.put("ar-EG", rightToLeft);
@@ -168,6 +171,8 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("ar-LB", rightToLeft);
         IE_FORMATS_.put("ar-OM", rightToLeft);
         IE_FORMATS_.put("ar-QA", rightToLeft);
+        IE_FORMATS_.put("ar-SA", rightToLeft);
+        IE_FORMATS_.put("ar-SD", rightToLeft);
         IE_FORMATS_.put("ar-SY", rightToLeft);
         IE_FORMATS_.put("ar-YE", rightToLeft);
         IE_FORMATS_.put("cs", ddDot);
@@ -228,6 +233,9 @@ public class DateTimeFormat extends SimpleScriptable {
             pattern = formats.get(locale.substring(0,  locale.indexOf('-')));
         }
         if (pattern == null) {
+            if ("no-NO-NY".equals(locale)) {
+                throw ScriptRuntime.rangeError("Invalid language tag: " + locale);
+            }
             pattern = formats.get("");
         }
         if (!browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK) && !locale.startsWith("ar")) {

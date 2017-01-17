@@ -21,6 +21,7 @@ import java.time.ZoneId;
 import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
 import java.time.chrono.JapaneseChronology;
+import java.time.chrono.ThaiBuddhistChronology;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DecimalStyle;
 import java.time.temporal.TemporalAccessor;
@@ -50,11 +51,36 @@ class DefaultDateTimeFormatter implements AbstractDateTimeFormatter {
             formatter_ = formatter_.withDecimalStyle(decimalStyle);
         }
 
-        if ("ja-JP-u-ca-japanese".equals(locale)) {
-            chronology_ = JapaneseChronology.INSTANCE;
-        }
-        else if ("ar".equals(locale) && browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
-            chronology_ = HijrahChronology.INSTANCE;
+        switch (locale) {
+            case "ja-JP-u-ca-japanese":
+                chronology_ = JapaneseChronology.INSTANCE;
+                break;
+
+            case "ar":
+                if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
+                    chronology_ = HijrahChronology.INSTANCE;
+                }
+                break;
+
+            case "ar-SA":
+                if (browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)) {
+                    chronology_ = HijrahChronology.INSTANCE;
+                }
+                break;
+
+            case "ar-SD":
+                if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
+                    chronology_ = HijrahChronology.INSTANCE;
+                }
+                break;
+
+            case "th":
+            case "th-TH":
+                chronology_ = ThaiBuddhistChronology.INSTANCE;
+                break;
+
+                default:
+
         }
     }
 
