@@ -760,7 +760,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var cdata = root.firstChild;\n"
             + test
-            + "    } catch(e) { alert(e); }\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 

@@ -2191,7 +2191,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 || "center".equals(alignLC)
                 || "justify".equals(alignLC)
                 || "left".equals(alignLC)
-                || "right".equals(alignLC)) {
+                || "right".equals(alignLC)
+                || "bottom".equals(alignLC)
+                || "middle".equals(alignLC)
+                || "top".equals(alignLC)) {
             if (!ignoreIfNoError) {
                 final String newValue = acceptArbitraryValues ? align : alignLC;
                 getDomNodeOrDie().setAttribute("align", newValue);

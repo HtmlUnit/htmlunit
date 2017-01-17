@@ -539,6 +539,9 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getAlign() {
+        if (getBrowserVersion().hasFeature(JS_ALIGN_FOR_INPUT_IGNORES_VALUES)) {
+            return "";
+        }
         return getAlign(true);
     }
 
