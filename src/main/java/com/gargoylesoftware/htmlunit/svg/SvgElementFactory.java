@@ -49,7 +49,7 @@ public class SvgElementFactory implements ElementFactory {
         SvgFontFaceURI.class, SvgForeignObject.class, SvgGlyph.class, SvgGlyphRef.class, SvgGroup.class,
         SvgHKern.class, SvgImage.class, SvgLine.class, SvgLinearGradient.class, SvgMarker.class, SvgMask.class,
         SvgMetadata.class, SvgMissingGlyph.class, SvgMPath.class, SvgPath.class, SvgPattern.class, SvgPolygon.class,
-        SvgPolyline.class,  SvgRadialGradient.class, SvgRect.class, SvgScript.class, SvgSet.class, SvgStop.class,
+        SvgPolyline.class, SvgRadialGradient.class, SvgRect.class, SvgScript.class, SvgSet.class, SvgStop.class,
         SvgStyle.class, SvgSvg.class, SvgSwitch.class, SvgSymbol.class, SvgText.class, SvgTextPath.class,
         SvgTitle.class, SvgTRef.class, SvgTSpan.class, SvgUse.class, SvgView.class, SvgVKern.class
     };

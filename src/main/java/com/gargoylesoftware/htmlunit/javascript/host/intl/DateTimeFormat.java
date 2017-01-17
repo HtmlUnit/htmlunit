@@ -150,9 +150,12 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("es-PR", ddSlash);
         CHROME_FORMATS_.put("es-US", ddSlash);
         CHROME_FORMATS_.put("hr", ddDotDot);
-        CHROME_FORMATS_.put("in", ddDot);
+        CHROME_FORMATS_.put("in", mmSlash);
         CHROME_FORMATS_.put("in-ID", ddSlash);
+        CHROME_FORMATS_.put("in", mmSlash);
         CHROME_FORMATS_.put("is", yyyyDash);
+        CHROME_FORMATS_.put("iw", mmSlash);
+        CHROME_FORMATS_.put("iw-IL", ddDot);
         CHROME_FORMATS_.put("ja-JP-u-ca-japanese", "平成yy/MM/dd");
         CHROME_FORMATS_.put("sk", ddDotBlank);
         CHROME_FORMATS_.put("sq", yyyyDash);
@@ -205,10 +208,10 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("sl", ddDot);
         IE_FORMATS_.put("sq", yyyyDash);
         IE_FORMATS_.put("sr", ddDot);
-        IE_FORMATS_.put("sr-BA", ddDot);
-        IE_FORMATS_.put("sr-CS", ddDot);
-        IE_FORMATS_.put("sr-ME", ddDot);
-        IE_FORMATS_.put("sr-RS", ddDot);
+        IE_FORMATS_.put("sr-BA", mmSlash);
+        IE_FORMATS_.put("sr-CS", mmSlash);
+        IE_FORMATS_.put("sr-ME", mmSlash);
+        IE_FORMATS_.put("sr-RS", mmSlash);
         IE_FORMATS_.put("zh", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
         IE_FORMATS_.put("zh-HK", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
     }

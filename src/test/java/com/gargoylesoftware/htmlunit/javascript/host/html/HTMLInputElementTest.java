@@ -117,7 +117,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                         "", "", "50", "  ", "", "  ", ""},
             IE = {"  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
                     "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ",
-                    "  ", "", "50", "  ",  "  ", "  ", "  "})
+                    "  ", "", "50", "  ", "  ", "  ", "  "})
     @Test
     public void setValueBlankString() throws Exception {
         testValue("'  '");

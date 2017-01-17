@@ -687,8 +687,8 @@ public class CodeStyleTest {
                     int p0 = line.indexOf("{@code ");
                     if (p0 != -1) {
                         p0 = p0 + "{@code ".length();
-                        final int p1 = line.indexOf('}',  p0 + 1);
-                        final String name = line.substring(p0,  p1);
+                        final int p1 = line.indexOf('}', p0 + 1);
+                        final String name = line.substring(p0, p1);
                         if (!name.equals(fileName)) {
                             failureFound = true;
                         }

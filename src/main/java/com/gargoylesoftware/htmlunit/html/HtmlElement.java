@@ -207,7 +207,13 @@ public abstract class HtmlElement extends DomElement {
         fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
     }
 
-    private static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
+    /**
+     * Recursively notifies all {@link HtmlAttributeChangeListener}s. 
+     * @param event the event
+     * @param element the element
+     * @param oldAttributeValue the old attribute value
+     */
+    protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue) {
         final Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {

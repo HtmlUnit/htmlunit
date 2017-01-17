@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.http.HttpStatus;
 import org.junit.After;
@@ -55,9 +56,9 @@ public class WebResponseTest extends WebServerTestCase {
     @Test
     @Alerts("\u6211\u662F\u6211\u7684 \u064A\u0627 \u0623\u0647\u0644\u0627\u064B")
     public void recognizeBOM() throws Exception {
-        recognizeBOM("UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf});
-        recognizeBOM("UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff});
-        recognizeBOM("UTF-16LE", new byte[] {(byte) 0xff, (byte) 0xfe});
+        recognizeBOM("UTF-8",  ByteOrderMark.UTF_8.getBytes());
+        recognizeBOM("UTF-16BE", ByteOrderMark.UTF_16BE.getBytes());
+        recognizeBOM("UTF-16LE", ByteOrderMark.UTF_16LE.getBytes());
     }
 
     private void recognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
