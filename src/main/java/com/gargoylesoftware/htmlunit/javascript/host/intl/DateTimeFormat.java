@@ -17,10 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.intl;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_AR_DZ_ASCII_DIGITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DecimalStyle;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,12 +44,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class DateTimeFormat extends SimpleScriptable {
 
-    private static Map<String, String> FF_38_FORMATS_ = new HashMap<>();
     private static Map<String, String> FF_45_FORMATS_ = new HashMap<>();
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
-    private DateFormat format_;
+    private DateTimeFormatter formatter_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -67,75 +65,68 @@ public class DateTimeFormat extends SimpleScriptable {
         final String yyyyDotDot = "\u200EYYYY\u200E.\u200EMM\u200E.\u200Edd\u200E.";
         final String rightToLeft = "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY";
 
-        FF_38_FORMATS_.put("", mmSlash);
-        FF_38_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
-        FF_38_FORMATS_.put("be", ddDot);
-        FF_38_FORMATS_.put("bg", ddDot + "\u200E \u0433.");
-        FF_38_FORMATS_.put("ca", ddSlash);
-        FF_38_FORMATS_.put("cs", ddDotBlank);
-        FF_38_FORMATS_.put("da", ddSlash);
-        FF_38_FORMATS_.put("de", ddDot);
-        FF_38_FORMATS_.put("el", ddSlash);
-        FF_38_FORMATS_.put("en-NZ", ddSlash);
-        FF_38_FORMATS_.put("en-PA", ddSlash);
-        FF_38_FORMATS_.put("en-PR", ddSlash);
-        FF_38_FORMATS_.put("en-AU", ddSlash);
-        FF_38_FORMATS_.put("en-GB", ddSlash);
-        FF_38_FORMATS_.put("en-IE", ddSlash);
-        FF_38_FORMATS_.put("en-IN", ddSlash);
-        FF_38_FORMATS_.put("en-MT", ddSlash);
-        FF_38_FORMATS_.put("en-SG", ddSlash);
-        FF_38_FORMATS_.put("en-ZA", yyyySlash);
-        FF_38_FORMATS_.put("es", ddSlash);
-        FF_38_FORMATS_.put("es-CL", ddDash);
-        FF_38_FORMATS_.put("es-PA", mmSlash);
-        FF_38_FORMATS_.put("es-PR", mmSlash);
-        FF_38_FORMATS_.put("es-US", mmSlash);
-        FF_38_FORMATS_.put("et", ddDot);
-        FF_38_FORMATS_.put("fi", ddDot);
-        FF_38_FORMATS_.put("fr", ddSlash);
-        FF_38_FORMATS_.put("fr-CA", yyyyDash);
-        FF_38_FORMATS_.put("ga", yyyyDash);
-        FF_38_FORMATS_.put("hi", ddSlash);
-        FF_38_FORMATS_.put("hr", ddDotBlankDot);
-        FF_38_FORMATS_.put("hu", yyyyDotBlankDot);
-        FF_38_FORMATS_.put("in", ddSlash);
-        FF_38_FORMATS_.put("is", ddDot);
-        FF_38_FORMATS_.put("it", ddSlash);
-        FF_38_FORMATS_.put("iw", ddDot);
-        FF_38_FORMATS_.put("ja", yyyySlash);
-        FF_38_FORMATS_.put("ko", yyyyDotBlankDot);
-        FF_38_FORMATS_.put("lt", yyyyDash);
-        FF_38_FORMATS_.put("lv", ddDotDot);
-        FF_38_FORMATS_.put("mk", ddDot);
-        FF_38_FORMATS_.put("ms", ddSlash);
-        FF_38_FORMATS_.put("mt", yyyyDash);
-        FF_38_FORMATS_.put("nl", ddDash);
-        FF_38_FORMATS_.put("pl", ddDot);
-        FF_38_FORMATS_.put("pt", ddSlash);
-        FF_38_FORMATS_.put("ro", ddDot);
-        FF_38_FORMATS_.put("ru", ddDot);
-        FF_38_FORMATS_.put("sk", ddDot);
-        FF_38_FORMATS_.put("sl", ddDotBlank);
-        FF_38_FORMATS_.put("sq", ddSlash);
-        FF_38_FORMATS_.put("sr", ddDotBlankDot);
-        FF_38_FORMATS_.put("sv", yyyyDash);
-        FF_38_FORMATS_.put("tr", ddDot);
-        FF_38_FORMATS_.put("uk", ddDot);
-        FF_38_FORMATS_.put("vi", ddSlash);
-        FF_38_FORMATS_.put("zh", yyyySlash);
-        FF_38_FORMATS_.put("zh-HK", ddSlash);
-        FF_38_FORMATS_.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
+        FF_45_FORMATS_.put("", mmSlash);
+        FF_45_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
+        FF_45_FORMATS_.put("be", ddDot);
+        FF_45_FORMATS_.put("bg", ddDot + "\u200E \u0433.");
+        FF_45_FORMATS_.put("ca", ddSlash);
+        FF_45_FORMATS_.put("cs", ddDotBlank);
+        FF_45_FORMATS_.put("da", ddSlash);
+        FF_45_FORMATS_.put("de", ddDot);
+        FF_45_FORMATS_.put("el", ddSlash);
+        FF_45_FORMATS_.put("en-NZ", ddSlash);
+        FF_45_FORMATS_.put("en-PA", ddSlash);
+        FF_45_FORMATS_.put("en-PR", ddSlash);
+        FF_45_FORMATS_.put("en-AU", ddSlash);
+        FF_45_FORMATS_.put("en-GB", ddSlash);
+        FF_45_FORMATS_.put("en-IE", ddSlash);
+        FF_45_FORMATS_.put("en-IN", ddSlash);
+        FF_45_FORMATS_.put("en-MT", ddSlash);
+        FF_45_FORMATS_.put("en-SG", ddSlash);
+        FF_45_FORMATS_.put("en-ZA", yyyySlash);
+        FF_45_FORMATS_.put("es", ddSlash);
+        FF_45_FORMATS_.put("es-CL", ddDash);
+        FF_45_FORMATS_.put("es-PA", mmSlash);
+        FF_45_FORMATS_.put("es-PR", mmSlash);
+        FF_45_FORMATS_.put("es-US", mmSlash);
+        FF_45_FORMATS_.put("et", ddDot);
+        FF_45_FORMATS_.put("fi", ddDot);
+        FF_45_FORMATS_.put("fr", ddSlash);
+        FF_45_FORMATS_.put("fr-CA", yyyyDash);
+        FF_45_FORMATS_.put("ga", yyyyDash);
+        FF_45_FORMATS_.put("hi", ddSlash);
+        FF_45_FORMATS_.put("hr", ddDotBlankDot);
+        FF_45_FORMATS_.put("hu", yyyyDotBlankDot);
+        FF_45_FORMATS_.put("in", ddSlash);
+        FF_45_FORMATS_.put("is", ddDot);
+        FF_45_FORMATS_.put("it", ddSlash);
+        FF_45_FORMATS_.put("iw", ddDot);
+        FF_45_FORMATS_.put("ja", yyyySlash);
+        FF_45_FORMATS_.put("ko", yyyyDotBlankDot);
+        FF_45_FORMATS_.put("lt", yyyyDash);
+        FF_45_FORMATS_.put("lv", ddDotDot);
+        FF_45_FORMATS_.put("mk", ddDot);
+        FF_45_FORMATS_.put("ms", ddSlash);
+        FF_45_FORMATS_.put("mt", yyyyDash);
+        FF_45_FORMATS_.put("nl", ddDash);
+        FF_45_FORMATS_.put("pl", ddDot);
+        FF_45_FORMATS_.put("pt", ddSlash);
+        FF_45_FORMATS_.put("ro", ddDot);
+        FF_45_FORMATS_.put("ru", ddDot);
+        FF_45_FORMATS_.put("sk", ddDot);
+        FF_45_FORMATS_.put("sl", ddDotBlank);
+        FF_45_FORMATS_.put("sq", ddSlash);
+        FF_45_FORMATS_.put("sr", ddDotBlankDot);
+        FF_45_FORMATS_.put("sv", yyyyDash);
+        FF_45_FORMATS_.put("tr", ddDot);
+        FF_45_FORMATS_.put("uk", ddDot);
+        FF_45_FORMATS_.put("vi", ddSlash);
+        FF_45_FORMATS_.put("zh", yyyySlash);
+        FF_45_FORMATS_.put("zh-HK", ddSlash);
+        FF_45_FORMATS_.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
 
-        FF_45_FORMATS_.putAll(FF_38_FORMATS_);
-        CHROME_FORMATS_.putAll(FF_38_FORMATS_);
-        IE_FORMATS_.putAll(FF_38_FORMATS_);
-        FF_45_FORMATS_.putAll(FF_38_FORMATS_);
-
-        FF_38_FORMATS_.put("sr-BA", ddDotBlankDot);
-        FF_38_FORMATS_.put("sr-CS", ddDotBlankDot);
-        FF_38_FORMATS_.put("sr-ME", ddDotBlankDot);
-        FF_38_FORMATS_.put("sr-RS", ddDotBlankDot);
+        CHROME_FORMATS_.putAll(FF_45_FORMATS_);
+        IE_FORMATS_.putAll(FF_45_FORMATS_);
 
         FF_45_FORMATS_.put("en-CA", yyyyDash);
         FF_45_FORMATS_.put("en-PH", ddSlash);
@@ -228,11 +219,8 @@ public class DateTimeFormat extends SimpleScriptable {
         else if (browserVersion.isIE()) {
             formats = IE_FORMATS_;
         }
-        else if (browserVersion.isFirefox() && browserVersion.getBrowserVersionNumeric() == 45) {
-            formats = FF_45_FORMATS_;
-        }
         else {
-            formats = FF_38_FORMATS_;
+            formats = FF_45_FORMATS_;
         }
         String pattern = formats.get(locale);
         if (pattern == null && locale.indexOf('-') != -1) {
@@ -245,22 +233,16 @@ public class DateTimeFormat extends SimpleScriptable {
             pattern = pattern.replace("\u200E", "");
         }
 
-        format_ = new SimpleDateFormat(pattern);
+        formatter_ = DateTimeFormatter.ofPattern(pattern);
         if (locale.startsWith("ar")
                 && (!browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)
                         || (!"ar-DZ".equals(locale)
                                 && !"ar-LY".equals(locale)
                                 && !"ar-MA".equals(locale)
                                 && !"ar-TN".equals(locale)))) {
-            setZeroDigit('\u0660');
+            final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
+            formatter_ = formatter_.withDecimalStyle(decimalStyle);
         }
-    }
-
-    private void setZeroDigit(final char zeroDigit) {
-        final DecimalFormat df = (DecimalFormat) format_.getNumberFormat();
-        final DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
-        dfs.setZeroDigit(zeroDigit);
-        df.setDecimalFormatSymbols(dfs);
     }
 
     /**
@@ -296,7 +278,7 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxFunction
     public String format(final Object object) {
         final Date date = (Date) Context.jsToJava(object, Date.class);
-        return format_.format(date);
+        return formatter_.format(date.toInstant().atZone(ZoneId.systemDefault()));
     }
 
 }
