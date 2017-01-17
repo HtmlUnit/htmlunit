@@ -503,7 +503,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var s = getSelection(document.getElementById('text1'));\n"
-            + "    if (s) {\n"
+            + "    if (s != undefined) {\n"
             + "      alert(s.length);\n"
             + "    }\n"
             + "  }\n"
