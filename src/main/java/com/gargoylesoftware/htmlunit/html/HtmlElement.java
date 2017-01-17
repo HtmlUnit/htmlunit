@@ -208,7 +208,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Recursively notifies all {@link HtmlAttributeChangeListener}s. 
+     * Recursively notifies all {@link HtmlAttributeChangeListener}s.
      * @param event the event
      * @param element the element
      * @param oldAttributeValue the old attribute value
