@@ -57,9 +57,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "<input type='image' name='aButton' value='foo'/>\n"
-            + "<input type='image' name='button' value='foo'/>\n"
-            + "<input type='image' name='anotherButton' value='foo'/>\n"
+            + "  <input type='image' name='aButton' value='foo'/>\n"
+            + "  <input type='image' name='button' value='foo'/>\n"
+            + "  <input type='image' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
@@ -73,14 +73,14 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
-            CHROME = "§§URL§§?button.x=22&button.y=7",
+            CHROME = "§§URL§§?button.x=20&button.y=7",
             IE = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({CHROME, IE})
     public void click_NoPosition_NoValue() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "<input type='image' name='button'>\n"
+            + "  <input type='image' name='button'>\n"
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
