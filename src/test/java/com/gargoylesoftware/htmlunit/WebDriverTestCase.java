@@ -130,13 +130,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * All browsers supported.
      */
     public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-            BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+        BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
 
     /**
      * Browsers which run by default.
      */
     public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-            BrowserVersion.INTERNET_EXPLORER};
+        BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
@@ -188,8 +188,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     if (browsersValue == null || browsersValue.isEmpty()) {
                         browsersValue = "hu";
                     }
-                    BROWSERS_PROPERTIES_
-                    = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
+                    BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
                             .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");

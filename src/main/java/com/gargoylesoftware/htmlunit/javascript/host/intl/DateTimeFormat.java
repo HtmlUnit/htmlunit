@@ -14,21 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_AR_DZ_ASCII_DIGITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
-import java.time.ZoneId;
-import java.time.chrono.Chronology;
-import java.time.chrono.HijrahChronology;
-import java.time.chrono.JapaneseChronology;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DecimalStyle;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -52,8 +45,7 @@ public class DateTimeFormat extends SimpleScriptable {
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
-    private DateTimeFormatter formatter_;
-    private Chronology chronology_;
+    private AbstractDateTimeFormatter formatter_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -242,22 +234,11 @@ public class DateTimeFormat extends SimpleScriptable {
             pattern = pattern.replace("\u200E", "");
         }
 
-        formatter_ = DateTimeFormatter.ofPattern(pattern);
-        if (locale.startsWith("ar")
-                && (!browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)
-                        || (!"ar-DZ".equals(locale)
-                                && !"ar-LY".equals(locale)
-                                && !"ar-MA".equals(locale)
-                                && !"ar-TN".equals(locale)))) {
-            final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
-            formatter_ = formatter_.withDecimalStyle(decimalStyle);
+        if (GAEUtils.isGaeMode()) {
+            formatter_ = new GAEDateTimeFormatter(locale, browserVersion, pattern);
         }
-        
-        if ("ja-JP-u-ca-japanese".equals(locale)) {
-            chronology_ = JapaneseChronology.INSTANCE;
-        }
-        else if ("ar".equals(locale) && browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
-            chronology_ = HijrahChronology.INSTANCE;
+        else {
+            formatter_ = new DefaultDateTimeFormatter(locale, browserVersion, pattern);
         }
     }
 
@@ -294,11 +275,7 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxFunction
     public String format(final Object object) {
         final Date date = (Date) Context.jsToJava(object, Date.class);
-        TemporalAccessor zonedDateTime = date.toInstant().atZone(ZoneId.systemDefault());
-        if (chronology_ != null) {
-            zonedDateTime = chronology_.date(zonedDateTime);
-        }
-        return formatter_.format(zonedDateTime);
+        return formatter_.format(date);
     }
 
 }
