@@ -18,8 +18,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_AR_DZ
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
 import java.time.ZoneId;
+import java.time.chrono.Chronology;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.JapaneseChronology;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DecimalStyle;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +53,7 @@ public class DateTimeFormat extends SimpleScriptable {
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
     private DateTimeFormatter formatter_;
+    private Chronology chronology_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -133,6 +138,7 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_45_FORMATS_.put("es-US", ddSlash);
         FF_45_FORMATS_.put("ga", ddSlash);
         FF_45_FORMATS_.put("hr", ddDotDot);
+        FF_45_FORMATS_.put("ja-JP-u-ca-japanese", "yy/MM/dd");
         FF_45_FORMATS_.put("sk", ddDotBlank);
         FF_45_FORMATS_.put("sr", ddDotDot);
         FF_45_FORMATS_.put("sq", ddDot);
@@ -150,11 +156,13 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("in", ddDot);
         CHROME_FORMATS_.put("in-ID", ddSlash);
         CHROME_FORMATS_.put("is", yyyyDash);
+        CHROME_FORMATS_.put("ja-JP-u-ca-japanese", "平成yy/MM/dd");
         CHROME_FORMATS_.put("sk", ddDotBlank);
         CHROME_FORMATS_.put("sq", yyyyDash);
         CHROME_FORMATS_.put("sr", ddDotDot);
         CHROME_FORMATS_.put("mk", yyyyDash);
 
+        IE_FORMATS_.put("ar", "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY");
         IE_FORMATS_.put("ar-AE", rightToLeft);
         IE_FORMATS_.put("ar-BH", rightToLeft);
         IE_FORMATS_.put("ar-DZ", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
@@ -185,6 +193,7 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("iw", ddSlash);
         IE_FORMATS_.put("it-CH", ddDot);
         IE_FORMATS_.put("ja", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
+        IE_FORMATS_.put("ja-JP-u-ca-japanese", "\u200E平成\u200E \u200Eyy\u200E年\u200EMM\u200E月\u200Edd\u200E日");
         IE_FORMATS_.put("ko", "\u200EYYYY\u200E\uB144 \u200EMM\u200E\uC6D4 \u200Edd\u200E\uC77C");
         IE_FORMATS_.put("lt", yyyyDot);
         IE_FORMATS_.put("lv", yyyyDotDot);
@@ -243,6 +252,13 @@ public class DateTimeFormat extends SimpleScriptable {
             final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
             formatter_ = formatter_.withDecimalStyle(decimalStyle);
         }
+        
+        if ("ja-JP-u-ca-japanese".equals(locale)) {
+            chronology_ = JapaneseChronology.INSTANCE;
+        }
+        else if ("ar".equals(locale) && browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
+            chronology_ = HijrahChronology.INSTANCE;
+        }
     }
 
     /**
@@ -278,7 +294,11 @@ public class DateTimeFormat extends SimpleScriptable {
     @JsxFunction
     public String format(final Object object) {
         final Date date = (Date) Context.jsToJava(object, Date.class);
-        return formatter_.format(date.toInstant().atZone(ZoneId.systemDefault()));
+        TemporalAccessor zonedDateTime = date.toInstant().atZone(ZoneId.systemDefault());
+        if (chronology_ != null) {
+            zonedDateTime = chronology_.date(zonedDateTime);
+        }
+        return formatter_.format(zonedDateTime);
     }
 
 }
