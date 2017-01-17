@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -283,6 +285,9 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = "")
+    @NotYetImplemented(IE)
+    // Xerxes is the problem here as they drop empty CDATA sections. So <root> has no children and our test fails.
+    // see: https://issues.apache.org/jira/browse/XERCESJ-1033
     public void nodeValue_empty() throws Exception {
         final String xml = ""
             + "<root>"
@@ -755,7 +760,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var cdata = root.firstChild;\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { alert(e); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
