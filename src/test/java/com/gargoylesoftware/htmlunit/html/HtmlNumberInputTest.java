@@ -437,7 +437,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts({"1234-1234-1234", "2345-2345-2345",
                 "3456-2345-2345", "3456-9876-9876",
                 "3456-44-44"})
-    @NotYetImplemented
     public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

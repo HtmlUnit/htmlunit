@@ -251,8 +251,11 @@ public class HTMLInputElement extends FormField {
             setType(value);
             return;
         }
-        super.setAttribute(name, value);
-        if ("value".equalsIgnoreCase(name)) {
+        final boolean valueAttribute = "value".equalsIgnoreCase(name);
+        if (!"number".equals(getType()) || !valueAttribute) {
+            super.setAttribute(name, value);
+        }
+        if (valueAttribute) {
             setDefaultValue(value);
         }
     }
