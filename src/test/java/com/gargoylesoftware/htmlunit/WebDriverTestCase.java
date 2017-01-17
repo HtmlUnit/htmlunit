@@ -1187,6 +1187,9 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
 
     @Override
     public String getText() {
+        if (element instanceof HtmlInput) {
+            return "";
+        }
         String text = getElement().asText();
         text = text.replace('\t', ' ');
         text = text.replace("\r", "");
