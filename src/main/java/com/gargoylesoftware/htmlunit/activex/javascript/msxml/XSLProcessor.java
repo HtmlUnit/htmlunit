@@ -176,9 +176,7 @@ public class XSLProcessor extends MSXMLScriptable {
             Source xmlSource = new DOMSource(source.getDomNodeOrDie());
             final Source xsltSource = new DOMSource(style_.getDomNodeOrDie());
 
-            //DocumentBuilderFactory.newInstance()
-            final DocumentBuilderFactory factory
-                = new com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl();
+            final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             final org.w3c.dom.Document containerDocument = factory.newDocumentBuilder().newDocument();
             final org.w3c.dom.Element containerElement = containerDocument.createElement("container");
             containerDocument.appendChild(containerElement);

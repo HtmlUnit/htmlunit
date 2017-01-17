@@ -33,8 +33,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl;
-import com.sun.org.apache.xerces.internal.dom.DeferredNode;
+import org.apache.xerces.dom.DeferredDocumentImpl;
+import org.apache.xerces.dom.DeferredNode;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -130,9 +130,7 @@ public final class XmlUtil {
     public static Document buildDocument(final WebResponse webResponse)
         throws IOException, SAXException, ParserConfigurationException {
 
-        // DocumentBuilderFactory.newInstance()
-        final DocumentBuilderFactory factory
-            = new com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl();
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
         if (webResponse == null) {
             return factory.newDocumentBuilder().newDocument();
@@ -318,7 +316,6 @@ public final class XmlUtil {
         return attributes;
     }
 
-    @SuppressWarnings("restriction")
     private static int getIndex(final NamedNodeMap namedNodeMap, final Map<Integer, List<String>> attributesOrderMap,
             final Node element, final int requiredIndex) {
         if (attributesOrderMap != null && element instanceof DeferredNode) {
@@ -436,7 +433,6 @@ public final class XmlUtil {
      * @param document the document
      * @return the map of an element index with its ordered attribute names
      */
-    @SuppressWarnings("restriction")
     public static Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
         final Map<Integer, List<String>> map = new HashMap<>();
         if (document instanceof DeferredDocumentImpl) {

@@ -975,9 +975,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
         assertNotNull("xml document could not be parsed", page.asXml());
-        // DocumentBuilderFactory.newInstance()
-        final DocumentBuilderFactory factory
-            = new com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl();
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.parse(TextUtil.toInputStream(page.asXml()));
     }

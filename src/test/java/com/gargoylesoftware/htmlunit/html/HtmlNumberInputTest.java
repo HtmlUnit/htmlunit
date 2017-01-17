@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
@@ -501,13 +500,15 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "exception")
-    @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         final String html =
               "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(getSelection(document.getElementById('text1')).length);\n"
+            + "    var s = getSelection(document.getElementById('text1'));\n"
+            + "    if (s) {\n"
+            + "      alert(s.length);\n"
+            + "    }\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
             + "    try {\n"

@@ -64,9 +64,7 @@ public class XSLProcessor2Test extends WebTestCase {
         final Source xmlSource = new StreamSource(new StringReader(input));
         final Source xsltSource = new StreamSource(new StringReader(style));
 
-        //DocumentBuilderFactory.newInstance()
-        final DocumentBuilderFactory factory
-            = new com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl();
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final Document containerDocument = factory.newDocumentBuilder().newDocument();
         final Element containerElement = containerDocument.createElement("container");
         containerDocument.appendChild(containerElement);
