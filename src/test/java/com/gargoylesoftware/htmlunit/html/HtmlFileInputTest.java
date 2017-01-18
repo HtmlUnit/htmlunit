@@ -1048,7 +1048,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "C:\\fakepath\\pom.xml--null",
             FF = "pom.xml--null",
-            IE = "ÃÂ§ÃÂ§PATHÃÂ§ÃÂ§--null")
+            IE = "§§PATH§§--null")
     public void value2() throws Exception {
         final String html =
               "<html>\n"
@@ -1071,7 +1071,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(absolutePath);
         driver.findElement(By.id("clickMe")).click();
 
-        setExpectedAlerts(getExpectedAlerts()[0].replace("ÃÂ§ÃÂ§PATHÃÂ§ÃÂ§", absolutePath));
+        setExpectedAlerts(getExpectedAlerts()[0].replace("§§PATH§§", absolutePath));
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
