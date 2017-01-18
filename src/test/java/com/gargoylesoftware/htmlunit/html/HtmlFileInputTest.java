@@ -44,6 +44,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -581,16 +582,16 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "<head>\n"
               + "<script>\n"
               + "  function test() {\n"
-              + "    var input = document.getElementById(\"f\")\n"
+              + "    var input = document.getElementById('f');\n"
               + "    try{\n"
-              + "      input.value=\"HtmlUnit\";\n"
+              + "      input.value = 'HtmlUnit';\n"
               + "    } catch(e) { alert('exception'); }\n"
               + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
               + "  }\n"
               + "</script>\n"
               + "<body>\n"
               + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+                    + " onChange='alert('foo');alert(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -616,9 +617,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "<head>\n"
               + "<script>\n"
               + "  function test() {\n"
-              + "    var input = document.getElementById(\"f\")\n"
+              + "    var input = document.getElementById('f);\n"
               + "    try{\n"
-              + "      input.defaultValue=\"HtmlUnit\";\n"
+              + "      input.defaultValue = 'HtmlUnit';\n"
               + "    } catch(e) { alert('exception'); }\n"
               + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
               + "  }\n"
@@ -626,7 +627,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "</head>\n"
               + "<body>\n"
               + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+                    + " onChange='alert('foo');alert(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -1047,7 +1048,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "C:\\fakepath\\pom.xml--null",
             FF = "pom.xml--null",
-            IE = "§§PATH§§--null")
+            IE = "ÃÂ§ÃÂ§PATHÃÂ§ÃÂ§--null")
     public void value2() throws Exception {
         final String html =
               "<html>\n"
@@ -1070,7 +1071,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(absolutePath);
         driver.findElement(By.id("clickMe")).click();
 
-        setExpectedAlerts(getExpectedAlerts()[0].replace("§§PATH§§", absolutePath));
+        setExpectedAlerts(getExpectedAlerts()[0].replace("ÃÂ§ÃÂ§PATHÃÂ§ÃÂ§", absolutePath));
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
@@ -1096,6 +1097,30 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"foo, change"})
+    @NotYetImplemented
+    public void onchange() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "</head>\n"
+              + "<body>\n"
+              + "  <input type='file' id='f' value='Hello world'"
+              + "      onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
+              + "</body></html>";
+
+        final String absolutePath = new File("pom.xml").getAbsolutePath();
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("f")).sendKeys(absolutePath);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
 }
