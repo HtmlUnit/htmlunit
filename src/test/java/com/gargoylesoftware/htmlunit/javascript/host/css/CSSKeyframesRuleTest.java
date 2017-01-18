@@ -109,7 +109,7 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  if (styleSheet.cssRules) {\n"
             + "    var rule = styleSheet.cssRules[0];\n"
-            + "    alert(rule.cssRules)\n"
+            + "    alert(rule.cssRules);\n"
             + "  } else {\n"
             + "    alert('Your browser does not support this example');\n"
             + "  }\n"

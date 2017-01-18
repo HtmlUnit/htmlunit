@@ -227,7 +227,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
         final String script =
             "/*@cc_on\n"
             + "document.write(\"\\\"\\\"\");\n"
-            + "alert(1)\n"
+            + "alert(1);\n"
             + "@*/\n"
             + "</script></html>";
 

@@ -1904,7 +1904,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      alert(document.foo == document.forms.foo);\n"
             + "      alert(document.blah);\n"
-            + "      alert(document.blah == document.forms.foo)\n"
+            + "      alert(document.blah == document.forms.foo);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"

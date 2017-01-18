@@ -931,15 +931,15 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
             + "  <script event='onload' for='window'>\n"
-            + "    log('onload for window')\n"
+            + "    log('onload for window');\n"
             + "  </script>\n"
             + "  <div id='div1'>the div 1</div>\n"
             + "  <div id='div2'>the div 2</div>\n"
             + "  <script event='onclick' for='div1'>\n"
-            + "    log('onclick for div1')\n"
+            + "    log('onclick for div1');\n"
             + "  </script>\n"
             + "  <script event='onclick' for='document.all.div2'>\n"
-            + "    log('onclick for div2')\n"
+            + "    log('onclick for div2');\n"
             + "  </script>\n"
             + "</body></html>";
 

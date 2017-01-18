@@ -62,13 +62,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  alert(document.form1.length)\n"
+            + "  alert(document.form1.length);\n"
             + "  for (var i = 0; i < document.form1.length; i++) {\n"
             + "    var element = document.form1.elements[i];\n"
             + "    if (element.type != 'radio' && element != document.form1[element.name]) {\n"
             + "      alert('name index not working for '+element.name);\n"
             + "    }\n"
-            + "    alert(element.name)\n"
+            + "    alert(element.name);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -132,10 +132,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var radioArray = document.form1['radio1'];\n"
-            + "  alert(radioArray.length)\n"
+            + "  alert(radioArray.length);\n"
             + "  for (var i = 0; i < radioArray.length; i++) {\n"
             + "    var element = radioArray[i];\n"
-            + "    alert(element.value)\n"
+            + "    alert(element.value);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -470,7 +470,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  alert(document.form1[0].name)\n"
+            + "  alert(document.form1[0].name);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -1108,7 +1108,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts("application/x-www-form-urlencoded")
     public void enctype_defaultValue() throws Exception {
         final String html = "<html><body><script>\n"
-            + "alert(document.createElement('form').enctype)\n"
+            + "alert(document.createElement('form').enctype);\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);

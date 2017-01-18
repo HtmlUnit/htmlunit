@@ -559,8 +559,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "  <script>\n"
-            + "    function test()\n"
-            + "    {\n"
+            + "    function test() {\n"
             + "      alert('table: ' + document.getElementById('myTable'));\n"
             + "      alert('row: ' + document.getElementById('myRow'));\n"
             + "      alert('headcell: ' + document.getElementById('myHeadCell'));\n"

@@ -617,7 +617,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "<head>\n"
               + "<script>\n"
               + "  function test() {\n"
-              + "    var input = document.getElementById('f);\n"
+              + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.defaultValue = 'HtmlUnit';\n"
               + "    } catch(e) { alert('exception'); }\n"
@@ -627,7 +627,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "</head>\n"
               + "<body>\n"
               + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert('foo');alert(event.type);'>\n"
+                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";

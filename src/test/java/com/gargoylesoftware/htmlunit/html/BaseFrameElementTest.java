@@ -42,7 +42,7 @@ public class BaseFrameElementTest extends SimpleWebTestCase {
             + "    var iframe1 = document.getElementById('iframe');\n"
             + "    frag1.appendChild(iframe1);\n"
             + "    var frag2 = frag1.cloneNode(true);\n"
-            + "    document.body.appendChild(frag2)\n"
+            + "    document.body.appendChild(frag2);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

@@ -1039,7 +1039,7 @@ public class ElementTest extends WebDriverTestCase {
             + "        var attr = doc.createAttribute('name');\n"
             + "        attr.value = 'test';\n"
             + "        element.setAttributeNode(attr);\n"
-            + "        alert(element.getAttributeNode('name').value)\n"
+            + "        alert(element.getAttributeNode('name').value);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

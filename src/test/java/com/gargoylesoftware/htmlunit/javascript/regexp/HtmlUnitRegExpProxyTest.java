@@ -369,7 +369,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var regexp = /((?:2001)-)/;\n"
             + "    var str = '2001-';\n"
-            + "    alert(regexp.test(str))\n"
+            + "    alert(regexp.test(str));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -388,7 +388,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var regexp = /(^|{)#([^}]+)(}|$)/;\n"
             + "    var str = '|{#abcd}|';\n"
-            + "    alert(str.match(regexp))\n"
+            + "    alert(str.match(regexp));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -407,7 +407,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var regexp = /[p\\bz]/g;\n"
             + "    var str = 'aapbzb' + String.fromCharCode(8);\n"
-            + "    alert(str.replace(regexp, '-'))\n"
+            + "    alert(str.replace(regexp, '-'));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -453,7 +453,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + " var re = /((?:\\((?:\\([^()]+\\)|[^()]+)+\\)|\\[(?:\\[[^[\\]]*\\]|['\"][^'\"]+['\"]|[^[\\]'\"]+)+\\]"
             + "|\\\\.|[^ >+~,(\\[]+)+|[>+~])(\\s*,\\s*)?/g\n"
             + "  function test() {\n"
-            + "    alert('div'.match(re))\n"
+            + "    alert('div'.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

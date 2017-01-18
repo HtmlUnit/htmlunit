@@ -254,7 +254,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "  alert('clicked');\n"
             + "  e.returnValue = false;\n"
             + "  if (e.preventDefault) {\n"
-            + "    e.preventDefault()\n"
+            + "    e.preventDefault();\n"
             + "  }\n"
             + "}\n"
             + "var oForm = document.forms[0];\n"

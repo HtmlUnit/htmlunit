@@ -100,7 +100,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + jsCallASynchXHR
             + "function testMain() {\n"
             + "  // set state 1 and wait for state 2\n"
-            + "  callSynchXHR('/setState1/setState3')\n"
+            + "  callSynchXHR('/setState1/setState3');\n"
             + "  // call function with XHR and handler in frame\n"
             + "  myFrame.contentWindow.callASynchXHR('/fooCalledFromFrameCalledFromMain');\n"
             + "}\n"
@@ -114,7 +114,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + jsCallASynchXHR
             + "function testFrame() {\n"
             + "  // set state 2\n"
-            + "  callSynchXHR('/setState2')\n"
+            + "  callSynchXHR('/setState2');\n"
             + "  // call function with XHR and handler in parent\n"
             + "  parent.callASynchXHR('/fooCalledFromMainCalledFromFrame');\n"
             + "}\n"
@@ -624,7 +624,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "    xhr.open('GET', '" + URL_CROSS_ORIGIN + "', false);\n"
             + "    alert('ok');\n"
             + "    xhr.send();\n"
-            + "    alert(xhr.readyState)\n"
+            + "    alert(xhr.readyState);\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"

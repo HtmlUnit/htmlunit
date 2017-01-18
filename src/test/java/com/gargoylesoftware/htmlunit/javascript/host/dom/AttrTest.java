@@ -252,10 +252,10 @@ public class AttrTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var attr = document.createAttribute('hi');\n"
             + "    alert(attr);\n"
-            + "    alert(attr.value)\n"
+            + "    alert(attr.value);\n"
             + "    attr = document.implementation.createDocument('', '', null).createAttribute('hi');\n"
             + "    alert(attr);\n"
-            + "    alert(attr.value)\n"
+            + "    alert(attr.value);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

@@ -59,7 +59,7 @@ public class DocumentTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  alert(document.forms.length)\n"
+            + "  alert(document.forms.length);\n"
             + "  for(var i = 0; i < document.forms.length; i++) {\n"
             + "    alert(document.forms[i].name);\n"
             + "  }\n"
@@ -87,7 +87,7 @@ public class DocumentTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  alert(document.forms.length)\n"
+            + "  alert(document.forms.length);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -108,7 +108,7 @@ public class DocumentTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  alert(document.forms.length)\n"
+            + "  alert(document.forms.length);\n"
             + "  for(var i = 0; i < document.forms.length; i++) {\n"
             + "    alert(document.forms[i].name);\n"
             + "  }\n"
@@ -130,7 +130,7 @@ public class DocumentTest extends WebDriverTestCase {
             = "<html><head><SCRIPT lang='JavaScript'>\n"
             + "function doSubmit(formName){\n"
             + "  var form = document.forms[formName];\n"
-            + "  form.submit()\n"
+            + "  form.submit();\n"
             + "}\n"
             + "</SCRIPT></head><body><form name='formName' method='POST' "
             + "action='" + URL_SECOND + "'>\n"
@@ -1352,7 +1352,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  document.title = 'correct title';\n"
-            + "  alert(document.title)\n"
+            + "  alert(document.title);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1371,7 +1371,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  document.title = 'correct title';\n"
-            + "  alert(document.title)\n"
+            + "  alert(document.title);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1389,7 +1389,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  document.title = 'correct title';\n"
-            + "  alert(document.title)\n"
+            + "  alert(document.title);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1405,7 +1405,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void title() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  alert(document.title)\n"
+            + "  alert(document.title);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -1445,7 +1445,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void documentWithNoBody() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "alert(document.body)\n"
+            + "  alert(document.body);\n"
             + "</script></head><body></body></html>";
 
         loadPageWithAlerts2(html);
@@ -2104,7 +2104,7 @@ public class DocumentTest extends WebDriverTestCase {
             + " <span id='s' onclick='\n"
             + "  if(document.fireEvent) {\n"
             + "    document.onkeydown = function() {alert(\"x\")};\n"
-            + "    document.fireEvent(\"onkeydown\")\n"
+            + "    document.fireEvent(\"onkeydown\");\n"
             + "  }\n"
             + " '>abc</span>\n"
             + "</body></html>";

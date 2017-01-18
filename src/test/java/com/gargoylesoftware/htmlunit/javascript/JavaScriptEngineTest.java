@@ -1253,7 +1253,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "  document.title = 'New title';\n"
             + "  notExisting(); // will throw\n"
             + "}\n"
-            + "window.setTimeout(myFunction, 5)\n"
+            + "window.setTimeout(myFunction, 5);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"

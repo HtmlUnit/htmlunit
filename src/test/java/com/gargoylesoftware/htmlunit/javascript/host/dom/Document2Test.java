@@ -105,7 +105,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      return false;\n"
             + "    }\n"
             + "  })();\n"
-            + "  alert(HAS_EXTENDED_CREATE_ELEMENT_SYNTAX)\n"
+            + "  alert(HAS_EXTENDED_CREATE_ELEMENT_SYNTAX);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -124,7 +124,7 @@ public class Document2Test extends WebDriverTestCase {
             + "  var span = document.createElement('SPAN');\n"
             + "  var div = document.getElementById('d');\n"
             + "  div.appendChild(span);\n"
-            + "  alert(span === div.childNodes[0])\n"
+            + "  alert(span === div.childNodes[0]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='d'></div>\n"

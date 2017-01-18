@@ -188,8 +188,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
 
         final String menuContent = "<html><head><title>Menu</title>\n"
             + "  <script>\n"
-            + "    function init()\n"
-            + "    {\n"
+            + "    function init() {\n"
             + "      var oFrame = top.button_pallete;\n"
             + "      alert((oFrame == null) ? 'Failure' : 'Success');\n"
             + "    }\n"

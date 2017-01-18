@@ -51,7 +51,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<tfoot id='tf'><tr><td>foot</td></tr></tfoot>"
             + "</table>\n"
             + "<script>\n"
-            + "alert(document.getElementById('tf').parentNode.nodeName)\n"
+            + "alert(document.getElementById('tf').parentNode.nodeName);\n"
             + "</script>\n"
             + "</body></html>";
 

@@ -328,7 +328,7 @@ public class Window3Test extends WebDriverTestCase {
     public void moveTo() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "window.moveTo(10, 20)\n"
+            + "  window.moveTo(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -342,7 +342,7 @@ public class Window3Test extends WebDriverTestCase {
     public void moveBy() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
-            + "window.moveBy(10, 20)\n"
+            + "  window.moveBy(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -1143,7 +1143,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><body>\n"
             + "<script>\n"
             + "  window.parent.eval('var foo = 1');\n"
-            + "  alert(window.parent.foo)\n"
+            + "  alert(window.parent.foo);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1210,7 +1210,7 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
             + "<script>\n"
-            + "alert(window.focus == window.focus)\n"
+            + "  alert(window.focus == window.focus);\n"
             + "</script>\n"
             + "</body></html>";
 

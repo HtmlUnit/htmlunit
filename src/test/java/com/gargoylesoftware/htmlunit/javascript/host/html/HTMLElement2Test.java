@@ -879,7 +879,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "function addListener(id, event) {\n"
             + "  var handler = function(e) { log(event + ' ' + id) };\n"
             + "  var e = document.getElementById(id);\n"
-            + "  e.addEventListener(event, handler, false)\n"
+            + "  e.addEventListener(event, handler, false);\n"
             + "}\n"
             + "var eventType = '" + type + "';\n"
             + "addListener('div', eventType);\n"

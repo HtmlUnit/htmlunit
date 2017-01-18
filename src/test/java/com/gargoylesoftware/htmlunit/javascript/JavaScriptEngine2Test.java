@@ -438,7 +438,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void alert() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "  alert('foo')\n"
+            + "  alert('foo');\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -495,7 +495,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.value = 1;\n"
-            + "  alert(document.form1.textfield1.value)\n"
+            + "  alert(document.form1.textfield1.value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -534,7 +534,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script><!--\n"
-            + " alert('1')\n"
+            + " alert('1');\n"
             + "--></script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -552,7 +552,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
             + "function doTest() {\n"
-            + "  alert('1')\n"
+            + "  alert('1');\n"
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
