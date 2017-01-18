@@ -54,6 +54,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -545,4 +546,29 @@ public class HtmlFileInput2Test extends WebServerTestCase {
                 + "</form></body></html>\n");
         }
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"foo, change"})
+    public void onchangeMultiple() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "</head>\n"
+              + "<body>\n"
+              + "  <input type='file' id='f' value='Hello world' multiple"
+              + "      onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
+              + "</body></html>";
+
+        final String pom = new File("pom.xml").getAbsolutePath();
+        final String license = new File("LICENSE.txt").getAbsolutePath();
+
+        final HtmlPage page = loadPage(html);
+        ((HtmlFileInput) page.getElementById("f")).setValueAttribute(new String[] {pom, license});
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
+    }
+
 }

@@ -177,6 +177,15 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(final String newValue) {
+        super.setValueAttribute(newValue);
+        executeOnChangeHandlerIfAppropriate(this);
+    }
+
+    /**
      * Used to specify <code>multiple</code> paths to upload.
      *
      * The current implementation splits the value based on '§'.
