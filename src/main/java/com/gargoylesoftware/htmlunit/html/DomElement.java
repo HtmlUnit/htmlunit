@@ -916,13 +916,13 @@ public class DomElement extends DomNamespaceNode implements Element {
             // give focus to current element (if possible) or only remove it from previous one
             DomElement elementToFocus = null;
             if (this instanceof SubmittableElement || this instanceof HtmlAnchor
-                    || (this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) { 
+                    || (this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
                 elementToFocus = this;
             }
             else if (this instanceof HtmlOption) {
                 elementToFocus = ((HtmlOption) this).getEnclosingSelect();
             }
-                
+
             ((InteractivePage) page).setFocusedElement(elementToFocus);
 
             if (triggerMouseEvents) {

@@ -4530,7 +4530,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
     public void blur() throws Exception {
         final String html = "<html><head>\n"
             + "<body>\n"
