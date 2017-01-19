@@ -55,6 +55,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -552,6 +553,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     @Alerts({"foo, change"})
+    @NotYetImplemented
     public void onchangeMultiple() throws Exception {
         final String html =
               "<html>\n"

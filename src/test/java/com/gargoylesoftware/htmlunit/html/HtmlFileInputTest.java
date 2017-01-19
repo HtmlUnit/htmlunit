@@ -44,6 +44,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1023,6 +1024,27 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"changed2", "changed"})
+    public void firingOnchange2() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form onchange='alert(\"changed\")'>\n"
+            + "  <input type='file' id='file1' onchange='alert(\"changed2\")'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
+        tmpFile.delete();
+        driver.findElement(By.tagName("body")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"true", "true"})
     public void nonZeroWidthHeight() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -1103,6 +1125,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"foo, change"})
+    @NotYetImplemented
     public void onchange() throws Exception {
         final String html =
               "<html>\n"
