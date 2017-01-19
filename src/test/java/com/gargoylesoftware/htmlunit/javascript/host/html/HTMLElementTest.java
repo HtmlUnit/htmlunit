@@ -4565,4 +4565,50 @@ public class HTMLElementTest extends WebDriverTestCase {
         verifyAlerts(webDriver, getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDivElement]", "[object HTMLBodyElement]"})
+    @NotYetImplemented
+    public void currentTarget() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "  function handler(ev) {\n"
+            + "    alert(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var byId = document.getElementById.bind(document);\n"
+
+            + "    var under = byId('under');\n"
+            + "    var over = byId('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    var types = ['click'];\n"
+            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
+            + "      under.addEventListener(type, handler);\n"
+            + "      over.addEventListener(type, handler);\n"
+            + "      body.addEventListener(type, handler);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='under'><p id='contents'>Hello</p></div>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("over")).click();
+
+        verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
 }
