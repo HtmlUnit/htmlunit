@@ -4526,4 +4526,44 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts
+    public void blur() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "  <div id='div1' onblur='alert(\"blurred\")'>the first div</div>\n"
+            + "  <div id='div2'>the second div</div>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("div1")).click();
+        webDriver.findElement(new ById("div2")).click();
+
+        verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("blurred")
+    public void blur2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "  <div id='div1' onblur='alert(\"blurred\")' tabindex='0'>the first div</div>\n"
+            + "  <div id='div2'>the second div</div>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("div1")).click();
+        webDriver.findElement(new ById("div2")).click();
+
+        verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
 }

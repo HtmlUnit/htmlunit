@@ -1312,7 +1312,7 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public boolean handles(final Event event) {
         if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
-            return this instanceof SubmittableElement;
+            return this instanceof SubmittableElement || getTabIndex() != null;
         }
 
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
