@@ -24,7 +24,6 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ById;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -613,7 +612,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html, URL_FIRST);
-        driver.findElement(new ById("myLink")).click();
+        driver.findElement(By.id("myLink")).click();
 
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
 

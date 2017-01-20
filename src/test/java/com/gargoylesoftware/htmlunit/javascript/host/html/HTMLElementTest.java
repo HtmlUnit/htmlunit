@@ -22,7 +22,7 @@ import java.net.URL;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By.ById;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -384,8 +384,8 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("login")).click();
-        webDriver.findElement(new ById("password")).click();
+        webDriver.findElement(By.id("login")).click();
+        webDriver.findElement(By.id("password")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -422,7 +422,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("login")).click();
+        webDriver.findElement(By.id("login")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -458,7 +458,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("login")).click();
+        webDriver.findElement(By.id("login")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -494,7 +494,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("login")).click();
+        webDriver.findElement(By.id("login")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -524,8 +524,8 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("login")).click();
-        webDriver.findElement(new ById("password")).click();
+        webDriver.findElement(By.id("login")).click();
+        webDriver.findElement(By.id("password")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -556,7 +556,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("login")).click();
+        webDriver.findElement(By.id("login")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -4539,8 +4539,8 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("div1")).click();
-        webDriver.findElement(new ById("div2")).click();
+        webDriver.findElement(By.id("div1")).click();
+        webDriver.findElement(By.id("div2")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -4559,8 +4559,8 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
 
-        webDriver.findElement(new ById("div1")).click();
-        webDriver.findElement(new ById("div2")).click();
+        webDriver.findElement(By.id("div1")).click();
+        webDriver.findElement(By.id("div2")).click();
 
         verifyAlerts(webDriver, getExpectedAlerts());
     }
@@ -4605,10 +4605,57 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver webDriver = loadPage2(html);
-
-        webDriver.findElement(new ById("over")).click();
-
+        webDriver.findElement(By.id("over")).click();
         verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+        + "mouseup--body\nmouseup--undefined")
+    @NotYetImplemented
+    public void clickAnElementThatDisappears() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "  function handler(e) {\n"
+            + "    var log = document.getElementById('log');\n"
+            + "    log.innerHTML += '<p></p>';\n"
+            + "    log.lastElementChild.textContent = e.type + '-' + e.target.id + '-' + e.currentTarget.id;\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var over = document.getElementById('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    var types = ['click', 'mousedown', 'mouseup'];\n"
+            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
+            + "      over.addEventListener(type, handler);\n"
+            + "      body.addEventListener(type, handler);\n"
+            + "      window.addEventListener(type, handler);\n"
+            + "    }\n"
+
+            + "    over.addEventListener('mousedown', function () {\n"
+            + "      over.style.display = 'none';\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='body' onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "  <div id='log'></div>\n"
+            + "  </div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("over")).click();
+        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("log")).getText());
     }
 
 }
