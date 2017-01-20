@@ -492,15 +492,14 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place
-     * @exception IOException If an io error occurs
+     * @exception IOException If an IO error occurs
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
+     * @deprecated as of 2.25, please use {@link #click()}
      */
     @SuppressWarnings("unchecked")
+    @Deprecated
     public <P extends Page> P click(final int x, final int y)
-        throws
-            IOException,
-            ElementNotFoundException {
-
+        throws IOException, ElementNotFoundException {
         // By default this is no different than a click without coordinates.
         return (P) click();
     }
