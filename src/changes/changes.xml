@@ -9,6 +9,9 @@
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: EventHander set at window-level only on setting it by attribute.
+            </action>
+            <action type="fix" dev="asashour">
                 Elements with 'tabindex' are focusable.
             </action>
             <action type="add" dev="asashour">

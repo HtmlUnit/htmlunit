@@ -4569,8 +4569,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLDivElement]", "[object HTMLBodyElement]"})
-    @NotYetImplemented
+    @Alerts({"[object HTMLDivElement]", "[object HTMLBodyElement]", "[object Window]"})
     public void currentTarget() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4594,6 +4593,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      under.addEventListener(type, handler);\n"
             + "      over.addEventListener(type, handler);\n"
             + "      body.addEventListener(type, handler);\n"
+            + "      window.addEventListener(type, handler);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"

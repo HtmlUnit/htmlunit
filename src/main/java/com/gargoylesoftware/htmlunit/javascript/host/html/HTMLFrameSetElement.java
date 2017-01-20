@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -47,15 +46,11 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Forwards the events to window.
-     *
      * {@inheritDoc}
-     *
-     * @see HTMLBodyElement#getEventListenersContainer()
      */
     @Override
-    public EventListenersContainer getEventListenersContainer() {
-        return getWindow().getEventListenersContainer();
+    protected boolean isEventHandlerOnWindow() {
+        return true;
     }
 
     /**

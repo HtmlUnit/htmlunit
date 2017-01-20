@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 
 /**
  * The JavaScript object {@code HTMLBodyElement}.
@@ -63,15 +62,11 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Forwards the events to window.
-     *
      * {@inheritDoc}
-     *
-     * @see HTMLFrameSetElement#getEventListenersContainer()
      */
     @Override
-    public EventListenersContainer getEventListenersContainer() {
-        return getWindow().getEventListenersContainer();
+    protected boolean isEventHandlerOnWindow() {
+        return true;
     }
 
     /**

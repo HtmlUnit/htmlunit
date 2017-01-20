@@ -82,7 +82,7 @@ public class EventTarget extends SimpleScriptable {
      * Gets the container for event listeners.
      * @return the container (newly created if needed)
      */
-    public EventListenersContainer getEventListenersContainer() {
+    public final EventListenersContainer getEventListenersContainer() {
         if (eventListenersContainer_ == null) {
             eventListenersContainer_ = new EventListenersContainer(this);
         }
@@ -300,8 +300,23 @@ public class EventTarget extends SimpleScriptable {
      * @param value the property ({@code null} to reset it)
      */
     protected void setEventHandlerProp(final String eventName, final Object value) {
-        getEventListenersContainer().setEventHandlerProp(
+        final EventListenersContainer container;
+        if (isEventHandlerOnWindow()) {
+            container = getWindow().getEventListenersContainer();
+        }
+        else {
+            container = getEventListenersContainer();
+        }
+        container.setEventHandlerProp(
                 StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2), value);
+    }
+
+    /**
+     * Is setting event handler property, at window-level.
+     * @return whether the event handler to be set at window-level
+     */
+    protected boolean isEventHandlerOnWindow() {
+        return false;
     }
 
     /**
