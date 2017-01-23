@@ -76,6 +76,32 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"exception undefined", "exception null", "exception empty", "exception invalid"})
+    public void initialWithoutUrl() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      new WebSocket(undefined);\n"
+            + "    } catch(e) { alert('exception undefined') }\n"
+            + "    try {\n"
+            + "      new WebSocket(null);\n"
+            + "    } catch(e) { alert('exception null') }\n"
+            + "    try {\n"
+            + "      new WebSocket('');\n"
+            + "    } catch(e) { alert('exception empty') }\n"
+            + "    try {\n"
+            + "      new WebSocket('#');\n"
+            + "    } catch(e) { alert('exception invalid') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"blob", "blob", "arraybuffer", "blob", "blob"},
             IE = {"blob", "exception", "arraybuffer", "blob", "exception"})
     @NotYetImplemented(IE)

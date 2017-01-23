@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -139,7 +140,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             });
         }
         catch (final Exception e) {
-            LOG.error("WS constructor error", e);
+            LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
+            throw Context.reportRuntimeError("WebSocket Error: 'url' parameter '" + url + "' is invalid.");
         }
     }
 
@@ -165,7 +167,11 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         if (!(args[0] instanceof String)) {
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter must be a String.");
         }
-        return new WebSocket((String) args[0], null, getWindow(ctorObj));
+        final String url = (String) args[0];
+        if (StringUtils.isBlank(url)) {
+            throw Context.reportRuntimeError("WebSocket Error: 'url' parameter must be not empty.");
+        }
+        return new WebSocket(url, null, getWindow(ctorObj));
     }
 
     /**
