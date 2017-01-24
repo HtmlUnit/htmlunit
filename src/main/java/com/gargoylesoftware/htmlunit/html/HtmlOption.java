@@ -84,7 +84,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      *         may not be the same as the original page)
      */
     public Page setSelected(final boolean selected) {
-        setSelected(selected, true);
+        setSelected(selected, true, false);
         return getPage();
     }
 
@@ -98,6 +98,18 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param invokeOnFocus whether to set focus or not.
      */
     public void setSelected(boolean selected, final boolean invokeOnFocus) {
+        setSelected(selected, invokeOnFocus, false);
+    }
+
+    /**
+     * Sets the selected state of this option. This will possibly also change the
+     * selected properties of sibling option elements.
+     *
+     * @param selected true if this option should be selected
+     * @param invokeOnFocus whether to set focus or not.
+     * @param unselectOthers whether to unselect other sibling options or not
+     */
+    private void setSelected(boolean selected, final boolean invokeOnFocus, final boolean unselectOthers) {
         if (selected == isSelected()) {
             return;
         }
@@ -107,7 +119,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
                     && !select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
                 selected = true;
             }
-            select.setSelectedAttribute(this, selected, invokeOnFocus);
+            select.setSelectedAttribute(this, selected, invokeOnFocus, unselectOthers);
             return;
         }
         // for instance from JS for an option created by document.createElement('option')
@@ -302,7 +314,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     protected boolean doClickStateUpdate() throws IOException {
         boolean changed = false;
         if (!isSelected()) {
-            setSelected(true);
+            setSelected(true, true, true);
             changed = true;
         }
         else if (getEnclosingSelect().isMultipleSelectEnabled()) {

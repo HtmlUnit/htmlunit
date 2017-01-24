@@ -256,7 +256,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
-                doSelectOption(option, true);
+                doSelectOption(option, true, false);
             }
         }
         return response;
@@ -306,7 +306,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             else {
                 selected = getOptionByValue(optionValue);
             }
-            return setSelectedAttribute(selected, isSelected, invokeOnFocus);
+            return setSelectedAttribute(selected, isSelected, invokeOnFocus, false);
         }
         catch (final ElementNotFoundException e) {
             if (hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
@@ -332,7 +332,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
-        return (P) setSelectedAttribute(selectedOption, isSelected, true);
+        return (P) setSelectedAttribute(selectedOption, isSelected, true, false);
     }
 
     /**
@@ -346,13 +346,14 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
      * @param invokeOnFocus whether to set focus or not.
+     * @param unselectOthers whether to unselect other sibling options or not
      * @param <P> the page type
      * @return the page contained in the current window as returned
      * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
-        final boolean invokeOnFocus) {
+        final boolean invokeOnFocus, final boolean unselectOthers) {
         if (isSelected && invokeOnFocus) {
             ((HtmlPage) getPage()).setFocusedElement(this);
         }
@@ -360,7 +361,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         final boolean changeSelectedState = selectedOption.isSelected() != isSelected;
 
         if (changeSelectedState) {
-            doSelectOption(selectedOption, isSelected);
+            doSelectOption(selectedOption, isSelected, unselectOthers);
             HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
 
@@ -368,10 +369,10 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     private void doSelectOption(final HtmlOption selectedOption,
-            final boolean isSelected) {
+            final boolean isSelected, final boolean unselectOthers) {
         // caution the HtmlOption may have been created from js and therefore the select now need
         // to "know" that it is selected
-        if (isMultipleSelectEnabled()) {
+        if (isMultipleSelectEnabled() && !unselectOthers) {
             selectedOption.setSelectedInternal(isSelected);
         }
         else {
@@ -705,7 +706,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         if (index < allOptions.size()) {
             final HtmlOption itemToSelect = allOptions.get(index);
-            setSelectedAttribute(itemToSelect, true, false);
+            setSelectedAttribute(itemToSelect, true, false, false);
         }
     }
 
