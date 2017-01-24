@@ -292,6 +292,28 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>\n")
+    public void asTextDefaultValue() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('textArea1').defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='textArea1'> foo \n bar\r\n test\r a "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</form></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("")
     public void asTextAndVisibility() throws Exception {
         final String html
