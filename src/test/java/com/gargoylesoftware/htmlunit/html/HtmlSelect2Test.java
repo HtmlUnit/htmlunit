@@ -68,7 +68,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
             .build();
 
         selectThreeOptions.perform();
-        
+
         assertFalse(options.get(0).isSelected());
         assertFalse(options.get(1).isSelected());
         assertFalse(options.get(2).isSelected());
@@ -104,7 +104,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
                 .build();
 
         selectThreeOptions.perform();
-        
+
         assertFalse(options.get(0).isSelected());
         assertTrue(options.get(1).isSelected());
         assertTrue(options.get(2).isSelected());

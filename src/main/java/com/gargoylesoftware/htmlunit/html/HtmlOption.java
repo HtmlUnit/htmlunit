@@ -97,7 +97,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param selected true if this option should be selected
      * @param invokeOnFocus whether to set focus or not.
      */
-    public void setSelected(boolean selected, final boolean invokeOnFocus) {
+    public void setSelected(final boolean selected, final boolean invokeOnFocus) {
         setSelected(selected, invokeOnFocus, false);
     }
 
