@@ -119,7 +119,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
                     && !select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
                 selected = true;
             }
-            select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey);
+            select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey, true);
             return;
         }
         // for instance from JS for an option created by document.createElement('option')
@@ -298,7 +298,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             }
 
             if (isStateUpdateFirst()) {
-                doClickStateUpdate();
+                doClickStateUpdate(event.getShiftKey());
             }
 
             return getEnclosingSelect().click(event);
@@ -311,17 +311,17 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate() throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
         boolean changed = false;
         if (!isSelected()) {
-            setSelected(true, true, false);
+            setSelected(true, true, shiftKey);
             changed = true;
         }
         else if (getEnclosingSelect().isMultipleSelectEnabled()) {
             setSelected(false);
             changed = true;
         }
-        super.doClickStateUpdate();
+        super.doClickStateUpdate(shiftKey);
         return changed;
     }
 

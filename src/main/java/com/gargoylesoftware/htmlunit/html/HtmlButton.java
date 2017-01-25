@@ -80,7 +80,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate() throws IOException {
+    protected boolean doClickStateUpdate(boolean shiftKey) throws IOException {
         final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
 
         HtmlForm form = null;
@@ -116,7 +116,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             return false;
         }
 
-        super.doClickStateUpdate();
+        super.doClickStateUpdate(shiftKey);
         return false;
     }
 

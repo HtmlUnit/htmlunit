@@ -30,7 +30,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -80,7 +79,6 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver({FF, IE})
-    @NotYetImplemented
     public void select2() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"

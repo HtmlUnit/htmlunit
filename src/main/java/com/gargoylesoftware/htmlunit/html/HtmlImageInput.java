@@ -103,13 +103,13 @@ public class HtmlImageInput extends HtmlInput {
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected boolean doClickStateUpdate() throws IOException {
+    protected boolean doClickStateUpdate(boolean shiftKey) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.submit(this);
             return false;
         }
-        super.doClickStateUpdate();
+        super.doClickStateUpdate(shiftKey);
         return false;
     }
 

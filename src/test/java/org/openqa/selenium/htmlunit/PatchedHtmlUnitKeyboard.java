@@ -17,6 +17,10 @@ package org.openqa.selenium.htmlunit;
 
 import java.lang.reflect.Field;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.HasInputDevices;
+import org.openqa.selenium.interactions.Mouse;
+
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 
@@ -44,7 +48,8 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
     @Override
     public void sendKeys(final HtmlElement element, final String currentValue, final InputKeysContainer keysToSend,
             final boolean releaseAllAtEnd) {
-        final KeyboardModifiersState modifiersState = (KeyboardModifiersState) getPrivateField("modifiersState");
+        final KeyboardModifiersState modifiersState =
+                getPrivateField(getClass().getSuperclass(), this, "modifiersState");
         keysToSend.setCapitalization(modifiersState.isShiftPressed());
         String keysSequence = keysToSend.toString();
         if (element instanceof HtmlFileInput) {
@@ -55,13 +60,42 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
         super.sendKeys(element, currentValue, keysToSend, releaseAllAtEnd);
     }
 
-    private Object getPrivateField(final String fieldName) {
+    @SuppressWarnings("unchecked")
+    private static <T> T getPrivateField(final Class<?> klass, final Object obj, final String fieldName) {
         try {
-            final Field f = getClass().getSuperclass().getDeclaredField(fieldName);
+            final Field f = klass.getDeclaredField(fieldName);
             f.setAccessible(true);
-            return f.get(this);
+            return (T) f.get(obj);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void pressKey(final CharSequence keyToPress) {
+        super.pressKey(keyToPress);
+        final KeyboardModifiersState modifiersState = getModifierState();
+        for (int i = 0; i < keyToPress.length(); i++) {
+            final char ch = keyToPress.charAt(i);
+            modifiersState.storeKeyDown(ch);
+        }
+    }
+
+    @Override
+    public void releaseKey(CharSequence keyToRelease) {
+        super.releaseKey(keyToRelease);
+        final KeyboardModifiersState modifiersState = getModifierState();
+        for (int i = 0; i < keyToRelease.length(); i++) {
+            final char ch = keyToRelease.charAt(i);
+            modifiersState.storeKeyUp(ch);
+        }
+    }
+
+    private KeyboardModifiersState getModifierState() {
+        final WebDriver driver = getPrivateField(getClass().getSuperclass(), this, "parent");
+        final Mouse mouse = ((HasInputDevices) driver).getMouse();
+        final HtmlUnitKeyboard htmlUnitKeyboard = getPrivateField(mouse.getClass(), mouse, "keyboard");
+        return getPrivateField(htmlUnitKeyboard.getClass(), htmlUnitKeyboard, "modifiersState");
     }
 }

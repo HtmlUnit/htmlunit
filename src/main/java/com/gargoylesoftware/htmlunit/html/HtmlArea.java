@@ -65,7 +65,7 @@ public class HtmlArea extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate() throws IOException {
+    protected boolean doClickStateUpdate(boolean shiftKey) throws IOException {
         final HtmlPage enclosingPage = (HtmlPage) getPage();
         final WebClient webClient = enclosingPage.getWebClient();
 

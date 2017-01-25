@@ -57,6 +57,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
+    /** What is the index of the HtmlOption which was last selected. */
+    private int lastSelectedIndex_ = -1;
 
     /**
      * Creates an instance.
@@ -256,7 +258,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
-                doSelectOption(option, true, false);
+                doSelectOption(option, true, false, false);
             }
         }
         return response;
@@ -306,7 +308,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             else {
                 selected = getOptionByValue(optionValue);
             }
-            return setSelectedAttribute(selected, isSelected, invokeOnFocus, true);
+            return setSelectedAttribute(selected, isSelected, invokeOnFocus, true, true);
         }
         catch (final ElementNotFoundException e) {
             if (hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
@@ -332,7 +334,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
-        return (P) setSelectedAttribute(selectedOption, isSelected, true, true);
+        return (P) setSelectedAttribute(selectedOption, isSelected, true, true, true);
     }
 
     /**
@@ -353,7 +355,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
-        final boolean invokeOnFocus, final boolean shiftKey) {
+        final boolean invokeOnFocus, final boolean shiftKey, final boolean isClick) {
         if (isSelected && invokeOnFocus) {
             ((HtmlPage) getPage()).setFocusedElement(this);
         }
@@ -361,7 +363,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         final boolean changeSelectedState = selectedOption.isSelected() != isSelected;
 
         if (changeSelectedState) {
-            doSelectOption(selectedOption, isSelected, shiftKey);
+            doSelectOption(selectedOption, isSelected, shiftKey, isClick);
             HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
 
@@ -369,17 +371,38 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     private void doSelectOption(final HtmlOption selectedOption,
-            final boolean isSelected, final boolean shiftKey) {
+            final boolean isSelected, final boolean shiftKey, final boolean isClick) {
         // caution the HtmlOption may have been created from js and therefore the select now need
         // to "know" that it is selected
-        if (isMultipleSelectEnabled() && shiftKey) {
+        if (isMultipleSelectEnabled()) {
             selectedOption.setSelectedInternal(isSelected);
-        }
-        else {
-            for (final HtmlOption option : getOptions()) {
-                option.setSelectedInternal(option == selectedOption && isSelected);
+            if (isClick) {
+                if (!shiftKey) {
+                    setOnlySelected(selectedOption, isSelected);
+                    lastSelectedIndex_ = getOptions().indexOf(selectedOption);
+                }
+                else if (isSelected && lastSelectedIndex_ != -1) {
+                    final List<HtmlOption> options = getOptions();
+                    final int newIndex = options.indexOf(selectedOption);
+                    for (int i = 0; i < options.size(); i++) {
+                        options.get(i).setSelectedInternal(isBetween(i, lastSelectedIndex_, newIndex));
+                    }
+                }
             }
         }
+        else {
+            setOnlySelected(selectedOption, isSelected);
+        }
+    }
+
+    private void setOnlySelected(final HtmlOption selectedOption, final boolean isSelected) {
+        for (final HtmlOption option : getOptions()) {
+            option.setSelectedInternal(option == selectedOption && isSelected);
+        }
+    }
+
+    private static boolean isBetween(final int number, final int min, final int max) {
+        return max > min ? number >= min && number <= max : number >= max && number <= min;
     }
 
     /**
@@ -706,7 +729,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         if (index < allOptions.size()) {
             final HtmlOption itemToSelect = allOptions.get(index);
-            setSelectedAttribute(itemToSelect, true, false, true);
+            setSelectedAttribute(itemToSelect, true, false, true, true);
         }
     }
 
