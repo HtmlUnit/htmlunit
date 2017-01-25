@@ -1003,11 +1003,15 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("changed")
+    @Alerts({"changed2", "changed"})
+    @NotYetImplemented
     public void firingOnchange() throws Exception {
         final String html = "<html><body>\n"
             + "<form onchange='alert(\"changed\")'>\n"
-            + "  <input type='file' id='file1'>\n"
+            + "  <input type='file' id='file1' onchange='alert(\"changed2\")' "
+                + "onkeydown='alert(\"onkeydown2\")' "
+                + "onkeypress='alert(\"onkeypress2\")' "
+                + "onkeyup='alert(\"onkeyup2\")'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -1015,28 +1019,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
         tmpFile.delete();
-        driver.findElement(By.tagName("body")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"changed2", "changed"})
-    public void firingOnchange2() throws Exception {
-        final String html = "<html><body>\n"
-            + "<form onchange='alert(\"changed\")'>\n"
-            + "  <input type='file' id='file1' onchange='alert(\"changed2\")'>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
-        driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
-        tmpFile.delete();
-        driver.findElement(By.tagName("body")).click();
 
         verifyAlerts(driver, getExpectedAlerts());
     }
