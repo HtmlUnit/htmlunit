@@ -72,7 +72,7 @@ public class DomTreeWalker implements TreeWalker {
      */
     @Override
     public DomNode getRoot() {
-        return (DomNode) root_;
+        return root_;
     }
 
     /**
@@ -104,7 +104,7 @@ public class DomTreeWalker implements TreeWalker {
      */
     @Override
     public DomNode getCurrentNode() {
-        return (DomNode) currentNode_;
+        return currentNode_;
     }
 
     /**
