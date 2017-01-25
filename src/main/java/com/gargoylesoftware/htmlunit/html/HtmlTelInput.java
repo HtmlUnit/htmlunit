@@ -17,13 +17,19 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input" where type is "tel".
  *
  * @author Ahmed Ashour
  */
-public class HtmlTelInput extends HtmlInput {
+public class HtmlTelInput extends HtmlInput implements SelectableTextInput {
+
+    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
+
+    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -35,6 +41,102 @@ public class HtmlTelInput extends HtmlInput {
     HtmlTelInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getSelectionStart() {
+        return selectionDelegate_.getSelectionStart();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSelectionStart(final int selectionStart) {
+        selectionDelegate_.setSelectionStart(selectionStart);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getSelectionEnd() {
+        return selectionDelegate_.getSelectionEnd();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSelectionEnd(final int selectionEnd) {
+        selectionDelegate_.setSelectionEnd(selectionEnd);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSelectedText() {
+        return selectionDelegate_.getSelectedText();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void select() {
+        selectionDelegate_.select();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setText(final String text) {
+        setValueAttribute(text);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getText() {
+        return getValueAttribute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final char c, final boolean startAtEnd) {
+        if (startAtEnd) {
+            selectionDelegate_.setSelectionStart(getValueAttribute().length());
+        }
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final int keyCode, final boolean startAtEnd) {
+        if (startAtEnd) {
+            selectionDelegate_.setSelectionStart(getValueAttribute().length());
+        }
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void typeDone(final String newValue) {
+        if (newValue.length() <= getMaxLength()) {
+            setAttribute("value", newValue);
+        }
     }
 
 }
