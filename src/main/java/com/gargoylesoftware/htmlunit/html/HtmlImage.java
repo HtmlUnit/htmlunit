@@ -512,7 +512,7 @@ public class HtmlImage extends HtmlElement {
             anchor.doClickStateUpdate(suffix);
             return false;
         }
-        anchor.doClickStateUpdate(null);
+        anchor.doClickStateUpdate(shiftKey);
         return false;
     }
 

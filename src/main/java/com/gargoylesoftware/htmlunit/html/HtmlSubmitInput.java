@@ -84,7 +84,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate(boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.submit(this);

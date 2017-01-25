@@ -67,8 +67,8 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Same as {@link #doClickStateUpdate(boolean)}, except that it accepts an {@code href} suffix, needed when a click is
-     * performed on an image map to pass information on the click position.
+     * Same as {@link #doClickStateUpdate(boolean)}, except that it accepts an {@code href} suffix,
+     * needed when a click is performed on an image map to pass information on the click position.
      *
      * @param hrefSuffix the suffix to add to the anchor's {@code href} attribute
      *        (for instance coordinates from an image map)
@@ -175,7 +175,7 @@ public class HtmlAnchor extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate(boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
         doClickStateUpdate("");
         return false;
     }

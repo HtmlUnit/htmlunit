@@ -51,9 +51,9 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
         final KeyboardModifiersState modifiersState =
                 getPrivateField(getClass().getSuperclass(), this, "modifiersState");
         keysToSend.setCapitalization(modifiersState.isShiftPressed());
-        String keysSequence = keysToSend.toString();
+        final String keysSequence = keysToSend.toString();
         if (element instanceof HtmlFileInput) {
-            HtmlFileInput fileInput = (HtmlFileInput) element;
+            final HtmlFileInput fileInput = (HtmlFileInput) element;
             fileInput.setValueAttribute(keysSequence);
             return;
         }
@@ -66,8 +66,8 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
             final Field f = klass.getDeclaredField(fieldName);
             f.setAccessible(true);
             return (T) f.get(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (final Exception e) {
             return null;
         }
     }
@@ -83,7 +83,7 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
     }
 
     @Override
-    public void releaseKey(CharSequence keyToRelease) {
+    public void releaseKey(final CharSequence keyToRelease) {
         super.releaseKey(keyToRelease);
         final KeyboardModifiersState modifiersState = getModifierState();
         for (int i = 0; i < keyToRelease.length(); i++) {

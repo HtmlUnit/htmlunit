@@ -349,6 +349,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param selectedOption the value of the option that is to change
      * @param invokeOnFocus whether to set focus or not.
      * @param shiftKey {@code true} if SHIFT is pressed
+     * @param isClick is mouse clicked
      * @param <P> the page type
      * @return the page contained in the current window as returned
      * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
