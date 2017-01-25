@@ -50,7 +50,6 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
         if (element instanceof HtmlFileInput) {
             HtmlFileInput fileInput = (HtmlFileInput) element;
             fileInput.setValueAttribute(keysSequence);
-            fileInput.fireEvent("change");
             return;
         }
         super.sendKeys(element, currentValue, keysToSend, releaseAllAtEnd);
