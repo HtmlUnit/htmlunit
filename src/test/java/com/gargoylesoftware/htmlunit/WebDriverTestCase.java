@@ -53,6 +53,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.NoSuchWindowException;
@@ -130,13 +131,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * All browsers supported.
      */
     public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-        BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+            BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
 
     /**
      * Browsers which run by default.
      */
     public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-        BrowserVersion.INTERNET_EXPLORER};
+            BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
@@ -1193,5 +1194,28 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
         text = text.replace('\t', ' ');
         text = text.replace("\r", "");
         return text;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Overridden because .setValueAttribute moved from HtmlFileInput to HtmlInput
+     */
+    @Override
+    public void clear() {
+        assertElementNotStale();
+
+        if (element instanceof HtmlInput) {
+            final HtmlInput htmlInput = (HtmlInput) element;
+            if (htmlInput.isReadOnly()) {
+                throw new InvalidElementStateException("You may only edit editable elements");
+            }
+            if (htmlInput.isDisabled()) {
+                throw new InvalidElementStateException("You may only interact with enabled elements");
+            }
+            htmlInput.setValueAttribute("");
+        }
+        else {
+            super.clear();
+        }
     }
 }

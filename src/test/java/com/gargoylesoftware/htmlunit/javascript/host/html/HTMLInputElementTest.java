@@ -1974,4 +1974,46 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("finish")
+    public void setAttributeFromJavaScript() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var input = document.getElementById('myInput');\n"
+            + "  input.setAttribute('value', 'text1');\n"
+            + "  alert('finish');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void clear() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebElement element = driver.findElement(By.id("myInput"));
+        element.clear();
+        verifyAlerts(driver, "changed");
+    }
 }
