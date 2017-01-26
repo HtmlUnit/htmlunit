@@ -122,9 +122,12 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
 
             final NativeArray array = new NativeArray(new Object[] {mutationRecord});
             ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-            final Context context = Context.getCurrentContext();
-            if (context != null) {
+            final Context context = Context.enter();
+            try {
                 function_.call(context, scope, this, new Object[] {array});
+            }
+            finally {
+                Context.exit();
             }
         }
     }
@@ -165,9 +168,12 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
 
                 final NativeArray array = new NativeArray(new Object[] {mutationRecord});
                 ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-                final Context context = Context.getCurrentContext();
-                if (context != null) {
+                final Context context = Context.enter();
+                try {
                     function_.call(context, scope, this, new Object[] {array});
+                }
+                finally {
+                    Context.exit();
                 }
             }
         }

@@ -23,7 +23,6 @@ import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -51,7 +50,7 @@ public final class ProxyAutoConfig {
      * @return semicolon-separated result
      */
     public static String evaluate(final String content, final URL url) {
-        final Context cx = ContextFactory.getGlobal().enterContext();
+        final Context cx = Context.enter();
         try {
             final ProxyAutoConfig config = new ProxyAutoConfig();
             final Scriptable scope = cx.initStandardObjects();

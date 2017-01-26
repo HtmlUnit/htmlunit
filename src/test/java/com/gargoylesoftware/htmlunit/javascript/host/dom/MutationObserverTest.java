@@ -18,10 +18,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Tests for {@link MutationObserver}.
@@ -186,5 +188,54 @@ public class MutationObserverTest extends WebDriverTestCase {
         driver.findElement(By.id("tester")).sendKeys("abc");
         driver.findElement(By.id("doIt")).click();
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object HTMLHeadingElement]-attributes")
+    public void test() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function makeRed() {\n"
+            + "    document.getElementById('headline').setAttribute('style', 'color: red');\n"
+            + "  }\n"
+
+            + "  function print(mutation) {\n"
+            + "     alert(mutation.target + '-' + mutation.type);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var mobs = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(print)\n"
+            + "    });\n"
+
+            + "    mobs.observe(document.getElementById('container'), {\n"
+            + "      attributes: true,\n"
+            + "      childList: true,\n"
+            + "      characterData: true,\n"
+            + "      subtree: true\n"
+            + "    });\n"
+
+            + "    document.addEventListener('beforeunload', function() {\n"
+            + "      mobs.disconnect();\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='container'>\n"
+            + "    <h1 id='headline' style='font-style: italic'>Some headline</h1>\n"
+            + "    <input id='id1' type='button' onclick='makeRed()' value='Make Red'>\n"
+            + "  </div>\n"
+            + "</body></html>\n";
+        WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("id1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        if (driver instanceof HtmlUnitDriver) {
+            driver.get(URL_FIRST.toExternalForm());
+            final HtmlElement element = toHtmlElement(driver.findElement(By.id("headline")));
+            element.setAttribute("style", "color: red");
+            verifyAlerts(driver, getExpectedAlerts());
+        }
     }
 }
