@@ -350,12 +350,13 @@ public abstract class BaseFrameElement extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue,
+            final boolean notifyAttributeChangeListeners) {
         if (null != attributeValue && "src".equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
 
         if ("src".equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {

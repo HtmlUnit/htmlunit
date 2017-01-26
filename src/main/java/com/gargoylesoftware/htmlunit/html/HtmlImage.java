@@ -111,13 +111,14 @@ public class HtmlImage extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
+            final boolean notifyAttributeChangeListeners) {
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED
                 && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
             if (!oldValue.equals(value)) {
-                super.setAttributeNS(namespaceURI, qualifiedName, value);
+                super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners);
 
                 // onload handlers may need to be invoked again, and a new image may need to be downloaded
                 onloadInvoked_ = false;
@@ -139,7 +140,7 @@ public class HtmlImage extends HtmlElement {
             }
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, value);
+        super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners);
     }
 
     /**

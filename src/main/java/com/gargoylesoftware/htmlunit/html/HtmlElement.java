@@ -165,22 +165,15 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Sets the value of the specified attribute. This method may be overridden by subclasses
-     * which are interested in specific attribute value changes, but such methods <b>must</b>
-     * invoke <tt>super.setAttributeValue()</tt>, and <b>should</b> consider the value of the
-     * <tt>cloning</tt> parameter when deciding whether or not to execute custom logic.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the attribute
-     * @param attributeValue the value of the attribute
+     * {@inheritDoc}
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,
-            final String attributeValue) {
+            final String attributeValue, final boolean notifyAttributeChangeListeners) {
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if (null == getHtmlPageOrNull()) {
-            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
             return;
         }
 
@@ -200,9 +193,12 @@ public abstract class HtmlElement extends DomElement {
         else {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
         }
-        notifyAttributeChangeListeners(event, this, oldAttributeValue);
 
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+
+        if (notifyAttributeChangeListeners) {
+            notifyAttributeChangeListeners(event, this, oldAttributeValue);
+        }
 
         fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
     }
@@ -519,7 +515,7 @@ public abstract class HtmlElement extends DomElement {
      * @exception IOException if an IO error occurs
      */
     public Page type(final char c) throws IOException {
-        return type(c, false);
+        return type(c, false, true);
     }
 
     /**
@@ -530,10 +526,11 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param c the character you wish to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
+     * @param lastType is this the last character to type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    private Page type(final char c, final boolean startAtEnd)
+    private Page type(final char c, final boolean startAtEnd, final boolean lastType)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -571,7 +568,7 @@ public abstract class HtmlElement extends DomElement {
 
             if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
                     && !keyPress.isAborted(keyPressResult)) {
-                doType(c, startAtEnd);
+                doType(c, startAtEnd, lastType);
             }
         }
 
@@ -616,7 +613,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the page that occupies this window after typing
      */
     public Page type(final int keyCode) {
-        return type(keyCode, false, true, true, true);
+        return type(keyCode, false, true, true, true, true);
     }
 
     /**
@@ -637,7 +634,7 @@ public abstract class HtmlElement extends DomElement {
             final Object[] entry = keys.get(i);
             final boolean startAtEnd = i == 0 && keyboard.isStartAtEnd();
             if (entry.length == 1) {
-                type((char) entry[0], startAtEnd);
+                type((char) entry[0], startAtEnd, i == keys.size() - 1);
             }
             else {
                 final int key = (int) entry[0];
@@ -670,10 +667,10 @@ public abstract class HtmlElement extends DomElement {
 
                         default:
                     }
-                    page = type(key, startAtEnd, true, keyPress, keyUp);
+                    page = type(key, startAtEnd, true, keyPress, keyUp, i == keys.size() - 1);
                 }
                 else {
-                    page = type(key, startAtEnd, false, false, true);
+                    page = type(key, startAtEnd, false, false, true, i == keys.size() - 1);
                 }
             }
         }
@@ -682,7 +679,8 @@ public abstract class HtmlElement extends DomElement {
     }
 
     private Page type(final int keyCode, final boolean startAtEnd,
-                    final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp) {
+                    final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp,
+                    final boolean lastType) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -720,7 +718,7 @@ public abstract class HtmlElement extends DomElement {
 
         if (keyDown != null && !keyDown.isAborted(keyDownResult)
                 && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
-            doType(keyCode, startAtEnd);
+            doType(keyCode, startAtEnd, lastType);
         }
 
         if (this instanceof HtmlTextInput
@@ -756,15 +754,16 @@ public abstract class HtmlElement extends DomElement {
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
+     * @param lastType is this the last character to type
      */
-    protected void doType(final char c, final boolean startAtEnd) {
+    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(c, startAtEnd, this);
+            ((DomText) domNode).doType(c, startAtEnd, this, lastType);
         }
         else if (domNode instanceof HtmlElement) {
             try {
-                ((HtmlElement) domNode).type(c, startAtEnd);
+                ((HtmlElement) domNode).type(c, startAtEnd, lastType);
             }
             catch (final IOException e) {
                 throw new RuntimeException(e);
@@ -779,14 +778,15 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param keyCode the key code wish to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
+     * @param lastType is this the last to type
      */
-    protected void doType(final int keyCode, final boolean startAtEnd) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
         final DomNode domNode = getDoTypeNode();
         if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(keyCode, startAtEnd, this);
+            ((DomText) domNode).doType(keyCode, startAtEnd, this, lastType);
         }
         else if (domNode instanceof HtmlElement) {
-            ((HtmlElement) domNode).type(keyCode, startAtEnd, true, true, true);
+            ((HtmlElement) domNode).type(keyCode, startAtEnd, true, true, true, lastType);
         }
     }
 
@@ -822,8 +822,9 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Called from {@link DoTypeProcessor}.
      * @param newValue the new value
+     * @param notifyAttributeChangeListeners to notify the associated {@link HtmlAttributeChangeListener}s
      */
-    protected void typeDone(final String newValue) {
+    protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         // nothing
     }
 

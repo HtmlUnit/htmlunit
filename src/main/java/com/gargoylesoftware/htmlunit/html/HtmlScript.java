@@ -180,15 +180,16 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * (behavior varies by browser version). {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners) {
         // special additional processing for the 'src'
         if (namespaceURI != null || !"src".equals(qualifiedName)) {
-            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
             return;
         }
 
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
 
         if (isAttachedToPage()) {
             // if FF, only execute if the "src" attribute

@@ -50,31 +50,31 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean startAtEnd) {
+    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getValueAttribute().length());
         }
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this);
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean startAtEnd) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getValueAttribute().length());
         }
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this);
+        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void typeDone(final String newValue) {
+    protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setAttribute("value", newValue);
+            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners);
         }
     }
 
@@ -154,8 +154,9 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners) {
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
         if ("value".equals(qualifiedName)) {
             final SgmlPage page = getPage();
             if (page != null && page.isHtmlPage()) {

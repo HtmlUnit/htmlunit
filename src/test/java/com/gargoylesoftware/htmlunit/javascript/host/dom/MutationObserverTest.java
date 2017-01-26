@@ -195,14 +195,14 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLHeadingElement]-attributes")
-    public void test() throws Exception {
+    public void attributeValue2() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function makeRed() {\n"
             + "    document.getElementById('headline').setAttribute('style', 'color: red');\n"
             + "  }\n"
 
             + "  function print(mutation) {\n"
-            + "     alert(mutation.target + '-' + mutation.type);\n"
+            + "    alert(mutation.target + '-' + mutation.type);\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -227,7 +227,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "    <input id='id1' type='button' onclick='makeRed()' value='Make Red'>\n"
             + "  </div>\n"
             + "</body></html>\n";
-        WebDriver driver = loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("id1")).click();
         verifyAlerts(driver, getExpectedAlerts());
 

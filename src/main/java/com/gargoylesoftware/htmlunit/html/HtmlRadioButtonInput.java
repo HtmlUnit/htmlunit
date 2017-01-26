@@ -307,14 +307,15 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners) {
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
         }
         if ("checked".equals(qualifiedName)) {
             checkedState_ = true;
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
     }
 
     /**

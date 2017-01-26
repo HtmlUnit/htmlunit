@@ -901,7 +901,7 @@ public class CodeStyleTest {
                         || lineTrimmed.startsWith("if")) {
                     final int difference = getInitialSpaces(next) - getInitialSpaces(line);
                     if (difference > 2) {
-                        addFailure("Too many spaces in " + relativePath + ", line: " + (i + 2));
+                        addFailure("Too many initial spaces in " + relativePath + ", line: " + (i + 2));
                     }
                     else if (difference == 1) {
                         addFailure("Add one more space in " + relativePath + ", line: " + (i + 2));

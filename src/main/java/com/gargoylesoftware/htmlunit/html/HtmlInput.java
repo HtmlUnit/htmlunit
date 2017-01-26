@@ -403,7 +403,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             else {
                 event = new HtmlAttributeChangeEvent(this, "value", defaultValue_);
             }
-            notifyAttributeChangeListeners(event, this, defaultValue_);
+//            notifyAttributeChangeListeners(event, this, defaultValue_);
             defaultValue_ = defaultValue;
         }
     }
@@ -559,14 +559,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners) {
         if ("name".equals(qualifiedName)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
     }
 
     /**

@@ -169,13 +169,15 @@ public class DomText extends DomCharacterData implements Text {
      * @param c the character you with to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
      * @param htmlElement the element in which typing occurs
+     * @param lastType is this the last character to type
      */
-    protected void doType(final char c, final boolean startAtEnd, final HtmlElement htmlElement) {
+    protected void doType(final char c, final boolean startAtEnd, final HtmlElement htmlElement,
+            final boolean lastType) {
         initDoTypeProcessor();
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getData().length());
         }
-        doTypeProcessor_.doType(getData(), selectionDelegate_, c, htmlElement);
+        doTypeProcessor_.doType(getData(), selectionDelegate_, c, htmlElement, lastType);
     }
 
     /**
@@ -184,13 +186,15 @@ public class DomText extends DomCharacterData implements Text {
      * @param keyCode the key code wish to simulate typing
      * @param startAtEnd whether typing should start at the text end or not
      * @param htmlElement the element in which typing occurs
+     * @param lastType is this the last character to type
      */
-    protected void doType(final int keyCode, final boolean startAtEnd, final HtmlElement htmlElement) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final HtmlElement htmlElement,
+            final boolean lastType) {
         initDoTypeProcessor();
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getData().length());
         }
-        doTypeProcessor_.doType(getData(), selectionDelegate_, keyCode, htmlElement);
+        doTypeProcessor_.doType(getData(), selectionDelegate_, keyCode, htmlElement, lastType);
     }
 
     private void initDoTypeProcessor() {

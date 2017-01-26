@@ -103,6 +103,15 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
     }
 
     /**
+     * Empties the MutationObserver instance's record queue and returns what was in there.
+     * @return an Array of {@link MutationRecord}s
+     */
+    @JsxFunction
+    public NativeArray takeRecords() {
+        return new NativeArray(0);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

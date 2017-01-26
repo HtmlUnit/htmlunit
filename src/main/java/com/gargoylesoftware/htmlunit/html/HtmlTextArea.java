@@ -464,29 +464,29 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean startAtEnd) {
+    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getText().length());
         }
-        doTypeProcessor_.doType(getText(), selectionDelegate_, c, this);
+        doTypeProcessor_.doType(getText(), selectionDelegate_, c, this, lastType);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean startAtEnd) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
         if (startAtEnd) {
             selectionDelegate_.setSelectionStart(getText().length());
         }
-        doTypeProcessor_.doType(getText(), selectionDelegate_, keyCode, this);
+        doTypeProcessor_.doType(getText(), selectionDelegate_, keyCode, this, lastType);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void typeDone(final String newValue) {
+    protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         setTextInternal(newValue);
     }
 
@@ -553,14 +553,15 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners) {
         if ("name".equals(qualifiedName)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
     }
 
     /**

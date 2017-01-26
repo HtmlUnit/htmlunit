@@ -46,7 +46,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 /**
- * The process for {@link HtmlElement#doType(char, boolean)}.
+ * The process for {@link HtmlElement#doType(char, boolean, boolean)}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill
@@ -82,7 +82,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
-            final char c, final HtmlElement element) {
+            final char c, final HtmlElement element, final boolean lastType) {
 
         int selectionStart = selectionDelegate.getSelectionStart();
         int selectionEnd = selectionDelegate.getSelectionEnd();
@@ -124,7 +124,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             }
         }
 
-        typeDone(newValue.toString());
+        typeDone(newValue.toString(), lastType);
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
@@ -170,12 +170,12 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         clipboard.setContents(stringSelection, this);
     }
 
-    private void typeDone(final String newValue) {
+    private void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (domNode_ instanceof DomText) {
             ((DomText) domNode_).setData(newValue);
         }
         else {
-            ((HtmlElement) domNode_).typeDone(newValue);
+            ((HtmlElement) domNode_).typeDone(newValue, notifyAttributeChangeListeners);
         }
     }
 
@@ -187,7 +187,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     }
 
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
-            final int keyCode, final HtmlElement element) {
+            final int keyCode, final HtmlElement element, final boolean lastType) {
 
         final StringBuilder newValue = new StringBuilder(currentValue);
         int selectionStart = selectionDelegate.getSelectionStart();
@@ -195,7 +195,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
 
         final Character ch = SPECIAL_KEYS_MAP_.get(keyCode);
         if (ch != null) {
-            doType(currentValue, selectionDelegate, ch, element);
+            doType(currentValue, selectionDelegate, ch, element, lastType);
             return;
         }
         switch (keyCode) {
@@ -263,7 +263,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             selectionEnd = selectionStart;
         }
 
-        typeDone(newValue.toString());
+        typeDone(newValue.toString(), lastType);
 
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
