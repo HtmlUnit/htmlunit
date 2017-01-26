@@ -51,7 +51,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 import com.gargoylesoftware.htmlunit.source.SVN;
 
 /**
- * Test of coding style for things that cannot be detected by Checkstyle.
+ * Test of coding style for issues which cannot be detected by Checkstyle.
  *
  * @author Ahmed Ashour
  */

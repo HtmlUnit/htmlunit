@@ -64,7 +64,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @param webClient the web client using this factory
      */
     public HtmlUnitContextFactory(final WebClient webClient) {
-        webClient_= webClient;
+        webClient_ = webClient;
         browserVersion_ = webClient.getBrowserVersion();
         errorReporter_ = new StrictErrorReporter();
     }
