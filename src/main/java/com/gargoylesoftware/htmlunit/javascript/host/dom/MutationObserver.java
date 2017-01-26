@@ -44,6 +44,8 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
 
     private Function function_;
     private Node node_;
+    @SuppressWarnings("unused")
+    private boolean childList_;
     private boolean attaributes_;
     private boolean attributeOldValue_;
     private NativeArray attributeFilter_;
@@ -76,12 +78,13 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
         node_ = node;
         attaributes_ = Boolean.TRUE.equals(options.get("attributes"));
         attributeOldValue_ = Boolean.TRUE.equals(options.get("attributeOldValue"));
+        childList_ = Boolean.TRUE.equals(options.get("childList"));
         characterData_ = Boolean.TRUE.equals(options.get("characterData"));
         characterDataOldValue_ = Boolean.TRUE.equals(options.get("characterDataOldValue"));
         subtree_ = Boolean.TRUE.equals(options.get("subtree"));
         attributeFilter_ = (NativeArray) options.get("attributeFilter");
 
-        if (attaributes_) {
+        if (attaributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
             ((HtmlElement) node_.getDomNodeOrDie()).addHtmlAttributeChangeListener(this);
         }
         if (characterData_) {
@@ -94,7 +97,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
      */
     @JsxFunction
     public void disconnect() {
-        if (attaributes_) {
+        if (attaributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
             ((HtmlElement) node_.getDomNodeOrDie()).removeHtmlAttributeChangeListener(this);
         }
         if (characterData_) {
