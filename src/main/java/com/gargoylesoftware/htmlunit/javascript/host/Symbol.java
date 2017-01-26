@@ -94,7 +94,8 @@ public class Symbol extends SimpleScriptable {
 
         Symbol symbol = map.get(name);
         if (symbol == null) {
-            symbol = new Symbol(name);
+            symbol = new Symbol();
+            symbol.name_ = name;
             symbol.setParentScope(scope);
             symbol.setPrototype(scope.getPrototype(symbol.getClass()));
             map.put(name, symbol);
@@ -221,7 +222,8 @@ public class Symbol extends SimpleScriptable {
         if (symbol == null) {
             final SimpleScriptable parentScope = (SimpleScriptable) thisObj.getParentScope();
 
-            symbol = new Symbol(key);
+            symbol = new Symbol();
+            symbol.name_ = key;
             symbol.setParentScope(parentScope);
             symbol.setPrototype(parentScope.getPrototype(symbol.getClass()));
             thisObj.put(key, thisObj, symbol);

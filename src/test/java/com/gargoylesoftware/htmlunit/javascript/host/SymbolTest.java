@@ -364,4 +364,25 @@ public class SymbolTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "called",
+            IE = {})
+    public void inFunction() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (window.Symbol) {\n"
+            + "    [].forEach.call('_', function(e) {\n"
+            + "       var x = Symbol.toPrimitive;\n"
+            + "       alert('called');\n"
+            + "    });\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
