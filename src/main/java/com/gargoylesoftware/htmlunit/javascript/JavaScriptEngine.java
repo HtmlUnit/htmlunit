@@ -121,6 +121,12 @@ public class JavaScriptEngine {
     public static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
+     * Key used to place the {@link HtmlPage} for which the JavaScript code is executed
+     * as thread local attribute in current context.
+     */
+    public static final String KEY_STARTING_PAGE = "startingPage";
+
+    /**
      * Creates an instance for the specified {@link WebClient}.
      *
      * @param webClient the client that will own this engine
@@ -870,6 +876,7 @@ public class JavaScriptEngine {
                 final Object response;
                 stack.push(scope_);
                 try {
+                    cx.putThreadLocal(KEY_STARTING_PAGE, page_);
                     synchronized (page_) { // 2 scripts can't be executed in parallel for one page
                         if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
                             return null; // page has been unloaded
