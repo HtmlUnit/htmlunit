@@ -44,7 +44,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1004,7 +1003,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"changed2", "changed"})
-    @NotYetImplemented
     public void firingOnchange() throws Exception {
         final String html = "<html><body>\n"
             + "<form onchange='alert(\"changed\")'>\n"
@@ -1107,7 +1105,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"foo, change"})
-    @NotYetImplemented
     public void onchange() throws Exception {
         final String html =
               "<html>\n"

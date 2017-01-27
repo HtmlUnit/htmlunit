@@ -177,6 +177,15 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValueAttribute(final String newValue) {
+        super.setValueAttribute(newValue);
+        fireEvent("change");
+    }
+
+    /**
      * Used to specify <code>multiple</code> paths to upload.
      *
      * The current implementation splits the value based on '§'.
@@ -196,7 +205,7 @@ public class HtmlFileInput extends HtmlInput {
             builder.append(p);
         }
         setDefaultValue(builder.toString());
-        super.setValueAttribute(builder.toString());
+        setValueAttribute(builder.toString());
     }
 
 }

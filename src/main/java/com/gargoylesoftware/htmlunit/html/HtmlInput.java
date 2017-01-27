@@ -378,7 +378,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * {@inheritDoc}
      *
      * @see SubmittableElement#setDefaultValue(String)
-     * @see HtmlFileInput#setDefaultValue(String)
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
@@ -390,10 +389,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param defaultValue the new default value
      * @param modifyValue Whether or not to set the current value to the default value
      */
-    protected void setDefaultValue(final String defaultValue, final boolean modifyValue) {
+    protected void setDefaultValue(String defaultValue, final boolean modifyValue) {
         defaultValue_ = defaultValue;
         if (modifyValue) {
-            setValueAttribute(defaultValue);
+            if (this instanceof HtmlFileInput) {
+                super.setAttribute("value", defaultValue);
+            }
+            else {
+                setValueAttribute(defaultValue);
+            }
         }
     }
 
