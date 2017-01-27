@@ -54,7 +54,7 @@ public class URL extends SimpleScriptable {
     public static String createObjectURL(final Object fileOrBlob) {
         if (fileOrBlob instanceof File) {
             final File file = (File) fileOrBlob;
-            return file.getPath().normalize().toString();
+            return file.getFile().toURI().normalize().toString();
         }
 
         return null;

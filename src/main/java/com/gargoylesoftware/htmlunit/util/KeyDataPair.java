@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -30,7 +29,7 @@ import java.nio.file.Path;
  */
 public class KeyDataPair extends NameValuePair {
 
-    private final Path path_;
+    private final File fileObject_;
     private final String fileName_;
     private final String mimeType_;
     private final String charset_;
@@ -40,21 +39,21 @@ public class KeyDataPair extends NameValuePair {
      * Creates an instance.
      *
      * @param key the key
-     * @param path the path
+     * @param file the file
      * @param fileName the name of the file
      * @param mimeType the MIME type
      * @param charset the charset encoding
      */
-    public KeyDataPair(final String key, final Path path, final String fileName,
+    public KeyDataPair(final String key, final File file, final String fileName,
             final String mimeType, final String charset) {
 
-        super(key, (path == null) ? "" : path.getFileName().toString());
+        super(key, (file == null) ? "" : file.getName());
 
-        if (path != null && Files.exists(path)) {
-            path_ = path;
+        if (file != null && file.exists()) {
+            fileObject_ = file;
         }
         else {
-            path_ = null;
+            fileObject_ = null;
         }
         fileName_ = fileName;
 
@@ -85,10 +84,10 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * @return the {@link Path} object if the file exists, else {@code null}
+     * @return the {@link File} object if the file exists, else {@code null}
      */
-    public Path getPath() {
-        return path_;
+    public File getFile() {
+        return fileObject_;
     }
 
     /**

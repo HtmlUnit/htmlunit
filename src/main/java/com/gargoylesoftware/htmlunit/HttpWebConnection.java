@@ -29,7 +29,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -404,8 +403,8 @@ public class HttpWebConnection implements WebConnection {
         for (final NameValuePair pair : pairs) {
             if (pair instanceof KeyDataPair) {
                 final KeyDataPair pairWithFile = (KeyDataPair) pair;
-                if (pairWithFile.getData() == null && pairWithFile.getPath() != null) {
-                    final String fileName = pairWithFile.getPath().getFileName().toString();
+                if (pairWithFile.getData() == null && pairWithFile.getFile() != null) {
+                    final String fileName = pairWithFile.getFile().getName();
                     for (int i = 0; i < fileName.length(); i++) {
                         if (fileName.codePointAt(i) > 127) {
                             return Charset.forName(charset);
@@ -424,21 +423,21 @@ public class HttpWebConnection implements WebConnection {
         }
 
         final ContentType contentType = ContentType.create(mimeType);
-        final Path path = pairWithFile.getPath();
+        final File file = pairWithFile.getFile();
 
         if (pairWithFile.getData() != null) {
             final String filename;
-            if (path == null) {
+            if (file == null) {
                 filename = pairWithFile.getValue();
             }
             else if (pairWithFile.getFileName() != null) {
                 filename = pairWithFile.getFileName();
             }
             else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-                filename = path.toAbsolutePath().toString();
+                filename = file.getAbsolutePath();
             }
             else {
-                filename = path.getFileName().toString();
+                filename = file.getName();
             }
 
             builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(pairWithFile.getData()),
@@ -446,7 +445,7 @@ public class HttpWebConnection implements WebConnection {
             return;
         }
 
-        if (path == null) {
+        if (file == null) {
             builder.addPart(pairWithFile.getName(),
                     // Overridden in order not to have a chunked response.
                     new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
@@ -459,19 +458,19 @@ public class HttpWebConnection implements WebConnection {
         }
 
         final String filename;
-        if (pairWithFile.getPath() == null) {
+        if (pairWithFile.getFile() == null) {
             filename = pairWithFile.getValue();
         }
         else if (pairWithFile.getFileName() != null) {
             filename = pairWithFile.getFileName();
         }
         else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-            filename = pairWithFile.getPath().toAbsolutePath().toString();
+            filename = pairWithFile.getFile().getAbsolutePath();
         }
         else {
-            filename = pairWithFile.getFileName();
+            filename = pairWithFile.getFile().getName();
         }
-        builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getPath().toFile(), contentType, filename);
+        builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getFile(), contentType, filename);
     }
 
     /**

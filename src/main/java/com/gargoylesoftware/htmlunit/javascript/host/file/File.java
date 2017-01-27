@@ -19,10 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Locale;
 
@@ -46,7 +42,7 @@ public class File extends Blob {
     private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
     private static final String LAST_MODIFIED_DATE_FORMAT_FF = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z";
 
-    private Path path_;
+    private java.io.File file_;
 
     /**
      * Creates an instance.
@@ -56,7 +52,7 @@ public class File extends Blob {
     }
 
     File(final String pathname) {
-        path_ = Paths.get(pathname);
+        file_ = new java.io.File(pathname);
     }
 
     /**
@@ -65,7 +61,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public String getName() {
-        return path_.getFileName().toString();
+        return file_.getName();
     }
 
     /**
@@ -93,12 +89,7 @@ public class File extends Blob {
      */
     @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public long getLastModified() {
-        try {
-            return Files.getLastModifiedTime(path_).toMillis();
-        }
-        catch (final IOException e) {
-            return 0;
-        }
+        return file_.lastModified();
     }
 
     /**
@@ -116,12 +107,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public long getSize() {
-        try {
-            return Files.size(path_);
-        }
-        catch (final IOException e) {
-            return 0;
-        }
+        return file_.length();
     }
 
     /**
@@ -130,7 +116,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public String getType() {
-        return getBrowserVersion().getUploadMimeType(path_);
+        return getBrowserVersion().getUploadMimeType(file_);
     }
 
     /**
@@ -148,10 +134,10 @@ public class File extends Blob {
     }
 
     /**
-     * Returns the underlying path.
-     * @return the underlying path
+     * Returns the underlying file.
+     * @return the underlying file
      */
-    public Path getPath() {
-        return path_;
+    public java.io.File getFile() {
+        return file_;
     }
 }

@@ -23,10 +23,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -80,11 +78,26 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void fileInput() throws Exception {
-        final Path path = Paths.get(getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toURI());
+        String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
         testFileInput(path);
+        final File file = new File(new URI(path));
+        testFileInput(file.getCanonicalPath());
+
+        if (path.startsWith("file:")) {
+            path = path.substring("file:".length());
+        }
+        while (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
+            testFileInput(URLDecoder.decode(path.replace('/', '\\'), "UTF-8"));
+        }
+        testFileInput("file:/" + path);
+        testFileInput("file://" + path);
+        testFileInput("file:///" + path);
     }
 
-    private void testFileInput(final Path path) throws Exception {
+    private void testFileInput(final String fileURL) throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
@@ -104,11 +117,11 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
-        fileInput.setPaths(path);
+        fileInput.setValueAttribute(fileURL);
         firstPage.getHtmlElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair.getPath());
-        assertFalse(pair.getPath().toString().isEmpty());
+        assertNotNull(pair.getFile());
+        assertTrue(pair.getFile().length() != 0);
     }
 
     /**
@@ -136,7 +149,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
-        fileInput.setPaths(Paths.get("dummy.txt"));
+        fileInput.setValueAttribute("dummy.txt");
         fileInput.setContentType("text/csv");
         fileInput.setData("My file data".getBytes());
         firstPage.getHtmlElementById("mySubmit").click();
@@ -180,8 +193,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
-        final Path path = Paths.get(getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toURI());
-        fileInput.setPaths(path);
+        final String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
+        fileInput.setValueAttribute(path);
         fileInput.setData("My file data".getBytes());
         firstPage.getHtmlElementById("mySubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
@@ -297,7 +310,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         firstPage.getHtmlElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertEquals("image", pair.getName());
-        assertNull(pair.getPath());
+        assertNull(pair.getFile());
     }
 
     /**
@@ -327,16 +340,16 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
 
-        fileInput.setPaths(Paths.get(fileURL.toURI()));
+        fileInput.setValueAttribute(fileURL.toExternalForm());
         f.getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair.getPath());
+        assertNotNull(pair.getFile());
         assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
 
         fileInput.setContentType("text/webtest");
         f.getInputByName("mysubmit").click();
         final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair2.getPath());
+        assertNotNull(pair2.getFile());
         assertEquals("text/webtest", pair2.getMimeType());
     }
 
@@ -393,15 +406,16 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final Path path = Paths.get(getClass().getClassLoader().getResource(filename).toURI());
-        assertTrue(Files.exists(path));
+        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
+        final File file = new File(new URI(path));
+        assertTrue(file.exists());
 
         final WebClient client = getWebClient();
         final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
 
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = form.getInputByName("myInput");
-        fileInput.setPaths(path);
+        fileInput.setValueAttribute(path);
 
         final HtmlSubmitInput submitInput = form.getInputByValue("Upload");
         final HtmlPage secondPage = submitInput.click();
@@ -485,19 +499,21 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String filename1 = "HtmlFileInputTest_one.txt";
-        final Path path1 = Paths.get(getClass().getResource(filename1).toURI());
-        assertTrue(Files.exists(path1));
+        final String path1 = getClass().getResource(filename1).toExternalForm();
+        final File file1 = new File(new URI(path1));
+        assertTrue(file1.exists());
 
         final String filename2 = "HtmlFileInputTest_two.txt";
-        final Path path2 = Paths.get(getClass().getResource(filename2).toURI());
-        assertTrue(Files.exists(path2));
+        final String path2 = getClass().getResource(filename2).toExternalForm();
+        final File file2 = new File(new URI(path2));
+        assertTrue(file2.exists());
 
         final WebClient client = getWebClient();
         final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
 
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = form.getInputByName("myInput");
-        fileInput.setPaths(path1, path2);
+        fileInput.setValueAttribute(new String[] {path1, path2});
 
         final HtmlSubmitInput submitInput = form.getInputByValue("Upload");
         final HtmlPage secondPage = submitInput.click();
@@ -544,43 +560,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
               + "<body>\n"
               + "  <input type='file' id='f' value='Hello world' multiple"
               + "      onChange='alert(\"foo\");alert(event.type);'>\n"
-              + "</body></html>";
-
-        final Path pom = Paths.get("pom.xml");
-        final Path license = Paths.get("LICENSE.txt");
-
-        final HtmlPage page = loadPage(html);
-        ((HtmlFileInput) page.getElementById("f")).setPaths(pom, license);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({"C:\\fakepath\\pom.xml-Hello world-Hello world",
-        "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
-    public void value() throws Exception {
-        final String html =
-              "<html>\n"
-              + "<head>\n"
-              + "<script>\n"
-              + "  function test() {\n"
-              + "    var input = document.getElementById('f');\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-              + "    alert(input.outerHTML);\n"
-              + "  }\n"
-              + "</script></head>\n"
-              + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world' multiple>\n"
               + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
               + "</body></html>";
 
-        final Path pom = Paths.get("pom.xml");
+        final String pom = new File("pom.xml").getAbsolutePath();
+        final String license = new File("LICENSE.txt").getAbsolutePath();
 
         final HtmlPage page = loadPage(html);
-        page.<HtmlFileInput>getHtmlElementById("f").setPaths(pom);
-        page.getElementById("clickMe").click();
+        ((HtmlFileInput) page.getElementById("f")).setValueAttribute(new String[] {pom, license});
         assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
     }
+
 }

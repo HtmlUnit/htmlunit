@@ -16,9 +16,6 @@
 package org.openqa.selenium.htmlunit;
 
 import java.lang.reflect.Field;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.HasInputDevices;
@@ -57,12 +54,7 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
         final String keysSequence = keysToSend.toString();
         if (element instanceof HtmlFileInput) {
             final HtmlFileInput fileInput = (HtmlFileInput) element;
-            try {
-                fileInput.setPaths(Paths.get(new URI(keysSequence)));
-            }
-            catch (final URISyntaxException e) {
-                fileInput.setPaths(Paths.get(keysSequence));
-            }
+            fileInput.setValueAttribute(keysSequence);
             return;
         }
         super.sendKeys(element, currentValue, keysToSend, releaseAllAtEnd);

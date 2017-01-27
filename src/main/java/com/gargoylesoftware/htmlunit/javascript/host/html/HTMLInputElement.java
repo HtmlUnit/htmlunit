@@ -28,8 +28,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -569,21 +569,21 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     public String getValue() {
+        String value = super.getValue();
         if ("file".equalsIgnoreCase(getType())) {
-            final Path[] paths = ((HtmlFileInput) getDomNodeOrDie()).getPaths();
-            if (paths == null || paths.length == 0) {
-                return ATTRIBUTE_NOT_DEFINED;
+            if (value == getDefaultValue()) {
+                value = ATTRIBUTE_NOT_DEFINED;
             }
-            final Path first = paths[0];
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
-                return "C:\\fakepath\\" + first.getName(first.getNameCount() - 1);
+            else if (value.contains(File.separator)) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+                    value = "C:\\fakepath\\" + value.substring(value.lastIndexOf(File.separator) + 1);
+                }
+                else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
+                    value = value.substring(value.lastIndexOf(File.separator) + 1);
+                }
             }
-            else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
-                return first.getName(first.getNameCount() - 1).toString();
-            }
-            return first.toString();
         }
-        return super.getValue();
+        return value;
     }
 
     /**
