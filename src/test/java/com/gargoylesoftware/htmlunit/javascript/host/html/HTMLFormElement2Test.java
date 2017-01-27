@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -319,21 +318,17 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
     @Test
     @Alerts("onchange")
     public void fileInput_fireOnChange() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = "<html><body>\n"
             + "<form>\n"
             + "  <input type='file' name='myFile' id='myFile' onchange='alert(\"onchange\")'/>\n"
             + "</form>\n"
-            + "</body>\n"
-            + "</html>";
+            + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
         fileInput.focus();
         fileInput.setAttribute("value", "dummy.txt");
-        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        // remove focus to trigger onchange
-        page.setFocusedElement(null);
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
