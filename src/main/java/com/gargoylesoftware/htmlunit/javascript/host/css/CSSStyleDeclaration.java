@@ -308,12 +308,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @Override
     public Object getWithFallback(final String name) {
         // TODO
-        if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
-            if (null != jsElement_) {
-                final StyleElement element = getStyleElement(name);
-                if (element != null && element.getValue() != null) {
-                    return element.getValue();
-                }
+        if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER) && null != jsElement_) {
+            final StyleElement element = getStyleElement(name);
+            if (element != null && element.getValue() != null) {
+                return element.getValue();
             }
         }
 
@@ -475,9 +473,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     protected void setStyleAttribute(final String name, String newValue, final String important) {
         if (null == newValue || "null".equals(newValue)) {
-            if (getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS)) {
-                //Context.throwAsScriptRuntimeEx(new Exception("Invalid argument."));
-            }
             newValue = "";
         }
         if (styleDeclaration_ != null) {
@@ -1678,11 +1673,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         final Scriptable prototype = getPrototype();
-        if (prototype != null && !"constructor".equals(name)) {
-            if (prototype.get(name, start) != Scriptable.NOT_FOUND) {
-                prototype.put(name, start, value);
-                return;
-            }
+        if (prototype != null && !"constructor".equals(name) && prototype.get(name, start) != Scriptable.NOT_FOUND) {
+            prototype.put(name, start, value);
+            return;
         }
 
         if (getDomNodeOrNull() != null) { // check if prototype or not
@@ -3116,13 +3109,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             }
 
             if ((auto && "auto".equals(valueString))
-                    || ("initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL))
+                    || "initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL)
                     || "inherit".equals(valueString)) {
                 setStyleAttribute(name, valueString, important);
                 return;
             }
 
-            if ((thinMedThick && "thin".equals(valueString))
+            if (thinMedThick && "thin".equals(valueString)
                     || "medium".equals(valueString)
                     || "thick".equals(valueString)) {
                 setStyleAttribute(name, valueString, important);

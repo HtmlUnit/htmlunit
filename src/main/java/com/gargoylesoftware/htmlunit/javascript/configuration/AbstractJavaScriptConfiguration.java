@@ -182,11 +182,9 @@ public abstract class AbstractJavaScriptConfiguration {
         final Map<String, Method> allSetters = new HashMap<>();
         for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
             for (final Annotation annotation : constructor.getAnnotations()) {
-                if (annotation instanceof JsxConstructor) {
-                    if (isSupported(((JsxConstructor) annotation).value(),
-                            expectedBrowserName, browserVersionNumeric)) {
-                        classConfiguration.setJSConstructor(constructor);
-                    }
+                if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
+                        expectedBrowserName, browserVersionNumeric)) {
+                    classConfiguration.setJSConstructor(constructor);
                 }
             }
         }
@@ -256,11 +254,9 @@ public abstract class AbstractJavaScriptConfiguration {
                         classConfiguration.addStaticFunction(name, method);
                     }
                 }
-                else if (annotation instanceof JsxConstructor) {
-                    if (isSupported(((JsxConstructor) annotation).value(),
-                            expectedBrowserName, browserVersionNumeric)) {
-                        classConfiguration.setJSConstructor(method);
-                    }
+                else if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
+                        expectedBrowserName, browserVersionNumeric)) {
+                    classConfiguration.setJSConstructor(method);
                 }
             }
         }

@@ -588,29 +588,26 @@ public final class HTMLParser {
             if ("body".equals(tagLower)) {
                 body_ = (HtmlElement) newElement;
             }
-            else if ("meta".equals(tagLower)) {
-                // i like the IE
-                if (page_.hasFeature(META_X_UA_COMPATIBLE)) {
-                    final HtmlMeta meta = (HtmlMeta) newElement;
-                    if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
-                        final String content = meta.getContentAttribute();
-                        if (content.startsWith("IE=")) {
-                            final String mode = content.substring(3).trim();
-                            final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
-                            if ("edge".equals(mode)) {
-                                ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(version);
+            else if ("meta".equals(tagLower) && page_.hasFeature(META_X_UA_COMPATIBLE)) {
+                final HtmlMeta meta = (HtmlMeta) newElement;
+                if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
+                    final String content = meta.getContentAttribute();
+                    if (content.startsWith("IE=")) {
+                        final String mode = content.substring(3).trim();
+                        final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
+                        if ("edge".equals(mode)) {
+                            ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(version);
+                        }
+                        else {
+                            try {
+                                int value = Integer.parseInt(mode);
+                                if (value > version) {
+                                    value = version;
+                                }
+                                ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
                             }
-                            else {
-                                try {
-                                    int value = Integer.parseInt(mode);
-                                    if (value > version) {
-                                        value = version;
-                                    }
-                                    ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
-                                }
-                                catch (final Exception e) {
-                                    // ignore
-                                }
+                            catch (final Exception e) {
+                                // ignore
                             }
                         }
                     }
@@ -993,7 +990,7 @@ public final class HTMLParser {
         private static boolean isSynthesized(final Augmentations augs) {
             final HTMLEventInfo info = (augs == null) ? null
                     : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
-            return info != null ? info.isSynthesized() : false;
+            return info != null && info.isSynthesized();
         }
 
         private boolean isInsideHtml() {

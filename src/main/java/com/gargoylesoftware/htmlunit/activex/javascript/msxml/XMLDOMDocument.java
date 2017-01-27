@@ -547,10 +547,8 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxFunction
     public boolean load(final String xmlSource) {
-        if (async_) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLDOMDocument.load(): 'async' is true, currently treated as false.");
-            }
+        if (async_ && LOG.isDebugEnabled()) {
+            LOG.debug("XMLDOMDocument.load(): 'async' is true, currently treated as false.");
         }
         try {
             final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

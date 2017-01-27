@@ -1250,7 +1250,7 @@ public class WebClient implements Serializable, AutoCloseable {
             page = getPage(webWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
         }
         final ScriptResult r = page.executeJavaScriptIfPossible(url.toExternalForm(), "JavaScript URL", 1);
-        if ((r.getJavaScriptResult() == null) || ScriptResult.isUndefined(r)) {
+        if (r.getJavaScriptResult() == null || ScriptResult.isUndefined(r)) {
             // No new WebResponse to produce.
             return webWindow.getEnclosedPage().getWebResponse();
         }
@@ -1785,8 +1785,8 @@ public class WebClient implements Serializable, AutoCloseable {
                     final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptableObject();
                     final ComputedCSSStyleDeclaration style =
                             htmlElement.getWindow().getComputedStyle(htmlElement, null);
-                    use = (style.getCalculatedWidth(false, false) != 0)
-                        && (style.getCalculatedHeight(false, false) != 0);
+                    use = style.getCalculatedWidth(false, false) != 0
+                        && style.getCalculatedHeight(false, false) != 0;
                 }
             }
             if (use) {

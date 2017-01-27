@@ -69,10 +69,9 @@ public class CSSStyleRule extends CSSRule {
         while (m.find()) {
             String fixedName = m.group();
             // this should be handled with the right regex but...
-            if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_LOWERCASE)) {
-                if (!fixedName.isEmpty() && '.' != fixedName.charAt(0) && '#' != fixedName.charAt(0)) {
-                    fixedName = fixedName.toLowerCase(Locale.ROOT);
-                }
+            if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_LOWERCASE)
+                    && !fixedName.isEmpty() && '.' != fixedName.charAt(0) && '#' != fixedName.charAt(0)) {
+                fixedName = fixedName.toLowerCase(Locale.ROOT);
             }
             fixedName = StringUtils.sanitizeForAppendReplacement(fixedName);
             m.appendReplacement(sb, fixedName);

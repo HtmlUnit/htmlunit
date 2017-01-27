@@ -211,7 +211,7 @@ public class JavaScriptEngine {
                     ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
         }
         else {
-            defineConstructor(browserVersion, window, window, new Window());
+            defineConstructor(window, window, new Window());
         }
 
         // remove some objects, that Rhino defines in top scope but that we don't want
@@ -252,7 +252,7 @@ public class JavaScriptEngine {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
-                configureConstantsPropertiesAndFunctions(config, window, browserVersion);
+                configureConstantsPropertiesAndFunctions(config, window);
 
                 final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
                 prototypesPerJSName.put(config.getClassName(), prototype);
@@ -358,8 +358,8 @@ public class JavaScriptEngine {
                         constructor = config.getHostClass().newInstance();
                         ((SimpleScriptable) constructor).setClassName(config.getClassName());
                     }
-                    defineConstructor(browserVersion, window, prototype, constructor);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor, browserVersion);
+                    defineConstructor(window, prototype, constructor);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
                 }
                 else {
                     final BaseFunction function;
@@ -413,7 +413,7 @@ public class JavaScriptEngine {
                         }
                     }
 
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, function, browserVersion);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
                 }
             }
         }
@@ -496,7 +496,7 @@ public class JavaScriptEngine {
         window.initialize(webWindow);
     }
 
-    private static void defineConstructor(final BrowserVersion browserVersion, final Window window,
+    private static void defineConstructor(final Window window,
             final Scriptable prototype, final ScriptableObject constructor) {
         constructor.setParentScope(window);
         ScriptableObject.defineProperty(prototype, "constructor", constructor,
@@ -548,7 +548,7 @@ public class JavaScriptEngine {
         prototype.setParentScope(window);
         prototype.setClassName(config.getClassName());
 
-        configureConstantsPropertiesAndFunctions(config, prototype, browserVersion);
+        configureConstantsPropertiesAndFunctions(config, prototype);
 
         return prototype;
     }
@@ -559,9 +559,9 @@ public class JavaScriptEngine {
      * @param scriptable the object to configure
      */
     private static void configureConstantsStaticPropertiesAndStaticFunctions(final ClassConfiguration config,
-            final ScriptableObject scriptable, final BrowserVersion browserVersion) {
+            final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
-        configureStaticProperties(config, browserVersion, scriptable);
+        configureStaticProperties(config, scriptable);
         configureStaticFunctions(config, scriptable);
     }
 
@@ -571,16 +571,13 @@ public class JavaScriptEngine {
      * @param scriptable the object to configure
      */
     private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
-            final ScriptableObject scriptable, final BrowserVersion browserVersion) {
+            final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
         configureProperties(config, scriptable);
-        configureFunctions(config, browserVersion, scriptable);
+        configureFunctions(config, scriptable);
     }
 
-    private static void configureFunctions(final ClassConfiguration config,
-            final BrowserVersion browserVersion,
-            final ScriptableObject scriptable) {
-
+    private static void configureFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
         final int attributes = ScriptableObject.EMPTY;
         // the functions
         for (final Entry<String, Method> functionInfo : config.getFunctionEntries()) {
@@ -607,9 +604,7 @@ public class JavaScriptEngine {
         }
     }
 
-    private static void configureStaticProperties(final ClassConfiguration config,
-            final BrowserVersion browserVersion,
-            final ScriptableObject scriptable) {
+    private static void configureStaticProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
         for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
                 : config.getStaticPropertyEntries()) {
             final String propertyName = propertyEntry.getKey();

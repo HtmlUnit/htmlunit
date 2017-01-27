@@ -101,10 +101,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /**
      * Creates a new instance.
      * @param url the URL to which to connect
-     * @param protocols if present, is either a string or an array of strings
      * @param window the top level window
      */
-    private WebSocket(final String url, final Object protocols, final Window window) {
+    private WebSocket(final String url, final Window window) {
         try {
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
             setParentScope(window);
@@ -171,7 +170,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         if (StringUtils.isBlank(url)) {
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter must be not empty.");
         }
-        return new WebSocket(url, null, getWindow(ctorObj));
+        return new WebSocket(url, getWindow(ctorObj));
     }
 
     /**

@@ -917,7 +917,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
         if (!(page instanceof InteractivePage)
-                || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
+                || this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return (P) page;
         }
 

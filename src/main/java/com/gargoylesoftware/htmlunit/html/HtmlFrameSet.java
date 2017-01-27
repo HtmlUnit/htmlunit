@@ -90,12 +90,4 @@ public class HtmlFrameSet extends HtmlElement {
     public final String getOnUnloadAttribute() {
         return getAttribute("onunload");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DisplayStyle getDefaultStyleDisplay() {
-        return super.getDefaultStyleDisplay();
-    }
 }

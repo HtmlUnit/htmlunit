@@ -62,10 +62,8 @@ public class RecursiveFunctionObject extends FunctionObject {
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
                 c != null; c = c.getSuperclass()) {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);
-            if (scripatble instanceof Scriptable) {
-                if (((Scriptable) scripatble).has(name, start)) {
-                    return true;
-                }
+            if (scripatble instanceof Scriptable && ((Scriptable) scripatble).has(name, start)) {
+                return true;
             }
         }
         return false;

@@ -66,10 +66,8 @@ final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
         for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
             final String name = entry.getKey();
-            if (name.startsWith(xmlns)) {
-                if (name.regionMatches(xmlnsLength, prefix, 0, prefix.length())) {
-                    return entry.getValue().getValue();
-                }
+            if (name.startsWith(xmlns) && name.regionMatches(xmlnsLength, prefix, 0, prefix.length())) {
+                return entry.getValue().getValue();
             }
         }
         for (final DomNode child : element.getChildren()) {

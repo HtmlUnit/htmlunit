@@ -207,7 +207,7 @@ class HtmlSerializer {
         else if (node instanceof DomComment) {
             // nothing to do
         }
-        else if ((node instanceof HtmlApplet) && appletEnabled_) {
+        else if (node instanceof HtmlApplet && appletEnabled_) {
             // nothing
         }
         else if (node instanceof HtmlBreak) {

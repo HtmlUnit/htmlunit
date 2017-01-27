@@ -30,7 +30,7 @@ public interface JavaScriptJobManager extends Serializable {
      * Simple filter interface. The caller can use this to filter
      * the jobs of interest in the job list.
      */
-    public interface JavaScriptJobFilter {
+    interface JavaScriptJobFilter {
 
         /**
          * Check if the job passes the filter.

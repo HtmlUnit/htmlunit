@@ -191,19 +191,15 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
 
-        if (isAttachedToPage()) {
-            // if FF, only execute if the "src" attribute
-            // was undefined and there was no inline code.
-            if (oldValue.isEmpty() && getFirstChild() == null) {
-                final PostponedAction action = new PostponedAction(getPage()) {
-                    @Override
-                    public void execute() {
-                        executeScriptIfNeeded();
-                    }
-                };
-                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
-                engine.addPostponedAction(action);
-            }
+        if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {
+            final PostponedAction action = new PostponedAction(getPage()) {
+                @Override
+                public void execute() {
+                    executeScriptIfNeeded();
+                }
+            };
+            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+            engine.addPostponedAction(action);
         }
     }
 
@@ -280,13 +276,12 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         }
 
         final String scriptCode = getScriptCode();
-        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
-            if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-                final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
-                final BaseFunction function = new EventHandler(this, event, scriptCode);
-                window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
-                return;
-            }
+        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED
+                && hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
+            final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
+            final BaseFunction function = new EventHandler(this, event, scriptCode);
+            window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
+            return;
         }
         if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
             final String url = getPage().getUrl().toExternalForm();

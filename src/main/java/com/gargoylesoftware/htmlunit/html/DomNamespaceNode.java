@@ -129,10 +129,8 @@ public abstract class DomNamespaceNode extends DomNode {
         // we have to drop the XHtmlNamespace because we did this already
         // for the html document itself
         final SgmlPage page = (SgmlPage) doc.getDomNodeOrDie();
-        if (page.isHtmlPage() && !(page instanceof XHtmlPage)) {
-            if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)) {
-                namespaceURI_ = null;
-            }
+        if (page.isHtmlPage() && !(page instanceof XHtmlPage) && HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)) {
+            namespaceURI_ = null;
         }
     }
 }

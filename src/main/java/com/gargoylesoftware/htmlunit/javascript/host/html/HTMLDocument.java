@@ -789,7 +789,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         compatMode_ = "CSS1Compat";
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (isQuirksDocType(browserVersion)) {
+        if (isQuirksDocType()) {
             compatMode_ = "BackCompat";
         }
 
@@ -809,7 +809,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         compatMode_ = documentMode == 5 ? "BackCompat" : "CSS1Compat";
     }
 
-    private boolean isQuirksDocType(final BrowserVersion browserVersion) {
+    private boolean isQuirksDocType() {
         final DocumentType docType = getPage().getDoctype();
         if (docType != null) {
             final String systemId = docType.getSystemId();
@@ -1560,20 +1560,19 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 clazz = null;
             }
         }
-        if (clazz == null) {
-            if ("Events".equals(eventType)
+        if (clazz == null
+                && ("Events".equals(eventType)
                 || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
                 || "HashChangeEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
+                && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
                 || "BeforeUnloadEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
+                && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
                 || "PointerEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
+                && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
                 || "PopStateEvent".equals(eventType)
                 || "ProgressEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)) {
-                clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
-            }
+                && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT))) {
+            clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
         }
         if (clazz == null) {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,

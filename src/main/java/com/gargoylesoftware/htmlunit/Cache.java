@@ -200,7 +200,7 @@ public class Cache implements Serializable {
         final long now = getCurrentTimestamp();
 
         return expires != null && (expires.getTime() - now > delay)
-                || (expires == null && lastModified != null && (now - lastModified.getTime() > delay));
+                || (expires == null && lastModified != null && now - lastModified.getTime() > delay);
     }
 
     /**

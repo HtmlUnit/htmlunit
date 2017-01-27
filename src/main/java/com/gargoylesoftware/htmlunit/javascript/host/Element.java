@@ -179,7 +179,7 @@ public class Element extends EventNode {
     public String getAttribute(final String attributeName, final Integer flags) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
 
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (value == ATTRIBUTE_NOT_DEFINED) {
             value = null;
         }
 
@@ -570,13 +570,13 @@ public class Element extends EventNode {
     public Object get(final String name, final Scriptable start) {
         final Object response = super.get(name, start);
 
-        // IE8 support .querySelector(All) but not in quirks mode
+        // IE support .querySelector(All) but not in quirks mode
         // => TODO: find a better way to handle this!
         if (response instanceof FunctionObject
                 && ("querySelectorAll".equals(name) || "querySelector".equals(name))
                 && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             final Document doc = getWindow().getDocument();
-            if ((doc instanceof HTMLDocument) && ((HTMLDocument) doc).getDocumentMode() < 8) {
+            if (doc instanceof HTMLDocument && ((HTMLDocument) doc).getDocumentMode() < 8) {
                 return NOT_FOUND;
             }
         }

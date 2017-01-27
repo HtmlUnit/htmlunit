@@ -1052,12 +1052,9 @@ public class HtmlPage extends InteractivePage {
         if (null != scriptCode) {
             final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
-            if (script != null) {
-                // cache the script
-                if (cache.cacheIfPossible(request, response, script)) {
-                    // no cleanup if the response is stored inside the cache
-                    return script;
-                }
+            if (script != null && cache.cacheIfPossible(request, response, script)) {
+                // no cleanup if the response is stored inside the cache
+                return script;
             }
 
             response.cleanUp();
@@ -1198,7 +1195,7 @@ public class HtmlPage extends InteractivePage {
             final BaseFrameElement frame = fw.getFrameElement();
 
             // if part of an document fragment, then the load event is not triggered
-            if (Event.TYPE_LOAD.equals(eventType) && (frame.getParentNode() instanceof DomDocumentFragment)) {
+            if (Event.TYPE_LOAD.equals(eventType) && frame.getParentNode() instanceof DomDocumentFragment) {
                 return true;
             }
 
@@ -1330,8 +1327,9 @@ public class HtmlPage extends InteractivePage {
      * @return the auto-refresh string
      */
     private String getRefreshStringOrNull() {
-        for (final HtmlMeta meta : getMetaTags("refresh")) {
-            return meta.getContentAttribute().trim();
+        final List<HtmlMeta> metaTags = getMetaTags("refresh");
+        if (!metaTags.isEmpty()) {
+            return metaTags.get(0).getContentAttribute().trim();
         }
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
@@ -1760,7 +1758,7 @@ public class HtmlPage extends InteractivePage {
      * @return {@code true} if the owning element should be mapped in its owning page
      */
     static boolean isMappedElement(final Document document, final String attributeName) {
-        return (document instanceof HtmlPage)
+        return document instanceof HtmlPage
             && ("name".equals(attributeName) || "id".equals(attributeName));
     }
 
@@ -1971,7 +1969,7 @@ public class HtmlPage extends InteractivePage {
                     "The Document may only have a single child DocumentType.");
             }
         }
-        else if (!((newChild instanceof Comment) || (newChild instanceof ProcessingInstruction))) {
+        else if (!(newChild instanceof Comment || newChild instanceof ProcessingInstruction)) {
             throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
                 "The Document may not have a child of this type: " + newChild.getNodeType());
         }
@@ -2104,7 +2102,7 @@ public class HtmlPage extends InteractivePage {
             String name = attr.getName();
             if (name.startsWith("xmlns")) {
                 int startPos = 5;
-                if ((name.length() > 5) && (name.charAt(5) == ':')) {
+                if (name.length() > 5 && name.charAt(5) == ':') {
                     startPos = 6;
                 }
                 name = name.substring(startPos);
@@ -2119,7 +2117,7 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     protected void setDocumentType(final DocumentType type) {
-        super.setDocumentType(type);
+       super.setDocumentType(type);
     }
 
     /**

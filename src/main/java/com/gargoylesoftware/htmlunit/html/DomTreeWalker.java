@@ -211,12 +211,8 @@ public class DomTreeWalker implements TreeWalker {
     private boolean isNodeVisible(final Node n) {
         if (acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
             if (filter_ == null || filter_.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
-                if (!expandEntityReferences_) {
-                    if (n.getParentNode() != null && n.getParentNode().getNodeType() == Node.ENTITY_REFERENCE_NODE) {
-                        return false;
-                    }
-                }
-                return true;
+                return expandEntityReferences_ || n.getParentNode() == null
+                        || n.getParentNode().getNodeType() != Node.ENTITY_REFERENCE_NODE;
             }
         }
         return false;
@@ -290,12 +286,8 @@ public class DomTreeWalker implements TreeWalker {
         if (filter_ != null && filter_.acceptNode(n) == NodeFilter.FILTER_REJECT) {
             return true;
         }
-        if (!expandEntityReferences_) {
-            if (n.getParentNode() != null && n.getParentNode().getNodeType() == Node.ENTITY_REFERENCE_NODE) {
-                return true;
-            }
-        }
-        return false;
+        return !expandEntityReferences_ && n.getParentNode() != null
+                && n.getParentNode().getNodeType() == Node.ENTITY_REFERENCE_NODE;
     }
 
     // Helper method for getEquivalentLogical

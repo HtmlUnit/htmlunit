@@ -113,11 +113,11 @@ public class MSXMLActiveXObjectFactory {
         }
 
         if (isXMLHTTPRequest(activeXName)) {
-            return createXMLHTTPRequest(enclosingWindow);
+            return createXMLHTTPRequest();
         }
 
         if (isXSLTemplate(activeXName)) {
-            return createXSLTemplate(enclosingWindow);
+            return createXSLTemplate();
         }
         return null;
     }
@@ -136,13 +136,13 @@ public class MSXMLActiveXObjectFactory {
         return document;
     }
 
-    private Scriptable createXMLHTTPRequest(final WebWindow enclosingWindow) {
+    private Scriptable createXMLHTTPRequest() {
         final XMLHTTPRequest request = new XMLHTTPRequest();
         initObject(request);
         return request;
     }
 
-    private Scriptable createXSLTemplate(final WebWindow enclosingWindow) {
+    private Scriptable createXSLTemplate() {
         final XSLTemplate template = new XSLTemplate();
         initObject(template);
         return template;

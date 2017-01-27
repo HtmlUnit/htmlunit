@@ -67,7 +67,7 @@ public abstract class PostponedAction {
      */
     public boolean isStillAlive() {
         final Page owningPage = getOwningPage();
-        return (owningPage != null) && (owningPage == owningPage.getEnclosingWindow().getEnclosedPage());
+        return owningPage != null && owningPage == owningPage.getEnclosingWindow().getEnclosedPage();
     }
 
     @Override

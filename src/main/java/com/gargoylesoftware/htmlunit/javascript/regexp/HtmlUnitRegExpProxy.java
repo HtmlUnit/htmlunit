@@ -85,7 +85,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private Object doAction(final Context cx, final Scriptable scope, final Scriptable thisObj,
         final Object[] args, final int actionType) {
         // in a first time just improve replacement with a String (not a function)
-        if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
+        if (RA_REPLACE == actionType && args.length == 2 && args[1] instanceof String) {
             final String thisString = Context.toString(thisObj);
             final String replacement = (String) args[1];
             final Object arg0 = args[0];
@@ -233,7 +233,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 // only valid back reference are "evaluated"
                 if (next >= '1' && next <= '9') {
                     final int num1digit = next - '0';
-                    final char next2 = (i + 2 < replacement.length()) ? replacement.charAt(i + 2) : 'x';
+                    final char next2 = i + 2 < replacement.length() ? replacement.charAt(i + 2) : 'x';
                     final int num2digits;
                     // if there are 2 digits, the second one is considered as part of the group number
                     // only if there is such a group

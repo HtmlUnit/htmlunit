@@ -97,7 +97,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.css.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
@@ -559,7 +558,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the {@code display} attribute.
-     * @param ignoreBlockIfNotAttached is {@link BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored
+     * @param ignoreBlockIfNotAttached is
+     * {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored
      * @return the {@code display} attribute
      */
     public String getDisplay(final boolean ignoreBlockIfNotAttached) {
@@ -741,10 +741,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return pixelString(defaultIfEmpty(superMarginX, "0px", null));
         }
         final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
-            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
-                return "";
-            }
+        if (!elem.getDomNodeOrDie().isAttachedToPage() && getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            return "";
         }
 
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
@@ -958,7 +956,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         final String content = getDomNodeOrDie().getTextContent();
                         // do this only for small content
                         // at least for empty div's this is more correct
-                        if (null != content && (content.length() < 13)) {
+                        if (null != content && content.length() < 13) {
                             return (content.length() * 7) + "px";
                         }
                     }

@@ -233,17 +233,13 @@ public class HtmlApplet extends HtmlElement {
             params.put(parameter.getNameAttribute(), parameter.getValueAttribute());
         }
 
-        if (StringUtils.isEmpty(params.get(CODEBASE))) {
-            if (StringUtils.isNotEmpty(getCodebaseAttribute())) {
-                params.put(CODEBASE, getCodebaseAttribute());
-            }
+        if (StringUtils.isEmpty(params.get(CODEBASE)) && StringUtils.isNotEmpty(getCodebaseAttribute())) {
+            params.put(CODEBASE, getCodebaseAttribute());
         }
         final String codebaseProperty = params.get(CODEBASE);
 
-        if (StringUtils.isEmpty(params.get(ARCHIVE))) {
-            if (StringUtils.isNotEmpty(getArchiveAttribute())) {
-                params.put(ARCHIVE, getArchiveAttribute());
-            }
+        if (StringUtils.isEmpty(params.get(ARCHIVE)) && StringUtils.isNotEmpty(getArchiveAttribute())) {
+            params.put(ARCHIVE, getArchiveAttribute());
         }
 
         final HtmlPage page = (HtmlPage) getPage();

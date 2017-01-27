@@ -349,10 +349,8 @@ public class Location extends SimpleScriptable {
     public void setHash(final String oldURL, String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
-        if (hash != null) {
-            if (!hash.isEmpty() && ('#' == hash.charAt(0))) {
-                hash = hash.substring(1);
-            }
+        if (hash != null && !hash.isEmpty() && hash.charAt(0) == '#') {
+            hash = hash.substring(1);
         }
         final boolean hasChanged = hash != null && !hash.equals(hash_);
         hash_ = hash;

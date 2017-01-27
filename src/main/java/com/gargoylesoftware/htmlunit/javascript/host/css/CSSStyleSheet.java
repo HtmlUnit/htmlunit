@@ -578,7 +578,7 @@ public class CSSStyleSheet extends StyleSheet {
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
                     final String attrValue = element.getAttribute(ac1.getLocalName());
-                    return DomElement.ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
+                    return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
                 }
                 return element.hasAttribute(ac1.getLocalName());
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
@@ -676,16 +676,14 @@ public class CSSStyleSheet extends StyleSheet {
         while (pos != -1) {
             if (pos > 0 && !Character.isWhitespace(attribute.charAt(pos - 1))) {
                 pos = attribute.indexOf(condition, pos + 1);
-                continue;
             }
-
-            final int lastPos = pos + condition.length();
-            if (lastPos < attribLength && !Character.isWhitespace(attribute.charAt(lastPos))) {
+            else {
+                final int lastPos = pos + condition.length();
+                if (lastPos >= attribLength || Character.isWhitespace(attribute.charAt(lastPos))) {
+                    return true;
+                }
                 pos = attribute.indexOf(condition, pos + 1);
-                continue;
             }
-
-            return true;
         }
 
         return false;
@@ -938,7 +936,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         final double n = (index - b) / (double) a;
-        return (n >= 0) && (n % 1 == 0);
+        return n >= 0 && n % 1 == 0;
     }
 
     /**
@@ -1143,10 +1141,10 @@ public class CSSStyleSheet extends StyleSheet {
         cssRules_.clearRules();
         cssRulesIndexFix_.clear();
 
-        final org.w3c.dom.css.CSSRuleList ruleList = getWrappedSheet().getCssRules();
+        final CSSRuleList ruleList = getWrappedSheet().getCssRules();
         final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
         int pos = 0;
-        for (Iterator<org.w3c.dom.css.CSSRule> it = rules.iterator(); it.hasNext();) {
+        for (Iterator<CSSRule> it = rules.iterator(); it.hasNext();) {
             final org.w3c.dom.css.CSSRule rule = it.next();
             if (rule instanceof org.w3c.dom.css.CSSCharsetRule) {
                 cssRulesIndexFix_.add(pos);

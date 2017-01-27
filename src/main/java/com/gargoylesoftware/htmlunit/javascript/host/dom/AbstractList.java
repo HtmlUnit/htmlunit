@@ -264,7 +264,7 @@ public class AbstractList extends SimpleScriptable implements Function {
             return response;
         }
         for (final DomNode node : getCandidates()) {
-            if ((node instanceof DomElement) && isMatching(node)) {
+            if (node instanceof DomElement && isMatching(node)) {
                 response.add(node);
             }
         }

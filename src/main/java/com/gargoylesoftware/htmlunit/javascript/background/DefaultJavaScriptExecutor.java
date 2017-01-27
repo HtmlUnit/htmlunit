@@ -111,11 +111,9 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
             final JavaScriptJobManager jobManager = weakReference.get();
             if (jobManager != null) {
                 final JavaScriptJob newJob = jobManager.getEarliestJob();
-                if (newJob != null) {
-                    if (earliestJob == null || earliestJob.compareTo(newJob) > 0) {
-                        earliestJob = newJob;
-                        javaScriptJobManager = jobManager;
-                    }
+                if (newJob != null && (earliestJob == null || earliestJob.compareTo(newJob) > 0)) {
+                    earliestJob = newJob;
+                    javaScriptJobManager = jobManager;
                 }
             }
         }

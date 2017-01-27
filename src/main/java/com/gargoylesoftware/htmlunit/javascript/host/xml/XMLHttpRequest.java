@@ -535,7 +535,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final URL originUrl = containingPage_.getFullyQualifiedUrl("");
-            if (!isAllowCrossDomainsFor(originUrl, fullUrl)) {
+            if (!isAllowCrossDomainsFor(fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
@@ -583,7 +583,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         setState(OPENED, null);
     }
 
-    private boolean isAllowCrossDomainsFor(final URL originUrl, final URL newUrl) {
+    private boolean isAllowCrossDomainsFor(final URL newUrl) {
         final BrowserVersion browser = getBrowserVersion();
         if (browser.hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
                 && "about".equals(newUrl.getProtocol())) {

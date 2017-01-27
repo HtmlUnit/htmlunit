@@ -297,7 +297,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
                 for (final DomElement elem : getDomElementDescendants()) {
                     final String localName = elem.getLocalName();
                     if ("*".equals(tagName) || localName.equals(tagName)
-                            || (!caseSensitive && localName.equalsIgnoreCase(tagName))) {
+                            || !caseSensitive && localName.equalsIgnoreCase(tagName)) {
                         res.add(elem);
                     }
                 }

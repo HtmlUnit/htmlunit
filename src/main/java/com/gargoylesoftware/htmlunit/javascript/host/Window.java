@@ -423,16 +423,14 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         if (replace != Undefined.instance) {
             replaceCurrentEntryInBrowsingHistory = Context.toBoolean(replace);
         }
-        if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(
-                        "window.open: features and replaceCurrentEntryInBrowsingHistory "
-                        + "not implemented: url=[" + urlString
-                        + "] windowName=[" + windowName
-                        + "] features=[" + featuresString
-                        + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
-                        + "]");
-            }
+        if ((featuresString != null || replaceCurrentEntryInBrowsingHistory) && LOG.isDebugEnabled()) {
+            LOG.debug(
+                   "window.open: features and replaceCurrentEntryInBrowsingHistory "
+                    + "not implemented: url=[" + urlString
+                    + "] windowName=[" + windowName
+                    + "] features=[" + featuresString
+                    + "] replaceCurrentEntry=[" + replaceCurrentEntryInBrowsingHistory
+                    + "]");
         }
 
         // if specified name is the name of an existing window, then hold it
@@ -1907,7 +1905,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()
                         || changed.isAncestorOf(node)
-                        || (clearParents && node.isAncestorOf(changed))) {
+                        || clearParents && node.isAncestorOf(changed)) {
                         i.remove();
                     }
                 }
