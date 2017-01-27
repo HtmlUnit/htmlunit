@@ -390,7 +390,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "called",
             IE = {})
     public void inFunction2() throws Exception {
         final String html = "<html><head><script>\n"
@@ -398,7 +398,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "  if (window.Symbol) {\n"
             + "    [].forEach.call('_', function(e) {\n"
             + "      try {\n"
-            + "        var x = new Symbol('test');\n"
+            + "        var x = Symbol('hello');\n"
             + "        alert('called');\n"
             + "      } catch(e) {alert('exception');}\n"
             + "    });\n"
