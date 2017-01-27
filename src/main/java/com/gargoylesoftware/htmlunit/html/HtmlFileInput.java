@@ -41,7 +41,7 @@ public class HtmlFileInput extends HtmlInput {
 
     private String contentType_;
     private byte[] data_;
-    private File[] files_;
+    private File[] files_ = new File[0];
 
     /**
      * Creates an instance.

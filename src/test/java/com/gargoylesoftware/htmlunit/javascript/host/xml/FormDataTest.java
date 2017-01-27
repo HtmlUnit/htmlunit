@@ -602,7 +602,6 @@ public class FormDataTest extends WebDriverTestCase {
             return;
         }
 
-        System.out.println(alerts.get(0));
         final String[] lines = alerts.get(0).split("\\n");
         assertEquals("Response: " + alerts.get(0) + "; line count", 17, lines.length);
         assertEquals("Content-Disposition: form-data; name=\"myKey1\"", lines[1]);

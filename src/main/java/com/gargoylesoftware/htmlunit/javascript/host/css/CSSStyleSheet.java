@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
@@ -73,7 +74,6 @@ import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -336,7 +336,7 @@ public class CSSStyleSheet extends StyleSheet {
                 // Use link.
                 request = link.getWebRequest();
 
-                if (element.getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
+                if (element.getBrowserVersion().hasFeature(HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
                     final String type = link.getTypeAttribute();
                     if (StringUtils.isNotBlank(type) && !"text/css".equals(type)) {
                         final InputSource source = new InputSource(new StringReader(""));

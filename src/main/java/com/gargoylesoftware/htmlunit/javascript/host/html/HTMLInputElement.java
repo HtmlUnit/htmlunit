@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_NO_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_NO_SELECTION;
@@ -42,7 +43,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
@@ -574,22 +574,23 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     public String getValue() {
-        String value = super.getValue();
-        if ("file".equalsIgnoreCase(getType())) {
+        final HtmlInput htmlInput = getDomNodeOrDie();
+        if (htmlInput instanceof HtmlFileInput) {
             final File[] files = ((HtmlFileInput) getDomNodeOrDie()).getFiles();
             if (files == null || files.length == 0) {
                 return ATTRIBUTE_NOT_DEFINED;
             }
             final File first = files[0];
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
-                return "C:\\fakepath\\" + first.getName();
+            final String name = first.getName();
+            if (!name.isEmpty() && getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+                return "C:\\fakepath\\" + name;
             }
             else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
-                return first.getName();
+                return name;
             }
             return first.toString();
         }
-        return value;
+        return super.getValue();
     }
 
     /**
