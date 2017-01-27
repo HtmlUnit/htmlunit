@@ -2001,7 +2001,25 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    public void sendKeys() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebElement element = driver.findElement(By.id("myInput"));
+        element.sendKeys("abc");
+        verifyAlerts(driver);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void clear() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

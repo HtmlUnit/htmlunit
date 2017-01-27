@@ -1213,6 +1213,7 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
                 throw new InvalidElementStateException("You may only interact with enabled elements");
             }
             htmlInput.setValueAttribute("");
+            htmlInput.fireEvent("change");
         }
         else {
             super.clear();
