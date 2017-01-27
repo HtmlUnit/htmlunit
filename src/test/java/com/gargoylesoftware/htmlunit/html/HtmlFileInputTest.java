@@ -310,6 +310,15 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         contentType("txt");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:text/html", "charset"})
+    public void contentTypeCaseInsensitive() throws Exception {
+        contentType("HtmL");
+    }
+
     private void contentType(final String extension) throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);

@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -841,7 +842,9 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param mimeType the mime type to be used when uploading files with this extension
      */
     public void registerUploadMimeType(final String fileExtension, final String mimeType) {
-        uploadMimeTypes_.put(fileExtension, mimeType);
+        if (fileExtension != null) {
+            uploadMimeTypes_.put(fileExtension.toLowerCase(Locale.ROOT), mimeType);
+        }
     }
 
     /**
@@ -856,7 +859,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         final String fileExtension = FilenameUtils.getExtension(file.getName());
 
-        String mimeType = uploadMimeTypes_.get(fileExtension);
+        String mimeType = uploadMimeTypes_.get(fileExtension.toLowerCase(Locale.ROOT));
         if (mimeType != null) {
             return mimeType;
         }
