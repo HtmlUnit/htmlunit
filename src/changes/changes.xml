@@ -9,6 +9,9 @@
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: nowrap property support added for div, dd, and dt elements (IE only).
+            </action>
+            <action type="fix" dev="rbri">
                 FormData now also respects configured mime type for uploading a file.
             </action>
             <action type="add" dev="asashour" issue="1818">

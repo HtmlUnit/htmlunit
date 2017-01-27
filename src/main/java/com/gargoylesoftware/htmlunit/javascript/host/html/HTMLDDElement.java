@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -29,4 +31,28 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(IE))
 public class HTMLDDElement extends HTMLElement {
 
+    /**
+     * Returns the value of the {@code noWrap} attribute.
+     * @return the value of the {@code noWrap} attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public boolean getNoWrap() {
+        return getDomNodeOrDie().hasAttribute("noWrap");
+    }
+
+    /**
+     * Sets the value of the {@code noWrap} attribute.
+     * @param noWrap the value of the {@code noWrap} attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setNoWrap(final boolean noWrap) {
+        if (noWrap) {
+            getDomNodeOrDie().setAttribute("noWrap", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("noWrap");
+        }
+    }
 }

@@ -280,4 +280,41 @@ public class HTMLDivElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"},
+            IE = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null"})
+    public void noWrap() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var div = document.getElementById('test');\n"
+            + "        alert(div.noWrap);\n"
+            + "        alert(div.getAttribute('noWrap'));\n"
+            + "        div.noWrap = 'nowrap';\n"
+            + "        alert(div.noWrap);\n"
+            + "        alert(div.getAttribute('noWrap'));\n"
+            + "        div.noWrap = 'x';\n"
+            + "        alert(div.noWrap);\n"
+            + "        alert(div.getAttribute('noWrap'));\n"
+            + "        div.setAttribute('noWrap', 'blah');\n"
+            + "        alert(div.noWrap);\n"
+            + "        alert(div.getAttribute('noWrap'));\n"
+            + "        div.noWrap = '';\n"
+            + "        alert(div.noWrap);\n"
+            + "        alert(div.getAttribute('noWrap'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <div id='test'>div</div>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

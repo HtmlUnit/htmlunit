@@ -1107,7 +1107,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "noWrap")
-    @NotYetImplemented(IE)
     public void dd() throws Exception {
         test("dd");
     }
@@ -1170,7 +1169,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align",
             IE = "align,noWrap",
             EDGE = "align,noWrap")
-    @NotYetImplemented({IE, EDGE})
+    @NotYetImplemented({EDGE})
     public void div() throws Exception {
         test("div");
     }
@@ -1193,7 +1192,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "noWrap")
-    @NotYetImplemented(IE)
     public void dt() throws Exception {
         test("dt");
     }
