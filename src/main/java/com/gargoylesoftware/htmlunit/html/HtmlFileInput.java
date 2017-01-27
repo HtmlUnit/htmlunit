@@ -15,10 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -41,8 +38,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  */
 public class HtmlFileInput extends HtmlInput {
-
-    private static final String FILE_SEPARATOR = "\u00A7";
 
     private String contentType_;
     private byte[] data_;
@@ -114,38 +109,6 @@ public class HtmlFileInput extends HtmlInput {
             list.add(keyDataPair);
         }
         return list.toArray(new NameValuePair[list.size()]);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * @param valueAttribute the string to split
-     * @return the list of files
-     */
-    public static List<File> splitFiles(final String valueAttribute) {
-        final List<File> files = new LinkedList<>();
-        for (String value : valueAttribute.split(FILE_SEPARATOR)) {
-            File file = null;
-            // to tolerate file://
-            if (value.startsWith("file:/")) {
-                if (value.startsWith("file://") && !value.startsWith("file:///")) {
-                    value = "file:///" + value.substring(7);
-                }
-                try {
-                    file = new File(new URI(value));
-                }
-                catch (final URISyntaxException e) {
-                    // nothing here
-                }
-            }
-
-            if (file == null) {
-                file = new File(value);
-            }
-
-            files.add(file);
-        }
-        return files;
     }
 
     /**
