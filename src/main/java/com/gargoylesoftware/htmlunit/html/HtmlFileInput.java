@@ -22,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -99,13 +98,12 @@ public class HtmlFileInput extends HtmlInput {
 
         final List<NameValuePair> list = new ArrayList<>();
         for (File file : splitFiles(valueAttribute)) {
-            // contentType and charset are determined from browser and page
-            // perhaps it could be interesting to have setters for it in this class
-            // to give finer control to user
-            final String contentType;
+            String contentType;
             if (contentType_ == null) {
-                final String fileExtension = FilenameUtils.getExtension(file.getName());
-                contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeTypeFor(fileExtension);
+                contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
+                if (StringUtils.isEmpty(contentType)) {
+                    contentType = "application/octet-stream";
+                }
             }
             else {
                 contentType = contentType_;

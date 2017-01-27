@@ -105,4 +105,71 @@ public class FileTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain")
+    public void typeTxt() throws Exception {
+        type(".txt");
+        type(".tXT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void typeHtmlUnit() throws Exception {
+        type(".htmlunit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void typeEmpty() throws Exception {
+        type("");
+    }
+
+    private void type(final String extension) throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.testForm.fileupload.files) {\n"
+            + "    var files = document.testForm.fileupload.files;\n"
+
+            + "    var file = files[0];\n"
+            + "    alert(file.type);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", extension);
+        try {
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
 }

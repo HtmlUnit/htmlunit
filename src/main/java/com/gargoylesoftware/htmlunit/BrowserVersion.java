@@ -14,8 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -23,6 +26,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -841,15 +845,31 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * @param fileExtension the file extension used to determine the mime type
-     * @return the registered mime type for the provided file extension
+     * Determines the content type for the given file.
+     * @param file the file
+     * @return a content type or an empty string if unknown
      */
-    public String getUploadMimeTypeFor(final String fileExtension) {
-        String mimeType = uploadMimeTypes_.get(fileExtension);
-        if (null == mimeType) {
-            mimeType = "application/octet-stream";
+    public String getUploadMimeType(final File file) {
+        if (file == null) {
+            return "";
         }
-        return mimeType;
+
+        final String fileExtension = FilenameUtils.getExtension(file.getName());
+
+        String mimeType = uploadMimeTypes_.get(fileExtension);
+        if (mimeType != null) {
+            return mimeType;
+        }
+        try {
+            mimeType = Files.probeContentType(file.toPath());
+        }
+        catch (final IOException e) {
+            // ignore
+        }
+        if (mimeType != null) {
+            return mimeType;
+        }
+        return "";
     }
 
     @Override

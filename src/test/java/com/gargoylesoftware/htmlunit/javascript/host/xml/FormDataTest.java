@@ -262,67 +262,14 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void appendFileWithFileName() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  try {\n"
-            + "    var files = document.testForm.myFile.files;\n"
-            + "    var formData = new FormData();\n"
-            + "    formData.append('myKey', files[0], 'myFileName');\n"
-            + "  } catch (e) {\n"
-            + "    alert('create: ' + e.message);\n"
-            + "    return;\n"
-            + "  }\n"
-            + "  try {\n"
-            + "    var xhr = new XMLHttpRequest();\n"
-            + "    xhr.open('POST', '/test2', false);\n"
-            + "    xhr.send(formData);\n"
-            + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
-            + "    alert('send: ' + e.message);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <form name='testForm'>\n"
-            + "    <input type='file' id='myFile' name='myFile'>\n"
-            + "  </form>\n"
-            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/test2", PostServlet.class);
-
-        final WebDriver driver = loadPage2(html, servlets);
-
-        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
-        try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
-
-            final String path = tstFile.getCanonicalPath();
-            driver.findElement(By.name("myFile")).sendKeys(path);
-
-            driver.findElement(By.id("testBtn")).click();
-
-            final List<String> alerts = getCollectedAlerts(driver);
-            if (!alerts.isEmpty()) {
-                final String[] lines = alerts.get(0).split("\\n");
-                assertEquals(6, lines.length);
-                assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"myFileName\"", lines[1]);
-                assertEquals("Content-Type: text/plain", lines[2]);
-                assertEquals("", lines[3]);
-                assertEquals("Hello HtmlUnit", lines[4]);
-                assertEquals(lines[0] + "--", lines[5]);
-            }
-        }
-        finally {
-            FileUtils.deleteQuietly(tstFile);
-        }
+        final String alerts = appendFile(".txt", "myFileName");
+        final String[] lines = alerts.split("\\n");
+        assertEquals(6, lines.length);
+        assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"myFileName\"", lines[1]);
+        assertEquals("Content-Type: text/plain", lines[2]);
+        assertEquals("", lines[3]);
+        assertEquals("Hello HtmlUnit", lines[4]);
+        assertEquals(lines[0] + "--", lines[5]);
     }
 
     /**
@@ -330,6 +277,50 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void appendFileWithEmptyFileName() throws Exception {
+        final String alerts = appendFile(".txt", "");
+
+        final String[] lines = alerts.split("\\n");
+        assertEquals(6, lines.length);
+        assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"\"", lines[1]);
+        assertEquals("Content-Type: text/plain", lines[2]);
+        assertEquals("", lines[3]);
+        assertEquals("Hello HtmlUnit", lines[4]);
+        assertEquals(lines[0] + "--", lines[5]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appendFileWithUnknownExtension() throws Exception {
+        final String alerts = appendFile(".htmlunit", "test");
+
+        final String[] lines = alerts.split("\\n");
+        assertEquals(6, lines.length);
+        assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"", lines[1]);
+        assertEquals("Content-Type: application/octet-stream", lines[2]);
+        assertEquals("", lines[3]);
+        assertEquals("Hello HtmlUnit", lines[4]);
+        assertEquals(lines[0] + "--", lines[5]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appendFileWithoutExtension() throws Exception {
+        final String alerts = appendFile("", "test");
+
+        final String[] lines = alerts.split("\\n");
+        assertEquals(6, lines.length);
+        assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"", lines[1]);
+        assertEquals("Content-Type: application/octet-stream", lines[2]);
+        assertEquals("", lines[3]);
+        assertEquals("Hello HtmlUnit", lines[4]);
+        assertEquals(lines[0] + "--", lines[5]);
+    }
+
+    private String appendFile(final String extension, final String name) throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -339,7 +330,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var files = document.testForm.myFile.files;\n"
             + "    var formData = new FormData();\n"
-            + "    formData.append('myKey', files[0], '');\n"
+            + "    formData.append('myKey', files[0], '" + name + "');\n"
             + "  } catch (e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
@@ -368,7 +359,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html, servlets);
 
-        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", extension);
         try {
             FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
 
@@ -378,15 +369,7 @@ public class FormDataTest extends WebDriverTestCase {
             driver.findElement(By.id("testBtn")).click();
 
             final List<String> alerts = getCollectedAlerts(driver);
-            if (!alerts.isEmpty()) {
-                final String[] lines = alerts.get(0).split("\\n");
-                assertEquals(6, lines.length);
-                assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"\"", lines[1]);
-                assertEquals("Content-Type: text/plain", lines[2]);
-                assertEquals("", lines[3]);
-                assertEquals("Hello HtmlUnit", lines[4]);
-                assertEquals(lines[0] + "--", lines[5]);
-            }
+            return alerts.get(0);
         }
         finally {
             FileUtils.deleteQuietly(tstFile);

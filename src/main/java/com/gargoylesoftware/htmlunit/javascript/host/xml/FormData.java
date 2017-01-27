@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
@@ -83,12 +82,10 @@ public class FormData extends SimpleScriptable {
             String contentType = null;
             if (filename instanceof String) {
                 fileName = (String) filename;
-
-                final String fileExtension = FilenameUtils.getExtension(file.getName());
-                contentType = getBrowserVersion().getUploadMimeTypeFor(fileExtension);
             }
-            if (contentType == null) {
-                contentType = file.getType();
+            contentType = file.getType();
+            if (StringUtils.isEmpty(contentType)) {
+                contentType = "application/octet-stream";
             }
             requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, null));
         }

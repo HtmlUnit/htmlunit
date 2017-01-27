@@ -19,8 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Date;
 import java.util.Locale;
 
@@ -118,12 +116,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public String getType() {
-        try {
-            return Files.probeContentType(file_.toPath());
-        }
-        catch (final IOException e) {
-            return "";
-        }
+        return getBrowserVersion().getUploadMimeType(file_);
     }
 
     /**
