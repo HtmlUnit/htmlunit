@@ -125,9 +125,9 @@ public abstract class DomNamespaceNode extends DomNode {
     public void processImportNode(final Document doc) {
         super.processImportNode(doc);
 
-        // if we importing from an namespace aware source
+        // if we are importing from a namespace-aware source
         // we have to drop the XHtmlNamespace because we did this already
-        // for the html document itself
+        // for the HTML document itself
         final SgmlPage page = (SgmlPage) doc.getDomNodeOrDie();
         if (page.isHtmlPage() && !(page instanceof XHtmlPage) && HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)) {
             namespaceURI_ = null;
