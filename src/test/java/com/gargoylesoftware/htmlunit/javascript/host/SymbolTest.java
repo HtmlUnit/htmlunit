@@ -376,8 +376,31 @@ public class SymbolTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  if (window.Symbol) {\n"
             + "    [].forEach.call('_', function(e) {\n"
-            + "       var x = Symbol.toPrimitive;\n"
-            + "       alert('called');\n"
+            + "      var x = Symbol.toPrimitive;\n"
+            + "      alert('called');\n"
+            + "    });\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = {})
+    public void inFunction2() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (window.Symbol) {\n"
+            + "    [].forEach.call('_', function(e) {\n"
+            + "      try {\n"
+            + "        var x = new Symbol('test');\n"
+            + "        alert('called');\n"
+            + "      } catch(e) {alert('exception');}\n"
             + "    });\n"
             + "  }\n"
             + "}\n"
