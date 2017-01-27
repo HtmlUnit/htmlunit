@@ -15,11 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -322,11 +323,11 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:
                 return false;
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
+                return browserVersion_.hasFeature(JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
             case Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10:
                 return true;
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST);
+                return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

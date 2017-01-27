@@ -83,6 +83,11 @@
         <property name="format" value="@version"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="^(?!import).*BrowserVersionFeatures\.[A-Z]"/>
+        <property name="message" value="Use static import for BrowserVersionFeatures"/>
+    </module>
+
     <!--
         at the moment there is a problem with disabling this check for some files
         without disabling all RegexpMultiline checks; for this reason this is not active

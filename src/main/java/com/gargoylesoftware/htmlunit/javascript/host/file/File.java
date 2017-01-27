@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILE_SHORT_DATE_FORMAT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -25,7 +26,6 @@ import java.util.Locale;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -74,7 +74,7 @@ public class File extends Blob {
         final BrowserVersion browser = getBrowserVersion();
         final Locale locale = new Locale(browser.getSystemLanguage());
 
-        if (browser.hasFeature(BrowserVersionFeatures.JS_FILE_SHORT_DATE_FORMAT)) {
+        if (browser.hasFeature(JS_FILE_SHORT_DATE_FORMAT)) {
             final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, locale);
             return format.format(date);
         }
