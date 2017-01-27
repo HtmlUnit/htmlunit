@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,6 +46,7 @@ public class HtmlFileInput extends HtmlInput {
 
     private String contentType_;
     private byte[] data_;
+    private File[] files_;
 
     /**
      * Creates an instance.
@@ -90,14 +92,12 @@ public class HtmlFileInput extends HtmlInput {
      */
     @Override
     public NameValuePair[] getSubmitNameValuePairs() {
-        final String valueAttribute = getValueAttribute();
-
-        if (StringUtils.isEmpty(valueAttribute)) {
+        if (files_ == null || files_.length == 0) {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, null)};
         }
 
         final List<NameValuePair> list = new ArrayList<>();
-        for (File file : splitFiles(valueAttribute)) {
+        for (File file : files_) {
             String contentType;
             if (contentType_ == null) {
                 contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
@@ -179,8 +179,7 @@ public class HtmlFileInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
-        super.setValueAttribute(newValue);
-        fireEvent("change");
+        setFiles(new File(newValue));
     }
 
     /**
@@ -189,21 +188,35 @@ public class HtmlFileInput extends HtmlInput {
      * The current implementation splits the value based on '§'.
      * We may follow WebDriver solution, once made,
      * see https://code.google.com/p/selenium/issues/detail?id=2239
-     * @param paths the list of paths of the files to upload
+     * @param files the list of paths of the files to upload
+     * @deprecated as of 2.25, please use {@link #setFiles(File...)} instead
      */
-    public void setValueAttribute(final String[] paths) {
-        if (getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
-            throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
-        }
-        final StringBuilder builder = new StringBuilder();
-        for (final String p : paths) {
-            if (builder.length() != 0) {
-                builder.append(FILE_SEPARATOR);
-            }
-            builder.append(p);
-        }
-        setDefaultValue(builder.toString());
-        setValueAttribute(builder.toString());
+    @Deprecated
+    public void setValueAttribute(final String[] files) {
+        final File[] array = Stream.of(files).map(p -> new File(p)).toArray(File[]::new);
+        setFiles(array);
     }
 
+    /**
+     * Used to specify {@code multiple} files to upload.
+     *
+     * We may follow WebDriver solution, once made,
+     * see https://code.google.com/p/selenium/issues/detail?id=2239
+     * @param files the list of files to upload
+     */
+    public void setFiles(final File... files) {
+        if (files.length > 1 && getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
+            throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
+        }
+        files_ = files;
+        fireEvent("change");
+    }
+
+    /**
+     * Returns the files.
+     * @return the array of {@link File}s
+     */
+    public File[] getFiles() {
+        return files_;
+    }
 }

@@ -571,17 +571,18 @@ public class HTMLInputElement extends FormField {
     public String getValue() {
         String value = super.getValue();
         if ("file".equalsIgnoreCase(getType())) {
-            if (value == getDefaultValue()) {
-                value = ATTRIBUTE_NOT_DEFINED;
+            final File[] files = ((HtmlFileInput) getDomNodeOrDie()).getFiles();
+            if (files == null || files.length == 0) {
+                return ATTRIBUTE_NOT_DEFINED;
             }
-            else if (value.contains(File.separator)) {
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
-                    value = "C:\\fakepath\\" + value.substring(value.lastIndexOf(File.separator) + 1);
-                }
-                else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
-                    value = value.substring(value.lastIndexOf(File.separator) + 1);
-                }
+            final File first = files[0];
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+                return "C:\\fakepath\\" + first.getName();
             }
+            else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
+                return first.getName();
+            }
+            return first.toString();
         }
         return value;
     }
