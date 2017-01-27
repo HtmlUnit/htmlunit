@@ -2117,7 +2117,7 @@ public class HtmlPage extends InteractivePage {
      */
     @Override
     protected void setDocumentType(final DocumentType type) {
-       super.setDocumentType(type);
+        super.setDocumentType(type);
     }
 
     /**
