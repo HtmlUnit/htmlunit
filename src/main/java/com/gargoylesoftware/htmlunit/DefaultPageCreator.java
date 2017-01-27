@@ -224,8 +224,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         for (byte b : bytes) {
             if (b < 0x08
                 || b == 0x0B
-                || b >= 0x0E && b <= 0x1A
-                || b >= 0x1C && b <= 0x1F) {
+                || (b >= 0x0E && b <= 0x1A)
+                || (b >= 0x1C && b <= 0x1F)) {
                 return true;
             }
         }
