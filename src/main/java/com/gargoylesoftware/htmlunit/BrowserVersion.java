@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -847,15 +847,15 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Determines the content type for the given file.
-     * @param file the file
+     * @param path the path
      * @return a content type or an empty string if unknown
      */
-    public String getUploadMimeType(final File file) {
-        if (file == null) {
+    public String getUploadMimeType(final Path path) {
+        if (path == null) {
             return "";
         }
 
-        final String fileExtension = FilenameUtils.getExtension(file.getName());
+        final String fileExtension = FilenameUtils.getExtension(path.getFileName().toString());
 
         final String mimeType = uploadMimeTypes_.get(fileExtension.toLowerCase(Locale.ROOT));
         if (mimeType != null) {

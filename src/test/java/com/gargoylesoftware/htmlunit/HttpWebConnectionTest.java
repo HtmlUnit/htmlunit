@@ -19,12 +19,12 @@ import static org.junit.Assert.fail;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -267,7 +267,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     @Test
     public void buildFilePart() throws Exception {
         final String encoding = "ISO8859-1";
-        final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "something",
+        final KeyDataPair pair = new KeyDataPair("myFile", Paths.get("this/doesnt_exist.txt"), "something",
                 "text/plain", encoding);
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
         try (HttpWebConnection webConnection = new HttpWebConnection(getWebClient())) {

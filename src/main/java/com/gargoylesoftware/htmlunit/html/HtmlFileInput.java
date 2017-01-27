@@ -17,10 +17,13 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,6 +48,7 @@ public class HtmlFileInput extends HtmlInput {
 
     private String contentType_;
     private byte[] data_;
+    private Path[] paths_;
 
     /**
      * Creates an instance.
@@ -90,17 +94,15 @@ public class HtmlFileInput extends HtmlInput {
      */
     @Override
     public NameValuePair[] getSubmitNameValuePairs() {
-        final String valueAttribute = getValueAttribute();
-
-        if (StringUtils.isEmpty(valueAttribute)) {
+        if (paths_ == null || paths_.length == 0) {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, null)};
         }
 
         final List<NameValuePair> list = new ArrayList<>();
-        for (File file : splitFiles(valueAttribute)) {
+        for (Path path : paths_) {
             String contentType;
             if (contentType_ == null) {
-                contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
+                contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(path);
                 if (StringUtils.isEmpty(contentType)) {
                     contentType = "application/octet-stream";
                 }
@@ -109,7 +111,7 @@ public class HtmlFileInput extends HtmlInput {
                 contentType = contentType_;
             }
             final String charset = getPage().getPageEncoding();
-            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, null, contentType, charset);
+            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), path, null, contentType, charset);
             keyDataPair.setData(data_);
             list.add(keyDataPair);
         }
@@ -179,8 +181,7 @@ public class HtmlFileInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
-        super.setValueAttribute(newValue);
-        fireEvent("change");
+        setPaths(Paths.get(newValue));
     }
 
     /**
@@ -190,20 +191,34 @@ public class HtmlFileInput extends HtmlInput {
      * We may follow WebDriver solution, once made,
      * see https://code.google.com/p/selenium/issues/detail?id=2239
      * @param paths the list of paths of the files to upload
+     * @deprecated as of 2.25, please use {@link #setPaths(Path...)} instead
      */
+    @Deprecated
     public void setValueAttribute(final String[] paths) {
-        if (getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
-            throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
-        }
-        final StringBuilder builder = new StringBuilder();
-        for (final String p : paths) {
-            if (builder.length() != 0) {
-                builder.append(FILE_SEPARATOR);
-            }
-            builder.append(p);
-        }
-        setDefaultValue(builder.toString());
-        setValueAttribute(builder.toString());
+        final Path[] array = Stream.of(paths).map(p -> Paths.get(p)).toArray(Path[]::new);
+        setPaths(array);
     }
 
+    /**
+     * Used to specify {@code multiple} paths to upload.
+     *
+     * We may follow WebDriver solution, once made,
+     * see https://code.google.com/p/selenium/issues/detail?id=2239
+     * @param paths the list of paths of to upload
+     */
+    public void setPaths(final Path... paths) {
+        if (paths.length > 1 && getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
+            throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
+        }
+        paths_ = paths;
+        fireEvent("change");
+    }
+
+    /**
+     * Returns the paths.
+     * @return the array of {@link Path}s
+     */
+    public Path[] getPaths() {
+        return paths_;
+    }
 }
