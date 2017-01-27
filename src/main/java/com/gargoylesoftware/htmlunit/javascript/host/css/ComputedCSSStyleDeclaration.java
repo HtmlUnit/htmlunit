@@ -725,27 +725,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginLeft() {
-        final String superMarginLeft = super.getMarginLeft();
-        if (!superMarginLeft.endsWith("%")) {
-            return pixelString(defaultIfEmpty(superMarginLeft, "0px", null));
-        }
-        final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
-            if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
-                return "";
-            }
-        }
-
-        final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
-        return pixelString(elem, new CssValue(0, windowWidth) {
-            @Override
-            public String get(final ComputedCSSStyleDeclaration style) {
-                if (style.getElement() == elem) {
-                    return style.getStyleAttribute(MARGIN_LEFT, true);
-                }
-                return style.getStyleAttribute(WIDTH, true);
-            }
-        });
+        return getMarginX(super.getMarginLeft(), MARGIN_LEFT);
     }
 
     /**
@@ -753,9 +733,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginRight() {
-        final String superMarginRight = super.getMarginRight();
-        if (!superMarginRight.endsWith("%")) {
-            return pixelString(defaultIfEmpty(superMarginRight, "0px", null));
+        return getMarginX(super.getMarginRight(), MARGIN_RIGHT);
+    }
+
+    private String getMarginX(final String superMarginX, final Definition definition) {
+        if (!superMarginX.endsWith("%")) {
+            return pixelString(defaultIfEmpty(superMarginX, "0px", null));
         }
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
@@ -769,7 +752,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
                 if (style.getElement() == elem) {
-                    return style.getStyleAttribute(MARGIN_RIGHT, true);
+                    return style.getStyleAttribute(definition, true);
                 }
                 return style.getStyleAttribute(WIDTH, true);
             }

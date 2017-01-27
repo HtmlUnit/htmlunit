@@ -279,6 +279,12 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @Override
     public Object appendChild(final Object newChild) {
+        verifyChild(newChild);
+
+        return super.appendChild(newChild);
+    }
+
+    private void verifyChild(final Object newChild) {
         if (newChild == null || "null".equals(newChild) || !(newChild instanceof XMLDOMNode)) {
             throw Context.reportRuntimeError("Type mismatch.");
         }
@@ -310,8 +316,6 @@ public class XMLDOMDocument extends XMLDOMNode {
                 child = child.getNextSibling();
             }
         }
-
-        return super.appendChild(newChild);
     }
 
     /**
@@ -528,37 +532,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     @Override
     protected Object insertBeforeImpl(final Object[] args) {
         final Object newChild = args[0];
-        if (newChild == null || "null".equals(newChild) || !(newChild instanceof XMLDOMNode)) {
-            throw Context.reportRuntimeError("Type mismatch.");
-        }
-        if (newChild instanceof XMLDOMCDATASection) {
-            throw Context.reportRuntimeError("This operation cannot be performed with a node of type CDATA.");
-        }
-        if (newChild instanceof XMLDOMText) {
-            throw Context.reportRuntimeError("This operation cannot be performed with a node of type TEXT.");
-        }
-        if (newChild instanceof XMLDOMElement && getDocumentElement() != null) {
-            throw Context.reportRuntimeError("Only one top level element is allowed in an XML document.");
-        }
-        if (newChild instanceof XMLDOMDocumentFragment) {
-            boolean elementFound = false;
-            XMLDOMNode child = ((XMLDOMDocumentFragment) newChild).getFirstChild();
-            while (child != null) {
-                if (child instanceof XMLDOMCDATASection) {
-                    throw Context.reportRuntimeError("This operation cannot be performed with a node of type CDATA.");
-                }
-                if (child instanceof XMLDOMText) {
-                    throw Context.reportRuntimeError("This operation cannot be performed with a node of type TEXT.");
-                }
-                if (child instanceof XMLDOMElement) {
-                    if (elementFound) {
-                        throw Context.reportRuntimeError("Only one top level element is allowed in an XML document.");
-                    }
-                    elementFound = true;
-                }
-                child = child.getNextSibling();
-            }
-        }
+        verifyChild(newChild);
         if (args.length != 2) {
             throw Context.reportRuntimeError("Wrong number of arguments or invalid property assignment.");
         }

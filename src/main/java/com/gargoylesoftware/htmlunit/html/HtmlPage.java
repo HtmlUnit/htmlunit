@@ -1674,22 +1674,7 @@ public class HtmlPage extends InteractivePage {
 
     private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
-        // first try real attributes
-        String value = element.getAttribute(attribute);
-
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
-            // second try are JavaScript attributes
-            // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptableObject();
-            // we have to make sure the scriptObject has a slot for the given attribute.
-            // just using get() may use e.g. getWithPreemption().
-            if (scriptObject.has(attribute, scriptObject)) {
-                final Object jsValue = scriptObject.get(attribute, scriptObject);
-                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
-                    value = (String) jsValue;
-                }
-            }
-        }
+        final String value = getAttributeValue(element, attribute);
 
         if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
             SortedSet<DomElement> elements = map.get(value);
@@ -1707,6 +1692,26 @@ public class HtmlPage extends InteractivePage {
                 addElement(map, child, attribute, true);
             }
         }
+    }
+
+    private static String getAttributeValue(final DomElement element, final String attribute) {
+        // first try real attributes
+        String value = element.getAttribute(attribute);
+
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
+            // second try are JavaScript attributes
+            // ...but applets are a bit special so ignore them
+            final ScriptableObject scriptObject = element.getScriptableObject();
+            // we have to make sure the scriptObject has a slot for the given attribute.
+            // just using get() may use e.g. getWithPreemption().
+            if (scriptObject.has(attribute, scriptObject)) {
+                final Object jsValue = scriptObject.get(attribute, scriptObject);
+                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+                    value = (String) jsValue;
+                }
+            }
+        }
+        return value;
     }
 
     /**
@@ -1732,24 +1737,9 @@ public class HtmlPage extends InteractivePage {
 
     private void removeElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
-        // first try real attributes
-        String value = element.getAttribute(attribute);
+        final String value = getAttributeValue(element, attribute);
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
-            // second try are JavaScript attributes
-            // ...but applets are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptableObject();
-            // we have to make sure the scriptObject has a slot for the given attribute.
-            // just using get() may use e.g. getWithPreemption().
-            if (scriptObject.has(attribute, scriptObject)) {
-                final Object jsValue = scriptObject.get(attribute, scriptObject);
-                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
-                    value = (String) jsValue;
-                }
-            }
-        }
-
-        if (!StringUtils.isEmpty(value)) {
+        if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
             final SortedSet<DomElement> elements = map.remove(value);
             if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
                 elements.remove(element);
