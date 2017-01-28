@@ -1133,4 +1133,27 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "C:\\fakepath\\pom.xml",
+            FF = "pom.xml",
+            IE = "§§PATH§§")
+    public void getAttribute() throws Exception {
+        final String html =
+              "<html><body>\n"
+              + "  <input type='file' id='f'>\n"
+              + "</body></html>";
+
+        final String absolutePath = new File("pom.xml").getAbsolutePath();
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement e = driver.findElement(By.id("f"));
+        e.sendKeys(absolutePath);
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", absolutePath);
+        assertEquals(expectedAlerts[0], e.getAttribute("value"));
+    }
+
 }

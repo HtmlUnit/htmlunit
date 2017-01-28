@@ -76,10 +76,12 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -1218,5 +1220,13 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
         else {
             super.clear();
         }
+    }
+
+    @Override
+    public String getAttribute(final String name) {
+        if (element instanceof HtmlFileInput && "value".equalsIgnoreCase(name)) {
+            return ((HTMLInputElement) element.getScriptableObject()).getValue();
+        }
+        return super.getAttribute(name);
     }
 }
