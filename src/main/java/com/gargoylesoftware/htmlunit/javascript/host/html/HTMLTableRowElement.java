@@ -51,8 +51,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass(domClass = HtmlTableRow.class)
 public class HTMLTableRowElement extends HTMLTableComponent {
 
-    private HTMLCollection cells_; // has to be a member to have equality (==) working
-
     /**
      * Creates an instance.
      */
@@ -108,16 +106,13 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      */
     @JsxGetter
     public Object getCells() {
-        if (cells_ == null) {
-            final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
-            cells_ = new HTMLCollection(row, false) {
-                @Override
-                protected List<Object> computeElements() {
-                    return new ArrayList<>(row.getCells());
-                }
-            };
-        }
-        return cells_;
+        final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
+        return new HTMLCollection(row, false) {
+            @Override
+            protected List<Object> computeElements() {
+                return new ArrayList<>(row.getCells());
+            }
+        };
     }
 
     /**

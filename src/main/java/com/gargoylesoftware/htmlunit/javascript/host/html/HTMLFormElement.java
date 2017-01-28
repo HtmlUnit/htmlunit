@@ -85,8 +85,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass(domClass = HtmlForm.class)
 public class HTMLFormElement extends HTMLElement implements Function {
 
-    private HTMLCollection elements_; // has to be a member to have equality (==) working
-
     /**
      * Creates an instance.
      */
@@ -128,56 +126,52 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxGetter
     public HTMLCollection getElements() {
-        if (elements_ == null) {
-            final HtmlForm htmlForm = getHtmlForm();
+        final HtmlForm htmlForm = getHtmlForm();
 
-            elements_ = new HTMLCollection(htmlForm, false) {
-                private boolean filterChildrenOfNestedForms_;
+        return new HTMLCollection(htmlForm, false) {
+            private boolean filterChildrenOfNestedForms_;
 
-                @Override
-                protected List<Object> computeElements() {
-                    final List<Object> response = super.computeElements();
-                    // it would be more performant to avoid iterating through
-                    // nested forms but as it is a corner case of ill formed HTML
-                    // the needed refactoring would take too much time
-                    // => filter here and not in isMatching as it won't be needed in most
-                    // of the cases
-                    if (filterChildrenOfNestedForms_) {
-                        for (final Iterator<Object> iter = response.iterator(); iter.hasNext();) {
-                            final HtmlElement field = (HtmlElement) iter.next();
-                            if (field.getEnclosingForm() != htmlForm) {
-                                iter.remove();
-                            }
+            @Override
+            protected List<Object> computeElements() {
+                final List<Object> response = super.computeElements();
+                // it would be more performant to avoid iterating through
+                // nested forms but as it is a corner case of ill formed HTML
+                // the needed refactoring would take too much time
+                // => filter here and not in isMatching as it won't be needed in most
+                // of the cases
+                if (filterChildrenOfNestedForms_) {
+                    for (final Iterator<Object> iter = response.iterator(); iter.hasNext();) {
+                        final HtmlElement field = (HtmlElement) iter.next();
+                        if (field.getEnclosingForm() != htmlForm) {
+                            iter.remove();
                         }
                     }
-                    response.addAll(htmlForm.getLostChildren());
-                    return response;
+                }
+                response.addAll(htmlForm.getLostChildren());
+                return response;
+            }
+
+            @Override
+            protected Object getWithPreemption(final String name) {
+                return HTMLFormElement.this.getWithPreemption(name);
+            }
+
+            @Override
+            public EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                return EffectOnCache.NONE;
+            }
+
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (node instanceof HtmlForm) {
+                    filterChildrenOfNestedForms_ = true;
+                    return false;
                 }
 
-                @Override
-                protected Object getWithPreemption(final String name) {
-                    return HTMLFormElement.this.getWithPreemption(name);
-                }
-
-                @Override
-                public EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    return EffectOnCache.NONE;
-                }
-
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    if (node instanceof HtmlForm) {
-                        filterChildrenOfNestedForms_ = true;
-                        return false;
-                    }
-
-                    return node instanceof HtmlInput || node instanceof HtmlButton
+                return node instanceof HtmlInput || node instanceof HtmlButton
                         || node instanceof HtmlTextArea || node instanceof HtmlSelect;
-                }
-            };
-        }
-
-        return elements_;
+            }
+        };
     }
 
     /**

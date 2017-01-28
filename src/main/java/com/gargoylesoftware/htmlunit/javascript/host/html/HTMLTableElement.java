@@ -56,8 +56,6 @@ public class HTMLTableElement extends RowContainer {
 
     private static final List<String> VALID_RULES_ = Arrays.asList("none", "groups", "rows", "cols");
 
-    private HTMLCollection tBodies_; // has to be a member to have equality (==) working
-
     /**
      * Creates an instance.
      */
@@ -166,16 +164,13 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public Object getTBodies() {
-        if (tBodies_ == null) {
-            final HtmlTable table = (HtmlTable) getDomNodeOrDie();
-            tBodies_ = new HTMLCollection(table, false) {
-                @Override
-                protected List<Object> computeElements() {
-                    return new ArrayList<>(table.getBodies());
-                }
-            };
-        }
-        return tBodies_;
+        final HtmlTable table = (HtmlTable) getDomNodeOrDie();
+        return new HTMLCollection(table, false) {
+            @Override
+            protected List<Object> computeElements() {
+                return new ArrayList<>(table.getBodies());
+            }
+        };
     }
 
     /**

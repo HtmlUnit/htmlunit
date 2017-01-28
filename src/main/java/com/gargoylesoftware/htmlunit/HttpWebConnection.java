@@ -80,7 +80,6 @@ import org.apache.http.client.protocol.RequestClientConnControl;
 import org.apache.http.client.protocol.RequestDefaultHeaders;
 import org.apache.http.client.protocol.RequestExpectContinue;
 import org.apache.http.client.protocol.ResponseProcessCookies;
-import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.config.ConnectionConfig;
 import org.apache.http.config.RegistryBuilder;
@@ -286,7 +285,6 @@ public class HttpWebConnection implements WebConnection {
      * @throws IOException
      * @throws URISyntaxException
      */
-    @SuppressWarnings("deprecation")
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
         throws URISyntaxException {
 
@@ -298,10 +296,7 @@ public class HttpWebConnection implements WebConnection {
         // chars in the URL.
         final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, charset);
 
-        // URIUtils.createURI is deprecated but as of httpclient-4.2.1, URIBuilder doesn't work here as it encodes path
-        // what shouldn't happen here
-        URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
-                escapeQuery(url.getQuery()), null);
+        URI uri = UrlUtils.toURI(url, escapeQuery(url.getQuery()));
         if (getVirtualHost() != null) {
             uri = URI.create(getVirtualHost());
         }
@@ -313,7 +308,7 @@ public class HttpWebConnection implements WebConnection {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
                 final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
                 final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
-                uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
+                uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);
             }
         }

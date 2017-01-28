@@ -184,7 +184,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     private Selection selection_;
     private Event currentEvent_;
     private String status_ = "";
-    private HTMLCollection frames_; // has to be a member to have equality (==) working
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
     private Object controllers_;
@@ -911,11 +910,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the live collection of frames contained by this window
      */
     private HTMLCollection getFrames() {
-        if (frames_ == null) {
-            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
-            frames_ = new HTMLCollectionFrames(page);
-        }
-        return frames_;
+        final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
+        return new HTMLCollectionFrames(page);
     }
 
     /**

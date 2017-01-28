@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.BitSet;
 
@@ -1077,5 +1079,49 @@ public final class UrlUtils {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Constructs a {@link URI} using all the specified URL.
+     *
+     * @param url the URL
+     * @param query the query
+     *
+     * @throws URISyntaxException
+     *         If both a scheme and a path are given but the path is
+     *         relative, if the URI string constructed from the given
+     *         components violates RFC&nbsp;2396, or if the authority
+     *         component of the string is present but cannot be parsed
+     *         as a server-based authority
+     * @return the URI
+     */
+    public static URI toURI(final URL url, final String query) throws URISyntaxException {
+        final String scheme = url.getProtocol();
+        final String host = url.getHost();
+        final int port = url.getPort();
+        final String path = url.getPath();
+        final StringBuilder buffer = new StringBuilder();
+        if (host != null) {
+            if (scheme != null) {
+                buffer.append(scheme);
+                buffer.append("://");
+            }
+            buffer.append(host);
+            if (port > 0) {
+                buffer.append(':');
+                buffer.append(port);
+            }
+        }
+        if (path == null || !path.startsWith("/")) {
+            buffer.append('/');
+        }
+        if (path != null) {
+            buffer.append(path);
+        }
+        if (query != null) {
+            buffer.append('?');
+            buffer.append(query);
+        }
+        return new URI(buffer.toString());
     }
 }
