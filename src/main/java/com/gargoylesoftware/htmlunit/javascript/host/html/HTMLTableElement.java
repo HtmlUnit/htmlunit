@@ -472,4 +472,22 @@ public class HTMLTableElement extends RowContainer {
     public void setSummary(final String summary) {
         setAttribute("summary", summary);
     }
+
+    /**
+     * Gets the {@code rules} attribute.
+     * @return the attribute
+     */
+    @JsxGetter
+    public String getRules() {
+        return getDomNodeOrDie().getAttribute("rules");
+    }
+
+    /**
+     * Sets the {@code rules} attribute.
+     * @param rules the new attribute
+     */
+    @JsxSetter
+    public void setRules(final String rules) {
+        setAttribute("rules", rules);
+    }
 }

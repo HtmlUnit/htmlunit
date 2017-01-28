@@ -906,4 +906,62 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"none", "groups", "rows", "cols", "wrong", ""},
+            IE = {"none", "groups", "rows", "cols", "", ""})
+    public void getRules() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table id='t1' rules='none' ></table>\n"
+            + "  <table id='t2' rules='groups' ></table>\n"
+            + "  <table id='t3' rules='rows' ></table>\n"
+            + "  <table id='t4' rules='cols' ></table>\n"
+            + "  <table id='t5' rules='wrong' ></table>\n"
+            + "  <table id='t6' ></table>\n"
+
+            + "<script>\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('t' + i).rules);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"groUPs", "8", "foo", "rows", "cols"},
+            IE = {"groups", "error", "groups", "error", "groups", "rows", "cols"})
+    @NotYetImplemented(IE)
+    public void setRules() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table id='t1' rules='groups' ></table>\n"
+
+            + "<script>\n"
+            + "  function setRules(elem, value) {\n"
+            + "    try {\n"
+            + "      elem.rules = value;\n"
+            + "    } catch (e) { alert('error'); }\n"
+            + "    alert(elem.rules);\n"
+            + "  }\n"
+
+            + "  var elem = document.getElementById('t1');\n"
+            + "  setRules(elem, 'groUPs');\n"
+
+            + "  setRules(elem, '8');\n"
+            + "  setRules(elem, 'foo');\n"
+
+            + "  setRules(elem, 'rows');\n"
+            + "  setRules(elem, 'cols');\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
