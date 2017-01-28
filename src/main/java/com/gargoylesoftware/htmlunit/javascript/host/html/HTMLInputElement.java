@@ -577,7 +577,10 @@ public class HTMLInputElement extends FormField {
             }
             final File first = files[0];
             final String name = first.getName();
-            if (!name.isEmpty() && getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+            if (name.isEmpty()) {
+                return name;
+            }
+            if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
                 return "C:\\fakepath\\" + name;
             }
             else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
