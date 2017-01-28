@@ -766,7 +766,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /**
      * Returns the {@code compatMode} property.
-     * Note that it is deprecated in Internet Explorer 8 in favor of the {@code documentMode}.
      * @return the {@code compatMode} property
      */
     @JsxGetter

@@ -31,12 +31,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -588,7 +583,7 @@ public class HTMLInputElement extends FormField {
             else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
                 return name;
             }
-            return first.toString();
+            return first.getAbsolutePath();
         }
         return super.getValue();
     }
@@ -723,28 +718,7 @@ public class HTMLInputElement extends FormField {
     public Object getFiles() {
         final HtmlInput htmlInput = getDomNodeOrDie();
         if (htmlInput instanceof HtmlFileInput) {
-            final List<File> files = Stream.of(((HtmlFileInput) htmlInput).getFiles())
-                    .map(File::getAbsolutePath).map(name -> {
-                        File file = null;
-                        // to tolerate file://
-                        if (name.startsWith("file:/")) {
-                            if (name.startsWith("file://") && !name.startsWith("file:///")) {
-                                name = "file:///" + name.substring(7);
-                            }
-                            try {
-                                file = new File(new URI(name));
-                            }
-                            catch (final URISyntaxException e) {
-                                // nothing here
-                            }
-                        }
-                        if (file == null) {
-                            file = new File(name);
-                        }
-                        return file;
-                    }) .collect(Collectors.toList());
-
-            final FileList list = new FileList(files);
+            final FileList list = new FileList(((HtmlFileInput) htmlInput).getFiles());
             list.setParentScope(getParentScope());
             list.setPrototype(getPrototype(list.getClass()));
             return list;

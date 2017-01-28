@@ -129,13 +129,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
         "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE", null);
 
-    /**
-     * Internet Explorer 11.
-     * @deprecated as of 2.20, please use {@link #INTERNET_EXPLORER} instead
-     */
-    @Deprecated
-    public static final BrowserVersion INTERNET_EXPLORER_11 = INTERNET_EXPLORER;
-
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"

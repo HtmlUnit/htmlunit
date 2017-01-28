@@ -18,8 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import java.util.List;
-
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -49,15 +47,13 @@ public class FileList extends SimpleScriptable {
 
     /**
      * Creates a new instance.
-     * @param pathnames the path names
+     * @param array the array of files
      */
-    public FileList(final List<java.io.File> pathnames) {
-        files_ = new File[pathnames.size()];
+    public FileList(final java.io.File[] array) {
+        files_ = new File[array.length];
 
-        int i = 0;
-        for (java.io.File file : pathnames) {
-            files_[i] = new File(file.getAbsolutePath());
-            i++;
+        for (int i = 0; i < array.length; i++) {
+            files_[i] = new File(array[i].getAbsolutePath());
         }
     }
 

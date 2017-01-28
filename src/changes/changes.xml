@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, ScriptPreProcessor, Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated HtmlElement.getHtmlElementsByTagName(), .getHtmlElementsByTagNames()
+                and CSSStyleSheet.modifyIfNecessary().
+            </action>
+            <action type="remove" dev="asashour">
+                BrowserVersion: remove deprecated INTERNET_EXPLORER_11.
+            </action>
             <action type="update" dev="asashour">
                 HtmlFileInput: deprecate .setValueAttribute(), use .setFiles() instead.
             </action>

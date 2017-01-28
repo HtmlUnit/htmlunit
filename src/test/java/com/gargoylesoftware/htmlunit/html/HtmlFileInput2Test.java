@@ -574,7 +574,11 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"C:\\fakepath\\pom.xml-Hello world-Hello world",
+    @Alerts(DEFAULT = {"C:\\fakepath\\pom.xml-Hello world-Hello world",
+        "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"},
+            FF = {"pom.xml-Hello world-Hello world",
+        "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"},
+            IE = {"§§PATH§§-Hello world-Hello world",
         "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
     public void value() throws Exception {
         final String html =
@@ -597,6 +601,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlPage page = loadPage(html);
         page.<HtmlFileInput>getHtmlElementById("f").setFiles(pom);
         page.getElementById("clickMe").click();
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", pom.getAbsolutePath());
+        assertEquals(expectedAlerts, getCollectedAlerts(page));
     }
 }

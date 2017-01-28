@@ -235,20 +235,6 @@ public class CSSStyleSheet extends StyleSheet {
      * @param style the style to modify
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
-     * @deprecated as of 2.21, please use {@link #modifyIfNecessary(ComputedCSSStyleDeclaration, Element, String)}
-     */
-    @Deprecated
-    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element) {
-        modifyIfNecessary(style, element, null);
-    }
-
-    /**
-     * Modifies the specified style object by adding any style rules which apply to the specified
-     * element.
-     *
-     * @param style the style to modify
-     * @param element the element to which style rules must apply in order for them to be added to
-     *        the specified style
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
      */
     public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,

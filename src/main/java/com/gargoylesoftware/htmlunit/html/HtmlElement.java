@@ -287,33 +287,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
-     * @param tagNames the tag names to match (case-insensitive)
-     * @return the HTML elements that are descendants of this element and that have one of the specified tag name
-     * @deprecated as of 2.21, please use {@link #getElementsByTagName(String)}
-     */
-    @Deprecated
-    public final List<HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
-        final List<HtmlElement> list = new ArrayList<>();
-        for (final String tagName : tagNames) {
-            list.addAll(getElementsByTagName(tagName));
-        }
-        return list;
-    }
-
-    /**
-     * Returns the HTML elements that are descendants of this element and that have the specified tag name.
-     * @param tagName the tag name to match (case-insensitive)
-     * @param <E> the sub-element type
-     * @return the HTML elements that are descendants of this element and that have the specified tag name
-     * @deprecated as of 2.21, please use {@link #getElementsByTagName(String)}, which returns read-only list
-     */
-    @Deprecated
-    public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {
-        return new ArrayList<>(this.<E>getElementsByTagNameImpl(tagName));
-    }
-
-    /**
      * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */

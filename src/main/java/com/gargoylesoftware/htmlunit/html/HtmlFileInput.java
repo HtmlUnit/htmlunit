@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -171,8 +173,34 @@ public class HtmlFileInput extends HtmlInput {
         if (files.length > 1 && getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
             throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
         }
+        for (int i = 0; i < files.length; i++) {
+            files[i] = normalizeFile(files[i]);
+        }
         files_ = files;
         fireEvent("change");
+    }
+
+    /**
+     * To tolerate {@code file://}
+     */
+    private static File normalizeFile(final File file) {
+        File f = null;
+        String path = file.getPath().replace('\\', '/');
+        if (path.startsWith("file:/")) {
+            if (path.startsWith("file://") && !path.startsWith("file:///")) {
+                path = "file:///" + path.substring(7);
+            }
+            try {
+                f = new File(new URI(path));
+            }
+            catch (final URISyntaxException e) {
+                // nothing here
+            }
+        }
+        if (f == null) {
+            f = new File(path);
+        }
+        return f;
     }
 
     /**

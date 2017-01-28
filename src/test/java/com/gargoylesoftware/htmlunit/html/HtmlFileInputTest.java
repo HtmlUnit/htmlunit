@@ -1081,8 +1081,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(absolutePath);
         driver.findElement(By.id("clickMe")).click();
 
-        setExpectedAlerts(getExpectedAlerts()[0].replace("§§PATH§§", absolutePath));
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", absolutePath);
+        assertEquals(expectedAlerts, getCollectedAlerts(driver));
     }
 
     /**
