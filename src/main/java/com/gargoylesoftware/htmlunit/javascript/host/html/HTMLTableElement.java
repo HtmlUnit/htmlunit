@@ -15,13 +15,16 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -50,6 +53,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass(domClass = HtmlTable.class)
 public class HTMLTableElement extends RowContainer {
+
+    private static final List<String> VALID_RULES_ = Arrays.asList("none", "groups", "rows", "cols");
 
     private HTMLCollection tBodies_; // has to be a member to have equality (==) working
 
@@ -270,8 +275,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the {@code width} attribute.
-     * @return the {@code width} attribute
+     * Returns the {@code width} property.
+     * @return the {@code width} property
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
@@ -279,8 +284,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code width} attribute.
-     * @param width the {@code width} attribute
+     * Sets the {@code width} property.
+     * @param width the {@code width} property
      */
     @JsxSetter
     public void setWidth(final String width) {
@@ -288,8 +293,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the {@code cellSpacing} attribute.
-     * @return the {@code cellSpacing} attribute
+     * Returns the {@code cellSpacing} property.
+     * @return the {@code cellSpacing} property
      */
     @JsxGetter
     public String getCellSpacing() {
@@ -297,8 +302,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code cellSpacing} attribute.
-     * @param cellSpacing the {@code cellSpacing} attribute
+     * Sets the {@code cellSpacing} property.
+     * @param cellSpacing the {@code cellSpacing} property
      */
     @JsxSetter
     public void setCellSpacing(final String cellSpacing) {
@@ -306,8 +311,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the {@code cellPadding} attribute.
-     * @return the {@code cellPadding} attribute
+     * Returns the {@code cellPadding} property.
+     * @return the {@code cellPadding} property
      */
     @JsxGetter
     public String getCellPadding() {
@@ -315,8 +320,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code cellPadding} attribute.
-     * @param cellPadding the {@code cellPadding} attribute
+     * Sets the {@code cellPadding} property.
+     * @param cellPadding the {@code cellPadding} property
      */
     @JsxSetter
     public void setCellPadding(final String cellPadding) {
@@ -324,8 +329,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the {@code border} attribute.
-     * @return the {@code border} attribute
+     * Gets the {@code border} property.
+     * @return the {@code border} property
      */
     @JsxGetter
     public String getBorder() {
@@ -334,8 +339,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code border} attribute.
-     * @param border the {@code border} attribute
+     * Sets the {@code border} property.
+     * @param border the {@code border} property
      */
     @JsxSetter
     public void setBorder(final String border) {
@@ -343,8 +348,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Returns the value of the {@code bgColor} attribute.
-     * @return the value of the {@code bgColor} attribute
+     * Returns the value of the {@code bgColor} property.
+     * @return the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
@@ -353,8 +358,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the value of the {@code bgColor} attribute.
-     * @param bgColor the value of the {@code bgColor} attribute
+     * Sets the value of the {@code bgColor} property.
+     * @param bgColor the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
@@ -363,8 +368,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
+     * Gets the {@code borderColor} property.
+     * @return the property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorderColor() {
@@ -372,8 +377,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
+     * Sets the {@code borderColor} property.
+     * @param borderColor the new property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBorderColor(final String borderColor) {
@@ -381,8 +386,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
+     * Gets the {@code borderColor} property.
+     * @return the property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorderColorDark() {
@@ -390,8 +395,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
+     * Sets the {@code borderColor} property.
+     * @param borderColor the new property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBorderColorDark(final String borderColor) {
@@ -399,8 +404,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
+     * Gets the {@code borderColor} property.
+     * @return the property
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorderColorLight() {
@@ -408,8 +413,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
+     * Sets the {@code borderColor} property.
+     * @param borderColor the new property
      */
     @JsxSetter(@WebBrowser(IE))
     public void setBorderColorLight(final String borderColor) {
@@ -456,8 +461,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the {@code summary} attribute.
-     * @return the attribute
+     * Gets the {@code summary} property.
+     * @return the property
      */
     @JsxGetter
     public String getSummary() {
@@ -465,8 +470,8 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Sets the {@code summary} attribute.
-     * @param summary the new attribute
+     * Sets the {@code summary} property.
+     * @param summary the new property
      */
     @JsxSetter
     public void setSummary(final String summary) {
@@ -474,20 +479,32 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Gets the {@code rules} attribute.
-     * @return the attribute
+     * Gets the {@code rules} property.
+     * @return the property
      */
     @JsxGetter
     public String getRules() {
-        return getDomNodeOrDie().getAttribute("rules");
+        String rules = getDomNodeOrDie().getAttribute("rules");
+        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)
+                && !VALID_RULES_.contains(rules)) {
+            rules = "";
+        }
+        return rules;
     }
 
     /**
-     * Sets the {@code rules} attribute.
-     * @param rules the new attribute
+     * Sets the {@code rules} property.
+     * @param rules the new property
      */
     @JsxSetter
-    public void setRules(final String rules) {
+    public void setRules(String rules) {
+        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
+            rules = rules.toLowerCase(Locale.ROOT);
+            if (!rules.isEmpty() && !VALID_RULES_.contains(rules)) {
+                throw Context.throwAsScriptRuntimeEx(new Exception("Invalid argument"));
+            }
+        }
         setAttribute("rules", rules);
     }
+
 }
