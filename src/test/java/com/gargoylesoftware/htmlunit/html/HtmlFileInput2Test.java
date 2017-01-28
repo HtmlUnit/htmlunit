@@ -91,9 +91,9 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
             testFileInput(new File(URLDecoder.decode(path.replace('/', '\\'), "UTF-8")));
         }
-        testFileInput(new File(new URL("file:/" + path).getPath()));
-        testFileInput(new File(new URL("file://" + path).getPath()));
-        testFileInput(new File(new URL("file:///" + path).getPath()));
+        testFileInput(new File("file:/" + path));
+        testFileInput(new File("file://" + path));
+        testFileInput(new File("file:///" + path));
     }
 
     private void testFileInput(final File file) throws Exception {
