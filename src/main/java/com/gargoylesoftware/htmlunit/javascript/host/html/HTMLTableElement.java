@@ -454,4 +454,22 @@ public class HTMLTableElement extends RowContainer {
         getWindow().clearComputedStyles(this);
         return removedChild;
     }
+
+    /**
+     * Gets the {@code summary} attribute.
+     * @return the attribute
+     */
+    @JsxGetter
+    public String getSummary() {
+        return getDomNodeOrDie().getAttribute("summary");
+    }
+
+    /**
+     * Sets the {@code summary} attribute.
+     * @param summary the new attribute
+     */
+    @JsxSetter
+    public void setSummary(final String summary) {
+        setAttribute("summary", summary);
+    }
 }

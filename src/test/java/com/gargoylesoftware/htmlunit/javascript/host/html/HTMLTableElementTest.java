@@ -872,4 +872,38 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "hello", "unknown", "exception", "", "test"})
+    public void summary() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table id='tab1'></table>\n"
+            + "  <table id='tab2' summary=''></table>\n"
+            + "  <table id='tab3' summary='test'></table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab1');\n"
+            + "  alert(node.summary);\n"
+
+            + "  node.summary='hello';\n"
+            + "  alert(node.summary);\n"
+
+            + "  node.summary='unknown';\n"
+            + "  alert(node.summary);\n"
+
+            + "  try { node.summary=unknown; } catch(e) { alert('exception') }\n"
+
+            + "  var node = document.getElementById('tab2');\n"
+            + "  alert(node.summary);\n"
+
+            + "  var node = document.getElementById('tab3');\n"
+            + "  alert(node.summary);\n"
+
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
