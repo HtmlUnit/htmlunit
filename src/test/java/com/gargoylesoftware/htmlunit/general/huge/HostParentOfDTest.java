@@ -4141,7 +4141,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _Event_RTCDataChannelEvent() throws Exception {
         test("Event", "RTCDataChannelEvent");
     }
@@ -4151,7 +4152,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _Event_RTCPeerConnectionIceEvent() throws Exception {
         test("Event", "RTCPeerConnectionIceEvent");
     }
@@ -5235,7 +5237,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF45 = "true",
+            CHROME = "true")
     public void _EventTarget_RTCPeerConnection() throws Exception {
         test("EventTarget", "RTCPeerConnection");
     }
