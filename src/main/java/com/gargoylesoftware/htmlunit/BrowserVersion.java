@@ -266,7 +266,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 23.0 r0", "undefined", "internal-not-yet-present");
+                "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         CHROME.getPlugins().add(flash);
