@@ -290,7 +290,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "3", "1", "-1", "true", "false"})
+    @Alerts({"0", "0", "3", "1", "-1", "true", "false"})
     public void rowIndex_sectionRowIndex() throws Exception {
         final String html
             = "<html><body><table>\n"
