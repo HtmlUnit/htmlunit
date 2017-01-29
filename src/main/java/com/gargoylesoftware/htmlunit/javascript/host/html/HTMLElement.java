@@ -810,7 +810,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the innerText attribute.
      * @return the contents of this node as text
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
+    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(FF)})
     public String getInnerText() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
@@ -942,7 +942,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Replaces all child elements of this element with the supplied text value.
      * @param value the new value for the contents of this element
      */
-    @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
+    @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(FF)})
     public void setInnerText(final Object value) {
         final String valueString;
         if (value == null && getBrowserVersion().hasFeature(JS_INNER_TEXT_VALUE_NULL)) {

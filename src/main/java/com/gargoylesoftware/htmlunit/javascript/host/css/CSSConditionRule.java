@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -29,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(EDGE) }),
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE) }),
         @JsxClass(isJSObject = false, browsers = {@WebBrowser(IE) })
     })
 public class CSSConditionRule extends CSSGroupingRule {
@@ -37,7 +38,7 @@ public class CSSConditionRule extends CSSGroupingRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
     public CSSConditionRule() {
     }
 
