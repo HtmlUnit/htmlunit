@@ -34,7 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(EDGE)})
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
 public class Reflect extends SimpleScriptable {
 
     /**

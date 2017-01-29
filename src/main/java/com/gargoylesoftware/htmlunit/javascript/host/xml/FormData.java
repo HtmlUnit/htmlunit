@@ -98,7 +98,7 @@ public class FormData extends SimpleScriptable {
      * Removes the entry (if exists).
      * @param name the name of the field to remove
      */
-    @JsxFunction(functionName = "delete", value = {@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxFunction(functionName = "delete", value = {@WebBrowser(FF), @WebBrowser(CHROME)})
     public void delete_js(final String name) {
         if (StringUtils.isEmpty(name)) {
             return;
@@ -117,7 +117,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
     public String get(final String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
@@ -137,7 +137,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
     public Scriptable getAll(final String name) {
         if (StringUtils.isEmpty(name)) {
             return Context.getCurrentContext().newArray(this, 0);
@@ -160,7 +160,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return true if the name exists
      */
-    @JsxFunction({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
     public boolean has(final String name) {
         if (StringUtils.isEmpty(name)) {
             return false;
@@ -183,7 +183,7 @@ public class FormData extends SimpleScriptable {
      * @param value the field's value
      * @param filename the filename reported to the server (optional)
      */
-    @JsxFunction({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
     public void set(final String name, final Object value, final Object filename) {
         if (StringUtils.isEmpty(name)) {
             return;

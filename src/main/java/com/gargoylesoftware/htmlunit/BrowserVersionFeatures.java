@@ -187,7 +187,7 @@ public enum BrowserVersionFeatures {
     EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
 
     /** Mouse events are triggered on disabled elements also. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    @BrowserFeature(@WebBrowser(FF))
     EVENT_MOUSE_ON_DISABLED,
 
     /** Triggers "onchange" event handler after "onclick" event handler. */
@@ -207,11 +207,11 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLOSE_DEFAULT_TYPE_EMPTY,
 
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    @BrowserFeature(@WebBrowser(FF))
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
     /** <code>CloseEvent</code> initCloseEvent is available but throws an exception when called. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    @BrowserFeature(@WebBrowser(FF))
     EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
@@ -670,7 +670,7 @@ public enum BrowserVersionFeatures {
     JS_DOCTYPE_NOTATIONS_NULL,
 
     /** Indicates that document.createAttribute converts the local name to lowercase. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
     /** Javascript function document.createElement accepts only tag names. */
@@ -998,7 +998,7 @@ public enum BrowserVersionFeatures {
     JS_LABEL_FORM_NULL,
 
     /** location.hash returns an encoded hash. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    @BrowserFeature(@WebBrowser(FF))
     JS_LOCATION_HASH_HASH_IS_ENCODED,
 
     /**
@@ -1118,7 +1118,7 @@ public enum BrowserVersionFeatures {
     JS_PRE_WIDTH_STRING,
 
     /** Support {@code Reflect}. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45), @WebBrowser(EDGE)})
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     JS_REFLECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
@@ -1211,7 +1211,7 @@ public enum BrowserVersionFeatures {
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
     /** Indicates wordSpacing support percent values. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 45))
+    @BrowserFeature(@WebBrowser(FF))
     JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
 
     /** Indicates that trying to access the style property with a wrong index returns undefined
@@ -1457,7 +1457,7 @@ public enum BrowserVersionFeatures {
     STRING_CONTAINS,
 
     /** Indicates that string.includes() is supported. */
-    @BrowserFeature({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     STRING_INCLUDES,
 
     /** Indicates that string.startsWith() and .endWith() are supported. */

@@ -130,7 +130,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code toPrimitive} static property
      */
-    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 45)})
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public static Symbol getToPrimitive(final Scriptable thisObj) {
         return getSymbol(thisObj, "toPrimitive");
     }
@@ -150,7 +150,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code match} static property
      */
-    @JsxStaticGetter({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxStaticGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public static Symbol getMatch(final Scriptable thisObj) {
         return getSymbol(thisObj, "match");
     }
@@ -200,7 +200,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code species} static property
      */
-    @JsxStaticGetter({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxStaticGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
     public static Symbol getSpecies(final Scriptable thisObj) {
         return getSymbol(thisObj, "species");
     }

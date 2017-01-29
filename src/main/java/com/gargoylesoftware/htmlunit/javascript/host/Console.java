@@ -269,7 +269,7 @@ public class Console extends SimpleScriptable {
      * Because there is no timeline in HtmlUnit this does nothing.
      * @param label the label
      */
-    @JsxFunction({@WebBrowser(value = FF, minVersion = 45), @WebBrowser(CHROME)})
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
     public void timeStamp(final String label) {
     }
 
