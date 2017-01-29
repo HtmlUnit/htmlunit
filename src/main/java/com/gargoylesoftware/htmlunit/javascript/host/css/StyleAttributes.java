@@ -1842,6 +1842,9 @@ public final class StyleAttributes {
         /** The style property {@code offsetPath}. */
         OFFSET_PATH("offsetPath", "offsetPath", chrome("none")),
 
+        /** The style property {@code offsetRotate}. */
+        OFFSET_ROTATE("offsetRotate", "offsetRotate", chrome("auto 0deg")),
+
         /** The style property {@code offsetRotation}. */
         OFFSET_ROTATION("offsetRotation", "offsetRotation", chrome("auto 0deg")),
 
@@ -1887,6 +1890,9 @@ public final class StyleAttributes {
 
         /** The style property {@code overflow}. */
         OVERFLOW("overflow", "overflow", chrome("visible"), ff("visible"), ie("visible")),
+
+        /** The style property {@code overflowAnchor}. */
+        OVERFLOW_ANCHOR("overflowAnchor", "overflow-anchor", chrome("auto")),
 
         /** The style property {@code overflowWrap}. */
         OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal")),
