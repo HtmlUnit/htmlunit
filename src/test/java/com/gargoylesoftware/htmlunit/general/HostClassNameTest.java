@@ -4808,7 +4808,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function RTCPeerConnectionIceEvent() {\n    [native code]\n}")
+            FF = "function RTCPeerConnectionIceEvent() {\n    [native code]\n}",
+            CHROME = "function RTCPeerConnectionIceEvent() { [native code] }")
     public void rtcPeerConnectionIceEvent() throws Exception {
         test("RTCPeerConnectionIceEvent");
     }
@@ -4904,7 +4905,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RTCDataChannel() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
@@ -6064,7 +6067,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function RTCPeerConnection() {\n    [native code]\n}")
+            FF45 = "function RTCPeerConnection() {\n    [native code]\n}",
+            CHROME = "function RTCPeerConnection() { [native code] }")
     public void rtcPeerConnection() throws Exception {
         test("RTCPeerConnection");
     }
@@ -6561,7 +6565,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function RTCDataChannelEvent() {\n    [native code]\n}")
+            FF = "function RTCDataChannelEvent() {\n    [native code]\n}",
+            CHROME = "function RTCDataChannelEvent() { [native code] }")
     public void rtcDataChannelEvent() throws Exception {
         test("RTCDataChannelEvent");
     }
@@ -7413,7 +7418,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             EDGE = "function CSSConditionRule() { [native code] }",
-            FF = "[object CSSConditionRule]")
+            FF = "[object CSSConditionRule]",
+            CHROME = "function CSSConditionRule() { [native code] }")
     public void cssConditionRule() throws Exception {
         test("CSSConditionRule");
     }
@@ -8856,8 +8862,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGViewSpec() { [native code] }")
+    @Alerts("exception")
+    @NotYetImplemented(CHROME)
     public void svgViewSpec() throws Exception {
         test("SVGViewSpec");
     }
@@ -9861,7 +9867,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ImageBitmapRenderingContext() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void imageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext");
     }
@@ -10223,7 +10231,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGL2RenderingContext() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext");
     }
@@ -10374,7 +10384,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLSync() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webGLSync() throws Exception {
         test("WebGLSync");
     }
@@ -10458,7 +10470,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLTransformFeedback() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback");
     }
@@ -10467,7 +10481,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLQuery() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webGLQuery() throws Exception {
         test("WebGLQuery");
     }
@@ -10551,7 +10567,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLVertexArrayObject() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject");
     }
@@ -10579,7 +10597,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLSampler() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void webGLSampler() throws Exception {
         test("WebGLSampler");
     }
