@@ -856,7 +856,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _CSSConditionRule_CSSConditionRule() throws Exception {
         test("CSSConditionRule", "CSSConditionRule");
     }
@@ -866,7 +867,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _CSSConditionRule_CSSMediaRule() throws Exception {
         test("CSSConditionRule", "CSSMediaRule");
     }
@@ -876,7 +878,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _CSSConditionRule_CSSSupportsRule() throws Exception {
         test("CSSConditionRule", "CSSSupportsRule");
     }
@@ -886,7 +889,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _CSSGroupingRule_CSSConditionRule() throws Exception {
         test("CSSGroupingRule", "CSSConditionRule");
     }
@@ -916,7 +920,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     @NotYetImplemented(CHROME)
     public void _CSSGroupingRule_CSSSupportsRule() throws Exception {
         test("CSSGroupingRule", "CSSSupportsRule");
@@ -927,7 +932,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            CHROME = "true")
     public void _CSSRule_CSSConditionRule() throws Exception {
         test("CSSRule", "CSSConditionRule");
     }
