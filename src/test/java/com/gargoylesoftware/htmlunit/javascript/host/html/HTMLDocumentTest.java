@@ -1664,7 +1664,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"myAttr", ""},
-            FF45 = {"myattr", ""})
+            FF45 = {"myattr", ""},
+            CHROME = {"myattr", ""})
     public void createAttributeNameValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
