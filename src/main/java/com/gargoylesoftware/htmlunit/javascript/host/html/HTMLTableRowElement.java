@@ -85,9 +85,6 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         DomNode row = getDomNodeOrDie();
         final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
         if (table == null) { // a not attached document.createElement('TR')
-            if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
-                return 0;
-            }
             return -1;
         }
         int index = -1;
