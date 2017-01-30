@@ -165,6 +165,7 @@ objectPosition
 offset
 offsetDistance
 offsetPath
+offsetRotate
 offsetRotation
 opacity
 order
@@ -176,6 +177,7 @@ outlineOffset
 outlineStyle
 outlineWidth
 overflow
+overflowAnchor
 overflowWrap
 overflowX
 overflowY
