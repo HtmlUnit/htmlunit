@@ -12,38 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.svg;
+package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code SVGViewSpec}.
+ * A JavaScript object for {@code ImageBitmapRenderingContext}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class SVGViewSpec extends SimpleScriptable {
-
-    /** The constant {@code SVG_ZOOMANDPAN_UNKNOWN}. */
-    @JsxConstant
-    public static final int SVG_ZOOMANDPAN_UNKNOWN = 0;
-    /** The constant {@code SVG_ZOOMANDPAN_DISABLE}. */
-    @JsxConstant
-    public static final int SVG_ZOOMANDPAN_DISABLE = 1;
-    /** The constant {@code SVG_ZOOMANDPAN_MAGNIFY}. */
-    @JsxConstant
-    public static final int SVG_ZOOMANDPAN_MAGNIFY = 2;
+public class ImageBitmapRenderingContext extends SimpleScriptable {
 
     /**
-     * Creates a new instance.
+     * Default constructor.
      */
     @JsxConstructor
-    public SVGViewSpec() {
+    public ImageBitmapRenderingContext() {
     }
 }

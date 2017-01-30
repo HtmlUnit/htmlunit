@@ -97,11 +97,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaSt
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasPattern;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageBitmapRenderingContext;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.IntersectionObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.IntersectionObserverEntry;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.TextMetrics;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGL2RenderingContext;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLActiveInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLFramebuffer;
@@ -476,7 +478,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBMutableFile.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class,
         IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
-        Image.class, ImageBitmap.class, ImageData.class, InputDeviceCapabilities.class, InputEvent.class,
+        Image.class, ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
+        InputDeviceCapabilities.class, InputEvent.class,
         InstallTrigger.class, Int16Array.class, Int32Array.class, Int8Array.class, IntersectionObserver.class,
         IntersectionObserverEntry.class,
         KeyboardEvent.class, LocalMediaStream.class,
@@ -559,7 +562,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGSymbolElement.class, SVGTextContentElement.class, SVGTextElement.class,
         SVGTextPathElement.class, SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class,
         SVGTransformList.class, SVGTSpanElement.class, SVGUnitTypes.class, SVGUseElement.class, SVGViewElement.class,
-        SVGViewSpec.class, SVGZoomEvent.class, Symbol.class, SyncManager.class, Text.class, TextDecoder.class,
+        SVGZoomEvent.class, Symbol.class, SyncManager.class, Text.class, TextDecoder.class,
         TextEncoder.class, TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
         TextTrackCueList.class, TextTrackList.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,
@@ -567,7 +570,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VideoPlaybackQuality.class,
         VTTCue.class, WaveShaperNode.class, WeakMap.class, WeakSet.class, WEBGL_compressed_texture_s3tc.class,
         WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class, WebGLContextEvent.class,
-        WebGLFramebuffer.class, WebGLProgram.class, WebGLRenderbuffer.class, WebGLRenderingContext.class,
+        WebGLFramebuffer.class, WebGLProgram.class, WebGLRenderbuffer.class, WebGL2RenderingContext.class,
+        WebGLRenderingContext.class,
         WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLTexture.class, WebGLUniformLocation.class,
         WebKitAnimationEvent.class, webkitAudioContext.class,
         WebKitCSSMatrix.class, webkitIDBCursor.class, webkitIDBDatabase.class, webkitIDBFactory.class,

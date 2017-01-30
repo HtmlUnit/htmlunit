@@ -2422,16 +2422,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SVGViewSpec_SVGViewSpec() throws Exception {
-        test("SVGViewSpec", "SVGViewSpec");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false")
     public void _SVGZoomEvent_SVGZoomEvent() throws Exception {

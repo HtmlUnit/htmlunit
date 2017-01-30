@@ -4331,6 +4331,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF = "object")
     public void cssConditionRule() throws Exception {
         test("CSSConditionRule");
@@ -5202,8 +5203,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void rtcDataChannelEvent() throws Exception {
         test("RTCDataChannelEvent");
     }
@@ -6255,8 +6256,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void svgViewSpec() throws Exception {
         test("SVGViewSpec");
     }
@@ -7167,7 +7167,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void imageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext");
     }
@@ -7501,7 +7502,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void webGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext");
     }
@@ -7668,8 +7670,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void rtcPeerConnection() throws Exception {
         test("RTCPeerConnection");
     }
