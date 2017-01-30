@@ -1204,7 +1204,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _CanvasCaptureMediaStream_CanvasCaptureMediaStream() throws Exception {
         test("CanvasCaptureMediaStream", "CanvasCaptureMediaStream");
     }

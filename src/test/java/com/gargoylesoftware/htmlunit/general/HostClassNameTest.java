@@ -3600,9 +3600,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function MessageChannel() { [native code] }",
-            FF = "exception",
-            IE = "\nfunction MessageChannel() {\n    [native code]\n}\n",
-            FF45 = "function MessageChannel() {\n    [native code]\n}")
+            FF = "function MessageChannel() {\n    [native code]\n}",
+            IE = "\nfunction MessageChannel() {\n    [native code]\n}\n")
     public void messageChannel() throws Exception {
         test("MessageChannel");
     }
@@ -3953,7 +3952,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Headers() { [native code] }",
-            FF45 = "function Headers() {\n    [native code]\n}")
+            FF = "function Headers() {\n    [native code]\n}")
     public void headers() throws Exception {
         test("Headers");
     }
@@ -4044,7 +4043,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSessionDescription() { [native code] }",
-            FF45 = "function RTCSessionDescription() {\n    [native code]\n}")
+            FF = "function RTCSessionDescription() {\n    [native code]\n}")
     public void rtcSessionDescription() throws Exception {
         test("RTCSessionDescription");
     }
@@ -4140,7 +4139,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeySession() { [native code] }",
-            FF45 = "function MediaKeySession() {\n    [native code]\n}")
+            FF = "function MediaKeySession() {\n    [native code]\n}")
     public void mediaKeySession() throws Exception {
         test("MediaKeySession");
     }
@@ -4223,7 +4222,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Response() { [native code] }",
-            FF45 = "function Response() {\n    [native code]\n}")
+            FF = "function Response() {\n    [native code]\n}")
     public void response() throws Exception {
         test("Response");
     }
@@ -4273,7 +4272,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function VideoPlaybackQuality() {\n    [native code]\n}",
+            FF = "function VideoPlaybackQuality() {\n    [native code]\n}",
             EDGE = "function VideoPlaybackQuality() { [native code] }")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
@@ -5082,7 +5081,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeyStatusMap() { [native code] }",
-            FF45 = "function MediaKeyStatusMap() {\n    [native code]\n}")
+            FF = "function MediaKeyStatusMap() {\n    [native code]\n}")
     public void mediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap");
     }
@@ -5205,7 +5204,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeyMessageEvent() { [native code] }",
-            FF45 = "function MediaKeyMessageEvent() {\n    [native code]\n}")
+            FF = "function MediaKeyMessageEvent() {\n    [native code]\n}")
     public void mediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent");
     }
@@ -5270,7 +5269,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeys() { [native code] }",
-            FF45 = "function MediaKeys() {\n    [native code]\n}")
+            FF = "function MediaKeys() {\n    [native code]\n}")
     public void mediaKeys() throws Exception {
         test("MediaKeys");
     }
@@ -5670,7 +5669,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Cache() { [native code] }",
-            FF45 = "function Cache() {\n    [native code]\n}")
+            FF = "function Cache() {\n    [native code]\n}")
     public void cache() throws Exception {
         test("Cache");
     }
@@ -5945,7 +5944,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeySystemAccess() { [native code] }",
-            FF45 = "function MediaKeySystemAccess() {\n    [native code]\n}")
+            FF = "function MediaKeySystemAccess() {\n    [native code]\n}")
     public void mediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess");
     }
@@ -6067,7 +6066,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function RTCPeerConnection() {\n    [native code]\n}",
+            FF = "function RTCPeerConnection() {\n    [native code]\n}",
             CHROME = "function RTCPeerConnection() { [native code] }")
     public void rtcPeerConnection() throws Exception {
         test("RTCPeerConnection");
@@ -6858,8 +6857,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function MediaSource() { [native code] }",
             IE = "exception",
-            FF = "exception",
-            FF45 = "function MediaSource() {\n    [native code]\n}")
+            FF = "function MediaSource() {\n    [native code]\n}")
     public void mediaSource() throws Exception {
         test("MediaSource");
     }
@@ -7086,7 +7084,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "[object Object]",
             EDGE = "[object Object]",
-            FF45 = "[object Object]")
+            FF = "[object Object]")
     public void reflect() throws Exception {
         test("Reflect");
     }
@@ -7177,7 +7175,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Request() { [native code] }",
-            FF45 = "function Request() {\n    [native code]\n}")
+            FF = "function Request() {\n    [native code]\n}")
     public void request() throws Exception {
         test("Request");
     }
@@ -7188,7 +7186,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function CacheStorage() { [native code] }",
-            FF45 = "function CacheStorage() {\n    [native code]\n}")
+            FF = "function CacheStorage() {\n    [native code]\n}")
     public void cacheStorage() throws Exception {
         test("CacheStorage");
     }
@@ -7951,7 +7949,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCIceCandidate() { [native code] }",
-            FF45 = "function RTCIceCandidate() {\n    [native code]\n}")
+            FF = "function RTCIceCandidate() {\n    [native code]\n}")
     public void rtcIceCandidate() throws Exception {
         test("RTCIceCandidate");
     }
@@ -8463,7 +8461,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function MediaKeyError() {\n    [native code]\n}")
+            FF = "function MediaKeyError() {\n    [native code]\n}")
     public void mediaKeyError() throws Exception {
         test("MediaKeyError");
     }
@@ -8927,9 +8925,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function TextTrackCue() { [native code] }",
-            FF = "exception",
-            IE = "\nfunction TextTrackCue() {\n    [native code]\n}\n",
-            FF45 = "function TextTrackCue() {\n    [native code]\n}")
+            FF = "function TextTrackCue() {\n    [native code]\n}",
+            IE = "\nfunction TextTrackCue() {\n    [native code]\n}\n")
     public void textTrackCue() throws Exception {
         test("TextTrackCue");
     }
@@ -9176,7 +9173,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function FontFace() { [native code] }",
-            FF45 = "function FontFace() {\n    [native code]\n}")
+            FF = "function FontFace() {\n    [native code]\n}")
     public void fontFace() throws Exception {
         test("FontFace");
     }
@@ -9187,7 +9184,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ImageBitmap() { [native code] }",
-            FF45 = "function ImageBitmap() {\n    [native code]\n}")
+            FF = "function ImageBitmap() {\n    [native code]\n}")
     public void imageBitmap() throws Exception {
         test("ImageBitmap");
     }
@@ -9207,7 +9204,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaEncryptedEvent() { [native code] }",
-            FF45 = "function MediaEncryptedEvent() {\n    [native code]\n}")
+            FF = "function MediaEncryptedEvent() {\n    [native code]\n}")
     public void mediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent");
     }
@@ -9248,7 +9245,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ScreenOrientation() { [native code] }",
-            FF45 = "function ScreenOrientation() {\n    [native code]\n}")
+            FF = "function ScreenOrientation() {\n    [native code]\n}")
     public void screenOrientation() throws Exception {
         test("ScreenOrientation");
     }
@@ -9567,7 +9564,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function CanvasCaptureMediaStream() {\n    [native code]\n}")
+            FF = "function CanvasCaptureMediaStream() {\n    [native code]\n}")
     public void canvasCaptureMediaStream() throws Exception {
         test("CanvasCaptureMediaStream");
     }
@@ -9595,7 +9592,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function FontFaceSet() {\n    [native code]\n}")
+            FF = "function FontFaceSet() {\n    [native code]\n}")
     public void fontFaceSet() throws Exception {
         test("FontFaceSet");
     }
@@ -9723,7 +9720,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaDeviceInfo() { [native code] }",
-            FF45 = "function MediaDeviceInfo() {\n    [native code]\n}")
+            FF = "function MediaDeviceInfo() {\n    [native code]\n}")
     public void mediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo");
     }
@@ -9888,7 +9885,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function SourceBufferList() {\n    [native code]\n}",
+            FF = "function SourceBufferList() {\n    [native code]\n}",
             CHROME = "function SourceBufferList() { [native code] }")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
@@ -10185,7 +10182,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function SourceBuffer() {\n    [native code]\n}",
+            FF = "function SourceBuffer() {\n    [native code]\n}",
             CHROME = "function SourceBuffer() { [native code] }")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
@@ -10272,7 +10269,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCCertificate() { [native code] }",
-            FF45 = "function RTCCertificate() {\n    [native code]\n}")
+            FF = "function RTCCertificate() {\n    [native code]\n}")
     public void rtcCertificate() throws Exception {
         test("RTCCertificate");
     }

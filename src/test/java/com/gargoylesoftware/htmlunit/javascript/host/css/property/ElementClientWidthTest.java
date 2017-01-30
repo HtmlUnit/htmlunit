@@ -846,7 +846,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF45 = "141",
+            FF = "141",
             IE = "143")
     @NotYetImplemented
     public void isindex() throws Exception {
@@ -882,7 +882,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "142",
-            FF45 = "110",
+            FF = "110",
             IE = "0")
     @NotYetImplemented({CHROME, FF})
     public void keygen() throws Exception {
@@ -1694,7 +1694,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "169",
-            FF45 = "141",
+            FF = "141",
             IE = "143")
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
@@ -1707,7 +1707,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF45 = "18",
+            FF = "18",
             IE = "20")
     @NotYetImplemented
     public void inputButton() throws Exception {
@@ -1732,7 +1732,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "238",
-            FF45 = "237",
+            FF = "237",
             IE = "262")
     @NotYetImplemented
     public void inputFile() throws Exception {
@@ -1757,7 +1757,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "169",
-            FF45 = "141",
+            FF = "141",
             IE = "145")
     @NotYetImplemented(IE)
     public void inputPassword() throws Exception {
@@ -1782,7 +1782,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "91",
-            FF45 = "50",
+            FF = "50",
             IE = "100")
     @NotYetImplemented
     public void inputReset() throws Exception {
@@ -1796,7 +1796,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "171",
-            FF45 = "141",
+            FF = "141",
             IE = "143")
     @NotYetImplemented(CHROME)
     public void inputSelect() throws Exception {
@@ -1810,7 +1810,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "56",
-            FF45 = "96",
+            FF = "96",
             IE = "114")
     @NotYetImplemented
     public void inputSubmit() throws Exception {
@@ -1824,7 +1824,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "169",
-            FF45 = "141",
+            FF = "141",
             IE = "143")
     public void inputText() throws Exception {
         loadPageWithAlerts2(testInput("text"));

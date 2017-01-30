@@ -2645,9 +2645,8 @@ public class HostParentOfMTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _MediaDeviceInfo_MediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo", "MediaDeviceInfo");
     }
@@ -2657,7 +2656,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _MediaKeyError_MediaKeyError() throws Exception {
         test("MediaKeyError", "MediaKeyError");
     }
@@ -2667,7 +2666,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _MediaStream_CanvasCaptureMediaStream() throws Exception {
         test("MediaStream", "CanvasCaptureMediaStream");
     }

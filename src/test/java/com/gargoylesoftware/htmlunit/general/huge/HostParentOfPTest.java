@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import java.util.Collection;
 
@@ -200,8 +200,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    @NotYetImplemented(FF45)
+            FF = "true")
+    @NotYetImplemented(FF)
     public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -211,9 +211,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _RTCIceCandidate_RTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "RTCIceCandidate");
     }
@@ -577,7 +576,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _RTCPeerConnection_RTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "RTCPeerConnection");
     }
@@ -587,8 +586,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    @NotYetImplemented(FF45)
+            FF = "true")
+    @NotYetImplemented(FF)
     public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -598,8 +597,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    @NotYetImplemented(FF45)
+            FF = "true")
+    @NotYetImplemented(FF)
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }

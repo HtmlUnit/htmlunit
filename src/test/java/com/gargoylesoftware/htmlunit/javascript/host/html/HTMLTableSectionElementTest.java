@@ -364,11 +364,9 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", ""},
+    @Alerts(DEFAULT = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
             CHROME = {"cell1", "[object HTMLTableRowElement]",
-                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"},
-            FF45 = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
-            IE = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
+                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"})
     public void innerText_body() throws Exception {
         final String html
             = "<html><body>\n"
@@ -394,11 +392,9 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", ""},
+    @Alerts(DEFAULT = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
             CHROME = {"cell1", "[object HTMLTableRowElement]",
-                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"},
-            FF45 = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
-            IE = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
+                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"})
     public void innerText_header() throws Exception {
         final String html
             = "<html><body>\n"
@@ -424,11 +420,9 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", ""},
+    @Alerts(DEFAULT = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
             CHROME = {"cell1", "[object HTMLTableRowElement]",
-                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"},
-            FF45 = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""},
-            IE = {"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
+                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1"})
     public void innerText_footer() throws Exception {
         final String html
             = "<html><body>\n"

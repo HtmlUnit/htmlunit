@@ -1663,9 +1663,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myAttr", ""},
-            FF45 = {"myattr", ""},
-            CHROME = {"myattr", ""})
+    @Alerts(DEFAULT = {"myattr", ""},
+            IE = {"myAttr", ""})
     public void createAttributeNameValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

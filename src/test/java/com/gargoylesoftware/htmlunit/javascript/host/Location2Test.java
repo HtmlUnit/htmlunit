@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -173,7 +173,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"})
-    @NotYetImplemented(FF45)
+    @NotYetImplemented(FF)
     public void hashEncoding2() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'myDataTable=foo%3Dojkoj';\n"
@@ -205,7 +205,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "#<a>foobar</a>",
-            FF45 = "#%3Ca%3Efoobar%3C/a%3E")
+            FF = "#%3Ca%3Efoobar%3C/a%3E")
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }

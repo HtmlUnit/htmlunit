@@ -2187,7 +2187,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             CHROME = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
                         "17px", "", "17px", "", "17px", "", "17px", "17px", "17px"},
-            FF45 = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+            FF = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
@@ -2201,7 +2201,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
-            FF45 = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+            FF = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                     "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
@@ -2882,7 +2882,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF45 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void orphans() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

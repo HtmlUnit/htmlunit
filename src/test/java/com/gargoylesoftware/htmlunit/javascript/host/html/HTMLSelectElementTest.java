@@ -2399,7 +2399,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF45 = "mouse over")
+    @Alerts(FF = "mouse over")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
             "<html>\n"

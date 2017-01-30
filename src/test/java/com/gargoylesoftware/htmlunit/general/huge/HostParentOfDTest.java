@@ -4714,9 +4714,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_VTTCue() throws Exception {
         test("EventTarget", "VTTCue");
     }
@@ -4854,9 +4853,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_ScreenOrientation() throws Exception {
         test("EventTarget", "ScreenOrientation");
     }
@@ -5206,7 +5204,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _EventTarget_CanvasCaptureMediaStream() throws Exception {
         test("EventTarget", "CanvasCaptureMediaStream");
     }
@@ -5227,7 +5225,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _EventTarget_FontFaceSet() throws Exception {
         test("EventTarget", "FontFaceSet");
     }
@@ -5236,9 +5234,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_RTCPeerConnection() throws Exception {
         test("EventTarget", "RTCPeerConnection");
     }
@@ -5268,7 +5265,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _Event_MediaKeyError() throws Exception {
         test("Event", "MediaKeyError");
     }
@@ -5278,7 +5275,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF = "true")
     public void _FontFaceSet_FontFaceSet() throws Exception {
         test("FontFaceSet", "FontFaceSet");
     }

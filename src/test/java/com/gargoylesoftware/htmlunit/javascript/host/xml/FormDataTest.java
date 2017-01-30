@@ -560,7 +560,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no set",
-            FF45 = "")
+            FF = "")
     public void set() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

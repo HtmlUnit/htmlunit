@@ -421,7 +421,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664",
-            FF45 = "\u0667\u200F/\u0662\u200F/\u0661\u0664\u0663\u0664 \u0647\u0640")
+            FF = "\u0667\u200F/\u0662\u200F/\u0661\u0664\u0663\u0664 \u0647\u0640")
     public void format_ar_sa() throws Exception {
         test("new Intl.DateTimeFormat('ar-SA').format(date)");
     }
@@ -736,7 +736,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            FF45 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
     public void format_en_ph() throws Exception {
         test("new Intl.DateTimeFormat('en-PH').format(date)");
@@ -1091,7 +1091,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF45 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_ga() throws Exception {
         test("new Intl.DateTimeFormat('ga').format(date)");
@@ -1102,7 +1102,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF45 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_ga_ie() throws Exception {
         test("new Intl.DateTimeFormat('ga-IE').format(date)");
@@ -1588,7 +1588,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF45 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E2012\u200E-\u200E12\u200E-\u200E20")
     public void format_sq() throws Exception {
         test("new Intl.DateTimeFormat('sq').format(date)");
@@ -1599,7 +1599,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF45 = "20.12.2012",
+            FF = "20.12.2012",
             IE = "\u200E2012\u200E-\u200E12\u200E-\u200E20")
     public void format_sq_al() throws Exception {
         test("new Intl.DateTimeFormat('sq-AL').format(date)");

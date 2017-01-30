@@ -730,7 +730,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF45 = "mouse over [tester]")
+    @Alerts(FF = "mouse over [tester]")
     public void mouseOverTextareaDisabled() throws Exception {
         mouseOver("<textarea id='tester' onmouseover='dumpEvent(event);' disabled >HtmlUnit</textarea>");
     }
