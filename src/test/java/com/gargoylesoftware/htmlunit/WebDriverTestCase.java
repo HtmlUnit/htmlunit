@@ -53,6 +53,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchSessionException;
@@ -1168,6 +1169,9 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
 
     @Override
     public void click() {
+        if (!getElement().isDisplayed()) {
+            throw new ElementNotVisibleException("You may only interact with visible elements");
+        }
         try {
             getElement().click();
         }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, ScriptPreProcessor, Bugfixes">
+            <action type="update" dev="asashour">
+                DomElement: .click() should does nothing when the element is not displayed.
+            </action>
             <action type="add" dev="rbri" >
                 Table elements now supporting the summary and rules attribute.
             </action>

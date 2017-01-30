@@ -1082,7 +1082,7 @@ public final class UrlUtils {
     }
 
     /**
-     * Constructs a {@link URI} using all the specified URL.
+     * Constructs a {@link URI} using the specified URL.
      *
      * @param url the URL
      * @param query the query

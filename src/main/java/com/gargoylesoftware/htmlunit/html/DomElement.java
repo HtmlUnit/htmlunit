@@ -916,7 +916,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final SgmlPage page = getPage();
         page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
-        if (!(page instanceof InteractivePage)
+        if (!isDisplayed() || !(page instanceof InteractivePage)
                 || this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return (P) page;
         }
@@ -981,7 +981,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public <P extends Page> P click(final Event event) throws IOException {
         final SgmlPage page = getPage();
 
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (!isDisplayed() || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
             return (P) page;
         }
 
