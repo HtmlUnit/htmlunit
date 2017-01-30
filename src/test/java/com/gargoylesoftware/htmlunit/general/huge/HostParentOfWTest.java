@@ -758,4 +758,14 @@ public class HostParentOfWTest extends HostParentOf {
     public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
         test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
+        test("WebGL2RenderingContext", "WebGL2RenderingContext");
+    }
 }

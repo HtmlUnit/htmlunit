@@ -8861,7 +8861,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(CHROME)
     public void svgViewSpec() throws Exception {
         test("SVGViewSpec");
     }
@@ -9866,7 +9865,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ImageBitmapRenderingContext() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void imageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext");
     }
@@ -10230,7 +10228,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGL2RenderingContext() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void webGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext");
     }

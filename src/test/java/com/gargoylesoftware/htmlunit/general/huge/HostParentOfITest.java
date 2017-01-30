@@ -470,4 +470,14 @@ public class HostParentOfITest extends HostParentOf {
         test("RTCStatsReport", "RTCStatsReport");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
+        test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
+    }
+
 }
