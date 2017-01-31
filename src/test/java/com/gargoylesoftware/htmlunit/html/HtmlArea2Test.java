@@ -14,204 +14,214 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Tests for {@link HtmlArea}.
  *
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
  * @author Ahmed Ashour
- * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlArea2Test extends WebDriverTestCase {
+public class HtmlArea2Test extends SimpleWebTestCase {
 
-    private WebDriver createWebClient(final String onClick) throws Exception {
+    private WebClient createWebClient(final String onClick) {
         final String firstContent
-            = "<html><head><title>first</title></head>\n"
-            + "<body>\n"
-            + "  <img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>\n"
-            + "  <map id='planetmap' name='planetmap'>\n"
-            + "    <area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
-                        + "href='" + URL_SECOND + "'>\n"
-            + "    <area shape='circle' coords='90,58,3' id='third' href='" + URL_THIRD + "'>\n"
-            + "  </map>\n"
-            + "</body></html>";
+            = "<html><head><title>first</title></head><body>\n"
+            + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>\n"
+            + "<map id='planetmap' name='planetmap'>\n"
+            + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
+            + "href='" + URL_SECOND + "'>\n"
+            + "<area shape='circle' coords='90,58,3' id='third' href='" + URL_THIRD + "'>\n"
+            + "</map></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
+        final WebClient client = getWebClient();
 
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
-        return loadPage2(firstContent);
+        client.setWebConnection(webConnection);
+        return client;
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void referer() throws Exception {
-        final WebDriver driver = createWebClient("");
+    public void click() throws Exception {
+        final WebClient client = createWebClient("");
 
-        driver.get(URL_FIRST.toExternalForm());
-        driver.findElement(By.id("third")).click();
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlArea area = page.getHtmlElementById("third");
 
-        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+        // Test that the correct value is being passed back up to the server
+        final HtmlPage thirdPage = area.click();
+        assertEquals("third", thirdPage.getTitleText());
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    public void isDisplayed() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>\n"
-                + "  <img id='myImg' usemap='#imgmap'"
-                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
-                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
-                + "  <map id='myMap' name='imgmap'>\n"
-                + "    <area id='myArea' shape='rect' coords='0,0,1,1'>\n"
-                + "  </map>\n"
-                + "</body></html>";
+    public void click_onclickReturnsFalse() throws Exception {
+        final WebClient client = createWebClient("alert('foo');return false;");
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlArea area = page.getHtmlElementById("second");
 
-        boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
-        assertTrue(displayed);
-
-        displayed = driver.findElement(By.id("myMap")).isDisplayed();
-        assertTrue(displayed);
-
-        displayed = driver.findElement(By.id("myArea")).isDisplayed();
-        assertTrue(displayed);
+        final HtmlPage thirdPage = area.click();
+        assertEquals(new String[] {"foo"}, collectedAlerts);
+        assertEquals("first", thirdPage.getTitleText());
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    public void isDisplayedHiddenImage() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>\n"
-                + "  <img id='myImg' usemap='#imgmap' style='display: none'"
-                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
-                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
-                + "  <map id='myMap' name='imgmap'>\n"
-                + "    <area id='myArea' shape='rect' coords='0,0,1,1'>\n"
-                + "  </map>\n"
-                + "</body></html>";
+    public void click_onclickReturnsTrue() throws Exception {
+        final WebClient client = createWebClient("alert('foo');return true;");
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlArea area = page.getHtmlElementById("second");
 
-        boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
-        assertFalse(displayed);
-
-        displayed = driver.findElement(By.id("myMap")).isDisplayed();
-        assertFalse(displayed);
-
-        displayed = driver.findElement(By.id("myArea")).isDisplayed();
-        assertFalse(displayed);
+        final HtmlPage thirdPage = area.click();
+        assertEquals(new String[] {"foo"}, collectedAlerts);
+        assertEquals("second", thirdPage.getTitleText());
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    public void isDisplayedHiddenMap() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>\n"
-                + "  <img id='myImg' usemap='#imgmap'"
-                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
-                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
-                + "  <map id='myMap' name='imgmap' style='display: none'>\n"
-                + "    <area id='myArea' shape='rect' coords='0,0,1,1'>\n"
-                + "  </map>\n"
-                + "</body></html>";
+    public void click_javascriptUrl() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final List<String> collectedAlerts = new ArrayList<>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final HtmlArea area = page.getHtmlElementById("a2");
 
-        boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        displayed = driver.findElement(By.id("myMap")).isDisplayed();
-        assertTrue(displayed);
+        final HtmlPage secondPage = area.click();
 
-        displayed = driver.findElement(By.id("myArea")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"false", "false", "false", "false", "false", "true"})
-    public void isDisplayedEmptyArea() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>\n"
-                + "  <img id='myImg' usemap='#imgmap'"
-                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
-                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
-                + "  <map id='myMap' name='imgmap'>\n"
-                + "    <area id='myArea1' shape='rect' coords='0,0,0,1'>\n"
-                + "    <area id='myArea2' shape='rect' coords='0,0,1,0'>\n"
-                + "    <area id='myArea3' shape='rect' coords='0,0,0,0'>\n"
-                + "    <area id='myArea4' shape='rect' >\n"
-                + "    <area id='myArea5' >\n"
-                + "    <area id='myArea6' shape='rect' coords='0,0,1,1'>\n"
-                + "  </map>\n"
-                + "</body></html>";
+    public void click_javascriptUrlMixedCas() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javasCRIpT:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final List<String> collectedAlerts = new ArrayList<>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final String[] expected = getExpectedAlerts();
+        final HtmlArea area = page.getHtmlElementById("a2");
 
-        setExpectedAlerts(new String[] {});
-        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
-        assertEquals(Boolean.parseBoolean(expected[0]), displayed);
+        final HtmlPage secondPage = area.click();
 
-        displayed = driver.findElement(By.id("myArea2")).isDisplayed();
-        assertEquals(Boolean.parseBoolean(expected[1]), displayed);
-
-        displayed = driver.findElement(By.id("myArea3")).isDisplayed();
-        assertEquals(Boolean.parseBoolean(expected[2]), displayed);
-
-        displayed = driver.findElement(By.id("myArea4")).isDisplayed();
-        assertEquals(Boolean.parseBoolean(expected[3]), displayed);
-
-        displayed = driver.findElement(By.id("myArea5")).isDisplayed();
-        assertEquals(Boolean.parseBoolean(expected[4]), displayed);
-
-        displayed = driver.findElement(By.id("myArea6")).isDisplayed();
-        assertEquals(Boolean.parseBoolean(expected[5]), displayed);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    public void isDisplayedMissingImage() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
-                + "<body>\n"
-                + "  <map id='myMap' name='imgmap' style='display: none'>\n"
-                + "    <area id='myArea' shape='rect' coords='0,0,1,1'>\n"
-                + "  </map>\n"
-                + "</body></html>";
+    public void click_javascriptUrlLeadingWhitespace() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='     javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final List<String> collectedAlerts = new ArrayList<>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final HtmlArea area = page.getHtmlElementById("a2");
 
-        boolean displayed = driver.findElement(By.id("myMap")).isDisplayed();
-        assertFalse(displayed);
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        displayed = driver.findElement(By.id("myArea")).isDisplayed();
-        assertFalse(displayed);
+        final HtmlPage secondPage = area.click();
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_javascriptUrl_javascriptDisabled() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final WebClient client = getWebClient();
+        client.getOptions().setJavaScriptEnabled(false);
+
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlArea area = page.getHtmlElementById("a2");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+
+        final HtmlPage secondPage = area.click();
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        assertSame(page, secondPage);
+    }
+
+    /**
+     * In action "this" should be the window and not the area.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void thisInJavascriptHref() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final List<String> collectedAlerts = new ArrayList<>();
+        final String[] expectedAlerts = {"true"};
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final Page page2 = page.getHtmlElementById("a2").click();
+
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertSame(page, page2);
+    }
+
 }
