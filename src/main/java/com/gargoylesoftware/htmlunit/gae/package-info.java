@@ -14,6 +14,7 @@
  */
 
 /**
- * <a href="http://code.google.com/appengine/">Google App Engine</a> test package.
+ * Classes used in getting HtmlUnit to run on
+ * <a href="http://code.google.com/appengine/">Google App Engine</a>.
  */
 package com.gargoylesoftware.htmlunit.gae;
