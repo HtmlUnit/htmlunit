@@ -12,4 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * <a href="http://code.google.com/appengine/">Google App Engine</a> test package.
+ */
 package com.gargoylesoftware.htmlunit.gae;

@@ -14,6 +14,7 @@
  */
 
 /**
- * Source-related test package.
+ * Implementations of the MSXML's (ActiveX) JavaScript host objects - users of HtmlUnit shouldn't
+ * need anything in this package.
  */
-package com.gargoylesoftware.htmlunit.source;
+package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
