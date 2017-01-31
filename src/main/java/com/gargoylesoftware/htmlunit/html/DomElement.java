@@ -951,7 +951,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                         ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
-            return (P) click(event);
+            return (P) click(event, false);
         }
     }
 
@@ -973,15 +973,17 @@ public class DomElement extends DomNamespaceNode implements Element {
      * action listeners, etc.
      *
      * @param event the click event used
+     * @param ignoreVisibility whether to ignore visibility or not
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P click(final Event event) throws IOException {
+    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
         final SgmlPage page = getPage();
 
-        if (!isDisplayed() || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
+        if ((!ignoreVisibility && !isDisplayed())
+                || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
             return (P) page;
         }
 

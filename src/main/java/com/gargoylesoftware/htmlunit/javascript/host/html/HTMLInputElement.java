@@ -623,7 +623,7 @@ public class HTMLInputElement extends FormField {
         else {
             event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
         }
-        domNode.click(event);
+        domNode.click(event, true);
 
         final boolean newState = domNode.isChecked();
 

@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -58,5 +60,45 @@ public final class DomElementTest extends WebDriverTestCase {
             assertEquals(2, page.getForms().get(0).getElementsByTagName("input").size());
             assertEquals(2, page.getForms().get(0).getElementsByTagName("INPUT").size());
         }
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test(expected = ElementNotVisibleException.class)
+    public void clickInvisible() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <a id='link' style='display: none'>Click me</a>>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("link")).click();
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void clickFromJavaScript() throws Exception {
+        final String html = "<head>\n"
+            + "<script>\n"
+            + " function test() {\n"
+            + "   try {\n"
+            + "     var e = document.getElementById('id1');\n"
+            + "     alert(e.checked);\n"
+            + "     e.click();\n"
+            + "     alert(e.checked);\n"
+            + "   } catch(e) {alert(e)}\n"
+            + " }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div style='display: none;'>\n"
+            + "    <input type='checkbox' id='id1'>\n"
+            + "  </div>\n"
+            + "</body>\n";
+        loadPageWithAlerts2(html);
     }
 }

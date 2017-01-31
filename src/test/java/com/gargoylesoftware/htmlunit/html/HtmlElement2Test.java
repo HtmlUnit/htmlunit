@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -333,19 +332,4 @@ public class HtmlElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, xml, "application/xml");
         loadPageWithAlerts2(html);
     }
-
-    /**
-     * @throws Exception on test failure
-     */
-    @Test(expected = ElementNotVisibleException.class)
-    public void clickInvisible() throws Exception {
-        final String html = "<html>\n"
-                + "<body>\n"
-                + "  <a id='link' style='display: none'>Click me</a>>\n"
-                + "</body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("link")).click();
-    }
-
 }

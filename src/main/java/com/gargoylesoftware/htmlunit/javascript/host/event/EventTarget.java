@@ -269,7 +269,7 @@ public class EventTarget extends SimpleScriptable {
         ScriptResult result = null;
         if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
             try {
-                element.click(event);
+                element.click(event, true);
             }
             catch (final IOException e) {
                 throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
