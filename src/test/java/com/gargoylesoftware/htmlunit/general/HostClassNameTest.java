@@ -10756,4 +10756,445 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("StorageManager");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaTrackConstraints() throws Exception {
+        test("MediaTrackConstraints");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaTrackSettings() throws Exception {
+        test("MediaTrackSettings");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vrDisplayCapabilities() throws Exception {
+        test("VRDisplayCapabilities");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function CSSValueList() {\n    [native code]\n}")
+    public void cssValueList() throws Exception {
+        test("CSSValueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowOrWorkerGlobalScope() throws Exception {
+        test("WindowOrWorkerGlobalScope");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void budgetState() throws Exception {
+        test("BudgetState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void storageEstimate() throws Exception {
+        test("StorageEstimate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaStreamConstraints() throws Exception {
+        test("MediaStreamConstraints");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystemEntry() throws Exception {
+        test("FileSystemEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystemFileEntry() throws Exception {
+        test("FileSystemFileEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationPlaybackEvent() throws Exception {
+        test("AnimationPlaybackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void budgetService() throws Exception {
+        test("BudgetService");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void paymentResponse() throws Exception {
+        test("PaymentResponse");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationEffectTimingReadOnly() throws Exception {
+        test("AnimationEffectTimingReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void wEBGL_compressed_texture_etc() throws Exception {
+        test("WEBGL_compressed_texture_etc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaTrackSupportedConstraints() throws Exception {
+        test("MediaTrackSupportedConstraints");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void presentationConnectionList() throws Exception {
+        test("PresentationConnectionList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationEffectReadOnly() throws Exception {
+        test("AnimationEffectReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorStorage() throws Exception {
+        test("NavigatorStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vrDisplay() throws Exception {
+        test("VRDisplay");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void documentOrShadowRoot() throws Exception {
+        test("DocumentOrShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vrStageParameters() throws Exception {
+        test("VRStageParameters");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void doubleRange() throws Exception {
+        test("DoubleRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void asyncFunction() throws Exception {
+        test("AsyncFunction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ambientLightSensorReading() throws Exception {
+        test("AmbientLightSensorReading");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void metadata() throws Exception {
+        test("Metadata");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void longRange() throws Exception {
+        test("LongRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void vrLayer() throws Exception {
+        test("VRLayer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void storageQuota() throws Exception {
+        test("StorageQuota");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationEffectTimingProperties() throws Exception {
+        test("AnimationEffectTimingProperties");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void audioScheduledSourceNode() throws Exception {
+        test("AudioScheduledSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystemFlags() throws Exception {
+        test("FileSystemFlags");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothCharacteristicProperties() throws Exception {
+        test("BluetoothCharacteristicProperties");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystemDirectoryEntry() throws Exception {
+        test("FileSystemDirectoryEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void ambientLightSensor() throws Exception {
+        test("AmbientLightSensor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void constrainDOMString() throws Exception {
+        test("ConstrainDOMString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationEffectTiming() throws Exception {
+        test("AnimationEffectTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void constrainLong() throws Exception {
+        test("ConstrainLong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcSctpTransport() throws Exception {
+        test("RTCSctpTransport");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystemDirectoryReader() throws Exception {
+        test("FileSystemDirectoryReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void keyframeEffectReadOnly() throws Exception {
+        test("KeyframeEffectReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void presentationReceiver() throws Exception {
+        test("PresentationReceiver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sharedKeyframeList() throws Exception {
+        test("SharedKeyframeList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void constrainBoolean() throws Exception {
+        test("ConstrainBoolean");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void constrainDouble() throws Exception {
+        test("ConstrainDouble");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void paymentAddress() throws Exception {
+        test("PaymentAddress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bufferSource() throws Exception {
+        test("BufferSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void presentationConnectionClosedEvent() throws Exception {
+        test("PresentationConnectionClosedEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void paymentRequest() throws Exception {
+        test("PaymentRequest");
+    }
 }

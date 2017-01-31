@@ -1369,4 +1369,23 @@ public class HostParentOfATest extends HostParentOf {
         test("CustomElementRegistry", "CustomElementRegistry");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CSSValueList_CSSValueList() throws Exception {
+        test("CSSValueList", "CSSValueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CSSValue_CSSValueList() throws Exception {
+        test("CSSValue", "CSSValueList");
+    }
 }

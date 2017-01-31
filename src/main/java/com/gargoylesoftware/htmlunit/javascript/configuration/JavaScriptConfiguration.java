@@ -147,6 +147,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValueList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSViewportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -441,7 +442,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSKeyframeRule.class, CSSKeyframesRule.class, CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class,
         CSSPrimitiveValue.class, CSSRule.class, CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class,
         CSSStyleSheet.class,
-        CSSSupportsRule.class, CSSValue.class, CSSViewportRule.class, CustomElementRegistry.class, CustomEvent.class, DataTransfer.class,
+        CSSSupportsRule.class, CSSValue.class, CSSValueList.class, CSSViewportRule.class, CustomElementRegistry.class,
+        CustomEvent.class, DataTransfer.class,
         DataTransferItem.class, DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class,
         DeviceMotionEvent.class, DeviceOrientationEvent.class, DeviceProximityEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
