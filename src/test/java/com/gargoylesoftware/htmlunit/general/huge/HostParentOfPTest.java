@@ -233,8 +233,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _RTCDataChannelEvent_RTCDataChannelEvent() throws Exception {
         test("RTCDataChannelEvent", "RTCDataChannelEvent");
     }
@@ -244,8 +244,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _RTCPeerConnectionIceEvent_RTCPeerConnectionIceEvent() throws Exception {
         test("RTCPeerConnectionIceEvent", "RTCPeerConnectionIceEvent");
     }
@@ -575,8 +575,8 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _RTCPeerConnection_RTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "RTCPeerConnection");
     }
@@ -601,6 +601,16 @@ public class HostParentOfPTest extends HostParentOf {
     @NotYetImplemented(FF)
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RTCPeerConnection_webkitRTCPeerConnection() throws Exception {
+        test("RTCPeerConnection", "webkitRTCPeerConnection");
     }
 
     /**
