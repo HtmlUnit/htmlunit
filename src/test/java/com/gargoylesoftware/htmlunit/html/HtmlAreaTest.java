@@ -14,16 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlArea}.
@@ -214,4 +222,162 @@ public class HtmlAreaTest extends WebDriverTestCase {
         displayed = driver.findElement(By.id("myArea")).isDisplayed();
         assertFalse(displayed);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_javascriptUrl() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
+            + "<map name='somename'>\n"
+            + "  <area href='javascript:alert(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "</map></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Page page;
+        if (driver instanceof HtmlUnitDriver) {
+             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+        }
+        else {
+            page = null;
+        }
+
+        verifyAlerts(driver);
+
+        driver.findElement(By.id("a2")).click();
+
+        verifyAlerts(driver, "clicked");
+        if (driver instanceof HtmlUnitDriver) {
+            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertSame(page, secondPage);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_javascriptUrlMixedCase() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
+            + "<map name='somename'>\n"
+            + "  <area href='javasCRIpT:alert(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "</map></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Page page;
+        if (driver instanceof HtmlUnitDriver) {
+             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+        }
+        else {
+            page = null;
+        }
+
+        verifyAlerts(driver);
+
+        driver.findElement(By.id("a2")).click();
+
+        verifyAlerts(driver, "clicked");
+        if (driver instanceof HtmlUnitDriver) {
+            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertSame(page, secondPage);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_javascriptUrlLeadingWhitespace() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
+            + "<map name='somename'>\n"
+            + "  <area href='    javascript:alert(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "</map></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Page page;
+        if (driver instanceof HtmlUnitDriver) {
+             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+        }
+        else {
+            page = null;
+        }
+
+        verifyAlerts(driver);
+
+        driver.findElement(By.id("a2")).click();
+
+        verifyAlerts(driver, "clicked");
+        if (driver instanceof HtmlUnitDriver) {
+            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertSame(page, secondPage);
+        }
+    }
+
+    /**
+     * In action "this" should be the window and not the area.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void thisInJavascriptHref() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
+            + "<map name='somename'>\n"
+            + "  <area href='javascript:alert(this == window)' id='a2' shape='rect' coords='0,0,30,30'/>\n"
+            + "</map></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final Page page;
+        if (driver instanceof HtmlUnitDriver) {
+             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+        }
+        else {
+            page = null;
+        }
+
+        verifyAlerts(driver);
+
+        driver.findElement(By.id("a2")).click();
+
+        verifyAlerts(driver, "true");
+        if (driver instanceof HtmlUnitDriver) {
+            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertSame(page, secondPage);
+        }
+    }
+
 }

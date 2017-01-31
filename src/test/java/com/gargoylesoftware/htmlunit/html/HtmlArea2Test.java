@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 
@@ -113,72 +112,6 @@ public class HtmlArea2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void click_javascriptUrl() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>\n"
-            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
-            + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-
-        final HtmlArea area = page.getHtmlElementById("a2");
-
-        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-
-        final HtmlPage secondPage = area.click();
-
-        assertEquals(new String[] {"clicked"}, collectedAlerts);
-        assertSame(page, secondPage);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void click_javascriptUrlMixedCas() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>\n"
-            + "<area href='javasCRIpT:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
-            + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-
-        final HtmlArea area = page.getHtmlElementById("a2");
-
-        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-
-        final HtmlPage secondPage = area.click();
-
-        assertEquals(new String[] {"clicked"}, collectedAlerts);
-        assertSame(page, secondPage);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void click_javascriptUrlLeadingWhitespace() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>\n"
-            + "<area href='     javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
-            + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-
-        final HtmlArea area = page.getHtmlElementById("a2");
-
-        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-
-        final HtmlPage secondPage = area.click();
-
-        assertEquals(new String[] {"clicked"}, collectedAlerts);
-        assertSame(page, secondPage);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void click_javascriptUrl_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
@@ -203,25 +136,6 @@ public class HtmlArea2Test extends SimpleWebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         assertSame(page, secondPage);
-    }
-
-    /**
-     * In action "this" should be the window and not the area.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void thisInJavascriptHref() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>\n"
-            + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"
-            + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<>();
-        final String[] expectedAlerts = {"true"};
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final Page page2 = page.getHtmlElementById("a2").click();
-
-        assertEquals(expectedAlerts, collectedAlerts);
-        assertSame(page, page2);
     }
 
 }
