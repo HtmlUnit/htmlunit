@@ -1880,8 +1880,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "-16")
+    @Alerts("0")
     public void slot() throws Exception {
         loadPageWithAlerts2(test("slot"));
     }
