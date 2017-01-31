@@ -28,7 +28,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -876,11 +875,6 @@ public class EventTest extends WebDriverTestCase {
 
         eventHandlersParentScopeChain("<input type='text'", "");
         eventHandlersParentScopeChain("<input type='password'", "");
-        // IE cannot click on hidden fields
-        if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER
-                && getBrowserVersion() != BrowserVersion.CHROME) {
-            eventHandlersParentScopeChain("<input type='hidden'", "");
-        }
 
         eventHandlersParentScopeChain("<input type='checkbox'", "");
         eventHandlersParentScopeChain("<input type='radio'", "");
