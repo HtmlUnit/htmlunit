@@ -192,6 +192,16 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
+        test("webkitRTCPeerConnection", "RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
     }
