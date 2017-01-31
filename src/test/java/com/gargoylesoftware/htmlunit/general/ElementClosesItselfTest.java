@@ -1669,4 +1669,15 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("template"));
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSlot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void slot() throws Exception {
+        loadPageWithAlerts2(test("slot"));
+    }
+
 }

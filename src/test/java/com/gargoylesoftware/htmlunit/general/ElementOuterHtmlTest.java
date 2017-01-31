@@ -1332,4 +1332,13 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("template"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<slot></slot>")
+    public void slot() throws Exception {
+        loadPageWithAlerts2(test("slot"));
+    }
+
 }

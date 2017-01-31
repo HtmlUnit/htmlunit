@@ -2055,4 +2055,16 @@ public class ElementCreationTest extends WebDriverTestCase {
     public void template() throws Exception {
         test("template");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSlot}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLSlotElement]")
+    public void slot() throws Exception {
+        test("slot");
+    }
 }

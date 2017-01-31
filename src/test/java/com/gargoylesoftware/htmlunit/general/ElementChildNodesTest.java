@@ -1605,4 +1605,15 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     public void template() throws Exception {
         loadPageWithAlerts2(test("template"));
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSlot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "2", "2", "3", "2", "2"})
+    public void slot() throws Exception {
+        loadPageWithAlerts2(test("slot"));
+    }
 }

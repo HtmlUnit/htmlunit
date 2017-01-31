@@ -1862,10 +1862,23 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "none"},
+    @Alerts(DEFAULT = {"", "inline"},
             FF = {"none", "none"},
             IE = {"inline", "inline"})
     public void template() throws Exception {
         loadPageWithAlerts2(test("template"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSlot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "inline"},
+            FF = {"block", "inline"},
+            IE = {"inline", "inline"})
+    public void slot() throws Exception {
+        loadPageWithAlerts2(test("slot"));
     }
 }

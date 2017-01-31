@@ -2713,4 +2713,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         testString("document.createEvent('UIEvent'), document.createEvent('Event')");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSlot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "assignedNodes(),name")
+    @NotYetImplemented(CHROME)
+    public void slot() throws Exception {
+        test("slot");
+    }
+
 }

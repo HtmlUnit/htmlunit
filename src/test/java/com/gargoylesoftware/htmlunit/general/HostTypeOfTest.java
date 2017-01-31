@@ -7882,4 +7882,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("StorageManager");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void cssValueList() throws Exception {
+        test("CSSValueList");
+    }
+
 }
