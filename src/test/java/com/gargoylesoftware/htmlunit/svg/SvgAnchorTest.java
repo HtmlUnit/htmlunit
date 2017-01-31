@@ -22,7 +22,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -57,12 +56,7 @@ public class SvgAnchorTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGAElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgAnchor.class.isInstance(page.getElementById("myId")));
-            }
-            else {
-                assertTrue(HtmlAnchor.class.isInstance(page.getElementById("myId")));
-            }
+            assertTrue(SvgAnchor.class.isInstance(page.getElementById("myId")));
         }
     }
 }

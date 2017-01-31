@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for {@link SvgElement}.
@@ -63,11 +62,8 @@ public class SvgElementTest extends WebDriverTestCase {
             if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgElement.class.getName().equals(page.getElementById("myId").getClass().getName()));
             }
-            else if ("[object Element]".equals(getExpectedAlerts()[0])) {
-                assertTrue(DomElement.class.getName().equals(page.getElementById("myId").getClass().getName()));
-            }
             else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
+                assertTrue(DomElement.class.getName().equals(page.getElementById("myId").getClass().getName()));
             }
         }
     }

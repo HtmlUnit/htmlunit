@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for {@link SvgView}.
@@ -56,12 +55,7 @@ public class SvgViewTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGViewElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgView.class.isInstance(page.getElementById("myId")));
-            }
-            else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
-            }
+            assertTrue(SvgView.class.isInstance(page.getElementById("myId")));
         }
     }
 }

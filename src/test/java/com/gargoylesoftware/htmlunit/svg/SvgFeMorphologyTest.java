@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for {@link SvgFeMorphology}.
@@ -57,12 +56,7 @@ public class SvgFeMorphologyTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGFEMorphologyElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgFeMorphology.class.isInstance(page.getElementById("myId")));
-            }
-            else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
-            }
+            assertTrue(SvgFeMorphology.class.isInstance(page.getElementById("myId")));
         }
     }
 }

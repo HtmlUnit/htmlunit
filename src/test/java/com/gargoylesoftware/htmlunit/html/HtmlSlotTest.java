@@ -51,7 +51,12 @@ public class HtmlSlotTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlSlot.class.isInstance(page.getHtmlElementById("myId")));
+            if ("[object HTMLSlotElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(HtmlSlot.class.isInstance(page.getElementById("myId")));
+            }
+            else {
+                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
+            }
         }
     }
 }

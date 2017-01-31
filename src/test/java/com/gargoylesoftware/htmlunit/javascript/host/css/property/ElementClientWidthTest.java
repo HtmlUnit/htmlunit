@@ -1874,4 +1874,17 @@ public class ElementClientWidthTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("template"));
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTemplate}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            CHROME = "-16")
+    @NotYetImplemented(CHROME)
+    public void slot() throws Exception {
+        loadPageWithAlerts2(test("slot"));
+    }
+
 }

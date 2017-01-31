@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for {@link SvgAltGlyph}.
@@ -39,9 +38,8 @@ public class SvgAltGlyphTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGAltGlyphElement]",
-            CHROME = "[object SVGElement]",
-            IE = "[object SVGElement]")
+    @Alerts(DEFAULT = "[object SVGElement]",
+            FF = "[object SVGAltGlyphElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -62,11 +60,8 @@ public class SvgAltGlyphTest extends WebDriverTestCase {
             if ("[object SVGAltGlyphElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgAltGlyph.class.isInstance(page.getElementById("myId")));
             }
-            else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
-            }
             else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
             }
         }
     }
