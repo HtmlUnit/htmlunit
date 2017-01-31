@@ -23,8 +23,10 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -56,20 +58,40 @@ public class ExternalTest {
     @Test
     public void pom() throws Exception {
         if (isDifferentWeek()) {
+            final Map<String, String> properties = new HashMap<>();
             final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
             for (int i = 0; i < lines.size(); i++) {
                 final String line = lines.get(i);
+                if (line.trim().equals("<properties>")) {
+                    processProperties(lines, i + 1, properties);
+                }
                 if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
                     final String artifactId = getValue(line);
                     final String groupId = getValue(lines.get(i - 1));
                     if (!lines.get(i + 1).contains("</exclusion>")) {
-                        final String version = getValue(lines.get(i + 1));
+                        String version = getValue(lines.get(i + 1));
+                        if (version.startsWith("${")) {
+                            version = properties.get(version.substring(2, version.length() - 1));
+                        }
                         assertVersion(groupId, artifactId, version);
                     }
                 }
             }
             assertVersion("org.sonatype.oss", "oss-parent", "9");
             assertChromeDriver("2.27");
+        }
+    }
+
+    private static void processProperties(final List<String> lines, int i, final Map<String, String> map) {
+        for ( ; i < lines.size(); i++) {
+            final String line = lines.get(i).trim();
+            if (!line.startsWith("<!--")) {
+                if ("</properties>".equals(line)) {
+                    break;
+                }
+                final String name = line.substring(line.indexOf('<') + 1, line.indexOf('>'));
+                map.put(name, getValue(line));
+            }
         }
     }
 
