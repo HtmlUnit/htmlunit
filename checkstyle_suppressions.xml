@@ -36,6 +36,7 @@
     <suppress checks="FileLength" files="StyleAttributes.java"/>
     <suppress checks="FileLength" files="WebClient.java"/>
     <suppress checks="FileLength" files="WebClientTest.java"/>
+    <suppress checks="FileLength" files="WebGL2RenderingContext.java"/>
     <suppress checks="FileLength" files="Window.java"/>
     <suppress checks="FileLength" files="WindowTest.java"/>
     <suppress checks="Header" files=".+.properties"/>

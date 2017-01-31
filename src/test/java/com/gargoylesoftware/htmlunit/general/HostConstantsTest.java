@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 
 /**
  * Test all {@code constant}s defined in host classes.
@@ -86,14 +87,24 @@ public class HostConstantsTest extends WebDriverTestCase {
                 + "      }\n"
                 + "    }\n"
                 + "    all.sort();\n"
+
+                // uncomment to generate java code
+                // + "    var helper = '';\n"
+                // + "    for (var i in all) {\n"
+                // + "      var x = all[i];\n"
+                // + "      string += '\\r\\n    /** The constant {@code ' + x + '}. */\\r\\n';\n"
+                //    + "      string += '    @JsxConstant\\r\\n';\n"
+                //    + "      string += '    public static final long ' + x + ' = ' + " + host_ + "[x] + 'L;\\r\\n';\n"
+                //    + "    }\n"
+                //    + "    alert(string);\n"
+
                 + "    var string = '';\n"
                 + "    for (var i in all) {\n"
                 + "      var x = all[i];\n"
                 + "      string += x + ':' + " + host_ + "[x] + ' ';\n"
                 + "    }\n"
                 + "    alert(string);\n"
-                + "  } catch (e) {\n"
-                + "  }\n"
+                + "  } catch (e) {}\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
