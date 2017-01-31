@@ -245,7 +245,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
         }
         else {
             page = null;
@@ -284,7 +284,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
         }
         else {
             page = null;
@@ -323,7 +323,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
         }
         else {
             page = null;
@@ -363,7 +363,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-             page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
         }
         else {
             page = null;

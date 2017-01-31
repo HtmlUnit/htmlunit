@@ -106,7 +106,7 @@ public class AttributesTest extends TestCase {
             "HtmlProgress",
             "HtmlRp", "HtmlRt", "HtmlRuby",
             "HtmlS", "HtmlSample",
-            "HtmlScript", "HtmlSection", "HtmlSelect", "HtmlSmall",
+            "HtmlScript", "HtmlSection", "HtmlSelect", "HtmlSlot", "HtmlSmall",
             "HtmlSource", "HtmlSpan",
             "HtmlStrike", "HtmlStrong", "HtmlStyle",
             "HtmlSubscript", "HtmlSummary", "HtmlSuperscript",

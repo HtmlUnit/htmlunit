@@ -147,7 +147,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception IOException if an IO error occurs
      */
     @Override
-    public <P extends Page> P click(final Event event, boolean ignoreVisibility) throws IOException {
+    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
         wasPositionSpecified_ = true;
         return super.click(event, ignoreVisibility);
     }
