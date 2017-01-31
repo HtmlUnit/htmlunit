@@ -162,16 +162,6 @@ public class ClickableElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test onClick handler and click method of area element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void area_onClick() throws Exception {
-        onClickBodyTest("<body><map><area id='clickId' onClick='alert(\"foo\")'/></map></body>\n");
-    }
-
-    /**
      * Test onClick handler and click method of bold element.
      *
      * @throws Exception if the test fails
@@ -430,16 +420,6 @@ public class ClickableElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test onClick handler and click method of image element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void image_onClick() throws Exception {
-        onClickSimpleTest("img");
-    }
-
-    /**
      * Test onClick handler and click method of header1 element.
      *
      * @throws Exception if the test fails
@@ -561,17 +541,6 @@ public class ClickableElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test onClick handler and click method of link element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void link_onClick() throws Exception {
-        onClickPageTest("<html><head><title>foo</title><link id='clickId' onClick='alert(\"foo\")'/>\n"
-            + "</head><body></body></html>");
-    }
-
-    /**
      * Test onClick handler and click method of List Item element.
      *
      * @throws Exception if the test fails
@@ -582,16 +551,6 @@ public class ClickableElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test onClick handler and click method of map element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void map_onClick() throws Exception {
-        onClickBodyTest("<body><map id='clickId' onClick='alert(\"foo\")'><area/></map></body>\n");
-    }
-
-    /**
      * Test onClick handler and click method of menu element.
      *
      * @throws Exception if the test fails
@@ -599,28 +558,6 @@ public class ClickableElementTest extends SimpleWebTestCase {
     @Test
     public void menu_onClick() throws Exception {
         onClickBodyTest("<body><menu id='clickId' onClick='alert(\"foo\")'><li>Item</li></menu></body>\n");
-    }
-
-    /**
-     * Test onClick handler and click method of no frames element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void noFrames_onClick() throws Exception {
-        onClickPageTest("<html><head><title>foo</title></head><frameset><frame/>\n"
-            + "<noframes id='clickId' onClick='alert(\"foo\")'/></frameset></html>");
-    }
-
-    /**
-     * Test onClick handler and click method of no script element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void noScript_onClick() throws Exception {
-        onClickBodyTest("<body><script>var i = 0;</script><noscript id='clickId' "
-            + "onClick='alert(\"foo\")'>Item</noscript></body>\n");
     }
 
     /**
