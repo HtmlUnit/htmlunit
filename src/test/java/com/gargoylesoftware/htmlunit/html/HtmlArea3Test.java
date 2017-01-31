@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlAreaTest extends SimpleWebTestCase {
+public class HtmlArea3Test extends SimpleWebTestCase {
 
     private WebClient createWebClient(final String onClick) {
         final String firstContent
