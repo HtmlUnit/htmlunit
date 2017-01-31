@@ -78,7 +78,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @BuggyWebDriver({FF, IE})
+    @BuggyWebDriver(IE)
     public void select2() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
