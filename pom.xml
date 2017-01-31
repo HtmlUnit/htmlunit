@@ -17,6 +17,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
+        <!-- As a property, as it is included in Checkstyle build -->
+        <checkstyle.version>7.4</checkstyle.version>
     </properties>
 
     <build>
@@ -49,7 +51,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>7.4</version>
+                        <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
