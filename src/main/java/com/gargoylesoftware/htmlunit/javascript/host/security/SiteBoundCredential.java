@@ -21,17 +21,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code PasswordCredential}.
+ * A JavaScript object for {@code SiteBoundCredential}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class PasswordCredential extends SiteBoundCredential {
+public class SiteBoundCredential extends Credential {
 
     /**
      * Default constructor.
      */
     @JsxConstructor
-    public PasswordCredential() {
+    public SiteBoundCredential() {
     }
 }

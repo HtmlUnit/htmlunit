@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.security;
+package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
@@ -21,17 +21,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code PasswordCredential}.
+ * A JavaScript object for {@code ConstantSourceNode}.
  *
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class PasswordCredential extends SiteBoundCredential {
+public class ConstantSourceNode extends AudioNode {
 
     /**
-     * Default constructor.
+     * Creates an instance.
      */
     @JsxConstructor
-    public PasswordCredential() {
+    public ConstantSourceNode() {
     }
 }

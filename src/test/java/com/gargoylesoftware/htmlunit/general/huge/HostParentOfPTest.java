@@ -633,4 +633,24 @@ public class HostParentOfPTest extends HostParentOf {
         test("RTCStatsReport", "RTCStatsReport");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PushSubscriptionOptions_PushSubscriptionOptions() throws Exception {
+        test("PushSubscriptionOptions", "PushSubscriptionOptions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RemotePlayback_RemotePlayback() throws Exception {
+        test("RemotePlayback", "RemotePlayback");
+    }
+
 }

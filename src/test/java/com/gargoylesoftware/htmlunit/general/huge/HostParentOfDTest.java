@@ -5300,4 +5300,64 @@ public class HostParentOfDTest extends HostParentOf {
         test("FederatedCredential", "FederatedCredential");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Element_HTMLSlotElement() throws Exception {
+        test("Element", "HTMLSlotElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_BaseAudioContext() throws Exception {
+        test("EventTarget", "BaseAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_ConstantSourceNode() throws Exception {
+        test("EventTarget", "ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_HTMLSlotElement() throws Exception {
+        test("EventTarget", "HTMLSlotElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_RemotePlayback() throws Exception {
+        test("EventTarget", "RemotePlayback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Event_MediaStreamTrackEvent() throws Exception {
+        test("Event", "MediaStreamTrackEvent");
+    }
+
 }

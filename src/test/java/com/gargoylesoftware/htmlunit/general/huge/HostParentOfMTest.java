@@ -219,9 +219,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _MouseEvent_PointerEvent() throws Exception {
         test("MouseEvent", "PointerEvent");
     }
@@ -2689,6 +2688,26 @@ public class HostParentOfMTest extends HostParentOf {
             FF = "true")
     public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamTrackEvent_MediaStreamTrackEvent() throws Exception {
+        test("MediaStreamTrackEvent", "MediaStreamTrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_HTMLSlotElement() throws Exception {
+        test("Node", "HTMLSlotElement");
     }
 
 }

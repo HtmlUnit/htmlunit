@@ -7791,4 +7791,95 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void windowProperties() throws Exception {
         test("WindowProperties");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void baseAudioContext() throws Exception {
+        test("BaseAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void constantSourceNode() throws Exception {
+        test("ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void customElementRegistry() throws Exception {
+        test("CustomElementRegistry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void htmlSlotElement() throws Exception {
+        test("HTMLSlotElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamTrackEvent() throws Exception {
+        test("MediaStreamTrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void pushSubscriptionOptions() throws Exception {
+        test("PushSubscriptionOptions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void remotePlayback() throws Exception {
+        test("RemotePlayback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void siteBoundCredential() throws Exception {
+        test("SiteBoundCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void storageManager() throws Exception {
+        test("StorageManager");
+    }
+
 }

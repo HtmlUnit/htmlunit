@@ -2781,4 +2781,44 @@ public class HostParentOfSTest extends HostParentOf {
     public void _SourceBuffer_SourceBuffer() throws Exception {
         test("SourceBuffer", "SourceBuffer");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SiteBoundCredential_FederatedCredential() throws Exception {
+        test("SiteBoundCredential", "FederatedCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SiteBoundCredential_PasswordCredential() throws Exception {
+        test("SiteBoundCredential", "PasswordCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SiteBoundCredential_SiteBoundCredential() throws Exception {
+        test("SiteBoundCredential", "SiteBoundCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _StorageManager_StorageManager() throws Exception {
+        test("StorageManager", "StorageManager");
+    }
 }

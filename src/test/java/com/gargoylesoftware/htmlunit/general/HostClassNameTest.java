@@ -10664,4 +10664,96 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void windowProperties() throws Exception {
         test("WindowProperties");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BaseAudioContext() { [native code] }")
+    public void baseAudioContext() throws Exception {
+        test("BaseAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ConstantSourceNode() { [native code] }")
+    public void constantSourceNode() throws Exception {
+        test("ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CustomElementRegistry() { [native code] }")
+    public void customElementRegistry() throws Exception {
+        test("CustomElementRegistry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLSlotElement() { [native code] }")
+    public void htmlSlotElement() throws Exception {
+        test("HTMLSlotElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function MediaStreamTrackEvent() {\n    [native code]\n}",
+            CHROME = "function MediaStreamTrackEvent() { [native code] }")
+    public void mediaStreamTrackEvent() throws Exception {
+        test("MediaStreamTrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PushSubscriptionOptions() { [native code] }")
+    public void pushSubscriptionOptions() throws Exception {
+        test("PushSubscriptionOptions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RemotePlayback() { [native code] }")
+    public void remotePlayback() throws Exception {
+        test("RemotePlayback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SiteBoundCredential() { [native code] }")
+    public void siteBoundCredential() throws Exception {
+        test("SiteBoundCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function StorageManager() { [native code] }")
+    public void storageManager() throws Exception {
+        test("StorageManager");
+    }
+
 }

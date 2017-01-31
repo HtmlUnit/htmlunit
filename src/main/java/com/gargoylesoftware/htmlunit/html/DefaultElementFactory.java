@@ -83,7 +83,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlProgress.TAG_NAME,
             HtmlRp.TAG_NAME, HtmlRt.TAG_NAME, HtmlRuby.TAG_NAME,
             HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
-            HtmlScript.TAG_NAME, HtmlSection.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
+            HtmlScript.TAG_NAME, HtmlSection.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSlot.TAG_NAME, HtmlSmall.TAG_NAME,
             HtmlSource.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
             HtmlSubscript.TAG_NAME, HtmlSummary.TAG_NAME, HtmlSuperscript.TAG_NAME,
@@ -594,6 +594,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlSmall.TAG_NAME:
                 element = new HtmlSmall(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlSlot.TAG_NAME:
+                element = new HtmlSlot(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlSource.TAG_NAME:

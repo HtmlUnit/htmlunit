@@ -1279,4 +1279,94 @@ public class HostParentOfATest extends HostParentOf {
         test("ANGLE_instanced_arrays", "ANGLE_instanced_arrays");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioNode_ConstantSourceNode() throws Exception {
+        test("AudioNode", "ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_AudioContext() throws Exception {
+        test("BaseAudioContext", "AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_BaseAudioContext() throws Exception {
+        test("BaseAudioContext", "BaseAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_OfflineAudioContext() throws Exception {
+        test("BaseAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_webkitAudioContext() throws Exception {
+        test("BaseAudioContext", "webkitAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_webkitOfflineAudioContext() throws Exception {
+        test("BaseAudioContext", "webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ConstantSourceNode_ConstantSourceNode() throws Exception {
+        test("ConstantSourceNode", "ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_SiteBoundCredential() throws Exception {
+        test("Credential", "SiteBoundCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CustomElementRegistry_CustomElementRegistry() throws Exception {
+        test("CustomElementRegistry", "CustomElementRegistry");
+    }
+
 }

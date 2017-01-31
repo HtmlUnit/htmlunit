@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class FederatedCredential extends Credential {
+public class FederatedCredential extends SiteBoundCredential {
 
     /**
      * Default constructor.
