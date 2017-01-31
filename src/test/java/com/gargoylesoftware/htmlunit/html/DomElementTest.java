@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -69,7 +70,7 @@ public final class DomElementTest extends WebDriverTestCase {
     public void clickInvisible() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
-                + "  <a id='link' style='display: none'>Click me</a>>\n"
+                + "  <a id='link' style='display: none'>Click me</a>\n"
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -101,4 +102,33 @@ public final class DomElementTest extends WebDriverTestCase {
             + "</body>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void clickDisabled() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <button id='id1' disabled>Click Me</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("id1")).click();
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test(expected = InvalidElementStateException.class)
+    public void sendKeysToDisabled() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <input id='id1' disabled>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("id1")).sendKeys("Hello");
+    }
+
 }
