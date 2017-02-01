@@ -14,62 +14,69 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlLabel}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
- * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class HtmlLabel2Test extends WebDriverTestCase {
+public class HtmlLabel2Test extends SimpleWebTestCase {
+
+    /**
+     * Verifies that a checkbox is toggled when the related label is clicked.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test_click() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
+            + "  <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
+            + "</form></body></html>";
+        final List<String> collectedAlerts = new ArrayList<>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("testCheckbox");
+
+        assertFalse(checkBox.isChecked());
+        final HtmlLabel label = page.getHtmlElementById("testLabel");
+        label.click();
+        assertTrue(checkBox.isChecked());
+        final String[] expectedAlerts = {"label", "checkbox"};
+        assertEquals(expectedAlerts, collectedAlerts);
+        label.click();
+        assertFalse(checkBox.isChecked());
+    }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLLabelElement]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<label id='myId'>Item</label>\n"
-            + "</body></html>";
+    public void test_getReferencedElement() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='checkbox' name='checkbox' id='testCheckbox'/>\n"
+            + "  <label for='testCheckbox' id='testLabel1'>Check me</label>\n"
+            + "  <label for='notExisting' id='testLabel2'>Check me too</label>\n"
+            + "</form></body></html>";
+        final List<String> collectedAlerts = new ArrayList<>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("testCheckbox");
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlLabel.class.isInstance(page.getHtmlElementById("myId")));
-        }
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({"labelclick", "chboxclick"})
-    public void clickFor() throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "  <label id='label1' for='checkbox1' onclick='alert(\"labelclick\")'>Toggle checkbox</label>\n"
-            + "  <input type='checkbox' id='checkbox1' onclick='alert(\"chboxclick\")'/>\n"
-            + "</body></html>";
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("label1")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        final HtmlLabel label = page.getHtmlElementById("testLabel1");
+        assertTrue(checkBox == label.getReferencedElement());
+        final HtmlLabel label2 = page.getHtmlElementById("testLabel2");
+        assertNull(label2.getReferencedElement());
     }
 }
