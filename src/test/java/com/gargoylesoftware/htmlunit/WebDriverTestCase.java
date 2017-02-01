@@ -1172,12 +1172,7 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
         if (!getElement().isDisplayed()) {
             throw new ElementNotVisibleException("You may only interact with visible elements");
         }
-        try {
-            getElement().click();
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
+        parent.getMouse().click(getCoordinates());
     }
 
     @Override

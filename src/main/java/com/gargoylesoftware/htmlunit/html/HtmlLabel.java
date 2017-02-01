@@ -20,6 +20,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
  * Wrapper for the HTML element "label".
@@ -147,13 +148,12 @@ public class HtmlLabel extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Page click() throws IOException {
+    public <P extends Page> P click(Event event, boolean ignoreVisibility) throws IOException {
         // first the click on the label
-        final Page page = super.click();
+        final P page = super.click(event, ignoreVisibility);
 
         // not sure which page we should return
-        final Page response;
+        final P response;
 
         // then the click on the referenced element
         final HtmlElement element = getReferencedElement();

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -54,5 +55,21 @@ public class HtmlLabel2Test extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlLabel.class.isInstance(page.getHtmlElementById("myId")));
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "chboxclick"})
+    public void clickFor() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='checkbox1' onclick='alert(\"labelclick\")'>Toggle checkbox</label>\n"
+            + "  <input type='checkbox' id='checkbox1' onclick='alert(\"chboxclick\")'/>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }
