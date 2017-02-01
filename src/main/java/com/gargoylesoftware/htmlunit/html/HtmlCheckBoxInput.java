@@ -138,9 +138,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         checkedState_ = !isChecked();
-        super.doClickStateUpdate(shiftKey);
+        super.doClickStateUpdate(shiftKey, ctrlKey);
         return true;
     }
 

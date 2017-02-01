@@ -488,7 +488,7 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
@@ -498,7 +498,7 @@ public class HtmlImage extends HtmlElement {
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
                     if (area.containsPoint(lastClickX_, lastClickY_)) {
-                        area.doClickStateUpdate(shiftKey);
+                        area.doClickStateUpdate(shiftKey, ctrlKey);
                         return false;
                     }
                 }
@@ -513,7 +513,7 @@ public class HtmlImage extends HtmlElement {
             anchor.doClickStateUpdate(suffix);
             return false;
         }
-        anchor.doClickStateUpdate(shiftKey);
+        anchor.doClickStateUpdate(shiftKey, ctrlKey);
         return false;
     }
 

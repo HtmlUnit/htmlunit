@@ -79,7 +79,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(IE)
-    public void select2() throws Exception {
+    public void shiftClick() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "  <option value='option1'>Option1</option>\n"
@@ -106,6 +106,41 @@ public class HtmlSelect2Test extends WebDriverTestCase {
         assertFalse(options.get(0).isSelected());
         assertTrue(options.get(1).isSelected());
         assertTrue(options.get(2).isSelected());
+        assertTrue(options.get(3).isSelected());
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @BuggyWebDriver({FF, IE})
+    public void controlClick() throws Exception {
+        final String html = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' multiple>\n"
+            + "  <option value='option1'>Option1</option>\n"
+            + "  <option value='option2'>Option2</option>\n"
+            + "  <option value='option3' selected='selected'>Option3</option>\n"
+            + "  <option value='option4'>Option4</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final List<WebElement> options = driver.findElements(By.tagName("option"));
+
+        final Actions actions = new Actions(driver);
+        final Action selectThreeOptions = actions.click(options.get(1))
+                .keyDown(Keys.CONTROL)
+                .click(options.get(3))
+                .keyUp(Keys.CONTROL)
+                .build();
+
+        selectThreeOptions.perform();
+
+        assertFalse(options.get(0).isSelected());
+        assertTrue(options.get(1).isSelected());
+        assertFalse(options.get(2).isSelected());
         assertTrue(options.get(3).isSelected());
     }
 }

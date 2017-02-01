@@ -84,7 +84,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      *         may not be the same as the original page)
      */
     public Page setSelected(final boolean selected) {
-        setSelected(selected, true, true);
+        setSelected(selected, true, true, false);
         return getPage();
     }
 
@@ -98,7 +98,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param invokeOnFocus whether to set focus or not.
      */
     public void setSelected(final boolean selected, final boolean invokeOnFocus) {
-        setSelected(selected, invokeOnFocus, true);
+        setSelected(selected, invokeOnFocus, true, false);
     }
 
     /**
@@ -108,8 +108,10 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param selected true if this option should be selected
      * @param invokeOnFocus whether to set focus or not.
      * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
      */
-    private void setSelected(boolean selected, final boolean invokeOnFocus, final boolean shiftKey) {
+    private void setSelected(boolean selected, final boolean invokeOnFocus, final boolean shiftKey,
+            final boolean ctrlKey) {
         if (selected == isSelected()) {
             return;
         }
@@ -119,7 +121,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
                     && !select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
                 selected = true;
             }
-            select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey, true);
+            select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey, ctrlKey, true);
             return;
         }
         // for instance from JS for an option created by document.createElement('option')
@@ -298,7 +300,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             }
 
             if (isStateUpdateFirst()) {
-                doClickStateUpdate(event.getShiftKey());
+                doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
             }
 
             return getEnclosingSelect().click(event, ignoreVisibility);
@@ -311,17 +313,17 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         boolean changed = false;
         if (!isSelected()) {
-            setSelected(true, true, shiftKey);
+            setSelected(true, true, shiftKey, ctrlKey);
             changed = true;
         }
         else if (getEnclosingSelect().isMultipleSelectEnabled()) {
             setSelected(false);
             changed = true;
         }
-        super.doClickStateUpdate(shiftKey);
+        super.doClickStateUpdate(shiftKey, ctrlKey);
         return changed;
     }
 

@@ -80,13 +80,13 @@ public class HtmlResetInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.reset();
             return false;
         }
-        super.doClickStateUpdate(shiftKey);
+        super.doClickStateUpdate(shiftKey, ctrlKey);
         return false;
     }
 

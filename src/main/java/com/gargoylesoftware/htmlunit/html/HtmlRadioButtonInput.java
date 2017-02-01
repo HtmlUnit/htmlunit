@@ -158,7 +158,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = !isChecked();
 
@@ -169,7 +169,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         else if (page != null && page.isHtmlPage()) {
             setCheckedForPage((HtmlPage) page);
         }
-        super.doClickStateUpdate(shiftKey);
+        super.doClickStateUpdate(shiftKey, ctrlKey);
         return changed;
     }
 

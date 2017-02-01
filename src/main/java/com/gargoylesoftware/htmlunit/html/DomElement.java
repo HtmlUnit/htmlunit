@@ -994,7 +994,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         boolean stateUpdated = false;
         boolean changed = false;
         if (isStateUpdateFirst()) {
-            changed = doClickStateUpdate(event.getShiftKey());
+            changed = doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
             stateUpdated = true;
         }
 
@@ -1006,7 +1006,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
             if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-                changed = doClickStateUpdate(event.getShiftKey());
+                changed = doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
             }
         }
         finally {
@@ -1023,22 +1023,23 @@ public class DomElement extends DomNamespaceNode implements Element {
     /**
      * This method implements the control state update part of the click action.
      *
-     * <p>The default implementation only calls doClickStateUpdate on parent's HtmlElement (if any).
+     * <p>The default implementation only calls doClickStateUpdate on parent's DomElement (if any).
      * Subclasses requiring different behavior (like {@link HtmlSubmitInput}) will override this method.</p>
      * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
      *
      * @return true if doClickFireEvent method has to be called later on (to signal,
      * that the value was changed)
      * @throws IOException if an IO error occurs
      */
-    protected boolean doClickStateUpdate(final boolean shiftKey) throws IOException {
+    protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         if (propagateClickStateUpdateToParent()) {
             // needed for instance to perform link doClickAction when a nested element is clicked
             // it should probably be changed to do this at the event level but currently
             // this wouldn't work with JS disabled as events are propagated in the host object tree.
             final DomNode parent = getParentNode();
-            if (parent instanceof HtmlElement) {
-                return ((HtmlElement) parent).doClickStateUpdate(shiftKey);
+            if (parent instanceof DomElement) {
+                return ((DomElement) parent).doClickStateUpdate(shiftKey, ctrlKey);
             }
         }
 
@@ -1046,7 +1047,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @see #doClickStateUpdate(boolean)
+     * @see #doClickStateUpdate(boolean, boolean)
      * Usually the click is propagated to the parent. Overwrite if you
      * like to disable this.
      *

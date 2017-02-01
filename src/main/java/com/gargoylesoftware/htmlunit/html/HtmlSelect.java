@@ -258,7 +258,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
-                doSelectOption(option, true, false, false);
+                doSelectOption(option, true, false, false, false);
             }
         }
         return response;
@@ -308,7 +308,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             else {
                 selected = getOptionByValue(optionValue);
             }
-            return setSelectedAttribute(selected, isSelected, invokeOnFocus, true, true);
+            return setSelectedAttribute(selected, isSelected, invokeOnFocus, true, false, true);
         }
         catch (final ElementNotFoundException e) {
             if (hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
@@ -334,7 +334,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
-        return (P) setSelectedAttribute(selectedOption, isSelected, true, true, true);
+        return (P) setSelectedAttribute(selectedOption, isSelected, true, true, false, true);
     }
 
     /**
@@ -349,6 +349,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param selectedOption the value of the option that is to change
      * @param invokeOnFocus whether to set focus or not.
      * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
      * @param isClick is mouse clicked
      * @param <P> the page type
      * @return the page contained in the current window as returned
@@ -356,7 +357,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
-        final boolean invokeOnFocus, final boolean shiftKey, final boolean isClick) {
+        final boolean invokeOnFocus, final boolean shiftKey, final boolean ctrlKey, final boolean isClick) {
         if (isSelected && invokeOnFocus) {
             ((HtmlPage) getPage()).setFocusedElement(this);
         }
@@ -364,7 +365,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         final boolean changeSelectedState = selectedOption.isSelected() != isSelected;
 
         if (changeSelectedState) {
-            doSelectOption(selectedOption, isSelected, shiftKey, isClick);
+            doSelectOption(selectedOption, isSelected, shiftKey, ctrlKey, isClick);
             HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
 
@@ -372,12 +373,12 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     private void doSelectOption(final HtmlOption selectedOption,
-            final boolean isSelected, final boolean shiftKey, final boolean isClick) {
+            final boolean isSelected, final boolean shiftKey, final boolean ctrlKey, final boolean isClick) {
         // caution the HtmlOption may have been created from js and therefore the select now need
         // to "know" that it is selected
         if (isMultipleSelectEnabled()) {
             selectedOption.setSelectedInternal(isSelected);
-            if (isClick) {
+            if (isClick && !ctrlKey) {
                 if (!shiftKey) {
                     setOnlySelected(selectedOption, isSelected);
                     lastSelectedIndex_ = getOptions().indexOf(selectedOption);
@@ -731,7 +732,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         if (index < allOptions.size()) {
             final HtmlOption itemToSelect = allOptions.get(index);
-            setSelectedAttribute(itemToSelect, true, false, true, true);
+            setSelectedAttribute(itemToSelect, true, false, true, false, true);
         }
     }
 
