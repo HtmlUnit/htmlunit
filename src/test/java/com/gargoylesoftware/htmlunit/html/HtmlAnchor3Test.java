@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlAnchorTest extends SimpleWebTestCase {
+public class HtmlAnchor3Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -176,6 +176,7 @@ public class HtmlAnchor extends HtmlElement {
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
+        new Exception().printStackTrace();
         doClickStateUpdate("");
         return false;
     }

@@ -24,6 +24,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -646,5 +647,36 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("myLink")).click();
+    }
+
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @BuggyWebDriver(IE)
+    public void shiftClickAnchor() throws Exception {
+        final String html = "<html><head><title>First</title></head><body>\n"
+            + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<head><title>Second</title>");
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement link = driver.findElement(By.linkText("Click Me"));
+
+        final String originalTitle = driver.getTitle();
+
+        final int windowsSize = driver.getWindowHandles().size();
+
+        new Actions(driver)
+            .moveToElement(link)
+            .keyDown(Keys.SHIFT)
+            .click()
+            .keyUp(Keys.SHIFT)
+            .perform();
+
+        assertEquals("Should have opened a new window", windowsSize + 1, driver.getWindowHandles().size());
+        assertEquals("Should not have navigated away", originalTitle, driver.getTitle());
     }
 }
