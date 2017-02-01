@@ -70,11 +70,14 @@ public class HtmlAnchor extends HtmlElement {
      * Same as {@link #doClickStateUpdate(boolean, boolean)}, except that it accepts an {@code href} suffix,
      * needed when a click is performed on an image map to pass information on the click position.
      *
+     * @param shiftKey {@code true} if SHIFT is pressed
+     * @param ctrlKey {@code true} if CTRL is pressed
      * @param hrefSuffix the suffix to add to the anchor's {@code href} attribute
      *        (for instance coordinates from an image map)
      * @throws IOException if an IO error occurs
      */
-    protected void doClickStateUpdate(final String hrefSuffix) throws IOException {
+    protected void doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey, final String hrefSuffix)
+            throws IOException {
         final String href = (getHrefAttribute() + hrefSuffix).trim();
         if (LOG.isDebugEnabled()) {
             final String w = getPage().getEnclosingWindow().getName();
@@ -176,8 +179,7 @@ public class HtmlAnchor extends HtmlElement {
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        new Exception().printStackTrace();
-        doClickStateUpdate("");
+        doClickStateUpdate(shiftKey, ctrlKey, "");
         return false;
     }
 

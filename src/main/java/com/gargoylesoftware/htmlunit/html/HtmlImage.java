@@ -510,7 +510,7 @@ public class HtmlImage extends HtmlElement {
         }
         if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             final String suffix = "?" + lastClickX_ + "," + lastClickY_;
-            anchor.doClickStateUpdate(suffix);
+            anchor.doClickStateUpdate(false, false, suffix);
             return false;
         }
         anchor.doClickStateUpdate(shiftKey, ctrlKey);
