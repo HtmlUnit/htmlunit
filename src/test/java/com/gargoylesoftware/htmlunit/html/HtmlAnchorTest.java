@@ -649,7 +649,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         webDriver.findElement(By.id("myLink")).click();
     }
 
-
     /**
      * @exception Exception If the test fails
      */
