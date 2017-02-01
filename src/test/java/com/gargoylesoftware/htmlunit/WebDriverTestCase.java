@@ -78,7 +78,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -1173,17 +1172,6 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
             throw new ElementNotVisibleException("You may only interact with visible elements");
         }
         parent.getMouse().click(getCoordinates());
-    }
-
-    @Override
-    public void submit() {
-        if (element instanceof HtmlInput) {
-            final HtmlForm form = ((HtmlElement) element).getEnclosingForm();
-            if (form == null) {
-                return;
-            }
-        }
-        super.submit();
     }
 
     @Override

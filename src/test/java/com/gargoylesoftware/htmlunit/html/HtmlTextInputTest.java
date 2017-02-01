@@ -22,11 +22,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -621,18 +623,35 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void submitOnEnterWithoutForm() throws Exception {
+    @NotYetImplemented
+    public void sendKeysEnterWithoutForm() throws Exception {
         final String html =
             "<html>\n"
             + "<body>\n"
-            + "  <input id='t' value='hello'/>\n"
+            + "  <input id='t' value='hello'>\n"
             + "</body>\n"
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final WebElement field = driver.findElement(By.id("t"));
+        driver.findElement(By.id("t")).sendKeys("\n");
 
-        field.sendKeys("\n");
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void submitWithoutForm() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <input id='t' value='hello'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("t")).submit();
 
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
