@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlLabelTest extends SimpleWebTestCase {
+public class HtmlLabel3Test extends SimpleWebTestCase {
 
     /**
      * Verifies that a checkbox is toggled when the related label is clicked.
