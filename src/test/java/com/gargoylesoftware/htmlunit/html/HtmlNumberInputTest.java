@@ -657,6 +657,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented
+    // fixed in HtmlUnitDriver 2.24
     public void sendKeysEnterWithoutForm() throws Exception {
         final String html =
             "<html>\n"
