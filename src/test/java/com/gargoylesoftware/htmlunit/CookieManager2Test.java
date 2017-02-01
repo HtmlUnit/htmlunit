@@ -23,6 +23,7 @@ import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
@@ -88,6 +89,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("my_key=")
     public void cookie_nullValue() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -103,9 +105,30 @@ public class CookieManager2Test extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 
-        final String[] expectedAlerts = {"my_key="};
-        assertEquals(expectedAlerts, collectedAlerts);
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my_name=my_data")
+    public void cookie_maxAgeMinusOne() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, CookieManagerTest.HTML_ALERT_COOKIE);
+        webClient.setWebConnection(webConnection);
+
+        final CookieManager mgr = webClient.getCookieManager();
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_name", "my_data", "/", -1, false));
+
+        final List<String> collectedAlerts = new ArrayList<>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
