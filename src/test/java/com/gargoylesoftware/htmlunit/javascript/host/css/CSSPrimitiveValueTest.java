@@ -63,9 +63,8 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"rgb(0, 0, 255)", "0"},
-            IE = "style.getPropertyCSSValue not available",
-            CHROME = "style.getPropertyCSSValue not available")
+    @Alerts(DEFAULT = "style.getPropertyCSSValue not available",
+            FF = {"rgb(0, 0, 255)", "0"})
     public void getPropertyCSSValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function doTest() {\n"

@@ -180,15 +180,7 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                        "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
-            CHROME = { "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
+    @Alerts(CHROME = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
@@ -196,14 +188,14 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
-            IE = {   "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
+            FF = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"})
+                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -417,18 +409,14 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
-            CHROME = { "[object PopStateEvent]", "null", "true",
+    @Alerts(CHROME = {"[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
-            IE = {   "[object PopStateEvent]", "null", "true",
+            FF = {"[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"})
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

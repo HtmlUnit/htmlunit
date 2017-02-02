@@ -33,9 +33,8 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {},
-            CHROME = {"undefined", "true"},
-            FF = {"undefined", "true"})
+    @Alerts(CHROME = {"undefined", "true"},
+            IE = {})
     public void has() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

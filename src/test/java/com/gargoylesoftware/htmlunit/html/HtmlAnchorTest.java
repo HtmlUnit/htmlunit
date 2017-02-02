@@ -141,9 +141,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "page2.html",
-            CHROME = "",
-            IE = "")
+    @Alerts(DEFAULT = "",
+            FF = "page2.html")
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
@@ -278,9 +277,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "page2.html",
-            CHROME = "",
-            IE = "")
+    @Alerts(DEFAULT = "",
+            FF = "page2.html")
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"

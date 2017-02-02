@@ -121,9 +121,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.species)", "true"},
-            FF = {"symbol", "Symbol(Symbol.species)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.species)", "true"},
             IE = "not supported")
     public void species() throws Exception {
         name("species");
@@ -133,9 +131,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
-            FF = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.toPrimitive)", "true"},
             IE = "not supported")
     public void toPrimitive() throws Exception {
         name("toPrimitive");

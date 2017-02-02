@@ -60,9 +60,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1",
-            CHROME = "1")
+    @Alerts(DEFAULT = "1",
+            FF = "2")
     public void loadImageBlankSource() throws Exception {
         loadImage("src=' '");
     }
@@ -121,9 +120,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            CHROME = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void isDisplayedNoSource() throws Exception {
         isDisplayed("");
     }

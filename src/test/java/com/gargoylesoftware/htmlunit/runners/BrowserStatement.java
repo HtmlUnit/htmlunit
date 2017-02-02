@@ -14,9 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.runners;
 
+import java.util.Arrays;
+
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -46,6 +51,7 @@ class BrowserStatement extends Statement {
 
     @Override
     public void evaluate() throws Throwable {
+        assertAlerts();
         for (int i = 0; i < tries_; i++) {
             try {
                 evaluateSolo();
@@ -67,6 +73,42 @@ class BrowserStatement extends Statement {
                     throw t;
                 }
             }
+        }
+    }
+
+    private void assertAlerts() {
+        final Alerts alerts = method_.getAnnotation(Alerts.class);
+        if (alerts != null) {
+            if (!BrowserVersionClassRunner.isDefined(alerts.value())) {
+                assertNotEquals(alerts.IE(), alerts.DEFAULT());
+                assertNotEquals(alerts.CHROME(), alerts.DEFAULT());
+                assertNotEquals(alerts.FF(), alerts.DEFAULT());
+                assertNotEquals(alerts.FF(), alerts.CHROME());
+                assertNotEquals(alerts.IE(), alerts.CHROME());
+                assertNotEquals(alerts.IE(), alerts.FF());
+                assertNotEquals(alerts.FF45(), alerts.FF());
+            }
+        }
+        final AlertsStandards alerts2 = method_.getAnnotation(AlertsStandards.class);
+        if (alerts2 != null) {
+            if (!BrowserVersionClassRunner.isDefined(alerts2.value())) {
+                assertNotEquals(alerts2.IE(), alerts2.DEFAULT());
+                assertNotEquals(alerts2.CHROME(), alerts2.DEFAULT());
+                assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
+                assertNotEquals(alerts2.FF(), alerts2.CHROME());
+                assertNotEquals(alerts2.IE(), alerts2.CHROME());
+                assertNotEquals(alerts2.IE(), alerts2.FF());
+                assertNotEquals(alerts2.FF45(), alerts2.FF());
+            }
+        }
+    }
+
+    private void assertNotEquals(final String[] value1, final String[] value2) {
+        if (value1.length != 0 && !BrowserRunner.EMPTY_DEFAULT.equals(value1[0])
+                && value1.length == value2.length
+                && Arrays.asList(value1).toString().equals(Arrays.asList(value2).toString())) {
+            throw new AssertionError("Redundant alert in "
+                    + method_.getDeclaringClass().getSimpleName() + '.' + method_.getName() + "()");
         }
     }
 

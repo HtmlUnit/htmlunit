@@ -80,12 +80,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "getLineDash",
-                        "removeHitRegion", "scrollPathIntoView", "setLineDash", "33 methods"},
-            FF = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
+    @Alerts(DEFAULT = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
                         "removeHitRegion", "scrollPathIntoView", "35 methods"},
-            IE = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
-                        "scrollPathIntoView", "35 methods"},
             CHROME = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
                         "scrollPathIntoView", "36 methods"})
     public void methods() throws Exception {

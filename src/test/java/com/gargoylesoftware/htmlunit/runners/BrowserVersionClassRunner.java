@@ -18,7 +18,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -84,14 +83,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 expectedAlerts = alerts.value();
             }
             else {
-                assertNotEquals(method, alerts.IE(), alerts.DEFAULT());
-                assertNotEquals(method, alerts.CHROME(), alerts.DEFAULT());
-                assertNotEquals(method, alerts.FF(), alerts.DEFAULT());
-                assertNotEquals(method, alerts.FF(), alerts.CHROME());
-                assertNotEquals(method, alerts.IE(), alerts.CHROME());
-                assertNotEquals(method, alerts.IE(), alerts.FF());
-                assertNotEquals(method, alerts.FF45(), alerts.FF());
-
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
@@ -109,14 +100,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         testCase.setExpectedAlerts(expectedAlerts);
     }
 
-    private static void assertNotEquals(final Method method, final String[] value1, final String[] value2) {
-        if (value1.length != 0 && !BrowserRunner.EMPTY_DEFAULT.equals(value1[0])
-                && Arrays.asList(value1).toString().equals(Arrays.asList(value2).toString())) {
-            throw new AssertionError("Redundant alert in "
-                    + method.getDeclaringClass().getSimpleName() + '.' + method.getName() + "()");
-        }
-    }
-
     private void setAlertsStandards(final WebTestCase testCase, final Method method) {
         final AlertsStandards alerts = method.getAnnotation(AlertsStandards.class);
         if (alerts != null) {
@@ -125,14 +108,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 expectedAlerts = alerts.value();
             }
             else {
-                assertNotEquals(method, alerts.IE(), alerts.DEFAULT());
-                assertNotEquals(method, alerts.CHROME(), alerts.DEFAULT());
-                assertNotEquals(method, alerts.FF(), alerts.DEFAULT());
-                assertNotEquals(method, alerts.FF(), alerts.CHROME());
-                assertNotEquals(method, alerts.IE(), alerts.CHROME());
-                assertNotEquals(method, alerts.IE(), alerts.FF());
-                assertNotEquals(method, alerts.FF45(), alerts.FF());
-
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
@@ -267,7 +242,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return false;
     }
 
-    private static boolean isDefined(final String[] alerts) {
+    static boolean isDefined(final String[] alerts) {
         return alerts.length != 1 || !alerts[0].equals(BrowserRunner.EMPTY_DEFAULT);
     }
 
