@@ -64,9 +64,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"0-0", "0-0", "undefined-undefined"},
-            CHROME = {"exception", "0-0", "undefined-undefined"},
-            IE = {"exception", "0-0", "undefined-undefined"})
+    @Alerts(DEFAULT = {"exception", "0-0", "undefined-undefined"},
+            FF = {"0-0", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -312,7 +311,21 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "keydown:16,0,16",
+    @Alerts(DEFAULT = {"keydown:16,0,16",
+                    "keydown:65,0,65",
+                    "keypress:65,65,65",
+                    "keyup:65,0,65",
+                    "keyup:16,0,16",
+                    "keydown:65,0,65",
+                    "keypress:97,97,97",
+                    "keyup:65,0,65",
+                    "keydown:190,0,190",
+                    "keypress:46,46,46",
+                    "keyup:190,0,190",
+                    "keydown:13,0,13",
+                    "keypress:13,13,13",
+                    "keyup:13,0,13"},
+            FF = { "keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:0,65,65",
                     "keyup:65,0,65",
@@ -325,34 +338,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keyup:190,0,190",
                     "keydown:13,0,13",
                     "keypress:13,0,13",
-                    "keyup:13,0,13"},
-            CHROME = {"keydown:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:65,65,65",
-                    "keyup:65,0,65",
-                    "keyup:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:97,97,97",
-                    "keyup:65,0,65",
-                    "keydown:190,0,190",
-                    "keypress:46,46,46",
-                    "keyup:190,0,190",
-                    "keydown:13,0,13",
-                    "keypress:13,13,13",
-                    "keyup:13,0,13"},
-           IE = {"keydown:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:65,65,65",
-                    "keyup:65,0,65",
-                    "keyup:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:97,97,97",
-                    "keyup:65,0,65",
-                    "keydown:190,0,190",
-                    "keypress:46,46,46",
-                    "keyup:190,0,190",
-                    "keydown:13,0,13",
-                    "keypress:13,13,13",
                     "keyup:13,0,13"})
     // An issue with HtmlUnitWebDriver, which mandates a containing form of the <input> to handle pressing RETURN
     @NotYetImplemented

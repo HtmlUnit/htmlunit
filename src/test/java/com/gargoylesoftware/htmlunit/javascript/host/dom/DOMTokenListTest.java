@@ -546,8 +546,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a \t c \n d  e", "4", "4", "a \t c \n d  e"},
-            IE = {"a \t c \n d  e", "4", "4", "a \t c \n d  e"})
+    @Alerts({"a \t c \n d  e", "4", "4", "a \t c \n d  e"})
     public void addToWhitespaceExisting() throws Exception {
         add("a \t c \n d  e", "c");
     }
@@ -728,9 +727,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a \t c \n d  e", "4", "3", "a d  e"},
-            CHROME = {"a \t c \n d  e", "4", "3", "a d e"},
-            IE = {"a \t c \n d  e", "4", "3", "a d e"})
+    @Alerts(DEFAULT = {"a \t c \n d  e", "4", "3", "a d e"},
+            FF = {"a \t c \n d  e", "4", "3", "a d  e"})
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }

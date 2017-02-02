@@ -210,9 +210,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"12", "12"},
-            CHROME = {"15", "15"},
-            IE = {"15", "15"})
+    @Alerts(DEFAULT = {"15", "15"},
+            FF = {"12", "12"})
     @NotYetImplemented({CHROME, IE})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =

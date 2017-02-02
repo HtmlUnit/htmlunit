@@ -303,9 +303,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Window]",
-            CHROME = "[object HTMLFrameElement]",
-            FF = "[object HTMLFrameElement]")
+    @Alerts(DEFAULT = "[object HTMLFrameElement]",
+            IE = "[object Window]")
     public void frames_framesetOnLoad() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
@@ -353,9 +352,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Window]",
-            CHROME = "[object HTMLFrameElement]",
-            FF = "[object HTMLFrameElement]")
+    @Alerts(DEFAULT = "[object HTMLFrameElement]",
+            IE = "[object Window]")
     public void parent_frames() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"

@@ -430,8 +430,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "inform('newHandler')", ""},
-            IE = {"null", "inform('newHandler')", ""})
+    @Alerts({"null", "inform('newHandler')", ""})
     public void setAttribute_eventHandlerEmptyString() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -466,8 +465,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "inform('newHandler')", "undefined"},
-            IE = {"null", "inform('newHandler')", "undefined"})
+    @Alerts({"null", "inform('newHandler')", "undefined"})
     public void setAttribute_eventHandlerUndefined() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2643,9 +2641,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true"},
-            CHROME = "undefined",
-            FF = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE = {"true", "true"})
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -3302,9 +3299,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"div2", "null", "div3", "div4", "div6", "div7", "null"},
-            CHROME = "removeNode not available",
-            FF = "removeNode not available")
+    @Alerts(DEFAULT = "removeNode not available",
+            IE = {"div2", "null", "div3", "div4", "div6", "div7", "null"})
     public void removeNode() throws Exception {
         final String html
             = "<html><head>\n"

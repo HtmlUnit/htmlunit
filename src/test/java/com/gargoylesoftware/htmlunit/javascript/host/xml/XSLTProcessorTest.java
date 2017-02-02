@@ -40,9 +40,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"97", "[object Element]"},
-            IE = "exception",
-            CHROME = "exception")
+    @Alerts(DEFAULT = "exception",
+            FF = {"97", "[object Element]"})
     @NotYetImplemented(FF)
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

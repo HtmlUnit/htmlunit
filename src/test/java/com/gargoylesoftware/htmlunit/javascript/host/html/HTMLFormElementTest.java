@@ -1318,9 +1318,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"in listener", "page2 loaded"},
-            CHROME = "in listener",
-            IE = "in listener")
+    @Alerts(DEFAULT = "in listener",
+            FF = {"in listener", "page2 loaded"})
     public void dispatchEventSubmitTriggersHandlers() throws Exception {
         // use an iframe to capture alerts among 2 pages
         final String container = "<html><body><iframe src='page1'></iframe></body></html>\n";

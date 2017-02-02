@@ -304,7 +304,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
@@ -317,7 +316,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
@@ -331,7 +329,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightUrlEncoded() throws Exception {
@@ -345,7 +342,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightUrlEncoded_contentTypeWithCharset() throws Exception {
@@ -359,7 +355,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightMultipart() throws Exception {
@@ -373,7 +368,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightMultipart_contentTypeWithCharset() throws Exception {
@@ -389,7 +383,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            CHROME = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_methods() throws Exception {
@@ -592,9 +585,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "false", "ex: open", "true"},
-            CHROME = {"false", "true", "false", "true"},
-            IE = {"false", "true", "false", "true"})
+    @Alerts(DEFAULT = {"false", "true", "false", "true"},
+            FF = {"false", "true", "false", "ex: open", "true"})
     public void withCredentials_setBeforeOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -674,9 +666,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"},
-            CHROME = {"false", "false", "true", "false"},
-            IE = {"false", "false", "true", "false"})
+    @Alerts(DEFAULT = {"false", "false", "true", "false"},
+            FF = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
     public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -709,9 +700,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"},
-            CHROME = {"false", "false", "true", "false"},
-            IE = {"false", "false", "true", "false"})
+    @Alerts(DEFAULT = {"false", "false", "true", "false"},
+            FF = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
     public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

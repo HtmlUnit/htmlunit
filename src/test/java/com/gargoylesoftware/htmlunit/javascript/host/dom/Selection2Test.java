@@ -231,9 +231,8 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"None", "None"},
-            FF = {"undefined", "exception", "undefined"},
-            IE = {"undefined", "exception", "undefined"})
+    @Alerts(DEFAULT = {"undefined", "exception", "undefined"},
+            CHROME = {"None", "None"})
     public void empty() throws Exception {
         test("try{selection.empty()}catch(e){alert('exception')}", "selection.type", "x ? x : 'undefined'");
     }

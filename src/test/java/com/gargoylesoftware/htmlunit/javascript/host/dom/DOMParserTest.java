@@ -147,9 +147,8 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGDocument]",
-            CHROME = "[object XMLDocument]",
-            IE = "[object XMLDocument]")
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            FF = "[object SVGDocument]")
     @NotYetImplemented(FF)
     public void parseFromString_application_svgXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_

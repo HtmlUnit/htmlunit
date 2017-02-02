@@ -1069,9 +1069,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "null",
-            CHROME = "null")
+    @Alerts(DEFAULT = "null",
+            IE = "undefined")
     public void all_NamedItem_Unknown() throws Exception {
         namedItem("foo");
     }

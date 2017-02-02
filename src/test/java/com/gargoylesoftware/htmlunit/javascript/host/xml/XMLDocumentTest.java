@@ -161,9 +161,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "true"},
-            CHROME = {"undefined", "undefined"},
-            IE = {"undefined", "undefined"})
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            FF = {"undefined", "true"})
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -180,9 +179,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"true", "books", "books", "3", "#text", "0"},
-            CHROME = "exception",
-            IE = "exception")
+    @Alerts(DEFAULT = "exception",
+            FF = {"true", "books", "books", "3", "#text", "0"})
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -216,9 +214,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"true", "books", "books", "3", "#text", "0"},
-            CHROME = "exception",
-            IE = "exception")
+    @Alerts(DEFAULT = "exception",
+            FF = {"true", "books", "books", "3", "#text", "0"})
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -754,9 +751,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "0", "1"},
-            CHROME = {"1", "0"},
-            IE = {"1", "0"})
+    @Alerts(DEFAULT = {"1", "0"},
+            FF = {"0", "1", "0", "1"})
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

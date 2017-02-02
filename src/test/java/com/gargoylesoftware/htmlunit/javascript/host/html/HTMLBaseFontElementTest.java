@@ -34,9 +34,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLSpanElement]", "undefined", "undefined", "undefined"},
-            CHROME = {"[object HTMLElement]", "undefined", "undefined", "undefined"},
-            FF = {"[object HTMLElement]", "undefined", "undefined", "undefined"},
+    @Alerts(DEFAULT = {"[object HTMLElement]", "undefined", "undefined", "undefined"},
             IE = {"[object HTMLBaseFontElement]", "", "3", ""})
     public void defaults() throws Exception {
         final String html =
@@ -149,9 +147,8 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]"},
-            CHROME = {"[object HTMLElement]", "exception"},
-            FF = {"[object HTMLElement]", "exception"})
+    @Alerts(DEFAULT = {"[object HTMLElement]", "exception"},
+            IE = {"[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

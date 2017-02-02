@@ -277,10 +277,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"},
-            CHROME = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block",
-                            "block", "none"},
-            IE = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none"})
+    @Alerts(DEFAULT = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none"},
+            FF = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"})
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -902,12 +900,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
-                        "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
-            CHROME = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+    @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
-            IE = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                        "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
+            FF = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
+                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"

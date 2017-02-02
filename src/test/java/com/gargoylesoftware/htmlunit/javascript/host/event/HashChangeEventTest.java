@@ -98,9 +98,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HashChangeEvent]", "", "true", "true", "", ""},
-            FF = {"[object HashChangeEvent]", "", "false", "false", "", ""},
-            CHROME = {"[object HashChangeEvent]", "", "false", "false", "", ""},
+    @Alerts(DEFAULT = {"[object HashChangeEvent]", "", "false", "false", "", ""},
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -154,9 +152,8 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "true", "false", "§§URL§§", "§§URL§§#1"},
-            CHROME = "exception",
-            IE = "exception")
+    @Alerts(DEFAULT = "exception",
+            FF = {"[object HashChangeEvent]", "hashchange", "true", "false", "§§URL§§", "§§URL§§#1"})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

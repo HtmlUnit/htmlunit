@@ -231,8 +231,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-1", "2", "-1", "-1"},
-            IE = {"-1", "2", "-1", "-1"})
+    @Alerts({"-1", "2", "-1", "-1"})
     public void setSelectedIndexInvalidValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

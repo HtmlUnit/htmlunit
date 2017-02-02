@@ -1002,9 +1002,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"hi", "null", "abcd", "null"},
-            CHROME = {"hi", "undefined", "abcd", "undefined"},
-            FF = {"hi", "undefined", "abcd", "undefined"})
+    @Alerts(DEFAULT = {"hi", "undefined", "abcd", "undefined"},
+            IE = {"hi", "null", "abcd", "null"})
     public void attributes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

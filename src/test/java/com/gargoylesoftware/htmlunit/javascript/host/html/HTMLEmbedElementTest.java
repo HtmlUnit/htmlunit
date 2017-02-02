@@ -74,11 +74,9 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                    "absbottom", "absmiddle", "bottom", "texttop"},
-            CHROME = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop"},
-            IE = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                    "absbottom", "absmiddle", "baseline", "texttop"})
+            FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "bottom", "texttop"})
     @NotYetImplemented(FF)
     public void setAlign() throws Exception {
         final String html

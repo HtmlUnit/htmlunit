@@ -1561,9 +1561,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"30", "undefined", "30", "30",
-                "40", "50", "string", "string"},
-            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string"})
+    @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void min() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1592,9 +1590,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"30", "undefined", "30", "30",
-                "40", "50", "string", "string"},
-            CHROME = {"30", "undefined", "30", "30", "40", "50", "string", "string"})
+    @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void max() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
