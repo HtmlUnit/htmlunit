@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -105,7 +104,7 @@ public final class TestCaseTest {
         allExpectedLines.removeAll(lines);
         if (!allExpectedLines.isEmpty()) {
             fail("You must specify the following line in " + relativePath + ":\n"
-                    + StringUtils.join(allExpectedLines, System.lineSeparator()));
+                    + String.join(System.lineSeparator(), allExpectedLines));
         }
     }
 }

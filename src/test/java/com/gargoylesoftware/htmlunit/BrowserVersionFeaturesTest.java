@@ -26,7 +26,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
@@ -133,7 +132,7 @@ public class BrowserVersionFeaturesTest  {
         if (!unusedFeatures.isEmpty()) {
             fail("The following " + BrowserVersionFeatures.class.getSimpleName() + " "
                     + (unusedFeatures.size() == 1 ? "is" : "are") + " not used: "
-                    + StringUtils.join(unusedFeatures, ", "));
+                    + String.join(", ", unusedFeatures));
         }
     }
 

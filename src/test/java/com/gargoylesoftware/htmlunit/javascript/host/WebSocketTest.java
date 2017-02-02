@@ -22,7 +22,6 @@ import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
@@ -373,7 +372,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
         while (text.length() > 0 && counter++ < 10);
 
-        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     private static void assertVisible(final String domId, final WebDriver driver) throws Exception {

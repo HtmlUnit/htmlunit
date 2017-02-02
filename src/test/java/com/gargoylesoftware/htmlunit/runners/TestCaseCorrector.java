@@ -26,7 +26,6 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.ComparisonFailure;
 import org.junit.runners.model.FrameworkMethod;
 
@@ -189,7 +188,7 @@ final class TestCaseCorrector {
                     lines.set(i - 1, "    @NotYetImplemented(" + browserSet.iterator().next() + ")");
                 }
                 else if (browserSet.size() > 1) {
-                    lines.set(i - 1, "    @NotYetImplemented({" + StringUtils.join(browserSet, ", ") + "})");
+                    lines.set(i - 1, "    @NotYetImplemented({" + String.join(", ", browserSet) + "})");
                 }
                 else {
                     lines.remove(i - 1);
@@ -203,7 +202,7 @@ final class TestCaseCorrector {
                         it.remove();
                     }
                 }
-                lines.set(i - 1, "    @NotYetImplemented({" + StringUtils.join(allBrowsers, ", ") + "})");
+                lines.set(i - 1, "    @NotYetImplemented({" + String.join(", ", allBrowsers) + "})");
             }
         }
     }

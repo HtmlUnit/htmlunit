@@ -35,7 +35,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -251,7 +250,7 @@ public final class JQueryExtractor {
                             if (browserNames.size() > 1) {
                                 System.out.print("{ ");
                             }
-                            System.out.print(StringUtils.join(browserNames, ", "));
+                            System.out.print(String.join(", ", browserNames));
                             if (browserNames.size() > 1) {
                                 System.out.print(" }");
                             }
