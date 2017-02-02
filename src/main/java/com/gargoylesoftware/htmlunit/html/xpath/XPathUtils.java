@@ -59,6 +59,7 @@ public final class XPathUtils {
     /**
      * Evaluates an XPath expression from the specified node, returning the resultant nodes.
      *
+     * @param <T> the type class
      * @param node the node to start searching from
      * @param xpathExpr the XPath expression
      * @param resolver the prefix resolver to use for resolving namespace prefixes, or null
