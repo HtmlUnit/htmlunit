@@ -22,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.google.common.base.Predicate;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -41,13 +40,9 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Parameters
     public static Collection<Object[]> data() throws Exception {
-        return HostParentOf.data(new Predicate<String>() {
-
-            @Override
-            public boolean apply(final String input) {
-                final char ch = Character.toUpperCase(input.charAt(0));
-                return ch >= 'T' && ch <= 'V';
-            }
+        return HostParentOf.data(input -> {
+            final char ch = Character.toUpperCase(input.charAt(0));
+            return ch >= 'T' && ch <= 'V';
         });
     }
 

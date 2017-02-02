@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
@@ -26,7 +27,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.google.common.base.Predicate;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -45,7 +45,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
         final List<Object[]> list = new ArrayList<>();
         final List<String> strings = TestCaseTest.getAllClassNames();
         for (final String parent : strings) {
-            if (predicate.apply(parent)) {
+            if (predicate.test(parent)) {
                 for (final String child : strings) {
                     list.add(new Object[] {parent, child});
                 }
