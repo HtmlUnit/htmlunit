@@ -76,12 +76,11 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(
-        CHROME = {"[object DocumentType]", "greeting,10,null,undefined,undefined,undefined",
+    @Alerts(DEFAULT = {"[object DocumentType]", "greeting,10,null,undefined,undefined,undefined",
                     "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
-        FF = {"[object DocumentType]", "greeting,10,null,null,null,null",
+            FF = {"[object DocumentType]", "greeting,10,null,null,null,null",
                     "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
-        IE = {"[object DocumentType]", "greeting,10,null,null,null,null",
+            IE = {"[object DocumentType]", "greeting,10,null,null,null,null",
                     "greeting,MyIdentifier,hello.dtd,null,null,null"})
     public void doctype_xml() throws Exception {
         final String html =

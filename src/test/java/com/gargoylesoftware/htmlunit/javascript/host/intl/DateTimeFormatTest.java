@@ -103,7 +103,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-        IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
+            IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
     public void format_ban() throws Exception {
         test("new Intl.DateTimeFormat('ban').format(date)");
     }

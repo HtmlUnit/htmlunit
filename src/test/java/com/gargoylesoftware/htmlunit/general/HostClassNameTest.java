@@ -134,7 +134,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-        FF = "function OfflineResourceList() {\n    [native code]\n}")
+            FF = "function OfflineResourceList() {\n    [native code]\n}")
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
@@ -3180,7 +3180,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-        IE = "[object TextRange]")
+            IE = "[object TextRange]")
     public void textRange() throws Exception {
         test("TextRange");
     }

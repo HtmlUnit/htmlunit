@@ -160,9 +160,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
     }
@@ -371,9 +370,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -447,9 +445,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }

@@ -188,9 +188,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(
-        DEFAULT = {"MutationNameEvents 1.0: true", "MutationNameEvents 2.0: true", "MutationNameEvents 3.0: true"},
-        IE = {"MutationNameEvents 1.0: false", "MutationNameEvents 2.0: false", "MutationNameEvents 3.0: false"})
+    @Alerts(DEFAULT = {"MutationNameEvents 1.0: true", "MutationNameEvents 2.0: true", "MutationNameEvents 3.0: true"},
+            IE = {"MutationNameEvents 1.0: false", "MutationNameEvents 2.0: false", "MutationNameEvents 3.0: false"})
     public void hasFeature_MutationNameEvents() throws Exception {
         hasFeature("MutationNameEvents", "['1.0', '2.0', '3.0']");
     }

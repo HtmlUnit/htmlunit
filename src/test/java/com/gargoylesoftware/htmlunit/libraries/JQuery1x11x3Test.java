@@ -1214,7 +1214,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "1, 1, 2",
-        IE = "0, 2, 2")
+            IE = "0, 2, 2")
     @NotYetImplemented(IE)
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
@@ -2929,7 +2929,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-        FF = {})
+            FF = {})
     public void event__Check_order_of_focusin_focusout_events() throws Exception {
         runTest("event: Check order of focusin/focusout events");
     }
@@ -5202,7 +5202,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-        FF45 = "0, 1, 1")
+            FF45 = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -7613,7 +7613,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 1, 1",
-        CHROME = "0, 2, 2")
+            CHROME = "0, 2, 2")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
@@ -7901,7 +7901,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-        CHROME = "1, 1, 2")
+            CHROME = "1, 1, 2")
     @NotYetImplemented(CHROME)
     // for some reason, real chrome div.getBoundingClientRect().top returns 999.53125
     // not able to reproduce it with simple case

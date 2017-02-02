@@ -1761,9 +1761,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _StereoPannerNode_StereoPannerNode() throws Exception {
         test("StereoPannerNode", "StereoPannerNode");
     }

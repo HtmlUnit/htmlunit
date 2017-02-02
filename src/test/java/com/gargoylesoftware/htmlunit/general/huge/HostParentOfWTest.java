@@ -253,9 +253,8 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _WebGLContextEvent_WebGLContextEvent() throws Exception {
         test("WebGLContextEvent", "WebGLContextEvent");
     }

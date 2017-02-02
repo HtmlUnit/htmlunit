@@ -160,6 +160,7 @@ public class CodeStyleTest {
                 className(lines, relativePath);
                 classNameUsed(lines, classNames, relativePath);
                 spaces(lines, relativePath);
+                indentation(lines, relativePath);
             }
         }
     }
@@ -907,6 +908,21 @@ public class CodeStyleTest {
                         addFailure("Add one more space in " + relativePath + ", line: " + (i + 2));
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Verifies the indentation of the expectations.
+     */
+    private void indentation(final List<String> lines, final String relativePath) {
+        for (int i = 0; i + 1 < lines.size(); i++) {
+            final String line = lines.get(i);
+            if (line.startsWith("        CHROME = ")
+                    || line.startsWith("        IE = ")
+                    || line.startsWith("        FF = ")
+                    || line.startsWith("        FF45 = ")) {
+                addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
             }
         }
     }

@@ -1646,7 +1646,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "0, 4, 4",
-        FF = "0, 4, 4")
+            FF = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -3548,7 +3548,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 5, 5",
-        IE = "1, 4, 5")
+            IE = "1, 4, 5")
     @NotYetImplemented(IE)
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
@@ -4000,8 +4000,8 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "2, 2, 4",
-        FF45 = "0, 1, 1",
-        IE = "0, 4, 4")
+            FF45 = "0, 1, 1",
+            IE = "0, 4, 4")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -6170,7 +6170,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 1, 1",
-        CHROME = "0, 2, 2")
+            CHROME = "0, 2, 2")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");

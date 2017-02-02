@@ -76,9 +76,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _PointerEvent_PointerEvent() throws Exception {
         test("PointerEvent", "PointerEvent");
     }
@@ -141,9 +140,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _PannerNode_PannerNode() throws Exception {
         test("PannerNode", "PannerNode");
     }

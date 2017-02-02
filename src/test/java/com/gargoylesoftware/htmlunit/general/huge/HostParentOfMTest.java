@@ -2015,9 +2015,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _MediaStream_MediaStream() throws Exception {
         test("MediaStream", "MediaStream");
     }

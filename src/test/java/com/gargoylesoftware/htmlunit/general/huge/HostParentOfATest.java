@@ -574,9 +574,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-        CHROME = "true",
-        IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _ClientRectList_ClientRectList() throws Exception {
         test("ClientRectList", "ClientRectList");
     }
@@ -635,9 +634,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _AudioNode_PannerNode() throws Exception {
         test("AudioNode", "PannerNode");
     }
@@ -721,9 +719,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _CSSKeyframeRule_CSSKeyframeRule() throws Exception {
         test("CSSKeyframeRule", "CSSKeyframeRule");
     }
@@ -732,9 +729,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _CSSKeyframesRule_CSSKeyframesRule() throws Exception {
         test("CSSKeyframesRule", "CSSKeyframesRule");
     }
@@ -743,9 +739,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _CSSRule_CSSKeyframeRule() throws Exception {
         test("CSSRule", "CSSKeyframeRule");
     }
@@ -754,9 +749,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _CSSRule_CSSKeyframesRule() throws Exception {
         test("CSSRule", "CSSKeyframesRule");
     }
@@ -849,9 +843,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSConditionRule_CSSConditionRule() throws Exception {
         test("CSSConditionRule", "CSSConditionRule");
     }
@@ -860,9 +853,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSConditionRule_CSSMediaRule() throws Exception {
         test("CSSConditionRule", "CSSMediaRule");
     }
@@ -871,9 +863,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSConditionRule_CSSSupportsRule() throws Exception {
         test("CSSConditionRule", "CSSSupportsRule");
     }
@@ -882,9 +873,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSGroupingRule_CSSConditionRule() throws Exception {
         test("CSSGroupingRule", "CSSConditionRule");
     }

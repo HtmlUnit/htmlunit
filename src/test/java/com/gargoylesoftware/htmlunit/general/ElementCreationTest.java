@@ -176,9 +176,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]",
+    @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLBaseFontElement]")
     public void basefont() throws Exception {
         test("basefont");
@@ -1135,9 +1133,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]",
+    @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void rp() throws Exception {
         test("rp");
@@ -1149,9 +1145,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]",
+    @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void rt() throws Exception {
         test("rt");
@@ -1163,9 +1157,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]",
+    @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
     public void ruby() throws Exception {
         test("ruby");
@@ -1706,9 +1698,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]")
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE = "[object HTMLUnknownElement]")
     public void event_source() throws Exception {
         test("event-source");
     }
@@ -1845,9 +1836,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]")
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE = "[object HTMLUnknownElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -1865,9 +1855,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]")
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE = "[object HTMLUnknownElement]")
     public void rtc() throws Exception {
         test("rtc");
     }

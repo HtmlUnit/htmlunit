@@ -64237,7 +64237,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "1")
     public void _command_slot() throws Exception {
         test("command", "slot");
     }
@@ -64327,7 +64328,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "2")
     public void _keygen_slot() throws Exception {
         test("keygen", "slot");
     }
@@ -64390,7 +64392,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            IE = "1")
     public void _template_slot() throws Exception {
         test("template", "slot");
     }
@@ -64498,7 +64501,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            FF = "1")
     public void _slot_command() throws Exception {
         test("slot", "command");
     }
@@ -64626,7 +64630,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     @NotYetImplemented
-    public void _slot_plainText() throws Exception {
+    public void _slot_plaintext() throws Exception {
         test("slot", "plaintext");
     }
 
