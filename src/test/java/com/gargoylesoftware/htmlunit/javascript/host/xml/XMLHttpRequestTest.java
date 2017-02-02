@@ -965,7 +965,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]"},
+    @Alerts(DEFAULT = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]"},
             IE = {"null", "myID", "blah", "span", "[object XMLDocument]"})
     public void responseXML_getElementById2() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
