@@ -133,9 +133,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:image/webp", "charset"},
-            FF = {"CONTENT_TYPE:application/octet-stream", "charset"},
-            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            CHROME = {"CONTENT_TYPE:image/webp", "charset"})
     public void contentTypeWebp() throws Exception {
         contentType("webp");
     }
@@ -162,9 +161,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/x-m4a", "charset"},
-            FF = {"CONTENT_TYPE:audio/mp4", "charset"},
-            IE = {"CONTENT_TYPE:audio/mp4", "charset"})
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/mp4", "charset"},
+            CHROME = {"CONTENT_TYPE:audio/x-m4a", "charset"})
     public void contentTypeM4a() throws Exception {
         contentType("m4a");
     }
@@ -173,9 +171,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/mp3", "charset"},
-            FF = {"CONTENT_TYPE:audio/mpeg", "charset"},
-            IE = {"CONTENT_TYPE:audio/mpeg", "charset"})
+    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/mpeg", "charset"},
+            CHROME = {"CONTENT_TYPE:audio/mp3", "charset"})
     public void contentTypeMp3() throws Exception {
         contentType("mp3");
     }
@@ -194,9 +191,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:video/ogg", "charset"},
-            FF = {"CONTENT_TYPE:video/x-ogm", "charset"},
-            IE = {"CONTENT_TYPE:video/x-ogm", "charset"})
+    @Alerts(DEFAULT = {"CONTENT_TYPE:video/x-ogm", "charset"},
+            CHROME = {"CONTENT_TYPE:video/ogg", "charset"})
     public void contentTypeOgm() throws Exception {
         contentType("ogm");
     }
@@ -284,9 +280,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:application/xhtml+xml", "charset"},
-            FF = {"CONTENT_TYPE:application/octet-stream", "charset"},
-            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            CHROME = {"CONTENT_TYPE:application/xhtml+xml", "charset"})
     public void contentTypeXhtm() throws Exception {
         contentType("xhtm");
     }

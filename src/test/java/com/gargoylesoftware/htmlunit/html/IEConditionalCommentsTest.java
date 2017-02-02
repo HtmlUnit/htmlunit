@@ -49,8 +49,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE = "hello")
+    @Alerts("hello")
     public void if_lte_IE_6() throws Exception {
         final String html = "<html><head>\n"
             + "<script>alert('hello')</script>\n"
@@ -63,8 +62,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hello",
-            IE = "hello")
+    @Alerts("hello")
     public void if_lte_IE_7() throws Exception {
         final String html = "<html><head>\n"
             + "<script>alert('hello')</script>\n"

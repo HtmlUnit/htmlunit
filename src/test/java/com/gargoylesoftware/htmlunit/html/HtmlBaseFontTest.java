@@ -36,9 +36,7 @@ public class HtmlBaseFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            CHROME = "[object HTMLElement]",
-            FF = "[object HTMLElement]",
+    @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLBaseFontElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
