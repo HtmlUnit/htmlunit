@@ -96,7 +96,7 @@ public class DOMTokenList extends SimpleScriptable {
             if (attr != null) {
                 String value = attr.getValue();
                 if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT)) {
-                    value = StringUtils.join(StringUtils.split(value, whitespaceChars()), ' ');
+                    value = String.join(" ", value.split(whitespaceChars()));
                 }
                 return value;
             }
@@ -157,7 +157,7 @@ public class DOMTokenList extends SimpleScriptable {
             value = result.toString();
 
             if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
-                value = StringUtils.join(StringUtils.split(value, whitespaceChars()), ' ');
+                value = String.join(" ", value.split(whitespaceChars()));
             }
             updateAttribute(value);
 

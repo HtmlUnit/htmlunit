@@ -27,7 +27,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1271,7 +1270,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     private void queryCommandSupported(final String... commands) throws Exception {
-        final String jsCommandArray = "['" + StringUtils.join(commands, "', '") + "']";
+        final String jsCommandArray = "['" + String.join("', '", commands) + "']";
         final String html = "<html><head><title>Test</title><script>\n"
             + "function doTest() {\n"
             + "  var cmds = " + jsCommandArray + ";\n"

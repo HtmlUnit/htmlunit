@@ -171,7 +171,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     }
 
     private void width_like_properties(final String... properties) throws Exception {
-        final String props = "'" + StringUtils.join(properties, "', '") + "'";
+        final String props = "'" + String.join("', '", properties) + "'";
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"

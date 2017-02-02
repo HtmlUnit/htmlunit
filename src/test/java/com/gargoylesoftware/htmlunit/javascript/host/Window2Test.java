@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -193,7 +192,7 @@ public class Window2Test extends WebDriverTestCase {
 
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
-            + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
+            + "  var props = ['" + String.join("', '", properties) + "'];\n"
             + "  for (var i = 0; i < props.length; i++)\n"
             + "    alert(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
             + "</script>\n"
@@ -211,7 +210,7 @@ public class Window2Test extends WebDriverTestCase {
 
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
-            + "  var props = ['" + StringUtils.join(properties, "', '") + "'];\n"
+            + "  var props = ['" + String.join("', '", properties) + "'];\n"
             + "  for (var i = 0; i < props.length; i++)\n"
             + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
             + "</script>\n"

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -778,7 +777,7 @@ public class EventTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
@@ -837,7 +836,7 @@ public class EventTest extends WebDriverTestCase {
         driver.findElement(By.id("input2")).click();
         final String addedValue = logElement.getAttribute("value").substring(initialValue.length());
         final String text = addedValue.trim().replaceAll("\r", "");
-        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**

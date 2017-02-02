@@ -26,7 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -103,7 +102,7 @@ public class HostTestsTest {
         if (!unusedNames.isEmpty()) {
             fail("You must specify the following line"
                     + (unusedNames.size() == 1 ? "" : "s") + " in " + file.getName() + ":\n"
-                    + StringUtils.join(unusedNames, ", "));
+                    + String.join(", ", unusedNames));
         }
     }
 }

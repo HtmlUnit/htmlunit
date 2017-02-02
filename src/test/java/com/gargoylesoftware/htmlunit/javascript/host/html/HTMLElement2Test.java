@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -892,7 +891,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         final WebElement log = driver.findElement(By.id("log"));
         log.click();
         final String text = log.getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
