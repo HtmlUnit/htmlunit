@@ -5,6 +5,7 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
 
 <suppressions>
+    <suppress checks="JavadocPackage" files=".*[\\/]src[\\/](test)[\\/]"/>
     <suppress checks="AvoidStarImport" files="JavaScriptConfiguration.java"/>
     <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
     <suppress checks="FileLength" files="BrowserVersionFeatures.java"/>
