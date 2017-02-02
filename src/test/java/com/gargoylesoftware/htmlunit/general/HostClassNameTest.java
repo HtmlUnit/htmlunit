@@ -202,9 +202,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function CSSFontFaceRule() { [native code] }",
-            FF = "[object CSSFontFaceRule]",
-            IE = "[object CSSFontFaceRule]")
+    @Alerts(DEFAULT = "[object CSSFontFaceRule]",
+            CHROME = "function CSSFontFaceRule() { [native code] }")
     public void cssFontFaceRule() throws Exception {
         test("CSSFontFaceRule");
     }
@@ -215,9 +214,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function CSSImportRule() { [native code] }",
-            FF = "[object CSSImportRule]",
-            IE = "[object CSSImportRule]")
+    @Alerts(DEFAULT = "[object CSSImportRule]",
+            CHROME = "function CSSImportRule() { [native code] }")
     public void cssImportRule() throws Exception {
         test("CSSImportRule");
     }

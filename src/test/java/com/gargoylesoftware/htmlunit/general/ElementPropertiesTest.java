@@ -1316,9 +1316,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,"
                 + "name,noResize,scrolling,"
                 + "src",
-            FF = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,name,noResize,"
-                + "scrolling,"
-                + "src",
             IE = "border,borderColor,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),"
                 + "height,longDesc,marginHeight,marginWidth,name,noResize,scrolling,security,src,"
                 + "width",

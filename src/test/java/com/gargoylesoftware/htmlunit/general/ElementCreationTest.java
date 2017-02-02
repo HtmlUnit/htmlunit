@@ -2026,9 +2026,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLPictureElement]",
-            FF = "[object HTMLPictureElement]")
+    @Alerts(DEFAULT = "[object HTMLPictureElement]",
+            IE = "[object HTMLUnknownElement]")
     public void picture() throws Exception {
         test("picture");
     }
