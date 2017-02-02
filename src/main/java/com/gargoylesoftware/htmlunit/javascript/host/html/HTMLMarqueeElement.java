@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMarquee.class, browsers = { @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(domClass = HtmlMarquee.class, browsers = {@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**

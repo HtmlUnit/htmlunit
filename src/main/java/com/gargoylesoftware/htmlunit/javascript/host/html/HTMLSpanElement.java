@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -37,10 +36,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlSpan.class),
-        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF))
-    })
+@JsxClass(domClass = HtmlSpan.class)
+@JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF))
 public class HTMLSpanElement extends HTMLElement {
 
     private boolean endTagForbidden_;

@@ -22,7 +22,6 @@ import org.apache.xml.utils.PrefixResolver;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -34,10 +33,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
-@JsxClasses({
-        @JsxClass(browsers = @WebBrowser(EDGE)),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME))
-    })
+@JsxClass(browsers = @WebBrowser(EDGE))
+@JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME))
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Object element_;

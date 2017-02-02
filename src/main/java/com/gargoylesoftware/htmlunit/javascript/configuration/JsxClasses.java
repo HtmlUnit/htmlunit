@@ -20,7 +20,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to mark a Java class as JavaScript class.
+ * An annotation for repeated {@link JsxClass}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -33,5 +33,5 @@ public @interface JsxClasses {
      * The different classes.
      * @return the classes
      */
-    JsxClass[] value() default { };
+    JsxClass[] value();
 }

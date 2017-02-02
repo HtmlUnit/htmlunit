@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -28,10 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlBackgroundSound.class, browsers = { @WebBrowser(IE)}),
-        @JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, browsers = @WebBrowser(FF))
-    })
+@JsxClass(domClass = HtmlBackgroundSound.class, browsers = {@WebBrowser(IE)})
+@JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, browsers = @WebBrowser(FF))
 public class HTMLBGSoundElement extends HTMLElement {
 
     /**

@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -39,15 +38,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(IE))
-    })
+@JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(IE))
 public class HTMLBlockElement extends HTMLElement {
 
     /**

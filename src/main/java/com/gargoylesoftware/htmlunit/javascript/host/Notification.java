@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
 public class Notification extends EventTarget {
 
     /**

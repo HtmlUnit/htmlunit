@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgSet;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgSet.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
+@JsxClass(domClass = SvgSet.class, browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
 public class SVGSetElement extends SVGAnimationElement {
 
     /**

@@ -42,7 +42,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlApplet.class, browsers = { @WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(domClass = HtmlApplet.class, browsers = {@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class HTMLAppletElement extends HTMLElement {
 
     /**

@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class, browsers = { @WebBrowser(IE)})
+@JsxClass(domClass = HtmlInlineQuotation.class, browsers = {@WebBrowser(IE)})
 public class HTMLInlineQuotationElement extends HTMLElement {
 
     /**

@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMeter.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME)})
+@JsxClass(domClass = HtmlMeter.class, browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
 public class HTMLMeterElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */

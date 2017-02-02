@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -35,10 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlDivision.class),
-        @JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(FF))
-    })
+@JsxClass(domClass = HtmlDivision.class)
+@JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(FF))
 public class HTMLDivElement extends HTMLElement {
 
     /**

@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -28,10 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF)}),
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
-    })
+@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
 public class SVGGraphicsElement extends SVGElement {
 
     /**

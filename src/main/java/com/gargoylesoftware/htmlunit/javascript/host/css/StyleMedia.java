@@ -23,7 +23,6 @@ import org.w3c.css.sac.SACMediaList;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -35,10 +34,8 @@ import com.steadystate.css.dom.MediaListImpl;
  *
  * @author Ahmed Ashour
  */
-@JsxClasses({
-        @JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME)),
-        @JsxClass(browsers = { @WebBrowser(IE), @WebBrowser(EDGE)})
-    })
+@JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = {@WebBrowser(IE), @WebBrowser(EDGE)})
 public class StyleMedia extends SimpleScriptable {
 
     /**

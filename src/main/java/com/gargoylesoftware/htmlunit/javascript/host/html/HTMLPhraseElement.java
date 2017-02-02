@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
@@ -58,34 +57,32 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlAbbreviated.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlAcronym.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlBig.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlBlink.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlBold.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlCitation.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlCode.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlDefinition.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlEmphasis.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlItalic.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlKeyboard.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlNoBreak.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlRt.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlS.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlSample.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlSmall.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlStrike.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlSubscript.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlSuperscript.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlStrong.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlTeletype.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlUnderlined.class, browsers = @WebBrowser(IE)),
-        @JsxClass(domClass = HtmlVariable.class, browsers = @WebBrowser(IE))
-    })
+@JsxClass(domClass = HtmlAbbreviated.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlAcronym.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlBig.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlBlink.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlBold.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlCitation.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlCode.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlDefinition.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlEmphasis.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlItalic.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlKeyboard.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlNoBreak.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlRt.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlS.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlSample.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlSmall.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlStrike.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlSubscript.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlSuperscript.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlStrong.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlTeletype.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlUnderlined.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlVariable.class, browsers = @WebBrowser(IE))
 public class HTMLPhraseElement extends HTMLElement {
 
     /**

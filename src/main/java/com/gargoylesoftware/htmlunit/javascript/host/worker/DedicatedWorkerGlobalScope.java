@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -56,10 +55,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  */
-@JsxClasses({
-        @JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(CHROME)}),
-        @JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(IE))
-    })
+@JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
+@JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(IE))
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);

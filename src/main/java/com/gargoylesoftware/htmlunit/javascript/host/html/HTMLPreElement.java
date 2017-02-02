@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -40,11 +39,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-        @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(CHROME)),
-        @JsxClass(domClass = HtmlPreformattedText.class),
-        @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(CHROME))
-    })
+@JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(CHROME))
+@JsxClass(domClass = HtmlPreformattedText.class)
+@JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(CHROME))
 public class HTMLPreElement extends HTMLElement {
 
     /** Valid values for the {@link #getClear() clear} property. */
