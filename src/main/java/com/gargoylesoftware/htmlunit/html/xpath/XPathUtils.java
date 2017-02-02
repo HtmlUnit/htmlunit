@@ -64,30 +64,31 @@ public final class XPathUtils {
      * @param resolver the prefix resolver to use for resolving namespace prefixes, or null
      * @return the list of objects found
      */
-    public static List<Object> getByXPath(final DomNode node, final String xpathExpr, final PrefixResolver resolver) {
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> getByXPath(final DomNode node, final String xpathExpr, final PrefixResolver resolver) {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid XPath expression");
         }
 
         PROCESS_XPATH_.set(Boolean.TRUE);
-        final List<Object> list = new ArrayList<>();
+        final List<T> list = new ArrayList<>();
         try {
             final XObject result = evaluateXPath(node, xpathExpr, resolver);
 
             if (result instanceof XNodeSet) {
                 final NodeList nodelist = ((XNodeSet) result).nodelist();
                 for (int i = 0; i < nodelist.getLength(); i++) {
-                    list.add(nodelist.item(i));
+                    list.add((T) nodelist.item(i));
                 }
             }
             else if (result instanceof XNumber) {
-                list.add(Double.valueOf(result.num()));
+                list.add((T) Double.valueOf(result.num()));
             }
             else if (result instanceof XBoolean) {
-                list.add(Boolean.valueOf(result.bool()));
+                list.add((T) Boolean.valueOf(result.bool()));
             }
             else if (result instanceof XString) {
-                list.add(result.str());
+                list.add((T) result.str());
             }
             else {
                 throw new RuntimeException("Unproccessed " + result.getClass().getName());

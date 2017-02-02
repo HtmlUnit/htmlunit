@@ -555,9 +555,7 @@ public class XMLDOMNode extends MSXMLScriptable {
                 "XMLDOMNode.selectNodes('" + expression + "')") {
             @Override
             protected List<DomNode> computeElements() {
-                @SuppressWarnings("unchecked")
-                final List<DomNode> nodes = (List<DomNode>) domNode.getByXPath(expression);
-                return new ArrayList<>(nodes);
+                return new ArrayList<>(domNode.getByXPath(expression));
             }
         };
         return collection;

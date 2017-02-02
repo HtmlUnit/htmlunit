@@ -178,14 +178,13 @@ public class HtmlRadioButtonInput extends HtmlInput {
      *
      * @param radioButtonInput the radio Button
      */
-    @SuppressWarnings("unchecked")
     private void setCheckedForPage(final HtmlPage htmlPage) {
         // May be done in single XPath search?
         final List<HtmlRadioButtonInput> pageInputs =
-            (List<HtmlRadioButtonInput>) htmlPage.getByXPath("//input[lower-case(@type)='radio' "
+            htmlPage.getByXPath("//input[lower-case(@type)='radio' "
                 + "and @name='" + getNameAttribute() + "']");
         final List<HtmlRadioButtonInput> formInputs =
-            (List<HtmlRadioButtonInput>) htmlPage.getByXPath("//form//input[lower-case(@type)='radio' "
+            htmlPage.getByXPath("//form//input[lower-case(@type)='radio' "
                 + "and @name='" + getNameAttribute() + "']");
 
         pageInputs.removeAll(formInputs);

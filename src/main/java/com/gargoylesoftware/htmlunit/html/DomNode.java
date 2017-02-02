@@ -1555,12 +1555,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Evaluates the specified XPath expression from this node, returning the matching elements.
      *
+     * @param <T> the expected type
      * @param xpathExpr the XPath expression to evaluate
      * @return the elements which match the specified XPath expression
      * @see #getFirstByXPath(String)
      * @see #getCanonicalXPath()
      */
-    public List<?> getByXPath(final String xpathExpr) {
+    public <T> List<T> getByXPath(final String xpathExpr) {
         PrefixResolver prefixResolver = null;
         if (hasFeature(XPATH_SELECTION_NAMESPACES)) {
             /*

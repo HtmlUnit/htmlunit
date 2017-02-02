@@ -655,7 +655,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver(IE)
     @NotYetImplemented
-    public void shiftClickAnchor() throws Exception {
+    public void shiftClick() throws Exception {
         final String html = "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
             + "</form></body></html>";
@@ -674,6 +674,37 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             .keyDown(Keys.SHIFT)
             .click()
             .keyUp(Keys.SHIFT)
+            .perform();
+
+        assertEquals("Should have opened a new window", windowsSize + 1, driver.getWindowHandles().size());
+        assertEquals("Should not have navigated away", originalTitle, driver.getTitle());
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @BuggyWebDriver({IE, FF})
+    @NotYetImplemented
+    public void ctrlClick() throws Exception {
+        final String html = "<html><head><title>First</title></head><body>\n"
+            + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<head><title>Second</title>");
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement link = driver.findElement(By.linkText("Click Me"));
+
+        final String originalTitle = driver.getTitle();
+
+        final int windowsSize = driver.getWindowHandles().size();
+
+        new Actions(driver)
+            .moveToElement(link)
+            .keyDown(Keys.CONTROL)
+            .click()
+            .keyUp(Keys.CONTROL)
             .perform();
 
         assertEquals("Should have opened a new window", windowsSize + 1, driver.getWindowHandles().size());
