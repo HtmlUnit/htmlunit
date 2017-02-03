@@ -238,6 +238,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     if (count >= 1000) {
                         shutDownReal(browserVersion);
                         driver = null;
+                        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(browserVersion);
                     }
                     else {
                         WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.put(browserVersion, count);
