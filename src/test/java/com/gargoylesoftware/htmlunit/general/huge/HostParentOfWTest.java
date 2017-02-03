@@ -187,6 +187,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(CHROME)
     public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "RTCPeerConnection");
     }

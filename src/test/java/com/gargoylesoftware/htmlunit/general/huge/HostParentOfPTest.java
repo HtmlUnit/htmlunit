@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import java.util.Collection;
@@ -602,6 +603,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(CHROME)
     public void _RTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "webkitRTCPeerConnection");
     }
