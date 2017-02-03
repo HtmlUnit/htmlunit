@@ -31,6 +31,7 @@ import org.junit.runners.model.Statement;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
@@ -43,6 +44,10 @@ public class ErrorOutputChecker implements TestRule {
                     + "2\\.53\\.1\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n");
+    private static final Pattern WEB_DRIVER_EDGE_MSG1 =
+            Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n");
+    private static final Pattern WEB_DRIVER_EDGE_MSG2 =
+            Pattern.compile(".*Stopping server.\r\r?\n");
     private static final Pattern WEB_DRIVER_IGNORE_MSG =
             Pattern.compile(".*ProtocolHandshake createSession\r?\n"
                     + "INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end\r?\n"
@@ -77,6 +82,8 @@ public class ErrorOutputChecker implements TestRule {
             // remove webdriver message
             output = WEB_DRIVER_CHROME_MSG.matcher(output).replaceAll("");
             output = WEB_DRIVER_IE_MSG.matcher(output).replaceAll("");
+            output = WEB_DRIVER_EDGE_MSG1.matcher(output).replaceAll("");
+            output = WEB_DRIVER_EDGE_MSG2.matcher(output).replaceAll("");
             output = WEB_DRIVER_IGNORE_MSG.matcher(output).replaceAll("");
 
             if (!output.isEmpty()) {
