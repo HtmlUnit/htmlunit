@@ -142,9 +142,14 @@ public class HtmlAnchor extends HtmlElement {
                     + "', using the originating URL "
                     + page.getUrl());
         }
-        page.getWebClient().download(page.getEnclosingWindow(),
-                page.getResolvedTarget(getTargetAttribute()),
-                webRequest, true, false, "Link click");
+        final String target;
+        if (shiftKey || ctrlKey) {
+            target = "_blank";
+        }
+        else {
+            target = page.getResolvedTarget(getTargetAttribute());
+        }
+        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest, true, false, "Link click");
     }
 
     /**

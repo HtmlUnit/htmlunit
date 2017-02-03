@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlAnchor}.
@@ -578,4 +579,66 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final HtmlAnchor htmlAnchor = page.getAnchorByName("foo");
         assertTrue(htmlAnchor.asXml().contains("</a>"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickShift() throws Exception {
+        final String first
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final String second
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, first);
+        webConnection.setResponse(URL_SECOND, second);
+        client.setWebConnection(webConnection);
+
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        final HtmlPage secondPage = anchor.click(true, false, false);
+        assertEquals(2, getWebClient().getTopLevelWindows().size());
+        assertEquals("Second", secondPage.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void clickCtrl() throws Exception {
+        final String first
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final String second
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, first);
+        webConnection.setResponse(URL_SECOND, second);
+        client.setWebConnection(webConnection);
+
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        final HtmlPage secondPage = anchor.click(false, true, false);
+        assertEquals(2, getWebClient().getTopLevelWindows().size());
+        assertEquals("First", secondPage.getTitleText());
+    }
+
 }
