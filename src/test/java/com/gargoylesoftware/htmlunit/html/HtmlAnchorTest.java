@@ -652,7 +652,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(IE)
-    @NotYetImplemented
     public void shiftClick() throws Exception {
         final String html = "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
@@ -683,7 +682,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver({IE, FF})
-    @NotYetImplemented
     public void ctrlClick() throws Exception {
         final String html = "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"

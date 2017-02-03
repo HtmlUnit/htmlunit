@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -64,6 +65,29 @@ public class HtmlAnchor extends HtmlElement {
     HtmlAnchor(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
+        final boolean ctrl = event.getCtrlKey();
+        WebWindow oldWebWindow = null;
+        if (ctrl) {
+            oldWebWindow = ((HTMLElement) event.getSrcElement()).getDomNodeOrDie()
+                    .getPage().getWebClient().getCurrentWindow();
+        }
+
+        P page = super.click(event, ignoreVisibility);
+
+        if (ctrl) {
+            page.getEnclosingWindow().getWebClient().setCurrentWindow(oldWebWindow);
+            page = (P) oldWebWindow.getEnclosedPage();
+        }
+
+        return page;
     }
 
     /**

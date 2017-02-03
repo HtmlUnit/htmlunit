@@ -9,7 +9,7 @@
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, ScriptPreProcessor, Bugfixes">
             <action type="fix" dev="asashour">
-                HtmlAnchor: handle clicking page with Shift key.
+                HtmlAnchor: handle clicking page with shift or ctrl keys.
             </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: change the return type of DomNode.getByXPath.
