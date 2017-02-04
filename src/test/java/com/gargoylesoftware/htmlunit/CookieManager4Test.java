@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assume.assumeTrue;
 
 import java.net.InetAddress;
@@ -31,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -148,8 +146,10 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
 
-        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 "text/html", responseHeader);
@@ -178,8 +178,10 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
 
-        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 "text/html", responseHeader);
@@ -206,8 +208,10 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
 
-        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 "text/html", responseHeader);
@@ -222,9 +226,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "c10=10; c9=9",
-            CHROME = "c10=10")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "c11=11; c12=12",
+            CHROME = "c12=12")
     public void storedDomain4() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
@@ -236,17 +239,19 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/"));
 
-        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 "text/html", responseHeader);
 
         final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST4));
 
-        assertEquals("c10=10; path=/; domain=htmlunit", driver.manage().getCookieNamed("c10").toString());
-        if (driver.manage().getCookieNamed("c9") != null) {
-            assertEquals("c9=9; path=/; domain=htmlunit", driver.manage().getCookieNamed("c9").toString());
+        assertEquals("c12=12; path=/; domain=htmlunit", driver.manage().getCookieNamed("c12").toString());
+        if (driver.manage().getCookieNamed("c11") != null) {
+            assertEquals("c11=11; path=/; domain=htmlunit", driver.manage().getCookieNamed("c11").toString());
         }
     }
 
@@ -270,8 +275,10 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
 
-                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
-                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "  document.cookie='c9=9; Domain=.org; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=org; Path=/';\n"
+                + "  document.cookie='c11=11; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c12=12; Domain=htmlunit; Path=/';\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";
@@ -305,8 +312,10 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
 
-                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
-                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "  document.cookie='c9=9; Domain=.org; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=org; Path=/';\n"
+                + "  document.cookie='c11=11; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c12=12; Domain=htmlunit; Path=/';\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";
@@ -338,8 +347,10 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
 
-                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
-                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "  document.cookie='c9=9; Domain=.org; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=org; Path=/';\n"
+                + "  document.cookie='c11=11; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c12=12; Domain=htmlunit; Path=/';\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";
@@ -355,9 +366,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "c10=10; path=/; domain=htmlunit", "c9=9; path=/; domain=htmlunit"},
-            CHROME = {"1", "c10=10; path=/; domain=htmlunit"})
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
+            CHROME = {"1", "c12=12; path=/; domain=htmlunit"})
     public void storedDomainFromJs4() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -374,8 +384,10 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
 
-                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
-                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "  document.cookie='c9=9; Domain=.org; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=org; Path=/';\n"
+                + "  document.cookie='c11=11; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c12=12; Domain=htmlunit; Path=/';\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";
@@ -384,9 +396,9 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         final String[] expected = getExpectedAlerts();
         assertEquals(Integer.parseInt(expected[0]), driver.manage().getCookies().size());
-        assertEquals(expected[1], driver.manage().getCookieNamed("c10").toString());
+        assertEquals(expected[1], driver.manage().getCookieNamed("c12").toString());
         if (Integer.parseInt(expected[0]) > 1) {
-            assertEquals(expected[2], driver.manage().getCookieNamed("c9").toString());
+            assertEquals(expected[2], driver.manage().getCookieNamed("c11").toString());
         }
     }
 

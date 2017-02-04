@@ -97,7 +97,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
      */
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
         super(new HtmlUnitVersionAttributeHandler(),
-                new HtmlUnitDomainHandler(),
+                new HtmlUnitDomainHandler(browserVersion),
                 new HtmlUnitPathHandler(browserVersion),
                 new BasicMaxAgeHandler(),
                 new BasicSecureHandler(),

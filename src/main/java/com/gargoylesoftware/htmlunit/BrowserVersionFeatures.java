@@ -524,6 +524,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
 
+    /** domain '.org' is handled as 'org'. */
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
+    HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS,
+
     /** Indicates that the start date for two digits cookies is 1970
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).

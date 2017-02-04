@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
@@ -26,6 +28,8 @@ import org.apache.http.impl.cookie.BasicDomainHandler;
 import org.apache.http.util.Args;
 import org.apache.http.util.TextUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 /**
  * Customized BasicDomainHandler for HtmlUnit.
  *
@@ -33,6 +37,11 @@ import org.apache.http.util.TextUtils;
  * @author Ahmed Ashour
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
+    private final BrowserVersion browserVersion_;
+
+    HtmlUnitDomainHandler(final BrowserVersion browserVersion) {
+        browserVersion_ = browserVersion;
+    }
 
     @Override
     public void parse(final SetCookie cookie, final String value)
@@ -49,7 +58,8 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         domain = domain.toLowerCase(Locale.ROOT);
 
         final int dotIndex = domain.indexOf('.');
-        if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
+        if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)
+                && dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
             domain = domain.toLowerCase(Locale.ROOT);
             domain = domain.substring(1);
         }
@@ -74,7 +84,9 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
             final String host = origin.getHost();
             domain = domain.toLowerCase(Locale.ROOT);
-            domain = domain.substring(1);
+            if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)) {
+                domain = domain.substring(1);
+            }
             if (host.equals(domain)) {
                 return true;
             }
