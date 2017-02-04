@@ -922,13 +922,12 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("frame loaded")
-    @NotYetImplemented
     public void siblingWithoutContentBeforeFrameset() throws Exception {
         final String html = "<html>\n"
                 + "<div><span></span></div>\n"
                 + "<frameset>\n"
                 + "  <frame name='main' src='" + URL_SECOND + "' />\n"
-                + "</div>\n"
+                + "</frameset>\n"
                 + "</html>";
 
         final String html2 = "<html><body>\n"
@@ -946,12 +945,59 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("frame loaded")
+    public void siblingWithWhitespaceContentBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div>     \t \r \r\n</div>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(1, webDriver.findElements(By.name("main")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void siblingWithNbspContentBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div>&nbsp;</div>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</div>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(0, webDriver.findElements(By.name("main")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void siblingWithContentBeforeFrameset() throws Exception {
         final String html = "<html>\n"
                 + "<div><span>CONTENT</span></div>\n"
                 + "<frameset>\n"
                 + "  <frame name='main' src='" + URL_SECOND + "' />\n"
-                + "</div>\n"
+                + "</frameset>\n"
                 + "</html>";
 
         final String html2 = "<html><body>\n"
