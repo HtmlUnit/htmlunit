@@ -254,6 +254,146 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void storedDomainFromJs1() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<p>Cookie Domain Test</p>\n"
+                + "<script>\n"
+                + "  document.cookie='c1=1; Domain=." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c2=2; Domain=" + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+
+                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_HOST1));
+
+        assertEquals(4, driver.manage().getCookies().size());
+        assertEquals("c1=1; path=/; domain=.htmlunit.org", driver.manage().getCookieNamed("c1").toString());
+        assertEquals("c2=2; path=/; domain=.htmlunit.org", driver.manage().getCookieNamed("c2").toString());
+        assertEquals("c3=3; path=/; domain=.host1.htmlunit.org", driver.manage().getCookieNamed("c3").toString());
+        assertEquals("c4=4; path=/; domain=.host1.htmlunit.org", driver.manage().getCookieNamed("c4").toString());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void storedDomainFromJs2() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<p>Cookie Domain Test</p>\n"
+                + "<script>\n"
+                + "  document.cookie='c1=1; Domain=." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c2=2; Domain=" + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+
+                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_HOST2));
+
+        assertEquals(2, driver.manage().getCookies().size());
+        assertEquals("c1=1; path=/; domain=.htmlunit.org", driver.manage().getCookieNamed("c1").toString());
+        assertEquals("c2=2; path=/; domain=.htmlunit.org", driver.manage().getCookieNamed("c2").toString());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void storedDomainFromJs3() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<p>Cookie Domain Test</p>\n"
+                + "<script>\n"
+                + "  document.cookie='c1=1; Domain=." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c2=2; Domain=" + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+
+                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_HOST3));
+
+        assertEquals(2, driver.manage().getCookies().size());
+        assertEquals("c1=1; path=/; domain=.htmlunit.org", driver.manage().getCookieNamed("c1").toString());
+        assertEquals("c2=2; path=/; domain=.htmlunit.org", driver.manage().getCookieNamed("c2").toString());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "c10=10; path=/; domain=htmlunit", "c9=9; path=/; domain=htmlunit"},
+            CHROME = {"1", "c10=10; path=/; domain=htmlunit"})
+    @NotYetImplemented(CHROME)
+    public void storedDomainFromJs4() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<p>Cookie Domain Test</p>\n"
+                + "<script>\n"
+                + "  document.cookie='c1=1; Domain=." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c2=2; Domain=" + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c3=3; Domain=.host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c4=4; Domain=host1." + DOMAIN + "; Path=/';\n"
+                + "  document.cookie='c5=5; Domain=." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c6=6; Domain=" + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c7=7; Domain=.host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+                + "  document.cookie='c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
+
+                + "  document.cookie='c9=9; Domain=.htmlunit; Path=/';\n"
+                + "  document.cookie='c10=10; Domain=htmlunit; Path=/';\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html, new URL(URL_HOST4));
+
+        final String[] expected = getExpectedAlerts();
+        assertEquals(Integer.parseInt(expected[0]), driver.manage().getCookies().size());
+        assertEquals(expected[1], driver.manage().getCookieNamed("c10").toString());
+        if (Integer.parseInt(expected[0]) > 1) {
+            assertEquals(expected[2], driver.manage().getCookieNamed("c9").toString());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("c1=1; c2=2")
     public void domainDuplicate() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
