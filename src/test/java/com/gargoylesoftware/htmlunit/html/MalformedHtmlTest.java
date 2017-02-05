@@ -345,7 +345,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
+    @Alerts({"4", "#text:\n  ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
                 "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
                 "outerA", "BODY:null", "1", "#text:V", "true", "false",
                 "outerA", "DIV:null", "1", "#text:W", "false", "false",
@@ -1009,5 +1009,85 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, html2);
         final WebDriver webDriver = loadPageWithAlerts2(html);
         assertEquals(0, webDriver.findElements(By.name("main")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("frame loaded")
+    @NotYetImplemented
+    public void framesetInsideDiv() throws Exception {
+        final String html = "<html>\n"
+                + "<div id='tester'>\n"
+                + "  <frameset>\n"
+                + "    <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "  </frameset>\n"
+                + "</div>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(1, webDriver.findElements(By.name("main")).size());
+        assertEquals(0, webDriver.findElements(By.id("tester")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("frame loaded")
+    @NotYetImplemented
+    public void framesetInsideForm() throws Exception {
+        final String html = "<html>\n"
+                + "<form id='tester'>\n"
+                + "  <frameset>\n"
+                + "    <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "  </frameset>\n"
+                + "</form>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(1, webDriver.findElements(By.name("main")).size());
+        assertEquals(0, webDriver.findElements(By.id("tester")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void framesetInsideTable() throws Exception {
+        final String html = "<html>\n"
+                + "<table id='tester'>\n"
+                + "  <frameset>\n"
+                + "    <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "  </frameset>\n"
+                + "</table>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals(0, webDriver.findElements(By.name("main")).size());
+        assertEquals(1, webDriver.findElements(By.id("tester")).size());
     }
 }
