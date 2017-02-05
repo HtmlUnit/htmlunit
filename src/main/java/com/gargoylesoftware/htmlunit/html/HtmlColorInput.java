@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "input" where type is "color".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlColorInput extends HtmlInput {
 
@@ -64,6 +65,9 @@ public class HtmlColorInput extends HtmlInput {
                 valid = true;
             }
             catch (final NumberFormatException e) {
+                // ignore
+            }
+            catch (final IllegalArgumentException e) {
                 // ignore
             }
         }
