@@ -2365,7 +2365,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over")
-    @BuggyWebDriver(IE)
     public void mouseOver() throws Exception {
         final String html =
             "<html>\n"

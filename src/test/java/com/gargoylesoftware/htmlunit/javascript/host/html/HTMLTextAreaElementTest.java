@@ -721,7 +721,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverTextarea() throws Exception {
         mouseOver("<textarea id='tester' onmouseover='dumpEvent(event);'>HtmlUnit</textarea>");
     }
