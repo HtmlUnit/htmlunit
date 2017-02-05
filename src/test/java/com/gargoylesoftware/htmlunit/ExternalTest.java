@@ -217,8 +217,6 @@ public class ExternalTest {
 
     private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
         return groupId.startsWith("org.eclipse.jetty") && version.startsWith("9.4.")
-                // https://github.com/checkstyle/checkstyle/issues/3776
-                || "checkstyle".equals(artifactId) && "7.5".equals(version)
                 // 1.8.13: missing many dependencies
                 // 1.8.14: https://issues.tmatesoft.com/issue/SVNKIT-692
                 || groupId.startsWith("org.tmatesoft.svnkit")
