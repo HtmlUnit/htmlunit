@@ -464,7 +464,10 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean lastType) {
+    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
+        if (startAtEnd) {
+            selectionDelegate_.setSelectionStart(getText().length());
+        }
         doTypeProcessor_.doType(getText(), selectionDelegate_, c, this, lastType);
     }
 
@@ -472,7 +475,10 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean lastType) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
+        if (startAtEnd) {
+            selectionDelegate_.setSelectionStart(getText().length());
+        }
         doTypeProcessor_.doType(getText(), selectionDelegate_, keyCode, this, lastType);
     }
 

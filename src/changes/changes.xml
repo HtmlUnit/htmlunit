@@ -8,9 +8,6 @@
 
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, ScriptPreProcessor, Bugfixes">
-            <action type="update" dev="asashour">
-                Keyboard: deprecate .isStartAtEnd().
-            </action>
             <action type="add" dev="asashour">
                 WebClientOptions: add option to automatically download images.
             </action>

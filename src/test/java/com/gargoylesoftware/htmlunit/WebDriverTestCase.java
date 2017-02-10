@@ -53,7 +53,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.NoSuchWindowException;
@@ -68,19 +67,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
-import org.openqa.selenium.htmlunit.PatchedHtmlUnitKeyboard;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -398,30 +391,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         // but because of visibility problems i need this construct
         // to patch the HtmlUnitDriver for the moment.
         final class PatchedHtmlUnitDriver extends HtmlUnitDriver {
-            private Keyboard originalKeyboard_;
-            private Keyboard keyboard_;
 
             private PatchedHtmlUnitDriver(final boolean enableJavascript) {
                 super(enableJavascript);
-                originalKeyboard_ = getKeyboard();
             }
 
             @Override
             protected WebClient newWebClient(final BrowserVersion browserVersion) {
                 return webClient_;
-            }
-
-            @Override
-            protected WebElement newHtmlUnitWebElement(final DomElement element) {
-                return new FixedWebDriverHtmlUnitWebElement(this, element);
-            }
-
-            @Override
-            public Keyboard getKeyboard() {
-                if (keyboard_ == null || originalKeyboard_ != super.getKeyboard()) {
-                    keyboard_ = new PatchedHtmlUnitKeyboard(this);
-                }
-                return keyboard_;
             }
         }
 
@@ -1151,60 +1128,5 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected boolean isWebClientCached() {
         return false;
-    }
-}
-
-/**
- * As HtmlUnit didn't generate the right events, WebDriver did it for us, but now that we do it correctly,
- * WebDriver shouldn't do it anymore
- * http://code.google.com/p/webdriver/issues/detail?id=93
- */
-class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
-
-    FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final DomElement element) {
-        super(parent, element);
-    }
-
-    @Override
-    public String getText() {
-        if (element instanceof HtmlInput) {
-            return "";
-        }
-        String text = getElement().asText();
-        text = text.replace('\t', ' ');
-        text = text.replace("\r", "");
-        return text;
-    }
-
-    /**
-     * {@inheritDoc}
-     * Overridden because .setValueAttribute moved from HtmlFileInput to HtmlInput
-     */
-    @Override
-    public void clear() {
-        assertElementNotStale();
-
-        if (element instanceof HtmlInput) {
-            final HtmlInput htmlInput = (HtmlInput) element;
-            if (htmlInput.isReadOnly()) {
-                throw new InvalidElementStateException("You may only edit editable elements");
-            }
-            if (htmlInput.isDisabled()) {
-                throw new InvalidElementStateException("You may only interact with enabled elements");
-            }
-            htmlInput.setValueAttribute("");
-            htmlInput.fireEvent("change");
-        }
-        else {
-            super.clear();
-        }
-    }
-
-    @Override
-    public String getAttribute(final String name) {
-        if (element instanceof HtmlFileInput && "value".equalsIgnoreCase(name)) {
-            return ((HTMLInputElement) element.getScriptableObject()).getValue();
-        }
-        return super.getAttribute(name);
     }
 }

@@ -111,7 +111,10 @@ public class HtmlTelInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean lastType) {
+    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
+        if (startAtEnd) {
+            selectionDelegate_.setSelectionStart(getValueAttribute().length());
+        }
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
     }
 
@@ -119,7 +122,10 @@ public class HtmlTelInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean lastType) {
+    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
+        if (startAtEnd) {
+            selectionDelegate_.setSelectionStart(getValueAttribute().length());
+        }
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
     }
 
