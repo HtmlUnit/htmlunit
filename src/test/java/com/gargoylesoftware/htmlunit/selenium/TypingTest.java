@@ -18,7 +18,6 @@ import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +28,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Modified from
@@ -309,15 +307,6 @@ public class TypingTest extends SeleniumTest {
 
         element.sendKeys("" + Keys.DELETE);
         assertThat(element.getAttribute("value"), is(""));
-    }
-
-    /**
-     * A test.
-     */
-    @Test
-    @NotYetImplemented
-    public void chordControlCutAndPaste() {
-        fail();
     }
 
     /**
