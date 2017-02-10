@@ -361,10 +361,18 @@ public class CSSStyleSheet extends StyleSheet {
                 client.printContentIfNecessary(response);
                 client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                 // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
+
                 final InputSource source = new InputSource();
-                source.setByteStream(response.getContentAsStream());
-                source.setEncoding(response.getContentCharset());
+                final String contentType = response.getContentType();
+                if (StringUtils.isEmpty(contentType) || "text/css".equals(contentType)) {
+                    source.setByteStream(response.getContentAsStream());
+                    source.setEncoding(response.getContentCharset());
+                }
+                else {
+                    source.setCharacterStream(new StringReader(""));
+                }
                 sheet = new CSSStyleSheet(element, source, uri);
+
                 // cache the style sheet
                 if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
                     response.cleanUp();

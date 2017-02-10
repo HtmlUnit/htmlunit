@@ -150,7 +150,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                         "§§URL§§style5.css 1", "§§URL§§style6.css 0",
                         "§§URL§§style7.css 0", "§§URL§§style8.css 1"},
             IE = {"2", "§§URL§§style1.css 1", "§§URL§§style5.css 1"})
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void hrefWrongContentType() throws Exception {
         final String baseUrl = getDefaultUrl().toExternalForm();
         final String html =
@@ -1234,12 +1234,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         final String bigContent = ".someRed { color: red; }" + StringUtils.repeat(' ', maxInMemory);
-        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), bigContent, 200, "OK", "text/html", headers2);
+        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), bigContent, 200, "OK", "text/css", headers2);
         conn.setResponse(new URL(getDefaultUrl(), "second.html"), html2);
 
         final List<NameValuePair> headers1 = new ArrayList<>();
         headers1.add(new NameValuePair("Location", "style2.css"));
-        conn.setResponse(new URL(getDefaultUrl(), "style.css"), "", 302, "Moved", "text/html", headers1);
+        conn.setResponse(new URL(getDefaultUrl(), "style.css"), "", 302, "Moved", "text/css", headers1);
 
         final WebDriver driver = loadPage2(html, new URL(getDefaultUrl(), "test.html"));
         driver.findElement(By.linkText("second page")).click();
