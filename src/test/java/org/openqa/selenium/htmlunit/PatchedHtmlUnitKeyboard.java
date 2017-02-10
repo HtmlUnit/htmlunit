@@ -46,7 +46,7 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
      * Overridden because .setValueAttribute moved from HtmlFileInput to HtmlInput
      */
     @Override
-    public void sendKeys(final HtmlElement element, final String currentValue, final InputKeysContainer keysToSend,
+    public void sendKeys(final HtmlElement element, final InputKeysContainer keysToSend,
             final boolean releaseAllAtEnd) {
         final KeyboardModifiersState modifiersState =
                 getPrivateField(getClass().getSuperclass(), this, "modifiersState");
@@ -57,7 +57,7 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
             fileInput.setValueAttribute(keysSequence);
             return;
         }
-        super.sendKeys(element, currentValue, keysToSend, releaseAllAtEnd);
+        super.sendKeys(element, keysToSend, releaseAllAtEnd);
     }
 
     @SuppressWarnings("unchecked")
