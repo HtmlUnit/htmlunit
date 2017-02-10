@@ -55,6 +55,7 @@ public class WebClientOptions implements Serializable {
     private int historySizeLimit_ = 50;
     private int historyPageCacheLimit_ = Integer.MAX_VALUE;
     private InetAddress localAddress_;
+    private boolean downloadImages_;
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
@@ -593,5 +594,21 @@ public class WebClientOptions implements Serializable {
      */
     public void setLocalAddress(final InetAddress localAddress) {
         this.localAddress_ = localAddress;
+    }
+
+    /**
+     * Sets whether to automatically download images by default, or not.
+     * @param downloadImages whether to automatically download images by default, or not
+     */
+    public void setDownloadImages(final boolean downloadImages) {
+        this.downloadImages_ = downloadImages;
+    }
+
+    /**
+     * Returns whether to automatically download images by default, or not.
+     * @return whether to automatically download images by default, or not.
+     */
+    public boolean isDownloadImages() {
+        return downloadImages_;
     }
 }
