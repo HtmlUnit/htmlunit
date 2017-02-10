@@ -21,9 +21,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Mouse;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
-
 /**
  * Temporary work around for HtmlUnitDriver.
  *
@@ -39,25 +36,6 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
      */
     public PatchedHtmlUnitKeyboard(final HtmlUnitDriver parent) {
         super(parent);
-    }
-
-    /**
-     * {@inheritDoc}
-     * Overridden because .setValueAttribute moved from HtmlFileInput to HtmlInput
-     */
-    @Override
-    public void sendKeys(final HtmlElement element, final InputKeysContainer keysToSend,
-            final boolean releaseAllAtEnd) {
-        final KeyboardModifiersState modifiersState =
-                getPrivateField(getClass().getSuperclass(), this, "modifiersState");
-        keysToSend.setCapitalization(modifiersState.isShiftPressed());
-        final String keysSequence = keysToSend.toString();
-        if (element instanceof HtmlFileInput) {
-            final HtmlFileInput fileInput = (HtmlFileInput) element;
-            fileInput.setValueAttribute(keysSequence);
-            return;
-        }
-        super.sendKeys(element, keysToSend, releaseAllAtEnd);
     }
 
     @SuppressWarnings("unchecked")
