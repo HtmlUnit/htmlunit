@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -96,13 +97,16 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
-            + "    img.width;\n" // this forces image loading in htmlunit
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <img id='myImage' " + src + " >\n"
             + "</body></html>";
 
+        final WebDriver webDriver = getWebDriver();
+        if (webDriver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) webDriver).setDownloadImages(true);
+        }
         loadPage2(html);
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }

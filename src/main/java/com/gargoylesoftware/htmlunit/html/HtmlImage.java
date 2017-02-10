@@ -88,6 +88,16 @@ public class HtmlImage extends HtmlElement {
     HtmlImage(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributes) {
         super(unifyLocalName(qualifiedName), page, attributes);
         originalQualifiedName_ = qualifiedName;
+        if (page.getWebClient().getOptions().isDownloadImages()) {
+            try {
+                downloadImageIfNeeded();
+            }
+            catch (final IOException e) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Unable to download image for element " + this);
+                }
+            }
+        }
     }
 
     private static String unifyLocalName(final String qualifiedName) {
@@ -114,6 +124,7 @@ public class HtmlImage extends HtmlElement {
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
             final boolean notifyAttributeChangeListeners) {
         final HtmlPage htmlPage = getHtmlPageOrNull();
+        
         if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED
                 && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
@@ -207,7 +218,7 @@ public class HtmlImage extends HtmlElement {
             }
             else {
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Unable to download image for tag " + this + "; not firing onload event.");
+                    LOG.debug("Unable to download image for " + this + "; not firing onload event.");
                 }
             }
         }
