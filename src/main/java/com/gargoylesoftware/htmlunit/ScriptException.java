@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
 public class ScriptException extends RuntimeException {
 
     private final String scriptSourceCode_;
-    private final InteractivePage page_;
+    private final HtmlPage page_;
 
     /**
      * Creates an instance.
@@ -50,7 +50,7 @@ public class ScriptException extends RuntimeException {
      * was thrown. This may be null if the exception was not caused by execution
      * of JavaScript.
      */
-    public ScriptException(final InteractivePage page, final Throwable throwable,
+    public ScriptException(final HtmlPage page, final Throwable throwable,
             final String scriptSourceCode) {
         super(getMessageFrom(throwable), throwable);
         scriptSourceCode_ = scriptSourceCode;
@@ -245,7 +245,7 @@ public class ScriptException extends RuntimeException {
      * executed at parsing time.
      * @return the page
      */
-    public InteractivePage getPage() {
+    public HtmlPage getPage() {
         return page_;
     }
 

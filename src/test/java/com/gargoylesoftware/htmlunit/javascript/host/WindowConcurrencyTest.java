@@ -25,19 +25,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -50,6 +43,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Tests for {@link Window} that use background jobs.
@@ -566,22 +565,22 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         client_.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
             @Override
-            public void loadScriptError(final InteractivePage htmlPage, final URL scriptUrl,
+            public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl,
                     final Exception exception) {
             }
 
             @Override
-            public void malformedScriptURL(final InteractivePage htmlPage, final String url,
+            public void malformedScriptURL(final HtmlPage htmlPage, final String url,
                     final MalformedURLException malformedURLException) {
             }
 
             @Override
-            public void scriptException(final InteractivePage htmlPage, final ScriptException scriptException) {
+            public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
                 scriptExceptions.add(scriptException);
             }
 
             @Override
-            public void timeoutError(final InteractivePage htmlPage, final long allowedTime, final long executionTime) {
+            public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
             }
         });
 

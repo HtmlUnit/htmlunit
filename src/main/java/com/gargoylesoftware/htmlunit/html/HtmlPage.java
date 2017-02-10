@@ -14,8 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 
 import java.io.File;
@@ -50,15 +53,16 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.History;
-import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -67,8 +71,11 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -77,6 +84,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -122,7 +130,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Joerg Werner
  */
-public class HtmlPage extends InteractivePage {
+public class HtmlPage extends SgmlPage {
 
     private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
@@ -148,6 +156,8 @@ public class HtmlPage extends InteractivePage {
     private URL baseUrl_;
     private List<AutoCloseable> autoCloseableList_;
     private ElementFromPointHandler elementFromPointHandler_;
+    private DomElement elementWithFocus_;
+    private List<Range> selectionRanges_ = new ArrayList<>(3);
 
     private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
@@ -1841,6 +1851,7 @@ public class HtmlPage extends InteractivePage {
     @Override
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
+        result.elementWithFocus_ = null;
 
         result.idMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
         result.nameMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
@@ -1855,12 +1866,15 @@ public class HtmlPage extends InteractivePage {
     public HtmlPage cloneNode(final boolean deep) {
         // we need the ScriptObject clone before cloning the kids.
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
+        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
+        jsObjClone.setDomNode(result);
 
         // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {
             synchronized (lock_) {
                 result.attributeListeners_ = null;
             }
+            result.selectionRanges_ = new ArrayList<>(3);
             result.afterLoadActions_ = new ArrayList<>();
             result.frameElements_ = new TreeSet<>(documentPositionComparator);
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
@@ -2266,16 +2280,6 @@ public class HtmlPage extends InteractivePage {
     }
 
     /**
-     * Returns the element with the focus or null if no element has the focus.
-     * @return the element with focus or null
-     * @see #setFocusedElement(DomElement)
-     */
-    @Override
-    public DomElement getFocusedElement() {
-        return super.getFocusedElement();
-    }
-
-    /**
      * Moves the focus to the specified element. This will trigger any relevant JavaScript
      * event handlers.
      *
@@ -2283,8 +2287,141 @@ public class HtmlPage extends InteractivePage {
      * @return true if the specified element now has the focus
      * @see #getFocusedElement()
      */
-    @Override
     public boolean setFocusedElement(final DomElement newElement) {
-        return super.setFocusedElement(newElement);
+        return setFocusedElement(newElement, false);
     }
+
+    /**
+     * Moves the focus to the specified element. This will trigger any relevant JavaScript
+     * event handlers.
+     *
+     * @param newElement the element that will receive the focus, use {@code null} to remove focus from any element
+     * @param windowActivated - whether the enclosing window got focus resulting in specified element getting focus
+     * @return true if the specified element now has the focus
+     * @see #getFocusedElement()
+     */
+    public boolean setFocusedElement(final DomElement newElement, final boolean windowActivated) {
+        if (elementWithFocus_ == newElement && !windowActivated) {
+            // nothing to do
+            return true;
+        }
+
+        final DomElement oldFocusedElement = elementWithFocus_;
+        elementWithFocus_ = null;
+
+        if (!windowActivated) {
+            if (hasFeature(EVENT_FOCUS_IN_FOCUS_OUT_BLUR)) {
+                if (oldFocusedElement != null) {
+                    oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+                }
+
+                if (newElement != null) {
+                    newElement.fireEvent(Event.TYPE_FOCUS_IN);
+                }
+            }
+
+            if (oldFocusedElement != null) {
+                oldFocusedElement.removeFocus();
+                oldFocusedElement.fireEvent(Event.TYPE_BLUR);
+            }
+        }
+
+        elementWithFocus_ = newElement;
+
+        if (elementWithFocus_ instanceof SelectableTextInput
+                && hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
+            final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
+            setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
+        }
+
+        if (elementWithFocus_ != null) {
+            elementWithFocus_.focus();
+            elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
+        }
+
+        if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+            if (oldFocusedElement != null) {
+                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+            }
+
+            if (newElement != null) {
+                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+            }
+        }
+
+        // If a page reload happened as a result of the focus change then obviously this
+        // element will not have the focus because its page has gone away.
+        return this == getEnclosingWindow().getEnclosedPage();
+    }
+
+    /**
+     * Returns the element with the focus or null if no element has the focus.
+     * @return the element with focus or null
+     * @see #setFocusedElement(DomElement)
+     */
+    public DomElement getFocusedElement() {
+        return elementWithFocus_;
+    }
+
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * Sets the element with focus.
+     * @param elementWithFocus the element with focus
+     */
+    public void setElementWithFocus(final DomElement elementWithFocus) {
+        elementWithFocus_ = elementWithFocus;
+    }
+
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * <p>Returns the page's current selection ranges. Note that some browsers, like IE, only allow
+     * a single selection at a time.</p>
+     *
+     * @return the page's current selection ranges
+     */
+    public List<Range> getSelectionRanges() {
+        return selectionRanges_;
+    }
+
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * <p>Makes the specified selection range the *only* selection range on this page.</p>
+     *
+     * @param selectionRange the selection range
+     */
+    public void setSelectionRange(final Range selectionRange) {
+        selectionRanges_.clear();
+        selectionRanges_.add(selectionRange);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Execute a Function in the given context.
+     *
+     * @param function the JavaScript Function to call
+     * @param thisObject the "this" object to be used during invocation
+     * @param args the arguments to pass into the call
+     * @param htmlElementScope the HTML element for which this script is being executed
+     * This element will be the context during the JavaScript execution. If null,
+     * the context will default to the page.
+     * @return a ScriptResult which will contain both the current page (which may be different than
+     * the previous page and a JavaScript result object.
+     */
+    public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
+            final Object[] args, final DomNode htmlElementScope) {
+
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+            return new ScriptResult(null, this);
+        }
+
+        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
+        final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
+
+        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+    }
+
 }

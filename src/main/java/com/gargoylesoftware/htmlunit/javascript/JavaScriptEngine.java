@@ -44,12 +44,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -677,7 +677,7 @@ public class JavaScriptEngine {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Script compile(final InteractivePage page, final String sourceCode,
+    public Script compile(final HtmlPage page, final String sourceCode,
                            final String sourceName, final int startLine) {
         final Scriptable scope = getScope(page, null);
         return compile(page, scope, sourceCode, sourceName, startLine);
@@ -693,7 +693,7 @@ public class JavaScriptEngine {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Script compile(final InteractivePage owningPage, final Scriptable scope, final String sourceCode,
+    public Script compile(final HtmlPage owningPage, final Scriptable scope, final String sourceCode,
             final String sourceName, final int startLine) {
         WebAssert.notNull("sourceCode", sourceCode);
 
@@ -727,7 +727,7 @@ public class JavaScriptEngine {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Object execute(final InteractivePage page,
+    public Object execute(final HtmlPage page,
                            final String sourceCode,
                            final String sourceName,
                            final int startLine) {
@@ -746,7 +746,7 @@ public class JavaScriptEngine {
      * @param script the script to execute
      * @return the result of executing the specified code
      */
-    public Object execute(final InteractivePage page, final Script script) {
+    public Object execute(final HtmlPage page, final Script script) {
         final Scriptable scope = getScope(page, null);
         return execute(page, scope, script);
     }
@@ -759,7 +759,7 @@ public class JavaScriptEngine {
      * @param script the script to execute
      * @return the result of executing the specified code
      */
-    public Object execute(final InteractivePage page, final Scriptable scope, final Script script) {
+    public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
         final ContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
@@ -785,7 +785,7 @@ public class JavaScriptEngine {
      * @return the result of the function call
      */
     public Object callFunction(
-            final InteractivePage page,
+            final HtmlPage page,
             final Function javaScriptFunction,
             final Scriptable thisObject,
             final Object[] args,
@@ -805,7 +805,7 @@ public class JavaScriptEngine {
      * @param args the function's arguments
      * @return the function result
      */
-    public Object callFunction(final InteractivePage page, final Function function,
+    public Object callFunction(final HtmlPage page, final Function function,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
         final ContextAction action = new HtmlUnitContextAction(scope, page) {
@@ -824,7 +824,7 @@ public class JavaScriptEngine {
         return getContextFactory().call(action);
     }
 
-    private static Scriptable getScope(final InteractivePage page, final DomNode node) {
+    private static Scriptable getScope(final HtmlPage page, final DomNode node) {
         if (node != null) {
             return node.getScriptableObject();
         }
@@ -847,9 +847,9 @@ public class JavaScriptEngine {
      */
     private abstract class HtmlUnitContextAction implements ContextAction {
         private final Scriptable scope_;
-        private final InteractivePage page_;
+        private final HtmlPage page_;
 
-        HtmlUnitContextAction(final Scriptable scope, final InteractivePage page) {
+        HtmlUnitContextAction(final Scriptable scope, final HtmlPage page) {
             scope_ = scope;
             page_ = page;
         }
@@ -966,7 +966,7 @@ public class JavaScriptEngine {
      */
     protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
         // Trigger window.onerror, if it has been set.
-        final InteractivePage page = scriptException.getPage();
+        final HtmlPage page = scriptException.getPage();
         if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
