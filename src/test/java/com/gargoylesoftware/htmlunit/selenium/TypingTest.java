@@ -202,7 +202,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void deleteAndBackspaceKeys() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -251,7 +250,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void shiftSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -269,7 +267,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void chordControlHomeShiftEndDelete() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -290,7 +287,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void chordReveseShiftHomeSelectionDeletes() {
         final WebDriver driver = getWebDriver("/javascriptPage.html");
 
@@ -342,7 +338,6 @@ public class TypingTest extends SeleniumTest {
      * A test.
      */
     @Test
-    @NotYetImplemented
     public void nonPrintableCharactersShouldWorkWithContentEditableOrDesignModeSet() {
         final WebDriver driver = getWebDriver("/rich_text.html");
 
