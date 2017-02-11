@@ -75,7 +75,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -1865,9 +1864,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public HtmlPage cloneNode(final boolean deep) {
         // we need the ScriptObject clone before cloning the kids.
-        final HtmlPage result = (HtmlPage) super.cloneNode(deep);
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
-        jsObjClone.setDomNode(result);
+        final HtmlPage result = (HtmlPage) super.cloneNode(false);
 
         // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {
