@@ -884,12 +884,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         catch (final CloneNotSupportedException e) {
             throw new IllegalStateException("Clone not supported for node [" + this + "]");
         }
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
-        jsObjClone.setDomNode(newnode);
 
         newnode.parent_ = null;
         newnode.nextSibling_ = null;
         newnode.previousSibling_ = null;
+        newnode.scriptObject_ = null;
         newnode.firstChild_ = null;
         newnode.attachedToPage_ = false;
 
