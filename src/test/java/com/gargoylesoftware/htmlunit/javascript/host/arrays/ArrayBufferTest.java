@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -97,6 +99,15 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("exception")
+    public void sliceInvalidStartIndexDouble() throws Exception {
+        sliceInvalidIndex("2.14");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"3", "0", "1234", "0"})
     public void sliceInvalidStartIndexString() throws Exception {
         sliceInvalidIndex("'four'");
@@ -107,9 +118,28 @@ public class ArrayBufferTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void sliceInvalidStartIndexTrue() throws Exception {
         sliceInvalidIndex("true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = {"3", "0", "1234", "0"})
+    @NotYetImplemented(FF)
+    public void sliceInvalidStartIndexPositiveInfinity() throws Exception {
+        sliceInvalidIndex("Number.POSITIVE_INFINITY");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "0", "1234", "0"})
+    public void sliceInvalidStartIndexNegativeInfinity() throws Exception {
+        sliceInvalidIndex("Number.NEGATIVE_INFINITY");
     }
 
     /**

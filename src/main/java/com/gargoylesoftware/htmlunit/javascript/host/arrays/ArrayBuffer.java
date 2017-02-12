@@ -61,7 +61,32 @@ public class ArrayBuffer extends SimpleScriptable {
      * @return the newly created ArrayBuffer
      */
     @JsxFunction
-    public ArrayBuffer slice(final int begin, final Object end) {
+    public ArrayBuffer slice(final Object begin, final Object end) {
+        if (begin == Undefined.instance || begin instanceof Boolean) {
+            throw Context.reportRuntimeError("Invalid type " + begin.getClass().getName());
+        }
+
+        final double beginNumber = Context.toNumber(begin);
+        final int beginInt;
+        if (Double.isNaN(beginNumber)) {
+            beginInt = 0;
+        }
+        else if (Double.isInfinite(beginNumber)) {
+            if (beginNumber > 0) {
+                final byte[] byteArray = new byte[0];
+                final ArrayBuffer arrayBuffer = new ArrayBuffer();
+                arrayBuffer.bytes_ = byteArray;
+                return arrayBuffer;
+            }
+            beginInt = 0;
+        }
+        else {
+            beginInt = (int) beginNumber;
+            if (beginInt != beginNumber) {
+                throw Context.reportRuntimeError("Invalid type " + begin.getClass().getName());
+            }
+        }
+
         double endNumber;
         if (end == Undefined.instance) {
             endNumber = getByteLength();
@@ -70,12 +95,12 @@ public class ArrayBuffer extends SimpleScriptable {
             endNumber = Context.toNumber(end);
         }
 
-        if (Double.isNaN(endNumber) || Double.isInfinite(endNumber) || endNumber < begin) {
-            endNumber = begin;
+        if (Double.isNaN(endNumber) || Double.isInfinite(endNumber) || endNumber < beginInt) {
+            endNumber = beginInt;
         }
 
-        final byte[] byteArray = new byte[(int) endNumber - begin];
-        System.arraycopy(bytes_, begin, byteArray, 0, byteArray.length);
+        final byte[] byteArray = new byte[(int) endNumber - beginInt];
+        System.arraycopy(bytes_, beginInt, byteArray, 0, byteArray.length);
         final ArrayBuffer arrayBuffer = new ArrayBuffer();
         arrayBuffer.bytes_ = byteArray;
         return arrayBuffer;
