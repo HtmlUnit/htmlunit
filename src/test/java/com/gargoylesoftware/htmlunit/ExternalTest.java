@@ -216,11 +216,10 @@ public class ExternalTest {
     }
 
     private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
-        return groupId.startsWith("org.eclipse.jetty") && version.startsWith("9.4.")
+        return groupId.startsWith("org.tmatesoft.svnkit")
                 // 1.8.13: missing many dependencies
                 // 1.8.14: https://issues.tmatesoft.com/issue/SVNKIT-692
-                || groupId.startsWith("org.tmatesoft.svnkit")
-                    && (version.startsWith("1.8.13") || version.startsWith("1.8.14"));
+                && (version.startsWith("1.8.13") || version.startsWith("1.8.14"));
     }
 
     private static String getValue(final String line) {
