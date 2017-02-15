@@ -128,11 +128,11 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + " try {\n"
-            + "  var x = console.error;"
-            + "  x('hello');\n"
-            + "  alert('success');\n"
-            + " } catch(e) {alert('exception')}\n"
+            + "  try {\n"
+            + "    var x = console.error;\n"
+            + "    x('hello');\n"
+            + "    alert('success');\n"
+            + "  } catch(e) {alert('exception')}\n"
             + "</script>\n"
             + "</body></html>";
 

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -126,6 +129,56 @@ public class NativeObjectTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(Object.__proto__);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for #1856.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object Object]", "null"})
+    @NotYetImplemented
+    public void proto2() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert({}.__proto__);\n"
+            + "    alert({}.__proto__.__proto__);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for #1855.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            IE = "exception")
+    @NotYetImplemented({CHROME, FF})
+    public void getPrototypeOf() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(Object.getPrototypeOf(''));\n"
+            + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
