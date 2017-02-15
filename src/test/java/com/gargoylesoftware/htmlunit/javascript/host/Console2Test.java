@@ -174,9 +174,7 @@ public class Console2Test extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  if (window.console) {\n"
-            + "    window.console.log(" + logInput + ");\n"
-            + "  }\n"
+            + "  window.console.log(" + logInput + ");\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
 

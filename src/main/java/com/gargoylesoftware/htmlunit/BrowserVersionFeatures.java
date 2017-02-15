@@ -641,6 +641,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_CLIENTWIDTH_INPUT_TEXT_169,
 
+    /** Is window can be used as Console. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_CONSOLE_HANDLE_WINDOW,
+
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature(@WebBrowser(FF))
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,

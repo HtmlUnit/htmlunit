@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -83,11 +83,22 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void log(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
-        final WebConsole webConsole = ((Console) thisObj).getWebConsole();
+        final WebConsole webConsole = toConsole(thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.info(args);
         webConsole.setFormatter(oldFormatter);
+    }
+
+    private static Console toConsole(Scriptable thisObj) {
+        if (thisObj instanceof Window
+                && ((SimpleScriptable) thisObj).getDomNodeOrDie().hasFeature(JS_CONSOLE_HANDLE_WINDOW)) {
+            thisObj = ((Window) thisObj).getConsole();
+        }
+        if (thisObj instanceof Console) {
+            return (Console) thisObj;
+        }
+        throw Context.reportRuntimeError("TypeError: object does not implemennt interface Console");
     }
 
     /**
@@ -100,7 +111,7 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void info(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
-        final WebConsole webConsole = ((Console) thisObj).getWebConsole();
+        final WebConsole webConsole = toConsole(thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.info(args);
@@ -117,7 +128,7 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void warn(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
-        final WebConsole webConsole = ((Console) thisObj).getWebConsole();
+        final WebConsole webConsole = toConsole(thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.warn(args);
@@ -134,7 +145,7 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void error(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
-        final WebConsole webConsole = ((Console) thisObj).getWebConsole();
+        final WebConsole webConsole = toConsole(thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.error(args);
@@ -151,7 +162,7 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void debug(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
-        final WebConsole webConsole = ((Console) thisObj).getWebConsole();
+        final WebConsole webConsole = toConsole(thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.debug(args);
@@ -168,7 +179,7 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void trace(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
-        final WebConsole webConsole = ((Console) thisObj).getWebConsole();
+        final WebConsole webConsole = toConsole(thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
         webConsole.trace(args);

@@ -105,14 +105,34 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  if (window.console) {\n"
-            + "    alert(typeof console.log);\n"
-            + "    alert(typeof console.info);\n"
-            + "    alert(typeof console.warn);\n"
-            + "    alert(typeof console.error);\n"
-            + "    alert(typeof console.debug);\n"
-            + "    alert(typeof console.timeStamp);\n"
-            + "  } else { alert('window.console not available');}\n"
+            + "  alert(typeof console.log);\n"
+            + "  alert(typeof console.info);\n"
+            + "  alert(typeof console.warn);\n"
+            + "  alert(typeof console.error);\n"
+            + "  alert(typeof console.debug);\n"
+            + "  alert(typeof console.timeStamp);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "success")
+    public void fromWindow() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + " try {\n"
+            + "  var x = console.error;"
+            + "  x('hello');\n"
+            + "  alert('success');\n"
+            + " } catch(e) {alert('exception')}\n"
             + "</script>\n"
             + "</body></html>";
 
