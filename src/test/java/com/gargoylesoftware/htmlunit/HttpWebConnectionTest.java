@@ -50,6 +50,7 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -555,6 +556,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void contentLengthLargerThanContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
@@ -591,6 +593,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void contentLengthLargerThanContentLargeContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
