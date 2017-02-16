@@ -15,10 +15,11 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A handler for JavaScript window.prompt(). Confirms are triggered when the JavaScript
+ * A handler for JavaScript window.prompt(). Prompts are triggered when the JavaScript
  * method Window.prompt() is called.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public interface PromptHandler {
 
@@ -26,7 +27,8 @@ public interface PromptHandler {
      * Handle a call to Window.prompt() for the given page.
      * @param page the page on which the prompt occurred
      * @param message the message in the prompt
-     * @return the value typed in or null if the user pressed cancel
+     * @param defaultValue the default value in the prompt
+     * @return the value typed in or {@code null} if the user pressed {@code cancel}
      */
-    String handlePrompt(Page page, String message);
+    String handlePrompt(Page page, String message, String defaultValue);
 }

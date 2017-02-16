@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -627,32 +626,66 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     public void prompt() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<>();
-        final List<String> collectedPrompts = new ArrayList<>();
+        try (final WebClient webClient = getWebClient()) {
+            try (final MockWebConnection webConnection = new MockWebConnection()) {
+                final List<String> collectedAlerts = new ArrayList<>();
+                final List<String> collectedPrompts = new ArrayList<>();
 
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        webClient.setPromptHandler(new PromptHandler() {
-            @Override
-            public String handlePrompt(final Page page, final String message) {
-                collectedPrompts.add(message);
-                return "Flintstone";
+                webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+                webClient.setPromptHandler((page, message, defaultValue) -> {
+                    collectedPrompts.add(message);
+                    return "Flintstone";
+                });
+
+                final String html
+                        = "<html><head><title>First</title>\n"
+                        + "<script>function doTest() {alert(prompt('foo'))}</script>\n"
+                        + "</head><body onload='doTest()'></body></html>";
+
+                webConnection.setResponse(URL_FIRST, html);
+                webClient.setWebConnection(webConnection);
+
+                final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+                assertEquals("First", firstPage.getTitleText());
+
+                assertEquals(new String[] {"foo"}, collectedPrompts);
+                assertEquals(new String[] {"Flintstone"}, collectedAlerts);
             }
-        });
+        }
+    }
 
-        final String firstContent
-            = "<html><head><title>First</title><script>function doTest() {alert(prompt('foo'))}</script>\n"
-            + "</head><body onload='doTest()'></body></html>";
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void promptWithDefault() throws Exception {
+        try (final WebClient webClient = getWebClient()) {
+            try (final MockWebConnection webConnection = new MockWebConnection()) {
+                final List<String> collectedAlerts = new ArrayList<>();
+                final List<String> collectedPrompts = new ArrayList<>();
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webClient.setWebConnection(webConnection);
+                webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+                webClient.setPromptHandler((page, message, defaultValue) -> {
+                    collectedPrompts.add(message);
+                    collectedPrompts.add(defaultValue);
+                    return defaultValue;
+                });
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-        assertEquals("First", firstPage.getTitleText());
+                final String html
+                        = "<html><head><title>First</title>\n"
+                        + "<script>function doTest() {alert(prompt('foo', 'some default'))}</script>\n"
+                        + "</head><body onload='doTest()'></body></html>";
 
-        assertEquals(new String[] {"foo"}, collectedPrompts);
-        assertEquals(new String[] {"Flintstone"}, collectedAlerts);
+                webConnection.setResponse(URL_FIRST, html);
+                webClient.setWebConnection(webConnection);
+
+                final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+                assertEquals("First", firstPage.getTitleText());
+
+                assertEquals(new String[] {"foo", "some default"}, collectedPrompts);
+                assertEquals(new String[] {"some default"}, collectedAlerts);
+            }
+        }
     }
 
     /**

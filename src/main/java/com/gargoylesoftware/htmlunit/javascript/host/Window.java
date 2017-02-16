@@ -319,16 +319,23 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * The JavaScript function {@code prompt}.
      * @param message the message
-     * @return true if ok was pressed, false if cancel was pressed
+     * @param defaultValue the default value displayed in the text input field
+     * @return the value typed in or {@code null} if the user pressed {@code cancel}
      */
     @JsxFunction
-    public String prompt(final String message) {
+    public String prompt(final String message, Object defaultValue) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
             LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
             return null;
         }
-        return handler.handlePrompt(document_.getPage(), message);
+        if (defaultValue == Undefined.instance) {
+            defaultValue = null;
+        }
+        else {
+            defaultValue = Context.toString(defaultValue);
+        }
+        return handler.handlePrompt(document_.getPage(), message, (String) defaultValue);
     }
 
     /**
