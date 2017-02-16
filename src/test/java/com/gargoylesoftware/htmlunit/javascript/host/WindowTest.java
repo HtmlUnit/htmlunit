@@ -626,8 +626,8 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     public void prompt() throws Exception {
-        try (final WebClient webClient = getWebClient()) {
-            try (final MockWebConnection webConnection = new MockWebConnection()) {
+        try (WebClient webClient = getWebClient()) {
+            try (MockWebConnection webConnection = new MockWebConnection()) {
                 final List<String> collectedAlerts = new ArrayList<>();
                 final List<String> collectedPrompts = new ArrayList<>();
 
@@ -659,8 +659,8 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     public void promptWithDefault() throws Exception {
-        try (final WebClient webClient = getWebClient()) {
-            try (final MockWebConnection webConnection = new MockWebConnection()) {
+        try (WebClient webClient = getWebClient()) {
+            try (MockWebConnection webConnection = new MockWebConnection()) {
                 final List<String> collectedAlerts = new ArrayList<>();
                 final List<String> collectedPrompts = new ArrayList<>();
 
