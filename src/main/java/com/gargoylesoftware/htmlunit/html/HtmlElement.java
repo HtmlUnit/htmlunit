@@ -301,8 +301,7 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.removeMappedElement(this);
         }
 
-        // TODO is this toLowerCase call needed?
-        super.removeAttribute(attributeName.toLowerCase(Locale.ROOT));
+        super.removeAttribute(attributeName);
 
         if (htmlPage != null) {
             htmlPage.addMappedElement(this);
