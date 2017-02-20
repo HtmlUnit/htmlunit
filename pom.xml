@@ -828,13 +828,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.22</version>
+            <version>1.7.23</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.22</version>
+            <version>1.7.23</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -860,13 +860,13 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>${project.version}</version>
+            <version>2.25-SNAPSHOT</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -878,31 +878,31 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-ie-driver</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -918,6 +918,14 @@
             <name>HtmlUnit WebSite - Sourceforge</name>
             <url>scp://shell.sourceforge.net/home/project-web/htmlunit/htdocs/</url>
         </site>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+           <id>sonatype-nexus-staging</id>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
     </distributionManagement>
     <repositories>
         <repository>
