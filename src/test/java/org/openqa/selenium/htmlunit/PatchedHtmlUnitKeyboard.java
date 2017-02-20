@@ -15,12 +15,6 @@
 
 package org.openqa.selenium.htmlunit;
 
-import java.lang.reflect.Field;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Mouse;
-
 /**
  * Temporary work around for HtmlUnitDriver.
  *
@@ -38,42 +32,4 @@ public final class PatchedHtmlUnitKeyboard extends HtmlUnitKeyboard {
         super(parent);
     }
 
-    @SuppressWarnings("unchecked")
-    private static <T> T getPrivateField(final Class<?> klass, final Object obj, final String fieldName) {
-        try {
-            final Field f = klass.getDeclaredField(fieldName);
-            f.setAccessible(true);
-            return (T) f.get(obj);
-        }
-        catch (final Exception e) {
-            return null;
-        }
-    }
-
-    @Override
-    public void pressKey(final CharSequence keyToPress) {
-        super.pressKey(keyToPress);
-        final KeyboardModifiersState modifiersState = getModifierState();
-        for (int i = 0; i < keyToPress.length(); i++) {
-            final char ch = keyToPress.charAt(i);
-            modifiersState.storeKeyDown(ch);
-        }
-    }
-
-    @Override
-    public void releaseKey(final CharSequence keyToRelease) {
-        super.releaseKey(keyToRelease);
-        final KeyboardModifiersState modifiersState = getModifierState();
-        for (int i = 0; i < keyToRelease.length(); i++) {
-            final char ch = keyToRelease.charAt(i);
-            modifiersState.storeKeyUp(ch);
-        }
-    }
-
-    private KeyboardModifiersState getModifierState() {
-        final WebDriver driver = getPrivateField(getClass().getSuperclass(), this, "parent");
-        final Mouse mouse = ((HasInputDevices) driver).getMouse();
-        final HtmlUnitKeyboard htmlUnitKeyboard = getPrivateField(mouse.getClass(), mouse, "keyboard");
-        return getPrivateField(htmlUnitKeyboard.getClass(), htmlUnitKeyboard, "modifiersState");
-    }
 }
