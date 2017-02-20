@@ -294,23 +294,6 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     /**
-     * Returns the class name that the given class implements. If the class is
-     * the input class, then the name is extracted from the type that the Input class
-     * is masquerading as.
-     * FIXME - Implement the Input class processing
-     * @param clazz
-     * @return the class name
-     */
-    String getClassnameForClass(final Class<?> clazz) {
-        final String name = CLASS_NAME_MAP_.get(clazz.getName());
-        if (name == null) {
-            throw new IllegalStateException("Did not find the mapping of the class to the classname for "
-                + clazz.getName());
-        }
-        return name;
-    }
-
-    /**
      * Returns an immutable map containing the DOM to JavaScript mappings. Keys are
      * java classes for the various DOM classes (e.g. HtmlInput.class) and the values
      * are the JavaScript class names (e.g. "HTMLAnchorElement").
