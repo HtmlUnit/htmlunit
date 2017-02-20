@@ -59,6 +59,22 @@ public class DataURLDecoder2Test {
 
         decoder = decodeDataURL("data:application/octet-stream;base64,a+b/cQ==");
         assertArrayEquals(new byte[]{107, -26, -1, 113}, decoder.getBytes());
+
+        decoder = decodeDataURL("data:text/html;charset=utf-8,%3C%21DOCTYPE%20html%3E%0D%0A%3Cht"
+                    + "ml%20lang%3D%22en%22%3E%0D%0A%3Chead%3E%3Ctitle%3EEmbedded%20Window%3C%2F"
+                    + "title%3E%3C%2Fhead%3E%0D%0A%3Cbody%3E%3Ch1%3E42%3C%2Fh1%3E%3C%2Fbody%3E%0"
+                    + "A%3C%2Fhtml%3E%0A%0D%0A");
+        assertEquals("<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head><title>Embedded Window</title></head>\r\n"
+                    + "<body><h1>42</h1></body>\n</html>\n\r\n", decoder.getDataAsString());
+
+        decoder = decodeDataURL("data:text/plain;charset=iso-8859-7,%b8%f7%fe");
+        assertEquals("\u0388\u03c7\u03ce", decoder.getDataAsString());
+
+        decoder = decodeDataURL("data:,A brief note");
+        assertEquals("A brief note", decoder.getDataAsString());
+
+        decoder = decodeDataURL("data:;,A brief note");
+        assertEquals("A brief note", decoder.getDataAsString());
     }
 
     /**
