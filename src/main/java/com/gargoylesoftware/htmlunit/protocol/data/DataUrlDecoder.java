@@ -26,8 +26,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Charsets;
-
 /**
  * Helper to work with data URLs.
  * @see <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC2397</a>
@@ -36,7 +34,7 @@ import com.google.common.base.Charsets;
  * @author Carsten Steul
  */
 public class DataUrlDecoder {
-    private static final Charset DEFAULT_CHARSET = Charsets.US_ASCII;
+    private static final Charset DEFAULT_CHARSET = Charset.forName("US-ASCII");
     private static final String DEFAULT_MEDIA_TYPE = "text/plain";
     private final String mediaType_;
     private final Charset charset_;
