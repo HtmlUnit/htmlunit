@@ -3074,7 +3074,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param auto true if auto is supported
      * @param thinMedThick thin, medium, thick are supported
      * @param unitRequired unit is required
-     * @param undefinedAsEmpty TODO
      * @param perecent true if percent is supported
      * @param undefinedAsEmpty true if undefined should be handled like an empty string
      */
