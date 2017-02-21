@@ -422,7 +422,7 @@ public class WebRequest implements Serializable {
     /**
      * Sets the character set to use to perform the request. The default value
      * is {@link TextUtil#DEFAULT_CHARSET}.
-     * @param charset the character set to use to perform the request
+     * @param charsetName the character set to use to perform the request
      * @deprecated as of 2.25, please use {@link #setCharset(Charset)}
      */
     @Deprecated

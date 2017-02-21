@@ -164,7 +164,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=ISO-8859-1", StandardCharsets.ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST,
+                                    "text/html; charset=ISO-8859-1", StandardCharsets.ISO_8859_1);
         final String result = driver.findElement(By.id("assert")).getText();
         assertEquals("\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc", result);
     }

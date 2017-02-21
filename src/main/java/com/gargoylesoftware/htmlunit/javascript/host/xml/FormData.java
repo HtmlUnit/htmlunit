@@ -215,7 +215,8 @@ public class FormData extends SimpleScriptable {
             if (filename instanceof String) {
                 fileName = (String) filename;
             }
-            requestParameters_.add(pos, new KeyDataPair(name, file.getFile(), fileName, file.getType(), (Charset) null));
+            requestParameters_.add(pos,
+                    new KeyDataPair(name, file.getFile(), fileName, file.getType(), (Charset) null));
         }
         else {
             requestParameters_.add(pos, new NameValuePair(name, Context.toString(value)));
