@@ -349,17 +349,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return "";
         }
         if (webResponse_ != null) {
-            Charset encoding = webResponse_.getContentCharset();
-            Charset defaultEncoding = null;
-            if (getBrowserVersion().hasFeature(XHR_USE_DEFAULT_CHARSET_FROM_PAGE)) {
-                defaultEncoding =
-                        Charset.forName(((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset());
-            }
-            if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {
-                defaultEncoding = encoding;
-            }
+            final Charset encoding = webResponse_.getContentCharset();
             if (encoding == null) {
-                encoding = defaultEncoding;
+                return "";
             }
             final String content = webResponse_.getContentAsString(encoding);
             if (content == null) {
@@ -784,7 +776,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (index != -1) {
                         charsetName = overriddenMimeType_.substring(index + "charset=".length());
                     }
-                    final Charset charset = EncodingSniffer.toCharset(charsetName);
+                    Charset charset = EncodingSniffer.toCharset(charsetName);
+                    if (charset == null
+                            && getBrowserVersion().hasFeature(XHR_USE_DEFAULT_CHARSET_FROM_PAGE)) {
+                        charset =
+                                Charset.forName(((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset());
+                    }
+                    final Charset charsetFinal = charset;
                     webResponse_ = new WebResponseWrapper(webResponse) {
                         @Override
                         public String getContentType() {
@@ -792,10 +790,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         }
                         @Override
                         public Charset getContentCharset() {
-                            if (charset != null) {
-                                return charset;
+                            if (charsetFinal == null
+                                    && getBrowserVersion().hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION)) {
+                                return super.getContentCharset();
                             }
-                            return super.getContentCharset();
+                            return charsetFinal;
                         }
                     };
                 }
