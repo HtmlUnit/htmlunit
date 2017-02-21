@@ -167,9 +167,6 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
             final Socket underlying = SocksConnectionSocketFactory.createSocketWithSocksProxy(socksProxy);
             underlying.setReuseAddress(true);
 
-            // TODO: commented out for HttpClient 4.3
-            // final int soTimeout = HttpConnectionParams.getSoTimeout(params);
-
             final SocketAddress socksProxyAddress = new InetSocketAddress(socksProxy.getHostName(),
                     socksProxy.getPort());
             try {

@@ -134,15 +134,6 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Returns namespaces.
-     * @return namespaces
-     */
-    //TODO: must be removed.
-    protected Map<String, String> namespaces() {
-        return namespaces_;
-    }
-
-    /**
      * Returns the tag name of this element.
      * @return the tag name of this element
      */
@@ -361,7 +352,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             qualifiedName = localName;
         }
         else {
-            final String prefix = namespaces().get(namespaceURI);
+            final String prefix = namespaces_.get(namespaceURI);
             if (prefix == null) {
                 qualifiedName = null;
             }
@@ -494,7 +485,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         attributes_.put(qualifiedName, newAttr);
 
         if (namespaceURI != null) {
-            namespaces().put(namespaceURI, newAttr.getPrefix());
+            namespaces_.put(namespaceURI, newAttr.getPrefix());
         }
     }
 
