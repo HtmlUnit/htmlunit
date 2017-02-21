@@ -28,10 +28,9 @@ import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.google.common.base.Strings;
 
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
@@ -977,7 +976,7 @@ public final class EncodingSniffer {
      * @return {@code Charset} if the specified charset name is supported on this platform
      */
     public static Charset toCharset(final String charsetName) {
-        if (Strings.isNullOrEmpty(charsetName)) {
+        if (StringUtils.isEmpty(charsetName)) {
             return null;
         }
         try {
