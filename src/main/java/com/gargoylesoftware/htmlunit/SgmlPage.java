@@ -337,10 +337,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
                 }
 
                 for (final DomElement elem : getDomElementDescendants()) {
-                    final String localName = elem.getLocalName();
+                    final String locName = elem.getLocalName();
 
                     if (("*".equals(namespaceURI) || comparator.compare(namespaceURI, elem.getNamespaceURI()) == 0)
-                            && ("*".equals(localName) || comparator.compare(localName, elem.getLocalName()) == 0)) {
+                            && ("*".equals(locName) || comparator.compare(locName, elem.getLocalName()) == 0)) {
                         res.add(elem);
                     }
                 }
