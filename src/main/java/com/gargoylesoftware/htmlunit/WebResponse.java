@@ -197,7 +197,9 @@ public class WebResponse implements Serializable {
      * charset/encoding is not supported then the default system encoding is used.
      * @param encoding the charset/encoding to use to convert the response content into a string
      * @return the response content as a string or null if the content retrieval was failing
+     * @deprecated as of 2.25, please use {@link #getContentAsString(Charset)} instead
      */
+    @Deprecated
     public String getContentAsString(final String encoding) {
         return getContentAsString(encoding, null);
     }
@@ -209,7 +211,9 @@ public class WebResponse implements Serializable {
      * @param encoding the charset/encoding to use to convert the response content into a string
      * @param defaultEncoding the default encoding to use if the specified {@code encode} is not supported
      * @return the response content as a string or null if the content retrieval was failing
+     * @deprecated as of 2.25, please use {@link #getContentAsString(Charset)} instead
      */
+    @Deprecated
     public String getContentAsString(final String encoding, final String defaultEncoding) {
         Charset charset;
         // first verify the charset because we can't read the
@@ -236,16 +240,17 @@ public class WebResponse implements Serializable {
      * @return the response content as a string or null if the content retrieval was failing
      */
     public String getContentAsString(final Charset encoding) {
-        try (InputStream in = responseData_.getInputStream()) {
-            if (null == in) {
-                return null;
+        if (responseData_ != null) {
+            try (InputStream in = responseData_.getInputStream()) {
+                if (in != null) {
+                    return IOUtils.toString(in, encoding);
+                }
             }
-            return IOUtils.toString(in, encoding);
+            catch (final IOException e) {
+                LOG.warn(e);
+            }
         }
-        catch (final IOException e) {
-            LOG.warn(e);
-            return null;
-        }
+        return null;
     }
 
     /**

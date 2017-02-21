@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -779,17 +780,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
                 else {
                     final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
-                    String charsetString = "";
+                    String charsetName = "";
                     if (index != -1) {
-                        charsetString = overriddenMimeType_.substring(index + "charset=".length());
+                        charsetName = overriddenMimeType_.substring(index + "charset=".length());
                     }
-                    final Charset charset;
-                    if (!charsetString.isEmpty()) {
-                        charset = Charset.forName(charsetString);
-                    }
-                    else {
-                        charset = null;
-                    }
+                    final Charset charset = EncodingSniffer.toCharset(charsetName);
                     webResponse_ = new WebResponseWrapper(webResponse) {
                         @Override
                         public String getContentType() {

@@ -23,8 +23,6 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,7 +40,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -106,14 +107,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     @Override
     public final Charset getCharset() {
         final String charsetName = getCharsetAttribute();
-        if (!charsetName.isEmpty()) {
-            try {
-                return Charset.forName(charsetName);
-            }
-            catch (final Exception e) {
-            }
-        }
-        return null;
+        return EncodingSniffer.toCharset(charsetName);
     }
 
     /**

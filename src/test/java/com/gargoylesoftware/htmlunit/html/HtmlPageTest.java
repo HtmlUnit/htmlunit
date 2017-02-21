@@ -590,7 +590,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("UTF-8", page.getCharset());
+        assertSame(StandardCharsets.UTF_8, page.getCharset());
         assertEquals(page.getWebResponse().getContentCharset(), page.getCharset());
     }
 

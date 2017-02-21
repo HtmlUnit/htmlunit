@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.ScriptElementSupport;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
 /**
  * Wrapper for the SVG element {@code script}.
@@ -103,15 +104,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      */
     @Override
     public final Charset getCharset() {
-        final String charsetName = getCharsetAttribute();
-        if (!charsetName.isEmpty()) {
-            try {
-                return Charset.forName(charsetName);
-            }
-            catch (final Exception e) {
-            }
-        }
-        return null;
+        return EncodingSniffer.toCharset(getCharsetAttribute());
     }
 
     /**

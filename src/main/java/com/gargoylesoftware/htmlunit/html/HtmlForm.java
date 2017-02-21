@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -251,7 +252,8 @@ public class HtmlForm extends HtmlElement {
         String charset = getAcceptCharsetAttribute();
         if (!charset.isEmpty()) {
             charset = charset.trim();
-            return Charset.forName(SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ROOT));
+            return EncodingSniffer.toCharset(
+                    SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ROOT));
         }
         return getPage().getCharset();
     }

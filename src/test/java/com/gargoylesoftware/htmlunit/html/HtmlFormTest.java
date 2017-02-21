@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1088,12 +1090,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitRequestCharset() throws Exception {
-        submitRequestCharset("utf-8", null, null, "UTF-8");
-        submitRequestCharset(null, "utf-8", null, "UTF-8");
-        submitRequestCharset("iso-8859-1", null, "utf-8", "UTF-8");
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "UTF-8");
-        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "ISO-8859-1");
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "UTF-8");
+        submitRequestCharset("utf-8", null, null, StandardCharsets.UTF_8);
+        submitRequestCharset(null, "utf-8", null, StandardCharsets.UTF_8);
+        submitRequestCharset("iso-8859-1", null, "utf-8", StandardCharsets.UTF_8);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", StandardCharsets.UTF_8);
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", StandardCharsets.ISO_8859_1);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", StandardCharsets.UTF_8);
     }
 
     /**
@@ -1106,7 +1108,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     private void submitRequestCharset(final String headerCharset,
             final String metaCharset, final String formCharset,
-            final String expectedRequestCharset) throws Exception {
+            final Charset expectedRequestCharset) throws Exception {
 
         final String formAcceptCharset;
         if (formCharset == null) {
@@ -1145,12 +1147,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(getDefaultUrl());
 
         final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
-        assertEquals(firstPageEncoding, page.getCharset());
+        assertEquals(firstPageEncoding, page.getCharset().name());
 
         final HtmlForm form = page.getFormByName("form1");
         form.getInputByName("button").click();
 
-        assertEquals(expectedRequestCharset, webConnection.getLastWebRequest().getCharset());
+        assertSame(expectedRequestCharset, webConnection.getLastWebRequest().getCharset());
     }
 
     /**

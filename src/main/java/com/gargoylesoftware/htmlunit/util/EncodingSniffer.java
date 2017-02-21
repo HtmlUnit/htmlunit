@@ -31,6 +31,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.base.Strings;
+
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
@@ -974,7 +976,10 @@ public final class EncodingSniffer {
      * @param charsetName the charset name to check
      * @return {@code Charset} if the specified charset name is supported on this platform
      */
-    static Charset toCharset(final String charsetName) {
+    public static Charset toCharset(final String charsetName) {
+        if (Strings.isNullOrEmpty(charsetName)) {
+            return null;
+        }
         try {
             return Charset.forName(charsetName);
         }

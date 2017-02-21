@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.nio.charset.StandardCharsets;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,7 +41,7 @@ public class WebResponse2Test extends SimpleWebTestCase {
             + "<body>foo</body>\n"
             + "</html>";
         final HtmlPage page = loadPage(html);
-        assertEquals("UTF-8", page.getWebResponse().getContentCharsetOrNull());
+        assertSame(StandardCharsets.UTF_8, page.getWebResponse().getContentCharsetOrNull());
         assertEquals(html, page.getWebResponse().getContentAsString());
     }
 

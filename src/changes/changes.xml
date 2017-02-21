@@ -9,7 +9,7 @@
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, WebRequest.getCharset, ScriptPreProcessor, Bugfixes">
             <action type="update" dev="asashour">
-                Deprecate SgmlPage.getPageEncoding().
+                Deprecate SgmlPage.getPageEncoding() and WebResponse.getContentAsString(String) variants.
             </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: change return type of WebRequest.getCharset,
