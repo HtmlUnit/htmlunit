@@ -19,11 +19,13 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,15 +43,6 @@ public final class EncodingSniffer {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(EncodingSniffer.class);
-
-    /** UTF-16 (little endian) charset name. */
-    static final String UTF16_LE = "UTF-16LE";
-
-    /** UTF-16 (big endian) charset name. */
-    static final String UTF16_BE = "UTF-16BE";
-
-    /** UTF-8 charset name. */
-    static final String UTF8 = "UTF-8";
 
     /** Sequence(s) of bytes indicating the beginning of a comment. */
     private static final byte[][] COMMENT_START = new byte[][] {
@@ -322,7 +315,7 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("windows-1258", "windows-1258");
         ENCODING_FROM_LABEL.put("x-cp1258", "windows-1258");
 
-        // windows-1258
+        // x-mac-cyrillic
         ENCODING_FROM_LABEL.put("x-mac-cyrillic", "x-mac-cyrillic");
         ENCODING_FROM_LABEL.put("x-mac-ukrainian", "x-mac-cyrillic");
 
@@ -341,7 +334,7 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("iso-ir-58", "gb18030");
         ENCODING_FROM_LABEL.put("x-gbk", "gb18030");
 
-        // gb18030
+        // hz-gb-2312
         ENCODING_FROM_LABEL.put("hz-gb-2312", "hz-gb-2312");
 
         // Legacy multi-byte Chinese (traditional) encodings
@@ -406,7 +399,7 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("utf-16", "utf-16le");
         ENCODING_FROM_LABEL.put("utf-16le", "utf-16le");
 
-        // utf-16le
+        // x-user-defined
         ENCODING_FROM_LABEL.put("x-user-defined", "x-user-defined");
     }
 
@@ -648,30 +641,26 @@ public final class EncodingSniffer {
         }
 
         String encoding = null;
-        // 0xef, 0xbb, 0xbf
-        if (bytes.length > 2
-                && ((byte) 0xef) == bytes[0]
-                && ((byte) 0xbb) == bytes[1]
-                && ((byte) 0xbf) == bytes[2]) {
-            encoding = UTF8;
+        if (isMatching(bytes, ByteOrderMark.UTF_8)) {
+            encoding = StandardCharsets.UTF_8.name();
         }
-        // 0xfe, 0xff
-        else if (bytes.length > 2
-                && ((byte) 0xfe) == bytes[0]
-                && ((byte) 0xff) == bytes[1]) {
-            encoding = UTF16_BE;
+        else if (isMatching(bytes, ByteOrderMark.UTF_16BE)) {
+            encoding = StandardCharsets.UTF_16BE.name();
         }
-        // 0xff, 0xfe
-        else if (bytes.length > 2
-                && ((byte) 0xff) == bytes[0]
-                && ((byte) 0xfe) == bytes[1]) {
-            encoding = UTF16_LE;
+        else if (isMatching(bytes, ByteOrderMark.UTF_16LE)) {
+            encoding = StandardCharsets.UTF_16LE.name();
         }
 
         if (encoding != null && LOG.isDebugEnabled()) {
             LOG.debug("Encoding found in Unicode Byte Order Mark: '" + encoding + "'.");
         }
         return encoding;
+    }
+
+    private static boolean isMatching(final byte[] bytes, final ByteOrderMark bom) {
+        final byte[] bomBytes = bom.getBytes();
+        final byte[] firstBytes = Arrays.copyOfRange(bytes, 0, Math.min(bytes.length, bomBytes.length));
+        return Arrays.equals(firstBytes, bomBytes);
     }
 
     /**
@@ -707,8 +696,9 @@ public final class EncodingSniffer {
                                 continue;
                             }
                         }
-                        if (UTF16_BE.equalsIgnoreCase(charset) || UTF16_LE.equalsIgnoreCase(charset)) {
-                            charset = UTF8;
+                        if (StandardCharsets.UTF_16BE.name().equalsIgnoreCase(charset)
+                                || StandardCharsets.UTF_16LE.name().equalsIgnoreCase(charset)) {
+                            charset = StandardCharsets.UTF_8.name();
                         }
                         if (charset != null && isSupportedCharset(charset)) {
                             charset = charset.toUpperCase(Locale.ROOT);

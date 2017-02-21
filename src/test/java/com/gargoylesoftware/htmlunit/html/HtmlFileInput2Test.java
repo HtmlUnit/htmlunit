@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -375,7 +375,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
-            .setCharset(Charset.forName("UTF-8"));
+            .setCharset(StandardCharsets.UTF_8);
         builder.addPart("myInput", new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
 
         filePost.setEntity(builder.build());

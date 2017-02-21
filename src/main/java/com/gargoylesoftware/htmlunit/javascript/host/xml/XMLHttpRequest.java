@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -540,7 +541,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
-            request.setCharset("UTF-8");
+            request.setCharset(StandardCharsets.UTF_8.name());
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
             if (!isSameOrigin(originUrl, fullUrl)) {
