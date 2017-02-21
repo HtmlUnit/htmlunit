@@ -109,10 +109,7 @@ public class DataUrlDecoder {
             try {
                 return Charset.forName(charsetName);
             }
-            catch (final UnsupportedCharsetException e) {
-                return DEFAULT_CHARSET;
-            }
-            catch (final IllegalCharsetNameException e) {
+            catch (final UnsupportedCharsetException | IllegalCharsetNameException e) {
                 return DEFAULT_CHARSET;
             }
         }
