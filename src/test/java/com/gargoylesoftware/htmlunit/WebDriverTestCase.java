@@ -387,21 +387,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws IOException in case of exception
      */
     protected WebDriver buildWebDriver() throws IOException {
-        // Yes, you are right, having a local inner class is strange
-        // but because of visibility problems i need this construct
-        // to patch the HtmlUnitDriver for the moment.
-        final class PatchedHtmlUnitDriver extends HtmlUnitDriver {
-
-            private PatchedHtmlUnitDriver(final boolean enableJavascript) {
-                super(enableJavascript);
-            }
-
-            @Override
-            protected WebClient newWebClient(final BrowserVersion browserVersion) {
-                return webClient_;
-            }
-        }
-
         if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {
@@ -447,7 +432,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
         }
-        return new PatchedHtmlUnitDriver(true);
+        return new HtmlUnitDriver(true) {
+            @Override
+            protected WebClient newWebClient(final BrowserVersion browserVersion) {
+                return webClient_;
+            }
+        };
     }
 
     /**
