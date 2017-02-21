@@ -782,6 +782,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         charset =
                                 Charset.forName(((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset());
                     }
+                    final String charsetNameFinal = charsetName;
                     final Charset charsetFinal = charset;
                     webResponse_ = new WebResponseWrapper(webResponse) {
                         @Override
@@ -790,8 +791,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         }
                         @Override
                         public Charset getContentCharset() {
-                            if (charsetFinal == null
-                                    && getBrowserVersion().hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION)) {
+                            if (charsetNameFinal.isEmpty()
+                                    || (charsetFinal == null && getBrowserVersion().hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION))) {
                                 return super.getContentCharset();
                             }
                             return charsetFinal;
