@@ -19,6 +19,8 @@ import static org.junit.Assert.fail;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
@@ -53,7 +55,7 @@ public class TextUtilTest extends SimpleWebTestCase {
             {"a", "a"},
             {"abcdefABCDEF", "abcdefABCDEF"},
         };
-        final String encoding = "ISO-8859-1";
+        final Charset encoding = StandardCharsets.ISO_8859_1;
 
         for (final String[] entry : data) {
             final String input = entry[0];
@@ -72,17 +74,17 @@ public class TextUtilTest extends SimpleWebTestCase {
      */
     @Test
     public void stringToByteArray() throws Exception {
-        byte[] result = TextUtil.stringToByteArray(null, "UTF-8");
+        byte[] result = TextUtil.stringToByteArray(null, StandardCharsets.UTF_8);
         assertEquals(0, result.length);
 
-        result = TextUtil.stringToByteArray("", "UTF-8");
+        result = TextUtil.stringToByteArray("", StandardCharsets.UTF_8);
         assertEquals(0, result.length);
 
-        result = TextUtil.stringToByteArray("htmlunit", "UTF-8");
+        result = TextUtil.stringToByteArray("htmlunit", StandardCharsets.UTF_8);
         assertEquals(8, result.length);
         assertEquals(104, result[0]);
 
-        result = TextUtil.stringToByteArray("htmlunit", "Klingon");
+        result = TextUtil.stringToByteArray("htmlunit", null);
         assertEquals(0, result.length);
     }
 

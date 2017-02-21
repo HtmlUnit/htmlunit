@@ -144,7 +144,7 @@ public class WebResponse implements Serializable {
      * @return the content charset specified explicitly in the header or in the content,
      *         or {@code null} if none was specified
      */
-    public String getContentCharsetOrNull() {
+    public Charset getContentCharsetOrNull() {
         try (InputStream is = getContentAsStream()) {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
         }
@@ -163,8 +163,8 @@ public class WebResponse implements Serializable {
      * @see <a href="http://www.w3.org/TR/xml/#charencoding">Character Encoding</a>
      * @return the content charset for this response
      */
-    public String getContentCharset() {
-        String charset = getContentCharsetOrNull();
+    public Charset getContentCharset() {
+        Charset charset = getContentCharsetOrNull();
         if (charset == null) {
             final String contentType = getContentType();
 
@@ -211,27 +211,35 @@ public class WebResponse implements Serializable {
      * @return the response content as a string or null if the content retrieval was failing
      */
     public String getContentAsString(final String encoding, final String defaultEncoding) {
+        Charset charset;
+        // first verify the charset because we can't read the
+        // input stream twice
+        try {
+            charset = Charset.forName(encoding);
+        }
+        catch (final Exception e) {
+            if (encoding.equals(defaultEncoding)) {
+                LOG.warn(e);
+                return "";
+            }
+            charset = defaultEncoding != null ? Charset.forName(defaultEncoding) : getContentCharset();
+            LOG.warn("Attempted to use unsupported encoding '"
+                    + encoding + "'; using default content charset ('" + charset + "').");
+        }
+        return getContentAsString(charset);
+    }
+
+    /**
+     * Returns the response content as a string, using the specified charset,
+     * rather than the charset/encoding specified in the server response.
+     * @param encoding the charset/encoding to use to convert the response content into a string
+     * @return the response content as a string or null if the content retrieval was failing
+     */
+    public String getContentAsString(final Charset encoding) {
         try (InputStream in = responseData_.getInputStream()) {
             if (null == in) {
                 return null;
             }
-
-            // first verify the charset because we can't read the
-            // input stream twice
-            try {
-                Charset.forName(encoding);
-            }
-            catch (final Exception e) {
-                if (encoding.equals(defaultEncoding)) {
-                    LOG.warn(e);
-                    return "";
-                }
-                final String cs = defaultEncoding != null ? defaultEncoding : getContentCharset();
-                LOG.warn("Attempted to use unsupported encoding '"
-                        + encoding + "'; using default content charset ('" + cs + "').");
-                return IOUtils.toString(in, cs);
-            }
-
             return IOUtils.toString(in, encoding);
         }
         catch (final IOException e) {

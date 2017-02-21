@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -638,7 +639,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            200,
                                            "OK",
                                            "text/xml",
-                                           "utf-8", responseHeaders);
+                                           StandardCharsets.UTF_8, responseHeaders);
         loadPageWithAlerts2(html);
     }
 

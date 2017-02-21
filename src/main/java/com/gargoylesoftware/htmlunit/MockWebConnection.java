@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class MockWebConnection implements WebConnection {
         private final String stringContent_;
         private final int statusCode_;
         private final String statusMessage_;
-        private String charset_;
+        private Charset charset_;
 
         RawResponseData(final byte[] byteContent, final int statusCode, final String statusMessage,
                 final String contentType, final List<NameValuePair> headers) {
@@ -60,7 +61,7 @@ public class MockWebConnection implements WebConnection {
             headers_ = compileHeaders(headers, contentType);
         }
 
-        RawResponseData(final String stringContent, final String charset, final int statusCode,
+        RawResponseData(final String stringContent, final Charset charset, final int statusCode,
                 final String statusMessage, final String contentType, final List<NameValuePair> headers) {
             byteContent_ = null;
             charset_ = charset;
@@ -139,7 +140,7 @@ public class MockWebConnection implements WebConnection {
          * Gets the configured charset.
          * @return {@code null} for byte content
          */
-        public String getCharset() {
+        public Charset getCharset() {
             return charset_;
         }
     }
@@ -255,11 +256,11 @@ public class MockWebConnection implements WebConnection {
      * @param statusCode the status code to return
      * @param statusMessage the status message to return
      * @param contentType the content type to return
-     * @param charset the name of a supported charset
+     * @param charset the charset
      * @param headers the response headers to return
      */
     public void setResponse(final URL url, final String content, final int statusCode,
-            final String statusMessage, final String contentType, final String charset,
+            final String statusMessage, final String contentType, final Charset charset,
             final List<NameValuePair> headers) {
 
         final RawResponseData responseEntry = buildRawResponseData(content, charset, statusCode, statusMessage,
@@ -290,7 +291,7 @@ public class MockWebConnection implements WebConnection {
         return new RawResponseData(content, statusCode, statusMessage, contentType, headers);
     }
 
-    private static RawResponseData buildRawResponseData(final String content, String charset, final int statusCode,
+    private static RawResponseData buildRawResponseData(final String content, Charset charset, final int statusCode,
             final String statusMessage, final String contentType, final List<NameValuePair> headers) {
 
         if (charset == null) {
@@ -332,9 +333,9 @@ public class MockWebConnection implements WebConnection {
      * @param url the URL that will return the given response
      * @param content the content to return
      * @param contentType the content type to return
-     * @param charset the name of a supported charset
+     * @param charset the charset
      */
-    public void setResponse(final URL url, final String content, final String contentType, final String charset) {
+    public void setResponse(final URL url, final String content, final String contentType, final Charset charset) {
         setResponse(url, content, 200, "OK", contentType, charset, null);
     }
 
@@ -408,9 +409,9 @@ public class MockWebConnection implements WebConnection {
      *
      * @param content the content to return
      * @param contentType the content type to return
-     * @param charset the name of a supported charset
+     * @param charset the charset
      */
-    public void setDefaultResponse(final String content, final String contentType, final String charset) {
+    public void setDefaultResponse(final String content, final String contentType, final Charset charset) {
         setDefaultResponse(content, 200, "OK", contentType, charset, null);
     }
 
@@ -435,11 +436,11 @@ public class MockWebConnection implements WebConnection {
      * @param statusCode the status code to return
      * @param statusMessage the status message to return
      * @param contentType the content type to return
-     * @param charset the name of a supported charset
+     * @param charset the charset
      * @param headers the response headers to return
      */
     public void setDefaultResponse(final String content, final int statusCode,
-            final String statusMessage, final String contentType, final String charset,
+            final String statusMessage, final String contentType, final Charset charset,
             final List<NameValuePair> headers) {
 
         defaultResponse_ = buildRawResponseData(content, charset, statusCode, statusMessage, contentType, headers);

@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +45,19 @@ public class StringWebResponse extends WebResponse {
      */
     public StringWebResponse(final String content, final URL originatingURL) {
         // use UTF-8 here to be sure, all chars in the string are part of the charset
-        this(content, "UTF-8", originatingURL);
+        this(content, StandardCharsets.UTF_8, originatingURL);
+    }
+
+    /**
+     * Creates an instance associated with the specified originating URL.
+     * @param content the content to return
+     * @param charset the charset used to convert the content
+     * @param originatingURL the URL that this should be associated with
+     * @deprecated as of 2.25, please use {@link #StringWebResponse(String, Charset, URL)}
+     */
+    @Deprecated
+    public StringWebResponse(final String content, final String charset, final URL originatingURL) {
+        this(content, Charset.forName(charset), originatingURL);
     }
 
     /**
@@ -52,7 +66,7 @@ public class StringWebResponse extends WebResponse {
      * @param charset the charset used to convert the content
      * @param originatingURL the URL that this should be associated with
      */
-    public StringWebResponse(final String content, final String charset, final URL originatingURL) {
+    public StringWebResponse(final String content, final Charset charset, final URL originatingURL) {
         super(getWebResponseData(content, charset), buildWebRequest(originatingURL, charset), 0);
     }
 
@@ -63,14 +77,14 @@ public class StringWebResponse extends WebResponse {
      * @param contentString the string to be converted to a <tt>WebResponseData</tt>
      * @return a simple <tt>WebResponseData</tt> with defaults specified
      */
-    private static WebResponseData getWebResponseData(final String contentString, final String charset) {
+    private static WebResponseData getWebResponseData(final String contentString, final Charset charset) {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair("Content-Type", "text/html; charset=" + charset));
         return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
     }
 
-    private static WebRequest buildWebRequest(final URL originatingURL, final String charset) {
+    private static WebRequest buildWebRequest(final URL originatingURL, final Charset charset) {
         final WebRequest webRequest = new WebRequest(originatingURL, HttpMethod.GET);
         webRequest.setCharset(charset);
         return webRequest;

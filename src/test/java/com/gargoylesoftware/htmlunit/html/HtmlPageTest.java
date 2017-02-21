@@ -20,6 +20,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -573,7 +574,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<meta http-equiv='Content-Type' content='text/html; charset='>\n"
             + "</head><body>abc</body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals(TextUtil.DEFAULT_CHARSET, page.getPageEncoding());
+        assertEquals(TextUtil.DEFAULT_CHARSET, page.getCharset());
     }
 
     /**
@@ -589,8 +590,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("UTF-8", page.getPageEncoding());
-        assertEquals(page.getWebResponse().getContentCharset(), page.getPageEncoding());
+        assertEquals("UTF-8", page.getCharset());
+        assertEquals(page.getWebResponse().getContentCharset(), page.getCharset());
     }
 
     /**
@@ -993,7 +994,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
+        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, StandardCharsets.UTF_8),
+                200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(getDefaultUrl());

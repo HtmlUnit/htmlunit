@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +173,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final URL url = getDefaultUrl();
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(html, "text/html", "ISO-8859-1");
+        webConnection.setDefaultResponse(html, "text/html", StandardCharsets.ISO_8859_1);
 
         final WebDriver driver = loadPage2(html);
         assertEquals(url.toExternalForm(), driver.getCurrentUrl());

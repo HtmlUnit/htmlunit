@@ -7,7 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, ScriptPreProcessor, Bugfixes">
+        <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, WebRequest.getCharset, ScriptPreProcessor, Bugfixes">
+            <action type="update" dev="asashour">
+                Deprecate SgmlPage.getPageEncoding().
+            </action>
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: change return type of WebRequest.getCharset,
+                WebResponse.getContentCharset() and getContentCharsetOrNull().
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: correct handling of window.onbeforeunload.
             </action>

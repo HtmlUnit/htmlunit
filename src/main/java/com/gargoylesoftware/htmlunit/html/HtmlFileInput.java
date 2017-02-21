@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +91,7 @@ public class HtmlFileInput extends HtmlInput {
     @Override
     public NameValuePair[] getSubmitNameValuePairs() {
         if (files_ == null || files_.length == 0) {
-            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, null)};
+            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, (Charset) null)};
         }
 
         final List<NameValuePair> list = new ArrayList<>();
@@ -105,7 +106,7 @@ public class HtmlFileInput extends HtmlInput {
             else {
                 contentType = contentType_;
             }
-            final String charset = getPage().getPageEncoding();
+            final Charset charset = getPage().getCharset();
             final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, null, contentType, charset);
             keyDataPair.setData(data_);
             list.add(keyDataPair);

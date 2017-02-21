@@ -288,7 +288,7 @@ public class HttpWebConnection implements WebConnection {
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
         throws URISyntaxException {
 
-        final String charset = webRequest.getCharset();
+        final Charset charset = webRequest.getCharset();
         final HttpContext httpContext = getHttpContext();
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
@@ -394,7 +394,7 @@ public class HttpWebConnection implements WebConnection {
         return query.replace("%%", "%25%25");
     }
 
-    private static Charset getCharset(final String charset, final List<NameValuePair> pairs) {
+    private static Charset getCharset(final Charset charset, final List<NameValuePair> pairs) {
         for (final NameValuePair pair : pairs) {
             if (pair instanceof KeyDataPair) {
                 final KeyDataPair pairWithFile = (KeyDataPair) pair;
@@ -402,7 +402,7 @@ public class HttpWebConnection implements WebConnection {
                     final String fileName = pairWithFile.getFile().getName();
                     for (int i = 0; i < fileName.length(); i++) {
                         if (fileName.codePointAt(i) > 127) {
-                            return Charset.forName(charset);
+                            return charset;
                         }
                     }
                 }

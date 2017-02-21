@@ -18,6 +18,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +95,7 @@ public class WebResponseTest extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", null);
         client.setWebConnection(webConnection);
         final WebRequest request = new WebRequest(URL_FIRST);
-        request.setCharset("UTF-8");
+        request.setCharset(StandardCharsets.UTF_8);
         final HtmlPage page = client.getPage(request);
         assertEquals(title, page.getTitleText());
 
@@ -129,13 +131,13 @@ public class WebResponseTest extends WebServerTestCase {
      */
     @Test
     public void illegalCharset() throws Exception {
-        illegalCharset("text/html; text/html; charset=ISO-8859-1;", "ISO-8859-1");
-        illegalCharset("text/html; charset=UTF-8; charset=UTF-8", "UTF-8");
+        illegalCharset("text/html; text/html; charset=ISO-8859-1;", StandardCharsets.ISO_8859_1);
+        illegalCharset("text/html; charset=UTF-8; charset=UTF-8", StandardCharsets.UTF_8);
         illegalCharset("text/html; charset=#sda+s", TextUtil.DEFAULT_CHARSET);
         illegalCharset("text/html; charset=UnknownCharset", TextUtil.DEFAULT_CHARSET);
     }
 
-    private void illegalCharset(final String cntTypeHeader, final String expectedCharset) throws Exception {
+    private void illegalCharset(final String cntTypeHeader, final Charset expectedCharset) throws Exception {
         final MockWebConnection conn = new MockWebConnection();
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Type", cntTypeHeader));

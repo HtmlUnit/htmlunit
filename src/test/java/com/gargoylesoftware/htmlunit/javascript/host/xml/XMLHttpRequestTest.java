@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -732,7 +733,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -760,7 +761,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -788,7 +789,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -821,7 +822,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -1328,7 +1329,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", "text/plain", StandardCharsets.UTF_8);
         loadPageWithAlerts2(html);
     }
 

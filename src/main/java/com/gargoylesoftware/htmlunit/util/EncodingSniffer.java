@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -446,7 +447,7 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
-    public static String sniffEncoding(final List<NameValuePair> headers, final InputStream content)
+    public static Charset sniffEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
         if (isHtml(headers)) {
             return sniffHtmlEncoding(headers, content);
@@ -523,10 +524,10 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
-    public static String sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
+    public static Charset sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        String encoding = sniffEncodingFromHttpHeaders(headers);
+        Charset encoding = sniffEncodingFromHttpHeaders(headers);
         if (encoding != null || content == null) {
             return encoding;
         }
@@ -555,10 +556,10 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
-    public static String sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
+    public static Charset sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        String encoding = sniffEncodingFromHttpHeaders(headers);
+        Charset encoding = sniffEncodingFromHttpHeaders(headers);
         if (encoding != null || content == null) {
             return encoding;
         }
@@ -588,10 +589,10 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
-    public static String sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
+    public static Charset sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        String encoding = sniffEncodingFromHttpHeaders(headers);
+        Charset encoding = sniffEncodingFromHttpHeaders(headers);
         if (encoding != null || content == null) {
             return encoding;
         }
@@ -608,15 +609,14 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified HTTP headers, or {@code null} if the encoding
      *         could not be determined
      */
-    static String sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
-        String encoding = null;
+    static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
+        Charset encoding = null;
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();
             if ("content-type".equalsIgnoreCase(name)) {
                 final String value = pair.getValue();
                 encoding = extractEncodingFromContentType(value);
                 if (encoding != null) {
-                    encoding = encoding.toUpperCase(Locale.ROOT);
                     break;
                 }
             }
@@ -635,20 +635,20 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
-    static String sniffEncodingFromUnicodeBom(final byte[] bytes) {
+    static Charset sniffEncodingFromUnicodeBom(final byte[] bytes) {
         if (bytes == null) {
             return null;
         }
 
-        String encoding = null;
-        if (isMatching(bytes, ByteOrderMark.UTF_8)) {
-            encoding = StandardCharsets.UTF_8.name();
+        Charset encoding = null;
+        if (startsWith(bytes, ByteOrderMark.UTF_8)) {
+            encoding = StandardCharsets.UTF_8;
         }
-        else if (isMatching(bytes, ByteOrderMark.UTF_16BE)) {
-            encoding = StandardCharsets.UTF_16BE.name();
+        else if (startsWith(bytes, ByteOrderMark.UTF_16BE)) {
+            encoding = StandardCharsets.UTF_16BE;
         }
-        else if (isMatching(bytes, ByteOrderMark.UTF_16LE)) {
-            encoding = StandardCharsets.UTF_16LE.name();
+        else if (startsWith(bytes, ByteOrderMark.UTF_16LE)) {
+            encoding = StandardCharsets.UTF_16LE;
         }
 
         if (encoding != null && LOG.isDebugEnabled()) {
@@ -657,7 +657,13 @@ public final class EncodingSniffer {
         return encoding;
     }
 
-    private static boolean isMatching(final byte[] bytes, final ByteOrderMark bom) {
+    /**
+     * Returns whether the specified byte array starts with the given {@link ByteOrderMark}, or not.
+     * @param bytes the byte array to check
+     * @param bom the {@link ByteOrderMark}
+     * @return whether the specified byte array starts with the given {@link ByteOrderMark}, or not
+     */
+    private static boolean startsWith(final byte[] bytes, final ByteOrderMark bom) {
         final byte[] bomBytes = bom.getBytes();
         final byte[] firstBytes = Arrays.copyOfRange(bytes, 0, Math.min(bytes.length, bomBytes.length));
         return Arrays.equals(firstBytes, bomBytes);
@@ -670,7 +676,7 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
-    static String sniffEncodingFromMetaTag(final byte[] bytes) {
+    static Charset sniffEncodingFromMetaTag(final byte[] bytes) {
         for (int i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, COMMENT_START)) {
                 i = indexOfSubArray(bytes, new byte[] {'-', '-', '>'}, i);
@@ -686,9 +692,9 @@ public final class EncodingSniffer {
                     final String name = att.getName();
                     final String value = att.getValue();
                     if ("charset".equals(name) || "content".equals(name)) {
-                        String charset = null;
+                        Charset charset = null;
                         if ("charset".equals(name)) {
-                            charset = value;
+                            charset = toCharset(value);
                         }
                         else if ("content".equals(name)) {
                             charset = extractEncodingFromContentType(value);
@@ -696,12 +702,11 @@ public final class EncodingSniffer {
                                 continue;
                             }
                         }
-                        if (StandardCharsets.UTF_16BE.name().equalsIgnoreCase(charset)
-                                || StandardCharsets.UTF_16LE.name().equalsIgnoreCase(charset)) {
-                            charset = StandardCharsets.UTF_8.name();
+                        if (StandardCharsets.UTF_16BE == charset
+                                || StandardCharsets.UTF_16LE == charset) {
+                            charset = StandardCharsets.UTF_8;
                         }
-                        if (charset != null && isSupportedCharset(charset)) {
-                            charset = charset.toUpperCase(Locale.ROOT);
+                        if (charset != null) {
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Encoding found in meta tag: '" + charset + "'.");
                             }
@@ -852,7 +857,7 @@ public final class EncodingSniffer {
      * @return the encoding found in the specified <tt>Content-Type</tt> value, or {@code null} if no
      *         encoding was found
      */
-    static String extractEncodingFromContentType(final String s) {
+    static Charset extractEncodingFromContentType(final String s) {
         if (s == null) {
             return null;
         }
@@ -894,8 +899,8 @@ public final class EncodingSniffer {
             if (index == -1) {
                 return null;
             }
-            final String charset = new String(ArrayUtils.subarray(bytes, i + 1, index), StandardCharsets.US_ASCII);
-            return isSupportedCharset(charset) ? charset : null;
+            final String charsetName = new String(ArrayUtils.subarray(bytes, i + 1, index), StandardCharsets.US_ASCII);
+            return toCharset(charsetName);
         }
         if (bytes[i] == '\'') {
             if (bytes.length <= i + 1) {
@@ -905,15 +910,15 @@ public final class EncodingSniffer {
             if (index == -1) {
                 return null;
             }
-            final String charset = new String(ArrayUtils.subarray(bytes, i + 1, index), StandardCharsets.US_ASCII);
-            return isSupportedCharset(charset) ? charset : null;
+            final String charsetName = new String(ArrayUtils.subarray(bytes, i + 1, index), StandardCharsets.US_ASCII);
+            return toCharset(charsetName);
         }
         int end = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3B});
         if (end == -1) {
             end = bytes.length;
         }
-        final String charset = new String(ArrayUtils.subarray(bytes, i, end), StandardCharsets.US_ASCII);
-        return isSupportedCharset(charset) ? charset : null;
+        final String charsetName = new String(ArrayUtils.subarray(bytes, i, end), StandardCharsets.US_ASCII);
+        return toCharset(charsetName);
     }
 
     /**
@@ -923,8 +928,8 @@ public final class EncodingSniffer {
      * @param bytes the XML content to sniff
      * @return the encoding of the specified XML content, or {@code null} if it could not be determined
      */
-    static String sniffEncodingFromXmlDeclaration(final byte[] bytes) {
-        String encoding = null;
+    static Charset sniffEncodingFromXmlDeclaration(final byte[] bytes) {
+        Charset encoding = null;
         if (bytes.length > 5
                 && XML_DECLARATION_PREFIX[0] == bytes[0]
                 && XML_DECLARATION_PREFIX[1] == bytes[1]
@@ -953,12 +958,9 @@ public final class EncodingSniffer {
                         }
                     }
                     final int end = declaration.indexOf(delimiter, start);
-                    encoding = declaration.substring(start, end);
+                    encoding = toCharset(declaration.substring(start, end));
                 }
             }
-        }
-        if (encoding != null && !isSupportedCharset(encoding)) {
-            encoding = null;
         }
         if (encoding != null && LOG.isDebugEnabled()) {
             LOG.debug("Encoding found in XML declaration: '" + encoding + "'.");
@@ -967,17 +969,17 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns {@code true} if the specified charset is supported on this platform.
+     * Returns {@code Charset} if the specified charset name is supported on this platform.
      *
-     * @param charset the charset to check
-     * @return {@code true} if the specified charset is supported on this platform
+     * @param charsetName the charset name to check
+     * @return {@code Charset} if the specified charset name is supported on this platform
      */
-    static boolean isSupportedCharset(final String charset) {
+    static Charset toCharset(final String charsetName) {
         try {
-            return Charset.isSupported(charset);
+            return Charset.forName(charsetName);
         }
-        catch (final IllegalCharsetNameException e) {
-            return false;
+        catch (final IllegalCharsetNameException | UnsupportedCharsetException e) {
+            return null;
         }
     }
 
@@ -1132,14 +1134,14 @@ public final class EncodingSniffer {
      * @param encodingLabel the label to translate
      * @return the normalized encoding name or null if not found
      */
-    public static String translateEncodingLabel(final String encodingLabel) {
+    public static String translateEncodingLabel(final Charset encodingLabel) {
         if (null == encodingLabel) {
             return null;
         }
-        final String encLC = encodingLabel.trim().toLowerCase(Locale.ROOT);
+        final String encLC = encodingLabel.name().toLowerCase(Locale.ROOT);
         final String enc = ENCODING_FROM_LABEL.get(encLC);
         if (encLC.equals(enc)) {
-            return encodingLabel;
+            return encodingLabel.name();
         }
         return enc;
     }

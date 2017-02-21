@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.nio.charset.StandardCharsets;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,7 +44,7 @@ public class MockWebConnectionTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, html, "text/html", "UTF-8");
+        webConnection.setResponse(URL_FIRST, html, "text/html", StandardCharsets.UTF_8);
         client.setWebConnection(webConnection);
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("\u00A3", page.getBody().asText());

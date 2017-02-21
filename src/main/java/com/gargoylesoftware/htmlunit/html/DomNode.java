@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -811,10 +812,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the XML string
      */
     public String asXml() {
-        String charsetName = null;
+        Charset charsetName = null;
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null) {
-            charsetName = htmlPage.getPageEncoding();
+            charsetName = htmlPage.getCharset();
         }
 
         final StringWriter stringWriter = new StringWriter();

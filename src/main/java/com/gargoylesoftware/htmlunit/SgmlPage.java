@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -195,8 +196,19 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     /**
      * Returns the page encoding.
      * @return the page encoding
+     * @deprecated as of 2.25, please use {@link #getCharset()} instead
      */
-    public abstract String getPageEncoding();
+    @Deprecated
+    public String getPageEncoding() {
+        final Charset charset = getCharset();
+        return charset == null ? null : charset.name();
+    }
+
+    /**
+     * Returns the encoding.
+     * @return the encoding
+     */
+    public abstract Charset getCharset();
 
     /**
      * Returns the document element.

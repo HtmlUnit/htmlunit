@@ -19,6 +19,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 
 import org.apache.commons.codec.DecoderException;
@@ -213,7 +215,7 @@ public final class UrlUtils {
      * @param charset the charset
      * @return the encoded URL
      */
-    public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding, final String charset) {
+    public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding, final Charset charset) {
         if (!isNormalUrlProtocol(URL_CREATOR.getProtocol(url))) {
             return url; // javascript:, about:, data: and anything not supported like foo:
         }
@@ -221,7 +223,7 @@ public final class UrlUtils {
         try {
             String path = url.getPath();
             if (path != null) {
-                path = encode(path, PATH_ALLOWED_CHARS, "UTF-8");
+                path = encode(path, PATH_ALLOWED_CHARS, StandardCharsets.UTF_8);
             }
             String query = url.getQuery();
             if (query != null) {
@@ -234,7 +236,7 @@ public final class UrlUtils {
             }
             String anchor = url.getRef();
             if (anchor != null) {
-                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "UTF-8");
+                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, StandardCharsets.UTF_8);
             }
             return createNewUrl(url.getProtocol(), url.getUserInfo(), url.getHost(),
                                 url.getPort(), path, anchor, query);
@@ -253,7 +255,7 @@ public final class UrlUtils {
      */
     public static String encodeAnchor(String anchor) {
         if (anchor != null) {
-            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "UTF-8");
+            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, StandardCharsets.UTF_8);
         }
         return anchor;
     }
@@ -266,7 +268,7 @@ public final class UrlUtils {
      */
     public static String encodeHash(String hash) {
         if (hash != null) {
-            hash = encode(hash, HASH_ALLOWED_CHARS, "UTF-8");
+            hash = encode(hash, HASH_ALLOWED_CHARS, StandardCharsets.UTF_8);
         }
         return hash;
     }
@@ -301,16 +303,10 @@ public final class UrlUtils {
      * @param charset the charset to use
      * @return the escaped string
      */
-    private static String encode(final String unescaped, final BitSet allowed, final String charset) {
-        try {
-            final byte[] bytes = unescaped.getBytes(charset);
-            final byte[] bytes2 = URLCodec.encodeUrl(allowed, bytes);
-            return encodePercentSign(bytes2);
-        }
-        catch (final UnsupportedEncodingException e) {
-            // Should never happen.
-            throw new RuntimeException(e);
-        }
+    private static String encode(final String unescaped, final BitSet allowed, final Charset charset) {
+        final byte[] bytes = unescaped.getBytes(charset);
+        final byte[] bytes2 = URLCodec.encodeUrl(allowed, bytes);
+        return encodePercentSign(bytes2);
     }
 
     /**
@@ -319,14 +315,13 @@ public final class UrlUtils {
      * @param str the input string
      * @return the given input string where every occurrence of <code>%</code> in
      * invalid escape sequences has been replace by <code>%25</code>
-     * @throws UnsupportedEncodingException should never happen
      */
-    private static String encodePercentSign(final byte[] input) throws UnsupportedEncodingException {
+    private static String encodePercentSign(final byte[] input) {
         if (input == null) {
             return null;
         }
 
-        final StringBuilder result = new StringBuilder(new String(input, "US-ASCII"));
+        final StringBuilder result = new StringBuilder(new String(input, StandardCharsets.US_ASCII));
         int state = -0;
         int offset = 0;
         for (int i = 0; i < input.length; i++) {

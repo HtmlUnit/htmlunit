@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1990,7 +1991,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "ISO-8859-1");
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", StandardCharsets.ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2016,7 +2017,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", "ISO-8859-1");
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", StandardCharsets.ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2042,7 +2043,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=utf-8", "ISO-8859-1");
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=utf-8", StandardCharsets.ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2069,7 +2070,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", StandardCharsets.UTF_8);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2087,7 +2088,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", StandardCharsets.UTF_8);
         driver.findElement(By.id("myId")).click();
         String actualQuery = driver.getCurrentUrl();
         actualQuery = actualQuery.substring(actualQuery.indexOf('?'));

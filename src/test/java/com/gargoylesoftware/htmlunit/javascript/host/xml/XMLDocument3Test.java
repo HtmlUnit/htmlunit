@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
@@ -95,7 +96,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
             + "</script></head><body onload='test(\"ISO-8859-1\");test(\"UTF8\");'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
+        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1",
+                StandardCharsets.ISO_8859_1);
 
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
         loadPageWithAlerts2(URL_FIRST);
@@ -122,7 +124,7 @@ public class XMLDocument3Test extends WebDriverTestCase {
             + "</script></head><body onload='test(\"UTF-8\");test(\"ISO-8859-1\");'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
+        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=UTF-8", StandardCharsets.UTF_8);
 
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
         loadPageWithAlerts2(URL_FIRST);

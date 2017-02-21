@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -294,12 +295,12 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @param html the HTML to use
      * @param url the url to use to load the page
      * @param contentType the content type to return
-     * @param charset the name of a supported charset
+     * @param charset the charset
      * @return the page
      * @throws Exception if something goes wrong
      */
     private HtmlPage loadPage(final String html, final URL url,
-            final String contentType, final String charset) throws Exception {
+            final String contentType, final Charset charset) throws Exception {
         final MockWebConnection mockWebConnection = getMockWebConnection();
         mockWebConnection.setResponse(url, html, contentType, charset);
         startWebServer(mockWebConnection);

@@ -14,9 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.IDN;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +61,7 @@ public class WebRequest implements Serializable {
     private Map<String, String> additionalHeaders_ = new HashMap<>();
     private Credentials urlCredentials_;
     private Credentials credentials_;
-    private String charset_ = TextUtil.DEFAULT_CHARSET;
+    private transient Charset charset_ = TextUtil.DEFAULT_CHARSET;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
@@ -411,7 +415,7 @@ public class WebRequest implements Serializable {
      * Returns the character set to use to perform the request.
      * @return the character set to use to perform the request
      */
-    public String getCharset() {
+    public Charset getCharset() {
         return charset_;
     }
 
@@ -419,8 +423,19 @@ public class WebRequest implements Serializable {
      * Sets the character set to use to perform the request. The default value
      * is {@link TextUtil#DEFAULT_CHARSET}.
      * @param charset the character set to use to perform the request
+     * @deprecated as of 2.25, please use {@link #setCharset(Charset)}
      */
-    public void setCharset(final String charset) {
+    @Deprecated
+    public void setCharset(final String charsetName) {
+        charset_ = Charset.forName(charsetName);
+    }
+
+    /**
+     * Sets the character set to use to perform the request. The default value
+     * is {@link TextUtil#DEFAULT_CHARSET}.
+     * @param charset the character set to use to perform the request
+     */
+    public void setCharset(final Charset charset) {
         charset_ = charset;
     }
 
@@ -441,5 +456,18 @@ public class WebRequest implements Serializable {
         builder.append(", " + credentials_);
         builder.append(">]");
         return builder.toString();
+    }
+
+    private void writeObject(final ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeObject(charset_ == null ? null : charset_.name());
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        final String charsetName = (String) ois.readObject();
+        if (charsetName != null) {
+            charset_ = Charset.forName(charsetName);
+        }
     }
 }

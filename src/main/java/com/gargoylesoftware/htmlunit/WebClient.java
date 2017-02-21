@@ -32,6 +32,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -1180,7 +1182,7 @@ public class WebClient implements Serializable, AutoCloseable {
             compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
             final WebResponseData responseData =
                 new WebResponseData(
-                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), "UTF-8"),
+                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), StandardCharsets.UTF_8),
                     404, "Not Found", compiledHeaders);
             return new WebResponse(responseData, webRequest, 0);
         }
@@ -1228,7 +1230,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     private WebResponse makeWebResponseForJavaScriptUrl(final WebWindow webWindow, final URL url,
-        final String charset) throws FailingHttpStatusCodeException, IOException {
+        final Charset charset) throws FailingHttpStatusCodeException, IOException {
 
         HtmlPage page = null;
         if (webWindow instanceof FrameWindow) {

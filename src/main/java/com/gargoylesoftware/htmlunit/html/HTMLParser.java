@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -211,14 +212,14 @@ public final class HTMLParser {
         final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url, null);
 
-        String charset = webResponse.getContentCharsetOrNull();
+        Charset charset = webResponse.getContentCharsetOrNull();
         try {
             // handle charset
             if (charset != null) {
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
             }
             else {
-                final String specifiedCharset = webResponse.getWebRequest().getCharset();
+                final Charset specifiedCharset = webResponse.getWebRequest().getCharset();
                 if (specifiedCharset != null) {
                     charset = specifiedCharset;
                 }
@@ -234,7 +235,7 @@ public final class HTMLParser {
         }
 
         try (InputStream content = webResponse.getContentAsStream()) {
-            final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset);
+            final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset.name());
 
             page.registerParsingStart();
             try {
@@ -408,9 +409,9 @@ public final class HTMLParser {
             page_.registerInlineSnippetParsingStart();
             try {
                 final WebResponse webResponse = page_.getWebResponse();
-                final String charset = webResponse.getContentCharset();
+                final Charset charset = webResponse.getContentCharset();
                 final String url = webResponse.getWebRequest().getUrl().toString();
-                final XMLInputSource in = new XMLInputSource(null, url, null, new StringReader(html), charset);
+                final XMLInputSource in = new XMLInputSource(null, url, null, new StringReader(html), charset.name());
                 ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
             }
             finally {

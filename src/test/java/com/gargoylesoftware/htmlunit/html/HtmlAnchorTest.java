@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.junit.Test;
@@ -607,7 +608,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "  <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse(html, "text/html", "UTF-8");
+        getMockWebConnection().setDefaultResponse(html, "text/html", StandardCharsets.UTF_8);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html, URL_FIRST);

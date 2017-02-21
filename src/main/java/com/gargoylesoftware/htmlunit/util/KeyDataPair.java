@@ -15,6 +15,10 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.charset.Charset;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -32,7 +36,7 @@ public class KeyDataPair extends NameValuePair {
     private final File fileObject_;
     private final String fileName_;
     private final String mimeType_;
-    private final String charset_;
+    private transient Charset charset_;
     private byte[] data_;
 
     /**
@@ -46,6 +50,20 @@ public class KeyDataPair extends NameValuePair {
      */
     public KeyDataPair(final String key, final File file, final String fileName,
             final String mimeType, final String charset) {
+        this(key, file, fileName, mimeType, Charset.forName(charset));
+    }
+
+    /**
+     * Creates an instance.
+     *
+     * @param key the key
+     * @param file the file
+     * @param fileName the name of the file
+     * @param mimeType the MIME type
+     * @param charset the charset encoding
+     */
+    public KeyDataPair(final String key, final File file, final String fileName,
+            final String mimeType, final Charset charset) {
 
         super(key, (file == null) ? "" : file.getName());
 
@@ -101,7 +119,7 @@ public class KeyDataPair extends NameValuePair {
      * Gets the charset encoding for this file upload.
      * @return the charset
      */
-    public String getCharset() {
+    public Charset getCharset() {
         return charset_;
     }
 
@@ -127,5 +145,18 @@ public class KeyDataPair extends NameValuePair {
      */
     public void setData(final byte[] data) {
         data_ = data;
+    }
+
+    private void writeObject(final ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeObject(charset_ == null ? null : charset_.name());
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        final String charsetName = (String) ois.readObject();
+        if (charsetName != null) {
+            charset_ = Charset.forName(charsetName);
+        }
     }
 }

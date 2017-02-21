@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -87,7 +88,7 @@ public class FormData extends SimpleScriptable {
             if (StringUtils.isEmpty(contentType)) {
                 contentType = "application/octet-stream";
             }
-            requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, null));
+            requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, (Charset) null));
         }
         else {
             requestParameters_.add(new NameValuePair(name, Context.toString(value)));
@@ -214,7 +215,7 @@ public class FormData extends SimpleScriptable {
             if (filename instanceof String) {
                 fileName = (String) filename;
             }
-            requestParameters_.add(pos, new KeyDataPair(name, file.getFile(), fileName, file.getType(), null));
+            requestParameters_.add(pos, new KeyDataPair(name, file.getFile(), fileName, file.getType(), (Charset) null));
         }
         else {
             requestParameters_.add(pos, new NameValuePair(name, Context.toString(value)));

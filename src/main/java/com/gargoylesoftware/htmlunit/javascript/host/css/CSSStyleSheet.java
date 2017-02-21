@@ -366,7 +366,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final String contentType = response.getContentType();
                 if (StringUtils.isEmpty(contentType) || "text/css".equals(contentType)) {
                     source.setByteStream(response.getContentAsStream());
-                    source.setEncoding(response.getContentCharset());
+                    source.setEncoding(response.getContentCharset().name());
                 }
                 else {
                     source.setCharacterStream(new StringReader(""));

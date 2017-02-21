@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_NORMALIZED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
@@ -43,6 +42,7 @@ import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -872,11 +872,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getInputEncoding() {
-        final String encoding = getPage().getPageEncoding();
-        if (encoding != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
-            return EncodingSniffer.translateEncodingLabel(encoding);
+        final Charset encoding = getPage().getCharset();
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return encoding.name();
         }
-        return encoding;
+        return EncodingSniffer.translateEncodingLabel(encoding);
     }
 
     /**
@@ -885,14 +885,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getCharacterSet() {
-        final String charset = getPage().getPageEncoding();
+        final Charset charset = getPage().getCharset();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return charset.toLowerCase(Locale.ROOT);
+            return charset.name().toLowerCase(Locale.ROOT);
         }
-        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
-            return EncodingSniffer.translateEncodingLabel(charset);
-        }
-        return charset;
+        return EncodingSniffer.translateEncodingLabel(charset);
     }
 
     /**
@@ -901,16 +898,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(FF)})
     public String getCharset() {
-        String charset = getPage().getPageEncoding();
-        if (charset != null) {
-            if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
-                return EncodingSniffer.translateEncodingLabel(charset);
-            }
-            if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-                charset = charset.toLowerCase(Locale.ROOT);
-            }
+        final Charset charset = getPage().getCharset();
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return charset.name().toLowerCase(Locale.ROOT);
         }
-        return charset;
+        return EncodingSniffer.translateEncodingLabel(charset);
     }
 
     /**

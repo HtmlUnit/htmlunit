@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -95,6 +96,22 @@ public class SvgScript extends SvgElement implements ScriptElement {
     @Override
     public final String getCharsetAttribute() {
         return getAttribute("charset");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Charset getCharset() {
+        final String charsetName = getCharsetAttribute();
+        if (!charsetName.isEmpty()) {
+            try {
+                return Charset.forName(charsetName);
+            }
+            catch (final Exception e) {
+            }
+        }
+        return null;
     }
 
     /**

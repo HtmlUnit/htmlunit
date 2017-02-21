@@ -1145,7 +1145,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(getDefaultUrl());
 
         final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
-        assertEquals(firstPageEncoding, page.getPageEncoding());
+        assertEquals(firstPageEncoding, page.getCharset());
 
         final HtmlForm form = page.getFormByName("form1");
         form.getInputByName("button").click();

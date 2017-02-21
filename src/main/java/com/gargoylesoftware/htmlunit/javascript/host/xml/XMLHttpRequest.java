@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
@@ -347,15 +348,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return "";
         }
         if (webResponse_ != null) {
-            final String encoding = webResponse_.getContentCharset();
-            String defaultEncoding = null;
+            Charset encoding = webResponse_.getContentCharset();
+            Charset defaultEncoding = null;
             if (getBrowserVersion().hasFeature(XHR_USE_DEFAULT_CHARSET_FROM_PAGE)) {
-                defaultEncoding = ((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset();
+                defaultEncoding =
+                        Charset.forName(((HTMLDocument) containingPage_.getScriptableObject()).getDefaultCharset());
             }
             if (getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)) {
                 defaultEncoding = encoding;
             }
-            final String content = webResponse_.getContentAsString(encoding, defaultEncoding);
+            if (encoding == null) {
+                encoding = defaultEncoding;
+            }
+            final String content = webResponse_.getContentAsString(encoding);
             if (content == null) {
                 return "";
             }
@@ -541,7 +546,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
-            request.setCharset(StandardCharsets.UTF_8.name());
+            request.setCharset(StandardCharsets.UTF_8);
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
             if (!isSameOrigin(originUrl, fullUrl)) {
@@ -778,9 +783,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (index != -1) {
                         charsetString = overriddenMimeType_.substring(index + "charset=".length());
                     }
-                    final String charset;
+                    final Charset charset;
                     if (!charsetString.isEmpty()) {
-                        charset = charsetString;
+                        charset = Charset.forName(charsetString);
                     }
                     else {
                         charset = null;
@@ -791,7 +796,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                             return overriddenMimeType_;
                         }
                         @Override
-                        public String getContentCharset() {
+                        public Charset getContentCharset() {
                             if (charset != null) {
                                 return charset;
                             }
@@ -1080,13 +1085,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         @Override
-        public String getContentCharset() {
-            return "";
+        public Charset getContentCharset() {
+            return null;
         }
 
         @Override
-        public String getContentCharsetOrNull() {
-            return "";
+        public Charset getContentCharsetOrNull() {
+            return null;
         }
 
         @Override

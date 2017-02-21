@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -102,7 +103,7 @@ public class UrlFetchWebConnection implements WebConnection {
             connection.setRequestMethod(httpMethod.name());
             if (HttpMethod.POST == httpMethod || HttpMethod.PUT == httpMethod || HttpMethod.PATCH == httpMethod) {
                 connection.setDoOutput(true);
-                final String charset = webRequest.getCharset();
+                final Charset charset = webRequest.getCharset();
                 connection.addRequestProperty("Content-Type", FormEncodingType.URL_ENCODED.getName());
 
                 try (OutputStream outputStream = connection.getOutputStream()) {

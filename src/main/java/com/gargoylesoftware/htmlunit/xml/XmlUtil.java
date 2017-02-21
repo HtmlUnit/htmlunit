@@ -19,6 +19,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Field;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -79,7 +81,7 @@ public final class XmlUtil {
     /**
      * Default encoding used.
      */
-    public static final String DEFAULT_CHARSET = "UTF-8";
+    public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
     private static final Log LOG = LogFactory.getLog(XmlUtil.class);
 

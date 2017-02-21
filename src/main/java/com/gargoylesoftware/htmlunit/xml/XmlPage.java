@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -361,8 +362,8 @@ public class XmlPage extends SgmlPage {
      * Not yet implemented.
      */
     @Override
-    public String getPageEncoding() {
-        throw new UnsupportedOperationException("XmlPage.getPageEncoding is not yet implemented.");
+    public Charset getCharset() {
+        throw new UnsupportedOperationException("XmlPage.getCharset is not yet implemented.");
     }
 
     /**

@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Utility methods relating to text.
@@ -31,9 +33,9 @@ import java.io.UnsupportedEncodingException;
 public final class TextUtil {
 
     /**
-     * Default encoding used.
+     * Default charset used.
      */
-    public static final String DEFAULT_CHARSET = "ISO-8859-1";
+    public static final Charset DEFAULT_CHARSET = StandardCharsets.ISO_8859_1;
 
     /** Private constructor to prevent instantiation. */
     private TextUtil() { }
@@ -44,39 +46,28 @@ public final class TextUtil {
      * @return the resulting input stream
      */
     public static InputStream toInputStream(final String content) {
-        try {
-            return toInputStream(content, DEFAULT_CHARSET);
-        }
-        catch (final UnsupportedEncodingException e) {
-            throw new IllegalStateException(
-                DEFAULT_CHARSET + " is an unsupported encoding!  You may have a corrupted installation of java.");
-        }
+        return toInputStream(content, DEFAULT_CHARSET);
     }
 
     /**
      * Convert a string into an input stream.
      * @param content the string
-     * @param encoding the encoding to use when converting the string to a stream
+     * @param charset the encoding to use when converting the string to a stream
      * @return the resulting input stream
      * @throws UnsupportedEncodingException if the encoding is not supported
      */
     public static InputStream toInputStream(
             final String content,
-            final String encoding)
-        throws
-            UnsupportedEncodingException {
+            final Charset charset) {
 
         try {
             final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(content.length() * 2);
-            final OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, encoding);
+            final OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, charset);
             writer.write(content);
             writer.flush();
 
             final byte[] byteArray = byteArrayOutputStream.toByteArray();
             return new ByteArrayInputStream(byteArray);
-        }
-        catch (final UnsupportedEncodingException e) {
-            throw e;
         }
         catch (final IOException e) {
             // Theoretically impossible since all the "IO" is in memory but it's a
@@ -88,20 +79,15 @@ public final class TextUtil {
     /**
      * Converts a string into a byte array using the specified encoding.
      *
-     * @param charset the name of a supported charset
+     * @param charset the charset
      * @param content the string to convert
      * @return the String as a byte[]; if the specified encoding is not supported an empty byte[] will be returned
      */
-    public static byte[] stringToByteArray(final String content, final String charset) {
-        if (content ==  null || content.isEmpty()) {
+    public static byte[] stringToByteArray(final String content, final Charset charset) {
+        if (content ==  null || content.isEmpty() || charset == null) {
             return new byte[0];
         }
 
-        try {
-            return content.getBytes(charset);
-        }
-        catch (final UnsupportedEncodingException e) {
-            return new byte[0];
-        }
+        return content.getBytes(charset);
     }
 }

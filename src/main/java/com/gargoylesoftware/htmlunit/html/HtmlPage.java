@@ -24,9 +24,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_S
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -139,7 +142,7 @@ public class HtmlPage extends SgmlPage {
     private static final Comparator<DomElement> documentPositionComparator = new DocumentPositionComparator();
 
     private HtmlUnitDOMBuilder builder_;
-    private String originalCharset_;
+    private transient Charset originalCharset_;
 
     private Map<String, SortedSet<DomElement>> idMap_
             = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
@@ -511,7 +514,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    public String getPageEncoding() {
+    public Charset getCharset() {
         if (originalCharset_ == null) {
             originalCharset_ = getWebResponse().getContentCharset();
         }
@@ -924,13 +927,13 @@ public class HtmlPage extends SgmlPage {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param srcAttribute the source attribute from the script tag
-     * @param charset the charset attribute from the script tag
+     * @param charset the charset from the script tag
      * @return the result of loading the specified external JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute, final String charset)
+    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute, final Charset charset)
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
@@ -991,11 +994,11 @@ public class HtmlPage extends SgmlPage {
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Script loadJavaScriptFromUrl(final URL url, final String charset) throws IOException,
+    private Script loadJavaScriptFromUrl(final URL url, final Charset charset) throws IOException,
         FailingHttpStatusCodeException {
 
-        String scriptEncoding = charset;
-        final String pageEncoding = getPageEncoding();
+        Charset scriptEncoding = charset;
+        final Charset pageEncoding = getCharset();
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
@@ -1047,8 +1050,8 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        if (StringUtils.isEmpty(scriptEncoding)) {
-            final String contentCharset = response.getContentCharset();
+        if (scriptEncoding == null) {
+            final Charset contentCharset = response.getContentCharset();
             if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
                 scriptEncoding = contentCharset;
             }
@@ -2453,4 +2456,16 @@ public class HtmlPage extends SgmlPage {
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
+    private void writeObject(final ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeObject(originalCharset_ == null ? null : originalCharset_.name());
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        final String charsetName = (String) ois.readObject();
+        if (charsetName != null) {
+            originalCharset_ = Charset.forName(charsetName);
+        }
+    }
 }

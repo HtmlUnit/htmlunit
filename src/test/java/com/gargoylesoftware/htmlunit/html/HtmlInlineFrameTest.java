@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.nio.charset.StandardCharsets;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -379,7 +381,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection conn = getMockWebConnection();
 
-        conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
+        conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", StandardCharsets.UTF_8);
         final HtmlPage page = webClient.getPage(URL_FIRST);
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
@@ -412,7 +414,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         final MockWebConnection conn = getMockWebConnection();
         webClient.setWebConnection(conn);
 
-        conn.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
+        conn.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", StandardCharsets.ISO_8859_1);
         final HtmlPage page = webClient.getPage(URL_FIRST);
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();

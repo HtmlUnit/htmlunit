@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -88,7 +89,7 @@ public class WebResponseWrapper extends WebResponse {
      * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
      */
     @Override
-    public String getContentCharsetOrNull() {
+    public Charset getContentCharsetOrNull() {
         return wrappedWebResponse_.getContentCharsetOrNull();
     }
 
@@ -97,7 +98,7 @@ public class WebResponseWrapper extends WebResponse {
      * The default behavior of this method is to return getContentCharset() on the wrapped webResponse object.
      */
     @Override
-    public String getContentCharset() {
+    public Charset getContentCharset() {
         return wrappedWebResponse_.getContentCharset();
     }
 

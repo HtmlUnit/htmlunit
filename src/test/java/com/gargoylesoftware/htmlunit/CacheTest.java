@@ -23,6 +23,7 @@ import static org.easymock.EasyMock.verify;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -440,12 +441,12 @@ class DummyWebResponse extends WebResponse {
     }
 
     @Override
-    public String getContentCharset() {
+    public Charset getContentCharset() {
         throw new RuntimeException("not implemented");
     }
 
     @Override
-    public String getContentCharsetOrNull() {
+    public Charset getContentCharsetOrNull() {
         throw new RuntimeException("not implemented");
     }
 

@@ -18,8 +18,11 @@ import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.extractEncoding
 import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFromHttpHeaders;
 import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
 import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.singletonList;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+
+import java.nio.charset.Charset;
 
 import org.junit.Test;
 
@@ -40,13 +43,13 @@ public class EncodingSnifferTest {
         header(null, "foo", "bar");
         header(null, "Content-Type", "blah");
         header(null, "Content-Type", "text/html;charset=blah");
-        header("UTF-8", "Content-Type", "text/html;charset=utf-8");
-        header("UTF-8", "Content-Type", "text/html;charset=utf-8;");
+        header(UTF_8, "Content-Type", "text/html;charset=utf-8");
+        header(UTF_8, "Content-Type", "text/html;charset=utf-8;");
     }
 
-    private static void header(final String expectedEncoding, final String headerName, final String headerValue) {
+    private static void header(final Charset expectedEncoding, final String headerName, final String headerValue) {
         final NameValuePair header = new NameValuePair(headerName, headerValue);
-        assertEquals(expectedEncoding, sniffEncodingFromHttpHeaders(singletonList(header)));
+        assertSame(expectedEncoding, sniffEncodingFromHttpHeaders(singletonList(header)));
     }
 
     /**
@@ -71,14 +74,14 @@ public class EncodingSnifferTest {
         meta(null, "<meta a='b'");
         meta(null, "<meta a='b' c=d e=\"f\"/>");
         meta(null, "<meta a='b' c=d e=\"f\" content='text/html; charset=blah' />");
-        meta("UTF-8", "<meta a='b' c=d e=\"f\" content='text/html; charset=utf-8' />");
-        meta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>");
-        meta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; CHARSET=UTF-8'/>");
-        meta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
+        meta(UTF_8, "<meta a='b' c=d e=\"f\" content='text/html; charset=utf-8' />");
+        meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>");
+        meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; CHARSET=UTF-8'/>");
+        meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
     }
 
-    private static void meta(final String expectedEncoding, final String content) {
-        assertEquals(expectedEncoding, sniffEncodingFromMetaTag(content.getBytes()));
+    private static void meta(final Charset expectedEncoding, final String content) {
+        assertSame(expectedEncoding, sniffEncodingFromMetaTag(content.getBytes()));
     }
 
     /**
@@ -96,14 +99,14 @@ public class EncodingSnifferTest {
         xmlDeclaration(null, "<?xml encoding='utf-8");
         xmlDeclaration(null, "<?xml encoding='utf-8'");
         xmlDeclaration(null, "<?xml encoding='blah'?>");
-        xmlDeclaration("utf-8", "<?xml encoding='utf-8'?>");
+        xmlDeclaration(UTF_8, "<?xml encoding='utf-8'?>");
         xmlDeclaration(null, "<?xml encoding=\"utf-8");
         xmlDeclaration(null, "<?xml encoding=\"utf-8\"");
-        xmlDeclaration("utf-8", "<?xml encoding=\"utf-8\"?>");
+        xmlDeclaration(UTF_8, "<?xml encoding=\"utf-8\"?>");
     }
 
-    private static void xmlDeclaration(final String expectedEncoding, final String content) {
-        assertEquals(expectedEncoding, sniffEncodingFromXmlDeclaration(content.getBytes()));
+    private static void xmlDeclaration(final Charset expectedEncoding, final String content) {
+        assertSame(expectedEncoding, sniffEncodingFromXmlDeclaration(content.getBytes()));
     }
 
     /**
@@ -124,22 +127,22 @@ public class EncodingSnifferTest {
         contentType(null, "\n text/html ; charset =");
         contentType(null, "\n text/html ; charset = \n");
         contentType(null, "\n text/html ; charset=blah");
-        contentType("utf-8", "\n text/html ; charset=utf-8");
-        contentType("utf-8", "\n text/html ; charset=utf-8;");
-        contentType("utf-8", "\n text/html ; charset = \n utf-8 ");
-        contentType("utf-8", "\n text/html ; charset = \n utf-8 ; ");
+        contentType(UTF_8, "\n text/html ; charset=utf-8");
+        contentType(UTF_8, "\n text/html ; charset=utf-8;");
+        contentType(UTF_8, "\n text/html ; charset = \n utf-8 ");
+        contentType(UTF_8, "\n text/html ; charset = \n utf-8 ; ");
         contentType(null, "\n text/html ; charset = \n'");
         contentType(null, "\n text/html ; charset = \n' ");
         contentType(null, "\n text/html ; charset = \n' utf-8");
-        contentType("utf-8", "\n text/html ; charset = \n'utf-8'");
+        contentType(UTF_8, "\n text/html ; charset = \n'utf-8'");
         contentType(null, "\n text/html ; charset = \n\"");
         contentType(null, "\n text/html ; charset = \n\" ");
         contentType(null, "\n text/html ; charset = \n\" utf-8");
-        contentType("utf-8", "\n text/html ; charset = \n\"utf-8\"");
+        contentType(UTF_8, "\n text/html ; charset = \n\"utf-8\"");
     }
 
-    private static void contentType(final String expectedEncoding, final String contentType) {
-        assertEquals(expectedEncoding, extractEncodingFromContentType(contentType));
+    private static void contentType(final Charset expectedEncoding, final String contentType) {
+        assertSame(expectedEncoding, extractEncodingFromContentType(contentType));
     }
 
 }

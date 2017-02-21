@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSI
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -186,7 +187,7 @@ public class HtmlForm extends HtmlElement {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
             }
-            final String enc = getPage().getPageEncoding();
+            final Charset enc = getPage().getCharset();
             queryFromFields =
                 URLEncodedUtils.format(Arrays.asList(NameValuePair.toHttpClient(parameters)), enc);
 
@@ -246,13 +247,13 @@ public class HtmlForm extends HtmlElement {
      * or the page's charset else
      * @return the charset to use for the form submission
      */
-    private String getSubmitCharset() {
+    private Charset getSubmitCharset() {
         String charset = getAcceptCharsetAttribute();
         if (!charset.isEmpty()) {
             charset = charset.trim();
-            return SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ROOT);
+            return Charset.forName(SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ROOT));
         }
-        return getPage().getPageEncoding();
+        return getPage().getCharset();
     }
 
     /**

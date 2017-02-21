@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUP
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -97,6 +98,22 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     @Override
     public final String getCharsetAttribute() {
         return getAttribute("charset");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Charset getCharset() {
+        final String charsetName = getCharsetAttribute();
+        if (!charsetName.isEmpty()) {
+            try {
+                return Charset.forName(charsetName);
+            }
+            catch (final Exception e) {
+            }
+        }
+        return null;
     }
 
     /**
@@ -338,7 +355,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 }
                 try {
                     executed_ = true;
-                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
+                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharset());
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(Event.TYPE_LOAD);
                     }

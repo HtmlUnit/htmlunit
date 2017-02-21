@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -677,7 +678,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             else {
                 final String newContent = getModifiedContent(resp.getStringContent());
                 if (!charsetInContentType) {
-                    response.setCharacterEncoding(resp.getCharset());
+                    response.setCharacterEncoding(resp.getCharset().name());
                 }
                 response.getWriter().print(newContent);
             }
@@ -711,12 +712,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param html the HTML to use
      * @param url the url to use to load the page
      * @param contentType the content type to return
-     * @param charset the name of a supported charset
+     * @param charset the charset
      * @return the web driver
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPage2(String html, final URL url,
-            final String contentType, final String charset) throws Exception {
+            final String contentType, final Charset charset) throws Exception {
         if (useStandards_ != null) {
             if (html.startsWith(HtmlPageTest.STANDARDS_MODE_PREFIX_)) {
                 fail("HTML must not be prefixed with Standards Mode.");

@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -72,7 +73,7 @@ class XmlSerializer {
         indent_.setLength(0);
         final SgmlPage page = node.getPage();
         if (null != page && page.isHtmlPage()) {
-            final String charsetName = page.getPageEncoding();
+            final Charset charsetName = page.getCharset();
             if (charsetName != null && node instanceof HtmlHtml) {
                 builder_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
             }
