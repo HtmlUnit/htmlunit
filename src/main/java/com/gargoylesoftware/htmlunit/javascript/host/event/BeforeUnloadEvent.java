@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing the BeforeUnloadEvent.
@@ -65,6 +66,7 @@ public class BeforeUnloadEvent extends Event {
         super(domNode, type);
 
         setBubbles(false);
+        setReturnValue(Undefined.instance);
     }
 
     /**

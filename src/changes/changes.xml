@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.25" date="???" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, ScriptPreProcessor, Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: correct handling of window.onbeforeunload.
+            </action>
             <action type="add" dev="rbri">
                 Encoding support for DataURl added.
             </action>

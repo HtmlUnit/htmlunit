@@ -109,6 +109,9 @@ public final class ScriptResult {
             else if (originalResult != null) {
                 jsResult = originalResult.getJavaScriptResult();
             }
+            else if (newResult != null) {
+                jsResult = newResult.getJavaScriptResult();
+            }
             else {
                 jsResult = null;
             }
@@ -119,6 +122,9 @@ public final class ScriptResult {
             }
             else if (originalResult != null) {
                 jsResult = originalResult.getJavaScriptResult();
+            }
+            else if (newResult != null) {
+                jsResult = newResult.getJavaScriptResult();
             }
             else {
                 jsResult = null;
