@@ -215,14 +215,14 @@ public final class HTMLParser {
         Charset charset = webResponse.getContentCharsetOrNull();
         try {
             // handle charset
-            if (charset != null) {
-                domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
-            }
-            else {
+            if (charset == null) {
                 final Charset specifiedCharset = webResponse.getWebRequest().getCharset();
                 if (specifiedCharset != null) {
                     charset = specifiedCharset;
                 }
+            }
+            else {
+                domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
             }
 
             // xml content is different
@@ -235,7 +235,11 @@ public final class HTMLParser {
         }
 
         try (InputStream content = webResponse.getContentAsStream()) {
-            final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charset.name());
+            String encoding = null;
+            if (charset != null) {
+                encoding = charset.name();
+            }
+            final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, encoding);
 
             page.registerParsingStart();
             try {
