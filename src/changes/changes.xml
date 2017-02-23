@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.26" date="???" description="Bugfixes">
+        </release>
         <release version="2.25" date="February 23, 2017" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, WebRequest.getCharset, ScriptPreProcessor, Bugfixes">
             <action type="update" dev="asashour">
                 Deprecate SgmlPage.getPageEncoding() and WebResponse.getContentAsString(String) variants.
