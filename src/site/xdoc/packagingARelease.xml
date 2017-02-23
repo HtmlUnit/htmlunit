@@ -52,21 +52,12 @@
                    </ol>
                </p>
             <p>
-                For SnapShots:
+                For Snapshots:
                 <ol>
                     <li>
-                        Add parent to the pom.xml:
-<source><![CDATA[<parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>9</version>
-</parent>]]></source>
-                    </li>
-                    <li>
-                        Execute "mvn -Dmaven.test.skip=true deploy"
-                    </li>
-                    <li>
-                        Remove the parent project.
+                    <source>
+mvn -Dmaven.test.skip=true deploy
+</source>
                     </li>
                 </ol>
             </p>
@@ -93,9 +84,6 @@
                         Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
                     </li>
                     <li>
-                        Remove &lt;repositories&gt; and &lt;pluginRepositories&gt; elements from pom.xml.
-                    </li>
-                    <li>
                         Build the zip files
                         <source>mvn -up clean site package -Dmaven.javadoc.failOnError=false</source>
                     </li>
@@ -113,13 +101,9 @@ mvn scm:tag
                     <li>
                         Ensure HtmlUnit-related dependencies are 'tagged' in the repository.
                     </li>
-                    <li>Deploy the release to Sonatype OSS Maven repository (which is the way we have to go to deploy to the main repository).
-                    This process should be improved. Here is what has been done to deploy release 2.24:
+                    <li>Deploy the release to Sonatype OSS Maven repository.
                     <source>
-mvn javadoc:jar
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.24.jar
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.24-sources.jar -Dclassifier=sources
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.24-javadoc.jar -Dclassifier=javadoc
+mvn deploy
 </source>
                     and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
                     </li>
@@ -148,9 +132,6 @@ mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/stagin
                     </li>
                     <li>
                         Add a new Milestone in SourceForge bugs system (for both Bugs and Feature-Requests).
-                    </li>
-                    <li>
-                        Add pom.xml reference to previously removed snapshot repository.
                     </li>
                 </ol>
             </p>
