@@ -52,36 +52,36 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *      };
  * </pre>
  * <script>
- *     var pre = document.getElementById('htmlUnitCode');
- *     pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
- *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
- *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
- *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
- *     var isEdge = navigator.appVersion.indexOf('Edge') != -1;
- *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
- *     var numeric = 45;
- *     if (isMicrosoft) {
- *         numeric = 11;
- *     }
- *     else if (isEdge) {
- *         numeric = 13;
- *     }
- *     else if (isChrome) {
- *         numeric = 56;
- *     }
- *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
- *     var browser = "FIREFOX_45";
- *     if (isMicrosoft) {
- *         browser = "INTERNET_EXPLORER";
- *     }
- *     else if (isEdge) {
- *         browser = "EDGE";
- *     }
- *     else if (isChrome) {
- *         browser = "CHROME";
- *     }
- *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
- * </script>
+       var pre = document.getElementById('htmlUnitCode');
+       pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
+       pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
+       pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
+       var isMicrosoft = navigator.appVersion.indexOf('Trident/') != -1;
+       var isEdge = navigator.appVersion.indexOf('Edge') != -1;
+       var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
+       var numeric = 45;
+       if (isMicrosoft) {
+           numeric = 11;
+       }
+       else if (isEdge) {
+           numeric = 13;
+       }
+       else if (isChrome) {
+           numeric = 56;
+       }
+       pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
+       var browser = "FIREFOX_45";
+       if (isMicrosoft) {
+           browser = "INTERNET_EXPLORER";
+       }
+       else if (isEdge) {
+           browser = "EDGE";
+       }
+       else if (isChrome) {
+           browser = "CHROME";
+       }
+       pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
+   </script>
  * However, note that the constants are not enough to fully customize the browser,
  *   you also need to look into the {@link BrowserVersionFeatures} and the classes inside "javascript" package.
  *

@@ -19,7 +19,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -54,7 +53,6 @@ public final class TextUtil {
      * @param content the string
      * @param charset the encoding to use when converting the string to a stream
      * @return the resulting input stream
-     * @throws UnsupportedEncodingException if the encoding is not supported
      */
     public static InputStream toInputStream(
             final String content,
