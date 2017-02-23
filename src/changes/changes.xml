@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Reduce the number of temp files created when asking images for width/height.
+            </action>
         </release>
         <release version="2.25" date="February 23, 2017" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, WebRequest.getCharset, ScriptPreProcessor, Bugfixes">
             <action type="update" dev="asashour">

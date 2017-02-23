@@ -74,6 +74,8 @@ public class HtmlImage extends HtmlElement {
     private int lastClickY_;
     private WebResponse imageWebResponse_;
     private transient ImageData imageData_;
+    private int width_ = -1;
+    private int height_ = -1;
     private boolean downloaded_;
     private boolean onloadInvoked_;
     private boolean createdByJavascript_;
@@ -133,6 +135,12 @@ public class HtmlImage extends HtmlElement {
                 // onload handlers may need to be invoked again, and a new image may need to be downloaded
                 onloadInvoked_ = false;
                 downloaded_ = false;
+                width_ = -1;
+                height_ = -1;
+                if (imageData_ != null) {
+                    imageData_.close();
+                    imageData_ = null;
+                }
 
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
@@ -364,7 +372,10 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an error occurs while downloading or reading the image
      */
     public int getHeight() throws IOException {
-        return getImageReader().getHeight(0);
+        if (height_ < 0) {
+            determineWidthAndHeight();
+        }
+        return height_;
     }
 
     /**
@@ -376,7 +387,10 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an error occurs while downloading or reading the image
      */
     public int getWidth() throws IOException {
-        return getImageReader().getWidth(0);
+        if (width_ < 0) {
+            determineWidthAndHeight();
+        }
+        return width_;
     }
 
     /**
@@ -390,6 +404,19 @@ public class HtmlImage extends HtmlElement {
     public ImageReader getImageReader() throws IOException {
         readImageIfNeeded();
         return imageData_.getImageReader();
+    }
+
+    private void determineWidthAndHeight() throws IOException {
+        final ImageReader imgReader = getImageReader();
+        width_ = imgReader.getWidth(0);
+        height_ = imgReader.getHeight(0);
+
+        // ImageIO creates temp files; to save file handles
+        // we will cache the values and close this directly to free the resources
+        if (imageData_ != null) {
+            imageData_.close();
+            imageData_ = null;
+        }
     }
 
     /**
@@ -432,8 +459,14 @@ public class HtmlImage extends HtmlElement {
                 request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
                 imageWebResponse_ = webclient.loadWebResponse(request);
             }
-            imageData_ = null;
+
+            if (imageData_ != null) {
+                imageData_.close();
+                imageData_ = null;
+            }
             downloaded_ = true;
+            width_ = -1;
+            height_ = -1;
         }
     }
 
@@ -557,7 +590,7 @@ public class HtmlImage extends HtmlElement {
      * of objects which could all be garbage collected without impacting the ImageReader it is better to
      * wrap it in another class.
      */
-    private static final class ImageData {
+    private static final class ImageData implements AutoCloseable {
 
         private final ImageReader imageReader_;
 
@@ -574,6 +607,12 @@ public class HtmlImage extends HtmlElement {
          */
         @Override
         protected void finalize() throws Throwable {
+            close();
+            super.finalize();
+        }
+
+        @Override
+        public void close() {
             if (imageReader_ != null) {
                 try {
                     try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
@@ -588,7 +627,6 @@ public class HtmlImage extends HtmlElement {
                     imageReader_.dispose();
                 }
             }
-            super.finalize();
         }
     }
 
