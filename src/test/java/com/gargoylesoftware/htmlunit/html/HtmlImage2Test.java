@@ -105,7 +105,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
 
         final WebDriver webDriver = getWebDriver();
         if (webDriver instanceof HtmlUnitDriver) {
-            ((HtmlUnitDriver) webDriver).setDownloadImages(true);
+//            ((HtmlUnitDriver) webDriver).setDownloadImages(true);
         }
         loadPage2(html);
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
