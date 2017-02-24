@@ -110,7 +110,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             case "text/html":
             case "image/svg+xml":
                 return PageType.HTML;
-                
+
             case "text/javascript":
             case "application/x-javascript":
             case "application/javascript":

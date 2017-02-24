@@ -50,7 +50,7 @@ public class SvgJavaScriptTest extends WebDriverTestCase {
             + "</svg>";
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "image/svg+xml", TextUtil.DEFAULT_CHARSET);
-        WebElement rect = driver.findElement(By.id("rect"));
+        final WebElement rect = driver.findElement(By.id("rect"));
 
         assertEquals("blue", rect.getAttribute("fill"));
         rect.click();
