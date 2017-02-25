@@ -1067,7 +1067,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
         super.releaseResources();
 
         if (!isWebClientCached()) {
-            webDriver_.close();
+            if (webDriver_ != null) {
+                webDriver_.close();
+            }
 //            if (webClient_ != null) {
 //                webClient_.close();
 //                webClient_.getCookieManager().clearCookies();
