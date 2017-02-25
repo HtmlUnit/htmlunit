@@ -294,7 +294,7 @@ public class BrowserRunner extends Suite {
         };
 
         /**
-         * An optional reason.
+         * @return an optional reason.
          */
         String reason() default "";
     }

@@ -388,7 +388,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Temporary flag to say the test class supports the Remote WebDriver.
      * Ultimately all classes will support, and we will remove this.
-     * 
+     *
      * @return whether to run with driver, or ignore it for now.
      */
     protected boolean supportedWebDriver() {
@@ -1004,7 +1004,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (collectedAlerts_ == null) {
             collectedAlerts_ = new ArrayList<>();
             for (int i = 0; i < alertsLength; i++) {
-                Alert alert = driver.switchTo().alert();
+                final Alert alert = driver.switchTo().alert();
                 collectedAlerts_.add(alert.getText());
                 alert.accept();
             }
