@@ -448,6 +448,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(getBrowserName(getBrowserVersion()));
             webDriver_ = new HtmlUnitDriver(capabilities);
+            collectedAlerts_ = null;
         }
         return webDriver_;
     }
