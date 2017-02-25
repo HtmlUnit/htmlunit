@@ -292,6 +292,11 @@ public class BrowserRunner extends Suite {
         Browser[] value() default {
             IE, FF, CHROME, EDGE
         };
+
+        /**
+         * An optional reason.
+         */
+        String reason() default "";
     }
 
     /**

@@ -28,6 +28,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -40,6 +41,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage3Test extends WebDriverTestCase {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportedWebDriver() {
+        return true;
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -105,6 +114,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
+    @NotYetImplemented(value = IE, reason= "WebDriver should be browser-aware")
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <title>foo</title>\n"
@@ -130,7 +140,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for window.onload property.
+     * Regression test for {@code window.onload} property.
      * @throws Exception if the test fails
      */
     @Test
@@ -143,14 +153,15 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(1, getCollectedAlerts(driver).size());
-        assertTrue(getCollectedAlerts(driver).get(0).startsWith("function"));
+        assertEquals(1, getCollectedAlerts(driver, 1).size());
+        assertTrue(getCollectedAlerts(driver, 1).get(0).startsWith("function"));
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
+    @NotYetImplemented(reason = "fails with Remote WebDriver")
     public void constructor() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"

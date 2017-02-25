@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,8 +54,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
@@ -73,11 +73,8 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * Base class for tests using WebDriver.
@@ -160,7 +157,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
 
-    private WebClient webClient_;
+    /**
+     * The HtmlUnitDriver.
+     */
+    private WebDriver webDriver_;
+    private List<String> collectedAlerts_;
 
     /**
      * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
@@ -383,12 +384,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Temporary flag to say the test class supports the Remote WebDriver.
+     * Ultimately all classes will support, and we will remove this.
+     * 
+     * @return whether to run with driver, or ignore it for now.
+     */
+    protected boolean supportedWebDriver() {
+        return false;
+    }
+
+    /**
      * Builds a new WebDriver instance.
      * @return the instance
      * @throws IOException in case of exception
      */
     protected WebDriver buildWebDriver() throws IOException {
-        assumeFalse(true);
+        assumeTrue(supportedWebDriver());
         if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {
@@ -431,10 +442,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
         }
-        if (webClient_ == null) {
-            webClient_ = new WebClient(getBrowserVersion());
+        if (webDriver_ == null) {
+            webDriver_ = new HtmlUnitDriver();//new WebClient(getBrowserVersion());
         }
-        return new HtmlUnitDriver();
+        return webDriver_;
     }
 
     /**
@@ -959,44 +970,62 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the collected alerts
      * @throws Exception in case of problem
      */
-    @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
-        final List<String> collectedAlerts = new ArrayList<>();
+        return getCollectedAlerts(driver, getExpectedAlerts().length);
+    }
 
-        // do not throw an exception if we ask for collected alerts for non html pages
-        // see com.gargoylesoftware.htmlunit.WebClient3Test.javascriptContentDetectorContentTypeTextPlain()
-        if (driver instanceof HtmlUnitDriver) {
-            final Page page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (!(page instanceof HtmlPage)) {
-                return collectedAlerts;
+    /**
+     * Gets the alerts collected by the driver.
+     * Note: it currently works only if no new page has been loaded in the window
+     * @param driver the driver
+     * @param alertsLength the expected length of Alerts
+     * @return the collected alerts
+     * @throws Exception in case of problem
+     */
+    protected List<String> getCollectedAlerts(final WebDriver driver, final int alertsLength) throws Exception {
+        if (collectedAlerts_ == null) {
+            collectedAlerts_ = new ArrayList<>();
+            for (int i = 0; i < alertsLength; i++) {
+                Alert alert = driver.switchTo().alert();
+                collectedAlerts_.add(alert.getText());
+                alert.accept();
             }
         }
 
-        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-
-        final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
-
-        if (result != null) {
-            if (driver instanceof HtmlUnitDriver) {
-                return (List<String>) result;
-            }
-            if (result instanceof List) {
-                for (final Object alert : (List<Object>) result) {
-                    collectedAlerts.add(Context.toString(alert));
-                }
-            }
-            else if (result instanceof String) {
-                collectedAlerts.add(result.toString());
-            }
-            else {
-                final Map<?, ?> map  = (Map<?, ?>) result;
-                for (final Object key : map.keySet()) {
-                    final int index = Integer.parseInt(key.toString());
-                    collectedAlerts.add(index, map.get(key).toString());
-                }
-            }
-        }
-        return collectedAlerts;
+//        // do not throw an exception if we ask for collected alerts for non html pages
+//        // see com.gargoylesoftware.htmlunit.WebClient3Test.javascriptContentDetectorContentTypeTextPlain()
+//        if (driver instanceof HtmlUnitDriver) {
+//            final Page page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+//            if (!(page instanceof HtmlPage)) {
+//                return collectedAlerts;
+//            }
+//        }
+//
+//        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+//
+//        final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
+//
+//        if (result != null) {
+//            if (driver instanceof HtmlUnitDriver) {
+//                return (List<String>) result;
+//            }
+//            if (result instanceof List) {
+//                for (final Object alert : (List<Object>) result) {
+//                    collectedAlerts.add(Context.toString(alert));
+//                }
+//            }
+//            else if (result instanceof String) {
+//                collectedAlerts.add(result.toString());
+//            }
+//            else {
+//                final Map<?, ?> map  = (Map<?, ?>) result;
+//                for (final Object key : map.keySet()) {
+//                    final int index = Integer.parseInt(key.toString());
+//                    collectedAlerts.add(index, map.get(key).toString());
+//                }
+//            }
+//        }
+        return collectedAlerts_;
     }
 
     /**
@@ -1038,12 +1067,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
         super.releaseResources();
 
         if (!isWebClientCached()) {
-            if (webClient_ != null) {
-                webClient_.close();
-                webClient_.getCookieManager().clearCookies();
-            }
-            webClient_ = null;
-            assertEquals(0, getJavaScriptThreads().size());
+            webDriver_.close();
+//            if (webClient_ != null) {
+//                webClient_.close();
+//                webClient_.getCookieManager().clearCookies();
+//            }
+//            webClient_ = null;
+//            assertEquals(0, getJavaScriptThreads().size());
         }
 
         if (useRealBrowser()) {
