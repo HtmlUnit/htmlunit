@@ -114,7 +114,6 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
-    @NotYetImplemented(value = IE, reason= "WebDriver should be browser-aware")
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <title>foo</title>\n"

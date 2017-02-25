@@ -69,6 +69,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
@@ -443,9 +445,24 @@ public abstract class WebDriverTestCase extends WebTestCase {
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
         }
         if (webDriver_ == null) {
-            webDriver_ = new HtmlUnitDriver();//new WebClient(getBrowserVersion());
+            final DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(getBrowserName(getBrowserVersion()));
+            webDriver_ = new HtmlUnitDriver(capabilities);
         }
         return webDriver_;
+    }
+
+    private static String getBrowserName(final BrowserVersion browserVersion) {
+        if (browserVersion == BrowserVersion.FIREFOX_45) {
+            return BrowserType.FIREFOX;
+        }
+        if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
+            return BrowserType.IE;
+        }
+        if (browserVersion == BrowserVersion.EDGE) {
+            return BrowserType.EDGE;
+        }
+        return BrowserType.CHROME;
     }
 
     /**
