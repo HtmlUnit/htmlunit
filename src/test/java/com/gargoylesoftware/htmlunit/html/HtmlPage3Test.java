@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.annotations.FailWithWebDriver;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -161,6 +162,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(reason = "fails with Remote WebDriver")
+    @FailWithWebDriver
     public void constructor() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"
