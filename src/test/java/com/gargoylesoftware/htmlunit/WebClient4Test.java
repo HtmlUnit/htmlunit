@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.Writer;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
@@ -39,7 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebClient4Test extends WebServerTestCase implements Serializable {
+public class WebClient4Test extends WebServerTestCase {
 
     /**
      * Verifies that a WebClient can be serialized and deserialized after it has been used.

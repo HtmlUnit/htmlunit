@@ -52,9 +52,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public abstract class WebServerTestCase extends WebTestCase {
+public abstract class WebServerTestCase extends WebTestCase implements Serializable {
 
-    private Server server_;
+    private transient Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
     private static Server STATIC_SERVER_;
     private WebClient webClient_;
