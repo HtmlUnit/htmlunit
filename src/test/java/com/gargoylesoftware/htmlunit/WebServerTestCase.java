@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -406,7 +407,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     protected final WebClient getWebClient() {
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
-            webClient_.setAlertHandler(this::handleAlert);
+            webClient_.setAlertHandler((AlertHandler & Serializable) this::handleAlert);
         }
         return webClient_;
     }
