@@ -14,11 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -290,7 +285,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         Browser[] value() default {
-            IE, FF, CHROME, EDGE
+            Browser.IE, Browser.FF, Browser.CHROME, Browser.EDGE
         };
 
         /**
@@ -312,7 +307,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         Browser[] value() default {
-            IE, FF, CHROME, EDGE
+            Browser.IE, Browser.FF, Browser.CHROME, Browser.EDGE
         };
     }
 

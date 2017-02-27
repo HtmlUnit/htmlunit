@@ -28,9 +28,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.annotations.FailWithWebDriver;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -161,8 +159,6 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @NotYetImplemented(reason = "fails with Remote WebDriver")
-    @FailWithWebDriver
     public void constructor() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -176,7 +172,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         assertEquals("foo", driver.getTitle());
     }
 
