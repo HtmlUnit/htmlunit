@@ -825,7 +825,7 @@
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-client</artifactId>
-            <version>9.4.1.v20170120</version>
+            <version>9.4.2.v20170220</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -856,13 +856,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.23</version>
+            <version>1.7.24</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.23</version>
+            <version>1.7.24</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -875,13 +875,13 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>9.4.1.v20170120</version>
+            <version>9.4.2.v20170220</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-server</artifactId>
-            <version>9.4.1.v20170120</version>
+            <version>9.4.2.v20170220</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
