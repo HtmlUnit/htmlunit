@@ -31,6 +31,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class IntlTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
