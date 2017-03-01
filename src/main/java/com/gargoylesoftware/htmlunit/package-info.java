@@ -14,6 +14,6 @@
  */
 
 /**
- * Framework classes (contains the {@link WebClient} class which is the main entry point).
+ * Framework classes (contains the {@link com.gargoylesoftware.htmlunit.WebClient} class which is the main entry point).
  */
 package com.gargoylesoftware.htmlunit;

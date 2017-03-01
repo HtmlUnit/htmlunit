@@ -167,7 +167,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * The HtmlUnitDriver.
      */
     private WebDriver webDriver_;
-    private List<String> collectedAlerts_;
 
     /**
      * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
@@ -452,7 +451,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(getBrowserName(getBrowserVersion()));
             webDriver_ = new HtmlUnitDriver(capabilities);
-            collectedAlerts_ = null;
         }
         return webDriver_;
     }
@@ -891,7 +889,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         try {
             // gets the collected alerts, waiting a bit if necessary
-            actualAlerts = getCollectedAlerts(driver);
+            actualAlerts = getCollectedAlerts(driver, expectedAlerts.length);
 
             final long maxWait = System.currentTimeMillis() + maxWaitTime;
             while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
@@ -1005,14 +1003,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of problem
      */
     protected List<String> getCollectedAlerts(final WebDriver driver, final int alertsLength) throws Exception {
-        if (collectedAlerts_ == null) {
-            collectedAlerts_ = new ArrayList<>();
+        final List<String> collectedAlerts = new ArrayList<>();
             for (int i = 0; i < alertsLength; i++) {
                 final Alert alert = driver.switchTo().alert();
-                collectedAlerts_.add(alert.getText());
+                collectedAlerts.add(alert.getText());
                 alert.accept();
             }
-        }
 
 //        // do not throw an exception if we ask for collected alerts for non html pages
 //        // see com.gargoylesoftware.htmlunit.WebClient3Test.javascriptContentDetectorContentTypeTextPlain()
@@ -1047,7 +1043,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 //                }
 //            }
 //        }
-        return collectedAlerts_;
+        return collectedAlerts;
     }
 
     /**
