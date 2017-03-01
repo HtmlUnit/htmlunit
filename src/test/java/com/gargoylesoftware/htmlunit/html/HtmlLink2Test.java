@@ -35,6 +35,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlLink2Test extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportedWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

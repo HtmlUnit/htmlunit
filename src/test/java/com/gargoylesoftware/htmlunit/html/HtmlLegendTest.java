@@ -33,6 +33,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlLegendTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportedWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
