@@ -36,7 +36,7 @@ public class HtmlLegendTest extends WebDriverTestCase {
      * {@inheritDoc}
      */
     @Override
-    protected boolean supportedWebDriver() {
+    protected boolean supportsWebDriver() {
         return true;
     }
 

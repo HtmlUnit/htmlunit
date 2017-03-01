@@ -395,7 +395,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      *
      * @return whether to run with driver, or ignore it for now.
      */
-    protected boolean supportedWebDriver() {
+    protected boolean supportsWebDriver() {
         return false;
     }
 
@@ -405,7 +405,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws IOException in case of exception
      */
     protected WebDriver buildWebDriver() throws IOException {
-        assumeTrue(supportedWebDriver());
+        assumeTrue(supportsWebDriver());
         if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {

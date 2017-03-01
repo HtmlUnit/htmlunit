@@ -38,7 +38,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * {@inheritDoc}
      */
     @Override
-    protected boolean supportedWebDriver() {
+    protected boolean supportsWebDriver() {
         return true;
     }
 
