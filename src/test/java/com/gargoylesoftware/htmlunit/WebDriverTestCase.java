@@ -1004,11 +1004,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected List<String> getCollectedAlerts(final WebDriver driver, final int alertsLength) throws Exception {
         final List<String> collectedAlerts = new ArrayList<>();
-            for (int i = 0; i < alertsLength; i++) {
-                final Alert alert = driver.switchTo().alert();
-                collectedAlerts.add(alert.getText());
-                alert.accept();
-            }
+        for (int i = 0; i < alertsLength; i++) {
+            final Alert alert = driver.switchTo().alert();
+            collectedAlerts.add(alert.getText());
+            alert.accept();
+        }
 
 //        // do not throw an exception if we ask for collected alerts for non html pages
 //        // see com.gargoylesoftware.htmlunit.WebClient3Test.javascriptContentDetectorContentTypeTextPlain()
