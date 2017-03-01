@@ -33,6 +33,15 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class TreeWalkerTest extends WebDriverTestCase {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     private static final String contentStart = "<html><head><title>TreeWalker Test</title>\n"
         + "<script>\n"
         + "function safeTagName(o) {\n"

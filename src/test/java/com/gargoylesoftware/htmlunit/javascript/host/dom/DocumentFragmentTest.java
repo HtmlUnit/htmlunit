@@ -33,6 +33,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class DocumentFragmentTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Regression test for bug 3191431 on computation from child selector
      * in a document fragment.
      * @throws Exception if the test fails

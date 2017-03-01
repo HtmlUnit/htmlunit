@@ -31,6 +31,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class CharacterDataTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Regression test for inline text nodes.
      * @throws Exception if the test fails
      */
