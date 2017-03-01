@@ -34,6 +34,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     /*
      Below is a page to see the different elements behavior
 <html>

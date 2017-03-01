@@ -31,6 +31,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class ComputedHeightTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests the relation between {@code fontSize} and {@code offsetHeight}.
      *
      * @throws Exception if the test fails

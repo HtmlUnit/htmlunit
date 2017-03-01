@@ -41,6 +41,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 public class StyleAttributesIterableTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Returns the parameterized data.
      * @return the parameterized data
      * @throws Exception if an error occurs

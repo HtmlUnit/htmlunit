@@ -33,6 +33,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class ImageDataTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

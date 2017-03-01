@@ -38,6 +38,14 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class CSSSelectorTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
