@@ -151,8 +151,9 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(1, getCollectedAlerts(driver, 1).size());
-        assertTrue(getCollectedAlerts(driver, 1).get(0).startsWith("function"));
+        final List<String> alerts = getCollectedAlerts(driver, 1);
+        assertEquals(1, alerts.size());
+        assertTrue(alerts.get(0).startsWith("function"));
     }
 
     /**
