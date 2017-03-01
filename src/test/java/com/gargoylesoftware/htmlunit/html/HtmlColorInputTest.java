@@ -32,6 +32,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlColorInputTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Verifies that a asText() returns the value string.
      * @throws Exception if the test fails
      */
