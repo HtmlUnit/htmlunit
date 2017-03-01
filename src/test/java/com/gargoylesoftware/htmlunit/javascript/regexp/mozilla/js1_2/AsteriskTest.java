@@ -30,6 +30,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class AsteriskTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests 'abcddddefg'.match(new RegExp('d*')).
      * @throws Exception if the test fails
      */

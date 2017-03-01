@@ -39,6 +39,14 @@ public class DigitTest extends WebDriverTestCase {
     private static final String digits = "1234567890";
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests digits.match(new RegExp('\\d+')).
      * @throws Exception if the test fails
      */

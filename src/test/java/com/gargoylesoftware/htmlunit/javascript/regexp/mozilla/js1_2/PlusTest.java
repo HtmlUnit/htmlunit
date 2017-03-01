@@ -30,6 +30,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class PlusTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests 'abcdddddefg'.match(new RegExp('d+')).
      * @throws Exception if the test fails
      */

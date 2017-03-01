@@ -30,6 +30,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class IntervalTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests 'aaabbbbcccddeeeefffff'.match(new RegExp('b{2}c')).
      * @throws Exception if the test fails
      */

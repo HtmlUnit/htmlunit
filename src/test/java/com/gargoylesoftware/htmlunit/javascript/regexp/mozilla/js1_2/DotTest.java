@@ -30,6 +30,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class DotTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests 'abcde'.match(new RegExp('ab.de')).
      * @throws Exception if the test fails
      */

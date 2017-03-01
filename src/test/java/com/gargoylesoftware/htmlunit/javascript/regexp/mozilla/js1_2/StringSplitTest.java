@@ -31,6 +31,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class StringSplitTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests 'a b c de f'.split(/\s/).
      * @throws Exception if the test fails
      */

@@ -30,6 +30,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class EverythingTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Tests 'Sally and Fred are sure to come'.match(/^[a-z\s]*\/i).
      * @throws Exception if the test fails
      */

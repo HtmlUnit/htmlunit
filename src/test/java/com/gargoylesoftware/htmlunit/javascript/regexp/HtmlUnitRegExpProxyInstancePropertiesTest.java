@@ -32,6 +32,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     private void testProperties(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

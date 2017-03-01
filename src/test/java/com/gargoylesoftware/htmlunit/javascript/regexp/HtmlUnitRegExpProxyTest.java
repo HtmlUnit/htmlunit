@@ -35,6 +35,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     private static final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
         + "  if (_arr == null) return null;\n"
         + "  var s = '[';\n"
