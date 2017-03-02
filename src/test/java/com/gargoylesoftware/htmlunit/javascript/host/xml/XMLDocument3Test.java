@@ -42,6 +42,14 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class XMLDocument3Test extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

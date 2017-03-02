@@ -32,6 +32,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class DataURLDecoderTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if something goes wrong
      */
     @Test
