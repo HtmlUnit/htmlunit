@@ -38,6 +38,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 public class SvgScriptTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
