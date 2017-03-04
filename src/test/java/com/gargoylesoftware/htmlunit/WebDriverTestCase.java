@@ -75,6 +75,7 @@ import org.openqa.selenium.htmlunit.server.Session;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
@@ -1057,6 +1058,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) {
+        if (webElement instanceof RemoteWebElement) {
+            throw new RuntimeException(
+                        "WebDriverTestCase.toHtmlElement(WebElement) does not work for RemoteWebElement's");
+        }
+
         try {
             final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
             field.setAccessible(true);
