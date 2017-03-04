@@ -41,6 +41,14 @@ public class ExtJS22Test extends WebDriverTestCase {
     private static Server SERVER_;
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @BeforeClass

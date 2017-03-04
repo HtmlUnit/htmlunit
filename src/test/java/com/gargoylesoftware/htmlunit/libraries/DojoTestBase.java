@@ -53,6 +53,14 @@ public abstract class DojoTestBase extends WebDriverTestCase {
     private static Server SERVER_;
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * @return the Dojo version being tested
      */
     abstract String getVersion();

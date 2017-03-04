@@ -44,6 +44,14 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     private static Server SERVER_;
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
+    /**
      * Returns the jQuery version being tested.
      * @return the jQuery version being tested
      */
