@@ -763,7 +763,7 @@ public abstract class WebTestCase {
      * Gets the active JavaScript threads.
      * @return the threads
      */
-    protected List<Thread> getJavaScriptThreads() {
+    protected static List<Thread> getJavaScriptThreads() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
         final List<Thread> jsThreads = new ArrayList<>();
