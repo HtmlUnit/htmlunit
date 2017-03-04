@@ -29,6 +29,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class ElementOuterHtmlTest extends WebDriverTestCase {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     private static String test(final String elementName) {
         return "<!DOCTYPE html><html><head>\n"
                 + "  <script>\n"

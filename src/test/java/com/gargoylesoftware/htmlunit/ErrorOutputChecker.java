@@ -49,7 +49,7 @@ public class ErrorOutputChecker implements TestRule {
     private static final Pattern WEB_DRIVER_EDGE_MSG2 =
             Pattern.compile(".*Stopping server.\r\r?\n");
     private static final Pattern WEB_DRIVER_IGNORE_MSG =
-            Pattern.compile(".*ProtocolHandshake createSession\r?\nINFO: Detected dialect: OSS\r?\n");
+            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: OSS\r?\n");
 
     /**
      * {@inheritDoc}

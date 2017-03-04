@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -32,14 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlBackgroundSoundTest extends WebDriverTestCase {
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
 
     /**
      * @throws Exception if the test fails
@@ -60,7 +53,8 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver && getExpectedAlerts()[0].contains("Sound")) {
-            assertTrue(HtmlBackgroundSound.class.isInstance(toHtmlElement(driver.findElement(By.id("myId")))));
+            final WebElement elem = driver.findElement(By.id("myId"));
+            assertTrue(HtmlBackgroundSound.class.isInstance(toHtmlElement(elem)));
         }
     }
 }

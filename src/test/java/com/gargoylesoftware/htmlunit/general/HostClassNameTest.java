@@ -40,6 +40,14 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 @StandardsMode
 public class HostClassNameTest extends WebDriverTestCase {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     private void test(final String className) throws Exception {
         final String html =
             "<html><head><script>\n"

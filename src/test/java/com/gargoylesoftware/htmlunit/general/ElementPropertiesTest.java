@@ -62,6 +62,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 @RunWith(BrowserRunner.class)
 public class ElementPropertiesTest extends WebDriverTestCase {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return true;
+    }
+
     private static DefaultCategoryDataset DATASET_;
     private static StringBuilder HTML_ = new StringBuilder();
     private static BrowserVersion BROWSER_VERSION_;

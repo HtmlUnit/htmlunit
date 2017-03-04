@@ -288,7 +288,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final List<Thread> jsThreads = getJavaScriptThreads();
         assertEquals("There are still " + jsThreads.size()
-                + "JS threads running after shutDownAll", 0, jsThreads.size());
+                + " JS threads running after shutDownAll", 0, jsThreads.size());
 
         shutDownRealBrowsers();
 
@@ -1082,7 +1082,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (!isWebClientCached()) {
             final List<Thread> jsThreads = getJavaScriptThreads();
             assertEquals("There are still " + jsThreads.size()
-                            + "JS threads running before starting the test", 0, jsThreads.size());
+                            + " JS threads running before starting the test", 0, jsThreads.size());
         }
     }
 
@@ -1104,9 +1104,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
 //                webClient_.getCookieManager().clearCookies();
 //            }
 //            webClient_ = null;
-            final List<Thread> jsThreads = getJavaScriptThreads();
+            List<Thread> jsThreads = getJavaScriptThreads();
+            int waitCount = 0;
+            while (jsThreads.size() > 0 && waitCount < 10) {
+                try {
+                    waitCount++;
+                    Thread.sleep(100);
+                }
+                catch (final InterruptedException e) {
+                    // ignore
+                }
+                jsThreads = getJavaScriptThreads();
+            }
             assertEquals("There are still " + jsThreads.size()
-                    + "JS threads running after the test", 0, jsThreads.size());
+                    + " JS threads running after the test", 0, jsThreads.size());
         }
 
         if (useRealBrowser()) {
