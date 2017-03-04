@@ -1070,7 +1070,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @Before
     public void before() {
         if (!isWebClientCached()) {
-//            assertEquals(0, getJavaScriptThreads().size());
+//            final List<Thread> jsThreads = getJavaScriptThreads();
+//            assertEquals("There are still " + jsThreads.size()
+//                            + "JS threads running before starting the test", 0, jsThreads.size());
         }
     }
 
@@ -1092,7 +1094,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
 //                webClient_.getCookieManager().clearCookies();
 //            }
 //            webClient_ = null;
-//            assertEquals(0, getJavaScriptThreads().size());
+//            final List<Thread> jsThreads = getJavaScriptThreads();
+//            assertEquals("There are still " + jsThreads.size()
+//                    + "JS threads running after the test", 0, jsThreads.size());
         }
 
         if (useRealBrowser()) {
