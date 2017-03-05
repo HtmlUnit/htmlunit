@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -36,5 +37,18 @@ public class MediaSource extends EventTarget {
      */
     @JsxConstructor
     public MediaSource() {
+    }
+
+    /**
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource/isTypeSupported">
+     * MDN MediaSource#isTypeSupported </a>
+     *
+     * @param mimeType the mimeType to check
+     * @return indicating if the given MIME type is supported by the
+     * current user agent — this is, if it can successfully create SourceBuffer objects for that MIME type
+     */
+    @JsxStaticFunction
+    public static boolean isTypeSupported(final String mimeType) {
+        return false;
     }
 }
