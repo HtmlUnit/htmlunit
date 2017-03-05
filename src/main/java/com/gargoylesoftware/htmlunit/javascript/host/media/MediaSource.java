@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code MediaSource}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
 public class MediaSource extends EventTarget {
