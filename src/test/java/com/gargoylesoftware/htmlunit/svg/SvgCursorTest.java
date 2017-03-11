@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +23,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -46,8 +49,8 @@ public class SvgCursorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGElement]",
-            CHROME = "[object SVGCursorElement]")
+    @Alerts("[object SVGElement]")
+    @NotYetImplemented(CHROME)
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -65,12 +68,7 @@ public class SvgCursorTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
-            }
-            else  {
-                assertTrue(SvgCursor.class.isInstance(page.getElementById("myId")));
-            }
+            assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
         }
     }
 }
