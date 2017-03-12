@@ -32,14 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 public class XmlPage2Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
