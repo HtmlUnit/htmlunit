@@ -30,14 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class StyleAttributesIterable2Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Some properties exist only in {@link CSSStyleDeclaration}, not in {@link ComputedCSSStyleDeclaration}.
      * Seems Rhino checks for prototype, so they will always be available, even for {@link ComputedCSSStyleDeclaration}.
      *

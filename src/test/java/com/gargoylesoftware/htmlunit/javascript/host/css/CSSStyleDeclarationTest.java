@@ -56,14 +56,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

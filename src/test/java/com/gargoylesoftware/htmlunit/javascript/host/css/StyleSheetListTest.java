@@ -41,14 +41,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class StyleSheetListTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test

@@ -36,14 +36,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class CSSImportRuleTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Regression test for bug 2658249.
      * @throws Exception if an error occurs
      */

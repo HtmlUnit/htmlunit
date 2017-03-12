@@ -30,14 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class StyleMediaTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
