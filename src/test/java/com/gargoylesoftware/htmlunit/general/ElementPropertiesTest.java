@@ -62,19 +62,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 @RunWith(BrowserRunner.class)
 public class ElementPropertiesTest extends WebDriverTestCase {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
     private static DefaultCategoryDataset DATASET_;
     private static StringBuilder HTML_ = new StringBuilder();
     private static BrowserVersion BROWSER_VERSION_;
     private static int IMPLEMENTED_COUNT_;
     private static int TOTAL_COUNT_;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
 
     private void test(final String tagName) throws Exception {
         testString("document.createElement('" + tagName + "'), unknown");
@@ -1611,7 +1611,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "cite,clear,width")
-    @NotYetImplemented(CHROME)
     public void keygen() throws Exception {
         test("keygen");
     }
