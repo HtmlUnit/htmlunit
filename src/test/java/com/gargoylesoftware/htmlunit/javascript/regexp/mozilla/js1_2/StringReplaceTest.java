@@ -30,14 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class StringReplaceTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Tests 'adddb'.replace(/ddd/,'XX').
      * @throws Exception if the test fails
      */

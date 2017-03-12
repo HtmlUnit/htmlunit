@@ -35,14 +35,6 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     private static final long now = System.currentTimeMillis();
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

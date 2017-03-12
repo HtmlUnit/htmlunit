@@ -30,14 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class ParenthesesTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Tests 'abc'.match(new RegExp('(abc)')).
      * @throws Exception if the test fails
      */

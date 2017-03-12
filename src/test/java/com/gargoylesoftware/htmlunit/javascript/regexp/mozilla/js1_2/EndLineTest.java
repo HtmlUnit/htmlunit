@@ -30,14 +30,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class EndLineTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Tests 'abcde'.match(new RegExp('de$')).
      * @throws Exception if the test fails
      */

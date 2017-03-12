@@ -31,14 +31,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class NodeListTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception on test failure
      */
     @Test

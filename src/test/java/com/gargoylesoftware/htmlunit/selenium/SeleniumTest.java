@@ -27,14 +27,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class SeleniumTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Starts the web server.
      */
     @Override

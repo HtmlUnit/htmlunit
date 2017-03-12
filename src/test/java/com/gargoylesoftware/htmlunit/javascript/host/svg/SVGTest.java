@@ -32,14 +32,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class SVGTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Test for issue 3313921.
      * @throws Exception if the test fails
      */

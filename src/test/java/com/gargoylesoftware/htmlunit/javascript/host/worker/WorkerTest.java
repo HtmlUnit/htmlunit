@@ -33,14 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class WorkerTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Closes the real ie because clearing all cookies seem to be not working
      * at the moment.
      */

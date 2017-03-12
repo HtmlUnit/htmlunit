@@ -40,14 +40,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 public class TypingTest extends SeleniumTest {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test

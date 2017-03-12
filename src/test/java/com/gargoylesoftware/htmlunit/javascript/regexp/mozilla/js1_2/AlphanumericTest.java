@@ -34,14 +34,6 @@ public class AlphanumericTest extends WebDriverTestCase {
     private static final String alphanumeric     = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Be sure all alphanumerics are matched by \w.
      * @throws Exception if the test fails
      */

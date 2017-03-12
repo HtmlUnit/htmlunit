@@ -36,14 +36,6 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
     private static final String SENTENCE_ = "sentence";
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

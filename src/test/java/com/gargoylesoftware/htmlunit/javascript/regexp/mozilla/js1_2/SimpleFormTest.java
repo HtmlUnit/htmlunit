@@ -31,14 +31,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class SimpleFormTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Tests /[0-9]{3}/('23 2 34 678 9 09').
      * @throws Exception if the test fails
      */
