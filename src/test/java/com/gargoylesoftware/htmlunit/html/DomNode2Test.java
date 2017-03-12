@@ -31,14 +31,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class DomNode2Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Test for Bug #1253.
      *
      * @throws Exception on test failure

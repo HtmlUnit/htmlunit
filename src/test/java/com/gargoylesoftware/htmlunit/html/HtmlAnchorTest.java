@@ -51,14 +51,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class HtmlAnchorTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test

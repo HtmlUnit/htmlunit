@@ -42,14 +42,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class HtmlAreaTest extends WebDriverTestCase {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
     private WebDriver createWebClient(final String onClick) throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head>\n"

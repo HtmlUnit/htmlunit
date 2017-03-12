@@ -36,14 +36,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public final class DomNodeIteratorTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

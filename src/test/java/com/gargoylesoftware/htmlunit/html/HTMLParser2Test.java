@@ -36,14 +36,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HTMLParser2Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * @throws Exception failure
      */
     @Test

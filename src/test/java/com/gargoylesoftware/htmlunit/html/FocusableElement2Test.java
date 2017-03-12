@@ -50,14 +50,6 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private static final String COMMON_ATTRIBUTES = COMMON_ID + COMMON_EVENTS;
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return true;
-    }
-
-    /**
      * Full page driver for onblur and onfocus tests.
      *
      * @param html HTML fragment for body of page with a focusable element identified by a focusId ID attribute
