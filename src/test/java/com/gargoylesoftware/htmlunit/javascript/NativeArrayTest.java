@@ -36,6 +36,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class NativeArrayTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * Test for sort algorithm used (when sort is called with callback).
      * @throws Exception if the test fails
      */

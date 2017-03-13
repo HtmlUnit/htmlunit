@@ -39,6 +39,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlNumberInputTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * Verifies that a asText() returns an empty string.
      * @throws Exception if the test fails
      */

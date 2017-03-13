@@ -39,6 +39,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HTMLBodyElementTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * Tests the default body padding and margins.
      * @throws Exception if an error occurs
      */

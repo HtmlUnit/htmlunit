@@ -49,6 +49,14 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class CSSStyleSheetTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test

@@ -40,6 +40,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class MalformedHtmlTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

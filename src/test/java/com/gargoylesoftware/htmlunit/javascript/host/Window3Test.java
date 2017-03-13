@@ -51,6 +51,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class Window3Test extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * Regression test to reproduce a known bug.
      * @throws Exception if the test fails
      */

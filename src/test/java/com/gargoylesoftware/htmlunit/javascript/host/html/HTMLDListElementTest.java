@@ -37,6 +37,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlDefinitionList;
 public class HTMLDListElementTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

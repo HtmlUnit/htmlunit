@@ -40,6 +40,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlDirectory;
 public class HTMLDirectoryElementTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

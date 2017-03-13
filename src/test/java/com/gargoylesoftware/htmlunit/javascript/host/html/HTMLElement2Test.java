@@ -43,6 +43,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class HTMLElement2Test extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

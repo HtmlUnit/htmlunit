@@ -35,6 +35,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlHeadTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * IE and FF both add a head element when it's not present in the HTML code.
      * @throws Exception if the test fails
      */

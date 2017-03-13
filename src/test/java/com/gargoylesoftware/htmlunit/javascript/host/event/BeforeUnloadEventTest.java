@@ -43,6 +43,14 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
         + "  }\n";
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -41,6 +41,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class HTMLButtonElementTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

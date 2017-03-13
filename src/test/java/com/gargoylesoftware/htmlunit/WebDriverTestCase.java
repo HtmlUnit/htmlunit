@@ -397,7 +397,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return whether to run with driver, or ignore it for now.
      */
     protected boolean supportsWebDriver() {
-        return false;
+        return true;
     }
 
     /**
@@ -442,7 +442,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 System.setProperty("webdriver.firefox.marionette", "false");
 
                 if (FF45_BIN_ != null) {
-                    FirefoxOptions options = new FirefoxOptions();
+                    final FirefoxOptions options = new FirefoxOptions();
                     options.setBinary(FF45_BIN_);
                     return new FirefoxDriver(options);
                 }
@@ -1103,18 +1103,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
 //                webClient_.getCookieManager().clearCookies();
 //            }
 //            webClient_ = null;
-            List<Thread> jsThreads = getJavaScriptThreads();
-            int waitCount = 0;
-            while (jsThreads.size() > 0 && waitCount < 10) {
-                try {
-                    waitCount++;
-                    Thread.sleep(100);
+
+            final List<Thread> jsThreads = getJavaScriptThreads();
+            if (jsThreads.size() > 0) {
+                LOG.error("There are still " + jsThreads.size()
+                            + " JS threads running after the test; we will interrupt these threads");
+                for (Thread thread : jsThreads) {
+                    thread.interrupt();
+                    try {
+                        thread.join(1_000);
+                    }
+                    catch (final InterruptedException e) {
+                        LOG.error("JS threads does not die", e);
+                    }
                 }
-                catch (final InterruptedException e) {
-                    // ignore
-                }
-                jsThreads = getJavaScriptThreads();
             }
+
             assertEquals("There are still " + jsThreads.size()
                     + " JS threads running after the test", 0, jsThreads.size());
         }

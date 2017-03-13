@@ -40,6 +40,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class Event2Test extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * Test event order for clicking on a select option.
      * @throws Exception if the test fails
      */

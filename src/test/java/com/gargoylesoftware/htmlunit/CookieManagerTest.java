@@ -45,6 +45,14 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class CookieManagerTest extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsWebDriver() {
+        return false;
+    }
+
+    /**
      * Closes the real ie because clearing all cookies seem to be not working
      * at the moment.
      */
