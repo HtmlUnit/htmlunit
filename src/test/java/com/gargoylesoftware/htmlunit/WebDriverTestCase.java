@@ -1116,12 +1116,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
 //            }
 //            webClient_ = null;
 
-            final List<Thread> jsThreads = getJavaScriptThreads();
+            List<Thread> jsThreads = getJavaScriptThreads();
+
             if (jsThreads.size() > 0) {
                 LOG.error("There are still " + jsThreads.size()
-                            + " JS threads running after the test; we will interrupt these threads");
+                            + " JS threads running after the test; we will wait a bit");
                 for (Thread thread : jsThreads) {
-                    thread.interrupt();
                     try {
                         thread.join(1_000);
                     }
@@ -1131,6 +1131,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
 
+            jsThreads = getJavaScriptThreads();
+            if (jsThreads.size() > 0) {
+                LOG.error("There are still " + jsThreads.size()
+                            + " JS threads running after the test; we will interrupt these threads");
+                for (Thread thread : jsThreads) {
+                    thread.interrupt();
+                    try {
+                        thread.join(1_000);
+                    }
+                    catch (final InterruptedException e) {
+                        LOG.error("InterruptedException while wating for a JS threads to die", e);
+                    }
+                }
+            }
+
+            jsThreads = getJavaScriptThreads();
             assertEquals("There are still " + jsThreads.size()
                     + " JS threads running after the test", 0, jsThreads.size());
         }
