@@ -89,7 +89,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * <pre>
    browsers=hu,ff45,ie
    chrome.bin=/path/to/chromedriver                     [Unix-like]
-   ff45.bin=/usr/bin/firefox                            [Unix-like]
+   ff52.bin=/usr/bin/firefox                            [Unix-like]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    autofix=true
@@ -97,11 +97,12 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * The file could contain some properties:
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie", "hu-ff45", "ff45", "ie", "chrome", which will be used to drive real browsers</li>
+ *   "hu-ie", "hu-ff52", "ff52", "ie", "chrome", which will be used to drive real browsers</li>
  *
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
  *   <li>ff45.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+ *   <li>ff52.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
  *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
@@ -142,6 +143,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String EDGE_BIN_;
     private static String IE_BIN_;
     private static String FF45_BIN_;
+    private static String FF52_BIN_;
 
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
@@ -194,6 +196,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF45_BIN_ = properties.getProperty("ff45.bin");
+                    FF52_BIN_ = properties.getProperty("ff52.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
                     System.setProperty(AUTOFIX_, Boolean.toString(autofix));
@@ -449,6 +452,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new FirefoxDriver();
             }
 
+            if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
+                if (FF52_BIN_ != null) {
+                    final FirefoxOptions options = new FirefoxOptions();
+                    options.setBinary(FF52_BIN_);
+                    return new FirefoxDriver(options);
+                }
+                return new FirefoxDriver();
+            }
+
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
         }
         if (webDriver_ == null) {
@@ -460,7 +472,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.FIREFOX_45) {
+        if (browserVersion == BrowserVersion.FIREFOX_45 || browserVersion == BrowserVersion.FIREFOX_52) {
             return BrowserType.FIREFOX;
         }
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {

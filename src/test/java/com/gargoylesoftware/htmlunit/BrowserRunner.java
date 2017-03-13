@@ -75,6 +75,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff45")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_45, true));
                 }
+                if (browsers.contains("ff52")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_52, true));
+                }
                 if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, true));
                 }
@@ -88,6 +91,9 @@ public class BrowserRunner extends Suite {
             }
             if (browsers.contains("hu-ff45")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_45, false));
+            }
+            if (browsers.contains("hu-ff52")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_52, false));
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
@@ -159,7 +165,10 @@ public class BrowserRunner extends Suite {
         FF,
 
         /** Firefox 45. */
-        FF45
+        FF45,
+
+        /** Firefox 52. */
+        FF52
     }
 
     /**
@@ -204,6 +213,12 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF45() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 52. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF52() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
@@ -256,6 +271,12 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF45() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 52. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF52() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
