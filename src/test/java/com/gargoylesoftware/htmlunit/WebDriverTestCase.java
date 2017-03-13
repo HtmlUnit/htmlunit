@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -69,9 +68,8 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.server.HtmlUnitLocalDriver;
-import org.openqa.selenium.htmlunit.server.HtmlUnitWebElement;
-import org.openqa.selenium.htmlunit.server.Session;
+import org.openqa.selenium.htmlunit.local.HtmlUnitLocalDriver;
+import org.openqa.selenium.htmlunit.local.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -1176,10 +1174,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final String sessionId = driver.getSessionId().toString();
-        final Method getDriver = Session.class.getDeclaredMethod("getDriver", String.class);
-        getDriver.setAccessible(true);
-        final HtmlUnitLocalDriver localDriver = (HtmlUnitLocalDriver) getDriver.invoke(null, sessionId);
+        final Field driverField = HtmlUnitDriver.class.getDeclaredField("driver");
+        driverField.setAccessible(true);
+        final HtmlUnitLocalDriver localDriver = (HtmlUnitLocalDriver) driverField.get(driver);
         final Field field = localDriver.getClass().getDeclaredField("currentWindow");
         field.setAccessible(true);
         return (WebWindow) field.get(localDriver);
