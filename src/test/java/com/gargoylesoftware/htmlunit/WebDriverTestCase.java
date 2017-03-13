@@ -64,9 +64,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.local.HtmlUnitLocalDriver;
 import org.openqa.selenium.htmlunit.local.HtmlUnitWebElement;
@@ -443,7 +442,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 System.setProperty("webdriver.firefox.marionette", "false");
 
                 if (FF45_BIN_ != null) {
-                    return new FirefoxDriver(new FirefoxBinary(new File(FF45_BIN_)), new FirefoxProfile());
+                    FirefoxOptions options = new FirefoxOptions();
+                    options.setBinary(FF45_BIN_);
+                    return new FirefoxDriver(options);
                 }
                 return new FirefoxDriver();
             }

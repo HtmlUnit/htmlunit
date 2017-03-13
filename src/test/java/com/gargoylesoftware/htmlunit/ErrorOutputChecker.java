@@ -36,20 +36,21 @@ import org.junit.runners.model.Statement;
 public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
-    private static final Pattern WEB_DRIVER_CHROME_MSG =
+    private static final Pattern[] PATTERNS = {
             Pattern.compile("Starting ChromeDriver 2\\.28\\.455520 ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
-                    + "Only local connections are allowed\\.\r?\n");
-    private static final Pattern WEB_DRIVER_IE_MSG =
+                    + "Only local connections are allowed\\.\r?\n"),
+            Pattern.compile(".*FirefoxOptions toCapabilities\r?\n"),
+            Pattern.compile(".*Preferring the firefox binary in these options \\(.*\\)\r?\n"),
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + "2\\.53\\.1\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
-                    + "Only local connections are allowed\r?\n");
-    private static final Pattern WEB_DRIVER_EDGE_MSG1 =
-            Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n");
-    private static final Pattern WEB_DRIVER_EDGE_MSG2 =
-            Pattern.compile(".*Stopping server.\r\r?\n");
-    private static final Pattern WEB_DRIVER_IGNORE_MSG =
-            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: OSS\r?\n");
+                    + "Only local connections are allowed\r?\n"),
+            // edge
+            Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
+            // edge
+            Pattern.compile(".*Stopping server.\r\r?\n"),
+            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: OSS\r?\n")
+    };
 
     /**
      * {@inheritDoc}
@@ -76,12 +77,10 @@ public class ErrorOutputChecker implements TestRule {
         if (baos_.size() != 0) {
             String output = baos_.toString();
 
-            // remove webdriver message
-            output = WEB_DRIVER_CHROME_MSG.matcher(output).replaceAll("");
-            output = WEB_DRIVER_IE_MSG.matcher(output).replaceAll("");
-            output = WEB_DRIVER_EDGE_MSG1.matcher(output).replaceAll("");
-            output = WEB_DRIVER_EDGE_MSG2.matcher(output).replaceAll("");
-            output = WEB_DRIVER_IGNORE_MSG.matcher(output).replaceAll("");
+            // remove webdriver messages
+            for (Pattern pattern : PATTERNS) {
+                output = pattern.matcher(output).replaceAll("");
+            }
 
             if (!output.isEmpty()) {
                 if (output.contains("ChromeDriver")) {
