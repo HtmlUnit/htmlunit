@@ -14,8 +14,8 @@
             <action type="fix" dev="rbri" issue="1858" due-to="Joerg Werner">
                 Correct file type detection for files with css suffix.
             </action>
-            <action type="add" >
-                JavaScript: simple impl for MediaSource.isTypeSupported added (returns always false).
+            <action type="add" dev="rbri">
+                JavaScript: simple implementation for MediaSource.isTypeSupported added (returns always false).
             </action>
             <action type="add" dev="asashour">
                 WebClientOptions: add option for screen width/height.
