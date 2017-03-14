@@ -1206,13 +1206,26 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if an error occurs
      * @see #toHtmlElement(WebElement)
      */
-    protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
+    protected static WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
         final Field driverField = HtmlUnitDriver.class.getDeclaredField("driver");
         driverField.setAccessible(true);
         final HtmlUnitLocalDriver localDriver = (HtmlUnitLocalDriver) driverField.get(driver);
         final Field field = localDriver.getClass().getDeclaredField("currentWindow");
         field.setAccessible(true);
         return (WebWindow) field.get(localDriver);
+    }
+
+    /**
+     * Sets whether to automatically download images or not.
+     * @param driver the driver
+     * @param downloadImages whether to automatically download images or not
+     * @throws Exception if an error occurs
+     */
+    protected static void setDownloadImages(final HtmlUnitDriver driver, final boolean downloadImages) throws Exception {
+        final Field driverField = HtmlUnitDriver.class.getDeclaredField("driver");
+        driverField.setAccessible(true);
+        final HtmlUnitLocalDriver localDriver = (HtmlUnitLocalDriver) driverField.get(driver);
+        localDriver.setDownloadImages(downloadImages);
     }
 
     /**

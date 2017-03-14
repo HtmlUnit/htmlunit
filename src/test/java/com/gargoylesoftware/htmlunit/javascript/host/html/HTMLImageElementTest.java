@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -601,7 +602,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    img.width;\n" // this forces image loading in htmlunit
             + "    alert(img.complete);\n"
             + "  }\n"
             + "  function test() {\n"
@@ -617,6 +617,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='myImage3' src='" + URL_SECOND + "'>\n"
             + "  <img id='myImage4' src='" + URL_SECOND + "img.jpg'>\n"
             + "</body></html>";
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            setDownloadImages((HtmlUnitDriver) driver, true);
+        }
 
         loadPageWithAlerts2(html);
     }
