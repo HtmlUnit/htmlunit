@@ -8,10 +8,13 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
-            <action type="fix" issue="#1858" due-to="Joerg Werner">
+            <action type="fix" dev="asashour">
+                Fix detection of HtmlInput types (IE).
+            </action>
+            <action type="fix" dev="rbri" issue="1858" due-to="Joerg Werner">
                 Correct file type detection for files with css suffix.
             </action>
-            <action type="add" dev="rbri">
+            <action type="add" >
                 JavaScript: simple impl for MediaSource.isTypeSupported added (returns always false).
             </action>
             <action type="add" dev="asashour">
