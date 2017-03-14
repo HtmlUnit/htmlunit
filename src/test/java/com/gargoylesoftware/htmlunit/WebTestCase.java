@@ -764,6 +764,20 @@ public abstract class WebTestCase {
      * @return the threads
      */
     protected static List<Thread> getJavaScriptThreads() {
+        List<Thread> jsThreads = getJavaScriptThreadsImpl();
+        if (!jsThreads.isEmpty()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            jsThreads = getJavaScriptThreadsImpl();
+        }
+
+        return jsThreads;
+    }
+
+    private static List<Thread> getJavaScriptThreadsImpl() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
         final List<Thread> jsThreads = new ArrayList<>();
