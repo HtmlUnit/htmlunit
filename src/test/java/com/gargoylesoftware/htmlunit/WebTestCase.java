@@ -768,7 +768,8 @@ public abstract class WebTestCase {
         if (!jsThreads.isEmpty()) {
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
+            }
+            catch (final InterruptedException e) {
                 throw new RuntimeException(e);
             }
             jsThreads = getJavaScriptThreadsImpl();
