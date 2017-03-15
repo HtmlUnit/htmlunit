@@ -977,7 +977,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  <input type='radio' id='r3' name='myRadio' checked='yes'>\n"
             + "  <input type='radio' name='myRadio'>\n"
             + "</form>\n"
-            + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+            + "  <button id='clickMe' onClick='test()'>do it</button>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -985,7 +985,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("r2")).click();
         driver.findElement(By.id("r3")).click();
 
-        driver.findElement(By.id("clickNe")).click();
+        driver.findElement(By.id("clickMe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 

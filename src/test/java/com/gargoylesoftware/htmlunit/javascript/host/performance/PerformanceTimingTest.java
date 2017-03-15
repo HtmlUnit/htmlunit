@@ -229,12 +229,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+                + "  <button id='clickMe' onClick='test()'>do it</button>\n"
                 + "</body>\n"
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("clickNe")).click();
+        driver.findElement(By.id("clickMe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -308,12 +308,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+                + "  <button id='clickMe' onClick='test()'>do it</button>\n"
                 + "</body>\n"
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("clickNe")).click();
+        driver.findElement(By.id("clickMe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -339,12 +339,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+                + "  <button id='clickMe' onClick='test()'>do it</button>\n"
                 + "</body>\n"
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("clickNe")).click();
+        driver.findElement(By.id("clickMe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -367,12 +367,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "  <button id='clickNe' onClick='test()'>do it</button>\n"
+                + "  <button id='clickMe' onClick='test()'>do it</button>\n"
                 + "</body>\n"
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("clickNe")).click();
+        driver.findElement(By.id("clickMe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 }
