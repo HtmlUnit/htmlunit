@@ -85,8 +85,10 @@ public final class InputElementFactory implements ElementFactory {
         }
 
         String type = null;
-        if (attributes != null) {
-            type = attributes.getValue("type");
+        for (final Map.Entry<String, DomAttr> entry : attributeMap.entrySet()) {
+            if ("type".equalsIgnoreCase(entry.getKey())) {
+                type = entry.getValue().getValue();
+            }
         }
         if (type == null) {
             type = "";
