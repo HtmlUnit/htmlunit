@@ -1237,8 +1237,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLKeygenElement() { [native code] }")
+    @Alerts("exception")
     public void htmlKeygenElement() throws Exception {
         test("HTMLKeygenElement");
     }
@@ -2310,8 +2309,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGCursorElement() { [native code] }")
+    @Alerts("exception")
     public void svgCursorElement() throws Exception {
         test("SVGCursorElement");
     }
@@ -9232,8 +9230,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function AudioContext() { [native code] }")
+    @Alerts("exception")
     public void webkitAudioContext() throws Exception {
         test("webkitAudioContext");
     }
@@ -9242,8 +9239,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBCursor() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBCursor() throws Exception {
         test("webkitIDBCursor");
     }
@@ -9252,8 +9248,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBDatabase() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBDatabase() throws Exception {
         test("webkitIDBDatabase");
     }
@@ -9262,8 +9257,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBFactory() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBFactory() throws Exception {
         test("webkitIDBFactory");
     }
@@ -9272,8 +9266,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBIndex() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBIndex() throws Exception {
         test("webkitIDBIndex");
     }
@@ -9282,8 +9275,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBKeyRange() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBKeyRange() throws Exception {
         test("webkitIDBKeyRange");
     }
@@ -9292,8 +9284,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBObjectStore() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBObjectStore() throws Exception {
         test("webkitIDBObjectStore");
     }
@@ -9302,8 +9293,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBRequest() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBRequest() throws Exception {
         test("webkitIDBRequest");
     }
@@ -9312,8 +9302,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function IDBTransaction() { [native code] }")
+    @Alerts("exception")
     public void webkitIDBTransaction() throws Exception {
         test("webkitIDBTransaction");
     }
@@ -9332,8 +9321,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function OfflineAudioContext() { [native code] }")
+    @Alerts("exception")
     public void webkitOfflineAudioContext() throws Exception {
         test("webkitOfflineAudioContext");
     }
@@ -9402,8 +9390,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function ServiceWorkerMessageEvent() { [native code] }")
+    @Alerts("exception")
     public void serviceWorkerMessageEvent() throws Exception {
         test("ServiceWorkerMessageEvent");
     }
@@ -10045,8 +10032,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object PerformanceNavigationTiming]")
+    @Alerts(DEFAULT = "[object PerformanceNavigationTiming]",
+            FF = "exception")
     public void performanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming");
     }
@@ -11000,7 +10987,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioScheduledSourceNode() { [native code] }")
     public void audioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode");
     }
