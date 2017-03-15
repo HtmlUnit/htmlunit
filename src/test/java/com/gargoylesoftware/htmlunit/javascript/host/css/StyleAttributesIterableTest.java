@@ -394,6 +394,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     public void _TEXT_DECORATION_OVERLINE() throws Exception {
         test("textDecorationOverline");
     }
+
     /**
      * @throws Exception if an error occurs
      */
