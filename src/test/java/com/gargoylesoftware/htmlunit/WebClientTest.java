@@ -76,6 +76,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Carsten Steul
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class WebClientTest extends SimpleWebTestCase {
@@ -1428,6 +1429,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
         assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
         assertEquals("empty.js", "text/javascript", c.guessContentType(getTestFile("empty.js")));
+        assertEquals("empty.css", "text/css", c.guessContentType(getTestFile("empty.css")));
 
         // test real files with bad file suffix
         assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
