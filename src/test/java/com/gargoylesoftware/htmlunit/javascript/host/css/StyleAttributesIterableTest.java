@@ -129,8 +129,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _BLOCK_SIZE() throws Exception {
         test("blockSize");
@@ -140,8 +140,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _INLINE_SIZE() throws Exception {
         test("inlineSize");
@@ -151,8 +151,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _JUSTIFY_ITEMS() throws Exception {
         test("justifyItems");
@@ -162,8 +162,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _JUSTIFY_SELF() throws Exception {
         test("justifySelf");
@@ -173,8 +173,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _MAX_BLOCK_SIZE() throws Exception {
         test("maxBlockSize");
@@ -184,8 +184,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _MAX_INLINE_SIZE() throws Exception {
         test("maxInlineSize");
@@ -195,8 +195,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _MIN_BLOCK_SIZE() throws Exception {
         test("minBlockSize");
@@ -206,8 +206,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _MIN_INLINE_SIZE() throws Exception {
         test("minInlineSize");
@@ -347,8 +347,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _TEXT_DECORATION_COLOR() throws Exception {
         test("textDecorationColor");
@@ -358,8 +358,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _TEXT_DECORATION_LINE() throws Exception {
         test("textDecorationLine");
@@ -399,8 +399,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented(CHROME)
     public void _TEXT_DECORATION_STYLE() throws Exception {
         test("textDecorationStyle");
@@ -420,8 +420,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     @NotYetImplemented(CHROME)
     public void _TEXT_UNDERLINE_POSITION() throws Exception {
         test("textUnderlinePosition");
