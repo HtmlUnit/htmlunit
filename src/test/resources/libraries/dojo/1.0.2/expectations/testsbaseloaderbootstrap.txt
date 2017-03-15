@@ -1,0 +1,15 @@
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base._loader.bootstrap" has 5 tests to run
+ PASSED test: hasConsole
+ PASSED test: hasDjConfig
+ PASSED test: getObject
+ PASSED test: exists
+ PASSED test: evalWorks
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 1 groups
+      0 errors
+      0 failures

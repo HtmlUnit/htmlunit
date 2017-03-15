@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Table Tutorial</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                The first set of examples will use this simple html.
+            </p>
+            <source><![CDATA[
+<html><head><title>Table sample</title></head><body>
+    <table id="table1">
+        <tr>
+            <th>Number</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Bicycle</td>
+        </tr>
+    </table>
+</body></html>]]></source>
+            <p>
+            This example shows how to iterate over all the rows and cells
+            <source><![CDATA[
+final HtmlTable table = page.getHtmlElementById("table1");
+for (final HtmlTableRow row : table.getRows()) {
+    System.out.println("Found row");
+    for (final HtmlTableCell cell : row.getCells()) {
+        System.out.println("   Found cell: " + cell.asText());
+    }
+}]]></source>
+            </p>
+
+            <p>
+            The following sample shows how to access specific cells by row and column
+            <source><![CDATA[
+final WebClient webClient = new WebClient();
+final HtmlPage page = webClient.getPage("http://foo.com");
+
+final HtmlTable table = page.getHtmlElementById("table1");
+System.out.println("Cell (1,2)=" + table.getCellAt(1,2));]]></source>
+            </p>
+        </section>
+
+        <section name="More complex table">
+            <p>
+                The next examples will use a more complicated table that includes table header, footer and body
+                sections as well as a caption
+            </p>
+            <source><![CDATA[
+<html><head><title>Table sample</title></head><body>
+    <table id="table1">
+        <caption>My complex table</caption>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>7</td>
+                <td></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>Bicycle</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>2</td>
+                <td>Tricycle</td>
+            </tr>
+        </tbody>
+    </table>
+</body></html>]]></source>
+
+            <p>
+                HtmlTableHeader, HtmlTableFooter and HtmlTableBody sections are groupings of rows.  There can
+                be at most one header and one footer but there may be more than one body.  Each one of these
+                contains rows which can be accessed via getRows()
+            <source><![CDATA[
+final HtmlTableHeader header = table.getHeader();
+final List<HtmlTableRow> headerRows = header.getRows();
+
+final HtmlTableFooter footer = table.getFooter();
+final List<HtmlTableRow> footerRows = footer.getRows();
+
+for (final HtmlTableBody body : table.getBodies()) {
+    final List<HtmlTableRow> rows = body.getRows();
+    ...
+}]]></source>
+            </p>
+
+            <p>
+                Every table may optionally have a caption element which describes it.
+                <source><![CDATA[final String caption = table.getCaptionText()]]></source>
+            </p>
+        </section>
+    </body>
+</document>
+

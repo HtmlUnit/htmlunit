@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>simple applet test</title>
+</head>
+<body>
+A simple applet (without display) with a method called doIt(String message) that shows "Called: doIt(#message#)" in the status bar of the window.
+ <applet id='myApplet'
+   codebase='.'
+   archive='simpleAppletDoIt.jar'
+   code='net.sourceforge.htmlunit.testapplets.AppletDoIt'
+   width='50' height='50'>
+ Your browser does not support the applet tag.
+</applet>
+
+<button onclick="document.applets[0].doIt('hello')" id="button1">call applet's doIt('hello')</button>
+<button onclick="document.applets[0].doIt(12345)" id="button2">call applet's doIt(12345)</button>
+
+<button onclick="document.applets[0].showCodeBase()" id="buttonShowCodeBase">ShowCodeBase</button>
+<button onclick="document.applets[0].showDocumentBase()" id="buttonShowDocumentBase">ShowDocumentBase</button>
+
+</body></html>

@@ -1,0 +1,5 @@
+1 tests, 7 assertions, 0 failures, 0 errors
+Status Test Message
+testBrowserDetection passed 7 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+Info: -- skipped for comparison --

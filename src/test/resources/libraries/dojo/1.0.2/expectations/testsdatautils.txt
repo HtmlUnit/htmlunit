@@ -1,0 +1,28 @@
+ 18 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.data.utils" has 18 tests to run
+ PASSED test: testWildcardFilter_1
+ PASSED test: testWildcardFilter_2
+ PASSED test: testWildcardFilter_3
+ PASSED test: testWildcardFilter_4
+ PASSED test: testWildcardFilter_5
+ PASSED test: testWildcardFilter_caseInsensitive
+ PASSED test: testSingleChar_1
+ PASSED test: testSingleChar_2
+ PASSED test: testBracketChar
+ PASSED test: testBraceChar
+ PASSED test: testParenChar
+ PASSED test: testPlusChar
+ PASSED test: testPeriodChar
+ PASSED test: testBarChar
+ PASSED test: testDollarSignChar
+ PASSED test: testCarrotChar
+ PASSED test: testEscapeChar
+ PASSED test: testAbsoluteMatch
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      18 tests in 1 groups
+      0 errors
+      0 failures

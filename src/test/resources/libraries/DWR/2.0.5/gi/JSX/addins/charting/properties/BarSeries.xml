@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="series" include="master.xml">
+		<record docdefault="DEFAULT_BARHEIGHT (&lt;code&gt;jsx3.chart.BarSeries.DEFAULT_BARHEIGHT&lt;/code&gt;)" docgetter="getBarHeight" docsetter="setBarHeight" eval="1" jsxexecute="objJSX.barHeight=vntValue;objJSX.getChart().repaint();" jsxid="barHeight" jsxmask="jsxtext" jsxtext="Bar Height" jsxtip="Sets the pixel height to use for each bar in a bar chart with two value axes."/>
+	</record>
+	
+	<record group="seriesfill" include="master.xml">
+    <record children="1" group="colorFunction" include="master.xml"/>
+  </record>
+  
+  <record group="component" include="master.xml"/>
+	<record group="interaction" include="master.xml"/>
+</data>

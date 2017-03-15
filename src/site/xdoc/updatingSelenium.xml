@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Updating Selenium</title>
+        <author email="rbri@rbri.de">RBRi</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                This document is intended for committers who are creating pull requests
+                to the selenium project.
+            </p>
+            <p>
+                First of all: ALWAYS work with branches.
+                <ol>
+                   <li>bring our fork master in sync with the origin</li>
+                   <li>create a new branch names 'htmlunit_x_xx'</li>
+                   <li>switch to the branch</li>
+                   <li>update the various subdirectories of 'third_party\java' with our new jar's; also update 'BUCK' and 'build.desc'</li>
+                   <li>update contents of file '.project' in directory 'java\client' (eclipse)</li>
+                   <li>update files subdirectory of '.idea\library' (IDEA)</li>
+                   <li>run the tests (start 'go test_htmlunit' from the command line)</li>
+                   <li>commit and create pull request</li>
+               </ol>
+            </p>
+        </section>
+    </body>
+</document>
+

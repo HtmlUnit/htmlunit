@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>TODO list</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                Items on this list are planned items that aren't bugs or feature requests. In other words,
+                these are all those things that need to be done but aren't listed in the sourceforge
+                bug tracker.  They are in no particular order.
+            </p>
+        </section>
+
+        <section name="Code todo's">
+            <ol>
+                <li>KeyboardEventTest.which should be fixed in HtmlUnitDriver</li>
+                <li>Fix focused window of focused page for <code>click()</code></li>
+                <li>Allow access to the WebResponse for all components that may request an additional request</li>
+                <li>JavaScript: isolate NodeList from HTMLCollection, e.g. node.childNodes is NodeList. Recheck live and static lists.</li>
+                <li>JavaScript: object.getClassName() to be browser specific, e.g. document.querySelectorAll() is NodeList in FF, but StaticNodeList in IE8</li>
+                <li>MockWebConnection: to be used in XMLHttpRequest3Test.post()</li>
+                <li>Check IE behavior in DefaultCredentialsProvider2Test</li>
+                <li>MockWebConnection: should be use in only WebTestCase, not WebServerTestCase</li>
+            </ol>
+        </section>
+
+        <section name="Documentation todo's">
+            <ol>
+                <li>XPath howto</li>
+            </ol>
+        </section>
+    </body>
+</document>
+

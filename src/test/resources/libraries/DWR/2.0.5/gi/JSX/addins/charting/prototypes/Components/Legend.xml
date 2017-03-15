@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Legend]]></name>
+ <icon><![CDATA[icons/legend.gif]]></icon>
+ <description><![CDATA[a chart component that displays a visual key to the data series in a chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.Legend">
+   <dynamics/>
+   <variants boxHeight="10" boxSpace="6" lineHeight="22" titleSpace="8"/>
+   <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="12" labelRotation="0"/>
+     <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+    </object>
+  </object>
+</serialization>

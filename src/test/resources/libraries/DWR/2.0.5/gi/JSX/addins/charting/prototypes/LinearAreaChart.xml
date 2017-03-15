@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Area - LinearX]]></name>
+ <icon><![CDATA[icons/linearArea.gif]]></icon>
+ <description><![CDATA[a sample area chart with two linear axes]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.AreaChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="linearAreaChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record day=&quot;0&quot; hi1=&quot;10&quot; lo1=&quot;5&quot; hi2=&quot;27&quot; lo2=&quot;19&quot;/&gt; &lt;record day=&quot;20&quot; hi1=&quot;11&quot; lo1=&quot;6&quot;/&gt; &lt;record day=&quot;50&quot; hi1=&quot;15&quot; lo1=&quot;8&quot;/&gt; &lt;record day=&quot;105&quot; hi1=&quot;18&quot; lo1=&quot;10&quot;/&gt; &lt;record day=&quot;162&quot; hi1=&quot;25&quot; lo1=&quot;12&quot;/&gt; &lt;record day=&quot;225&quot; hi1=&quot;30&quot; lo1=&quot;13&quot;/&gt; &lt;record day=&quot;275&quot; hi1=&quot;18&quot; lo1=&quot;10&quot;/&gt; &lt;record day=&quot;340&quot; hi1=&quot;12&quot; lo1=&quot;6&quot;/&gt; &lt;record day=&quot;10&quot; hi2=&quot;28&quot; lo2=&quot;20&quot;/&gt; &lt;record day=&quot;45&quot; hi2=&quot;35&quot; lo2=&quot;26&quot;/&gt; &lt;record day=&quot;80&quot; hi2=&quot;30&quot; lo2=&quot;19&quot;/&gt; &lt;record day=&quot;117&quot; hi2=&quot;23&quot; lo2=&quot;15&quot;/&gt; &lt;record day=&quot;154&quot; hi2=&quot;17&quot; lo2=&quot;12&quot;/&gt; &lt;record day=&quot;194&quot; hi2=&quot;12&quot; lo2=&quot;8&quot;/&gt; &lt;record day=&quot;243&quot; hi2=&quot;15&quot; lo2=&quot;9&quot;/&gt; &lt;record day=&quot;278&quot; hi2=&quot;21&quot; lo2=&quot;15&quot;/&gt; &lt;record day=&quot;310&quot; hi2=&quot;24&quot; lo2=&quot;17&quot;/&gt; &lt;record day=&quot;345&quot; hi2=&quot;26&quot; lo2=&quot;19&quot;/&gt; &lt;record day=&quot;365&quot; hi1=&quot;10&quot; lo1=&quot;5&quot; hi2=&quot;27&quot; lo2=&quot;19&quot;/&gt; &lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="overlay"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Linear-X Area Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" displayWidth="15" horizontal="0" labelGap="3" minorTickDivisions="4" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelPlacement="axis" labelStyle="font-family: Verdana; font-size: 8px; text-align: right;" minorTickPlacement="outside" minorTickStroke="#999999 1 1" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270" preferredWidth="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="ytitle" jsxtext="Temperature" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="0" pointRadius="3" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#669900 .7" form="segment" jsxname="series1" minField="lo1" seriesName="Berlin" tooltipFunction="jsx3.chart.AreaSeries.tooltip" xField="day" yField="hi1"/>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="1" pointRadius="3" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#996600 .7" form="segment" jsxname="series2" minField="lo2" seriesName="Sydney" tooltipFunction="jsx3.chart.AreaSeries.tooltip" xField="day" yField="hi2"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants horizontalAbove="1" inForeground="0" strokeMajorH="['#000000 1 .2']" strokeMinorH="['#000000 1 .1']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#AAAAAA" jsxname="bgGrid"/>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" horizontal="1" interval="60" labelGap="3" max="365" min="1" minorTickDivisions="4" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="xAxis" labelFunction="function(d) { var t = new Date(2005, 0, d); return (t.getMonth()+1) + &quot;/&quot; + t.getDate(); }" labelPlacement="axis" labelStyle="font-size: 8px;" minorTickPlacement="outside" minorTickStroke="#999999 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+    </object>
+  </object>
+</serialization>

@@ -1,0 +1,71 @@
+@CHARSET "ISO-8859-1";
+
+body { margin:60px 40px 0px 40px; color:#666; line-height:1.3em;
+  font-family:'Century Gothic', Helvetica, Arial, clean, sans-serif;
+}
+
+select, textarea, input[type='text'], input[type='password'] {
+  font-family:'Century Gothic', Helvetica, Arial, clean, sans-serif;
+  font-size:1em; padding:3px 3px; margin:2px; border:1px solid #999;
+}
+
+button, input[type='button'], input[type='submit'], input[type='cancel'] {
+  font-family:'Century Gothic', Helvetica, Arial, clean, sans-serif;
+  font-size:1em;
+}
+
+a { color:Blue; text-decoration:none; }
+a:hover { background-color:#ffc; color:#fc6; }
+a:active { color:#fc6; }
+
+h1 { color:#000; font-weight:bold; font-size:130%; }
+h2 { color:#000; font-size:110%; }
+h3 { color:#000; font-size:100%; }
+h4 { color:#000; font-size:90%; }
+
+img { border:0; }
+
+table { border-collapse:collapse; border-spacing:5px; }
+table, td, th { border:1px solid #ccc; padding:5px; }
+table.form th { text-align:right; font-weight:normal; }
+table.grey th { background:#eee; font-weight:normal; }
+table.plain { border:0; }
+table.plain td { border:0; }
+table.plain th { border:0; }
+
+ul.inlineList li { display:inline; padding:0px 5px; }
+ul.inlineList { list-style-type:none; padding:0; margin:5px; }
+
+pre { background:#f4f4f4; padding:10px; }
+
+.xmlReply { background:#f8eeff; padding:4px; margin:4px; }
+
+.small { font-size:80%; }
+.testblock { margin:10px; background-color:#fff8dd; padding:10px }
+
+.showborder td, .showborder th { border:1px solid #999999; padding:2px 5px; }
+.showborder { border-collapse:collapse; }
+
+.error { color:#F00; font-size:70%; }
+
+.disabled { border:1px solid Blue; }
+
+.tip { position:relative; position:absolute; color:#66a; font-size:70%;
+  width:200px; text-align:right; padding-top:2px;
+}
+
+#page-title { background-color:#7272a2; border:1px solid #000000;
+  border-top:0; padding:5px; font-size:80%; line-height:1.8em;
+  position:absolute; top:0; left:0; width:100%; color:#ccc;
+}
+#page-title a { text-decoration:none; color:white; }
+#page-title a:hover { background-color:#7272a2; color:#ff3; }
+#page-title a:active { color:#fc6; }
+
+#dwr-debug {  white-space:nowrap; font-size:70%; border:1px solid #AAA;
+  font-family:anonymous,courier,monospace; background:#EEE; padding: 5px;
+  margin:20px 0px;
+}
+
+#gidemo table { border-collapse:separate; border-spacing:0; }
+#gidemo table, #gidemo td, #gidemo th { border:0; padding:0; }

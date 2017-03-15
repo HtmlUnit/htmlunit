@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Logging</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                HtmlUnit uses the <a href="http://jakarta.apache.org/commons/logging/">commons logging</a>
+                package from the <a href="http://jakarta.apache.org">Apache Jakarta</a> project.  Commons
+                logging is a thin wrapper that sits on top of other logging frameworks such as
+                <a href="http://jakarta.apache.org/log4j/docs/index.html">LOG4J</a> or
+                <a href="http://jakarta.apache.org/avalon/logkit/">LogKit</a>.
+            </p>
+            <p>
+                For full details on configuring commons logging, refer to the
+                <a href="http://jakarta.apache.org/commons/logging/">homepage</a>.
+            </p>
+            <p>
+                If you don't explicitly configure commons logging to use LOG4J or another logging framework
+                then it will use the simple logger.  When using the simple logger, you can change the default
+                logging level by setting the following system property.
+            </p>
+            <source><![CDATA[System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "trace");]]></source>
+            <p>
+                Valid values for this property are "trace", "debug", "info", "warn", "error", or "fatal" (in
+                order from least serious to most serious).
+            </p>
+        </section>
+        <section name="Noteworthy loggers">
+            <p>
+                In HtmlUnit, each class has its own log named according to the class's fully qualified name.
+            </p>
+            <p>
+                HtmlUnit uses Apache HttpClient which uses "org.apache.http" to log the headers and wire content,
+                please read more in
+                <a href="http://hc.apache.org/httpcomponents-client/logging.html">HttpClient Logging Practices</a>
+            </p>
+        </section>
+        <section name="Logging HTML parsing messages">
+            <p>
+                The package used to parse the HTML has the ability to report the problems it encounters while parsing source.  
+                These messages may be programmatically catched or easily logged to the 
+                "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log for instance by calling:
+                <source><![CDATA[
+final WebClient webClient = new WebClient();
+webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
+                The parser (NekoHTML) by default processes the
+                content that is outside of the BODY and HTML tags. This is seen by the logging reporting that the 
+                BODY and HTML tags are not closed properly.  This can be changed by calling
+                'WebClient.setIgnoreOutsideContent(true);'.
+            </p>
+        </section>
+    </body>
+</document>
+

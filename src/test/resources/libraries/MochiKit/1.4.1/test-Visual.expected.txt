@@ -1,0 +1,38 @@
+Passed: 36
+Failed: 0
+ok - pulsate ok
+ok - pulsate with numbered pulses ok
+ok - shake ok
+ok - fade ok
+ok - appear ok
+ok - toggle size ok
+ok - toggle size reverse ok
+ok - Morph OK
+ok - Morph multiple (font) OK
+ok - Morph multiple (margin) OK
+ok - Morph generic property OK
+ok - switchOff ok
+ok - grow ok
+ok - shrink ok
+ok - dropOut ok
+ok - puff ok
+ok - fold ok
+ok - squish ok
+ok - slideUp ok
+ok - slideDown ok
+ok - blindDown ok
+ok - blindUp ok
+ok - multiple ok
+ok - multiple ok
+ok - toggle with css ok
+ok - toggle with css ok
+ok - MochiKit.Visual.roundElement doesn't need 'new' keyword
+ok - MochiKit.Visual.roundClass doesn't need 'new' keyword
+ok - MochiKit.Visual.tagifyText doesn't need 'new' keyword
+ok - MochiKit.Visual.Opacity doesn't need 'new' keyword
+ok - MochiKit.Visual.Move doesn't need 'new' keyword
+ok - MochiKit.Visual.Highlight doesn't need 'new' keyword
+ok - MochiKit.Visual.ScrollTo doesn't need 'new' keyword
+ok - MochiKit.Visual.Morph doesn't need 'new' keyword
+ok - Scale doesn't need 'new' keyword
+ok - visual suite finished

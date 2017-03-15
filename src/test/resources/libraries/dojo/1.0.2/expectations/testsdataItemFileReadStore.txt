@@ -1,0 +1,66 @@
+ 56 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.data.readOnlyItemFileTestTemplates, with datastore dojo.data.ItemFileReadStore" has 56 tests to run
+ PASSED test: Identity API: fetchItemByIdentity()
+ PASSED test: Identity API: fetchItemByIdentity() notFound
+ PASSED test: Identity API: getIdentityAttributes()
+ PASSED test: Identity API: fetchItemByIdentity() commentFilteredJson
+ PASSED test: Identity API: fetchItemByIdentity() nullValue
+ PASSED test: Identity API: fetchItemByIdentity() booleanValue
+ PASSED test: Identity API: fetchItemByIdentity() withoutSpecifiedIdInData
+ PASSED test: Identity API: getIdentity()
+ PASSED test: Identity API: getIdentity() withoutSpecifiedId
+ PASSED test: Read API: fetch() all
+ PASSED test: Read API: fetch() one
+ PASSED test: Read API: fetch() shallow
+ PASSED test: Read API: fetch() Multiple
+ PASSED test: Read API: fetch() MultipleMixedFetch
+ PASSED test: Read API: fetch() deep
+ PASSED test: Read API: fetch() one_commentFilteredJson
+ PASSED test: Read API: fetch() withNull
+ PASSED test: Read API: fetch() all_streaming
+ PASSED test: Read API: fetch() paging
+ PASSED test: Read API: fetch() with MultiType Match
+ PASSED test: Read API: fetch() with MultiType, MultiValue Match
+ PASSED test: Read API: getLabel()
+ PASSED test: Read API: getLabelAttributes()
+ PASSED test: Read API: getValue()
+ PASSED test: Read API: getValues()
+ PASSED test: Read API: isItem()
+ PASSED test: Read API: isItem() multistore
+ PASSED test: Read API: hasAttribute()
+ PASSED test: Read API: containsValue()
+ PASSED test: Read API: getAttributes()
+ PASSED test: Read API: getFeatures()
+ PASSED test: Read API: fetch() patternMatch0
+ PASSED test: Read API: fetch() patternMatch1
+ PASSED test: Read API: fetch() patternMatch2
+ PASSED test: Read API: fetch() patternMatch_caseSensitive
+ PASSED test: Read API: fetch() patternMatch_caseInsensitive
+ PASSED test: Read API: fetch() sortNumeric
+ PASSED test: Read API: fetch() sortNumericDescending
+ PASSED test: Read API: fetch() sortNumericWithCount
+ PASSED test: Read API: fetch() sortAlphabetic
+ PASSED test: Read API: fetch() sortAlphabeticDescending
+ PASSED test: Read API: fetch() sortDate
+ PASSED test: Read API: fetch() sortDateDescending
+ PASSED test: Read API: fetch() sortMultiple
+ PASSED test: Read API: fetch() sortMultipleSpecialComparator
+ PASSED test: Read API: fetch() sortAlphabeticWithUndefined
+ PASSED test: Read API: errorCondition_idCollision_inMemory
+ PASSED test: Read API: errorCondition_idCollision_xhr
+ PASSED test: Read API: Date_datatype
+ PASSED test: Read API: custom_datatype_Color_SimpleMapping
+ PASSED test: Read API: custom_datatype_Color_GeneralMapping
+ PASSED test: Read API: hierarchical_data
+ PASSED test: Identity API: no_identifier_specified
+ PASSED test: Identity API: hierarchical_data
+ PASSED test: Read API: functionConformance
+ PASSED test: Identity API: functionConformance
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      56 tests in 1 groups
+      0 errors
+      0 failures

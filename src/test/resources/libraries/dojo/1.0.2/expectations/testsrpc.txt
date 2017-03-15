@@ -1,0 +1,42 @@
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.rpc" has 4 tests to run
+ PASSED test: JsonRPC-EchoTest
+ PASSED test: JsonRPC-EmptyParamTest
+ PASSED test: JsonRPC_SMD_Loading_test
+ TypeError: this.svc.webSearch is not a function
+     ERROR IN:
+    (function (){
+    var d = new doh.Deferred();
+
+    if (window.location.protocol=="file:") {
+     var err= new Error("This Test requires a webserver and will fail intentionally if loaded from file://");
+     d.errback(err);
+     return d;
+    }
+
+    var td = this.svc.webSearch({query:"dojotoolkit"});
+
+    td.addCallbacks(function(result){
+     return true;
+     if (result["ResultSet"]["Result"][0]["DisplayUrl"]=="dojotoolkit.org/") {
+      return true;
+     }else{
+      return new Error("JsonRpc_SMD_Loading_Test failed, resultant content didn't match");
+     }
+    }, function(result){
+     return new Error(result);
+    });
+
+    td.addBoth(d, "callback");
+
+    return d;
+   })
+ FAILED test: JsonP_test
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      4 tests in 1 groups
+      1 errors
+      0 failures

@@ -1,0 +1,21 @@
+================
+EcmaUnit changes
+================
+
+- EcmaUnit 0.4
+
+  o Added assertNotEquals function.
+    [fschulze]
+
+- EcmaUnit 0.3 (2005-04-19)
+  
+  o Added tracebacks for Mozilla and Spidermonkey ('verbose' mode).
+
+- EcmaUnit 0.2 (2004-05-27)
+
+  o Factored the reporting mechanism to a separate component
+    (HTMLReporter) and added an alternative reporter for command-line
+    enviroments (StdoutReporter). This essentially allows running unit
+    tests using command line interpreters, e.g. with spidermonkey.
+
+- EcmaUnit 0.1 (2004-05-21)

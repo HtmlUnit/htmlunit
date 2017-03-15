@@ -1,0 +1,4 @@
+This directory contains the resources necessary to run the Direct Web Remoting unit tests.
+
+Each subdirectory corresponds to a specific version of the DWR library. Each of these subdirectories
+was created by unpacking the WAR distribution.

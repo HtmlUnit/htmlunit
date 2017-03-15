@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot" jsxns="urn:tibco.com/v3.0/dynamicproperties/1">
+  <record jsxid="@Min Tip" jsxtext="Toggle Display" type="jsxtip"/>
+  <record jsxid="@Close Tip" jsxtext="Close" type="jsxtip"/>
+  <record jsxid="@Max Tip" jsxtext="Maximize" type="jsxtip"/>
+  <record jsxid="@Restore Tip" jsxtext="Restore Down" type="jsxtip"/>
+</data>

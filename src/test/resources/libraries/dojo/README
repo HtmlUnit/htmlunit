@@ -1,0 +1,5 @@
+This directory contains the resources necessary to run the Dojo JavaScript library unit tests.
+
+Each subdirectory corresponds to a specific version of the Dojo library. Each of these subdirectories
+was created by checking out a tagged version of the Dojo source tree from SVN and copying the "dojo"
+and "util/doh" directories.

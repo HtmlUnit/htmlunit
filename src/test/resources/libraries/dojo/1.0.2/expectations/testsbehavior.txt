@@ -1,0 +1,39 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.behavior" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/behavior.html::t::add
+ PASSED test: ../../dojo/tests/behavior.html::t::apply
+ PASSED test: ../../dojo/tests/behavior.html::t::reapply
+     _AssertFailure: http://localhost:12345/dojo/dojo.js line 20 > eval:114 doh._AssertFailure: assertEqual() failed: expected |3| but got |2|: assertEqual() failed: expected |3| but got |2|
+ doh._AssertFailure: assertEqual() failed: expected |3| but got |2|
+     ERROR IN:
+    (function topics(t){
+       t.is(0, topicCount);
+       dojo.behavior.add({ ".foo": "/foo" });
+       dojo.behavior.apply();
+       t.is(2, topicCount);
+
+       dojo.behavior.add({ ".foo": {
+         "onfocus": "/foo" 
+        }
+       });
+       dojo.behavior.apply();
+       t.is(2, topicCount);
+       dojo.byId("blah").focus();
+       t.is(3, topicCount);
+       dojo.byId("blah").blur();
+       dojo.byId("blah").focus();
+       t.is(4, topicCount);
+
+      })
+ FAILED test: ../../dojo/tests/behavior.html::t::topics
+ PASSED test: ../../dojo/tests/behavior.html
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 2 groups
+      0 errors
+      1 failures

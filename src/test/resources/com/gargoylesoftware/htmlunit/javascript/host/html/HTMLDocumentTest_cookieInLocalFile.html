@@ -1,0 +1,15 @@
+<html>
+	<head>
+		<script>
+			function test() {
+				alert(document.domain);
+				alert(document.cookie);
+				document.cookie = 'blah=bleh';
+				alert(document.cookie);
+			}
+		</script>
+	</head>
+	<body onload='test()'>
+		foo
+	</body>
+</html>

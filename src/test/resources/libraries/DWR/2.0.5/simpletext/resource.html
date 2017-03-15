@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Resource Forwarding</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+  <script type='text/javascript' src='../tabs/tabs.js'> </script>
+  <script type='text/javascript' src='../dwr/engine.js'> </script>
+  <script type='text/javascript' src='../dwr/util.js'> </script>
+  <script type='text/javascript' src='../dwr/interface/Demo.js'> </script>
+  <script type="text/javascript" src='resource.js'> </script>
+  <link rel="stylesheet" type="text/css" href="../tabs/tabs.css" />
+  <link rel="stylesheet" type="text/css" href="../generic.css" />
+</head>
+<body onload="dwr.util.useLoadingMessage();Tabs.init('tabList', 'tabContents');">
+<div id="page-title">[
+  <a href="http://getahead.org/dwr/">DWR Website</a> |
+  <a href="..">Web Application Index</a>
+]</div>
+
+<h1>Resource Forwarding</h1>
+
+<p>This is a simple demonstration of how to dynamically update a web-page with
+the contents of a page retrieved from the server.</p>
+
+<ul id="tabList">
+  <li><a href="#" tabId="demoDiv">Demo</a></li>
+  <li><a href="#" tabId="explainDiv">How it works</a></li>
+  <li><a href="#" tabId="sourceDiv">Source</a></li>
+</ul>
+
+<div id="tabContents">
+
+  <div id="demoDiv">
+
+    <p><input value="Include Page" type="button" onclick="forward()"/><br/>
+    Included Page:</p>
+    <div id="forward"></div>
+
+  </div>
+
+  <div id="explainDiv">
+    <p>Normally the code called by DWR is a simple POJO that knows nothing about
+    the web. In this demonstration we want to find out about the web server so we
+    use the <code>WebContext</code> class to get access to the ServletContext.</p>
+
+    <p>This example is similar to the <a href="index.html">dynamic text example</a>,
+    the big difference is that we are using <a href="forward.html">this HTML page</a>,
+    and the WebContext class to allow us to get it.
+    There are no iframes used in this example - just DWR and a humble div.</p>
+
+    <p>The Java code looks like this:</p>
+
+<pre>
+public String getInclude() {
+    WebContext wctx = WebContextFactory.get();
+    return wctx.forwardToString("/simpletext/forward.html");
+}
+</pre>
+
+    <p>There is one other difference. In the previous example we were working
+    with plain text. Here we are working with HTML. To help protect you from XSS
+    attacks DWR automatically escapes HTML characters, however sometimes (like
+    in this case) we know that we have HTML, and that it is safe. So the
+    Javascipt code looks like this:</p>
+
+<pre>
+function forward() {
+  Demo.getInclude(function(data) {
+    dwr.util.setValue("forward", data, { escapeHtml:false });
+  });
+}
+</pre>
+
+    <p>The third parameter is the options parameter which is present on a number
+    of DWR functions. It allows you to customize how the function acts. In this
+    case we are asking DWR to not escape and HTML in the passed string.</p>
+
+  </div>
+
+  <div id="sourceDiv">
+
+<h2>HTML source:</h2>
+<pre>
+&lt;p&gt;
+  &lt;input value="Include Page" type="button" onclick="forward()"/&gt;&lt;br/&gt;
+  Included Page:
+&lt;/p&gt;
+&lt;div id="forward"&gt;&lt;/div&gt;
+</pre>
+
+<h2>Javascript source:</h2>
+<pre>
+function forward() {
+  Demo.getInclude(function(data) {
+    dwr.util.setValue("forward", data, { escapeHtml:false });
+  });
+}
+</pre>
+
+<h2>Java source:</h2>
+<pre>
+package org.getahead.dwrdemo.simpletext;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import org.directwebremoting.WebContext;
+import org.directwebremoting.WebContextFactory;
+
+public class Demo {
+    public String getInclude() throws ServletException, IOException {
+        WebContext wctx = WebContextFactory.get();
+        return wctx.forwardToString("/simpletext/forward.html");
+    }
+}
+</pre>
+
+<h2>dwr.xml</h2>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr/dwr20.dtd"&gt;
+
+&lt;dwr&gt;
+  &lt;allow&gt;
+    &lt;create creator="new" javascript="Demo"&gt;
+      &lt;param name="class" value="org.getahead.dwrdemo.simpletext.Demo"/&gt;
+    &lt;/create&gt;
+  &lt;/allow&gt;
+&lt;/dwr&gt;
+</pre>
+
+  </div>
+
+</div>
+
+</body>
+</html>

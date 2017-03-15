@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs title="Frequently Asked Questions">
+	<part id="general">
+
+		<faq id="HowToReportABug">
+			<question>
+				I've found a bug, how do I report it?
+			</question>
+			<answer>
+				<p>
+					The best way is to open a bug report in the
+					<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
+					tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
+					bug may get lost. Putting it in the bug database guarantees that it won't. Please
+					search the bug database to see if your bug hasn't already been reported before opening
+					a new one.
+				</p>
+				<p>
+					If you know how to fix the problem then patches are gratefully accepted.
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="HowToRequestAFeature">
+			<question>
+				HtmlUnit doesn't support feature X. How do I request this feature?
+			</question>
+			<answer>
+				<p>
+					The best way is to open a bug report in the
+					<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
+					tracking database</a>. See the answer on bug reporting for why the database is preferred.
+				</p>
+				<p>
+					If you're willing to write the feature yourself, you can always send us a patch.
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="configurations">
+			<question>
+				What are the most important configurations?
+			</question>
+			<answer>
+				<p>
+            <source><![CDATA[
+    webClient.getOptions().setJavaScriptEnabled(...);
+    webClient.getOptions().setThrowExceptionOnFailingStatusCode(...);
+    webClient.getOptions().setThrowExceptionOnScriptError(...);
+    webClient.getOptions().getProxyConfig().set...();
+            ]]></source>
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="AJAXDoesNotWork">
+			<question>
+				Nothing happens when using HtmlUnit with AJAX, although page works correctly in browsers. What's wrong?
+			</question>
+			<answer>
+				<p>
+					The main thread using HtmlUnit may be finishing execution before allowing background threads to run.
+					You have a couple of options:
+					<ol>
+						<li><code>webClient.setAjaxController(new NicelyResynchronizingAjaxController());</code> will tell your WebClient instance to re-synchronize asynchronous XHR.</li>
+						<li><code>webClient.waitForBackgroundJavaScript(10000);</code> or <code>webClient.waitForBackgroundJavaScriptStartingBefore(10000);</code> just after getting the page and before manipulating it.</li>
+						<li>Explicitly wait for a condition that is expected be fulfilled when your JavaScript runs, e.g.
+            <source><![CDATA[
+
+        //try 20 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
+            if (condition_to_happen_after_js_execution) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(500);
+            }
+        }
+            ]]></source>
+						</li>
+					</ol>
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="HowToModifyRequestOrResponse">
+			<question>
+				How to modify the outgoing request or incoming response?
+			</question>
+			<answer>
+				<p>
+					You can subclass HttpWebConnection and override getResponse() as:
+            <source><![CDATA[
+
+        new WebConnectionWrapper(webClient) {
+
+            public WebResponse getResponse(WebRequest request) throws IOException {
+                WebResponse response = super.getResponse(request);
+                if (request.getUrl().toExternalForm().contains("my_url")) {
+                    String content = response.getContentAsString("UTF-8");
+
+                    //change content
+
+                    WebResponseData data = new WebResponseData(content.getBytes("UTF-8"),
+                            response.getStatusCode(), response.getStatusMessage(), response.getResponseHeaders());
+                    response = new WebResponse(data, request, response.getLoadTime());
+                }
+                return response;
+            }
+        };
+            ]]></source>
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="CookieSupport">
+			<question>
+				I'm having problems with cookie support.
+			</question>
+			<answer>
+				<p>
+					HtmlUnit relies on <a href="http://hc.apache.org/">HttpClient 4</a> for Cookie handling. 
+					If you have an issue, please post it to the HtmlUnit mailing list.
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="RedirectionDiagnosticMessages">
+			<question>
+				I get error messages about redirection being disabled but I've turned it on.
+			</question>
+			<answer>
+				<source>
+26.02.2003 16:07:05 org.apache.commons.httpclient.HttpMethodBase   processRedirectResponse
+INFO: Redirect requested but followRedirects is disabled
+				</source>
+				<p>
+					It's an annoyance that I haven't figured out how to fix yet.
+				</p>
+				<p>
+					For a variety of reasons, I handle the redirection logic inside HtmlUnit rather than letting
+					commons-httpclient handle it for me. It's commons-httpclient that is displaying that message
+					because I have explicitly disabled its redirection support.
+				</p>
+				<p>
+					I'd like to filter out that warning message but haven't figured out a clean way of doing it.  A
+					number of people have pointed out that it's easy to disable a message if you know which logger
+					is being used.  The problem is that there isn't a way to disable the messages without knowing
+					the logger in use.
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="Roadmap">
+			<question>
+				What version will feature X be in?
+			</question>
+			<answer>
+				<p>
+					There is no "roadmap" of releases.  Features will be added as 
+					they are written.
+				</p>
+				<p>
+					Changes to the product (including new features) are implemented by 
+					volunteers in their spare time.  If feature X is important to you 
+					and nobody seems to be working on it then perhaps you should consider 
+					writing it yourself and <a href="submittingPatches.html">submitting a 
+					patch</a>.
+				</p>
+			</answer>
+		</faq>
+
+		<faq id="MemoryLeak">
+			<question>
+				HtmlUnit appears to be leaking memory; what's the deal?
+			</question>
+			<answer>
+				<p>
+					Make sure (a) that you are using the latest version of HtmlUnit, and
+					(b) that you are calling WebClient.close()
+					(or use <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>)
+					when you are finished with your WebClient instance.
+				</p>
+			</answer>
+		</faq>
+
+	</part>
+</faqs>

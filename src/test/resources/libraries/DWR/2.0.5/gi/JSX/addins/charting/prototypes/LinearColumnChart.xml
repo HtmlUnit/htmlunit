@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Column - LinearX]]></name>
+ <icon><![CDATA[icons/linearColumn.gif]]></icon>
+ <description><![CDATA[a sample column chart with two linear axes]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.ColumnChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" categoryCoverage="0.65" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1" seriesOverlap="0"/>
+   <strings borderColor="#999999" dataPadding="14 14 6 6" jsxbgcolor="#FFFFFF" jsxname="linearColumnChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record day=&quot;59&quot; s1=&quot;10.75&quot; m1=&quot;9.48&quot;/&gt; &lt;record day=&quot;60&quot; s1=&quot;9.65&quot; m1=&quot;8.59&quot;/&gt; &lt;record day=&quot;61&quot; s1=&quot;7.29&quot; m1=&quot;6.92&quot;/&gt; &lt;record day=&quot;62&quot; s1=&quot;7.26&quot; m1=&quot;7.01&quot;/&gt; &lt;record day=&quot;63&quot; s1=&quot;7.59&quot; m1=&quot;7.12&quot;/&gt; &lt;record day=&quot;66&quot; s1=&quot;7.51&quot; m1=&quot;7.37&quot;/&gt; &lt;record day=&quot;67&quot; s1=&quot;7.62&quot; m1=&quot;7.35&quot;/&gt; &lt;record day=&quot;68&quot; s1=&quot;7.53&quot; m1=&quot;7.28&quot;/&gt; &lt;record day=&quot;69&quot; s1=&quot;7.46&quot; m1=&quot;7.22&quot;/&gt; &lt;record day=&quot;70&quot; s1=&quot;7.80&quot; m1=&quot;7.30&quot;/&gt;  &lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="clustered"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Linear-Linear Column Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="0" displayWidth="15" horizontal="1" interval="1" labelGap="3" minorTickDivisions="4" minorTickLength="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="xAxis" labelFunction="function(d) { var t = new Date(2005, 0, d); return (t.getMonth()+1) + &quot;/&quot; + t.getDate(); } " labelPlacement="low" labelStyle="font-size: 8px; font-family: Verdana;" minorTickPlacement="none" minorTickStroke="#000000 1 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredHeight="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="xTitle" jsxtext="TIBX" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="0" displayWidth="15" horizontal="0" interval="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelFunction="function (x) { return &quot;$&quot; + x; }" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana; text-align: right;" minorTickPlacement="outside" minorTickStroke="#666666 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270" preferredWidth="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="yTitle" jsxtext="Price" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants fillH="['#EEEEEE']" horizontalAbove="0" inForeground="0" strokeMajorH="['#FFFFFF']" strokeMajorV="['#CCE5FF']" strokeMinorH="['#CCE5FF']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="bgGrid"/>
+    </object>
+    <object type="jsx3.chart.ColumnSeries">
+     <dynamics/>
+     <variants columnWidth="12" index="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#3399CC" jsxname="series1" minField="m1" seriesName="TIBX" tooltipFunction="jsx3.chart.ColumnSeries.tooltip" xField="day" yField="s1"/>
+    </object>
+  </object>
+</serialization>

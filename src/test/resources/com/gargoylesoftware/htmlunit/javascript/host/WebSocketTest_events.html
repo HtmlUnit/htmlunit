@@ -1,0 +1,126 @@
+<html>
+<head>
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+    
+
+    // https://developers.google.com/web/updates/2012/06/How-to-convert-ArrayBuffer-to-and-from-String
+    function ab2str(buf) {
+        return String.fromCharCode.apply(null, new Uint16Array(buf));
+    }
+
+    function str2ab(str) {
+        var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+        var bufView = new Uint16Array(buf);
+        for (var i=0, strLen=str.length; i < strLen; i++) {
+          bufView[i] = str.charCodeAt(i);
+        }
+        return buf;
+    }
+
+    function log(x) {
+        $('log').value += x + '\n';
+    }
+
+    var room = {
+        init : function() {
+            var location = "ws://localhost:12345"
+            this._ws = new WebSocket(location);
+            this._ws.binaryType = 'arraybuffer';
+
+            this._ws.addEventListener('open', this._onopenListener);
+            this._ws.onopen = this._onopen;
+
+            this._ws.addEventListener('message', this._onmessageListener);
+            this._ws.onmessage = this._onmessage;
+
+            this._ws.addEventListener('close', this._oncloseListener);
+            this._ws.onclose =  this._onclose;
+
+            this._ws.onerror = this._onerror;
+        },
+
+        _onopenListener : function() {
+            log('onOpenListener');
+        },
+
+        _onopen : function() {
+            log('onOpen');
+            room._send('text');
+        },
+
+        _onmessageListener : function(e) {
+            if (e.data === 'server_text') {
+                log('onMessageTextListener');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
+            }
+            else if(ab2str(e.data) === 'server_binary'){
+                log('onMessageBinaryListener');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
+            }
+            else {
+                log("Unknown message: ", e.data);
+            }
+        },
+
+        _onmessage : function(e) {
+            if (e.data === 'server_text') {
+                log('onMessageText');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
+
+                room._send(str2ab('binary'));
+            }
+            else if(ab2str(e.data) === 'server_binary'){
+                log('onMessageBinary');
+                log(e.data);
+                log(e.origin);
+                log(e.lastEventId);
+                log(e.source);
+
+                room._send('close');
+            }
+            else {
+                log("Unknown message: ", e.data);
+            }
+        },
+
+        _oncloseListener : function(ce) {
+            log('onCloseListener code: ' + ce.code + '  wasClean: ' + ce.wasClean);
+        },
+
+        _onclose : function(ce) {
+            this._ws = null;
+            log('onClose code: ' + ce.code + '  wasClean: ' + ce.wasClean);
+        },
+
+        _onerror : function(e) {
+            log('onError' + e);
+        },
+        
+        _send: function(data) {
+            this._ws.send(data);
+        }
+    };
+    
+    window.onload = function(){
+        room.init();
+    };
+</script>
+
+</head>
+
+<body>
+    <textarea id='log' cols='80' rows='40'></textarea>"
+</body>
+</html>
