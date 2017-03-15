@@ -32,6 +32,7 @@ public class DefaultPageCreator2Test extends WebTestCase {
     @Test
     public void determinePageType() {
         assertEquals(PageType.HTML, DefaultPageCreator.determinePageType("text/html"));
+        assertEquals(PageType.HTML, DefaultPageCreator.determinePageType("image/svg+xml"));
 
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("text/javascript"));
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/x-javascript"));
@@ -44,7 +45,6 @@ public class DefaultPageCreator2Test extends WebTestCase {
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.mozilla.xul+xml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.wap.xhtml+xml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/rdf+xml"));
-        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("image/svg+xml"));
 
         assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/plain"));
         assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/csv"));
