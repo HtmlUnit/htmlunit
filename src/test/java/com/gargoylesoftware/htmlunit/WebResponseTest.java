@@ -100,7 +100,7 @@ public class WebResponseTest extends WebServerTestCase {
         assertEquals(title, page.getTitleText());
 
         assertEquals(content, page.getWebResponse().getContentAsString());
-        assertEquals(content, page.getWebResponse().getContentAsString("UTF-8"));
+        assertEquals(content, page.getWebResponse().getContentAsString(StandardCharsets.UTF_8));
     }
 
     /**
@@ -192,7 +192,8 @@ public class WebResponseTest extends WebServerTestCase {
         webClient.setWebConnection(conn);
 
         final Page page = webClient.getPage(URL_FIRST);
-        assertEquals("<html/>", page.getWebResponse().getContentAsString("EUROPE"));
+        final WebResponse webResponse = page.getWebResponse();
+        assertEquals("<html/>", webResponse.getContentAsString(webResponse.getContentCharset()));
     }
 
     /**
@@ -235,7 +236,8 @@ public class WebResponseTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final HtmlPage page = getWebClient().getPage("http://localhost:" + PORT + "/test");
-        assertEquals(BinaryResponseHeadersServlet.RESPONSE, page.getWebResponse().getContentAsString("UTF8"));
+        assertEquals(BinaryResponseHeadersServlet.RESPONSE,
+                page.getWebResponse().getContentAsString(StandardCharsets.UTF_8));
 
         assertEquals("gzip", page.getWebResponse().getResponseHeaderValue("Content-Encoding"));
         assertEquals("73", page.getWebResponse().getResponseHeaderValue("Content-Length"));
