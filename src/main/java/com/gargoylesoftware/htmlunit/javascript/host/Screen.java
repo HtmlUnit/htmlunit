@@ -217,7 +217,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxGetter
     public int getHeight() {
-        return 768;
+        return ((Window) getParentScope()).getWebWindow().getWebClient().getOptions().getScreenHeight();
     }
 
     /**
@@ -361,7 +361,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxGetter
     public int getWidth() {
-        return 1024;
+        return ((Window) getParentScope()).getWebWindow().getWebClient().getOptions().getScreenWidth();
     }
 
     /**
