@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: simple impl for MediaSource.isTypeSupported added (returns always false).
+            </action>
             <action type="add" dev="asashour">
                 WebClientOptions: add option for screen width/height.
             </action>
