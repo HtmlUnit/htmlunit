@@ -57,3 +57,4 @@ public class SvgJavaScriptTest extends WebDriverTestCase {
         assertEquals("green", rect.getAttribute("fill"));
     }
 }
+
