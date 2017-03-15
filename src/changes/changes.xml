@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: WebSocket onError processing was missing.
+            </action>
             <action type="fix" dev="asashour">
                 Fix detection of HtmlInput types (IE).
             </action>

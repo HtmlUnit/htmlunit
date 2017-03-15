@@ -437,5 +437,24 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             fire(msgEvent);
             callFunction(messageHandler_, new Object[] {msgEvent});
         }
+
+        @Override
+        public void onWebSocketError(final Throwable cause) {
+            super.onWebSocketError(cause);
+            readyState_ = CLOSED;
+            outgoingSession_ = null;
+
+            final Event errorEvent = new Event();
+            errorEvent.setType(Event.TYPE_ERROR);
+            fire(errorEvent);
+            callFunction(errorHandler_, new Object[] {errorEvent});
+
+            final CloseEvent closeEvent = new CloseEvent();
+            closeEvent.setCode(1006);
+            closeEvent.setReason(cause.getMessage());
+            closeEvent.setWasClean(false);
+            fire(closeEvent);
+            callFunction(closeHandler_, new Object[] {closeEvent});
+        }
     }
 }
