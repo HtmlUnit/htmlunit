@@ -85,7 +85,7 @@ mvn -Dmaven.test.skip=true deploy
                     </li>
                     <li>
                         Build the zip files
-                        <source>mvn -up clean site package -Dmaven.javadoc.failOnError=false</source>
+                        <source>mvn -up clean site package</source>
                     </li>
                     <li>
                         Upload the two zip files (htmlunit-x.y-bin.zip and htmlunit-x.y-src.zip) to
