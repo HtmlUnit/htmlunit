@@ -14,7 +14,7 @@
  */
 
 /**
- * Classes specific to HTML pages, particularly the {@link com.gargoylesoftware.htmlunit.html.HtmlPage} which represents
+ * Classes specific to HTML pages, particularly the {@link HtmlPage} which represents
  * an HTML document and provides access to its content.
  */
 package com.gargoylesoftware.htmlunit.html;

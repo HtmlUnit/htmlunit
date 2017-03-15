@@ -27,9 +27,9 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlImage}.
@@ -196,43 +196,5 @@ public class HtmlImageTest extends SimpleWebTestCase {
         final File tempFile = File.createTempFile("img", ".tmp");
         img.saveAs(tempFile);
         FileUtils.deleteQuietly(tempFile);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void determineWidthHeigthFromImage() throws Exception {
-        try (InputStream is = getClass().getClassLoader().
-                getResourceAsStream("testfiles/4x7.jpg")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final URL urlImage = new URL(URL_FIRST, "4x7.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-        }
-        try (InputStream is = getClass().getClassLoader().
-                getResourceAsStream("testfiles/tiny-jpg.img")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-        }
-
-        final String html = "<html><head>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <img id='myImage' src='4x7.jpg' >\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-
-        final HtmlImage img = page.getHtmlElementById("myImage");
-        assertEquals(4, img.getWidth());
-        assertEquals(7, img.getHeight());
-
-        // source change has to force new determination
-        img.setAttribute("src", "img.jpg");
-        assertEquals(1, img.getWidth());
-        assertEquals(1, img.getHeight());
     }
 }

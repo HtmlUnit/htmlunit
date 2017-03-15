@@ -249,9 +249,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     @Before
     public void before() {
-        final List<Thread> jsThreads = getJavaScriptThreads();
-        assertEquals("There are still " + jsThreads.size()
-                        + " JS threads running before starting the test", 0, jsThreads.size());
+        assertEquals(0, getJavaScriptThreads().size());
     }
 
     /**
@@ -268,7 +266,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         webClient_ = null;
 
         final List<Thread> jsThreads = getJavaScriptThreads();
-        assertEquals("There are still " + jsThreads.size() + " JS threads running after the test", 0, jsThreads.size());
+        assertEquals(0, jsThreads.size());
 
         // collect stack traces
         // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()

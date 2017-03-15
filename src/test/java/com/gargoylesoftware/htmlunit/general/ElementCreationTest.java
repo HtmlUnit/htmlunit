@@ -781,7 +781,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            CHROME = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLKeygenElement]",
             IE = "[object HTMLBlockElement]")
     public void keygen() throws Exception {
         test("keygen");

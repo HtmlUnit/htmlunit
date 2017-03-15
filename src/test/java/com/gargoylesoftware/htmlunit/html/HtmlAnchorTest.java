@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -69,10 +68,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
-
         driver.findElement(By.id("myButton")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -94,10 +91,9 @@ public class HtmlAnchorTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
-
         driver.findElement(By.id("myButton")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -520,13 +516,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         driver.findElement(By.id("a1")).click();
         assertEquals(2, webConnection.getRequestCount());
 
-        final String[] expectedAlerts = getExpectedAlerts();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            final Alert alert = driver.switchTo().alert();
-            assertEquals(expectedAlerts[i], alert.getText());
-            alert.accept();
-        }
-
         driver.findElement(By.id("a2")).click();
         assertEquals(2, webConnection.getRequestCount());
 
@@ -565,13 +554,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
 
         driver.findElement(By.id("a1")).click();
         assertEquals(2, webConnection.getRequestCount());
-
-        final String[] expectedAlerts = getExpectedAlerts();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            final Alert alert = driver.switchTo().alert();
-            assertEquals(expectedAlerts[i], alert.getText());
-            alert.accept();
-        }
 
         driver.findElement(By.id("a2")).click();
         assertEquals(2, webConnection.getRequestCount());

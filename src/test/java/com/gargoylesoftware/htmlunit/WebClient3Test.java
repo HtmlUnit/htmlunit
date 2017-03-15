@@ -47,14 +47,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebClient3Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
-    /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
      * @throws Exception if an error occurs
      */

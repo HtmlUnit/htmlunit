@@ -68,14 +68,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     private static int IMPLEMENTED_COUNT_;
     private static int TOTAL_COUNT_;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
     private void test(final String tagName) throws Exception {
         testString("document.createElement('" + tagName + "'), unknown");
     }
@@ -470,11 +462,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
-                + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,ongotpointercapture,"
-                + "oninput,oninvalid,"
-                + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onlostpointercapture,"
-                + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
-                + "onpause,onplay,onplaying,"
+                + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,"
+                + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
+                + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,"
+                + "onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,"
                 + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
@@ -546,9 +537,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,"
-                + "NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+    @Alerts(CHROME = "AT_TARGET,BLUR,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CHANGE,CLICK,"
+                + "composed,composedPath(),"
+                + "currentTarget,DBLCLICK,defaultPrevented,DRAGDROP,eventPhase,FOCUS,initEvent(),isTrusted,"
+                + "KEYDOWN,KEYPRESS,KEYUP,MOUSEDOWN,MOUSEDRAG,MOUSEMOVE,MOUSEOUT,MOUSEOVER,MOUSEUP,NONE,"
+                + "path,preventDefault(),returnValue,SELECT,srcElement,stopImmediatePropagation(),stopPropagation(),"
                 + "target,timeStamp,type",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,CAPTURING_PHASE,CONTROL_MASK,currentTarget,"
                 + "defaultPrevented,eventPhase,explicitOriginalTarget,getPreventDefault(),initEvent(),isTrusted,"
@@ -575,19 +568,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,"
                 + "close(),closed,confirm(),"
-                + "console,createImageBitmap(),crypto,customElements,defaultstatus,defaultStatus,devicePixelRatio,"
+                + "console,createImageBitmap(),crypto,customElements,defaultStatus,defaultstatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
                 + "getMatchedCSSRules(),getSelection(),history,ieMethods,"
-                + "indexedDB,innerHeight,innerWidth,isSecureContext,length,"
+                + "indexedDB,innerHeight,innerWidth,isSecureContext,"
+                + "length,"
                 + "localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),name,navigator,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
                 + "onauxclick,onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,"
                 + "onchange,onclick,onclose,oncontextmenu,oncuechange,ondblclick,ondevicemotion,ondeviceorientation,"
                 + "ondeviceorientationabsolute,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
-                + "ondurationchange,onemptied,onended,onerror,onfocus,ongotpointercapture,"
-                + "onhashchange,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
-                + "onlanguagechange,onload(),onloadeddata,onloadedmetadata,onloadstart,onlostpointercapture,onmessage,"
-                + "onmousedown,"
+                + "ondurationchange,"
+                + "onemptied,onended,onerror,onfocus,onhashchange,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onlanguagechange,onload(),onloadeddata,onloadedmetadata,onloadstart,onmessage,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onoffline,"
                 + "ononline,onpagehide,onpageshow,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
@@ -604,8 +597,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "resizeBy(),resizeTo(),screen,screenLeft,screenTop,"
                 + "screenX,screenY,scroll(),scrollbars,scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),sortFunction(),speechSynthesis,status,statusbar,stop(),styleMedia,"
-                + "TEMPORARY,test(),toolbar,top,webkitCancelAnimationFrame(),"
-                + "webkitRequestAnimationFrame(),webkitRequestFileSystem(),"
+                + "TEMPORARY,test(),toolbar,top,webkitCancelAnimationFrame(),webkitCancelRequestAnimationFrame(),"
+                + "webkitIndexedDB,webkitRequestAnimationFrame(),webkitRequestFileSystem(),"
                 + "webkitResolveLocalFileSystemURL(),webkitStorageInfo,"
                 + "window",
             FF = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
@@ -1610,7 +1603,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
+            CHROME = "autofocus,challenge,checkValidity(),disabled,form,keytype,labels,name,reportValidity(),"
+                + "setCustomValidity(),type,validationMessage,validity,"
+                + "willValidate",
             IE = "cite,clear,width")
+    @NotYetImplemented(CHROME)
     public void keygen() throws Exception {
         test("keygen");
     }

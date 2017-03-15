@@ -46,14 +46,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
-    /**
      * Returns the parameterized data.
      * @return the parameterized data
      * @throws Exception if an error occurs

@@ -38,7 +38,8 @@ public class SvgCursorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object SVGElement]")
+    @Alerts(DEFAULT = "[object SVGElement]",
+            CHROME = "[object SVGCursorElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -56,7 +57,12 @@ public class SvgCursorTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+            if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+            }
+            else  {
+                assertTrue(SvgCursor.class.isInstance(page.getElementById("myId")));
+            }
         }
     }
 }

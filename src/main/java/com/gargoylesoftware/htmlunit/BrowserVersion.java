@@ -52,36 +52,36 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *      };
  * </pre>
  * <script>
-       var pre = document.getElementById('htmlUnitCode');
-       pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
-       pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
-       pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
-       var isMicrosoft = navigator.appVersion.indexOf('Trident/') != -1;
-       var isEdge = navigator.appVersion.indexOf('Edge') != -1;
-       var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
-       var numeric = 52;
-       if (isMicrosoft) {
-           numeric = 11;
-       }
-       else if (isEdge) {
-           numeric = 13;
-       }
-       else if (isChrome) {
-           numeric = 56;
-       }
-       pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
-       var browser = "FIREFOX_52";
-       if (isMicrosoft) {
-           browser = "INTERNET_EXPLORER";
-       }
-       else if (isEdge) {
-           browser = "EDGE";
-       }
-       else if (isChrome) {
-           browser = "CHROME";
-       }
-       pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
-   </script>
+ *     var pre = document.getElementById('htmlUnitCode');
+ *     pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
+ *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
+ *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
+ *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
+ *     var isEdge = navigator.appVersion.indexOf('Edge') != -1;
+ *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
+ *     var numeric = 45;
+ *     if (isMicrosoft) {
+ *         numeric = 11;
+ *     }
+ *     else if (isEdge) {
+ *         numeric = 13;
+ *     }
+ *     else if (isChrome) {
+ *         numeric = 56;
+ *     }
+ *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
+ *     var browser = "FIREFOX_45";
+ *     if (isMicrosoft) {
+ *         browser = "INTERNET_EXPLORER";
+ *     }
+ *     else if (isEdge) {
+ *         browser = "EDGE";
+ *     }
+ *     else if (isChrome) {
+ *         browser = "CHROME";
+ *     }
+ *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
+ * </script>
  * However, note that the constants are not enough to fully customize the browser,
  *   you also need to look into the {@link BrowserVersionFeatures} and the classes inside "javascript" package.
  *
@@ -124,15 +124,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
         45, "FF45", null);
 
-    /**
-     * Firefox 52 ESR.
-     * @since 2.26
-     */
-    public static final BrowserVersion FIREFOX_52 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0",
-        52, "FF52", null);
-
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
@@ -141,10 +132,10 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36",
-        57, "Chrome", null);
+        + " (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36",
+        56, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(
@@ -174,17 +165,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_45.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_45.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_45.setCssAcceptHeader("text/css,*/*;q=0.1");
-
-        // FF52
-        FIREFOX_52.initDefaultFeatures();
-        FIREFOX_52.setVendor("");
-        FIREFOX_52.buildId_ = "20170303022339";
-        FIREFOX_52.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
-        FIREFOX_52.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_52.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_52.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
-        FIREFOX_52.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         // IE
         INTERNET_EXPLORER.initDefaultFeatures();

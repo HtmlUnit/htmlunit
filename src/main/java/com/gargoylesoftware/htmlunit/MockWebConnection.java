@@ -327,7 +327,7 @@ public class MockWebConnection implements WebConnection {
 
     /**
      * Convenient method that is the same as calling
-     * {@link #setResponse(URL, String, int, String, String, Charset, List)} with a status
+     * {@link #setResponse(URL,String,int,String,String,String,List)} with a status
      * of "200 OK" and no additional headers.
      *
      * @param url the URL that will return the given response

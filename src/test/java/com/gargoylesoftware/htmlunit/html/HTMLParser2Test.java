@@ -425,6 +425,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
+            + "try {\n"
             + "  var tmp = document.getElementById('myDiv');\n"
             + "  alert(tmp.innerHTML);\n"
             + "  alert(tmp.childNodes.length);\n"
@@ -433,12 +434,14 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "  alert(child.nodeType);\n"
             + "  alert(child.nodeName);\n"
             + "  alert(child.nodeValue);\n"
-            + "  alert(child.childNodes.length);\n"
 
+            + "  alert(child.childNodes.length);\n"
             + "  var child2 = child.childNodes[0];\n"
             + "  alert(child2.nodeType);\n"
             + "  alert(child2.nodeName);\n"
             + "  alert(child2.nodeValue);\n"
+
+            + "} catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

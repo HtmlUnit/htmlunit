@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -70,25 +69,10 @@ public class FocusableElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final int expectationsLength = getExpectedAlerts().length;
-        assertTrue(expectationsLength % 2 == 0);
-
         driver.findElement(By.id("focusId")).click();
-
-        int index = 0;
-        for (int i = 0; i < expectationsLength / 2; i++) {
-            final Alert alert = driver.switchTo().alert();
-            assertEquals(getExpectedAlerts()[index++], alert.getText());
-            alert.accept();
-        }
-
         driver.findElement(By.id("other")).click();
 
-        for (int i = 0; i < expectationsLength / 2; i++) {
-            final Alert alert = driver.switchTo().alert();
-            assertEquals(getExpectedAlerts()[index++], alert.getText());
-            alert.accept();
-        }
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     private void testWithCallFocusBlur(String tag) throws Exception {

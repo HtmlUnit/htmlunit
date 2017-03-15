@@ -35,14 +35,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 public class MutationObserverTest extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

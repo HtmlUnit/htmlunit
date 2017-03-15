@@ -130,7 +130,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for {@code window.onload} property.
+     * Regression test for window.onload property.
      * @throws Exception if the test fails
      */
     @Test
@@ -143,9 +143,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final List<String> alerts = getCollectedAlerts(driver, 1);
-        assertEquals(1, alerts.size());
-        assertTrue(alerts.get(0).startsWith("function"));
+        assertEquals(1, getCollectedAlerts(driver).size());
+        assertTrue(getCollectedAlerts(driver).get(0).startsWith("function"));
     }
 
     /**
@@ -165,7 +164,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
         assertEquals("foo", driver.getTitle());
     }
 

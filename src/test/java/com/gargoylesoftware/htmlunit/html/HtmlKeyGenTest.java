@@ -33,7 +33,7 @@ public class HtmlKeyGenTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline", "inline"},
+    @Alerts(DEFAULT = {"", "inline-block", "inline-block"},
             FF = {"block", "inline", "inline-block"},
             IE = {"inline", "inline", "inline"})
     public void defaultStyle() throws Exception {

@@ -681,7 +681,11 @@ public abstract class WebTestCase {
      * @return the modified html
      */
     protected static String getModifiedContent(final String html) {
-        return html;
+        // replace alert(x) by a storage in top scope
+        // Convert to string here due to: http://code.google.com/p/webdriver/issues/detail?id=209
+        return StringUtils.replace(html, "alert(",
+                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
+                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
     }
 
     /**
@@ -763,22 +767,7 @@ public abstract class WebTestCase {
      * Gets the active JavaScript threads.
      * @return the threads
      */
-    protected static List<Thread> getJavaScriptThreads() {
-        List<Thread> jsThreads = getJavaScriptThreadsImpl();
-        if (!jsThreads.isEmpty()) {
-            try {
-                Thread.sleep(1_000);
-            }
-            catch (final InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            jsThreads = getJavaScriptThreadsImpl();
-        }
-
-        return jsThreads;
-    }
-
-    private static List<Thread> getJavaScriptThreadsImpl() {
+    protected List<Thread> getJavaScriptThreads() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
         final List<Thread> jsThreads = new ArrayList<>();

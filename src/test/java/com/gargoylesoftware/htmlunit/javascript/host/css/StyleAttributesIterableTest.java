@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +26,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
@@ -123,94 +120,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
             IE = "false")
     public void _FONT_VARIANT_NUMERIC() throws Exception {
         test("fontVariantNumeric");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _BLOCK_SIZE() throws Exception {
-        test("blockSize");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _INLINE_SIZE() throws Exception {
-        test("inlineSize");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _JUSTIFY_ITEMS() throws Exception {
-        test("justifyItems");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _JUSTIFY_SELF() throws Exception {
-        test("justifySelf");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _MAX_BLOCK_SIZE() throws Exception {
-        test("maxBlockSize");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _MAX_INLINE_SIZE() throws Exception {
-        test("maxInlineSize");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _MIN_BLOCK_SIZE() throws Exception {
-        test("minBlockSize");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _MIN_INLINE_SIZE() throws Exception {
-        test("minInlineSize");
     }
 
     /**
@@ -347,28 +256,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _TEXT_DECORATION_COLOR() throws Exception {
-        test("textDecorationColor");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _TEXT_DECORATION_LINE() throws Exception {
-        test("textDecorationLine");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _TEXT_DECORATION_LINE_THROUGH() throws Exception {
@@ -399,31 +286,10 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(CHROME)
-    public void _TEXT_DECORATION_STYLE() throws Exception {
-        test("textDecorationStyle");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _TEXT_DECORATION_UNDERLINE() throws Exception {
         test("textDecorationUnderline");
     }
 
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _TEXT_UNDERLINE_POSITION() throws Exception {
-        test("textUnderlinePosition");
-    }
 }

@@ -373,33 +373,6 @@ public class WebSocketTest extends WebDriverTestCase {
         while (text.length() > 0 && counter++ < 10);
 
         assertEquals(String.join("\n", getExpectedAlerts()), text);
-        stopWebServers();
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"onError[object Event]",
-                "onCloseListener code: 1006  wasClean: false",
-                "onClose code: 1006  wasClean: false"})
-    public void eventsNoSocketServer() throws Exception {
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
-            null, null, null);
-        final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/WebSocketTest_events.html");
-
-        final WebElement logElement = driver.findElement(By.id("log"));
-        int counter = 0;
-        String text;
-        do {
-            Thread.sleep(100);
-
-            text = logElement.getAttribute("value").trim().replaceAll("\r", "");
-        }
-        while (text.length() > 0 && counter++ < 10);
-
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     private static void assertVisible(final String domId, final WebDriver driver) throws Exception {

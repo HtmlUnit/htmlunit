@@ -14,12 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +40,9 @@ import org.junit.After;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.
  *
@@ -52,13 +52,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public abstract class WebServerTestCase extends WebTestCase implements Serializable {
+public abstract class WebServerTestCase extends WebTestCase {
 
-    private transient Server server_;
+    private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
     private static Server STATIC_SERVER_;
     private WebClient webClient_;
-    private Map<Page, List<String>> collectedAlerts_ = new HashMap<>();
 
     /**
      * Starts the web server on the default {@link #PORT}.
@@ -383,12 +382,17 @@ public abstract class WebServerTestCase extends WebTestCase implements Serializa
      * @param page the page
      * @return the alerts
      */
-    protected final List<String> getCollectedAlerts(final HtmlPage page) {
-        List<String> alerts = collectedAlerts_.get(page);
-        if (alerts == null) {
-            alerts = Collections.emptyList();
+    protected List<String> getCollectedAlerts(final HtmlPage page) {
+        final ScriptResult result = page.executeJavaScript("top.__huCatchedAlerts;");
+        final List<String> list = new ArrayList<>();
+        final Object object = result.getJavaScriptResult();
+        if (object != Undefined.instance) {
+            final NativeArray arr = (NativeArray) object;
+            for (int i = 0; i < arr.getLength(); i++) {
+                list.add(arr.get(i).toString());
+            }
         }
-        return alerts;
+        return list;
     }
 
     /**
@@ -407,18 +411,8 @@ public abstract class WebServerTestCase extends WebTestCase implements Serializa
     protected final WebClient getWebClient() {
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
-            webClient_.setAlertHandler((AlertHandler & Serializable) this::handleAlert);
         }
         return webClient_;
-    }
-
-    private void handleAlert(final Page page, final String message) {
-        List<String> alerts = collectedAlerts_.get(page);
-        if (alerts == null) {
-            alerts = new ArrayList<>();
-            collectedAlerts_.put(page, alerts);
-        }
-        alerts.add(message);
     }
 
     /**

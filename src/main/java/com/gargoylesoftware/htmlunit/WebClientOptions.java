@@ -56,8 +56,6 @@ public class WebClientOptions implements Serializable {
     private int historyPageCacheLimit_ = Integer.MAX_VALUE;
     private InetAddress localAddress_;
     private boolean downloadImages_;
-    private int screenWidth_ = 1024;
-    private int screenHeight_ = 768;
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
@@ -612,41 +610,5 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isDownloadImages() {
         return downloadImages_;
-    }
-
-    /**
-     * Sets the screen width.
-     *
-     * @param screenWidth the screen width
-     */
-    public void setScreenWidth(final int screenWidth) {
-        this.screenWidth_ = screenWidth;
-    }
-
-    /**
-     * Returns the screen width.
-     *
-     * @return the screen width
-     */
-    public int getScreenWidth() {
-        return screenWidth_;
-    }
-
-    /**
-     * Sets the screen height.
-     *
-     * @param screenHeight the screen height
-     */
-    public void setScreenHeight(final int screenHeight) {
-        this.screenHeight_ = screenHeight;
-    }
-
-    /**
-     * Returns the screen height.
-     *
-     * @return the screen height
-     */
-    public int getScreenHeight() {
-        return screenHeight_;
     }
 }

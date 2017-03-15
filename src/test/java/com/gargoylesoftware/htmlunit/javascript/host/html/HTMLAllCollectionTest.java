@@ -597,7 +597,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
+    @Alerts(DEFAULT = "function () {}",
             FF = "function () {\n}",
             IE = "[object Object]")
     @NotYetImplemented

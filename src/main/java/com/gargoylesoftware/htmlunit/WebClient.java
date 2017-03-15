@@ -132,7 +132,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Nicolas Belisle
  * @author Ronald Brill
  * @author Frank Danek
- * @author Joerg Werner
  */
 public class WebClient implements Serializable, AutoCloseable {
 
@@ -1206,20 +1205,11 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return "application/octet-stream" if nothing could be guessed
      */
     public String guessContentType(final File file) {
-        if (file.getName().endsWith(".xhtml")) {
-            // Java's mime type map returns application/xml in JDK8.
-            return "application/xhtml+xml";
-        }
-
-        // Java's mime type map does not know these in JDK8.
-        if (file.getName().endsWith(".js")) {
-            return "text/javascript";
-        }
-        if (file.getName().toLowerCase().endsWith(".css")) {
-            return "text/css";
-        }
-
         String contentType = URLConnection.guessContentTypeFromName(file.getName());
+        if (file.getName().endsWith(".xhtml")) {
+            // Java's mime type map doesn't know about XHTML files (at least in Sun JDK5).
+            contentType = "application/xhtml+xml";
+        }
         if (contentType == null) {
             try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
@@ -1229,7 +1219,12 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         if (contentType == null) {
-            contentType = "application/octet-stream";
+            if (file.getName().endsWith(".js")) {
+                contentType = "text/javascript";
+            }
+            else {
+                contentType = "application/octet-stream";
+            }
         }
         return contentType;
     }

@@ -47,14 +47,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class Location2Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
-    /**
      * Regression test for bug 742902.
      * @throws Exception if the test fails
      */

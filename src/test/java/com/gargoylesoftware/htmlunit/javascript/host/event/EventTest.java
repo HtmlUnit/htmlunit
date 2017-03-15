@@ -44,14 +44,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 @RunWith(BrowserRunner.class)
 public class EventTest extends WebDriverTestCase {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    alert(event);\n"
         + "    alert(event.type);\n"

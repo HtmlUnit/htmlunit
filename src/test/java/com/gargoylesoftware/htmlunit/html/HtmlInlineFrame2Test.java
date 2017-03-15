@@ -45,14 +45,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlInlineFrame2Test extends WebDriverTestCase {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsWebDriver() {
-        return false;
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -106,32 +106,27 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return PageType.UNKNOWN;
         }
 
-        switch (contentType) {
-            case "text/html":
-            case "image/svg+xml":
-                return PageType.HTML;
-
-            case "text/javascript":
-            case "application/x-javascript":
-            case "application/javascript":
-                return PageType.JAVASCRIPT;
-
-            case "text/xml":
-            case "application/xml":
-            case "text/vnd.wap.wml":
-                return PageType.XML;
-
-            default:
-                if (contentType.endsWith("+xml")) {
-                    return PageType.XML;
-                }
-
-                if (contentType.startsWith("text/")) {
-                    return PageType.TEXT;
-                }
-
-                return PageType.UNKNOWN;
+        if ("text/html".equals(contentType)) {
+            return PageType.HTML;
         }
+
+        if ("text/javascript".equals(contentType) || "application/x-javascript".equals(contentType)
+                || "application/javascript".equals(contentType)) {
+            return PageType.JAVASCRIPT;
+        }
+
+        if ("text/xml".equals(contentType)
+            || "application/xml".equals(contentType)
+            || "text/vnd.wap.wml".equals(contentType)
+            || contentType.endsWith("+xml")) {
+            return PageType.XML;
+        }
+
+        if (contentType.startsWith("text/")) {
+            return PageType.TEXT;
+        }
+
+        return PageType.UNKNOWN;
     }
 
     /**

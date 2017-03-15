@@ -8,24 +8,6 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
-            <action type="fix" dev="rbri">
-                JavaScript: WebSocket onError processing was missing.
-            </action>
-            <action type="fix" dev="asashour">
-                Fix detection of HtmlInput types (IE).
-            </action>
-            <action type="fix" dev="rbri" issue="1858" due-to="Joerg Werner">
-                Correct file type detection for files with css suffix.
-            </action>
-            <action type="add" dev="rbri">
-                JavaScript: simple implementation for MediaSource.isTypeSupported added (returns always false).
-            </action>
-            <action type="add" dev="asashour">
-                WebClientOptions: add option for screen width/height.
-            </action>
-            <action type="update" dev="rbri">
-                Reduce the number of temp files created when asking images for width/height.
-            </action>
         </release>
         <release version="2.25" date="February 23, 2017" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, WebRequest.getCharset, ScriptPreProcessor, Bugfixes">
             <action type="update" dev="asashour">

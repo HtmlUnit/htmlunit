@@ -12,20 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.annotations;
+package com.gargoylesoftware.htmlunit.javascript.host.idb;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * An annotation to denote a test which works with old WebDriver, but fails with the Remote one.
+ * A JavaScript object for {@code webkitIDBCursor}.
  *
  * @author Ahmed Ashour
  */
-@Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.METHOD)
-public @interface FailWithWebDriver {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class webkitIDBCursor extends IDBCursor {
 
+    /**
+     * Creates a new instance.
+     */
+    @JsxConstructor
+    public webkitIDBCursor() {
+    }
 }

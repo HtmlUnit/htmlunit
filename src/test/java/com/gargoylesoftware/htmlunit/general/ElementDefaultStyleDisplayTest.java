@@ -871,7 +871,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
+    @Alerts(DEFAULT = {"", "inline-block"},
             FF = {"block", "inline"},
             IE = {"inline", "inline"})
     public void keygen() throws Exception {

@@ -856,7 +856,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "  <input type='checkbox' id='c2' name='radar' value='initial' checked>\n"
             + "  <input type='checkbox' id='c3' name='radar' value='initial' checked='yes'>\n"
             + "</form>\n"
-            + "  <button id='clickMe' onClick='test()'>do it</button>\n"
+            + "  <button id='clickNe' onClick='test()'>do it</button>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -864,7 +864,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("c2")).click();
         driver.findElement(By.id("c3")).click();
 
-        driver.findElement(By.id("clickMe")).click();
+        driver.findElement(By.id("clickNe")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }
 
