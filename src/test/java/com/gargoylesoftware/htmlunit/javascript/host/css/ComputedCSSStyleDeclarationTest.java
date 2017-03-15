@@ -630,7 +630,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"inline", "inline-block", "inline", "block", "list-item"},
+            CHROME = { "inline", "inline", "inline", "block", "list-item" },
             IE = {"inline", "inline", "inline", "inline", "list-item"})
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_KL() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -1096,7 +1098,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"underline", "none", "underline"})
+    @Alerts(DEFAULT = {"underline", "none", "underline"},
+            CHROME = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"})
+    @NotYetImplemented(CHROME)
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
