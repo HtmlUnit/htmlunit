@@ -138,7 +138,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         // this has to be a multiple of 10ms
         // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;
-        while (!shutdown_ && webClient_.get() != null) {
+        while (!shutdown_ && !Thread.currentThread().isInterrupted() && webClient_.get() != null) {
             final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
 
             if (jobManager != null) {
@@ -164,7 +164,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
             }
 
             // check for cancel
-            if (shutdown_ || webClient_.get() == null) {
+            if (shutdown_ || Thread.currentThread().isInterrupted() || webClient_.get() == null) {
                 break;
             }
 
@@ -173,7 +173,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
                 Thread.sleep(sleepInterval);
             }
             catch (final InterruptedException e) {
-                // nothing, probably a shutdown notification
+                Thread.currentThread().interrupt();
             }
         }
     }
