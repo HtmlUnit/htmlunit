@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests that {@code typeof} host class is correct.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HostTypeOfTest extends WebDriverTestCase {
@@ -2150,8 +2151,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void svgCursorElement() throws Exception {
         test("SVGCursorElement");
     }
@@ -6251,8 +6251,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitAudioContext() throws Exception {
         test("webkitAudioContext");
     }
@@ -6261,8 +6260,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBCursor() throws Exception {
         test("webkitIDBCursor");
     }
@@ -6271,8 +6269,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBDatabase() throws Exception {
         test("webkitIDBDatabase");
     }
@@ -6281,8 +6278,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBFactory() throws Exception {
         test("webkitIDBFactory");
     }
@@ -6291,8 +6287,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBIndex() throws Exception {
         test("webkitIDBIndex");
     }
@@ -6301,8 +6296,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBKeyRange() throws Exception {
         test("webkitIDBKeyRange");
     }
@@ -6311,8 +6305,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBObjectStore() throws Exception {
         test("webkitIDBObjectStore");
     }
@@ -6321,8 +6314,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBRequest() throws Exception {
         test("webkitIDBRequest");
     }
@@ -6331,8 +6323,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitIDBTransaction() throws Exception {
         test("webkitIDBTransaction");
     }
@@ -6351,8 +6342,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webkitOfflineAudioContext() throws Exception {
         test("webkitOfflineAudioContext");
     }
@@ -6590,8 +6580,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void serviceWorkerMessageEvent() throws Exception {
         test("ServiceWorkerMessageEvent");
     }
@@ -6970,6 +6959,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             IE = "object")
     public void performanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming");

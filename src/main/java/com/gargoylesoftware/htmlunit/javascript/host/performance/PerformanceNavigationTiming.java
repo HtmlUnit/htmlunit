@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -32,6 +33,7 @@ public class PerformanceNavigationTiming extends SimpleScriptable {
     /**
      * Creates an instance.
      */
+    @JsxConstructor(@WebBrowser(CHROME))
     public PerformanceNavigationTiming() {
     }
 }
