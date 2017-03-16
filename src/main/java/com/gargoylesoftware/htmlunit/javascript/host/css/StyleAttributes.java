@@ -933,6 +933,14 @@ public final class StyleAttributes {
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
+        /** The style property {@code glyphOrientationHorizontal}. */
+        GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
+                ie("0deg")),
+
+        /** The style property {@code glyphOrientationVertical}. */
+        GLYPH_ORIENTATION_VERTICAL("glyphOrientationVertical", "glyph-orientation-vertical",
+                ie("auto")),
+
         /** The style property {@code grid}. */
         GRID("grid", "grid", chrome("none / none / none / row / auto / auto / 0px / 0px")),
 
@@ -986,14 +994,6 @@ public final class StyleAttributes {
 
         /** The style property {@code gridTemplateRows}. */
         GRID_TEMPLATE_ROWS("gridTemplateRows", "grid-template-rows", chrome("none")),
-
-        /** The style property {@code glyphOrientationHorizontal}. */
-        GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
-                ie("0deg")),
-
-        /** The style property {@code glyphOrientationVertical}. */
-        GLYPH_ORIENTATION_VERTICAL("glyphOrientationVertical", "glyph-orientation-vertical",
-                ie("auto")),
 
         /** The style property {@code height}. */
         HEIGHT("height", "height", chrome(""), ff(""), ie("")),
