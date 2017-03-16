@@ -562,8 +562,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _Element_HTMLKeygenElement() throws Exception {
         test("Element", "HTMLKeygenElement");
     }
@@ -1083,8 +1082,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _Element_SVGCursorElement() throws Exception {
         test("Element", "SVGCursorElement");
     }
@@ -1930,6 +1928,15 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_AudioScheduledSourceNode() throws Exception {
+        test("EventTarget", "AudioScheduledSourceNode");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_BiquadFilterNode() throws Exception {
@@ -2400,8 +2407,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_HTMLKeygenElement() throws Exception {
         test("EventTarget", "HTMLKeygenElement");
     }
@@ -3000,8 +3006,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_SVGCursorElement() throws Exception {
         test("EventTarget", "SVGCursorElement");
     }
@@ -5001,8 +5006,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _Event_ServiceWorkerMessageEvent() throws Exception {
         test("Event", "ServiceWorkerMessageEvent");
     }
@@ -5031,8 +5035,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_webkitAudioContext() throws Exception {
         test("EventTarget", "webkitAudioContext");
     }
@@ -5041,8 +5044,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_webkitIDBDatabase() throws Exception {
         test("EventTarget", "webkitIDBDatabase");
     }
@@ -5051,8 +5053,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_webkitIDBRequest() throws Exception {
         test("EventTarget", "webkitIDBRequest");
     }
@@ -5061,8 +5062,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_webkitIDBTransaction() throws Exception {
         test("EventTarget", "webkitIDBTransaction");
     }
@@ -5081,8 +5081,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _EventTarget_webkitOfflineAudioContext() throws Exception {
         test("EventTarget", "webkitOfflineAudioContext");
     }
