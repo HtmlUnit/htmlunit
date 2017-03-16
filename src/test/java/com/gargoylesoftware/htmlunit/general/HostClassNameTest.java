@@ -10032,7 +10032,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object PerformanceNavigationTiming]",
+    @Alerts(DEFAULT = "function PerformanceNavigationTiming() { [native code] }",
+            IE = "[object PerformanceNavigationTiming]",
             FF = "exception")
     public void performanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming");
