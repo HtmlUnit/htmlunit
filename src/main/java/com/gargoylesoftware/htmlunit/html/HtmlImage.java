@@ -636,8 +636,8 @@ public class HtmlImage extends HtmlElement {
      * @return true if the image was successfully downloaded
      */
     public boolean isComplete() {
-        return downloaded_ ||
-                (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
+        return downloaded_
+                || (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
                 ? ATTRIBUTE_NOT_DEFINED == getSrcAttribute()
                 : imageData_ != null);
     }
