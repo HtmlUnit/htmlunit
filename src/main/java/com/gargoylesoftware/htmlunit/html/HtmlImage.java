@@ -464,7 +464,9 @@ public class HtmlImage extends HtmlElement {
                 imageData_.close();
                 imageData_ = null;
             }
-            downloaded_ = true;
+            downloaded_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
+                    || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
+
             width_ = -1;
             height_ = -1;
         }
@@ -633,11 +635,20 @@ public class HtmlImage extends HtmlElement {
     /**
      * @return true if the image was successfully downloaded
      */
+    public boolean isComplete() {
+        return downloaded_ ||
+                (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
+                ? ATTRIBUTE_NOT_DEFINED == getSrcAttribute()
+                : imageData_ != null);
+    }
+
+    /**
+     * @return true if the image was successfully downloaded
+     * @deprecated as of 2.26, please use {@link #isComplete()} instead
+     */
+    @Deprecated
     public boolean getComplete() {
-        if (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)) {
-            return downloaded_ || ATTRIBUTE_NOT_DEFINED == getSrcAttribute();
-        }
-        return imageData_ != null;
+        return isComplete();
     }
 
     /**

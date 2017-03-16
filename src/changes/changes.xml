@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
-            <action type="fix" dev="asashour">
+            <action type="update" dev="asashour">
+                Deprecate HtmlImage.getComplete().
+            </action>
+            <action type="update" dev="asashour">
                 Deprecate HtmlKeygen.
             </action>
             <action type="fix" dev="rbri">

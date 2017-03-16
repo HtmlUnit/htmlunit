@@ -361,8 +361,8 @@ public class HTMLImageElement extends HTMLElement {
      * @return the value of the {@code complete} property
      */
     @JsxGetter
-    public boolean getComplete() {
-        return ((HtmlImage) getDomNodeOrDie()).getComplete();
+    public boolean isComplete() {
+        return ((HtmlImage) getDomNodeOrDie()).isComplete();
     }
 
     /**
