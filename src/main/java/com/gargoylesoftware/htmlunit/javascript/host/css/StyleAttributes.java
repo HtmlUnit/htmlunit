@@ -1020,7 +1020,7 @@ public final class StyleAttributes {
         IME_MODE_("ime-mode", "ime-mode", ff("auto")),
 
         /** The style property {@code inlineSize}. */
-        INLINE_SIZE("inlineSize", "inline-size", ff45up(""), chrome("913")),
+        INLINE_SIZE("inlineSize", "inline-size", ff45up(""), chrome("913px")),
 
         /** The style property {@code inlineSize}. */
         INLINE_SIZE_("inline-size", "inline-size", ff45up("")),
@@ -1032,19 +1032,19 @@ public final class StyleAttributes {
         JUSTIFY_CONTENT("justifyContent", "justify-content",
                 ffBelow45("flex-start"),
                 ff45up("auto"),
-                ie("flex-start"), chrome("flex-start")),
+                ie("flex-start"), chrome("normal")),
 
         /** The style property {@code justify-content}. */
         JUSTIFY_CONTENT_("justify-content", "justify-content", ffBelow45("flex-start"), ff45up("auto")),
 
         /** The style property {@code justifyItems}. */
-        JUSTIFY_ITEMS("justifyItems", "justify-items", ff45up("start")),
+        JUSTIFY_ITEMS("justifyItems", "justify-items", ff45up("start"), chrome("normal")),
 
         /** The style property {@code justify-items}. */
         JUSTIFY_ITEMS_("justify-items", "justify-items", ff45up("start")),
 
         /** The style property {@code justifySelf}. */
-        JUSTIFY_SELF("justifySelf", "justify-self", ff45up("start")),
+        JUSTIFY_SELF("justifySelf", "justify-self", ff45up("start"), chrome("normal")),
 
         /** The style property {@code justify-self}. */
         JUSTIFY_SELF_("justify-self", "justify-self", ff45up("start")),
@@ -1211,7 +1211,7 @@ public final class StyleAttributes {
         MASK_TYPE_("mask-type", "mask-type", ff("luminance")),
 
         /** The style property {@code maxBlockSize}. */
-        MAX_BLOCK_SIZE("maxBlockSize", "max-block-size", ff45up("")),
+        MAX_BLOCK_SIZE("maxBlockSize", "max-block-size", ff45up(""), chrome("none")),
 
         /** The style property {@code max-block-size}. */
         MAX_BLOCK_SIZE_("max-block-size", "max-block-size", ff45up("")),
@@ -1223,7 +1223,7 @@ public final class StyleAttributes {
         MAX_HEIGHT_("max-height", "max-height", ff("none")),
 
         /** The style property {@code maxInlineSize}. */
-        MAX_INLINE_SIZE("maxInlineSize", "max-inline-size", ff45up("")),
+        MAX_INLINE_SIZE("maxInlineSize", "max-inline-size", ff45up(""), chrome("none")),
 
         /** The style property {@code max-inline-size}. */
         MAX_INLINE_SIZE_("max-inline-size", "max-inline-size", ff45up("")),
@@ -1238,7 +1238,7 @@ public final class StyleAttributes {
         MAX_ZOOM("maxZoom", "max-zoom", chrome("")),
 
         /** The style property {@code min-block-size}. */
-        MIN_BLOCK_SIZE("minBlockSize", "min-block-size", ff45up("")),
+        MIN_BLOCK_SIZE("minBlockSize", "min-block-size", ff45up(""), chrome("0px")),
 
         /** The style property {@code min-height}. */
         MIN_BLOCK_SIZE_("min-block-size", "min-block-size", ff45up("")),
@@ -1250,7 +1250,7 @@ public final class StyleAttributes {
         MIN_HEIGHT_("min-height", "min-height", ff("0px")),
 
         /** The style property {@code minInlineSize}. */
-        MIN_INLINE_SIZE("minInlineSize", "min-inline-size", ff45up("")),
+        MIN_INLINE_SIZE("minInlineSize", "min-inline-size", ff45up(""), chrome("0px")),
 
         /** The style property {@code min-inline-size}. */
         MIN_INLINE_SIZE_("min-inline-size", "min-inline-size", ff45up("")),
@@ -2352,7 +2352,7 @@ public final class StyleAttributes {
         TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none")),
 
         /** The style property {@code textDecoration}. */
-        TEXT_DECORATION("textDecoration", "text-decoration", chrome("none"), ff("none"), ie("none")),
+        TEXT_DECORATION("textDecoration", "text-decoration", chrome("none solid rgb(0, 0, 0)"), ff("none"), ie("none")),
 
         /** The style property {@code text-decoration}. */
         TEXT_DECORATION_("text-decoration", "text-decoration", ff("none")),
@@ -2361,13 +2361,14 @@ public final class StyleAttributes {
         TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false").setIteratable(false)),
 
         /** The style property {@code textDecorationColor}. */
-        TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color", ff("rgb(0, 0, 0)")),
+        TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color",
+                ff("rgb(0, 0, 0)"), chrome("rgb(0, 0, 0)")),
 
         /** The style property {@code text-decoration-color}. */
         TEXT_DECORATION_COLOR_("text-decoration-color", "text-decoration-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textDecorationLine}. */
-        TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", ff("none")),
+        TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", ff("none"), chrome("none")),
 
         /** The style property {@code text-decoration-line}. */
         TEXT_DECORATION_LINE_("text-decoration-line", "text-decoration-line", ff("none")),
@@ -2383,8 +2384,11 @@ public final class StyleAttributes {
         TEXT_DECORATION_OVERLINE("textDecorationOverline", "text-decoration-overline",
                 ie("false").setIteratable(false)),
 
+        /** The style property {@code textDecorationSkip}. */
+        TEXT_DECORATION_SKIP("textDecorationSkip", "text-decoration-skip", chrome("objects")),
+
         /** The style property {@code textDecorationStyle}. */
-        TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff("solid")),
+        TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff("solid"), chrome("solid")),
 
         /** The style property {@code text-decoration-style}. */
         TEXT_DECORATION_STYLE_("text-decoration-style", "text-decoration-style", ff("solid")),
@@ -2445,7 +2449,7 @@ public final class StyleAttributes {
         TEXT_TRANSFORM_("text-transform", "text-transform", ff("none")),
 
         /** The style property {@code textUnderlinePosition}. */
-        TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", ie("auto")),
+        TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", ie("auto"), chrome("auto")),
 
         /** The style property {@code top}. */
         TOP("top", "top", ff("auto"), ie("auto"), chrome("auto")),
