@@ -2362,13 +2362,13 @@ public final class StyleAttributes {
 
         /** The style property {@code textDecorationColor}. */
         TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color",
-                ff("rgb(0, 0, 0)"), chrome("rgb(0, 0, 0)")),
+                chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)")),
 
         /** The style property {@code text-decoration-color}. */
         TEXT_DECORATION_COLOR_("text-decoration-color", "text-decoration-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textDecorationLine}. */
-        TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", ff("none"), chrome("none")),
+        TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", chrome("none"), ff("none")),
 
         /** The style property {@code text-decoration-line}. */
         TEXT_DECORATION_LINE_("text-decoration-line", "text-decoration-line", ff("none")),
@@ -2385,10 +2385,10 @@ public final class StyleAttributes {
                 ie("false").setIteratable(false)),
 
         /** The style property {@code textDecorationSkip}. */
-        TEXT_DECORATION_SKIP("textDecorationSkip", "text-decoration-skip", chrome("objects")),
+        TEXT_DECORATION_SKIP("textDecorationSkip", "text-decoration-sskip", chrome("objects")),
 
         /** The style property {@code textDecorationStyle}. */
-        TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff("solid"), chrome("solid")),
+        TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", chrome("solid"), ff("solid")),
 
         /** The style property {@code text-decoration-style}. */
         TEXT_DECORATION_STYLE_("text-decoration-style", "text-decoration-style", ff("solid")),
@@ -2449,7 +2449,7 @@ public final class StyleAttributes {
         TEXT_TRANSFORM_("text-transform", "text-transform", ff("none")),
 
         /** The style property {@code textUnderlinePosition}. */
-        TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", ie("auto"), chrome("auto")),
+        TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", chrome("auto"), ie("auto")),
 
         /** The style property {@code top}. */
         TOP("top", "top", ff("auto"), ie("auto"), chrome("auto")),
