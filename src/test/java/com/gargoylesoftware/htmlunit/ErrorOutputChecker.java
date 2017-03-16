@@ -41,6 +41,9 @@ public class ErrorOutputChecker implements TestRule {
                     + "Only local connections are allowed\\.\r?\n"),
             Pattern.compile(".*FirefoxOptions toCapabilities\r?\n"),
             Pattern.compile(".*Preferring the firefox binary in these options \\(.*\\)\r?\n"),
+            Pattern.compile(".*geckodriver.*\r?\n"),
+            Pattern.compile(".*mozprofile.*\r?\n"),
+            Pattern.compile(".*Marionette.*\r?\n"),
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + "2\\.53\\.1\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
@@ -49,7 +52,7 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
             // edge
             Pattern.compile(".*Stopping server.\r\r?\n"),
-            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: OSS\r?\n")
+            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n")
     };
 
     /**
