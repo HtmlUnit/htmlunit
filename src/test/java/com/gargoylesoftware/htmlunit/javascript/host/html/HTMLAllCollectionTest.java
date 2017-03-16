@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -600,7 +603,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function () { [native code] }",
             FF = "function () {\n}",
             IE = "[object Object]")
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"
