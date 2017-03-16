@@ -1603,7 +1603,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "cite,clear,width")
-    @NotYetImplemented(CHROME)
     public void keygen() throws Exception {
         test("keygen");
     }
