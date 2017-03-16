@@ -151,6 +151,7 @@ public class NotYetImplementedTest {
         int count = 0;
         int countIE = 0;
         int countFF45 = 0;
+        int countFF52 = 0;
         int countChrome = 0;
         int countEdge = 0;
         for (final String entry : entries_) {
@@ -195,9 +196,14 @@ public class NotYetImplementedTest {
             if (browser.contains("FF45")) {
                 countFF45++;
             }
+            if (browser.contains("FF52")) {
+                countFF52++;
+            }
             if (!browser.contains("FF45")
+                    && !browser.contains("FF52")
                     && browser.contains("FF")) {
                 countFF45++;
+                countFF52++;
             }
             if (browser.contains("CHROME")) {
                 countChrome++;
@@ -208,6 +214,7 @@ public class NotYetImplementedTest {
             if (browser.contains("All")) {
                 countIE++;
                 countFF45++;
+                countFF52++;
                 countChrome++;
                 countEdge++;
             }
@@ -229,6 +236,11 @@ public class NotYetImplementedTest {
         overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(countFF45)).append("</td>\n");
         overview.append("    <td>for FF45</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(countFF52).append("</td>\n");
+        overview.append("    <td>for FF52</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
