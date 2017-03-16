@@ -414,7 +414,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"none", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block"},
-            CHROME = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"})
+            CHROME = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"},
+            FF52 = {"none", "block", "inline", "block", "inline", "inline", "block", "block", "block", "block"})
     public void defaultDisplayValues_D() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"
@@ -843,7 +844,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
                         "inline", "inline", "inline", "inline", "inline", "inline", "inline"},
             CHROME = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "block", "inline"})
+                        "inline", "inline", "inline", "inline", "inline", "block", "inline"},
+            FF52 = {"inline", "inline", "none", "block", "inline-block", "inline",
+                    "inline", "inline", "inline", "inline", "inline", "block", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
