@@ -53,12 +53,8 @@ class BrowserConfiguration {
         return browserConfiguration;
     }
 
-    static BrowserConfiguration ffBelow45(final String defaultValue) {
-        return ff(defaultValue).upTo(44);
-    }
-
-    static BrowserConfiguration ff45up(final String defaultValue) {
-        return ff(defaultValue).startingWith(45);
+    static BrowserConfiguration ff52up(final String defaultValue) {
+        return ff(defaultValue).startingWith(52);
     }
 
     static BrowserConfiguration getMatchingConfiguration(
