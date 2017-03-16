@@ -386,20 +386,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _AudioContext_webkitAudioContext() throws Exception {
         test("AudioContext", "webkitAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented(CHROME)
-    public void _AudioContext_webkitOfflineAudioContext() throws Exception {
-        test("AudioContext", "webkitOfflineAudioContext");
     }
 
     /**
@@ -466,6 +455,16 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioNode_AudioScheduledSourceNode() throws Exception {
+        test("AudioNode", "AudioScheduledSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _AudioNode_BiquadFilterNode() throws Exception {
@@ -520,6 +519,48 @@ public class HostParentOfATest extends HostParentOf {
             IE = "false")
     public void _AudioProcessingEvent_AudioProcessingEvent() throws Exception {
         test("AudioProcessingEvent", "AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _AudioScheduledSourceNode_AudioBufferSourceNode() throws Exception {
+        test("AudioScheduledSourceNode", "AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioScheduledSourceNode_AudioScheduledSourceNode() throws Exception {
+        test("AudioScheduledSourceNode", "AudioScheduledSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AudioScheduledSourceNode_ConstantSourceNode() throws Exception {
+        test("AudioScheduledSourceNode", "ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _AudioScheduledSourceNode_OscillatorNode() throws Exception {
+        test("AudioScheduledSourceNode", "OscillatorNode");
     }
 
     /**
@@ -1294,26 +1335,6 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _BaseAudioContext_OfflineAudioContext() throws Exception {
         test("BaseAudioContext", "OfflineAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _BaseAudioContext_webkitAudioContext() throws Exception {
-        test("BaseAudioContext", "webkitAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _BaseAudioContext_webkitOfflineAudioContext() throws Exception {
-        test("BaseAudioContext", "webkitOfflineAudioContext");
     }
 
     /**

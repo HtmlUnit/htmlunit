@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioNode;
 
 /**
  * A JavaScript object for {@code AudioScheduledSourceNode}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(CHROME))
-public class AudioScheduledSourceNode extends SimpleScriptable {
+public class AudioScheduledSourceNode extends AudioNode {
 
     /**
      * Creates a new instance.
