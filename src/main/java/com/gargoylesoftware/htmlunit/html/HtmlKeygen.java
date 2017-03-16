@@ -26,7 +26,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @deprecated as of 2.26, it is not supported by real browsers anymore
  */
+@Deprecated
 public class HtmlKeygen extends HtmlElement {
 
     /** The HTML tag represented by this element. */
