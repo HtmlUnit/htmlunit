@@ -933,6 +933,60 @@ public final class StyleAttributes {
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
+        /** The style property {@code grid}. */
+        GRID("grid", "grid", chrome("none / none / none / row / auto / auto / 0px / 0px")),
+
+        /** The style property {@code gridArea}. */
+        GRID_AREA("gridArea", "grid-area", chrome("auto / auto / auto / auto")),
+
+        /** The style property {@code gridAutoColumns}. */
+        GRID_AUTO_COLUMNS("gridAutoColumns", "grid-auto-columns", chrome("auto")),
+
+        /** The style property {@code gridAutoFlow}. */
+        GRID_AUTO_FLOW("gridAutoFlow", "grid-auto-flow", chrome("row")),
+
+        /** The style property {@code gridAutoRows}. */
+        GRID_AUTO_ROWS("gridAutoRows", "grid-auto-rows", chrome("auto")),
+
+        /** The style property {@code gridColumn}. */
+        GRID_COLUMN("gridColumn", "grid-column", chrome("auto / auto")),
+
+        /** The style property {@code gridColumnEnd}. */
+        GRID_COLUMN_END("gridColumnEnd", "grid-column-end", chrome("auto")),
+
+        /** The style property {@code gridColumnGap}. */
+        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chrome("0px")),
+
+        /** The style property {@code gridColumnStart}. */
+        GRID_COLUMN_START("gridColumnStart", "grid-column-start", chrome("auto")),
+
+        /** The style property {@code gridGap}. */
+        GRID_GAP("gridGap", "grid-gap", chrome("0px 0px")),
+
+        /** The style property {@code gridRow}. */
+        GRID_ROW("gridRow", "grid-row", chrome("auto / auto")),
+
+        /** The style property {@code gridRowEnd}. */
+        GRID_ROW_END("gridRowEnd", "grid-row-end", chrome("auto")),
+
+        /** The style property {@code gridRowGap}. */
+        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chrome("0px")),
+
+        /** The style property {@code gridRowStart}. */
+        GRID_ROW_START("gridRowStart", "grid-row-start", chrome("auto")),
+
+        /** The style property {@code gridTemplate}. */
+        GRID_TEMPLATE("gridTemplate", "grid-template", chrome("none / none / none")),
+
+        /** The style property {@code gridTemplateAreas}. */
+        GRID_TEMPLATE_AREAS("gridTemplateAreas", "grid-template-areas", chrome("none")),
+
+        /** The style property {@code gridTemplateColumns}. */
+        GRID_TEMPLATE_COLUMNS("gridTemplateColumns", "grid-template-columns", chrome("none")),
+
+        /** The style property {@code gridTemplateRows}. */
+        GRID_TEMPLATE_ROWS("gridTemplateRows", "grid-template-rows", chrome("none")),
+
         /** The style property {@code glyphOrientationHorizontal}. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
                 ie("0deg")),
