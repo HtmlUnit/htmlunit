@@ -1923,7 +1923,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code page} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxGetter(@WebBrowser(CHROME))
     public String getPage() {
         return getStyleAttribute(PAGE);
     }
@@ -1932,7 +1932,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code page} style attribute.
      * @param page the new attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxSetter(@WebBrowser(CHROME))
     public void setPage(final String page) {
         setStyleAttribute(PAGE.getAttributeName(), page);
     }
@@ -2193,7 +2193,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code size} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxGetter(@WebBrowser(CHROME))
     public String getSize() {
         return getStyleAttribute(SIZE);
     }
@@ -2202,7 +2202,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code size} style attribute.
      * @param size the new attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxSetter(@WebBrowser(CHROME))
     public void setSize(final String size) {
         setStyleAttribute(SIZE.getAttributeName(), size);
     }
@@ -2374,7 +2374,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code widows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public String getWidows() {
         return getStyleAttribute(WIDOWS);
     }
@@ -2383,7 +2383,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code widows} style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public void setWidows(final String widows) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {
@@ -2402,7 +2402,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -2411,7 +2411,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 38)})
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE)})
     public void setOrphans(final String orphans) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {

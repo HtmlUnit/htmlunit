@@ -20,7 +20,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to specify a range of browser, e.g. Firefox from version 38 to version 45.
+ * An annotation to specify a range of browser, e.g. Firefox from version 45 to version 52.
  *
  * @author Ahmed Ashour
  */

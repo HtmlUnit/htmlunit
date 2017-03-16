@@ -44,7 +44,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -748,24 +747,6 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter(@WebBrowser(FF))
     public DOMTokenList getRelList() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code searchParams} attribute.
-     * @return the {@code searchParams} attribute
-     */
-    @JsxGetter(@WebBrowser(value = FF, maxVersion = 38))
-    public String getSearchParams() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code searchParams} attribute.
-     * @param searchParams {@code searchParams} attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setSearchParams(final URLSearchParams searchParams) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
