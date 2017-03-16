@@ -94,21 +94,21 @@ public final class StyleAttributes {
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"),
-                ffBelow45("stretch"), ff45up("auto"), chrome("stretch")),
+                ffBelow45("stretch"), ff45up("auto"), chrome("normal")),
 
         /** The style property {@code align-content}. */
         ALIGN_CONTENT_("align-content", "align-content", ffBelow45("stretch"), ff45up("auto")),
 
         /** The style property {@code alignItems}. */
         ALIGN_ITEMS("alignItems", "align-items", ffBelow45("stretch"), ff45up("start"),
-                ie("stretch"), chrome("stretch")),
+                ie("stretch"), chrome("normal")),
 
         /** The style property {@code align-items}. */
         ALIGN_ITEMS_("align-items", "align-items", ffBelow45("stretch"), ff45up("start")),
 
         /** The style property {@code alignSelf}. */
         ALIGN_SELF("alignSelf", "align-self", ffBelow45("stretch"), ff45up("start"),
-                ie("auto"), chrome("stretch")),
+                ie("auto"), chrome("normal")),
 
         /** The style property {@code align-self}. */
         ALIGN_SELF_("align-self", "align-self", ffBelow45("stretch"), ff45up("start")),
@@ -271,7 +271,7 @@ public final class StyleAttributes {
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code blockSize}. */
-        BLOCK_SIZE("blockSize", "block-size", ff45up("")),
+        BLOCK_SIZE("blockSize", "block-size", ff45up(""), chrome("0px")),
 
         /** The style property {@code block-size}. */
         BLOCK_SIZE_("block-size", "block-size", ff45up("")),
@@ -613,6 +613,9 @@ public final class StyleAttributes {
 
         /** The style property {@code caption-side}. */
         CAPTION_SIDE_("caption-side", "caption-side", ff("top")),
+
+        /** The style property {@code caretColor}. */
+        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)")),
 
         /** The style property {@code clear}. */
         CLEAR("clear", "clear", chrome("none"), ff("none"), ie("none")),
@@ -963,7 +966,7 @@ public final class StyleAttributes {
         IME_MODE_("ime-mode", "ime-mode", ff("auto")),
 
         /** The style property {@code inlineSize}. */
-        INLINE_SIZE("inlineSize", "inline-size", ff45up("")),
+        INLINE_SIZE("inlineSize", "inline-size", ff45up(""), chrome("913")),
 
         /** The style property {@code inlineSize}. */
         INLINE_SIZE_("inline-size", "inline-size", ff45up("")),
@@ -2001,7 +2004,7 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("621px 172.5px"), ie("620px 163.2px"), chrome("620px 161px")),
+                ff("621px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("621px 172.5px")),
@@ -2401,7 +2404,7 @@ public final class StyleAttributes {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("621px 172.5px"), ie("620px 163.2px"), chrome("620px 161px")),
+                ff("621px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("621px 172.5px")),
@@ -2617,7 +2620,7 @@ public final class StyleAttributes {
         WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chrome("322px")),
 
         /** The style property {@code webkitLogicalWidth}. */
-        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("1240px")),
+        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("913px")),
 
         /** The style property {@code webkitMarginAfter}. */
         WEBKIT_MARGIN_AFTER("webkitMarginAfter", "webkit-margin-after", chrome("0px")),
