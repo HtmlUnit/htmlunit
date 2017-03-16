@@ -7491,4 +7491,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("CSSValueList");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void audioScheduledSourceNode() throws Exception {
+        test("AudioScheduledSourceNode");
+    }
+
 }
