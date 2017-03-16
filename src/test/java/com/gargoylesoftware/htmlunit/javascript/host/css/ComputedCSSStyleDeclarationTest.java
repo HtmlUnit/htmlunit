@@ -632,7 +632,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"inline", "inline-block", "inline", "block", "list-item"},
             CHROME = { "inline", "inline", "inline", "block", "list-item" },
             IE = {"inline", "inline", "inline", "inline", "list-item"})
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_KL() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
