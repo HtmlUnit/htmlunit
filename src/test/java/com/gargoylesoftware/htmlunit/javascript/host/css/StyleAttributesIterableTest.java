@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +26,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
@@ -131,7 +128,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _BLOCK_SIZE() throws Exception {
         test("blockSize");
     }
@@ -142,7 +138,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _INLINE_SIZE() throws Exception {
         test("inlineSize");
     }
@@ -153,7 +148,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _JUSTIFY_ITEMS() throws Exception {
         test("justifyItems");
     }
@@ -164,7 +158,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _JUSTIFY_SELF() throws Exception {
         test("justifySelf");
     }
@@ -175,7 +168,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _MAX_BLOCK_SIZE() throws Exception {
         test("maxBlockSize");
     }
@@ -186,7 +178,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _MAX_INLINE_SIZE() throws Exception {
         test("maxInlineSize");
     }
@@ -197,7 +188,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _MIN_BLOCK_SIZE() throws Exception {
         test("minBlockSize");
     }
@@ -208,7 +198,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _MIN_INLINE_SIZE() throws Exception {
         test("minInlineSize");
     }
@@ -349,7 +338,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _TEXT_DECORATION_COLOR() throws Exception {
         test("textDecorationColor");
     }
@@ -360,7 +348,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _TEXT_DECORATION_LINE() throws Exception {
         test("textDecorationLine");
     }
@@ -401,7 +388,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(CHROME)
     public void _TEXT_DECORATION_STYLE() throws Exception {
         test("textDecorationStyle");
     }
@@ -422,7 +408,6 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false")
-    @NotYetImplemented(CHROME)
     public void _TEXT_UNDERLINE_POSITION() throws Exception {
         test("textUnderlinePosition");
     }
