@@ -374,6 +374,7 @@
                 <configuration>
                     <issueLinkTemplatePerSystem>
                         <features>http://sourceforge.net/p/htmlunit/feature-requests/%ISSUE%</features>
+                        <htmlunitdriver>https://github.com/SeleniumHQ/htmlunit-driver/issues/%ISSUE%</htmlunitdriver>
                     </issueLinkTemplatePerSystem>
                 </configuration>
             </plugin>

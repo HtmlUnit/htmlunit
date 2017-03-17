@@ -356,6 +356,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final Window window = (Window) webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
+                    window.clearComputedStyles();
                 }
                 return (P) page;
             }

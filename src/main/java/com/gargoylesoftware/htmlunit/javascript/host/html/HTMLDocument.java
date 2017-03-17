@@ -1826,7 +1826,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
                 nodes.add(domNode.getScriptableObject());
             }
-            return  NodeList.staticNodeList(this, nodes);
+            return NodeList.staticNodeList(this, nodes);
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"

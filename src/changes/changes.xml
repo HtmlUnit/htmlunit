@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" system="htmlunitdriver" issue="46">
+                CSS: fix handling :target pseudo class.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlImage.getComplete().
             </action>

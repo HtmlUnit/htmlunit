@@ -1273,4 +1273,33 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  .tab div {\n"
+                + "    display: none;\n"
+                + "  }\n"
+                + "\n"
+                + "  .tab div:target {\n"
+                + "    display: block;\n"
+                + "  }\n"
+                + "</style></head><body>\n"
+                + "<div class='tab'>\n"
+                + "  <div id='anchor'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</div>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse(html);;
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("anchor")).isDisplayed());
+        webDriver.get(URL_FIRST + "#anchor");
+        assertTrue(webDriver.findElement(By.id("anchor")).isDisplayed());
+    }
 }

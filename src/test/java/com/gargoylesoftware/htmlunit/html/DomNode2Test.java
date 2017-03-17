@@ -80,4 +80,5 @@ public class DomNode2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
 }
