@@ -661,6 +661,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     }
                     return null;
                 }
+
+                @Override
+                public String toString() {
+                    return "XMLHttpRequest "
+                                + webRequest_.getHttpMethod().toString()
+                                + " '" + webRequest_.getUrl().toExternalForm() + "'";
+                }
             };
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                     createJavascriptXMLHttpRequestJob(cf, action);

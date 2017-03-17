@@ -38,6 +38,6 @@ final class JavascriptXMLHttpRequestJob extends BasicJavaScriptJob {
 
     @Override
     public String toString() {
-        return "XMLHttpRequest Job " + getId();
+        return "XMLHttpRequest Execution Job " + getId() + ": " + action_.toString();
     }
 }
