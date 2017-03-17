@@ -464,8 +464,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _HTMLKeygenElement_HTMLKeygenElement() throws Exception {
         test("HTMLKeygenElement", "HTMLKeygenElement");
     }
@@ -1215,8 +1214,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _HTMLElement_HTMLKeygenElement() throws Exception {
         test("HTMLElement", "HTMLKeygenElement");
     }
