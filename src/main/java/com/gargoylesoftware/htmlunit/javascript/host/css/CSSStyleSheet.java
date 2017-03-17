@@ -411,7 +411,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param selector the selector to test
      * @param element the element to test
      * @param pseudoElement the pseudo element to match, (can be {@code null})
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
