@@ -674,8 +674,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _Node_HTMLKeygenElement() throws Exception {
         test("Node", "HTMLKeygenElement");
     }
@@ -1228,8 +1227,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _Node_SVGCursorElement() throws Exception {
         test("Node", "SVGCursorElement");
     }
@@ -2567,8 +2565,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _OfflineAudioContext_webkitOfflineAudioContext() throws Exception {
         test("OfflineAudioContext", "webkitOfflineAudioContext");
     }
