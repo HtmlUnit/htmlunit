@@ -301,8 +301,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBCursor_webkitIDBCursor() throws Exception {
         test("IDBCursor", "webkitIDBCursor");
     }
@@ -312,8 +311,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBDatabase_webkitIDBDatabase() throws Exception {
         test("IDBDatabase", "webkitIDBDatabase");
     }
@@ -323,8 +321,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBFactory_webkitIDBFactory() throws Exception {
         test("IDBFactory", "webkitIDBFactory");
     }
@@ -334,8 +331,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBIndex_webkitIDBIndex() throws Exception {
         test("IDBIndex", "webkitIDBIndex");
     }
@@ -345,8 +341,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBKeyRange_webkitIDBKeyRange() throws Exception {
         test("IDBKeyRange", "webkitIDBKeyRange");
     }
@@ -356,8 +351,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBObjectStore_webkitIDBObjectStore() throws Exception {
         test("IDBObjectStore", "webkitIDBObjectStore");
     }
@@ -367,8 +361,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBRequest_webkitIDBRequest() throws Exception {
         test("IDBRequest", "webkitIDBRequest");
     }
@@ -378,8 +371,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _IDBTransaction_webkitIDBTransaction() throws Exception {
         test("IDBTransaction", "webkitIDBTransaction");
     }
