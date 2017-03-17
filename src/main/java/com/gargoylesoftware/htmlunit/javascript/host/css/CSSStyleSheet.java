@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -260,7 +261,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
-                    final boolean selected = selects(browser, selector, e, pseudoElement);
+                    final boolean selected = selects(browser, selector, e, pseudoElement, false);
                     if (selected) {
                         final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
                         style.applyStyleFromSelector(dec, selector);
@@ -406,38 +407,15 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * Returns {@code true} if the specified selector selects the specified element.
      *
-     * @param selector the selector to test
-     * @param element the element to test
-     * @return {@code true} if it does apply, {@code false} if it doesn't apply
-     */
-    boolean selects(final Selector selector, final DomElement element) {
-        return selects(getBrowserVersion(), selector, element);
-    }
-
-    /**
-     * Returns {@code true} if the specified selector selects the specified element.
-     *
-     * @param browserVersion the browser version
-     * @param selector the selector to test
-     * @param element the element to test
-     * @return {@code true} if it does apply, {@code false} if it doesn't apply
-     */
-    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
-            final DomElement element) {
-        return selects(browserVersion, selector, element, null);
-    }
-
-    /**
-     * Returns {@code true} if the specified selector selects the specified element.
-     *
      * @param browserVersion the browser version
      * @param selector the selector to test
      * @param element the element to test
      * @param pseudoElement the pseudo element to match, (can be {@code null})
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String) 
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
-            final DomElement element, final String pseudoElement) {
+            final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 if (selector instanceof GeneralAdjacentSelectorImpl) {
@@ -446,8 +424,10 @@ public class CSSStyleSheet extends StyleSheet {
                     final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
                     for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
                         if (prev instanceof HtmlElement
-                            && selects(browserVersion, ssSelector, (HtmlElement) prev)
-                            && selects(browserVersion, ssSiblingSelector, element)) {
+                            && selects(browserVersion, ssSelector, (HtmlElement) prev,
+                                    pseudoElement, fromQuerySelectorAll)
+                            && selects(browserVersion, ssSiblingSelector, element,
+                                    pseudoElement, fromQuerySelectorAll)) {
                             return true;
                         }
                     }
@@ -464,19 +444,21 @@ public class CSSStyleSheet extends StyleSheet {
                     return false; // for instance parent is a DocumentFragment
                 }
                 final DescendantSelector cs = (DescendantSelector) selector;
-                return selects(browserVersion, cs.getSimpleSelector(), element)
-                    && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode);
+                return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
+                    && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode,
+                            pseudoElement, fromQuerySelectorAll);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 final SimpleSelector simpleSelector = ds.getSimpleSelector();
-                if (selects(browserVersion, simpleSelector, element, pseudoElement)) {
+                if (selects(browserVersion, simpleSelector, element, pseudoElement, fromQuerySelectorAll)) {
                     DomNode ancestor = element;
                     if (simpleSelector.getSelectorType() != Selector.SAC_PSEUDO_ELEMENT_SELECTOR) {
                         ancestor = ancestor.getParentNode();
                     }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof HtmlElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor, pseudoElement)) {
+                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor, pseudoElement,
+                                fromQuerySelectorAll)) {
                             return true;
                         }
                         ancestor = ancestor.getParentNode();
@@ -486,8 +468,9 @@ public class CSSStyleSheet extends StyleSheet {
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final SimpleSelector simpleSel = conditional.getSimpleSelector();
-                return (simpleSel == null || selects(browserVersion, simpleSel, element))
-                    && selects(browserVersion, conditional.getCondition(), element);
+                return (simpleSel == null || selects(browserVersion, simpleSel, element,
+                        pseudoElement, fromQuerySelectorAll))
+                    && selects(browserVersion, conditional.getCondition(), element, fromQuerySelectorAll);
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
@@ -501,11 +484,12 @@ public class CSSStyleSheet extends StyleSheet {
                     prev = prev.getPreviousSibling();
                 }
                 return prev != null
-                    && selects(browserVersion, ss.getSelector(), (HtmlElement) prev)
-                    && selects(browserVersion, ss.getSiblingSelector(), element);
+                    && selects(browserVersion, ss.getSelector(), (HtmlElement) prev,
+                            pseudoElement, fromQuerySelectorAll)
+                    && selects(browserVersion, ss.getSiblingSelector(), element, pseudoElement, fromQuerySelectorAll);
             case Selector.SAC_NEGATIVE_SELECTOR:
                 final NegativeSelector ns = (NegativeSelector) selector;
-                return !selects(browserVersion, ns.getSimpleSelector(), element);
+                return !selects(browserVersion, ns.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll);
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
                 if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
                     final String pseudoName = ((ElementSelector) selector).getLocalName();
@@ -529,9 +513,11 @@ public class CSSStyleSheet extends StyleSheet {
      * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String) 
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
-    static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element) {
+    static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
+            final boolean fromQuerySelectorAll) {
         if (condition instanceof PrefixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
@@ -561,8 +547,8 @@ public class CSSStyleSheet extends StyleSheet {
                 return selectsWhitespaceSeparated(v3, a3);
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return selects(browserVersion, cc1.getFirstCondition(), element)
-                    && selects(browserVersion, cc1.getSecondCondition(), element);
+                return selects(browserVersion, cc1.getFirstCondition(), element, fromQuerySelectorAll)
+                    && selects(browserVersion, cc1.getSecondCondition(), element, fromQuerySelectorAll);
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
@@ -586,11 +572,11 @@ public class CSSStyleSheet extends StyleSheet {
                 return selects(v2, a2, ' ');
             case Condition.SAC_OR_CONDITION:
                 final CombinatorCondition cc2 = (CombinatorCondition) condition;
-                return selects(browserVersion, cc2.getFirstCondition(), element)
-                    || selects(browserVersion, cc2.getSecondCondition(), element);
+                return selects(browserVersion, cc2.getFirstCondition(), element, fromQuerySelectorAll)
+                    || selects(browserVersion, cc2.getSecondCondition(), element, fromQuerySelectorAll);
             case Condition.SAC_NEGATIVE_CONDITION:
                 final NegativeCondition nc = (NegativeCondition) condition;
-                return !selects(browserVersion, nc.getCondition(), element);
+                return !selects(browserVersion, nc.getCondition(), element, fromQuerySelectorAll);
             case Condition.SAC_ONLY_CHILD_CONDITION:
                 return element.getParentNode().getChildNodes().getLength() == 1;
             case Condition.SAC_CONTENT_CONDITION:
@@ -612,7 +598,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final String tagName = element.getTagName();
                 return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass(browserVersion, (AttributeCondition) condition, element);
+                return selectsPseudoClass(browserVersion, (AttributeCondition) condition, element, fromQuerySelectorAll);
             case Condition.SAC_POSITIONAL_CONDITION:
                 return false;
             default:
@@ -683,7 +669,7 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final AttributeCondition condition, final DomElement element) {
+            final AttributeCondition condition, final DomElement element, final boolean fromQuerySelectorAll) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             final Object sobj = element.getPage().getScriptableObject();
             if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
@@ -792,6 +778,9 @@ public class CSSStyleSheet extends StyleSheet {
                 return isEmpty(element);
 
             case "target":
+                if (fromQuerySelectorAll && browserVersion.hasFeature(QUERYSELECTORALL_NO_TARGET)) {
+                    return false;
+                }
                 final String ref = element.getPage().getUrl().getRef();
                 return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
 
@@ -871,7 +860,8 @@ public class CSSStyleSheet extends StyleSheet {
 
                         validateSelectors(selectorList, 9, element);
 
-                        return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
+                        return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element,
+                                null, fromQuerySelectorAll);
                     }
                     catch (final IOException e) {
                         throw new CSSException("Error parsing CSS selectors from '" + selectors + "': "

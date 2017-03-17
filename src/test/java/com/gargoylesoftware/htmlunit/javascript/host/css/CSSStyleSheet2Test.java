@@ -23,6 +23,7 @@ import org.w3c.css.sac.Selector;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -65,22 +66,24 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final HtmlInput input2 = (HtmlInput) page.getElementsByName("i2").get(0);
         final DomElement button1 = page.getElementsByName("b1").get(0);
         final DomElement button2 = page.getElementsByName("b2").get(0);
+        final BrowserVersion browserVersion = getBrowserVersion();
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input");
-        assertFalse(sheet.selects(selector, body));
-        assertFalse(sheet.selects(selector, form));
-        assertTrue(sheet.selects(selector, input1));
-        assertTrue(sheet.selects(selector, input2));
-        assertFalse(sheet.selects(selector, button1));
-        assertFalse(sheet.selects(selector, button2));
+        
+        assertFalse(CSSStyleSheet.selects(browserVersion, selector, body, null, false));
+        assertFalse(CSSStyleSheet.selects(browserVersion, selector, form, null, false));
+        assertTrue(CSSStyleSheet.selects(browserVersion, selector, input1, null, false));
+        assertTrue(CSSStyleSheet.selects(browserVersion, selector, input2, null, false));
+        assertFalse(CSSStyleSheet.selects(browserVersion, selector, button1, null, false));
+        assertFalse(CSSStyleSheet.selects(browserVersion, selector, button2, null, false));
 
         selector = parseSelector(sheet, "#m1");
-        assertTrue(sheet.selects(selector, input1));
-        assertFalse(sheet.selects(selector, input2));
+        assertTrue(CSSStyleSheet.selects(browserVersion, selector, input1, null, false));
+        assertFalse(CSSStyleSheet.selects(browserVersion, selector, input2, null, false));
     }
 
     private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
@@ -150,13 +153,14 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
+        final BrowserVersion browserVersion = getBrowserVersion();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).item(0);
-        assertTrue(sheet.selects(selector, page.getHtmlElementById("d:e")));
+        assertTrue(CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d:e"), null, false));
 
         selector = sheet.parseSelectors(new InputSource(new StringReader("#d-e"))).item(0);
-        assertTrue(sheet.selects(selector, page.getHtmlElementById("d-e")));
+        assertTrue(CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d-e"), null, false));
     }
 
     /**
@@ -207,13 +211,17 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
             + "  </body>\n"
             + "</html>";
         final HtmlPage page = loadPage(html);
+        final BrowserVersion browserVersion = getBrowserVersion();
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
         final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).item(0);
-        assertEquals(selectBody, sheet.selects(selector, page.getHtmlElementById("b")));
-        assertEquals(selectDivD, sheet.selects(selector, page.getHtmlElementById("d")));
-        assertEquals(selectSpanS, sheet.selects(selector, page.getHtmlElementById("s")));
+        assertEquals(selectBody,
+                CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("b"), null, false));
+        assertEquals(selectDivD,
+                CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d"), null, false));
+        assertEquals(selectSpanS,
+                CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("s"), null, false));
     }
 
     /**
