@@ -73,7 +73,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input");
-        
+
         assertFalse(CSSStyleSheet.selects(browserVersion, selector, body, null, false));
         assertFalse(CSSStyleSheet.selects(browserVersion, selector, form, null, false));
         assertTrue(CSSStyleSheet.selects(browserVersion, selector, input1, null, false));

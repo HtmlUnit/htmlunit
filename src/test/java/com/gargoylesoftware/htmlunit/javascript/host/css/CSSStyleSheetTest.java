@@ -1296,7 +1296,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "  </div>\n"
                 + "</div>\n"
                 + "</body></html>";
-        getMockWebConnection().setDefaultResponse(html);;
+        getMockWebConnection().setDefaultResponse(html);
         final WebDriver webDriver = loadPage2(html);
         assertFalse(webDriver.findElement(By.id("anchor")).isDisplayed());
         webDriver.get(URL_FIRST + "#anchor");

@@ -411,7 +411,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param selector the selector to test
      * @param element the element to test
      * @param pseudoElement the pseudo element to match, (can be {@code null})
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String) 
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
@@ -513,7 +513,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String) 
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
@@ -598,7 +598,8 @@ public class CSSStyleSheet extends StyleSheet {
                 final String tagName = element.getTagName();
                 return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass(browserVersion, (AttributeCondition) condition, element, fromQuerySelectorAll);
+                return selectsPseudoClass(browserVersion,
+                        (AttributeCondition) condition, element, fromQuerySelectorAll);
             case Condition.SAC_POSITIONAL_CONDITION:
                 return false;
             default:
