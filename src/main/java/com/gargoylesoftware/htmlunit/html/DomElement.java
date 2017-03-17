@@ -170,7 +170,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * string, this method actually removes the named style attribute.
      * @param name the attribute name (delimiter-separated, not camel-cased)
      * @param value the attribute value
-     * @param priority  the new priority of the property; <code>"important"</code>or the empty string if none.
+     * @param priority the new priority of the property; <code>"important"</code>or the empty string if none.
      */
     public void replaceStyleAttribute(final String name, final String value, final String priority) {
         if (org.apache.commons.lang3.StringUtils.isBlank(value)) {

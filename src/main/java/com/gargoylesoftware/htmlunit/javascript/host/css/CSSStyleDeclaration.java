@@ -3098,7 +3098,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             if (undefinedAsEmpty && Undefined.instance == value) {
                 valueString = "";
             }
-            else  if (null == value) {
+            else if (null == value) {
                 valueString = "";
             }
 

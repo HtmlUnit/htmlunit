@@ -154,7 +154,7 @@ public class DOMParserTest extends WebDriverTestCase {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var text='<svg  xmlns=\"http://www.w3.org/2000/svg\"/>';\n"
+            + "    var text='<svg xmlns=\"http://www.w3.org/2000/svg\"/>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'image/svg+xml');\n"

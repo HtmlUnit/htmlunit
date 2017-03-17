@@ -164,7 +164,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("12345")
-    public void  wrongHtml_TagBeforeHtml() throws Exception {
+    public void wrongHtml_TagBeforeHtml() throws Exception {
         final String html = "<div>\n"
             + "<html>\n"
             + "<head><title>foo</title>\n"

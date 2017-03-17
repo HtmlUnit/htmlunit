@@ -358,7 +358,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void  getOptionByValue() throws Exception {
+    public void getOptionByValue() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
             + "  <option value='option1'>s1o1</option>\n"
