@@ -365,6 +365,18 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
+        test("PerformanceEntry", "PerformanceNavigationTiming");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _PerformanceEntry_PerformanceMark() throws Exception {
         test("PerformanceEntry", "PerformanceMark");
@@ -430,6 +442,18 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts("true")
     public void _PerformanceResourceTiming_PerformanceResourceTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceResourceTiming");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
+        test("PerformanceResourceTiming", "PerformanceNavigationTiming");
     }
 
     /**
@@ -519,8 +543,8 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _PerformanceNavigationTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming", "PerformanceNavigationTiming");
     }
