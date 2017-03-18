@@ -171,8 +171,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _SVGCursorElement_SVGCursorElement() throws Exception {
         test("SVGCursorElement", "SVGCursorElement");
     }
@@ -856,8 +855,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _SVGElement_SVGCursorElement() throws Exception {
         test("SVGElement", "SVGCursorElement");
     }
@@ -2740,8 +2738,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _ServiceWorkerMessageEvent_ServiceWorkerMessageEvent() throws Exception {
         test("ServiceWorkerMessageEvent", "ServiceWorkerMessageEvent");
     }
