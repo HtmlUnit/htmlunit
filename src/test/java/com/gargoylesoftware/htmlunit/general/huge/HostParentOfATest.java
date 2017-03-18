@@ -386,15 +386,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _AudioContext_webkitAudioContext() throws Exception {
-        test("AudioContext", "webkitAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _AudioDestinationNode_AudioDestinationNode() throws Exception {
@@ -1116,15 +1107,6 @@ public class HostParentOfATest extends HostParentOf {
             IE = "false")
     public void _BarProp_BarProp() throws Exception {
         test("BarProp", "BarProp");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _AutocompleteErrorEvent_AutocompleteErrorEvent() throws Exception {
-        test("AutocompleteErrorEvent", "AutocompleteErrorEvent");
     }
 
     /**

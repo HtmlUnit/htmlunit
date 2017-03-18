@@ -464,15 +464,6 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLKeygenElement_HTMLKeygenElement() throws Exception {
-        test("HTMLKeygenElement", "HTMLKeygenElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _HTMLLIElement_HTMLLIElement() throws Exception {
         test("HTMLLIElement", "HTMLLIElement");
@@ -1208,15 +1199,6 @@ public class HostParentOfHTest extends HostParentOf {
             IE = "true")
     public void _HTMLElement_HTMLIsIndexElement() throws Exception {
         test("HTMLElement", "HTMLIsIndexElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLElement_HTMLKeygenElement() throws Exception {
-        test("HTMLElement", "HTMLKeygenElement");
     }
 
     /**

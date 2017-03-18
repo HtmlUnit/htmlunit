@@ -674,16 +674,6 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Node_HTMLKeygenElement() throws Exception {
-        test("Node", "HTMLKeygenElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Node_HTMLLIElement() throws Exception {
         test("Node", "HTMLLIElement");
@@ -1220,16 +1210,6 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_SVGClipPathElement() throws Exception {
         test("Node", "SVGClipPathElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_SVGCursorElement() throws Exception {
-        test("Node", "SVGCursorElement");
     }
 
     /**
@@ -2558,16 +2538,6 @@ public class HostParentOfMTest extends HostParentOf {
             CHROME = "true")
     public void _MutationObserver_WebKitMutationObserver() throws Exception {
         test("MutationObserver", "WebKitMutationObserver");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _OfflineAudioContext_webkitOfflineAudioContext() throws Exception {
-        test("OfflineAudioContext", "webkitOfflineAudioContext");
     }
 
     /**

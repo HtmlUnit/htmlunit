@@ -171,15 +171,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGCursorElement_SVGCursorElement() throws Exception {
-        test("SVGCursorElement", "SVGCursorElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGDefsElement_SVGDefsElement() throws Exception {
         test("SVGDefsElement", "SVGDefsElement");
@@ -849,15 +840,6 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGElement_SVGClipPathElement() throws Exception {
         test("SVGElement", "SVGClipPathElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SVGElement_SVGCursorElement() throws Exception {
-        test("SVGElement", "SVGCursorElement");
     }
 
     /**
@@ -2732,15 +2714,6 @@ public class HostParentOfSTest extends HostParentOf {
             IE = "false")
     public void _ScreenOrientation_ScreenOrientation() throws Exception {
         test("ScreenOrientation", "ScreenOrientation");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ServiceWorkerMessageEvent_ServiceWorkerMessageEvent() throws Exception {
-        test("ServiceWorkerMessageEvent", "ServiceWorkerMessageEvent");
     }
 
     /**

@@ -562,15 +562,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Element_HTMLKeygenElement() throws Exception {
-        test("Element", "HTMLKeygenElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Element_HTMLLIElement() throws Exception {
         test("Element", "HTMLLIElement");
@@ -1076,15 +1067,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts("true")
     public void _Element_SVGClipPathElement() throws Exception {
         test("Element", "SVGClipPathElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Element_SVGCursorElement() throws Exception {
-        test("Element", "SVGCursorElement");
     }
 
     /**
@@ -2408,15 +2390,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _EventTarget_HTMLKeygenElement() throws Exception {
-        test("EventTarget", "HTMLKeygenElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_HTMLLIElement() throws Exception {
@@ -3001,15 +2974,6 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_SVGClipPathElement() throws Exception {
         test("EventTarget", "SVGClipPathElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _EventTarget_SVGCursorElement() throws Exception {
-        test("EventTarget", "SVGCursorElement");
     }
 
     /**
@@ -4168,15 +4132,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _DOMError_FileError() throws Exception {
-        test("DOMError", "FileError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _DOMStringList_DOMStringList() throws Exception {
         test("DOMStringList", "DOMStringList");
@@ -4239,15 +4194,6 @@ public class HostParentOfDTest extends HostParentOf {
             CHROME = "true")
     public void _EventTarget_ServiceWorkerRegistration() throws Exception {
         test("EventTarget", "ServiceWorkerRegistration");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _FileError_FileError() throws Exception {
-        test("FileError", "FileError");
     }
 
     /**
@@ -4739,15 +4685,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Event_AutocompleteErrorEvent() throws Exception {
-        test("Event", "AutocompleteErrorEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false")
     public void _Event_SVGZoomEvent() throws Exception {
@@ -5007,15 +4944,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Event_ServiceWorkerMessageEvent() throws Exception {
-        test("Event", "ServiceWorkerMessageEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
     public void _Event_BeforeInstallPromptEvent() throws Exception {
@@ -5036,55 +4964,10 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _EventTarget_webkitAudioContext() throws Exception {
-        test("EventTarget", "webkitAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _EventTarget_webkitIDBDatabase() throws Exception {
-        test("EventTarget", "webkitIDBDatabase");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _EventTarget_webkitIDBRequest() throws Exception {
-        test("EventTarget", "webkitIDBRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _EventTarget_webkitIDBTransaction() throws Exception {
-        test("EventTarget", "webkitIDBTransaction");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
     public void _EventTarget_webkitMediaStream() throws Exception {
         test("EventTarget", "webkitMediaStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _EventTarget_webkitOfflineAudioContext() throws Exception {
-        test("EventTarget", "webkitOfflineAudioContext");
     }
 
     /**

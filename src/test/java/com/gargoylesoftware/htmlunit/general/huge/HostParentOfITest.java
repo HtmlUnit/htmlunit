@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -24,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -294,97 +291,6 @@ public class HostParentOfITest extends HostParentOf {
             IE = "false")
     public void _ImageBitmap_ImageBitmap() throws Exception {
         test("ImageBitmap", "ImageBitmap");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBCursor_webkitIDBCursor() throws Exception {
-        test("IDBCursor", "webkitIDBCursor");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBDatabase_webkitIDBDatabase() throws Exception {
-        test("IDBDatabase", "webkitIDBDatabase");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBFactory_webkitIDBFactory() throws Exception {
-        test("IDBFactory", "webkitIDBFactory");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBIndex_webkitIDBIndex() throws Exception {
-        test("IDBIndex", "webkitIDBIndex");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBKeyRange_webkitIDBKeyRange() throws Exception {
-        test("IDBKeyRange", "webkitIDBKeyRange");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBObjectStore_webkitIDBObjectStore() throws Exception {
-        test("IDBObjectStore", "webkitIDBObjectStore");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBRequest_webkitIDBRequest() throws Exception {
-        test("IDBRequest", "webkitIDBRequest");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _IDBTransaction_webkitIDBTransaction() throws Exception {
-        test("IDBTransaction", "webkitIDBTransaction");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
-    public void _InstallTrigger_InstallTrigger() throws Exception {
-        test("InstallTrigger", "InstallTrigger");
     }
 
     /**

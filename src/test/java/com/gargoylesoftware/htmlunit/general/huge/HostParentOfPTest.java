@@ -483,16 +483,6 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _ReadableByteStream_ReadableByteStream() throws Exception {
-        test("ReadableByteStream", "ReadableByteStream");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
     public void _ReadableStream_ReadableStream() throws Exception {
