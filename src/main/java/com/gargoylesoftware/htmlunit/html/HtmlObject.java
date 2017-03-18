@@ -55,6 +55,7 @@ public class HtmlObject extends HtmlElement {
 
     private static final String APPLET_TYPE = "application/x-java-applet";
     private static final String ARCHIVE = "archive";
+    private static final String CACHE_ARCHIVE = "cache_archive";
     private static final String CODEBASE = "codebase";
 
     /** The HTML tag represented by this element. */
@@ -336,14 +337,9 @@ public class HtmlObject extends HtmlElement {
         }
 
         final HashMap<String, String> params = new HashMap<>();
-//        params.put("name", getNameAttribute());
-//
-//        params.put("object", getObjectAttribute());
-//        params.put("align", getAlignAttribute());
-//        params.put("alt", getAltAttribute());
+        params.put("name", getNameAttribute());
+
         params.put("height", getHeightAttribute());
-//        params.put("hspace", getHspaceAttribute());
-//        params.put("vspace", getVspaceAttribute());
         params.put("width", getWidthAttribute());
 
         final DomNodeList<HtmlElement> paramTags = getElementsByTagName("param");
@@ -370,6 +366,9 @@ public class HtmlObject extends HtmlElement {
         }
 
         String appletClassName = getAttribute("code");
+        if (StringUtils.isEmpty(appletClassName)) {
+            appletClassName = params.get("code");
+        }
         if (appletClassName.endsWith(".class")) {
             appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
         }
@@ -388,7 +387,18 @@ public class HtmlObject extends HtmlElement {
 
         // check archive
         archiveUrls_ = new LinkedList<>();
-        final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+        String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+        if (null != archives) {
+            for (int i = 0; i < archives.length; i++) {
+                final String tmpArchive = archives[i].trim();
+                final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+                appletClassLoader_.addArchiveToClassPath(archiveUrl);
+                archiveUrls_.add(archiveUrl);
+            }
+        }
+        archives = StringUtils.split(params.get(CACHE_ARCHIVE), ',');
         if (null != archives) {
             for (int i = 0; i < archives.length; i++) {
                 final String tmpArchive = archives[i].trim();

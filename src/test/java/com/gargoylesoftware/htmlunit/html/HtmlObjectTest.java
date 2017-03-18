@@ -93,6 +93,23 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cacheArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/cacheArchiveApplet.html");
+
+        final HtmlPage page = getWebClient().getPage(url);
+        final HtmlObject objectNode = page.getHtmlElementById("myApp");
+
+        assertEquals("net.sourceforge.htmlunit.testapplets.EmptyApplet", objectNode.getApplet().getClass().getName());
+    }
+
+    /**
      * Tests the codebase and documentbase properties.
      * @throws Exception if the test fails
      */

@@ -55,6 +55,7 @@ public class HtmlApplet extends HtmlElement {
     private static final Log LOG = LogFactory.getLog(HtmlApplet.class);
 
     private static final String ARCHIVE = "archive";
+    private static final String CACHE_ARCHIVE = "cache_archive";
     private static final String CODEBASE = "codebase";
 
     /** The HTML tag represented by this element. */
@@ -273,7 +274,18 @@ public class HtmlApplet extends HtmlElement {
 
         // check archive
         archiveUrls_ = new LinkedList<>();
-        final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+        String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+        if (null != archives) {
+            for (int i = 0; i < archives.length; i++) {
+                final String tmpArchive = archives[i].trim();
+                final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+                appletClassLoader_.addArchiveToClassPath(archiveUrl);
+                archiveUrls_.add(archiveUrl);
+            }
+        }
+        archives = StringUtils.split(params.get(CACHE_ARCHIVE), ',');
         if (null != archives) {
             for (int i = 0; i < archives.length; i++) {
                 final String tmpArchive = archives[i].trim();
