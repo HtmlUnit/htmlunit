@@ -216,6 +216,10 @@ public class HtmlApplet extends HtmlElement {
      */
     @SuppressWarnings("unchecked")
     private synchronized void setupAppletIfNeeded() throws IOException {
+        if (applet_ != null) {
+            return;
+        }
+
         final HashMap<String, String> params = new HashMap<>();
         params.put("name", getNameAttribute());
 
@@ -250,74 +254,71 @@ public class HtmlApplet extends HtmlElement {
             return;
         }
 
-        if (null == applet_) {
+        String appletClassName = getCodeAttribute();
+        if (appletClassName.endsWith(".class")) {
+            appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
+        }
 
-            String appletClassName = getCodeAttribute();
-            if (appletClassName.endsWith(".class")) {
-                appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
+        appletClassLoader_ = new AppletClassLoader();
+
+        final String documentUrl = page.getUrl().toExternalForm();
+        String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
+        if (StringUtils.isNotEmpty(codebaseProperty)) {
+            // codebase can be relative to the page
+            baseUrl = UrlUtils.resolveUrl(baseUrl, codebaseProperty);
+        }
+        if (!baseUrl.endsWith("/")) {
+            baseUrl = baseUrl + "/";
+        }
+
+        // check archive
+        archiveUrls_ = new LinkedList<>();
+        final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+        if (null != archives) {
+            for (int i = 0; i < archives.length; i++) {
+                final String tmpArchive = archives[i].trim();
+                final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+                appletClassLoader_.addArchiveToClassPath(archiveUrl);
+                archiveUrls_.add(archiveUrl);
             }
+        }
+        archiveUrls_ = Collections.unmodifiableList(archiveUrls_);
 
-            appletClassLoader_ = new AppletClassLoader();
+        // no archive attribute, single class
+        if (null == archives || archives.length == 0) {
+            final String tempUrl = UrlUtils.resolveUrl(baseUrl, getCodeAttribute());
+            final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
-            final String documentUrl = page.getUrl().toExternalForm();
-            String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
-            if (StringUtils.isNotEmpty(codebaseProperty)) {
-                // codebase can be relative to the page
-                baseUrl = UrlUtils.resolveUrl(baseUrl, codebaseProperty);
-            }
-            if (!baseUrl.endsWith("/")) {
-                baseUrl = baseUrl + "/";
-            }
-
-            // check archive
-            archiveUrls_ = new LinkedList<>();
-            final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
-            if (null != archives) {
-                for (int i = 0; i < archives.length; i++) {
-                    final String tmpArchive = archives[i].trim();
-                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
-                    final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
-
-                    appletClassLoader_.addArchiveToClassPath(archiveUrl);
-                    archiveUrls_.add(archiveUrl);
-                }
-            }
-            archiveUrls_ = Collections.unmodifiableList(archiveUrls_);
-
-            // no archive attribute, single class
-            if (null == archives || archives.length == 0) {
-                final String tempUrl = UrlUtils.resolveUrl(baseUrl, getCodeAttribute());
-                final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
-
-                final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
-                try {
-                    webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-                    appletClassLoader_.addClassToClassPath(appletClassName, response);
-                }
-                catch (final FailingHttpStatusCodeException e) {
-                    // that is what the browser does, the applet only fails, if
-                    // the main class is not loadable
-                    LOG.error(e.getMessage(), e);
-                }
-            }
-
+            final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
             try {
-                final Class<Applet> appletClass = (Class<Applet>) appletClassLoader_.loadClass(appletClassName);
-                applet_ = appletClass.newInstance();
-                applet_.setStub(new AppletStubImpl(this, params,
-                        UrlUtils.toUrlUnsafe(baseUrl), UrlUtils.toUrlUnsafe(documentUrl)));
-                applet_.init();
-                applet_.start();
+                webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                appletClassLoader_.addClassToClassPath(appletClassName, response);
             }
-            catch (final ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            catch (final FailingHttpStatusCodeException e) {
+                // that is what the browser does, the applet only fails, if
+                // the main class is not loadable
+                LOG.error(e.getMessage(), e);
             }
-            catch (final InstantiationException e) {
-                throw new RuntimeException(e);
-            }
-            catch (final IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+        }
+
+        try {
+            final Class<Applet> appletClass = (Class<Applet>) appletClassLoader_.loadClass(appletClassName);
+            applet_ = appletClass.newInstance();
+            applet_.setStub(new AppletStubImpl(getHtmlPageOrNull(), params,
+                    UrlUtils.toUrlUnsafe(baseUrl), UrlUtils.toUrlUnsafe(documentUrl)));
+            applet_.init();
+            applet_.start();
+        }
+        catch (final ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        catch (final InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+        catch (final IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 

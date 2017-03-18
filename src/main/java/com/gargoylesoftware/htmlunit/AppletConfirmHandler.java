@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlObject;
 
 /**
  * A handler for Applets. Like in real browsers, you have to confirm
@@ -30,4 +31,11 @@ public interface AppletConfirmHandler {
      * @return true if starting is allowed
      */
     boolean confirm(HtmlApplet applet);
+
+    /**
+     * Handles a confirm for the specified page.
+     * @param applet the applet the browser likes to start
+     * @return true if starting is allowed
+     */
+    boolean confirm(HtmlObject applet);
 }

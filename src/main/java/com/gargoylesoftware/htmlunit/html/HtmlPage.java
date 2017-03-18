@@ -1738,9 +1738,11 @@ public class HtmlPage extends SgmlPage {
         // first try real attributes
         String value = element.getAttribute(attribute);
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == value
+                && !(element instanceof HtmlApplet)
+                && !(element instanceof HtmlObject)) {
             // second try are JavaScript attributes
-            // ...but applets are a bit special so ignore them
+            // ...but applets/objects are a bit special so ignore them
             final ScriptableObject scriptObject = element.getScriptableObject();
             // we have to make sure the scriptObject has a slot for the given attribute.
             // just using get() may use e.g. getWithPreemption().

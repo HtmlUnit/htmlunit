@@ -14,13 +14,29 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.applet.Applet;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.AppletConfirmHandler;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.applets.AppletClassLoader;
+import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -37,8 +53,16 @@ public class HtmlObject extends HtmlElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlObject.class);
 
+    private static final String APPLET_TYPE = "application/x-java-applet";
+    private static final String ARCHIVE = "archive";
+    private static final String CODEBASE = "codebase";
+
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "object";
+
+    private Applet applet_;
+    private AppletClassLoader appletClassLoader_;
+    private List<URL> archiveUrls_;
 
     /**
      * Creates an instance of HtmlObject
@@ -282,5 +306,134 @@ public class HtmlObject extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * Gets the applet referenced by this tag. Instantiates it if necessary.
+     *
+     * @return the applet or null, if the installed AppletConfirmHandler
+     * prohibits this applet
+     * @throws IOException in case of problem
+     */
+    public Applet getApplet() throws IOException {
+        setupAppletIfNeeded();
+        return applet_;
+    }
+
+    /**
+     * Download the associated content specified in the code attribute.
+     *
+     * @throws IOException if an error occurs while downloading the content
+     */
+    @SuppressWarnings("unchecked")
+    private synchronized void setupAppletIfNeeded() throws IOException {
+        if (applet_ != null) {
+            return;
+        }
+
+        if (StringUtils.isBlank(getTypeAttribute()) || !getTypeAttribute().startsWith(APPLET_TYPE)) {
+            return;
+        }
+
+        final HashMap<String, String> params = new HashMap<>();
+//        params.put("name", getNameAttribute());
+//
+//        params.put("object", getObjectAttribute());
+//        params.put("align", getAlignAttribute());
+//        params.put("alt", getAltAttribute());
+        params.put("height", getHeightAttribute());
+//        params.put("hspace", getHspaceAttribute());
+//        params.put("vspace", getVspaceAttribute());
+        params.put("width", getWidthAttribute());
+
+        final DomNodeList<HtmlElement> paramTags = getElementsByTagName("param");
+        for (final HtmlElement paramTag : paramTags) {
+            final HtmlParameter parameter = (HtmlParameter) paramTag;
+            params.put(parameter.getNameAttribute(), parameter.getValueAttribute());
+        }
+
+        if (StringUtils.isEmpty(params.get(CODEBASE)) && StringUtils.isNotEmpty(getCodebaseAttribute())) {
+            params.put(CODEBASE, getCodebaseAttribute());
+        }
+        final String codebaseProperty = params.get(CODEBASE);
+
+        if (StringUtils.isEmpty(params.get(ARCHIVE)) && StringUtils.isNotEmpty(getArchiveAttribute())) {
+            params.put(ARCHIVE, getArchiveAttribute());
+        }
+
+        final HtmlPage page = (HtmlPage) getPage();
+        final WebClient webclient = page.getWebClient();
+
+        final AppletConfirmHandler handler = webclient.getAppletConfirmHandler();
+        if (null != handler && !handler.confirm(this)) {
+            return;
+        }
+
+        String appletClassName = getAttribute("code");
+        if (appletClassName.endsWith(".class")) {
+            appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
+        }
+
+        appletClassLoader_ = new AppletClassLoader();
+
+        final String documentUrl = page.getUrl().toExternalForm();
+        String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
+        if (StringUtils.isNotEmpty(codebaseProperty)) {
+            // codebase can be relative to the page
+            baseUrl = UrlUtils.resolveUrl(baseUrl, codebaseProperty);
+        }
+        if (!baseUrl.endsWith("/")) {
+            baseUrl = baseUrl + "/";
+        }
+
+        // check archive
+        archiveUrls_ = new LinkedList<>();
+        final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+        if (null != archives) {
+            for (int i = 0; i < archives.length; i++) {
+                final String tmpArchive = archives[i].trim();
+                final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+                appletClassLoader_.addArchiveToClassPath(archiveUrl);
+                archiveUrls_.add(archiveUrl);
+            }
+        }
+        archiveUrls_ = Collections.unmodifiableList(archiveUrls_);
+
+        // no archive attribute, single class
+        if (null == archives || archives.length == 0) {
+            final String tempUrl = UrlUtils.resolveUrl(baseUrl, getAttribute("code"));
+            final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+            final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
+            try {
+                webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                appletClassLoader_.addClassToClassPath(appletClassName, response);
+            }
+            catch (final FailingHttpStatusCodeException e) {
+                // that is what the browser does, the applet only fails, if
+                // the main class is not loadable
+                LOG.error(e.getMessage(), e);
+            }
+        }
+
+        try {
+            final Class<Applet> appletClass = (Class<Applet>) appletClassLoader_.loadClass(appletClassName);
+            applet_ = appletClass.newInstance();
+            applet_.setStub(new AppletStubImpl(getHtmlPageOrNull(), params,
+                    UrlUtils.toUrlUnsafe(baseUrl), UrlUtils.toUrlUnsafe(documentUrl)));
+            applet_.init();
+            applet_.start();
+        }
+        catch (final ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        catch (final InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+        catch (final IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

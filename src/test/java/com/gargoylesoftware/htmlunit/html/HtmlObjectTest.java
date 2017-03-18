@@ -14,17 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.AppletConfirmHandler;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectTest;
 
@@ -32,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectTest;
  * Tests for {@link HtmlObject}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlObjectTest extends SimpleWebTestCase {
@@ -68,5 +73,414 @@ public class HtmlObjectTest extends SimpleWebTestCase {
 
         client.getPage(getDefaultUrl());
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void simpleInstantiation() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/emptyApplet.html");
+
+        final HtmlPage page = getWebClient().getPage(url);
+        final HtmlObject objectNode = page.getHtmlElementById("myApp");
+
+        assertEquals("net.sourceforge.htmlunit.testapplets.EmptyApplet", objectNode.getApplet().getClass().getName());
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletBaseWithoutCodebase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/objects/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/objects/simpleAppletDoIt.html'"));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletBase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/codebaseApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/objects/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/objects/codebaseApplet.html'"));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkSubdirAppletBase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/subdir/codebaseApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/objects/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/objects/subdir/codebaseApplet.html'"));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkSubdirRelativeAppletBase() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/subdir/archiveRelativeApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/objects/subdir/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/objects/subdir/archiveRelativeApplet.html'"));
+    }
+
+    /**
+     * Tests the handling of parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletParams() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonParam1");
+        button.click();
+        button = page.getHtmlElementById("buttonParam2");
+        button.click();
+        button = page.getHtmlElementById("buttonParamCodebase");
+        button.click();
+        button = page.getHtmlElementById("buttonParamArchive");
+        button.click();
+
+        assertEquals(4, collectedStatus.size());
+        assertEquals("param1: 'value1'", collectedStatus.get(0));
+        assertEquals("param2: 'value2'", collectedStatus.get(1));
+        assertEquals("codebase: 'null'", collectedStatus.get(2));
+        assertEquals("archive: 'simpleAppletDoIt.jar'", collectedStatus.get(3));
+    }
+
+    /**
+     * Tests the handling of parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletOverwriteArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/subdir/codebaseParamApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonParam1");
+        button.click();
+        button = page.getHtmlElementById("buttonParam2");
+        button.click();
+        button = page.getHtmlElementById("buttonParamCodebase");
+        button.click();
+        button = page.getHtmlElementById("buttonParamArchive");
+        button.click();
+
+        assertEquals(4, collectedStatus.size());
+        assertEquals("param1: 'value1'", collectedStatus.get(0));
+        assertEquals("param2: 'value2'", collectedStatus.get(1));
+        assertEquals("codebase: '..'", collectedStatus.get(2));
+        assertEquals("archive: 'simpleAppletDoIt.jar'", collectedStatus.get(3));
+    }
+
+    /**
+     * Tests the processing of an applet definition with wrong archive.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletUnknownArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/unknownArchiveApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<DomElement> objects = page.getElementsByTagName("object");
+        assertEquals(1, objects.size());
+
+        final HtmlObject htmlObject = (HtmlObject) objects.get(0);
+        try {
+            htmlObject.getApplet();
+        }
+        catch (final Exception e) {
+            assertEquals("java.lang.ClassNotFoundException: net.sourceforge.htmlunit.testapplets.EmptyApplet",
+                e.getMessage());
+        }
+    }
+
+    /**
+     * Tests the processing of an applet definition with one valid and one wrong archive.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletIgnoreUnknownArchive() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/ignoreUnknownArchiveApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<DomElement> objects = page.getElementsByTagName("object");
+        assertEquals(1, objects.size());
+
+        final HtmlObject htmlObject = (HtmlObject) objects.get(0);
+        htmlObject.getApplet();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appletConfirmHandler() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        webClient.setAppletConfirmHandler(new AppletConfirmHandler() {
+            @Override
+            public boolean confirm(final HtmlApplet applet) {
+                return false;
+            }
+
+            @Override
+            public boolean confirm(final HtmlObject applet) {
+                assertEquals("simpleAppletDoIt.jar", applet.getArchiveAttribute());
+                return true;
+            }
+        });
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<DomElement> objects = page.getElementsByTagName("object");
+        assertEquals(1, objects.size());
+
+        final HtmlObject htmlObject = (HtmlObject) objects.get(0);
+        assertTrue(htmlObject.getApplet() != null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appletConfirmHandlerPermit() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        webClient.setAppletConfirmHandler(new AppletConfirmHandler() {
+            @Override
+            public boolean confirm(final HtmlApplet applet) {
+                return true;
+            }
+
+            @Override
+            public boolean confirm(final HtmlObject applet) {
+                assertEquals("simpleAppletDoIt.jar", applet.getArchiveAttribute());
+                return false;
+            }
+        });
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<DomElement> objects = page.getElementsByTagName("object");
+        assertEquals(1, objects.size());
+
+        final HtmlObject htmlObject = (HtmlObject) objects.get(0);
+        assertTrue(htmlObject.getApplet() == null);
     }
 }

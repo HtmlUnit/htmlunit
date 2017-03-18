@@ -19,7 +19,6 @@ import java.applet.AppletStub;
 import java.net.URL;
 import java.util.HashMap;
 
-import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -37,14 +36,14 @@ public class AppletStubImpl implements AppletStub {
 
     /**
      * Constructs a stub for an applet node.
-     * @param htmlApplet the applet node
+     * @param htmlPage the containing page
      * @param parameters app parameters of the applet
      * @param codebase codebase of the applet
      * @param documentbase documentbase of the applet
      */
-    public AppletStubImpl(final HtmlApplet htmlApplet,
+    public AppletStubImpl(final HtmlPage htmlPage,
             final HashMap<String, String> parameters, final URL codebase, final URL documentbase) {
-        appletContextImpl_ = new AppletContextImpl((HtmlPage) htmlApplet.getPage());
+        appletContextImpl_ = new AppletContextImpl(htmlPage);
         parameters_ = parameters;
         codebase_ = codebase;
         documentbase_ = documentbase;

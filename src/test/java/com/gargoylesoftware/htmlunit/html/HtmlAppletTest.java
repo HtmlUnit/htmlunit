@@ -46,7 +46,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     public void asText_appletDisabled() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
-            + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
+            + "  <applet id='myId'>Your browser doesn't support applets</applet>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
@@ -62,7 +62,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     public void asText_appletEnabled() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
-            + "  <applet id='myId'>Your browser doesn't support applets</object>\n"
+            + "  <applet id='myId'>Your browser doesn't support applets</applet>\n"
             + "</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
@@ -424,6 +424,11 @@ public class HtmlAppletTest extends SimpleWebTestCase {
                 assertEquals("simpleAppletDoIt.jar", applet.getArchiveAttribute());
                 return true;
             }
+
+            @Override
+            public boolean confirm(final HtmlObject applet) {
+                return false;
+            }
         });
 
         final HtmlPage page = webClient.getPage(url);
@@ -460,6 +465,11 @@ public class HtmlAppletTest extends SimpleWebTestCase {
             @Override
             public boolean confirm(final HtmlApplet applet) {
                 assertEquals("simpleAppletDoIt.jar", applet.getArchiveAttribute());
+                return false;
+            }
+
+            @Override
+            public boolean confirm(final HtmlObject applet) {
                 return false;
             }
         });

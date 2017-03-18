@@ -20,9 +20,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.applet.Applet;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
@@ -33,9 +36,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeJavaObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 
 /**
@@ -55,6 +61,60 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public HTMLObjectElement() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+
+        if (domNode.getPage().getWebClient().getOptions().isAppletEnabled()) {
+            try {
+                createAppletMethodAndProperties();
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void createAppletMethodAndProperties() throws Exception {
+        final HtmlObject appletNode = (HtmlObject) getDomNodeOrDie();
+        final Applet applet = appletNode.getApplet();
+        if (applet == null) {
+            return;
+        }
+
+        // Rhino should provide the possibility to declare delegate for Functions as it does for properties!!!
+        for (final Method method : applet.getClass().getMethods()) {
+            final Function f = new BaseFunction() {
+                @Override
+                public Object call(final Context cx, final Scriptable scope,
+                        final Scriptable thisObj, final Object[] args) {
+
+                    final Object[] realArgs = new Object[method.getParameterTypes().length];
+                    for (int i = 0; i < realArgs.length; i++) {
+                        final Object arg;
+                        if (i > args.length) {
+                            arg = null;
+                        }
+                        else {
+                            arg = Context.jsToJava(args[i], method.getParameterTypes()[i]);
+                        }
+                        realArgs[i] = arg;
+                    }
+                    try {
+                        return method.invoke(applet, realArgs);
+                    }
+                    catch (final Exception e) {
+                        throw Context.throwAsScriptRuntimeEx(e);
+                    }
+                }
+            };
+            ScriptableObject.defineProperty(this, method.getName(), f, ScriptableObject.READONLY);
+        }
     }
 
     /**
