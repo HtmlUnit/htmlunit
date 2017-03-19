@@ -180,7 +180,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void emptyStringHasNoCookies() {
-        assertEquals(0, UrlFetchWebConnection.parseCookies("www.foo.com", "").size());
+        assertTrue(UrlFetchWebConnection.parseCookies("www.foo.com", "").isEmpty());
     }
 
     /**

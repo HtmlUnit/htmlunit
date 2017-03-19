@@ -74,12 +74,12 @@ public class CookieManager3Test {
         // Disable cookies.
         mgr.setCookiesEnabled(false);
         assertFalse(mgr.isCookiesEnabled());
-        assertEquals(0, mgr.getCookies().size());
+        assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie after disabling cookies.
         final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
         mgr.addCookie(cookie2);
-        assertEquals(0, mgr.getCookies().size());
+        assertTrue(mgr.getCookies().isEmpty());
         assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10_000)));
 
         // Enable cookies again.

@@ -71,7 +71,7 @@ public class AttachmentTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, content1);
         conn.setResponse(URL_SECOND, content2, 200, "OK", "text/html", headers);
         client.setWebConnection(conn);
-        assertEquals(0, attachments.size());
+        assertTrue(attachments.isEmpty());
 
         final HtmlPage result = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = result.getAnchors().get(0);

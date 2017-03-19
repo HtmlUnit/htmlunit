@@ -249,7 +249,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     @Before
     public void before() {
-        assertEquals(0, getJavaScriptThreads().size());
+        assertTrue(getJavaScriptThreads().isEmpty());
     }
 
     /**

@@ -1040,7 +1040,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @Before
     public void before() {
         if (!isWebClientCached()) {
-            assertEquals(0, getJavaScriptThreads().size());
+            assertTrue(getJavaScriptThreads().isEmpty());
         }
     }
 
@@ -1059,7 +1059,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 webClient_.getCookieManager().clearCookies();
             }
             webClient_ = null;
-            assertEquals(0, getJavaScriptThreads().size());
+            assertTrue(getJavaScriptThreads().isEmpty());
         }
 
         if (useRealBrowser()) {

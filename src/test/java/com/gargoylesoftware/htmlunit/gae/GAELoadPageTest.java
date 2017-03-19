@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.gae;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -143,11 +144,11 @@ public class GAELoadPageTest {
             client.getPage(FIRST_URL);
             final long startTime = System.currentTimeMillis();
 
-            assertEquals(0, collectedAlerts.size());
+            assertTrue(collectedAlerts.isEmpty());
 
             // pump but not long enough
             int executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 2);
-            assertEquals(0, collectedAlerts.size());
+            assertTrue(collectedAlerts.isEmpty());
 
             // pump a bit more
             executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout + 1);

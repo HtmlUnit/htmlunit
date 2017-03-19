@@ -1128,7 +1128,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         // attribute value is case sensitive
         elements = form.getElementsByAttribute("input", "value", "pushMe");
-        assertEquals(0, elements.size());
+        assertTrue(elements.isEmpty());
 
         // selected='selected'
         elements = form.getElementsByAttribute("option", "selected", "selected");

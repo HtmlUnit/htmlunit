@@ -167,7 +167,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
         final HtmlPage newPage = anchor.click();
         assertEquals("new page should load", "Third", newPage.getTitleText());
-        assertEquals("frame should be gone", 0, newPage.getFrames().size());
+        assertTrue("frame should be gone", newPage.getFrames().isEmpty());
 
         mgr.waitForJobs(10_000);
         assertEquals("job manager should have no jobs left", 0, mgr.getJobCount());

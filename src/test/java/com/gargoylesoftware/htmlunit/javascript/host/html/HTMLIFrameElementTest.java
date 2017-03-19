@@ -135,6 +135,6 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
 
         // frame has to be gone
         frames = page.getFrames();
-        assertEquals(0, frames.size());
+        assertTrue(frames.isEmpty());
     }
 }

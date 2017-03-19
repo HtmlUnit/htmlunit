@@ -1359,7 +1359,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         }
         Thread.sleep(400);
-        assertEquals(0, getJavaScriptThreads().size());
+        assertTrue(getJavaScriptThreads().isEmpty());
     }
 
     /**
@@ -1382,7 +1382,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         loadPage(html);
 
         getWebClient().close();
-        assertEquals(0, getJavaScriptThreads().size());
+        assertTrue(getJavaScriptThreads().isEmpty());
     }
 
     /**

@@ -333,7 +333,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final HtmlHead head = (HtmlHead) title.getParentNode();
         assertEquals(results, head.getByXPath("//title"));
         assertEquals(results, head.getByXPath("./title"));
-        assertEquals(0, head.getByXPath("/title").size());
+        assertTrue(head.getByXPath("/title").isEmpty());
         assertEquals(results, head.getByXPath("title"));
 
         final HtmlElement div = page.getFirstByXPath("//div");

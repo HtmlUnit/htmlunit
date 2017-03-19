@@ -396,7 +396,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         client_.getPage(URL_FIRST);
         client_.close();
         client_.waitForBackgroundJavaScript(5000);
-        assertEquals(0, collectedAlerts.size());
+        assertTrue(collectedAlerts.isEmpty());
     }
 
     /**
@@ -430,7 +430,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         client_.waitForBackgroundJavaScript(5000);
         client_.waitForBackgroundJavaScript(5000);
 
-        assertEquals(0, collectedAlerts.size());
+        assertTrue(collectedAlerts.isEmpty());
     }
 
     /**
