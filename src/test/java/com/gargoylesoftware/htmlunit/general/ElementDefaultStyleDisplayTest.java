@@ -32,15 +32,13 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 @StandardsMode
 public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
 
-    private static String test(final String tagName) throws Exception {
+    private static String test(final String tagName) {
         return "<html><head><script>\n"
             + "  function test() {\n"
-            + "    try {\n"
-            + "      var e = document.createElement('" + tagName + "');\n"
-            + "      alert(window.getComputedStyle(e, null).display);\n"
-            + "      document.body.appendChild(e);\n"
-            + "      alert(window.getComputedStyle(e, null).display);\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "    var e = document.createElement('" + tagName + "');\n"
+            + "    alert(window.getComputedStyle(e, null).display);\n"
+            + "    document.body.appendChild(e);\n"
+            + "    alert(window.getComputedStyle(e, null).display);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
