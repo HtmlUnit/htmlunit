@@ -1466,4 +1466,19 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             t2.join();
         }
     }
+
+    /**
+     * Tests case where {@link JavaScriptEngine#registerWindowAndMaybeStartEventLoop(WebWindow)}
+     * is being called after {@link JavaScriptEngine#shutdown()}.
+     */
+    @Test
+    public void useAfterShutdownShouldNotCreateThreads() {
+        @SuppressWarnings("resource")
+        final WebClient webClient = getWebClient();
+        final WebWindow window = webClient.getCurrentWindow();
+        final JavaScriptEngine engine = webClient.getJavaScriptEngine();
+        webClient.close();
+        engine.registerWindowAndMaybeStartEventLoop(window);
+        assertTrue(getJavaScriptThreads().isEmpty());
+    }
 }

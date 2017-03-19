@@ -101,7 +101,7 @@ public class JavaScriptEngine {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
-    private final WebClient webClient_;
+    private WebClient webClient_;
     private final HtmlUnitContextFactory contextFactory_;
     private final JavaScriptConfiguration jsConfig_;
 
@@ -632,10 +632,12 @@ public class JavaScriptEngine {
      * @param webWindow the WebWindow to be registered.
      */
     public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
-        if (javaScriptExecutor_ == null) {
-            javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
+        if (webClient_ != null) {
+            if (javaScriptExecutor_ == null) {
+                javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
+            }
+            javaScriptExecutor_.addWindow(webWindow);
         }
-        javaScriptExecutor_.addWindow(webWindow);
     }
 
     /**
@@ -655,6 +657,7 @@ public class JavaScriptEngine {
      * Shutdown the JavaScriptEngine.
      */
     public void shutdown() {
+        webClient_ = null;
         if (javaScriptExecutor_ != null) {
             javaScriptExecutor_.shutdown();
             javaScriptExecutor_ = null;
