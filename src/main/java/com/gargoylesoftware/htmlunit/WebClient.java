@@ -498,7 +498,8 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
 
-        if (webResponse.getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+        if (webResponse.getStatusCode() == HttpStatus.SC_NO_CONTENT
+                || scriptEngine_ == null) {
             return webWindow.getEnclosedPage();
         }
 
@@ -1836,6 +1837,7 @@ public class WebClient implements Serializable, AutoCloseable {
         // start a new window that will start the thread again
         if (scriptEngine_ != null) {
             scriptEngine_.shutdown();
+            scriptEngine_ = null;
         }
 
         try {
