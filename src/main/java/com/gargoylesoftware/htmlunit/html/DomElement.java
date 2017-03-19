@@ -1390,7 +1390,11 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
         };
 
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final JavaScriptEngine engine = client.getJavaScriptEngine();
+        if (engine == null) {
+            return null;
+        }
+        final ContextFactory cf = engine.getContextFactory();
         final ScriptResult result = (ScriptResult) cf.call(action);
         if (event.isAborted(result)) {
             preventDefault();
