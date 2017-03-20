@@ -1468,7 +1468,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests case where {@link JavaScriptEngine#registerWindowAndMaybeStartEventLoop(WebWindow)}
+     * Test case where {@link JavaScriptEngine#registerWindowAndMaybeStartEventLoop(WebWindow)}
      * is being called after {@link JavaScriptEngine#shutdown()}.
      */
     @Test
