@@ -147,6 +147,23 @@
                 </executions>
             </plugin>
             <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <rules>
+                                <dependencyConvergence />
+                            </rules>
+                        </configuration>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.10</version>
@@ -777,7 +794,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <artifactId>httpmime</artifactId>
             <version>4.5.3</version>
         </dependency>
         <dependency>
@@ -786,16 +803,6 @@
             <version>4.5.3</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.10</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
@@ -852,6 +859,12 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.2</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- The presence of slf4j on the classpath during the unit tests triggers correct logging in Jetty. -->
         <dependency>
@@ -903,6 +916,12 @@
             <artifactId>selenium-ie-driver</artifactId>
             <version>3.3.1</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -933,6 +952,16 @@
             <artifactId>svnkit</artifactId>
             <version>1.8.12</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.jcraft</groupId>
+                    <artifactId>jsch.agentproxy.connector-factory</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.jcraft</groupId>
+                    <artifactId>jsch.agentproxy.svnkit-trilead-ssh2</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <distributionManagement>
