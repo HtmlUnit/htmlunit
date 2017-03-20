@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlUnitRegExpProxy}.
  * Test the various properties.
  *
- *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
