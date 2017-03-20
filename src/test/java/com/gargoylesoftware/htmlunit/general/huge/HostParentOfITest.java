@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.util.Collection;
 
 import org.junit.Test;
@@ -22,6 +24,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -371,6 +374,16 @@ public class HostParentOfITest extends HostParentOf {
             CHROME = "true")
     public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(FF)
+    public void _InstallTrigger_InstallTrigger() throws Exception {
+        test("InstallTrigger", "InstallTrigger");
     }
 
 }

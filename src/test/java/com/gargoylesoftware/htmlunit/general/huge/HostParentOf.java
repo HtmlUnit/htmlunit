@@ -101,7 +101,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
+System.out.println(html);
         loadPageWithAlerts2(html);
     }
 
