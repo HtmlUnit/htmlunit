@@ -304,13 +304,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse(html);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert(2);");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert(3);");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script4.js"), "alert(4);");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script5.js"), "alert(5);");
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(html);
     }
 
     /**

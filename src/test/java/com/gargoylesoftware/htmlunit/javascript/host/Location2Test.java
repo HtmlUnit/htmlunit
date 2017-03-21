@@ -314,7 +314,6 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     public void replaceLastInHistory() throws Exception {
         final String startContent = "<html><head><title>First Page</title></head><body></body></html>";
-        getMockWebConnection().setResponse(URL_FIRST, startContent);
 
         final String secondContent
             = "<html><head><title>Second Page</title><script>\n"
@@ -329,7 +328,7 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(URL_THIRD, thirdContent);
 
-        final WebDriver webdriver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver webdriver = loadPageWithAlerts2(startContent);
         webdriver.get(URL_SECOND.toExternalForm());
 
         assertEquals("Third Page", webdriver.getTitle());
@@ -381,10 +380,9 @@ public class Location2Test extends WebDriverTestCase {
 
         final String secondContent = "<html><head><title>Second Page</title></head><body></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        final WebDriver webdriver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver webdriver = loadPageWithAlerts2(firstContent);
 
         assertEquals("Second Page", webdriver.getTitle());
     }
@@ -552,10 +550,9 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
         final String secondHtml = "<html><body><script>alert('3');</script></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(firstHtml);
     }
 
     /**

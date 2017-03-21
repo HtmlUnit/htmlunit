@@ -80,10 +80,9 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, framesetContent);
         getMockWebConnection().setResponse(URL_SECOND, frameContent);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(framesetContent);
     }
 
 }

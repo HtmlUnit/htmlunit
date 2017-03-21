@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -68,11 +69,10 @@ public class XMLDocument3Test extends WebDriverTestCase {
         final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html);
         final List<NameValuePair> emptyList = Collections.emptyList();
         getMockWebConnection().setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -124,10 +124,9 @@ public class XMLDocument3Test extends WebDriverTestCase {
             + "</script></head><body onload='test(\"UTF-8\");test(\"ISO-8859-1\");'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=UTF-8", StandardCharsets.UTF_8);
-
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
-        loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=UTF-8", StandardCharsets.UTF_8);
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
 }

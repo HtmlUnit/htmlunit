@@ -1257,8 +1257,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='id2'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(html);
     }
 
     /**

@@ -95,11 +95,9 @@ public class PostponedActionTest extends WebDriverTestCase {
         final String secondContent
             = "<script>alert('second.html');</script>";
 
-        final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(firstContent);
     }
 
     /**

@@ -318,10 +318,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "<body></body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, mainHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(mainHtml);
     }
 
     /**
@@ -342,10 +341,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, mainHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(mainHtml);
     }
 
     /**
@@ -372,10 +370,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "<body onload='test();'></body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, mainHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(mainHtml);
     }
 
     /**

@@ -105,11 +105,10 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
-        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
         assertEquals("First", driver.getTitle());
     }
 
@@ -161,7 +160,6 @@ public class Window3Test extends WebDriverTestCase {
             + "myVariable = 'first'"
             + "  </script><iframe name='left' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
 
         final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Second</title></head><body><script>\n"
@@ -181,7 +179,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<body onload='doTest()'></body></html>";
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
-        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
         assertEquals("First", driver.getTitle());
     }
 
@@ -205,7 +203,6 @@ public class Window3Test extends WebDriverTestCase {
             + "  </frameset>\n"
             + "  <frame src='" + urlFourth + "' name='fourth'>\n"
             + "</frameset></html>";
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
 
         final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>second</title></head><body><script>\n"
@@ -229,7 +226,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></body></html>";
         getMockWebConnection().setResponse(urlFourth, fourthContent);
 
-        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
         assertEquals("first", driver.getTitle());
     }
 
@@ -267,7 +264,6 @@ public class Window3Test extends WebDriverTestCase {
             + "  </frameset>\n"
             + "  <frame src='" + urlFourth + "' name='fourth'>\n"
             + "</frameset></html>";
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
 
         final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>second</title></head><body><p>second</p></body></html>";
@@ -293,7 +289,7 @@ public class Window3Test extends WebDriverTestCase {
         }
         setExpectedAlerts(expectedAlerts);
 
-        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
         assertEquals("first", driver.getTitle());
     }
 
@@ -1109,14 +1105,13 @@ public class Window3Test extends WebDriverTestCase {
         final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Second</title></head><body></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
         setExpectedAlerts();
 
-        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
 
         driver.findElement(By.id("clickme")).click();
 
@@ -1490,10 +1485,9 @@ public class Window3Test extends WebDriverTestCase {
         final String secondHtml = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Second</title></head><body></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPageWithAlerts2(firstHtml);
 
         driver.findElement(By.id("clickme")).click();
     }
