@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -272,10 +271,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlUnitDriver huDriver = (HtmlUnitDriver) driver;
-            final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
-            field.setAccessible(true);
-            final WebWindow webWindow = (WebWindow) field.get(huDriver);
+            final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
             final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
             assertEquals("BackCompat".equals(getExpectedAlerts()[0]), page.isQuirksMode());
         }
