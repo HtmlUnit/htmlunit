@@ -66,10 +66,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument) {\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    }\n"
-            + "    alert('createDocument not available');\n"
+            + "    return document.implementation.createDocument('', '', null);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

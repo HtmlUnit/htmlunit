@@ -967,7 +967,6 @@ public class ElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        if (!document.implementation.createDocument) { alert('createDocument not available'); return }\n"
             + "        var doc = document.implementation.createDocument(\"\", \"\", null);\n"
             + "        var element = doc.createElementNS(\'uri:test\', \'test:element\');\n"
             + "        element.setAttributeNS(\'uri:test\', \'test:attribute\', 'test value');\n"

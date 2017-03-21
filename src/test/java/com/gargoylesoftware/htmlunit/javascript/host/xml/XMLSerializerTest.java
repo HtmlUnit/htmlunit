@@ -213,13 +213,11 @@ public class XMLSerializerTest extends WebDriverTestCase {
             IE = {"<foo />", "<foo />"})
     public void document() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    if (document.implementation.createDocument) {\n"
-            + "      var doc = document.implementation.createDocument('', 'foo', null);\n"
-            + "      alert(new XMLSerializer().serializeToString(doc));\n"
-            + "      alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
-            + "    } else { alert('createDocument not available'); }\n"
-            + "  }\n"
+            + "function test() {\n"
+            + "  var doc = document.implementation.createDocument('', 'foo', null);\n"
+            + "  alert(new XMLSerializer().serializeToString(doc));\n"
+            + "  alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

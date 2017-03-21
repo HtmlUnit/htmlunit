@@ -254,10 +254,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void preserveWhiteSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    try {\n"
-            + "      var doc = document.implementation.createDocument('', '', null);\n"
-            + "      alert(doc.preserveWhiteSpace);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
+            + "    alert(doc.preserveWhiteSpace);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
