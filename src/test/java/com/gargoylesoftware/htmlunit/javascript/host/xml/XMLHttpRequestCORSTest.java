@@ -108,7 +108,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/simple1"));
     }
 
     /**
@@ -142,7 +142,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/simple1"));
     }
 
     /**
@@ -176,7 +176,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/simple1"));
     }
 
     /**
@@ -210,7 +210,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/simple1"));
     }
 
     /**
@@ -286,7 +286,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/simple1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/simple1"));
     }
 
     /**
@@ -424,7 +424,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/preflight1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/preflight1"));
     }
 
     /**
@@ -513,7 +513,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/preflight1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/preflight1"));
     }
 
     /**
@@ -553,7 +553,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/preflight1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/preflight1"));
     }
 
     /**
@@ -578,7 +578,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/withCredentials1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/withCredentials1"));
     }
 
     /**
@@ -827,7 +827,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/withCredentials1"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "/withCredentials1"));
     }
 
     /**

@@ -163,7 +163,7 @@ public class DomTextTest extends SimpleWebTestCase {
                 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
         final String xml = page.getHtmlElementById("foo").getFirstChild().asXml().trim();
         assertEquals(expectedValues.length, xml.length());
         int index = 0;

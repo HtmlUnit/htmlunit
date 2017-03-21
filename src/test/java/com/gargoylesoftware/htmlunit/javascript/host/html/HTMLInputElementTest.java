@@ -623,7 +623,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        assertEquals(getDefaultUrl() + "?textfield1=blue", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "?textfield1=blue", driver.getCurrentUrl());
     }
 
     /**
@@ -649,7 +649,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        assertEquals(getDefaultUrl() + "?textfield1=foo", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "?textfield1=foo", driver.getCurrentUrl());
     }
 
     /**
@@ -735,7 +735,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
 
-        assertEquals(getDefaultUrl() + "?changed=foo&button1=pushme", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "?changed=foo&button1=pushme", driver.getCurrentUrl());
     }
 
     /**

@@ -231,7 +231,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String jsContent = "alert('got here');\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.js"), jsContent,
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.js"), jsContent,
                 "text/javascript");
 
         final HtmlPage page = loadPageWithAlerts(html);
@@ -292,7 +292,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             loadPageWithAlerts(content1);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage().indexOf(getDefaultUrl().toString()) > -1);
+            assertTrue(e.getMessage().indexOf(URL_FIRST.toString()) > -1);
         }
 
         // external script
@@ -306,13 +306,13 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String jsContent = "a.foo = 213;\n";
 
-        webConnection.setResponse(getDefaultUrl(), content2);
-        final URL urlScript = new URL(getDefaultUrl(), "foo.js");
+        webConnection.setResponse(URL_FIRST, content2);
+        final URL urlScript = new URL(URL_FIRST, "foo.js");
         webConnection.setResponse(urlScript, jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
         try {
-            client.getPage(getDefaultUrl());
+            client.getPage(URL_FIRST);
         }
         catch (final Exception e) {
             assertTrue(e.getMessage(), e.getMessage().indexOf(urlScript.toString()) > -1);
@@ -364,22 +364,22 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
          */
         final String jsContent = "alert('\u8868');\n";
 
-        webConnection.setResponse(getDefaultUrl(), htmlContent);
+        webConnection.setResponse(URL_FIRST, htmlContent);
 
         webConnection.setResponse(
-            new URL(getDefaultUrl(), "hidden"),
+            new URL(URL_FIRST, "hidden"),
             htmlContent2);
 
         webConnection.setResponse(
-            new URL(getDefaultUrl(), "foo.js"),
-            // make SJIS bytes as responsebody
+            new URL(URL_FIRST, "foo.js"),
+            // make SJIS bytes as response body
             new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
 
         /*
          * foo2.js is same with foo.js
          */
         webConnection.setResponse(
-            new URL(getDefaultUrl(), "foo2.js"),
+            new URL(URL_FIRST, "foo2.js"),
             // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"), "8859_1"),
             "text/javascript");
@@ -393,7 +393,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         /*
          * detect encoding from meta tag
          */
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlScript htmlScript = page.getHtmlElementById("script1");
 
         assertNotNull(htmlScript);
@@ -403,7 +403,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
          * detect encoding from charset attribute of script tag
          */
         collectedAlerts.clear();
-        final HtmlPage page2 = client.getPage(new URL(getDefaultUrl(), "hidden"));
+        final HtmlPage page2 = client.getPage(new URL(URL_FIRST, "hidden"));
         final HtmlScript htmlScript2 = page2.getHtmlElementById("script2");
 
         assertNotNull(htmlScript2);
@@ -426,7 +426,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+        webConnection.setResponse(new URL(URL_FIRST, "foo.js"),
                 bytes.toByteArray(), 200, "OK", "text/javascript", headers);
 
         final String htmlContent
@@ -454,7 +454,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair("Content-Length", "0"));
             headers.add(new NameValuePair("Content-Encoding", "gzip"));
-            webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+            webConnection.setResponse(new URL(URL_FIRST, "foo.js"),
                     bytes.toByteArray(), 200, "OK", "text/javascript", headers);
         }
 
@@ -482,7 +482,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair("Content-Encoding", "gzip"));
-            webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+            webConnection.setResponse(new URL(URL_FIRST, "foo.js"),
                     bytes.toByteArray(), 200, "OK", "text/javascript", headers);
         }
 
@@ -716,7 +716,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
         client.setJavaScriptEngine(countingJavaScriptEngine);
 
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals(1, countingJavaScriptEngine.getExecutionCount());
         assertEquals(0, countingJavaScriptEngine.getCallCount());
@@ -1206,7 +1206,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(new WebRequest(getDefaultUrl(), HttpMethod.POST));
+        final HtmlPage page = client.getPage(new WebRequest(URL_FIRST, HttpMethod.POST));
         return page;
     }
 

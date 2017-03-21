@@ -613,14 +613,6 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Gets the default URL used for the tests.
-     * @return the url
-     */
-    protected static URL getDefaultUrl() {
-        return URL_FIRST;
-    }
-
-    /**
      * Prepare the environment.
      * Rhino has localized error message... for instance for French
      */

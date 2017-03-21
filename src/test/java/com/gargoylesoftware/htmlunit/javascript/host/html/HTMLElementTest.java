@@ -2755,7 +2755,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final String page2 = "<html><body><script>alert('page2 loaded');</script></body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page2"), page2);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "page2"), page2);
         loadPageWithAlerts2(html);
     }
 

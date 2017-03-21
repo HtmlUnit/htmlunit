@@ -122,8 +122,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
         loadPageWithAlerts2(html);
     }
 
@@ -148,8 +148,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
                 + "  <h1>third</h1>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
 
         loadPageWithAlerts2(html);
     }
@@ -178,9 +178,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  <h1>fourth</h1>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "fourth.html"), fourthHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "fourth.html"), fourthHtml);
 
         final WebDriver driver = loadPage2(html);
         final List<String> actualAlerts = getCollectedAlerts(driver);
@@ -255,8 +255,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         final String secondHtml = "<html><body onload='alert(\"foo\")'></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(new URL(getDefaultUrl(), "frame1.html"), firstHtml);
-        webConnection.setResponse(new URL(getDefaultUrl(), "frame2.html"), secondHtml);
+        webConnection.setResponse(new URL(URL_FIRST, "frame1.html"), firstHtml);
+        webConnection.setResponse(new URL(URL_FIRST, "frame2.html"), secondHtml);
 
         final WebDriver driver = loadPage2(html);
         driver.switchTo().frame(0);

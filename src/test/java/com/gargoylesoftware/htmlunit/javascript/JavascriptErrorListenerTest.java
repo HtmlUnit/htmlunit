@@ -148,9 +148,9 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         }
 
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
-        assertEquals(getDefaultUrl() + "notExisting.js, "
+        assertEquals(URL_FIRST + "notExisting.js, "
                 + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
-                + "500 Server Error for " + getDefaultUrl() + "notExisting.js",
+                + "500 Server Error for " + URL_FIRST + "notExisting.js",
                 javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("", javaScriptErrorListener.getMalformedScriptURLErrors());
         assertEquals("", javaScriptErrorListener.getTimeoutErrors());

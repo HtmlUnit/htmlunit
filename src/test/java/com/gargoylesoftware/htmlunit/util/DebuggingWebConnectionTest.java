@@ -102,13 +102,13 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         final MockWebConnection mockConnection = new MockWebConnection();
         final List<NameValuePair> responseHeaders = Arrays.asList(
             new NameValuePair("Content-Encoding", "gzip"));
-        mockConnection.setResponse(getDefaultUrl(), baos.toByteArray(), 200, "OK", "application/javascript",
+        mockConnection.setResponse(URL_FIRST, baos.toByteArray(), 200, "OK", "application/javascript",
             responseHeaders);
 
         final String dirName = "test-" + getClass().getSimpleName();
         try (DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName)) {
 
-            final WebRequest request = new WebRequest(getDefaultUrl());
+            final WebRequest request = new WebRequest(URL_FIRST);
             final WebResponse response = dwc.getResponse(request); // was throwing here
             assertNull(response.getResponseHeaderValue("Content-Encoding"));
 

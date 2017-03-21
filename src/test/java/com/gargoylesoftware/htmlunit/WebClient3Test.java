@@ -53,7 +53,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     public void bug3012067_npe() throws Exception {
         final String html = "<html><body>\n"
-            + "<form action='" + getDefaultUrl() + "#foo' method='post'></form>\n"
+            + "<form action='" + URL_FIRST + "#foo' method='post'></form>\n"
             + "<script>\n"
             + "function doWork() {\n"
             + "  var f = document.forms[0];\n"
@@ -87,7 +87,7 @@ public class WebClient3Test extends WebDriverTestCase {
             binaryContent[i] = (byte) (random.nextInt(Byte.MAX_VALUE));
         }
         mockConnection.setDefaultResponse(binaryContent, 200, "OK", "application/octet-stream");
-        final URL urlFoo = new URL(getDefaultUrl(), "foo.html");
+        final URL urlFoo = new URL(URL_FIRST, "foo.html");
         mockConnection.setResponse(urlFoo, "<html></html>");
 
         final WebDriver driver = loadPage2(html);
@@ -110,7 +110,7 @@ public class WebClient3Test extends WebDriverTestCase {
     public void escapeRequestQuery() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
-        loadPage2("", new URL(getDefaultUrl(), "foo?a=<b>i</b>"));
+        loadPage2("", new URL(URL_FIRST, "foo?a=<b>i</b>"));
     }
 
     /**
@@ -127,7 +127,7 @@ public class WebClient3Test extends WebDriverTestCase {
     public void escapeRequestQuery2a() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
-        final URL url = new URL(getDefaultUrl(), "foo.png?cb=%%RANDOM_NUMBER%%");
+        final URL url = new URL(URL_FIRST, "foo.png?cb=%%RANDOM_NUMBER%%");
         loadPage2("", url);
 
         assertEquals(url, getMockWebConnection().getLastWebRequest().getUrl());
@@ -145,7 +145,7 @@ public class WebClient3Test extends WebDriverTestCase {
     public void escapeRequestQuery2b() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
-        final URL url = new URL(getDefaultUrl(), "foo.png?cb=%%RANDOM_NUMBER%%");
+        final URL url = new URL(URL_FIRST, "foo.png?cb=%%RANDOM_NUMBER%%");
         loadPage2("", url);
     }
 
@@ -398,7 +398,7 @@ public class WebClient3Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl() + "a%20b.js"), "alert('hello');", "text/javascript");
+        conn.setResponse(new URL(URL_FIRST, "a%20b.js"), "alert('hello');", "text/javascript");
 
         loadPageWithAlerts2(html);
     }

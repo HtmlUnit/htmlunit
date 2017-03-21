@@ -58,7 +58,7 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        final URL imageUrl = new URL(getDefaultUrl(), "foo.png");
+        final URL imageUrl = new URL(URL_FIRST, "foo.png");
         conn.setResponse(imageUrl, "foo", "image/png");
 
         loadPageWithAlerts(html);

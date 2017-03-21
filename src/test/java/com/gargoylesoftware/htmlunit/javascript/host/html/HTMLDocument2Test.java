@@ -238,7 +238,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final URL url = getDefaultUrl();
+        final URL url = URL_FIRST;
         getMockWebConnection().setResponse(url, html);
 
         final CookieManager mgr = webClient.getCookieManager();

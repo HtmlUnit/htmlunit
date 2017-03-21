@@ -100,7 +100,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.html"), secondHtml);
 
         final WebDriver wd = loadPageWithAlerts2(html);
 
@@ -180,9 +180,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         final MockWebConnection mockWebConnection = getMockWebConnection();
 
         final List<NameValuePair> redirectHeaders = Arrays.asList(new NameValuePair("Location", "/nextPage"));
-        mockWebConnection.setResponse(new URL(getDefaultUrl() + "test"), "", 302, "Found", null, redirectHeaders);
+        mockWebConnection.setResponse(new URL(URL_FIRST, "test"), "", 302, "Found", null, redirectHeaders);
 
-        mockWebConnection.setResponse(new URL(getDefaultUrl() + "nextPage"),
+        mockWebConnection.setResponse(new URL(URL_FIRST, "nextPage"),
             "<html><head><title>next page</title></head></html>");
 
         final WebDriver wd = loadPageWithAlerts2(html);

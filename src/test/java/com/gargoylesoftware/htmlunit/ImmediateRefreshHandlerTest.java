@@ -45,7 +45,7 @@ public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
                 String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='0;url="
-                        + getDefaultUrl().toExternalForm()
+                        + URL_FIRST.toExternalForm()
                         + "'>\n";
                 }
                 content += "</head><body></body></html>";
@@ -57,7 +57,7 @@ public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
         };
         client.setWebConnection(webConnection);
 
-        final WebRequest request = new WebRequest(getDefaultUrl());
+        final WebRequest request = new WebRequest(URL_FIRST);
         request.setHttpMethod(HttpMethod.POST);
         client.getPage(request);
     }

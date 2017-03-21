@@ -1195,7 +1195,7 @@ public class Window2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).click();
 
-        assertEquals(getDefaultUrl() + "page2", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "page2", driver.getCurrentUrl());
     }
 
     /**
@@ -1540,7 +1540,7 @@ public class Window2Test extends WebDriverTestCase {
         assertEquals("Second", driver.getTitle());
 
         assertEquals(1, driver.getWindowHandles().size());
-        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(URL_FIRST));
         assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
     }
 
@@ -1570,7 +1570,7 @@ public class Window2Test extends WebDriverTestCase {
         assertEquals("Second", driver.getTitle());
 
         assertEquals(1, driver.getWindowHandles().size());
-        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(URL_FIRST));
         assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
     }
 
@@ -1600,7 +1600,7 @@ public class Window2Test extends WebDriverTestCase {
         assertEquals("Second", driver.getTitle());
 
         assertEquals(1, driver.getWindowHandles().size());
-        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(URL_FIRST));
         assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
     }
 

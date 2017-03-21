@@ -62,7 +62,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
         final WebClient client = getWebClientWithMockWebConnection();
         try {
-            client.getPage(getDefaultUrl());
+            client.getPage(URL_FIRST);
             fail("FailingHttpStatusCodeException expected");
         }
         catch (final FailingHttpStatusCodeException e) {

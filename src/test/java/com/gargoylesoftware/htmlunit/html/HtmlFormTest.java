@@ -87,7 +87,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
-        assertEquals("url", getDefaultUrl() + "?foo=2&button=foo", secondPage.getUrl());
+        assertEquals("url", URL_FIRST + "?foo=2&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -268,10 +268,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        getMockWebConnection().setResponse(getDefaultUrl(), firstHtml);
+        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
         getMockWebConnection().setDefaultResponse("");
 
-        final HtmlPage firstPage = client.getPage(getDefaultUrl());
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -970,7 +970,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(html);
 
-        final WebRequest request = new WebRequest(getDefaultUrl(), HttpMethod.POST);
+        final WebRequest request = new WebRequest(URL_FIRST, HttpMethod.POST);
 
         final HtmlPage page = client.getPage(request);
         final HtmlInput submitButton = page.getHtmlElementById("submitButton");
@@ -1082,7 +1082,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     private void urlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
         throws Exception {
-        urlAfterSubmit(getDefaultUrl(), method, action, getDefaultUrl() + expectedUrlEnd);
+        urlAfterSubmit(URL_FIRST, method, action, URL_FIRST + expectedUrlEnd);
     }
 
     /**
@@ -1144,7 +1144,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             contentType += ";charset=" + headerCharset;
         }
         webConnection.setDefaultResponse(html, 200, "ok", contentType);
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
         assertEquals(firstPageEncoding, page.getCharset().name());
@@ -1345,10 +1345,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void urlAfterSubmit2() throws Exception {
-        final URL url = new URL(getDefaultUrl(), "test.html");
+        final URL url = new URL(URL_FIRST, "test.html");
         urlAfterSubmit(url, "post", "?hi", url + "?hi");
-        urlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
-            getDefaultUrl() + "test.html?hi");
+        urlAfterSubmit(new URL(URL_FIRST, "test.html?there"), "post", "?hi",
+                URL_FIRST + "test.html?hi");
     }
 
     /**

@@ -46,7 +46,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             IE = {"[object CSSImportRule]", "§§URL§§second/",
                 "all", "0", "[object CSSStyleSheet]"})
     public void getImportFromCssRulesCollection_absolute() throws Exception {
-        getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
+        getImportFromCssRulesCollection(URL_FIRST, URL_SECOND.toExternalForm(), URL_SECOND);
     }
 
     /**

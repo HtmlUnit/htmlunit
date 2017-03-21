@@ -123,11 +123,11 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body></body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "frame.html"), frame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frame);
         getMockWebConnection().setDefaultResponse(""); // for all XHR
 
         // just to avoid unused variable warning when the next line is commented
-        getMockWebConnection().setResponse(getDefaultUrl(), html);
+        getMockWebConnection().setResponse(URL_FIRST, html);
         loadPage2(html);
     }
 
@@ -253,7 +253,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlFoo = new URL(URL_FIRST + "foo.xml");
+        final URL urlFoo = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             "text/plain");
         loadPageWithAlerts2(html);
@@ -281,7 +281,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlFoo = new URL(URL_FIRST + "foo.xml");
+        final URL urlFoo = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             contentType);
         loadPageWithAlerts2(html);
@@ -305,7 +305,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlFoo = new URL(URL_FIRST + "foo.xml");
+        final URL urlFoo = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             "text/plain");
         loadPageWithAlerts2(html);

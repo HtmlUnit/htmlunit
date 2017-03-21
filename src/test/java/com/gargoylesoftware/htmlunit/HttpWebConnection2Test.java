@@ -53,7 +53,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver driver = loadPage2(html, getDefaultUrl());
+        final WebDriver driver = loadPage2(html, URL_FIRST);
         driver.findElement(By.id("submit")).click();
 
         // better would be to look at the HTTP traffic directly
@@ -63,7 +63,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertSame(StandardCharsets.ISO_8859_1, lastRequest.getCharset());
         assertEquals(null, lastRequest.getProxyHost());
         assertEquals(null, lastRequest.getRequestBody());
-        assertEquals(getDefaultUrl() + "foo", lastRequest.getUrl());
+        assertEquals(URL_FIRST + "foo", lastRequest.getUrl());
         final String expectedHeaders = ""
             + "Connection: keep-alive\n"
             + "Content-Length: 48\n"

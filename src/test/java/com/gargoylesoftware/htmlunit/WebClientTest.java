@@ -98,7 +98,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         try {
-            client.getPage(new WebRequest(getDefaultUrl(), HttpMethod.POST));
+            client.getPage(new WebRequest(URL_FIRST, HttpMethod.POST));
             fail("Expected FailingHttpStatusCodeException");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -140,7 +140,7 @@ public class WebClientTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(getDefaultUrl());
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
 
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
@@ -1119,7 +1119,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void loadWebResponseInto() throws Exception {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(
-                "<html><head><title>first</title></head><body></body></html>", getDefaultUrl());
+                "<html><head><title>first</title></head><body></body></html>", URL_FIRST);
 
         final Page page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
         assertTrue(HtmlPage.class.isInstance(page));
@@ -2249,14 +2249,14 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</script>\n"
                 + "</head><body></body></html>";
 
-        getMockWebConnection().setResponse(getDefaultUrl(), html);
+        getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setDefaultResponse(html2);
 
         @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final int initialJSThreads = getJavaScriptThreads().size();
         webClient.setWebConnection(getMockWebConnection());
-        webClient.getPage(getDefaultUrl());
+        webClient.getPage(URL_FIRST);
 
         int nbJSThreads = getJavaScriptThreads().size();
         final int nbNewJSThreads = nbJSThreads - initialJSThreads;

@@ -770,7 +770,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPage2(final String html,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
-        return loadPage2(html, getDefaultUrl(), servlets);
+        return loadPage2(html, URL_FIRST, servlets);
     }
 
     /**
@@ -914,7 +914,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPageWithAlerts2(final String html,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
-        return loadPageWithAlerts2(html, getDefaultUrl(), DEFAULT_WAIT_TIME, servlets);
+        return loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME, servlets);
     }
 
     /**
@@ -929,7 +929,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
 
         final WebDriver driver = loadPage2(html, url, servlets);

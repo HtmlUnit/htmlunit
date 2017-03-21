@@ -67,10 +67,10 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(getDefaultUrl(), html);
+        webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
-        client.getPage(getDefaultUrl());
+        client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -130,10 +130,10 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(getDefaultUrl(), html);
+        webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
-        client.getPage(getDefaultUrl());
+        client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -170,10 +170,10 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(getDefaultUrl(), html);
+        webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
-        client.getPage(getDefaultUrl());
+        client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

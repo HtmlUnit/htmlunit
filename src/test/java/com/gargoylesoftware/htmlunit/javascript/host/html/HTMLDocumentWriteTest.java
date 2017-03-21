@@ -318,7 +318,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"foo", "foo2"};
 
-        final URL scriptUrl = new URL(URL_FIRST + "script.js");
+        final URL scriptUrl = new URL(URL_FIRST, "script.js");
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);

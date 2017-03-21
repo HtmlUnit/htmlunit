@@ -50,7 +50,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void get() throws Exception {
-        doGetTest(getDefaultUrl());
+        doGetTest(URL_FIRST);
     }
 
     /**
@@ -59,7 +59,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void get_withQueryParameters() throws Exception {
-        final URL url = new URL(getDefaultUrl() + "?a=b&c=d&e=f");
+        final URL url = new URL(URL_FIRST, "?a=b&c=d&e=f");
         doGetTest(url);
     }
 
@@ -102,7 +102,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final HtmlPage page = loadPage(html, getDefaultUrl());
+        final HtmlPage page = loadPage(html, URL_FIRST);
         page.getHtmlElementById("submit").click();
         return getMockWebConnection().getLastWebRequest();
     }
@@ -136,11 +136,11 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
                 200, "OK", "text/html", responseHeader);
 
         // verify expectations with "normal" HTMLUnit
-        loadPageWithAlerts(getDefaultUrl());
+        loadPageWithAlerts(URL_FIRST);
 
         getWebClient().getCookieManager().clearCookies();
         getWebClient().setWebConnection(new UrlFetchWebConnection(getWebClient()));
-        loadPageWithAlerts(getDefaultUrl());
+        loadPageWithAlerts(URL_FIRST);
     }
 
     static void compareRequests(final WebRequest referenceRequest, final WebRequest newRequest) {

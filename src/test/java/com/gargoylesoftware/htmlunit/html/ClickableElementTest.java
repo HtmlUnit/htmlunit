@@ -90,7 +90,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         client.setAlertHandler(alertHandler);
 
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlElement clickable = page.getHtmlElementById("clickId");
 
         for (int i = 0; i < numClicks; i++) {

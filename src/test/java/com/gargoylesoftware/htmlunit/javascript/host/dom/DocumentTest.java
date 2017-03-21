@@ -553,7 +553,7 @@ public class DocumentTest extends WebDriverTestCase {
             = "doTest = function() {\n"
             + "  alert(top.document.getElementById('script1').src);\n"
             + "}";
-        getMockWebConnection().setResponse(new URL(URL_FIRST + "script/"), script, "text/javascript");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script/"), script, "text/javascript");
 
         loadPageWithAlerts2(html);
     }
@@ -995,7 +995,7 @@ public class DocumentTest extends WebDriverTestCase {
         final String html = "<html><body><script src=\"" + URL_FIRST + "script\"></script></body></html>";
 
         final String script = "alert(document.getElementsByTagName('script').length);\n";
-        getMockWebConnection().setResponse(new URL(URL_FIRST + "script"), script, "text/javascript");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script"), script, "text/javascript");
 
         loadPageWithAlerts2(html);
     }

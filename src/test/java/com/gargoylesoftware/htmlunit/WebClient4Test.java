@@ -159,7 +159,7 @@ public class WebClient4Test extends WebServerTestCase {
         servlets.put("/*", ServeBodySlowlyServlet.class);
         startWebServer("./", new String[0], servlets);
 
-        final Page page = getWebClient().getPage(getDefaultUrl());
+        final Page page = getWebClient().getPage(URL_FIRST);
         final long loadTime = page.getWebResponse().getLoadTime();
         assertTrue("Load time: " + loadTime + ", last request time: " + ServeBodySlowlyServlet.LastRequestTime_,
                 loadTime >= ServeBodySlowlyServlet.LastRequestTime_);
@@ -324,7 +324,7 @@ public class WebClient4Test extends WebServerTestCase {
         client.getOptions().setTimeout(500);
 
         try {
-            client.getPage(getDefaultUrl());
+            client.getPage(URL_FIRST);
             fail("timeout expected!");
         }
         catch (final SocketTimeoutException e) {
@@ -333,7 +333,7 @@ public class WebClient4Test extends WebServerTestCase {
 
         // now configure higher timeout allowing to get the page
         client.getOptions().setTimeout(5000);
-        client.getPage(getDefaultUrl());
+        client.getPage(URL_FIRST);
     }
 
     /**

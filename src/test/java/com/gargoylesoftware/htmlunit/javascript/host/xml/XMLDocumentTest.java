@@ -708,7 +708,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
         final String xml = "<order><book><title/></book><cd/><dvd/></order>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST + "foo.xml"), xml, "text/xml");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.xml"), xml, "text/xml");
         loadPageWithAlerts2(html);
     }
 

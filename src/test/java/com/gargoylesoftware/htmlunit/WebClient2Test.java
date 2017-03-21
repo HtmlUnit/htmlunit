@@ -252,7 +252,7 @@ public class WebClient2Test extends SimpleWebTestCase {
         final String lang = client.getBrowserVersion().getBrowserLanguage();
         try {
             client.getBrowserVersion().setBrowserLanguage("fr");
-            client.getPage(getDefaultUrl());
+            client.getPage(URL_FIRST);
             assertEquals("fr", getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language"));
         }
         finally {

@@ -1411,7 +1411,7 @@ public class WindowTest extends SimpleWebTestCase {
             @Override
             public boolean handleEvent(final Page page, final String returnValue) {
                 final String[] expectedRequests = {""};
-                assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+                assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(URL_FIRST));
                 return true;
             }
         };
@@ -1419,7 +1419,7 @@ public class WindowTest extends SimpleWebTestCase {
         loadPageWithAlerts(html);
 
         final String[] expectedRequests = {"", "foo.html"};
-        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(URL_FIRST));
     }
 
     /**

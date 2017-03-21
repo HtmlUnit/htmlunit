@@ -191,7 +191,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final WebDriver webdriver = loadPageWithAlerts2(html);
         webdriver.findElement(By.id("clickMe")).click();
 
-        assertEquals(getDefaultUrl() + "foo?submit=button", webdriver.getCurrentUrl());
+        assertEquals(URL_FIRST + "foo?submit=button", webdriver.getCurrentUrl());
         assertSame("method", HttpMethod.GET, getMockWebConnection().getLastMethod());
     }
 

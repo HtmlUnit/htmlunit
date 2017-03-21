@@ -95,7 +95,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "97")
     public void transform() throws Exception {
-        final URL urlThird = new URL(URL_FIRST + "third/");
+        final URL urlThird = new URL(URL_FIRST, "third/");
 
         final String html = ""
             + "  function test() {\n"

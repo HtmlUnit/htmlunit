@@ -182,14 +182,14 @@ public class StorageTest extends WebDriverTestCase {
             + "  alert(localStorage.getItem('hello'));\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
-        getMockWebConnection().setResponse(getDefaultUrl(), html2);
+        getMockWebConnection().setResponse(URL_FIRST, html2);
 
         releaseResources();
         // we have to control 2nd driver by ourself
         WebDriver driver2 = null;
         try {
             driver2 = buildWebDriver();
-            driver2.get(getDefaultUrl().toString());
+            driver2.get(URL_FIRST.toString());
             final List<String> newAlerts = getCollectedAlerts(driver2);
             alerts.addAll(newAlerts);
             assertEquals(getExpectedAlerts(), alerts);

@@ -71,10 +71,10 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
         final String html = "<html><body><script>while (</script></body></html>";
         getMockWebConnection().setDefaultResponse(html);
-        webClient.getPage(getDefaultUrl());
+        webClient.getPage(URL_FIRST);
 
         assertEquals("net.sourceforge.htmlunit.corejs.javascript.EvaluatorException: "
-            + "Unexpected end of file (script in " + getDefaultUrl() + " from (1, 21) to (1, 37)#1)\n",
+            + "Unexpected end of file (script in " + URL_FIRST + " from (1, 21) to (1, 37)#1)\n",
                 scriptExceptions.toString());
     }
 }

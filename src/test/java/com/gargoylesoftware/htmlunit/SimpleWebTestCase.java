@@ -69,7 +69,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         if (generateTest_browserVersion_.get() == null) {
             generateTest_browserVersion_.set(browserVersion);
         }
-        return loadPage(browserVersion, html, collectedAlerts, getDefaultUrl());
+        return loadPage(browserVersion, html, collectedAlerts, URL_FIRST);
     }
 
     /**
@@ -82,7 +82,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     public final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
-        return loadPage(getBrowserVersion(), html, collectedAlerts, getDefaultUrl());
+        return loadPage(getBrowserVersion(), html, collectedAlerts, URL_FIRST);
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     protected final HtmlPage loadPage(final WebClient client,
             final String html, final List<String> collectedAlerts) throws Exception {
 
-        return loadPage(client, html, collectedAlerts, getDefaultUrl());
+        return loadPage(client, html, collectedAlerts, URL_FIRST);
     }
 
     /**
@@ -204,7 +204,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
-        return loadPageWithAlerts(html, getDefaultUrl(), -1);
+        return loadPageWithAlerts(html, URL_FIRST, -1);
     }
 
     /**

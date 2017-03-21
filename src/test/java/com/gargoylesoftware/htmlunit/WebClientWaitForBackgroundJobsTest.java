@@ -584,12 +584,12 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         };
 
         webConnection.setDefaultResponse(html);
-        webConnection.setResponse(new URL(getDefaultUrl(), "iframe.html"), iframe);
-        webConnection.setResponse(new URL(getDefaultUrl(), "page3.html"), page3);
-        webConnection.setResponseAsGenericHtml(new URL(getDefaultUrl(), "delayedPage4.html"), "page 4");
+        webConnection.setResponse(new URL(URL_FIRST, "iframe.html"), iframe);
+        webConnection.setResponse(new URL(URL_FIRST, "page3.html"), page3);
+        webConnection.setResponseAsGenericHtml(new URL(URL_FIRST, "delayedPage4.html"), "page 4");
         client.setWebConnection(webConnection);
 
-        client.getPage(getDefaultUrl());
+        client.getPage(URL_FIRST);
 
         threadSynchronizer.waitForState("/delayedPage4.html requested");
         threadSynchronizer.setState("ready to call waitForBGJS");

@@ -367,14 +367,14 @@ public class WebClient6Test extends WebDriverTestCase {
                 + "<html><body><a href='redirect.html'>redirect</a></body></html>";
         final int reqCount = getMockWebConnection().getRequestCount();
 
-        final URL url = new URL(getDefaultUrl(), "page2.html");
+        final URL url = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(url, html);
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", redirectUrl));
         getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
 
@@ -396,14 +396,14 @@ public class WebClient6Test extends WebDriverTestCase {
                 + "</form></body></html>";
         final int reqCount = getMockWebConnection().getRequestCount();
 
-        final URL url = new URL(getDefaultUrl(), "page2.html");
+        final URL url = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(url, html);
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", redirectUrl));
         getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("postBtn")).click();
 
@@ -446,7 +446,7 @@ public class WebClient6Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
-        assertEquals(getDefaultUrl() + "page2", driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "page2", driver.getCurrentUrl());
     }
 
     /**
@@ -457,7 +457,7 @@ public class WebClient6Test extends WebDriverTestCase {
     public void redirect302ChangePageUrl() throws Exception {
         final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
 
-        final URL url = new URL(getDefaultUrl(), "page2.html");
+        final URL url = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(url, html);
 
         final List<NameValuePair> headers = new ArrayList<>();
@@ -478,7 +478,7 @@ public class WebClient6Test extends WebDriverTestCase {
     public void redirect302UrlsInQuery() throws Exception {
         final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
 
-        final URL url = new URL(getDefaultUrl(), "page2.html");
+        final URL url = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(url, html);
 
         final List<NameValuePair> headers = new ArrayList<>();

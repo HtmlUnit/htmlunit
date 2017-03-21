@@ -31,7 +31,7 @@ public class StringWebResponseTest extends SimpleWebTestCase {
      */
     @Test
     public void charset() {
-        final StringWebResponse webResponse = new StringWebResponse("hello", StandardCharsets.UTF_8, getDefaultUrl());
+        final StringWebResponse webResponse = new StringWebResponse("hello", StandardCharsets.UTF_8, URL_FIRST);
         assertSame(StandardCharsets.UTF_8, webResponse.getContentCharset());
     }
 
@@ -43,7 +43,7 @@ public class StringWebResponseTest extends SimpleWebTestCase {
         final String content = "<html><head>\n"
                 + "<meta http-equiv='Content-Type' content='text/html; charset=windows-1250' />\n"
                 + "</head><body>\u010C\u00CDSLO</body></html>";
-        final StringWebResponse webResponse = new StringWebResponse(content, StandardCharsets.UTF_8, getDefaultUrl());
+        final StringWebResponse webResponse = new StringWebResponse(content, StandardCharsets.UTF_8, URL_FIRST);
 
         assertSame(StandardCharsets.UTF_8, webResponse.getContentCharset());
         assertEquals(content, webResponse.getContentAsString());

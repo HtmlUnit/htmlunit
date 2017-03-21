@@ -59,7 +59,7 @@ public class WorkerTest extends WebDriverTestCase {
 
         final String workerJs = "postMessage('worker loaded');\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
         loadPageWithAlerts2(html, 2000);
     }
@@ -85,7 +85,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "  postMessage(workerResult);\n"
                 + "}\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
         loadPageWithAlerts2(html, 2000);
     }
@@ -112,9 +112,9 @@ public class WorkerTest extends WebDriverTestCase {
         final String scriptToImportJs1 = "postMessage('in imported script1');\n";
         final String scriptToImportJs2 = "postMessage('in imported script2');\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "worker.js"), workerJs);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "scriptToImport1.js"), scriptToImportJs1);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "scriptToImport2.js"), scriptToImportJs2);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport2.js"), scriptToImportJs2);
 
         loadPageWithAlerts2(html, 2000);
     }
@@ -139,7 +139,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "postMessage('' + self);\n"
                 + "postMessage('' + (this == self));\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
         loadPageWithAlerts2(html, 2000);
     }

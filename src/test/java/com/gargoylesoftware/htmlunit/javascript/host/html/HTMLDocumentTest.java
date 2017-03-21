@@ -649,9 +649,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(getDefaultUrl(), html, 200, "OK", "text/html", responseHeaders);
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", "text/html", responseHeaders);
 
-        loadPageWithAlerts2(getDefaultUrl());
+        loadPageWithAlerts2(URL_FIRST);
     }
 
     /**

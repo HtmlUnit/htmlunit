@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.WebTestCase.URL_FIRST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -39,7 +40,7 @@ public class WebRequestTest {
      */
     @Test
     public void headers() throws Exception {
-        final WebRequest request = new WebRequest(WebTestCase.getDefaultUrl());
+        final WebRequest request = new WebRequest(URL_FIRST);
         final int initialSize = request.getAdditionalHeaders().size();
         request.setAdditionalHeader("Accept", "nothing");
         assertEquals(initialSize, request.getAdditionalHeaders().size());

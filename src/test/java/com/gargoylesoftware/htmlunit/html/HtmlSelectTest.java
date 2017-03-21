@@ -75,7 +75,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", getDefaultUrl() + "?select1=option2&button=foo", secondPage.getUrl());
+        assertEquals("url", URL_FIRST + "?select1=option2&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -107,7 +107,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", getDefaultUrl() + "?button=foo", secondPage.getUrl());
+        assertEquals("url", URL_FIRST + "?button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -140,7 +140,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", getDefaultUrl() + "?select1=option3&button=foo", secondPage.getUrl());
+        assertEquals("url", URL_FIRST + "?select1=option3&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -174,7 +174,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", getDefaultUrl() + "?select1=option1&select1=option2&select1=option3&button=foo",
+        assertEquals("url", URL_FIRST + "?select1=option1&select1=option2&select1=option3&button=foo",
                 secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);

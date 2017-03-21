@@ -56,10 +56,10 @@ public class XHtmlPageTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(getDefaultUrl(), html, "text/xml");
+        conn.setResponse(URL_FIRST, html, "text/xml");
         client.setWebConnection(conn);
 
-        final XHtmlPage page = client.getPage(getDefaultUrl());
+        final XHtmlPage page = client.getPage(URL_FIRST);
         final DomNode body = page.getDocumentElement().getFirstChild().getNextSibling();
         final DomNode div = body.getFirstChild();
 

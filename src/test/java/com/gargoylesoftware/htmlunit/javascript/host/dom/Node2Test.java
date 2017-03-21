@@ -125,7 +125,7 @@ public class Node2Test extends SimpleWebTestCase {
 
         final URL expectedURL;
         if (getBrowserVersion().isIE()) {
-            expectedURL = getDefaultUrl();
+            expectedURL = URL_FIRST;
         }
         else {
             expectedURL = URL_SECOND;

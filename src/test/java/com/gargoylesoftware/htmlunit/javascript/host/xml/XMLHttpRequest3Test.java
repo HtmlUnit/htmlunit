@@ -173,7 +173,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             }
         };
         conn.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
@@ -217,7 +217,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);

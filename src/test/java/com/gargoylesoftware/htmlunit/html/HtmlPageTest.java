@@ -116,7 +116,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         expectedParameters.add(new NameValuePair("hidden1", "hidden1"));
         expectedParameters.add(new NameValuePair("submitInput1", "push me"));
 
-        final URL expectedUrl = new URL(getDefaultUrl() + "formSubmit");
+        final URL expectedUrl = new URL(URL_FIRST, "formSubmit");
         final URL actualUrl = secondPage.getUrl();
         assertEquals("url", expectedUrl, actualUrl);
         assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
@@ -322,8 +322,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final String urlString = getDefaultUrl().toExternalForm();
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final String urlString = URL_FIRST.toExternalForm();
+        final HtmlPage page = client.getPage(URL_FIRST);
 
         assertEquals(urlString, page.getFullyQualifiedUrl(""));
         assertEquals(urlString + "foo", page.getFullyQualifiedUrl("foo"));
@@ -998,7 +998,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
                 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
         final String xml = page.asXml();
         assertTrue(xml.contains("<?xml "));
         assertTrue(xml.contains(unicodeString));
@@ -1244,7 +1244,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         };
         client.setWebConnection(webConnection);
 
-        final WebRequest request = new WebRequest(getDefaultUrl());
+        final WebRequest request = new WebRequest(URL_FIRST);
         request.setHttpMethod(HttpMethod.POST);
         client.getPage(request);
     }

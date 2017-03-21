@@ -536,7 +536,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             "text/xml");
@@ -644,7 +644,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         final WebDriver webdriver = loadPageWithAlerts2(html);
-        assertEquals(getDefaultUrl().toString(), webdriver.getCurrentUrl());
+        assertEquals(URL_FIRST.toString(), webdriver.getCurrentUrl());
         assertEquals("foo", webdriver.getTitle());
     }
 
@@ -672,7 +672,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlPage2 = new URL(getDefaultUrl() + "foo.xml.txt");
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml.txt");
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             "text/plain");
@@ -702,7 +702,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlPage2 = new URL(getDefaultUrl() + "foo.xml.txt");
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml.txt");
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             "text/plain");
@@ -895,7 +895,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final URL urlPage2 = new URL(URL_FIRST + "foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", "text/xml");
         loadPage2(html);
 

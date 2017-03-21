@@ -247,7 +247,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "testFrame.html"), frameContent);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "testFrame.html"), frameContent);
         loadPageWithAlerts2(html);
     }
 

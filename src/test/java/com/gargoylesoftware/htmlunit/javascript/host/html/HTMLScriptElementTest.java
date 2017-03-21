@@ -1020,9 +1020,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<script src='js3.js'></script>\n"
             + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js3.js"), "alert(3);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "alert(1);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "alert(2);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js3.js"), "alert(3);");
 
         loadPageWithAlerts2(html);
     }
@@ -1044,8 +1044,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<script src='js2.js'></script>\n"
             + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "alert(1);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "alert(2);");
 
         loadPageWithAlerts2(html);
     }
@@ -1066,8 +1066,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<script src='js2.js'></script>\n"
             + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "alert(1);");
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "alert(2);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "alert(1);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "alert(2);");
 
         loadPageWithAlerts2(html);
     }
@@ -1090,7 +1090,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "alert(1);\n"
             + "</script></body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js.js"), "alert(3);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "alert(3);");
 
         loadPageWithAlerts2(html);
     }
@@ -1116,7 +1116,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js.js"), "alert('from script');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "alert('from script');");
 
         loadPageWithAlerts2(html);
     }
@@ -1154,8 +1154,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "</head><body onload='doTest()'>\n"
             + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "");
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "");
 
         loadPageWithAlerts2(html);
     }
@@ -1196,8 +1196,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "</head><body onload='doTest()'>\n"
             + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js1.js"), "");
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "js2.js"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "");
 
         loadPageWithAlerts2(html);
     }

@@ -447,7 +447,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
 
         final String xml = "<order><book><title/></book><cd/><dvd/></order>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST + "foo.xml"), xml, "text/xml");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.xml"), xml, "text/xml");
         loadPageWithAlerts2(createTestHTML(html));
     }
 

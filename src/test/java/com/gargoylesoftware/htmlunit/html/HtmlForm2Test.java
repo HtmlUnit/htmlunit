@@ -171,12 +171,11 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  <a href='bug.html?k\u00F6nig' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
-        final URL url = getDefaultUrl();
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(html, "text/html", StandardCharsets.ISO_8859_1);
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(url.toExternalForm(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST.toExternalForm(), driver.getCurrentUrl());
         driver.findElement(By.id("myLink")).click();
         final String linkSuffix;
         if (getBrowserVersion().isIE()) {
@@ -185,7 +184,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         else {
             linkSuffix = "bug.html?k%F6nig";
         }
-        assertEquals(url.toExternalForm() + linkSuffix, driver.getCurrentUrl());
+        assertEquals(URL_FIRST.toExternalForm() + linkSuffix, driver.getCurrentUrl());
     }
 
     /**
@@ -230,8 +229,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ByTagName("input")).click();
 
         final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
-        final String expectedUrl = getDefaultUrl().toExternalForm();
-        assertEquals(expectedUrl, requestedUrl);
+        assertEquals(URL_FIRST.toExternalForm(), requestedUrl);
     }
 
     /**
@@ -254,8 +252,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ByTagName("input")).click();
 
         final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
-        final String expectedUrl = getDefaultUrl().toExternalForm();
-        assertEquals(expectedUrl, requestedUrl);
+        assertEquals(URL_FIRST.toExternalForm(), requestedUrl);
     }
 
     /**

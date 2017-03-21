@@ -71,9 +71,9 @@ public class NoHttpResponseTest {
         // TODO [IE] does not run in real IE (browser waits for a looooooong time)
         public void callSubmitInButtonAndReturnTrue() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(getDefaultUrl(), html);
-            MiniServer.configureDropConnection(mockWebConnection, new URL(getDefaultUrl() + "page2?textfield="));
-            final URL urlRightSubmit = new URL(getDefaultUrl() + "page2?textfield=new+value");
+            mockWebConnection.setResponse(URL_FIRST, html);
+            MiniServer.configureDropConnection(mockWebConnection, new URL(URL_FIRST, "page2?textfield="));
+            final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
 
             final WebDriver driver = getWebDriver();
@@ -81,7 +81,7 @@ public class NoHttpResponseTest {
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
             miniServer.start();
             try {
-                driver.get(getDefaultUrl().toString());
+                driver.get(URL_FIRST.toString());
                 driver.findElement(By.id("loginButton")).click();
                 assertEquals("right submit", driver.getTitle());
             }
@@ -103,13 +103,13 @@ public class NoHttpResponseTest {
         @Test(expected = FailingHttpStatusCodeException.class)
         public void callSubmitInButtonAndReturnTrue() throws Throwable {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(getDefaultUrl(), html);
-            MiniServer.configureDropConnection(mockWebConnection, new URL(getDefaultUrl() + "page2?textfield="));
+            mockWebConnection.setResponse(URL_FIRST, html);
+            MiniServer.configureDropConnection(mockWebConnection, new URL(URL_FIRST, "page2?textfield="));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
             miniServer.start();
             try {
-                final HtmlPage page = getWebClient().getPage(getDefaultUrl());
+                final HtmlPage page = getWebClient().getPage(URL_FIRST);
                 page.getElementById("loginButton").click();
             }
             finally {

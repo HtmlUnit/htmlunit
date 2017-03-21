@@ -45,7 +45,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
     public void simpleHTMLString() throws Exception {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(
-            "<html><head><title>TITLE</title></head><body><div>TEST</div></body></html>", getDefaultUrl());
+            "<html><head><title>TITLE</title></head><body><div>TEST</div></body></html>", URL_FIRST);
 
         final HtmlPage page = HTMLParser.parseHtml(webResponse, webClient.getCurrentWindow());
 

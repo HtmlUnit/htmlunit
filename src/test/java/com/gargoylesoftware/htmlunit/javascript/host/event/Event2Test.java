@@ -506,7 +506,7 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         driver.findElement(By.id("mySubmit"));
-        assertEquals(getDefaultUrl().toExternalForm(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST.toExternalForm(), driver.getCurrentUrl());
     }
 
     /**

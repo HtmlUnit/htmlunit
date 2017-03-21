@@ -229,7 +229,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "  <a id='click' href='#1'>change hash</a>\n"
             + "</body></html>";
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
 

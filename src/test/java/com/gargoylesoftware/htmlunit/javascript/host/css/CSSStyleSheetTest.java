@@ -112,14 +112,13 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null"})
     public void href() throws Exception {
-        final String baseUrl = getDefaultUrl().toExternalForm();
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <link href='" + baseUrl + "style1.css' type='text/css'></link>\n"
-            + "    <link href='" + baseUrl + "style2.css' rel='stylesheet'></link>\n"
-            + "    <link href='" + baseUrl + "style3.css'></link>\n"
+            + "    <link href='" + URL_FIRST + "style1.css' type='text/css'></link>\n"
+            + "    <link href='" + URL_FIRST + "style2.css' rel='stylesheet'></link>\n"
+            + "    <link href='" + URL_FIRST + "style3.css'></link>\n"
             + "    <link href='style4.css' rel='stylesheet'></link>\n"
             + "    <style>div.x { color: red; }</style>\n"
             + "  </head>\n" + "  <body>\n"
@@ -133,12 +132,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "style1.css"), "", "text/css");
-        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), "", "text/css");
-        conn.setResponse(new URL(getDefaultUrl(), "style3.css"), "", "text/css");
-        conn.setResponse(new URL(getDefaultUrl(), "style4.css"), "", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style1.css"), "", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), "", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style3.css"), "", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style4.css"), "", "text/css");
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "test.html"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
     }
 
     /**
@@ -152,19 +151,18 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             IE = {"2", "§§URL§§style1.css 1", "§§URL§§style5.css 1"})
     @NotYetImplemented(IE)
     public void hrefWrongContentType() throws Exception {
-        final String baseUrl = getDefaultUrl().toExternalForm();
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <link href='" + baseUrl + "style1.css' rel='stylesheet' type='text/css'></link>\n"
-            + "    <link href='" + baseUrl + "style2.css' rel='stylesheet' type='text/css'></link>\n"
-            + "    <link href='" + baseUrl + "style3.css' rel='stylesheet' type='text/css'></link>\n"
-            + "    <link href='" + baseUrl + "style4.css' rel='stylesheet' type='text/css'></link>\n"
-            + "    <link href='" + baseUrl + "style5.css' rel='stylesheet' ></link>\n"
-            + "    <link href='" + baseUrl + "style6.css' rel='stylesheet' ></link>\n"
-            + "    <link href='" + baseUrl + "style7.css' rel='stylesheet' ></link>\n"
-            + "    <link href='" + baseUrl + "style8.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + URL_FIRST + "style1.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + URL_FIRST + "style2.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + URL_FIRST + "style3.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + URL_FIRST + "style4.css' rel='stylesheet' type='text/css'></link>\n"
+            + "    <link href='" + URL_FIRST + "style5.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + URL_FIRST + "style6.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + URL_FIRST + "style7.css' rel='stylesheet' ></link>\n"
+            + "    <link href='" + URL_FIRST + "style8.css' rel='stylesheet' ></link>\n"
             + "  </head>\n" + "  <body>\n"
             + "    <script>\n"
             + "      alert(document.styleSheets.length);\n"
@@ -176,16 +174,16 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "style1.css"), "div { color: red; }", "text/css");
-        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), "div { color: red; }", "text/html");
-        conn.setResponse(new URL(getDefaultUrl(), "style3.css"), "div { color: red; }", "text/plain");
-        conn.setResponse(new URL(getDefaultUrl(), "style4.css"), "div { color: red; }", "");
-        conn.setResponse(new URL(getDefaultUrl(), "style5.css"), "div { color: red; }", "text/css");
-        conn.setResponse(new URL(getDefaultUrl(), "style6.css"), "div { color: red; }", "text/html");
-        conn.setResponse(new URL(getDefaultUrl(), "style7.css"), "div { color: red; }", "text/plain");
-        conn.setResponse(new URL(getDefaultUrl(), "style8.css"), "div { color: red; }", "");
+        conn.setResponse(new URL(URL_FIRST, "style1.css"), "div { color: red; }", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(URL_FIRST, "style3.css"), "div { color: red; }", "text/plain");
+        conn.setResponse(new URL(URL_FIRST, "style4.css"), "div { color: red; }", "");
+        conn.setResponse(new URL(URL_FIRST, "style5.css"), "div { color: red; }", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style6.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(URL_FIRST, "style7.css"), "div { color: red; }", "text/plain");
+        conn.setResponse(new URL(URL_FIRST, "style8.css"), "div { color: red; }", "");
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "test.html"));
+        loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
     }
 
     /**
@@ -1206,10 +1204,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             maxInMemory = webClient.getOptions().getMaxInMemory();
         }
 
-        final String baseUrl = getDefaultUrl().toExternalForm();
         final String html = "<html>\n"
             + "  <head>\n"
-            + "    <link href='" + baseUrl + "style.css' rel='stylesheet'></link>\n"
+            + "    <link href='" + URL_FIRST + "style.css' rel='stylesheet'></link>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <a href='second.html'>second page</a>\n"
@@ -1218,7 +1215,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
 
         final String html2 = "<html>\n"
                 + "  <head>\n"
-                + "    <link href='" + baseUrl + "style.css' rel='stylesheet'></link>\n"
+                + "    <link href='" + URL_FIRST + "style.css' rel='stylesheet'></link>\n"
                 + "  </head>\n"
                 + "  <body class='someRed'>\n"
                 + "    <script>\n"
@@ -1234,14 +1231,14 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         final String bigContent = ".someRed { color: red; }" + StringUtils.repeat(' ', maxInMemory);
-        conn.setResponse(new URL(getDefaultUrl(), "style2.css"), bigContent, 200, "OK", "text/css", headers2);
-        conn.setResponse(new URL(getDefaultUrl(), "second.html"), html2);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), bigContent, 200, "OK", "text/css", headers2);
+        conn.setResponse(new URL(URL_FIRST, "second.html"), html2);
 
         final List<NameValuePair> headers1 = new ArrayList<>();
         headers1.add(new NameValuePair("Location", "style2.css"));
-        conn.setResponse(new URL(getDefaultUrl(), "style.css"), "", 302, "Moved", "text/css", headers1);
+        conn.setResponse(new URL(URL_FIRST, "style.css"), "", 302, "Moved", "text/css", headers1);
 
-        final WebDriver driver = loadPage2(html, new URL(getDefaultUrl(), "test.html"));
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "test.html"));
         driver.findElement(By.linkText("second page")).click();
         verifyAlerts(driver, getExpectedAlerts());
     }

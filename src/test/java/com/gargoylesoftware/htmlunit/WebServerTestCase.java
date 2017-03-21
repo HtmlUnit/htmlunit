@@ -276,7 +276,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPage(final String html) throws Exception {
-        return loadPage(html, getDefaultUrl());
+        return loadPage(html, URL_FIRST);
     }
 
     /**

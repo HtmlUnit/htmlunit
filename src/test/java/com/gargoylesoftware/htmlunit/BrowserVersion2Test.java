@@ -45,7 +45,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             IE = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderGetUrl() throws Exception {
         final String html = "<html><body>Response</body></html>";
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
     }
@@ -65,7 +65,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "  <a id='clickme' href='javascript: window.open(\"" + URL_SECOND + "\")'>Click me</a>\n"
                 + "</body></html>";
-        final WebDriver driver = loadPage2(html, getDefaultUrl());
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
         // because real browsers are doing the open async, we have to be a bit patient
         Thread.sleep(DEFAULT_WAIT_TIME);
@@ -91,7 +91,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "  <a id='clickme' href='test.html'>Click me</a>\n"
                 + "</body></html>";
-        final WebDriver driver = loadPage2(html, getDefaultUrl());
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
 
         assertEquals(getExpectedAlerts()[0], Integer.toString(getMockWebConnection().getRequestCount()));
@@ -113,7 +113,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "  <a id='clickme' href='test.html' type='text/plain'>Click me</a>\n"
                 + "</body></html>";
-        final WebDriver driver = loadPage2(html, getDefaultUrl());
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
 
         assertEquals(2, getMockWebConnection().getRequestCount());
@@ -139,7 +139,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "  <img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -164,7 +164,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -183,7 +183,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -202,7 +202,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -227,7 +227,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -254,7 +254,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final int requests = getMockWebConnection().getRequestCount();
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         final int count = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(count, getMockWebConnection().getRequestCount() - requests);
@@ -282,7 +282,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final int requests = getMockWebConnection().getRequestCount();
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         final int count = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(count, getMockWebConnection().getRequestCount() - requests);
@@ -311,7 +311,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final int requests = getMockWebConnection().getRequestCount();
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         final int count = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(count, getMockWebConnection().getRequestCount() - requests);
@@ -340,7 +340,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final int requests = getMockWebConnection().getRequestCount();
-        loadPage2(html, getDefaultUrl());
+        loadPage2(html);
 
         final int count = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(count, getMockWebConnection().getRequestCount() - requests);

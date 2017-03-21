@@ -95,7 +95,7 @@ public class Location2Test extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.html"), html2);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.html"), html2);
         loadPageWithAlerts2(html1);
     }
 
@@ -207,7 +207,7 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "#<a>foobar</a>",
             FF = "#%3Ca%3Efoobar%3C/a%3E")
     public void hash() throws Exception {
-        checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
+        checkHash(URL_FIRST + "?#<a>foobar</a>");
     }
 
     /**
@@ -217,7 +217,7 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             IE = "#")
     public void emptyHash() throws Exception {
-        checkHash(getDefaultUrl().toExternalForm() + "#");
+        checkHash(URL_FIRST + "#");
     }
 
     /**
@@ -226,7 +226,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void noHash() throws Exception {
-        checkHash(getDefaultUrl().toExternalForm());
+        checkHash(URL_FIRST.toExternalForm());
     }
 
     private void checkHash(final String url) throws Exception {
@@ -281,7 +281,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     public void setHrefWithOnlyHash2() throws Exception {
-        final String html = "<script>document.location.href = '" + getDefaultUrl() + "#x';</script>";
+        final String html = "<script>document.location.href = '" + URL_FIRST + "#x';</script>";
         loadPageWithAlerts2(html);
     }
 
@@ -492,7 +492,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body></body></html>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST + "foo.txt"), "bla bla", "text/plain");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.txt"), "bla bla", "text/plain");
         final WebDriver driver = loadPage2(html, URL_FIRST);
         assertTrue(driver.getPageSource().contains("bla bla"));
     }
@@ -572,8 +572,8 @@ public class Location2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
 
-        assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(getDefaultUrl()));
-        assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
+        assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(URL_FIRST));
+        assertEquals(new URL(URL_FIRST, "foo2.html").toString(), driver.getCurrentUrl());
     }
 
     /**
@@ -592,8 +592,8 @@ public class Location2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
 
-        assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(getDefaultUrl()));
-        assertEquals(new URL(getDefaultUrl(), "foo3.html").toString(), driver.getCurrentUrl());
+        assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(URL_FIRST));
+        assertEquals(new URL(URL_FIRST, "foo3.html").toString(), driver.getCurrentUrl());
     }
 
     /**
@@ -670,7 +670,7 @@ public class Location2Test extends WebDriverTestCase {
             + "  <button id='click' onclick='location.hash=1'>change hash</button>\n"
             + "</body></html>";
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
 
@@ -746,10 +746,10 @@ public class Location2Test extends WebDriverTestCase {
         final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
-        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
+        conn.setResponse(new URL(URL_FIRST, "content.html"), content);
+        conn.setResponse(new URL(URL_FIRST, "content.html"), content);
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
 
         assertEquals(1, conn.getRequestCount());
@@ -793,10 +793,10 @@ public class Location2Test extends WebDriverTestCase {
         final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "menu.html"), menu);
-        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
+        conn.setResponse(new URL(URL_FIRST, "menu.html"), menu);
+        conn.setResponse(new URL(URL_FIRST, "content.html"), content);
 
-        expandExpectedAlertsVariables(getDefaultUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
 
         assertEquals(2, conn.getRequestCount());

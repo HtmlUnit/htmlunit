@@ -65,8 +65,8 @@ public class PostponedActionTest extends WebDriverTestCase {
             = "<script>alert('third.html');</script>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "frame2.html"), secondContent);
-        conn.setResponse(new URL(getDefaultUrl(), "frame3.html"), thirdContent);
+        conn.setResponse(new URL(URL_FIRST, "frame2.html"), secondContent);
+        conn.setResponse(new URL(URL_FIRST, "frame3.html"), thirdContent);
 
         loadPageWithAlerts2(html);
     }
@@ -132,7 +132,7 @@ public class PostponedActionTest extends WebDriverTestCase {
                 = "<script>alert('iframe.html')</script>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(getDefaultUrl(), "iframe.html"), secondContent);
+        conn.setResponse(new URL(URL_FIRST, "iframe.html"), secondContent);
 
         loadPageWithAlerts2(html);
     }

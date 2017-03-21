@@ -836,7 +836,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         driver.findElement(By.id("x")).click();
         // caution: IE7 doesn't put a trailing "?"
-        assertEquals(getDefaultUrl() + expectedFile, driver.getCurrentUrl().replaceAll("\\?", ""));
+        assertEquals(URL_FIRST + expectedFile, driver.getCurrentUrl().replaceAll("\\?", ""));
     }
 
     /**
@@ -1222,8 +1222,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
                 + "<script src='script" + i + ".js'></script>\n"
                 + "<script>alert('page" + i + "');</script>\n"
                 + "</head></html>";
-            connection.setResponse(new URL(getDefaultUrl(), "foo" + i), htmlX);
-            connection.setResponse(new URL(getDefaultUrl(), "script" + i + ".js"), "", JAVASCRIPT_MIME_TYPE);
+            connection.setResponse(new URL(URL_FIRST, "foo" + i), htmlX);
+            connection.setResponse(new URL(URL_FIRST, "script" + i + ".js"), "", JAVASCRIPT_MIME_TYPE);
         }
         final String[] expectedRequests = getExpectedAlerts();
 
@@ -1231,7 +1231,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html); // forces to wait, what is needed for FFdriver
 
         // NB: comparing the sequence order here is not 100% safe with a real browser
-        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(URL_FIRST));
 
         assertEquals("Page 4", driver.getTitle());
     }
@@ -1339,8 +1339,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final String page2 = "<html><body><script>alert('page2 loaded');</script></body></html>";
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page1"), page1);
-        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page2"), page2);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "page1"), page1);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "page2"), page2);
         loadPageWithAlerts2(container);
     }
 
@@ -1421,7 +1421,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
         getMockWebConnection().setDefaultResponse(html2);
 
-        loadPageWithAlerts2(html, getDefaultUrl(), 5000);
+        loadPageWithAlerts2(html, URL_FIRST, 5000);
     }
 
     /**
@@ -1462,7 +1462,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
         getMockWebConnection().setDefaultResponse(html2);
 
-        loadPageWithAlerts2(html, getDefaultUrl(), 5000);
+        loadPageWithAlerts2(html, URL_FIRST, 5000);
     }
 
     /**

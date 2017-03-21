@@ -136,7 +136,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -241,7 +241,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(getDefaultUrl());
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -445,7 +445,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlAnchor a1 = page.getHtmlElementById("a1");
         final HtmlPage secondPage = a1.click();
-        assertEquals(getDefaultUrl(), secondPage.getUrl());
+        assertEquals(URL_FIRST, secondPage.getUrl());
     }
 
     /**
@@ -469,7 +469,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlAnchor a1 = page.getHtmlElementById("a1");
         final HtmlPage secondPage = a1.click();
-        assertEquals(getDefaultUrl(), secondPage.getUrl());
+        assertEquals(URL_FIRST, secondPage.getUrl());
     }
 
     /**
@@ -485,7 +485,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlAnchor a1 = page.getHtmlElementById("a1");
         final HtmlPage secondPage = a1.click();
-        assertEquals(getDefaultUrl(), secondPage.getUrl());
+        assertEquals(URL_FIRST, secondPage.getUrl());
     }
 
     /**
@@ -500,12 +500,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
                 + "</body></html>";
         HtmlPage page = loadPage(html);
         HtmlPage targetPage = page.getHtmlElementById("a").click();
-        assertEquals(new URL(getDefaultUrl(), "#a"), page.getUrl());
+        assertEquals(new URL(URL_FIRST, "#a"), page.getUrl());
         assertEquals(page.getEnclosingWindow(), targetPage.getEnclosingWindow());
 
         page = loadPage(html);
         targetPage = page.getHtmlElementById("a_target").click();
-        assertEquals(new URL(getDefaultUrl(), "#target"), targetPage.getUrl());
+        assertEquals(new URL(URL_FIRST, "#target"), targetPage.getUrl());
         assertFalse(page.getEnclosingWindow().equals(targetPage.getEnclosingWindow()));
     }
 
@@ -562,7 +562,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final HtmlElement span = page.getHtmlElementById("theSpan");
         assertEquals("span", span.getTagName());
         final HtmlPage page2 = span.click();
-        assertEquals(new URL(getDefaultUrl(), "page2.html"), page2.getUrl());
+        assertEquals(new URL(URL_FIRST, "page2.html"), page2.getUrl());
     }
 
     /**
