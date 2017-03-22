@@ -1755,7 +1755,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts ({"0", "true", "false", "false", "0"})
+    @Alerts({"0", "true", "false", "false", "0"})
     public void defaultSelectedValue_SizeZero() throws Exception {
         defaultSelectedValue("0", false);
     }
@@ -1764,7 +1764,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts ({"0", "false", "false", "false", "-1"})
+    @Alerts({"0", "false", "false", "false", "-1"})
     public void defaultSelectedValue_SizeZero_Multi() throws Exception {
         defaultSelectedValue("0", true);
     }

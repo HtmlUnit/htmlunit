@@ -178,7 +178,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({"open", "first", "second"})
+    @Alerts({"open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -225,7 +225,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({"open", "first", "second"})
+    @Alerts({"open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -274,7 +274,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({"open", "first", "second"})
+    @Alerts({"open", "first", "second"})
     public void windowOpenedByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>\n"
             + "<head>\n"
@@ -319,7 +319,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({"open", "first", "second"})
+    @Alerts({"open", "first", "second"})
     public void windowOpenedByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>\n"
             + "<head>\n"
@@ -366,7 +366,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts ({"Executed", "later"})
+    @Alerts({"Executed", "later"})
     // TODO [IE]ERRORPAGE real IE displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"
@@ -460,7 +460,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts ("executed")
+    @Alerts("executed")
     public void javascriptContentDetectorWithoutContentType() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", null);
@@ -471,7 +471,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts (DEFAULT = "executed",
+    @Alerts(DEFAULT = "executed",
              IE = "")
     @NotYetImplemented(IE)
     public void javascriptContentDetectorWithoutContentType500() throws Exception {
@@ -484,7 +484,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts ("executed")
+    @Alerts("executed")
     public void javascriptContentDetectorWithoutContentTypeWhitespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(" \t \r\n \n   <script>alert('executed')</script>", 200, "OK", null);
@@ -505,7 +505,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts ("executed")
+    @Alerts("executed")
     public void javascriptContentDetectorWithoutContentUppercase() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<SCRIPT>alert('executed')</SCRIPT>", 200, "OK", null);
@@ -516,7 +516,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts ("executed")
+    @Alerts("executed")
     public void javascriptContentDetectorWithoutContentMixedCase() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<scRIPt>alert('executed')</scRIPt>", 200, "OK", null);
