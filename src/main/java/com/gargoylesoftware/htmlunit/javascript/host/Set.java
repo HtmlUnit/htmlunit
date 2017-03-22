@@ -187,10 +187,16 @@ public class Set extends SimpleScriptable {
     @JsxFunction
     public void forEach(final Function callback, final Object thisArg) {
         if (getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
-            final Object thisArgumentFinal = this;
+            final Scriptable thisArgument;
+            if (thisArg instanceof Scriptable) {
+                thisArgument = (Scriptable) thisArg;
+            }
+            else {
+                thisArgument = getWindow();
+            }
             for (Object object : set_) {
-                callback.call(Context.getCurrentContext(), getParentScope(), this,
-                        new Object[] {object, object, thisArgumentFinal});
+                callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
+                        new Object[] {object, object, this});
             }
         }
     }

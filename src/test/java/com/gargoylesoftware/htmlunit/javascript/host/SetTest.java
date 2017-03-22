@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -217,8 +218,9 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "undefined", "undefined", "[object Set]",
-            "null", "null", "[object Set]"},
+    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "[object Window]",
+            "undefined", "undefined", "[object Set]", "[object Window]",
+            "null", "null", "[object Set]", "[object Window]"},
             IE = {})
     public void forEach() throws Exception {
         final String html
@@ -227,10 +229,38 @@ public class SetTest extends WebDriverTestCase {
             + "  alert(value1);\n"
             + "  alert(value2);\n"
             + "  alert(s);\n"
+            + "  alert(this);\n"
             + "}\n"
             + "function test() {\n"
             + "  var mySet = new Set(['ab', undefined, null]);\n"
             + "  mySet.forEach(logElement);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
+            "null", "null", "[object Set]", "hello"},
+            IE = {})
+    @NotYetImplemented
+    public void forEachThis() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value1, value2, s) {\n"
+            + "  alert(value1);\n"
+            + "  alert(value2);\n"
+            + "  alert(s);\n"
+            + "  alert(this);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var mySet = new Set(['ab', undefined, null]);\n"
+            + "  mySet.forEach(logElement, 'hello');\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
