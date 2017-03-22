@@ -31,9 +31,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -64,13 +66,13 @@ public class Set extends SimpleScriptable {
                 if (iterable instanceof NativeArray) {
                     final NativeArray array = (NativeArray) iterable;
                     for (int i = 0; i < array.getLength(); i++) {
-                        add(array.get(i));
+                        add(ScriptableObject.getProperty(array, i));
                     }
                 }
                 else if (iterable instanceof ArrayBufferViewBase) {
                     final ArrayBufferViewBase array = (ArrayBufferViewBase) iterable;
                     for (int i = 0; i < array.getLength(); i++) {
-                        add(array.get(i));
+                        add(ScriptableObject.getProperty(array, i));
                     }
                 }
                 else if (iterable instanceof String) {
@@ -176,4 +178,21 @@ public class Set extends SimpleScriptable {
         object.setParentScope(getParentScope());
         return object;
     }
+
+    /**
+     * Executes a provided function once per each value in the {@link Set} object, in insertion order.
+     * @param callback {@link Function} to execute for each element.
+     * @param thisArg Value to use as this when executing callback (optional)
+     */
+    @JsxFunction
+    public void forEach(final Function callback, final Object thisArg) {
+        if (getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
+            final Object thisArgumentFinal = this;
+            for (Object object : set_) {
+                callback.call(Context.getCurrentContext(), getParentScope(), this,
+                        new Object[] {object, object, thisArgumentFinal});
+            }
+        }
+    }
+
 }

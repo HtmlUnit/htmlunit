@@ -212,4 +212,30 @@ public class SetTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "undefined", "undefined", "[object Set]",
+            "null", "null", "[object Set]"},
+            IE = {})
+    public void forEach() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value1, value2, s) {\n"
+            + "  alert(value1);\n"
+            + "  alert(value2);\n"
+            + "  alert(s);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var mySet = new Set(['ab', undefined, null]);\n"
+            + "  mySet.forEach(logElement);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
