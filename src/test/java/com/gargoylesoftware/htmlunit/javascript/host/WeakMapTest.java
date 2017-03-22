@@ -38,12 +38,10 @@ public class WeakMapTest extends WebDriverTestCase {
     public void get() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    if (window.WeakMap) {\n"
-            + "      var kvArray = [[{}, 'value1'], [window, 'value2']];\n"
-            + "      var myMap = new WeakMap(kvArray);\n"
-            + "      alert(myMap.size);\n"
-            + "      alert(myMap.get(window));\n"
-            + "    }\n"
+            + "    var kvArray = [[{}, 'value1'], [window, 'value2']];\n"
+            + "    var myMap = new WeakMap(kvArray);\n"
+            + "    alert(myMap.size);\n"
+            + "    alert(myMap.get(window));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
