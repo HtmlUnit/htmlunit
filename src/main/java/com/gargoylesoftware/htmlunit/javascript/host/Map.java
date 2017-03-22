@@ -96,7 +96,7 @@ public class Map extends SimpleScriptable {
      * Replacement of {@link NativeArray#toArray()}.
      */
     private static Object[] toArray(final NativeArray narray) {
-        long longLen = narray.getLength();
+        final long longLen = narray.getLength();
         if (longLen > Integer.MAX_VALUE) {
             throw new IllegalStateException();
         }
