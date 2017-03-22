@@ -194,7 +194,7 @@ public class Set extends SimpleScriptable {
             else {
                 thisArgument = getWindow();
             }
-            for (Object object : set_) {
+            for (final Object object : set_) {
                 callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
                         new Object[] {object, object, this});
             }

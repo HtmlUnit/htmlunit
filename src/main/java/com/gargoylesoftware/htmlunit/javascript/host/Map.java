@@ -30,9 +30,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -65,7 +67,7 @@ public class Map extends SimpleScriptable {
                     for (int i = 0; i < array.getLength(); i++) {
                         final Object entryObject = array.get(i);
                         if (entryObject instanceof NativeArray) {
-                            final Object[] entry = ((NativeArray) entryObject).toArray();
+                            final Object[] entry = toArray((NativeArray) entryObject);
                             if (entry.length > 0) {
                                 final Object key = entry[0];
                                 final Object value = entry.length > 1 ? entry[1] : null;
@@ -88,6 +90,23 @@ public class Map extends SimpleScriptable {
                 }
             }
         }
+    }
+
+    /**
+     * Replacement of {@link NativeArray#toArray()}.
+     */
+    private static Object[] toArray(final NativeArray narray) {
+        long longLen = narray.getLength();
+        if (longLen > Integer.MAX_VALUE) {
+            throw new IllegalStateException();
+        }
+
+        final int len = (int) longLen;
+        final Object[] arr = new Object[len];
+        for (int i = 0; i < len; i++) {
+            arr[i] = ScriptableObject.getProperty(narray, i);
+        }
+        return arr;
     }
 
     /**
@@ -204,4 +223,27 @@ public class Map extends SimpleScriptable {
         object.setParentScope(getParentScope());
         return object;
     }
+
+    /**
+     * Executes a provided function once per each value in the {@link Map} object, in insertion order.
+     * @param callback {@link Function} to execute for each element.
+     * @param thisArg Value to use as this when executing callback (optional)
+     */
+    @JsxFunction
+    public void forEach(final Function callback, final Object thisArg) {
+        if (getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
+            final Scriptable thisArgument;
+            if (thisArg instanceof Scriptable) {
+                thisArgument = (Scriptable) thisArg;
+            }
+            else {
+                thisArgument = getWindow();
+            }
+            for (final java.util.Map.Entry<Object, Object> entry : map_.entrySet()) {
+                callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
+                        new Object[] {entry.getValue(), entry.getKey(), this});
+            }
+        }
+    }
+
 }

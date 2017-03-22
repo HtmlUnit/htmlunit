@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -248,7 +251,7 @@ public class SetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
             "null", "null", "[object Set]", "hello"},
             IE = {})
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void forEachThis() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

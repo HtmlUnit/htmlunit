@@ -9,7 +9,7 @@
     <body>
         <release version="2.26" date="???" description="Bugfixes">
             <action type="add" dev="asashour">
-                JavaScript: support Set.forEach().
+                JavaScript: Set and Map to support .forEach().
             </action>
             <action type="add" dev="rbri">
                 Object tag now has some applet support.

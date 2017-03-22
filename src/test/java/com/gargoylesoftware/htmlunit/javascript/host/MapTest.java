@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -290,4 +294,64 @@ public class MapTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"value1", "key1", "[object Map]", "[object Window]",
+            "[object Object]", "key2", "[object Map]", "[object Window]",
+            "null", "key3", "[object Map]", "[object Window]",
+            "undefined", "key4", "[object Map]", "[object Window]"},
+            IE = {})
+    public void forEach() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value, key, m) {\n"
+            + "  alert(value);\n"
+            + "  alert(key);\n"
+            + "  alert(m);\n"
+            + "  alert(this);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "try {"
+            + "  var myMap = new Map([['key1', 'value1'], ['key2', {}], ['key3', null], ['key4', undefined]]);\n"
+            + "  myMap.forEach(logElement);\n"
+             + "}catch(e){alert(e)}"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"value1", "key1", "[object Map]", "hello",
+            "[object Object]", "key2", "[object Map]", "hello",
+            "null", "key3", "[object Map]", "hello",
+            "undefined", "key4", "[object Map]", "hello"},
+            IE = {})
+    @NotYetImplemented({CHROME, FF})
+    public void forEachThis() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value, key, m) {\n"
+            + "  alert(value);\n"
+            + "  alert(key);\n"
+            + "  alert(m);\n"
+            + "  alert(this);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var myMap = new Map([['key1', 'value1'], ['key2', {}], ['key3', null], ['key4', undefined]]);\n"
+            + "  myMap.forEach(logElement, 'hello');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
