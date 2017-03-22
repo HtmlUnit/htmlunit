@@ -157,7 +157,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
     /**
      * Verifies that a script element is not run when it is cloned.
-     * See bug 1707788.
+     * See bug #469.
      * @throws Exception if an error occurs
      */
     @Test
@@ -348,7 +348,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 3236689.
+     * Regression test for bug #1267.
      * @throws Exception if an error occurs
      */
     @Test
@@ -362,7 +362,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
     /**
      * Verifies that the weird script src attribute used by the jQuery JavaScript library is
-     * ignored silently (bug 1695279).
+     * ignored silently (bug #455).
      * @throws Exception if the test fails
      */
     @Test

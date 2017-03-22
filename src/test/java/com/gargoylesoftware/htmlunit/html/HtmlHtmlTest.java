@@ -48,8 +48,7 @@ public class HtmlHtmlTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for
-     * <a href="http://sf.net/support/tracker.php?aid=2865948">Bug 2865948</a>:
+     * Regression test for bug #921
      * canonical XPath for html element was computed to "/html[2]" where a doctype
      * was present.
      * @throws Exception if the test fails

@@ -140,7 +140,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for a stylesheet link which points to a non-existent file (bug 2070940).
+     * Test for a stylesheet link which points to a non-existent file (bug #685).
      * @throws Exception if an error occurs
      */
     @Test

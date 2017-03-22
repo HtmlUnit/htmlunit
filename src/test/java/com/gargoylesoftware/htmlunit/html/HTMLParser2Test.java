@@ -335,7 +335,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
     /**
      * Test incorrect parsing of LABEL within A tag. Fixed in NekoHTML 1.9.19.
-     * @see <a href="http://sf.net/p/htmlunit/bugs/1547/">Bug 1547</a>
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1547/">Bug #1547</a>
      * @throws Exception on test failure
      */
     @Test
@@ -352,7 +352,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * @see <a href="http://sf.net/p/htmlunit/bugs/1423/">Bug 1423</a>
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1423/">Bug #1423</a>
      * @throws Exception on test failure
      */
     @Test
@@ -381,7 +381,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * @see <a href="http://sf.net/p/htmlunit/bugs/1046/">Bug 1046</a>
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1046/">Bug #1046</a>
      * @throws Exception on test failure
      */
     @Test

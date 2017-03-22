@@ -182,7 +182,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2815614.
+     * Regression test for bug #851.
      * Clicking an element should force the enclosing window to become the current one.
      * @throws Exception if the test fails
      */

@@ -264,7 +264,7 @@ public class Location2Test extends WebDriverTestCase {
 
     /**
      * Verifies that setting <tt>location.href</tt> to a hash behaves like setting <tt>location.hash</tt>
-     * (ie doesn't result in a server hit). See bug 2089341.
+     * (ie doesn't result in a server hit). See bug #688.
      * @throws Exception if an error occurs
      */
     @Test

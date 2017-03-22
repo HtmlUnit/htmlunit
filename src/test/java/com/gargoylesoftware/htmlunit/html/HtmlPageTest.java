@@ -565,7 +565,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that an empty charset in a content-type meta tag is ignored. See bug 2484753.
+     * Verifies that an empty charset in a content-type meta tag is ignored. See bug #752.
      * @throws Exception if an error occurs
      */
     @Test
@@ -578,7 +578,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * <a href="https://sourceforge.net/tracker/?func=detail&aid=2860732&group_id=47038&atid=448266">Bug 2860732</a>.
+     * Bug #914.
+     *
      * @throws Exception if an error occurs
      */
     @Test

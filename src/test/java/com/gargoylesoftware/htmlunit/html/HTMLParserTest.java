@@ -70,7 +70,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2523870: parse failure when parsing page with UTF-8 BOM (byte order mark).
+     * Regression test for bug #766: parse failure when parsing page with UTF-8 BOM (byte order mark).
      * The HTML file used is from NekoHTML's bug number #54.
      * @throws Exception if an error occurs
      */

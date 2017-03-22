@@ -502,8 +502,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2956588.
-     * As of HttmlUnit-2.8-SNAPSHOT on 26.02.10, reading responseXML with xhtml namespace
+     * Regression test for bug #1033.
+     * As of 26.02.10, reading responseXML with xhtml namespace
      * was causing ClassCastException for IE simulation when it contained a checked radio button.
      * @throws Exception if the test fails.
      */

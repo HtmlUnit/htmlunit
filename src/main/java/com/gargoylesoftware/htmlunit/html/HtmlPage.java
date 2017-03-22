@@ -670,7 +670,7 @@ public class HtmlPage extends SgmlPage {
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
         final URL baseUrl = getBaseURL();
 
-        // to handle http: and http:/ in FF (Bug 1714767)
+        // to handle http: and http:/ in FF (Bug #474)
         if (hasFeature(URL_MISSING_SLASHES)) {
             boolean incorrectnessNotified = false;
             while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {

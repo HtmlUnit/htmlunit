@@ -106,7 +106,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug 2063012 (missing href attribute).
+     * Test for bug #680 (missing href attribute).
      * @throws Exception if an error occurs
      */
     @Test

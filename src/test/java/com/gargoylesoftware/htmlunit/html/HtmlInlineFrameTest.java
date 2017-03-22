@@ -99,7 +99,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
     /**
      * Tests that a recursive src attribute (i.e. src="#xyz") doesn't result in an
-     * infinite loop (bug 1699125).
+     * infinite loop (bug #459).
      *
      * @throws Exception if an error occurs
      */
@@ -145,7 +145,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
     /**
      * Tests that an invalid src attribute (i.e. src="foo://bar") doesn't result
-     * in a NPE (bug 1699119).
+     * in a NPE (bug #458).
      *
      * @throws Exception if an error occurs
      */
@@ -185,7 +185,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that cloned frames do no reload their content (bug 1954869).
+     * Verifies that cloned frames do no reload their content (bug #613).
      * @throws Exception if an error occurs
      */
     @Test
@@ -207,7 +207,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that frames added via document.write() don't get their contents loaded twice (bug 1156009).
+     * Verifies that frames added via document.write() don't get their contents loaded twice (bug #238).
      * @throws Exception if an error occurs
      */
     @Test

@@ -2164,7 +2164,7 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug 2024729 (we were missing the document.captureEvents(...) method).
+     * Test for bug #658 (we were missing the document.captureEvents(...) method).
      * @throws Exception if the test fails
      */
     @Test

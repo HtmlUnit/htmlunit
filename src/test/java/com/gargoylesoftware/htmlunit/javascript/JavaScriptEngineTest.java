@@ -1212,7 +1212,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
     /**
      * Verifies that we're not using a global context factory, so that we can cleanly run multiple
-     * WebClient instances concurrently within a single JVM. See bug 2089599.
+     * WebClient instances concurrently within a single JVM. See bug #689.
      */
     @Test
     public void noGlobalContextFactoryUsed() {
