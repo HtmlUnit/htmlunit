@@ -27,7 +27,6 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -121,10 +120,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);
 
-            // there seem to be a bug in jetty, this constructor sets the cookies twice
-            // incomingSession_ = client_.connect(new WebSocketImpl(), new URI(url)).get();
-            final Future<Session> connectFuture = client_.connect(new WebSocketImpl(),
-                                                                    url_, new ClientUpgradeRequest());
+            final Future<Session> connectFuture = client_.connect(new WebSocketImpl(), url_);
             client_.getExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
