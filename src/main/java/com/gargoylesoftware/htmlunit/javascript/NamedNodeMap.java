@@ -84,6 +84,18 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        final Object o = super.get(name, start);
+        if (o != NOT_FOUND) {
+            return o;
+        }
+        return getWithFallback(name);
+    }
+
+    /**
      * Returns the element with the specified name, or {@link #NOT_FOUND} if the name is invalid.
      *
      * {@inheritDoc}

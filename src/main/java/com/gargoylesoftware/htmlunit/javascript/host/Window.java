@@ -2272,9 +2272,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         if (response != NOT_FOUND) {
             return response;
         }
-        if (start instanceof ScriptableWithFallbackGetter) {
-            response = ((ScriptableWithFallbackGetter) start).getWithFallback(name);
-        }
         return response;
     }
 }

@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass
 public class MimeType extends SimpleScriptable {
+
     private String description_;
     private String suffixes_;
     private String type_;
