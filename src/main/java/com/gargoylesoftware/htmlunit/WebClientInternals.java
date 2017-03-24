@@ -73,7 +73,7 @@ public class WebClientInternals implements Serializable {
     }
 
     /**
-     * A listener for internal events. 
+     * A listener for internal events.
      */
     public interface Listener {
 

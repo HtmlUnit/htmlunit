@@ -490,7 +490,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
-            WebClientInternals.Listener internalsListener = mock(WebClientInternals.Listener.class);
+            final WebClientInternals.Listener internalsListener = mock(WebClientInternals.Listener.class);
 
             listener = mock(WebSocketListener.class);
             final WebSocketListener listenerFinal = listener;
@@ -498,8 +498,8 @@ public class WebSocketTest extends WebDriverTestCase {
             doAnswer(new Answer<Void>() {
                 @Override
                 public Void answer(final InvocationOnMock invocation) {
-                    Object[] args = invocation.getArguments();
-                    WebSocket webSocket = (WebSocket) args[0];
+                    final Object[] args = invocation.getArguments();
+                    final WebSocket webSocket = (WebSocket) args[0];
                     webSocket.setWebSocketListener(listenerFinal);
                     return null;
                 }
@@ -509,7 +509,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
 
         driver.get(URL_FIRST + "WebSocketTest_listener.html");
-        
+
         if (listener != null) {
             verify(listener, timeout(DEFAULT_WAIT_TIME)).onWebSocketConnect(any());
         }
