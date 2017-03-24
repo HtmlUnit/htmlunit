@@ -16,6 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -24,6 +29,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+import org.eclipse.jetty.websocket.api.WebSocketListener;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
@@ -32,13 +38,18 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientInternals;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -133,6 +144,7 @@ public class WebSocketTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 
@@ -349,12 +361,12 @@ public class WebSocketTest extends WebDriverTestCase {
                 "onCloseListener code: 1000  wasClean: true",
                 "onClose code: 1000  wasClean: true"},
             IE = {"onOpenListener", "onOpen",
-                    "onMessageTextListener", "server_text", "", "undefined", "null",
-                    "onMessageText", "server_text", "", "undefined", "null",
-                    "onMessageBinaryListener", "[object ArrayBuffer]", "", "undefined", "null",
-                    "onMessageBinary", "[object ArrayBuffer]", "", "undefined", "null",
-                    "onCloseListener code: 1005  wasClean: true",
-                    "onClose code: 1005  wasClean: true"})
+                "onMessageTextListener", "server_text", "", "undefined", "null",
+                "onMessageText", "server_text", "", "undefined", "null",
+                "onMessageBinaryListener", "[object ArrayBuffer]", "", "undefined", "null",
+                "onMessageBinary", "[object ArrayBuffer]", "", "undefined", "null",
+                "onCloseListener code: 1005  wasClean: true",
+                "onClose code: 1005  wasClean: true"})
     @NotYetImplemented(IE)
     public void events() throws Exception {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
@@ -464,4 +476,44 @@ public class WebSocketTest extends WebDriverTestCase {
             }
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void listener() throws Exception {
+        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+                null, null, new EventsWebSocketHandler());
+
+        final WebDriver driver = getWebDriver();
+        WebSocketListener listener = null;
+
+        if (driver instanceof HtmlUnitDriver) {
+            final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+            WebClientInternals.Listener internalsListener = mock(WebClientInternals.Listener.class);
+
+            listener = mock(WebSocketListener.class);
+            final WebSocketListener listenerFinal = listener;
+
+            doAnswer(new Answer<Void>() {
+                @Override
+                public Void answer(final InvocationOnMock invocation) {
+                    Object[] args = invocation.getArguments();
+                    WebSocket webSocket = (WebSocket) args[0];
+                    webSocket.setWebSocketListener(listenerFinal);
+                    return null;
+                }
+            }).when(internalsListener).webSocketCreated(any());
+
+            webClient.getInternals().addListener(internalsListener);
+        }
+
+        driver.get(URL_FIRST + "WebSocketTest_listener.html");
+        
+        if (listener != null) {
+            verify(listener, timeout(DEFAULT_WAIT_TIME)).onWebSocketConnect(any());
+        }
+        stopWebServers();
+    }
+
 }

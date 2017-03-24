@@ -59,7 +59,7 @@
                 log(e.lastEventId);
                 log(e.source);
             }
-            else if(ab2str(e.data) === 'server_binary'){
+            else if(ab2str(e.data) === 'server_binary') {
                 log('onMessageBinaryListener');
                 log(e.data);
                 log(e.origin);
@@ -81,7 +81,7 @@
 
                 room._send(str2ab('binary'));
             }
-            else if(ab2str(e.data) === 'server_binary'){
+            else if(ab2str(e.data) === 'server_binary') {
                 log('onMessageBinary');
                 log(e.data);
                 log(e.origin);
@@ -113,7 +113,7 @@
         }
     };
     
-    window.onload = function(){
+    window.onload = function() {
         room.init();
     };
 </script>

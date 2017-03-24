@@ -27,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+import org.eclipse.jetty.websocket.api.WebSocketListener;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -90,11 +91,30 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     private WebSocketClient client_;
     private volatile Session incomingSession_;
     private Session outgoingSession_;
+    private WebSocketListener listener_;
 
     /**
      * Creates a new instance.
      */
     public WebSocket() {
+    }
+
+    /**
+     * Sets the {@link WebSocketListener}.
+     *
+     * @param listener the {@link WebSocketListener}
+     */
+    public void setWebSocketListener(final WebSocketListener listener) {
+        listener_ = listener;
+    }
+
+    /**
+     * Returns the the {@link WebSocketListener}.
+     *
+     * @return the the {@link WebSocketListener}
+     */
+    public WebSocketListener getWebSocketListener() {
+        return listener_;
     }
 
     /**
@@ -119,6 +139,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             client_.start();
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);
+
+            webClient.getInternals().created(this);
 
             final Future<Session> connectFuture = client_.connect(new WebSocketImpl(), url_);
             client_.getExecutor().execute(new Runnable() {
@@ -383,6 +405,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         @Override
         public void onWebSocketConnect(final Session session) {
+            if (listener_ != null) {
+                listener_.onWebSocketConnect(session);
+            }
             super.onWebSocketConnect(session);
             readyState_ = OPEN;
             outgoingSession_ = session;
@@ -395,6 +420,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         @Override
         public void onWebSocketClose(final int statusCode, final String reason) {
+            if (listener_ != null) {
+                listener_.onWebSocketClose(statusCode, reason);
+            }
             super.onWebSocketClose(statusCode, reason);
             readyState_ = CLOSED;
             outgoingSession_ = null;
@@ -409,6 +437,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         @Override
         public void onWebSocketText(final String message) {
+            if (listener_ != null) {
+                listener_.onWebSocketText(message);
+            }
             super.onWebSocketText(message);
 
             final MessageEvent msgEvent = new MessageEvent(message);
@@ -419,6 +450,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         @Override
         public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
+            if (listener_ != null) {
+                listener_.onWebSocketBinary(data, offset, length);
+            }
             super.onWebSocketBinary(data, offset, length);
 
             final ArrayBuffer buffer = new ArrayBuffer();
@@ -436,6 +470,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         @Override
         public void onWebSocketError(final Throwable cause) {
+            if (listener_ != null) {
+                listener_.onWebSocketError(cause);
+            }
             super.onWebSocketError(cause);
             readyState_ = CLOSED;
             outgoingSession_ = null;

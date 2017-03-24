@@ -392,6 +392,7 @@
                     <issueLinkTemplatePerSystem>
                         <features>http://sourceforge.net/p/htmlunit/feature-requests/%ISSUE%</features>
                         <htmlunitdriver>https://github.com/SeleniumHQ/htmlunit-driver/issues/%ISSUE%</htmlunitdriver>
+                        <stackoverflow>http://stackoverflow.com/questions/%ISSUE%</stackoverflow>
                     </issueLinkTemplatePerSystem>
                 </configuration>
             </plugin>
@@ -846,6 +847,12 @@
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <version>3.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.7.19</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -197,6 +197,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
     private WebClientOptions options_ = new WebClientOptions();
+    private WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
 
     private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
@@ -2203,6 +2204,16 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebClientOptions getOptions() {
         return options_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the internals object of this WebClient.
+     * @return the internals object
+     */
+    public WebClientInternals getInternals() {
+        return internals_;
     }
 
     /**

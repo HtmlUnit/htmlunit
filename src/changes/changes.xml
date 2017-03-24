@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
+            <action type="add" dev="asashour" issue="42982495" system="stackoverflow">
+                WebClient: add .getInternals() to listener to WebSockets.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: Set and Map to support .forEach().
             </action>
