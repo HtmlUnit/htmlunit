@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_PROTOTYPE_OF_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
 
@@ -328,6 +329,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return true;
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
                 return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
+            case Context.FEATURE_HTMLUNIT_GET_PROTOTYPE_OF_STRING:
+                return browserVersion_.hasFeature(JS_GET_PROTOTYPE_OF_STRING);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

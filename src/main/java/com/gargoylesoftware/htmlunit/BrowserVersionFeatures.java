@@ -891,6 +891,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,
 
+    /** Indicates that {@code Object.getPrototypeOf('')} is allowed. */
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
+    JS_GET_PROTOTYPE_OF_STRING,
+
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,

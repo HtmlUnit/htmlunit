@@ -170,7 +170,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "exception")
-    @NotYetImplemented({CHROME, FF})
     public void getPrototypeOf() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -178,6 +177,53 @@ public class NativeObjectTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      alert(Object.getPrototypeOf(''));\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "exception")
+    public void getPrototypeOfNumber() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(Object.getPrototypeOf(1));\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "object",
+            IE = "exception")
+    @NotYetImplemented({CHROME, FF})
+    public void getTypeOfPrototypeOfNumber() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(typeof Object.getPrototypeOf(1));\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"

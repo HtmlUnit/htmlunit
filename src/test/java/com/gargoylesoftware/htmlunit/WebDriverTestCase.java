@@ -85,7 +85,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * "{@code test.properties}" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff45,ie
+   browsers=hu,ff52,ie
    chrome.bin=/path/to/chromedriver                     [Unix-like]
    ff52.bin=/usr/bin/firefox                            [Unix-like]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
@@ -126,7 +126,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * All browsers supported.
      */
     public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
-        BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+        BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
 
     /**
      * Browsers which run by default.
