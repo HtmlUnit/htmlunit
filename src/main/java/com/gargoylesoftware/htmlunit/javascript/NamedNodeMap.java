@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
 @JsxClass
-public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
+public class NamedNodeMap extends SimpleScriptable {
 
     private final org.w3c.dom.NamedNodeMap attributes_;
 
@@ -88,21 +88,12 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        final Object o = super.get(name, start);
-        if (o != NOT_FOUND) {
-            return o;
+        Object response = super.get(name, start);
+        if (response != NOT_FOUND) {
+            return response;
         }
-        return getWithFallback(name);
-    }
 
-    /**
-     * Returns the element with the specified name, or {@link #NOT_FOUND} if the name is invalid.
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        final Object response = getNamedItem(name);
+        response = getNamedItem(name);
         if (response != null) {
             return response;
         }

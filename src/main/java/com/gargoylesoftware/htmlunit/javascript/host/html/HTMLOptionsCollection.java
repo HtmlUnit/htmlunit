@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IN_ALWAYS_TRUE;
@@ -37,7 +36,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -66,7 +64,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
 @JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
-public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
+public class HTMLOptionsCollection extends SimpleScriptable {
 
     private HtmlSelect htmlSelect_;
 
@@ -158,29 +156,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         else {
             super.put(name, start, value);
         }
-    }
-
-    /**
-     * <p>This method delegates the call to the parent select element.</p>
-     *
-     * <p>See {@link #put(String, Scriptable, Object)} for the corresponding setter behavior.</p>
-     *
-     * @param name {@inheritDoc}
-     * @return {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        if (!getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY)
-                && "childNodes".equals(name)) {
-            return NOT_FOUND;
-        }
-        if (htmlSelect_ == null) {
-            return NOT_FOUND;
-        }
-        // If the name was NOT_FOUND on the prototype, then just drop through
-        // to search on the select element for IE only AND FF.
-        final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptableObject();
-        return ScriptableObject.getProperty(select, name);
     }
 
     /**

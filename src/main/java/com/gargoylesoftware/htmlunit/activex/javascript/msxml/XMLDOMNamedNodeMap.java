@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -41,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Frank Danek
  */
 @JsxClass(browsers = @WebBrowser(IE))
-public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWithFallbackGetter {
+public class XMLDOMNamedNodeMap extends MSXMLScriptable {
 
     private final org.w3c.dom.NamedNodeMap attributes_;
 
@@ -76,20 +75,6 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
     public final Object get(final int index, final Scriptable start) {
         final XMLDOMNamedNodeMap startMap = (XMLDOMNamedNodeMap) start;
         final Object response = startMap.item(index);
-        if (response != null) {
-            return response;
-        }
-        return NOT_FOUND;
-    }
-
-    /**
-     * Returns the element with the specified name, or <code>NOT_FOUND</code> if the name is invalid.
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        final Object response = getNamedItem(name);
         if (response != null) {
             return response;
         }
