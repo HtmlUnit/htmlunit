@@ -362,4 +362,5 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
 
         return super.has(index, start);
     }
+
 }

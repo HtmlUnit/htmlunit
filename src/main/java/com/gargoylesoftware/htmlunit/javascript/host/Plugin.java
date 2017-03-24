@@ -105,17 +105,4 @@ public class Plugin extends SimpleArray {
     public String getVersion() {
         return version_;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        final Object response = namedItem(name);
-        if (response != null) {
-            return response;
-        }
-        return NOT_FOUND;
-    }
-
 }

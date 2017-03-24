@@ -88,8 +88,8 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
         if (this == start) {
             response = getWithPreemption(name);
         }
-        if (response == NOT_FOUND && start instanceof ScriptableWithFallbackGetter) {
-            response = ((ScriptableWithFallbackGetter) start).getWithFallback(name);
+        if (response == NOT_FOUND && start instanceof Window) {
+            response = ((Window) start).getWithFallback(name);
         }
         return response;
     }

@@ -35,18 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class PluginArray extends SimpleArray {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        final Object response = namedItem(name);
-        if (response != null) {
-            return response;
-        }
-        return NOT_FOUND;
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
