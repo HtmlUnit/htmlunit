@@ -17,14 +17,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code SimpleArray} allowing access per key and index (like {@link MimeTypeArray}).
@@ -34,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
 @JsxClass(isJSObject = false)
-public class SimpleArray extends SimpleScriptable implements ScriptableWithFallbackGetter {
+public class SimpleArray extends SimpleScriptable {
     private final List<Object> elements_ = new ArrayList<>();
 
     /**
@@ -51,12 +49,12 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * {@inheritDoc}
      */
     @Override
-    public Object getWithFallback(final String name) {
+    protected Object getWithPreemption(final String name) {
         final Object response = namedItem(name);
         if (response != null) {
             return response;
         }
-        return Undefined.instance;
+        return NOT_FOUND;
     }
 
     /**
