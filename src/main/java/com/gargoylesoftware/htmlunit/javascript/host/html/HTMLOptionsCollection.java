@@ -363,4 +363,22 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         return super.has(index, start);
     }
 
+    /**
+     * Returns the value of the {@code selectedIndex} property.
+     * @return the {@code selectedIndex} property
+     */
+    @JsxGetter
+    public int getSelectedIndex() {
+        return htmlSelect_.getSelectedIndex();
+    }
+
+    /**
+     * Sets the value of the {@code selectedIndex} property.
+     * @param index the new value
+     */
+    @JsxSetter
+    public void setSelectedIndex(final int index) {
+        htmlSelect_.setSelectedIndex(index);
+    }
+
 }
