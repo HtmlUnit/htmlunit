@@ -1652,7 +1652,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "\n"
             + "    s.options.selectedIndex = 1;\n"
             + "    doAlerts(s);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "  } catch (e) { alert('exception'); }\n"
             + "}\n"
             + "function doAlerts(s) {\n"
             + "  alert(s.childNodes.length + '-' + s.options.childNodes.length);\n"

@@ -27,8 +27,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -41,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
@@ -381,4 +386,22 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         htmlSelect_.setSelectedIndex(index);
     }
 
+    /**
+     * Returns the child nodes of the current element.
+     * @return the child nodes of the current element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public NodeList getChildNodes() {
+        return new NodeList(htmlSelect_, false) {
+            @Override
+            protected List<Object> computeElements() {
+                final List<Object> response = new ArrayList<>();
+                for (final DomNode child : htmlSelect_.getChildren()) {
+                    response.add(child);
+                }
+
+                return response;
+            }
+        };
+    }
 }
