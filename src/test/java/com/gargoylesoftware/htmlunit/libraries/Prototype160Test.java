@@ -62,7 +62,7 @@ public class Prototype160Test extends PrototypeTestBase {
      */
     @Override
     protected String getBaseUrl() {
-        return "http://localhost:" + PORT + "/test/unit/";
+        return URL_FIRST + "test/unit/";
     }
 
     @Override

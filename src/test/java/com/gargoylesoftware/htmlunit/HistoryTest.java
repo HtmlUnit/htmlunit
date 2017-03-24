@@ -57,7 +57,7 @@ public class HistoryTest extends WebDriverTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/post1");
+        driver.get(URL_FIRST + "post1");
 
         driver.findElement(By.id("mySubmit")).click();
         assertEquals(URL_FIRST + "post2", driver.getCurrentUrl());
@@ -95,7 +95,7 @@ public class HistoryTest extends WebDriverTestCase {
 
         int count = Post1Servlet.Count_;
         for (int i = 0; i < testDeep; i++) {
-            driver.get("http://localhost:" + PORT + "/post" + i);
+            driver.get(URL_FIRST + "post" + i);
             assertTrue(driver.getPageSource(), driver.getPageSource().contains("Call: " + (i + count)));
         }
 

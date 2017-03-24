@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.net.URL;
+
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -54,10 +56,10 @@ public class CurvyCornersTest extends WebDriverTestCase {
     }
 
     /**
-     * @return the resource base url
+     * @return the resource base URL
      */
-    protected String getBaseUrl() {
-        return "http://localhost:" + PORT + "/";
+    protected URL getBaseUrl() {
+        return URL_FIRST;
     }
 
     /**

@@ -133,8 +133,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = PATHNAME,
             IE = "/")
     public void link_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
-                "linkEmpty", 1, getExpectedAlerts()[0], "");
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor", "linkEmpty", 1, getExpectedAlerts()[0], "");
     }
 
     /**
@@ -296,8 +295,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = PATHNAME,
             IE = "/")
     public void javascript_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
-                "javascriptEmpty", 1, getExpectedAlerts()[0], "");
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor", "javascriptEmpty", 1, getExpectedAlerts()[0], "");
     }
 
     /**
@@ -556,7 +554,7 @@ public class PageReloadTest extends WebDriverTestCase {
             CHROME = {"1", ANCHOR},
             IE = {"1", ""})
     public void submitGet_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmpty",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor", "submitGetEmpty",
                 Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
     }
@@ -568,7 +566,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ANCHOR,
             IE = "")
     public void submitGetV_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmptyV",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor", "submitGetEmptyV",
                 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
@@ -907,7 +905,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ANCHOR,
             IE = "")
     public void submitPost_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                 "submitPostEmpty", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
@@ -918,7 +916,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ANCHOR,
             IE = "")
     public void submitPostV_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                 "submitPostEmptyV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
@@ -1252,7 +1250,7 @@ public class PageReloadTest extends WebDriverTestCase {
             CHROME = {"1", ANCHOR},
             IE = {"1", ""})
     public void jsSubmitGet_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                "jsSubmitGetEmpty", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, getExpectedAlerts()[1]);
     }
 
@@ -1263,7 +1261,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ANCHOR,
             IE = "")
     public void jsSubmitGetV_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                "jsSubmitGetEmptyV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
@@ -1601,7 +1599,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ANCHOR,
             IE = "")
     public void jsSubmitPost_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                 "jsSubmitPostEmpty", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
@@ -1612,7 +1610,7 @@ public class PageReloadTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ANCHOR,
             IE = "")
     public void jsSubmitPostV_urlHash_emptyUrl() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
+        openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                 "jsSubmitPostEmptyV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
@@ -1813,11 +1811,11 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  <a id='linkDifferentHash' href='#anchor2'>linkDifferentHash</a>\n"
                 + "  <a id='linkUrl' href='" + RELOAD_URL + "'>linkUrl</a>\n"
                 + "  <a id='linkUrlHash' href='" + RELOAD_URL_ANCHOR + "'>linkUrlHash</a>\n"
-                + "  <a id='linkDifferentUrl' href='" + "http://localhost:" + PORT + "/reload2.html"
+                + "  <a id='linkDifferentUrl' href='" + URL_FIRST + "reload2.html"
                 + "'>linkDifferentUrl</a>\n"
-                + "  <a id='linkDifferentUrlEmptyHash' href='" + "http://localhost:" + PORT + "/reload2.html#"
+                + "  <a id='linkDifferentUrlEmptyHash' href='" + URL_FIRST + "reload2.html#"
                 + "'>linkDifferentUrlEmptyHash</a>\n"
-                + "  <a id='linkDifferentUrlHash' href='" + "http://localhost:" + PORT + "/reload2.html"
+                + "  <a id='linkDifferentUrlHash' href='" + URL_FIRST + "reload2.html"
                 + ANCHOR + "'>linkDifferentUrlHash</a>\n"
                 + "  <a id='linkDifferentUrlDifferentHash' href='" + "http://localhost:" + PORT
                 + "/reload2.html#anchor2" + "'>linkDifferentUrlDifferentHash</a>\n";
@@ -1838,15 +1836,15 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "    <input type='button' id='javascriptUrlHash' value='javascriptUrlHash'"
                 + " onclick='location.href=\"" + RELOAD_URL_ANCHOR + "\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrl' value='javascriptDifferentUrl'"
-                + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html" + "\"'>\n"
+                + " onclick='location.href=\"" + URL_FIRST + "reload2.html" + "\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrlEmptyHash' "
                                                     + "value='javascriptDifferentUrlEmptyHash'"
-                + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html#\"'>\n"
+                + " onclick='location.href=\"" + URL_FIRST + "reload2.html#\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrlHash' value='javascriptDifferentUrlHash'"
-                + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "\"'>\n"
+                + " onclick='location.href=\"" + URL_FIRST + "reload2.html" + ANCHOR + "\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrlDifferentHash'"
                 + " value='javascriptDifferentUrlDifferentHash'"
-                + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html#anchor2" + "\"'>\n"
+                + " onclick='location.href=\"" + URL_FIRST + "reload2.html#anchor2" + "\"'>\n"
                 + "  </form>\n"
 
                 // get
@@ -1914,26 +1912,26 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "    <input type='button' id='jsSubmitGetUrlHashV' value='jsSubmitGetUrlHashV' onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + "' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + "' method='GET'>\n"
                 + "    <input type='submit' id='submitGetDifferentUrl' value='submitGetDifferentUrl'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrl' value='jsSubmitGetDifferentUrl'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + "' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + "' method='GET'>\n"
                 + "    <input type='text' name='valueGetDifferentUrlV' />\n"
                 + "    <input type='submit' id='submitGetDifferentUrlV' value='submitGetDifferentUrlV'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrlV' value='jsSubmitGetDifferentUrlV'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#' method='GET'>\n"
                 + "    <input type='submit' id='submitGetDifferentUrlEmptyHash' "
                                                 + "value='submitGetDifferentUrlEmptyHash'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrlEmptyHash' "
                                                 + "value='jsSubmitGetDifferentUrlEmptyHash'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#' method='GET'>\n"
                 + "    <input type='text' name='valueGetDifferentUrlEmptyHashV' />\n"
                 + "    <input type='submit' id='submitGetDifferentUrlEmptyHashV' "
                                                 + "value='submitGetDifferentUrlEmptyHashV'>\n"
@@ -1942,25 +1940,25 @@ public class PageReloadTest extends WebDriverTestCase {
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + ANCHOR + "' method='GET'>\n"
                 + "    <input type='submit' id='submitGetDifferentUrlHash' value='submitGetDifferentUrlHash'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrlHash' value='jsSubmitGetDifferentUrlHash'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + ANCHOR + "' method='GET'>\n"
                 + "    <input type='text' name='valueGetDifferentUrlHashV' />\n"
                 + "    <input type='submit' id='submitGetDifferentUrlHashV' value='submitGetDifferentUrlHashV'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrlHashV' value='jsSubmitGetDifferentUrlHashV'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#anchor2" + "' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#anchor2" + "' method='GET'>\n"
                 + "    <input type='submit' id='submitGetDifferentUrlDifferentHash'"
                 + " value='submitGetDifferentUrlDifferentHash'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrlDifferentHash'"
                 + " value='jsSubmitGetDifferentUrlDifferentHash' onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#anchor2" + "' method='GET'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#anchor2" + "' method='GET'>\n"
                 + "    <input type='text' name='valueGetDifferentUrlDifferentHashV' />\n"
                 + "    <input type='submit' id='submitGetDifferentUrlDifferentHashV'"
                 + " value='submitGetDifferentUrlDifferentHashV'>\n"
@@ -2035,25 +2033,25 @@ public class PageReloadTest extends WebDriverTestCase {
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + "' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + "' method='POST'>\n"
                 + "    <input type='submit' id='submitPostDifferentUrl' value='submitPostDifferentUrl'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrl' value='jsSubmitPostDifferentUrl'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + "' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + "' method='POST'>\n"
                 + "    <input type='text' name='valuePostDifferentUrlV' />\n"
                 + "    <input type='submit' id='submitPostDifferentUrlV' value='submitPostDifferentUrlV'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrlV' value='jsSubmitPostDifferentUrlV'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#' method='POST'>\n"
                 + "    <input type='submit' id='submitPostDifferentUrlEmptyHash' "
                                                 + "value='submitPostDifferentUrlEmptyHash'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrlEmptyHash'"
                 + " value='jsSubmitPostDifferentUrlEmptyHash' onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#' method='POST'>\n"
                 + "    <input type='text' name='valuePostDifferentUrlEmptyHashV' />\n"
                 + "    <input type='submit' id='submitPostDifferentUrlEmptyHashV' "
                                                 + "value='submitPostDifferentUrlEmptyHashV'>\n"
@@ -2061,25 +2059,25 @@ public class PageReloadTest extends WebDriverTestCase {
                 + " value='jsSubmitPostDifferentUrlEmptyHashV' onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + ANCHOR + "' method='POST'>\n"
                 + "    <input type='submit' id='submitPostDifferentUrlHash' value='submitPostDifferentUrlHash'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrlHash'"
                 + " value='jsSubmitPostDifferentUrlHash' onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html" + ANCHOR + "' method='POST'>\n"
                 + "    <input type='text' name='valuePostDifferentUrlHashV' />\n"
                 + "    <input type='submit' id='submitPostDifferentUrlHashV' value='submitPostDifferentUrlHashV'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrlHashV'"
                 + " value='jsSubmitPostDifferentUrlHashV' onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#anchor2" + "' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#anchor2" + "' method='POST'>\n"
                 + "    <input type='submit' id='submitPostDifferentUrlDifferentHash'"
                 + " value='submitPostDifferentUrlDifferentHash'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrlDifferentHash'"
                 + " value='jsSubmitPostDifferentUrlDifferentHash' onclick='submit();'>\n"
                 + "  </form>\n"
-                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#anchor2" + "' method='POST'>\n"
+                + "  <form action='" + URL_FIRST + "reload2.html#anchor2" + "' method='POST'>\n"
                 + "    <input type='text' name='valuePostDifferentUrlDifferentHashV' />\n"
                 + "    <input type='submit' id='submitPostDifferentUrlDifferentHashV'"
                 + " value='submitPostDifferentUrlDifferentHashV'>\n"

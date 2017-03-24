@@ -321,7 +321,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.get(URL_FIRST + "upload1");
 
         final File tmpFile = File.createTempFile("htmlunit-test", "." + extension);
         try {
@@ -431,7 +431,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.get(URL_FIRST + "upload1");
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
         if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
@@ -473,7 +473,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.get(URL_FIRST + "upload1");
         driver.findElement(By.id("mySubmit")).click();
 
         String pageSource = driver.getPageSource();
@@ -502,7 +502,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.get(URL_FIRST + "upload1");
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
         if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
@@ -533,7 +533,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         startWebServer("./", new String[0], servlets);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.get(URL_FIRST + "upload1");
         driver.findElement(By.id("mySubmit")).click();
         assertFalse(driver.getPageSource().contains("chunked"));
     }

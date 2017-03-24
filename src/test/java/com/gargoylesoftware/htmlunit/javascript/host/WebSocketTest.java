@@ -160,7 +160,7 @@ public class WebSocketTest extends WebDriverTestCase {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new ChatWebSocketHandler());
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/WebSocketTest_chat.html");
+        driver.get(URL_FIRST + "WebSocketTest_chat.html");
 
         driver.findElement(By.id("username")).sendKeys("Browser");
         driver.findElement(By.id("joinB")).click();
@@ -278,7 +278,7 @@ public class WebSocketTest extends WebDriverTestCase {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new CookiesWebSocketHandler());
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/WebSocketTest_cookies.html");
+        driver.get(URL_FIRST + "WebSocketTest_cookies.html");
 
         driver.findElement(By.id("username")).sendKeys("Browser");
         driver.findElement(By.id("joinB")).click();
@@ -372,7 +372,7 @@ public class WebSocketTest extends WebDriverTestCase {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new EventsWebSocketHandler());
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/WebSocketTest_events.html");
+        driver.get(URL_FIRST + "WebSocketTest_events.html");
 
         final WebElement logElement = driver.findElement(By.id("log"));
         int counter = 0;
@@ -399,7 +399,7 @@ public class WebSocketTest extends WebDriverTestCase {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, null);
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/WebSocketTest_events.html");
+        driver.get(URL_FIRST + "WebSocketTest_events.html");
 
         final WebElement logElement = driver.findElement(By.id("log"));
         int counter = 0;

@@ -214,7 +214,7 @@ public class GWT250Test extends WebServerTestCase {
 
         final WebClient client = getWebClient();
 
-        final String url = "http://localhost:" + PORT + "/DynaTable.html";
+        final String url = URL_FIRST + "DynaTable.html";
         final HtmlPage page = client.getPage(url);
         client.waitForBackgroundJavaScriptStartingBefore(2000);
 

@@ -68,7 +68,7 @@ public class SocksProxyTest extends WebServerTestCase {
         servlets.put("/test", SocksProxyTestServlet.class);
         startWebServer("./", new String[0], servlets);
 
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
         assertEquals("hello", page.getTitleText());
     }
 

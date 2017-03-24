@@ -140,7 +140,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     private HtmlImage getHtmlElementToTest(final String id) throws Exception {
-        final String url = "http://localhost:" + PORT + "/HtmlImageDownloadTest.html";
+        final String url = URL_FIRST + "HtmlImageDownloadTest.html";
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(url);
         return (HtmlImage) page.getElementById(id);

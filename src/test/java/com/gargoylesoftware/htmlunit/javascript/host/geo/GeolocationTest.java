@@ -76,14 +76,14 @@ public class GeolocationTest extends WebServerTestCase {
         servlets.put("/browserLocation", BrowserLocationServlet.class);
         startWebServer("./", new String[0], servlets);
 
-        Geolocation.setProviderUrl("http://localhost:" + PORT + "/browserLocation");
+        Geolocation.setProviderUrl(URL_FIRST + "browserLocation");
         final WebClient client = getWebClient();
         if (geolocationEnabled) {
             client.getOptions().setGeolocationEnabled(true);
         }
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        client.getPage("http://localhost:" + PORT + "/test");
+        client.getPage(URL_FIRST + "test");
         client.waitForBackgroundJavaScript(2000);
 
         assertEquals(getExpectedAlerts(), collectedAlerts);

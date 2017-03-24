@@ -61,7 +61,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
         try {
 
             final WebDriver webdriver = getWebDriver();
-            final String url = "http://localhost:" + PORT + "/util/doh/runner.html?testModule=" + module;
+            final String url = URL_FIRST + "util/doh/runner.html?testModule=" + module;
             webdriver.get(url);
 
             final long runTime = 60 * DEFAULT_WAIT_TIME;

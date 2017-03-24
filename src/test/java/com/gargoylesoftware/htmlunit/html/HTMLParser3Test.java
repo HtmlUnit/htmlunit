@@ -85,7 +85,7 @@ public class HTMLParser3Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
         assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asText()));
     }
 

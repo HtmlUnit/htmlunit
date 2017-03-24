@@ -212,7 +212,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./");
 
         final WebClient client = getWebClient();
-        final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
+        final Page page = client.getPage(URL_FIRST + "src/test/resources/event_coordinates.html");
         final WebConnection defaultConnection = client.getWebConnection();
         assertTrue(
                 "HttpWebConnection should be the default",
@@ -239,7 +239,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         };
 
         webClient.setWebConnection(myWebConnection);
-        webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+        webClient.getPage(URL_FIRST + "LICENSE.txt");
         assertTrue("createHttpClient has not been called", tabCalled[0]);
     }
 
@@ -256,9 +256,9 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final HttpWebConnection webConnection = new HttpWebConnection(webClient);
 
         webClient.setWebConnection(webConnection);
-        webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+        webClient.getPage(URL_FIRST + "LICENSE.txt");
         webConnection.close();
-        webClient.getPage("http://localhost:" + PORT + "/pom.xml");
+        webClient.getPage(URL_FIRST + "pom.xml");
     }
 
     /**
@@ -294,7 +294,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void unicode() throws Exception {
         startWebServer("./");
         final WebClient client = getWebClient();
-        client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html?param=\u00F6");
+        client.getPage(URL_FIRST + "src/test/resources/event_coordinates.html?param=\u00F6");
     }
 
     /**
@@ -313,7 +313,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         assertEquals(0, client.getCookieManager().getCookies().size());
-        client.getPage("http://localhost:" + PORT + "/test");
+        client.getPage(URL_FIRST + "test");
         assertEquals(expectedAlerts, collectedAlerts);
         assertEquals(1, client.getCookieManager().getCookies().size());
     }
@@ -329,7 +329,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "  <script>\n"
                 + "    function test() {\n"
                 + "      var xhr = window.ActiveXObject?new ActiveXObject('Microsoft.XMLHTTP'):new XMLHttpRequest();\n"
-                + "      xhr.open('PUT', '" + "http://localhost:" + PORT + "/test" + "', true);\n"
+                + "      xhr.open('PUT', '" + URL_FIRST + "test" + "', true);\n"
                 + "      xhr.send();\n"
                 + "      alert(1);\n"
                 + "    }\n"
@@ -365,7 +365,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             startWebServer("./");
 
             final WebClient webClient = getWebClient();
-            webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+            webClient.getPage(URL_FIRST + "LICENSE.txt");
             for (int i = 0; i < getExpectedAlerts().length; i++) {
                 assertTrue(appender.getMessages().get(i + 1).contains(getExpectedAlerts()[i]));
             }
@@ -389,11 +389,11 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebClient client = getWebClient();
 
         client.getCookieManager().setCookiesEnabled(false);
-        HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
+        HtmlPage page = client.getPage(URL_FIRST + "test1");
         assertTrue(page.asText().contains("No Cookies"));
 
         client.getCookieManager().setCookiesEnabled(true);
-        page = client.getPage("http://localhost:" + PORT + "/test1");
+        page = client.getPage(URL_FIRST + "test1");
         assertTrue(page.asText().contains("key1=value1"));
     }
 
@@ -451,7 +451,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         String firstPort = null;
 
         for (int i = 0; i < 5; i++) {
-            final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+            final HtmlPage page = client.getPage(URL_FIRST + "test");
             final String port = page.asText();
             if (firstPort == null) {
                 firstPort = port;
@@ -485,7 +485,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthSmallerThanContent");
+        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
         assertEquals("visible text", page.asText());
     }
 
@@ -522,7 +522,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthSmallerThanContent");
+        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
         assertTrue(page.asText(), page.asText().endsWith("visible text"));
     }
 
@@ -563,7 +563,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthLargerThanContent");
+        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthLargerThanContent");
         assertEquals("visible text", page.asText());
     }
 
@@ -600,7 +600,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthLargerThanContent");
+        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthLargerThanContent");
         assertEquals("visible text", page.asText());
     }
 

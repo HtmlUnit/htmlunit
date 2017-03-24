@@ -148,7 +148,7 @@ public class MochiKitTest extends WebDriverTestCase {
     }
 
     private void doTest(final String testName) throws Exception {
-        final String url = "http://localhost:" + PORT + "/tests/test_MochiKit-" + testName + ".html";
+        final String url = URL_FIRST + "tests/test_MochiKit-" + testName + ".html";
         assertNotNull(url);
 
         final WebDriver driver = getWebDriver();

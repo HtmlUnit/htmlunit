@@ -52,7 +52,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient c = getWebClient();
-        final String base = "http://localhost:" + PORT + "/x?";
+        final String base = URL_FIRST + "x?";
 
         assertTrue(c.getPage(base + "type=text%2Fhtml") instanceof HtmlPage);
         assertTrue(c.getPage(base + "type=text%2Fhtml&doctype=1") instanceof HtmlPage);
@@ -111,7 +111,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
         assertNotNull(page);
     }
 

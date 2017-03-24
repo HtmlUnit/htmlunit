@@ -80,7 +80,7 @@ public class MooTools121Test extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mooTools() throws Exception {
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/Specs/index.html");
+        driver.get(URL_FIRST + "Specs/index.html");
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("id('progress')[text() = '100']"));

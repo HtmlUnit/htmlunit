@@ -49,7 +49,7 @@ public class WebClient4Test extends WebServerTestCase {
         startWebServer("./");
 
         try (WebClient client = getWebClient()) {
-            TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+            TextPage textPage = client.getPage(URL_FIRST + "LICENSE.txt");
             assertTrue(textPage.getContent().contains("Apache License"));
 
             try (WebClient copy = clone(client)) {
@@ -71,7 +71,7 @@ public class WebClient4Test extends WebServerTestCase {
                 assertNotNull(content);
                 assertTrue(content.contains("Apache License"));
 
-                textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+                textPage = copy.getPage(URL_FIRST + "LICENSE.txt");
                 assertTrue(textPage.getContent().contains("Apache License"));
             }
         }
@@ -203,7 +203,7 @@ public class WebClient4Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
         assertEquals("Going anywhere?", page.asText());
     }
 
@@ -236,7 +236,7 @@ public class WebClient4Test extends WebServerTestCase {
         servlets.put("/test2", NoContentServlet2.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
+        final HtmlPage page = client.getPage(URL_FIRST + "test1");
         final HtmlPage page2 = page.getHtmlElementById("submit").click();
         assertEquals(page, page2);
     }
@@ -283,8 +283,8 @@ public class WebClient4Test extends WebServerTestCase {
         servlets.put("/test", NotModifiedServlet.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
-        final TextPage page2 = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
+        final TextPage page2 = client.getPage(URL_FIRST + "test");
         assertNotNull(page);
         assertNotNull(page2);
     }

@@ -51,10 +51,10 @@ public class HistoryTest extends WebServerTestCase {
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         final History history = window.getHistory();
 
-        final String urlA = "http://localhost:" + PORT + "/HistoryTest_a.html";
-        final String urlB = "http://localhost:" + PORT + "/HistoryTest_b.html";
-        final String urlBX = "http://localhost:" + PORT + "/HistoryTest_b.html#x";
-        final String urlC = "http://localhost:" + PORT + "/HistoryTest_c.html";
+        final String urlA = URL_FIRST + "HistoryTest_a.html";
+        final String urlB = URL_FIRST + "HistoryTest_b.html";
+        final String urlBX = URL_FIRST + "HistoryTest_b.html#x";
+        final String urlC = URL_FIRST + "HistoryTest_c.html";
 
         HtmlPage page = client.getPage(urlA);
         assertEquals(1, history.getLength());
@@ -111,10 +111,10 @@ public class HistoryTest extends WebServerTestCase {
         final TopLevelWindow window = (TopLevelWindow) client.getCurrentWindow();
         final History history = window.getHistory();
 
-        final String urlA = "http://localhost:" + PORT + "/HistoryTest_a.html";
-        final String urlB = "http://localhost:" + PORT + "/HistoryTest_b.html";
-        final String urlBX = "http://localhost:" + PORT + "/HistoryTest_b.html#x";
-        final String urlC = "http://localhost:" + PORT + "/HistoryTest_c.html";
+        final String urlA = URL_FIRST + "HistoryTest_a.html";
+        final String urlB = URL_FIRST + "HistoryTest_b.html";
+        final String urlBX = URL_FIRST + "HistoryTest_b.html#x";
+        final String urlC = URL_FIRST + "HistoryTest_c.html";
 
         HtmlPage page = client.getPage(urlA);
         assertEquals(1, history.getLength());

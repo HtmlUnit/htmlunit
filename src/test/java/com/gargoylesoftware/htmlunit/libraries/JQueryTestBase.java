@@ -65,7 +65,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
 
         try {
             final WebDriver webdriver = getWebDriver();
-            final String url = "http://localhost:" + PORT + "/jquery/test/index.html?dev&testNumber=" + testNumber;
+            final String url = URL_FIRST + "jquery/test/index.html?dev&testNumber=" + testNumber;
             webdriver.get(url);
 
             while (!getResultElementText(webdriver).startsWith("Tests completed")) {

@@ -62,7 +62,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         map.put("/two.html", RefreshServlet.class);
         startWebServer(".", null, map);
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
+        final HtmlPage page = client.getPage(URL_FIRST + "one.html");
         final HtmlSubmitInput submit = page.getHtmlElementById("myButton");
         final HtmlPage secondPage = submit.click();
         assertEquals("0\nPOST\nsome_name some_value\n", secondPage.getWebResponse().getContentAsString());
@@ -152,7 +152,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         try (WebClient client = getWebClient()) {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);
-            final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
+            final HtmlPage page = client.getPage(URL_FIRST + "one.html");
             ((HTMLBodyElement) page.getBody().getScriptableObject()).getCurrentStyle();
 
             assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());

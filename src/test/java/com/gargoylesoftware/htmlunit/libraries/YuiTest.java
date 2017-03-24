@@ -225,7 +225,7 @@ public class YuiTest extends WebDriverTestCase {
             final String buttonToPush, final long timeToWait) throws Exception {
 
         // final URL url = getClass().getClassLoader().getResource("tests/" + fileName);
-        final String url = "http://localhost:" + PORT + "/tests/" + fileName;
+        final String url = URL_FIRST + "tests/" + fileName;
         assertNotNull(url);
 
         final WebDriver driver = getWebDriver();

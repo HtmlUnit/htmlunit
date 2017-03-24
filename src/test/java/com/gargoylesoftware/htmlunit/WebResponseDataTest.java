@@ -167,7 +167,7 @@ public class WebResponseDataTest extends WebServerTestCase {
 
         final WebClient client = getWebClient();
 
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/folder1/page1");
+        final HtmlPage page = client.getPage(URL_FIRST + "folder1/page1");
         assertEquals("Hello Redirected!", page.asText());
     }
 

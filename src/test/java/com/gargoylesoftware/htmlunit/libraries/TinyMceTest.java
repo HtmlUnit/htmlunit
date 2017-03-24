@@ -69,7 +69,7 @@ public class TinyMceTest extends WebDriverTestCase {
     }
 
     private void test(final String fileName, final int expectedTotal, final int expectedFailed) throws Exception {
-        final String url = "http://localhost:" + PORT + "/tests/" + fileName + ".html";
+        final String url = URL_FIRST + "tests/" + fileName + ".html";
         assertNotNull(url);
 
         final WebDriver driver = getWebDriver();

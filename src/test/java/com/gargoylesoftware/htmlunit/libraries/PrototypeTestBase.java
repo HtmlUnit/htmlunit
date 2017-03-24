@@ -174,9 +174,9 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
     }
 
     /**
-     * @return the resource base url
+     * @return the resource base URL
      */
     protected String getBaseUrl() {
-        return "http://localhost:" + PORT + "/";
+        return URL_FIRST.toExternalForm();
     }
 }

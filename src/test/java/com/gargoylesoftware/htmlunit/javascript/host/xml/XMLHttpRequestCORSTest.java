@@ -756,7 +756,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "0", "4", "0"},
             IE = {"1", "0", "4", "200"})
     public void withCredentialsServerSlashAtEnd() throws Exception {
-        testWithCredentials("http://localhost:" + PORT + "/", "true");
+        testWithCredentials(URL_FIRST.toExternalForm(), "true");
     }
 
     /**
@@ -786,7 +786,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "0", "4", "0"},
             IE = {"1", "0", "4", "200"})
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
-        testWithCredentials("http://localhost:" + PORT + "/", null);
+        testWithCredentials(URL_FIRST.toExternalForm(), null);
     }
 
     private void testWithCredentials(final String accessControlAllowOrigin,

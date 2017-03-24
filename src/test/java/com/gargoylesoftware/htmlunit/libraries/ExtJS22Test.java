@@ -74,7 +74,7 @@ public class ExtJS22Test extends WebDriverTestCase {
      */
     protected WebDriver getPage(final String example, final String htmlName) throws Exception {
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/examples/" + example + "/" + htmlName + ".html");
+        driver.get(URL_FIRST + "examples/" + example + "/" + htmlName + ".html");
         return driver;
     }
 

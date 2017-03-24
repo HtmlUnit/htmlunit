@@ -366,7 +366,7 @@ public class XmlPageTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
-        client.getPage("http://localhost:" + PORT + "/test");
+        client.getPage(URL_FIRST + "test");
     }
 
     /**

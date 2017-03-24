@@ -171,7 +171,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         getWebClient().getCredentialsProvider().clear();
 
         try {
-            loadPage(html, new URL("http://localhost:" + PORT + "/"));
+            loadPage(html, URL_FIRST);
             fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -196,8 +196,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // next step without credentials but the credentials are still known
-            final URL url = new URL("http://localhost:" + PORT + "/");
-            loadPageWithAlerts(html, url);
+            loadPageWithAlerts(html, URL_FIRST);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
             }
@@ -222,7 +221,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // no credentials
-            loadPage(html, new URL("http://localhost:" + PORT + "/"));
+            loadPage(html, URL_FIRST);
             fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -247,8 +246,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // next step without credentials but the credentials are still known
-            final URL url = new URL("http://localhost:" + PORT + "/");
-            loadPageWithAlerts(url);
+            loadPageWithAlerts(URL_FIRST);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
             }
@@ -261,7 +259,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // different path
-            final URL url = new URL("http://localhost:" + PORT + "/somewhere");
+            final URL url = new URL(URL_FIRST, "somewhere");
             loadPageWithAlerts(url);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
@@ -287,7 +285,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // no credentials
-            loadPage(html, new URL("http://localhost:" + PORT + "/"));
+            loadPage(html, URL_FIRST);
             fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -312,8 +310,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // next step without credentials but the credentials are still known
-            final URL url = new URL("http://localhost:" + PORT + "/");
-            loadPageWithAlerts(url);
+            loadPageWithAlerts(URL_FIRST);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
             }
@@ -347,11 +344,10 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
 
         // use default credentials
-        URL url = new URL("http://localhost:" + PORT + "/");
-        loadPageWithAlerts(url);
+        loadPageWithAlerts(URL_FIRST);
 
         try {
-            url = new URL("http://joe:jetty@localhost:" + PORT + "/");
+            final URL url = new URL("http://joe:jetty@localhost:" + PORT + "/");
             final HtmlPage page = loadPage(html, url);
             if (getBrowserVersion().isIE()) {
                 assertTrue(getCollectedAlerts(page).contains("SecRet"));
@@ -383,9 +379,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("joe", "hack");
 
         // use default wrong credentials
-        URL url = new URL("http://localhost:" + PORT + "/");
         try {
-            loadPage(html, url);
+            loadPage(html, URL_FIRST);
             fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -396,7 +391,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // now a url with correct credentials
-            url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
+            final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");

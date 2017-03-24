@@ -69,7 +69,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
 
         try {
             final WebDriver webdriver = getWebDriver();
-            final String url = "http://localhost:" + PORT + "/jquery/test/index.html?testNumber=" + testNumber;
+            final String url = URL_FIRST + "jquery/test/index.html?testNumber=" + testNumber;
             webdriver.get(url);
 
             final WebElement status = webdriver.findElement(By.id("qunit-testresult"));

@@ -160,7 +160,7 @@ public class WebResponseTest extends WebServerTestCase {
         servlets.put("/test", ResponseHeadersServlet.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
         assertEquals("some_value", page.getWebResponse().getResponseHeaderValue("some_header"));
     }
 
@@ -235,7 +235,7 @@ public class WebResponseTest extends WebServerTestCase {
         servlets.put("/test", BinaryResponseHeadersServlet.class);
         startWebServer("./", null, servlets);
 
-        final HtmlPage page = getWebClient().getPage("http://localhost:" + PORT + "/test");
+        final HtmlPage page = getWebClient().getPage(URL_FIRST + "test");
         assertEquals(BinaryResponseHeadersServlet.RESPONSE,
                 page.getWebResponse().getContentAsString(StandardCharsets.UTF_8));
 

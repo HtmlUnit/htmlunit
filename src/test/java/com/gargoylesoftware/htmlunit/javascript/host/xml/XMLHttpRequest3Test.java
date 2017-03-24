@@ -324,7 +324,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final String resourceBase = "./src/test/resources/com/gargoylesoftware/htmlunit/javascript/host";
         startWebServer(resourceBase, null, servlets);
         final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/XMLHttpRequestTest_streaming.html");
+        final HtmlPage page = client.getPage(URL_FIRST + "XMLHttpRequestTest_streaming.html");
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
         final HtmlElement body = page.getBody();
         assertEquals(10, body.asText().split("\n").length);
@@ -400,7 +400,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(100));
 
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/content.html");
+        final HtmlPage page = client.getPage(URL_FIRST + "content.html");
         final DomElement elem = page.getElementById("doIt");
         ((HtmlSubmitInput) elem).click();
 

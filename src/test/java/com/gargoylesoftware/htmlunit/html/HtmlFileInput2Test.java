@@ -371,7 +371,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         servlets.put("/upload2", Upload2Servlet.class);
 
         startWebServer("./", null, servlets);
-        final HttpPost filePost = new HttpPost("http://localhost:" + PORT + "/upload2");
+        final HttpPost filePost = new HttpPost(URL_FIRST + "upload2");
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
@@ -410,7 +410,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         assertTrue(file.exists());
 
         final WebClient client = getWebClient();
-        final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
+        final HtmlPage firstPage = client.getPage(URL_FIRST + "upload1");
 
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = form.getInputByName("myInput");
@@ -508,7 +508,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         assertTrue(file2.exists());
 
         final WebClient client = getWebClient();
-        final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
+        final HtmlPage firstPage = client.getPage(URL_FIRST + "upload1");
 
         final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = form.getInputByName("myInput");

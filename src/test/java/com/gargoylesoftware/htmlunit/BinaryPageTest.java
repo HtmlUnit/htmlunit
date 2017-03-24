@@ -49,7 +49,7 @@ public class BinaryPageTest extends WebServerTestCase {
 
         final WebClient client = getWebClient();
 
-        final Page page = client.getPage("http://localhost:" + PORT + "/big");
+        final Page page = client.getPage(URL_FIRST + "big");
         assertTrue(page instanceof UnexpectedPage);
     }
 
@@ -85,7 +85,7 @@ public class BinaryPageTest extends WebServerTestCase {
 
         final WebClient client = getWebClient();
 
-        final Page page = client.getPage("http://localhost:" + PORT + "/bigChunked");
+        final Page page = client.getPage(URL_FIRST + "bigChunked");
         assertTrue(page instanceof UnexpectedPage);
     }
 
@@ -135,7 +135,7 @@ public class BinaryPageTest extends WebServerTestCase {
         primitiveWebServer_.start();
         final WebClient client = getWebClient();
 
-        final TextPage page = client.getPage("http://localhost:" + PORT + "/chunked");
+        final TextPage page = client.getPage(URL_FIRST + "chunked");
         assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
     }
 
