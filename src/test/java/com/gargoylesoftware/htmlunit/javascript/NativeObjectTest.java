@@ -145,7 +145,6 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object Object]", "null"})
-    @NotYetImplemented
     public void proto2() throws Exception {
         final String html = ""
             + "<html><head>\n"

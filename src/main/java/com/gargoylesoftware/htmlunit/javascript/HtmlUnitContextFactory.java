@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_PROTOTYPE_OF_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
@@ -301,8 +300,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
         switch (featureIndex) {
             case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
                 return true;
-            case Context.FEATURE_PARENT_PROTO_PROPERTIES:
-                return !browserVersion_.hasFeature(JS_PARENT_PROTO_PROPERTIES);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
                 return false;
             case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:

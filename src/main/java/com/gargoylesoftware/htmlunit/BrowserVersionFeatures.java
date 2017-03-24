@@ -395,13 +395,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
 
-    /**
-     * Calls to <code>document.XYZ</code> should first look at standard functions before looking at elements
-     * named <code>XYZ</code>.
-     */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
-
     /** Allows invalid 'align' values. */
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     HTMLELEMENT_ALIGN_INVALID,
@@ -1103,10 +1096,6 @@ public enum BrowserVersionFeatures {
     /** element.outerHTML removes all children from detached node. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
-
-    /** If {@code true}, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_PARENT_PROTO_PROPERTIES,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */

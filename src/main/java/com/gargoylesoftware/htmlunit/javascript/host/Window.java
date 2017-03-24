@@ -2262,6 +2262,21 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     public void setParentScope(final Scriptable parent) {
         // nothing as the window is the top level scope and its parent scope should stay null
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        Object response = super.get(name, start);
+        if (response != NOT_FOUND) {
+            return response;
+        }
+        if (start instanceof ScriptableWithFallbackGetter) {
+            response = ((ScriptableWithFallbackGetter) start).getWithFallback(name);
+        }
+        return response;
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

@@ -115,9 +115,11 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable implements ScriptableWit
      * @return the attribute node, {@code null} if the attribute is not defined
      */
     public Object getNamedItemWithoutSyntheticClassAttr(final String name) {
-        final DomNode attr = (DomNode) attributes_.getNamedItem(name);
-        if (attr != null) {
-            return attr.getScriptableObject();
+        if (attributes_ != null) {
+            final DomNode attr = (DomNode) attributes_.getNamedItem(name);
+            if (attr != null) {
+                return attr.getScriptableObject();
+            }
         }
         return null;
     }

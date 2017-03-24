@@ -245,10 +245,6 @@ public class JavaScriptEngine {
             reflect.defineProperties();
         }
 
-        // put custom object to be called as very last prototype to call the fallback getter (if any)
-        final Scriptable fallbackCaller = new FallbackCaller();
-        ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
-
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
@@ -1021,22 +1017,6 @@ public class JavaScriptEngine {
         javaScriptRunning_ = new ThreadLocal<>();
         postponedActions_ = new ThreadLocal<>();
         holdPostponedActions_ = false;
-    }
-
-    private static class FallbackCaller extends ScriptableObject {
-
-        @Override
-        public Object get(final String name, final Scriptable start) {
-            if (start instanceof ScriptableWithFallbackGetter) {
-                return ((ScriptableWithFallbackGetter) start).getWithFallback(name);
-            }
-            return NOT_FOUND;
-        }
-
-        @Override
-        public String getClassName() {
-            return "htmlUnitHelper-fallbackCaller";
-        }
     }
 
     /**
