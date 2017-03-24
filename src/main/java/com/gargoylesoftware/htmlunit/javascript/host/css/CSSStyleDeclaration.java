@@ -128,7 +128,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -164,7 +163,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass
-public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
+public class CSSStyleDeclaration extends SimpleScriptable {
     private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
     private static final Pattern URL_PATTERN =
         Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
@@ -306,8 +305,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the object value, {@link #NOT_FOUND} if nothing is found
      */
     @Override
-    public Object getWithFallback(final String name) {
-        // TODO
+    protected Object getWithPreemption(final String name) {
         if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER) && null != jsElement_) {
             final StyleElement element = getStyleElement(name);
             if (element != null && element.getValue() != null) {

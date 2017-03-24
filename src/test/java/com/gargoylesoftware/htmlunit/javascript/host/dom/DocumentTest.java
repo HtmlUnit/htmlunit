@@ -1537,9 +1537,9 @@ public class DocumentTest extends WebDriverTestCase {
     public void precedence() throws Exception {
         final String html = "<html><head></head>\n"
             + "<body>\n"
-            + "<form name='writeln'>foo</form>\n"
-            + "<script>alert(typeof document.writeln);</script>\n"
-            + "<script>alert(document.writeln.tagName);</script>\n"
+            + "  <form name='writeln'>foo</form>\n"
+            + "  <script>alert(typeof document.writeln);</script>\n"
+            + "  <script>alert(document.writeln.tagName);</script>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
