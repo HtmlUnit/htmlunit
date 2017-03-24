@@ -117,7 +117,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of anchor element.
+     * Test onblur and onfocus handlers and blur() and focus() methods of div element.
      *
      * @throws Exception if the test fails
      */
@@ -127,7 +127,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of anchor element.
+     * Test onblur and onfocus handlers and blur() and focus() methods of div element.
      *
      * @throws Exception if the test fails
      */

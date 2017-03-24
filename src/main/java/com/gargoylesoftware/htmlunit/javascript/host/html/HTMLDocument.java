@@ -84,7 +84,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
@@ -151,7 +150,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * W3C DOM Level 1</a>
  */
 @JsxClass
-public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
+public class HTMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(HTMLDocument.class);
 
@@ -1142,10 +1141,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
         if (page == null || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS)) {
             Object response = getPrototype().get(name, this);
-            if (response == NOT_FOUND) {
-                response = getWithFallback(name);
+            if (response != NOT_FOUND) {
+                return response;
             }
-            return response;
         }
         return getIt(name);
     }
@@ -1206,15 +1204,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         return collection;
-    }
-
-    /**
-     * Looks at properties with the specified name.
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        return getIt(name);
     }
 
     /**

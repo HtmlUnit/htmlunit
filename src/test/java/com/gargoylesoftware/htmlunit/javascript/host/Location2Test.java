@@ -573,7 +573,7 @@ public class Location2Test extends WebDriverTestCase {
         driver.findElement(By.tagName("a")).click();
 
         assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(URL_FIRST));
-        assertEquals(new URL(URL_FIRST, "foo2.html").toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "foo2.html", driver.getCurrentUrl());
     }
 
     /**
@@ -593,7 +593,7 @@ public class Location2Test extends WebDriverTestCase {
         driver.findElement(By.tagName("a")).click();
 
         assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(URL_FIRST));
-        assertEquals(new URL(URL_FIRST, "foo3.html").toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "foo3.html", driver.getCurrentUrl());
     }
 
     /**
@@ -723,7 +723,7 @@ public class Location2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
         try {
-            assertEquals(new URL(URL_FIRST, "test.html").toExternalForm(), driver.getCurrentUrl());
+            assertEquals(URL_FIRST + "test.html", driver.getCurrentUrl());
         }
         finally {
             // TODO [IE] when run with real IE the window is closed and all following tests are broken
@@ -746,7 +746,6 @@ public class Location2Test extends WebDriverTestCase {
         final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(URL_FIRST, "content.html"), content);
         conn.setResponse(new URL(URL_FIRST, "content.html"), content);
 
         expandExpectedAlertsVariables(URL_FIRST);

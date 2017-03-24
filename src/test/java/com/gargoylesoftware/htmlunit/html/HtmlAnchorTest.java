@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -114,7 +113,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement span = driver.findElement(By.id("theSpan"));
         assertEquals("span", span.getTagName());
         span.click();
-        assertEquals(new URL(URL_FIRST, "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "page2.html", driver.getCurrentUrl());
     }
 
     /**
@@ -135,7 +134,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement button = driver.findElement(By.id("theButton"));
         assertEquals("button", button.getTagName());
         button.click();
-        assertEquals(new URL(URL_FIRST, "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "page2.html", driver.getCurrentUrl());
     }
 
     /**
@@ -158,7 +157,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement checkbox = driver.findElement(By.id("theCheckbox"));
         assertEquals("input", checkbox.getTagName());
         checkbox.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
@@ -179,7 +178,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement img = driver.findElement(By.id("theImage"));
         assertEquals("img", img.getTagName());
         img.click();
-        assertEquals(new URL(URL_FIRST, "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "page2.html", driver.getCurrentUrl());
     }
 
     /**
@@ -202,7 +201,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
@@ -225,7 +224,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
@@ -248,7 +247,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
@@ -271,7 +270,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement option = driver.findElement(By.id("theOption"));
         assertEquals("option", option.getTagName());
         option.click();
-        assertEquals(new URL(URL_FIRST, "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + "page2.html", driver.getCurrentUrl());
     }
 
     /**
@@ -294,7 +293,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement radio = driver.findElement(By.id("theRadio"));
         assertEquals("input", radio.getTagName());
         radio.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
@@ -316,7 +315,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
@@ -338,7 +337,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(URL_FIRST, getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+        assertEquals(URL_FIRST + getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
