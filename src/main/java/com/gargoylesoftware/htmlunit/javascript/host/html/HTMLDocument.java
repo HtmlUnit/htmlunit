@@ -1140,7 +1140,7 @@ public class HTMLDocument extends Document {
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
         if (page == null || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS)) {
-            Object response = getPrototype().get(name, this);
+            final Object response = getPrototype().get(name, this);
             if (response != NOT_FOUND) {
                 return response;
             }

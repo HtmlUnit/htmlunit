@@ -86,7 +86,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
@@ -152,7 +151,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends EventTarget implements ScriptableWithFallbackGetter, Function, AutoCloseable {
+public class Window extends EventTarget implements Function, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
@@ -1295,9 +1294,11 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * {@inheritDoc}
+     * To be called when the property detection fails in normal scenarios.
+     * 
+     * @param name the name
+     * @return the found object, or {@link Scriptable#NOT_FOUND}
      */
-    @Override
     public Object getWithFallback(final String name) {
         Object result = NOT_FOUND;
 

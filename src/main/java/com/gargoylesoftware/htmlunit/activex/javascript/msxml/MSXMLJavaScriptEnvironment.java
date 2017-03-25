@@ -19,18 +19,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
+
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * JavaScript environment for the MSXML ActiveX library.
@@ -57,7 +56,6 @@ public class MSXMLJavaScriptEnvironment {
         final Map<Class<? extends MSXMLScriptable>, Scriptable> prototypes = new HashMap<>();
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)
-        final Scriptable fallbackCaller = new FallbackCaller();
 
         for (final ClassConfiguration config : config_.getAll()) {
             final ScriptableObject prototype = configureClass(config);
@@ -82,7 +80,7 @@ public class MSXMLJavaScriptEnvironment {
             }
             else {
 //                prototype.setPrototype(objectPrototype);
-                prototype.setPrototype(fallbackCaller);
+//                prototype.setPrototype(fallbackCaller);
             }
         }
 
@@ -164,21 +162,5 @@ public class MSXMLJavaScriptEnvironment {
      */
     public Scriptable getPrototype(final Class<? extends SimpleScriptable> jsClass) {
         return prototypes_.get(jsClass);
-    }
-
-    private static class FallbackCaller extends ScriptableObject {
-
-        @Override
-        public Object get(final String name, final Scriptable start) {
-            if (start instanceof ScriptableWithFallbackGetter) {
-                return ((ScriptableWithFallbackGetter) start).getWithFallback(name);
-            }
-            return NOT_FOUND;
-        }
-
-        @Override
-        public String getClassName() {
-            return "htmlUnitHelper-fallbackCaller";
-        }
     }
 }

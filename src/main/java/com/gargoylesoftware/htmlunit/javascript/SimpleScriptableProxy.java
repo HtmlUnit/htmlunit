@@ -27,7 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Daniel Gredler
  */
 public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends Delegator
-        implements ScriptableWithFallbackGetter, Serializable {
+        implements Serializable {
 
     /**
      * {@inheritDoc}
@@ -55,18 +55,6 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
             start = ((SimpleScriptableProxy<?>) start).getDelegee();
         }
         return getDelegee().get(name, start);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        final SimpleScriptable delegee = getDelegee();
-        if (delegee instanceof ScriptableWithFallbackGetter) {
-            return ((ScriptableWithFallbackGetter) delegee).getWithFallback(name);
-        }
-        return NOT_FOUND;
     }
 
     /**

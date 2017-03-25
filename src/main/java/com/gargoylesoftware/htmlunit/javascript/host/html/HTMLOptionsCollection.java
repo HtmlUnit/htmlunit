@@ -133,8 +133,6 @@ public class HTMLOptionsCollection extends SimpleScriptable {
      * select *does* have the specified property, this method delegates the call to the parent
      * select element.</p>
      *
-     * <p>See {@link #getWithFallback(String)} for the corresponding getter behavior.</p>
-     *
      * @param name {@inheritDoc}
      * @param start {@inheritDoc}
      * @param value {@inheritDoc}
