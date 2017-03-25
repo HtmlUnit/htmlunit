@@ -86,7 +86,10 @@ public class JSObject {
      * @throws JSException in case or error
      */
     public Object getMember(final String paramString) throws JSException {
-        throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.getMember(String)).");
+        if (scriptableObject_ instanceof Element) {
+            return  ((Element) scriptableObject_).getAttribute(paramString, null);
+        }
+        return scriptableObject_.get(paramString, scriptableObject_);
     }
 
     /**
