@@ -1295,7 +1295,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
 
     /**
      * To be called when the property detection fails in normal scenarios.
-     * 
+     *
      * @param name the name
      * @return the found object, or {@link Scriptable#NOT_FOUND}
      */
