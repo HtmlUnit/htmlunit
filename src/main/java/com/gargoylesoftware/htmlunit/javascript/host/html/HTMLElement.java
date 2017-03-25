@@ -118,7 +118,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -218,7 +217,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlWordBreak.class)
 @JsxClass(domClass = HtmlMain.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
 @JsxClass(domClass = HtmlVariable.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
+public class HTMLElement extends Element {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
@@ -512,15 +511,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return domNode.getLocalName().toLowerCase(Locale.ROOT);
         }
         return domNode.getLocalName();
-    }
-
-    /**
-    * Looks at attributes with the given name.
-    * {@inheritDoc}
-    */
-    @Override
-    public Object getWithFallback(final String name) {
-        return NOT_FOUND;
     }
 
     /**

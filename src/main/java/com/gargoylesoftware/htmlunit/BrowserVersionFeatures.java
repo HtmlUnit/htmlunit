@@ -1151,10 +1151,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
-    /** Indicates that select.options.childNodes is a valid property. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY,
-
     /** Indicates that select.options has a wong class name. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
