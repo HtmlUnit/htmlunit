@@ -337,7 +337,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
         final String secondContent
             = "<html><head><title>Second</title></head><body'></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);

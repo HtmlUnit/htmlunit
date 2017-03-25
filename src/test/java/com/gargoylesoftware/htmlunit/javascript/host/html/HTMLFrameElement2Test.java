@@ -194,10 +194,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String defaultContent
             = "<html><head><script>alert(location)</script></head></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setDefaultResponse(defaultContent);
 
-        final WebDriver driver = loadPage2(firstContent, URL_FIRST);
+        final WebDriver driver = loadPage2(firstContent);
         assertEquals("first", driver.getTitle());
 
         expandExpectedAlertsVariables(URL_FIRST);
@@ -287,11 +286,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "<body>frame 1</body></html>";
         final String frame2Html = frame1Html.replaceAll("frame 1", "frame 2");
 
-        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "frame1.html"), frame1Html);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "frame2.html"), frame2Html);
 
-        final WebDriver driver = loadPage2(firstHtml, URL_FIRST);
+        final WebDriver driver = loadPage2(firstHtml);
         driver.findElement(By.id("btn1")).click();
         driver.findElement(By.id("btn2")).click();
         driver.findElement(By.id("btn3")).click();
@@ -475,12 +473,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "header.html"), headerFrame);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), contentFrame);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "onload.html"), onloadFrame);
 
-        final WebDriver driver = loadPage2(html, URL_FIRST);
+        final WebDriver driver = loadPage2(html);
         // top frame
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
@@ -551,12 +548,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "header.html"), headerFrame);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), contentFrame);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "onload.html"), onloadFrame);
 
-        final WebDriver driver = loadPage2(html, URL_FIRST);
+        final WebDriver driver = loadPage2(html);
         // top frame
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
@@ -628,12 +624,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "header.html"), headerFrame);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), contentFrame);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "onload.html"), onloadFrame);
 
-        final WebDriver driver = loadPage2(html, URL_FIRST);
+        final WebDriver driver = loadPage2(html);
         // top frame
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 

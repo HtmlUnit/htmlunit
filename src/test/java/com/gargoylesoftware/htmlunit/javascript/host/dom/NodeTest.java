@@ -1091,10 +1091,9 @@ public class NodeTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPage2(firstHtml, URL_FIRST);
+        final WebDriver driver = loadPage2(firstHtml);
         driver.findElement(By.id("myInput")).click();
 
         verifyAlerts(driver, getExpectedAlerts());

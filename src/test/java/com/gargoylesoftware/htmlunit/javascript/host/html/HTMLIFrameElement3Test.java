@@ -127,7 +127,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setDefaultResponse(frameContent);
-        webConnection.setResponse(URL_FIRST, firstContent);
 
         loadPageWithAlerts2(firstContent);
     }
@@ -238,7 +237,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
 
-        webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(new URL(URL_FIRST, "1.html"), frame1);
         webConnection.setResponse(new URL(URL_FIRST, "2.html"), frame2);
 
@@ -426,7 +424,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
 
-        webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse(frame);
 
         loadPageWithAlerts2(html);
@@ -502,7 +499,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final String html2 = "<html><body>foo</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, html);
         conn.setResponse(new URL(URL_FIRST, "frame.html"), html2);
 
         final WebDriver driver = loadPage2(html);
@@ -676,7 +672,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
 
-        webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, frameContent);
 
         final WebDriver driver = loadPage2(firstContent);

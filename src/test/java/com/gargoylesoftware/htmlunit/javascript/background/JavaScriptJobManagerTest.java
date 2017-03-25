@@ -155,7 +155,6 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 

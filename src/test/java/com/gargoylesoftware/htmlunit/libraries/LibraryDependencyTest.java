@@ -72,11 +72,10 @@ public class LibraryDependencyTest extends WebDriverTestCase {
         final String prototype = getContent("libraries/prototype/1.6.0/dist/prototype.js");
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, prototype, "application/javascript");
 
-        loadPageWithAlerts2(URL_FIRST, 10_000);
+        loadPageWithAlerts2(firstHtml, 10_000);
     }
 
     private String getContent(final String resourceName) throws IOException {

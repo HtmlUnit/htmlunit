@@ -126,8 +126,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "frame.html"), frame);
         getMockWebConnection().setDefaultResponse(""); // for all XHR
 
-        // just to avoid unused variable warning when the next line is commented
-        getMockWebConnection().setResponse(URL_FIRST, html);
         loadPage2(html);
     }
 

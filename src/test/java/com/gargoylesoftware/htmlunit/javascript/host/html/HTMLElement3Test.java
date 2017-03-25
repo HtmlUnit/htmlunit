@@ -96,7 +96,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final String html2 = "<html></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, html1);
         webConnection.setResponse(URL_SECOND, html2);
 
         final String[] alerts = getExpectedAlerts();

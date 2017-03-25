@@ -209,7 +209,6 @@ public class WebClient3Test extends WebDriverTestCase {
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
@@ -258,7 +257,6 @@ public class WebClient3Test extends WebDriverTestCase {
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
@@ -303,7 +301,6 @@ public class WebClient3Test extends WebDriverTestCase {
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
@@ -353,7 +350,6 @@ public class WebClient3Test extends WebDriverTestCase {
 
             + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);

@@ -186,7 +186,6 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
         client.getOptions().setJavaScriptEnabled(false);
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, "foo", "image/png");
 
         loadPageWithAlerts(html);

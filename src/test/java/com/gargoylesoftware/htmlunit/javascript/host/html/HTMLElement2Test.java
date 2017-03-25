@@ -1374,7 +1374,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "  <button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\", \"second\");'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
-        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
 
         final String secondHtml =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
