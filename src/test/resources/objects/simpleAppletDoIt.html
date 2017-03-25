@@ -14,6 +14,8 @@ A simple applet (without display) with a method called doIt(String message) that
  Your browser does not support the applet tag.
  </object>
 
+<input type="text" id="myInput">
+
 <button onclick="document.getElementById('myApplet').doIt('hello')" id="button1">call applet's doIt('hello')</button>
 <button onclick="document.getElementById('myApplet').doIt(12345)" id="button2">call applet's doIt(12345)</button>
 
@@ -24,5 +26,8 @@ A simple applet (without display) with a method called doIt(String message) that
 <button onclick="document.getElementById('myApplet').showParam('param2')" id="buttonParam2">ShowParam2</button>
 <button onclick="document.getElementById('myApplet').showParam('codebase')" id="buttonParamCodebase">ShowParamCodebase</button>
 <button onclick="document.getElementById('myApplet').showParam('archive')" id="buttonParamArchive">ShowParamArchive</button>
+
+<button onclick="document.getElementById('myApplet').execJS('7')" id="execJs7">execJs7</button>
+<button onclick="document.getElementById('myApplet').setValueAttribute('myInput', 'HtmlUnit')" id="setValueAttribute">setValueAttribute</button>
 
 </body></html>

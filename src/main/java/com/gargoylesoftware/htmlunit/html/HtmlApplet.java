@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.applets.AppletClassLoader;
 import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -260,7 +261,7 @@ public class HtmlApplet extends HtmlElement {
             appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
         }
 
-        appletClassLoader_ = new AppletClassLoader();
+        appletClassLoader_ = new AppletClassLoader((Window) getPage().getEnclosingWindow().getScriptableObject());
 
         final String documentUrl = page.getUrl().toExternalForm();
         String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
@@ -299,7 +300,7 @@ public class HtmlApplet extends HtmlElement {
         archiveUrls_ = Collections.unmodifiableList(archiveUrls_);
 
         // no archive attribute, single class
-        if (null == archives || archives.length == 0) {
+        if (archiveUrls_.isEmpty()) {
             final String tempUrl = UrlUtils.resolveUrl(baseUrl, getCodeAttribute());
             final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
 

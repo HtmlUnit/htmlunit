@@ -305,6 +305,72 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletExecJs() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        final HtmlButton button = page.getHtmlElementById("execJs7");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertEquals("execJS: '7'", collectedStatus.get(0));
+        assertEquals("  '7.0'", collectedStatus.get(1));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setMember() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        final HtmlButton button = page.getHtmlElementById("setValueAttribute");
+        button.click();
+
+        assertEquals(1, collectedStatus.size());
+        assertEquals("value set for 'myInput' to 'HtmlUnit'", collectedStatus.get(0));
+
+        final String value = page.getElementById("myInput").getAttribute("value");
+        assertEquals("HtmlUnit", value);
+    }
+
+    /**
      * Tests the handling of parameters.
      * @throws Exception if the test fails
      */

@@ -16,6 +16,14 @@ package netscape.javascript;
 
 import java.applet.Applet;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * Stub for the JSException. This is part of the Applet
  * LiveConnect simulation.
@@ -25,6 +33,18 @@ import java.applet.Applet;
  * @author Ronald Brill
  */
 public class JSObject {
+
+    private static Window Window_;
+    private ScriptableObject scriptableObject_;
+
+    /**
+     * Constructor.
+     *
+     * @param scriptableObject the wrapped scriptableObject
+     */
+    public JSObject(final ScriptableObject scriptableObject) {
+        scriptableObject_ = scriptableObject;
+    }
 
     /**
      * Empty stub.
@@ -46,7 +66,16 @@ public class JSObject {
      * @throws JSException in case or error
      */
     public Object eval(final String paramString) throws JSException {
-        throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.eval(String)).");
+        final Page page = Window_.getWebWindow().getEnclosedPage();
+        if (page instanceof HtmlPage) {
+            final HtmlPage htmlPage = (HtmlPage) page;
+            final ScriptResult result = htmlPage.executeJavaScript(paramString);
+            if (result.getJavaScriptResult() instanceof ScriptableObject) {
+                return new JSObject((ScriptableObject) result.getJavaScriptResult());
+            }
+            return result.getJavaScriptResult();
+        }
+        return null;
     }
 
     /**
@@ -68,7 +97,11 @@ public class JSObject {
      * @throws JSException in case or error
      */
     public void setMember(final String paramString, final Object paramObject) throws JSException {
-        throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.setMember(String, Object)).");
+        if (scriptableObject_ instanceof Element) {
+            ((Element) scriptableObject_).setAttribute(paramString, paramObject.toString());
+            return;
+        }
+        scriptableObject_.put(paramString, scriptableObject_, paramObject);
     }
 
     /**
@@ -104,13 +137,22 @@ public class JSObject {
     }
 
     /**
-     * Empty stub.
-     *
      * @param paramApplet the paramApplet
      * @return result Object
      * @throws JSException in case or error
      */
     public static JSObject getWindow(final Applet paramApplet) throws JSException {
-        throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.getWindow(Applet)).");
+        return new JSObject(Window_);
+    }
+
+    /**
+     * Sets the window this class works for.
+     * Every applet works inside his onw class loaders, and this class
+     * will be loaded separatly into every one.
+     *
+     * @param window the window
+     */
+    public static void setWindow(final Window window) {
+        Window_ = window;
     }
 }
