@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -629,4 +630,26 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             super.doGet(request, response);
         }
     }
+
+    /**
+     * Test for bug #1861.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void userAgent() throws Exception {
+        final WebClient webClient = getWebClient();
+        final HttpWebConnection connection = (HttpWebConnection) webClient.getWebConnection();
+        final HttpClientBuilder builder = connection.getHttpClientBuilder();
+        final String userAgent = get(builder, "userAgent");
+        assertEquals(webClient.getBrowserVersion().getUserAgent(), userAgent);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T get(final Object o, final String fieldName) throws Exception {
+        final Field field = o.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        return (T) field.get(o);
+    }
+
 }

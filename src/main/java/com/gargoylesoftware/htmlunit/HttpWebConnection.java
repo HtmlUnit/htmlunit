@@ -533,6 +533,7 @@ public class HttpWebConnection implements WebConnection {
             builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
 
             builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
+            builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
             httpClientBuilder_.put(Thread.currentThread(), builder);
         }
 

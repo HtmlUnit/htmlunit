@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.26" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1861">
+                HttpWebConnection: fix User-Agent header of CONNECT request.
+            </action>
             <action type="add" dev="rbri">
                 Applet: initial javascript interaction support added; it is now possible to use
                 the JSObject from the applet to call javascript functions or set attributes.
