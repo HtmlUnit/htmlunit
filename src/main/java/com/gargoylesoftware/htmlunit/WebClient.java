@@ -1277,22 +1277,19 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return the WebResponse
      */
     public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
-        final WebResponse response;
-        final String protocol = webRequest.getUrl().getProtocol();
-        if ("about".equals(protocol)) {
-            response = makeWebResponseForAboutUrl(webRequest.getUrl());
-        }
-        else if ("file".equals(protocol)) {
-            response = makeWebResponseForFileUrl(webRequest);
-        }
-        else if ("data".equals(protocol)) {
-            response = makeWebResponseForDataUrl(webRequest);
-        }
-        else {
-            response = loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
-        }
+        switch (webRequest.getUrl().getProtocol()) {
+            case "about":
+                return makeWebResponseForAboutUrl(webRequest.getUrl());
 
-        return response;
+            case "file":
+                return makeWebResponseForFileUrl(webRequest);
+
+            case "data":
+                return makeWebResponseForDataUrl(webRequest);
+
+            default:
+                return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
+        }
     }
 
     /**
