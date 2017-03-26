@@ -473,7 +473,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title,translate,"
                 + "webkitdropzone",
-            FF45 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,"
+            FF = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,"
                 + "draggable,focus(),hidden,innerText,isContentEditable,itemId,itemProp,itemRef,itemScope,"
                 + "itemType,itemValue,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onblur,oncanplay,"
@@ -2554,7 +2554,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF45 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+    @Alerts(FF = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,"
                 + "required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"

@@ -921,7 +921,8 @@ public class CodeStyleTest {
             if (line.startsWith("        CHROME = ")
                     || line.startsWith("        IE = ")
                     || line.startsWith("        FF = ")
-                    || line.startsWith("        FF45 = ")) {
+                    || line.startsWith("        FF45 = ")
+                    || line.startsWith("        FF52 = ")) {
                 addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
             }
         }
