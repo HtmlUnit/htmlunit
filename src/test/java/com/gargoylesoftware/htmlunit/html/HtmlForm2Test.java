@@ -206,7 +206,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ByTagName("input")).click();
 
         final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
-        final String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
+        final URL expectedUrl = new URL(URL_SECOND, "two.html");
         assertEquals(expectedUrl, requestedUrl);
     }
 

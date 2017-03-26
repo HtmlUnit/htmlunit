@@ -505,7 +505,7 @@ public class History2Test extends WebDriverTestCase {
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<a name='length' href='' onclick='alert(history.length);return false;'>length</a><br>\n"
-                + "<a name='b' href='" + URL_SECOND.toExternalForm() + "'>b</a><br>\n"
+                + "<a name='b' href='" + URL_SECOND + "'>b</a><br>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);

@@ -526,7 +526,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
     @Test
     public void cleanSetTimeout() throws Exception {
         final String page1 = "<html><body>\n"
-            + "<a id=it href='" + URL_SECOND.toString() + "'>link</a>\n"
+            + "<a id=it href='" + URL_SECOND + "'>link</a>\n"
             + "</body></html>";
 
         final String html = "<html><body>\n"

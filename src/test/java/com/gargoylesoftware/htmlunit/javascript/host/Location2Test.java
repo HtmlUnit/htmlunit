@@ -689,7 +689,7 @@ public class Location2Test extends WebDriverTestCase {
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      var win = window.open('" + URL_SECOND.toExternalForm() + "','test','',true);\n"
+            + "      var win = window.open('" + URL_SECOND + "','test','',true);\n"
             + "      win.close();\n"
             + "      location.href = 'test.html';\n"
             + "    }\n"
