@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -761,7 +762,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Alerts("a")
     public void stackOverflow() throws Exception {
         final String s = IOUtils.toString(getClass().getResourceAsStream("stackOverflow.txt"),
-                TextUtil.DEFAULT_CHARSET);
+                ISO_8859_1);
         final String html = buildHtml(
                   "var s = '" + s + "';\n"
                 + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"

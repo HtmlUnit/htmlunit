@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -142,7 +143,7 @@ public class BrowserVersionFeaturesTest  {
                 unusedCheck(file, unusedFeatures);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                 final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
                 for (final String line : lines) {
                     for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {

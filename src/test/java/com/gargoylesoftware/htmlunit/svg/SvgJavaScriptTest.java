@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.svg;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -52,7 +52,7 @@ public class SvgJavaScriptTest extends WebDriverTestCase {
             + "onclick=\"document.getElementById('rect').setAttribute('fill', 'green')\" />\n"
             + "</svg>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "image/svg+xml", TextUtil.DEFAULT_CHARSET);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "image/svg+xml", ISO_8859_1);
         final WebElement rect = driver.findElement(By.id("rect"));
 
         assertEquals("blue", rect.getAttribute("fill"));

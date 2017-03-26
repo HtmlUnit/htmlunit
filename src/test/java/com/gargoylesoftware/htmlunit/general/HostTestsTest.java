@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -27,8 +28,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
  * Tests the general host tests have all JavaScript objects names defined in all the other tests.
@@ -78,7 +77,7 @@ public class HostTestsTest {
                 collectionObjectNames(file, set);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                 for (final String line : lines) {
                     final Matcher matcher = pattern_.matcher(line);
                     while (matcher.find()) {
@@ -91,7 +90,7 @@ public class HostTestsTest {
 
     private static void ensure(final File file, final Set<String> set) throws IOException {
         final Set<String> unusedNames = new HashSet<>(set);
-        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (final String line : lines) {
             for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
                 if (line.contains("(\"" + it.next() + "\")")) {

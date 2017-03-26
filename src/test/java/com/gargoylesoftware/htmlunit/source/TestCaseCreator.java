@@ -14,13 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.source;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-
-import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
  * Prints out a tiny test case, from a provided HTML file.
@@ -53,7 +53,7 @@ public final class TestCaseCreator {
         System.out.println("        @Alerts()");
         System.out.println("        public void test() throws Exception {");
 
-        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (i == 0) {

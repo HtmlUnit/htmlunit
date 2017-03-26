@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESUL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +68,6 @@ import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -93,7 +93,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 /**
  * A representation of an HTML page returned from a server.
  * <p>
@@ -1052,14 +1051,14 @@ public class HtmlPage extends SgmlPage {
 
         if (scriptEncoding == null) {
             final Charset contentCharset = response.getContentCharset();
-            if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
+            if (!contentCharset.equals(ISO_8859_1)) {
                 scriptEncoding = contentCharset;
             }
-            else if (!pageEncoding.equals(TextUtil.DEFAULT_CHARSET)) {
+            else if (!pageEncoding.equals(ISO_8859_1)) {
                 scriptEncoding = pageEncoding;
             }
             else {
-                scriptEncoding = TextUtil.DEFAULT_CHARSET;
+                scriptEncoding = ISO_8859_1;
             }
         }
 

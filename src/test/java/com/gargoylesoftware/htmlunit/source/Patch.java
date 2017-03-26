@@ -14,14 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.source;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-
-import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
  * Patches utilities.
@@ -44,14 +44,14 @@ public final class Patch {
     public static void checkAuthor(final String baseDir, final String patchPath, final String authorName)
         throws IOException {
         final List<String> errors = new ArrayList<>();
-        final List<String> lines = FileUtils.readLines(new File(patchPath), TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(new File(patchPath), ISO_8859_1);
         for (final String line : lines) {
             if (line.startsWith("+++")) {
                 final String fileName = line.substring(4, line.indexOf('\t', 4));
                 if (fileName.endsWith(".java")) {
                     final File file = new File(baseDir, fileName);
                     if (file.exists()) {
-                        final List<String> fileLines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                        final List<String> fileLines = FileUtils.readLines(file, ISO_8859_1);
                         boolean authorFound = false;
                         for (final String fileLine : fileLines) {
                             if (fileLine.contains("@author " + authorName)) {
@@ -81,7 +81,7 @@ public final class Patch {
      * @throws IOException if an exception occurs
      */
     public static void generateHtmlString(final File htmlFile) throws IOException {
-        final List<String> lines = FileUtils.readLines(htmlFile, TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(htmlFile, ISO_8859_1);
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i).replace("\t", "    ").replace("\\", "\\\\").replace("\"", "\\\"");
             if (i == 0) {

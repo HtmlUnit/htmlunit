@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
@@ -39,7 +40,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -228,7 +228,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);
@@ -363,7 +363,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", extension);
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);
@@ -670,7 +670,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("myFile")).sendKeys(path);

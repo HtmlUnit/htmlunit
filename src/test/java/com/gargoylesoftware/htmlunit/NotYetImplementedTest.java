@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -57,7 +59,7 @@ public class NotYetImplementedTest {
                         && !"SimpleWebTestCase.java".equals(fileName)
                         && !"NotYetImplementedTest.java".equals(fileName)
                         && !"CodeStyleTest.java".equals(fileName)) {
-                    final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                    final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
                     process(lines, relativePath);
@@ -258,7 +260,7 @@ public class NotYetImplementedTest {
         builder.insert(overviewPos, overview);
 
         FileUtils.writeStringToFile(new File(ElementPropertiesTest.getTargetDirectory(), "notYetImplemented.html"),
-                builder.toString(), TextUtil.DEFAULT_CHARSET);
+                builder.toString(), ISO_8859_1);
     }
 
 }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -27,7 +29,6 @@ import org.apache.commons.io.FileUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ProxyConfig;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -94,7 +95,7 @@ public final class HostExtractor {
 
     private static void ensure(final File file, final Set<String> set) throws IOException {
         final Set<String> unusedNames = new HashSet<>(set);
-        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (final String line : lines) {
             for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
                 if (line.contains("(\"" + it.next() + "\")")) {

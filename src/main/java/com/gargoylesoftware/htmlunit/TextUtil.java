@@ -34,7 +34,10 @@ public final class TextUtil {
 
     /**
      * Default charset used.
+     *
+     * @deprecated as of 2.26, use {@link java.nio.charset.StandardCharsets#ISO_8859_1}
      */
+    @Deprecated
     public static final Charset DEFAULT_CHARSET = ISO_8859_1;
 
     /** Private constructor to prevent instantiation. */
@@ -46,7 +49,7 @@ public final class TextUtil {
      * @return the resulting input stream
      */
     public static InputStream toInputStream(final String content) {
-        return toInputStream(content, DEFAULT_CHARSET);
+        return toInputStream(content, ISO_8859_1);
     }
 
     /**

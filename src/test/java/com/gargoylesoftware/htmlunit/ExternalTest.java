@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -59,7 +60,7 @@ public class ExternalTest {
     public void pom() throws Exception {
         if (isDifferentWeek()) {
             final Map<String, String> properties = new HashMap<>();
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
             for (int i = 0; i < lines.size(); i++) {
                 final String line = lines.get(i);
                 if (line.trim().equals("<properties>")) {
@@ -113,7 +114,7 @@ public class ExternalTest {
     @Test
     public void snapshot() throws Exception {
         if (isDifferentWeek()) {
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
             String version = null;
             for (int i = 0; i < lines.size(); i++) {
                 if ("<artifactId>htmlunit</artifactId>".equals(lines.get(i).trim())) {

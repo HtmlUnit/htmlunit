@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.source;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,7 +41,6 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
 
@@ -293,7 +294,7 @@ public final class JQueryExtractor {
     static class Expectations implements Iterable<Expectation> {
         static Expectations readExpectations(final File file) throws IOException {
             final Expectations expectations = new Expectations();
-            final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+            final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
             for (int i = 0; i < lines.size(); i++) {
                 expectations.add(new Expectation(i + 1, lines.get(i)));
             }

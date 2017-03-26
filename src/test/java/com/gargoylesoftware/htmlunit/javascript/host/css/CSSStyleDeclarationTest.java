@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -34,7 +35,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
@@ -2770,10 +2770,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
         final File cssFolder = new File("src/main/java/com/gargoylesoftware/htmlunit/javascript/host/css/");
-        final List<String> cssLines = FileUtils.readLines(new File(cssFolder, "CSSStyleDeclaration.java"),
-                TextUtil.DEFAULT_CHARSET);
+        final List<String> cssLines = FileUtils.readLines(new File(cssFolder, "CSSStyleDeclaration.java"), ISO_8859_1);
         final List<String> computedLines = FileUtils.readLines(new File(cssFolder, "ComputedCSSStyleDeclaration.java"),
-                TextUtil.DEFAULT_CHARSET);
+                ISO_8859_1);
         for (final String propertyName : propertyMap.keySet()) {
             final PropertyInfo info = propertyMap.get(propertyName);
             if (info.getReadMethod() == null) {

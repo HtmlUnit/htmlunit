@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -49,7 +50,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -256,7 +256,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     .append(htmlDetailsHeader())
                     .append(HTML_)
                     .append(htmlDetailsFooter())
-                    .append(htmlFooter()).toString(), TextUtil.DEFAULT_CHARSET);
+                    .append(htmlFooter()).toString(), ISO_8859_1);
     }
 
     private static void saveChart() throws IOException {

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -287,7 +289,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPage(final String html, final URL url) throws Exception {
-        return loadPage(html, url, "text/html", TextUtil.DEFAULT_CHARSET);
+        return loadPage(html, url, "text/html", ISO_8859_1);
     }
 
     /**

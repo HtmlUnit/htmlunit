@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.File;
@@ -37,7 +38,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -229,7 +229,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
-        final String content = FileUtils.readFileToString(file, TextUtil.DEFAULT_CHARSET);
+        final String content = FileUtils.readFileToString(file, ISO_8859_1);
         assertFalse(content.contains("<script"));
 
         assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
@@ -425,7 +425,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
-        assertEquals(css, FileUtils.readFileToString(cssFile, TextUtil.DEFAULT_CHARSET));
+        assertEquals(css, FileUtils.readFileToString(cssFile, ISO_8859_1));
 
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
     }
@@ -543,7 +543,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             assertTrue(file.exists());
             assertTrue(file.isFile());
             assertTrue(page.asXml().contains("</textarea>"));
-            assertTrue(FileUtils.readFileToString(file, TextUtil.DEFAULT_CHARSET).contains("</textarea>"));
+            assertTrue(FileUtils.readFileToString(file, ISO_8859_1).contains("</textarea>"));
         }
         finally {
             file.delete();

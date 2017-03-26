@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -112,7 +114,7 @@ public class WebResponseData implements Serializable {
                                  + "<p>The page you are trying to view cannot be shown because"
                                  + " it uses an invalid or unsupported form of compression.</p>\n"
                                  + "</body>\n"
-                                 + "</html>", TextUtil.DEFAULT_CHARSET);
+                                 + "</html>", ISO_8859_1);
                 }
             }
             else if (StringUtils.contains(encoding, "deflate")) {

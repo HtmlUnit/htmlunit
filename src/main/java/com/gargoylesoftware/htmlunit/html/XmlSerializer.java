@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,7 +32,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -60,7 +61,7 @@ class XmlSerializer {
         }
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         outputDir_ = new File(file.getParentFile(), fileName);
-        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()), TextUtil.DEFAULT_CHARSET);
+        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()), ISO_8859_1);
     }
 
     /**
@@ -240,8 +241,7 @@ class XmlSerializer {
             final String protocol = link.getWebRequest().getUrl().getProtocol();
             if ("http".equals(protocol) || "https".equals(protocol)) {
                 final File file = createFile(hrefAttr.getValue(), ".css");
-                FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(),
-                        TextUtil.DEFAULT_CHARSET);
+                FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(), ISO_8859_1);
                 hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
             }
         }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +36,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -324,7 +325,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @throws IOException if a problem occurs writing the file
      */
     private void createOverview() throws IOException {
-        FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", TextUtil.DEFAULT_CHARSET);
+        FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", ISO_8859_1);
 
         final URL indexResource = DebuggingWebConnection.class.getResource("DebuggingWebConnection.index.html");
         if (indexResource == null) {

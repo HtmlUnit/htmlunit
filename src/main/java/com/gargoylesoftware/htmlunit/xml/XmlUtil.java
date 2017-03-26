@@ -81,7 +81,10 @@ public final class XmlUtil {
 
     /**
      * Default encoding used.
+     *
+     * @deprecated as of 2.26, use {@link java.nio.charset.StandardCharsets#UTF_8}
      */
+    @Deprecated
     public static final Charset DEFAULT_CHARSET = UTF_8;
 
     private static final Log LOG = LogFactory.getLog(XmlUtil.class);

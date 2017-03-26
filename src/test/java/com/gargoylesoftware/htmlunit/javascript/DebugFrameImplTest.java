@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.StringWriter;
 import java.net.URL;
 
@@ -30,7 +32,6 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 
@@ -97,7 +98,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
     void loggedCalls() throws Exception {
         final URL url = getClass().getResource("debugFrameImplTest.html");
         final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"),
-                TextUtil.DEFAULT_CHARSET);
+                ISO_8859_1);
 
         final StringWriter sw = new StringWriter();
         final Layout layout = new PatternLayout("%m%n");

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.net.URL;
 
@@ -28,7 +29,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1041,7 +1041,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
             + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
             + "</svg>";
-        final WebDriver driver = loadPage2(svg, URL_FIRST, "text/xml", TextUtil.DEFAULT_CHARSET);
+        final WebDriver driver = loadPage2(svg, URL_FIRST, "text/xml", ISO_8859_1);
         driver.findElement(By.id("rect")).click();
 
         verifyAlerts(driver, getExpectedAlerts());

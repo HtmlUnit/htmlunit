@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -47,7 +49,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class WebRequest implements Serializable {
 
-    // private static final Log LOG = LogFactory.getLog(WebRequest.class);
     private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");
     private static final Pattern DOT_DOT_PATTERN = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
     private static final Pattern REMOVE_DOTS_PATTERN = Pattern.compile("^/(\\.\\.?/)*");
@@ -61,7 +62,7 @@ public class WebRequest implements Serializable {
     private Map<String, String> additionalHeaders_ = new HashMap<>();
     private Credentials urlCredentials_;
     private Credentials credentials_;
-    private transient Charset charset_ = TextUtil.DEFAULT_CHARSET;
+    private transient Charset charset_ = ISO_8859_1;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
@@ -421,7 +422,7 @@ public class WebRequest implements Serializable {
 
     /**
      * Sets the character set to use to perform the request. The default value
-     * is {@link TextUtil#DEFAULT_CHARSET}.
+     * is {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
      * @param charsetName the character set to use to perform the request
      * @deprecated as of 2.25, please use {@link #setCharset(Charset)}
      */
@@ -432,7 +433,7 @@ public class WebRequest implements Serializable {
 
     /**
      * Sets the character set to use to perform the request. The default value
-     * is {@link TextUtil#DEFAULT_CHARSET}.
+     * is {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
      * @param charset the character set to use to perform the request
      */
     public void setCharset(final Charset charset) {

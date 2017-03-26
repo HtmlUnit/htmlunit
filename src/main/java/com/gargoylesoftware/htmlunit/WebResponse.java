@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -28,7 +31,6 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A response from a web server.
@@ -158,7 +160,7 @@ public class WebResponse implements Serializable {
      * Returns the content charset for this response, even if no charset was specified explicitly.
      * This method always returns a valid charset. This method first checks the {@code Content-Type}
      * header; if not found, it checks the request charset; as a last resort, this method
-     * returns {@link TextUtil#DEFAULT_CHARSET}.
+     * returns {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
      * If no charset is defined for an xml response, then UTF-8 is used
      * @see <a href="http://www.w3.org/TR/xml/#charencoding">Character Encoding</a>
      * @return the content charset for this response
@@ -171,13 +173,13 @@ public class WebResponse implements Serializable {
             // xml pages are using a different content type
             if (null != contentType
                 && PageType.XML == DefaultPageCreator.determinePageType(contentType)) {
-                return XmlUtil.DEFAULT_CHARSET;
+                return UTF_8;
             }
 
             charset = getWebRequest().getCharset();
         }
         if (charset == null) {
-            charset = TextUtil.DEFAULT_CHARSET;
+            charset = ISO_8859_1;
         }
         return charset;
     }

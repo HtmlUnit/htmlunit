@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -76,7 +77,6 @@ import org.w3c.dom.stylesheets.MediaList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -1015,7 +1015,7 @@ public class CSSStyleSheet extends StyleSheet {
                     final ByteArrayInputStream bis = (ByteArrayInputStream) is;
                     bis.reset();
                 }
-                return IOUtils.toString(is, TextUtil.DEFAULT_CHARSET);
+                return IOUtils.toString(is, ISO_8859_1);
             }
             return "";
         }

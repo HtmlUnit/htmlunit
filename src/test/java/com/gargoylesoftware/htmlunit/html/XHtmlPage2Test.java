@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -51,7 +52,7 @@ public class XHtmlPage2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", TextUtil.DEFAULT_CHARSET);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", ISO_8859_1);
 
         assertEquals("", driver.findElement(By.id("div1")).getText());
         assertEquals("not empty", driver.findElement(By.id("div2")).getText());
@@ -79,7 +80,7 @@ public class XHtmlPage2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", TextUtil.DEFAULT_CHARSET);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", ISO_8859_1);
 
         assertEquals("", driver.findElement(By.id("myText")).getText());
     }

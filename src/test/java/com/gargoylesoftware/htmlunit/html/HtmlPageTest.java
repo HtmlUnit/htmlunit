@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
@@ -574,7 +575,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<meta http-equiv='Content-Type' content='text/html; charset='>\n"
             + "</head><body>abc</body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals(TextUtil.DEFAULT_CHARSET, page.getCharset());
+        assertEquals(ISO_8859_1, page.getCharset());
     }
 
     /**

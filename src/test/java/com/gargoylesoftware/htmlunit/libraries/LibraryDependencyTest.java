@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -24,7 +26,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -80,7 +81,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
 
     private String getContent(final String resourceName) throws IOException {
         try (InputStream in = getClass().getClassLoader().getResourceAsStream(resourceName)) {
-            return IOUtils.toString(in, TextUtil.DEFAULT_CHARSET);
+            return IOUtils.toString(in, ISO_8859_1);
         }
     }
 }

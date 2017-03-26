@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -141,7 +142,7 @@ public class CodeStyleTest {
             final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
             svnProperties(file, relativePath);
             if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                 openingCurlyBracket(lines, relativePath);
                 year(lines, relativePath);
                 javaDocFirstLine(lines, relativePath);
@@ -331,7 +332,7 @@ public class CodeStyleTest {
                 }
                 else {
                     if (file.getName().endsWith(".xml")) {
-                        final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                         final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
                         mixedIndentation(lines, relativePath);
@@ -386,7 +387,7 @@ public class CodeStyleTest {
      * Checks the year in {@code LICENSE.txt}.
      */
     private void licenseYear() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), ISO_8859_1);
         boolean check = false;
         for (final String line : lines) {
             if (line.contains("<property name=\"header\"")) {
@@ -407,7 +408,7 @@ public class CodeStyleTest {
     private void versionYear() throws IOException {
         final List<String> lines =
                 FileUtils.readLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"),
-                        TextUtil.DEFAULT_CHARSET);
+                        ISO_8859_1);
         for (final String line : lines) {
             if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
                 return;
@@ -420,7 +421,7 @@ public class CodeStyleTest {
      * Verifies no &lt;parent&gt; tag in {@code pom.xml}.
      */
     private void parentInPom() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("pom.xml"), TextUtil.DEFAULT_CHARSET);
+        final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).contains("<parent>")) {
                 addFailure("'pom.xml' should not have <parent> tag in line: " + (i + 1));

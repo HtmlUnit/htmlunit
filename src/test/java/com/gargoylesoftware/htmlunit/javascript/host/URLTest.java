@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
@@ -24,11 +26,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link URL}.
@@ -95,7 +96,7 @@ public class URLTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
         try {
-            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", TextUtil.DEFAULT_CHARSET);
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("fileupload")).sendKeys(path);

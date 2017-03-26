@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -245,7 +247,7 @@ public class MockWebConnection implements WebConnection {
                 statusCode,
                 statusMessage,
                 contentType,
-                TextUtil.DEFAULT_CHARSET,
+                ISO_8859_1,
                 headers);
     }
 
@@ -295,7 +297,7 @@ public class MockWebConnection implements WebConnection {
             final String statusMessage, final String contentType, final List<NameValuePair> headers) {
 
         if (charset == null) {
-            charset = TextUtil.DEFAULT_CHARSET;
+            charset = ISO_8859_1;
         }
         return new RawResponseData(content, charset, statusCode, statusMessage, contentType, headers);
     }

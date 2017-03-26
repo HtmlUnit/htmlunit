@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.gae;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayOutputStream;
@@ -27,8 +28,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
-
-import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
  * Test runner for GAE support tests. This runner uses a custom class loader that
@@ -111,7 +110,7 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
     private static Set<String> loadWhiteList() {
         try (InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt")) {
             assertNotNull(is);
-            return new HashSet<>(IOUtils.readLines(is, TextUtil.DEFAULT_CHARSET));
+            return new HashSet<>(IOUtils.readLines(is, ISO_8859_1));
         }
         catch (final IOException e) {
             throw new Error("Failed to load while list content", e);

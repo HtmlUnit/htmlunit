@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public final class TestCaseTest {
                     generateTestForHtmlElements(file);
                 }
                 else if (file.getName().endsWith(".java")) {
-                    final List<String> lines = FileUtils.readLines(file, TextUtil.DEFAULT_CHARSET);
+                    final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                     for (final String line : lines) {
                         if (line.contains("(\"xmp\")")) {
                             final String relativePath = file.getAbsolutePath().substring(
