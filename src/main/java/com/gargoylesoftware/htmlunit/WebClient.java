@@ -1177,7 +1177,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         String fileUrl = cleanUrl.toExternalForm();
-        fileUrl = URLDecoder.decode(fileUrl, "UTF-8");
+        fileUrl = URLDecoder.decode(fileUrl, StandardCharsets.UTF_8.name());
         final File file = new File(fileUrl.substring(5));
         if (!file.exists()) {
             // construct 404

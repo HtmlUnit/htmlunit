@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -281,13 +280,9 @@ public final class UrlUtils {
      */
     public static String decode(final String escaped) {
         try {
-            final byte[] bytes = escaped.getBytes("US-ASCII");
+            final byte[] bytes = escaped.getBytes(StandardCharsets.US_ASCII);
             final byte[] bytes2 = URLCodec.decodeUrl(bytes);
-            return new String(bytes2, "UTF-8");
-        }
-        catch (final UnsupportedEncodingException e) {
-            // Should never happen.
-            throw new RuntimeException(e);
+            return new String(bytes2, StandardCharsets.UTF_8);
         }
         catch (final DecoderException e) {
             // Should never happen.
