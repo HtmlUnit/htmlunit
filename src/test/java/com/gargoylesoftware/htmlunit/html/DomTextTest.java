@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,8 +160,7 @@ public class DomTextTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, StandardCharsets.UTF_8),
-                200, "OK", "text/html");
+        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, UTF_8), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

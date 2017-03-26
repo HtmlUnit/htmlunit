@@ -29,13 +29,13 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDE
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -539,7 +539,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
-            request.setCharset(StandardCharsets.UTF_8);
+            request.setCharset(UTF_8);
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
             if (!isSameOrigin(originUrl, fullUrl)) {

@@ -15,11 +15,12 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +173,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(html, "text/html", StandardCharsets.ISO_8859_1);
+        webConnection.setDefaultResponse(html, "text/html", ISO_8859_1);
 
         final WebDriver driver = loadPage2(html);
         assertEquals(URL_FIRST.toExternalForm(), driver.getCurrentUrl());
@@ -364,7 +365,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             final String html = "<html><head><script>\n"
@@ -412,7 +413,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             final String html = "<html><head><script>\n"

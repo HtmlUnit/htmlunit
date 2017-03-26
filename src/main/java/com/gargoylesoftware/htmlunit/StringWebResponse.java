@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class StringWebResponse extends WebResponse {
      */
     public StringWebResponse(final String content, final URL originatingURL) {
         // use UTF-8 here to be sure, all chars in the string are part of the charset
-        this(content, StandardCharsets.UTF_8, originatingURL);
+        this(content, UTF_8, originatingURL);
     }
 
     /**

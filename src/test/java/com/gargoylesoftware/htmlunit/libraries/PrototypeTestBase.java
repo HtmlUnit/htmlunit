@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -128,7 +129,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null && !expected.equals(actual)) {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
             final File f = new File(tmpDir, "prototype" + getVersion() + "_result_" + filename);
-            FileUtils.writeStringToFile(f, driver.getPageSource(), "UTF-8");
+            FileUtils.writeStringToFile(f, driver.getPageSource(), UTF_8);
             LOG.info("Test result for " + filename + " written to: " + f.getAbsolutePath());
         }
 
@@ -162,7 +163,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
             }
         }
 
-        return FileUtils.readFileToString(expectationsFile, "UTF-8");
+        return FileUtils.readFileToString(expectationsFile, UTF_8);
     }
 
     /**

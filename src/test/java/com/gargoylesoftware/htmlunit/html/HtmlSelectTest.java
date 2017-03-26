@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -734,7 +736,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // save the file and reload it
         final File file = new File(tmpFolderProvider_.newFolder("tmp"), "test.html");
         page.save(file);
-        final String html2 = FileUtils.readFileToString(file, "UTF-8");
+        final String html2 = FileUtils.readFileToString(file, UTF_8);
         final HtmlPage page2 = loadPage(html2);
         final HtmlSelect select2 = (HtmlSelect) page2.getElementById("main");
         assertEquals("option 2", select2.getSelectedOptions().get(0).getText());

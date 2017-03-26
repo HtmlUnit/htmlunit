@@ -15,12 +15,12 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -591,7 +591,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertSame(StandardCharsets.UTF_8, page.getCharset());
+        assertSame(UTF_8, page.getCharset());
         assertEquals(page.getWebResponse().getContentCharset(), page.getCharset());
     }
 
@@ -995,8 +995,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, StandardCharsets.UTF_8),
-                200, "OK", "text/html");
+        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, UTF_8), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

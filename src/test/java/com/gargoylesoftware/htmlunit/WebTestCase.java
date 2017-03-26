@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -728,7 +730,7 @@ public abstract class WebTestCase {
         assertNotNull(url);
         final File file = new File(url.toURI());
 
-        String content = FileUtils.readFileToString(file, "UTF-8");
+        String content = FileUtils.readFileToString(file, UTF_8);
         content = StringUtils.replace(content, "\r\n", "\n");
         return content;
     }

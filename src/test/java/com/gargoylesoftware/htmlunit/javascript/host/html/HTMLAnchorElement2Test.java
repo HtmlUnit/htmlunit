@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -975,7 +976,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
 
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {

@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,7 +61,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         // rather than to examine a request that has been rebuilt but...
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
 
-        assertSame(StandardCharsets.ISO_8859_1, lastRequest.getCharset());
+        assertSame(ISO_8859_1, lastRequest.getCharset());
         assertEquals(null, lastRequest.getProxyHost());
         assertEquals(null, lastRequest.getRequestBody());
         assertEquals(URL_FIRST + "foo", lastRequest.getUrl());

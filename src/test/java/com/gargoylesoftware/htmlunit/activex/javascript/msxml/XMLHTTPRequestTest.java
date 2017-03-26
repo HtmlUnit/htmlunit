@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUt
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLHTTPREQUEST_FUNCTION_NAME;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callCreateXMLHTTPRequest;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.createTestHTML;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -339,7 +340,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         final String response = "ol\u00E9";
-        final byte[] responseBytes = response.getBytes("UTF-8");
+        final byte[] responseBytes = response.getBytes(UTF_8);
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", "text/plain",
             new ArrayList<NameValuePair>());
@@ -472,7 +473,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         final String response = "<root>ol\u00E9</root>";
-        final byte[] responseBytes = response.getBytes("UTF-8");
+        final byte[] responseBytes = response.getBytes(UTF_8);
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", "text/xml",
             new ArrayList<NameValuePair>());

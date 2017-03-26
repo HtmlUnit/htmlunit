@@ -14,11 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1090,12 +1091,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitRequestCharset() throws Exception {
-        submitRequestCharset("utf-8", null, null, StandardCharsets.UTF_8);
-        submitRequestCharset(null, "utf-8", null, StandardCharsets.UTF_8);
-        submitRequestCharset("iso-8859-1", null, "utf-8", StandardCharsets.UTF_8);
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", StandardCharsets.UTF_8);
-        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", StandardCharsets.ISO_8859_1);
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", StandardCharsets.UTF_8);
+        submitRequestCharset("utf-8", null, null, UTF_8);
+        submitRequestCharset(null, "utf-8", null, UTF_8);
+        submitRequestCharset("iso-8859-1", null, "utf-8", UTF_8);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", UTF_8);
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", ISO_8859_1);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", UTF_8);
     }
 
     /**

@@ -15,13 +15,13 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -733,7 +733,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -761,7 +761,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -789,7 +789,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -822,7 +822,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", StandardCharsets.UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -1086,7 +1086,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>";
 
         final String response = "ol\u00E9";
-        final byte[] responseBytes = response.getBytes("UTF-8");
+        final byte[] responseBytes = response.getBytes(UTF_8);
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", "text/html",
             new ArrayList<NameValuePair>());
@@ -1329,7 +1329,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", "text/plain", StandardCharsets.UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", "text/plain", UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -1343,7 +1343,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         // this method is not a test case, but rather to show the behavior of java
 
         final String string = "'\u9EC4'";
-        final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
+        final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes(UTF_8));
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"))) {
             final String output = reader.readLine();
             assertNotNull(output);

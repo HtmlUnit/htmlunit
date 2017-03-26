@@ -18,8 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
@@ -91,8 +92,7 @@ public class XMLDocument3Test extends WebDriverTestCase {
             + "</body></html>";
 
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=ISO-8859-1",
-                StandardCharsets.ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=ISO-8859-1", ISO_8859_1);
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -118,7 +118,7 @@ public class XMLDocument3Test extends WebDriverTestCase {
             + "</body></html>";
 
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=UTF-8", StandardCharsets.UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=UTF-8", UTF_8);
         verifyAlerts(driver, getExpectedAlerts());
     }
 

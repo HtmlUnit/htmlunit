@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Utility methods relating to text.
@@ -34,7 +35,7 @@ public final class TextUtil {
     /**
      * Default charset used.
      */
-    public static final Charset DEFAULT_CHARSET = StandardCharsets.ISO_8859_1;
+    public static final Charset DEFAULT_CHARSET = ISO_8859_1;
 
     /** Private constructor to prevent instantiation. */
     private TextUtil() { }

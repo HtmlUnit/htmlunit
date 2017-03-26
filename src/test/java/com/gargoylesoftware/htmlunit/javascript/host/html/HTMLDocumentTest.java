@@ -17,9 +17,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1987,7 +1988,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", StandardCharsets.ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2013,7 +2014,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", StandardCharsets.ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2039,7 +2040,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=utf-8", StandardCharsets.ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=utf-8", ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2066,7 +2067,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", StandardCharsets.UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", UTF_8);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2084,7 +2085,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", StandardCharsets.UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", UTF_8);
         driver.findElement(By.id("myId")).click();
         String actualQuery = driver.getCurrentUrl();
         actualQuery = actualQuery.substring(actualQuery.indexOf('?'));

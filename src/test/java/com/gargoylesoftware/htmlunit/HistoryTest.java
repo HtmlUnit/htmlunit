@@ -33,6 +33,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Tests for {@link History}.
@@ -129,7 +130,7 @@ public class HistoryTest extends WebDriverTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
 
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             response.getWriter().write(
                     "<html>\n"
@@ -158,7 +159,7 @@ public class HistoryTest extends WebDriverTestCase {
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
 
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("POST<br>\n");
@@ -181,7 +182,7 @@ public class HistoryTest extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
                 throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("GET<br>\n");

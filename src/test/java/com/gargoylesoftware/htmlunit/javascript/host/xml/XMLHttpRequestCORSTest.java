@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -226,7 +227,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
                 response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
             }
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/xml");
             String origin = request.getHeader("Origin");
             if (origin == null) {
@@ -465,7 +466,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
                 response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
             }
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/xml");
             final Writer writer = response.getWriter();
 
@@ -899,7 +900,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             if (ACCESS_CONTROL_ALLOW_CREDENTIALS_ != null) {
                 response.setHeader("Access-Control-Allow-Credentials", ACCESS_CONTROL_ALLOW_CREDENTIALS_);
             }
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/xml");
             String origin = request.getHeader("Origin");
             if (origin == null) {

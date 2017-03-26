@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
@@ -427,7 +428,7 @@ public class WebClient3Test extends WebDriverTestCase {
     }
 
     private void doTestDeflateCompression(final boolean gzipCompatibleCompression) throws Exception {
-        final byte[] input = "document.title = 'modified';".getBytes("UTF-8");
+        final byte[] input = "document.title = 'modified';".getBytes(UTF_8);
 
         final byte[] buffer = new byte[100];
         final Deflater deflater = new Deflater(Deflater.DEFAULT_COMPRESSION, gzipCompatibleCompression);

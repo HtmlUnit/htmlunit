@@ -14,9 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +52,7 @@ public class HTMLParser3Test extends WebServerTestCase {
      */
     @Test
     public void headerVsMetaTagContentType_both() throws Exception {
-        HeaderVsMetaTagContentTypeServlet.setEncoding("UTF-8", "ISO-8859-1");
+        HeaderVsMetaTagContentTypeServlet.setEncoding(UTF_8, ISO_8859_1);
         headerVsMetaTagContentType(true);
     }
 
@@ -57,7 +61,7 @@ public class HTMLParser3Test extends WebServerTestCase {
      */
     @Test
     public void headerVsMetaTagContentType_bothReversed() throws Exception {
-        HeaderVsMetaTagContentTypeServlet.setEncoding("ISO-8859-1", "UTF-8");
+        HeaderVsMetaTagContentTypeServlet.setEncoding(ISO_8859_1, UTF_8);
         headerVsMetaTagContentType(false);
     }
 
@@ -66,7 +70,7 @@ public class HTMLParser3Test extends WebServerTestCase {
      */
     @Test
     public void headerVsMetaTagContentType4_headerOnly() throws Exception {
-        HeaderVsMetaTagContentTypeServlet.setEncoding("UTF-8", null);
+        HeaderVsMetaTagContentTypeServlet.setEncoding(UTF_8, null);
         headerVsMetaTagContentType(true);
     }
 
@@ -75,7 +79,7 @@ public class HTMLParser3Test extends WebServerTestCase {
      */
     @Test
     public void headerVsMetaTagContentType_metaOnly() throws Exception {
-        HeaderVsMetaTagContentTypeServlet.setEncoding(null, "UTF-8");
+        HeaderVsMetaTagContentTypeServlet.setEncoding(null, UTF_8);
         headerVsMetaTagContentType(true);
     }
 
@@ -94,10 +98,10 @@ public class HTMLParser3Test extends WebServerTestCase {
      */
     public static class HeaderVsMetaTagContentTypeServlet extends HttpServlet {
         private static final String utf8String = "\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u0644";
-        private static String HEADER_ENCODING_;
-        private static String META_TAG_ENCODING_;
+        private static Charset HEADER_ENCODING_;
+        private static Charset META_TAG_ENCODING_;
 
-        private static void setEncoding(final String headerEncoding, final String metaTagEncoding) {
+        private static void setEncoding(final Charset headerEncoding, final Charset metaTagEncoding) {
             HEADER_ENCODING_ = headerEncoding;
             META_TAG_ENCODING_ = metaTagEncoding;
         }
@@ -109,9 +113,9 @@ public class HTMLParser3Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("text/html");
             if (HEADER_ENCODING_ != null) {
-                response.setCharacterEncoding(HEADER_ENCODING_);
+                response.setCharacterEncoding(HEADER_ENCODING_.name());
             }
-            try (Writer writer = new OutputStreamWriter(response.getOutputStream(), "UTF-8")) {
+            try (Writer writer = new OutputStreamWriter(response.getOutputStream(), UTF_8)) {
                 String html = "<html><head>";
                 if (META_TAG_ENCODING_ != null) {
                     html += "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=" + META_TAG_ENCODING_ + "'>";

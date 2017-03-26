@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -172,7 +172,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", StandardCharsets.UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8);
         verifyAlerts(driver, getExpectedAlerts());
     }
 }

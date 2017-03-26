@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,7 +98,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
     public void gzip() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos)) {
-            IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
+            IOUtils.write("alert(1)", gzipOutputStream, UTF_8);
         }
 
         final MockWebConnection mockConnection = new MockWebConnection();

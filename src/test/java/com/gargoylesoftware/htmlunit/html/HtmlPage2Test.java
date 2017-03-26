@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -287,7 +289,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         assertTrue(file.isFile());
 
         final File imgFile = new File(folder, "hu_save/foo.txt");
-        assertEquals("hello", FileUtils.readFileToString(imgFile, "UTF-8"));
+        assertEquals("hello", FileUtils.readFileToString(imgFile, UTF_8));
     }
 
     /**

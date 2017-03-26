@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
+import static java.nio.charset.StandardCharsets.US_ASCII;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
-import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 
 import org.apache.commons.codec.DecoderException;
@@ -35,7 +36,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Carsten Steul
  */
 public class DataUrlDecoder {
-    private static final Charset DEFAULT_CHARSET = StandardCharsets.US_ASCII;
+    private static final Charset DEFAULT_CHARSET = US_ASCII;
     private static final String DEFAULT_MEDIA_TYPE = "text/plain";
     private final String mediaType_;
     private final Charset charset_;

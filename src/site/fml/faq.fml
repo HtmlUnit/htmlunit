@@ -97,11 +97,11 @@
             public WebResponse getResponse(WebRequest request) throws IOException {
                 WebResponse response = super.getResponse(request);
                 if (request.getUrl().toExternalForm().contains("my_url")) {
-                    String content = response.getContentAsString("UTF-8");
+                    String content = response.getContentAsString();
 
                     //change content
 
-                    WebResponseData data = new WebResponseData(content.getBytes("UTF-8"),
+                    WebResponseData data = new WebResponseData(content.getBytes(),
                             response.getStatusCode(), response.getStatusMessage(), response.getResponseHeaders());
                     response = new WebResponse(data, request, response.getLoadTime());
                 }

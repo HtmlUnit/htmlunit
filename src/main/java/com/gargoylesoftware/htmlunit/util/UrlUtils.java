@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static java.nio.charset.StandardCharsets.US_ASCII;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 
 import org.apache.commons.codec.DecoderException;
@@ -222,7 +224,7 @@ public final class UrlUtils {
         try {
             String path = url.getPath();
             if (path != null) {
-                path = encode(path, PATH_ALLOWED_CHARS, StandardCharsets.UTF_8);
+                path = encode(path, PATH_ALLOWED_CHARS, UTF_8);
             }
             String query = url.getQuery();
             if (query != null) {
@@ -235,7 +237,7 @@ public final class UrlUtils {
             }
             String anchor = url.getRef();
             if (anchor != null) {
-                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, StandardCharsets.UTF_8);
+                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, UTF_8);
             }
             return createNewUrl(url.getProtocol(), url.getUserInfo(), url.getHost(),
                                 url.getPort(), path, anchor, query);
@@ -254,7 +256,7 @@ public final class UrlUtils {
      */
     public static String encodeAnchor(String anchor) {
         if (anchor != null) {
-            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, StandardCharsets.UTF_8);
+            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, UTF_8);
         }
         return anchor;
     }
@@ -267,7 +269,7 @@ public final class UrlUtils {
      */
     public static String encodeHash(String hash) {
         if (hash != null) {
-            hash = encode(hash, HASH_ALLOWED_CHARS, StandardCharsets.UTF_8);
+            hash = encode(hash, HASH_ALLOWED_CHARS, UTF_8);
         }
         return hash;
     }
@@ -280,9 +282,9 @@ public final class UrlUtils {
      */
     public static String decode(final String escaped) {
         try {
-            final byte[] bytes = escaped.getBytes(StandardCharsets.US_ASCII);
+            final byte[] bytes = escaped.getBytes(US_ASCII);
             final byte[] bytes2 = URLCodec.decodeUrl(bytes);
-            return new String(bytes2, StandardCharsets.UTF_8);
+            return new String(bytes2, UTF_8);
         }
         catch (final DecoderException e) {
             // Should never happen.
@@ -316,7 +318,7 @@ public final class UrlUtils {
             return null;
         }
 
-        final StringBuilder result = new StringBuilder(new String(input, StandardCharsets.US_ASCII));
+        final StringBuilder result = new StringBuilder(new String(input, US_ASCII));
         int state = -0;
         int offset = 0;
         for (int i = 0; i < input.length; i++) {

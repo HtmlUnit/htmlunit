@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -168,7 +169,7 @@ public class XmlPageTest extends WebServerTestCase {
              + "\u0434\n"
              + "</foo>";
 
-        final byte[] bytes = TextUtil.stringToByteArray(content, StandardCharsets.UTF_8);
+        final byte[] bytes = TextUtil.stringToByteArray(content, UTF_8);
 
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

@@ -15,13 +15,13 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -401,7 +401,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(urlAsString);
 
             final WebRequest request = new WebRequest(fullUrl);
-            request.setCharset(StandardCharsets.UTF_8);
+            request.setCharset(UTF_8);
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));

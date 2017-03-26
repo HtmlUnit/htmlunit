@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -352,7 +354,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             response.getWriter().write("<html>\n"
                 + "<body>\n"
@@ -376,7 +378,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             if (ServletFileUpload.isMultipartContent(request)) {
@@ -409,7 +411,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             final BufferedReader reader = request.getReader();
@@ -454,7 +456,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("CONTENT_TYPE:" + request.getContentType());
@@ -548,7 +550,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             writer.write("TRANSFER_ENCODING:" + request.getHeader("TRANSFER-ENCODING"));

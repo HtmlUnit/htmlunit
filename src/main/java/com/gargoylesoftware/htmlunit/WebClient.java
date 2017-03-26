@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -33,7 +34,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -1177,7 +1177,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         String fileUrl = cleanUrl.toExternalForm();
-        fileUrl = URLDecoder.decode(fileUrl, StandardCharsets.UTF_8.name());
+        fileUrl = URLDecoder.decode(fileUrl, UTF_8.name());
         final File file = new File(fileUrl.substring(5));
         if (!file.exists()) {
             // construct 404
@@ -1185,7 +1185,7 @@ public class WebClient implements Serializable, AutoCloseable {
             compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
             final WebResponseData responseData =
                 new WebResponseData(
-                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), StandardCharsets.UTF_8),
+                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), UTF_8),
                     404, "Not Found", compiledHeaders);
             return new WebResponse(responseData, webRequest, 0);
         }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
@@ -62,7 +64,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
         final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
-        final String body = new String(data.getBody(), "UTF-8");
+        final String body = new String(data.getBody(), UTF_8);
         assertTrue(StringUtils.contains(body, "Test"));
     }
 

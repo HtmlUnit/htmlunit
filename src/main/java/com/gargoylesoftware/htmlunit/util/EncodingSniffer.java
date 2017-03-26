@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static java.nio.charset.StandardCharsets.US_ASCII;
+import static java.nio.charset.StandardCharsets.UTF_16BE;
+import static java.nio.charset.StandardCharsets.UTF_16LE;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
-import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -405,7 +409,7 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("x-user-defined", "x-user-defined");
     }
 
-    private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(StandardCharsets.US_ASCII);
+    private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(US_ASCII);
 
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <tt>meta</tt> tags;
@@ -643,13 +647,13 @@ public final class EncodingSniffer {
 
         Charset encoding = null;
         if (startsWith(bytes, ByteOrderMark.UTF_8)) {
-            encoding = StandardCharsets.UTF_8;
+            encoding = UTF_8;
         }
         else if (startsWith(bytes, ByteOrderMark.UTF_16BE)) {
-            encoding = StandardCharsets.UTF_16BE;
+            encoding = UTF_16BE;
         }
         else if (startsWith(bytes, ByteOrderMark.UTF_16LE)) {
-            encoding = StandardCharsets.UTF_16LE;
+            encoding = UTF_16LE;
         }
 
         if (encoding != null && LOG.isDebugEnabled()) {
@@ -703,9 +707,8 @@ public final class EncodingSniffer {
                                 continue;
                             }
                         }
-                        if (StandardCharsets.UTF_16BE == charset
-                                || StandardCharsets.UTF_16LE == charset) {
-                            charset = StandardCharsets.UTF_8;
+                        if (UTF_16BE == charset || UTF_16LE == charset) {
+                            charset = UTF_8;
                         }
                         if (charset != null) {
                             if (LOG.isDebugEnabled()) {
@@ -862,7 +865,7 @@ public final class EncodingSniffer {
         if (s == null) {
             return null;
         }
-        final byte[] bytes = s.getBytes(StandardCharsets.US_ASCII);
+        final byte[] bytes = s.getBytes(US_ASCII);
         int i;
         for (i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, CHARSET_START)) {
@@ -900,7 +903,7 @@ public final class EncodingSniffer {
             if (index == -1) {
                 return null;
             }
-            final String charsetName = new String(ArrayUtils.subarray(bytes, i + 1, index), StandardCharsets.US_ASCII);
+            final String charsetName = new String(ArrayUtils.subarray(bytes, i + 1, index), US_ASCII);
             return toCharset(charsetName);
         }
         if (bytes[i] == '\'') {
@@ -911,14 +914,14 @@ public final class EncodingSniffer {
             if (index == -1) {
                 return null;
             }
-            final String charsetName = new String(ArrayUtils.subarray(bytes, i + 1, index), StandardCharsets.US_ASCII);
+            final String charsetName = new String(ArrayUtils.subarray(bytes, i + 1, index), US_ASCII);
             return toCharset(charsetName);
         }
         int end = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3B});
         if (end == -1) {
             end = bytes.length;
         }
-        final String charsetName = new String(ArrayUtils.subarray(bytes, i, end), StandardCharsets.US_ASCII);
+        final String charsetName = new String(ArrayUtils.subarray(bytes, i, end), US_ASCII);
         return toCharset(charsetName);
     }
 
@@ -940,7 +943,7 @@ public final class EncodingSniffer {
                 && XML_DECLARATION_PREFIX[5] == bytes[5]) {
             final int index = ArrayUtils.indexOf(bytes, (byte) '?', 2);
             if (index + 1 < bytes.length && bytes[index + 1] == '>') {
-                final String declaration = new String(bytes, 0, index + 2, StandardCharsets.US_ASCII);
+                final String declaration = new String(bytes, 0, index + 2, US_ASCII);
                 int start = declaration.indexOf("encoding");
                 if (start != -1) {
                     start += 8;

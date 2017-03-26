@@ -16,13 +16,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -637,7 +637,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            200,
                                            "OK",
                                            "text/xml",
-                                           StandardCharsets.UTF_8, responseHeaders);
+                                           UTF_8, responseHeaders);
         loadPageWithAlerts2(html);
     }
 
@@ -754,7 +754,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            final byte[] bytes = RESPONSE.getBytes("UTF-8");
+            final byte[] bytes = RESPONSE.getBytes(UTF_8);
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
             final GZIPOutputStream gout = new GZIPOutputStream(bos);
             gout.write(bytes);
@@ -763,7 +763,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             final byte[] encoded = bos.toByteArray();
 
             response.setContentType("text/xml");
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setStatus(200);
             response.setContentLength(encoded.length);
             response.setHeader("Content-Encoding", "gzip");

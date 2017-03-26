@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
@@ -55,7 +56,7 @@ public class TextUtilTest extends SimpleWebTestCase {
             {"a", "a"},
             {"abcdefABCDEF", "abcdefABCDEF"},
         };
-        final Charset encoding = StandardCharsets.ISO_8859_1;
+        final Charset encoding = ISO_8859_1;
 
         for (final String[] entry : data) {
             final String input = entry[0];
@@ -74,13 +75,13 @@ public class TextUtilTest extends SimpleWebTestCase {
      */
     @Test
     public void stringToByteArray() throws Exception {
-        byte[] result = TextUtil.stringToByteArray(null, StandardCharsets.UTF_8);
+        byte[] result = TextUtil.stringToByteArray(null, UTF_8);
         assertEquals(0, result.length);
 
-        result = TextUtil.stringToByteArray("", StandardCharsets.UTF_8);
+        result = TextUtil.stringToByteArray("", UTF_8);
         assertEquals(0, result.length);
 
-        result = TextUtil.stringToByteArray("htmlunit", StandardCharsets.UTF_8);
+        result = TextUtil.stringToByteArray("htmlunit", UTF_8);
         assertEquals(8, result.length);
         assertEquals(104, result[0]);
 

@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_16BE;
+import static java.nio.charset.StandardCharsets.UTF_16LE;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,12 +62,12 @@ public class WebResponseTest extends WebServerTestCase {
     @Test
     @Alerts("\u6211\u662F\u6211\u7684 \u064A\u0627 \u0623\u0647\u0644\u0627\u064B")
     public void recognizeBOM() throws Exception {
-        recognizeBOM("UTF-8",  ByteOrderMark.UTF_8.getBytes());
-        recognizeBOM("UTF-16BE", ByteOrderMark.UTF_16BE.getBytes());
-        recognizeBOM("UTF-16LE", ByteOrderMark.UTF_16LE.getBytes());
+        recognizeBOM(UTF_8,  ByteOrderMark.UTF_8.getBytes());
+        recognizeBOM(UTF_16BE, ByteOrderMark.UTF_16BE.getBytes());
+        recognizeBOM(UTF_16LE, ByteOrderMark.UTF_16LE.getBytes());
     }
 
-    private void recognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
+    private void recognizeBOM(final Charset encoding, final byte[] markerBytes) throws Exception {
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
@@ -92,15 +96,15 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", null);
+        webConnection.setResponse(URL_FIRST, content.getBytes(UTF_8), 200, "OK", "text/html", null);
         client.setWebConnection(webConnection);
         final WebRequest request = new WebRequest(URL_FIRST);
-        request.setCharset(StandardCharsets.UTF_8);
+        request.setCharset(UTF_8);
         final HtmlPage page = client.getPage(request);
         assertEquals(title, page.getTitleText());
 
         assertEquals(content, page.getWebResponse().getContentAsString());
-        assertEquals(content, page.getWebResponse().getContentAsString(StandardCharsets.UTF_8));
+        assertEquals(content, page.getWebResponse().getContentAsString(UTF_8));
     }
 
     /**
@@ -131,8 +135,8 @@ public class WebResponseTest extends WebServerTestCase {
      */
     @Test
     public void illegalCharset() throws Exception {
-        illegalCharset("text/html; text/html; charset=ISO-8859-1;", StandardCharsets.ISO_8859_1);
-        illegalCharset("text/html; charset=UTF-8; charset=UTF-8", StandardCharsets.UTF_8);
+        illegalCharset("text/html; text/html; charset=ISO-8859-1;", ISO_8859_1);
+        illegalCharset("text/html; charset=UTF-8; charset=UTF-8", UTF_8);
         illegalCharset("text/html; charset=#sda+s", TextUtil.DEFAULT_CHARSET);
         illegalCharset("text/html; charset=UnknownCharset", TextUtil.DEFAULT_CHARSET);
     }
@@ -207,7 +211,7 @@ public class WebResponseTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            final byte[] bytes = RESPONSE.getBytes("UTF-8");
+            final byte[] bytes = RESPONSE.getBytes(UTF_8);
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
             final GZIPOutputStream gout = new GZIPOutputStream(bos);
             gout.write(bytes);
@@ -216,7 +220,7 @@ public class WebResponseTest extends WebServerTestCase {
             final byte[] encoded = bos.toByteArray();
 
             response.setContentType("text/html");
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setStatus(200);
             response.setContentLength(encoded.length);
             response.setHeader("Content-Encoding", "gzip");
@@ -237,7 +241,7 @@ public class WebResponseTest extends WebServerTestCase {
 
         final HtmlPage page = getWebClient().getPage(URL_FIRST + "test");
         assertEquals(BinaryResponseHeadersServlet.RESPONSE,
-                page.getWebResponse().getContentAsString(StandardCharsets.UTF_8));
+                page.getWebResponse().getContentAsString(UTF_8));
 
         assertEquals("gzip", page.getWebResponse().getResponseHeaderValue("Content-Encoding"));
         assertEquals("73", page.getWebResponse().getResponseHeaderValue("Content-Length"));

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +26,6 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
             path = path.substring(1);
         }
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-            testFileInput(new File(URLDecoder.decode(path.replace('/', '\\'), "UTF-8")));
+            testFileInput(new File(URLDecoder.decode(path.replace('/', '\\'), UTF_8.name())));
         }
         testFileInput(new File("file:/" + path));
         testFileInput(new File("file://" + path));
@@ -374,8 +375,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HttpPost filePost = new HttpPost(URL_FIRST + "upload2");
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
-            .setCharset(StandardCharsets.UTF_8);
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE).setCharset(UTF_8);
         builder.addPart("myInput", new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
 
         filePost.setEntity(builder.build());
@@ -438,7 +438,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
@@ -460,7 +460,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         @Override
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             if (ServletFileUpload.isMultipartContent(request)) {
@@ -536,7 +536,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/html");
             response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
