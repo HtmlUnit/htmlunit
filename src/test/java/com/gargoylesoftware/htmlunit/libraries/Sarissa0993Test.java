@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -52,10 +51,7 @@ public class Sarissa0993Test extends WebDriverTestCase {
 
         driver.findElement(By.xpath("//button")).click();
 
-        // the HtmlUnitDriver doesn't yet support alert()
-        if (!(driver instanceof HtmlUnitDriver)) {
-            driver.switchTo().alert().dismiss();
-        }
+        driver.switchTo().alert().dismiss();
 
         verify(driver, "SarissaTestCase", getExpectedAlerts()[0]);
         verify(driver, "XmlHttpRequestTestCase", getExpectedAlerts()[1]);
