@@ -473,7 +473,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title,translate,"
                 + "webkitdropzone",
-            FF = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,"
+            FF45 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,"
                 + "draggable,focus(),hidden,innerText,isContentEditable,itemId,itemProp,itemRef,itemScope,"
                 + "itemType,itemValue,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onblur,oncanplay,"
@@ -486,6 +486,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,properties,"
                 + "spellcheck,style,tabIndex,"
                 + "title",
+            FF52 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,"
+                + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
+                + "onanimationend,onanimationiteration,onanimationstart,onblur,oncanplay,"
+                + "oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,"
+                + "ondragenter,ondragexit,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,"
+                + "onended,onerror,"
+                + "onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,"
+                + "onloadend,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
+                + "onmouseover,onmouseup,"
+                + "onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onselectstart,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,"
+                + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
+                + "onwebkittransitionend,spellcheck,style,tabIndex,title",
             IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
                 + "clearAttributes(),click(),componentFromPoint(),contains(),contentEditable,createControlRange(),"
                 + "currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),getAdjacentText(),"
@@ -542,7 +557,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,"
                 + "NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
                 + "target,timeStamp,type",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,CAPTURING_PHASE,CONTROL_MASK,currentTarget,"
+            FF45 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,CAPTURING_PHASE,CONTROL_MASK,currentTarget,"
+                + "defaultPrevented,eventPhase,explicitOriginalTarget,getPreventDefault(),initEvent(),isTrusted,"
+                + "META_MASK,NONE,originalTarget,preventDefault(),SHIFT_MASK,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,"
+                + "type",
+            FF52 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,"
                 + "defaultPrevented,eventPhase,explicitOriginalTarget,getPreventDefault(),initEvent(),isTrusted,"
                 + "META_MASK,NONE,originalTarget,preventDefault(),SHIFT_MASK,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,"
@@ -600,7 +621,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitRequestAnimationFrame(),webkitRequestFileSystem(),"
                 + "webkitResolveLocalFileSystemURL(),webkitStorageInfo,"
                 + "window",
-            FF = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
+            FF45 = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,content,"
                 + "createImageBitmap(),crypto,devicePixelRatio,dispatchEvent(),document,dump(),"
                 + "external,fetch(),find(),"
@@ -629,6 +650,37 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "sizeToContent(),sortFunction(),status,statusbar,stop(),test(),toolbar,top,"
                 + "updateCommands(),"
                 + "window",
+            FF52 = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
+                + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),content,"
+                + "createImageBitmap(),crypto,devicePixelRatio,dispatchEvent(),document,dump(),"
+                + "external,fetch(),find(),"
+                + "focus(),frameElement,frames,fullScreen,getComputedStyle(),getDefaultComputedStyle(),"
+                + "getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,"
+                + "InstallTrigger,isSecureContext,length,localStorage,location,locationbar,"
+                + "matchMedia(),menubar,moveBy(),moveTo(),"
+                + "mozInnerScreenX,mozInnerScreenY,mozPaintCount,name,navigator,onabort,"
+                + "onabsolutedeviceorientation,onafterprint,onanimationend,onanimationiteration,"
+                + "onanimationstart,onbeforeprint,onbeforeunload,onblur,"
+                + "oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,ondevicelight,"
+                + "ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,ondragenter,"
+                + "ondragexit,ondragleave,"
+                + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
+                + "onhashchange,oninput,oninvalid,onkeydown,onkeypress,onkeyup,onlanguagechange,onload(),"
+                + "onloadeddata,onloadedmetadata,onloadend,onloadstart,onmessage,onmousedown,onmouseenter,"
+                + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
+                + "onmozfullscreenerror,onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,"
+                + "onpopstate,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
+                + "onselectstart,onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "ontransitionend,onunload,onuserproximity,onvolumechange,onwaiting,onwebkitanimationend,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,"
+                + "open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
+                + "personalbar,postMessage(),print(),process(),prompt(),releaseEvents(),"
+                + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),"
+                + "screen,screenX,screenY,scroll(),scrollbars,scrollBy(),scrollByLines(),scrollByPages(),"
+                + "scrollMaxX,scrollMaxY,scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
+                + "setResizable(),setTimeout(),showModalDialog(),sidebar,sizeToContent(),"
+                + "sortFunction(),speechSynthesis,"
+                + "status,statusbar,stop(),test(),toolbar,top,updateCommands(),window",
             IE = "addEventListener(),alert(),animationStartTime,applicationCache,atob(),blur(),btoa(),"
                 + "cancelAnimationFrame(),captureEvents(),clearImmediate(),clearInterval(),clearTimeout(),"
                 + "clientInformation,clipboardData,close(),closed,confirm(),console,"
@@ -718,9 +770,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,referrerPolicy,rel,rev,search,shape,target,text,type,"
                 + "username",
-            FF = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                    + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
-                    + "username",
+            FF45 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+                + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
+                + "username",
+            FF52 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+                + "port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,type,"
+                + "username",
             IE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
                 + "urn",
@@ -769,8 +824,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
                 + "protocol,referrerPolicy,rel,search,shape,target,username",
-            FF = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
+            FF45 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,shape,target,username",
+            FF52 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
+                + "referrerPolicy,rel,relList,search,shape,target,username",
             IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target",
             EDGE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target")
     @NotYetImplemented
@@ -813,7 +870,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,"
                 + "volume,webkitAudioDecodedByteCount,"
                 + "webkitVideoDecodedByteCount",
-            FF = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+            FF45 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
                 + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,mozAudioCaptured,"
                 + "mozAutoplayEnabled,mozCaptureStream(),"
@@ -821,6 +878,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozFragmentEnd,mozGetMetadata(),mozPreservesPitch,mozSrcObject,muted,NETWORK_EMPTY,NETWORK_IDLE,"
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "pause(),paused,play(),playbackRate,played,preload,"
+                + "readyState,seekable,seeking,setMediaKeys(),src,srcObject,textTracks,volume",
+            FF52 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+                + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
+                + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,mozAudioCaptured,"
+                + "mozAutoplayEnabled,mozCaptureStream(),"
+                + "mozCaptureStreamUntilEnded(),"
+                + "mozFragmentEnd,mozGetMetadata(),mozPreservesPitch,mozSrcObject,muted,NETWORK_EMPTY,NETWORK_IDLE,"
+                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
+                + "onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,"
                 + "readyState,seekable,seeking,setMediaKeys(),src,srcObject,textTracks,volume",
             IE = "addTextTrack(),audioTracks,autobuffer,autoplay,buffered,canPlayType(),controls,currentSrc,"
                 + "currentTime,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
@@ -989,8 +1055,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "formTarget,labels,name,reportValidity(),setCustomValidity(),type,validationMessage,validity,"
                 + "value,"
                 + "willValidate",
-            FF = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
+            FF45 = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
                 + "formTarget,name,setCustomValidity(),type,validationMessage,validity,value,"
+                + "willValidate",
+            FF52 = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
+                + "formTarget,name,reportValidity(),setCustomValidity(),type,validationMessage,validity,value,"
                 + "willValidate",
             IE = "autofocus,checkValidity(),createTextRange(),form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
@@ -1128,6 +1197,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
+            FF52 = "open",
             CHROME = "open")
     public void details() throws Exception {
         test("details");
@@ -1233,8 +1303,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,"
                 + "willValidate",
-            FF = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
+            FF45 = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
                 + "willValidate",
+            FF52 = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
+                + "validationMessage,validity,willValidate",
             IE = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             EDGE = "align,checkValidity(),disabled,form,setCustomValidity(),validationMessage,validity,willValidate")
     @NotYetImplemented
@@ -1282,8 +1354,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reportValidity(),reset(),submit(),"
                 + "target",
-            FF = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
+            FF45 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reset(),submit(),"
+                + "target",
+            FF52 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
+                + "noValidate,reportValidity(),reset(),submit(),"
                 + "target",
             IE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
                 + "name,namedItem(),noValidate,reset(),submit(),"
@@ -1474,8 +1549,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
+    @Alerts(FF45 = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
                 + "longDesc,marginHeight,marginWidth,name,sandbox,scrolling,src,srcdoc,"
+                + "width",
+            FF52 = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
+                + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
             CHROME = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
                 + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
@@ -1510,8 +1588,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
+    @Alerts(FF45 = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,sizes,src,srcset,useMap,vspace,width,x,"
+                + "y",
+            FF52 = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
+                + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             CHROME = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
@@ -1648,6 +1729,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "width",
+            FF52 = "width",
             IE = "cite,clear,width",
             EDGE = "width")
     @NotYetImplemented(EDGE)
@@ -1675,8 +1757,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "as,charset,crossOrigin,disabled,href,hreflang,import,integrity,"
                     + "media,rel,relList,rev,sheet,sizes,target,type",
-            FF = "charset,crossOrigin,disabled,href,hreflang,integrity,"
+            FF45 = "charset,crossOrigin,disabled,href,hreflang,integrity,"
                     + "media,rel,relList,rev,sheet,sizes,target,type",
+            FF52 = "charset,crossOrigin,disabled,href,hreflang,integrity,"
+                + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             IE = "charset,href,hreflang,media,rel,rev,sheet,target,type",
             EDGE = "charset,disabled,href,hreflang,media,rel,rev,sheet,target,type")
     @NotYetImplemented
@@ -1882,9 +1966,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "data,declare,form,"
                 + "getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,type,useMap,"
                 + "validationMessage,validity,vspace,width,willValidate",
-            FF = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
+            FF45 = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,setCustomValidity(),standby,type,typeMustMatch,"
                 + "useMap,validationMessage,validity,vspace,width,willValidate",
+            FF52 = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
+                + "declare,form,getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,"
+                + "type,typeMustMatch,useMap,validationMessage,validity,vspace,width,willValidate",
             IE = "align,alt,altHtml,archive,BaseHref,border,checkValidity(),classid,code,codeBase,codeType,"
                 + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
@@ -1948,8 +2035,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,value,"
                 + "willValidate",
-            FF = "checkValidity(),defaultValue,form,htmlFor,name,setCustomValidity(),type,validationMessage,"
+            FF45 = "checkValidity(),defaultValue,form,htmlFor,name,setCustomValidity(),type,validationMessage,"
                 + "validity,value,"
+                + "willValidate",
+            FF52 = "checkValidity(),defaultValue,form,htmlFor,name,reportValidity(),setCustomValidity(),"
+                + "type,validationMessage,validity,value,"
                 + "willValidate",
             IE = "",
             EDGE = "")
@@ -2113,9 +2203,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),size,type,"
                 + "validationMessage,validity,value,"
                 + "willValidate",
-            FF = "add(),autofocus,checkValidity(),disabled,form,item(),length,multiple,name,"
+            FF45 = "add(),autofocus,checkValidity(),disabled,form,item(),length,multiple,name,"
                 + "namedItem(),options,required,selectedIndex,selectedOptions,setCustomValidity(),size,type,"
                 + "validationMessage,validity,value,"
+                + "willValidate",
+            FF52 = "add(),autofocus,checkValidity(),disabled,form,item(),length,multiple,name,"
+                + "namedItem(),options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),"
+                + "size,type,validationMessage,validity,value,"
                 + "willValidate",
             IE = "add(),autofocus,checkValidity(),form,item(),length,multiple,name,namedItem(),options,remove(),"
                 + "required,selectedIndex,setCustomValidity(),size,type,validationMessage,validity,value,"
@@ -2350,10 +2444,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "selectionDirection,selectionEnd,selectionStart,setCustomValidity(),setRangeText(),"
                 + "setSelectionRange(),textLength,type,validationMessage,validity,value,willValidate,"
                 + "wrap",
-            FF = "autofocus,checkValidity(),cols,defaultValue,disabled,form,maxLength,name,placeholder,readOnly,"
+            FF45 = "autofocus,checkValidity(),cols,defaultValue,disabled,form,maxLength,name,placeholder,readOnly,"
                 + "required,rows,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
                 + "setRangeText(),setSelectionRange(),textLength,type,validationMessage,validity,value,willValidate,"
                 + "wrap",
+            FF52 = "autofocus,checkValidity(),cols,defaultValue,disabled,form,maxLength,minLength,name,placeholder,"
+                + "readOnly,reportValidity(),required,rows,select(),selectionDirection,selectionEnd,"
+                + "selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),"
+                + "textLength,type,validationMessage,validity,value,willValidate,wrap",
             IE = "autofocus,checkValidity(),cols,createTextRange(),defaultValue,form,maxLength,name,placeholder,"
                 + "readOnly,required,rows,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),status,type,validationMessage,validity,value,willValidate,"
@@ -2489,7 +2587,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitEnterFullScreen(),webkitEnterFullscreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
-            FF = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+            FF45 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),getVideoPlaybackQuality(),"
                 + "HAVE_CURRENT_DATA,"
                 + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,"
@@ -2499,6 +2597,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozParsedFrames,mozPresentedFrames,mozPreservesPitch,mozSrcObject,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "pause(),paused,play(),playbackRate,"
+                + "played,poster,preload,readyState,seekable,seeking,setMediaKeys(),"
+                + "src,srcObject,textTracks,videoHeight,videoWidth,volume,"
+                + "width",
+            FF52 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+                + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),getVideoPlaybackQuality(),"
+                + "HAVE_CURRENT_DATA,"
+                + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,"
+                + "mozAudioCaptured,"
+                + "mozAutoplayEnabled,mozCaptureStream(),mozCaptureStreamUntilEnded(),"
+                + "mozDecodedFrames,mozFragmentEnd,mozFrameDelay,mozGetMetadata(),mozHasAudio,mozPaintedFrames,"
+                + "mozParsedFrames,mozPresentedFrames,mozPreservesPitch,mozSrcObject,muted,NETWORK_EMPTY,"
+                + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
+                + "onwaitingforkey,pause(),paused,play(),playbackRate,"
                 + "played,poster,preload,readyState,seekable,seeking,setMediaKeys(),"
                 + "src,srcObject,textTracks,videoHeight,videoWidth,volume,"
                 + "width",
@@ -2541,7 +2652,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "width",
-            FF = "",
+            FF45 = "",
+            FF52 = "width",
             IE = "cite,clear,width")
     @NotYetImplemented(EDGE)
     public void xmp() throws Exception {
@@ -2554,12 +2666,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+    @Alerts(FF45 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,"
                 + "required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
                 + "setRangeText(),setSelectionRange(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,"
                 + "validationMessage,validity,value,valueAsNumber,width,willValidate",
+            FF52 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+                + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
+                + "indeterminate,list,max,maxLength,min,minLength,mozIsTextField(),multiple,name,"
+                + "pattern,placeholder,readOnly,reportValidity(),required,"
+                + "select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
+                + "setRangeText(),setSelectionRange(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,"
+                + "validationMessage,validity,value,valueAsNumber,webkitdirectory,webkitEntries,width,willValidate",
             IE = "accept,align,alt,autocomplete,autofocus,border,checked,checkValidity(),complete,"
                 + "createTextRange(),defaultChecked,defaultValue,dynsrc,files,form,formAction,formEnctype,"
                 + "formMethod,formNoValidate,formTarget,height,hspace,indeterminate,list,loop,lowsrc,max,maxLength,"
@@ -2603,9 +2722,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "getDistributedNodes(),select",
-            IE = "",
-            EDGE = "")
+    @Alerts(DEFAULT = "",
+            CHROME = "getDistributedNodes(),select",
+            FF45 = "getDistributedNodes(),select")
     @NotYetImplemented({CHROME, FF})
     public void content() throws Exception {
         test("content");
@@ -2697,7 +2816,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "detail,initUIEvent(),sourceCapabilities,view,which",
-            FF = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
+            FF45 = "cancelBubble,detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
+            FF52 = "detail,initUIEvent(),isChar,layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
             IE = "detail,initUIEvent(),view")
     @NotYetImplemented
