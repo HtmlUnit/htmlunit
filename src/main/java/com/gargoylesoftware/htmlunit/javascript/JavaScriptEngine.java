@@ -914,8 +914,14 @@ public class JavaScriptEngine {
     private void doProcessPostponedActions() {
         holdPostponedActions_ = false;
 
+        final WebClient webClient = getWebClient();
+        if (webClient == null) {
+            postponedActions_.set(null);
+            return;
+        }
+
         try {
-            getWebClient().loadDownloadedResponses();
+            webClient.loadDownloadedResponses();
         }
         catch (final RuntimeException e) {
             throw e;
