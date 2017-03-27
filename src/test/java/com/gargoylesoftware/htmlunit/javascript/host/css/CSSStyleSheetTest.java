@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -1178,18 +1178,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    @SuppressWarnings("unchecked")
-    private static <T> T get(final Object o, final Class<?> c, final String fieldName) {
-        try {
-            final Field field = c.getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return (T) field.get(o);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * @throws Exception if an error occurs
      */
@@ -1199,7 +1187,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         getWebDriver();
 
         int maxInMemory = 0;
-        final WebClient webClient = get(this, WebDriverTestCase.class, "webClient_");
+        final WebClient webClient = getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient();
         if (webClient != null) {
             maxInMemory = webClient.getOptions().getMaxInMemory();
         }

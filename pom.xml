@@ -915,7 +915,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>2.25</version>
+            <version>2.26-SNAPSHOT</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>

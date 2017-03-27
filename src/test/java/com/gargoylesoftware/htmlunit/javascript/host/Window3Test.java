@@ -697,7 +697,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <xmp name='element1'></xmp>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**

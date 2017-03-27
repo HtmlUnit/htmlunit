@@ -375,11 +375,11 @@ public class EventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("t")).sendKeys("a");
         driver.findElement(By.id("d")).click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("t")).sendKeys("bc");
         driver.findElement(By.id("d")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     private void onClickPageTest(final String html) throws Exception {
@@ -687,7 +687,7 @@ public class EventTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -733,10 +733,14 @@ public class EventTest extends WebDriverTestCase {
             + "<button onclick=\"alert('form1: ' + form1); alert('form2: ' + form2); testFunc()\">click me</button>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.tagName("button")).click();
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
 
-        verifyAlerts(driver, getExpectedAlerts());
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
+
+        driver.findElement(By.tagName("button")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
     }
 
     /**
@@ -921,25 +925,28 @@ public class EventTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("theField"));
         field.click();
+        verifyAlerts(driver, alerts[0]);
 
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
         // remove property on field
         jsExecutor.executeScript("delete document.getElementById('theField').foo");
         field.click();
+        verifyAlerts(driver, alerts[1]);
 
         // remove property on form
         jsExecutor.executeScript("delete document.getElementById('theForm').foo");
         field.click();
+        verifyAlerts(driver, alerts[2]);
 
         // remove property on document
         jsExecutor.executeScript("delete document.foo");
         field.click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, alerts[3]);
     }
 
     /**

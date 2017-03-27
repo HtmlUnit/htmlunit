@@ -636,6 +636,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         // for some strange reasons, the selenium driven browser is in an invalid
         // state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -784,7 +785,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "not defined",
             IE = {"true", "1"})
-    @NotYetImplemented(IE)
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"

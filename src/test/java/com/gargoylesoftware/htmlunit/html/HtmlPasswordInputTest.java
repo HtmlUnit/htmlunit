@@ -114,11 +114,11 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
 
         final WebElement check = driver.findElement(By.id("check"));
         check.click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
 
         p.sendKeys("abc");
         check.click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     /**
@@ -140,11 +140,11 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
 
         final WebElement check = driver.findElement(By.id("check"));
         check.click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
 
         p.sendKeys("abc");
         check.click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     /**
@@ -218,21 +218,21 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("HtmlUnit");
 
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
         final String[] expectedAlerts1 = {"foo", "change", "boo", "blur"};
-        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+        assertEquals(expectedAlerts1, getCollectedAlerts(driver, 4));
 
         // set only the focus but change nothing
         p.click();
-        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        final String[] expectedAlerts2 = {"foo", "change", "boo", "blur", "boo", "blur"};
-        assertEquals(expectedAlerts2, getCollectedAlerts(driver));
+        final String[] expectedAlerts2 = {"boo", "blur"};
+        assertEquals(expectedAlerts2, getCollectedAlerts(driver, 2));
     }
 
     /**

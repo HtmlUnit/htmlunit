@@ -2157,10 +2157,13 @@ public class DocumentTest extends WebDriverTestCase {
             + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("text1")).click();
+        verifyAlerts(driver, alerts[0]);
+        Thread.sleep(100);
 
-        verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("text1")).click();
+        verifyAlerts(driver, alerts[1], alerts[2]);
     }
 
     /**

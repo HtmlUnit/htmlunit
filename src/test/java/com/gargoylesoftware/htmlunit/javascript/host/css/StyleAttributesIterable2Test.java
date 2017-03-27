@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,7 +38,6 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "in style")
-    @NotYetImplemented(IE)
     public void notInComputed() throws Exception {
         styleVsComputed("pixelBottom");
     }

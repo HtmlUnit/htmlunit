@@ -25,7 +25,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,8 +40,6 @@ public class SvgJavaScriptTest extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(CHROME)
-    // Fixed in WebDriver 2.26
-    @NotYetImplemented
     public void onclick() throws Exception {
         final String html = ""
             + "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"

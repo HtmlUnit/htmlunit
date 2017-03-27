@@ -414,7 +414,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         html = html
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 8 * DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -1280,12 +1280,12 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("a")).click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
 
         final Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.id("b")));
         actions.perform();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     /**
@@ -1327,10 +1327,11 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("a")).click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
         driver.findElement(By.id("b")).click();
+        verifyAlerts(driver, getExpectedAlerts()[1]);
         driver.findElement(By.id("c")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[2]);
     }
 
     /**
@@ -1402,10 +1403,12 @@ public class HTMLElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = loadPage2(firstHtml);
+        verifyAlerts(driver, "body1");
         assertEquals("First", driver.getTitle());
 
         driver.findElement(By.id("button1")).click();
         driver.switchTo().window("second");
+        verifyAlerts(driver, "body1");
         assertEquals("Second", driver.getTitle());
 
         driver.findElement(By.id("button2")).click();

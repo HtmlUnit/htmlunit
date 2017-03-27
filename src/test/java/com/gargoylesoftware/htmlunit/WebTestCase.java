@@ -644,8 +644,7 @@ public abstract class WebTestCase {
 
             final File outFile = new File(targetDir, generateTest_testName_);
 
-            final String newContent = getModifiedContent(generateTest_content_);
-            FileUtils.writeStringToFile(outFile, newContent, ISO_8859_1);
+            FileUtils.writeStringToFile(outFile, generateTest_content_, ISO_8859_1);
 
             // write the expected alerts
             final String suffix;
@@ -668,19 +667,6 @@ public abstract class WebTestCase {
                 }
             }
         }
-    }
-
-    /**
-     * Returns the modified JavaScript after changing how 'alerts' are called.
-     * @param html the html
-     * @return the modified html
-     */
-    protected static String getModifiedContent(final String html) {
-        // replace alert(x) by a storage in top scope
-        // Convert to string here due to: http://code.google.com/p/webdriver/issues/detail?id=209
-        return StringUtils.replace(html, "alert(",
-                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
-                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
     }
 
     /**

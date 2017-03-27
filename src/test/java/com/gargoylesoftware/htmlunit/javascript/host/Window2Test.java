@@ -197,7 +197,7 @@ public class Window2Test extends WebDriverTestCase {
             + "    alert(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 3 * DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -522,6 +522,7 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -556,6 +557,7 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -590,6 +592,7 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -632,6 +635,7 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
         // for some reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 

@@ -381,12 +381,16 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver webDriver = loadPage2(html);
 
         webDriver.findElement(By.id("login")).click();
-        webDriver.findElement(By.id("password")).click();
+        verifyAlerts(webDriver, alerts[i++], alerts[i++]);
 
-        verifyAlerts(webDriver, getExpectedAlerts());
+        webDriver.findElement(By.id("password")).click();
+        verifyAlerts(webDriver, alerts[i++], alerts[i++]);
     }
 
     /**
@@ -420,10 +424,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver webDriver = loadPage2(html);
+        verifyAlerts(webDriver, getExpectedAlerts());
 
         webDriver.findElement(By.id("login")).click();
-
-        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -455,10 +458,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver webDriver = loadPage2(html);
+        verifyAlerts(webDriver, getExpectedAlerts());
 
         webDriver.findElement(By.id("login")).click();
-
-        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -490,10 +492,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver webDriver = loadPage2(html);
+        verifyAlerts(webDriver, getExpectedAlerts());
 
         webDriver.findElement(By.id("login")).click();
-
-        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -519,12 +520,15 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+
         final WebDriver webDriver = loadPage2(html);
 
         webDriver.findElement(By.id("login")).click();
-        webDriver.findElement(By.id("password")).click();
+        verifyAlerts(webDriver, alerts[0], alerts[1]);
 
-        verifyAlerts(webDriver, getExpectedAlerts());
+        webDriver.findElement(By.id("password")).click();
+        verifyAlerts(webDriver, alerts[2]);
     }
 
     /**
@@ -551,11 +555,13 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+
         final WebDriver webDriver = loadPage2(html);
+        verifyAlerts(webDriver, alerts[0], alerts[1]);
 
         webDriver.findElement(By.id("login")).click();
-
-        verifyAlerts(webDriver, getExpectedAlerts());
+        verifyAlerts(webDriver, alerts[2]);
     }
 
     /**

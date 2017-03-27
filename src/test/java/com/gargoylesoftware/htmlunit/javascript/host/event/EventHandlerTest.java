@@ -42,7 +42,7 @@ public class EventHandlerTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String alert = getCollectedAlerts(driver).get(0);
+        final String alert = getCollectedAlerts(driver, 1).get(0);
         assertTrue(alert.contains("function onload(event)"));
     }
 }

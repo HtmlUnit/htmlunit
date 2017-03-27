@@ -70,7 +70,7 @@ public class NativeStringTest extends WebDriverTestCase {
             "strike", "sub", "substr", "substring", "sup", "toLocaleLowerCase", "toLocaleUpperCase", "toLowerCase",
             "toString", "toUpperCase", "valueOf"};
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**

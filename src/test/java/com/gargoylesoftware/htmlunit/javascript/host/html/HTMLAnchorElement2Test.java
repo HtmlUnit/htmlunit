@@ -109,9 +109,10 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("link")).click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
 
-        verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("link")).click();
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     /**

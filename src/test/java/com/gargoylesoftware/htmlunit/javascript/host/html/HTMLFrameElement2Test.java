@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
@@ -179,7 +176,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"§§URL§§subdir/frame.html", "§§URL§§frame.html"},
             IE = {"§§URL§§subdir/frame.html"})
-    @NotYetImplemented(IE)
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");
         location("Frame1.location.replace(\"frame.html\")");
@@ -197,11 +193,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(defaultContent);
 
         final WebDriver driver = loadPage2(firstContent);
-        assertEquals("first", driver.getTitle());
 
         expandExpectedAlertsVariables(URL_FIRST);
-
         verifyAlerts(driver, getExpectedAlerts());
+
+        assertEquals("first", driver.getTitle());
     }
 
     /**
@@ -289,12 +285,16 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "frame1.html"), frame1Html);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "frame2.html"), frame2Html);
 
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver driver = loadPage2(firstHtml);
         driver.findElement(By.id("btn1")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
         driver.findElement(By.id("btn2")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
         driver.findElement(By.id("btn3")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
     }
 
     /**
@@ -435,6 +435,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 "content\nClick for new frame content with onload",
                 "header -> content -> frameSet -> onloadFrame",
                 "onloadFrame\nNew content loaded..."})
+    @NotYetImplemented
     public void windowLocationReplaceOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
@@ -491,7 +492,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
+        final boolean ie = getBrowserVersion().isIE();
+        verifyAlerts(driver, "Body alert.");
+        if (!ie) {
+            verifyAlerts(driver, "Onload alert.");
+        }
         driver.switchTo().defaultContent();
+        if (ie) {
+            verifyAlerts(driver, "Onload alert.");
+        }
         driver.switchTo().frame("header");
         assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
 
@@ -504,12 +513,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"OnloadTest", "header -> content -> frameSet",
-                        "content\nClick for new frame content with onload",
-                        "header -> content -> frameSet -> onloadFrame",
-                        "onloadFrame\nNew content loaded..."},
-            FF = {"OnloadTest", "header -> frameSet", ""})
-    @NotYetImplemented(FF)
+    @Alerts({"OnloadTest", "header -> content -> frameSet",
+            "content\nClick for new frame content with onload",
+            "header -> content -> frameSet -> onloadFrame",
+            "onloadFrame\nNew content loaded..."})
+    @NotYetImplemented
     public void windowLocationAssignOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
@@ -565,16 +573,22 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         driver.switchTo().frame("content");
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
-        if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
-            driver.findElement(By.name("onloadFrameAnchor")).click();
-            driver.switchTo().defaultContent();
-            driver.switchTo().frame("header");
-            assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
-
-            driver.switchTo().defaultContent();
-            driver.switchTo().frame("content");
-            assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
+        driver.findElement(By.name("onloadFrameAnchor")).click();
+        final boolean ie = getBrowserVersion().isIE();
+        verifyAlerts(driver, "Body alert.");
+        if (!ie) {
+            verifyAlerts(driver, "Onload alert.");
         }
+        driver.switchTo().defaultContent();
+        if (ie) {
+            verifyAlerts(driver, "Onload alert.");
+        }
+        driver.switchTo().frame("header");
+        assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
+
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("content");
+        assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
     }
 
     /**

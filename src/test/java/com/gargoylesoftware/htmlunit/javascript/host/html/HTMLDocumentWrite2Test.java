@@ -246,6 +246,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         // for some reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -305,6 +306,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         // for some reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -330,6 +332,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         // for some reason, the selenium driven browser is in an invalid state after this test
+        releaseResources();
         shutDownAll();
     }
 
@@ -577,6 +580,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
 
+        releaseResources();
         shutDownAll();
     }
 

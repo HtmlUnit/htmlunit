@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -193,7 +194,8 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final List<String> alerts = getCollectedAlerts(driver);
+        final Set<PluginConfiguration> plugins = getBrowserVersion().getPlugins();
+        final List<String> alerts = getCollectedAlerts(driver, plugins.size());
 
         for (PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
             assertTrue(alerts.contains(plugin.getName()));

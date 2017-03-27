@@ -53,13 +53,13 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final String now1 = getCollectedAlerts(driver).get(0);
+        final String now1 = getCollectedAlerts(driver, 1).get(0);
         assertTrue(Double.parseDouble(now1) > 0);
 
-        final String now2 = getCollectedAlerts(driver).get(1);
+        final String now2 = getCollectedAlerts(driver, 1).get(0);
         assertTrue(Double.parseDouble(now2) > Double.parseDouble(now1));
 
-        assertEquals("number", getCollectedAlerts(driver).get(2));
+        assertEquals("number", getCollectedAlerts(driver, 1).get(0));
     }
 
     /**

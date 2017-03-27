@@ -21,6 +21,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -427,7 +428,14 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        try {
+            getCollectedAlerts(driver, 1);
+            fail("expected NoAlertPresentException");
+        }
+        catch (final NoAlertPresentException e) {
+            // success
+        }
     }
 
     /**

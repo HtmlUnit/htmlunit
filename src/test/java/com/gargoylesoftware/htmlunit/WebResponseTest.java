@@ -71,7 +71,7 @@ public class WebResponseTest extends WebServerTestCase {
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
-        final byte[] script = getModifiedContent("alert('" + getExpectedAlerts()[0]  + "');").getBytes(encoding);
+        final byte[] script = ("alert('" + getExpectedAlerts()[0]  + "');").getBytes(encoding);
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");

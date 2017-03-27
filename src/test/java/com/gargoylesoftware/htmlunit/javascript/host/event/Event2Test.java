@@ -441,10 +441,11 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("clickId"));
         element.sendKeys("a");
+        verifyAlerts(driver, getExpectedAlerts()[0]);
         element.sendKeys("b");
+        verifyAlerts(driver, getExpectedAlerts()[1]);
         element.click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[2]);
     }
 
     /**
@@ -472,11 +473,15 @@ public class Event2Test extends WebDriverTestCase {
             + "<div id='div' onclick='test(event)'>abc</div>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+
         final WebElement element = driver.findElement(By.id("div"));
         element.click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
     }
 
     /**
@@ -711,7 +716,7 @@ public class Event2Test extends WebDriverTestCase {
                 "div capturing", "true", "true", "span capturing", "true", "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
                 "div capturing", "false", "false", "span capturing", "false", "true"})
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented(IE)
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }
@@ -746,11 +751,15 @@ public class Event2Test extends WebDriverTestCase {
             + "  </div>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
-        driver.findElement(By.id("theSpan")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
-        verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("theSpan")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++]);
     }
 
     /**
@@ -833,10 +842,14 @@ public class Event2Test extends WebDriverTestCase {
             + "</div>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
-        driver.findElement(By.id("theSpan")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
-        verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("theSpan")).click();
+        verifyAlerts(driver, alerts[i++]);
     }
 }

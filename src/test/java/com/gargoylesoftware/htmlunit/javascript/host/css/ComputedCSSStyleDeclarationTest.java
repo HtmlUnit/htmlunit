@@ -1578,7 +1578,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**

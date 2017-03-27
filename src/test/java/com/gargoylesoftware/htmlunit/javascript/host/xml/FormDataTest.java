@@ -370,7 +370,7 @@ public class FormDataTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            final List<String> alerts = getCollectedAlerts(driver);
+            final List<String> alerts = getCollectedAlerts(driver, 1);
             return alerts.get(0);
         }
         finally {

@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Arrays;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -98,6 +99,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why and not in div?")
     public void anchor_onblur_onfocus() throws Exception {
         testTagWithClick("<a href='javascript:void(0)'>link</a>");
     }
@@ -111,6 +113,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocusout", "onfocus", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why and not in div?")
+    // TODO: why it passes in HtmlUnit?
     @NotYetImplemented(IE)
     public void anchor_onblur_onfocus_methodsCalls() throws Exception {
         testWithCallFocusBlur("<a href='.'>link</a>");
@@ -145,6 +149,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
     public void button_onblur_onfocus() throws Exception {
         testTagWithClick("<button name='foo' value='bar' type='button'>button</button>");
     }
@@ -158,6 +163,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
     public void labelContainsInput_onblur_onfocus() throws Exception {
         final String body = "<form><label " + COMMON_ID + ">\n"
                 + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n";
@@ -173,6 +179,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
     public void labelReferencesInput_onblur_onfocus() throws Exception {
         final String body = "<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>\n"
                 + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>\n";
@@ -188,6 +195,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
     public void select_onblur_onfocus() throws Exception {
         testTagWithClick("<select><option>1</option></select>");
     }
@@ -201,6 +209,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"onfocus", "onblur"},
             CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
             IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
+    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
     public void textarea_onblur_onfocus() throws Exception {
         testTagWithClick("<textarea>Text</textarea>");
     }

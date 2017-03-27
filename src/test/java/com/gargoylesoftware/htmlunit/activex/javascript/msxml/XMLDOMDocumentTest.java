@@ -1872,7 +1872,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageWithAlerts2(createTestHTML(html), 2 * DEFAULT_WAIT_TIME);
     }
 
     private void tester(final String test, final String xml) throws Exception {

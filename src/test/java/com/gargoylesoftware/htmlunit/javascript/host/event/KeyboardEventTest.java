@@ -174,7 +174,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(2 * DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -223,7 +223,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(2 * DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -274,7 +274,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(2 * DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

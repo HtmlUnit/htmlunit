@@ -856,11 +856,11 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(frameHtml);
 
         final WebDriver driver = loadPage2(html);
-
+        verifyAlerts(driver, getExpectedAlerts()[0]);
         driver.findElement(By.id("d1")).click();
+        verifyAlerts(driver, getExpectedAlerts()[1]);
         driver.findElement(By.id("d2")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[2]);
     }
 
     /**

@@ -81,7 +81,7 @@ public class NativeDateTest extends WebDriverTestCase {
             "toLocaleDateString", "toLocaleString", "toLocaleTimeString", "toString",
             "toTimeString", "toUTCString", "valueOf", "UTC"};
         final String html = createHTMLTestMethods("new Date()", methods);
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 3 * DEFAULT_WAIT_TIME);
     }
 
     /**

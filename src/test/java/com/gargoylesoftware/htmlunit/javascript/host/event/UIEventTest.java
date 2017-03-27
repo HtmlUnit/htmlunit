@@ -93,13 +93,20 @@ public class UIEventTest extends WebDriverTestCase {
             + "  <div id='a' onclick='alertDetail(event)'>abc</div>\n"
             + "  <div id='b' ondblclick='alertDetail(event)'>xyz</div>\n"
             + "</body></html>";
+
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
+
         driver.findElement(By.id("a")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
+
         final Actions action = new Actions(driver);
         action.doubleClick(driver.findElement(By.id("b")));
         action.perform();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
     }
 
     /**
@@ -118,9 +125,14 @@ public class UIEventTest extends WebDriverTestCase {
             + "</script>\n"
             + "<form><input type='button' id='b' onclick='alertView(event)'></form>\n"
             + "</body></html>";
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("b")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
+
+        driver.findElement(By.id("b")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
     }
 }

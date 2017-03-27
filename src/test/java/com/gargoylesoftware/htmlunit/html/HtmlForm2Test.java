@@ -374,7 +374,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
 
-            writer.write(getModifiedContent(html));
+            writer.write(html);
         }
     }
 
@@ -422,7 +422,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
 
-            writer.write(getModifiedContent(html));
+            writer.write(html);
         }
     }
 }

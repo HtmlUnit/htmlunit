@@ -183,7 +183,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "fourth.html"), fourthHtml);
 
         final WebDriver driver = loadPage2(html);
-        final List<String> actualAlerts = getCollectedAlerts(driver);
+        final List<String> actualAlerts = getCollectedAlerts(2 * DEFAULT_WAIT_TIME, driver, 4);
 
         // tested with real ff17 and ie6; running in selenium returns different results
         assertEquals(4, actualAlerts.size());

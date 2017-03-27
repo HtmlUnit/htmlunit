@@ -186,8 +186,8 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).sendKeys("abc");
-        driver.findElement(By.id("doIt")).click();
         verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("doIt")).click();
     }
 
     /**

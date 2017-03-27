@@ -602,7 +602,6 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
                    "1:ex status ex text ",
                    "2:ex status ex text ",
                    "0:ex status ex text ex xml"})
-    @NotYetImplemented(IE)
     // currently the started asynchronous request is not interrupted on abortion
     public void abort_sentAsync() throws Exception {
         final String test = ""
@@ -1408,7 +1407,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageWithAlerts2(createTestHTML(html), URL_FIRST, 4 * DEFAULT_WAIT_TIME);
     }
 
     private void tester_bounce(final String test) throws Exception {

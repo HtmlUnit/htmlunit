@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static org.mockito.ArgumentMatchers.any;
@@ -66,7 +67,9 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"ws://localhost:12345/", "", "0", "blob"})
+    @Alerts(DEFAULT = {"ws://localhost:12345/", "", "0", "blob"},
+            FF = {"ws://localhost:12345/", "", "3", "blob"})
+    @NotYetImplemented({CHROME, IE})
     public void initial() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

@@ -258,7 +258,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -476,7 +476,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -504,10 +504,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement checkBox = driver.findElement(By.id("checkbox1"));
         assertFalse(checkBox.isSelected());
-        driver.findElement(By.id("clickme")).click();
-        assertTrue(checkBox.isSelected());
 
+        driver.findElement(By.id("clickme")).click();
         verifyAlerts(driver, getExpectedAlerts());
+        assertTrue(checkBox.isSelected());
     }
 
     /**
@@ -547,11 +547,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertFalse(radioC.isSelected());
 
         driver.findElement(By.id("clickme")).click();
+        verifyAlerts(driver, getExpectedAlerts());
         assertFalse(radioA.isSelected());
         assertTrue(radioB.isSelected());
         assertFalse(radioC.isSelected());
-
-        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -592,12 +591,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertTrue(button1.isEnabled());
         assertFalse(button2.isEnabled());
         assertTrue(button3.isEnabled());
+
         driver.findElement(By.id("clickme")).click();
+        verifyAlerts(driver, getExpectedAlerts());
         assertFalse(button1.isEnabled());
         assertTrue(button2.isEnabled());
         assertFalse(button3.isEnabled());
-
-        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -761,9 +760,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        assertEquals("from button", textinput.getAttribute("value"));
-
         verifyAlerts(driver, getExpectedAlerts());
+        Thread.sleep(10);
+        assertEquals("from button", textinput.getAttribute("value"));
     }
 
     /**
@@ -792,9 +791,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        assertEquals("from button", textinput.getAttribute("value"));
-
         verifyAlerts(driver, getExpectedAlerts());
+        Thread.sleep(10);
+        assertEquals("from button", textinput.getAttribute("value"));
     }
 
     /**
@@ -1418,6 +1417,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("onsubmit")
     public void submitNonRequired() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1435,9 +1435,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("mySubmit")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+        Thread.sleep(10);
         assertTrue(driver.getCurrentUrl().contains("myName"));
+
         // because we have a new page
-        assertTrue(getCollectedAlerts(driver).isEmpty());
+        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
     }
 
     /**
@@ -1493,9 +1496,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
+
         driver.findElement(By.id("myInput")).sendKeys("something");
         driver.findElement(By.id("myButton")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     /**

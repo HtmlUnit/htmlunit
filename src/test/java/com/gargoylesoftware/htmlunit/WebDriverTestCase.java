@@ -54,8 +54,9 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
@@ -67,17 +68,17 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
+import org.openqa.selenium.htmlunit.local.HtmlUnitLocalDriver;
+import org.openqa.selenium.htmlunit.local.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * Base class for tests using WebDriver.
@@ -162,7 +163,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
 
-    private WebClient webClient_;
+    /**
+     * The HtmlUnitDriver.
+     */
+    private WebDriver webDriver_;
 
     /**
      * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
@@ -444,15 +448,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
         }
-        if (webClient_ == null) {
-            webClient_ = new WebClient(getBrowserVersion());
+        if (webDriver_ == null) {
+            final DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(getBrowserName(getBrowserVersion()));
+            webDriver_ = new HtmlUnitDriver(capabilities);
         }
-        return new HtmlUnitDriver(true) {
-            @Override
-            protected WebClient newWebClient(final BrowserVersion browserVersion) {
-                return webClient_;
-            }
-        };
+        return webDriver_;
+    }
+
+    private static String getBrowserName(final BrowserVersion browserVersion) {
+        if (browserVersion == BrowserVersion.FIREFOX_45 || browserVersion == BrowserVersion.FIREFOX_52) {
+            return BrowserType.FIREFOX;
+        }
+        if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
+            return BrowserType.IE;
+        }
+        if (browserVersion == BrowserVersion.EDGE) {
+            return BrowserType.EDGE;
+        }
+        return BrowserType.CHROME;
     }
 
     /**
@@ -690,11 +704,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 response.getOutputStream().write(resp.getByteContent());
             }
             else {
-                final String newContent = getModifiedContent(resp.getStringContent());
                 if (!charsetInContentType) {
                     response.setCharacterEncoding(resp.getCharset().name());
                 }
-                response.getWriter().print(newContent);
+                response.getWriter().print(resp.getStringContent());
             }
             response.flushBuffer();
         }
@@ -872,22 +885,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
             throws Exception {
-        List<String> actualAlerts = null;
-
-        try {
-            // gets the collected alerts, waiting a bit if necessary
-            actualAlerts = getCollectedAlerts(driver);
-
-            final long maxWait = System.currentTimeMillis() + maxWaitTime;
-            while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
-                Thread.sleep(30);
-                actualAlerts = getCollectedAlerts(driver);
-            }
-        }
-        catch (final WebDriverException e) {
-            shutDownRealBrowsers();
-            throw e;
-        }
+        final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expectedAlerts.length);
 
         assertEquals(expectedAlerts, actualAlerts);
         if (!ignoreExpectationsLength()) {
@@ -947,7 +945,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final URL url) throws Exception {
-        return loadPageWithAlerts2(url, 0);
+        return loadPageWithAlerts2(url, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -977,43 +975,50 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the collected alerts
      * @throws Exception in case of problem
      */
-    @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
+        return getCollectedAlerts(driver, getExpectedAlerts().length);
+    }
+
+    /**
+     * Gets the alerts collected by the driver.
+     * Note: it currently works only if no new page has been loaded in the window
+     * @param driver the driver
+     * @param alertsLength the expected length of Alerts
+     * @return the collected alerts
+     * @throws Exception in case of problem
+     */
+    protected List<String> getCollectedAlerts(final WebDriver driver, final int alertsLength) throws Exception {
+        return getCollectedAlerts(DEFAULT_WAIT_TIME, driver, alertsLength);
+    }
+
+    /**
+     * Gets the alerts collected by the driver.
+     * Note: it currently works only if no new page has been loaded in the window
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
+     * @param driver the driver
+     * @param alertsLength the expected length of Alerts
+     * @return the collected alerts
+     * @throws Exception in case of problem
+     */
+    protected List<String> getCollectedAlerts(final long maxWaitTime, final WebDriver driver, final int alertsLength)
+            throws Exception {
         final List<String> collectedAlerts = new ArrayList<>();
 
-        // do not throw an exception if we ask for collected alerts for non html pages
-        // see com.gargoylesoftware.htmlunit.WebClient3Test.javascriptContentDetectorContentTypeTextPlain()
-        if (driver instanceof HtmlUnitDriver) {
-            final Page page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (!(page instanceof HtmlPage)) {
-                return collectedAlerts;
-            }
-        }
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
 
-        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-
-        final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
-
-        if (result != null) {
-            if (driver instanceof HtmlUnitDriver) {
-                return (List<String>) result;
-            }
-            if (result instanceof List) {
-                for (final Object alert : (List<Object>) result) {
-                    collectedAlerts.add(Context.toString(alert));
+        for (int i = 0; i < alertsLength; i++) {
+            while (collectedAlerts.size() < alertsLength && System.currentTimeMillis() < maxWait) {
+                try {
+                    final Alert alert = driver.switchTo().alert();
+                    collectedAlerts.add(alert.getText());
+                    alert.accept();
                 }
-            }
-            else if (result instanceof String) {
-                collectedAlerts.add(result.toString());
-            }
-            else {
-                final Map<?, ?> map  = (Map<?, ?>) result;
-                for (final Object key : map.keySet()) {
-                    final int index = Integer.parseInt(key.toString());
-                    collectedAlerts.add(index, map.get(key).toString());
+                catch (final NoAlertPresentException e) {
+                    Thread.sleep(10);
                 }
             }
         }
+
         return collectedAlerts;
     }
 
@@ -1021,17 +1026,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Returns the HtmlElement of the specified WebElement.
      * @param webElement the webElement
      * @return the HtmlElement
+     * @throws Exception if an error occurs
      * @see #getWebWindowOf(HtmlUnitDriver)
      */
-    protected HtmlElement toHtmlElement(final WebElement webElement) {
-        try {
-            final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
-            field.setAccessible(true);
-            return (HtmlElement) field.get(webElement);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+    protected HtmlElement toHtmlElement(final WebElement webElement) throws Exception {
+        final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
+        field.setAccessible(true);
+        return (HtmlElement) field.get(webElement);
     }
 
     /**
@@ -1055,12 +1056,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
         super.releaseResources();
 
         if (!isWebClientCached()) {
-            if (webClient_ != null) {
-                webClient_.close();
-                webClient_.getCookieManager().clearCookies();
+            if (webDriver_ != null) {
+                webDriver_.quit();
             }
-            webClient_ = null;
-            assertTrue(getJavaScriptThreads().isEmpty());
+            assertTrue("There are still JS threads running after the test", getJavaScriptThreads().isEmpty());
         }
 
         if (useRealBrowser()) {
@@ -1119,9 +1118,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
+        final Field driverField = HtmlUnitDriver.class.getDeclaredField("driver");
+        driverField.setAccessible(true);
+        final HtmlUnitLocalDriver localDriver = (HtmlUnitLocalDriver) driverField.get(driver);
+        final Field field = localDriver.getClass().getDeclaredField("currentWindow");
         field.setAccessible(true);
-        return (WebWindow) field.get(driver);
+        return (WebWindow) field.get(localDriver);
     }
 
     /**
