@@ -449,14 +449,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         if (webDriver_ == null) {
             final DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(getBrowserName(getBrowserVersion()));
+            capabilities.setBrowserName(BrowserType.HTMLUNIT);
+            capabilities.setVersion(getBrowserName(getBrowserVersion()));
             webDriver_ = new HtmlUnitDriver(capabilities);
         }
         return webDriver_;
     }
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.FIREFOX_45 || browserVersion == BrowserVersion.FIREFOX_52) {
+        if (browserVersion == BrowserVersion.FIREFOX_45) {
+            return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
+        } else if (browserVersion == BrowserVersion.FIREFOX_52) {
             return BrowserType.FIREFOX;
         }
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
