@@ -63,4 +63,11 @@ public class CollectingAlertHandler implements AlertHandler, Serializable {
     public List<String> getCollectedAlerts() {
         return collectedAlerts_;
     }
+
+    /**
+     * Removes all alerts.
+     */
+    public void clear() {
+        collectedAlerts_.clear();
+    }
 }

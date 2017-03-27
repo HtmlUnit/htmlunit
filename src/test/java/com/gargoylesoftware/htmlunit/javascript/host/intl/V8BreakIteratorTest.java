@@ -115,7 +115,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 3 * DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, 4 * DEFAULT_WAIT_TIME);
     }
 
     /**

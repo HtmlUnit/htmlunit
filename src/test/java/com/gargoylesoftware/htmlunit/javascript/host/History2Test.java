@@ -336,9 +336,13 @@ public class History2Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myId")).click();
+        verifyAlerts(driver, expectedAlerts[0]);
+
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
         assertEquals(URL_FIRST + "bar.html", ((JavascriptExecutor) driver).executeScript("return location.href"));
         driver.findElement(By.id("myId2")).click();
+        verifyAlerts(driver, expectedAlerts[1]);
+
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
         assertEquals(URL_FIRST + "bar2.html", ((JavascriptExecutor) driver).executeScript("return location.href"));
         driver.navigate().back();
@@ -349,8 +353,6 @@ public class History2Test extends WebDriverTestCase {
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
         driver.navigate().forward();
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
-
-        verifyAlerts(driver, expectedAlerts);
     }
 
     /**

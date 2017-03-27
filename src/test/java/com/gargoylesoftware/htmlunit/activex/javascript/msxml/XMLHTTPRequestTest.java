@@ -1407,7 +1407,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
-        loadPageWithAlerts2(createTestHTML(html), URL_FIRST, 4 * DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(createTestHTML(html), URL_FIRST, 6 * DEFAULT_WAIT_TIME);
     }
 
     private void tester_bounce(final String test) throws Exception {

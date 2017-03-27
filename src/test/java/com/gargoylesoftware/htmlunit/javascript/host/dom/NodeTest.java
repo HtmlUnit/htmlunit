@@ -346,9 +346,8 @@ public class NodeTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("div1")).click();
-
         verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("div1")).click();
     }
 
     /**

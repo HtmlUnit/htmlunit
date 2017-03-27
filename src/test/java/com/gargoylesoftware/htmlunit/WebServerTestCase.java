@@ -18,7 +18,6 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +41,6 @@ import org.junit.After;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.
  *
@@ -60,6 +56,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     private static Boolean LAST_TEST_MockWebConnection_;
     private static Server STATIC_SERVER_;
     private WebClient webClient_;
+    private CollectingAlertHandler alertHandler_ = new CollectingAlertHandler();
 
     /**
      * Starts the web server on the default {@link #PORT}.
@@ -254,6 +251,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final int maxWaitTime)
         throws Exception {
+        alertHandler_.clear();
         expandExpectedAlertsVariables(URL_FIRST);
 
         final String[] expectedAlerts = getExpectedAlerts();
@@ -368,6 +366,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final URL url) throws Exception {
+        alertHandler_.clear();
         expandExpectedAlertsVariables(url);
         final String[] expectedAlerts = getExpectedAlerts();
 
@@ -385,16 +384,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @return the alerts
      */
     protected List<String> getCollectedAlerts(final HtmlPage page) {
-        final ScriptResult result = page.executeJavaScript("top.__huCatchedAlerts;");
-        final List<String> list = new ArrayList<>();
-        final Object object = result.getJavaScriptResult();
-        if (object != Undefined.instance) {
-            final NativeArray arr = (NativeArray) object;
-            for (int i = 0; i < arr.getLength(); i++) {
-                list.add(arr.get(i).toString());
-            }
-        }
-        return list;
+        return alertHandler_.getCollectedAlerts();
     }
 
     /**
@@ -413,6 +403,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     protected final WebClient getWebClient() {
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
+            webClient_.setAlertHandler(alertHandler_);
         }
         return webClient_;
     }
@@ -429,5 +420,6 @@ public abstract class WebServerTestCase extends WebTestCase {
             webClient_.getCookieManager().clearCookies();
         }
         webClient_ = null;
+        alertHandler_ = null;
     }
 }

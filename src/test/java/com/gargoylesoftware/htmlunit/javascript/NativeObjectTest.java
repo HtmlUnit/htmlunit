@@ -55,7 +55,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             "toLocaleString", "toString", "valueOf", "__defineGetter__", "__defineSetter__",
             "__lookupGetter__", "__lookupSetter__"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**

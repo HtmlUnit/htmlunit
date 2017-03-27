@@ -567,6 +567,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final HtmlPage page = loadPage(html);
         ((HtmlFileInput) page.getElementById("f")).setFiles(pom, license);
+        Thread.sleep(100);
         assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
     }
 
@@ -601,6 +602,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlPage page = loadPage(html);
         page.<HtmlFileInput>getHtmlElementById("f").setFiles(pom);
         page.getElementById("clickMe").click();
+        Thread.sleep(100);
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", pom.getAbsolutePath());
         assertEquals(expectedAlerts, getCollectedAlerts(page));

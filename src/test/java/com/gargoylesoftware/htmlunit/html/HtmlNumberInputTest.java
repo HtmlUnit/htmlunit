@@ -222,16 +222,16 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         // trigger lost focus
         driver.findElement(By.id("b")).click();
         final String[] expectedAlerts1 = {"foo", "change", "boo", "blur"};
-        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+        assertEquals(expectedAlerts1, getCollectedAlerts(driver, 4));
 
         // set only the focus but change nothing
         p.click();
-        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        final String[] expectedAlerts2 = {"foo", "change", "boo", "blur", "boo", "blur"};
-        assertEquals(expectedAlerts2, getCollectedAlerts(driver));
+        final String[] expectedAlerts2 = {"boo", "blur"};
+        assertEquals(expectedAlerts2, getCollectedAlerts(driver, 2));
     }
 
     /**

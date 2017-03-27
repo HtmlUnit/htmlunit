@@ -792,11 +792,15 @@ public class Event2Test extends WebDriverTestCase {
             + "</div>\n"
             + "</body></html>";
 
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
-        driver.findElement(By.id("theSpan")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
-        verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.id("theSpan")).click();
+        verifyAlerts(driver, alerts[i++], alerts[i++]);
     }
 
     /**
