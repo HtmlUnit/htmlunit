@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +25,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.local.HtmlUnitLocalDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -105,20 +103,12 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "  <img id='myImage' " + src + " >\n"
             + "</body></html>";
 
-        final WebDriver webDriver = getWebDriver();
-        if (webDriver instanceof HtmlUnitDriver) {
-            final HtmlUnitLocalDriver localDriver = get(getWebDriver(), "driver");
-            localDriver.setDownloadImages(true);
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
         }
         loadPage2(html);
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> T get(final Object o, final String fieldName) throws Exception {
-        final Field field = o.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        return (T) field.get(o);
     }
 
     /**

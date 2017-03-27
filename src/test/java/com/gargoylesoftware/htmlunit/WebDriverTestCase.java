@@ -68,8 +68,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.local.HtmlUnitLocalDriver;
-import org.openqa.selenium.htmlunit.local.HtmlUnitWebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -1118,12 +1117,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final Field driverField = HtmlUnitDriver.class.getDeclaredField("driver");
-        driverField.setAccessible(true);
-        final HtmlUnitLocalDriver localDriver = (HtmlUnitLocalDriver) driverField.get(driver);
-        final Field field = localDriver.getClass().getDeclaredField("currentWindow");
+        final Field field = driver.getClass().getDeclaredField("currentWindow");
         field.setAccessible(true);
-        return (WebWindow) field.get(localDriver);
+        return (WebWindow) field.get(driver);
     }
 
     /**
