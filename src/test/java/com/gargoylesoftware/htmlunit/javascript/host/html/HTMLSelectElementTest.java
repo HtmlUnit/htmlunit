@@ -2628,7 +2628,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         assertTrue(options.get(2).isSelected());
 
         options.get(0).click();
-        
+
         assertFalse(options.get(0).isSelected());
         assertFalse(options.get(1).isSelected());
         assertTrue(options.get(2).isSelected());
@@ -2658,7 +2658,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         assertTrue(options.get(2).isSelected());
 
         new Actions(driver).click(options.get(0)).perform();
-        
+
         assertTrue(options.get(0).isSelected());
         assertFalse(options.get(1).isSelected());
         assertEquals(!getBrowserVersion().isChrome(), options.get(2).isSelected());
