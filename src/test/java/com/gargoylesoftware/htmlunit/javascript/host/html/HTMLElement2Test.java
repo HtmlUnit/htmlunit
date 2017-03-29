@@ -1360,7 +1360,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"body1", "setActive not available"},
             IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2"})
     @BuggyWebDriver(IE)
-    // alert conflicts with focus/blur 
+    // alert conflicts with focus/blur
     @NotYetImplemented
     public void setActiveAndFocus() throws Exception {
         final String firstHtml =
