@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -25,7 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -2579,7 +2581,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void deselectFromMultiple() throws Exception {
         final String html
             = "<html><body>\n"
@@ -2638,7 +2639,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    // https://github.com/mozilla/geckodriver/issues/584
+    @BuggyWebDriver(FF)
     public void optionClickActions() throws Exception {
         final String html
             = "<html><body>\n"
@@ -2661,6 +2663,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         assertTrue(options.get(0).isSelected());
         assertFalse(options.get(1).isSelected());
-        assertEquals(!getBrowserVersion().isChrome(), options.get(2).isSelected());
+        assertFalse(options.get(2).isSelected());
     }
 }

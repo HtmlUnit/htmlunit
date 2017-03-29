@@ -397,7 +397,12 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         }
     }
 
-    private void setOnlySelected(final HtmlOption selectedOption, final boolean isSelected) {
+    /**
+     * Sets the given {@link HtmlOption} as the only selected one.
+     * @param selectedOption the selected {@link HtmlOption}
+     * @param isSelected whether selected or not
+     */
+    void setOnlySelected(final HtmlOption selectedOption, final boolean isSelected) {
         for (final HtmlOption option : getOptions()) {
             option.setSelectedInternal(option == selectedOption && isSelected);
         }

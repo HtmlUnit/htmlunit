@@ -84,7 +84,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      *         may not be the same as the original page)
      */
     public Page setSelected(final boolean selected) {
-        setSelected(selected, true, true, false);
+        setSelected(selected, true, false, false);
         return getPage();
     }
 
@@ -320,8 +320,13 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             changed = true;
         }
         else if (getEnclosingSelect().isMultipleSelectEnabled()) {
-            setSelected(false);
-            changed = true;
+            if (ctrlKey) {
+                setSelected(false, true, shiftKey, ctrlKey);
+                changed = true;
+            }
+            else {
+                getEnclosingSelect().setOnlySelected(this, true);
+            }
         }
         super.doClickStateUpdate(shiftKey, ctrlKey);
         return changed;
