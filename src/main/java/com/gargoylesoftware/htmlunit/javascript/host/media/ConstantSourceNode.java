@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52) })
 public class ConstantSourceNode extends AudioScheduledSourceNode {
 
     /**

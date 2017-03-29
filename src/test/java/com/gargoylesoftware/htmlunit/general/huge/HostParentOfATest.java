@@ -752,7 +752,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF45 = "false")
     public void _CSSKeyframeRule_CSSKeyframeRule() throws Exception {
         test("CSSKeyframeRule", "CSSKeyframeRule");
     }
@@ -762,7 +762,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF45 = "false")
     public void _CSSKeyframesRule_CSSKeyframesRule() throws Exception {
         test("CSSKeyframesRule", "CSSKeyframesRule");
     }
@@ -772,7 +772,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF45 = "false")
     public void _CSSRule_CSSKeyframeRule() throws Exception {
         test("CSSRule", "CSSKeyframeRule");
     }
@@ -782,7 +782,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF45 = "false")
     public void _CSSRule_CSSKeyframesRule() throws Exception {
         test("CSSRule", "CSSKeyframesRule");
     }
@@ -1194,6 +1194,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _AudioNode_IIRFilterNode() throws Exception {
         test("AudioNode", "IIRFilterNode");
@@ -1264,7 +1265,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _CSSRule_MozCSSKeyframesRule() throws Exception {
         test("CSSRule", "MozCSSKeyframesRule");
     }
@@ -1284,6 +1285,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _AudioNode_ConstantSourceNode() throws Exception {
         test("AudioNode", "ConstantSourceNode");
@@ -1324,6 +1326,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _ConstantSourceNode_ConstantSourceNode() throws Exception {
         test("ConstantSourceNode", "ConstantSourceNode");
