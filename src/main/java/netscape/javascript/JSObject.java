@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
+import net.sourceforge.htmlunit.corejs.javascript.ConsString;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -72,6 +73,9 @@ public class JSObject {
             final ScriptResult result = htmlPage.executeJavaScript(paramString);
             if (result.getJavaScriptResult() instanceof ScriptableObject) {
                 return new JSObject((ScriptableObject) result.getJavaScriptResult());
+            }
+            if (result.getJavaScriptResult() instanceof ConsString) {
+                return ((ConsString) result.getJavaScriptResult()).toString();
             }
             return result.getJavaScriptResult();
         }
