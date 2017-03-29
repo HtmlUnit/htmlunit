@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +25,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -2570,5 +2573,35 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "</body>"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void deselectFromMultiple() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<select id='s' multiple>\n"
+            + "  <option selected value='one'>One</option>\n"
+            + "  <option value='two'>Two</option>\n"
+            + "  <option selected value='three'>Three</option>\n"
+            + "</select>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement multiSelect = driver.findElement(By.id("s"));
+        final List<WebElement> options = multiSelect.findElements(By.tagName("option"));
+
+        WebElement option = options.get(0);
+        assertTrue(option.isSelected());
+        option.click();
+        assertFalse(option.isSelected());
+        option.click();
+        assertTrue(option.isSelected());
+
+        option = options.get(2);
+        assertTrue(option.isSelected());
     }
 }
