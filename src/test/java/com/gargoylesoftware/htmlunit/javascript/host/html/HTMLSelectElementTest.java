@@ -2604,4 +2604,63 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         option = options.get(2);
         assertTrue(option.isSelected());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void optionClick() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<select id='s' multiple>\n"
+            + "  <option selected value='one'>One</option>\n"
+            + "  <option value='two'>Two</option>\n"
+            + "  <option selected value='three'>Three</option>\n"
+            + "</select>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement multiSelect = driver.findElement(By.id("s"));
+        final List<WebElement> options = multiSelect.findElements(By.tagName("option"));
+
+        assertTrue(options.get(0).isSelected());
+        assertFalse(options.get(1).isSelected());
+        assertTrue(options.get(2).isSelected());
+
+        options.get(0).click();
+        
+        assertFalse(options.get(0).isSelected());
+        assertFalse(options.get(1).isSelected());
+        assertTrue(options.get(2).isSelected());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void optionClickActions() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<select id='s' multiple>\n"
+            + "  <option selected value='one'>One</option>\n"
+            + "  <option value='two'>Two</option>\n"
+            + "  <option selected value='three'>Three</option>\n"
+            + "</select>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement multiSelect = driver.findElement(By.id("s"));
+        final List<WebElement> options = multiSelect.findElements(By.tagName("option"));
+
+        assertTrue(options.get(0).isSelected());
+        assertFalse(options.get(1).isSelected());
+        assertTrue(options.get(2).isSelected());
+
+        new Actions(driver).click(options.get(0)).perform();
+        
+        assertTrue(options.get(0).isSelected());
+        assertFalse(options.get(1).isSelected());
+        assertEquals(!getBrowserVersion().isChrome(), options.get(2).isSelected());
+    }
 }
