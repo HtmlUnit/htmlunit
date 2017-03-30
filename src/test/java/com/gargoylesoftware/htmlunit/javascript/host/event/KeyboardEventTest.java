@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -337,8 +339,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13",
                     "keypress:13,0,13",
                     "keyup:13,0,13"})
-    // An issue with HtmlUnitWebDriver, which mandates a containing form of the <input> to handle pressing RETURN
-    @NotYetImplemented
+    @NotYetImplemented(FF)
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
