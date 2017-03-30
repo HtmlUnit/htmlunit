@@ -1029,7 +1029,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             // this wouldn't work with JS disabled as events are propagated in the host object tree.
             final DomNode parent = getParentNode();
             if (parent instanceof DomElement) {
-                return ((DomElement) parent).doClickStateUpdate(shiftKey, ctrlKey);
+                return ((DomElement) parent).doClickStateUpdate(false, false);
             }
         }
 
