@@ -50,32 +50,32 @@ public class EventListenersContainer implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
-    static class Handlers implements Serializable {
-        private List<Scriptable> capturingHandlers_;
-        private List<Scriptable> bubblingHandlers_;
+    static class TypeContainer implements Serializable {
+        private List<Scriptable> capturingListeners_;
+        private List<Scriptable> bubblingListeners_;
         private Object handler_;
 
-        Handlers() {
-            capturingHandlers_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
-            bubblingHandlers_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
+        TypeContainer() {
+            capturingListeners_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
+            bubblingListeners_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
         }
 
-        private Handlers(final List<Scriptable> capturingHandlers,
+        private TypeContainer(final List<Scriptable> capturingHandlers,
                     final List<Scriptable> bubblingHandlers, final Object handler) {
-            capturingHandlers_ = Collections.unmodifiableList(new ArrayList<>(capturingHandlers));
-            bubblingHandlers_ = Collections.unmodifiableList(new ArrayList<>(bubblingHandlers));
+            capturingListeners_ = Collections.unmodifiableList(new ArrayList<>(capturingHandlers));
+            bubblingListeners_ = Collections.unmodifiableList(new ArrayList<>(bubblingHandlers));
             handler_ = handler;
         }
 
-        private List<Scriptable> getHandlers(final boolean useCapture) {
+        private List<Scriptable> getListeners(final boolean useCapture) {
             if (useCapture) {
-                return capturingHandlers_;
+                return capturingListeners_;
             }
-            return bubblingHandlers_;
+            return bubblingListeners_;
         }
 
         private synchronized boolean addListener(final Scriptable listener, final boolean useCapture) {
-            final List<Scriptable> listeners = getHandlers(useCapture);
+            final List<Scriptable> listeners = getListeners(useCapture);
 
             if (listeners.contains(listener)) {
                 return false;
@@ -87,17 +87,17 @@ public class EventListenersContainer implements Serializable {
             newListeners = Collections.unmodifiableList(newListeners);
 
             if (useCapture) {
-                capturingHandlers_ = newListeners;
+                capturingListeners_ = newListeners;
             }
             else {
-                bubblingHandlers_ = newListeners;
+                bubblingListeners_ = newListeners;
             }
 
             return true;
         }
 
         private synchronized void removeListener(final Scriptable listener, final boolean useCapture) {
-            final List<Scriptable> listeners = getHandlers(useCapture);
+            final List<Scriptable> listeners = getListeners(useCapture);
 
             final int idx = listeners.indexOf(listener);
             if (idx < 0) {
@@ -109,20 +109,20 @@ public class EventListenersContainer implements Serializable {
             newListeners = Collections.unmodifiableList(newListeners);
 
             if (useCapture) {
-                capturingHandlers_ = newListeners;
+                capturingListeners_ = newListeners;
             }
             else {
-                bubblingHandlers_ = newListeners;
+                bubblingListeners_ = newListeners;
             }
         }
 
         @Override
-        protected Handlers clone() {
-            return new Handlers(capturingHandlers_, bubblingHandlers_, handler_);
+        protected TypeContainer clone() {
+            return new TypeContainer(capturingListeners_, bubblingListeners_, handler_);
         }
     }
 
-    private final Map<String, Handlers> eventHandlers_ = new HashMap<>();
+    private final Map<String, TypeContainer> typeContainers_ = new HashMap<>();
     private final EventTarget jsNode_;
 
     /**
@@ -146,8 +146,8 @@ public class EventListenersContainer implements Serializable {
             return true;
         }
 
-        final Handlers handlers = getHandlersOrCreateIt(type);
-        final boolean added = handlers.addListener(listener, useCapture);
+        final TypeContainer container = getTypeContainer(type);
+        final boolean added = container.addListener(listener, useCapture);
         if (!added) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
@@ -157,14 +157,14 @@ public class EventListenersContainer implements Serializable {
         return true;
     }
 
-    private Handlers getHandlersOrCreateIt(final String type) {
+    private TypeContainer getTypeContainer(final String type) {
         final String typeLC = type.toLowerCase(Locale.ROOT);
-        Handlers handlers = eventHandlers_.get(typeLC);
-        if (handlers == null) {
-            handlers = new Handlers();
-            eventHandlers_.put(typeLC, handlers);
+        TypeContainer container = typeContainers_.get(typeLC);
+        if (container == null) {
+            container = new TypeContainer();
+            typeContainers_.put(typeLC, container);
         }
-        return handlers;
+        return container;
     }
 
     /**
@@ -173,10 +173,10 @@ public class EventListenersContainer implements Serializable {
      * @param useCapture whether to use capture of not
      * @return the handlers list
      */
-    public List<Scriptable> getHandlers(final String eventType, final boolean useCapture) {
-        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ROOT));
-        if (handlers != null) {
-            return handlers.getHandlers(useCapture);
+    public List<Scriptable> getListeners(final String eventType, final boolean useCapture) {
+        final TypeContainer container = typeContainers_.get(eventType.toLowerCase(Locale.ROOT));
+        if (container != null) {
+            return container.getListeners(useCapture);
         }
         return null;
     }
@@ -188,29 +188,29 @@ public class EventListenersContainer implements Serializable {
      * @param useCapture to use capture or not
      */
     public void removeEventListener(final String eventType, final Scriptable listener, final boolean useCapture) {
-        if (null == listener) {
+        if (listener == null) {
             return;
         }
 
-        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ROOT));
+        final TypeContainer handlers = typeContainers_.get(eventType.toLowerCase(Locale.ROOT));
         if (handlers != null) {
             handlers.removeListener(listener, useCapture);
         }
     }
 
     /**
-     * Sets the handler property (with an handler or something else).
+     * Sets the handler property (with a handler or something else).
      * @param eventName the event name (like "click")
      * @param value the new property
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
         Object handler = value;
-        if (Undefined.instance == value) {
+        if (handler == Undefined.instance) {
             handler = null;
         }
 
-        final Handlers handlers = getHandlersOrCreateIt(eventName);
-        handlers.handler_ = handler;
+        final TypeContainer container = getTypeContainer(eventName);
+        container.handler_ = handler;
     }
 
     /**
@@ -219,11 +219,11 @@ public class EventListenersContainer implements Serializable {
      * @return the handler, or null if not found
      */
     public Object getEventHandlerProp(final String eventType) {
-        final Handlers handlers = eventHandlers_.get(eventType);
-        if (handlers == null) {
+        final TypeContainer container = typeContainers_.get(eventType);
+        if (container == null) {
             return null;
         }
-        return handlers.handler_;
+        return container.handler_;
     }
 
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
@@ -234,13 +234,13 @@ public class EventListenersContainer implements Serializable {
         }
 
         ScriptResult allResult = null;
-        final List<Scriptable> handlers = getHandlers(event.getType(), useCapture);
-        if (handlers != null && !handlers.isEmpty()) {
+        final List<Scriptable> listeners = getListeners(event.getType(), useCapture);
+        if (listeners != null && !listeners.isEmpty()) {
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
 
             // no need for a copy, handlers are copy on write
-            for (final Scriptable listener : handlers) {
+            for (final Scriptable listener : listeners) {
                 Function function = null;
                 Scriptable thisObject = null;
                 if (listener instanceof Function) {
@@ -358,9 +358,11 @@ public class EventListenersContainer implements Serializable {
      * @return {@code true} if there are any event handlers for the specified event, {@code false} otherwise
      */
     public boolean hasEventHandlers(final String eventType) {
-        final Handlers h = eventHandlers_.get(eventType);
-        return h != null
-            && (h.handler_ instanceof Function || !h.bubblingHandlers_.isEmpty() || !h.capturingHandlers_.isEmpty());
+        final TypeContainer container = typeContainers_.get(eventType);
+        return container != null
+            && (container.handler_ instanceof Function
+                    || !container.bubblingListeners_.isEmpty()
+                    || !container.capturingListeners_.isEmpty());
     }
 
     /**
@@ -403,9 +405,9 @@ public class EventListenersContainer implements Serializable {
      * @param eventListenersContainer where to copy from
      */
     public void copyFrom(final EventListenersContainer eventListenersContainer) {
-        for (final Map.Entry<String, Handlers> entry : eventListenersContainer.eventHandlers_.entrySet()) {
-            final Handlers handlers = entry.getValue().clone();
-            eventHandlers_.put(entry.getKey(), handlers);
+        for (final Map.Entry<String, TypeContainer> entry : eventListenersContainer.typeContainers_.entrySet()) {
+            final TypeContainer handlers = entry.getValue().clone();
+            typeContainers_.put(entry.getKey(), handlers);
         }
     }
 
@@ -414,6 +416,6 @@ public class EventListenersContainer implements Serializable {
      */
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "[node=" + jsNode_ + " handlers=" + eventHandlers_.keySet() + "]";
+        return getClass().getSimpleName() + "[node=" + jsNode_ + " handlers=" + typeContainers_.keySet() + "]";
     }
 }

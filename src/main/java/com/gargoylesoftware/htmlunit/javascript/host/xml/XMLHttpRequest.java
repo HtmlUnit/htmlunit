@@ -239,7 +239,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
             }
 
-            List<Scriptable> handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, false);
+            List<Scriptable> handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, false);
             if (handlers != null) {
                 for (final Scriptable scriptable : handlers) {
                     if (scriptable instanceof Function) {
@@ -249,7 +249,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
 
-            handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, true);
+            handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, true);
             if (handlers != null) {
                 for (final Scriptable scriptable : handlers) {
                     if (scriptable instanceof Function) {
