@@ -221,7 +221,7 @@ public class EventTarget extends SimpleScriptable {
         if (eventListenersContainer_ == null) {
             return false;
         }
-        return eventListenersContainer_.hasEventHandlers(StringUtils.substring(eventName, 2));
+        return eventListenersContainer_.hasEventListeners(StringUtils.substring(eventName, 2));
     }
 
     /**
