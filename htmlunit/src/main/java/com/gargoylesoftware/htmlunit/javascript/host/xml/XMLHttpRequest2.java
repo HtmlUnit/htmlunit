@@ -532,7 +532,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
 //                jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
             }
 
-            List<ScriptObject> handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, false);
+            List<ScriptObject> handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, false);
             if (handlers != null) {
                 for (final ScriptObject scriptable : handlers) {
                     if (scriptable instanceof ScriptFunction) {
@@ -543,7 +543,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
                 }
             }
 
-            handlers = getEventListenersContainer().getHandlers(Event.TYPE_LOAD, true);
+            handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, true);
             if (handlers != null) {
                 for (final ScriptObject scriptable : handlers) {
                     if (scriptable instanceof ScriptFunction) {
