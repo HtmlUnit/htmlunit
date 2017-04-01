@@ -812,6 +812,12 @@
         </dependency>
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>js</artifactId>
+            <version>3.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>neko-htmlunit</artifactId>
             <version>2.25</version>
         </dependency>
