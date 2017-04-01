@@ -697,7 +697,7 @@ public class JavaScriptEngine {
         WebAssert.notNull("sourceCode", sourceCode);
 
         if (LOG.isTraceEnabled()) {
-            final String newline = System.getProperty("line.separator");
+            final String newline = System.lineSeparator();
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 

@@ -42,8 +42,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
-    private static final String LINE_SEPARARATOR = System.getProperty("line.separator");
-
     /**
      * The window to which this job manager belongs (weakly referenced, so as not
      * to leak memory).
@@ -312,17 +310,18 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     @Override
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
         final StringBuilder status = new StringBuilder();
+        final String lineSeparator = System.lineSeparator();
         status.append("------ JavaScript job status -----");
-        status.append(LINE_SEPARARATOR);
+        status.append(lineSeparator);
         if (null != currentlyRunningJob_ && (filter == null || filter.passes(currentlyRunningJob_))) {
             status.append("  current running job: ").append(currentlyRunningJob_.toString());
             status.append("      job id: " + currentlyRunningJob_.getId());
-            status.append(LINE_SEPARARATOR);
-            status.append(LINE_SEPARARATOR);
-            status.append(LINE_SEPARARATOR);
+            status.append(lineSeparator);
+            status.append(lineSeparator);
+            status.append(lineSeparator);
         }
         status.append("  number of jobs on the queue: " + scheduledJobsQ_.size());
-        status.append(LINE_SEPARARATOR);
+        status.append(lineSeparator);
         int count = 1;
         for (final JavaScriptJob job : scheduledJobsQ_) {
             if (filter == null || filter.passes(job)) {
@@ -331,20 +330,20 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 status.append("  " + count);
                 status.append(")  Job target execution time: " + execTime);
                 status.append(" (should start in " + ((execTime - now) / 1000d) + "s)");
-                status.append(LINE_SEPARARATOR);
+                status.append(lineSeparator);
                 status.append("      job to string: ").append(job.toString());
-                status.append(LINE_SEPARARATOR);
+                status.append(lineSeparator);
                 status.append("      job id: " + job.getId());
-                status.append(LINE_SEPARARATOR);
+                status.append(lineSeparator);
                 if (job.isPeriodic()) {
                     status.append("      period: " + job.getPeriod().intValue());
-                    status.append(LINE_SEPARARATOR);
+                    status.append(lineSeparator);
                 }
                 count++;
             }
         }
         status.append("------------------------------------------");
-        status.append(LINE_SEPARARATOR);
+        status.append(lineSeparator);
 
         return status.toString();
     }

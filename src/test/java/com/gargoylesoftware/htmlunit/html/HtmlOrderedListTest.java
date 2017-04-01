@@ -48,10 +48,11 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
+        final String ls = System.lineSeparator();
         final String expectedText = "1. first item"
-                            + LINE_SEPARATOR + "2. second item"
-                            + LINE_SEPARATOR + "something without li node"
-                            + LINE_SEPARATOR + "3. third item";
+                            + ls + "2. second item"
+                            + ls + "something without li node"
+                            + ls + "3. third item";
 
         assertEquals(expectedText, node.asText());
         assertEquals(expectedText, page.asText());

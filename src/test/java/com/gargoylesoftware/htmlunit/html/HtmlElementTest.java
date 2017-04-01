@@ -957,7 +957,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("test" + LINE_SEPARATOR + "Welcome", page.asText());
+        assertEquals("test" + System.lineSeparator() + "Welcome", page.asText());
     }
 
     /**
@@ -977,7 +977,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world", page.asText());
+        final String ls = System.lineSeparator();
+        assertEquals("test" + ls + "Welcome" + ls + "to the world", page.asText());
     }
 
     /**
@@ -995,7 +996,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "some more hidden text</p>\n"
             + "</body>\n"
             + "</html>";
-        final String expected = "test" + LINE_SEPARATOR + "Welcome" + LINE_SEPARATOR + "to the world";
+        final String ls = System.lineSeparator();
+        final String expected = "test" + ls + "Welcome" + ls + "to the world";
 
         final HtmlPage page = loadPage(html);
         assertEquals(expected, page.asText());

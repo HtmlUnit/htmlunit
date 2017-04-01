@@ -73,7 +73,7 @@ class HtmlSerializer {
         // ignore <br/> at the end of a block
         text = reduceWhitespace(text);
         text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
-        final String ls = System.getProperty("line.separator");
+        final String ls = System.lineSeparator();
         text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
         // text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
         text = StringUtils.replace(text, AS_TEXT_BLOCK_SEPARATOR, ls);

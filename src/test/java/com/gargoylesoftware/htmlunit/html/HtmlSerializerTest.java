@@ -35,7 +35,7 @@ public class HtmlSerializerTest {
      */
     @Test
     public void cleanUp() {
-        final String ls = System.getProperty("line.separator");
+        final String ls = System.lineSeparator();
         final HtmlSerializer serializer = new HtmlSerializer();
 
         assertEquals("", serializer.cleanUp(""));

@@ -49,7 +49,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
             + "</html>\n";
 
         final HtmlPage page = loadPage(html);
-        final String expected = "Dummy" + LINE_SEPARATOR + "Dummy page";
+        final String expected = "Dummy" + System.lineSeparator() + "Dummy page";
         assertEquals(expected, page.asText());
     }
 

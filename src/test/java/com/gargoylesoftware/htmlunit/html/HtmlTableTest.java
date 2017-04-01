@@ -517,8 +517,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement table = page.getHtmlElementById("myId");
-        final String expectedText = "This is the caption" + LINE_SEPARATOR
-            + "cell 1,1\tcell 1,2" + LINE_SEPARATOR
+        final String expectedText = "This is the caption" + System.lineSeparator()
+            + "cell 1,1\tcell 1,2" + System.lineSeparator()
             + "cell 2,1\tcell 2,2";
 
         assertEquals(expectedText, table.asText());

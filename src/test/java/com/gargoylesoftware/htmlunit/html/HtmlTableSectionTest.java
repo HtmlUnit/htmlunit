@@ -45,8 +45,10 @@ public class HtmlTableSectionTest extends SimpleWebTestCase {
             + "  </table>\n"
             + "</body></html>";
 
+        final String ls = System.lineSeparator();
+
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("One" + LINE_SEPARATOR + "Two" + LINE_SEPARATOR + "Three" + LINE_SEPARATOR
-                + "Four" + LINE_SEPARATOR + "Five", page.asText());
+        assertEquals("One" + ls + "Two" + ls + "Three" + ls
+                + "Four" + ls + "Five", page.asText());
     }
 }

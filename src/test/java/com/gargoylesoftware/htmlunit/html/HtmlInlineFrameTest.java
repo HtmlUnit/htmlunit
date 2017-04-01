@@ -482,8 +482,9 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("First" + LINE_SEPARATOR + "before" + LINE_SEPARATOR
-                + "Second content" + LINE_SEPARATOR + "after", page.asText());
+        final String ls = System.lineSeparator();
+        assertEquals("First" + ls + "before" + ls
+                + "Second content" + ls + "after", page.asText());
     }
 
     /**
@@ -500,6 +501,6 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("1" + LINE_SEPARATOR + "2", page.asText());
+        assertEquals("1" + System.lineSeparator() + "2", page.asText());
     }
 }

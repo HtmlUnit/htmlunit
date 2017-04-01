@@ -98,13 +98,14 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void asText_regression() throws Exception {
-        String expected = "a" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "c";
+        final String ls = System.lineSeparator();
+        String expected = "a" + ls + "b" + ls + "c";
         testAsText("a<ul><li>b</ul>c", expected);
         testAsText("a<p>b<br>c", expected);
         testAsText("a<table><tr><td>b</td></tr></table>c", expected);
         testAsText("a<div>b</div>c", expected);
 
-        expected = "a" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "b" + LINE_SEPARATOR + "c";
+        expected = "a" + ls + "b" + ls + "b" + ls + "c";
         testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", expected);
     }
 

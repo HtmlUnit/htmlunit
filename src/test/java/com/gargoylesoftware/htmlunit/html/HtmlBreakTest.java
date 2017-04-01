@@ -68,7 +68,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertEquals("Hello" + LINE_SEPARATOR + "world", page.getBody().asText());
+            assertEquals("Hello" + System.lineSeparator() + "world", page.getBody().asText());
         }
     }
 }

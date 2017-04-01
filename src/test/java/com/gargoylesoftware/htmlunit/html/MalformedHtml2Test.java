@@ -68,7 +68,7 @@ public class MalformedHtml2Test extends SimpleWebTestCase {
             + "</table>\n"
             + "</body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
-        final String expectedText = "some text" + LINE_SEPARATOR
+        final String expectedText = "some text" + System.lineSeparator()
             + "1\t2";
         assertEquals(expectedText, page.asText());
     }

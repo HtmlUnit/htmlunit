@@ -47,9 +47,10 @@ public class HtmlUnorderedListTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
-        final String expectedText = "first item" + LINE_SEPARATOR
-            + "second item" + LINE_SEPARATOR
-            + "something without li node" + LINE_SEPARATOR
+        final String ls = System.lineSeparator();
+        final String expectedText = "first item" + ls
+            + "second item" + ls
+            + "something without li node" + ls
             + "third item";
 
         assertEquals(expectedText, node.asText());

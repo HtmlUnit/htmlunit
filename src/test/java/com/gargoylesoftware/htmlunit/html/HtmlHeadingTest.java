@@ -45,18 +45,19 @@ public class HtmlHeadingTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final String expectedText = "begin" + LINE_SEPARATOR
-            + "in h1" + LINE_SEPARATOR
-            + "after h1" + LINE_SEPARATOR
-            + "in h2" + LINE_SEPARATOR
-            + "after h2" + LINE_SEPARATOR
-            + "in h3" + LINE_SEPARATOR
-            + "after h3" + LINE_SEPARATOR
-            + "in h4" + LINE_SEPARATOR
-            + "after h4" + LINE_SEPARATOR
-            + "in h5" + LINE_SEPARATOR
-            + "after h5" + LINE_SEPARATOR
-            + "in h6" + LINE_SEPARATOR
+        final String ls = System.lineSeparator();
+        final String expectedText = "begin" + ls
+            + "in h1" + ls
+            + "after h1" + ls
+            + "in h2" + ls
+            + "after h2" + ls
+            + "in h3" + ls
+            + "after h3" + ls
+            + "in h4" + ls
+            + "after h4" + ls
+            + "in h5" + ls
+            + "after h5" + ls
+            + "in h6" + ls
             + "after h6";
 
         assertEquals(expectedText, page.asText());

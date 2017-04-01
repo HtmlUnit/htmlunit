@@ -34,11 +34,12 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
      */
     @Test
     public void asText() throws Exception {
-        String expected = "hello" + LINE_SEPARATOR + "world";
+        final String ls = System.lineSeparator();
+        String expected = "hello" + ls + "world";
         testAsText(expected, "<div>hello</div>world");
         testAsText(expected, "<div>hello<br/></div>world");
 
-        expected = "hello" + LINE_SEPARATOR + LINE_SEPARATOR + "world";
+        expected = "hello" + ls + ls + "world";
         testAsText(expected, "<div>hello<br/><br/></div>world");
     }
 
@@ -47,7 +48,7 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
      */
     @Test
     public void asText_contiguousBlocks() throws Exception {
-        final String expected = "hello" + LINE_SEPARATOR + "world";
+        final String expected = "hello" + System.lineSeparator() + "world";
         testAsText(expected, "<div><table><tr><td>hello</td></tr><tr><td>world<br/></td></tr></table></div>");
         testAsText(expected, "<div>hello</div><div>world</div>");
         testAsText(expected, "<div>hello</div><div><div>world</div></div>");
