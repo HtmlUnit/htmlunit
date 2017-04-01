@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -389,9 +390,10 @@ public class CodeStyleTest {
     private void licenseYear() throws IOException {
         final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), ISO_8859_1);
         boolean check = false;
+        final String copyright = "Copyright (c) 2002-" + LocalDate.now().getYear();
         for (final String line : lines) {
             if (line.contains("<property name=\"header\"")) {
-                if (!line.contains("Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
+                if (!line.contains(copyright)) {
                     addFailure("Incorrect year in LICENSE.txt");
                 }
                 check = true;
