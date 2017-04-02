@@ -102,7 +102,7 @@ public interface AbstractJavaScriptEngine {
     void shutdown();
 
     /**
-     * Indicates if JavaScript is running in current thread.<br/>
+     * Indicates if JavaScript is running in current thread.
      * This allows code to know if there own evaluation is has been triggered by some JS code.
      * @return {@code true} if JavaScript is running
      */
