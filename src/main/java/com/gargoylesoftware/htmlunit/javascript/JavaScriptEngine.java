@@ -97,7 +97,7 @@ import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public class JavaScriptEngine {
+public class JavaScriptEngine implements AbstractJavaScriptEngine {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
@@ -158,6 +158,7 @@ public class JavaScriptEngine {
      * Performs initialization for the given webWindow.
      * @param webWindow the web window to initialize for
      */
+    @Override
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
 
@@ -627,6 +628,7 @@ public class JavaScriptEngine {
      * Register WebWindow with the JavaScriptExecutor.
      * @param webWindow the WebWindow to be registered.
      */
+    @Override
     public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
         if (webClient_ != null) {
             if (javaScriptExecutor_ == null) {
@@ -652,6 +654,7 @@ public class JavaScriptEngine {
     /**
      * Shutdown the JavaScriptEngine.
      */
+    @Override
     public void shutdown() {
         webClient_ = null;
         if (javaScriptExecutor_ != null) {
@@ -726,6 +729,7 @@ public class JavaScriptEngine {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
+    @Override
     public Object execute(final HtmlPage page,
                            final String sourceCode,
                            final String sourceName,
@@ -835,6 +839,7 @@ public class JavaScriptEngine {
      * <p>This allows code to know if there own evaluation is has been triggered by some JS code.
      * @return {@code true} if JavaScript is running
      */
+    @Override
     public boolean isScriptRunning() {
         return Boolean.TRUE.equals(javaScriptRunning_.get());
     }
@@ -955,6 +960,7 @@ public class JavaScriptEngine {
      * Adds an action that should be executed first when the script currently being executed has finished.
      * @param action the action
      */
+    @Override
     public void addPostponedAction(final PostponedAction action) {
         List<PostponedAction> actions = postponedActions_.get();
         if (actions == null) {
@@ -1007,6 +1013,7 @@ public class JavaScriptEngine {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Process postponed actions, if any.
      */
+    @Override
     public void processPostponedActions() {
         doProcessPostponedActions();
     }
@@ -1038,6 +1045,7 @@ public class JavaScriptEngine {
      * Gets the associated configuration.
      * @return the configuration
      */
+    @Override
     public JavaScriptConfiguration getJavaScriptConfiguration() {
         return jsConfig_;
     }
@@ -1046,6 +1054,7 @@ public class JavaScriptEngine {
      * Returns the javascript timeout.
      * @return the javascript timeout
      */
+    @Override
     public long getJavaScriptTimeout() {
         return getContextFactory().getTimeout();
     }
@@ -1054,6 +1063,7 @@ public class JavaScriptEngine {
      * Sets the javascript timeout.
      * @param timeout the timeout
      */
+    @Override
     public void setJavaScriptTimeout(final long timeout) {
         getContextFactory().setTimeout(timeout);
     }
