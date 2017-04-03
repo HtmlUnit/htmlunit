@@ -457,7 +457,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            CHROME = "-16")
+            CHROME = "-16",
+            FF52 = "-16")
     public void details() throws Exception {
         loadPageWithAlerts2(test("details"));
     }
@@ -881,10 +882,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "142",
-            FF = "110",
-            IE = "0")
-    @NotYetImplemented({CHROME, FF})
+    @Alerts(DEFAULT = "0",
+            FF = "110")
+    @NotYetImplemented(FF)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -1443,7 +1443,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            CHROME = "-16")
+            CHROME = "-16",
+            FF52 = "-16")
     public void summary() throws Exception {
         loadPageWithAlerts2(test("summary"));
     }
