@@ -336,7 +336,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see WebRequest
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequest webRequest,
+    <P extends Page> P getPage(final WebWindow webWindow, final WebRequest webRequest,
             final boolean addToHistory)
         throws IOException, FailingHttpStatusCodeException {
 

@@ -39,7 +39,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
      * @param message the message
      * @param failingResponse the failing response
      */
-    FailingHttpStatusCodeException(final String message, final WebResponse failingResponse) {
+    public FailingHttpStatusCodeException(final String message, final WebResponse failingResponse) {
         super(message);
         response_ = failingResponse;
     }

@@ -357,4 +357,58 @@ public class WebClient4Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void redirectInfiniteMeta() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test1", RedirectMetaServlet1.class);
+        servlets.put("/test2", RedirectMetaServlet2.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebClient client = getWebClient();
+
+        try {
+            client.getPage(URL_FIRST + "test1");
+        }
+        catch (final Exception e) {
+            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+        }
+    }
+
+    /**
+     * Servlet for {@link #redirectInfiniteMeta()}.
+     */
+    public static class RedirectMetaServlet1 extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            res.setContentType("text/html");
+            final Writer writer = res.getWriter();
+            writer.write("<html><head>\n"
+                    + "  <meta http-equiv='refresh' content='0;URL=test2'>\n"
+                    + "</head><body>foo</body></html>");
+        }
+    }
+
+    /**
+     * Servlet for {@link #redirectInfiniteMeta()}.
+     */
+    public static class RedirectMetaServlet2 extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            res.setContentType("text/html");
+            final Writer writer = res.getWriter();
+            writer.write("<html><head>\n"
+                    + "  <meta http-equiv='refresh' content='0;URL=test1'>\n"
+                    + "</head><body>foo</body></html>");
+        }
+    }
+
 }

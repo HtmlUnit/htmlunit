@@ -323,7 +323,7 @@ public class HtmlPage extends SgmlPage {
         deregisterFramesIfNeeded();
         cleaning_ = false;
         if (autoCloseableList_ != null) {
-            for (@SuppressWarnings("resource") final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
+            for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
                 try {
                     closeable.close();
                 }
@@ -1359,7 +1359,22 @@ public class HtmlPage extends SgmlPage {
         }
 
         final int timeRounded = (int) time;
+        checkRecursion();
         getWebClient().getRefreshHandler().handleRefresh(this, url, timeRounded);
+    }
+
+    private void checkRecursion() {
+        final StackTraceElement[] elements = new Exception().getStackTrace();
+        if (elements.length > 500) {
+            for (int i = 0; i < 500; i++) {
+                if (!elements[i].getClassName().startsWith("com.gargoylesoftware.htmlunit.")) {
+                    return;
+                }
+            }
+            final WebResponse webResponse = getWebResponse();
+            throw new FailingHttpStatusCodeException("Too much redirect for "
+                    + webResponse.getWebRequest().getUrl(), webResponse);
+        }
     }
 
     /**
