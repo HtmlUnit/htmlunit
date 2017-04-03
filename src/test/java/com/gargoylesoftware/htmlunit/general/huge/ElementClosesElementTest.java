@@ -34771,6 +34771,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1")
+    @NotYetImplemented({FF, IE})
     public void _isindex_slot() throws Exception {
         test("isindex", "slot");
     }
@@ -64566,8 +64567,9 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            FF = "2")
+    @Alerts(DEFAULT = "2",
+            CHROME = "1")
+    @NotYetImplemented({FF, IE})
     public void _slot_isindex() throws Exception {
         test("slot", "isindex");
     }
