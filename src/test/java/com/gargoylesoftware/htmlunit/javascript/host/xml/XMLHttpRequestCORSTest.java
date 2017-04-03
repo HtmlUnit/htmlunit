@@ -529,7 +529,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "200", "options_headers", "x-ping,x-pong"},
-            CHROME = {"4", "200", "options_headers", "x-ping, x-pong"},
             IE = {"4", "200", "options_headers", "null"})
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));

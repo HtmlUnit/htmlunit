@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEPARATE_HEADERS_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
@@ -729,9 +728,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     final String name = header.getKey().toLowerCase(Locale.ROOT);
                     if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
-                            final boolean useAdditionalBlank =
-                                    getBrowserVersion().hasFeature(XHR_SEPARATE_HEADERS_BLANK);
-                            builder.append(useAdditionalBlank ? ", " : ",");
+                            builder.append(',');
                         }
                         builder.append(name);
                     }
