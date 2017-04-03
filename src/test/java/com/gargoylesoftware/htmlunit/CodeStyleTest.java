@@ -629,7 +629,8 @@ public class CodeStyleTest {
                 && !relativePath.contains("BrowserVersionFeatures")
                 && !relativePath.contains("HTMLDocument")
                 && !relativePath.contains("HTMLParser")
-            && !relativePath.contains("DateTimeFormat")) {
+                && !relativePath.contains("DateTimeFormat")
+                && !relativePath.contains("NashornJavaScriptEngine")) {
             int index = 1;
             for (final String line : lines) {
                 if (line.contains(".isIE()") || line.contains(".isFirefox()")) {
