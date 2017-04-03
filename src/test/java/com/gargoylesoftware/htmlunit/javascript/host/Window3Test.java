@@ -72,7 +72,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "one", "two", "three"})
-    @BuggyWebDriver
+    @BuggyWebDriver(IE)
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
