@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 45))
 public class SVGDocument extends Document {
 
     /**
