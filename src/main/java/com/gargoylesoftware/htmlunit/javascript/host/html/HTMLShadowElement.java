@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 45)})
 public class HTMLShadowElement extends HTMLElement {
 
     /**
