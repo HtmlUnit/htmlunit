@@ -349,14 +349,6 @@
                     <name>hu3</name>
                 </property>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>net.sourceforge.htmlunit</groupId>
-                    <artifactId>js</artifactId>
-                    <version>3.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
     <reporting>
@@ -825,12 +817,6 @@
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
             <version>2.26-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>js</artifactId>
-            <version>3.0-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
