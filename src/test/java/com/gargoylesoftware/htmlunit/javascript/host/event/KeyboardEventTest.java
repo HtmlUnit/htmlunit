@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -27,7 +25,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -134,16 +131,18 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
+    @Alerts({"32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, "})
     public void keyCodes_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);\n"
+            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body>\n"
-            + "<input id='t' onkeyup='handleKey(event)'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='t' onkeyup='handleKey(event)'/>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -151,24 +150,27 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys(" 0123456789");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        final String log = driver.findElement(By.id("log")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], log);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
-        "82", "83", "84", "85", "86", "87", "88", "89", "90"})
+    @Alerts({"65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, "
+        + "82, 83, 84, 85, 86, 87, 88, 89, 90, "})
     public void keyCodes2_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);\n"
+            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body>\n"
-            + "<input id='t' onkeyup='handleKey(event)'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='t' onkeyup='handleKey(event)'/>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -176,23 +178,26 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        verifyAlerts(2 * DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        final String log = driver.findElement(By.id("log")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], log);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
+    @Alerts({"32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, "})
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);\n"
+            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body>\n"
-            + "<input id='t' onkeydown='handleKey(event)'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='t' onkeydown='handleKey(event)'/>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -200,24 +205,27 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys(" 0123456789");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        final String log = driver.findElement(By.id("log")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], log);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
-        "82", "83", "84", "85", "86", "87", "88", "89", "90"})
+    @Alerts({"65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, "
+                + "80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, "})
     public void keyCodes2_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.keyCode);\n"
+            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body>\n"
-            + "<input id='t' onkeydown='handleKey(event)'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='t' onkeydown='handleKey(event)'/>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -225,23 +233,26 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        verifyAlerts(2 * DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        final String log = driver.findElement(By.id("log")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], log);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
+    @Alerts({"32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, "})
     public void keyCodes_keypress() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.charCode);\n"
+            + "  document.getElementById('log').value += e.charCode + ', ';\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body>\n"
-            + "<input id='t' onkeypress='handleKey(event)'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='t' onkeypress='handleKey(event)'/>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -249,26 +260,29 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys(" 0123456789");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        final String log = driver.findElement(By.id("log")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], log);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"97", "98", "99",
-            "100", "101", "102", "103", "104", "105", "106", "107", "108", "109",
-            "110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
-            "120", "121", "122"})
+    @Alerts({"97, 98, 99, "
+            + "100, 101, 102, 103, 104, 105, 106, 107, 108, 109, "
+            + "110, 111, 112, 113, 114, 115, 116, 117, 118, 119, "
+            + "120, 121, 122, "})
     public void keyCodes2_keypress() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function handleKey(e) {\n"
-            + "  alert(e.charCode);\n"
+            + "  document.getElementById('log').value += e.charCode + ', ';\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body>\n"
-            + "<input id='t' onkeypress='handleKey(event)'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='t' onkeypress='handleKey(event)'/>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -276,7 +290,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        verifyAlerts(2 * DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        final String log = driver.findElement(By.id("log")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], log);
     }
 
     /**
@@ -327,9 +342,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13",
                     "keypress:13,13,13",
                     "keyup:13,0,13"},
-            FF = {  "keydown:65,0,65",
+            FF = {  "keydown:16,0,16",
+                    "keydown:65,0,65",
                     "keypress:0,65,65",
                     "keyup:65,0,65",
+                    "keyup:16,0,16",
                     "keydown:65,0,65",
                     "keypress:0,97,97",
                     "keyup:65,0,65",
@@ -339,7 +356,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13",
                     "keypress:13,0,13",
                     "keyup:13,0,13"})
-    @NotYetImplemented(FF)
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
