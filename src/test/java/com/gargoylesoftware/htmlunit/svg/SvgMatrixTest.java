@@ -123,7 +123,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-1, -2, 3, 4, 5, 6"})
+    @Alerts("-1, -2, 3, 4, 5, 6")
     public void flipX() throws Exception {
         transformTest("flipX()");
     }
@@ -132,7 +132,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1, 2, -3, -4, 5, 6"})
+    @Alerts("1, 2, -3, -4, 5, 6")
     public void flipY() throws Exception {
         transformTest("flipY()");
     }
@@ -141,7 +141,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-2, 1, 1.5, -0.5, 1, -2"})
+    @Alerts("-2, 1, 1.5, -0.5, 1, -2")
     @NotYetImplemented
     public void inverse() throws Exception {
         transformTest("inverse()");
@@ -151,7 +151,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3, 6, 9, 12, 5, 6"})
+    @Alerts("3, 6, 9, 12, 5, 6")
     public void scale() throws Exception {
         transformTest("scale(3)");
     }

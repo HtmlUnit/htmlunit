@@ -1111,7 +1111,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"foo, change"})
+    @Alerts("foo, change")
     public void onchange() throws Exception {
         final String html =
               "<html>\n"

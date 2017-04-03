@@ -383,7 +383,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"{#abcd},{,abcd,}"})
+    @Alerts("{#abcd},{,abcd,}")
     public void regexWithNonEscapedCurlyBraces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

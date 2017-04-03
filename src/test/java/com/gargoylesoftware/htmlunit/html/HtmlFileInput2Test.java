@@ -550,7 +550,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"foo, change"})
+    @Alerts("foo, change")
     public void onchangeMultiple() throws Exception {
         final String html =
               "<html>\n"
