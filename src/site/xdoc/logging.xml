@@ -37,7 +37,7 @@
             <p>
                 HtmlUnit uses Apache HttpClient which uses "org.apache.http" to log the headers and wire content,
                 please read more in
-                <a href="http://hc.apache.org/httpcomponents-client/logging.html">HttpClient Logging Practices</a>
+                <a href="https://hc.apache.org/httpcomponents-client-ga/logging.html">HttpClient Logging Practices</a>
             </p>
         </section>
         <section name="Logging HTML parsing messages">
