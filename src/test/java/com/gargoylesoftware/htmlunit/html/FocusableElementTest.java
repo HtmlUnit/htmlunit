@@ -31,7 +31,8 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 public class FocusableElementTest extends SimpleWebTestCase {
 
     /**
-     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1161705&group_id=47038.
+     * Regression test for Bug #246.
+     *
      * @throws Exception if the test fails
      */
     @Test

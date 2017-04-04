@@ -263,7 +263,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests no selected options on single select lists with a size > 1.
+     * Tests no selected options on single select lists with a size more than 1.
+     *
      * @exception Exception If the test fails
      */
     @Test

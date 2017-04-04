@@ -46,7 +46,6 @@ public class BrowserRunnerTest extends SimpleWebTestCase {
 
     /**
      * Methods marked @BeforeClass (and @AfterClass) were wrongly called twice when using {@link BrowserRunner}.
-     * @throws Exception if the test fails
      */
     @Test
     public void thatBeforeClassMethodHasBeenCalledOnlyOnce() {

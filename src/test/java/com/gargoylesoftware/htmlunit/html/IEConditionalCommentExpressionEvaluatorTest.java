@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCase {
 
     /**
-     * Test for expression [if IE].
+     * Test for expression {@code if IE}.
      * @throws Exception if the test fails
      */
     @Test
@@ -43,7 +43,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if IE 5].
+     * Test for expression {@code if IE 5}.
      * @throws Exception if the test fails
      */
     @Test
@@ -53,7 +53,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if IE 6].
+     * Test for expression {@code if IE 6}.
      * @throws Exception if the test fails
      */
     @Test
@@ -63,7 +63,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if IE 7].
+     * Test for expression {@code if IE 7}.
      * @throws Exception if the test fails
      */
     @Test
@@ -73,7 +73,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if IE 8].
+     * Test for expression {@code if IE 8}.
      * @throws Exception if the test fails
      */
     @Test
@@ -83,7 +83,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if !IE].
+     * Test for expression {@code if !IE}.
      * @throws Exception if the test fails
      */
     @Test
@@ -93,7 +93,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if lt IE 5.5].
+     * Test for expression {@code if lt IE 5.5}.
      * @throws Exception if the test fails
      */
     @Test
@@ -103,7 +103,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if lt IE 6].
+     * Test for expression {@code if lt IE 6}.
      * @throws Exception if the test fails
      */
     @Test
@@ -113,7 +113,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if lt IE 7].
+     * Test for expression {@code if lt IE 7}.
      * @throws Exception if the test fails
      */
     @Test
@@ -123,7 +123,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if lt IE 8].
+     * Test for expressions {@code if lt IE 8}.
      * @throws Exception if the test fails
      */
     @Test
@@ -133,7 +133,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if lt IE 9].
+     * Test for expression {@code if lt IE 9}.
      * @throws Exception if the test fails
      */
     @Test
@@ -143,7 +143,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if gt IE 5.5].
+     * Test for expression {@code if gt IE 5.5}.
      * @throws Exception if the test fails
      */
     @Test
@@ -153,7 +153,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if gt IE 6].
+     * Test for expression {@code if gt IE 6}.
      * @throws Exception if the test fails
      */
     @Test
@@ -163,7 +163,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if gt IE 7].
+     * Test for expression {@code if gt IE 7}.
      * @throws Exception if the test fails
      */
     @Test
@@ -173,7 +173,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if gt IE 8].
+     * Test for expression {@code if gt IE 8}.
      * @throws Exception if the test fails
      */
     @Test
@@ -183,7 +183,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if gte IE 5.5].
+     * Test for expression {@code if gte IE 5.5}.
      * @throws Exception if the test fails
      */
     @Test
@@ -193,7 +193,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expression [if gte IE 6].
+     * Test for expression {@code if gte IE 6}.
      * @throws Exception if the test fails
      */
     @Test
@@ -203,7 +203,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if gte IE 7].
+     * Test for expressions {@code if gte IE 7}.
      * @throws Exception if the test fails
      */
     @Test
@@ -213,7 +213,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if gte IE 8].
+     * Test for expressions {@code if gte IE 8}.
      * @throws Exception if the test fails
      */
     @Test
@@ -223,7 +223,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if !(IE 5)].
+     * Test for expressions {@code if !(IE 5)}.
      * @throws Exception if the test fails
      */
     @Test
@@ -233,7 +233,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if !(IE 6)].
+     * Test for expressions {@code if !(IE 6)}.
      * @throws Exception if the test fails
      */
     @Test
@@ -243,7 +243,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if !(IE 7)].
+     * Test for expressions {@code if !(IE 7)}.
      * @throws Exception if the test fails
      */
     @Test
@@ -253,7 +253,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if !(IE 8)].
+     * Test for expressions {@code if !(IE 8)}.
      * @throws Exception if the test fails
      */
     @Test
@@ -263,7 +263,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [(gt IE 6)&(lt IE 8)].
+     * Test for expressions {@code (gt IE 6)&(lt IE 8)}.
      * @throws Exception if the test fails
      */
     @Test
@@ -273,7 +273,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if (IE 6)|(IE 7)].
+     * Test for expressions {@code if (IE 6)|(IE 7)}.
      * @throws Exception if the test fails
      */
     @Test
@@ -283,7 +283,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends WebDriverTestCa
     }
 
     /**
-     * Test for expressions [if true].
+     * Test for expressions {@code if true}.
      * @throws Exception if the test fails
      */
     @Test

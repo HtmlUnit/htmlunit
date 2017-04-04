@@ -55,48 +55,48 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunnerWithParame
  *
  * For example, you can have:
  * <pre>
- * &#064;RunWith(BrowserParameterizedRunner.class)
- * public class SomeTest extends WebDriverTestCase {
- *
- *    &#064;Parameters
- *    public static Iterable&lt;Object[]&gt; data() {
- *        return Arrays.asList(new Object[][] { { 0, 0 }, { 1, 1 }, { 2, 1 },
- *                 /&#042 will be overridden, see below &#042/ { 3, 2 },
- *                 { 4, 3 }, { 5, 5 }, { 6, 8 } });
- *    }
- *
- *    &#064;Parameter
- *    public int param1;
- *
- *    &#064;Parameter(1)
- *    public int param2;
- *
- *    &#064;Test
- *    &#064;Alerts("some alert")
- *    &#064;Default
- *    public void test() throws Exception {
- *       loadPageWithAlerts2("some HTML with " + param1 + " " + param2);
- *    }
- *
- *
- *    /&#042&#042
- *     &#042 This method will override the <tt>{ 3, 2 }</tt> entry.
- *     &#042/
- *    &#064;Test
- *    &#064;Alerts("another alert")
- *    &#064;NotYetImplemented
- *    public void _3_2() throws Exception {
- *       loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
- *    }
- *
- *    &#064;Test
- *    &#064;Alerts("another alert")
- *    &#064;NotYetImplemented
- *    public void anotherTest() throws Exception {
- *       loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
- *    }
- * }
- * </pre>
+   &#064;RunWith(BrowserParameterizedRunner.class)
+   public class SomeTest extends WebDriverTestCase {
+
+      &#064;Parameters
+      public static Iterable&lt;Object[]&gt; data() {
+          return Arrays.asList(new Object[][] { { 0, 0 }, { 1, 1 }, { 2, 1 },
+                   /&#042; will be overridden, see below &#042;/ { 3, 2 },
+                   { 4, 3 }, { 5, 5 }, { 6, 8 } });
+      }
+
+      &#064;Parameter
+      public int param1;
+
+      &#064;Parameter(1)
+      public int param2;
+
+      &#064;Test
+      &#064;Alerts("some alert")
+      &#064;Default
+      public void test() throws Exception {
+         loadPageWithAlerts2("some HTML with " + param1 + " " + param2);
+      }
+
+
+      /&#042;&#042;
+       &#042; This method will override the <tt>{ 3, 2 }</tt> entry.
+       &#042;/
+      &#064;Test
+      &#064;Alerts("another alert")
+      &#064;NotYetImplemented
+      public void _3_2() throws Exception {
+         loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
+      }
+
+      &#064;Test
+      &#064;Alerts("another alert")
+      &#064;NotYetImplemented
+      public void anotherTest() throws Exception {
+         loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
+      }
+   }
+   </pre>
  *
  * @author Ahmed Ashour
  */

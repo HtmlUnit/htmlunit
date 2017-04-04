@@ -2205,8 +2205,7 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for
-     * <a href="http://sourceforge.net/support/tracker.php?aid=2819046>bug 2819046</a>.
+     * Regression test for Bug #861.
      *
      * @throws Exception if something goes wrong
      */

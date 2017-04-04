@@ -81,7 +81,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Base class for tests using WebDriver.
- * <p>
+ *
  * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
  * "{@code test.properties}" in the HtmlUnit root directory.
  * Sample:
@@ -92,7 +92,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    autofix=true
- * </pre>
+   </pre>
  * The file could contain some properties:
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
@@ -109,7 +109,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
  *   or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
  * </ul>
- * </p>
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -814,7 +813,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Defines the provided HTML as the response for {@link #getDefaultUrl()}
+     * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
      * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
      * @param html the HTML to use
@@ -826,7 +825,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Defines the provided HTML as the response for {@link #getDefaultUrl()}
+     * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
      * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
      * @param html the HTML to use

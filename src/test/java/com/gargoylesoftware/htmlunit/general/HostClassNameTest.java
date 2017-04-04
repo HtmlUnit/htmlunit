@@ -153,8 +153,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.BoxObject}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -186,8 +184,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -637,8 +633,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.FormChild}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -648,8 +642,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.FormField}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -1232,8 +1224,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLKeygenElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -1397,8 +1387,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNoShowElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -1756,8 +1744,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -1842,8 +1828,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLWBRElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -2140,8 +2124,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Popup}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -2304,8 +2286,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCursorElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -3382,7 +3362,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link net.sourceforge.htmlunit.corejs.javascript.NativeIterator.StopIteration}.
+     * Test {@code net.sourceforge.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
      *
      * @throws Exception if an error occurs
      */
@@ -3477,7 +3457,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link net.sourceforge.htmlunit.corejs.javascript.Arguments}.
+     * Test {@code net.sourceforge.htmlunit.corejs.javascript.Arguments}.
      *
      * @throws Exception if an error occurs
      */

@@ -27,32 +27,32 @@ import java.lang.annotation.Target;
  * this could be the default behavior and we then have something like {@literal @WithoutStandardsMode}
  * </p>
  *
- * <p>A typical example would be:
+ * A typical example would be:
  * <pre>
- * {@literal @RunWith(BrowserRunner.class)}
- * {@literal @StandardsMode}
- * public class SomeTest extends WebDriverTestCase {
+   {@literal @RunWith(BrowserRunner.class)}
+   {@literal @StandardsMode}
+   public class SomeTest extends WebDriverTestCase {
+
+       {@literal @Test}
+       {@literal @Alerts("BackCompat")}
+       {@literal @AlertsStandards("CSS1Compat")}
+       public void test() throws Exception {
+            final String html = "&lt;html&gt;\n"
+                + "&lt;head&gt;\n"
+                + "    &lt;script&gt;\n"
+                + "    function test() {\n"
+                + "        alert(document.compatMode);\n"
+                + "    }\n"
+                + "    &lt;/script&gt;\n"
+                + "&lt;/head&gt;\n"
+                + "&lt;body onload='test()'&gt;\n"
+                + "&lt;/body&gt;\n"
+                + "&lt;/html&gt;";
+            loadPageWithAlerts2(html);
+      }
+   }
+   </pre>
  *
- *     {@literal @Test}
- *     {@literal @Alerts("BackCompat")}
- *     {@literal @AlertsStandards("CSS1Compat")}
- *     public void test() throws Exception {
- *          final String html = "&lt;html&gt;\n"
- *              + "&lt;head&gt;\n"
- *              + "    &lt;script&gt;\n"
- *              + "    function test() {\n"
- *              + "        alert(document.compatMode);\n"
- *              + "    }\n"
- *              + "    &lt;/script&gt;\n"
- *              + "&lt;/head&gt;\n"
- *              + "&lt;body onload='test()'&gt;\n"
- *              + "&lt;/body&gt;\n"
- *              + "&lt;/html&gt;";
- *          loadPageWithAlerts2(html);
- *     }
- * }
- * </pre>
- * </p>
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)

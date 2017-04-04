@@ -51,8 +51,7 @@ public class WebRequestTest {
     }
 
     /**
-     * A number of these refer to '285434' which is this defect:
-     *  https://sourceforge.net/tracker/?func=detail&aid=2854634&group_id=47038&atid=448266.
+     * Tests for Bug #901.
      *
      * @throws Exception if the test fails
      */
