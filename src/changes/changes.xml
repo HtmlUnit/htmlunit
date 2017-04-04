@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.26" date="???" description="Bugfixes">
+        <release version="2.26" date="April 4, 2017" description="Bugfixes">
             <action type="fix" dev="asashour">
                 Handle infinite meta refresh.
             </action>
