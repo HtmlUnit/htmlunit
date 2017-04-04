@@ -103,7 +103,7 @@ public class URLTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            final String url = getCollectedAlerts(driver).get(0);
+            final String url = getCollectedAlerts(driver, 1).get(0);
             Assert.assertTrue(url, url.startsWith("blob:"));
         }
         finally {
