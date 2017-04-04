@@ -388,8 +388,13 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts("dog=dalmation")
     public void trailing_slash() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = getWebDriver();
-        loadPage2(HTML_ALERT_COOKIE, URL_SECOND);
+
+        setExpectedAlerts("");
+        loadPageWithAlerts2(HTML_ALERT_COOKIE, URL_SECOND);
+
+        setExpectedAlerts(expectedAlerts);
         driver.manage().addCookie(new org.openqa.selenium.Cookie("dog", "dalmation", "/second/"));
         loadPageWithAlerts2(HTML_ALERT_COOKIE, URL_SECOND);
     }
