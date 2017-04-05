@@ -110,7 +110,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code unscopables} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getUnscopables(final Scriptable thisObj) {
         return getSymbol(thisObj, "unscopables");
     }
@@ -120,7 +120,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code isConcatSpreadable} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getIsConcatSpreadable(final Scriptable thisObj) {
         return getSymbol(thisObj, "isConcatSpreadable");
     }
@@ -140,7 +140,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code toStringTag} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getToStringTag(final Scriptable thisObj) {
         return getSymbol(thisObj, "toStringTag");
     }
@@ -160,7 +160,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code hasInstance} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getHasInstance(final Scriptable thisObj) {
         return getSymbol(thisObj, "hasInstance");
     }
@@ -170,7 +170,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code replace} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getReplace(final Scriptable thisObj) {
         return getSymbol(thisObj, "replace");
     }
@@ -180,7 +180,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code search} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getSearch(final Scriptable thisObj) {
         return getSymbol(thisObj, "search");
     }
@@ -190,7 +190,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code split} static property
      */
-    @JsxStaticGetter(@WebBrowser(CHROME))
+    @JsxStaticGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public static Symbol getSplit(final Scriptable thisObj) {
         return getSymbol(thisObj, "split");
     }

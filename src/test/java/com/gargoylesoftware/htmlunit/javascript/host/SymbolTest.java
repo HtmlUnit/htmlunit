@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF52;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -55,8 +59,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.replace)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.replace)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void replace() throws Exception {
         name("replace");
@@ -66,8 +70,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.search)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.search)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void search() throws Exception {
         name("search");
@@ -77,8 +81,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.split)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.split)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void split() throws Exception {
         name("split");
@@ -88,8 +92,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.hasInstance)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.hasInstance)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");
@@ -99,8 +103,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
@@ -110,8 +114,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.unscopables)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.unscopables)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void unscopables() throws Exception {
         name("unscopables");
@@ -141,8 +145,8 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "true"},
-            CHROME = {"symbol", "Symbol(Symbol.toStringTag)", "true"},
+    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.toStringTag)", "true"},
+            FF45 = {"undefined", "-", "true"},
             IE = "not supported")
     public void toStringTag() throws Exception {
         name("toStringTag");
@@ -157,7 +161,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
             + "    alert(typeof Symbol." + name + ");\n"
-            + "    alert(Symbol." + name + ");\n"
+            + "    alert(Symbol." + name + " ? Symbol." + name + ".toString() : '-');\n"
             + "    alert(Symbol." + name + " === Symbol." + name + ");\n"
             + "  }\n"
             + "</script>\n"
@@ -171,8 +175,10 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"},
+    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "exception"},
+            FF45 = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "undefined"},
             IE = "not supported")
+    @NotYetImplemented({CHROME, FF52})
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -184,6 +190,7 @@ public class SymbolTest extends WebDriverTestCase {
             + "    alert(Symbol().toString());\n"
             + "    alert(Symbol('foo').toString());\n"
             + "    alert(Symbol.iterator.toString());\n"
+            + "    try { alert(Symbol.replace) } catch(e) { alert('exception'); };\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -207,9 +214,9 @@ public class SymbolTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    if (!window.Symbol) { alert('not supported'); return; }\n"
             + "    try {\n"
-            + "      alert(Symbol());\n"
-            + "      alert(Symbol('foo'));\n"
-            + "      alert(Symbol.iterator);\n"
+            + "      alert(Symbol().toString());\n"
+            + "      alert(Symbol('foo').toString());\n"
+            + "      alert(Symbol.iterator.toString());\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"

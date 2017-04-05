@@ -173,7 +173,7 @@ public class BrowserRunner extends Suite {
         FF45,
 
         /** Firefox 52. */
-        FF42
+        FF52
     }
 
     /**
