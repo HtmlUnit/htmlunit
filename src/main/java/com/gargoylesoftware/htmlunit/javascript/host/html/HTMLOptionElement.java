@@ -158,10 +158,10 @@ public class HTMLOptionElement extends HTMLElement {
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
         if (!selected && optionNode.isSelected()
                 && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
-            enclosingSelect.getOption(0).setSelected(true, false);
+            enclosingSelect.getOption(0).setSelectedFromJavaScript(true);
         }
         else {
-            optionNode.setSelected(selected, false);
+            optionNode.setSelectedFromJavaScript(selected);
         }
     }
 
