@@ -141,9 +141,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
         57, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
@@ -167,7 +167,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF45
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setVendor("");
-        FIREFOX_45.buildId_ = "20161129180326";
+        FIREFOX_45.buildId_ = "20170301181722";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -178,7 +178,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF52
         FIREFOX_52.initDefaultFeatures();
         FIREFOX_52.setVendor("");
-        FIREFOX_52.buildId_ = "20170303022339";
+        FIREFOX_52.buildId_ = "20170323110425";
         FIREFOX_52.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_52.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -266,6 +266,30 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_45.registerUploadMimeType("txt", "text/plain");
         FIREFOX_45.registerUploadMimeType("text", "text/plain");
 
+        FIREFOX_52.registerUploadMimeType("html", "text/html");
+        FIREFOX_52.registerUploadMimeType("htm", "text/html");
+        FIREFOX_52.registerUploadMimeType("css", "text/css");
+        FIREFOX_52.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_52.registerUploadMimeType("gif", "image/gif");
+        FIREFOX_52.registerUploadMimeType("jpeg", "image/jpeg");
+        FIREFOX_52.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_52.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX_52.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX_52.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_52.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX_52.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX_52.registerUploadMimeType("ogm", "video/x-ogm");
+        FIREFOX_52.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_52.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX_52.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX_52.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_52.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX_52.registerUploadMimeType("flac", "audio/x-flac");
+        FIREFOX_52.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX_52.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX_52.registerUploadMimeType("txt", "text/plain");
+        FIREFOX_52.registerUploadMimeType("text", "text/plain");
+
         INTERNET_EXPLORER.registerUploadMimeType("html", "text/html");
         INTERNET_EXPLORER.registerUploadMimeType("htm", "text/html");
         INTERNET_EXPLORER.registerUploadMimeType("css", "text/css");
@@ -292,10 +316,16 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 24.0 r0", "24.0.0.194", "NPSWF32_24_0_0_194.dll");
+                "Shockwave Flash 25.0 r0", "25.0.0.127", "NPSWF32_25_0_0_127.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
+
+        flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 25.0 r0", "25.0.0.127", "NPSWF32_25_0_0_127.dll");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        FIREFOX_52.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 23.0 r0", "23.0.0.207", "Flash32_23_0_0_207.ocx");

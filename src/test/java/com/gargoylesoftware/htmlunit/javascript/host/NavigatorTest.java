@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -183,9 +182,14 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "  <title>test</title>\n"
                 + "  <script>\n"
                 + "  function doTest() {\n"
+
+                + "    var names = [];"
                 + "    for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
-                + "      alert(window.navigator.plugins[i].name);\n"
+                + "      names[i] = window.navigator.plugins[i].name;\n"
                 + "    }\n"
+                // there is no fixed order, sort for stable testing
+                + "    name = names.sort().join('; ');\n"
+                + "    alert(names);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -194,11 +198,10 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final Set<PluginConfiguration> plugins = getBrowserVersion().getPlugins();
-        final List<String> alerts = getCollectedAlerts(driver, plugins.size());
+        final List<String> alerts = getCollectedAlerts(driver, 1);
 
         for (PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
-            assertTrue(alerts.contains(plugin.getName()));
+            assertTrue(plugin.getName() + " not found", alerts.get(0).contains(plugin.getName()));
         }
     }
 
@@ -207,7 +210,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "24.0.0.194", "NPSWF32_24_0_0_194.dll"},
+    @Alerts(FF = {"Shockwave Flash", "Shockwave Flash 25.0 r0", "25.0.0.127", "NPSWF32_25_0_0_127.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present"},
             IE = {"Shockwave Flash", "Shockwave Flash 23.0 r0", "23.0.0.207", "Flash32_23_0_0_207.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
@@ -371,7 +374,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "20161129180326")
+            FF45 = "20170301181722",
+            FF52 = "20170323110425")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
