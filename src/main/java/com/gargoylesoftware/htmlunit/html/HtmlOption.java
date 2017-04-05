@@ -121,7 +121,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
                     && !select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
                 selected = true;
             }
-            select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey, ctrlKey, true);
+            select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey, ctrlKey, false);
             return;
         }
         // for instance from JS for an option created by document.createElement('option')

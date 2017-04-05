@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -215,5 +217,30 @@ public class HtmlOptionTest extends SimpleWebTestCase {
         final boolean disabled = !getBrowserVersion().isIE();
         assertEquals(disabled, ((HtmlOption) page.getElementById("o1")).isDisabled());
         assertFalse(((HtmlOption) page.getElementById("o2")).isDisabled());
+    }
+
+    /**
+     * Test case for #1864.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isSelected() throws Exception {
+        final String html = "<html><body>"
+                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlSelect select = (HtmlSelect) page.getElementsByTagName("select").get(0);
+        assertTrue(select.isMultipleSelectEnabled());
+
+        final List<HtmlOption> options = select.getOptions();
+        for (final HtmlOption option : options) {
+            option.setSelected(true);
+        }
+        
+        for (final HtmlOption option : options) {
+            assertTrue(option.isSelected());
+        }
     }
 }

@@ -18,11 +18,13 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -108,5 +110,30 @@ public class HtmlOption2Test extends WebDriverTestCase {
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
                 '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
+    }
+
+    /**
+     * Test case for #1864.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isSelected() throws Exception {
+        final String html = "<html><body>"
+                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        
+        final WebElement select = driver.findElement(By.tagName("select"));
+
+        final List<WebElement> options = select.findElements(By.tagName("option"));
+        for (final WebElement option : options) {
+            option.click();
+        }
+        
+        for (final WebElement option : options) {
+            assertTrue(option.isSelected());
+        }
     }
 }
