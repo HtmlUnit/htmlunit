@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,7 +45,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "  var elem = document.getElementById('a1');\n"
+            + "    var elem = document.getElementById('a1');\n"
             + "    try {\n"
             + "      alert(elem);\n"
             + "      alert(HTMLAudioElement);\n"
@@ -51,6 +55,31 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <audio id='a1'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "done"})
+    @BuggyWebDriver(IE)
+    @NotYetImplemented
+    public void audio() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = new Audio('1.mp3');\n"
+            + "    alert(a);\n"
+            + "    a.play();\n"
+            + "    alert('done');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
