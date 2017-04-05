@@ -78,7 +78,6 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunnerWithParame
          loadPageWithAlerts2("some HTML with " + param1 + " " + param2);
       }
 
-
       /&#042;&#042;
        &#042; This method will override the <tt>{ 3, 2 }</tt> entry.
        &#042;/
