@@ -58,7 +58,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         + "<script>\n"
         // there is no fixed order, sort for stable testing
         + "  var c = document.cookie;\n"
-        + "  var c = c.split('; ').sort().join('; ');\n"
+        + "  c = c.split('; ').sort().join('; ');\n"
         + "  alert(c);\n"
         + "</script>\n"
         + "</head>\n"
