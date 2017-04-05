@@ -120,7 +120,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
     @Test
     public void isSelected() throws Exception {
         final String html = "<html><body>"
-                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>"
+                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>\n"
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -131,6 +131,36 @@ public class HtmlOption2Test extends WebDriverTestCase {
         for (final WebElement option : options) {
             option.click();
         }
+        
+        for (final WebElement option : options) {
+            assertTrue(option.isSelected());
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isSelectedJavaScript() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var s = document.getElementsByTagName('select').item(0);\n"
+                + "    var options = s.options;\n"
+                + "    for (var i = 0; i < options.length; i++) {\n"
+                + "      options[i].selected = true;\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement select = driver.findElement(By.tagName("select"));
+
+        final List<WebElement> options = select.findElements(By.tagName("option"));
         
         for (final WebElement option : options) {
             assertTrue(option.isSelected());

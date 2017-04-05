@@ -227,7 +227,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
     @Test
     public void isSelected() throws Exception {
         final String html = "<html><body>"
-                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>"
+                + "  <select multiple><option value='a'>a</option><option value='b'>b</option></select>\n"
                 + "</body></html>";
 
         final HtmlPage page = loadPage(html);
