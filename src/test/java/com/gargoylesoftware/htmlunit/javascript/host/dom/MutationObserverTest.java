@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -164,7 +166,8 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc")
+    @Alerts({"attributes", "value", "null", "x", "abc",
+             "attributes", "value", "null", "y", "abc"})
     public void attributeValue() throws Exception {
         final String html
             = "<html>\n"
@@ -173,6 +176,10 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
             + "    var observer = new MutationObserver(function(mutations) {\n"
             + "      mutations.forEach(function(mutation) {\n"
+            + "        alert(mutation.type);\n"
+            + "        alert(mutation.attributeName);\n"
+            + "        alert(mutation.oldValue);\n"
+            + "        alert(mutation.target.getAttribute(\"value\"));\n"
             + "        alert(mutation.target.value);\n"
             + "      });\n"
             + "    });\n"
@@ -181,13 +188,30 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='tester' value=''>\n"
-            + "  <button id='doIt' onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"x\")'>"
+            + "  <button id='doAlert' onclick='alert(\"heho\");'>DoAlert</button>\n"
+            + "  <button id='doIt' "
+                        + "onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"x\")'>"
                         + "DoIt</button>\n"
+            + "  <button id='doItAgain' "
+                        + " onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"y\")'>"
+                        + "DoItAgain</button>\n"
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).sendKeys("abc");
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, new String[] {});
+
+        driver.findElement(By.id("doAlert")).click();
+        verifyAlerts(driver, new String[] {"heho"});
+
+        final String[] expected = getExpectedAlerts();
         driver.findElement(By.id("doIt")).click();
+        verifyAlerts(driver, Arrays.copyOfRange(expected, 0, 5));
+
+        driver.findElement(By.id("doAlert")).click();
+        verifyAlerts(driver, new String[] {"heho"});
+
+        driver.findElement(By.id("doItAgain")).click();
+        verifyAlerts(driver, Arrays.copyOfRange(expected, 5, 10));
     }
 
     /**
