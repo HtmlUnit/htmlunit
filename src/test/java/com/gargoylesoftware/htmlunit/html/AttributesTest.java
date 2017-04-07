@@ -92,7 +92,7 @@ public class AttributesTest extends TestCase {
             "HtmlHorizontalRule", "HtmlHtml", "HtmlInlineFrame",
             "HtmlInlineQuotation",
             "HtmlImage", "HtmlImage", "HtmlInsertedText", "HtmlIsIndex",
-            "HtmlItalic", "HtmlKeyboard", "HtmlKeygen", "HtmlLabel", "HtmlLayer",
+            "HtmlItalic", "HtmlKeyboard", "HtmlLabel", "HtmlLayer",
             "HtmlLegend", "HtmlListing", "HtmlListItem",
             "HtmlLink",
             "HtmlMap", "HtmlMain", "HtmlMark", "HtmlMarquee",
