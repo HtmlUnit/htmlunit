@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class CSSRuleListTest extends WebDriverTestCase {

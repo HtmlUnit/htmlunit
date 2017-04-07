@@ -101,8 +101,11 @@ public class SvgScript extends SvgElement implements ScriptElement {
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated as of 2.27, not used
      */
     @Override
+    @Deprecated
     public final Charset getCharset() {
         return EncodingSniffer.toCharset(getCharsetAttribute());
     }

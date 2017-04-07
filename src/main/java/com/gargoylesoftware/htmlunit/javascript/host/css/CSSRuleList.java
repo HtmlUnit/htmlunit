@@ -92,7 +92,7 @@ public class CSSRuleList extends SimpleScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        return null;
+        return get(index, this);
     }
 
     /**

@@ -103,8 +103,11 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated as of 2.27, not used
      */
     @Override
+    @Deprecated
     public final Charset getCharset() {
         final String charsetName = getCharsetAttribute();
         return EncodingSniffer.toCharset(charsetName);
