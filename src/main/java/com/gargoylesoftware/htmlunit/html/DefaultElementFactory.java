@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
+
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.Map;
 
 import org.xml.sax.Attributes;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
@@ -41,10 +45,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 class DefaultElementFactory implements ElementFactory {
 
+    private static final String KEYGEN_ = "keygen";
     /*
      * You can generate your own test cases by looking into ElementTestSource.generateTestForHtmlElements
      */
-    static final List<String> SUPPORTED_TAGS_ = Arrays.asList(HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
+    static final List<String> SUPPORTED_TAGS_ = Arrays.asList(KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
             HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
             HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
@@ -142,6 +147,19 @@ class DefaultElementFactory implements ElementFactory {
         }
 
         switch (tagName) {
+            case KEYGEN_:
+                final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+                if (browserVersion.hasFeature(HTMLABBREVIATED)) {
+                    element = new HtmlBlockQuote(qualifiedName, page, attributeMap);
+                }
+                else if (browserVersion.hasFeature(HTMLIMAGE_HTMLELEMENT)) {
+                    element = new HtmlSpan(qualifiedName, page, attributeMap);
+                }
+                else {
+                    element = new HtmlUnknownElement(page, qualifiedName, attributeMap);
+                }
+                break;
+
             case HtmlAbbreviated.TAG_NAME:
                 element = new HtmlAbbreviated(qualifiedName, page, attributeMap);
                 break;
