@@ -359,19 +359,23 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"onfocus1", "onclick1", "onblur1", "onfocus2"})
+    @Alerts({"onfocus1-onclick1-", "onfocus1-onclick1-onblur1-onfocus2-"})
     public void setAttribute_eventHandler() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title></title><script>\n"
+            + "  function inform(msg) {\n"
+            + "    document.title += msg;\n"
+            + "    document.title += '-';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
             + "    var password = document.getElementById('password');\n"
 
-            + "    text.setAttribute('onclick', \"alert('onclick1');\");\n"
-            + "    text.setAttribute('onFocus', \"alert('onfocus1');\");\n"
-            + "    text.setAttribute('ONBLUR', \"alert('onblur1');\");\n"
+            + "    text.setAttribute('onclick', \"inform('onclick1');\");\n"
+            + "    text.setAttribute('onFocus', \"inform('onfocus1');\");\n"
+            + "    text.setAttribute('ONBLUR', \"inform('onblur1');\");\n"
 
-            + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
-            + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
+            + "    password.setAttribute('onfocus', \"inform('onfocus2');\");\n"
+            + "    password.setAttribute('onblur', \"inform('onblur2');\");\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -387,10 +391,10 @@ public class HTMLElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
 
         webDriver.findElement(By.id("login")).click();
-        verifyAlerts(webDriver, alerts[i++], alerts[i++]);
+        assertEquals(alerts[i++], webDriver.getTitle());
 
         webDriver.findElement(By.id("password")).click();
-        verifyAlerts(webDriver, alerts[i++], alerts[i++]);
+        assertEquals(alerts[i++], webDriver.getTitle());
     }
 
     /**
@@ -401,7 +405,11 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = {"null", "inform('newHandler')", ""})
     @NotYetImplemented(IE)
     public void setAttribute_eventHandlerNull() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title></title><script>\n"
+            + "  function inform(msg) {\n"
+            + "    document.title += msg;\n"
+            + "    document.title += '-';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
             + "    var password = document.getElementById('password');\n"
@@ -413,9 +421,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    text.setAttribute('onclick', null);\n"
             + "    alert(text.getAttribute('onclick'));\n"
             + "  }\n"
-            + "  function inform(msg) {\n"
-            + "    alert(msg);\n"
-            + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form>\n"
@@ -423,10 +428,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPage2(html);
-        verifyAlerts(webDriver, getExpectedAlerts());
+        final WebDriver webDriver = loadPageWithAlerts2(html);
 
         webDriver.findElement(By.id("login")).click();
+        assertEquals("", webDriver.getTitle());
     }
 
     /**
@@ -435,7 +440,11 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "inform('newHandler')", ""})
     public void setAttribute_eventHandlerEmptyString() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title></title><script>\n"
+            + "  function inform(msg) {\n"
+            + "    document.title += msg;\n"
+            + "    document.title += '-';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
             + "    var password = document.getElementById('password');\n"
@@ -447,9 +456,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    text.setAttribute('onclick', '');\n"
             + "    alert(text.getAttribute('onclick'));\n"
             + "  }\n"
-            + "  function inform(msg) {\n"
-            + "    alert(msg);\n"
-            + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form>\n"
@@ -457,10 +463,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPage2(html);
-        verifyAlerts(webDriver, getExpectedAlerts());
+        final WebDriver webDriver = loadPageWithAlerts2(html);
 
         webDriver.findElement(By.id("login")).click();
+        assertEquals("", webDriver.getTitle());
     }
 
     /**
@@ -469,7 +475,11 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "inform('newHandler')", "undefined"})
     public void setAttribute_eventHandlerUndefined() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title></title><script>\n"
+            + "  function inform(msg) {\n"
+            + "    document.title += msg;\n"
+            + "    document.title += '-';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
             + "    var password = document.getElementById('password');\n"
@@ -481,9 +491,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    text.setAttribute('onclick', undefined);\n"
             + "    alert(text.getAttribute('onclick'));\n"
             + "  }\n"
-            + "  function inform(msg) {\n"
-            + "    alert(msg);\n"
-            + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form>\n"
@@ -491,25 +498,29 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPage2(html);
-        verifyAlerts(webDriver, getExpectedAlerts());
+        final WebDriver webDriver = loadPageWithAlerts2(html);
 
         webDriver.findElement(By.id("login")).click();
+        assertEquals("", webDriver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"focus", "click", "blur"})
+    @Alerts({"focus-click-", "focus-click-blur-"})
     public void setAttribute_eventHandlerEventArgument() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title></title><script>\n"
+            + "  function inform(msg) {\n"
+            + "    document.title += msg;\n"
+            + "    document.title += '-';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
 
-            + "    text.setAttribute('onclick', 'alert(event.type);');\n"
-            + "    text.setAttribute('onFocus', 'alert(event.type);');\n"
-            + "    text.setAttribute('ONBLUR', 'alert(event.type);');\n"
+            + "    text.setAttribute('onclick', 'inform(event.type);');\n"
+            + "    text.setAttribute('onFocus', 'inform(event.type);');\n"
+            + "    text.setAttribute('ONBLUR', 'inform(event.type);');\n"
 
             + "  }\n"
             + "</script></head>\n"
@@ -521,14 +532,15 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] alerts = getExpectedAlerts();
+        int i = 0;
 
         final WebDriver webDriver = loadPage2(html);
 
         webDriver.findElement(By.id("login")).click();
-        verifyAlerts(webDriver, alerts[0], alerts[1]);
+        assertEquals(alerts[i++], webDriver.getTitle());
 
         webDriver.findElement(By.id("password")).click();
-        verifyAlerts(webDriver, alerts[2]);
+        assertEquals(alerts[i++], webDriver.getTitle());
     }
 
     /**
@@ -4202,7 +4214,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end"},
-            FF = "insertAdjacentElement not available")
+            FF45 = "insertAdjacentElement not available")
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -4255,7 +4267,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "executed",
-            FF = "insertAdjacentElement not available")
+            FF45 = "insertAdjacentElement not available")
     public void insertAdjacentElementExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4284,7 +4296,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "executed",
-            FF = "insertAdjacentElement not available")
+            FF45 = "insertAdjacentElement not available")
     public void insertAdjacentElementExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4315,7 +4327,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "declared",
-            FF = "insertAdjacentElement not available")
+            FF45 = "insertAdjacentElement not available")
     public void insertAdjacentElementDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4346,7 +4358,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"outside", "middle",
                 "before-begin after-begin inside before-end after-end"},
-            FF = "insertAdjacentText not available")
+            FF45 = "insertAdjacentText not available")
     public void insertAdjacentText() throws Exception {
         insertAdjacentText("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentText("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");

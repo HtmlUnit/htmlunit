@@ -1099,7 +1099,7 @@ public class HTMLElement extends Element {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
@@ -1126,7 +1126,7 @@ public class HTMLElement extends Element {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
     public void insertAdjacentText(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
