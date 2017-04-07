@@ -400,7 +400,6 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
 
-        @SuppressWarnings("resource")
         final WebClient webClient = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();

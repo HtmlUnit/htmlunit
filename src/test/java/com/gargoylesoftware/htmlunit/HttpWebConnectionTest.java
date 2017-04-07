@@ -253,7 +253,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./");
 
         final WebClient webClient = getWebClient();
-        @SuppressWarnings("resource")
         final HttpWebConnection webConnection = new HttpWebConnection(webClient);
 
         webClient.setWebConnection(webConnection);
