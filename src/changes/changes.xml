@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove HtmlKeygen.
+            </action>
             <action type="add" dev="asashour" issue="43263382" system="stackoverflow">
                 JavaScript: support Object.getOwnPropertySymbols().
             </action>

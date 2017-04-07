@@ -23,7 +23,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAddress;
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
-import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -42,7 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE))
 @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(IE))
 @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(IE))
-@JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(IE))
 @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(IE))
 @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(IE))
 public class HTMLBlockElement extends HTMLElement {

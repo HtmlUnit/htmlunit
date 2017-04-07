@@ -68,8 +68,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlInlineQuotation.TAG_NAME,
             HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
             HtmlItalic.TAG_NAME,
-            HtmlKeyboard.TAG_NAME, HtmlKeygen.TAG_NAME,
-            HtmlLabel.TAG_NAME, HtmlLayer.TAG_NAME,
+            HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME, HtmlLayer.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlLink.TAG_NAME, HtmlMain.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
             HtmlMenu.TAG_NAME, HtmlMenuItem.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
@@ -422,10 +421,6 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlKeyboard.TAG_NAME:
                 element = new HtmlKeyboard(qualifiedName, page, attributeMap);
-                break;
-
-            case HtmlKeygen.TAG_NAME:
-                element = new HtmlKeygen(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlLabel.TAG_NAME:
