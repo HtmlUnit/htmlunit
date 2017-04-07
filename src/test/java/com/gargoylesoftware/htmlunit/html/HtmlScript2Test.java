@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.net.URL;
-import static java.nio.charset.StandardCharsets.*;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.junit.Test;
