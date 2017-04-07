@@ -91,14 +91,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
 
-    /** The default value of the display property for the 'keygen' tag is always 'inline'. */
-    @BrowserFeature(@WebBrowser(IE))
-    CSS_KEYGEN_DISPLAY_INLINE_ALWAYS,
-
-    /** The default value of the display property for the 'keygen' tag is 'inline' when created by JavaScript. */
-    @BrowserFeature(@WebBrowser(FF))
-    CSS_KEYGEN_DISPLAY_INLINE_JS,
-
     /** 'initial' is a valid length value. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     CSS_LENGTH_INITIAL,
@@ -449,10 +441,6 @@ public enum BrowserVersionFeatures {
     /** HTMLInputElement: type {@code file} value to be only the file name. */
     @BrowserFeature(@WebBrowser(FF))
     HTMLINPUT_FILE_VALUE_NO_PATH,
-
-    /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen} have no end tag. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLKEYGEN_END_TAG_FORBIDDEN,
 
     /** If the type is present for a link only use if type is text/css. */
     @BrowserFeature(@WebBrowser(CHROME))
