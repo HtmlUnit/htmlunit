@@ -163,7 +163,7 @@ public class History extends SimpleScriptable {
      * Returns the {@code scrollRestoration} property.
      * @return the {@code scrollRestoration} property
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public String getScrollRestoration() {
         return "auto";
     }

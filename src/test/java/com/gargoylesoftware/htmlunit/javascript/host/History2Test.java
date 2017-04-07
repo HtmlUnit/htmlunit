@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -56,6 +61,7 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object PopStateEvent]", "null"})
+    @BuggyWebDriver(CHROME)
     public void pushStateSimple() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -101,6 +107,7 @@ public class History2Test extends WebDriverTestCase {
                 "[object PopStateEvent]", "{\"hi\":\"there\"}",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}"})
+    @BuggyWebDriver(CHROME)
     public void pushState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -207,6 +214,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
+    @BuggyWebDriver(CHROME)
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -364,6 +372,7 @@ public class History2Test extends WebDriverTestCase {
                 "[object PopStateEvent]", "null",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}"})
+    @BuggyWebDriver(CHROME)
     public void replaceState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -451,6 +460,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
+    @BuggyWebDriver(CHROME)
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -664,11 +674,11 @@ public class History2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("hasNegativeOne")).click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
         driver.findElement(By.name("hasZero")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 2, 4));
         driver.findElement(By.name("hasPositiveOne")).click();
-        verifyAlerts(driver, getExpectedAlerts()[2]);
+        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 4, 6));
     }
 
     /**
@@ -711,6 +721,8 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"back", "forward", "go", "length", "pushState", "replaceState", "state"},
+            FF52 = {"back", "forward", "go", "length", "pushState", "replaceState",
+                        "scrollRestoration", "state"},
             CHROME = {"back", "forward", "go", "length", "pushState", "replaceState",
                         "scrollRestoration", "state"})
     public void properties() throws Exception {
