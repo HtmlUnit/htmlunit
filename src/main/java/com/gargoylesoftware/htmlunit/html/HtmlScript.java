@@ -191,7 +191,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * (behavior varies by browser version). {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners) {
         // special additional processing for the 'src'
         if (namespaceURI != null || !"src".equals(qualifiedName)) {

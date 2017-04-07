@@ -553,7 +553,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners) {
         if ("name".equals(qualifiedName)) {
             if (newNames_.isEmpty()) {

@@ -167,7 +167,7 @@ public abstract class HtmlElement extends DomElement {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName,
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue, final boolean notifyAttributeChangeListeners) {
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.

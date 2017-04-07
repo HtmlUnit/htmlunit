@@ -226,7 +226,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners) {
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);

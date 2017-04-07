@@ -154,7 +154,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
         if ("value".equals(qualifiedName)) {

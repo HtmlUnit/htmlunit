@@ -123,7 +123,7 @@ public class HtmlImage extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value,
             final boolean notifyAttributeChangeListeners) {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
@@ -478,7 +478,6 @@ public class HtmlImage extends HtmlElement {
             if (null == imageWebResponse_) {
                 throw new IOException("No image response available (src=" + getSrcAttribute() + ")");
             }
-            @SuppressWarnings("resource")
             final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
             final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
             if (!iter.hasNext()) {
