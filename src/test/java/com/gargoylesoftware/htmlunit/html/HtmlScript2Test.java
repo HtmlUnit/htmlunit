@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
+import static java.nio.charset.StandardCharsets.*;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -385,6 +388,26 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_SECOND, "abcd"), "alert('loaded')");
         expandExpectedAlertsVariables(URL_SECOND);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    @NotYetImplemented
+    public void incorrectCharset() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <script src='" + URL_SECOND + "' charset='" + ISO_8859_1 + "'></script>\n"
+            + "</head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        final String script = new String(ByteOrderMark.UTF_8.getBytes())
+                + "alert('أهلاً');";
+        getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
         loadPageWithAlerts2(html);
     }
 }
