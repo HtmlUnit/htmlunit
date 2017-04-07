@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
+import com.gargoylesoftware.htmlunit.javascript.host.ObjectCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -488,6 +489,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
+
+        if (browserVersion.hasFeature(STRING_INCLUDES)) {
+            ((ScriptableObject) objectPrototype).defineFunctionProperties(new String[] {"getOwnPropertySymbols"},
+                    ObjectCustom.class, ScriptableObject.EMPTY);
+        }
 
         window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow);

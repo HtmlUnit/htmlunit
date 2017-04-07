@@ -240,4 +240,60 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "true", "true"},
+            IE = "exception")
+    @NotYetImplemented({CHROME, FF})
+    public void getOwnPropertySymbols() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var obj = {};\n"
+            + "      var a = Symbol('a');\n"
+            + "      var b = Symbol.for('b');\n"
+            + "\n"
+            + "      obj[a] = 'localSymbol';\n"
+            + "      obj[b] = 'globalSymbol';\n"
+            + "\n"
+            + "      var objectSymbols = Object.getOwnPropertySymbols(obj);\n"
+            + "      alert(objectSymbols.length);\n"
+            + "      alert(objectSymbols[0] === a);\n"
+            + "      alert(objectSymbols[1] === b);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void getOwnPropertySymbolsEmpty() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var objectSymbols = Object.getOwnPropertySymbols();\n"
+            + "      alert(objectSymbols.length);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
