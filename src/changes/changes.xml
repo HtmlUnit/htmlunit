@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: CSSRuleList.item() is supported in all browsers.
+            </action>
             <action type="remove" dev="asashour">
                 Remove HtmlKeygen.
             </action>
