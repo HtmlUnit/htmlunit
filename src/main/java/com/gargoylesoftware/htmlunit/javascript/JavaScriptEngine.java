@@ -492,7 +492,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
 
         if (browserVersion.hasFeature(STRING_INCLUDES)) {
             ((ScriptableObject) objectPrototype).defineFunctionProperties(new String[] {"getOwnPropertySymbols"},
-                    ObjectCustom.class, ScriptableObject.EMPTY);
+                    ObjectCustom.class, ScriptableObject.DONTENUM);
         }
 
         window.setPrototypes(prototypes, prototypesPerJSName);
