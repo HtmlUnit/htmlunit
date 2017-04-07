@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.net.URL;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -377,54 +376,56 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"head", "bottom", "frameset"})
+    @Alerts("OnloadTest head bottom frameset")
     public void onloadOrderRows() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
-                + "<frameset rows='50%,*' onLoad='alert(\"frameset\")'>\n"
+                + "<frameset rows='50%,*' onLoad='document.title += \" frameset\"'>\n"
                 + "  <frame name='head' src='head.html'>\n"
                 + "  <frame name='bottom' src='bottom.html'>\n"
                 + "</frameset>\n"
                 + "</html>";
 
         final String top = "<html><head><title>Head</title></head>\n"
-                + "<body onload='alert(\"head\")'>head</body>\n"
+                + "<body onload='top.document.title += \" head\"'>head</body>\n"
                 + "</html>";
         final String bottom = "<html><head><title>Bottom</title></head>\n"
-                + "<body onload='alert(\"bottom\")'>bottom</body>\n"
+                + "<body onload='top.document.title += \" bottom\"'>bottom</body>\n"
                 + "</html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "head.html"), top);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "bottom.html"), bottom);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"left", "right", "frameset"})
+    @Alerts("OnloadTest left right frameset")
     public void onloadOrderCols() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
-                + "<frameset cols='50%,*' onLoad='alert(\"frameset\")'>\n"
+                + "<frameset cols='50%,*' onLoad='document.title += \" frameset\"'>\n"
                 + "  <frame name='left' src='left.html'>\n"
                 + "  <frame name='right' src='right.html'>\n"
                 + "</frameset>\n"
                 + "</html>";
 
         final String left = "<html><head><title>Left</title></head>\n"
-                + "<body onload='alert(\"left\")'>left</body>\n"
+                + "<body onload='top.document.title += \" left\"'>left</body>\n"
                 + "</html>";
         final String right = "<html><head><title>Right</title></head>\n"
-                + "<body onload='alert(\"right\")'>right</body>\n"
+                + "<body onload='top.document.title += \" right\"'>right</body>\n"
                 + "</html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "left.html"), left);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "right.html"), right);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
     }
 
     /**
@@ -630,10 +631,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
-                + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
-                + "  <script type='text/javascript'>\n"
-                + "    alert('Body alert.');\n"
-                + "  </script>\n"
+                + "<body onload=\"top.header.addToFrameOrder('onloadFrame');\">\n"
                 + "  <h3>onloadFrame</h3>\n"
                 + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
@@ -655,16 +653,14 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         driver.switchTo().frame("content");
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
-        if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
-            driver.findElement(By.name("onloadFrameAnchor")).click();
-            driver.switchTo().defaultContent();
-            driver.switchTo().frame("header");
-            assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
+        driver.findElement(By.name("onloadFrameAnchor")).click();
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("header");
+        assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
 
-            driver.switchTo().defaultContent();
-            driver.switchTo().frame("content");
-            assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
-        }
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("content");
+        assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
     }
 
     /**
