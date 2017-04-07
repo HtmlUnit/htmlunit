@@ -74,7 +74,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners);
+            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
         }
     }
 
@@ -155,8 +155,9 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
         if ("value".equals(qualifiedName)) {
             final SgmlPage page = getPage();
             if (page != null && page.isHtmlPage()) {

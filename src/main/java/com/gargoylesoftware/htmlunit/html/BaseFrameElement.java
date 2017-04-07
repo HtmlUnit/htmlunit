@@ -351,12 +351,12 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue,
-            final boolean notifyAttributeChangeListeners) {
+            final boolean notifyAttributeChangeListeners, boolean notifyMutationObserver) {
         if (null != attributeValue && "src".equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners, notifyMutationObserver);
 
         if ("src".equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {

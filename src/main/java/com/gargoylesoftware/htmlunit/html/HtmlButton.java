@@ -327,14 +327,15 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners) {
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         if ("name".equals(qualifiedName)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
     }
 
     /**

@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
@@ -168,11 +169,13 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName,
-            final String attributeValue, final boolean notifyAttributeChangeListeners) {
+            final String attributeValue, final boolean notifyAttributeChangeListeners,
+            final boolean notifyMutationObservers) {
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if (null == getHtmlPageOrNull()) {
-            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                    notifyMutationObservers);
             return;
         }
 
@@ -193,10 +196,11 @@ public abstract class HtmlElement extends DomElement {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
 
         if (notifyAttributeChangeListeners) {
-            notifyAttributeChangeListeners(event, this, oldAttributeValue);
+            notifyAttributeChangeListeners(event, this, oldAttributeValue, notifyMutationObservers);
         }
 
         fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
@@ -207,27 +211,32 @@ public abstract class HtmlElement extends DomElement {
      * @param event the event
      * @param element the element
      * @param oldAttributeValue the old attribute value
+     * @param notifyMutationObservers whether to notify {@link MutationObserver}s or not
      */
     protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
-            final HtmlElement element, final String oldAttributeValue) {
+            final HtmlElement element, final String oldAttributeValue, final boolean notifyMutationObservers) {
         final Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
-                    listener.attributeAdded(event);
+                    if (notifyMutationObservers || !(listener instanceof MutationObserver)) {
+                        listener.attributeAdded(event);
+                    }
                 }
             }
         }
         else {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
-                    listener.attributeReplaced(event);
+                    if (notifyMutationObservers || !(listener instanceof MutationObserver)) {
+                        listener.attributeReplaced(event);
+                    }
                 }
             }
         }
         final DomNode parentNode = element.getParentNode();
         if (parentNode instanceof HtmlElement) {
-            notifyAttributeChangeListeners(event, (HtmlElement) parentNode, oldAttributeValue);
+            notifyAttributeChangeListeners(event, (HtmlElement) parentNode, oldAttributeValue, notifyMutationObservers);
         }
     }
 
@@ -276,7 +285,7 @@ public abstract class HtmlElement extends DomElement {
         else {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
         }
-        notifyAttributeChangeListeners(event, this, oldAttributeValue);
+        notifyAttributeChangeListeners(event, this, oldAttributeValue, true);
 
         final Attr result = super.setAttributeNode(attribute);
 

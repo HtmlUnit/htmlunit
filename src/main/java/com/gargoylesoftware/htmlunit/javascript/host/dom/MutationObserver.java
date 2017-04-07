@@ -172,6 +172,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                 mutationRecord.setParentScope(scope);
                 mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
 
+                mutationRecord.setAttributeName(attributeName);
                 mutationRecord.setType("attributes");
                 mutationRecord.setTarget(target.getScriptableObject());
                 if (attributeOldValue_) {

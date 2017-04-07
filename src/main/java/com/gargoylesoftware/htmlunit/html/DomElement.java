@@ -453,7 +453,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @Override
     public void setAttribute(final String attributeName, final String attributeValue) {
-        setAttributeNS(null, attributeName, attributeValue, true);
+        setAttributeNS(null, attributeName, attributeValue);
     }
 
     /**
@@ -466,7 +466,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
-        setAttributeNS(namespaceURI, qualifiedName, attributeValue, true);
+        setAttributeNS(namespaceURI, qualifiedName, attributeValue, true, true);
     }
 
     /**
@@ -476,9 +476,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param qualifiedName the qualified name (prefix:local) of the attribute
      * @param attributeValue the value of the attribute
      * @param notifyAttributeChangeListeners to notify the associated {@link HtmlAttributeChangeListener}s
+     * @param notifyMutationObservers to notify {@code MutationObserver}s or not
      */
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName,
-            final String attributeValue, final boolean notifyAttributeChangeListeners) {
+            final String attributeValue, final boolean notifyAttributeChangeListeners,
+            final boolean notifyMutationObservers) {
         final String value = attributeValue;
         final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, value, true);
         newAttr.setParentNode(this);

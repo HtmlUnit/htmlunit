@@ -150,7 +150,7 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners);
+            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
         }
     }
 

@@ -37,6 +37,7 @@ public class MutationRecord extends SimpleScriptable {
     private String type_;
     private ScriptableObject target_;
     private String oldValue_;
+    private String attributeName_;
 
     /**
      * Creates an instance.
@@ -94,6 +95,23 @@ public class MutationRecord extends SimpleScriptable {
     @JsxGetter
     public String getOldValue() {
         return oldValue_;
+    }
+
+    /**
+     * Sets the {@code attributeName} property.
+     * @param attributeName the {@code attributeName} property
+     */
+    void setAttributeName(final String attributeName) {
+        attributeName_ = attributeName;
+    }
+
+    /**
+     * Returns the {@code attributeName} property.
+     * @return the {@code attributeName} property
+     */
+    @JsxGetter
+    public String getAttributeName() {
+        return attributeName_;
     }
 
 }

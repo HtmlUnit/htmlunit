@@ -192,15 +192,17 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners) {
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         // special additional processing for the 'src'
         if (namespaceURI != null || !"src".equals(qualifiedName)) {
-            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                    notifyMutationObservers);
             return;
         }
 
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
 
         if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {
             final PostponedAction action = new PostponedAction(getPage()) {

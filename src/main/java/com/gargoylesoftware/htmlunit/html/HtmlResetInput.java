@@ -116,11 +116,12 @@ public class HtmlResetInput extends HtmlInput {
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners) {
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
     }
 
     /**

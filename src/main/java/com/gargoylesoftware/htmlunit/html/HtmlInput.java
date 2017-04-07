@@ -390,6 +390,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param modifyValue Whether or not to set the current value to the default value
      */
     protected void setDefaultValue(final String defaultValue, final boolean modifyValue) {
+        final String oldAttributeValue = defaultValue_;
+        final HtmlAttributeChangeEvent event;
+        if (defaultValue_ == ATTRIBUTE_NOT_DEFINED) {
+            event = new HtmlAttributeChangeEvent(this, "value", defaultValue);
+        }
+        else {
+            event = new HtmlAttributeChangeEvent(this, "value", oldAttributeValue);
+        }
+
         defaultValue_ = defaultValue;
         if (modifyValue) {
             if (this instanceof HtmlFileInput) {
@@ -399,6 +408,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 setValueAttribute(defaultValue);
             }
         }
+        notifyAttributeChangeListeners(event, this, oldAttributeValue, true);
     }
 
     /**
@@ -553,14 +563,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners) {
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         if ("name".equals(qualifiedName)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners);
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                notifyMutationObservers);
     }
 
     /**
