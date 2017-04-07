@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.junit.Test;
@@ -408,6 +409,50 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</html>";
 
         final String script = new String(ByteOrderMark.UTF_8.getBytes())
+                + "alert('أهلاً');";
+        getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    @NotYetImplemented
+    public void isoCharsetWithUtfBom() throws Exception {
+        charsetWithBom(ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void utfCharsetWithoutBom() throws Exception {
+        charsetWithBom(UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    @NotYetImplemented
+    public void isoCharsetWithoutBom() throws Exception {
+        charsetWithBom(ISO_8859_1, null);
+    }
+
+    private void charsetWithBom(final Charset charsetAttribute, final ByteOrderMark bom) throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <script src='" + URL_SECOND + "' charset='" + charsetAttribute + "'></script>\n"
+            + "</head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        final String script =
+                (bom == null ? "" : new String(bom.getBytes()))
                 + "alert('أهلاً');";
         getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
         loadPageWithAlerts2(html);
