@@ -238,7 +238,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
         for (final HtmlOption option : options) {
             option.setSelected(true);
         }
-        
+
         for (final HtmlOption option : options) {
             assertTrue(option.isSelected());
         }

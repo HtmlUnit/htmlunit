@@ -124,14 +124,14 @@ public class HtmlOption2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        
+
         final WebElement select = driver.findElement(By.tagName("select"));
 
         final List<WebElement> options = select.findElements(By.tagName("option"));
         for (final WebElement option : options) {
             option.click();
         }
-        
+
         for (final WebElement option : options) {
             assertTrue(option.isSelected());
         }
@@ -161,7 +161,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
         final WebElement select = driver.findElement(By.tagName("select"));
 
         final List<WebElement> options = select.findElements(By.tagName("option"));
-        
+
         for (final WebElement option : options) {
             assertTrue(option.isSelected());
         }
