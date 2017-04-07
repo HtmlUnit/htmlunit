@@ -28,7 +28,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -399,7 +398,6 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("أهلاً")
-    @NotYetImplemented
     public void incorrectCharset() throws Exception {
         final String html
             = "<html><head>\n"
@@ -419,7 +417,6 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("أهلاً")
-    @NotYetImplemented
     public void isoCharsetWithUtfBom() throws Exception {
         charsetWithBom(ISO_8859_1, ByteOrderMark.UTF_8);
     }
@@ -438,7 +435,6 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("أهلاً")
-    @NotYetImplemented
     public void isoCharsetWithoutBom() throws Exception {
         charsetWithBom(ISO_8859_1, null);
     }

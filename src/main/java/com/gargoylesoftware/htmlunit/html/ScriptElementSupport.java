@@ -137,8 +137,7 @@ public final class ScriptElementSupport {
                 try {
                     final ScriptElement scriptElement = (ScriptElement) element;
                     scriptElement.setExecuted(true);
-                    final JavaScriptLoadResult result =
-                            page.loadExternalJavaScriptFile(src, scriptElement.getCharset());
+                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, null);
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(element, Event.TYPE_LOAD);
                     }

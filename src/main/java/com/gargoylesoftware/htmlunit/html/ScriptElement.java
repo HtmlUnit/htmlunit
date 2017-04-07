@@ -59,7 +59,9 @@ public interface ScriptElement {
      * Returns the {@link Charset}.
      *
      * @return the {@link Charset}
+     * @deprecated as of 2.27, not used
      */
+    @Deprecated
     Charset getCharset();
 
 }
