@@ -1258,7 +1258,7 @@ public enum BrowserVersionFeatures {
     /** Setting the property cols throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets cols to 0.
      */
-    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 45)})
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
@@ -1272,7 +1272,7 @@ public enum BrowserVersionFeatures {
     /** Setting the property rows throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets rows to 0.
      */
-    @BrowserFeature({@WebBrowser(IE), @WebBrowser(FF)})
+    @BrowserFeature({@WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 45)})
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Setting the value processes null as null value. */

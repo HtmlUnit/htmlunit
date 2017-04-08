@@ -366,8 +366,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"20", "5", "8", "4", "20", "20", "20", "3"},
-            FF = {"20", "5", "8", "4", "error", "4", "error", "4", "20", "3"},
+    @Alerts(DEFAULT = {"20", "5", "8", "4", "20", "20", "20", "3"},
+            FF45 = {"20", "5", "8", "4", "error", "4", "error", "4", "20", "3"},
             IE = {"20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
     public void cols() throws Exception {
         final String html
@@ -417,8 +417,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"2", "5", "8", "4", "2", "2", "2", "3"},
-            FF = {"2", "5", "8", "4", "error", "4", "error", "4", "2", "3"},
+    @Alerts(DEFAULT = {"2", "5", "8", "4", "2", "2", "2", "3"},
+            FF45 = {"2", "5", "8", "4", "error", "4", "error", "4", "2", "3"},
             IE = {"2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
     public void rows() throws Exception {
         final String html
@@ -728,7 +728,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "mouse over [tester]")
+    @Alerts(DEFAULT = "",
+            FF = "mouse over [tester]")
     public void mouseOverTextareaDisabled() throws Exception {
         mouseOver("<textarea id='tester' onmouseover='dumpEvent(event);' disabled >HtmlUnit</textarea>");
     }
@@ -738,7 +739,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
+            + "    <title></title>\n"
             + "    <script>\n"
             + "    function dumpEvent(event) {\n"
             + "      // target\n"
@@ -758,7 +759,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      alert(msg);\n"
+            + "      document.title += msg;\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -774,6 +775,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("tester")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 }
