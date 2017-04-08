@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 
 import java.net.URL;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,26 +96,26 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"second [object HTMLFormElement]", "third [object HTMLFormElement]",
-                        "parent [object HTMLFormElement]"},
-            CHROME = {"second undefined", "third [object HTMLFormElement]",
-                        "parent [object HTMLFormElement]"})
+    @Alerts(DEFAULT = "second [object HTMLFormElement] third [object HTMLFormElement] "
+                        + "parent [object HTMLFormElement]",
+            CHROME = "second undefined third [object HTMLFormElement] "
+                        + "parent [object HTMLFormElement]")
     // real FF sometimes alerts 'third' before 'second'
     @NotYetImplemented(CHROME)
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET rows='50%,*' "
-                + "onload=\"alert('parent ' + window.parent.frames['third'].document.frm)\">\n"
+                + "onload=\"document.title += ' parent ' + window.parent.frames['third'].document.frm\">\n"
             + "  <FRAME name='second' frameborder='0' src='second.html'>\n"
             + "  <FRAME name='third' frameborder='0' src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
-            + "<body onload=\"alert('second ' + window.parent.frames['third'].document.frm)\">\n"
+            + "<body onload=\"top.document.title += ' second ' + window.parent.frames['third'].document.frm\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
 
         final String thirdHtml = "<html>\n"
-            + "<body onload=\"alert('third ' + window.parent.frames['third'].document.frm)\">\n"
+            + "<body onload=\"top.document.title += ' third ' + window.parent.frames['third'].document.frm\">\n"
             + "  <form name='frm' id='frm'>\n"
             + "    <input type='text' id='one' name='one' value='something'>\n"
             + "  </form>\n"
@@ -124,57 +123,64 @@ public class HtmlFrame2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
-        loadPageWithAlerts2(html);
+
+        loadPage2(html);
+        assertEquals(3, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"second", "third", "first"})
+    @Alerts("second third first")
     public void frameOnload() throws Exception {
-        final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
+        final String html = "<FRAMESET rows='50%,50%' onload=\"document.title += ' first'\">\n"
             + "  <FRAME name='second' src='second.html'>\n"
             + "  <FRAME name='third' src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
-            + "<body onload=\"alert('second')\">\n"
+            + "<body onload=\"top.document.title += ' second'\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
 
         final String thirdHtml = "<html>\n"
-                + "<body onload=\"alert('third')\">\n"
+                + "<body onload=\"top.document.title += ' third'\">\n"
                 + "  <h1>third</h1>\n"
                 + "</body></html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        assertEquals(3, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("second fourth third first")
+    @NotYetImplemented
     public void frameOnloadFrameInFrame() throws Exception {
-        final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
+        final String html = "<FRAMESET rows='50%,50%' onload=\"document.title += ' first'\">\n"
             + "  <FRAME name='second' src='second.html'>\n"
             + "  <FRAME name='third' src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
-            + "<body onload=\"alert('second')\">\n"
+            + "<body onload=\"top.document.title += ' second'\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
 
-        final String thirdHtml = "<FRAMESET cols='100%' onload=\"alert('third')\">\n"
+        final String thirdHtml = "<FRAMESET cols='100%' onload=\"top.document.title += ' third'\">\n"
                 + "  <FRAME name='fourth' src='fourth.html'>\n"
                 + "</FRAMESET>";
 
         final String fourthHtml = "<html>\n"
-            + "<body onload=\"alert('fourth')\">\n"
+            + "<body onload=\"top.document.title += ' fourth'\">\n"
             + "  <h1>fourth</h1>\n"
             + "</body></html>";
 
@@ -182,14 +188,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "fourth.html"), fourthHtml);
 
-        final WebDriver driver = loadPage2(html);
-        final List<String> actualAlerts = getCollectedAlerts(2 * DEFAULT_WAIT_TIME, driver, 4);
-
-        // tested with real ff17 and ie6; running in selenium returns different results
-        assertEquals(4, actualAlerts.size());
-
-        // returns 'first' at last
-        assertEquals("first", actualAlerts.get(3));
+        loadPage2(html);
+        assertEquals(4, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
     }
 
     /**
