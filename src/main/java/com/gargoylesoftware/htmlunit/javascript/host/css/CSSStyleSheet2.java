@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -68,7 +69,6 @@ import org.w3c.dom.stylesheets.MediaList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -1269,7 +1269,7 @@ public class CSSStyleSheet2 extends StyleSheet2 {
                     final ByteArrayInputStream bis = (ByteArrayInputStream) is;
                     bis.reset();
                 }
-                return IOUtils.toString(is, TextUtil.DEFAULT_CHARSET);
+                return IOUtils.toString(is, ISO_8859_1);
             }
             return "";
         }

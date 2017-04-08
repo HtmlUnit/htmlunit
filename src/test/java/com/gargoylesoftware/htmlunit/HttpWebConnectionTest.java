@@ -253,12 +253,12 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         startWebServer("./");
 
         final WebClient webClient = getWebClient();
-        final HttpWebConnection webConnection = new HttpWebConnection(webClient);
-
-        webClient.setWebConnection(webConnection);
-        webClient.getPage(URL_FIRST + "LICENSE.txt");
-        webConnection.close();
-        webClient.getPage(URL_FIRST + "pom.xml");
+        try (final HttpWebConnection webConnection = new HttpWebConnection(webClient)) {
+            webClient.setWebConnection(webConnection);
+            webClient.getPage(URL_FIRST + "LICENSE.txt");
+            webConnection.close();
+            webClient.getPage(URL_FIRST + "pom.xml");
+        }
     }
 
     /**

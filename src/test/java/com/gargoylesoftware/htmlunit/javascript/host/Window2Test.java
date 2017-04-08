@@ -112,7 +112,6 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * Very strange: in FF3 it seems that you can set window.controllers if you haven't accessed it before.
      * @throws Exception if the test fails
      */
     @Test

@@ -214,7 +214,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                     executeScriptIfNeeded();
                 }
             };
-            final AbstractJavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
     }
@@ -255,7 +255,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             }
         };
 
-        final AbstractJavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
         if (hasAttribute("async") && !engine.isScriptRunning()) {
             final HtmlPage owningPage = getHtmlPageOrNull();
             owningPage.addAfterLoadAction(action);

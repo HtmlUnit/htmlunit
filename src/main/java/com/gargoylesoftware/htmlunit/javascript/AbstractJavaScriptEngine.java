@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Ronald Brill
  * @author Frank Danek
  */
-public interface AbstractJavaScriptEngine {
+public interface AbstractJavaScriptEngine<SCRIPT> {
 
     /**
      * Gets the associated configuration.
@@ -113,4 +113,24 @@ public interface AbstractJavaScriptEngine {
      * Indicates that no postponed action should be executed.
      */
     void holdPosponedActions();
+
+    /**
+     * Compiles the specified JavaScript code in the context of a given HTML page.
+     *
+     * @param page the page that the code will execute within
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name that will be displayed on error conditions
+     * @param startLine the line at which the script source starts
+     * @return the result of executing the specified code
+     */
+    SCRIPT compile(HtmlPage page, String sourceCode, String sourceName, int startLine);
+
+    /**
+     * Executes the specified JavaScript code in the context of a given page.
+     *
+     * @param page the page that the code will execute within
+     * @param script the script to execute
+     * @return the result of executing the specified code
+     */
+    Object execute(HtmlPage page, SCRIPT script);
 }

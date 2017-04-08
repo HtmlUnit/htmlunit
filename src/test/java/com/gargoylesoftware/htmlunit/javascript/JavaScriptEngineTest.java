@@ -1212,8 +1212,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
 
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
-        final AbstractJavaScriptEngine engine = webClient.getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
 
         engine.addPostponedAction(new PostponedAction(page) {
             @Override
@@ -1228,7 +1229,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     @SuppressWarnings("unchecked")
-    private static ThreadLocal<List<PostponedAction>> getPostponedActions(final AbstractJavaScriptEngine engine) {
+    private static ThreadLocal<List<PostponedAction>> getPostponedActions(final AbstractJavaScriptEngine<?> engine) {
         try {
             final Field field = engine.getClass().getDeclaredField("postponedActions_");
             field.setAccessible(true);
@@ -1381,9 +1382,10 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void useAfterShutdownShouldNotCreateThreads() {
+        @SuppressWarnings("resource")
         final WebClient webClient = getWebClient();
         final WebWindow window = webClient.getCurrentWindow();
-        final AbstractJavaScriptEngine engine = webClient.getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
         webClient.close();
         engine.registerWindowAndMaybeStartEventLoop(window);
         assertTrue(getJavaScriptThreads().isEmpty());

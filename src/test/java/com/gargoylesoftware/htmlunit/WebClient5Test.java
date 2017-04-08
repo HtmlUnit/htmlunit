@@ -81,6 +81,7 @@ public class WebClient5Test extends WebTestCase {
         final MockWebConnection connection = getMockWebConnection();
         connection.setDefaultResponse("hello");
 
+        @SuppressWarnings("resource")
         final WebClient webClient = new WebClient();
         webClient.setWebConnection(connection);
         webClient.close();

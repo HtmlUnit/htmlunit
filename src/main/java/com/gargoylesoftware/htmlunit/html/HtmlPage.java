@@ -79,7 +79,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -329,7 +328,7 @@ public class HtmlPage extends SgmlPage {
         deregisterFramesIfNeeded();
         cleaning_ = false;
         if (autoCloseableList_ != null) {
-            for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
+            for (@SuppressWarnings("resource") final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
                 try {
                     closeable.close();
                 }
@@ -983,13 +982,9 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.COMPILATION_ERROR;
         }
 
-        final AbstractJavaScriptEngine engine = client.getJavaScriptEngine();
-        if (engine instanceof JavaScriptEngine) {
-            ((JavaScriptEngine) engine).execute(this, (Script) script);
-        }
-        else {
-            ((NashornJavaScriptEngine) engine).execute(this, (ScriptFunction) script);
-        }
+        @SuppressWarnings("unchecked")
+        final AbstractJavaScriptEngine<Object> engine = (AbstractJavaScriptEngine<Object>) client.getJavaScriptEngine();
+        engine.execute(this, script);
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -1076,15 +1071,8 @@ public class HtmlPage extends SgmlPage {
 
         final String scriptCode = response.getContentAsString(scriptEncoding);
         if (null != scriptCode) {
-            final AbstractJavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
-            final Object script;
-            if (javaScriptEngine instanceof JavaScriptEngine) {
-                script = ((JavaScriptEngine) javaScriptEngine).compile(this, scriptCode, url.toExternalForm(), 1);
-            }
-            else {
-                script = ((NashornJavaScriptEngine) javaScriptEngine)
-                        .compile(this, scriptCode, url.toExternalForm(), 1);
-            }
+            final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
+            final Object script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null && cache.cacheIfPossible(request, response, script)) {
                 // no cleanup if the response is stored inside the cache
                 return script;

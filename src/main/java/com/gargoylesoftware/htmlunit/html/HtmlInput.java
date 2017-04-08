@@ -539,7 +539,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final SgmlPage page = htmlElement.getPage();
 
-        final AbstractJavaScriptEngine engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();
         if (engine.isScriptRunning()) {
             return page;
         }

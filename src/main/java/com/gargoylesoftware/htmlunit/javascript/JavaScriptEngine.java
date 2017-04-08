@@ -98,7 +98,7 @@ import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public class JavaScriptEngine implements AbstractJavaScriptEngine {
+public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
@@ -677,14 +677,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     /**
-     * Compiles the specified JavaScript code in the context of a given HTML page.
-     *
-     * @param page the page that the code will execute within
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name that will be displayed on error conditions
-     * @param startLine the line at which the script source starts
-     * @return the result of executing the specified code
+     * {@inheritDoc}
      */
+    @Override
     public Script compile(final HtmlPage page, final String sourceCode,
                            final String sourceName, final int startLine) {
         final Scriptable scope = getScope(page, null);
@@ -727,13 +722,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     /**
-     * Executes the specified JavaScript code in the context of a given page.
-     *
-     * @param page the page that the code will execute within
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name that will be displayed on error conditions
-     * @param startLine the line at which the script source starts
-     * @return the result of executing the specified code
+     * {@inheritDoc}
      */
     @Override
     public Object execute(final HtmlPage page,
@@ -749,12 +738,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     /**
-     * Executes the specified JavaScript code in the context of a given page.
-     *
-     * @param page the page that the code will execute within
-     * @param script the script to execute
-     * @return the result of executing the specified code
+     * {@inheritDoc}
      */
+    @Override
     public Object execute(final HtmlPage page, final Script script) {
         final Scriptable scope = getScope(page, null);
         return execute(page, scope, script);

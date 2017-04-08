@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.SynchronousQueue;
 
 import javax.script.ScriptContext;
 
@@ -101,7 +100,7 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.Source;
  *
  * @author Ahmed Ashour
  */
-public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
+public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptFunction> {
 
     private static final Log LOG = LogFactory.getLog(NashornJavaScriptEngine.class);
 
@@ -199,7 +198,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         return new Browser(family, (int) version.getBrowserVersionNumeric());
     }
 
-    private void initGlobal(final WebWindow webWindow, final Browser browser) {
+    private static void initGlobal(final WebWindow webWindow, final Browser browser) {
         Browser.setCurrent(browser);
         final Global global = getGlobal(webWindow);
         final Global oldGlobal = Context.getGlobal();
@@ -322,7 +321,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
         }
     }
 
-    private void setProto(final Global global, final String childName, final String parentName) {
+    private static void setProto(final Global global, final String childName, final String parentName) {
         final ScriptObject child = (ScriptObject) global.get(childName);
         final ScriptObject parent = (ScriptObject) global.get(parentName);
         if (child instanceof ScriptFunction && parent instanceof ScriptFunction) {
@@ -393,11 +392,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     /**
-     * Executes.
-     * @param page the page
-     * @param script the script
-     * @return the value.
+     * {@inheritDoc}
      */
+    @Override
     public Object execute(final HtmlPage page, final ScriptFunction script) {
         try {
             return engine_.evalImpl(script, page.getEnclosingWindow().getScriptContext());
@@ -439,14 +436,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     /**
-     * Compiles the specified JavaScript code in the context of a given HTML page.
-     *
-     * @param page the page that the code will execute within
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name that will be displayed on error conditions
-     * @param startLine the line at which the script source starts
-     * @return the result of executing the specified code
+     * {@inheritDoc}
      */
+    @Override
     public ScriptFunction compile(final HtmlPage page, final String sourceCode,
             final String sourceName, final int startLine) {
         final Global global = page.getEnclosingWindow().getGlobal();

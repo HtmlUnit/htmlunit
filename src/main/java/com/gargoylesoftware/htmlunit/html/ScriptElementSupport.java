@@ -87,7 +87,7 @@ public final class ScriptElementSupport {
             }
         };
 
-        final AbstractJavaScriptEngine engine = element.getPage().getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> engine = element.getPage().getWebClient().getJavaScriptEngine();
         if (element.hasAttribute("async") && !engine.isScriptRunning()) {
             final HtmlPage owningPage = element.getHtmlPageOrNull();
             owningPage.addAfterLoadAction(action);

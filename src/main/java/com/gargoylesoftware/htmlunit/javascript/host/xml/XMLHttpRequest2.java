@@ -515,7 +515,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
         final BrowserVersion browser = getBrowserVersion();
         if (stateChangeHandler_ != null && (async_ || state == DONE)) {
 //            final Scriptable scope = stateChangeHandler_.getParentScope();
-            final AbstractJavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
@@ -532,7 +532,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
         }
 
         if (state == DONE) {
-            final AbstractJavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             final ProgressEvent2 event = new ProgressEvent2(this, Event.TYPE_LOAD);
             final Object[] params = new Event2[] {event};
@@ -874,7 +874,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
     private void processError(final Global context) {
         if (errorHandler_ != null) {
 //            final Scriptable scope = errorHandler_.getParentScope();
-            final AbstractJavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             final Object[] params = new Event2[] {new ProgressEvent2(this, Event2.TYPE_ERROR)};
 

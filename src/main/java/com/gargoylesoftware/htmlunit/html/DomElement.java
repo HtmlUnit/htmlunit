@@ -1012,7 +1012,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             stateUpdated = true;
         }
 
-        final AbstractJavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
         try {
             final ScriptResult scriptResult = doClickFireClickEvent(event);
@@ -1068,7 +1068,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             stateUpdated = true;
         }
 
-        final AbstractJavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
         try {
             final ScriptResult scriptResult = doClickFireClickEvent(event);

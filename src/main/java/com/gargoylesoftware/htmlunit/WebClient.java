@@ -149,7 +149,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
-    private transient AbstractJavaScriptEngine scriptEngine_;
+    private transient AbstractJavaScriptEngine<?> scriptEngine_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
@@ -631,7 +631,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never {@code null})
      */
-    public AbstractJavaScriptEngine getJavaScriptEngine() {
+    public AbstractJavaScriptEngine<?> getJavaScriptEngine() {
         return scriptEngine_;
     }
 
@@ -640,7 +640,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param engine the new script engine to use
      */
-    public void setJavaScriptEngine(final AbstractJavaScriptEngine engine) {
+    public void setJavaScriptEngine(final AbstractJavaScriptEngine<?> engine) {
         if (engine == null) {
             throw new IllegalArgumentException("Can't set JavaScriptEngine to null");
         }
