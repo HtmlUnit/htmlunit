@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.SynchronousQueue;
 
 import javax.script.ScriptContext;
 
@@ -158,7 +159,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
     private transient boolean holdPostponedActions_;
 
-    private final WebClient webClient_;
+    private WebClient webClient_;
     /** The JavaScriptExecutor corresponding to all windows of this Web client. */
     private transient JavaScriptExecutor javaScriptExecutor_;
 
@@ -514,7 +515,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
     }
 
     /**
-     * Returns theg {@link Global}.
+     * Returns the {@link Global}.
      * @param webWindow the webwindow
      * @return the {@link Global}
      */
@@ -544,6 +545,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine {
 
     @Override
     public void shutdown() {
+        webClient_ = null;
         if (javaScriptExecutor_ != null) {
             javaScriptExecutor_.shutdown();
             javaScriptExecutor_ = null;
