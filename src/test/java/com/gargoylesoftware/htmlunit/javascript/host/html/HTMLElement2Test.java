@@ -773,7 +773,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"something", "null"},
-            CHROME = {"something", "0"})
+            CHROME = {"something", "0"},
+            FF52 = {"something", "0"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1357,22 +1358,22 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"body1", "setActive not available"},
-            IE = {"body1", "text1", "[object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2"})
+    @Alerts(DEFAULT = {" body1", "", " body1 setActive not available"},
+            IE = {" body1", " text1", " [object HTMLButtonElement]", "text2", "[object Window]", "onfocus text2"})
     @BuggyWebDriver(IE)
     // alert conflicts with focus/blur
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void setActiveAndFocus() throws Exception {
         final String firstHtml =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>First</title>\n"
+            + "  <title>First: </title>\n"
             + "  <script>var win2;</script>\n"
             + "</head>\n"
-            + "<body id='body1' onload='alert(document.activeElement.id)'>\n"
+            + "<body id='body1' onload='document.title += \" \" + document.activeElement.id'>\n"
             + "<form name='form1'>\n"
-            + "  <input id='text1' onfocus='alert(\"onfocus text1\"); win2.focus();'>\n"
+            + "  <input id='text1' onfocus='document.title += \" onfocus text1\"; win2.focus();'>\n"
             + "  <button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\", \"second\");'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1381,22 +1382,22 @@ public class HTMLElement2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Second</title>\n"
+            + "  <title>Second: </title>\n"
             + "</head>\n"
             + "<body id='body2'>\n"
-            + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "  <input id='text2' onfocus='document.title += \" onfocus text2\"'>\n"
             + "  <button id='button2' onClick='doTest();'>Click me</a>\n"
             + "  <script>\n"
             + "    function doTest() {\n"
             + "      var elem = opener.document.getElementById('text1');\n"
-            + "      alert(opener.document.activeElement.id);\n"
-            + "      if (!elem.setActive) { alert('setActive not available'); return; }\n"
+            + "      document.title += ' ' + opener.document.activeElement.id;\n"
+            + "      if (!elem.setActive) { document.title += ' setActive not available'; return; }\n"
             + "      elem.setActive();\n"
-            + "      alert(opener.document.activeElement.id);\n"
-            + "      alert(document.activeElement);\n"
+            + "      document.title += ' ' + opener.document.activeElement.id;\n"
+            + "      document.title += ' ' + document.activeElement;\n"
             + "      document.getElementById('text2').setActive();\n"
-            + "      alert(document.activeElement.id);\n"
-            + "      alert(opener);\n"
+            + "      document.title += ' ' + document.activeElement.id;\n"
+            + "      document.title += ' ' + opener;\n"
             + "      opener.focus();\n"
             + "    }\n"
             + "  </script>\n"
@@ -1404,16 +1405,14 @@ public class HTMLElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = loadPage2(firstHtml);
-        verifyAlerts(driver, "body1");
-        assertEquals("First", driver.getTitle());
+        assertEquals("First:" + getExpectedAlerts()[0], driver.getTitle());
 
         driver.findElement(By.id("button1")).click();
         driver.switchTo().window("second");
-        verifyAlerts(driver, "body1");
-        assertEquals("Second", driver.getTitle());
+        assertEquals("Second:" + getExpectedAlerts()[1], driver.getTitle());
 
         driver.findElement(By.id("button2")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals("Second:" + getExpectedAlerts()[2], driver.getTitle());
     }
 
     /**

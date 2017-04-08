@@ -958,7 +958,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_READONLY_FOR_TABLE,
 
     /** Indicates that innerText setter supports null values. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     JS_INNER_TEXT_VALUE_NULL,
 
     /** Chrome throws an error if using selectionStart/selectionEnd. */
