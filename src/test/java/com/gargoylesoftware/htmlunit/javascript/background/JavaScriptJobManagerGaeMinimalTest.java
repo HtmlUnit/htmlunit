@@ -20,6 +20,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.gae.GAETestRunner;
  *
  * @author Amit Manjhi
  */
+@Ignore
 @RunWith(GAETestRunner.class)
 public class JavaScriptJobManagerGaeMinimalTest {
 
