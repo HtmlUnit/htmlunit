@@ -1441,7 +1441,7 @@ public enum BrowserVersionFeatures {
      * Indicates that all options of a select are deselected,
      * if the select state is changed for an unknown option.
      */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /** Indicates that string.contains() is supported. */

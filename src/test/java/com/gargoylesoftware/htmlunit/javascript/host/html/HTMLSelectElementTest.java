@@ -2129,7 +2129,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"two", ""},
-            FF = {"two", "two"})
+            FF45 = {"two", "two"})
     public void value() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2186,7 +2186,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"two", ""},
-            FF = {"two", "two"})
+            FF45 = {"two", "two"})
     public void valueByValueCase() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2273,7 +2273,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"two", ""},
-            FF = {"two", "two"})
+            FF45 = {"two", "two"})
     public void valueNull() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2302,7 +2302,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"two", "", ""},
-            FF = {"two", "two", "two"})
+            FF45 = {"two", "two", "two"})
     public void valueOther() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2371,10 +2371,10 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
+            + "    <title></title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
-            + "      alert('mouse over');\n"
+            + "      document.title += 'mouse over';\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -2392,22 +2392,23 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "mouse over")
+    @Alerts(DEFAULT = "",
+            FF = "mouse over")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
+            + "    <title></title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
-            + "      alert('mouse over');\n"
+            + "      document.title += 'mouse over';\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -2425,7 +2426,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
