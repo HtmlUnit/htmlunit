@@ -358,13 +358,14 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "mouse over [disabledBtn]")
+    @Alerts(DEFAULT = "Test:",
+            FF = "Test:mouse over [disabledBtn]")
     public void mouseOverDiabled() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
+            + "    <title>Test:</title>\n"
             + "    <script>\n"
             + "    function dumpEvent(event) {\n"
             + "      // target\n"
@@ -384,7 +385,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      alert(msg);\n"
+            + "      document.title += msg;\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -400,6 +401,6 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("disabledBtn")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 }
