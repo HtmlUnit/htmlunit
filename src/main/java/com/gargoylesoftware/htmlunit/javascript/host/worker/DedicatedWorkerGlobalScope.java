@@ -119,7 +119,8 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[DedicatedWorker] postMessage: {}" + message);
         }
-        final JavaScriptEngine jsEngine = owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine =
+                (JavaScriptEngine) owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
@@ -143,7 +144,8 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
-        final JavaScriptEngine jsEngine = owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine =
+                (JavaScriptEngine) owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
@@ -198,7 +200,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         final WebRequest webRequest = new WebRequest(fullUrl);
         final WebResponse response = webClient.loadWebResponse(webRequest);
         final String scriptCode = response.getContentAsString();
-        final JavaScriptEngine javaScriptEngine = webClient.getJavaScriptEngine();
+        final JavaScriptEngine javaScriptEngine = (JavaScriptEngine) webClient.getJavaScriptEngine();
 
         final DedicatedWorkerGlobalScope thisScope = this;
         final ContextAction action = new ContextAction() {
@@ -206,7 +208,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
             public Object run(final Context cx) {
                 final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
                         fullUrl.toExternalForm(), 1);
-                return webClient.getJavaScriptEngine().execute(page, thisScope, script);
+                return javaScriptEngine.execute(page, thisScope, script);
             }
         };
 

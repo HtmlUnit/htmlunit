@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
@@ -214,7 +214,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                     executeScriptIfNeeded();
                 }
             };
-            final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
     }
@@ -235,21 +235,27 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final PostponedAction action = new PostponedAction(getPage(), "Execution of script " + this) {
             @Override
             public void execute() {
-                final HTMLDocument jsDoc = (HTMLDocument)
-                        ((Window) getPage().getEnclosingWindow().getScriptableObject()).getDocument();
-                jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
-                        && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                HTMLDocument jsDoc = null;
+                final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
+                // null for Nashorn
+                if (window != null) {
+                    jsDoc = (HTMLDocument) window.getDocument();
+                    jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
+                            && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                }
 
                 try {
                     executeScriptIfNeeded();
                 }
                 finally {
-                    jsDoc.setExecutingDynamicExternalPosponed(false);
+                    if (jsDoc != null) {
+                        jsDoc.setExecutingDynamicExternalPosponed(false);
+                    }
                 }
             }
         };
 
-        final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
         if (hasAttribute("async") && !engine.isScriptRunning()) {
             final HtmlPage owningPage = getHtmlPageOrNull();
             owningPage.addAfterLoadAction(action);

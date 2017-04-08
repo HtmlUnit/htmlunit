@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
@@ -33,7 +35,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Tests for {@link History}.

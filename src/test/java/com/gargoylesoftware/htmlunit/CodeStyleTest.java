@@ -638,10 +638,9 @@ public class CodeStyleTest {
                             + relativePath + ", line: " + index);
                 }
                 if (line.contains(".getBrowserVersionNumeric()")
-                        && !relativePath.contains("IEConditionalCommentExpressionEvaluator")
-                        && !relativePath.contains("IEConditionalCompilationScriptPreProcessor")
                         && !relativePath.contains("BrowserConfiguration")
-                        && !relativePath.contains("Window.java")) {
+                        && !relativePath.contains("Window.java")
+                        && !relativePath.contains("Window2.java")) {
                     addFailure(".getBrowserVersionNumeric() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }
@@ -686,24 +685,26 @@ public class CodeStyleTest {
         if (relativePath.contains("main") && relativePath.contains("host")) {
             String fileName = relativePath.substring(0, relativePath.length() - 5);
             fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
-            boolean failureFound = false;
-            for (final String line : lines) {
-                if (line.startsWith(" * ")) {
-                    int p0 = line.indexOf("{@code ");
-                    if (p0 != -1) {
-                        p0 = p0 + "{@code ".length();
-                        final int p1 = line.indexOf('}', p0 + 1);
-                        final String name = line.substring(p0, p1);
-                        if (!name.equals(fileName)) {
-                            failureFound = true;
+            if (!fileName.endsWith("2")) {
+                boolean failureFound = false;
+                for (final String line : lines) {
+                    if (line.startsWith(" * ")) {
+                        int p0 = line.indexOf("{@code ");
+                        if (p0 != -1) {
+                            p0 = p0 + "{@code ".length();
+                            final int p1 = line.indexOf('}', p0 + 1);
+                            final String name = line.substring(p0, p1);
+                            if (!name.equals(fileName)) {
+                                failureFound = true;
+                            }
                         }
                     }
-                }
-                else if (line.startsWith("public class")) {
-                    if (failureFound) {
-                        addFailure("Incorrect host class in " + relativePath);
+                    else if (line.startsWith("public class")) {
+                        if (failureFound) {
+                            addFailure("Incorrect host class in " + relativePath);
+                        }
+                        return;
                     }
-                    return;
                 }
             }
         }

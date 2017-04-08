@@ -169,7 +169,11 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @return a WebClient with the current {@link BrowserVersion}
      */
     protected WebClient createNewWebClient() {
-        return new WebClient(getBrowserVersion());
+        final WebClient webClient = new WebClient(getBrowserVersion());
+        if (System.getProperty(NASHRON) != null) {
+            webClient.getInternals().setUseNashorn();
+        }
+        return webClient;
     }
 
     /**

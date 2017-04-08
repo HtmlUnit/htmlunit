@@ -111,7 +111,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @param description a text useful for debugging
      */
     public XMLDOMNodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        this(parentScope.getScriptableObject(), attributeChangeSensitive, description);
+        this((ScriptableObject) parentScope.getScriptableObject(), attributeChangeSensitive, description);
         setDomNode(parentScope, false);
     }
 
@@ -121,7 +121,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @param initialElements the initial content for the cache
      */
     protected XMLDOMNodeList(final DomNode parentScope, final List<DomNode> initialElements) {
-        this(parentScope.getScriptableObject(), true, null);
+        this((ScriptableObject) parentScope.getScriptableObject(), true, null);
         cachedElements_ = new ArrayList<>(initialElements);
     }
 

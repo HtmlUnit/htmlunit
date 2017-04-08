@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Popup;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

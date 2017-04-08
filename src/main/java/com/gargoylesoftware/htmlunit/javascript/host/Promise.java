@@ -245,7 +245,8 @@ public class Promise extends SimpleScriptable {
             }
         };
 
-        final JavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine
+            = (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
         jsEngine.addPostponedAction(thenAction);
 
         return promise;
@@ -279,7 +280,8 @@ public class Promise extends SimpleScriptable {
             }
         };
 
-        final JavaScriptEngine jsEngine = window.getWebWindow().getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine
+            = (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
         jsEngine.addPostponedAction(thenAction);
 
         return promise;

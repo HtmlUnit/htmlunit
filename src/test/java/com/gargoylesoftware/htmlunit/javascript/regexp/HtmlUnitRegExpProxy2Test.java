@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,6 +21,13 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -103,7 +104,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     @Test
     public void needCustomFix() {
         final WebClient client = getWebClient();
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
         final Context ctx = cf.enterContext();
         try {
             final ScriptableObject topScope = ctx.initStandardObjects();
@@ -132,7 +133,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     @Test
     public void matchFixNeeded() throws Exception {
         final WebClient client = getWebClient();
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+        final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
         final Context cx = cf.enterContext();
         try {
             final ScriptableObject topScope = cx.initStandardObjects();

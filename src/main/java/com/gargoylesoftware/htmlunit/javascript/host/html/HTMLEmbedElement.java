@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@link HtmlEmbed}.
+ * The JavaScript object {@code HTMLEmbedElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * A JavaScript object for {@link HtmlCanvas}.
+ * The JavaScript object {@code HTMLCanvasElement}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

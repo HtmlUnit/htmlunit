@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.UrlFetchWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
 /**
@@ -108,7 +109,7 @@ public class GAELoadPageTest {
 
             client.getPage(FIRST_URL);
 
-            final int executedJobs = client.getJavaScriptEngine().pumpEventLoop(1000);
+            final int executedJobs = ((JavaScriptEngine) client.getJavaScriptEngine()).pumpEventLoop(1000);
             final String[] alerts = {String.valueOf(XMLHttpRequest.UNSENT),
                 String.valueOf(XMLHttpRequest.OPENED),
                 String.valueOf(XMLHttpRequest.HEADERS_RECEIVED),
@@ -146,19 +147,20 @@ public class GAELoadPageTest {
 
             assertTrue(collectedAlerts.isEmpty());
 
+            final JavaScriptEngine engine = (JavaScriptEngine) client.getJavaScriptEngine();
             // pump but not long enough
-            int executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 2);
+            int executedJobs = engine.pumpEventLoop(timeout / 2);
             assertTrue(collectedAlerts.isEmpty());
 
             // pump a bit more
-            executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
+            executedJobs = engine.pumpEventLoop(timeout + 1);
             long count = (System.currentTimeMillis() - startTime) / timeout;
             count = Math.max(1, count);
             assertEquals(count, collectedAlerts.size());
             assertEquals(count, executedJobs);
 
             // pump even more
-            executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
+            executedJobs += engine.pumpEventLoop(timeout + 1);
             count = (System.currentTimeMillis() - startTime) / timeout;
             count = Math.max(2, count);
             assertEquals(count, collectedAlerts.size());
@@ -190,17 +192,18 @@ public class GAELoadPageTest {
             client.setWebConnection(conn);
             client.getPage(FIRST_URL);
 
-            int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
+            final JavaScriptEngine engine = (JavaScriptEngine) client.getJavaScriptEngine();
+            int executedJobs = engine.pumpEventLoop(20);
             assertEquals(Arrays.asList("hello"), collectedAlerts);
             assertEquals(1, executedJobs);
 
-            executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
+            executedJobs = engine.pumpEventLoop(20);
             assertEquals(Arrays.asList("hello"), collectedAlerts);
             assertEquals(0, executedJobs);
 
             while (executedJobs < 1) {
                 assertEquals(Arrays.asList("hello"), collectedAlerts);
-                executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 10);
+                executedJobs = engine.pumpEventLoop(timeout / 10);
             }
 
             assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);

@@ -77,15 +77,21 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -960,7 +966,7 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.NOOP;
         }
 
-        final Script script;
+        final Object script;
         try {
             script = loadJavaScriptFromUrl(scriptURL, charset);
         }
@@ -977,7 +983,13 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.COMPILATION_ERROR;
         }
 
-        client.getJavaScriptEngine().execute(this, script);
+        final AbstractJavaScriptEngine engine = client.getJavaScriptEngine();
+        if (engine instanceof JavaScriptEngine) {
+            ((JavaScriptEngine) engine).execute(this, (Script) script);
+        }
+        else {
+            ((NashornJavaScriptEngine) engine).execute(this, (ScriptFunction) script);
+        }
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -993,7 +1005,7 @@ public class HtmlPage extends SgmlPage {
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Script loadJavaScriptFromUrl(final URL url, final Charset charset) throws IOException,
+    private Object loadJavaScriptFromUrl(final URL url, final Charset charset) throws IOException,
         FailingHttpStatusCodeException {
 
         Charset scriptEncoding = charset;
@@ -1016,8 +1028,8 @@ public class HtmlPage extends SgmlPage {
         // now we can look into the cache with the fixed request for
         // a cached script
         final Object cachedScript = cache.getCachedObject(request);
-        if (cachedScript instanceof Script) {
-            return (Script) cachedScript;
+        if (cachedScript instanceof Script || cachedScript instanceof ScriptFunction) {
+            return cachedScript;
         }
 
         client.printContentIfNecessary(response);
@@ -1064,8 +1076,15 @@ public class HtmlPage extends SgmlPage {
 
         final String scriptCode = response.getContentAsString(scriptEncoding);
         if (null != scriptCode) {
-            final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
-            final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
+            final AbstractJavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
+            final Object script;
+            if (javaScriptEngine instanceof JavaScriptEngine) {
+                script = ((JavaScriptEngine) javaScriptEngine).compile(this, scriptCode, url.toExternalForm(), 1);
+            }
+            else {
+                script = ((NashornJavaScriptEngine) javaScriptEngine)
+                        .compile(this, scriptCode, url.toExternalForm(), 1);
+            }
             if (script != null && cache.cacheIfPossible(request, response, script)) {
                 // no cleanup if the response is stored inside the cache
                 return script;
@@ -1757,13 +1776,25 @@ public class HtmlPage extends SgmlPage {
                 && !(element instanceof HtmlObject)) {
             // second try are JavaScript attributes
             // ...but applets/objects are a bit special so ignore them
-            final ScriptableObject scriptObject = element.getScriptableObject();
-            // we have to make sure the scriptObject has a slot for the given attribute.
-            // just using get() may use e.g. getWithPreemption().
-            if (scriptObject.has(attribute, scriptObject)) {
-                final Object jsValue = scriptObject.get(attribute, scriptObject);
-                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
-                    value = (String) jsValue;
+            final Object o = element.getScriptableObject();
+            if (o instanceof ScriptableObject) {
+                final ScriptableObject scriptObject = (ScriptableObject) o;
+                // we have to make sure the scriptObject has a slot for the given attribute.
+                // just using get() may use e.g. getWithPreemption().
+                if (scriptObject.has(attribute, scriptObject)) {
+                    final Object jsValue = scriptObject.get(attribute, scriptObject);
+                    if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+                        value = (String) jsValue;
+                    }
+                }
+            }
+            else {
+                final ScriptObject scriptObject = (ScriptObject) o;
+                if (scriptObject.has(attribute)) {
+                    final Object jsValue = scriptObject.get(attribute);
+                    if (jsValue != null /*&& jsValue != Scriptable.NOT_FOUND*/ && jsValue instanceof String) {
+                        value = (String) jsValue;
+                    }
                 }
             }
         }
@@ -2466,9 +2497,44 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
+        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Execute a Function in the given context.
+     *
+     * @param function the JavaScript Function to call
+     * @param thisObject the "this" object to be used during invocation
+     * @param args the arguments to pass into the call
+     * @param htmlElementScope the HTML element for which this script is being executed
+     * This element will be the context during the JavaScript execution. If null,
+     * the context will default to the page.
+     * @return a ScriptResult which will contain both the current page (which may be different than
+     * the previous page and a JavaScript result object.
+     */
+    public ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function,
+            final ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
+
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+            return new ScriptResult(null, this);
+        }
+
+        final ScriptFunction functionToCall;
+        if (function.getName().isEmpty()) {
+            functionToCall = function;
+        }
+        else {
+            ScriptRuntime.apply(function, thisObject);
+            functionToCall = (ScriptFunction) thisObject.get("on" + ((Event2) args[0]).getType());
+        }
+
+        final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
+        getWebClient().getJavaScriptEngine().processPostponedActions();
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 

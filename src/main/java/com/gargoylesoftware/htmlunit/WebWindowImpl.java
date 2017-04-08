@@ -19,7 +19,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.script.ScriptContext;
+import javax.script.SimpleScriptContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +32,8 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -49,11 +56,14 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private ScriptableObject scriptObject_;
+    private transient ScriptObject global_;
+    private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
     private final History history_ = new History(this);
     private boolean closed_;
+    private Map<Object, Object> threadLocalMap_;
 
     private int innerHeight_;
     private int outerHeight_;
@@ -153,11 +163,27 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     /**
+     * @param scriptObject the scriptObject to set
+     */
+    @Override
+    public void setScriptObject(final ScriptObject scriptObject) {
+        this.global_ = scriptObject;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public ScriptableObject getScriptableObject() {
         return scriptObject_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Global getGlobal() {
+        return (Global) global_;
     }
 
     /**
@@ -335,4 +361,27 @@ public abstract class WebWindowImpl implements WebWindow {
         outerHeight_ = outerHeight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScriptContext getScriptContext() {
+        return scriptContext_;
+    }
+
+    @Override
+    public final Object getThreadLocal(final Object key) {
+        if (threadLocalMap_ == null) {
+            return null;
+        }
+        return threadLocalMap_.get(key);
+    }
+
+    @Override
+    public final synchronized void putThreadLocal(final Object key, final Object value) {
+        if (threadLocalMap_ == null) {
+            threadLocalMap_ = new HashMap<>();
+        }
+        threadLocalMap_.put(key, value);
+    }
 }

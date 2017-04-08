@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import javax.swing.Popup;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

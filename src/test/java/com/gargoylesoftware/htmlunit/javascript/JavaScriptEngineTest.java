@@ -1128,8 +1128,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client1 = getWebClient();
         final WebClient client2 = createNewWebClient();
 
-        final ContextFactory cf1 = client1.getJavaScriptEngine().getContextFactory();
-        final ContextFactory cf2 = client2.getJavaScriptEngine().getContextFactory();
+        final ContextFactory cf1 = ((JavaScriptEngine) client1.getJavaScriptEngine()).getContextFactory();
+        final ContextFactory cf2 = ((JavaScriptEngine) client2.getJavaScriptEngine()).getContextFactory();
 
         assertFalse(cf1 == cf2);
         assertFalse(cf1 == ContextFactory.getGlobal());
@@ -1213,7 +1213,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final WebClient webClient = getWebClient();
-        final JavaScriptEngine engine = webClient.getJavaScriptEngine();
+        final AbstractJavaScriptEngine engine = webClient.getJavaScriptEngine();
 
         engine.addPostponedAction(new PostponedAction(page) {
             @Override
@@ -1228,7 +1228,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     @SuppressWarnings("unchecked")
-    private static ThreadLocal<List<PostponedAction>> getPostponedActions(final JavaScriptEngine engine) {
+    private static ThreadLocal<List<PostponedAction>> getPostponedActions(final AbstractJavaScriptEngine engine) {
         try {
             final Field field = engine.getClass().getDeclaredField("postponedActions_");
             field.setAccessible(true);
@@ -1383,7 +1383,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void useAfterShutdownShouldNotCreateThreads() {
         final WebClient webClient = getWebClient();
         final WebWindow window = webClient.getCurrentWindow();
-        final JavaScriptEngine engine = webClient.getJavaScriptEngine();
+        final AbstractJavaScriptEngine engine = webClient.getJavaScriptEngine();
         webClient.close();
         engine.registerWindowAndMaybeStartEventLoop(window);
         assertTrue(getJavaScriptThreads().isEmpty());

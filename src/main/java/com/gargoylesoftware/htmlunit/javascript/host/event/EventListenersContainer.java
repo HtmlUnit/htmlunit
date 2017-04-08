@@ -40,6 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Container for event listener.
+ *
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour

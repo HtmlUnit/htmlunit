@@ -200,7 +200,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final BrowserVersion browser = getBrowserVersion();
         if (stateChangeHandler_ != null && (async_ || state == DONE)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
@@ -217,7 +217,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         if (state == DONE) {
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
             final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
             final Object[] params = new Event[] {event};
@@ -304,7 +304,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private void processError(Context context) {
         if (errorHandler_ != null) {
             final Scriptable scope = errorHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
             final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
 
@@ -638,7 +638,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();
-            final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+            final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction action = new ContextAction() {
                 @Override
                 public Object run(final Context cx) {

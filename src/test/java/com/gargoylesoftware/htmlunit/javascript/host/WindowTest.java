@@ -508,7 +508,6 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test to reproduce a known bug.
      * @throws Exception if the test fails
      */
     @Test

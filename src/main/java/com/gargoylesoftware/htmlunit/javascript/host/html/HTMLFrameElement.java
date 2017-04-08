@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
 
 /**
- * A JavaScript object for a {@link HtmlFrame}.
+ * The JavaScript object {@code HTMLFrameElement}.
  *
  * @author Marc Guillemot
  * @author Chris Erskine

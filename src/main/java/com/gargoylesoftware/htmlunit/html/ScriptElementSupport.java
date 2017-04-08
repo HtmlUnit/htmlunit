@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -87,7 +87,7 @@ public final class ScriptElementSupport {
             }
         };
 
-        final JavaScriptEngine engine = element.getPage().getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine engine = element.getPage().getWebClient().getJavaScriptEngine();
         if (element.hasAttribute("async") && !engine.isScriptRunning()) {
             final HtmlPage owningPage = element.getHtmlPageOrNull();
             owningPage.addAfterLoadAction(action);

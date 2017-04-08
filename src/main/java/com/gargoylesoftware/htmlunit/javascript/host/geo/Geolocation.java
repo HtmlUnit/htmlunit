@@ -162,7 +162,8 @@ public class Geolocation extends SimpleScriptable {
                 final Position position = new Position(coordinates);
                 position.setPrototype(getPrototype(position.getClass()));
 
-                final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+                final JavaScriptEngine jsEngine =
+                        (JavaScriptEngine) getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
                 jsEngine.callFunction((HtmlPage) getWindow().getWebWindow().getEnclosedPage(), successHandler_, this,
                         getParentScope(), new Object[] {position});
             }

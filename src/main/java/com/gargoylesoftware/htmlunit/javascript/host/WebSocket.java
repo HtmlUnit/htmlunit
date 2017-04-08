@@ -383,7 +383,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         evt.setParentScope(getParentScope());
         evt.setPrototype(getPrototype(evt.getClass()));
 
-        final JavaScriptEngine engine = containingPage_.getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine engine
+            = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
         engine.getContextFactory().call(new ContextAction() {
             @Override
             public ScriptResult run(final Context cx) {
@@ -397,7 +398,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             return;
         }
         final Scriptable scope = function.getParentScope();
-        final JavaScriptEngine engine = containingPage_.getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine engine
+            = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
         engine.callFunction(containingPage_, function, scope, this, args);
     }
 

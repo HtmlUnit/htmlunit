@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * JavaScript object representing the PointerEvent.
+ * JavaScript object representing a {@code PointerEvent}.
  * @see <a href="http://www.w3.org/TR/pointerevents/">W3C Spec</a>
  * @see <a href="http://msdn.microsoft.com/en-us/library/ie/hh772103.aspx">MSDN</a>
  *

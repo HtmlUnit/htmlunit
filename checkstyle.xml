@@ -28,8 +28,6 @@
         <property name="header" value="/*\n * Copyright (c) 2002-2017 Gargoyle Software Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n"/>
     </module>
 
-    <module name="FileLength"/>
-
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
     </module>
@@ -115,9 +113,6 @@
         <module name="LineLength">
             <property name="max" value="120"/>
         </module>
-        <module name="MethodLength">
-            <property name="max" value="175"/>
-        </module>
 
         <module name="ConstantName">
             <property name="format" value="log|^[a-zA-Z][a-zA-Z0-9_]*$"/>
@@ -167,10 +162,6 @@
         <module name="IllegalImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
-
-        <!-- Checks for Size Violations.                    -->
-        <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="ParameterNumber"/>
 
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->

@@ -107,4 +107,10 @@ public interface AbstractJavaScriptEngine {
      * @return {@code true} if JavaScript is running
      */
     boolean isScriptRunning();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * Indicates that no postponed action should be executed.
+     */
+    void holdPosponedActions();
 }

@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
- * Wrapper for the HTML element "frameset".
+ * The JavaScript object {@code HTMLFrameSetElement}.
  *
  * @author Bruce Chapman
  * @author Ahmed Ashour

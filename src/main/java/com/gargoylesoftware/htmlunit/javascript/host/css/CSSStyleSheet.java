@@ -861,7 +861,7 @@ public class CSSStyleSheet extends StyleSheet {
 
                         validateSelectors(selectorList, 9, element);
 
-                        return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element,
+                        return !selects(browserVersion, selectorList.item(0), element,
                                 null, fromQuerySelectorAll);
                     }
                     catch (final IOException e) {

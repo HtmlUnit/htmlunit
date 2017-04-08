@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 
 /**
@@ -30,7 +32,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
  */
 public class WebClientInternals implements Serializable {
 
+    private final WebClient webClient_;
     private Collection<Listener> listeners_;
+
+    WebClientInternals(final WebClient webClient) {
+        webClient_ = webClient;
+    }
 
     /**
      * Adds a new {@link Listener}.
@@ -70,6 +77,13 @@ public class WebClientInternals implements Serializable {
                 }
             }
         }
+    }
+
+    /**
+     * Sets the {@link AbstractJavaScriptEngine} to be {@link NashornJavaScriptEngine}.
+     */
+    public void setUseNashorn() {
+        webClient_.setJavaScriptEngine(new NashornJavaScriptEngine(webClient_));
     }
 
     /**

@@ -2110,7 +2110,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 
-        final JavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine jsEngine
+            = (JavaScriptEngine) getWebWindow().getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
             @Override
             public void execute() throws Exception {

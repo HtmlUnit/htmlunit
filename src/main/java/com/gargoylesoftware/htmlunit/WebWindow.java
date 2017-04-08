@@ -16,7 +16,11 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
+import javax.script.ScriptContext;
+
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -101,6 +105,16 @@ public interface WebWindow extends Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
+     * Sets the JavaScript object that corresponds to this element. This is not guaranteed
+     * to be set even if there is a JavaScript object for this HTML element.
+     *
+     * @param scriptObject the JavaScript object
+     */
+    void setScriptObject(ScriptObject scriptObject);
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns the JavaScript object that corresponds to this element.
      *
      * @return the JavaScript object that corresponds to this element
@@ -177,4 +191,43 @@ public interface WebWindow extends Serializable {
      * @param outerHeight the outer height
      */
     void setOuterHeight(int outerHeight);
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the JavaScript object that corresponds to this element.
+     *
+     * @return the JavaScript object that corresponds to this element
+     */
+    Global getGlobal();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the {@link ScriptContext}
+     *
+     * @return the {@link ScriptContext}
+     */
+    ScriptContext getScriptContext();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns a thread local object.
+     *
+     * @param key the object key
+     *
+     * @return the thread local object
+     */
+    Object getThreadLocal(Object key);
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Puts a thread local object by {@code key}.
+     *
+     * @param key the object key
+     * @param value the object value
+     */
+    void putThreadLocal(Object key, Object value);
 }

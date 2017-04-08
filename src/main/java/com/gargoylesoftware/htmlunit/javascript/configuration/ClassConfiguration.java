@@ -23,11 +23,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A container for all the JavaScript configuration information for one class.

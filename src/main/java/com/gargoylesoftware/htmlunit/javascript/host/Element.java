@@ -63,7 +63,7 @@ import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * A JavaScript object for {@link DomElement}.
+ * A JavaScript object for {@code Element}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

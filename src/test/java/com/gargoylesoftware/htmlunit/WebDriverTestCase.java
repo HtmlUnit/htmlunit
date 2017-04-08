@@ -450,7 +450,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(BrowserType.HTMLUNIT);
             capabilities.setVersion(getBrowserName(getBrowserVersion()));
-            webDriver_ = new HtmlUnitDriver(capabilities);
+            webDriver_ = new HtmlUnitDriver(capabilities) {
+                @Override
+                protected WebClient newWebClient(final BrowserVersion version) {
+                    final WebClient webClient = super.newWebClient(version);
+                    if (System.getProperty(NASHRON) != null) {
+                        webClient.getInternals().setUseNashorn();
+                    }
+                    return webClient;
+                }
+            };
         }
         return webDriver_;
     }
@@ -1124,7 +1133,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final Field field = driver.getClass().getDeclaredField("currentWindow");
+        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
         field.setAccessible(true);
         return (WebWindow) field.get(driver);
     }

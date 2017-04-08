@@ -164,7 +164,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
 
         if (stateChangeHandler_ != null && !openedMultipleTimes_) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
@@ -463,7 +463,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         else {
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();
-            final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+            final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction action = new ContextAction() {
                 @Override
                 public Object run(final Context cx) {

@@ -74,12 +74,15 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
+import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -90,6 +93,7 @@ import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -145,7 +149,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
-    private transient JavaScriptEngine scriptEngine_;
+    private transient AbstractJavaScriptEngine scriptEngine_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
@@ -197,7 +201,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
     private WebClientOptions options_ = new WebClientOptions();
-    private WebClientInternals internals_ = new WebClientInternals();
+    private WebClientInternals internals_ = new WebClientInternals(this);
     private final StorageHolder storageHolder_ = new StorageHolder();
 
     private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
@@ -627,7 +631,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never {@code null})
      */
-    public JavaScriptEngine getJavaScriptEngine() {
+    public AbstractJavaScriptEngine getJavaScriptEngine() {
         return scriptEngine_;
     }
 
@@ -636,7 +640,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param engine the new script engine to use
      */
-    public void setJavaScriptEngine(final JavaScriptEngine engine) {
+    public void setJavaScriptEngine(final AbstractJavaScriptEngine engine) {
         if (engine == null) {
             throw new IllegalArgumentException("Can't set JavaScriptEngine to null");
         }
@@ -1069,7 +1073,14 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
-        ((Window) newPage.getEnclosingWindow().getScriptableObject()).initialize(newPage);
+        final WebWindow webWindow = newPage.getEnclosingWindow();
+        if (webWindow.getScriptableObject() instanceof Window) {
+            ((Window) webWindow.getScriptableObject()).initialize(newPage);
+        }
+        else {
+            final Global global = NashornJavaScriptEngine.getGlobal(newPage.getEnclosingWindow());
+            global.<Window2>getWindow().initialize(newPage);
+        }
     }
 
     /**
