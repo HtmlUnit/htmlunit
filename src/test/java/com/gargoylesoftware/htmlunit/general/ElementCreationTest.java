@@ -775,8 +775,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen}.
-     *
      * @throws Exception if an error occurs
      */
     @Test

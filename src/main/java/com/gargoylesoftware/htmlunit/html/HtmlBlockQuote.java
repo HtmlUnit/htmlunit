@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLKEYGEN_END_TAG_FORBIDDEN;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -53,5 +55,17 @@ public class HtmlBlockQuote extends HtmlElement {
      */
     public final String getCiteAttribute() {
         return getAttribute("cite");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if ("keygen".equals(getNodeName()) && hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN)) {
+            return DisplayStyle.INLINE;
+        }
+
+        return super.getDefaultStyleDisplay();
     }
 }

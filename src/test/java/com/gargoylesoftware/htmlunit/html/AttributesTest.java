@@ -143,8 +143,10 @@ public class AttributesTest extends TestCase {
             }
         }
 
+        supportedTags.remove("keygen");
+
         if (!supportedTags.isEmpty()) {
-            throw new RuntimeException("Missing tag class(es) " + supportedTags.toString());
+            throw new RuntimeException("Missing tag class(es) " + supportedTags);
         }
         return suite;
     }

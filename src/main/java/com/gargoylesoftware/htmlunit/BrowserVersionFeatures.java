@@ -442,6 +442,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     HTMLINPUT_FILE_VALUE_NO_PATH,
 
+    /** Should the HTMLElement of {@code keygen} have no end tag. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLKEYGEN_END_TAG_FORBIDDEN,
+
     /** If the type is present for a link only use if type is text/css. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,

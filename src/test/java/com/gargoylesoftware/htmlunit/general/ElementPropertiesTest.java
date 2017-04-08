@@ -1677,8 +1677,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen}.
-     *
      * @throws Exception if the test fails
      */
     @Test
