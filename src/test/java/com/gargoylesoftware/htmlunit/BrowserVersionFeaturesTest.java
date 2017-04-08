@@ -65,6 +65,7 @@ public class BrowserVersionFeaturesTest  {
     public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<>();
         browsers.add(BrowserVersion.FIREFOX_45);
+        browsers.add(BrowserVersion.FIREFOX_52);
         browsers.add(BrowserVersion.INTERNET_EXPLORER);
         browsers.add(BrowserVersion.CHROME);
         browsers.add(BrowserVersion.EDGE);
