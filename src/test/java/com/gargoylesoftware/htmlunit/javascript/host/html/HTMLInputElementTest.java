@@ -1893,7 +1893,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title></title>\n"
             + "    <script>\n"
             + "    function dumpEvent(event) {\n"
             + "      // target\n"

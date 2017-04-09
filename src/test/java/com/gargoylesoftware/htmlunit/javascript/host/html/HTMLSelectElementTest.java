@@ -2371,7 +2371,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title></title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
             + "      document.title += 'mouse over';\n"
@@ -2405,7 +2404,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title></title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
             + "      document.title += 'mouse over';\n"

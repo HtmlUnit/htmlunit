@@ -218,7 +218,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
                HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "<title></title>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var elem = document.getElementById('text1');\n"
@@ -253,7 +252,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "<title></title>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var elem = document.getElementById('text1');\n"
