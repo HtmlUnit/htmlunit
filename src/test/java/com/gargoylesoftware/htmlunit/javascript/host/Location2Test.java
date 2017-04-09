@@ -121,7 +121,8 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"", "about:blank", "blank", "", "about:", ""},
-            FF = {"", "about:blank", "", "", "about:", ""},
+            FF45 = {"", "about:blank", "", "", "about:", ""},
+            FF52 = {"", "about:blank", "blank", "", "about:", ""},
             IE = {"", "about:blank", "/blank", "", "about:", ""})
     public void about_blank_attributes() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -535,24 +536,25 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "2", "3"})
+    @Alerts("1 2 3")
     public void href_postponed() throws Exception {
         final String firstHtml =
             "<html><head><script>\n"
             + "function test() {\n"
-            + "  alert('1');\n"
+            + "  document.title += ' 1';\n"
             + "  self.frames['frame1'].document.location.href='" + URL_SECOND + "';\n"
-            + "  alert('2');\n"
+            + "  document.title += ' 2';\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <iframe name='frame1' id='frame1'/>\n"
             + "</body></html>";
-        final String secondHtml = "<html><body><script>alert('3');</script></body></html>";
+        final String secondHtml = "<html><body><script>top.document.title += ' 3';</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        loadPageWithAlerts2(firstHtml);
+        final WebDriver driver = loadPage2(firstHtml);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
