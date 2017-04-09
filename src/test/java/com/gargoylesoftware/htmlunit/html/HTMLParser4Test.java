@@ -174,6 +174,31 @@ public class HTMLParser4Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"from script", "from body"})
+    public void badlyFormedHTML_duplicateHead() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "  <head>\n"
+            + "    <title>foo</title>\n"
+            + "    <script src='script.js'></script>\n"
+            + "  </head>\n"
+            + "  </head>\n"
+            + "  <body>"
+            + "    <p>HtmlUnit</p>"
+            + "    <script>alert('from body');</script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("alert('from script')", 200, "OK", null);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test when an illegal tag is found in head as some websites do.
      * @throws Exception failure
      */
