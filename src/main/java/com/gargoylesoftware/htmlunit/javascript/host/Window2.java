@@ -1321,7 +1321,8 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * Cancels a time-out previously set with the {@link #setTimeout(Object, Object, int, Object)} method.
      *
      * @param self this object
-     * @param timeoutId identifier for the timeout to clear (returned by {@link #setTimeout(Object, int, Object)})
+     * @param timeoutId identifier for the timeout to clear
+     *        (returned by {@link #setTimeout(Object, Object, int, Object)})
      */
     @Function
     public static void clearTimeout(final Object self, final int timeoutId) {
@@ -1858,7 +1859,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * Current implementation does nothing.
      * @param self self
      * @param intervalID specifies the interval to cancel as returned by the
-     *        {@link #setInterval(Object, int, Object)} method
+     *        {@link #setInterval(Object, Object, int, Object)} method
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     @Function
