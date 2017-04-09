@@ -19,6 +19,7 @@ import java.net.URL;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -94,54 +95,58 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"start worker", "in imported script1", "in imported script2", "end worker"})
+    @Alerts("start worker in imported script1 in imported script2 end worker")
     public void importScripts() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert(e.data);\n"
+            + "    document.title += e.data;\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { document.title += ' exception'; }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('start worker');\n"
                 + "importScripts('scriptToImport1.js', 'scriptToImport2.js');\n"
-                + "postMessage('end worker');\n";
+                + "postMessage(' end worker');\n";
 
-        final String scriptToImportJs1 = "postMessage('in imported script1');\n";
-        final String scriptToImportJs2 = "postMessage('in imported script2');\n";
+        final String scriptToImportJs1 = "postMessage(' in imported script1');\n";
+        final String scriptToImportJs2 = "postMessage(' in imported script2');\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport2.js"), scriptToImportJs2);
 
-        loadPageWithAlerts2(html, 2000);
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DedicatedWorkerGlobalScope]", "[object DedicatedWorkerGlobalScope]", "true"},
-            IE = {"[object WorkerGlobalScope]", "[object WorkerGlobalScope]", "true"})
+    @Alerts(DEFAULT = "[object DedicatedWorkerGlobalScope] [object DedicatedWorkerGlobalScope] true",
+            IE = "[object WorkerGlobalScope] [object WorkerGlobalScope] true")
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert(e.data);\n"
+            + "    document.title += e.data;\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { document.tilte += ' exception'; }\n"
             + "</script></body></html>\n";
 
-        final String workerJs = "postMessage('' + this);\n"
-                + "postMessage('' + self);\n"
-                + "postMessage('' + (this == self));\n";
+        final String workerJs = "postMessage(' ' + this);\n"
+                + "postMessage(' ' + self);\n"
+                + "postMessage(' ' + (this == self));\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
-        loadPageWithAlerts2(html, 2000);
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
