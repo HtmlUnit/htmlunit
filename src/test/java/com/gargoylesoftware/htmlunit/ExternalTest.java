@@ -47,6 +47,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class ExternalTest {
 
+    /** Chrome driver. */
+    static String CHROME_DRIVER_ = "2.29";
+
     private static final DateFormat TEAM_CITY_FORMAT_ = new SimpleDateFormat("dd MMM yy HH:mm", Locale.ROOT);
 
     /**
@@ -79,7 +82,7 @@ public class ExternalTest {
                 }
             }
             assertVersion("org.sonatype.oss", "oss-parent", "9");
-            assertChromeDriver("2.28");
+            assertChromeDriver();
         }
     }
 
@@ -96,11 +99,11 @@ public class ExternalTest {
         }
     }
 
-    private static void assertChromeDriver(final String version) throws Exception {
+    private static void assertChromeDriver() throws Exception {
         try (WebClient webClient = getWebClient()) {
             final AbstractPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
-            assertEquals("Chrome Driver", pageContent, version);
+            assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
         }
     }
 
