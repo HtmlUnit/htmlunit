@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.27" date="???" description="Bugfixes">
+        <release version="2.27" date="???" description="GAE broken, Bugfixes">
             <action type="fix" dev="asashour">
                 HtmlScript: charset attribute should not be considered.
             </action>

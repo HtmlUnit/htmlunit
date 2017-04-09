@@ -298,7 +298,7 @@ public class Document2 extends EventNode2 {
      * Does nothing special anymore.
      *
      * @param type the type of events to capture
-     * @see Window2#captureEvents(String)
+     * @see Window2#captureEvents(Object, String)
      */
     @Function
     public void captureEvents(final String type) {

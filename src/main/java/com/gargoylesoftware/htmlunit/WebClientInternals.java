@@ -83,7 +83,7 @@ public class WebClientInternals implements Serializable {
      * Sets the {@link AbstractJavaScriptEngine} to be {@link NashornJavaScriptEngine}.
      */
     public void setUseNashorn() {
-        webClient_.setJavaScriptEngine(new NashornJavaScriptEngine(webClient_));
+//        webClient_.setJavaScriptEngine(new NashornJavaScriptEngine(webClient_));
     }
 
     /**

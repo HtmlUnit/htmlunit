@@ -248,7 +248,6 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the search portion of the link's URL (the portion starting with
      * '?' and up to but not including any '#').
      * @return the search portion of the link's URL
-     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     @Getter

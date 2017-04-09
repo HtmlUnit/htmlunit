@@ -102,7 +102,7 @@ public class EventTarget2 extends SimpleScriptObject {
      * Executes the event on this object only (needed for instance for onload on (i)frame tags).
      * @param event the event
      * @return the result
-     * @see #fireEvent(Event)
+     * @see #fireEvent(Event2)
      */
     public ScriptResult executeEventLocally(final Event2 event) {
         final EventListenersContainer2 eventListenersContainer = getEventListenersContainer();

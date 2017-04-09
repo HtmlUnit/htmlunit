@@ -92,7 +92,6 @@ public class NamedNodeMap2 extends SimpleScriptObject {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Gets the specified attribute but does not handle the synthetic class attribute for IE.
-     * @see #getNamedItem(String)
      *
      * @param name attribute name
      * @return the attribute node, {@code null} if the attribute is not defined
