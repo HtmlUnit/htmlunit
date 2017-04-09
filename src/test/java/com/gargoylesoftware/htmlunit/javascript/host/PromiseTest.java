@@ -213,8 +213,8 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "fulfilled!", "TypeError: Throwing", "Resolving"},
-            IE = {})
+    @Alerts(DEFAULT = {"true fulfilled! TypeError: Throwing Resolving"},
+            IE = "")
     public void resolveThenables() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -223,15 +223,15 @@ public class PromiseTest extends WebDriverTestCase {
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve({\n"
             + "          then: function(onFulfill, onReject) {\n"
-            + "            onFulfill('fulfilled!');\n"
+            + "            onFulfill(' fulfilled!');\n"
             + "          }\n"
             + "        });\n"
-            + "        alert(p1 instanceof Promise);\n"
+            + "        document.title += p1 instanceof Promise;\n"
             + "\n"
             + "        p1.then(function(v) {\n"
-            + "            alert(v);\n"
+            + "            document.title += v;\n"
             + "        }, function(e) {\n"
-            + "            alert('failure');\n"
+            + "            document.title += 'failure';\n"
             + "        });\n"
             + "\n"
             + "        var thenable = {\n"
@@ -243,9 +243,9 @@ public class PromiseTest extends WebDriverTestCase {
             + "\n"
             + "        var p2 = Promise.resolve(thenable);\n"
             + "        p2.then(function(v) {\n"
-            + "          alert('failure');\n"
+            + "          document.title += 'failure';\n"
             + "        }, function(e) {\n"
-            + "          alert(e);\n"
+            + "          document.title += ' ' + e;\n"
             + "        });\n"
             + "\n"
             + "        var thenable = {\n"
@@ -257,9 +257,9 @@ public class PromiseTest extends WebDriverTestCase {
             + "\n"
             + "        var p3 = Promise.resolve(thenable);\n"
             + "        p3.then(function(v) {\n"
-            + "          alert(v);\n"
+            + "          document.title += ' ' + v;\n"
             + "        }, function(e) {\n"
-            + "          alert('failure');\n"
+            + "          document.title += 'failure';\n"
             + "        });\n"
             + "      }\n"
             + "    }\n"
@@ -268,7 +268,9 @@ public class PromiseTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
@@ -308,17 +310,19 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"end", "in then"},
+    @Alerts(DEFAULT = {"end in-then"},
             IE = "exception")
     public void then() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  var p = Promise.resolve(void 0);\n"
-            + "  p.then(function() { alert('in then'); });\n"
-            + "  alert('end');\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  p.then(function() { document.title += ' in-then'; });\n"
+            + "  document.title += ' end';\n"
+            + "} catch (e) { document.title += ' exception'; }\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
@@ -363,7 +367,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Success",
-            IE = {})
+            IE = "")
     public void thenInsideEventHandler() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -378,7 +382,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "             resolve('Success');\n"
                 + "           }, 0);\n"
                 + "        }).then(function(value) {\n"
-                + "          alert(value);\n"
+                + "          document.title += value;\n"
                 + "        });\n"
                 + "      };\n"
                 + "    }\n"
@@ -390,7 +394,9 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("btn1")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+
+        Thread.sleep(200);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
