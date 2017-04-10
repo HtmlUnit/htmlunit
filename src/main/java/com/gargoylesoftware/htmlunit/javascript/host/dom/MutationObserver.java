@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import org.openqa.selenium.InvalidArgumentException;
+
 import com.gargoylesoftware.htmlunit.html.CharacterDataChangeEvent;
 import com.gargoylesoftware.htmlunit.html.CharacterDataChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -44,7 +46,6 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
 
     private Function function_;
     private Node node_;
-    @SuppressWarnings("unused")
     private boolean childList_;
     private boolean attaributes_;
     private boolean attributeOldValue_;
@@ -75,6 +76,13 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
      */
     @JsxFunction
     public void observe(final Node node, final NativeObject options) {
+        if (node == null) {
+            throw Context.throwAsScriptRuntimeEx(new InvalidArgumentException("Node is undefined"));
+        }
+        if (options == null) {
+            throw Context.throwAsScriptRuntimeEx(new InvalidArgumentException("Options is undefined"));
+        }
+
         node_ = node;
         attaributes_ = Boolean.TRUE.equals(options.get("attributes"));
         attributeOldValue_ = Boolean.TRUE.equals(options.get("attributeOldValue"));
@@ -83,6 +91,11 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
         characterDataOldValue_ = Boolean.TRUE.equals(options.get("characterDataOldValue"));
         subtree_ = Boolean.TRUE.equals(options.get("subtree"));
         attributeFilter_ = (NativeArray) options.get("attributeFilter");
+
+        if (!attaributes_ && !childList_ && !characterData_) {
+            throw Context.throwAsScriptRuntimeEx(new InvalidArgumentException(
+                        "One of childList, attributes, od characterData must be set"));
+        }
 
         if (attaributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
             ((HtmlElement) node_.getDomNodeOrDie()).addHtmlAttributeChangeListener(this);

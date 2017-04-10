@@ -40,6 +40,109 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("exception")
+    public void observeNullNode() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var observer = new MutationObserver(function(mutations) {});\n"
+            + "\n"
+            + "  try {\n"
+            + "    observer.observe(div, {});\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>old</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void observeNullInit() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var observer = new MutationObserver(function(mutations) {});\n"
+            + "\n"
+            + "  try {\n"
+            + "    observer.observe(div);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>old</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void observeEmptyInit() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var observer = new MutationObserver(function(mutations) {});\n"
+            + "\n"
+            + "  try {\n"
+            + "    observer.observe(div, {});\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>old</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"exception", "childList", "attributes", "characterData"})
+    public void observeRequiredMissingInit() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var observer = new MutationObserver(function(mutations) {});\n"
+            + "\n"
+            + "  try {\n"
+            + "    observer.observe(div, {subtree: true});\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "  try {\n"
+            + "    observer.observe(div, {childList: true});\n"
+            + "    alert('childList');\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "  try {\n"
+            + "    observer.observe(div, {attributes: true});\n"
+            + "    alert('attributes');\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "  try {\n"
+            + "    observer.observe(div, {characterData: true});\n"
+            + "    alert('characterData');\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>old</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"old", "new"})
     public void characterData() throws Exception {
         final String html
