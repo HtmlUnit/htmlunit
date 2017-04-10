@@ -242,13 +242,16 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param message the message
      */
     @Function
-    public static void alert(final Object self, final String message) {
+    public static void alert(final Object self, String message) {
         final Window2 window = getWindow(self);
         final AlertHandler handler = window.getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
             LOG.warn("window.alert(\"" + message + "\") no alert handler installed");
         }
         else {
+            if (message == null) {
+                message = "null";
+            }
             handler.handleAlert(window.document_.getPage(), message);
         }
     }
