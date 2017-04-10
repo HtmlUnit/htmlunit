@@ -77,14 +77,24 @@ public class EventTarget2 extends SimpleScriptObject {
 
     /**
      * Allows the registration of event listeners on the event target.
+     *
+     * @param self this object
      * @param type the event type to listen for (like "click")
      * @param listener the event listener
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
     @Function
-    public void addEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
-        getEventListenersContainer().addEventListener(type, listener, useCapture);
+    public static void addEventListener(final ScriptObject self, final String type, final ScriptObject listener,
+            final boolean useCapture) {
+        final EventTarget2 eventTarget;
+        if (self instanceof EventTarget2) {
+            eventTarget = (EventTarget2) self;
+        }
+        else {
+            eventTarget = ((Global) self).<Window2>getWindow();
+        }
+        eventTarget.getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
     /**
@@ -304,6 +314,8 @@ public class EventTarget2 extends SimpleScriptObject {
 
     /**
      * Allows the removal of event listeners on the event target.
+     *
+     * @param self this object
      * @param type the event type to listen for (like "click")
      * @param listener the event listener
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
@@ -311,8 +323,16 @@ public class EventTarget2 extends SimpleScriptObject {
      * documentation</a>
      */
     @Function
-    public void removeEventListener(final String type, final ScriptObject listener, final boolean useCapture) {
-        getEventListenersContainer().removeEventListener(type, listener, useCapture);
+    public static void removeEventListener(final ScriptObject self, final String type, final ScriptObject listener,
+            final boolean useCapture) {
+        final EventTarget2 eventTarget;
+        if (self instanceof EventTarget2) {
+            eventTarget = (EventTarget2) self;
+        }
+        else {
+            eventTarget = ((Global) self).<Window2>getWindow();
+        }
+        eventTarget.getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
     /**
