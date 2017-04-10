@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -26,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -61,7 +58,6 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object PopStateEvent]", "null"})
-    @BuggyWebDriver(CHROME)
     public void pushStateSimple() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -107,7 +103,6 @@ public class History2Test extends WebDriverTestCase {
                 "[object PopStateEvent]", "{\"hi\":\"there\"}",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}"})
-    @BuggyWebDriver(CHROME)
     public void pushState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -214,7 +209,6 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
-    @BuggyWebDriver(CHROME)
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -372,7 +366,6 @@ public class History2Test extends WebDriverTestCase {
                 "[object PopStateEvent]", "null",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
                 "[object PopStateEvent]", "{\"hi2\":\"there2\"}"})
-    @BuggyWebDriver(CHROME)
     public void replaceState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -460,7 +453,6 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
-    @BuggyWebDriver(CHROME)
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
