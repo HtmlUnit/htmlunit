@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -929,8 +930,11 @@ public abstract class HtmlElement extends DomElement {
      * @return true if an event handler has been defined otherwise false
      */
     public final boolean hasEventHandlers(final String eventName) {
-        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
-        return jsObj.hasEventHandlers(eventName);
+        final Object jsObj = getScriptableObject();
+        if (jsObj instanceof HTMLElement) {
+            return ((HTMLElement) jsObj).hasEventHandlers(eventName);
+        }
+        return ((HTMLElement2) jsObj).hasEventHandlers(eventName);
     }
 
     /**
