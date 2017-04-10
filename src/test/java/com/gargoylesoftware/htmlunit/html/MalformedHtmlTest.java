@@ -271,7 +271,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"inFirst", "inSecond"})
+    @Alerts("inFirst inSecond")
     public void nestedForms() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='TransSearch'>\n"
@@ -284,13 +284,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "<tr><td><input name='FromDate' value='inSecond'></form></td></tr>\n"
             + "</table>\n"
             + "<script>\n"
-            + "alert(document.forms[0].elements['FromDate'].value);\n"
-            + "alert(document.forms[1].elements['FromDate'].value);\n"
+            + "document.title += ' ' + document.forms[0].elements['FromDate'].value;\n"
+            + "document.title += ' ' + document.forms[1].elements['FromDate'].value;\n"
             + "</script>\n"
             + "</body></html>";
-        final WebDriver driver = loadPageWithAlerts2(html);
-        driver.findElement(By.id("button")).click();
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
+        driver.findElement(By.id("button")).click();
         assertEquals(URL_FIRST + "?FromDate=inFirst", driver.getCurrentUrl());
     }
 
