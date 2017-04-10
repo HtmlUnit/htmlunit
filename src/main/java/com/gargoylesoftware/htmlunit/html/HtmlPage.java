@@ -1346,7 +1346,7 @@ public class HtmlPage extends SgmlPage {
 
     private static String getBeforeUnloadMessage(final Event2 event, final ScriptResult result, final boolean ie) {
         String message = null;
-        if (event.getReturnValue() != ScriptRuntime.UNDEFINED) {
+        if (event.getReturnValue() != null) {
             if (!ie || event.getReturnValue() != null || result == null || result.getJavaScriptResult() == null
                     || result.getJavaScriptResult() == ScriptRuntime.UNDEFINED) {
                 message = ScriptRuntime.safeToString(event.getReturnValue());

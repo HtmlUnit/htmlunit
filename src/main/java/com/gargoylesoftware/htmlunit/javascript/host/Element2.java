@@ -93,14 +93,14 @@ public class Element2 extends EventNode2 {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
+        createEventHandlers();
         style_ = new CSSStyleDeclaration2(this);
     }
 
     /**
      * Convert JavaScript snippets defined in the attribute map to executable event handlers.
-     * Should be called only on construction.
      */
-    public void createEventHandlers() {
+    private void createEventHandlers() {
         final DomElement htmlElt = getDomNodeOrDie();
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = attr.getName();
