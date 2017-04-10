@@ -696,7 +696,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    public Script compile(final HtmlPage owningPage, final Scriptable scope, final String sourceCode,
+    public Script compile(final HtmlPage owningPage, final Scriptable scope, String sourceCode,
             final String sourceName, final int startLine) {
         WebAssert.notNull("sourceCode", sourceCode);
 
@@ -705,6 +705,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
+        sourceCode = sourceCode.trim();
+        if (sourceCode.startsWith("return ")) {
+            sourceCode = sourceCode.substring("return ".length());
+        }
         final String source = sourceCode;
         final ContextAction action = new HtmlUnitContextAction(scope, owningPage) {
             @Override

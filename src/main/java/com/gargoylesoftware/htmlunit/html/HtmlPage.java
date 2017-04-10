@@ -2549,12 +2549,22 @@ public class HtmlPage extends SgmlPage {
      * @param thisObject the "this" object to be used during invocation
      * @param args the arguments to pass into the call
      * @param htmlElementScope the HTML element for which this script is being executed
-     * This element will be the context during the JavaScript execution. If null,
-     * the context will default to the page.
+     *        This element will be the context during the JavaScript execution. If null,
+     *        the context will default to the page.
      * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
+     *        the previous page and a JavaScript result object.
      */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
+    public ScriptResult executeJavaScriptFunctionIfPossible(final Object function, final Object thisObject,
+            final Object[] args, final DomNode htmlElementScope) {
+        if (function instanceof ScriptFunction) {
+            return executeJavaScriptFunctionIfPossible((ScriptFunction) function, (ScriptObject) thisObject,
+                    args, htmlElementScope);
+        }
+        return executeJavaScriptFunctionIfPossible((Function) function, (Scriptable) thisObject,
+                args, htmlElementScope);
+    }
+
+    private ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
             final Object[] args, final DomNode htmlElementScope) {
 
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
@@ -2567,21 +2577,7 @@ public class HtmlPage extends SgmlPage {
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Execute a Function in the given context.
-     *
-     * @param function the JavaScript Function to call
-     * @param thisObject the "this" object to be used during invocation
-     * @param args the arguments to pass into the call
-     * @param htmlElementScope the HTML element for which this script is being executed
-     * This element will be the context during the JavaScript execution. If null,
-     * the context will default to the page.
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
-     */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function,
+    private ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function,
             final ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
 
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
