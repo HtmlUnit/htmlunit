@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import org.openqa.selenium.InvalidArgumentException;
-
 import com.gargoylesoftware.htmlunit.html.CharacterDataChangeEvent;
 import com.gargoylesoftware.htmlunit.html.CharacterDataChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -77,10 +75,10 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
     @JsxFunction
     public void observe(final Node node, final NativeObject options) {
         if (node == null) {
-            throw Context.throwAsScriptRuntimeEx(new InvalidArgumentException("Node is undefined"));
+            throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Node is undefined"));
         }
         if (options == null) {
-            throw Context.throwAsScriptRuntimeEx(new InvalidArgumentException("Options is undefined"));
+            throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Options is undefined"));
         }
 
         node_ = node;
@@ -93,7 +91,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
         attributeFilter_ = (NativeArray) options.get("attributeFilter");
 
         if (!attaributes_ && !childList_ && !characterData_) {
-            throw Context.throwAsScriptRuntimeEx(new InvalidArgumentException(
+            throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException(
                         "One of childList, attributes, od characterData must be set"));
         }
 
