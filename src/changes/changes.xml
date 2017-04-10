@@ -9,6 +9,9 @@
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
             <action type="fix" dev="asashour">
+                HtmlScript: fix parameter checking for MutationObserver.observe()
+            </action>
+            <action type="fix" dev="asashour">
                 HtmlScript: charset attribute should not be considered.
             </action>
             <action type="fix" dev="asashour">
