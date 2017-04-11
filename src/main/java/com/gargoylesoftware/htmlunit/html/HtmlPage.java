@@ -2600,7 +2600,16 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        final Object result = ScriptRuntime.apply(function, thisObject, args);
+        final ScriptFunction functionToCall;
+        if (function.getName().isEmpty() || args.length == 0) {
+            functionToCall = function;
+        }
+        else {
+            ScriptRuntime.apply(function, thisObject);
+            functionToCall = (ScriptFunction) thisObject.get("on" + ((Event2) args[0]).getType());
+        }
+
+        final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
         getWebClient().getJavaScriptEngine().processPostponedActions();
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
