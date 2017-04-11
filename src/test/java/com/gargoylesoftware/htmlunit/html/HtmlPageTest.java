@@ -1009,6 +1009,26 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @exception Exception if the test fails
      */
     @Test
+    public void getElementsById() throws Exception {
+        final String html = "<html><body><div id='a'>foo</div><div id='b'/><div id='b'/></body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals(1, page.getElementsById("a").size());
+        assertEquals(2, page.getElementsById("b").size());
+        assertEquals(0, page.getElementsById("c").size());
+
+        final DomElement a = page.getElementsById("a").get(0);
+        a.remove();
+        assertEquals(0, page.getElementsById("a").size());
+
+        final DomElement b1 = page.getElementsById("b").get(0);
+        b1.appendChild(a);
+        assertEquals(1, page.getElementsById("a").size());
+    }
+
+    /**
+     * @exception Exception if the test fails
+     */
+    @Test
     public void getElementsByName() throws Exception {
         final String html = "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
         final HtmlPage page = loadPage(html);

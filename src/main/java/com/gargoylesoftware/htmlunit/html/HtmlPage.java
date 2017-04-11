@@ -330,7 +330,7 @@ public class HtmlPage extends SgmlPage {
         deregisterFramesIfNeeded();
         cleaning_ = false;
         if (autoCloseableList_ != null) {
-            for (@SuppressWarnings("resource") final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
+            for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
                 try {
                     closeable.close();
                 }
@@ -1680,6 +1680,22 @@ public class HtmlPage extends SgmlPage {
             throw new ElementNotFoundException("*", "id", elementId);
         }
         return (E) element;
+    }
+
+    /**
+     * Returns the elements with the specified ID. If there are no elements
+     * with the specified ID, this method returns an empty list. Please note that
+     * the lists returned by this method are immutable.
+     *
+     * @param elementId the ID value to search for
+     * @return the elements with the specified name attribute
+     */
+    public List<DomElement> getElementsById(final String elementId) {
+        final SortedSet<DomElement> elements = idMap_.get(elementId);
+        if (elements != null) {
+            return new ArrayList<>(elements);
+        }
+        return Collections.emptyList();
     }
 
     /**

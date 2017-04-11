@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="add" dev="rbri">
+                Method HtmlPage.getElementsById(String) added to make simple to detect duplicate id's.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: fix parameter checking for MutationObserver.observe().
             </action>
