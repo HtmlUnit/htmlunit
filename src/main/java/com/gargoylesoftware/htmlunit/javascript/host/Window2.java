@@ -409,7 +409,10 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         return getWindow(self).document_;
     }
 
-    private static Window2 getWindow(final Object self) {
+    private static Window2 getWindow(Object self) {
+        if (self instanceof ScriptFunction) {
+            self = ((ScriptFunction) self).getScope();
+        }
         if (self instanceof Global) {
             Window2 window = ((Global) self).getWindow();
             if (window.isProxy_) {
