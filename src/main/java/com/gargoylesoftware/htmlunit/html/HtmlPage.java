@@ -878,7 +878,7 @@ public class HtmlPage extends SgmlPage {
      * the previous page) and a JavaScript result object
      */
     public ScriptResult executeJavaScript(final String sourceCode) {
-        return executeJavaScriptIfPossible(sourceCode, "injected script", 1);
+        return executeJavaScript(sourceCode, "injected script", 1);
     }
 
     /**
@@ -901,7 +901,7 @@ public class HtmlPage extends SgmlPage {
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
      */
-    public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
+    public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
@@ -2570,17 +2570,17 @@ public class HtmlPage extends SgmlPage {
      * @return a ScriptResult which will contain both the current page (which may be different than
      *        the previous page and a JavaScript result object.
      */
-    public ScriptResult executeJavaScriptFunctionIfPossible(final Object function, final Object thisObject,
+    public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
         if (function instanceof ScriptFunction) {
             return executeJavaScriptFunctionIfPossible((ScriptFunction) function, (ScriptObject) thisObject,
                     args, htmlElementScope);
         }
-        return executeJavaScriptFunctionIfPossible((Function) function, (Scriptable) thisObject,
+        return executeJavaScriptFunction((Function) function, (Scriptable) thisObject,
                 args, htmlElementScope);
     }
 
-    private ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
+    private ScriptResult executeJavaScriptFunction(final Function function, final Scriptable thisObject,
             final Object[] args, final DomNode htmlElementScope) {
 
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {

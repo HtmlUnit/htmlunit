@@ -49,7 +49,7 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
     protected void runJavaScript(final HtmlPage page) {
         final HtmlElement doc = page.getDocumentElement();
         final Scriptable scriptable = page.getEnclosingWindow().getScriptableObject();
-        page.executeJavaScriptFunctionIfPossible(function_, scriptable, new Object[0], doc);
+        page.executeJavaScriptFunction(function_, scriptable, new Object[0], doc);
     }
 
 }

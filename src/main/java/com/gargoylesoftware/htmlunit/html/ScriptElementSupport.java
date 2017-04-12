@@ -298,7 +298,7 @@ public final class ScriptElementSupport {
                 + ") to (" + line2 + ", " + col2 + ")";
 
             ((ScriptElement) element).setExecuted(true);
-            ((HtmlPage) element.getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
+            ((HtmlPage) element.getPage()).executeJavaScript(scriptCode, desc, line1);
         }
     }
 

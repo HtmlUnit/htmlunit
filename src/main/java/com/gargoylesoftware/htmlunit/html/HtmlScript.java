@@ -315,7 +315,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 + ") to (" + line2 + ", " + col2 + ")";
 
             executed_ = true;
-            ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
+            ((HtmlPage) getPage()).executeJavaScript(scriptCode, desc, line1);
         }
     }
 

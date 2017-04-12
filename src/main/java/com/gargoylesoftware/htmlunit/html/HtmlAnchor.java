@@ -130,7 +130,7 @@ public class HtmlAnchor extends HtmlElement {
             }
 
             if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
-                page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+                page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
             }
             else {
                 final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
@@ -138,7 +138,7 @@ public class HtmlAnchor extends HtmlElement {
                 final Page enclosedPage = win.getEnclosedPage();
                 if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                     page = (HtmlPage) enclosedPage;
-                    page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+                    page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
                 }
             }
             return;

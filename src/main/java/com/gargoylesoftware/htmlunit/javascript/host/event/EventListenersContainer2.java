@@ -256,7 +256,7 @@ public class EventListenersContainer2 implements Serializable {
 //                }
                 if (function != null) {
                     final ScriptResult result =
-                            page.executeJavaScriptFunctionIfPossible(function, thisObject, args, node);
+                            page.executeJavaScriptFunction(function, thisObject, args, node);
                     if (event.isPropagationStopped()) {
                         allResult = result;
                     }
@@ -295,7 +295,7 @@ public class EventListenersContainer2 implements Serializable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Executing " + event.getType() + " handler for " + node);
             }
-            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_,
+            return page.executeJavaScriptFunction(handler, jsNode_,
                     propHandlerArgs, page);
         }
         return null;

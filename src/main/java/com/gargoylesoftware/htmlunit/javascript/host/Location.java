@@ -227,7 +227,7 @@ public class Location extends SimpleScriptable {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
-            page.executeJavaScriptIfPossible(script, "new location value", 1);
+            page.executeJavaScript(script, "new location value", 1);
             return;
         }
         try {

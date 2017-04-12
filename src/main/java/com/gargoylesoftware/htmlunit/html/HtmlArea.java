@@ -73,7 +73,7 @@ public class HtmlArea extends HtmlElement {
         if (!href.isEmpty()) {
             final HtmlPage page = (HtmlPage) getPage();
             if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                page.executeJavaScriptIfPossible(
+                page.executeJavaScript(
                     href, "javascript url", getStartLineNumber());
                 return false;
             }

@@ -56,7 +56,7 @@ class JavaScriptFunctionJob2 extends JavaScriptExecutionJob {
         final Global global = page.getEnclosingWindow().getGlobal();
         try {
             Context.setGlobal(global);
-            page.executeJavaScriptFunctionIfPossible(function_, global, new Object[0], doc);
+            page.executeJavaScriptFunction(function_, global, new Object[0], doc);
         }
         finally {
             Context.setGlobal(oldGlobal);

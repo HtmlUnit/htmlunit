@@ -46,7 +46,7 @@ class JavaScriptStringJob extends JavaScriptExecutionJob {
         if (script_ == null) {
             return;
         }
-        page.executeJavaScriptIfPossible(script_, "JavaScriptStringJob", 1);
+        page.executeJavaScript(script_, "JavaScriptStringJob", 1);
     }
 
 }

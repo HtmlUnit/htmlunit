@@ -178,7 +178,7 @@ public class Location2 extends SimpleScriptObject {
         final HtmlPage page = (HtmlPage) Global.instance().<Window2>getWindow().getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
-            page.executeJavaScriptIfPossible(script, "new location value", 1);
+            page.executeJavaScript(script, "new location value", 1);
             return;
         }
         try {
