@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -90,6 +91,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
@@ -2570,16 +2573,19 @@ public class HtmlPage extends SgmlPage {
      * @return a ScriptResult which will contain both the current page (which may be different than
      *        the previous page and a JavaScript result object.
      */
-    public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
+    public ScriptResult executeJavaScriptFunction(Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
 
-        if (function instanceof ScriptFunction) {
-            return executeJavaScriptFunctionIfPossible((ScriptFunction) function, (ScriptObject) thisObject, args);
+        if (function instanceof Function) {
+            return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
         }
-        return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
+        if (function instanceof ScriptObjectMirror) {
+            function = get(function, "sobj");
+        }
+        return executeJavaScriptFunction((ScriptFunction) function, (ScriptObject) thisObject, args, htmlElementScope);
     }
 
     private ScriptResult executeJavaScriptFunction(final Function function, final Scriptable thisObject,
@@ -2591,8 +2597,8 @@ public class HtmlPage extends SgmlPage {
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
-    private ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function,
-            final ScriptObject thisObject, final Object[] args) {
+    private ScriptResult executeJavaScriptFunction(final ScriptFunction function,
+            final ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
 
         final ScriptFunction functionToCall;
         if (function.getName().isEmpty() || args.length == 0) {
@@ -2603,9 +2609,35 @@ public class HtmlPage extends SgmlPage {
             functionToCall = (ScriptFunction) thisObject.get("on" + ((Event2) args[0]).getType());
         }
 
-        final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
-        getWebClient().getJavaScriptEngine().processPostponedActions();
-        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+        final Global global = htmlElementScope.getPage().getEnclosingWindow().getGlobal();
+        final Global oldGlobal = com.gargoylesoftware.js.nashorn.internal.runtime.Context.getGlobal();
+        final boolean globalChanged = oldGlobal != global;
+        try {
+            if (globalChanged) {
+                com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(global);
+            }
+
+            final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
+            getWebClient().getJavaScriptEngine().processPostponedActions();
+            return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+        }
+        finally {
+            if (globalChanged) {
+                com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(oldGlobal);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T get(final Object o, final String fieldName) {
+        try {
+            final Field field = o.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return (T) field.get(o);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {
