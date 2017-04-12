@@ -2572,20 +2572,18 @@ public class HtmlPage extends SgmlPage {
      */
     public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
-        if (function instanceof ScriptFunction) {
-            return executeJavaScriptFunctionIfPossible((ScriptFunction) function, (ScriptObject) thisObject,
-                    args, htmlElementScope);
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+            return new ScriptResult(null, this);
         }
-        return executeJavaScriptFunction((Function) function, (Scriptable) thisObject,
-                args, htmlElementScope);
+
+        if (function instanceof ScriptFunction) {
+            return executeJavaScriptFunctionIfPossible((ScriptFunction) function, (ScriptObject) thisObject, args);
+        }
+        return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
     }
 
     private ScriptResult executeJavaScriptFunction(final Function function, final Scriptable thisObject,
             final Object[] args, final DomNode htmlElementScope) {
-
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
-        }
 
         final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
@@ -2594,11 +2592,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     private ScriptResult executeJavaScriptFunctionIfPossible(final ScriptFunction function,
-            final ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
-
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
-        }
+            final ScriptObject thisObject, final Object[] args) {
 
         final ScriptFunction functionToCall;
         if (function.getName().isEmpty() || args.length == 0) {
