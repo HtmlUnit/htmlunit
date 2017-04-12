@@ -384,6 +384,14 @@ public class RegExpJsToJavaConverter {
                 }
             }
         }
+        else {
+            // if \0 is last character of pattern
+            if ('0' == aFirstChar) {
+                // \0 has to be replaced by \x00
+                tape_.insert("x0", -1);
+                return false;
+            }
+        }
 
         if (tmpNo.charAt(0) == '0') {
             // we have a octal here

@@ -1028,7 +1028,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "true", "true", "true", "true", "true"})
+    @Alerts({"true", "true", "true", "true", "true", "true", "true"})
     public void nullCharacter() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1041,6 +1041,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "    regex = new RegExp('[\\\\\\0-\\x08]');\n"
             + "    alert(regex.test('\\0'));\n"
             + "    alert('\\0'.match(regex) != null);\n"
+            + "    alert('\\0'.match(/^\\0/) != null);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
