@@ -36,9 +36,11 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -385,9 +387,17 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     private void executeEvent(final String type) {
-        final HTMLScriptElement script = (HTMLScriptElement) getScriptableObject();
-        final Event event = new Event(this, type);
-        script.executeEventLocally(event);
+        final Object scriptable = getScriptableObject();
+        if (scriptable instanceof HTMLScriptElement2) {
+            final HTMLScriptElement2 script = (HTMLScriptElement2) scriptable;
+            final Event2 event = new Event2(this, type);
+            script.executeEventLocally(event);
+        }
+        else {
+            final HTMLScriptElement script = (HTMLScriptElement) scriptable;
+            final Event event = new Event(this, type);
+            script.executeEventLocally(event);
+        }
     }
 
     /**

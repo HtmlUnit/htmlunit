@@ -145,7 +145,7 @@ public class Element2 extends EventNode2 {
             if (globalChanged) {
                 Context.setGlobal(global);
             }
-            final ScriptFunction eventHandler = context.compileScript(source, thisObject);
+            final ScriptFunction eventHandler = context.compileScript(source, global);
             ScriptRuntime.apply(eventHandler, thisObject);
             setEventHandler(eventName, eventHandler);
         }
