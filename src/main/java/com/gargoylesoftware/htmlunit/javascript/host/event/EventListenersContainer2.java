@@ -183,11 +183,12 @@ public class EventListenersContainer2 implements Serializable {
 
     /**
      * Removes event listener.
+     *
      * @param eventType the type
      * @param listener the listener
      * @param useCapture to use capture or not
      */
-    public void removeEventListener(final String eventType, final ScriptObject listener, final boolean useCapture) {
+    void removeEventListener(final String eventType, final ScriptObject listener, final boolean useCapture) {
         if (listener == null) {
             return;
         }
@@ -344,12 +345,8 @@ public class EventListenersContainer2 implements Serializable {
      * @param eventName the event name (e.g. "click")
      * @return the handler function, {@code null} if the property is null or not a function
      */
-    public ScriptFunction getEventHandler(final String eventName) {
-        final Object handler = getEventHandlerProp(eventName.toLowerCase(Locale.ROOT));
-        if (handler instanceof ScriptFunction) {
-            return (ScriptFunction) handler;
-        }
-        return null;
+    ScriptFunction getEventHandler(final String eventName) {
+        return (ScriptFunction) getEventHandlerProp(eventName.toLowerCase(Locale.ROOT));
     }
 
     /**
@@ -357,7 +354,7 @@ public class EventListenersContainer2 implements Serializable {
      * @param eventType the event type (e.g. "click")
      * @return {@code true} if there are any event listeners for the specified event, {@code false} otherwise
      */
-    public boolean hasEventListeners(final String eventType) {
+    boolean hasEventListeners(final String eventType) {
         final TypeContainer container = typeContainers_.get(eventType);
         return container != null
             && (container.handler_ instanceof Function
@@ -367,12 +364,13 @@ public class EventListenersContainer2 implements Serializable {
 
     /**
      * Executes listeners.
+     *
      * @param event the event
      * @param args the arguments
      * @param propHandlerArgs handler arguments
      * @return the result
      */
-    public ScriptResult executeListeners(final Event2 event, final Object[] args, final Object[] propHandlerArgs) {
+    ScriptResult executeListeners(final Event2 event, final Object[] args, final Object[] propHandlerArgs) {
         // the registered capturing listeners (if any)
         event.setEventPhase(Event.CAPTURING_PHASE);
         ScriptResult result = executeEventListeners(true, event, args);
@@ -398,17 +396,6 @@ public class EventListenersContainer2 implements Serializable {
         }
 
         return result;
-    }
-
-    /**
-     * Copies all the events from the provided container.
-     * @param eventListenersContainer where to copy from
-     */
-    public void copyFrom(final EventListenersContainer2 eventListenersContainer) {
-        for (final Map.Entry<String, TypeContainer> entry : eventListenersContainer.typeContainers_.entrySet()) {
-            final TypeContainer conainer = entry.getValue().clone();
-            typeContainers_.put(entry.getKey(), conainer);
-        }
     }
 
     /**
