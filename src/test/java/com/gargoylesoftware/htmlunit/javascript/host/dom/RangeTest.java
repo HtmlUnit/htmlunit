@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author James Phillpotts
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class RangeTest extends WebDriverTestCase {
@@ -333,6 +334,26 @@ public class RangeTest extends WebDriverTestCase {
             + "  alert(document.getElementById('c'));\n"
             + "  alert(d.textContent);\n"
             + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0")
+    public void getClientRects() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <div id='d'>a</div>\n"
+            + "<script>\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var r = document.createRange();\n"
+            + "  alert(r.getClientRects().length);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>\n";
         loadPageWithAlerts2(html);
     }
 }

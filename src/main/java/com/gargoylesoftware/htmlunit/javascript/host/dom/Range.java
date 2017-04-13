@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -48,6 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author James Phillpotts
+ * @author Ronald Brill
  */
 @JsxClass
 public class Range extends SimpleScriptable {
@@ -480,5 +482,21 @@ public class Range extends SimpleScriptable {
                 && endContainer_ == other.endContainer_
                 && startOffset_ == other.startOffset_
                 && endOffset_ == other.endOffset_;
+    }
+
+    /**
+     * Retrieves a collection of rectangles that describes the layout of the contents of an object
+     * or range within the client. Each rectangle describes a single line.
+     * @return a collection of rectangles that describes the layout of the contents
+     */
+    @JsxFunction
+    public Object getClientRects() {
+        final ClientRectList rectList = new ClientRectList();
+        rectList.setParentScope(getWindow());
+        rectList.setPrototype(getPrototype(rectList.getClass()));
+
+        // simple impl at the moment
+
+        return rectList;
     }
 }
