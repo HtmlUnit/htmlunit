@@ -29,6 +29,7 @@ import java.util.Stack;
  * like "{n}", "{n,}" or "{n,m}" (where n and m are positive integers).
  *
  * @author Ronald Brill
+ * @author Leszek Hoppe
  */
 public class RegExpJsToJavaConverter {
 
