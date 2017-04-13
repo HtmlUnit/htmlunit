@@ -44,6 +44,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.SynchronousQueue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -2601,12 +2602,12 @@ public class HtmlPage extends SgmlPage {
             final ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
 
         final ScriptFunction functionToCall;
-        if (function.getName().isEmpty() || args.length == 0) {
-            functionToCall = function;
-        }
-        else {
+        if (":program".equals(function.getName()) && args.length != 0) {
             ScriptRuntime.apply(function, thisObject);
             functionToCall = (ScriptFunction) thisObject.get("on" + ((Event2) args[0]).getType());
+        }
+        else {
+            functionToCall = function;
         }
 
         final Global global = htmlElementScope.getPage().getEnclosingWindow().getGlobal();
