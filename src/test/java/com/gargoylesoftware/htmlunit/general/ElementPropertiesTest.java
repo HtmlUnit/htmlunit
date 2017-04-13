@@ -161,6 +161,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "      }\n"
                 + "    }\n"
                 + "    all.sort(sortFunction);\n"
+                + "    if (all.length == 0) { all = '-' };\n"
                 + "    alert(all);\n"
                 + "  }\n"
                 + "  function sortFunction(s1, s2) {\n"
@@ -172,7 +173,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         if (BROWSER_VERSION_ == null) {
             BROWSER_VERSION_ = getBrowserVersion();
         }
-        final String expected = getExpectedAlerts().length == 0 ? "" : getExpectedAlerts()[0];
+        assertTrue(getExpectedAlerts().length == 1);
+
+        final String expected = getExpectedAlerts()[0];
         String actual;
 
         ComparisonFailure failure = null;
@@ -448,7 +451,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "namedRecordset(),recordset")
+    @Alerts(DEFAULT = "-",
+            IE = "namedRecordset(),recordset")
     @NotYetImplemented(IE)
     public void unknown() throws Exception {
         testString("unknown, div");
@@ -543,7 +547,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "blockDirection,clipBottom,clipLeft,clipRight,clipTop,hasLayout")
+    @Alerts(DEFAULT = "-",
+            IE = "blockDirection,clipBottom,clipLeft,clipRight,clipTop,hasLayout")
     @NotYetImplemented(IE)
     public void currentStyle() throws Exception {
         testString("document.body.currentStyle, document.body.style");
@@ -745,7 +750,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void abbr() throws Exception {
         test("abbr");
     }
@@ -756,7 +762,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void acronym() throws Exception {
         test("acronym");
     }
@@ -793,7 +800,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,clear,width")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,clear,width")
     public void address() throws Exception {
         test("address");
     }
@@ -810,7 +818,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,data,declare,"
                 + "form,height,hspace,name,object,standby,type,useMap,vspace,"
                 + "width",
-            CHROME = {})
+            CHROME = "-")
     @NotYetImplemented({FF, IE})
     public void applet() throws Exception {
         test("applet");
@@ -841,6 +849,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void article() throws Exception {
         test("article");
     }
@@ -851,6 +860,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void aside() throws Exception {
         test("aside");
     }
@@ -912,7 +922,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "balance,loop,src,volume")
+    @Alerts(DEFAULT = "-",
+            IE = "balance,loop,src,volume")
     @NotYetImplemented(IE)
     public void bgsound() throws Exception {
         test("bgsound");
@@ -935,7 +946,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "color,face,size",
+    @Alerts(DEFAULT = "-",
+            IE = "color,face,size",
             EDGE = "color,face,size")
     public void basefont() throws Exception {
         test("basefont");
@@ -947,6 +959,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -957,7 +970,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void bdo() throws Exception {
         test("bdo");
     }
@@ -968,7 +982,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void big() throws Exception {
         test("big");
     }
@@ -979,7 +994,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void blink() throws Exception {
         test("blink");
     }
@@ -1029,7 +1045,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void b() throws Exception {
         test("b");
     }
@@ -1108,7 +1125,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,clear,width")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,clear,width")
     public void center() throws Exception {
         test("center");
     }
@@ -1119,7 +1137,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void cite() throws Exception {
         test("cite");
     }
@@ -1130,7 +1149,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void code() throws Exception {
         test("code");
     }
@@ -1141,6 +1161,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void command() throws Exception {
         test("command");
     }
@@ -1163,7 +1184,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void dfn() throws Exception {
         test("dfn");
     }
@@ -1174,7 +1196,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "noWrap")
+    @Alerts(DEFAULT = "-",
+            IE = "noWrap")
     public void dd() throws Exception {
         test("dd");
     }
@@ -1196,7 +1219,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = "-",
             FF52 = "open",
             CHROME = "open")
     public void details() throws Exception {
@@ -1209,7 +1232,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = "-",
             CHROME = "close(),open,returnValue,show(),showModal()")
     @NotYetImplemented(CHROME)
     public void dialog() throws Exception {
@@ -1260,7 +1283,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "noWrap")
+    @Alerts(DEFAULT = "-",
+            IE = "noWrap")
     public void dt() throws Exception {
         test("dt");
     }
@@ -1289,7 +1313,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void em() throws Exception {
         test("em");
     }
@@ -1320,6 +1345,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void figcaption() throws Exception {
         test("figcaption");
     }
@@ -1330,6 +1356,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void figure() throws Exception {
         test("figure");
     }
@@ -1377,6 +1404,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void footer() throws Exception {
         test("footer");
     }
@@ -1431,7 +1459,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "profile",
+    @Alerts(DEFAULT = "-",
+            IE = "profile",
             EDGE = "profile")
     @NotYetImplemented({IE, EDGE})
     public void head() throws Exception {
@@ -1444,6 +1473,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void header() throws Exception {
         test("header");
     }
@@ -1617,7 +1647,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
+    @Alerts(DEFAULT = "-",
+            IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
                 + "height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
                 + "start,useMap,vrml,vspace,"
@@ -1648,7 +1679,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "action,form,prompt")
+    @Alerts(DEFAULT = "-",
+            IE = "action,form,prompt")
     @NotYetImplemented(IE)
     public void isindex() throws Exception {
         test("isindex");
@@ -1660,7 +1692,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void i() throws Exception {
         test("i");
     }
@@ -1671,7 +1704,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void kbd() throws Exception {
         test("kbd");
     }
@@ -1680,7 +1714,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = "-",
             IE = "cite,clear,width")
     public void keygen() throws Exception {
         test("keygen");
@@ -1705,6 +1739,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void layer() throws Exception {
         test("layer");
     }
@@ -1726,7 +1761,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "width",
+    @Alerts(DEFAULT = "-",
+            CHROME = "width",
             FF52 = "width",
             IE = "cite,clear,width",
             EDGE = "width")
@@ -1772,6 +1808,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void main() throws Exception {
         test("main");
     }
@@ -1793,6 +1830,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void mark() throws Exception {
         test("mark");
     }
@@ -1837,7 +1875,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
+    @Alerts(DEFAULT = "-",
+            FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
     @NotYetImplemented(FF)
     public void menuitem() throws Exception {
         test("menuitem");
@@ -1865,8 +1904,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "high,labels,low,max,min,optimum,value",
             FF = "high,low,max,min,optimum,value",
-            IE = "",
-            EDGE = "")
+            IE = "-",
+            EDGE = "-")
     public void meter() throws Exception {
         test("meter");
     }
@@ -1877,6 +1916,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void multicol() throws Exception {
         test("multicol");
     }
@@ -1887,6 +1927,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void nav() throws Exception {
         test("nav");
     }
@@ -1897,7 +1938,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "n")
+    @Alerts(DEFAULT = "-",
+            IE = "n")
     @NotYetImplemented(IE)
     public void nextid() throws Exception {
         test("nextid");
@@ -1909,7 +1951,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void nobr() throws Exception {
         test("nobr");
     }
@@ -1920,6 +1963,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void noembed() throws Exception {
         test("noembed");
     }
@@ -1930,6 +1974,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void noframes() throws Exception {
         test("noframes");
     }
@@ -1940,6 +1985,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void nolayer() throws Exception {
         test("nolayer");
     }
@@ -1950,6 +1996,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void noscript() throws Exception {
         test("noscript");
     }
@@ -2039,8 +2086,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF52 = "checkValidity(),defaultValue,form,htmlFor,name,reportValidity(),setCustomValidity(),"
                 + "type,validationMessage,validity,value,"
                 + "willValidate",
-            IE = "",
-            EDGE = "")
+            IE = "-",
+            EDGE = "-")
     @NotYetImplemented({FF, CHROME})
     public void output() throws Exception {
         test("output");
@@ -2077,7 +2124,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,clear,width")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,clear,width")
     public void plaintext() throws Exception {
         test("plaintext");
     }
@@ -2115,7 +2163,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     @NotYetImplemented(IE)
     public void rp() throws Exception {
         test("rp");
@@ -2127,7 +2176,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     @NotYetImplemented(IE)
     public void rt() throws Exception {
         test("rt");
@@ -2139,7 +2189,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     @NotYetImplemented(IE)
     public void ruby() throws Exception {
         test("ruby");
@@ -2151,7 +2202,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void s() throws Exception {
         test("s");
     }
@@ -2162,7 +2214,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void samp() throws Exception {
         test("samp");
     }
@@ -2187,6 +2240,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void section() throws Exception {
         test("section");
     }
@@ -2227,7 +2281,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void small() throws Exception {
         test("small");
     }
@@ -2252,6 +2307,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void span() throws Exception {
         test("span");
     }
@@ -2262,7 +2318,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void strike() throws Exception {
         test("strike");
     }
@@ -2273,7 +2330,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void strong() throws Exception {
         test("strong");
     }
@@ -2299,7 +2357,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void sub() throws Exception {
         test("sub");
     }
@@ -2310,6 +2369,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void summary() throws Exception {
         test("summary");
     }
@@ -2320,7 +2380,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void sup() throws Exception {
         test("sup");
     }
@@ -2493,7 +2554,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void tt() throws Exception {
         test("tt");
     }
@@ -2504,7 +2566,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "dateTime")
+    @Alerts(DEFAULT = "-",
+            FF = "dateTime")
     public void time() throws Exception {
         test("time");
     }
@@ -2538,7 +2601,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void u() throws Exception {
         test("u");
     }
@@ -2560,7 +2624,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "cite,dateTime")
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
     public void var() throws Exception {
         test("var");
     }
@@ -2639,6 +2704,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void wbr() throws Exception {
         test("wbr");
     }
@@ -2650,7 +2716,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "width",
-            FF45 = "",
+            FF45 = "-",
             FF52 = "width",
             IE = "cite,clear,width")
     @NotYetImplemented(EDGE)
@@ -2709,7 +2775,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "value")
+    @Alerts(DEFAULT = "-",
+            FF = "value")
     public void data() throws Exception {
         test("data");
     }
@@ -2720,7 +2787,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = "-",
             CHROME = "getDistributedNodes(),select",
             FF45 = "getDistributedNodes(),select")
     @NotYetImplemented({CHROME, FF})
@@ -2734,6 +2801,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("-")
     public void picutre() throws Exception {
         test("picture");
     }
@@ -2745,8 +2813,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "content",
-            IE = "",
-            EDGE = "")
+            IE = "-",
+            EDGE = "-")
     public void template() throws Exception {
         test("template");
     }
@@ -2830,7 +2898,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "assignedNodes(),name")
+    @Alerts(DEFAULT = "-",
+            CHROME = "assignedNodes(),name")
     @NotYetImplemented(CHROME)
     public void slot() throws Exception {
         test("slot");
