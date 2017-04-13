@@ -44,7 +44,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.concurrent.SynchronousQueue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
