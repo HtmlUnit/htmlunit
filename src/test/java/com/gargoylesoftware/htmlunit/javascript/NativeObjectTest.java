@@ -147,7 +147,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     }
 
     /**
-     * Test case for #1856.
+     * Test case for Bug #1856.
      *
      * @throws Exception if the test fails
      */
@@ -297,4 +297,5 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
 }

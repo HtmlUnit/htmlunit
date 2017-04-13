@@ -271,4 +271,32 @@ public class SetTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test case for Bug #1868.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object Set Iterator]",
+            IE = {})
+    public void iteratorPrototype() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    if (window.Symbol) {\n"
+            + "      var mySet = new Set();\n"
+            + "      var iter = mySet[Symbol.iterator]();\n"
+            + "      alert(Object.getPrototypeOf(iter));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
