@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CANVAS_DAT
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCanvas;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -39,8 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlCanvas.class, browsers = {@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(domClass = HtmlCanvas.class)
 public class HTMLCanvasElement extends HTMLElement {
 
     private Object context_;

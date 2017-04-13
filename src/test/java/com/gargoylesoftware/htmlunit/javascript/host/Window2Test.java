@@ -1352,7 +1352,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String iframe = "<html><body>\n"
-            + "<button id='clickme' onclick='top.postMessage(\"hello\", \"*\");'>Click me</a>\n"
+            + "  <button id='clickme' onclick='top.postMessage(\"hello\", \"*\");'>Click me</a>\n"
             + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);

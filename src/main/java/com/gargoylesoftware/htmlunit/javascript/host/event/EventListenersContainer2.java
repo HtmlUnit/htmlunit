@@ -136,6 +136,7 @@ public class EventListenersContainer2 implements Serializable {
 
     /**
      * Adds an event listener.
+     *
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
@@ -169,6 +170,7 @@ public class EventListenersContainer2 implements Serializable {
 
     /**
      * Returns the relevant listeners.
+     *
      * @param eventType the event type
      * @param useCapture whether to use capture of not
      * @return the listeners list
