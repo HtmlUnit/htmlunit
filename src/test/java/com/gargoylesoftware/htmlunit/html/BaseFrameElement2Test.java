@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -34,7 +35,7 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"posted", "called"})
+    @Alerts("posted called")
     public void windowEventListenersContainer() throws Exception {
         final String html
             = "<html>\n"
@@ -47,16 +48,17 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
             + "    var win = iframe.contentWindow;\n"
             + "    win.addEventListener('message', handler);\n"
             + "    win.postMessage('hello', '*');\n"
-            + "    alert('posted');\n"
+            + "    document.title += ' posted';\n"
             + "  }\n"
             + "  function handler() {\n"
-            + "    alert('called');\n"
+            + "    document.title += ' called';\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 }
