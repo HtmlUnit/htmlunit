@@ -2001,7 +2001,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"0", "17"})
+    @Alerts("0 17")
     @NotYetImplemented
     public void iFrameInnerWidth() throws Exception {
         final String html = "<html><head>\n"
@@ -2012,9 +2012,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    iframe.style.cssText = 'width: 500px; height: 500px;';\n"
             + "    iframe.contentWindow.location = 'test2.html';\n"
             + "    var win = iframe.contentWindow;\n"
-            + "    alert(win.innerWidth - win.document.documentElement.clientWidth);\n"
+            + "    document.title += ' ' + (win.innerWidth - win.document.documentElement.clientWidth);\n"
             + "    iframe.onload = function() {\n"
-            + "      alert(win.innerWidth - win.document.documentElement.clientWidth);\n"
+            + "      document.title += ' ' + (win.innerWidth - win.document.documentElement.clientWidth);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head>\n"
@@ -2030,7 +2030,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body></body>\n"
                 + "</html>");
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
