@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="fix" dev="rbri" issue="1869">
+                Neko: fix handling of invalid numeric entity references inside attributes.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: add basic support for Range.getClientRects().
             </action>

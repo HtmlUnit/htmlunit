@@ -187,13 +187,35 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    <script src='script.js'></script>\n"
             + "  </head>\n"
             + "  </head>\n"
-            + "  <body>"
-            + "    <p>HtmlUnit</p>"
+            + "  <body>\n"
+            + "    <p>HtmlUnit</p>\n"
             + "    <script>alert('from body');</script>\n"
             + "  </body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("alert('from script')", 200, "OK", null);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts("<p title=\"Nimbus\ufffd X\">Nimbus\ufffd X</p>")
+    public void badlyFormedHTML_invalidNumericCharacterReference() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <title>foo</title>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <div id='tester'><p title='Nimbus&#84823000 X'>Nimbus&#84823000 X</p></div>\n"
+            + "    <script>\n"
+            + "      alert(document.getElementById('tester').innerHTML);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }
