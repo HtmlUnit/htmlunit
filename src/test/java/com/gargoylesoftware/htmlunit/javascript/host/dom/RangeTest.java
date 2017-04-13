@@ -342,7 +342,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    public void getClientRects() throws Exception {
+    public void getClientRectsEmpty() throws Exception {
         final String html =
             "<html>\n"
             + "<body>\n"
@@ -354,6 +354,25 @@ public class RangeTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>\n";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getClientRectsMany() throws Exception {
+        final String html =
+            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
+            + "<span id='d'>d</span></div><script>\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 1);\n"
+            + "  r.setEnd(d, 3);\n"
+            + "  alert(r.getClientRects().length > 1);\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }

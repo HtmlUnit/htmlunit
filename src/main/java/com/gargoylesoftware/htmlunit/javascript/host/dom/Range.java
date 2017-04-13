@@ -34,10 +34,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -495,7 +498,17 @@ public class Range extends SimpleScriptable {
         rectList.setParentScope(getWindow());
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
-        // simple impl at the moment
+        // simple impl for now
+        final DomDocumentFragment fragment = (DomDocumentFragment) toW3C().extractContents();
+        for (DomNode node : fragment.getDescendants()) {
+            final ScriptableObject scriptable = node.getScriptableObject();
+            if (scriptable instanceof HTMLElement) {
+                final ClientRect rect = new ClientRect(0, 0, 1, 1);
+                rect.setParentScope(getWindow());
+                rect.setPrototype(getPrototype(rect.getClass()));
+                rectList.add(rect);
+            }
+        }
 
         return rectList;
     }
