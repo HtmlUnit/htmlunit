@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -538,7 +539,7 @@ public class AbstractList extends SimpleScriptable implements Function {
     protected void addElementIds(final List<String> idList, final List<Object> elements) {
         int index = 0;
         for (final Object next : elements) {
-            final HtmlElement element = (HtmlElement) next;
+            final DomElement element = ((Element) next).getDomNodeOrDie();
             final String name = element.getAttribute("name");
             if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
                 idList.add(name);

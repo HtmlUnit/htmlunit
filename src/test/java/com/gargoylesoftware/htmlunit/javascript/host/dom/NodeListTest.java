@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -66,4 +70,33 @@ public class NodeListTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = "0,1,2,3,4,entries,forEach,item,keys,length,values",
+            IE = "0,1,2,3,4,item,length")
+    @NotYetImplemented({CHROME, FF})
+    public void iterator() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var all = [];\n"
+                + "    for (var i in document.querySelectorAll('*')) {\n"
+                + "       all.push(i);\n"
+                + "    }\n"
+                + "    all.sort(sortFunction);\n"
+                + "    alert(all);\n"
+                + "  }\n"
+                + "  function sortFunction(s1, s2) {\n"
+                + "    return s1.toLowerCase() > s2.toLowerCase() ? 1 : -1;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
