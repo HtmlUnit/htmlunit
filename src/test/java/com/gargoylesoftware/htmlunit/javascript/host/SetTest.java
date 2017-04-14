@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -278,7 +279,9 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Set Iterator]",
+            FF45 = "[object Object]",
             IE = {})
+    @NotYetImplemented(FF45)
     public void iteratorPrototype() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

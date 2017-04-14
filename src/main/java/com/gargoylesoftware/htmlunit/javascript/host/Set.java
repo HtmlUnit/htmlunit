@@ -46,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class Set extends SimpleScriptable {
 
+    private static final String SET_ITERATOR_NAME = "Set Iterator";
     private static Iterator ITERATOR_PROTOTYPE_;
     private java.util.Set<Object> set_ = new LinkedHashSet<>();
 
@@ -175,7 +176,7 @@ public class Set extends SimpleScriptable {
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object values() {
-        final SimpleScriptable object = new Iterator("Set Iterator", set_.iterator());
+        final SimpleScriptable object = new Iterator(SET_ITERATOR_NAME, set_.iterator());
         object.setParentScope(getParentScope());
         setIteratorPrototype(object);
         return object;
@@ -183,7 +184,7 @@ public class Set extends SimpleScriptable {
 
     private static void setIteratorPrototype(final Scriptable scriptable) {
         if (ITERATOR_PROTOTYPE_ == null) {
-            ITERATOR_PROTOTYPE_ = new Iterator("Set Iterator", null);
+            ITERATOR_PROTOTYPE_ = new Iterator(SET_ITERATOR_NAME, null);
         }
         scriptable.setPrototype(ITERATOR_PROTOTYPE_);
     }
