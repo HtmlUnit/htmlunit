@@ -45,6 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class Map extends SimpleScriptable {
 
+    private static final String MAP_ITERATOR_NAME = "Map Iterator";
     private static Iterator ITERATOR_PROTOTYPE_;
     private java.util.Map<Object, Object> map_ = new LinkedHashMap<>();
 
@@ -196,7 +197,7 @@ public class Map extends SimpleScriptable {
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object entries() {
-        final SimpleScriptable object = new Iterator("Map Iterator", map_.entrySet().iterator());
+        final SimpleScriptable object = new Iterator(MAP_ITERATOR_NAME, map_.entrySet().iterator());
         object.setParentScope(getParentScope());
         setIteratorPrototype(object);
         return object;
@@ -209,7 +210,7 @@ public class Map extends SimpleScriptable {
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object keys() {
-        final SimpleScriptable object = new Iterator("Map Iterator", map_.keySet().iterator());
+        final SimpleScriptable object = new Iterator(MAP_ITERATOR_NAME, map_.keySet().iterator());
         object.setParentScope(getParentScope());
         setIteratorPrototype(object);
         return object;
@@ -222,7 +223,7 @@ public class Map extends SimpleScriptable {
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
     public Object values() {
-        final SimpleScriptable object = new Iterator("Map Iterator", map_.values().iterator());
+        final SimpleScriptable object = new Iterator(MAP_ITERATOR_NAME, map_.values().iterator());
         object.setParentScope(getParentScope());
         setIteratorPrototype(object);
         return object;
@@ -230,7 +231,7 @@ public class Map extends SimpleScriptable {
 
     private static void setIteratorPrototype(final Scriptable scriptable) {
         if (ITERATOR_PROTOTYPE_ == null) {
-            ITERATOR_PROTOTYPE_ = new Iterator("Map Iterator", null);
+            ITERATOR_PROTOTYPE_ = new Iterator(MAP_ITERATOR_NAME, null);
         }
         scriptable.setPrototype(ITERATOR_PROTOTYPE_);
     }

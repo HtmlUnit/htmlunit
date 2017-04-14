@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF52;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,8 +76,9 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0,1,2,3,4,5,entries,forEach,item,keys,length,values",
+            FF45 = "0,1,2,3,4,5,item,length",
             IE = "0,1,2,3,4,5,item,length")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF52})
     public void iterator() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
                 + "<script>\n"
