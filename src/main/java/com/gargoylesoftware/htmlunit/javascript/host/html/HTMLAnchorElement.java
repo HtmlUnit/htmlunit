@@ -210,7 +210,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of the rev property.
      * @return the referrerPolicy property
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public String getReferrerPolicy() {
         String attrib = ((HtmlAnchor) getDomNodeOrDie()).getAttribute("referrerPolicy");
         if (StringUtils.isEmpty(attrib)) {
@@ -227,7 +227,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the rev property.
      * @param referrerPolicy referrerPolicy attribute value
      */
-    @JsxSetter(@WebBrowser(CHROME))
+    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public void setReferrerPolicy(final String referrerPolicy) {
         getDomNodeOrDie().setAttribute("referrerPolicy", referrerPolicy);
     }

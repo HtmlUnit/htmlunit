@@ -21,10 +21,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -431,90 +431,92 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inner")
+    @Alerts({"# inner", ""})
     public void javascriptTargetNone() throws Exception {
-        javascriptTarget("", 0, getExpectedAlerts());
+        javascriptTarget("", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inner")
+    @Alerts({"# inner", ""})
     public void javascriptTargetEmpty() throws Exception {
-        javascriptTarget("target=''", 0, getExpectedAlerts());
+        javascriptTarget("target=''", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            CHROME = {"0", "inner"})
+    @Alerts(DEFAULT = {"1", "", "# "},
+            CHROME = {"0", "# inner", ""})
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='  '",
                             Integer.parseInt(alerts[0]),
-                            Arrays.copyOfRange(alerts, 1, alerts.length));
+                            alerts[1], alerts[2]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inner")
+    @Alerts({"# inner", ""})
     public void javascriptTargetSelf() throws Exception {
-        javascriptTarget("target='_self'", 0, getExpectedAlerts());
+        javascriptTarget("target='_self'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            CHROME = {"0", "inner"})
+    @Alerts(DEFAULT = {"1", "", "# "},
+            CHROME = {"0", "# inner", ""})
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='_blank'",
                             Integer.parseInt(alerts[0]),
-                            Arrays.copyOfRange(alerts, 1, alerts.length));
+                            alerts[1], alerts[2]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "main",
-            CHROME = "inner")
+    @Alerts(DEFAULT = {"", "# main"},
+            CHROME = {"# inner", ""})
     public void javascriptTargetTop() throws Exception {
-        javascriptTarget("target='_top'", 0, getExpectedAlerts());
+        javascriptTarget("target='_top'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "main",
-            CHROME = "inner")
+    @Alerts(DEFAULT = {"", "# main"},
+            CHROME = {"# inner", ""})
     public void javascriptTargetParent() throws Exception {
-        javascriptTarget("target='_parent'", 0, getExpectedAlerts());
+        javascriptTarget("target='_parent'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            CHROME = {"0", "inner"})
+    @Alerts(DEFAULT = {"1", "", "# "},
+            CHROME = {"0", "# inner", ""})
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='unknown'",
                             Integer.parseInt(alerts[0]),
-                            Arrays.copyOfRange(alerts, 1, alerts.length));
+                            alerts[1], alerts[2]);
     }
 
     private void javascriptTarget(final String target, final int newWindows,
-                    final String[] expectedAlerts) throws Exception {
+                    final String frameAlerts, final String windowAlerts) throws Exception {
+        assertTrue(newWindows < 2);
+
         final String html
             = "<html>\n"
             + "<head><title>main</title></head>\n"
@@ -527,21 +529,41 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "<head><title>inner</title></head>\n"
             + "<body>\n"
             + "  <a id='tester' " + target
-                + " href='javascript: try { alert(document.title); } catch(e) { alert(e); }'>no href</a>\n"
+                + " href='javascript: try { document.body.setAttribute(\"title\", \"# \" + document.title); } "
+                + "catch(e) { alert(e); }'>no href</a>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        setExpectedAlerts(expectedAlerts);
         final WebDriver driver = loadPage2(html);
+
+        final String firstWindow = driver.getWindowHandle();
 
         driver.switchTo().frame("testFrame");
         assertEquals(1, driver.getWindowHandles().size());
         driver.findElement(By.id("tester")).click();
+
+        // TODO seems to be a HtmlUnitDriver bug
+        String titleVal = driver.findElement(By.tagName("body")).getAttribute("title");
+        if (titleVal == null) {
+            titleVal = "";
+        }
+        assertEquals(frameAlerts, titleVal);
+
+        final Set<String> windows = driver.getWindowHandles();
         assertEquals(1 + newWindows, driver.getWindowHandles().size());
 
-        verifyAlerts(driver, getExpectedAlerts());
+        if (newWindows > 0) {
+            windows.remove(firstWindow);
+        }
+        driver.switchTo().window(windows.iterator().next());
+        // TODO seems to be a HtmlUnitDriver bug
+        titleVal = driver.findElement(By.tagName("body")).getAttribute("title");
+        if (titleVal == null) {
+            titleVal = "";
+        }
+        assertEquals(windowAlerts, titleVal);
     }
 
     /**
@@ -802,6 +824,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                         "undefined-no-referrer", "undefined-origin",
                         "undefined-unsafe-url", "undefined-unknown"},
             CHROME = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
+                        "origin-origin", "unsafe-url-unsafe-url", "-unknown"},
+            FF52 = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
                         "origin-origin", "unsafe-url-unsafe-url", "-unknown"})
     public void referrerPolicy() throws Exception {
         final String html =
@@ -838,6 +862,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                         "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
                         "NO-reFerrer- ", "NO-reFerrer-unknown"},
             CHROME = {"origin-origin", "-unknown", "no-referrer-no-referrer",
+                        "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"},
+            FF52 = {"origin-origin", "-unknown", "no-referrer-no-referrer",
                         "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"})
     public void setReferrerPolicy() throws Exception {
         final String html =
