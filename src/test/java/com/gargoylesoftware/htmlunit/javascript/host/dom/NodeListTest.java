@@ -84,7 +84,7 @@ public class NodeListTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var all = [];\n"
                 + "    for (var i in document.querySelectorAll('*')) {\n"
-                + "       all.push(i);\n"
+                + "      all.push(i);\n"
                 + "    }\n"
                 + "    all.sort(sortFunction);\n"
                 + "    alert(all);\n"
