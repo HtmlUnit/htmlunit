@@ -1815,11 +1815,7 @@ public class HTMLDocument extends Document {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<DomNode> nodes = new ArrayList<>();
-            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add(domNode);
-            }
-            return NodeList.staticNodeList(this, nodes);
+            return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"

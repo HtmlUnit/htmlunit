@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -594,11 +593,7 @@ public class Element extends EventNode {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<DomNode> nodes = new ArrayList<>();
-            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add(domNode);
-            }
-            return NodeList.staticNodeList(this, nodes);
+            return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
