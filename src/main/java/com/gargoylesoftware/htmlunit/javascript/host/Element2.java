@@ -103,8 +103,8 @@ public class Element2 extends EventNode2 {
     private void createEventHandlers() {
         final DomElement htmlElt = getDomNodeOrDie();
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
-            final String eventName = attr.getName();
-            if (eventName.toLowerCase(Locale.ROOT).startsWith("on")) {
+            final String eventName = attr.getName().toLowerCase(Locale.ROOT);
+            if (eventName.startsWith("on")) {
                 createEventHandler(eventName, attr.getValue());
             }
         }
