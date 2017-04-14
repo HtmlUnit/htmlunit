@@ -128,7 +128,7 @@ public class HTMLAllCollection extends HTMLCollection {
      */
     @Override
     public final Object namedItem(final String name) {
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
         final List<DomElement> matching = new ArrayList<>();
@@ -147,7 +147,7 @@ public class HTMLAllCollection extends HTMLCollection {
             }
         }
 
-        for (final Object next : elements) {
+        for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
                 if (name.equals(elem.getAttribute("name"))) {
@@ -173,7 +173,8 @@ public class HTMLAllCollection extends HTMLCollection {
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
-        final HTMLCollection collection = new HTMLCollection(domNode, matching);
+        final List<DomNode> nodes = new ArrayList<>(matching);
+        final HTMLCollection collection = new HTMLCollection(domNode, nodes);
         collection.setAvoidObjectDetection(true);
         return collection;
     }
@@ -235,7 +236,7 @@ public class HTMLAllCollection extends HTMLCollection {
      * {@inheritDoc}
      */
     @Override
-    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
+    protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
         if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_NODE_LIST_FOR_DUPLICATES)) {
             return new NodeList(parentScope, initialElements);
         }

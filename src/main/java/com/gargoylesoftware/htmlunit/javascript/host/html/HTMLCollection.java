@@ -86,7 +86,7 @@ public class HTMLCollection extends AbstractList {
      * @param domNode the parent scope, on which we listen for changes
      * @param initialElements the initial content for the cache
      */
-    HTMLCollection(final DomNode domNode, final List<?> initialElements) {
+    HTMLCollection(final DomNode domNode, final List<DomNode> initialElements) {
         super(domNode, initialElements);
     }
 
@@ -96,10 +96,10 @@ public class HTMLCollection extends AbstractList {
      * @return an empty collection
      */
     public static HTMLCollection emptyCollection(final DomNode domNode) {
-        final List<Object> list = Collections.emptyList();
+        final List<DomNode> list = Collections.emptyList();
         return new HTMLCollection(domNode, false) {
             @Override
-            public List<Object> getElements() {
+            public List<DomNode> getElements() {
                 return list;
             }
         };
@@ -109,7 +109,7 @@ public class HTMLCollection extends AbstractList {
      * {@inheritDoc}
      */
     @Override
-    protected AbstractList create(final DomNode parentScope, final List<?> initialElements) {
+    protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
         return new HTMLCollection(parentScope, initialElements);
     }
 
@@ -138,10 +138,10 @@ public class HTMLCollection extends AbstractList {
      * {@inheritDoc}
      */
     @Override
-    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
-        final List<Object> matchingElements = new ArrayList<>();
+    protected Object getWithPreemptionByName(final String name, final List<DomNode> elements) {
+        final List<DomNode> matchingElements = new ArrayList<>();
         final boolean searchName = isGetWithPreemptionSearchName();
-        for (final Object next : elements) {
+        for (final DomNode next : elements) {
             if (next instanceof DomElement
                     && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
                 final String nodeName = ((DomElement) next).getAttribute("name");
@@ -218,7 +218,7 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction
     public Object namedItem(final String name) {
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST)) {
             for (final Object next : elements) {
@@ -255,7 +255,7 @@ public class HTMLCollection extends AbstractList {
     @JsxFunction(@WebBrowser(IE))
     public Object nextNode() {
         final Object nextNode;
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
         if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
             nextNode = elements.get(currentIndex_);
         }
@@ -303,10 +303,10 @@ class HTMLSubCollection extends HTMLCollection {
     }
 
     @Override
-    protected List<Object> computeElements() {
-        final List<Object> list = new ArrayList<>();
-        for (final Object o : mainCollection_.getElements()) {
-            if (isMatching((DomNode) o)) {
+    protected List<DomNode> computeElements() {
+        final List<DomNode> list = new ArrayList<>();
+        for (final DomNode o : mainCollection_.getElements()) {
+            if (isMatching(o)) {
                 list.add(o);
             }
         }

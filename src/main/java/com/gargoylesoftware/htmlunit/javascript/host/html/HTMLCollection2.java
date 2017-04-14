@@ -108,7 +108,7 @@ public class HTMLCollection2 extends AbstractList2 {
      * @param domNode the parent scope, on which we listen for changes
      * @param initialElements the initial content for the cache
      */
-    HTMLCollection2(final DomNode domNode, final List<?> initialElements) {
+    HTMLCollection2(final DomNode domNode, final List<DomNode> initialElements) {
         super(domNode, initialElements);
     }
 
@@ -165,8 +165,8 @@ public class HTMLCollection2 extends AbstractList2 {
      */
     @Function
     public Object namedItem(final String name) {
-        final List<Object> elements = getElements();
-        for (final Object next : elements) {
+        final List<DomNode> elements = getElements();
+        for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
                 final String nodeName = elem.getAttribute("name");
@@ -187,10 +187,10 @@ public class HTMLCollection2 extends AbstractList2 {
      * {@inheritDoc}
      */
     @Override
-    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
-        final List<Object> matchingElements = new ArrayList<>();
+    protected Object getWithPreemptionByName(final String name, final List<DomNode> elements) {
+        final List<DomNode> matchingElements = new ArrayList<>();
         final boolean searchName = isGetWithPreemptionSearchName();
-        for (final Object next : elements) {
+        for (final DomNode next : elements) {
             if (next instanceof DomElement
                     && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
                 final String nodeName = ((DomElement) next).getAttribute("name");

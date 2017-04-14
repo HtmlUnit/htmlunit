@@ -367,8 +367,8 @@ public class HTMLOptionsCollection extends SimpleScriptable {
     public NodeList getChildNodes() {
         return new NodeList(htmlSelect_, false) {
             @Override
-            protected List<Object> computeElements() {
-                final List<Object> response = new ArrayList<>();
+            protected List<DomNode> computeElements() {
+                final List<DomNode> response = new ArrayList<>();
                 for (final DomNode child : htmlSelect_.getChildren()) {
                     response.add(child);
                 }

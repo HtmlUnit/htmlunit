@@ -132,15 +132,15 @@ public class HTMLFormElement extends HTMLElement implements Function {
             private boolean filterChildrenOfNestedForms_;
 
             @Override
-            protected List<Object> computeElements() {
-                final List<Object> response = super.computeElements();
+            protected List<DomNode> computeElements() {
+                final List<DomNode> response = super.computeElements();
                 // it would be more performant to avoid iterating through
                 // nested forms but as it is a corner case of ill formed HTML
                 // the needed refactoring would take too much time
                 // => filter here and not in isMatching as it won't be needed in most
                 // of the cases
                 if (filterChildrenOfNestedForms_) {
-                    for (final Iterator<Object> iter = response.iterator(); iter.hasNext();) {
+                    for (final Iterator<DomNode> iter = response.iterator(); iter.hasNext();) {
                         final HtmlElement field = (HtmlElement) iter.next();
                         if (field.getEnclosingForm() != htmlForm) {
                             iter.remove();
@@ -392,10 +392,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (elements.size() == 1) {
             return getScriptableFor(elements.get(0));
         }
-
-        final HTMLCollection collection = new HTMLCollection(getHtmlForm(), elements) {
+        final List<DomNode> nodes = new ArrayList<>(elements);
+        final HTMLCollection collection = new HTMLCollection(getHtmlForm(), nodes) {
             @Override
-            protected List<Object> computeElements() {
+            protected List<DomNode> computeElements() {
                 return new ArrayList<>(findElements(name));
             }
         };

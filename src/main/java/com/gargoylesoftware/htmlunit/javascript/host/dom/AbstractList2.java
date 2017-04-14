@@ -75,7 +75,7 @@ public class AbstractList2 extends SimpleScriptObject {
     /**
      * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
      */
-    private List<Object> cachedElements_;
+    private List<DomNode> cachedElements_;
 
     private boolean listenerRegistered_;
 
@@ -102,7 +102,7 @@ public class AbstractList2 extends SimpleScriptObject {
      * @param domNode the {@link DomNode}
      * @param initialElements the initial content for the cache
      */
-    protected AbstractList2(final DomNode domNode, final List<?> initialElements) {
+    protected AbstractList2(final DomNode domNode, final List<DomNode> initialElements) {
         this(domNode, true, new ArrayList<>(initialElements));
     }
 
@@ -115,7 +115,7 @@ public class AbstractList2 extends SimpleScriptObject {
      * @param initialElements the initial content for the cache
      */
     private AbstractList2(final DomNode domeNode, final boolean attributeChangeSensitive,
-            final List<Object> initialElements) {
+            final List<DomNode> initialElements) {
         if (domeNode != null) {
             setDomNode(domeNode, false);
             final ScriptObject parentScope = domeNode.getScriptObject2();
@@ -187,7 +187,7 @@ public class AbstractList2 extends SimpleScriptObject {
      */
     @Override
     public final Object get(final int index) {
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
         if (index >= 0 && index < elements.size()) {
             return getScriptObjectForElement(elements.get(index));
         }
@@ -209,9 +209,9 @@ public class AbstractList2 extends SimpleScriptObject {
      * Gets the HTML elements from cache or retrieve them at first call.
      * @return the list of {@link HtmlElement} contained in this collection
      */
-    public List<Object> getElements() {
+    public List<DomNode> getElements() {
         // a bit strange but we like to avoid sync
-        List<Object> cachedElements = cachedElements_;
+        List<DomNode> cachedElements = cachedElements_;
 
         if (cachedElements == null) {
 //        if (getParentScope() == null) {
@@ -248,8 +248,8 @@ public class AbstractList2 extends SimpleScriptObject {
      * Returns the elements whose associated host objects are available through this collection.
      * @return the elements whose associated host objects are available through this collection
      */
-    protected List<Object> computeElements() {
-        final List<Object> response = new ArrayList<>();
+    protected List<DomNode> computeElements() {
+        final List<DomNode> response = new ArrayList<>();
         final DomNode domNode = getDomNodeOrNull();
         if (domNode == null) {
             return response;
@@ -654,12 +654,12 @@ public class AbstractList2 extends SimpleScriptObject {
             return ScriptRuntime.UNDEFINED/*NOT_FOUND*/;
         }
 
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
-        final List<Object> matchingElements = new ArrayList<>();
+        final List<DomNode> matchingElements = new ArrayList<>();
 
-        for (final Object next : elements) {
+        for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getId();
                 if (name.equals(id)) {
@@ -687,7 +687,7 @@ public class AbstractList2 extends SimpleScriptObject {
      * @param initialElements the initial content for the cache
      * @return the newly created instance
      */
-    protected AbstractList2 create(final DomNode parentScope, final List<?> initialElements) {
+    protected AbstractList2 create(final DomNode parentScope, final List<DomNode> initialElements) {
         return new AbstractList2(parentScope, initialElements);
     }
 
@@ -697,9 +697,9 @@ public class AbstractList2 extends SimpleScriptObject {
      * @param elements the children elements.
      * @return {@link Scriptable#NOT_FOUND} if not found
      */
-    protected Object getWithPreemptionByName(final String name, final List<Object> elements) {
-        final List<Object> matchingElements = new ArrayList<>();
-        for (final Object next : elements) {
+    protected Object getWithPreemptionByName(final String name, final List<DomNode> elements) {
+        final List<DomNode> matchingElements = new ArrayList<>();
+        for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final String nodeName = ((DomElement) next).getAttribute("name");
                 if (name.equals(nodeName)) {

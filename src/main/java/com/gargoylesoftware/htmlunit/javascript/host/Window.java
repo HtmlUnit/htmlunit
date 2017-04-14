@@ -1397,9 +1397,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
 
         return new HTMLCollection(page, true) {
             @Override
-            protected List<Object> computeElements() {
+            protected List<DomNode> computeElements() {
                 final List<DomElement> expElements = page.getElementsByName(expElementName);
-                final List<Object> result = new ArrayList<>(expElements.size());
+                final List<DomNode> result = new ArrayList<>(expElements.size());
 
                 for (DomElement domElement : expElements) {
                     if (filter.matches(domElement)) {
@@ -2293,7 +2293,7 @@ class HTMLCollectionFrames extends HTMLCollection {
 
     @Override
     protected Object getWithPreemption(final String name) {
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
 
         for (final Object next : elements) {
             final BaseFrameElement frameElt = (BaseFrameElement) next;
@@ -2316,8 +2316,8 @@ class HTMLCollectionFrames extends HTMLCollection {
     }
 
     @Override
-    protected void addElementIds(final List<String> idList, final List<Object> elements) {
-        for (final Object next : elements) {
+    protected void addElementIds(final List<String> idList, final List<DomNode> elements) {
+        for (final DomNode next : elements) {
             final BaseFrameElement frameElt = (BaseFrameElement) next;
             final WebWindow window = frameElt.getEnclosedWindow();
             final String windowName = window.getName();

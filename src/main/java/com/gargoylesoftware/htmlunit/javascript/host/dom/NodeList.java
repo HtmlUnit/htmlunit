@@ -67,7 +67,7 @@ public class NodeList extends AbstractList {
      * @param domNode the parent scope, on which we listen for changes
      * @param initialElements the initial content for the cache
      */
-    public NodeList(final DomNode domNode, final List<?> initialElements) {
+    public NodeList(final DomNode domNode, final List<DomNode> initialElements) {
         super(domNode, initialElements);
     }
 
@@ -87,10 +87,10 @@ public class NodeList extends AbstractList {
      * @param elements the elements
      * @return an empty collection
      */
-    public static NodeList staticNodeList(final HtmlUnitScriptable parentScope, final List<Object> elements) {
+    public static NodeList staticNodeList(final HtmlUnitScriptable parentScope, final List<DomNode> elements) {
         return new NodeList(parentScope) {
             @Override
-            public List<Object> getElements() {
+            public List<DomNode> getElements() {
                 return elements;
             }
         };

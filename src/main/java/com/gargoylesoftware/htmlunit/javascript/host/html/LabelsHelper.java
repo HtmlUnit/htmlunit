@@ -46,8 +46,8 @@ class LabelsHelper extends NodeList {
      * {@inheritDoc}
      */
     @Override
-    public List<Object> getElements() {
-        final List<Object> response = new ArrayList<>();
+    public List<DomNode> getElements() {
+        final List<DomNode> response = new ArrayList<>();
         final DomElement domElement = (DomElement) getDomNodeOrDie();
         for (DomNode parent = domElement.getParentNode(); parent != null; parent = parent.getParentNode()) {
             if (parent instanceof HtmlLabel) {

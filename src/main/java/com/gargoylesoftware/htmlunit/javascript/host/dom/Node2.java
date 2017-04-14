@@ -517,8 +517,8 @@ public class Node2 extends EventTarget2 {
             final DomNode node = getDomNodeOrDie();
             childNodes_ = new NodeList2(node, false) {
                 @Override
-                protected List<Object> computeElements() {
-                    final List<Object> response = new ArrayList<>();
+                protected List<DomNode> computeElements() {
+                    final List<DomNode> response = new ArrayList<>();
                     for (final DomNode child : node.getChildren()) {
                         response.add(child);
                     }

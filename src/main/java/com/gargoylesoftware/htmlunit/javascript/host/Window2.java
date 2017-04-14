@@ -556,9 +556,9 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
         return new HTMLCollection2(page, true) {
             @Override
-            protected List<Object> computeElements() {
+            protected List<DomNode> computeElements() {
                 final List<DomElement> expElements = page.getElementsByName(expElementName);
-                final List<Object> result = new ArrayList<>(expElements.size());
+                final List<DomNode> result = new ArrayList<>(expElements.size());
 
                 for (DomElement domElement : expElements) {
                     if (filter.matches(domElement)) {

@@ -167,7 +167,7 @@ public class HTMLTableElement extends RowContainer {
         final HtmlTable table = (HtmlTable) getDomNodeOrDie();
         return new HTMLCollection(table, false) {
             @Override
-            protected List<Object> computeElements() {
+            protected List<DomNode> computeElements() {
                 return new ArrayList<>(table.getBodies());
             }
         };

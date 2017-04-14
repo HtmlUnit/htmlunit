@@ -1114,7 +1114,7 @@ public class HTMLDocument extends Document {
         final HtmlPage page = getPage();
         final HTMLCollection collection = new HTMLCollection(page, true) {
             @Override
-            protected List<Object> computeElements() {
+            protected List<DomNode> computeElements() {
                 return new ArrayList<>(page.getElementsByName(expElementName));
             }
 
@@ -1155,7 +1155,7 @@ public class HTMLDocument extends Document {
         final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
         final HTMLCollection collection = new HTMLCollection(page, true) {
             @Override
-            protected List<Object> computeElements() {
+            protected List<DomNode> computeElements() {
                 final List<DomElement> elements;
                 if (forIDAndOrName) {
                     elements = page.getElementsByIdAndOrName(name);
@@ -1163,7 +1163,7 @@ public class HTMLDocument extends Document {
                 else {
                     elements = page.getElementsByName(name);
                 }
-                final List<Object> matchingElements = new ArrayList<>();
+                final List<DomNode> matchingElements = new ArrayList<>();
                 for (final DomElement elt : elements) {
                     if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
                             || (alsoFrames && elt instanceof BaseFrameElement)) {
@@ -1815,9 +1815,9 @@ public class HTMLDocument extends Document {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<Object> nodes = new ArrayList<>();
+            final List<DomNode> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add(domNode.getScriptableObject());
+                nodes.add(domNode);
             }
             return NodeList.staticNodeList(this, nodes);
         }

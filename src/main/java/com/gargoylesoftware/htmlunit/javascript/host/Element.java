@@ -418,8 +418,8 @@ public class Element extends EventNode {
         final DomElement node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(node, false) {
             @Override
-            protected List<Object> computeElements() {
-                final List<Object> children = new LinkedList<>();
+            protected List<DomNode> computeElements() {
+                final List<DomNode> children = new LinkedList<>();
                 for (DomNode domNode : node.getChildNodes()) {
                     if (domNode instanceof DomElement) {
                         children.add(domNode);
@@ -594,9 +594,9 @@ public class Element extends EventNode {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            final List<Object> nodes = new ArrayList<>();
+            final List<DomNode> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-                nodes.add(domNode.getScriptableObject());
+                nodes.add(domNode);
             }
             return NodeList.staticNodeList(this, nodes);
         }

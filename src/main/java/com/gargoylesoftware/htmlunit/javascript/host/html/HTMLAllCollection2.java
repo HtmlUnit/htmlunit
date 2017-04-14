@@ -149,7 +149,7 @@ public class HTMLAllCollection2 extends HTMLCollection2 {
      */
     @Override
     public final Object namedItem(final String name) {
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
         final List<DomElement> matching = new ArrayList<>();
@@ -194,7 +194,7 @@ public class HTMLAllCollection2 extends HTMLCollection2 {
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
-        final HTMLCollection2 collection = new HTMLCollection2(domNode, matching);
+        final HTMLCollection2 collection = new HTMLCollection2(domNode, new ArrayList<>(matching));
         collection.setAvoidObjectDetection(true);
         return collection;
     }

@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
-            <action type="add" dev="asashour" issue="43394489" system="stackoverflow">
+            <action type="fix" dev="asashour" issue="43394489" system="stackoverflow">
                 JavaScript: fix AbstractList iteration.
             </action>
             <action type="fix" dev="rbri" issue="1869">

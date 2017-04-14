@@ -58,8 +58,8 @@ public class HTMLMapElement extends HTMLElement {
             final HtmlMap map = (HtmlMap) getDomNodeOrDie();
             areas_ = new HTMLCollection(map, false) {
                 @Override
-                protected List<Object> computeElements() {
-                    final List<Object> list = new ArrayList<>();
+                protected List<DomNode> computeElements() {
+                    final List<DomNode> list = new ArrayList<>();
                     for (final DomNode node : map.getChildElements()) {
                         if (node instanceof HtmlArea) {
                             list.add(node);
