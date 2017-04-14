@@ -51,7 +51,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class Window3Test extends WebDriverTestCase {
 
     /**
-     * Regression test to reproduce a known bug.
      * @throws Exception if the test fails
      */
     @Test
@@ -130,7 +129,7 @@ public class Window3Test extends WebDriverTestCase {
 
     /**
      * Variables that are defined inside JavaScript should be accessible through the
-     * window object (ie window.myVariable). Test that this works.
+     * window object (i.e. window.myVariable). Test that this works.
      * @throws Exception if the test fails
      */
     @Test
@@ -185,7 +184,7 @@ public class Window3Test extends WebDriverTestCase {
 
     /**
      * Variables that are defined inside JavaScript should be accessible through the
-     * window object (ie window.myVariable). Test that this works.
+     * window object (i.e. window.myVariable). Test that this works.
      * @throws Exception if the test fails
      */
     @Test
@@ -1213,7 +1212,8 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
-     * Test for 1225021.
+     * Test for Bug #283.
+     *
      * @throws Exception if the test fails
      */
     @Test
