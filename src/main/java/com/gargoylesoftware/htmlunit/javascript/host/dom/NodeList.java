@@ -18,13 +18,16 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -94,5 +97,35 @@ public class NodeList extends AbstractList {
                 return elements;
             }
         };
+    }
+
+    /**
+     * Returns an {@link Iterator} allowing to go through all keys contained in this object. 
+     * @return an {@link Iterator}
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    public Iterator keys() {
+        final List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < getLength(); i++) {
+            list.add(i);
+        }
+        final Iterator object = new Iterator("Iterator", list.iterator());
+        object.setParentScope(getParentScope());
+        return object;
+    }
+
+    /**
+     * Returns an {@link Iterator} allowing to go through all keys contained in this object. 
+     * @return an {@link Iterator}
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    public Iterator values() {
+        final List<Object> list = new ArrayList<>();
+        for (int i = 0; i < getLength(); i++) {
+            list.add(item(i));
+        }
+        final Iterator object = new Iterator("Iterator", list.iterator());
+        object.setParentScope(getParentScope());
+        return object;
     }
 }

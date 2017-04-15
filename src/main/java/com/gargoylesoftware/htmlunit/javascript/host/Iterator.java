@@ -67,6 +67,7 @@ public class Iterator extends SimpleScriptable {
         final SimpleScriptable object = new SimpleScriptable();
         object.setParentScope(getParentScope());
         final Object value;
+        final boolean done;
         if (iterator_ != null && iterator_.hasNext()) {
             final Object next = iterator_.next();
             if (next instanceof java.util.Map.Entry) {
@@ -83,10 +84,13 @@ public class Iterator extends SimpleScriptable {
             else {
                 value = next;
             }
+            done = false;
         }
         else {
             value = Undefined.instance;
+            done = true;
         }
+        object.defineProperty("done", done, ScriptableObject.DONTENUM);
         object.defineProperty("value", value, ScriptableObject.DONTENUM);
         return object;
     }
