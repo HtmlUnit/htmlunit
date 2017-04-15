@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
 public class WebGL2RenderingContext extends SimpleScriptable {
 
     /** The constant {@code ACTIVE_ATTRIBUTES}. */

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(browsers = {@WebBrowser(value = FF, maxVersion = 45), @WebBrowser(IE), @WebBrowser(EDGE)})
 public class DOMSettableTokenList extends DOMTokenList {
 
     /**
