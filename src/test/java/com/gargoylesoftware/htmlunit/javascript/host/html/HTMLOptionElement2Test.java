@@ -1383,14 +1383,13 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "o-mouse over [option1]",
-            FF = {"o-mouse over [option1]", "s-mouse over [option1]"},
-            IE = {})
+            FF = "o-mouse over [option1] s-mouse over [option1]",
+            IE = "")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
             + "    <script>\n"
             + "    function dumpEvent(event, pre) {\n"
             + "      // target\n"
@@ -1410,7 +1409,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      alert(msg);\n"
+            + "      document.title += ' ' + msg;\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1429,7 +1428,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
