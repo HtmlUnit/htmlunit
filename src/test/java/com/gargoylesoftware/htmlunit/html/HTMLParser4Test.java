@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -626,5 +627,91 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</html>\n";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    public void specialComments() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "  <title>Outer Html</title>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var body = document.getElementById('tester');\n"
+                + "      var text = body.innerText;"
+                + "      alert(text);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body id='tester' onload='test()'>\n"
+                + "  <div>before1<!---->after1</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before2<!--->after2</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before3<!-->after3</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before4<!->after4</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before5<!>after5</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before6<>after6</div>\n"
+                + "  <!--good comment-->\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        final String alerts = getCollectedAlerts(driver, 1).get(0);
+
+        assertTrue(alerts, alerts.contains("before1after1"));
+        assertTrue(alerts, alerts.contains("before2after2"));
+        assertTrue(alerts, alerts.contains("before3after3"));
+        assertTrue(alerts, alerts.contains("before4after4"));
+        assertTrue(alerts, alerts.contains("before5after5"));
+        assertTrue(alerts, alerts.contains("before6<>after6"));
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    public void specialComments2() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "  <title>Outer Html</title>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var body = document.getElementById('tester');\n"
+                + "      var text = body.innerText;"
+                + "      alert(text);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body id='tester' onload='test()'>\n"
+                + "  <div>before1<!-- -->after1</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before2<!-- ->after2</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before3<!-- >after3</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before4<!- >after4</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before5<! >after5</div>\n"
+                + "  <!--good comment-->\n"
+                + "  <div>before6< >after6</div>\n"
+                + "  <!--good comment-->\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        final String alerts = getCollectedAlerts(driver, 1).get(0);
+
+        assertTrue(alerts, alerts.contains("before1after1"));
+        assertTrue(alerts, alerts.contains("before2\n"));
+        assertTrue(alerts, alerts.contains("before3\n"));
+        assertTrue(alerts, alerts.contains("before4after4"));
+        assertTrue(alerts, alerts.contains("before5after5"));
+        assertTrue(alerts, alerts.contains("before6< >after6"));
     }
 }

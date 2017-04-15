@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="fix" dev="rbri" issue="1862">
+                Neko: fix handling of strange comment syntax supported by browsers
+            </action>
             <action type="fix" dev="asashour" issue="43394489" system="stackoverflow">
                 JavaScript: fix AbstractList iteration.
             </action>
