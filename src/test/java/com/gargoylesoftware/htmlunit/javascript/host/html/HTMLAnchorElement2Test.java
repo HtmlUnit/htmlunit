@@ -431,7 +431,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"# inner", ""})
+    @Alerts({"# inner", "main"})
     public void javascriptTargetNone() throws Exception {
         javascriptTarget("", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -440,7 +440,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"# inner", ""})
+    @Alerts({"# inner", "main"})
     public void javascriptTargetEmpty() throws Exception {
         javascriptTarget("target=''", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -449,8 +449,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "", "# "},
-            CHROME = {"0", "# inner", ""})
+    @Alerts(DEFAULT = {"1", "inner", "# "},
+            CHROME = {"0", "# inner", "main"})
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='  '",
@@ -462,7 +462,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"# inner", ""})
+    @Alerts({"# inner", "main"})
     public void javascriptTargetSelf() throws Exception {
         javascriptTarget("target='_self'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -471,8 +471,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "", "# "},
-            CHROME = {"0", "# inner", ""})
+    @Alerts(DEFAULT = {"1", "inner", "# "},
+            CHROME = {"0", "# inner", "main"})
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='_blank'",
@@ -484,8 +484,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "# main"},
-            CHROME = {"# inner", ""})
+    @Alerts(DEFAULT = {"inner", "# main"},
+            CHROME = {"# inner", "main"})
     public void javascriptTargetTop() throws Exception {
         javascriptTarget("target='_top'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -494,8 +494,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "# main"},
-            CHROME = {"# inner", ""})
+    @Alerts(DEFAULT = {"inner", "# main"},
+            CHROME = {"# inner", "main"})
     public void javascriptTargetParent() throws Exception {
         javascriptTarget("target='_parent'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -504,8 +504,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "", "# "},
-            CHROME = {"0", "# inner", ""})
+    @Alerts(DEFAULT = {"1", "inner", "# "},
+            CHROME = {"0", "# inner", "main"})
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='unknown'",
@@ -520,14 +520,14 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final String html
             = "<html>\n"
             + "<head><title>main</title></head>\n"
-            + "<body>\n"
+            + "<body title='main'>\n"
             + "  <iframe id='testFrame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
         final String secondHtml
             = "<html>\n"
             + "<head><title>inner</title></head>\n"
-            + "<body>\n"
+            + "<body  title='inner'>\n"
             + "  <a id='tester' " + target
                 + " href='javascript: try { document.body.setAttribute(\"title\", \"# \" + document.title); } "
                 + "catch(e) { alert(e); }'>no href</a>\n"

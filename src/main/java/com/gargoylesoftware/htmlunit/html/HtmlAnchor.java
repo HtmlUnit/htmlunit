@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -135,7 +136,11 @@ public class HtmlAnchor extends HtmlElement {
             else {
                 final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
                         page.getResolvedTarget(getTargetAttribute()), "_self");
-                final Page enclosedPage = win.getEnclosedPage();
+                Page enclosedPage = win.getEnclosedPage();
+                if (enclosedPage == null) {
+                    win.getWebClient().getPage(win, new WebRequest(WebClient.URL_ABOUT_BLANK));
+                    enclosedPage = win.getEnclosedPage();
+                }
                 if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                     page = (HtmlPage) enclosedPage;
                     page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
