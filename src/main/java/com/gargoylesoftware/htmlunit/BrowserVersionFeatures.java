@@ -1542,7 +1542,7 @@ public enum BrowserVersionFeatures {
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates that open() throws an exception in sync mode if 'withCredentials' is set to true. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 45))
     XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION,
 
     /** Indicates that method overrideMimeType throws if msg was already sent. */
@@ -1561,7 +1561,7 @@ public enum BrowserVersionFeatures {
      * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
      * Setting the property throws an exception.
      */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 45))
     XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION,
 
     /** Indicates that the XPath attribute is case sensitive. */

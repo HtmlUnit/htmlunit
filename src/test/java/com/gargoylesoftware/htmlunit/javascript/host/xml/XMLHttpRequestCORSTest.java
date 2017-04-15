@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -593,7 +594,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "true", "false", "true"},
-            FF = {"false", "true", "false", "ex: open", "true"})
+            FF45 = {"false", "true", "false", "ex: open", "true"})
     public void withCredentials_setBeforeOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -674,7 +675,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "false"},
-            FF = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
+            FF45 = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
     public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -708,7 +709,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "false"},
-            FF = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
+            FF45 = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
     public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -741,8 +742,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "4", "0"},
-            IE = {"1", "0", "4", "200"})
+    @Alerts(DEFAULT = "1 0 4 0",
+            IE = "1 0 4 200")
     public void withCredentials() throws Exception {
         testWithCredentials("*", "true");
     }
@@ -751,7 +752,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"1", "0", "4", "200"})
+    @Alerts("1 0 4 200")
     public void withCredentialsServer() throws Exception {
         testWithCredentials("http://localhost:" + PORT, "true");
     }
@@ -760,8 +761,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "4", "0"},
-            IE = {"1", "0", "4", "200"})
+    @Alerts(DEFAULT = "1 0 4 0",
+            IE = "1 0 4 200")
     public void withCredentialsServerSlashAtEnd() throws Exception {
         testWithCredentials(URL_FIRST.toExternalForm(), "true");
     }
@@ -770,8 +771,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "4", "0"},
-            IE = {"1", "0", "4", "200"})
+    @Alerts(DEFAULT = "1 0 4 0",
+            IE = "1 0 4 200")
     public void withCredentials_no_header() throws Exception {
         testWithCredentials("*", null);
     }
@@ -780,8 +781,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "4", "0"},
-            IE = {"1", "0", "4", "200"})
+    @Alerts(DEFAULT = "1 0 4 0",
+            IE = "1 0 4 200")
     public void withCredentials_no_header_Server() throws Exception {
         testWithCredentials("http://localhost:" + PORT, null);
     }
@@ -790,8 +791,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "4", "0"},
-            IE = {"1", "0", "4", "200"})
+    @Alerts(DEFAULT = "1 0 4 0",
+            IE = "1 0 4 200")
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
         testWithCredentials(URL_FIRST.toExternalForm(), null);
     }
@@ -810,16 +811,16 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.withCredentials = true;\n"
                 + "    xhr.onreadystatechange = onReadyStateChange;\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { alert(e) }\n"
-                + "  alert(xhr.readyState);\n"
+                + "  } catch(e) { document.title += ' ' + e }\n"
+                + "  document.title += ' ' + xhr.readyState;\n"
                 + "  try {\n"
-                + "    alert(xhr.status);\n"
-                + "  } catch(e) { alert('ex: status not available') }\n"
+                + "    document.title += ' ' + xhr.status;\n"
+                + "  } catch(e) { document.title += ' ' + 'ex: status not available' }\n"
 
                 + "  function onReadyStateChange() {\n"
                 + "    if (xhr.readyState == 4) {\n"
-                + "      alert(xhr.readyState);\n"
-                + "      alert(xhr.status);\n"
+                + "      document.title += ' ' + xhr.readyState;\n"
+                + "      document.title += ' ' + xhr.status;\n"
                 + "    }\n"
                 + "  }\n"
                 + "}\n"
@@ -834,7 +835,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "/withCredentials1"));
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "/withCredentials1"));
+        Thread.sleep(DEFAULT_WAIT_TIME);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
