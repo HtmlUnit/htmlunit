@@ -53,12 +53,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -1304,10 +1304,39 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     protected void detach() {
-        final ScriptableObject document = getPage().getScriptableObject();
+        final Object document = getPage().getScriptableObject();
 
         if (document instanceof HTMLDocument) {
             final HTMLDocument doc = (HTMLDocument) document;
+            final Object activeElement = doc.getActiveElement();
+
+            if (activeElement == getScriptableObject()) {
+                doc.setActiveElement(null);
+                if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                    ((HtmlPage) getPage()).setFocusedElement(null);
+                }
+                else {
+                    ((HtmlPage) getPage()).setElementWithFocus(null);
+                }
+            }
+            else {
+                for (DomNode child : getChildNodes()) {
+                    if (activeElement == child.getScriptableObject()) {
+                        doc.setActiveElement(null);
+                        if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
+                            ((HtmlPage) getPage()).setFocusedElement(null);
+                        }
+                        else {
+                            ((HtmlPage) getPage()).setElementWithFocus(null);
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+        else if (document instanceof HTMLDocument2) {
+            final HTMLDocument2 doc = (HTMLDocument2) document;
             final Object activeElement = doc.getActiveElement();
 
             if (activeElement == getScriptableObject()) {
