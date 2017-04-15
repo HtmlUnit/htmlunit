@@ -77,7 +77,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0,1,2,3,4,5,entries,forEach,item,keys,length,values",
             FF45 = "0,1,2,3,4,5,item,length",
-            IE = "0,1,2,3,4,5,item,length")
+            IE = "0,1,2,3,4,5,item,length",
+            EDGE = "0,1,2,3,4,5,item,length")
     @NotYetImplemented({CHROME, FF52})
     public void iterator() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
