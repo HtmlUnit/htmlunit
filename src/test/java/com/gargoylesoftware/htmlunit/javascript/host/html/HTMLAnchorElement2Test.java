@@ -544,11 +544,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         assertEquals(1, driver.getWindowHandles().size());
         driver.findElement(By.id("tester")).click();
 
-        // TODO seems to be a HtmlUnitDriver bug
         String titleVal = driver.findElement(By.tagName("body")).getAttribute("title");
-        if (titleVal == null) {
-            titleVal = "";
-        }
         assertEquals(frameAlerts, titleVal);
 
         final Set<String> windows = driver.getWindowHandles();
@@ -558,11 +554,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             windows.remove(firstWindow);
         }
         driver.switchTo().window(windows.iterator().next());
-        // TODO seems to be a HtmlUnitDriver bug
         titleVal = driver.findElement(By.tagName("body")).getAttribute("title");
-        if (titleVal == null) {
-            titleVal = "";
-        }
         assertEquals(windowAlerts, titleVal);
     }
 
