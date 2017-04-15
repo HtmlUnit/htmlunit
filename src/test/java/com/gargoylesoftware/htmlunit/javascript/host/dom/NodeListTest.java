@@ -95,7 +95,7 @@ public class NodeListTest extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
-                + "  <div>/div>\n"
+                + "  <div></div>\n"
                 + "</body></html>";
 
         loadPageWithAlerts2(html);
