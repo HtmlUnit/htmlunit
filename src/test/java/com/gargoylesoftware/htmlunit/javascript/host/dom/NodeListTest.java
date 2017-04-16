@@ -115,7 +115,6 @@ public class NodeListTest extends WebDriverTestCase {
             FF45 = "no forEach",
             IE = "no forEach",
             EDGE = "no forEach")
-    @NotYetImplemented({CHROME, FF52})
     public void forEach() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "<script>\n"

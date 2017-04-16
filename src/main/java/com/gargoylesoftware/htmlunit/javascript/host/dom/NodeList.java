@@ -29,6 +29,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -105,8 +108,9 @@ public class NodeList extends AbstractList {
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public Iterator keys() {
+        final int length = getElements().size();
         final List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < getLength(); i++) {
+        for (int i = 0; i < length; i++) {
             list.add(i);
         }
         final Iterator object = new Iterator("Iterator", list.iterator());
@@ -120,12 +124,30 @@ public class NodeList extends AbstractList {
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public Iterator values() {
-        final List<Object> list = new ArrayList<>();
-        for (int i = 0; i < getLength(); i++) {
-            list.add(item(i));
-        }
+        final List<DomNode> list = getElements();
         final Iterator object = new Iterator("Iterator", list.iterator());
         object.setParentScope(getParentScope());
         return object;
+    }
+
+    /**
+     * Calls the {@code callback} given in parameter once for each value pair in the list, in insertion order.
+     * @param callback function to execute for each element
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    public void forEach(final Object callback) {
+        final List<DomNode> nodes = getElements();
+        final Context context = Context.enter();
+        try {
+            final Function function = (Function) callback;
+            final Scriptable scope = getParentScope();
+            for (int i = 0; i < nodes.size(); i++) {
+                function.call(context, scope, this, new Object[] {
+                        nodes.get(i).getScriptableObject(), i, this});
+            }
+        }
+        finally {
+            Context.exit();
+        }
     }
 }
