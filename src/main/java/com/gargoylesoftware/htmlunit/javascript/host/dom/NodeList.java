@@ -50,6 +50,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass
 public class NodeList extends AbstractList {
 
+    private static final String ITERATOR_NAME = "Iterator";
+    private static Iterator ITERATOR_PROTOTYPE_;
+
     /**
      * Creates an instance.
      */
@@ -113,8 +116,9 @@ public class NodeList extends AbstractList {
         for (int i = 0; i < length; i++) {
             list.add(i);
         }
-        final Iterator object = new Iterator("Iterator", list.iterator());
+        final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
         object.setParentScope(getParentScope());
+        setIteratorPrototype(object);
         return object;
     }
 
@@ -125,8 +129,9 @@ public class NodeList extends AbstractList {
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public Iterator values() {
         final List<DomNode> list = getElements();
-        final Iterator object = new Iterator("Iterator", list.iterator());
+        final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
         object.setParentScope(getParentScope());
+        setIteratorPrototype(object);
         return object;
     }
 
@@ -137,15 +142,25 @@ public class NodeList extends AbstractList {
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public Iterator entries() {
         final List<DomNode> elements = getElements();
-        
+        final Context context = Context.getCurrentContext();
+        final Scriptable scope = getParentScope();
+
         final List<Scriptable> list = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
             final Object[] array = new Object[] {i, elements.get(i).getScriptableObject()};
-            list.add(Context.getCurrentContext().newArray(getParentScope(), array));
+            list.add(context.newArray(scope, array));
         }
-        final Iterator object = new Iterator("Iterator", list.iterator());
-        object.setParentScope(getParentScope());
+        final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
+        object.setParentScope(scope);
+        setIteratorPrototype(object);
         return object;
+    }
+
+    private static void setIteratorPrototype(final Scriptable scriptable) {
+        if (ITERATOR_PROTOTYPE_ == null) {
+            ITERATOR_PROTOTYPE_ = new Iterator(ITERATOR_NAME, null);
+        }
+        scriptable.setPrototype(ITERATOR_PROTOTYPE_);
     }
 
     /**

@@ -190,10 +190,9 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                     mutationRecord.setOldValue(event.getValue());
                 }
 
-                final NativeArray array = new NativeArray(new Object[] {mutationRecord});
-                ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
                 final Context context = Context.enter();
                 try {
+                    final Scriptable array = context.newArray(scope, new Object[] {mutationRecord});
                     function_.call(context, scope, this, new Object[] {array});
                 }
                 finally {

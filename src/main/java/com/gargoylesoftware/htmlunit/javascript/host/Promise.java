@@ -33,9 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -149,9 +147,7 @@ public class Promise extends SimpleScriptable {
                     values[i] = p.value_;
                 }
             }
-            final NativeArray array = new NativeArray(values);
-            ScriptRuntime.setBuiltinProtoAndParent(array, getParentScope(), TopLevel.Builtins.Array);
-            value_ = array;
+            value_ = Context.getCurrentContext().newArray(getParentScope(), values);
         }
         return resolve_;
     }

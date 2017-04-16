@@ -19,7 +19,6 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -41,7 +40,7 @@ public final class ObjectCustom {
      * @param function the function
      * @return array
      */
-    public static NativeArray getOwnPropertySymbols(
+    public static Scriptable getOwnPropertySymbols(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         if (args.length == 0) {
             throw ScriptRuntime.typeError("Cannot convert undefined or null to object");
@@ -56,6 +55,6 @@ public final class ObjectCustom {
                 list.add(id);
             }
         }
-        return new NativeArray(list.toArray(new Object[list.size()]));
+        return context.newArray(thisObj, list.toArray(new Object[list.size()]));
     }
 }
