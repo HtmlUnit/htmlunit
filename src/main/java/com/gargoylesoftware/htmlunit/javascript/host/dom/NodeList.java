@@ -100,7 +100,7 @@ public class NodeList extends AbstractList {
     }
 
     /**
-     * Returns an {@link Iterator} allowing to go through all keys contained in this object. 
+     * Returns an {@link Iterator} allowing to go through all keys contained in this object.
      * @return an {@link Iterator}
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
@@ -115,7 +115,7 @@ public class NodeList extends AbstractList {
     }
 
     /**
-     * Returns an {@link Iterator} allowing to go through all keys contained in this object. 
+     * Returns an {@link Iterator} allowing to go through all keys contained in this object.
      * @return an {@link Iterator}
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})

@@ -102,4 +102,39 @@ public class NodeListTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLHtmlElement] 0 [object NodeList] undefined",
+                "[object HTMLHeadElement] 1 [object NodeList] undefined",
+                "[object HTMLTitleElement] 2 [object NodeList] undefined",
+                "[object HTMLScriptElement] 3 [object NodeList] undefined",
+                "[object HTMLBodyElement] 4 [object NodeList] undefined",
+                "[object HTMLDivElement] 5 [object NodeList] undefined"},
+            FF45 = "no forEach",
+            IE = "no forEach",
+            EDGE = "no forEach")
+    @NotYetImplemented({CHROME, FF52})
+    public void forEach() throws Exception {
+        final String html = "<html><head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "   var nodeList = document.querySelectorAll('*');\n"
+            + "   if (nodeList.forEach) {\n"
+            + "     nodeList.forEach(myFunction, 'something');\n"
+            + "   } else {\n"
+            + "     alert('no forEach');\n"
+            + "   }\n"
+            + "  }\n"
+            + "  function myFunction(value, index, list, arg) {\n"
+            + "    alert(value + ' ' + index + ' ' + list + ' ' + arg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
