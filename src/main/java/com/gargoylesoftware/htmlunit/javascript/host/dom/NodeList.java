@@ -131,6 +131,24 @@ public class NodeList extends AbstractList {
     }
 
     /**
+     * Returns an {@link Iterator} allowing to go through all key/value pairs contained in this object.
+     * @return an {@link Iterator}
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    public Iterator entries() {
+        final List<DomNode> elements = getElements();
+        
+        final List<Scriptable> list = new ArrayList<>();
+        for (int i = 0; i < elements.size(); i++) {
+            final Object[] array = new Object[] {i, elements.get(i).getScriptableObject()};
+            list.add(Context.getCurrentContext().newArray(getParentScope(), array));
+        }
+        final Iterator object = new Iterator("Iterator", list.iterator());
+        object.setParentScope(getParentScope());
+        return object;
+    }
+
+    /**
      * Calls the {@code callback} given in parameter once for each value pair in the list, in insertion order.
      * @param callback function to execute for each element
      */

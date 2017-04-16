@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF52;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -79,7 +75,6 @@ public class NodeListTest extends WebDriverTestCase {
             FF45 = "0,1,2,3,4,5,item,length",
             IE = "0,1,2,3,4,5,item,length",
             EDGE = "0,1,2,3,4,5,item,length")
-    @NotYetImplemented({CHROME, FF52})
     public void iterator() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
                 + "<script>\n"
@@ -133,6 +128,39 @@ public class NodeListTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "  <div></div>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "value", "object", "0", "[object HTMLHtmlElement]"},
+            FF45 = "not defined",
+            IE = "not defined",
+            EDGE = "not defined")
+    public void entries() throws Exception {
+        final String html = "<html><head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var nodeList = document.querySelectorAll('*');\n"
+            + "    if (!nodeList.entries) {\n"
+            + "      alert('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    var i = nodeList.entries().next();\n"
+            + "    for (var x in i) {\n"
+            + "      alert(x);\n"
+            + "    }\n"
+            + "    var v = i.value;\n"
+            + "    alert(typeof v);\n"
+            + "    alert(v[0]);\n"
+            + "    alert(v[1]);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>\n";
 
         loadPageWithAlerts2(html);
     }
