@@ -192,6 +192,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
+            FF52 = {"7,7", "11,11", "3,11", "3,10"},
             IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
@@ -202,6 +203,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            FF52 = {"7,7", "11,11", "0,11", "0,11"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
@@ -212,6 +214,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
+            FF52 = {"7,7", "11,11", "10,11", "5,5"},
             IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
@@ -241,6 +244,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
+            FF52 = {"5,5", "4,5", "10,10", "4,4", "1,1"},
             IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
