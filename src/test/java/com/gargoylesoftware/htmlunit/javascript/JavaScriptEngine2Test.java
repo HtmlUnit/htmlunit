@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -130,7 +131,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"in goo", "in hoo", "in foo"},
-            FF = {"in goo", "in hoo", "foo error"})
+            FF45 = {"in goo", "in hoo", "foo error"})
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -158,8 +159,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function foo() {}", "function foo() {}"},
             CHROME = {"undefined", "function foo() {}"},
-            FF = {"undefined", "foo error"})
-    @NotYetImplemented({IE, CHROME})
+            FF52 = {"undefined", "function foo() {}"},
+            FF45 = {"undefined", "foo error"})
+    @NotYetImplemented({IE, CHROME, FF52})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"

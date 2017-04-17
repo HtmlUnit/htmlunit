@@ -876,7 +876,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_USABLE_AS_FUNCTION,
 
     /** Indicates that function is defined even before its declaration, inside a block. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
     /** Indicates if the method toSource exists on the native objects. */
