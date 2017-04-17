@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -281,8 +283,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
-            IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
+    @Alerts("<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -298,14 +299,23 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
+    @Alerts(DEFAULT = {"<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"},
+            IE = {"<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<basefont xmlns=\"http://www.w3.org/1999/xhtml\"></basefont>",
+                    "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                    "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
+    @NotYetImplemented(IE)
     public void noClosingTag() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -359,16 +369,11 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
+    @Alerts({"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"},
-            IE = {"<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />"})
+                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
     public void otherTags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -32,13 +33,13 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    if (event) {\n"
-        + "      alert(event);\n"
-        + "      alert(event.type);\n"
-        + "      alert(event.bubbles);\n"
-        + "      alert(event.cancelable);\n"
-        + "      alert(event.returnValue);\n"
+        + "      document.title += ' -' + event;\n"
+        + "      document.title += ' -' + event.type;\n"
+        + "      document.title += ' -' + event.bubbles;\n"
+        + "      document.title += ' -' + event.cancelable;\n"
+        + "      document.title += ' -' + event.returnValue;\n"
         + "    } else {\n"
-        + "      alert('no event');\n"
+        + "      document.title += ' ' + 'no event';\n"
         + "    }\n"
         + "  }\n";
 
@@ -65,82 +66,85 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "", "true", "true", ""},
-            FF = {"[object BeforeUnloadEvent]", "", "false", "false", ""},
-            CHROME = {"[object BeforeUnloadEvent]", "beforeunload", "false", "true", ""},
+    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-", "-true", "-true", "-"},
+            FF = {"-[object BeforeUnloadEvent]", "-", "-false", "-false", "-"},
+            CHROME = {"-[object BeforeUnloadEvent]", "-beforeunload", "-false", "-true", "-"},
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { document.title += 'exception' }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", ""},
+    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-"},
             IE = "exception")
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { document.title += 'exception' }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", ""},
+    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-"},
             IE = "exception")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { document.title += 'exception' }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onbeforeunload  = dump;\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "beforeunload", "true", "false", "undefined"},
-            CHROME = {"[object Event]", "beforeunload", "true", "false", "true"})
+    @Alerts(DEFAULT = {"-[object Event]", "-beforeunload", "-true", "-false", "-undefined"},
+            CHROME = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
@@ -153,7 +157,8 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
     }
 
     /**

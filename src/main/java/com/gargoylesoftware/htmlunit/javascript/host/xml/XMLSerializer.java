@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT;
 
 import java.util.Arrays;
@@ -207,8 +206,7 @@ public class XMLSerializer extends SimpleScriptable {
         }
         if (!startTagClosed) {
             final String tagName = nodeName.toLowerCase(Locale.ROOT);
-            final boolean nonEmptyTagsSupported = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_NON_EMPTY_TAGS);
-            if (nonEmptyTagsSupported && NON_EMPTY_TAGS.contains(tagName)) {
+            if (NON_EMPTY_TAGS.contains(tagName)) {
                 builder.append('>');
                 builder.append("</").append(nodeName).append('>');
             }

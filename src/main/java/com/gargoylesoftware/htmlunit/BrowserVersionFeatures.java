@@ -1379,10 +1379,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY,
 
-    /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
-    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
-    JS_XML_SERIALIZER_NON_EMPTY_TAGS,
-
     /** Indicates that <code>XMLSerializer.serializeToString(..)</code> serializes a single CDataSection as escaped
      * text instead of <code>&lt;![CDATA[xxx]]&gt;</code>. */
     @BrowserFeature(@WebBrowser(IE))
