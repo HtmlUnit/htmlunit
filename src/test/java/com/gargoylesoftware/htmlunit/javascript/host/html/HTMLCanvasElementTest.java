@@ -135,6 +135,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
                         "[object WebGLRenderingContext]", "null", "null", "null"},
+            FF52 = {"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
+                        "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"},
             IE = {"[object CanvasRenderingContext2D]", "null",
                         "[object WebGLRenderingContext]", "null", "null", "null"})
     @NotYetImplemented
