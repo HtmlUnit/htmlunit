@@ -104,7 +104,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 1192854.
+     * Regression test for Bug #259.
      * @throws Exception if the test fails
      */
     @Test
@@ -169,7 +169,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/p/htmlunit/bugs/203/.
+     * Regression test for Bug #203.
      * @throws Exception if the test fails
      */
     @Test
@@ -200,8 +200,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 1236048.
-     * See http://sourceforge.net/p/htmlunit/bugs/288/.
+     * Regression test for Bug #288.
      * @throws Exception if the test fails
      */
     @Test
@@ -222,8 +221,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 307.
-     * See http://sourceforge.net/p/htmlunit/bugs/307/.
+     * Regression test for Bug #307.
      * @throws Exception if the test fails
      */
     @Test

@@ -67,7 +67,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 715379.
+     * Regression test for Bug #71.
      * @throws Exception if the test fails
      */
     @Test

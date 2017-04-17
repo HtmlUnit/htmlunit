@@ -1254,7 +1254,7 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
-     * Added test for Bud #485.  Bad context in evaluation of the JavaScript.
+     * Added test for Bug #485.  Bad context in evaluation of the JavaScript.
      * @throws Exception if the test fails
      */
     @Test

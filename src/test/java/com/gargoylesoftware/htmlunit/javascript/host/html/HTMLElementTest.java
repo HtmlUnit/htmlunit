@@ -660,7 +660,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
     /**
      * Test that {@link HTMLElement#getElementsByTagName} returns an associative array.
-     * Test for bug 1369514.
+     * Test for Bug #321.
      * @throws Exception if the test fails
      */
     @Test
@@ -2192,7 +2192,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1960512&group_id=47038.
+     * Test for Bug #616.
      * @throws Exception if the test fails
      */
     @Test
@@ -3043,7 +3043,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for https://sourceforge.net/tracker/?func=detail&aid=2022578&group_id=47038&atid=448266.
+     * Regression test for Bug #655.
      * @throws Exception if the test fails
      */
     @Test

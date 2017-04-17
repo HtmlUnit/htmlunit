@@ -1274,7 +1274,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2995968: lost children should be accessible per name from HTMLFormElement.elements.
+     * Regression test for Bug #1083: lost children should be accessible per name from HTMLFormElement.elements.
      * @throws Exception if the test fails
      */
     @Test

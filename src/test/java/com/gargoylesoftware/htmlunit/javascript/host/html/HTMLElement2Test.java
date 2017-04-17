@@ -418,7 +418,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Partial regression test for bug 2892939.
+     * Partial regression test for Bug #968.
      * @throws Exception if an error occurs
      */
     @Test
@@ -434,7 +434,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2912255.
+     * Regression test for Bug #999.
      * @throws Exception if an error occurs
      */
     @Test
@@ -500,7 +500,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2959014.
+     * Regression test for Bug #1037.
      * @throws Exception if an error occurs
      */
     @Test
@@ -516,7 +516,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 3306325.
+     * Regression test for Bug #1290.
      * @throws Exception if an error occurs
      */
     @Test
@@ -533,7 +533,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Partial regression test for bug 2892939.
+     * Partial regression test for Bug #968.
      * @throws Exception if an error occurs
      */
     @Test
