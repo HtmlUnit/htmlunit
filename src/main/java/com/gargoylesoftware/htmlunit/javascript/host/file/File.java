@@ -96,7 +96,7 @@ public class File extends Blob {
      * Returns the {@code webkitRelativePath} property.
      * @return the {@code webkitRelativePath} property
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public String getWebkitRelativePath() {
         return "";
     }
