@@ -151,7 +151,7 @@ public enum BrowserVersionFeatures {
     DIALOGWINDOW_REFERER,
 
     /** DOCTYPE has undefined value for 'prefix'. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     DOCTYPE_PREFIX_UNDEFINED,
 
     /** IE removes all child text nodes, but FF preserves the first. */
