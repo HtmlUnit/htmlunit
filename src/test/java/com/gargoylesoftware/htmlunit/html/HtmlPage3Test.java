@@ -55,7 +55,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     /**
-     * Test for 3306491.
+     * Test for Bug #1291.
      * @throws Exception if an error occurs
      */
     @Test

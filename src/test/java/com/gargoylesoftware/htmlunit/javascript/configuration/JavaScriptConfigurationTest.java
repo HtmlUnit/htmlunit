@@ -80,7 +80,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2854240.
+     * Regression test for Bug #899.
      * This test was throwing an OutOfMemoryError when the bug existed.
      * @throws Exception if an error occurs
      */

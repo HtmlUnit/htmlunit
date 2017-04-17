@@ -166,7 +166,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for a stylesheet link which points to a broken gzip encoded file (bug 3566999).
+     * Test for a stylesheet link which points to a broken gzip encoded file (Bug #1434).
      * @throws Exception if an error occurs
      */
     @Test
@@ -199,7 +199,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for a stylesheet link which points to a broken gzip encoded file (bug 3498578).
+     * Test for a stylesheet link which points to a broken gzip encoded file (Bug #1389).
      * @throws Exception if an error occurs
      */
     @Test

@@ -173,7 +173,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for bug 1728883 that makes sure closing a window prevents a
+     * Test for Bug #487 that makes sure closing a window prevents a
      * recursive setTimeout from continuing forever.
      *
      * @throws Exception if the test fails

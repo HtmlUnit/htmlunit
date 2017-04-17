@@ -225,7 +225,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Test for 3325124.
+     * Test for #1300.
      * @throws Exception if the test fails
      */
     @Test

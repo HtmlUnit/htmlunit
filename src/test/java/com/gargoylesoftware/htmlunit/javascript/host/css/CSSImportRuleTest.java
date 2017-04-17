@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class CSSImportRuleTest extends WebDriverTestCase {
 
     /**
-     * Regression test for bug 2658249.
+     * Regression test for Bug #789.
      * @throws Exception if an error occurs
      */
     @Test
@@ -50,7 +50,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2658249.
+     * Regression test for Bug #789.
      * @throws Exception if an error occurs
      */
     @Test

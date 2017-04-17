@@ -59,7 +59,7 @@ public class XHtmlPage2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 3112678.
+     * Regression test for Bug #1219.
      *
      * @throws Exception if an error occurs
      */

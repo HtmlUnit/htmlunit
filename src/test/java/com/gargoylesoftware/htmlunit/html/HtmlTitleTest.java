@@ -111,7 +111,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for bug 3103101.
+     * Test for Bug #1199.
      * @throws Exception if the test fails
      */
     @Test

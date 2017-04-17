@@ -54,7 +54,7 @@ public class MalformedHtml2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 2940936.
+     * Regression test for Bug #1018.
      * @throws Exception if an error occurs
      */
     @Test

@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 public class XHtmlPageTest extends SimpleWebTestCase {
 
     /**
-     * Regression test for bug 2515873. Originally located in {@link com.gargoylesoftware.htmlunit.xml.XmlPageTest}.
+     * Regression test for Bug #764. Originally located in {@link com.gargoylesoftware.htmlunit.xml.XmlPageTest}.
      * @throws Exception if an error occurs
      */
     @Test

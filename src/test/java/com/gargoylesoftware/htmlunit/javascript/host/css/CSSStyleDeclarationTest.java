@@ -216,7 +216,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 1592299.
+     * Regression test for Bug #398.
      * @throws Exception if the test fails
      */
     @Test

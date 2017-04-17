@@ -108,7 +108,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/p/htmlunit/bugs/203/.
+     * Regression test for Bud #203.
      * @throws Exception if the test fails
      */
     @Test
@@ -276,7 +276,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/p/htmlunit/bugs/521/.
+     * Regression test for Bug #521.
      * @throws Exception if the test fails
      */
     @Test
