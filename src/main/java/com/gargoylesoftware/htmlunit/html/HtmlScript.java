@@ -34,11 +34,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -237,21 +239,29 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final PostponedAction action = new PostponedAction(getPage(), "Execution of script " + this) {
             @Override
             public void execute() {
-                HTMLDocument jsDoc = null;
+                Object jsDoc = null;
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
-                // null for Nashorn
                 if (window != null) {
                     jsDoc = (HTMLDocument) window.getDocument();
-                    jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
+                    ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                }
+                else {
+                    jsDoc = (HTMLDocument2) Window2.getDocument(getPage().getEnclosingWindow().getGlobal());
+                    ((HTMLDocument2) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
+                            && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                    
                 }
 
                 try {
                     executeScriptIfNeeded();
                 }
                 finally {
-                    if (jsDoc != null) {
-                        jsDoc.setExecutingDynamicExternalPosponed(false);
+                    if (jsDoc instanceof HTMLDocument) {
+                        ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(false);
+                    }
+                    else if (jsDoc instanceof HTMLDocument2) {
+                        ((HTMLDocument2) jsDoc).setExecutingDynamicExternalPosponed(false);
                     }
                 }
             }
