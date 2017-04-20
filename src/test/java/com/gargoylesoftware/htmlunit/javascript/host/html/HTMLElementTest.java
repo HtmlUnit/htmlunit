@@ -4675,7 +4675,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"<select id=\"myId\"><option>Two</option></select>"})
+    @Alerts("<select id=\"myId\"><option>Two</option></select>")
     public void innerHTML() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4691,6 +4691,31 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <select id='myId'><option>One</option></select>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void innerHTMLGetElementsByTagName() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.innerHTML = \"<table></table><a href='/a'>a</a>\";\n"
+            + "      alert(div.getElementsByTagName('a').length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 

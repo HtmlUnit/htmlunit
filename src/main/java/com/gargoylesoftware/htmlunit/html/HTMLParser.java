@@ -395,6 +395,7 @@ public final class HTMLParser {
 
         /** Did the snippet tried to overwrite the start node? */
         private boolean snippetStartNodeOverwritten_;
+        private final int initialSize_;
         private DomNode currentNode_;
         private StringBuilder characters_;
         private HeadParsed headParsed_ = HeadParsed.NO;
@@ -467,6 +468,7 @@ public final class HTMLParser {
             catch (final SAXException e) {
                 throw new ObjectInstantiationException("unable to create HTML parser", e);
             }
+            initialSize_ = stack_.size();
         }
 
         /**
@@ -757,8 +759,7 @@ public final class HTMLParser {
                 if ("html".equals(tagLower) || "body".equals(tagLower)) {
                     return;
                 }
-                // stack_ size is 4 for snippet
-                if (stack_.size() < 5) {
+                if (stack_.size() == initialSize_) {
                     snippetStartNodeOverwritten_ = true;
                     return;
                 }
