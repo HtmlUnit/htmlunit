@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="fix" dev="asashour" issue="43482935" system="stackoverflow">
+                JavaScript: fix setting .innerHTML.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: implement NodeList.entries(), keys(), values() and forEach().
             </action>

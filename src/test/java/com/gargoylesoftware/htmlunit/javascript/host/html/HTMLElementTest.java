@@ -4671,4 +4671,30 @@ public class HTMLElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("log")).getText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<select id=\"myId\"><option>Two</option></select>"})
+    public void innerHTML() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var select = document.getElementById('myId');\n"
+            + "      select.innerHTML = \"<select id='myId2'><option>Two</option></select>\";\n"
+            + "      alert(document.body.innerHTML.trim());\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='myId'><option>One</option></select>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

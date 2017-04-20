@@ -393,6 +393,8 @@ public final class HTMLParser {
         private Locator locator_;
         private final Deque<DomNode> stack_ = new ArrayDeque<>();
 
+        /** Did the snippet tried to overwrite the start node? */
+        private boolean snippetStartNodeOverwritten_;
         private DomNode currentNode_;
         private StringBuilder characters_;
         private HeadParsed headParsed_ = HeadParsed.NO;
@@ -525,6 +527,10 @@ public final class HTMLParser {
         public void startElement(String namespaceURI, final String localName, String qName, final Attributes atts)
             throws SAXException {
 
+            if (snippetStartNodeOverwritten_) {
+                snippetStartNodeOverwritten_ = false;
+                return;
+            }
             handleCharacters();
 
             String tagLower = localName.toLowerCase(Locale.ROOT);
@@ -747,8 +753,15 @@ public final class HTMLParser {
 
             final String tagLower = localName.toLowerCase(Locale.ROOT);
 
-            if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
-                return;
+            if (page_.isParsingHtmlSnippet()) {
+                if ("html".equals(tagLower) || "body".equals(tagLower)) {
+                    return;
+                }
+                // stack_ size is 4 for snippet
+                if (stack_.size() < 5) {
+                    snippetStartNodeOverwritten_ = true;
+                    return;
+                }
             }
 
             if (parsingInnerHead_) {
