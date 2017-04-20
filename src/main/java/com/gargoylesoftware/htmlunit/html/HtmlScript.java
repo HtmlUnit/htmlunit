@@ -250,7 +250,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                     jsDoc = (HTMLDocument2) Window2.getDocument(getPage().getEnclosingWindow().getGlobal());
                     ((HTMLDocument2) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
-                    
                 }
 
                 try {

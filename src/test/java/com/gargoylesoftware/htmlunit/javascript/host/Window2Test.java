@@ -129,7 +129,6 @@ public class Window2Test extends WebDriverTestCase {
 
     /**
      * Verifies that properties added to <tt>Function.prototype</tt> are visible on <tt>window.onload</tt>.
-     * See bug 2318508.
      * @throws Exception if an error occurs
      */
     @Test
