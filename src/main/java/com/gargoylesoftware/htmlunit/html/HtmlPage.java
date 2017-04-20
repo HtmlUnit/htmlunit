@@ -2616,7 +2616,7 @@ public class HtmlPage extends SgmlPage {
             if (globalChanged) {
                 com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(global);
             }
-
+            thisObject.addBoundProperties(global);
             final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
             getWebClient().getJavaScriptEngine().processPostponedActions();
             return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
