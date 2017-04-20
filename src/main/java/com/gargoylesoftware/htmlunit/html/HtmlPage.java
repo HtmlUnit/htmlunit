@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
@@ -2376,7 +2377,7 @@ public class HtmlPage extends SgmlPage {
                         baseUrl = new URL(String.format("%s%s", url.toString(), href));
                     }
                     else {
-                        baseUrl = new URL(String.format("%s/%s", url.toString(), href));
+                        baseUrl = new URL(UrlUtils.resolveUrl(url, href));
                     }
                 }
                 catch (final MalformedURLException e) {

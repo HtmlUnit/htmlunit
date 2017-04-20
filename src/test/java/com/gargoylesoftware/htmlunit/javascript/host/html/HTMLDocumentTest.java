@@ -21,6 +21,7 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -2325,9 +2326,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§",
             IE = "undefined")
     public void baseURI_noBaseTag() throws Exception {
-        final String html = "<html><body><script>\n"
-            + "alert(document.baseURI);\n"
-            + "</script></body></html>";
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -2339,12 +2343,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "http://myotherwebsite.com/foo",
             IE = "undefined")
     public void baseURI_withBaseTag() throws Exception {
-        final String html = "<html><head>\n"
-            + "<base href='http://myotherwebsite.com/foo'>\n"
-            + "</head>\n"
-            + "<body><script>\n"
-            + "alert(document.baseURI);\n"
-            + "</script></body></html>";
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <base href='http://myotherwebsite.com/foo'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -2356,13 +2362,115 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "http://myotherwebsite.com/foo",
             IE = "undefined")
     public void baseURI_withBaseTagInBody() throws Exception {
-        final String html = "<html><body>\n"
-            + "<base href='http://myotherwebsite.com/foo'>\n"
-            + "<script>\n"
-            + "alert(document.baseURI);\n"
-            + "</script></body></html>";
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<base href='http://myotherwebsite.com/foo'>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "http://localhost:12345/img/",
+            IE = "undefined")
+    public void baseURI_withBaseTag_absolutePath() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <base href='/img/'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "http://localhost:12345/path/to/img",
+            IE = "undefined")
+    public void baseURI_withBaseTag_relativePath() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <base href='img'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "http://localhost:12345/path/to/img/",
+            IE = "undefined")
+    public void baseURI_withBaseTag_relativePath_slash() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <base href='img/'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "http://localhost:12345/path/img",
+            IE = "undefined")
+    public void baseURI_withBaseTag_relativePath_parent() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <base href='../img'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "http://localhost:12345/img",
+            IE = "undefined")
+    public void baseURI_withBaseTag_relativePath_strange() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <base href='../../../../img'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alert(document.baseURI);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
     }
 
     /**
