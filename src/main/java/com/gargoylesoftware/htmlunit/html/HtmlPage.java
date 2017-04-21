@@ -1216,7 +1216,7 @@ public class HtmlPage extends SgmlPage {
                 return false;
             }
         }
-        if (window.getGlobal() != null) {
+        if (window.getScriptableObject() instanceof Global) {
             final HtmlElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
