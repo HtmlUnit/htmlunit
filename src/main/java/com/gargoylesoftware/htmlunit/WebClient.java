@@ -84,10 +84,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -1799,11 +1801,21 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
-                    final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptableObject();
-                    final ComputedCSSStyleDeclaration style =
-                            htmlElement.getWindow().getComputedStyle(htmlElement, null);
-                    use = style.getCalculatedWidth(false, false) != 0
-                        && style.getCalculatedHeight(false, false) != 0;
+                    final Object element = frameElement.getScriptableObject();
+                    if (element instanceof HTMLElement2) {
+                        final HTMLElement2 htmlElement = (HTMLElement2) element;
+                        final ComputedCSSStyleDeclaration2 style =
+                                Window2.getComputedStyle(htmlElement.getWindow(), htmlElement, null);
+                        use = style.getCalculatedWidth(false, false) != 0
+                                && style.getCalculatedHeight(false, false) != 0;
+                    }
+                    else {
+                        final HTMLElement htmlElement = (HTMLElement) element;
+                        final ComputedCSSStyleDeclaration style =
+                                htmlElement.getWindow().getComputedStyle(htmlElement, null);
+                        use = style.getCalculatedWidth(false, false) != 0
+                                && style.getCalculatedHeight(false, false) != 0;
+                    }
                 }
             }
             if (use) {
