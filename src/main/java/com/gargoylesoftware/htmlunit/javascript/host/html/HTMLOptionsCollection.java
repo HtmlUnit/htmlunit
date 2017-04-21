@@ -194,11 +194,11 @@ public class HTMLOptionsCollection extends SimpleScriptable {
         }
     }
 
-   /**
-    * Returns the number of elements in this array.
-    *
-    * @return the number of elements in the array
-    */
+    /**
+     * Returns the number of elements in this array.
+     *
+     * @return the number of elements in the array
+     */
     @JsxGetter
     public int getLength() {
         return htmlSelect_.getOptionSize();

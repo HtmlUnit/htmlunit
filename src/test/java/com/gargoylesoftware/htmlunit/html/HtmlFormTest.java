@@ -652,9 +652,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
         assertEquals(expectedParameters, collectedParameters);
     }
 
-   /**
-    * @throws Exception if the test fails
-    */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void submit_IgnoresDisabledControls() throws Exception {
         final String html

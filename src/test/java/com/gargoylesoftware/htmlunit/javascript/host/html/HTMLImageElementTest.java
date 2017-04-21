@@ -424,7 +424,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-   /**
+    /**
      * Test that image's width and height are numbers.
      * @throws Exception if the test fails
      */

@@ -118,9 +118,9 @@ public abstract class DomNamespaceNode extends DomNode {
         return qualifiedName_;
     }
 
-   /**
-    * {@inheritDoc}
-    */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void processImportNode(final Document doc) {
         super.processImportNode(doc);

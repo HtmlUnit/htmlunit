@@ -1688,7 +1688,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-   /**
+    /**
      * Test the removal of behaviors.
      *
      * @throws Exception if the test fails

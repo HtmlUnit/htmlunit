@@ -83,6 +83,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -731,33 +732,33 @@ public class HtmlPage extends SgmlPage {
         return Collections.unmodifiableList(list);
     }
 
-   /**
-    * Returns a list of all elements that are tabbable in the order that will
-    * be used for tabbing.<p>
-    *
-    * The rules for determining tab order are as follows:
-    * <ol>
-    *   <li>Those elements that support the tabindex attribute and assign a
-    *   positive value to it are navigated first. Navigation proceeds from the
-    *   element with the lowest tabindex value to the element with the highest
-    *   value. Values need not be sequential nor must they begin with any
-    *   particular value. Elements that have identical tabindex values should
-    *   be navigated in the order they appear in the character stream.
-    *   <li>Those elements that do not support the tabindex attribute or
-    *   support it and assign it a value of "0" are navigated next. These
-    *   elements are navigated in the order they appear in the character
-    *   stream.
-    *   <li>Elements that are disabled do not participate in the tabbing
-    *   order.
-    * </ol>
-    * Additionally, the value of tabindex must be within 0 and 32767. Any
-    * values outside this range will be ignored.<p>
-    *
-    * The following elements support the <tt>tabindex</tt> attribute: A, AREA, BUTTON,
-    * INPUT, OBJECT, SELECT, and TEXTAREA.<p>
-    *
-    * @return all the tabbable elements in proper tab order
-    */
+    /**
+     * Returns a list of all elements that are tabbable in the order that will
+     * be used for tabbing.<p>
+     *
+     * The rules for determining tab order are as follows:
+     * <ol>
+     *   <li>Those elements that support the tabindex attribute and assign a
+     *   positive value to it are navigated first. Navigation proceeds from the
+     *   element with the lowest tabindex value to the element with the highest
+     *   value. Values need not be sequential nor must they begin with any
+     *   particular value. Elements that have identical tabindex values should
+     *   be navigated in the order they appear in the character stream.
+     *   <li>Those elements that do not support the tabindex attribute or
+     *   support it and assign it a value of "0" are navigated next. These
+     *   elements are navigated in the order they appear in the character
+     *   stream.
+     *   <li>Elements that are disabled do not participate in the tabbing
+     *   order.
+     * </ol>
+     * Additionally, the value of tabindex must be within 0 and 32767. Any
+     * values outside this range will be ignored.<p>
+     *
+     * The following elements support the <tt>tabindex</tt> attribute: A, AREA, BUTTON,
+     * INPUT, OBJECT, SELECT, and TEXTAREA.<p>
+     *
+     * @return all the tabbable elements in proper tab order
+     */
     public List<HtmlElement> getTabbableElements() {
         final List<HtmlElement> tabbableElements = new ArrayList<>();
         for (final HtmlElement element : getHtmlElementDescendants()) {
@@ -2599,8 +2600,11 @@ public class HtmlPage extends SgmlPage {
     }
 
     private ScriptResult executeJavaScriptFunction(final ScriptFunction function,
-            final ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
+            ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
 
+        if (thisObject instanceof Window2) {
+            thisObject = ((Window2) thisObject).getGlobal();
+        }
         final ScriptFunction functionToCall;
         if (":program".equals(function.getName()) && args.length != 0) {
             ScriptRuntime.apply(function, thisObject);
@@ -2617,7 +2621,9 @@ public class HtmlPage extends SgmlPage {
             if (globalChanged) {
                 com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(global);
             }
-            thisObject.addBoundProperties(global);
+            if (!(thisObject instanceof Global)) {
+                thisObject.addBoundProperties(global);
+            }
             final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
             getWebClient().getJavaScriptEngine().processPostponedActions();
             return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());

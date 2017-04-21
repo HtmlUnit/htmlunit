@@ -914,7 +914,7 @@ public class Window3Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-   /**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1237,7 +1237,7 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
-     * Verifies that the onload handler is executed with "this" referring to the window.
+     * Verifies that the {@code onload} handler is executed with {@code this} referring to the window.
      *
      * @throws Exception if an error occurs
      */
