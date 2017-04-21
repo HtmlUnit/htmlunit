@@ -51,7 +51,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
     private WebClient webClient_;
     private Page enclosedPage_;
-    private Object scriptObject_;
+    private transient Object scriptObject_;
     private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
