@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
+import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -528,7 +529,7 @@ public abstract class HtmlElement extends DomElement {
         }
         final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftPressed_);
 
-        final boolean nashorn = this.getPage().getEnclosingWindow().getGlobal() != null;
+        final boolean nashorn = getPage().getEnclosingWindow().getScriptableObject() instanceof Global;
         if (nashorn) {
             final Event2 shiftDown;
             final ScriptResult shiftDownResult;

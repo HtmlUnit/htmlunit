@@ -1248,7 +1248,7 @@ public class HtmlPage extends SgmlPage {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Executing on" + eventType + " handler for " + frame);
                 }
-                if (window.getGlobal() == null) {
+                if (window.getScriptableObject() instanceof Window) {
                     final Event event;
                     if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
                         event = new BeforeUnloadEvent(frame, eventType);
