@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
            numeric = 13;
        }
        else if (isChrome) {
-           numeric = 57;
+           numeric = 58;
        }
        pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
        var browser = "FIREFOX_52";
@@ -141,10 +141,10 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
-        57, "Chrome", null);
+        + " (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36",
+        58, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(
