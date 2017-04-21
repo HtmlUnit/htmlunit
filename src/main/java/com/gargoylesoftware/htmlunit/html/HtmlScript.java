@@ -240,9 +240,9 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             @Override
             public void execute() {
                 Object jsDoc = null;
-                final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
-                if (window != null) {
-                    jsDoc = (HTMLDocument) window.getDocument();
+                final Object window = getPage().getEnclosingWindow().getScriptableObject();
+                if (window instanceof Window) {
+                    jsDoc = (HTMLDocument) ((Window) window).getDocument();
                     ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
                 }

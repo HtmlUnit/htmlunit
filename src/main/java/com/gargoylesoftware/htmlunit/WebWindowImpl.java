@@ -55,7 +55,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
     private WebClient webClient_;
     private Page enclosedPage_;
-    private ScriptableObject scriptObject_;
+    private Object scriptObject_;
     private transient ScriptObject global_;
     private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
@@ -158,24 +158,16 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public void setScriptableObject(final ScriptableObject scriptObject) {
+    public <T> void setScriptableObject(final T scriptObject) {
         scriptObject_ = scriptObject;
-    }
-
-    /**
-     * @param scriptObject the scriptObject to set
-     */
-    @Override
-    public void setScriptObject(final ScriptObject scriptObject) {
-        this.global_ = scriptObject;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ScriptableObject getScriptableObject() {
-        return scriptObject_;
+    public <T> T getScriptableObject() {
+        return (T) scriptObject_;
     }
 
     /**
@@ -183,7 +175,7 @@ public abstract class WebWindowImpl implements WebWindow {
      */
     @Override
     public Global getGlobal() {
-        return (Global) global_;
+        return (Global) scriptObject_;
     }
 
     /**

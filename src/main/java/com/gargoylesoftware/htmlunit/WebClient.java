@@ -88,6 +88,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
@@ -799,9 +800,17 @@ public class WebClient implements Serializable, AutoCloseable {
             //2. onFocus event is triggered for focusedElement of new current window
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                final Window jsWindow = (Window) currentWindow_.getScriptableObject();
-                if (jsWindow != null) {
-                    final HTMLElement activeElement = ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
+                final Object jsWindow = currentWindow_.getScriptableObject();
+                if (jsWindow instanceof Window) {
+                    final HTMLElement activeElement =
+                            ((HTMLDocument) ((Window) jsWindow).getDocument()).getActiveElement();
+                    if (activeElement != null) {
+                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
+                    }
+                }
+                else {
+                    final HTMLElement2 activeElement =
+                            ((HTMLDocument2) Window2.getDocument(jsWindow)).getActiveElement();
                     if (activeElement != null) {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }

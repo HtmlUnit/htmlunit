@@ -98,28 +98,20 @@ public interface WebWindow extends Serializable {
      * Sets the JavaScript object that corresponds to this element. This is not guaranteed
      * to be set even if there is a JavaScript object for this HTML element.
      *
+     * @param <T> the object type
      * @param scriptObject the JavaScript object
      */
-    void setScriptableObject(ScriptableObject scriptObject);
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Sets the JavaScript object that corresponds to this element. This is not guaranteed
-     * to be set even if there is a JavaScript object for this HTML element.
-     *
-     * @param scriptObject the JavaScript object
-     */
-    void setScriptObject(ScriptObject scriptObject);
+    <T> void setScriptableObject(T scriptObject);
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Returns the JavaScript object that corresponds to this element.
      *
+     * @param <T> the object type
      * @return the JavaScript object that corresponds to this element
      */
-    ScriptableObject getScriptableObject();
+    <T> T getScriptableObject();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
