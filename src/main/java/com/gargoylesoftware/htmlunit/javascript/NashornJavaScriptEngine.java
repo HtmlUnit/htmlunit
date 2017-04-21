@@ -443,7 +443,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
     @Override
     public ScriptFunction compile(final HtmlPage page, final String sourceCode,
             final String sourceName, final int startLine) {
-        final Global global = page.getEnclosingWindow().getGlobal();
+        final Global global = page.getEnclosingWindow().getScriptableObject();
         final Global oldGlobal = Context.getGlobal();
         try {
             Context.setGlobal(global);
@@ -474,7 +474,7 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
         if (triggerOnError && page != null) {
             final WebWindow webWindow = page.getEnclosingWindow();
             if (webWindow != null) {
-                final Window2 window = webWindow.getGlobal().getWindow();
+                final Window2 window = webWindow.<Global>getScriptableObject().getWindow();
                 if (window != null) {
                     try {
                         window.triggerOnError(scriptException);

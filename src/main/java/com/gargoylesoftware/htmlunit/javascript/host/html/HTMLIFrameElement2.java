@@ -61,7 +61,7 @@ public class HTMLIFrameElement2 extends HTMLElement2 {
      */
     @Getter
     public Global getContentWindow() {
-        return getFrame().getEnclosedWindow().getGlobal();
+        return getFrame().getEnclosedWindow().getScriptableObject();
     }
 
     private BaseFrameElement getFrame() {

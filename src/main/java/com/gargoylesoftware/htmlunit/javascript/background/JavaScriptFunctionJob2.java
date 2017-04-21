@@ -53,7 +53,7 @@ class JavaScriptFunctionJob2 extends JavaScriptExecutionJob {
     protected void runJavaScript(final HtmlPage page) {
         final HtmlElement doc = page.getDocumentElement();
         final Global oldGlobal = Context.getGlobal();
-        final Global global = page.getEnclosingWindow().getGlobal();
+        final Global global = page.getEnclosingWindow().getScriptableObject();
         try {
             Context.setGlobal(global);
             page.executeJavaScriptFunction(function_, global, new Object[0], doc);

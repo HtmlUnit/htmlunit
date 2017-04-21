@@ -134,7 +134,7 @@ public class Element2 extends EventNode2 {
                 + " in " + htmlElt.getPage().getUrl(), attrValue);
 
         ScriptObject thisObject = this;
-        final Global global = getWindow().getWebWindow().getGlobal();
+        final Global global = getWindow().getWebWindow().getScriptableObject();
         if (thisObject instanceof HTMLBodyElement2 || thisObject instanceof HTMLFrameSetElement2) {
             thisObject = global;
         }

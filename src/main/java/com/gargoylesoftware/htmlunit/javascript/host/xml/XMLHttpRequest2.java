@@ -237,7 +237,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
             final WebWindow webWindow = containingPage_.getEnclosingWindow();
             try {
                 final XmlPage page = new XmlPage(webResponse_, webWindow);
-                final XMLDocument2 document = XMLDocument2.constructor(true, webWindow.getGlobal());
+                final XMLDocument2 document = XMLDocument2.constructor(true, webWindow.getScriptableObject());
 //                document.setPrototype(getPrototype(document.getClass()));
 //                document.setParentScope(getWindow());
                 document.setDomNode(page);

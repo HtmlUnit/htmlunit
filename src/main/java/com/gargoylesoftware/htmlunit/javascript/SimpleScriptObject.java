@@ -211,7 +211,7 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
      */
     protected ScriptObject getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
-            return ((WebWindow) object).getGlobal();
+            return ((WebWindow) object).getScriptableObject();
         }
         final DomNode domNode = (DomNode) object;
 

@@ -32,10 +32,6 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -56,7 +52,6 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;
-    private transient ScriptObject global_;
     private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
@@ -166,16 +161,9 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T getScriptableObject() {
         return (T) scriptObject_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Global getGlobal() {
-        return (Global) scriptObject_;
     }
 
     /**

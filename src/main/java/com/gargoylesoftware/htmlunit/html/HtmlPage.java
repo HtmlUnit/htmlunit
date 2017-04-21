@@ -2614,7 +2614,7 @@ public class HtmlPage extends SgmlPage {
             functionToCall = function;
         }
 
-        final Global global = htmlElementScope.getPage().getEnclosingWindow().getGlobal();
+        final Global global = htmlElementScope.getPage().getEnclosingWindow().getScriptableObject();
         final Global oldGlobal = com.gargoylesoftware.js.nashorn.internal.runtime.Context.getGlobal();
         final boolean globalChanged = oldGlobal != global;
         try {

@@ -19,10 +19,6 @@ import java.io.Serializable;
 import javax.script.ScriptContext;
 
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * An interface that represents one window in a browser. It could be a top level window or a frame.
@@ -183,15 +179,6 @@ public interface WebWindow extends Serializable {
      * @param outerHeight the outer height
      */
     void setOuterHeight(int outerHeight);
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns the JavaScript object that corresponds to this element.
-     *
-     * @return the JavaScript object that corresponds to this element
-     */
-    Global getGlobal();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

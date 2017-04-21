@@ -216,7 +216,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             if (webWindow instanceof TopLevelWindow) {
                 final WebWindow opener = ((TopLevelWindow) webWindow).getOpener();
                 if (opener != null) {
-                    opener_ = opener.getGlobal();
+                    opener_ = opener.getScriptableObject();
                 }
             }
         }
@@ -310,7 +310,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     public static Global getTop(final Object self) {
         final WebWindow webWindow = getWindow(self).getWebWindow();
         final WebWindow top = webWindow.getTopWindow();
-        return top.getGlobal();
+        return top.getScriptableObject();
     }
 
     /**
@@ -415,7 +415,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         if (self instanceof Global) {
             Window2 window = ((Global) self).getWindow();
             if (window.isProxy_) {
-                window = window.getWebWindow().getGlobal().getWindow();
+                window = window.getWebWindow().<Global>getScriptableObject().getWindow();
             }
             return window;
         }
@@ -579,7 +579,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     private static Global getFrameWindowByName(final HtmlPage page, final String name) {
         try {
-            return page.getFrameByName(name).getGlobal();
+            return page.getFrameByName(name).getScriptableObject();
         }
         catch (final ElementNotFoundException e) {
             return null;
@@ -1034,7 +1034,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         // if specified name is the name of an existing window, then hold it
         if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
             try {
-                final Global global = webClient.getWebWindowByName(windowName).getGlobal();
+                final Global global = webClient.getWebWindowByName(windowName).getScriptableObject();
                 global.<Window2>getWindow().isProxy_ = true;
                 return global;
             }
@@ -1044,7 +1044,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         }
         final URL newUrl = window.makeUrlForOpenWindow(urlString);
         final WebWindow newWebWindow = webClient.openWindow(newUrl, windowName, webWindow);
-        final Global global = newWebWindow.getGlobal();
+        final Global global = newWebWindow.getScriptableObject();
         global.<Window2>getWindow().isProxy_ = true;
         return global;
     }
@@ -1494,7 +1494,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
             // the dialog window is close()'ed? Would only work in interpreted mode, though.
-            final ScriptObject jsDialog = dialog.getGlobal();
+            final ScriptObject jsDialog = dialog.getScriptableObject();
             return jsDialog.getProperty("returnValue").getObjectValue(jsDialog, jsDialog);
         }
         catch (final Throwable e) {
@@ -1520,7 +1520,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         try {
             final URL completeUrl = ((HtmlPage) window.getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            return dialog.getGlobal();
+            return dialog.getScriptableObject();
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
@@ -1641,7 +1641,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Getter
     public static Global getParent(final Object self) {
         final WebWindow parent = getWindow(self).getWebWindow().getParentWindow();
-        return parent.getGlobal();
+        return parent.getScriptableObject();
     }
 
     /**
@@ -2044,7 +2044,7 @@ class HTMLCollectionFrames2 extends HTMLCollection2 {
             window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
         }
 
-        return window.getGlobal();
+        return window.getScriptableObject();
     }
 
 //    @Override
