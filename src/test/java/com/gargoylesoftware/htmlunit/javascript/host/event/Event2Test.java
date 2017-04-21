@@ -44,10 +44,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [clickMe] [1]"},
-            IE = {"[object Event] change b:true c:false [select] [-]",
-                "[object MouseEvent] click b:true c:true [select] [1]"})
+    @Alerts(DEFAULT = "[object Event] change b:true c:false [select] [-]"
+                + " [object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object Event] change b:true c:false [select] [-]"
+                + " [object MouseEvent] click b:true c:true [select] [1]")
     @BuggyWebDriver({CHROME, FF})
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
@@ -71,7 +71,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
-            IE = {})
+            IE = {""})
     @BuggyWebDriver(CHROME)
     // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
@@ -90,10 +90,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object MouseEvent] click b:true c:true [radio] [1]",
-                "[object Event] change b:true c:false [radio] [-]"},
-            IE = {"[object Event] change b:true c:false [radio] [-]",
-                "[object PointerEvent] click b:true c:true [radio] [1]"})
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [radio] [1]"
+                + " [object Event] change b:true c:false [radio] [-]",
+            IE = "[object Event] change b:true c:false [radio] [-]"
+                + " [object PointerEvent] click b:true c:true [radio] [1]")
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -106,10 +106,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object MouseEvent] click b:true c:true [checkbox] [1]",
-                "[object Event] change b:true c:false [checkbox] [-]"},
-            IE = {"[object Event] change b:true c:false [checkbox] [-]",
-                "[object PointerEvent] click b:true c:true [checkbox] [1]"})
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [checkbox] [1]"
+                + " [object Event] change b:true c:false [checkbox] [-]",
+            IE = "[object Event] change b:true c:false [checkbox] [-]"
+                + " [object PointerEvent] click b:true c:true [checkbox] [1]")
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
@@ -164,6 +164,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("")
     public void submitClick() throws Exception {
         final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -259,7 +260,7 @@ public class Event2Test extends WebDriverTestCase {
                 + "        msg = msg + ' [-]';\n"
                 + "      }\n"
                 + "\n"
-                + "      alert(msg);\n"
+                + "      document.title += ' ' + msg;\n"
                 + "    }\n"
                 + "  //-->\n"
                 + "  </script>\n"
@@ -288,7 +289,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
