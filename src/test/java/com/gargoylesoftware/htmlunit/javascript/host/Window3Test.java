@@ -948,7 +948,7 @@ public class Window3Test extends WebDriverTestCase {
 
     /**
      * Verifies that you can set window.onload to something else than a function.
-     * See bug 1708532 & 1201561.
+     *
      * @throws Exception if an error occurs
      */
     @Test

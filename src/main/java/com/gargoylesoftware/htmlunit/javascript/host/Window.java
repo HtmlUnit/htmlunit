@@ -1101,7 +1101,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public Object getOnload() {
         final Object onload = getHandlerForJavaScript("load");
         if (onload == null) {
-            // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {

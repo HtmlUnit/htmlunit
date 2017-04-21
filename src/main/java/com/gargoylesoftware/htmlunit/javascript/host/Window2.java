@@ -356,7 +356,6 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         final Window2 window = getWindow(self);
         final Object onload = window.getHandlerForJavaScript("load");
         if (onload == null) {
-            // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) window.getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {
