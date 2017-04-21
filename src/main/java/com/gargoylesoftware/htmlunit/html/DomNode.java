@@ -917,6 +917,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param <T> the object type
      * @return the JavaScript object that corresponds to this node
      */
+    @SuppressWarnings("unchecked")
     public <T> T getScriptableObject() {
         if (scriptObject_ == null) {
             final SgmlPage page = getPage();

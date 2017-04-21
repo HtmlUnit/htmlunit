@@ -1055,16 +1055,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         @Override
-        public String getContentAsString(final String encoding) {
-            return "";
-        }
-
-        @Override
-        public String getContentAsString(final String encoding, final String defaultEncoding) {
-            return "";
-        }
-
-        @Override
         public InputStream getContentAsStream() {
             return null;
         }

@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -83,7 +84,6 @@ import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
-
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
  *
@@ -386,7 +386,7 @@ public class XMLHttpRequest2 extends EventTarget2 {
             }
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
-            request.setCharset("UTF-8");
+            request.setCharset(UTF_8);
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
             if (!isSameOrigin(originUrl, fullUrl)) {
@@ -929,16 +929,6 @@ public class XMLHttpRequest2 extends EventTarget2 {
 
         @Override
         public String getContentAsString() {
-            return "";
-        }
-
-        @Override
-        public String getContentAsString(final String encoding) {
-            return "";
-        }
-
-        @Override
-        public String getContentAsString(final String encoding, final String defaultEncoding) {
             return "";
         }
 

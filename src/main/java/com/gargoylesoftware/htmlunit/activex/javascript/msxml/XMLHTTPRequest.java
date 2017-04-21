@@ -771,11 +771,6 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         }
 
         @Override
-        public String getContentAsString(final String encoding) {
-            return "";
-        }
-
-        @Override
         public InputStream getContentAsStream() {
             return null;
         }
