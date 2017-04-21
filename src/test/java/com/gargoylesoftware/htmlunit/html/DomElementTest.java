@@ -24,7 +24,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -68,7 +67,6 @@ public final class DomElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test(expected = ElementNotInteractableException.class)
-    @BuggyWebDriver
     public void clickInvisible() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
