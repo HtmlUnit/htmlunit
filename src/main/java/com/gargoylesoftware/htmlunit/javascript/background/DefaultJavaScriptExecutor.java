@@ -92,7 +92,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         lock_.lock();
         finishCondition_ = lock_.newCondition();
         try {
-            finishCondition_.await(100, TimeUnit.MILLISECONDS);
+            finishCondition_.await(500, TimeUnit.MILLISECONDS);
         }
         catch (final InterruptedException e) {
             // nothing
