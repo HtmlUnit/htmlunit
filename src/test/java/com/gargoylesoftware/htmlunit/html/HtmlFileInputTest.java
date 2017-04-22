@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
@@ -46,6 +47,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -254,7 +256,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:audio/flac", "charset"},
-            FF = {"CONTENT_TYPE:audio/x-flac", "charset"},
+            FF45 = {"CONTENT_TYPE:audio/x-flac", "charset"},
+            FF52 = {"CONTENT_TYPE:application/octet-stream", "charset"},
             IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
     public void contentTypeFlac() throws Exception {
         contentType("flac");
@@ -872,12 +875,20 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "0",
+            FF52 = "0")
+    @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var element = document.getElementById('text1');\n"
+            + "    var s = getSelection(document.getElementById('text1'));\n"
+            + "    if (s != undefined) {\n"
+            + "      alert(s.length);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function getSelection(element) {\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "    } catch(e) { alert('exception'); }\n"
@@ -893,12 +904,16 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception value", "exception",
+    @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
+                        "exception", "null,null",
+                        "exception", "null,null"},
+            FF45 = {"exception", "exception value", "exception",
                         "exception", "exception",
                         "exception", "exception"},
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
+    @NotYetImplemented(CHROME)
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -907,12 +922,16 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception value", "exception",
+    @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
+                        "exception", "null,null",
+                        "exception", "null,null"},
+            FF45 = {"exception", "exception value", "exception",
                         "exception", "exception",
                         "exception", "exception"},
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
+    @NotYetImplemented(CHROME)
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -921,12 +940,16 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception value", "exception",
+    @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
+                        "exception", "null,null",
+                        "exception", "null,null"},
+            FF45 = {"exception", "exception value", "exception",
                         "exception", "exception",
                         "exception", "exception"},
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
+    @NotYetImplemented(CHROME)
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -972,7 +995,10 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = {"null,null", "exception"},
+            FF52 = {"null,null", "exception"})
+    @NotYetImplemented(CHROME)
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
