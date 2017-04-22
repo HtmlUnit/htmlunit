@@ -313,7 +313,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection start
      */
     @JsxGetter
-    public int getSelectionStart() {
+    public Object getSelectionStart() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
             if ("number".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
@@ -325,6 +325,9 @@ public class HTMLInputElement extends FormField {
             return ((SelectableTextInput) dom).getSelectionStart();
         }
 
+        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+            return null;
+        }
         throw Context.reportRuntimeError("Failed to read the 'selectionStart' property from 'HTMLInputElement': "
                 + "The input element's type (" + getType() + ") does not support selection.");
     }
@@ -356,7 +359,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection end
      */
     @JsxGetter
-    public int getSelectionEnd() {
+    public Object getSelectionEnd() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
             if ("number".equalsIgnoreCase(getType()) && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_NO_SELECTION)) {
@@ -368,6 +371,9 @@ public class HTMLInputElement extends FormField {
             return ((SelectableTextInput) dom).getSelectionEnd();
         }
 
+        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+            return null;
+        }
         throw Context.reportRuntimeError("Failed to read the 'selectionEnd' property from 'HTMLInputElement': "
                 + "The input element's type (" + getType() + ") does not support selection.");
     }

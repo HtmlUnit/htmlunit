@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
@@ -47,7 +46,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -878,7 +876,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "0",
             FF52 = "0")
-    @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -913,7 +910,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
-    @NotYetImplemented(CHROME)
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -931,7 +927,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
-    @NotYetImplemented(CHROME)
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -949,7 +944,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
-    @NotYetImplemented(CHROME)
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -998,7 +992,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = {"null,null", "exception"},
             FF52 = {"null,null", "exception"})
-    @NotYetImplemented(CHROME)
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
