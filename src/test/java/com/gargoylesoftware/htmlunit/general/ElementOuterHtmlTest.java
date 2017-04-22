@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -133,8 +136,8 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<bgsound>",
-            CHROME = "<bgsound></bgsound>")
+    @Alerts("<bgsound>")
+    @NotYetImplemented(CHROME)
     public void bgsound() throws Exception {
         loadPageWithAlerts2(test("bgsound"));
     }
@@ -631,8 +634,8 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<image></image>",
-            CHROME = "<image>",
             IE = "<img>")
+    @NotYetImplemented(CHROME)
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
     }
@@ -795,7 +798,9 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<menuitem></menuitem>")
+    @Alerts(DEFAULT = "<menuitem></menuitem>",
+            CHROME = "<menuitem>")
+    @NotYetImplemented(CHROME)
     public void menuitem() throws Exception {
         loadPageWithAlerts2(test("menuitem"));
     }
