@@ -37,7 +37,7 @@ public class ImageDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"200", "100", "50", "255", "100", "50", "125", "255", "123", "111", "222", "255"},
-            CHROME = {"200", "100", "50", "255", "101", "50", "125", "255", "123", "111", "222", "255"})
+            CHROME = {"200", "100", "50", "255", "99", "50", "125", "255", "123", "111", "222", "255"})
     @NotYetImplemented(CHROME)
     public void getImageData() throws Exception {
         final String html =
