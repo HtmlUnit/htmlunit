@@ -1062,7 +1062,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @Before
     public void before() {
         if (!isWebClientCached()) {
-            assertTrue(getJavaScriptThreads().isEmpty());
+            assertNoJavaScriptThreads();
         }
     }
 
@@ -1079,7 +1079,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (webDriver_ != null) {
                 webDriver_.quit();
             }
-            assertTrue("There are still JS threads running after the test", getJavaScriptThreads().isEmpty());
+            assertNoJavaScriptThreads();
         }
 
         if (useRealBrowser()) {

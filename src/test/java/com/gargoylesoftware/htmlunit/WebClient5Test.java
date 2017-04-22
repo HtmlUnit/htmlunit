@@ -87,6 +87,6 @@ public class WebClient5Test extends WebTestCase {
         webClient.close();
 
         webClient.getPage(URL_FIRST);
-        assertTrue(getJavaScriptThreads().isEmpty());
+        assertNoJavaScriptThreads();
     }
 }

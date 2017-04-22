@@ -745,10 +745,21 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Gets the active JavaScript threads.
-     * @return the threads
+     * Asserts there is no active JavaScript threads.
      */
-    protected List<Thread> getJavaScriptThreads() {
+    protected void assertNoJavaScriptThreads() {
+        List<Thread> threads = getJavaScriptThreads();
+        if (!threads.isEmpty()) {
+            threads = getJavaScriptThreads();
+        }
+        assertTrue("There are JavaScript threads running", threads.isEmpty());
+    }
+
+    /**
+     * Returns the current active JavaScript threads.
+     * @return the current active JavaScript threads
+     */
+    protected static List<Thread> getJavaScriptThreads() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
         final List<Thread> jsThreads = new ArrayList<>();
