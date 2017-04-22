@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BEFOREUNLOAD_AUTO_TYPE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -67,19 +66,6 @@ public class BeforeUnloadEvent extends Event {
 
         setBubbles(false);
         setReturnValue(Undefined.instance);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void eventCreated() {
-        super.eventCreated();
-
-        if (getBrowserVersion().hasFeature(EVENT_BEFOREUNLOAD_AUTO_TYPE)) {
-            setEventType(TYPE_BEFORE_UNLOAD);
-            setCancelable(true);
-        }
     }
 
     /**

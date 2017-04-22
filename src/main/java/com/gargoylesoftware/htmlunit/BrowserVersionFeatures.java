@@ -158,10 +158,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
-    /** <code>BeforeUnloadEvent</code> automatically gets the <code>type</code> 'beforeunload'. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    EVENT_BEFOREUNLOAD_AUTO_TYPE,
-
     /** Chrome maintains a separate state for this. */
     @BrowserFeature(@WebBrowser(CHROME))
     EVENT_CANCEL_BUBBLE,
