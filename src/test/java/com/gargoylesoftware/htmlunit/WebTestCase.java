@@ -30,11 +30,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -747,12 +749,8 @@ public abstract class WebTestCase {
     /**
      * Asserts there is no active JavaScript threads.
      */
-    protected void assertNoJavaScriptThreads() {
-        List<Thread> threads = getJavaScriptThreads();
-        if (!threads.isEmpty()) {
-            threads = getJavaScriptThreads();
-        }
-        assertTrue("There are JavaScript threads running", threads.isEmpty());
+    protected static void assertNoJavaScriptThreads() {
+        Assert.assertTrue("There are JavaScript threads running", getJavaScriptThreads().isEmpty());
     }
 
     /**
@@ -762,14 +760,8 @@ public abstract class WebTestCase {
     protected static List<Thread> getJavaScriptThreads() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
-        final List<Thread> jsThreads = new ArrayList<>();
-        for (final Thread t : threads) {
-            if (t != null && t.getName().startsWith("JS executor for")) {
-                jsThreads.add(t);
-            }
-        }
-
-        return jsThreads;
+        return Stream.of(threads).filter(Objects::nonNull)
+                .filter(t -> t.getName().startsWith("JS executor for")).collect(Collectors.toList());
     }
 
     /**
