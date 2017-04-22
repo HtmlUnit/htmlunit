@@ -7286,8 +7286,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void rtcStatsReport() throws Exception {
         test("RTCStatsReport");
     }

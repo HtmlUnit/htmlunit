@@ -636,8 +636,8 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _RTCStatsReport_RTCStatsReport() throws Exception {
         test("RTCStatsReport", "RTCStatsReport");
     }
