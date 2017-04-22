@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -496,8 +498,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "exception")
+    @Alerts("0")
+    @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         final String html =
               "<html><head>\n"
@@ -525,9 +527,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
-            CHROME = {"exception", "exception", "exception",
-                        "exception", "exception", "exception"},
+            CHROME = {"null,null", "null,null", "exception",
+                        "null,null", "exception", "null,null"},
+            FF52 = {"null,null", "null,null", "exception",
+                        "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "3,3", "3,10"})
+    @NotYetImplemented(CHROME)
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -537,9 +542,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
-            CHROME = {"exception", "exception", "exception",
-                        "exception", "exception", "exception"},
+            CHROME = {"null,null", "null,null", "exception",
+                        "null,null", "exception", "null,null"},
+            FF52 = {"null,null", "null,null", "exception",
+                        "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
+    @NotYetImplemented(CHROME)
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -549,9 +557,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
-            CHROME = {"exception", "exception", "exception",
-                        "exception", "exception", "exception"},
+            CHROME = {"null,null", "null,null", "exception",
+                        "null,null", "exception", "null,null"},
+            FF52 = {"null,null", "null,null", "exception",
+                        "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "10,10", "5,5"})
+    @NotYetImplemented(CHROME)
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -596,8 +607,10 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
-            CHROME = "exception",
+            CHROME = {"null,null", "exception"},
+            FF52 = {"null,null", "exception"},
             IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
+    @NotYetImplemented(CHROME)
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
