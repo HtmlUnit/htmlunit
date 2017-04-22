@@ -10375,6 +10375,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function RTCStatsReport() { [native code] }",
             FF = "function RTCStatsReport() {\n    [native code]\n}")
     public void rtcStatsReport() throws Exception {
         test("RTCStatsReport");
