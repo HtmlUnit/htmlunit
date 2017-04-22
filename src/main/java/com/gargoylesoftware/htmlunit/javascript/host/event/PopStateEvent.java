@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_POP_STATE_EVENT_CLONE_STATE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_POP_STATE_EVENT_TYPE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -93,18 +92,6 @@ public class PopStateEvent extends Event {
     @JsxGetter
     public Object getState() {
         return state_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void eventCreated() {
-        super.eventCreated();
-        if (getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_TYPE)) {
-            setType(Event.TYPE_POPSTATE);
-            setCancelable(true);
-        }
     }
 
     /**

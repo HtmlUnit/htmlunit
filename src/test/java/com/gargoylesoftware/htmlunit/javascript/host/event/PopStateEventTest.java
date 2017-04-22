@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -98,8 +99,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
-            CHROME = {"[object PopStateEvent]", "null", "popstate", "false", "true", "null"})
+    @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "null"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -120,8 +120,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
-            CHROME = {"[object PopStateEvent]", "null", "popstate", "false", "true", "null"})
+    @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "null"})
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -144,9 +143,8 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception"},
-            FF = {"dispatched"},
-            CHROME = {"[object PopStateEvent]", "[object Window]", "popstate", "false", "true", "null", "dispatched"})
-    @NotYetImplemented(IE)
+            FF45 = {"dispatched"})
+    @NotYetImplemented({IE, CHROME})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -155,7 +153,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      dispatchEvent(event);\n"
             + "      alert('dispatched');\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { alert('exception' +e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
