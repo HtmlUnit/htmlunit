@@ -129,6 +129,20 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.Audio}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function HTMLAudioElement() { [native code] }",
+            IE = "\nfunction Audio() {\n    [native code]\n}\n",
+            FF = "function Audio() {\n    [native code]\n}")
+    @NotYetImplemented(CHROME)
+    public void audio() throws Exception {
+        test("Audio");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
      *
      * @throws Exception if an error occurs
