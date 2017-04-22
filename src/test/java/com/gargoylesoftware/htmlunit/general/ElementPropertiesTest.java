@@ -475,8 +475,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerup,onprogress,"
                 + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,outerText,"
-                + "spellcheck,style,tabIndex,title,translate,"
-                + "webkitdropzone",
+                + "spellcheck,style,tabIndex,title,translate",
             FF45 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,"
                 + "draggable,focus(),hidden,innerText,isContentEditable,itemId,itemProp,itemRef,itemScope,"
                 + "itemType,itemValue,"
@@ -871,7 +870,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
+                + "canPlayType(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
                 + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
@@ -1790,7 +1790,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "as,charset,crossOrigin,disabled,href,hreflang,import,integrity,"
-                    + "media,rel,relList,rev,sheet,sizes,target,type",
+                    + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             FF45 = "charset,crossOrigin,disabled,href,hreflang,integrity,"
                     + "media,rel,relList,rev,sheet,sizes,target,type",
             FF52 = "charset,crossOrigin,disabled,href,hreflang,integrity,"
@@ -2636,7 +2636,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
+                + "canPlayType(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
                 + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
@@ -2647,7 +2648,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
                 + "webkitDisplayingFullscreen,webkitDroppedFrameCount,"
-                + "webkitEnterFullScreen(),webkitEnterFullscreen(),"
+                + "webkitEnterFullscreen(),webkitEnterFullScreen(),"
                 + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF45 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
