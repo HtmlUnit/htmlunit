@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -200,18 +199,6 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @Override
     public void setOuterHTML(final Object value) {
         throw Context.reportRuntimeError("outerHTML is read-only for tag 'tr'");
-    }
-
-    /**
-     * Overwritten to throw an exception because this is readonly.
-     * @param value the new value for the contents of this node
-     */
-    @Override
-    public void setInnerText(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
-            throw Context.reportRuntimeError("innerText is read-only for tag 'tr'");
-        }
-        super.setInnerText(value);
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -414,17 +413,6 @@ public class HTMLTableElement extends RowContainer {
     @JsxSetter(@WebBrowser(IE))
     public void setBorderColorLight(final String borderColor) {
         setColorAttribute("borderColorLight", borderColor);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setInnerText(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
-            throw Context.reportRuntimeError("innerText is read-only for tag 'table'");
-        }
-        super.setInnerText(value);
     }
 
     /**

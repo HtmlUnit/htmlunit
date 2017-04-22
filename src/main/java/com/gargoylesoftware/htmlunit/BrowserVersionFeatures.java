@@ -949,10 +949,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_INNER_TEXT_CR_NL,
 
-    /** Indicates that innerText is readonly for tables. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_INNER_TEXT_READONLY_FOR_TABLE,
-
     /** Indicates that innerText setter supports null values. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     JS_INNER_TEXT_VALUE_NULL,

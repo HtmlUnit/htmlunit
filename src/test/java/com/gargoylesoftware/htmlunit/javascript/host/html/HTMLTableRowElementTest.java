@@ -349,10 +349,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", ""},
-            CHROME = {"cell1", "[object HTMLTableCellElement]",
-                        "ex", "cell1", "[object HTMLTableCellElement]", "ex", "cell1"},
-            FF = {"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""})
+    @Alerts(DEFAULT = {"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""},
+            IE = {"cell1", "[object HTMLTableDataCellElement]", "abc", "[object Text]", ""})
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

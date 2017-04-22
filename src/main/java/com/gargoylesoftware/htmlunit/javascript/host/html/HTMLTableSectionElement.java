@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -165,10 +164,6 @@ public class HTMLTableSectionElement extends RowContainer {
     @Override
     @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME)})
     public void setInnerText(final Object value) {
-        if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
-            throw Context.reportRuntimeError("innerText is read-only for tag '"
-                    + getDomNodeOrDie().getNodeName() + "'");
-        }
         super.setInnerText(value);
     }
 }
