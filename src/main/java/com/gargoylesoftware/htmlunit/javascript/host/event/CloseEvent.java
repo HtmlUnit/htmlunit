@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DEFAULT_TYPE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -48,19 +47,7 @@ public class CloseEvent extends Event {
      * Creates a new event instance.
      */
     public CloseEvent() {
-        setType(TYPE_CLOSE);
         reason_ = "";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void eventCreated() {
-        super.eventCreated();
-        if (getBrowserVersion().hasFeature(EVENT_ONCLOSE_DEFAULT_TYPE_EMPTY)) {
-            setType("");
-        }
     }
 
     /**

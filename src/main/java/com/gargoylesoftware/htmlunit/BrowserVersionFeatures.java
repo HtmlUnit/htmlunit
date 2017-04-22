@@ -190,10 +190,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONCLICK_USES_POINTEREVENT,
 
-    /** <code>CloseEvent</code> has type '' when created from document.createEvent('CloseEvent'). */
-    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
-    EVENT_ONCLOSE_DEFAULT_TYPE_EMPTY,
-
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature(@WebBrowser(FF))
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,

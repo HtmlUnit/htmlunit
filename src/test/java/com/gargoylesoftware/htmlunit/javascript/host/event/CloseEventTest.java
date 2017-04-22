@@ -102,7 +102,6 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "0", "", "false"},
-            CHROME = {"[object CloseEvent]", "close", "false", "false", "0", "", "false"},
             FF = "exception")
     @BuggyWebDriver(IE)
     public void create_createEvent() throws Exception {
