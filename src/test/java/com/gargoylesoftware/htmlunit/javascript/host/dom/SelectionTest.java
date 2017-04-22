@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -92,7 +89,6 @@ public class SelectionTest extends WebDriverTestCase {
             CHROME = {
                         "1:null/0/null/0/true/None/0/",
                         "2:s2/0/s2/1/false/Range/1/xyz/xyz"})
-    @NotYetImplemented(CHROME)
     public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
@@ -118,7 +114,6 @@ public class SelectionTest extends WebDriverTestCase {
                     "4:s2/0/s3/3/false/Range/1/xyzfoo---foo/xyzfoo---foo"},
             IE = {"1:s2/0/s2/1/false/undefined/1/xyz/xyz",
                         "selection.extend not available"})
-    @NotYetImplemented(CHROME)
     public void extend() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -145,7 +140,6 @@ public class SelectionTest extends WebDriverTestCase {
             CHROME = {
                         "1:s2/0/s2/1/false/Range/1/xyz/xyz",
                         "2:s2/0/s2/0/true/Caret/1//"})
-    @NotYetImplemented(CHROME)
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -166,7 +160,6 @@ public class SelectionTest extends WebDriverTestCase {
             CHROME = {
                         "1:s2/0/s2/1/false/Range/1/xyz/xyz",
                         "2:s2/1/s2/1/true/Caret/1//"})
-    @NotYetImplemented(CHROME)
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -191,7 +184,6 @@ public class SelectionTest extends WebDriverTestCase {
                     "2:null/0/null/0/true/None/0/",
                     "3:s2/1/s3/1/false/Range/1/foo/foo",
                     "4:null/0/null/0/true/None/0/"})
-    @NotYetImplemented(CHROME)
     public void range() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -221,7 +213,6 @@ public class SelectionTest extends WebDriverTestCase {
                     "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo/yzfo",
                     "2:null/0/null/0/true/None/0/",
                     "false", "true"})
-    @NotYetImplemented(CHROME)
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
             + "    var range = document.createRange();\n"
@@ -306,5 +297,4 @@ public class SelectionTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
-
 }

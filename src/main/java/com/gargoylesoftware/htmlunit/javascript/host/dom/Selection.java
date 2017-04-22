@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +45,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass
 public class Selection extends SimpleScriptable {
+    private static final String TYPE_NONE = "None";
+    private static final String TYPE_CARET = "Caret";
+    private static final String TYPE_RANGE = "Range";
 
-    private String type_ = "None";
+    private String type_ = TYPE_NONE;
 
     /**
      * Creates an instance.
@@ -157,16 +159,26 @@ public class Selection extends SimpleScriptable {
      */
     @JsxFunction
     public void addRange(final com.gargoylesoftware.htmlunit.javascript.host.dom.Range range) {
-        getRanges().add(range.toW3C());
+        final SimpleRange rg = range.toW3C();
+        getRanges().add(rg);
+
+        if (TYPE_CARET.equals(type_) && rg.getCollapsed()) {
+            return;
+        }
+        type_ = TYPE_RANGE;
     }
 
     /**
      * Removes a range from the selection.
      * @param range the range to remove
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxFunction
     public void removeRange(final com.gargoylesoftware.htmlunit.javascript.host.dom.Range range) {
         getRanges().remove(range.toW3C());
+
+        if (getRangeCount() < 1) {
+            type_ = TYPE_NONE;
+        }
     }
 
     /**
@@ -175,6 +187,8 @@ public class Selection extends SimpleScriptable {
     @JsxFunction
     public void removeAllRanges() {
         getRanges().clear();
+
+        type_ = TYPE_NONE;
     }
 
     /**
@@ -208,6 +222,8 @@ public class Selection extends SimpleScriptable {
         final List<Range> ranges = getRanges();
         ranges.clear();
         ranges.add(new SimpleRange(parentNode.getDomNodeOrDie(), offset));
+
+        type_ = TYPE_CARET;
     }
 
     /**
@@ -222,6 +238,8 @@ public class Selection extends SimpleScriptable {
             ranges.add(last);
             last.collapse(false);
         }
+
+        type_ = TYPE_CARET;
     }
 
     /**
@@ -236,14 +254,16 @@ public class Selection extends SimpleScriptable {
             ranges.add(first);
             first.collapse(true);
         }
+
+        type_ = TYPE_CARET;
     }
 
     /**
-     * Cancels the current selection, sets the selection type to none, and sets the item property to null (IE only).
+     * Cancels the current selection, sets the selection type to none.
      */
     @JsxFunction(@WebBrowser(CHROME))
     public void empty() {
-        type_ = "None";
+        removeAllRanges();
     }
 
     /**
@@ -256,6 +276,8 @@ public class Selection extends SimpleScriptable {
         final Range last = getLastRange();
         if (last != null) {
             last.setEnd(parentNode.getDomNodeOrDie(), offset);
+
+            type_ = TYPE_RANGE;
         }
     }
 
@@ -267,7 +289,15 @@ public class Selection extends SimpleScriptable {
     public void selectAllChildren(final Node parentNode) {
         final List<Range> ranges = getRanges();
         ranges.clear();
-        ranges.add(new SimpleRange(parentNode.getDomNodeOrDie()));
+        final SimpleRange rg = new SimpleRange(parentNode.getDomNodeOrDie());
+        ranges.add(rg);
+
+        if (rg.getCollapsed()) {
+            type_ = TYPE_CARET;
+        }
+        else {
+            type_ = TYPE_RANGE;
+        }
     }
 
     /**
@@ -343,5 +373,4 @@ public class Selection extends SimpleScriptable {
         }
         return scriptable;
     }
-
 }

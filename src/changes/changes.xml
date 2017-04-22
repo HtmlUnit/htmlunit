@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Selection.type implementation fixed for Chrome.
+            </action>
             <action type="fix" dev="rbri" issue="1870" due-to="Joerg Werner">
                 JavaScript: document.baseURI calculation fixed for relative href.
             </action>
