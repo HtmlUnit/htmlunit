@@ -203,6 +203,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
+            CHROME = {"0,0", "11,11", "11,11", "11,11"},
             FF52 = {"7,7", "11,11", "0,11", "0,11"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {

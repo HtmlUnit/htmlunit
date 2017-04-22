@@ -957,6 +957,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     JS_INNER_TEXT_VALUE_NULL,
 
+    /** Chrome ignores negative selection starts. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
+
     /** Chrome throws an error if using selectionStart/selectionEnd. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_INPUT_NUMBER_NO_SELECTION,

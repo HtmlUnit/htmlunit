@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html.impl;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_IGNORE_NEGATIVE_SELECTION_START;
+
 import org.w3c.dom.ranges.Range;
 
 /**
@@ -75,6 +77,12 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
      */
     @Override
     public void setSelectionStart(int selectionStart) {
+        if (selectionStart < 0
+                && element_.getPage().getEnclosingWindow().getWebClient()
+                    .getBrowserVersion().hasFeature(JS_INPUT_IGNORE_NEGATIVE_SELECTION_START)) {
+            return;
+        }
+
         final int length = element_.getText().length();
         selectionStart = Math.max(0, Math.min(selectionStart, length));
         selection_.setStart(element_, selectionStart);
