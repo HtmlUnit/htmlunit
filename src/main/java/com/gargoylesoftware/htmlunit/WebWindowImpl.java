@@ -18,6 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +35,8 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -363,5 +368,15 @@ public abstract class WebWindowImpl implements WebWindow {
             threadLocalMap_ = new HashMap<>();
         }
         threadLocalMap_.put(key, value);
+    }
+
+    private void writeObject(final ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeObject(scriptObject_ instanceof Scriptable ? scriptObject_ : null);
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        scriptObject_ = ois.readObject();
     }
 }
