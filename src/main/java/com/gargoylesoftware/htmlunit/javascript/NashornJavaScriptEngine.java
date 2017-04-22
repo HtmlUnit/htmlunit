@@ -502,10 +502,12 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
      */
     @Override
     public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
-        if (javaScriptExecutor_ == null) {
-            javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
+        if (webClient_ != null) {
+            if (javaScriptExecutor_ == null) {
+                javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
+            }
+            javaScriptExecutor_.addWindow(webWindow);
         }
-        javaScriptExecutor_.addWindow(webWindow);
     }
 
     /**
