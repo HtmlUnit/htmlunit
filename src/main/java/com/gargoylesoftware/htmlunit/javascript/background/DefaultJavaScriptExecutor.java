@@ -17,10 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,8 +48,6 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptExecutor.class);
 
     private Browser browser_;
-    private Lock lock_;
-    private Condition finishCondition_;
 
     /** Creates an EventLoop for the webClient.
      *
@@ -87,18 +81,6 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     private void killThread() {
         if (eventLoopThread_ == null) {
             return;
-        }
-        lock_ = new ReentrantLock();
-        lock_.lock();
-        finishCondition_ = lock_.newCondition();
-        try {
-            finishCondition_.await(1500, TimeUnit.MILLISECONDS);
-        }
-        catch (final InterruptedException e) {
-            // nothing
-        }
-        finally {
-            lock_.unlock();
         }
         try {
             eventLoopThread_.interrupt();
@@ -198,15 +180,6 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
             }
             catch (final InterruptedException e) {
                 Thread.currentThread().interrupt();
-            }
-        }
-        if (finishCondition_ != null) {
-            lock_.lock();
-            try {
-                finishCondition_.signal();
-            }
-            finally {
-                lock_.unlock();
             }
         }
     }

@@ -750,6 +750,16 @@ public abstract class WebTestCase {
      * Asserts there is no active JavaScript threads.
      */
     protected static void assertNoJavaScriptThreads() {
+        List<Thread> threads = getJavaScriptThreads();
+        try {
+            for (int i = 0; !threads.isEmpty() && i < 10; i++) {
+                Thread.sleep(100);
+                threads = getJavaScriptThreads();
+            }
+        }
+        catch (final InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertTrue("There are JavaScript threads running", getJavaScriptThreads().isEmpty());
     }
 
