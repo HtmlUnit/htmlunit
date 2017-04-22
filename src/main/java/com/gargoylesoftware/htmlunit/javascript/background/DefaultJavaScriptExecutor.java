@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 
 /**
  * An event loop to execute all the JavaScript jobs.
@@ -38,12 +39,14 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
     private transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
 
-    private volatile boolean shutdown_ = false;
+    private volatile boolean shutdown_;
 
-    private transient Thread eventLoopThread_ = null;
+    private transient Thread eventLoopThread_;
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptExecutor.class);
+
+    private Browser browser_;
 
     /** Creates an EventLoop for the webClient.
      *
@@ -58,6 +61,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      */
     protected void startThreadIfNeeded() {
         if (eventLoopThread_ == null) {
+            browser_ = Browser.getCurrent();
             eventLoopThread_ = new Thread(this, getThreadName());
             eventLoopThread_.setDaemon(true);
             eventLoopThread_.start();
@@ -134,6 +138,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     /** Runs the eventLoop. */
     @Override
     public void run() {
+        Browser.setCurrent(browser_);
         final boolean trace = LOG.isTraceEnabled();
         // this has to be a multiple of 10ms
         // otherwise the VM has to fight with the OS to get such small periods

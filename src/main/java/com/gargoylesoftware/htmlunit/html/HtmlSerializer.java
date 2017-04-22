@@ -23,8 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Element2;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -280,10 +280,18 @@ class HtmlSerializer {
         }
         else {
             final boolean block;
-            final ScriptableObject scriptableObject = node.getScriptableObject();
-            if (scriptableObject instanceof Element && !(node instanceof HtmlBody)) {
+            final Object scriptableObject = node.getScriptableObject();
+            if (node instanceof HtmlBody) {
+                block = false;
+            }
+            else if (scriptableObject instanceof Element) {
                 final Element element = (Element) scriptableObject;
                 final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+                block = "block".equals(display);
+            }
+            else if (scriptableObject instanceof Element2) {
+                final Element2 element = (Element2) scriptableObject;
+                final String display = Window2.getComputedStyle(element.getWindow(), element, null).getDisplay(true);
                 block = "block".equals(display);
             }
             else {
