@@ -122,7 +122,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "true",
             CHROME = "false")
     @NotYetImplemented({FF, IE})
-    public void _Audio_HTMLAudioElement() throws Exception {
+    public void Audio_HTMLAudioElement() throws Exception {
         parentOf("Audio", "HTMLAudioElement");
     }
 
@@ -131,7 +131,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void _HTMLAudioElement_Audio() throws Exception {
+    public void HTMLAudioElement_Audio() throws Exception {
         parentOf("HTMLAudioElement", "Audio");
     }
 
