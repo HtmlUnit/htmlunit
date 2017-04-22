@@ -79,6 +79,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
 
     /**
      * Runs the test.
+     *
      * @param parent the parent host name
      * @param child the child host name
      * @throws Exception if an error occurs

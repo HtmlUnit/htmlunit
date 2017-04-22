@@ -14,30 +14,32 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-
-import com.gargoylesoftware.htmlunit.html.HtmlAudio;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object {@code HTMLAudioElement}.
+ * The JavaScript object {@code Audio}.
  *
- * @author Ronald Brill
  * @author Ahmed Ashour
- * @author Frank Danek
  */
-@JsxClass(domClass = HtmlAudio.class)
-public class HTMLAudioElement extends HTMLMediaElement {
+@JsxClass
+public class Audio extends HTMLAudioElement {
 
     /**
      * The constructor.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
-    public HTMLAudioElement() {
+    @JsxConstructor
+    public Audio() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return "[object HTMLAudioElement]";
+        }
+        return super.getDefaultValue(hint);
+    }
 }

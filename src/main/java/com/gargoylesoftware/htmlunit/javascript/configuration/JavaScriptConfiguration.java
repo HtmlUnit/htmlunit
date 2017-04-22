@@ -415,7 +415,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class, AnimationEvent.class,
         AppBannerPromptResult.class, ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
-        ArrayBufferView.class, ArrayBufferViewBase.class, Attr.class, AudioBuffer.class,
+        ArrayBufferView.class, ArrayBufferViewBase.class, Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
         BarProp.class, BaseAudioContext.class,

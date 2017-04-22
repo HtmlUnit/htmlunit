@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 
 /**
  * The JavaScript object {@code HTMLMediaElement}.
@@ -97,5 +98,17 @@ public class HTMLMediaElement extends HTMLElement {
     @JsxFunction
     public String canPlayType(final String type) {
         return ((HtmlMedia) getDomNodeOrDie()).canPlayType(type);
+    }
+
+    /**
+     * Begins playback of the media.
+     *
+     * @return a {@link Promise} which is fulfilled when playback has been started,
+     *         or is rejected if for any reason playback cannot be started
+     */
+    @JsxFunction
+    public Promise play() {
+        final Promise promise = new Promise(getWindow());
+        return promise;
     }
 }

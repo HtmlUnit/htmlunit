@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="add" dev="asashour" issue="246" system="features">
+                JavaScript: implement Audio.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Selection.type implementation fixed for Chrome.
             </action>

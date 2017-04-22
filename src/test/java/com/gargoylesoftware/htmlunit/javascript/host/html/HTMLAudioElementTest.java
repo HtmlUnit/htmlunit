@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -24,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLAudioElement}.
@@ -66,7 +68,6 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "done"})
     @BuggyWebDriver(IE)
-    @NotYetImplemented
     public void audio() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -84,4 +85,54 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Checks whether the specific {@code parent} is an actual parent of the given {@code child}.
+     *
+     * @param parent the parent host name
+     * @param child the child host name
+     * @throws Exception if an error occurs
+     */
+    protected void parentOf(final String parent, final String child) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>" + (getBrowserVersion().isIE() ? "Blank Page" : "New Tab") + "</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(isParentOf(" + parent + ", " + child + "));\n"
+            + "    } catch(e) { alert('false'); }\n"
+            + "  }\n"
+
+            + "  /*\n"
+            + "   * Returns true if o1 prototype is parent/grandparent of o2 prototype\n"
+            + "   */\n"
+            + "  function isParentOf(o1, o2) {\n"
+            + "    o1.prototype.myCustomFunction = function() {};\n"
+            + "    return o2.prototype.myCustomFunction != undefined;\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    @NotYetImplemented({FF, IE})
+    public void _Audio_HTMLAudioElement() throws Exception {
+        parentOf("Audio", "HTMLAudioElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _HTMLAudioElement_Audio() throws Exception {
+        parentOf("HTMLAudioElement", "Audio");
+    }
+
 }
