@@ -131,6 +131,15 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _HTMLAudioElement_Audio() throws Exception {
+        test("HTMLAudioElement", "Audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _HTMLAudioElement_HTMLAudioElement() throws Exception {
         test("HTMLAudioElement", "HTMLAudioElement");
     }
@@ -882,6 +891,15 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _HTMLElement_Audio() throws Exception {
+        test("HTMLElement", "Audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _HTMLElement_HTMLAnchorElement() throws Exception {
         test("HTMLElement", "HTMLAnchorElement");
     }
@@ -1613,6 +1631,15 @@ public class HostParentOfHTest extends HostParentOf {
     @Alerts("true")
     public void _HTMLElement_Option() throws Exception {
         test("HTMLElement", "Option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _HTMLMediaElement_Audio() throws Exception {
+        test("HTMLMediaElement", "Audio");
     }
 
     /**
