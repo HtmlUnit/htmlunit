@@ -136,6 +136,15 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Element_Audio() throws Exception {
+        test("Element", "Audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Element_Element() throws Exception {
         test("Element", "Element");
     }
@@ -1867,6 +1876,16 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_Attr() throws Exception {
         test("EventTarget", "Attr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_Audio() throws Exception {
+        test("EventTarget", "Audio");
     }
 
     /**
