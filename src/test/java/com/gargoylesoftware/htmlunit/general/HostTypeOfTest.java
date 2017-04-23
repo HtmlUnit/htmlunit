@@ -4377,6 +4377,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("function")
+    public void audio() throws Exception {
+        test("Audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
     public void audioBuffer() throws Exception {
