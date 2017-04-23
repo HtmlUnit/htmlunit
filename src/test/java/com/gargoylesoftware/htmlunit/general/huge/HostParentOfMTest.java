@@ -236,6 +236,16 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_Audio() throws Exception {
+        test("Node", "Audio");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_CDATASection() throws Exception {
         test("Node", "CDATASection");
     }
