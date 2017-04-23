@@ -189,6 +189,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "fourth.html"), fourthHtml);
 
         loadPage2(html);
+        Thread.sleep(400);
         assertEquals(4, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
     }
