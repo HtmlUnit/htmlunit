@@ -345,6 +345,15 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void _Audio_Audio() throws Exception {
+        test("Audio", "Audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _AudioBuffer_AudioBuffer() throws Exception {
