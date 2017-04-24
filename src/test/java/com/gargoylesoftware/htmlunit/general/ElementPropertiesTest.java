@@ -1326,12 +1326,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,"
-                + "willValidate",
+                + "validationMessage,validity,willValidate",
             FF45 = "checkValidity(),disabled,elements,form,name,setCustomValidity(),type,validationMessage,validity,"
                 + "willValidate",
-            FF52 = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,willValidate",
             IE = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             EDGE = "align,checkValidity(),disabled,form,setCustomValidity(),validationMessage,validity,willValidate")
     @NotYetImplemented
@@ -1383,9 +1380,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "target",
             FF45 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reset(),submit(),"
-                + "target",
-            FF52 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,reportValidity(),reset(),submit(),"
                 + "target",
             IE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
                 + "name,namedItem(),noValidate,reset(),submit(),"
@@ -2718,7 +2712,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "width",
             FF45 = "-",
-            FF52 = "width",
             IE = "cite,clear,width")
     @NotYetImplemented(EDGE)
     public void xmp() throws Exception {

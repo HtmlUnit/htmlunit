@@ -36,13 +36,10 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"[object DocumentType]", "true", "html,10,null,undefined,undefined,undefined",
+    @Alerts(DEFAULT = {"[object DocumentType]", "true", "html,10,null,undefined,undefined,undefined",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
                         + "undefined,undefined,undefined"},
             FF45 = {"[object DocumentType]", "true", "html,10,null,null,null,null",
-                        "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-                            + "undefined,undefined,undefined"},
-            FF52 = {"[object DocumentType]", "true", "html,10,null,undefined,undefined,undefined",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
                             + "undefined,undefined,undefined"},
             IE = {"[object DocumentType]", "true", "html,10,null,null,null,null",
