@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -43,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 @RunWith(BrowserParameterizedRunner.class)
 @ToRunWithRealBrowsers
+@Ignore
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**
