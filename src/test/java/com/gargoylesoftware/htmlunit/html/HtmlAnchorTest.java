@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.junit.Test;
@@ -599,16 +600,17 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"§§URL§§bug.html?h%F6=G%FCnter", "h\ufffd", "G\ufffdnter"},
-            IE = {"§§URL§§bug.html?h\u00F6=G\u00FCnter", "h\ufffd", "G\ufffdnter"})
+    @Alerts({"§§URL§§bug.html?h%C3%B6=G%C3%BCnter", "h\u00F6", "G\u00FCnter"})
     public void encoding() throws Exception {
+        final String href = "bug.html?" + URLEncoder.encode("h\u00F6", "UTF-8")
+                + '=' + URLEncoder.encode("G\u00FCnter", "UTF-8") + "";
         final String html =
             "<html>\n"
             + "<head>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <a href='bug.html?h\u00F6=G\u00FCnter' id='myLink'>Click me</a>\n"
+            + "  <a href='" + href + "' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html, "text/html", UTF_8);

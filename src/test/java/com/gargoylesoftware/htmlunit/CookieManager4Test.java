@@ -100,7 +100,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Before
     public void clearCookies() throws Exception {
         getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
-        startWebServer(getMockWebConnection());
+        startWebServer(getMockWebConnection(), null);
         final WebDriver driver = getWebDriver();
         driver.get(URL_HOST1);
         driver.manage().deleteAllCookies();

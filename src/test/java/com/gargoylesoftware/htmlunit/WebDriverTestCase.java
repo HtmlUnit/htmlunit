@@ -26,6 +26,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,8 +36,14 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,6 +54,7 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.util.security.Constraint;
@@ -483,9 +491,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Starts the web server delivering response from the provided connection.
      * @param mockConnection the sources for responses
+     * @param serverCharset the {@link Charset} at the server side
      * @throws Exception if a problem occurs
      */
-    protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
+    protected void startWebServer(final MockWebConnection mockConnection, final Charset serverCharset)
+            throws Exception {
         if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
             stopWebServers();
         }
@@ -513,6 +523,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             context.addServlet(MockWebConnectionServlet.class, "/*");
+            if (serverCharset != null) {
+                AsciiEncodingFilter.CHARSET_ = serverCharset;
+                context.addFilter(AsciiEncodingFilter.class, "/*",
+                        EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
+            }
             STATIC_SERVER_.setHandler(context);
             STATIC_SERVER_.start();
         }
@@ -742,7 +757,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPage2(final String html, final URL url) throws Exception {
-        return loadPage2(html, url, "text/html;charset=ISO-8859-1", ISO_8859_1);
+        return loadPage2(html, url, "text/html;charset=ISO-8859-1", ISO_8859_1, null);
     }
 
     /**
@@ -754,8 +769,23 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPage2(String html, final URL url,
+    protected final WebDriver loadPage2(final String html, final URL url,
             final String contentType, final Charset charset) throws Exception {
+        return loadPage2(html, url, contentType, charset, null);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts2(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @param contentType the content type to return
+     * @param charset the charset
+     * @param serverCharset the charset at the server side.
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(String html, final URL url,
+            final String contentType, final Charset charset, final Charset serverCharset) throws Exception {
         if (useStandards_ != null) {
             if (html.startsWith(HtmlPageTest.STANDARDS_MODE_PREFIX_)) {
                 fail("HTML must not be prefixed with Standards Mode.");
@@ -766,7 +796,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         final MockWebConnection mockWebConnection = getMockWebConnection();
         mockWebConnection.setResponse(url, html, contentType, charset);
-        startWebServer(mockWebConnection);
+        startWebServer(mockWebConnection, serverCharset);
 
         WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
@@ -970,7 +1000,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         expandExpectedAlertsVariables(url);
         final String[] expectedAlerts = getExpectedAlerts();
 
-        startWebServer(getMockWebConnection());
+        startWebServer(getMockWebConnection(), null);
 
         final WebDriver driver = getWebDriver();
         driver.get(url.toExternalForm());
@@ -1152,5 +1182,39 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected boolean isWebClientCached() {
         return false;
+    }
+
+    /**
+     * Needed as Jetty starting from 9.4.4 expects UTF-8 encoding by default.
+     */
+    public static class AsciiEncodingFilter implements Filter {
+
+        private static Charset CHARSET_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void init(final FilterConfig filterConfig) throws ServletException {
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
+                throws IOException, ServletException {
+            if (request instanceof Request) {
+                ((Request) request).setQueryEncoding(CHARSET_.name());
+            }
+            chain.doFilter(request, response);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void destroy() {
+        }
     }
 }

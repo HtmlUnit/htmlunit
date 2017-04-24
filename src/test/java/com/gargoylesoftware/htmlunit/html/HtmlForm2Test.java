@@ -304,7 +304,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\ufffdm", "Hello G\ufffdnter"})
+    @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\u00F6m", "Hello G\u00FCnter"})
     public void encodingSubmit() throws Exception {
         final String html =
             "<html>\n"
@@ -319,7 +319,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final WebDriver driver = loadPage2(html, URL_FIRST);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=ISO-8859-1", ISO_8859_1, ISO_8859_1);
         driver.findElement(new ById("mySubmit")).click();
 
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
