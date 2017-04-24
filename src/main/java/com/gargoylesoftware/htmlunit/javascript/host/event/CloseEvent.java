@@ -47,7 +47,17 @@ public class CloseEvent extends Event {
      * Creates a new event instance.
      */
     public CloseEvent() {
+        setType(TYPE_CLOSE);
         reason_ = "";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void eventCreated() {
+        super.eventCreated();
+        setType("");
     }
 
     /**
