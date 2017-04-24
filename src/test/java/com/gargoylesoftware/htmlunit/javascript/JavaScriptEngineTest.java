@@ -1268,7 +1268,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         }
         Thread.sleep(400);
-        assertNoJavaScriptThreads();
+        assertTrue(getJavaScriptThreads().isEmpty());
     }
 
     /**
@@ -1291,7 +1291,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         loadPage(html);
 
         getWebClient().close();
-        assertNoJavaScriptThreads();
+        assertTrue(getJavaScriptThreads().isEmpty());
     }
 
     /**
@@ -1388,6 +1388,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
         webClient.close();
         engine.registerWindowAndMaybeStartEventLoop(window);
-        assertNoJavaScriptThreads();
+        assertTrue(getJavaScriptThreads().isEmpty());
     }
 }

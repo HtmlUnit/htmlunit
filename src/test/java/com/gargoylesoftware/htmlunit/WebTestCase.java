@@ -30,13 +30,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -595,7 +593,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Expand "§§URL§§" to the provided URL in the expected alerts.
+     * Expand "Â§Â§URLÂ§Â§" to the provided URL in the expected alerts.
      * @param url the URL to expand
      */
     protected void expandExpectedAlertsVariables(final URL url) {
@@ -603,7 +601,7 @@ public abstract class WebTestCase {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
         for (int i = 0; i < expectedAlerts_.length; i++) {
-            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url.toExternalForm());
+            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("Â§Â§URLÂ§Â§", url.toExternalForm());
         }
     }
 
@@ -747,31 +745,20 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Asserts there is no active JavaScript threads.
+     * Gets the active JavaScript threads.
+     * @return the threads
      */
-    protected static void assertNoJavaScriptThreads() {
-        List<Thread> threads = getJavaScriptThreads();
-        try {
-            for (int i = 0; !threads.isEmpty() && i < 10; i++) {
-                Thread.sleep(100);
-                threads = getJavaScriptThreads();
-            }
-        }
-        catch (final InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Assert.assertTrue("There are JavaScript threads running", getJavaScriptThreads().isEmpty());
-    }
-
-    /**
-     * Returns the current active JavaScript threads.
-     * @return the current active JavaScript threads
-     */
-    protected static List<Thread> getJavaScriptThreads() {
+    protected List<Thread> getJavaScriptThreads() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
-        return Stream.of(threads).filter(Objects::nonNull)
-                .filter(t -> t.getName().startsWith("JS executor for")).collect(Collectors.toList());
+        final List<Thread> jsThreads = new ArrayList<>();
+        for (final Thread t : threads) {
+            if (t != null && t.getName().startsWith("JS executor for")) {
+                jsThreads.add(t);
+            }
+        }
+
+        return jsThreads;
     }
 
     /**

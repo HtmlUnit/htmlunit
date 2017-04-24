@@ -824,7 +824,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts (in which "Â§Â§URLÂ§Â§" has been expanded to the default URL).
      * @param html the HTML to use
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -836,7 +836,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts (in which "Â§Â§URLÂ§Â§" has been expanded to the default URL).
      * @param html the HTML to use
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver
@@ -1062,7 +1062,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @Before
     public void before() {
         if (!isWebClientCached()) {
-            assertNoJavaScriptThreads();
+            assertTrue(getJavaScriptThreads().isEmpty());
         }
     }
 
@@ -1079,7 +1079,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (webDriver_ != null) {
                 webDriver_.quit();
             }
-            assertNoJavaScriptThreads();
+            assertTrue("There are still JS threads running after the test", getJavaScriptThreads().isEmpty());
         }
 
         if (useRealBrowser()) {
