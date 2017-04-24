@@ -250,7 +250,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "exception"})
+    @Alerts(DEFAULT = {"a b", "2", "exception"},
+            FF52 = {"a b", "2", "false"})
     public void containsEmpty() throws Exception {
         contains("a b", "");
     }
@@ -259,7 +260,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "exception"})
+    @Alerts(DEFAULT = {"a b", "2", "exception"},
+            FF52 = {"a b", "2", "false"})
     public void containsBlank() throws Exception {
         contains("a b", " ");
     }
@@ -268,7 +270,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "exception"})
+    @Alerts(DEFAULT = {"a b", "2", "exception"},
+            FF52 = {"a b", "2", "false"})
     public void containsTab() throws Exception {
         contains("a b", "\t");
     }
@@ -277,7 +280,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "exception"})
+    @Alerts(DEFAULT = {"a b", "2", "exception"},
+            FF52 = {"a b", "2", "false"})
     public void containsCr() throws Exception {
         contains("a b", "\\r");
     }
@@ -286,7 +290,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a b", "2", "exception"})
+    @Alerts(DEFAULT = {"a b", "2", "exception"},
+            FF52 = {"a b", "2", "false"})
     public void containsNl() throws Exception {
         contains("a b", "\\n");
     }
@@ -673,7 +678,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({" \t \n  ", "0", "0", " \t \n  "})
+    @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  "},
+            FF52 = {" \t \n  ", "0", "0", ""})
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }
@@ -728,7 +734,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a \t c \n d  e", "4", "3", "a d e"},
-            FF = {"a \t c \n d  e", "4", "3", "a d  e"})
+            FF45 = {"a \t c \n d  e", "4", "3", "a d  e"})
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }

@@ -467,6 +467,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             CHROME = "[object HTMLPreElement]",
+            FF52 = "[object HTMLPreElement]",
             IE = "[object HTMLBlockElement]")
     public void xmp() throws Exception {
         test("xmp");
@@ -826,6 +827,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             CHROME = "[object HTMLPreElement]",
+            FF52 = "[object HTMLPreElement]",
             IE = "[object HTMLBlockElement]")
     public void listing() throws Exception {
         test("listing");
@@ -1306,7 +1308,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+            CHROME = "[object HTMLElement]",
+            FF52 = "[object HTMLElement]")
     public void summary() throws Exception {
         test("summary");
     }
@@ -1648,7 +1651,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLDetailsElement]")
+            CHROME = "[object HTMLDetailsElement]",
+            FF52 = "[object HTMLDetailsElement]")
     public void details() throws Exception {
         test("details");
     }
@@ -2013,6 +2017,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLContentElement]",
+            FF52 = "[object HTMLUnknownElement]",
             IE = "[object HTMLUnknownElement]")
     public void content() throws Exception {
         test("content");

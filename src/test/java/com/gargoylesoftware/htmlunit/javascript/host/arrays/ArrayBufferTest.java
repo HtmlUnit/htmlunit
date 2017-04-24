@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -127,8 +127,8 @@ public class ArrayBufferTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = {"3", "0", "1234", "0"})
-    @NotYetImplemented(FF)
+            FF45 = {"3", "0", "1234", "0"})
+    @NotYetImplemented(FF45)
     public void sliceInvalidStartIndexPositiveInfinity() throws Exception {
         sliceInvalidIndex("Number.POSITIVE_INFINITY");
     }
