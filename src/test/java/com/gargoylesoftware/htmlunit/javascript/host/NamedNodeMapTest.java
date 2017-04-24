@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -43,9 +43,9 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({FF, IE})
-    @Alerts(FF = {"baz=blah", "foo=bar", "id=f", "name=f"},
-            CHROME = {"name=f", "id=f", "foo=bar", "baz=blah"},
+    @NotYetImplemented({FF45, IE})
+    @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"},
+            FF45 = {"baz=blah", "foo=bar", "id=f", "name=f"},
             IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
     public void attributes() throws Exception {
         final String html =
