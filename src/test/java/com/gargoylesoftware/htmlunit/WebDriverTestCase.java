@@ -71,12 +71,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
@@ -402,44 +405,34 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (useRealBrowser()) {
             if (getBrowserVersion().isIE()) {
                 if (IE_BIN_ != null) {
-                    System.setProperty("webdriver.ie.driver", IE_BIN_);
+                    System.setProperty(InternetExplorerDriverService.IE_DRIVER_EXE_PROPERTY, IE_BIN_);
                 }
                 return new InternetExplorerDriver();
             }
 
             if (BrowserVersion.CHROME == getBrowserVersion()) {
                 if (CHROME_BIN_ != null) {
-                    System.setProperty("webdriver.chrome.driver", CHROME_BIN_);
+                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, CHROME_BIN_);
                 }
                 return new ChromeDriver();
             }
 
             if (BrowserVersion.EDGE == getBrowserVersion()) {
                 if (EDGE_BIN_ != null) {
-                    System.setProperty("webdriver.edge.driver", EDGE_BIN_);
+                    System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, EDGE_BIN_);
                 }
                 return new EdgeDriver();
             }
 
             if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
                 // disable the new marionette interface because it requires ff47 or more
-                System.setProperty("webdriver.firefox.marionette", "false");
+                System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
 
-                if (FF45_BIN_ != null) {
-                    final FirefoxOptions options = new FirefoxOptions();
-                    options.setBinary(FF45_BIN_);
-                    return new FirefoxDriver(options);
-                }
-                return new FirefoxDriver();
+                return createFirefoxDriver(FF45_BIN_);
             }
 
             if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
-                if (FF52_BIN_ != null) {
-                    final FirefoxOptions options = new FirefoxOptions();
-                    options.setBinary(FF52_BIN_);
-                    return new FirefoxDriver(options);
-                }
-                return new FirefoxDriver();
+                return createFirefoxDriver(FF52_BIN_);
             }
 
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
@@ -460,6 +453,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
             };
         }
         return webDriver_;
+    }
+
+    private static FirefoxDriver createFirefoxDriver(final String binary) {
+        if (binary != null) {
+            final FirefoxOptions options = new FirefoxOptions();
+            options.setBinary(binary);
+            return new FirefoxDriver(options);
+        }
+        return new FirefoxDriver();
     }
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
