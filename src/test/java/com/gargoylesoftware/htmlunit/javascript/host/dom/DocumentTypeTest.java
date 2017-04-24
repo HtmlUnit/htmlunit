@@ -83,8 +83,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
                     "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
             FF45 = {"[object DocumentType]", "greeting,10,null,null,null,null",
                     "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
-            FF52 = {"[object DocumentType]", "greeting,10,null,undefined,undefined,undefined",
-                    "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
             IE = {"[object DocumentType]", "greeting,10,null,null,null,null",
                     "greeting,MyIdentifier,hello.dtd,null,null,null"})
     public void doctype_xml() throws Exception {
