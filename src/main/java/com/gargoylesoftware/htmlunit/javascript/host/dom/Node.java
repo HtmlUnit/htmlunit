@@ -473,7 +473,7 @@ public class Node extends EventTarget {
      *
      * @return whether this node is the same node as the given one
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
     public boolean isSameNode(final Object other) {
         return other == this;
     }
