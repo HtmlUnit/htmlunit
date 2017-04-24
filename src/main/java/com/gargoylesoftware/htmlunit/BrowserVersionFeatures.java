@@ -1514,7 +1514,7 @@ public enum BrowserVersionFeatures {
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
 
     /** ProgressEvent.lengthComputable is true. */
-    @BrowserFeature({@WebBrowser(FF), @WebBrowser(IE)})
+    @BrowserFeature({@WebBrowser(value = FF, maxVersion = 45), @WebBrowser(IE)})
     XHR_LENGTH_COMPUTABLE,
 
     /** A cross origin request to {@code about:blank} is not allowed. */
@@ -1530,7 +1530,7 @@ public enum BrowserVersionFeatures {
     XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION,
 
     /** Indicates that method overrideMimeType throws if msg was already sent. */
-    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
 
     /** Indicates that the request uses the charset from the requesting page. */

@@ -684,7 +684,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "exception"},
-            FF = {"true", "overwritten"})
+            FF45 = {"true", "overwritten"})
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1392,7 +1392,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "true"},
-            CHROME = {"someLoad [object ProgressEvent]", "load", "false"})
+            CHROME = {"someLoad [object ProgressEvent]", "load", "false"},
+            FF52 = {"someLoad [object ProgressEvent]", "load", "false"})
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
@@ -1428,7 +1429,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"},
-            CHROME = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"})
+            CHROME = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"},
+            FF52 = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"})
     public void addEventListenerDetails() throws Exception {
         final String html =
               "<html>\n"
@@ -1466,7 +1468,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            CHROME = "function")
+            CHROME = "function",
+            FF52 = "function")
     @NotYetImplemented
     public void addEventListenerCaller() throws Exception {
         final String html =
