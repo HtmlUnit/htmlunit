@@ -83,6 +83,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
                         "removeHitRegion", "scrollPathIntoView", "35 methods"},
             CHROME = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
+                        "scrollPathIntoView", "36 methods"},
+            FF52 = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
                         "scrollPathIntoView", "36 methods"})
     public void methods() throws Exception {
         final String[] methods = {"addHitRegion", "arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip",
@@ -191,7 +193,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"rendering...", "...done"},
-            FF = {"rendering...", "exception"})
+            FF45 = {"rendering...", "exception"})
     public void drawImage_noImage() throws Exception {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"
@@ -215,7 +217,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"rendering...", "...done"},
-            FF = {"rendering...", "exception"})
+            FF45 = {"rendering...", "exception"})
     public void drawImage_invalidImage() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("invalid.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

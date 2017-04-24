@@ -363,7 +363,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param endAngle the endAngle
      * @param anticlockwise the anticlockwise
      */
-    @JsxFunction(@WebBrowser(CHROME))
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     public void ellipse(final double x, final double y,
                     final double radiusX, final double radiusY,
                     final double rotation, final double startAngle, final double endAngle,

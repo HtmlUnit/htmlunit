@@ -594,7 +594,7 @@ public enum BrowserVersionFeatures {
     JS_CANVAS_DATA_URL_IE_PNG,
 
     /** draw for canvas throws an error if no image available. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 45))
     JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG,
 
     /** Do not allow invalid clear values. */
@@ -630,7 +630,7 @@ public enum BrowserVersionFeatures {
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
     /** Uses {@code MozCSSKeyframesRule}. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 45))
     JS_CSS_MOZ_CSS_KEYFRAMES_RULE,
 
     /** {@link DateTimeFormat} uses the Ascii digits for {@code ar-DZ} locale. */
