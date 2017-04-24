@@ -80,7 +80,8 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"contains: undefined", "toSource: undefined", "trim: function"},
-            FF = {"contains: function", "toSource: function", "trim: function"})
+            FF52 = {"contains: undefined", "toSource: function", "trim: function"},
+            FF45 = {"contains: function", "toSource: function", "trim: function"})
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
@@ -157,7 +158,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "contains not supported",
-            FF = {"true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
+            FF45 = {"true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
                         "true", "true", "false", "false"})
     public void contains() throws Exception {
         final String html

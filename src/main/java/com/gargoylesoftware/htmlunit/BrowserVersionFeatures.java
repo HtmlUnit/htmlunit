@@ -1429,7 +1429,7 @@ public enum BrowserVersionFeatures {
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /** Indicates that string.contains() is supported. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 45))
     STRING_CONTAINS,
 
     /** Indicates that string.includes() is supported. */
