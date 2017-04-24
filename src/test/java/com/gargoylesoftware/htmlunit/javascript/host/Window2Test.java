@@ -1395,7 +1395,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"posted", "received"})
+    @Alerts("posted received")
     public void postMessage_exactURL() throws Exception {
         postMessage(URL_FIRST.toExternalForm());
     }
@@ -1404,7 +1404,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"posted", "received"})
+    @Alerts("posted received")
     public void postMessage_slash() throws Exception {
         postMessage("/");
     }
@@ -1457,11 +1457,11 @@ public class Window2Test extends WebDriverTestCase {
     private void postMessage(final String url) throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title></head>\n"
+            + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "  function receiveMessage(event) {\n"
-            + "    alert('received');\n"
+            + "    document.title += ' received';\n"
             + "  }\n"
             + "  window.addEventListener('message', receiveMessage, false);\n"
             + "</script>\n"
@@ -1471,14 +1471,16 @@ public class Window2Test extends WebDriverTestCase {
         final String iframe = "<html><body><script>\n"
             + "  try {\n"
             + "    top.postMessage('hello', '" + url + "');\n"
-            + "    alert('posted');\n"
+            + "    top.document.title += ' posted';\n"
             + "  } catch (e) {\n"
-            + "    alert('exception');\n"
+            + "    top.document.title += ' exception';\n"
             + "  }\n"
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 
     /**
@@ -1489,11 +1491,15 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts("about:blank")
     public void openWindow_emptyUrl() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
             + "var w = window.open('');\n"
             + "alert(w ? w.document.location : w);\n"
-            + "</script></head>\n"
-            + "<body></body></html>";
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }
