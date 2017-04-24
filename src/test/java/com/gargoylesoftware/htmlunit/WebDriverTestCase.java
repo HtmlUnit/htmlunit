@@ -71,7 +71,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -163,8 +162,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Server STATIC_SERVER2_;
     // third server for multi-origin cross-origin tests.
     private static Server STATIC_SERVER3_;
-    private static ChromeDriverService CHROME_SERVICE_;
-
+    
     private boolean useRealBrowser_;
     private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
@@ -410,18 +408,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             if (BrowserVersion.CHROME == getBrowserVersion()) {
-                if (CHROME_SERVICE_ == null) {
-                    final ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
-                    if (CHROME_BIN_ != null) {
-                        builder.usingDriverExecutable(new File(CHROME_BIN_));
-                    }
-                    CHROME_SERVICE_ = builder
-                            .usingAnyFreePort()
-                            .build();
-
-                    CHROME_SERVICE_.start();
+                if (CHROME_BIN_ != null) {
+                    System.setProperty("webdriver.chrome.driver", CHROME_BIN_);
                 }
-                return new ChromeDriver(CHROME_SERVICE_);
+                return new ChromeDriver();
             }
 
             if (BrowserVersion.EDGE == getBrowserVersion()) {
