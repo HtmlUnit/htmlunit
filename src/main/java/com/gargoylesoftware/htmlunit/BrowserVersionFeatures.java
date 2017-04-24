@@ -49,10 +49,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     ANCHOR_IGNORE_TARGET_FOR_JS_HREF,
 
-    /**
-     * Is the default display style of Applet is 'inline-block'.
-     */
-    @BrowserFeature(@WebBrowser(FF))
+    /** Is the default display style of Applet is 'inline-block'. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 45))
     APPLET_INLINE_BLOCK,
 
     /** Background image is 'initial'. */
