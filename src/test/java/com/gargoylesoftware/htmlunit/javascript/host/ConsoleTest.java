@@ -122,7 +122,8 @@ public class ConsoleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "success")
+            CHROME = "success",
+            FF52 = "success")
     public void fromWindow() throws Exception {
         final String html
             = "<html>\n"
