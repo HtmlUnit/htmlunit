@@ -80,7 +80,7 @@ public class PointerEvent extends MouseEvent {
 
         if (args.length > 1) {
             final NativeObject object = (NativeObject) args[1];
-            event.setBubbles((boolean) getValue(object, "bubbles", event.getBubbles()));
+            event.setBubbles((boolean) getValue(object, "bubbles", event.isBubbles()));
             event.pointerId_ = (int) getValue(object, "pointerId", event.pointerId_);
             event.width_ = (int) getValue(object, "width", event.width_);
             event.height_ = (int) getValue(object, "height", event.height_);

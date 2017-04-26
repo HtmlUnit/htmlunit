@@ -431,7 +431,7 @@ public class Event2 extends SimpleScriptObject {
      * @return whether or not this event can be canceled
      */
     @Getter
-    public Boolean getCancelable() {
+    public Boolean isCancelable() {
         return cancelable_;
     }
 
@@ -619,7 +619,7 @@ public class Event2 extends SimpleScriptObject {
      * Returns whether {@code SHIFT} has been pressed during this event or not.
      * @return whether {@code SHIFT} has been pressed during this event or not
      */
-    public boolean getShiftKey() {
+    public boolean isShiftKey() {
         return shiftKey_;
     }
 
@@ -635,7 +635,7 @@ public class Event2 extends SimpleScriptObject {
      * Returns whether {@code CTRL} has been pressed during this event or not.
      * @return whether {@code CTRL} has been pressed during this event or not
      */
-    public boolean getCtrlKey() {
+    public boolean isCtrlKey() {
         return ctrlKey_;
     }
 
@@ -651,7 +651,7 @@ public class Event2 extends SimpleScriptObject {
      * Returns whether {@code ALT} has been pressed during this event or not.
      * @return whether {@code ALT} has been pressed during this event or not
      */
-    public boolean getAltKey() {
+    public boolean isAltKey() {
         return altKey_;
     }
 

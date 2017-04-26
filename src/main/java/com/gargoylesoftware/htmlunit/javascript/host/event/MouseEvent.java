@@ -356,8 +356,8 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     @JsxGetter
-    public boolean getAltKey() {
-        return super.getAltKey();
+    public boolean isAltKey() {
+        return super.isAltKey();
     }
 
     /**
@@ -365,8 +365,8 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     @JsxGetter
-    public boolean getCtrlKey() {
-        return super.getCtrlKey();
+    public boolean isCtrlKey() {
+        return super.isCtrlKey();
     }
 
     /**
@@ -374,7 +374,7 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     @JsxGetter
-    public boolean getShiftKey() {
-        return super.getShiftKey();
+    public boolean isShiftKey() {
+        return super.isShiftKey();
     }
 }

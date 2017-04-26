@@ -109,11 +109,11 @@ public class UIEvent extends Event {
      */
     @Override
     @JsxGetter
-    public boolean getCancelBubble() {
+    public boolean isCancelBubble() {
         if (getBrowserVersion().hasFeature(EVENT_CANCEL_BUBBLE)) {
             return cancelBubble_;
         }
-        return super.getCancelBubble();
+        return super.isCancelBubble();
     }
 
     /**

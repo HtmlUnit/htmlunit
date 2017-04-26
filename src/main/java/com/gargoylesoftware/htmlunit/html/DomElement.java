@@ -1008,7 +1008,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         boolean stateUpdated = false;
         boolean changed = false;
         if (isStateUpdateFirst()) {
-            changed = doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
+            changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
             stateUpdated = true;
         }
 
@@ -1020,7 +1020,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
             if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-                changed = doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
+                changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
             }
         }
         finally {
@@ -1064,7 +1064,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         boolean stateUpdated = false;
         boolean changed = false;
         if (isStateUpdateFirst()) {
-            changed = doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
+            changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
             stateUpdated = true;
         }
 
@@ -1076,7 +1076,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
             if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-                changed = doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
+                changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
             }
         }
         finally {

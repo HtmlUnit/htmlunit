@@ -74,7 +74,7 @@ public class HtmlAnchor extends HtmlElement {
     @Override
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
-        final boolean ctrl = event.getCtrlKey();
+        final boolean ctrl = event.isCtrlKey();
         WebWindow oldWebWindow = null;
         if (ctrl) {
             oldWebWindow = ((HTMLElement) event.getSrcElement()).getDomNodeOrDie()

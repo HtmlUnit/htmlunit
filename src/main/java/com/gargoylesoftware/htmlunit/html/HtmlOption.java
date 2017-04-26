@@ -300,7 +300,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             }
 
             if (isStateUpdateFirst()) {
-                doClickStateUpdate(event.getShiftKey(), event.getCtrlKey());
+                doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
             }
 
             return getEnclosingSelect().click(event, ignoreVisibility);

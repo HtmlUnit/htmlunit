@@ -429,7 +429,7 @@ public class Event extends SimpleScriptable {
      * Returns whether {@code SHIFT} has been pressed during this event or not.
      * @return whether {@code SHIFT} has been pressed during this event or not
      */
-    public boolean getShiftKey() {
+    public boolean isShiftKey() {
         return shiftKey_;
     }
 
@@ -445,7 +445,7 @@ public class Event extends SimpleScriptable {
      * Returns whether {@code CTRL} has been pressed during this event or not.
      * @return whether {@code CTRL} has been pressed during this event or not
      */
-    public boolean getCtrlKey() {
+    public boolean isCtrlKey() {
         return ctrlKey_;
     }
 
@@ -461,7 +461,7 @@ public class Event extends SimpleScriptable {
      * Returns whether {@code ALT} has been pressed during this event or not.
      * @return whether {@code ALT} has been pressed during this event or not
      */
-    public boolean getAltKey() {
+    public boolean isAltKey() {
         return altKey_;
     }
 
@@ -499,7 +499,7 @@ public class Event extends SimpleScriptable {
      * @return whether or not this event bubbles
      */
     @JsxGetter
-    public boolean getBubbles() {
+    public boolean isBubbles() {
         return bubbles_;
     }
 
@@ -514,7 +514,7 @@ public class Event extends SimpleScriptable {
      * @return whether or not this event can be canceled
      */
     @JsxGetter
-    public boolean getCancelable() {
+    public boolean isCancelable() {
         return cancelable_;
     }
 
@@ -531,7 +531,7 @@ public class Event extends SimpleScriptable {
      * @return {@code true} if this event has been cancelled or not
      */
     @JsxGetter({@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
-    public boolean getDefaultPrevented() {
+    public boolean isDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
 
@@ -539,7 +539,7 @@ public class Event extends SimpleScriptable {
      * @return indicates if event propagation is stopped
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getCancelBubble() {
+    public boolean isCancelBubble() {
         return stopPropagation_;
     }
 
