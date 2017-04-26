@@ -250,7 +250,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the value of this boolean result
      */
     @JsxGetter
-    public boolean getBooleanValue() {
+    public boolean isBooleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }

@@ -263,7 +263,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the readOnly attribute
      */
     @JsxGetter
-    public boolean getReadOnly() {
+    public boolean isReadOnly() {
         return ((HtmlTextArea) getDomNodeOrDie()).isReadOnly();
     }
 

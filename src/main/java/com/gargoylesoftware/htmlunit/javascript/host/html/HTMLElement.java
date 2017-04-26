@@ -474,7 +474,7 @@ public class HTMLElement extends Element {
      * @return true if this element is disabled
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getDisabled() {
+    public boolean isDisabled() {
         return getDomNodeOrDie().hasAttribute("disabled");
     }
 
@@ -1356,8 +1356,8 @@ public class HTMLElement extends Element {
      * default IE behavior implementation.
      * @return whether or not cookies are enabled
      */
-    public boolean getCookieEnabled() {
-        return getWindow().getNavigator().getCookieEnabled();
+    public boolean isCookieEnabled() {
+        return getWindow().getNavigator().isCookieEnabled();
     }
 
     /**
@@ -1383,7 +1383,7 @@ public class HTMLElement extends Element {
      * default IE behavior implementation.
      * @return whether or not Java is enabled
      */
-    public boolean getJavaEnabled() {
+    public boolean isJavaEnabled() {
         return getWindow().getNavigator().javaEnabled();
     }
 
@@ -1903,7 +1903,7 @@ public class HTMLElement extends Element {
      * @return the {@code spellcheck} property
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean getSpellcheck() {
+    public boolean isSpellcheck() {
         return Context.toBoolean(getDomNodeOrDie().getAttribute("spellcheck"));
     }
 
@@ -2670,7 +2670,7 @@ public class HTMLElement extends Element {
      * @return the {@code isContentEditable} property
      */
     @JsxGetter
-    public boolean getIsContentEditable() {
+    public boolean isIsContentEditable() {
         final String attribute = getContentEditable();
         if ("true".equals(attribute)) {
             return true;
@@ -2680,7 +2680,7 @@ public class HTMLElement extends Element {
             if (parent != null) {
                 final Object parentScriptable = parent.getScriptableObject();
                 if (parentScriptable instanceof HTMLElement) {
-                    return ((HTMLElement) parentScriptable).getIsContentEditable();
+                    return ((HTMLElement) parentScriptable).isIsContentEditable();
                 }
             }
         }

@@ -826,7 +826,7 @@ public abstract class HtmlElement extends DomElement {
     private DomNode getDoTypeNode() {
         DomNode node = null;
         final HTMLElement scriptElement = (HTMLElement) getScriptableObject();
-        if (scriptElement.getIsContentEditable()
+        if (scriptElement.isIsContentEditable()
                 || "on".equals(((Document) scriptElement.getOwnerDocument()).getDesignMode())) {
             final DomNodeList<DomNode> children = getChildNodes();
             if (!children.isEmpty()) {

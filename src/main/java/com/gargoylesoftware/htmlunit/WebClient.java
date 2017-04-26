@@ -555,7 +555,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      *
      * <p>Logs the response's content if its status code indicates a request failure and
-     * {@link WebClientOptions#getPrintContentOnFailingStatusCode()} returns {@code true}.
+     * {@link WebClientOptions#isPrintContentOnFailingStatusCode()} returns {@code true}.
      *
      * @param webResponse the response whose content may be logged
      */
@@ -563,7 +563,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
         final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-        if (getOptions().getPrintContentOnFailingStatusCode() && !successful) {
+        if (getOptions().isPrintContentOnFailingStatusCode() && !successful) {
             LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
             LOG.info(webResponse.getContentAsString());
         }

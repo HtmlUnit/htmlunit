@@ -69,7 +69,7 @@ public class MediaQueryList extends EventTarget {
      * @return whether the document currently matches the media query list or not
      */
     @JsxGetter
-    public boolean getMatches() {
+    public boolean isMatches() {
         final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
         final SACMediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
         return CSSStyleSheet.isActive(this, new MediaListImpl(mediaList));

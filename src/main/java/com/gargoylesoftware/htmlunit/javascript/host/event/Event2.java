@@ -416,7 +416,7 @@ public class Event2 extends SimpleScriptObject {
      * @return whether or not this event bubbles
      */
     @Getter
-    public Boolean getBubbles() {
+    public Boolean isBubbles() {
         return bubbles_;
     }
 

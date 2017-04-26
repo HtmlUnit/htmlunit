@@ -151,7 +151,7 @@ public class CloseEvent extends Event {
      * @return the wasClean
      */
     @JsxGetter
-    public boolean getWasClean() {
+    public boolean isWasClean() {
         return wasClean_;
     }
 

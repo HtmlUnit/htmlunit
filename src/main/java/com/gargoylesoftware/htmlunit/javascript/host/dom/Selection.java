@@ -130,7 +130,7 @@ public class Selection extends SimpleScriptable {
      * @return a boolean indicating whether the selection's start and end points are at the same position
      */
     @JsxGetter
-    public boolean getIsCollapsed() {
+    public boolean isIsCollapsed() {
         final List<Range> ranges = getRanges();
         return ranges.isEmpty() || (ranges.size() == 1 && ranges.get(0).getCollapsed());
     }

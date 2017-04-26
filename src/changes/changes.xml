@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="update" dev="asashour">
+                WebClientOptions: deprecate .getPrintContentOnFailingStatusCode().
+            </action>
             <action type="add" dev="asashour" issue="246" system="features">
                 JavaScript: implement Audio.
             </action>

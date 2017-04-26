@@ -210,7 +210,7 @@ public class Range extends SimpleScriptable {
      * @return {@code true} if the range is collapsed
      */
     @JsxGetter
-    public boolean getCollapsed() {
+    public boolean isCollapsed() {
         return startContainer_ == endContainer_ && startOffset_ == endOffset_;
     }
 

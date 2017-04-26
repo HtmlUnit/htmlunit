@@ -124,7 +124,7 @@ public class ProgressEvent2 extends Event2 {
      * @return the lengthComputable property from the event.
      */
     @JsxGetter
-    public boolean getLengthComputable() {
+    public boolean isLengthComputable() {
         return lengthComputable_;
     }
 

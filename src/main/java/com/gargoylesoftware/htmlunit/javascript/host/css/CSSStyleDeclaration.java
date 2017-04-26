@@ -2210,7 +2210,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationBlink() {
+    public boolean isTextDecorationBlink() {
         return false;
     }
 
@@ -2228,7 +2228,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationLineThrough() {
+    public boolean isTextDecorationLineThrough() {
         return false;
     }
 
@@ -2246,7 +2246,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationNone() {
+    public boolean isTextDecorationNone() {
         return false;
     }
 
@@ -2264,7 +2264,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getTextDecorationOverline() {
+    public boolean isTextDecorationOverline() {
         return false;
     }
 

@@ -69,7 +69,7 @@ public class HTMLDivElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getNoWrap() {
+    public boolean isNoWrap() {
         return getDomNodeOrDie().hasAttribute("noWrap");
     }
 

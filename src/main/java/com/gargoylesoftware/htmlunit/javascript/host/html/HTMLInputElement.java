@@ -224,7 +224,7 @@ public class HTMLInputElement extends FormField {
      *@return the checked property
      */
     @JsxGetter
-    public boolean getChecked() {
+    public boolean isChecked() {
         return getDomNodeOrDie().isChecked();
     }
 
@@ -285,7 +285,7 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public boolean getDefaultChecked() {
+    public boolean isDefaultChecked() {
         return getDomNodeOrDie().isDefaultChecked();
     }
 
@@ -479,7 +479,7 @@ public class HTMLInputElement extends FormField {
      * @return the readOnly attribute
      */
     @JsxGetter
-    public boolean getReadOnly() {
+    public boolean isReadOnly() {
         return getDomNodeOrDie().isReadOnly();
     }
 

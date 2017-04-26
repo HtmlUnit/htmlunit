@@ -112,7 +112,7 @@ public class Navigator extends SimpleScriptable {
      * @return the {@code cookieEnabled} property
      */
     @JsxGetter
-    public boolean getCookieEnabled() {
+    public boolean isCookieEnabled() {
         return getWindow().getWebWindow().getWebClient().getCookieManager().isCookiesEnabled();
     }
 
@@ -130,7 +130,7 @@ public class Navigator extends SimpleScriptable {
      * @return the {@code onLine} property
      */
     @JsxGetter
-    public boolean getOnLine() {
+    public boolean isOnLine() {
         return getBrowserVersion().isOnLine();
     }
 

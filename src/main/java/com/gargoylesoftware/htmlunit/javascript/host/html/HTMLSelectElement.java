@@ -291,7 +291,7 @@ public class HTMLSelectElement extends FormField {
      * @return {@code true} if the {@code multiple} attribute is set
      */
     @JsxGetter
-    public boolean getMultiple() {
+    public boolean isMultiple() {
         return getDomNodeOrDie().hasAttribute("multiple");
     }
 

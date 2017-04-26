@@ -80,7 +80,7 @@ public class Attr extends Node {
      * @return {@code true} if the attribute is an custom property
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getExpando() {
+    public boolean isExpando() {
         final Object owner = getOwnerElement();
         if (null == owner) {
             return false;
@@ -133,7 +133,7 @@ public class Attr extends Node {
      * @return {@code true} if this attribute has been specified
      */
     @JsxGetter
-    public boolean getSpecified() {
+    public boolean isSpecified() {
         return getDomNodeOrDie().getSpecified();
     }
 

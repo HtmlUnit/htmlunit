@@ -131,7 +131,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
      * @return {@code true} if this attribute has been explicitly specified
      */
     @JsxGetter
-    public boolean getSpecified() {
+    public boolean isSpecified() {
         return getDomNodeOrDie().getSpecified();
     }
 

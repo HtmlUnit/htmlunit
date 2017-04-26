@@ -106,7 +106,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      * @return if asynchronous download is permitted
      */
     @JsxGetter
-    public boolean getAsync() {
+    public boolean isAsync() {
         return async_;
     }
 
@@ -217,7 +217,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      * @return the default white space handling
      */
     @JsxGetter
-    public boolean getPreserveWhiteSpace() {
+    public boolean isPreserveWhiteSpace() {
         return preserveWhiteSpace_;
     }
 

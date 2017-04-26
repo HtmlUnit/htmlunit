@@ -519,7 +519,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         if (!async
-                && getWithCredentials()
+                && isWithCredentials()
                 && getBrowserVersion().hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION)) {
             throw Context.reportRuntimeError(
                             "open() in sync mode is not possible because 'withCredentials' is set to true");
@@ -757,7 +757,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (originHeaderValue != null) {
                 String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
-                if (getWithCredentials()) {
+                if (isWithCredentials()) {
                     allowOriginResponse = allowOriginResponse
                             || (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL)
                             && ALLOW_ORIGIN_ALL.equals(value));
@@ -950,7 +950,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return the {@code withCredentials} property
      */
     @JsxGetter
-    public boolean getWithCredentials() {
+    public boolean isWithCredentials() {
         return withCredentials_;
     }
 

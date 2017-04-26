@@ -259,7 +259,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public boolean getNoWrap() {
+    public boolean isNoWrap() {
         return getDomNodeOrDie().hasAttribute("noWrap");
     }
 

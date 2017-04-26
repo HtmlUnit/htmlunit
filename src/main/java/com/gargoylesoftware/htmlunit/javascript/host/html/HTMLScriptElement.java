@@ -211,7 +211,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the {@code async} property
      */
     @JsxGetter
-    public boolean getAsync() {
+    public boolean isAsync() {
         return getDomNodeOrDie().hasAttribute("async");
     }
 

@@ -967,7 +967,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
-    public boolean getClosed() {
+    public boolean isClosed() {
         final WebWindow webWindow = getWebWindow();
         return !webWindow.getWebClient().containsWebWindow(webWindow);
     }

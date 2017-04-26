@@ -106,7 +106,7 @@ public class CSSStyleRule extends CSSRule {
      * @return the readonly value.
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getReadOnly() {
+    public boolean isReadOnly() {
         return false;
     }
 }

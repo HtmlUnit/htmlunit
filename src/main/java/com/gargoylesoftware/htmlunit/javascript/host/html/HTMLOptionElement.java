@@ -140,7 +140,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the text property
      */
     @JsxGetter
-    public boolean getSelected() {
+    public boolean isSelected() {
         final DomNode dom = getDomNodeOrNull();
         if (dom instanceof HtmlOption) {
             return ((HtmlOption) dom).isSelected();
@@ -170,7 +170,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the text property
      */
     @JsxGetter
-    public boolean getDefaultSelected() {
+    public boolean isDefaultSelected() {
         final DomNode dom = getDomNodeOrNull();
         if (dom instanceof HtmlOption) {
             return ((HtmlOption) dom).isDefaultSelected();
@@ -211,8 +211,8 @@ public class HTMLOptionElement extends HTMLElement {
      */
     @Override
     @JsxGetter
-    public boolean getDisabled() {
-        return super.getDisabled();
+    public boolean isDisabled() {
+        return super.isDisabled();
     }
 
     /**

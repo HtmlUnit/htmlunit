@@ -114,7 +114,7 @@ public class XMLDocument extends Document {
      * @return the {@code async} attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean getAsync() {
+    public boolean isAsync() {
         return async_;
     }
 

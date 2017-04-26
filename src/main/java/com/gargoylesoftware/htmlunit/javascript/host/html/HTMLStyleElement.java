@@ -126,7 +126,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @return the scoped
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean getScoped() {
+    public boolean isScoped() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.hasAttribute("scoped");
     }
@@ -145,6 +145,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Returns the {@code disabled} property.
      * @return the {@code disabled} property
      */
+    @Override
     @JsxGetter
     public boolean isDisabled() {
         return !getSheet().isEnabled();

@@ -198,7 +198,7 @@ public class Screen extends SimpleScriptable {
      * @return the {@code fontSmoothingEnabled} property
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean getFontSmoothingEnabled() {
+    public boolean isFontSmoothingEnabled() {
         return true;
     }
 

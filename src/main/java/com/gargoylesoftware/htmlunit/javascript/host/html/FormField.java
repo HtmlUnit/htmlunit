@@ -95,8 +95,8 @@ public class FormField extends HTMLElement {
      */
     @Override
     @JsxGetter
-    public boolean getDisabled() {
-        return super.getDisabled();
+    public boolean isDisabled() {
+        return super.isDisabled();
     }
 
     /**

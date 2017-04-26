@@ -209,7 +209,7 @@ public class Screen2 extends SimpleScriptObject {
      * @return the {@code fontSmoothingEnabled} property
      */
     @Getter(@WebBrowser(IE))
-    public boolean getFontSmoothingEnabled() {
+    public boolean isFontSmoothingEnabled() {
         return true;
     }
 

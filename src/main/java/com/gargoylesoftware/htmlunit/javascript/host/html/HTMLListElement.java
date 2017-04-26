@@ -37,7 +37,7 @@ public class HTMLListElement extends HTMLElement {
      * @return the value of the {@code compact} attribute
      */
     @JsxGetter
-    public boolean getCompact() {
+    public boolean isCompact() {
         return getDomNodeOrDie().hasAttribute("compact");
     }
 

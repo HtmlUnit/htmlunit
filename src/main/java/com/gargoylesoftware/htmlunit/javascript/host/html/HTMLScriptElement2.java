@@ -220,7 +220,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      * @return the {@code async} property
      */
     @Getter
-    public Boolean getAsync() {
+    public Boolean isAsync() {
         return getDomNodeOrDie().hasAttribute("async");
     }
 
