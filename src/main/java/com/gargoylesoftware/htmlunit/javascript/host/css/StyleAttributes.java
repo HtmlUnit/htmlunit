@@ -2046,15 +2046,6 @@ public final class StyleAttributes {
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("621px 172.5px")),
 
-        /** The style property {@code placeContent}. */
-        PLACE_CONTENT_("placeContent", "place-content", ff52up("")),
-
-        /** The style property {@code placeItems}. */
-        PLACE_ITEMS_("placeItems", "place-items", ff52up("")),
-
-        /** The style property {@code placeSelf}. */
-        PLACE_SELF_("placeSelf", "place-self", ff52up("")),
-
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
 
@@ -2078,6 +2069,15 @@ public final class StyleAttributes {
 
         /** The style property {@code pixelWidth}. */
         PIXEL_WIDTH("pixelWidth", "pixel-width", ie("").setIteratable(false)),
+
+        /** The style property {@code placeContent}. */
+        PLACE_CONTENT("placeContent", "place-content", ff52up("")),
+
+        /** The style property {@code placeItems}. */
+        PLACE_ITEMS("placeItems", "place-items", ff52up("")),
+
+        /** The style property {@code placeSelf}. */
+        PLACE_SELF("placeSelf", "place-self", ff52up("")),
 
         /** The style property {@code pointerEvents}. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie("visiblePainted"), chrome("auto"), ff("auto")),
@@ -2605,23 +2605,6 @@ public final class StyleAttributes {
         /** The style property {@code webkitBackgroundSize}. */
         WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff52up("")),
 
-        /** The style property {@code webkitBorderBottomLeftRadius}. */
-        WEBKIT_BORDER_BOTTOM_LEFT_RADIUS("webkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
-                ff52up("")),
-
-        /** The style property {@code webkitBorderBottomRightRadius}. */
-        WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS("webkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
-                ff52up("")),
-
-        /** The style property {@code webkitBorderRadius}. */
-        WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", ff52up("")),
-
-        /** The style property {@code webkitBorderTopLeftRadius}. */
-        WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("")),
-
-        /** The style property {@code webkitBorderTopRightRadius}. */
-        WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("")),
-
         /** The style property {@code webkitBorderAfter}. */
         WEBKIT_BORDER_AFTER("webkitBorderAfter", "webkit-border-after", chrome("0px none rgb(0, 0, 0)")),
 
@@ -2646,6 +2629,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderBeforeWidth}. */
         WEBKIT_BORDER_BEFORE_WIDTH("webkitBorderBeforeWidth", "webkit-border-before-width", chrome("0px")),
 
+        /** The style property {@code webkitBorderBottomLeftRadius}. */
+        WEBKIT_BORDER_BOTTOM_LEFT_RADIUS("webkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
+                ff52up("")),
+
+        /** The style property {@code webkitBorderBottomRightRadius}. */
+        WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS("webkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
+                ff52up("")),
+
         /** The style property {@code webkitBorderEnd}. */
         WEBKIT_BORDER_END("webkitBorderEnd", "webkit-border-end", chrome("0px none rgb(0, 0, 0)")),
 
@@ -2665,6 +2656,9 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderImage}. */
         WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none"), ff52up("none")),
 
+        /** The style property {@code webkitBorderRadius}. */
+        WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", ff52up("")),
+
         /** The style property {@code webkitBorderStart}. */
         WEBKIT_BORDER_START("webkitBorderStart", "webkit-border-start", chrome("0px none rgb(0, 0, 0)")),
 
@@ -2676,6 +2670,12 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBorderStartWidth}. */
         WEBKIT_BORDER_START_WIDTH("webkitBorderStartWidth", "webkit-border-start-width", chrome("0px")),
+
+        /** The style property {@code webkitBorderTopLeftRadius}. */
+        WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("")),
+
+        /** The style property {@code webkitBorderTopRightRadius}. */
+        WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("")),
 
         /** The style property {@code webkitBorderVerticalSpacing}. */
         WEBKIT_BORDER_VERTICAL_SPACING("webkitBorderVerticalSpacing", "webkit-border-vertical-spacing", chrome("0px")),
