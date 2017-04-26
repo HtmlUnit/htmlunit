@@ -322,6 +322,50 @@ public class Element2 extends EventNode2 {
         return getNodeName();
     }
 
+    /**
+     * Returns the {@code clientLeft} attribute.
+     * @return the {@code clientLeft} attribute
+     */
+    @Getter
+    public int getClientLeft() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getBorderLeftValue();
+    }
+
+    /**
+     * Returns {@code clientTop} attribute.
+     * @return the {@code clientTop} attribute
+     */
+    @Getter
+    public int getClientTop() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getBorderTopValue();
+    }
+
+    /**
+     * Returns the {@code clientHeight} attribute.
+     * @return the {@code clientHeight} attribute
+     */
+    @Getter
+    public int getClientHeight() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getCalculatedHeight(false, true);
+    }
+
+    /**
+     * Returns the {@code clientWidth} attribute.
+     * @return the {@code clientWidth} attribute
+     */
+    @Getter
+    public int getClientWidth() {
+        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
+        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
+        return style.getCalculatedWidth(false, true);
+    }
+
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {
         try {
             return MethodHandles.lookup().findStatic(Element2.class,
@@ -365,4 +409,5 @@ public class Element2 extends EventNode2 {
             super("Element");
         }
     }
+
 }

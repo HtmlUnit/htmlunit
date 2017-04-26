@@ -487,28 +487,6 @@ public class HTMLElement2 extends Element2 {
     }
 
     /**
-     * Returns the {@code clientLeft} attribute.
-     * @return the {@code clientLeft} attribute
-     */
-    @Getter
-    public int getClientLeft() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
-        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
-        return style.getBorderLeftValue();
-    }
-
-    /**
-     * Returns {@code clientTop} attribute.
-     * @return the {@code clientTop} attribute
-     */
-    @Getter
-    public int getClientTop() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
-        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
-        return style.getBorderTopValue();
-    }
-
-    /**
      * Gets the first ancestor instance of {@link HTMLElement}. It is mostly identical
      * to {@link #getParent()} except that it skips XML nodes.
      * @return the parent HTML element
@@ -577,28 +555,6 @@ public class HTMLElement2 extends Element2 {
         }
 
         return top;
-    }
-
-    /**
-     * Returns the {@code clientHeight} attribute.
-     * @return the {@code clientHeight} attribute
-     */
-    @Getter
-    public int getClientHeight() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
-        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
-        return style.getCalculatedHeight(false, true);
-    }
-
-    /**
-     * Returns the {@code clientWidth} attribute.
-     * @return the {@code clientWidth} attribute
-     */
-    @Getter
-    public int getClientWidth() {
-        final Global global = NashornJavaScriptEngine.getGlobal(getWindow().getWebWindow());
-        final ComputedCSSStyleDeclaration2 style = Window2.getComputedStyle(global, this, null);
-        return style.getCalculatedWidth(false, true);
     }
 
     /**
