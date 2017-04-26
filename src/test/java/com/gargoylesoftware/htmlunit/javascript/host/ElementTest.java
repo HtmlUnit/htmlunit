@@ -957,7 +957,7 @@ public class ElementTest extends WebDriverTestCase {
 
     /**
      * Tests the usage of getAttributeNS, setAttributeNS, removeAttributeNS
-     * and hasAttributeNS methods on elements under Firefox.
+     * and hasAttributeNS methods.
      * @throws Exception if the test fails
      */
     @Test
@@ -1083,10 +1083,8 @@ public class ElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      try {\n"
-            + "        alert(Element.ALLOW_KEYBOARD_INPUT);\n"
-            + "        alert(typeof Element.ALLOW_KEYBOARD_INPUT);\n"
-            + "      } catch (e) {alert('exception')}\n"
+            + "      alert(Element.ALLOW_KEYBOARD_INPUT);\n"
+            + "      alert(typeof Element.ALLOW_KEYBOARD_INPUT);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

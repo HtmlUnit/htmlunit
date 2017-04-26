@@ -86,31 +86,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     /** Helper. */
     public static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
             + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
-            + "    if (window.DOMParser) {\n"
-            + "      parser = new DOMParser();\n"
-            + "      return parser.parseFromString(xml,\"text/xml\");\n"
-            + "    } else {\n"
-            + "      xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
-            + "      xmlDoc.async = false;\n"
-            + "      xmlDoc.loadXML(xml);\n"
-            + "      return xmlDoc;\n"
-            + "    }\n"
-            + "  }\n";
-
-    /** Helper. */
-    public static final String LOAD_NATIVE_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
-            + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
-            + "    parser = new DOMParser();\n"
+            + "    var parser = new DOMParser();\n"
             + "    return parser.parseFromString(xml,\"text/xml\");\n"
-            + "  }\n";
-
-    /** Helper. */
-    public static final String LOAD_ACTIVEX_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
-            + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
-            + "    xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
-            + "    xmlDoc.async = false;\n"
-            + "    xmlDoc.loadXML(xml);\n"
-            + "    return xmlDoc;\n"
             + "  }\n";
 
     /**
