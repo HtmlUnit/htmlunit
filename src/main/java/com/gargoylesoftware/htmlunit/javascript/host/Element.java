@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import org.w3c.css.sac.CSSException;
 
@@ -72,6 +73,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass(domClass = DomElement.class)
 public class Element extends EventNode {
+
+    private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
 
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
@@ -677,6 +680,51 @@ public class Element extends EventNode {
     public int getClientTop() {
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getBorderTopValue();
+    }
+
+    /**
+     * Returns the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param localName the local name of the attribute to look for
+     * @return the specified attribute, {@code null} if the attribute is not defined
+     */
+    @JsxFunction
+    public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
+        return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptableObject();
+    }
+
+    /**
+     * Returns all the descendant elements with the specified class.
+     * @param className the name to search for
+     * @return all the descendant elements with the specified class name
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
+    public HTMLCollection getElementsByClassName(final String className) {
+        final DomElement elt = getDomNodeOrDie();
+        final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
+
+        final HTMLCollection collection = new HTMLCollection(elt, true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (!(node instanceof HtmlElement)) {
+                    return false;
+                }
+                String classAttribute = ((HtmlElement) node).getAttribute("class");
+                if (classAttribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
+                    return false; // probably better performance as most of elements won't have a class attribute
+                }
+
+                classAttribute = " " + classAttribute + " ";
+                for (final String aClassName : classNames) {
+                    if (!classAttribute.contains(" " + aClassName + " ")) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        };
+
+        return collection;
     }
 
 }

@@ -238,7 +238,6 @@ public class HTMLElement extends Element {
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
 
-    private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
     private static final Pattern PRINT_NODE_PATTERN = Pattern.compile("  ");
     private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
 
@@ -564,17 +563,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns the specified attribute.
-     * @param namespaceURI the namespace URI
-     * @param localName the local name of the attribute to look for
-     * @return the specified attribute, {@code null} if the attribute is not defined
-     */
-    @JsxFunction
-    public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
-        return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptableObject();
-    }
-
-    /**
      * Sets an attribute.
      * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-F68F082">
      * the DOM reference</a>
@@ -672,37 +660,12 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns all the descendant elements with the specified class.
-     * @param className the name to search for
-     * @return all the descendant elements with the specified class name
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
+    @JsxFunction({@WebBrowser(IE)})
     public HTMLCollection getElementsByClassName(final String className) {
-        final HtmlElement elt = getDomNodeOrDie();
-        final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
-
-        final HTMLCollection collection = new HTMLCollection(elt, true) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                if (!(node instanceof HtmlElement)) {
-                    return false;
-                }
-                String classAttribute = ((HtmlElement) node).getAttribute("class");
-                if (classAttribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
-                    return false; // probably better performance as most of elements won't have a class attribute
-                }
-
-                classAttribute = " " + classAttribute + " ";
-                for (final String aClassName : classNames) {
-                    if (!classAttribute.contains(" " + aClassName + " ")) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        };
-
-        return collection;
+        return super.getElementsByClassName(className);
     }
 
     /**
