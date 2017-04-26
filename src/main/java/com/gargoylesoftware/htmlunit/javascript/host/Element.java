@@ -630,4 +630,12 @@ public class Element extends EventNode {
         return getDomNodeOrDie().getAttribute("class");
     }
 
+    /**
+     * Sets the class attribute for this element.
+     * @param className the new class name
+     */
+    @JsxSetter(propertyName = "className", value = {@WebBrowser(CHROME), @WebBrowser(FF)})
+    public void setClassName_js(final String className) {
+        getDomNodeOrDie().setAttribute("class", className);
+    }
 }

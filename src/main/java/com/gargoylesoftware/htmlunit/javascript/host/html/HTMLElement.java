@@ -715,6 +715,15 @@ public class HTMLElement extends Element {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(propertyName = "className", value = @WebBrowser(IE))
+    public void setClassName_js(final String className) {
+        super.setClassName_js(className);
+    }
+
+    /**
      * Returns the {@code clientHeight} attribute.
      * @return the {@code clientHeight} attribute
      */
@@ -732,15 +741,6 @@ public class HTMLElement extends Element {
     public int getClientWidth() {
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getCalculatedWidth(false, true);
-    }
-
-    /**
-     * Sets the class attribute for this element.
-     * @param className the new class name
-     */
-    @JsxSetter(propertyName = "className")
-    public void setClassName_js(final String className) {
-        getDomNodeOrDie().setAttribute("class", className);
     }
 
     /**
