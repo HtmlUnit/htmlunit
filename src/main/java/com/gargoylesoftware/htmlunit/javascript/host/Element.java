@@ -638,4 +638,45 @@ public class Element extends EventNode {
     public void setClassName_js(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
     }
+
+    /**
+     * Returns the {@code clientHeight} attribute.
+     * @return the {@code clientHeight} attribute
+     */
+    @JsxGetter
+    public int getClientHeight() {
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getCalculatedHeight(false, true);
+    }
+
+    /**
+     * Returns the {@code clientWidth} attribute.
+     * @return the {@code clientWidth} attribute
+     */
+    @JsxGetter
+    public int getClientWidth() {
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getCalculatedWidth(false, true);
+    }
+
+    /**
+     * Returns the {@code clientLeft} attribute.
+     * @return the {@code clientLeft} attribute
+     */
+    @JsxGetter
+    public int getClientLeft() {
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getBorderLeftValue();
+    }
+
+    /**
+     * Returns {@code clientTop} attribute.
+     * @return the {@code clientTop} attribute
+     */
+    @JsxGetter
+    public int getClientTop() {
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getBorderTopValue();
+    }
+
 }

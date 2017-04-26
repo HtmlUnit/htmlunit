@@ -724,26 +724,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns the {@code clientHeight} attribute.
-     * @return the {@code clientHeight} attribute
-     */
-    @JsxGetter
-    public int getClientHeight() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getCalculatedHeight(false, true);
-    }
-
-    /**
-     * Returns the {@code clientWidth} attribute.
-     * @return the {@code clientWidth} attribute
-     */
-    @JsxGetter
-    public int getClientWidth() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getCalculatedWidth(false, true);
-    }
-
-    /**
      * Gets the innerHTML attribute.
      * @return the contents of this node as HTML
      */
@@ -2347,26 +2327,6 @@ public class HTMLElement extends Element {
             return (HTMLElement) offsetParent;
         }
         return null;
-    }
-
-    /**
-     * Returns the {@code clientLeft} attribute.
-     * @return the {@code clientLeft} attribute
-     */
-    @JsxGetter
-    public int getClientLeft() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getBorderLeftValue();
-    }
-
-    /**
-     * Returns {@code clientTop} attribute.
-     * @return the {@code clientTop} attribute
-     */
-    @JsxGetter
-    public int getClientTop() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getBorderTopValue();
     }
 
     /**
