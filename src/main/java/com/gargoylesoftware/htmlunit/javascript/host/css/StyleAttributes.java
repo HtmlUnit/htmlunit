@@ -2729,7 +2729,6 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderBeforeWidth}. */
         WEBKIT_BORDER_BEFORE_WIDTH("webkitBorderBeforeWidth", "webkit-border-before-width", chrome("0px")),
 
-
         /** The style property {@code webkitBorderBottomLeftRadius}. */
         WEBKIT_BORDER_BOTTOM_LEFT_RADIUS("webkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
                 ff52up("0px")),
@@ -2771,7 +2770,6 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBorderStartWidth}. */
         WEBKIT_BORDER_START_WIDTH("webkitBorderStartWidth", "webkit-border-start-width", chrome("0px")),
-
 
         /** The style property {@code webkitBorderTopLeftRadius}. */
         WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("0px")),
