@@ -24,8 +24,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Function is a native JavaScript object and therefore provided by Rhino but some tests are needed here
- * to be sure that we have the expected results (for instance "bind" is an EcmaScript 5 method that is not
- * available in FF2 or FF3).
+ * to be sure that we have the expected results.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -282,4 +281,141 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my y var")
+    public void commaOperator() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var obj = {default: eval};\n"
+            + "  (0, obj.default)('var y=\"my y var\"');\n"
+            + "  alert(y);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my y var")
+    public void commaOperatorFunction() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function setFunction(o) {\n"
+            + "  o.default = eval;\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var obj = {};\n"
+            + "  setFunction(obj);\n"
+            + "  (0, obj.default)('var y=\"my y var\"');\n"
+            + "  alert(y);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"my x var", "my y var"})
+    public void commaOperatorTwice() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var obj = {default: eval};\n"
+            + "  (0, obj.default)('var x=\"my x var\"');\n"
+            + "  alert(x);\n"
+            + "  (0, obj.default)('var y=\"my y var\"');\n"
+            + "  alert(y);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my y var")
+    public void commaOperatorFunctionTry() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function setFunction(o) {\n"
+            + "  o.default = eval;\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var obj = {};\n"
+            + "  setFunction(obj);\n"
+            + "  try {\n"
+            + "    (0, obj.default)('var y=\"my y var\"');\n"
+            + "    alert(y);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my y var")
+    public void commaOperatorFunctionCall() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function setFunction(o) {\n"
+            + "  o.default = eval;\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var obj = {};\n"
+            + "  setFunction(obj);\n"
+
+            + "  function b() {\n"
+            + "    (0, obj.default)('var y=\"my y var\"');\n"
+            + "    alert(y);\n"
+            + "  }\n"
+
+            + "  b();\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my y var")
+    public void commaOperatorFunctionAnonymous() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function setFunction(o) {\n"
+            + "  o.default = eval;\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var obj = {};\n"
+            + "  setFunction(obj);\n"
+
+            + "  (function b() {\n"
+            + "    (0, obj.default)('var y=\"my y var\"');\n"
+            + "    alert(y);\n"
+            + "  })();\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
