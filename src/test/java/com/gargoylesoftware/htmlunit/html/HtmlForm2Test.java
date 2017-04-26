@@ -306,6 +306,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\u00F6m", "Hello G\u00FCnter"})
     public void encodingSubmit() throws Exception {
+        stopWebServers();
         final String html =
             "<html>\n"
             + "<head>\n"
