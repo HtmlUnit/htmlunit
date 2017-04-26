@@ -620,4 +620,14 @@ public class Element extends EventNode {
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
+
+    /**
+     * Returns the class defined for this element.
+     * @return the class name
+     */
+    @JsxGetter(propertyName = "className", value = {@WebBrowser(CHROME), @WebBrowser(FF)})
+    public Object getClassName_js() {
+        return getDomNodeOrDie().getAttribute("class");
+    }
+
 }

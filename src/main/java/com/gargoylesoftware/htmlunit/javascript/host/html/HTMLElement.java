@@ -706,12 +706,12 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns the class defined for this element.
-     * @return the class name
+     * {@inheritDoc}
      */
-    @JsxGetter(propertyName = "className")
+    @Override
+    @JsxGetter(propertyName = "className", value = @WebBrowser(IE))
     public Object getClassName_js() {
-        return getDomNodeOrDie().getAttribute("class");
+        return super.getClassName_js();
     }
 
     /**
