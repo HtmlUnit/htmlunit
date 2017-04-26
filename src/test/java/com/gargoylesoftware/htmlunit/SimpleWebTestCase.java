@@ -24,6 +24,7 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.
@@ -253,7 +254,9 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     @Before
     public void before() {
-        assertTrue(getJavaScriptThreads().isEmpty());
+        if (webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
+            assertTrue(getJavaScriptThreads().isEmpty());
+        }
     }
 
     /**
@@ -269,31 +272,33 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         }
         webClient_ = null;
 
-        final List<Thread> jsThreads = getJavaScriptThreads();
-        assertEquals(0, jsThreads.size());
+        if (webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
+            final List<Thread> jsThreads = getJavaScriptThreads();
+            assertEquals(0, jsThreads.size());
 
-        // collect stack traces
-        // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
-        // and before stack traces are retrieved
-        if (jsThreads.size() > 0) {
-            final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
-            for (final Thread t : jsThreads) {
-                final StackTraceElement[] elts = t.getStackTrace();
-                if (elts != null) {
-                    stackTraces.put(t.getName(), elts);
-                }
-            }
-
-            if (!stackTraces.isEmpty()) {
-                System.err.println("JS threads still running:");
-                for (final Map.Entry<String, StackTraceElement[]> entry : stackTraces.entrySet()) {
-                    System.err.println("Thread: " + entry.getKey());
-                    final StackTraceElement[] elts = entry.getValue();
-                    for (final StackTraceElement elt : elts) {
-                        System.err.println(elt);
+            // collect stack traces
+            // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
+            // and before stack traces are retrieved
+            if (jsThreads.size() > 0) {
+                final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
+                for (final Thread t : jsThreads) {
+                    final StackTraceElement[] elts = t.getStackTrace();
+                    if (elts != null) {
+                        stackTraces.put(t.getName(), elts);
                     }
                 }
-                throw new RuntimeException("JS threads are still running: " + jsThreads.size());
+
+                if (!stackTraces.isEmpty()) {
+                    System.err.println("JS threads still running:");
+                    for (final Map.Entry<String, StackTraceElement[]> entry : stackTraces.entrySet()) {
+                        System.err.println("Thread: " + entry.getKey());
+                        final StackTraceElement[] elts = entry.getValue();
+                        for (final StackTraceElement elt : elts) {
+                            System.err.println(elt);
+                        }
+                    }
+                    throw new RuntimeException("JS threads are still running: " + jsThreads.size());
+                }
             }
         }
     }
