@@ -81,7 +81,7 @@ public class MessageEvent2 extends Event2 {
      * @param source the window object that contains the document that caused the event
      * @param ports the message ports
      */
-    @Function({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45)})
+    @Function
     public void initMessageEvent(
             final String type,
             final boolean canBubble,
@@ -157,7 +157,7 @@ public class MessageEvent2 extends Event2 {
      * Returns the {@code ports} property.
      * @return the {@code ports} property
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 45)})
+    @Getter
     public Object getPorts() {
         return ports_;
     }

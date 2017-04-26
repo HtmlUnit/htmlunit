@@ -67,15 +67,6 @@ public class Attr extends Node {
     }
 
     /**
-     * Returns {@code true} if this attribute is an ID.
-     * @return {@code true} if this attribute is an ID
-     */
-    @JsxGetter(@WebBrowser(value = FF, maxVersion = 23))
-    public boolean getIsId() {
-        return getDomNodeOrDie().isId();
-    }
-
-    /**
      * Returns {@code true} if the attribute is an custom property.
      * @return {@code true} if the attribute is an custom property
      */

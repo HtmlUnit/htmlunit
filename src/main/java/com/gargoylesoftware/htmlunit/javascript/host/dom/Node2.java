@@ -502,7 +502,7 @@ public class Node2 extends EventTarget2 {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    @Getter({@WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 21)})
+    @Getter(@WebBrowser(IE))
     public Object getAttributes() {
         return null;
     }
