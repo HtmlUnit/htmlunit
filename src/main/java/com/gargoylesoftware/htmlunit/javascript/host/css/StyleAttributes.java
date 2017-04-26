@@ -2426,7 +2426,10 @@ public final class StyleAttributes {
         TEXT_ALIGN_("text-align", "text-align", ff("start")),
 
         /** The style property {@code textAlignLast}. */
-        TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chrome("auto")),
+        TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chrome("auto"), ff52up("auto")),
+
+        /** The style property {@code text-align-last}. */
+        TEXT_ALIGN_LAST_("text-align-last", "text-align-last", ff52up("auto")),
 
         /** The style property {@code textAnchor}. */
         TEXT_ANCHOR("textAnchor", "text-anchor", ff("start"), ie("start"), chrome("start")),
@@ -2438,7 +2441,10 @@ public final class StyleAttributes {
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie("undefined")),
 
         /** The style property {@code textCombineUpright}. */
-        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none")),
+        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none"), ff52up("none")),
+
+        /** The style property {@code text-combine-upright}. */
+        TEXT_COMBINE_UPRIGHT_("text-combine-upright", "text-combine-upright", ff52up("none")),
 
         /** The style property {@code textDecoration}. */
         TEXT_DECORATION("textDecoration", "text-decoration", chrome("none solid rgb(0, 0, 0)"), ff("none"), ie("none")),
@@ -2487,16 +2493,28 @@ public final class StyleAttributes {
                 ie("false").setIteratable(false)),
 
         /** The style property {@code textEmphasis}. */
-        TEXT_EMPHASIS("textEmphasis", "text-emphasis"),
+        TEXT_EMPHASIS("textEmphasis", "text-emphasis", ff52up("")),
+
+        /** The style property {@code text-emphasis}. */
+        TEXT_EMPHASIS_("text-emphasis", "text-emphasis", ff52up("")),
 
         /** The style property {@code textEmphasisColor}. */
-        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color"),
+        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color", ff52up("rgb(0, 0, 0)")),
+
+        /** The style property {@code text-emphasis-color}. */
+        TEXT_EMPHASIS_COLOR_("text-emphasis-color", "text-emphasis-color", ff52up("rgb(0, 0, 0)")),
 
         /** The style property {@code textEmphasisPosition}. */
-        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position"),
+        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", ff52up("over right")),
+
+        /** The style property {@code text-emphasis-position}. */
+        TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position", ff52up("over right")),
 
         /** The style property {@code textEmphasisStyle}. */
-        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style"),
+        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", ff52up("none")),
+
+        /** The style property {@code text-emphasis-style}. */
+        TEXT_EMPHASIS_STYLE_("text-emphasis-style", "text-emphasis-style", ff52up("none")),
 
         /** The style property {@code textIndent}. */
         TEXT_INDENT("textIndent", "text-indent", chrome("0px"), ff(""), ie("")),
@@ -2556,7 +2574,7 @@ public final class StyleAttributes {
         TOP("top", "top", ff("auto"), ie("auto"), chrome("auto")),
 
         /** The style property {@code touchAction}. */
-        TOUCH_ACTION("touchAction", "touch-action", ie("auto"), chrome("auto")),
+        TOUCH_ACTION("touchAction", "touch-action", ie("auto"), chrome("auto"), ff52up("auto")),
 
         /** The style property {@code touch-action}. */
         TOUCH_ACTION_("touch-action", "touch-action", ff52up("auto")),
@@ -2566,10 +2584,10 @@ public final class StyleAttributes {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("705px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
+                ffBelow52("705px 172.5px"), ff52up("625px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code transform-origin}. */
-        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("705px 172.5px")),
+        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
 
         /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie("flat"), chrome("flat")),
@@ -2692,7 +2710,7 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBackfaceVisibility}. */
         WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility",
-                ff52up("")),
+                ff52up("visible")),
 
         /** The style property {@code webkitBackgroundClip}. */
         WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip",
@@ -2754,7 +2772,7 @@ public final class StyleAttributes {
                 chrome("0px")),
 
         /** The style property {@code webkitBorderImage}. */
-        WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none"), ff52up("none")),
+        WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none"), ff52up("")),
 
         /** The style property {@code webkitBorderRadius}. */
         WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", ff52up("")),
@@ -2975,7 +2993,7 @@ public final class StyleAttributes {
         WEBKIT_MIN_LOGICAL_WIDTH("webkitMinLogicalWidth", "webkit-min-logical-width", chrome("0px")),
 
         /** The style property {@code webkitOrder}. */
-        WEBKIT_ORDER("webkitOrder", "webkit-order", ff52up("")),
+        WEBKIT_ORDER("webkitOrder", "webkit-order", ff52up("0")),
 
         /** The style property {@code webkitPaddingAfter}. */
         WEBKIT_PADDING_AFTER("webkitPaddingAfter", "webkit-padding-after", chrome("0px")),
@@ -2990,7 +3008,7 @@ public final class StyleAttributes {
         WEBKIT_PADDING_START("webkitPaddingStart", "webkit-padding-start", chrome("0px")),
 
         /** The style property {@code webkitPerspective}. */
-        WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", ff52up("")),
+        WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", ff52up("none")),
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
@@ -3047,7 +3065,7 @@ public final class StyleAttributes {
         WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chrome("none")),
 
         /** The style property {@code webkitTextSizeAdjust}. */
-        WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("")),
+        WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("auto")),
 
         /** The style property {@code webkitTextStroke}. */
         WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chrome(""), ff52up("")),
