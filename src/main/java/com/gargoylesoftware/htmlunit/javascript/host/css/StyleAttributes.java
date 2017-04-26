@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff52up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow52;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;
@@ -240,9 +241,15 @@ public final class StyleAttributes {
         BACKGROUND_POSITION_X("backgroundPositionX", "background-position-x",
                 ie("undefined"), chrome("0%"), ff52up("0%")),
 
+        /** The style property {@code background-position-x}. */
+        BACKGROUND_POSITION_X_("background-position-x", "background-position-x", ff52up("0%")),
+
         /** The style property {@code backgroundPositionY}. */
         BACKGROUND_POSITION_Y("backgroundPositionY", "background-position-y",
                 ie("undefined"), chrome("0%"), ff52up("0%")),
+
+        /** The style property {@code background-position-y}. */
+        BACKGROUND_POSITION_Y_("background-position-y", "background-position-y", ff52up("0%")),
 
         /** The style property {@code backgroundRepeat}. */
         BACKGROUND_REPEAT("backgroundRepeat", "background-repeat", chrome("repeat"), ff("repeat"), ie("repeat")),
@@ -637,7 +644,10 @@ public final class StyleAttributes {
         COLOR("color", "color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code color-adjust}. */
-        COLOR_ADJUST("colorAdjust", "color-adjust", ff52up("")),
+        COLOR_ADJUST("colorAdjust", "color-adjust", ff52up("economy")),
+
+        /** The style property {@code color-adjust}. */
+        COLOR_ADJUST_("color-adjust", "color-adjust", ff52up("economy")),
 
         /** The style property {@code colorInterpolation}. */
         COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb"), chrome("sRGB")),
@@ -658,24 +668,45 @@ public final class StyleAttributes {
         /** The style property {@code columnCount}. */
         COLUMN_COUNT("columnCount", "column-count", chrome("auto"), ff52up("auto"), ie("auto")),
 
+        /** The style property {@code column-count}. */
+        COLUMN_COUNT_("column-count", "column-count", ff52up("auto")),
+
         /** The style property {@code columnFill}. */
         COLUMN_FILL("columnFill", "column-fill", chrome("balance"), ff52up("balance"), ie("balance")),
 
+        /** The style property {@code column-fill}. */
+        COLUMN_FILL_("column-fill", "column-fill", ff52up("balance")),
+
         /** The style property {@code columnGap}. */
-        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ff52up("normal"), ie("normal")),
+        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ff52up("16px"), ie("normal")),
+
+        /** The style property {@code column-gap}. */
+        COLUMN_GAP_("column-gap", "column-gap", ff52up("16px")),
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chrome("0px none rgb(0, 0, 0)"), ff52up(""), ie("")),
+
+        /** The style property {@code column-rule}. */
+        COLUMN_RULE_("column-rule", "column-rule", ff52up("")),
 
         /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color",
                 chrome("rgb(0, 0, 0)"), ff52up("rgb(0, 0, 0)"), ie("rgb(0, 0, 0)")),
 
+        /** The style property {@code column-rule-color}. */
+        COLUMN_RULE_COLOR_("column-rule-color", "column-rule-color", ff52up("rgb(0, 0, 0)")),
+
         /** The style property {@code columnRuleStyle}. */
         COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", chrome("none"), ff52up("none"), ie("none")),
 
+        /** The style property {@code column-rule-style}. */
+        COLUMN_RULE_STYLE_("column-rule-style", "column-rule-style", ff52up("none")),
+
         /** The style property {@code columnRuleWidth}. */
         COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chrome("0px"), ff52up("0px"), ie("medium")),
+
+        /** The style property {@code column-rule-wWidth}. */
+        COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff52up("0px")),
 
         /** The style property {@code columnSpan}. */
         COLUMN_SPAN("columnSpan", "column-span", chrome("none"), ie("1")),
@@ -683,8 +714,11 @@ public final class StyleAttributes {
         /** The style property {@code columnWidth}. */
         COLUMN_WIDTH("columnWidth", "column-width", chrome("auto"), ff52up("auto"), ie("auto")),
 
+        /** The style property {@code column-width}. */
+        COLUMN_WIDTH_("column-width", "column-width", ff52up("auto")),
+
         /** The style property {@code columns}. */
-        COLUMNS("columns", "columns", chrome("auto auto"), ff52up("auto auto"), ie("")),
+        COLUMNS("columns", "columns", chrome("auto auto"), ff52up(""), ie("")),
 
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chrome("none")),
@@ -945,59 +979,109 @@ public final class StyleAttributes {
 
         /** The style property {@code grid}. */
         GRID("grid", "grid", chrome("none / none / none / row / auto / auto / 0px / 0px"),
-                ff52up("none / none / none / row / auto / auto / 0px / 0px")),
+                ff52up("")),
 
         /** The style property {@code gridArea}. */
-        GRID_AREA("gridArea", "grid-area", chrome("auto / auto / auto / auto"),
-                ff52up("auto / auto / auto / auto")),
+        GRID_AREA("gridArea", "grid-area", chrome("auto / auto / auto / auto"), ff52up("")),
+
+        /** The style property {@code grid-area}. */
+        GRID_AREA_("grid-area", "grid-area", ff52up("")),
 
         /** The style property {@code gridAutoColumns}. */
         GRID_AUTO_COLUMNS("gridAutoColumns", "grid-auto-columns", chrome("auto"), ff52up("auto")),
 
+        /** The style property {@code grid-auto-columns}. */
+        GRID_AUTO_COLUMNS_("grid-auto-columns", "grid-auto-columns", ff52up("auto")),
+
         /** The style property {@code gridAutoFlow}. */
         GRID_AUTO_FLOW("gridAutoFlow", "grid-auto-flow", chrome("row"), ff52up("row")),
+
+        /** The style property {@code grid-auto-flow}. */
+        GRID_AUTO_FLOW_("grid-auto-flow", "grid-auto-flow", ff52up("row")),
 
         /** The style property {@code gridAutoRows}. */
         GRID_AUTO_ROWS("gridAutoRows", "grid-auto-rows", chrome("auto"), ff52up("auto")),
 
+        /** The style property {@code grid-auto-rows}. */
+        GRID_AUTO_ROWS_("grid-auto-rows", "grid-auto-rows", ff52up("auto")),
+
         /** The style property {@code gridColumn}. */
-        GRID_COLUMN("gridColumn", "grid-column", chrome("auto / auto"), ff52up("auto / auto")),
+        GRID_COLUMN("gridColumn", "grid-column", chrome("auto / auto"), ff52up("")),
+
+        /** The style property {@code grid-column}. */
+        GRID_COLUMN_("grid-column", "grid-column", ff52up("")),
 
         /** The style property {@code gridColumnEnd}. */
         GRID_COLUMN_END("gridColumnEnd", "grid-column-end", chrome("auto"), ff52up("auto")),
 
+        /** The style property {@code grid-column-end}. */
+        GRID_COLUMN_END_("grid-column-end", "grid-column-end", ff52up("auto")),
+
         /** The style property {@code gridColumnGap}. */
         GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chrome("0px"), ff52up("0px")),
+
+        /** The style property {@code grid-column-gap}. */
+        GRID_COLUMN_GAP_("grid-column-gap", "grid-column-gap", ff52up("0px")),
 
         /** The style property {@code gridColumnStart}. */
         GRID_COLUMN_START("gridColumnStart", "grid-column-start", chrome("auto"), ff52up("auto")),
 
+        /** The style property {@code grid-column-start}. */
+        GRID_COLUMN_START_("grid-column-start", "grid-column-start", ff52up("auto")),
+
         /** The style property {@code gridGap}. */
-        GRID_GAP("gridGap", "grid-gap", chrome("0px 0px"), ff52up("0px 0px")),
+        GRID_GAP("gridGap", "grid-gap", chrome("0px 0px"), ff52up("")),
+
+        /** The style property {@code grid-gap}. */
+        GRID_GAP_("grid-gap", "grid-gap", ff52up("")),
 
         /** The style property {@code gridRow}. */
-        GRID_ROW("gridRow", "grid-row", chrome("auto / auto"), ff52up("auto / auto")),
+        GRID_ROW("gridRow", "grid-row", chrome("auto / auto"), ff52up("")),
+
+        /** The style property {@code grid-row}. */
+        GRID_ROW_("grid-row", "grid-row", ff52up("")),
 
         /** The style property {@code gridRowEnd}. */
         GRID_ROW_END("gridRowEnd", "grid-row-end", chrome("auto"), ff52up("auto")),
 
+        /** The style property {@code grid-row-end}. */
+        GRID_ROW_END_("grid-row-end", "grid-row-end", ff52up("auto")),
+
         /** The style property {@code gridRowGap}. */
         GRID_ROW_GAP("gridRowGap", "grid-row-gap", chrome("0px"), ff52up("0px")),
+
+        /** The style property {@code grid-row-gap}. */
+        GRID_ROW_GAP_("grid-row-gap", "grid-row-gap", ff52up("0px")),
 
         /** The style property {@code gridRowStart}. */
         GRID_ROW_START("gridRowStart", "grid-row-start", chrome("auto"), ff52up("auto")),
 
+        /** The style property {@code grid-row-start}. */
+        GRID_ROW_START_("grid-row-start", "grid-row-start", ff52up("auto")),
+
         /** The style property {@code gridTemplate}. */
-        GRID_TEMPLATE("gridTemplate", "grid-template", chrome("none / none / none"), ff52up("none / none / none")),
+        GRID_TEMPLATE("gridTemplate", "grid-template", chrome("none / none / none"), ff52up("")),
+
+        /** The style property {@code grid-template}. */
+        GRID_TEMPLATE_("grid-template", "grid-template", ff52up("")),
 
         /** The style property {@code gridTemplateAreas}. */
         GRID_TEMPLATE_AREAS("gridTemplateAreas", "grid-template-areas", chrome("none"), ff52up("none")),
 
+        /** The style property {@code grid-template-areas}. */
+        GRID_TEMPLATE_AREAS_("grid-template-areas", "grid-template-areas", ff52up("none")),
+
         /** The style property {@code gridTemplateColumns}. */
         GRID_TEMPLATE_COLUMNS("gridTemplateColumns", "grid-template-columns", chrome("none"), ff52up("none")),
 
+        /** The style property {@code grid-template-columns}. */
+        GRID_TEMPLATE_COLUMNS_("grid-template-columns", "grid-template-columns", ff52up("none")),
+
         /** The style property {@code gridTemplateRows}. */
         GRID_TEMPLATE_ROWS("gridTemplateRows", "grid-template-rows", chrome("none"), ff52up("none")),
+
+        /** The style property {@code grid-template-rows}. */
+        GRID_TEMPLATE_ROWS_("grid-template-rows", "grid-template-rows", ff52up("none")),
 
         /** The style property {@code height}. */
         HEIGHT("height", "height", chrome(""), ff(""), ie("")),
@@ -1034,23 +1118,23 @@ public final class StyleAttributes {
 
         /** The style property {@code justifyContent}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content",
-                ff("auto"),
+                ffBelow52("auto"), ff52up("normal"),
                 ie("flex-start"), chrome("normal")),
 
         /** The style property {@code justify-content}. */
-        JUSTIFY_CONTENT_("justify-content", "justify-content", ff("auto")),
+        JUSTIFY_CONTENT_("justify-content", "justify-content", ffBelow52("auto"), ff52up("normal")),
 
         /** The style property {@code justifyItems}. */
-        JUSTIFY_ITEMS("justifyItems", "justify-items", ff("start"), chrome("normal")),
+        JUSTIFY_ITEMS("justifyItems", "justify-items", ffBelow52("start"), ff52up("normal"), chrome("normal")),
 
         /** The style property {@code justify-items}. */
-        JUSTIFY_ITEMS_("justify-items", "justify-items", ff("start")),
+        JUSTIFY_ITEMS_("justify-items", "justify-items", ffBelow52("start"), ff52up("normal")),
 
         /** The style property {@code justifySelf}. */
-        JUSTIFY_SELF("justifySelf", "justify-self", ff("start"), chrome("normal")),
+        JUSTIFY_SELF("justifySelf", "justify-self", ffBelow52("start"), ff52up("auto"), chrome("normal")),
 
         /** The style property {@code justify-self}. */
-        JUSTIFY_SELF_("justify-self", "justify-self", ff("start")),
+        JUSTIFY_SELF_("justify-self", "justify-self", ffBelow52("start"), ff52up("auto")),
 
         /** The style property {@code kerning}. */
         KERNING("kerning", "kerning", ie("auto")),
@@ -1190,10 +1274,10 @@ public final class StyleAttributes {
         MARKER_MID_("marker-mid", "marker-mid", ff("none")),
 
         /** The style property {@code markerOffset}. */
-        MARKER_OFFSET("markerOffset", "marker-offset", ff("auto")),
+        MARKER_OFFSET("markerOffset", "marker-offset", ffBelow52("auto")),
 
         /** The style property {@code marker-offset}. */
-        MARKER_OFFSET_("marker-offset", "marker-offset", ff("auto")),
+        MARKER_OFFSET_("marker-offset", "marker-offset", ffBelow52("auto")),
 
         /** The style property {@code markerStart}. */
         MARKER_START("markerStart", "marker-start", ff("none"), ie("none"), chrome("none")),
@@ -1514,7 +1598,7 @@ public final class StyleAttributes {
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff("621px 172.5px")),
+                "-moz-perspective-origin", ff("705px 172.5px")),
 
         /** The style property {@code MozStackSizing}. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing",
@@ -1535,7 +1619,7 @@ public final class StyleAttributes {
         MOZ_TRANSFORM("MozTransform", "-moz-transform", ff("none")),
 
         /** The style property {@code MozTransformOrigin}. */
-        MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin", ff("621px 172.5px")),
+        MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin", ff("705px 172.5px")),
 
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -1937,6 +2021,9 @@ public final class StyleAttributes {
         /** The style property {@code overflowWrap}. */
         OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal"), ff52up("normal")),
 
+        /** The style property {@code overflow-wrap}. */
+        OVERFLOW_WRAP_("overflow-wrap", "overflow-wrap", ff52up("normal")),
+
         /** The style property {@code overflowX}. */
         OVERFLOW_X("overflowX", "overflow-x", chrome("visible"), ff("visible"), ie("visible")),
 
@@ -2041,10 +2128,14 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("621px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
+                ffBelow52("705px 172.5px"), ff52up("625px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code perspective-origin}. */
-        PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("621px 172.5px")),
+        PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
+                ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
+
+        /** The style property {@code placeSelf}. */
+        PLACE_SELF_("place-self", "place-self", ff52up("")),
 
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
@@ -2073,8 +2164,14 @@ public final class StyleAttributes {
         /** The style property {@code placeContent}. */
         PLACE_CONTENT("placeContent", "place-content", ff52up("")),
 
+        /** The style property {@code placeContent}. */
+        PLACE_CONTENT_("place-content", "place-content", ff52up("")),
+
         /** The style property {@code placeItems}. */
         PLACE_ITEMS("placeItems", "place-items", ff52up("")),
+
+        /** The style property {@code placeItems}. */
+        PLACE_ITEMS_("place-items", "place-items", ff52up("")),
 
         /** The style property {@code placeSelf}. */
         PLACE_SELF("placeSelf", "place-self", ff52up("")),
@@ -2329,7 +2426,7 @@ public final class StyleAttributes {
         TEXT_ALIGN_("text-align", "text-align", ff("start")),
 
         /** The style property {@code textAlignLast}. */
-        TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chrome("auto"), ff52up("auto")),
+        TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chrome("auto")),
 
         /** The style property {@code textAnchor}. */
         TEXT_ANCHOR("textAnchor", "text-anchor", ff("start"), ie("start"), chrome("start")),
@@ -2341,7 +2438,7 @@ public final class StyleAttributes {
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie("undefined")),
 
         /** The style property {@code textCombineUpright}. */
-        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none"), ff52up("none")),
+        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none")),
 
         /** The style property {@code textDecoration}. */
         TEXT_DECORATION("textDecoration", "text-decoration", chrome("none solid rgb(0, 0, 0)"), ff("none"), ie("none")),
@@ -2390,16 +2487,16 @@ public final class StyleAttributes {
                 ie("false").setIteratable(false)),
 
         /** The style property {@code textEmphasis}. */
-        TEXT_EMPHASIS("textEmphasis", "text-emphasis", ff52up("")),
+        TEXT_EMPHASIS("textEmphasis", "text-emphasis"),
 
         /** The style property {@code textEmphasisColor}. */
-        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color", ff52up("rgb(0, 0, 0)")),
+        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color"),
 
         /** The style property {@code textEmphasisPosition}. */
-        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", ff52up("over")),
+        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position"),
 
         /** The style property {@code textEmphasisStyle}. */
-        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", ff52up("none")),
+        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style"),
 
         /** The style property {@code textIndent}. */
         TEXT_INDENT("textIndent", "text-indent", chrome("0px"), ff(""), ie("")),
@@ -2459,17 +2556,20 @@ public final class StyleAttributes {
         TOP("top", "top", ff("auto"), ie("auto"), chrome("auto")),
 
         /** The style property {@code touchAction}. */
-        TOUCH_ACTION("touchAction", "touch-action", ie("auto"), chrome("auto"), ff52up("auto")),
+        TOUCH_ACTION("touchAction", "touch-action", ie("auto"), chrome("auto")),
+
+        /** The style property {@code touch-action}. */
+        TOUCH_ACTION_("touch-action", "touch-action", ff52up("auto")),
 
         /** The style property {@code transform}. */
         TRANSFORM("transform", "transform", ff("none"), ie("none"), chrome("none")),
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("621px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
+                ff("705px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code transform-origin}. */
-        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("621px 172.5px")),
+        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("705px 172.5px")),
 
         /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie("flat"), chrome("flat")),
@@ -2511,10 +2611,10 @@ public final class StyleAttributes {
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
-                ff("-moz-isolate"), ie("normal"), chrome("normal")),
+                ffBelow52("-moz-isolate"), ff52up("isolate"), ie("normal"), chrome("normal")),
 
         /** The style property {@code unicode-bidi}. */
-        UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ff("-moz-isolate")),
+        UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ffBelow52("-moz-isolate"), ff52up("isolate")),
 
         /** The style property {@code unicodeRange}. */
         UNICODE_RANGE("unicodeRange", "unicode-range", chrome("")),
@@ -2547,42 +2647,42 @@ public final class StyleAttributes {
         VOLUME("volume", "volume"),
 
         /** The style property {@code webkitAlignContent}. */
-        WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", ff52up("")),
+        WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", ff52up("normal")),
 
         /** The style property {@code webkitAlignItems}. */
-        WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", ff52up("")),
+        WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", ff52up("normal")),
 
         /** The style property {@code webkitAlignSelf}. */
-        WEBKIT_ALIGN_SELF("webkitAlignSelf", "webkit-align-self", ff52up("")),
+        WEBKIT_ALIGN_SELF("webkitAlignSelf", "webkit-align-self", ff52up("auto")),
 
         /** The style property {@code webkitAnimation}. */
         WEBKIT_ANIMATION("webkitAnimation", "webkit-animation", ff52up("")),
 
         /** The style property {@code webkitAnimationDelay}. */
-        WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", ff52up("")),
+        WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", ff52up("0s")),
 
         /** The style property {@code webkitAnimationDirection}. */
-        WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction", ff52up("")),
+        WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction", ff52up("normal")),
 
         /** The style property {@code webkitAnimationDuration}. */
-        WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration", ff52up("")),
+        WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration", ff52up("0s")),
 
         /** The style property {@code webkitAnimationFillMode}. */
-        WEBKIT_ANIMATION_FILL_MODE("webkitAnimationFillMode", "webkit-animation-fill-mode", ff52up("")),
+        WEBKIT_ANIMATION_FILL_MODE("webkitAnimationFillMode", "webkit-animation-fill-mode", ff52up("none")),
 
         /** The style property {@code webkitAnimationIterationCount}. */
         WEBKIT_ANIMATION_ITERATION_COUNT("webkitAnimationIterationCount", "webkit-animation-iteration-count",
-                ff52up("")),
+                ff52up("1")),
 
         /** The style property {@code webkitAnimationName}. */
-        WEBKIT_ANIMATION_NAME("webkitAnimationName", "webkit-animation-name", ff52up("")),
+        WEBKIT_ANIMATION_NAME("webkitAnimationName", "webkit-animation-name", ff52up("none")),
 
         /** The style property {@code webkitAnimationPlayState}. */
-        WEBKIT_ANIMATION_PLAY_STATE("webkitAnimationPlayState", "webkit-animation-play-state", ff52up("")),
+        WEBKIT_ANIMATION_PLAY_STATE("webkitAnimationPlayState", "webkit-animation-play-state", ff52up("running")),
 
         /** The style property {@code webkitAnimationTimingFunction}. */
         WEBKIT_ANIMATION_TIMING_FUNCTION("webkitAnimationTimingFunction", "webkit-animation-timing-function",
-                ff52up("")),
+                ff52up("ease")),
 
         /** The style property {@code webkitAppRegion}. */
         WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("no-drag")),
@@ -2603,7 +2703,7 @@ public final class StyleAttributes {
                 chrome("padding-box"), ff52up("padding-box")),
 
         /** The style property {@code webkitBackgroundSize}. */
-        WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff52up("")),
+        WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff52up("auto auto")),
 
         /** The style property {@code webkitBorderAfter}. */
         WEBKIT_BORDER_AFTER("webkitBorderAfter", "webkit-border-after", chrome("0px none rgb(0, 0, 0)")),
@@ -2629,13 +2729,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderBeforeWidth}. */
         WEBKIT_BORDER_BEFORE_WIDTH("webkitBorderBeforeWidth", "webkit-border-before-width", chrome("0px")),
 
+
         /** The style property {@code webkitBorderBottomLeftRadius}. */
         WEBKIT_BORDER_BOTTOM_LEFT_RADIUS("webkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
-                ff52up("")),
+                ff52up("0px")),
 
         /** The style property {@code webkitBorderBottomRightRadius}. */
         WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS("webkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
-                ff52up("")),
+                ff52up("0px")),
 
         /** The style property {@code webkitBorderEnd}. */
         WEBKIT_BORDER_END("webkitBorderEnd", "webkit-border-end", chrome("0px none rgb(0, 0, 0)")),
@@ -2671,11 +2772,12 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderStartWidth}. */
         WEBKIT_BORDER_START_WIDTH("webkitBorderStartWidth", "webkit-border-start-width", chrome("0px")),
 
+
         /** The style property {@code webkitBorderTopLeftRadius}. */
-        WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("")),
+        WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("0px")),
 
         /** The style property {@code webkitBorderTopRightRadius}. */
-        WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("")),
+        WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("0px")),
 
         /** The style property {@code webkitBorderVerticalSpacing}. */
         WEBKIT_BORDER_VERTICAL_SPACING("webkitBorderVerticalSpacing", "webkit-border-vertical-spacing", chrome("0px")),
@@ -2711,10 +2813,10 @@ public final class StyleAttributes {
         WEBKIT_BOX_REFLECT("webkitBoxReflect", "webkit-box-reflect", chrome("none")),
 
         /** The style property {@code webkitBoxShadow}. */
-        WEBKIT_BOX_SHADOW("webkitBoxShadow", "webkit-box-shadow", ff52up("")),
+        WEBKIT_BOX_SHADOW("webkitBoxShadow", "webkit-box-shadow", ff52up("none")),
 
         /** The style property {@code webkitBoxSizing}. */
-        WEBKIT_BOX_SIZING("webkitBoxSizing", "webkit-box-sizing", ff52up("")),
+        WEBKIT_BOX_SIZING("webkitBoxSizing", "webkit-box-sizing", ff52up("content-box")),
 
         /** The style property {@code webkitColumnBreakAfter}. */
         WEBKIT_COLUMN_BREAK_AFTER("webkitColumnBreakAfter", "webkit-column-break-after", chrome("auto")),
@@ -2726,28 +2828,28 @@ public final class StyleAttributes {
         WEBKIT_COLUMN_BREAK_INSIDE("webkitColumnBreakInside", "webkit-column-break-inside", chrome("auto")),
 
         /** The style property {@code webkitFilter}. */
-        WEBKIT_FILTER("webkitFilter", "webkit-filter", ff52up("")),
+        WEBKIT_FILTER("webkitFilter", "webkit-filter", ff52up("none")),
 
         /** The style property {@code webkitFlex}. */
         WEBKIT_FLEX("webkitFlex", "webkit-flex", ff52up("")),
 
         /** The style property {@code webkitFlexBasis}. */
-        WEBKIT_FLEX_BASIS("webkitFlexBasis", "webkit-flex-basis", ff52up("")),
+        WEBKIT_FLEX_BASIS("webkitFlexBasis", "webkit-flex-basis", ff52up("auto")),
 
         /** The style property {@code webkitFlexDirection}. */
-        WEBKIT_FLEX_DIRECTION("webkitFlexDirection", "webkit-flex-direction", ff52up("")),
+        WEBKIT_FLEX_DIRECTION("webkitFlexDirection", "webkit-flex-direction", ff52up("row")),
 
         /** The style property {@code webkitFlexFlow}. */
         WEBKIT_FLEX_FLOW("webkitFlexFlow", "webkit-flex-flow", ff52up("")),
 
         /** The style property {@code webkitFlexGrow}. */
-        WEBKIT_FLEX_GROW("webkitFlexGrow", "webkit-flex-grow", ff52up("")),
+        WEBKIT_FLEX_GROW("webkitFlexGrow", "webkit-flex-grow", ff52up("0")),
 
         /** The style property {@code webkitFlexShrink}. */
-        WEBKIT_FLEX_SHRINK("webkitFlexShrink", "webkit-flex-shrink", ff52up("")),
+        WEBKIT_FLEX_SHRINK("webkitFlexShrink", "webkit-flex-shrink", ff52up("1")),
 
         /** The style property {@code webkitFlexWrap}. */
-        WEBKIT_FLEX_WRAP("webkitFlexWrap", "webkit-flex-wrap", ff52up("")),
+        WEBKIT_FLEX_WRAP("webkitFlexWrap", "webkit-flex-wrap", ff52up("nowrap")),
 
         /** The style property {@code webkitFontSizeDelta}. */
         WEBKIT_FONT_SIZE_DELTA("webkitFontSizeDelta", "webkit-font-size-delta", chrome("")),
@@ -2762,7 +2864,7 @@ public final class StyleAttributes {
         WEBKIT_HYPHENATE_CHARACTER("webkitHyphenateCharacter", "webkit-hyphenate-character", chrome("auto")),
 
         /** The style property {@code webkitJustifyContent}. */
-        WEBKIT_JUSTIFY_CHARACTER("webkitJustifyContent", "webkit-justify-content", ff52up("")),
+        WEBKIT_JUSTIFY_CHARACTER("webkitJustifyContent", "webkit-justify-content", ff52up("normal")),
 
         /** The style property {@code webkitLineBreak}. */
         WEBKIT_LINE_BREAK("webkitLineBreak", "webkit-line-break", chrome("auto")),
@@ -2893,7 +2995,7 @@ public final class StyleAttributes {
         WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", ff52up("")),
 
         /** The style property {@code webkitPerspectiveOrigin}. */
-        WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("")),
+        WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chrome("")),
@@ -2912,7 +3014,7 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTapHighlightColor}. */
         WEBKIT_TAP_HIGHLIGHT_COLOR("webkitTapHighlightColor", "webkit-tap-highlight-color",
-                chrome("rgba(0, 0, 0, 0.180392)")),
+                chrome("rgba(0, 0, 0, 0.18)")),
 
         /** The style property {@code webkitTextCombine}. */
         WEBKIT_TEXT_COMBINE("webkitTextCombine", "webkit-text-combine", chrome("none")),
@@ -2960,10 +3062,10 @@ public final class StyleAttributes {
         WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px"), ff52up("0px")),
 
         /** The style property {@code webkitTransform}. */
-        WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", ff52up("")),
+        WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", ff52up("none")),
 
         /** The style property {@code webkitTransformOrigin}. */
-        WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", ff52up("")),
+        WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", ff52up("625px 172.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chrome("")),
@@ -2975,23 +3077,23 @@ public final class StyleAttributes {
         WEBKIT_TRANSFORM_ORIGIN_Z("webkitTransformOriginZ", "webkit-transform-origin-z", chrome("")),
 
         /** The style property {@code webkitTransformStyle}. */
-        WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", ff52up("")),
+        WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", ff52up("flat")),
 
         /** The style property {@code webkitTransition}. */
         WEBKIT_TRANSITION("webkitTransition", "webkit-transition", ff52up("")),
 
         /** The style property {@code webkitTransitionDelay}. */
-        WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", ff52up("")),
+        WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
 
         /** The style property {@code webkitTransitionDuration}. */
-        WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", ff52up("")),
+        WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
 
         /** The style property {@code webkitTransitionProperty}. */
-        WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", ff52up("")),
+        WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", ff52up("all")),
 
         /** The style property {@code webkitTransitionTimingFunction}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION("webkitTransitionTimingFunction", "webkit-transition-timing-function",
-                ff52up("")),
+                ff52up("ease")),
 
         /** The style property {@code webkitUserDrag}. */
         WEBKIT_USER_DRAG("webkitUserDrag", "webkit-user-drag", chrome("auto")),
@@ -3000,7 +3102,7 @@ public final class StyleAttributes {
         WEBKIT_USER_MODIFY("webkitUserModify", "webkit-user-modify", chrome("read-only")),
 
         /** The style property {@code webkitUserSelect}. */
-        WEBKIT_USER_SELECT("webkitUserSelect", "webkit-user-select", ff52up("read-only")),
+        WEBKIT_USER_SELECT("webkitUserSelect", "webkit-user-select", ff52up("auto")),
 
         /** The style property {@code webkitWritingMode}. */
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chrome("horizontal-tb")),
