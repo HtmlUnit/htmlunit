@@ -2134,9 +2134,6 @@ public final class StyleAttributes {
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
                 ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
 
-        /** The style property {@code placeSelf}. */
-        PLACE_SELF_("place-self", "place-self", ff52up("")),
-
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
 
@@ -2175,6 +2172,9 @@ public final class StyleAttributes {
 
         /** The style property {@code placeSelf}. */
         PLACE_SELF("placeSelf", "place-self", ff52up("")),
+
+        /** The style property {@code placeSelf}. */
+        PLACE_SELF_("place-self", "place-self", ff52up("")),
 
         /** The style property {@code pointerEvents}. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie("visiblePainted"), chrome("auto"), ff("auto")),
