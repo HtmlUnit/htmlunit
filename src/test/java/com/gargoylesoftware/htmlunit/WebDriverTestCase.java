@@ -165,7 +165,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Server STATIC_SERVER2_;
     // third server for multi-origin cross-origin tests.
     private static Server STATIC_SERVER3_;
-    
+
     private boolean useRealBrowser_;
     private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
