@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -63,7 +64,7 @@ public class TextRange extends SimpleScriptable {
      * Constructs a text range around the provided element.
      * @param elt the element to wrap
      */
-    public TextRange(final HTMLElement elt) {
+    public TextRange(final Element elt) {
         range_ = new SimpleRange(elt.getDomNodeOrDie());
     }
 

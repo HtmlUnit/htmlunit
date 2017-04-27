@@ -17,13 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
@@ -47,18 +42,14 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomCharacterData;
-import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
@@ -78,7 +69,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
@@ -127,10 +117,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
-import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
@@ -138,7 +126,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
@@ -237,14 +224,6 @@ public class HTMLElement extends Element {
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
-
-    private static final Pattern PRINT_NODE_PATTERN = Pattern.compile("  ");
-    private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
-
-    static final String POSITION_BEFORE_BEGIN = "beforebegin";
-    static final String POSITION_AFTER_BEGIN = "afterbegin";
-    static final String POSITION_BEFORE_END = "beforeend";
-    static final String POSITION_AFTER_END = "afterend";
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -681,51 +660,79 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
+    @JsxGetter(@WebBrowser(IE))
+    public String getOuterHTML() {
+        return super.getOuterHTML();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(@WebBrowser(IE))
+    public void setOuterHTML(final Object value) {
+        super.setOuterHTML(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(@WebBrowser(IE))
+    public String getInnerHTML() {
+        return super.getInnerHTML();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(@WebBrowser(IE))
+    public void setInnerHTML(final Object value) {
+        super.setInnerHTML(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @JsxSetter(propertyName = "className", value = @WebBrowser(IE))
     public void setClassName_js(final String className) {
         super.setClassName_js(className);
     }
 
     /**
-     * Gets the innerHTML attribute.
-     * @return the contents of this node as HTML
+     * {@inheritDoc}
      */
-    @JsxGetter
-    public String getInnerHTML() {
-        final DomNode domNode;
-        try {
-            domNode = getDomNodeOrDie();
-        }
-        catch (final IllegalStateException e) {
-            Context.throwAsScriptRuntimeEx(e);
-            return "";
-        }
-        return getInnerHTML(domNode);
+    @Override
+    @JsxFunction(@WebBrowser(IE))
+    public void insertAdjacentHTML(final String position, final String text) {
+        super.insertAdjacentHTML(position, text);
     }
 
     /**
-     * Helper for getInnerHtml (to be reuses bei HTMLTemplate.
-     * @param domNode the node
-     * @return the contents of this node as HTML
+     * {@inheritDoc}
      */
-    protected String getInnerHTML(final DomNode domNode) {
-        final StringBuilder buf = new StringBuilder();
+    @Override
+    @JsxFunction(@WebBrowser(IE))
+    public void insertAdjacentText(final String where, final String text) {
+        super.insertAdjacentText(where, text);
+    }
 
-        final String tagName = getTagName();
-        boolean isPlain = "SCRIPT".equals(tagName);
-
-        isPlain = isPlain || "STYLE".equals(tagName);
-
-        // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, domNode, !isPlain);
-        return buf.toString();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(@WebBrowser(IE))
+    public Object insertAdjacentElement(final String where, final Object insertedElement) {
+        return super.insertAdjacentElement(where, insertedElement);
     }
 
     /**
      * Gets the innerText attribute.
      * @return the contents of this node as text
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter
     public String getInnerText() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
@@ -734,130 +741,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Gets the outerHTML of the node.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
-     * @return the contents of this node as HTML
-     */
-    @JsxGetter
-    public String getOuterHTML() {
-        final StringBuilder buf = new StringBuilder();
-        // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printNode(buf, getDomNodeOrDie(), true);
-        return buf.toString();
-    }
-
-    /**
-     * Helper for getting code back from nodes.
-     * @param builder the builder to write to
-     * @param node the node to be serialized
-     * @param html flag
-     */
-    private void printChildren(final StringBuilder builder, final DomNode node, final boolean html) {
-        for (final DomNode child : node.getChildren()) {
-            printNode(builder, child, html);
-        }
-    }
-
-    private void printNode(final StringBuilder builder, final DomNode node, final boolean html) {
-        if (node instanceof DomComment) {
-            if (html) {
-                // Remove whitespace sequences.
-                final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
-                builder.append("<!--").append(s).append("-->");
-            }
-        }
-        else if (node instanceof DomCharacterData) {
-            // Remove whitespace sequences, possibly escape XML characters.
-            String s = node.getNodeValue();
-            if (html) {
-                s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
-            }
-            builder.append(s);
-        }
-        else if (html) {
-            final DomElement element = (DomElement) node;
-            final Element scriptObject = (Element) node.getScriptableObject();
-            final String tag = element.getTagName();
-
-            HTMLElement htmlElement = null;
-            if (scriptObject instanceof HTMLElement) {
-                htmlElement = (HTMLElement) scriptObject;
-            }
-            builder.append("<").append(tag);
-            // Add the attributes. IE does not use quotes, FF does.
-            for (final DomAttr attr : element.getAttributesMap().values()) {
-                if (!attr.getSpecified()) {
-                    continue;
-                }
-
-                final String name = attr.getName();
-                final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                builder.append(' ').append(name).append("=");
-                builder.append("\"");
-                builder.append(value);
-                builder.append("\"");
-            }
-            builder.append(">");
-            // Add the children.
-            final boolean isHtml = html
-                    && !(scriptObject instanceof HTMLScriptElement)
-                    && !(scriptObject instanceof HTMLStyleElement);
-            printChildren(builder, node, isHtml);
-            if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
-                builder.append("</").append(tag).append(">");
-            }
-        }
-        else {
-            final HtmlElement element = (HtmlElement) node;
-            if ("p".equals(element.getTagName())) {
-                if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
-                    builder.append("\r\n"); // \r\n because it's to implement something IE specific
-                }
-                else {
-                    int i = builder.length() - 1;
-                    while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
-                        i--;
-                    }
-                    builder.setLength(i + 1);
-                    builder.append("\n");
-                }
-            }
-            if (!"script".equals(element.getTagName())) {
-                printChildren(builder, node, html);
-            }
-        }
-    }
-
-    /**
-     * Replaces all child elements of this element with the supplied value.
-     * @param value the new value for the contents of this element
-     */
-    @JsxSetter
-    public void setInnerHTML(final Object value) {
-        final DomNode domNode;
-        try {
-            domNode = getDomNodeOrDie();
-        }
-        catch (final IllegalStateException e) {
-            Context.throwAsScriptRuntimeEx(e);
-            return;
-        }
-
-        domNode.removeAllChildren();
-
-        final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
-        if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
-
-            final String valueAsString = Context.toString(value);
-            parseHtmlSnippet(domNode, valueAsString);
-        }
-    }
-
-    /**
      * Replaces all child elements of this element with the supplied text value.
      * @param value the new value for the contents of this element
      */
-    @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter
     public void setInnerText(final Object value) {
         final String valueString;
         if (value == null && getBrowserVersion().hasFeature(JS_INNER_TEXT_VALUE_NULL)) {
@@ -890,73 +777,6 @@ public class HTMLElement extends Element {
     @Override
     public void setTextContent(final Object value) {
         setInnerTextImpl(value == null ? null : Context.toString(value));
-    }
-
-    /**
-     * Replaces this element (including all child elements) with the supplied value.
-     * @param value the new value for replacing this element
-     */
-    @JsxSetter
-    public void setOuterHTML(final Object value) {
-        final DomNode domNode = getDomNodeOrDie();
-        final DomNode parent = domNode.getParentNode();
-        if (null == parent) {
-            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED)) {
-                domNode.removeAllChildren();
-            }
-            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
-                throw Context.reportRuntimeError("outerHTML is readonly for detached nodes");
-            }
-            return;
-        }
-
-        if (value == null && !getBrowserVersion().hasFeature(JS_OUTER_HTML_NULL_AS_STRING)) {
-            domNode.remove();
-            return;
-        }
-        final String valueStr = Context.toString(value);
-        if (valueStr.isEmpty()) {
-            domNode.remove();
-            return;
-        }
-
-        final DomNode nextSibling = domNode.getNextSibling();
-        domNode.remove();
-
-        final DomNode target;
-        final boolean append;
-        if (nextSibling != null) {
-            target = nextSibling;
-            append = false;
-        }
-        else {
-            target = parent;
-            append = true;
-        }
-
-        final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append);
-        parseHtmlSnippet(proxyDomNode, valueStr);
-    }
-
-    /**
-     * Parses the specified HTML source code, appending the resulting content at the specified target location.
-     * @param target the node indicating the position at which the parsed content should be placed
-     * @param source the HTML code extract to parse
-     */
-    private static void parseHtmlSnippet(final DomNode target, final String source) {
-        try {
-            HTMLParser.parseFragment(target, source);
-        }
-        catch (final IOException e) {
-            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                    + e.getMessage());
-        }
-        catch (final SAXException e) {
-            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                    + e.getMessage());
-        }
     }
 
     /**
@@ -1007,141 +827,6 @@ public class HTMLElement extends Element {
         public boolean isAppend() {
             return append_;
         }
-    }
-
-    /**
-     * Parses the given text as HTML or XML and inserts the resulting nodes into the tree in the position given by the
-     * position argument.
-     * @param position specifies where to insert the nodes, using one of the following values (case-insensitive):
-     *        <code>beforebegin</code>, <code>afterbegin</code>, <code>beforeend</code>, <code>afterend</code>
-     * @param text the text to parse
-     *
-     * @see <a href="http://www.w3.org/TR/DOM-Parsing/#methods-2">W3C Spec</a>
-     * @see <a href="http://domparsing.spec.whatwg.org/#dom-element-insertadjacenthtml">WhatWG Spec</a>
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML"
-     *      >Mozilla Developer Network</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536452.aspx">MSDN</a>
-     */
-    @JsxFunction
-    public void insertAdjacentHTML(final String position, final String text) {
-        final Object[] values = getInsertAdjacentLocation(position);
-        final DomNode domNode = (DomNode) values[0];
-        final boolean append = ((Boolean) values[1]).booleanValue();
-
-        // add the new nodes
-        final DomNode proxyDomNode = new ProxyDomNode(domNode.getPage(), domNode, append);
-        parseHtmlSnippet(proxyDomNode, text);
-    }
-
-    /**
-     * Inserts the given element into the element at the location.
-     * @param where specifies where to insert the element, using one of the following values (case-insensitive):
-     *        beforebegin, afterbegin, beforeend, afterend
-     * @param insertedElement the element to be inserted
-     * @return an element object
-     *
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
-     */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
-    public Object insertAdjacentElement(final String where, final Object insertedElement) {
-        if (insertedElement instanceof Node) {
-            final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
-            final Object[] values = getInsertAdjacentLocation(where);
-            final DomNode node = (DomNode) values[0];
-            final boolean append = ((Boolean) values[1]).booleanValue();
-
-            if (append) {
-                node.appendChild(childNode);
-            }
-            else {
-                node.insertBefore(childNode);
-            }
-            return insertedElement;
-        }
-        throw Context.reportRuntimeError("Passed object is not an element: " + insertedElement);
-    }
-
-    /**
-     * Inserts the given text into the element at the specified location.
-     * @param where specifies where to insert the text, using one of the following values (case-insensitive):
-     *      beforebegin, afterbegin, beforeend, afterend
-     * @param text the text to insert
-     *
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
-     */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
-    public void insertAdjacentText(final String where, final String text) {
-        final Object[] values = getInsertAdjacentLocation(where);
-        final DomNode node = (DomNode) values[0];
-        final boolean append = ((Boolean) values[1]).booleanValue();
-
-        final DomText domText = new DomText(node.getPage(), text);
-        // add the new nodes
-        if (append) {
-            node.appendChild(domText);
-        }
-        else {
-            node.insertBefore(domText);
-        }
-    }
-
-    /**
-     * Returns where and how to add the new node.
-     * Used by {@link #insertAdjacentHTML(String, String)},
-     * {@link #insertAdjacentElement(String, Object)} and
-     * {@link #insertAdjacentText(String, String)}.
-     * @param where specifies where to insert the element, using one of the following values (case-insensitive):
-     *        beforebegin, afterbegin, beforeend, afterend
-     * @return an array of 1-DomNode:parentNode and 2-Boolean:append
-     */
-    private Object[] getInsertAdjacentLocation(final String where) {
-        final DomNode currentNode = getDomNodeOrDie();
-        final DomNode node;
-        final boolean append;
-
-        // compute the where and how the new nodes should be added
-        if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
-            if (currentNode.getFirstChild() == null) {
-                // new nodes should appended to the children of current node
-                node = currentNode;
-                append = true;
-            }
-            else {
-                // new nodes should be inserted before first child
-                node = currentNode.getFirstChild();
-                append = false;
-            }
-        }
-        else if (POSITION_BEFORE_BEGIN.equalsIgnoreCase(where)) {
-            // new nodes should be inserted before current node
-            node = currentNode;
-            append = false;
-        }
-        else if (POSITION_BEFORE_END.equalsIgnoreCase(where)) {
-            // new nodes should appended to the children of current node
-            node = currentNode;
-            append = true;
-        }
-        else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
-            if (currentNode.getNextSibling() == null) {
-                // new nodes should appended to the children of parent node
-                node = currentNode.getParentNode();
-                append = true;
-            }
-            else {
-                // new nodes should be inserted before current node's next sibling
-                node = currentNode.getNextSibling();
-                append = false;
-            }
-        }
-        else {
-            throw Context.reportRuntimeError("Illegal position value: \"" + where + "\"");
-        }
-
-        if (append) {
-            return new Object[] {node, Boolean.TRUE};
-        }
-        return new Object[] {node, Boolean.FALSE};
     }
 
     /**
@@ -1537,23 +1222,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns whether the {@code display} is {@code none} or not.
-     * @return whether the {@code display} is {@code none} or not
-     */
-    protected final boolean isDisplayNone() {
-        HTMLElement element = this;
-        while (element != null) {
-            final CSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
-            final String display = style.getDisplay();
-            if (DisplayStyle.NONE.value().equals(display)) {
-                return true;
-            }
-            element = element.getParentHTMLElement();
-        }
-        return false;
-    }
-
-    /**
      * Returns this element's <tt>offsetWidth</tt>, which is the element width plus the element's padding
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
@@ -1713,27 +1381,6 @@ public class HTMLElement extends Element {
     public void scrollIntoView() { /* do nothing at the moment */ }
 
     /**
-     * Retrieves a collection of rectangles that describes the layout of the contents of an object
-     * or range within the client. Each rectangle describes a single line.
-     * @return a collection of rectangles that describes the layout of the contents
-     */
-    @JsxFunction
-    public Object getClientRects() {
-        final ClientRectList rectList = new ClientRectList();
-        rectList.setParentScope(getWindow());
-        rectList.setPrototype(getPrototype(rectList.getClass()));
-
-        if (!isDisplayNone() && getDomNodeOrDie().isAttachedToPage()) {
-            final ClientRect rect = new ClientRect(0, 0, 1, 1);
-            rect.setParentScope(getWindow());
-            rect.setPrototype(getPrototype(rect.getClass()));
-            rectList.add(rect);
-        }
-
-        return rectList;
-    }
-
-    /**
      * Retrieves an auto-generated, unique identifier for the object.
      * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
      * @return an auto-generated, unique identifier for the object
@@ -1769,18 +1416,6 @@ public class HTMLElement extends Element {
     @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public void blur() {
         super.blur();
-    }
-
-    /**
-     * Creates a new TextRange object for this element.
-     * @return a new TextRange object for this element
-     */
-    @JsxFunction(@WebBrowser(IE))
-    public Object createTextRange() {
-        final TextRange range = new TextRange(this);
-        range.setParentScope(getParentScope());
-        range.setPrototype(getPrototype(range.getClass()));
-        return range;
     }
 
     /**
@@ -2491,10 +2126,9 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns whether the end tag is forbidden or not.
-     * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>
-     * @return whether the end tag is forbidden or not
+     * {@inheritDoc}
      */
+    @Override
     protected boolean isEndTagForbidden() {
         return endTagForbidden_;
     }
