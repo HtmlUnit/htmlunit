@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -44,7 +43,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 @RunWith(BrowserParameterizedRunner.class)
 @ToRunWithRealBrowsers
-@Ignore
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**
@@ -57,7 +55,9 @@ public class HostConstantsTest extends WebDriverTestCase {
         final List<Object[]> list = new ArrayList<>();
         final List<String> strings = TestCaseTest.getAllClassNames();
         for (final String host : strings) {
-            list.add(new Object[] {host});
+            if (!"Audio".equals(host)) {
+                list.add(new Object[] {host});
+            }
         }
         return list;
     }
