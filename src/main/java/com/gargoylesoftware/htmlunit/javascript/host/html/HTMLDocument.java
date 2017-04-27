@@ -726,15 +726,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the base URL to resolve relative URLs.
-     * @return the base URL
-     */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
-    public String getBaseURI() {
-        return getPage().getBaseURL().toString();
-    }
-
-    /**
      * Returns the {@code cookie} property.
      * @return the {@code cookie} property
      */

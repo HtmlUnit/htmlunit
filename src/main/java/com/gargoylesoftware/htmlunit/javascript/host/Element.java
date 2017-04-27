@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_BASE_URL_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
@@ -174,18 +173,6 @@ public class Element extends EventNode {
             attributes_ = createAttributesObject();
         }
         return attributes_;
-    }
-
-    /**
-     * Returns the Base URI as a string.
-     * @return the Base URI as a string
-     */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
-    public String getBaseURI() {
-        if ("Element".equals(getClass().getSimpleName()) && getBrowserVersion().hasFeature(JS_ELEMENT_BASE_URL_NULL)) {
-            return null;
-        }
-        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 
     /**
