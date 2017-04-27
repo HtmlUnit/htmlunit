@@ -643,7 +643,7 @@ public final class StyleAttributes {
         /** The style property {@code color}. */
         COLOR("color", "color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
-        /** The style property {@code color-adjust}. */
+        /** The style property {@code colorAdjust}. */
         COLOR_ADJUST("colorAdjust", "color-adjust", ff52up("economy")),
 
         /** The style property {@code color-adjust}. */
@@ -705,7 +705,7 @@ public final class StyleAttributes {
         /** The style property {@code columnRuleWidth}. */
         COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chrome("0px"), ff52up("0px"), ie("medium")),
 
-        /** The style property {@code column-rule-wWidth}. */
+        /** The style property {@code column-rule-width}. */
         COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff52up("0px")),
 
         /** The style property {@code columnSpan}. */
@@ -1110,7 +1110,7 @@ public final class StyleAttributes {
         /** The style property {@code inlineSize}. */
         INLINE_SIZE("inlineSize", "inline-size", ff(""), chrome("913px")),
 
-        /** The style property {@code inlineSize}. */
+        /** The style property {@code inline-size}. */
         INLINE_SIZE_("inline-size", "inline-size", ff("")),
 
         /** The style property {@code isolation}. */
@@ -1321,10 +1321,10 @@ public final class StyleAttributes {
         /** The style property {@code maxZoom}. */
         MAX_ZOOM("maxZoom", "max-zoom", chrome("")),
 
-        /** The style property {@code min-block-size}. */
+        /** The style property {@code minBlockSize}. */
         MIN_BLOCK_SIZE("minBlockSize", "min-block-size", ff(""), chrome("0px")),
 
-        /** The style property {@code min-height}. */
+        /** The style property {@code min-block-size}. */
         MIN_BLOCK_SIZE_("min-block-size", "min-block-size", ff("")),
 
         /** The style property {@code minHeight}. */
@@ -2162,19 +2162,19 @@ public final class StyleAttributes {
         /** The style property {@code placeContent}. */
         PLACE_CONTENT("placeContent", "place-content", ff52up("")),
 
-        /** The style property {@code placeContent}. */
+        /** The style property {@code place-content}. */
         PLACE_CONTENT_("place-content", "place-content", ff52up("")),
 
         /** The style property {@code placeItems}. */
         PLACE_ITEMS("placeItems", "place-items", ff52up("")),
 
-        /** The style property {@code placeItems}. */
+        /** The style property {@code place-items}. */
         PLACE_ITEMS_("place-items", "place-items", ff52up("")),
 
         /** The style property {@code placeSelf}. */
         PLACE_SELF("placeSelf", "place-self", ff52up("")),
 
-        /** The style property {@code placeSelf}. */
+        /** The style property {@code place-self}. */
         PLACE_SELF_("place-self", "place-self", ff52up("")),
 
         /** The style property {@code pointerEvents}. */
@@ -2559,7 +2559,7 @@ public final class StyleAttributes {
         /** The style property {@code text-shadow}. */
         TEXT_SHADOW_("text-shadow", "text-shadow", ff("none")),
 
-        /** The style property {@code textShadow}. */
+        /** The style property {@code textSizeAdjust}. */
         TEXT_SIZE_ADJUST("textSizeAdjust", "text-size-adjust", chrome("auto")),
 
         /** The style property {@code textTransform}. */
@@ -3225,7 +3225,7 @@ public final class StyleAttributes {
         /** The style property {@code webkitTextStrokeWidth}. */
         WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px"), ff52up("0px")),
 
-        /** The style property {@code webkitTextStrokeWidth}. */
+        /** The style property {@code WebkitTextStrokeWidth}. */
         WEBKIT_TEXT_STROKE_WIDTH_("WebkitTextStrokeWidth", "webkit-text-stroke-width", ff52up("0px")),
 
         /** The style property {@code webkitTransform}. */
