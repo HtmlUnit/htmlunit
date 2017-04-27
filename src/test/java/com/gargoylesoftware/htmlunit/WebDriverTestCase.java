@@ -1099,7 +1099,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         super.releaseResources();
 
         if (!isWebClientCached()) {
-            boolean rhino = true;
+            boolean rhino = false;
             if (webDriver_ != null) {
                 try {
                     rhino = getWebWindowOf(webDriver_).getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
