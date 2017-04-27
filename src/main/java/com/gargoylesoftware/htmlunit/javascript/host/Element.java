@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINE
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -102,7 +101,6 @@ public class Element extends EventNode {
 
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
-    private CSSStyleDeclaration style_;
     private int scrollLeft_;
     private int scrollTop_;
 
@@ -121,7 +119,6 @@ public class Element extends EventNode {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-        style_ = new CSSStyleDeclaration(this);
 
         setParentScope(getWindow().getDocument());
 
@@ -508,47 +505,6 @@ public class Element extends EventNode {
     }
 
     /**
-     * Returns the style object for this element.
-     * @return the style object for this element
-     */
-    @JsxGetter
-    public CSSStyleDeclaration getStyle() {
-        return style_;
-    }
-
-    /**
-     * Sets the styles for this element.
-     * @param style the style of the element
-     */
-    @JsxSetter
-    public void setStyle(final String style) {
-        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
-            getStyle().setCssText(style);
-        }
-    }
-
-    /**
-     * Returns the runtime style object for this element.
-     * @return the runtime style object for this element
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public CSSStyleDeclaration getRuntimeStyle() {
-        return style_;
-    }
-
-    /**
-     * Returns the current (calculated) style object for this element.
-     * @return the current (calculated) style object for this element
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public ComputedCSSStyleDeclaration getCurrentStyle() {
-        if (!getDomNodeOrDie().isAttachedToPage()) {
-            return null;
-        }
-        return getWindow().getComputedStyle(this, null);
-    }
-
-    /**
      * Sets the attribute node for the specified attribute.
      * @param newAtt the attribute to set
      * @return the replaced attribute node, if any
@@ -783,8 +739,7 @@ public class Element extends EventNode {
      * Creates a new TextRange object for this element.
      * @return a new TextRange object for this element
      */
-    @JsxFunction(@WebBrowser(IE))
-    public Object createTextRange() {
+    protected TextRange createTextRange() {
         final TextRange range = new TextRange(this);
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGI
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Locale;
 
@@ -25,10 +26,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 
 /**
  * The JavaScript object {@code HTMLBodyElement}.
@@ -222,4 +225,13 @@ public class HTMLBodyElement extends HTMLElement {
     public int getClientWidth() {
         return super.getClientWidth() + 16;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(@WebBrowser(IE))
+    public TextRange createTextRange() {
+        return super.createTextRange();
+    };
 }

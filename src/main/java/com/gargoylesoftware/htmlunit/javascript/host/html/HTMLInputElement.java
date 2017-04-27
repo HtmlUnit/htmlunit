@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
@@ -824,4 +825,13 @@ public class HTMLInputElement extends FormField {
     public boolean checkValidity() {
         return getDomNodeOrDie().isValid();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(@WebBrowser(IE))
+    public TextRange createTextRange() {
+        return super.createTextRange();
+    };
 }

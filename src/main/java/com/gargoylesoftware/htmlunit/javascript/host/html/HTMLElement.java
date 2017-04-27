@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
@@ -119,6 +120,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap;
@@ -231,6 +233,7 @@ public class HTMLElement extends Element {
 
     private final Set<String> behaviors_ = new HashSet<>();
     private String uniqueID_;
+    private CSSStyleDeclaration style_;
 
     static {
         COLORS_MAP_IE.put("AliceBlue", "#F0F8FF");
@@ -398,6 +401,8 @@ public class HTMLElement extends Element {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
+
+        style_ = new CSSStyleDeclaration(this);
 
         final String name = domNode.getLocalName();
         if ("wbr".equalsIgnoreCase(name)
@@ -2127,4 +2132,46 @@ public class HTMLElement extends Element {
         }
         return false;
     }
+
+    /**
+     * Returns the style object for this element.
+     * @return the style object for this element
+     */
+    @JsxGetter
+    public CSSStyleDeclaration getStyle() {
+        return style_;
+    }
+
+    /**
+     * Sets the styles for this element.
+     * @param style the style of the element
+     */
+    @JsxSetter
+    public void setStyle(final String style) {
+        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            getStyle().setCssText(style);
+        }
+    }
+
+    /**
+     * Returns the runtime style object for this element.
+     * @return the runtime style object for this element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public CSSStyleDeclaration getRuntimeStyle() {
+        return style_;
+    }
+
+    /**
+     * Returns the current (calculated) style object for this element.
+     * @return the current (calculated) style object for this element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public ComputedCSSStyleDeclaration getCurrentStyle() {
+        if (!getDomNodeOrDie().isAttachedToPage()) {
+            return null;
+        }
+        return getWindow().getComputedStyle(this, null);
+    }
+
 }

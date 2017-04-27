@@ -1587,10 +1587,10 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public CSS2Properties getComputedStyle(final Object element, final String pseudoElement) {
-        if (!(element instanceof Element)) {
+        if (!(element instanceof HTMLElement)) {
             throw ScriptRuntime.typeError("parameter 1 is not of type 'Element'");
         }
-        final Element e = (Element) element;
+        final HTMLElement e = (HTMLElement) element;
         synchronized (computedStyles_) {
             final Map<String, CSS2Properties> elementMap = computedStyles_.get(e);
             if (elementMap != null) {

@@ -618,4 +618,5 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     public void setPlaceholder(final String placeholder) {
         setAttribute("placeholder", placeholder);
     }
+
 }

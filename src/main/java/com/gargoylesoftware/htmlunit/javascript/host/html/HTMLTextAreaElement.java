@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -346,4 +348,12 @@ public class HTMLTextAreaElement extends FormField {
         return labels_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(@WebBrowser(IE))
+    public TextRange createTextRange() {
+        return super.createTextRange();
+    };
 }
