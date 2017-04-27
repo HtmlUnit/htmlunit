@@ -104,6 +104,8 @@ public class Element extends EventNode {
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
     private CSSStyleDeclaration style_;
+    private int scrollLeft_;
+    private int scrollTop_;
 
     /**
      * Default constructor.
@@ -1166,6 +1168,119 @@ public class Element extends EventNode {
      */
     protected boolean isEndTagForbidden() {
         return false;
+    }
+
+    /**
+     * Returns the element ID.
+     * @return the ID of this element
+     */
+    @JsxGetter
+    public String getId() {
+        return getDomNodeOrDie().getId();
+    }
+
+    /**
+     * Sets the identifier this element.
+     * @param newId the new identifier of this element
+     */
+    @JsxSetter
+    public void setId(final String newId) {
+        getDomNodeOrDie().setId(newId);
+    }
+
+    /**
+     * Removes the specified attribute.
+     * @param attribute the attribute to remove
+     */
+    @JsxFunction
+    public void removeAttributeNode(final Attr attribute) {
+        final String name = attribute.getName();
+        final Object namespaceUri = attribute.getNamespaceURI();
+        if (namespaceUri instanceof String) {
+            removeAttributeNS((String) namespaceUri, name);
+            return;
+        }
+        removeAttributeNS(null, name);
+    }
+
+    /**
+     * Gets the scrollTop value for this element.
+     * @return the scrollTop value for this element
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534618.aspx">MSDN documentation</a>
+     */
+    @JsxGetter
+    public int getScrollTop() {
+        // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
+        // because modifying the CSS style of the element is supposed to affect the attribute value.
+        if (scrollTop_ < 0) {
+            scrollTop_ = 0;
+        }
+        else if (scrollTop_ > 0) {
+            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+            if (!style.isScrollable(false)) {
+                scrollTop_ = 0;
+            }
+        }
+        return scrollTop_;
+    }
+
+    /**
+     * Sets the scrollTop value for this element.
+     * @param scroll the scrollTop value for this element
+     */
+    @JsxSetter
+    public void setScrollTop(final int scroll) {
+        scrollTop_ = scroll;
+    }
+
+    /**
+     * Gets the scrollLeft value for this element.
+     * @return the scrollLeft value for this element
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534617.aspx">MSDN documentation</a>
+     */
+    @JsxGetter
+    public int getScrollLeft() {
+        // It's easier to perform these checks and adjustments in the getter, rather than in the setter,
+        // because modifying the CSS style of the element is supposed to affect the attribute value.
+        if (scrollLeft_ < 0) {
+            scrollLeft_ = 0;
+        }
+        else if (scrollLeft_ > 0) {
+            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+            if (!style.isScrollable(true)) {
+                scrollLeft_ = 0;
+            }
+        }
+        return scrollLeft_;
+    }
+
+    /**
+     * Sets the scrollLeft value for this element.
+     * @param scroll the scrollLeft value for this element
+     */
+    @JsxSetter
+    public void setScrollLeft(final int scroll) {
+        scrollLeft_ = scroll;
+    }
+
+    /**
+     * Gets the scrollHeight for this element.
+     * @return at the moment the same as client height
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534615.aspx">MSDN documentation</a>
+     */
+    @JsxGetter
+    public int getScrollHeight() {
+        return getClientHeight();
+    }
+
+    /**
+     * Gets the scrollWidth for this element.
+     * @return a dummy value of 10
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534619.aspx">MSDN documentation</a>
+     */
+    @JsxGetter
+    public int getScrollWidth() {
+        return getClientWidth();
     }
 
 }

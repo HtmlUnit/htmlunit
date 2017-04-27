@@ -401,15 +401,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Sets the identifier this element.
-     *
-     * @param newId the new identifier of this element
-     */
-    public final void setId(final String newId) {
-        setAttribute("id", newId);
-    }
-
-    /**
      * Returns this element's tab index, if it has one. If the tab index is outside of the
      * valid range (less than <tt>0</tt> or greater than <tt>32767</tt>), this method
      * returns {@link #TAB_INDEX_OUT_OF_BOUNDS}. If this element does not have

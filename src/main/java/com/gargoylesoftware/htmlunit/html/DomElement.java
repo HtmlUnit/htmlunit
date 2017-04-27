@@ -685,6 +685,15 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * Sets the identifier this element.
+     *
+     * @param newId the new identifier of this element
+     */
+    public final void setId(final String newId) {
+        setAttribute("id", newId);
+    }
+
+    /**
      * Returns the first child element node of this element. null if this element has no child elements.
      * @return the first child element node of this element. null if this element has no child elements
      */
@@ -1621,6 +1630,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
         return false;
     }
+
 }
 
 /**
