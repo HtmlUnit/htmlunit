@@ -33,6 +33,7 @@ import org.apache.xml.utils.PrefixResolver;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
@@ -118,6 +119,9 @@ public class Document extends EventNode {
      */
     @JsxGetter
     public Location getLocation() {
+        if (window_ == null) {
+            return null;
+        }
         return window_.getLocation();
     }
 
@@ -154,9 +158,13 @@ public class Document extends EventNode {
      */
     @JsxGetter
     public String getReferrer() {
-        final String referrer = getPage().getWebResponse().getWebRequest().getAdditionalHeaders().get("Referer");
-        if (referrer == null) {
-            return "";
+        String referrer = "";
+        final WebResponse webResponse = getPage().getWebResponse();
+        if (webResponse != null) {
+            referrer = webResponse.getWebRequest().getAdditionalHeaders().get("Referer");
+            if (referrer == null) {
+                referrer = "";
+            }
         }
         return referrer;
     }
