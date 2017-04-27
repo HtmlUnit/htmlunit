@@ -47,7 +47,7 @@ public class DataView extends ArrayBufferView {
         if (length == Undefined.instance) {
             length = ((ArrayBuffer) array).getByteLength();
         }
-        super.constructor(((ArrayBuffer) array), byteOffset, ((Number) length).intValue());
+        super.constructor((ArrayBuffer) array, byteOffset, ((Number) length).intValue());
     }
 
     /**
