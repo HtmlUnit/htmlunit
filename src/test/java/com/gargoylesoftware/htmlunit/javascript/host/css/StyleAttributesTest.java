@@ -70,7 +70,7 @@ public class StyleAttributesTest {
         for (final Definition definition : StyleAttributes.Definition.values()) {
             final String propertyName = definition.getPropertyName();
             if (propertyName.indexOf('-') == -1) {
-                if (definition.name().endsWith("_")) {
+                if (definition.name().endsWith("_") && Character.isLowerCase(definition.name().charAt(0))) {
                     fail("StyleAttributes.Definition: '" + definition.name() + "' must not end with underscore");
                 }
             }
