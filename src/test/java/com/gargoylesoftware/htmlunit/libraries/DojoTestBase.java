@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
- * Base class for jQuery Tests.
-/**
  * Base class for the <a href="http://dojotoolkit.org/">Dojo
  * JavaScript library tests.</a>.
  *

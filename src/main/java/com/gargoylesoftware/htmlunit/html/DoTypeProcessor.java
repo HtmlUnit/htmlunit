@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
+
 /**
  * The process for {@link HtmlElement#doType(char, boolean, boolean)}.
  *

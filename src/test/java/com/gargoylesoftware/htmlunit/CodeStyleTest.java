@@ -147,6 +147,7 @@ public class CodeStyleTest {
                 openingCurlyBracket(lines, relativePath);
                 year(lines, relativePath);
                 javaDocFirstLine(lines, relativePath);
+                classJavaDoc(lines, relativePath);
                 methodFirstLine(lines, relativePath);
                 methodLastLine(lines, relativePath);
                 lineBetweenMethods(lines, relativePath);
@@ -207,6 +208,19 @@ public class CodeStyleTest {
                         addFailure("Lower case start in " + relativePath + ", line: " + (index + 1));
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Checks the JavaDoc for class should be superseded with an empty line.
+     */
+    private void classJavaDoc(final List<String> lines, final String relativePath) {
+        for (int index = 1; index < lines.size(); index++) {
+            final String previousLine = lines.get(index - 1);
+            final String currentLine = lines.get(index);
+            if (currentLine.startsWith("/**") && !previousLine.isEmpty()) {
+                addFailure("Not empty line in " + relativePath + ", line: " + index);
             }
         }
     }
