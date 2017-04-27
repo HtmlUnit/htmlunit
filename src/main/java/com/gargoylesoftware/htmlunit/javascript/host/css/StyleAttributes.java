@@ -94,24 +94,24 @@ public final class StyleAttributes {
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"),
-                ff("auto"), chrome("normal")),
+                ffBelow52("auto"), ff52up("normal"), chrome("normal")),
 
         /** The style property {@code align-content}. */
-        ALIGN_CONTENT_("align-content", "align-content", ff("auto")),
+        ALIGN_CONTENT_("align-content", "align-content", ffBelow52("auto"), ff52up("normal")),
 
         /** The style property {@code alignItems}. */
-        ALIGN_ITEMS("alignItems", "align-items", ff("start"),
+        ALIGN_ITEMS("alignItems", "align-items", ffBelow52("start"), ff52up("normal"),
                 ie("stretch"), chrome("normal")),
 
         /** The style property {@code align-items}. */
-        ALIGN_ITEMS_("align-items", "align-items", ff("start")),
+        ALIGN_ITEMS_("align-items", "align-items", ffBelow52("start"), ff52up("normal")),
 
         /** The style property {@code alignSelf}. */
-        ALIGN_SELF("alignSelf", "align-self", ff("start"),
+        ALIGN_SELF("alignSelf", "align-self", ffBelow52("start"), ff52up("auto"),
                 ie("auto"), chrome("normal")),
 
         /** The style property {@code align-self}. */
-        ALIGN_SELF_("align-self", "align-self", ff("start")),
+        ALIGN_SELF_("align-self", "align-self", ffBelow52("start"), ff52up("auto")),
 
         /** The style property {@code alignmentBaseline}. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie("auto"), chrome("auto")),
@@ -1598,7 +1598,7 @@ public final class StyleAttributes {
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff("705px 172.5px")),
+                "-moz-perspective-origin", ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
 
         /** The style property {@code MozStackSizing}. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing",
@@ -1619,7 +1619,8 @@ public final class StyleAttributes {
         MOZ_TRANSFORM("MozTransform", "-moz-transform", ff("none")),
 
         /** The style property {@code MozTransformOrigin}. */
-        MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin", ff("705px 172.5px")),
+        MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
+                ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
 
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -1658,7 +1659,7 @@ public final class StyleAttributes {
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
 
         /** The style property {@code MozWindowDragging}. */
-        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ff("no-drag")),
+        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ffBelow52("no-drag"), ff52up("default")),
 
         /** The style property {@code msAnimation}. */
         MS_ANIMATION("msAnimation", "-ms-animation", ie("")),
@@ -2667,39 +2668,77 @@ public final class StyleAttributes {
         /** The style property {@code webkitAlignContent}. */
         WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", ff52up("normal")),
 
+        /** The style property {@code webkitAlignContent}. */
+        WEBKIT_ALIGN_CONTENT_("WebkitAlignContent", "webkit-align-content", ff52up("normal")),
+
         /** The style property {@code webkitAlignItems}. */
         WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", ff52up("normal")),
+
+        /** The style property {@code webkitAlignItems}. */
+        WEBKIT_ALIGN_ITEMS_("WebkitAlignItems", "webkit-align-items", ff52up("normal")),
 
         /** The style property {@code webkitAlignSelf}. */
         WEBKIT_ALIGN_SELF("webkitAlignSelf", "webkit-align-self", ff52up("auto")),
 
+        /** The style property {@code webkitAlignSelf}. */
+        WEBKIT_ALIGN_SELF_("WebkitAlignSelf", "webkit-align-self", ff52up("auto")),
+
         /** The style property {@code webkitAnimation}. */
         WEBKIT_ANIMATION("webkitAnimation", "webkit-animation", ff52up("")),
+
+        /** The style property {@code webkitAnimation}. */
+        WEBKIT_ANIMATION_("WebkitAnimation", "webkit-animation", ff52up("")),
 
         /** The style property {@code webkitAnimationDelay}. */
         WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", ff52up("0s")),
 
+        /** The style property {@code webkitAnimationDelay}. */
+        WEBKIT_ANIMATION_DELAY_("WebkitAnimationDelay", "webkit-animation-delay", ff52up("0s")),
+
         /** The style property {@code webkitAnimationDirection}. */
         WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction", ff52up("normal")),
+
+        /** The style property {@code webkitAnimationDirection}. */
+        WEBKIT_ANIMATION_DIRECTION_("WebkitAnimationDirection", "webkit-animation-direction", ff52up("normal")),
 
         /** The style property {@code webkitAnimationDuration}. */
         WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration", ff52up("0s")),
 
+        /** The style property {@code webkitAnimationDuration}. */
+        WEBKIT_ANIMATION_DURATION_("WebkitAnimationDuration", "webkit-animation-duration", ff52up("0s")),
+
         /** The style property {@code webkitAnimationFillMode}. */
         WEBKIT_ANIMATION_FILL_MODE("webkitAnimationFillMode", "webkit-animation-fill-mode", ff52up("none")),
+
+        /** The style property {@code webkitAnimationFillMode}. */
+        WEBKIT_ANIMATION_FILL_MODE_("WebkitAnimationFillMode", "webkit-animation-fill-mode", ff52up("none")),
 
         /** The style property {@code webkitAnimationIterationCount}. */
         WEBKIT_ANIMATION_ITERATION_COUNT("webkitAnimationIterationCount", "webkit-animation-iteration-count",
                 ff52up("1")),
 
+        /** The style property {@code webkitAnimationIterationCount}. */
+        WEBKIT_ANIMATION_ITERATION_COUNT_("WebkitAnimationIterationCount", "webkit-animation-iteration-count",
+                ff52up("1")),
+
         /** The style property {@code webkitAnimationName}. */
         WEBKIT_ANIMATION_NAME("webkitAnimationName", "webkit-animation-name", ff52up("none")),
+
+        /** The style property {@code webkitAnimationName}. */
+        WEBKIT_ANIMATION_NAME_("WebkitAnimationName", "webkit-animation-name", ff52up("none")),
 
         /** The style property {@code webkitAnimationPlayState}. */
         WEBKIT_ANIMATION_PLAY_STATE("webkitAnimationPlayState", "webkit-animation-play-state", ff52up("running")),
 
+        /** The style property {@code webkitAnimationPlayState}. */
+        WEBKIT_ANIMATION_PLAY_STATE_("WebkitAnimationPlayState", "webkit-animation-play-state", ff52up("running")),
+
         /** The style property {@code webkitAnimationTimingFunction}. */
         WEBKIT_ANIMATION_TIMING_FUNCTION("webkitAnimationTimingFunction", "webkit-animation-timing-function",
+                ff52up("ease")),
+
+        /** The style property {@code webkitAnimationTimingFunction}. */
+        WEBKIT_ANIMATION_TIMING_FUNCTION_("WebkitAnimationTimingFunction", "webkit-animation-timing-function",
                 ff52up("ease")),
 
         /** The style property {@code webkitAppRegion}. */
@@ -2712,16 +2751,31 @@ public final class StyleAttributes {
         WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility",
                 ff52up("visible")),
 
+        /** The style property {@code webkitBackfaceVisibility}. */
+        WEBKIT_BACKFACE_VISIBILITY_("WebkitBackfaceVisibility", "webkit-backface-visibility",
+                ff52up("visible")),
+
         /** The style property {@code webkitBackgroundClip}. */
         WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip",
                 chrome("border-box"), ff52up("border-box")),
+
+        /** The style property {@code webkitBackgroundClip}. */
+        WEBKIT_BACKGROUND_CLIP_("WebkitBackgroundClip", "webkit-background-clip",
+                ff52up("border-box")),
 
         /** The style property {@code webkitBackgroundOrigin}. */
         WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin",
                 chrome("padding-box"), ff52up("padding-box")),
 
+        /** The style property {@code webkitBackgroundOrigin}. */
+        WEBKIT_BACKGROUND_ORIGIN_("WebkitBackgroundOrigin", "webkit-background-origin",
+                ff52up("padding-box")),
+
         /** The style property {@code webkitBackgroundSize}. */
         WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff52up("auto auto")),
+
+        /** The style property {@code webkitBackgroundSize}. */
+        WEBKIT_BACKGROUND_SIZE_("WebkitBackgroundSize", "webkit-background-size", ff52up("auto auto")),
 
         /** The style property {@code webkitBorderAfter}. */
         WEBKIT_BORDER_AFTER("webkitBorderAfter", "webkit-border-after", chrome("0px none rgb(0, 0, 0)")),
@@ -2751,8 +2805,16 @@ public final class StyleAttributes {
         WEBKIT_BORDER_BOTTOM_LEFT_RADIUS("webkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
                 ff52up("0px")),
 
+        /** The style property {@code webkitBorderBottomLeftRadius}. */
+        WEBKIT_BORDER_BOTTOM_LEFT_RADIUS_("WebkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
+                ff52up("0px")),
+
         /** The style property {@code webkitBorderBottomRightRadius}. */
         WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS("webkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
+                ff52up("0px")),
+
+        /** The style property {@code webkitBorderBottomRightRadius}. */
+        WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS_("WebkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
                 ff52up("0px")),
 
         /** The style property {@code webkitBorderEnd}. */
@@ -2774,8 +2836,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderImage}. */
         WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none"), ff52up("")),
 
+        /** The style property {@code webkitBorderImage}. */
+        WEBKIT_BORDER_IMAGE_("WebkitBorderImage", "webkit-border-image", ff52up("")),
+
         /** The style property {@code webkitBorderRadius}. */
         WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", ff52up("")),
+
+        /** The style property {@code webkitBorderRadius}. */
+        WEBKIT_BORDER_RADIUS_("WebkitBorderRadius", "webkit-border-radius", ff52up("")),
 
         /** The style property {@code webkitBorderStart}. */
         WEBKIT_BORDER_START("webkitBorderStart", "webkit-border-start", chrome("0px none rgb(0, 0, 0)")),
@@ -2792,8 +2860,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitBorderTopLeftRadius}. */
         WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("0px")),
 
+        /** The style property {@code webkitBorderTopLeftRadius}. */
+        WEBKIT_BORDER_TOP_LEFT_RADIUS_("WebkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("0px")),
+
         /** The style property {@code webkitBorderTopRightRadius}. */
         WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("0px")),
+
+        /** The style property {@code webkitBorderTopRightRadius}. */
+        WEBKIT_BORDER_TOP_RIGHT_RADIUS_("WebkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("0px")),
 
         /** The style property {@code webkitBorderVerticalSpacing}. */
         WEBKIT_BORDER_VERTICAL_SPACING("webkitBorderVerticalSpacing", "webkit-border-vertical-spacing", chrome("0px")),
@@ -2801,14 +2875,23 @@ public final class StyleAttributes {
         /** The style property {@code webkitBoxAlign}. */
         WEBKIT_BOX_ALIGN("webkitBoxAlign", "webkit-box-align", chrome("stretch"), ff52up("stretch")),
 
+        /** The style property {@code webkitBoxAlign}. */
+        WEBKIT_BOX_ALIGN_("WebkitBoxAlign", "webkit-box-align", ff52up("stretch")),
+
         /** The style property {@code webkitBoxDecorationBreak}. */
         WEBKIT_BOX_DECORATION_BREAK("webkitBoxDecorationBreak", "webkit-box-decoration-break", chrome("slice")),
 
         /** The style property {@code webkitBoxDirection}. */
         WEBKIT_BOX_DIRECTION("webkitBoxDirection", "webkit-box-direction", chrome("normal"), ff52up("normal")),
 
+        /** The style property {@code webkitBoxDirection}. */
+        WEBKIT_BOX_DIRECTION_("WebkitBoxDirection", "webkit-box-direction", ff52up("normal")),
+
         /** The style property {@code webkitBoxFlex}. */
         WEBKIT_BOX_FLEX("webkitBoxFlex", "webkit-box-flex", chrome("0"), ff52up("0")),
+
+        /** The style property {@code webkitBoxFlex}. */
+        WEBKIT_BOX_FLEX_("WebkitBoxFlex", "webkit-box-flex", ff52up("0")),
 
         /** The style property {@code webkitBoxFlexGroup}. */
         WEBKIT_BOX_FLEX_GROUP("webkitBoxFlexGroup", "webkit-box-flex-group", chrome("1")),
@@ -2819,11 +2902,20 @@ public final class StyleAttributes {
         /** The style property {@code webkitBoxOrdinalGroup}. */
         WEBKIT_BOX_ORDINAL_GROUP("webkitBoxOrdinalGroup", "webkit-box-ordinal-group", chrome("1"), ff52up("1")),
 
+        /** The style property {@code webkitBoxOrdinalGroup}. */
+        WEBKIT_BOX_ORDINAL_GROUP_("WebkitBoxOrdinalGroup", "webkit-box-ordinal-group", ff52up("1")),
+
         /** The style property {@code webkitBoxOrient}. */
         WEBKIT_BOX_ORIENT("webkitBoxOrient", "webkit-box-orient", chrome("horizontal"), ff52up("horizontal")),
 
+        /** The style property {@code webkitBoxOrient}. */
+        WEBKIT_BOX_ORIENT_("WebkitBoxOrient", "webkit-box-orient", ff52up("horizontal")),
+
         /** The style property {@code webkitBoxPack}. */
         WEBKIT_BOX_PACK("webkitBoxPack", "webkit-box-pack", chrome("start"), ff52up("start")),
+
+        /** The style property {@code webkitBoxPack}. */
+        WEBKIT_BOX_PACK_("WebkitBoxPack", "webkit-box-pack", ff52up("start")),
 
         /** The style property {@code webkitBoxReflect}. */
         WEBKIT_BOX_REFLECT("webkitBoxReflect", "webkit-box-reflect", chrome("none")),
@@ -2831,8 +2923,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitBoxShadow}. */
         WEBKIT_BOX_SHADOW("webkitBoxShadow", "webkit-box-shadow", ff52up("none")),
 
+        /** The style property {@code webkitBoxShadow}. */
+        WEBKIT_BOX_SHADOW_("WebkitBoxShadow", "webkit-box-shadow", ff52up("none")),
+
         /** The style property {@code webkitBoxSizing}. */
         WEBKIT_BOX_SIZING("webkitBoxSizing", "webkit-box-sizing", ff52up("content-box")),
+
+        /** The style property {@code webkitBoxSizing}. */
+        WEBKIT_BOX_SIZING_("WebkitBoxSizing", "webkit-box-sizing", ff52up("content-box")),
 
         /** The style property {@code webkitColumnBreakAfter}. */
         WEBKIT_COLUMN_BREAK_AFTER("webkitColumnBreakAfter", "webkit-column-break-after", chrome("auto")),
@@ -2846,26 +2944,50 @@ public final class StyleAttributes {
         /** The style property {@code webkitFilter}. */
         WEBKIT_FILTER("webkitFilter", "webkit-filter", ff52up("none")),
 
+        /** The style property {@code webkitFilter}. */
+        WEBKIT_FILTER_("WebkitFilter", "webkit-filter", ff52up("none")),
+
         /** The style property {@code webkitFlex}. */
         WEBKIT_FLEX("webkitFlex", "webkit-flex", ff52up("")),
+
+        /** The style property {@code webkitFlex}. */
+        WEBKIT_FLEX_("WebkitFlex", "webkit-flex", ff52up("")),
 
         /** The style property {@code webkitFlexBasis}. */
         WEBKIT_FLEX_BASIS("webkitFlexBasis", "webkit-flex-basis", ff52up("auto")),
 
+        /** The style property {@code webkitFlexBasis}. */
+        WEBKIT_FLEX_BASIS_("WebkitFlexBasis", "webkit-flex-basis", ff52up("auto")),
+
         /** The style property {@code webkitFlexDirection}. */
         WEBKIT_FLEX_DIRECTION("webkitFlexDirection", "webkit-flex-direction", ff52up("row")),
+
+        /** The style property {@code webkitFlexDirection}. */
+        WEBKIT_FLEX_DIRECTION_("WebkitFlexDirection", "webkit-flex-direction", ff52up("row")),
 
         /** The style property {@code webkitFlexFlow}. */
         WEBKIT_FLEX_FLOW("webkitFlexFlow", "webkit-flex-flow", ff52up("")),
 
+        /** The style property {@code webkitFlexFlow}. */
+        WEBKIT_FLEX_FLOW_("WebkitFlexFlow", "webkit-flex-flow", ff52up("")),
+
         /** The style property {@code webkitFlexGrow}. */
         WEBKIT_FLEX_GROW("webkitFlexGrow", "webkit-flex-grow", ff52up("0")),
+
+        /** The style property {@code webkitFlexGrow}. */
+        WEBKIT_FLEX_GROW_("WebkitFlexGrow", "webkit-flex-grow", ff52up("0")),
 
         /** The style property {@code webkitFlexShrink}. */
         WEBKIT_FLEX_SHRINK("webkitFlexShrink", "webkit-flex-shrink", ff52up("1")),
 
+        /** The style property {@code webkitFlexShrink}. */
+        WEBKIT_FLEX_SHRINK_("WebkitFlexShrink", "webkit-flex-shrink", ff52up("1")),
+
         /** The style property {@code webkitFlexWrap}. */
         WEBKIT_FLEX_WRAP("webkitFlexWrap", "webkit-flex-wrap", ff52up("nowrap")),
+
+        /** The style property {@code webkitFlexWrap}. */
+        WEBKIT_FLEX_WRAP_("WebkitFlexWrap", "webkit-flex-wrap", ff52up("nowrap")),
 
         /** The style property {@code webkitFontSizeDelta}. */
         WEBKIT_FONT_SIZE_DELTA("webkitFontSizeDelta", "webkit-font-size-delta", chrome("")),
@@ -2880,7 +3002,10 @@ public final class StyleAttributes {
         WEBKIT_HYPHENATE_CHARACTER("webkitHyphenateCharacter", "webkit-hyphenate-character", chrome("auto")),
 
         /** The style property {@code webkitJustifyContent}. */
-        WEBKIT_JUSTIFY_CHARACTER("webkitJustifyContent", "webkit-justify-content", ff52up("normal")),
+        WEBKIT_JUSTIFY_CONTENT("webkitJustifyContent", "webkit-justify-content", ff52up("normal")),
+
+        /** The style property {@code webkitJustifyContent}. */
+        WEBKIT_JUSTIFY_CONTENT_("WebkitJustifyContent", "webkit-justify-content", ff52up("normal")),
 
         /** The style property {@code webkitLineBreak}. */
         WEBKIT_LINE_BREAK("webkitLineBreak", "webkit-line-break", chrome("auto")),
@@ -2995,6 +3120,9 @@ public final class StyleAttributes {
         /** The style property {@code webkitOrder}. */
         WEBKIT_ORDER("webkitOrder", "webkit-order", ff52up("0")),
 
+        /** The style property {@code webkitOrder}. */
+        WEBKIT_ORDER_("WebkitOrder", "webkit-order", ff52up("0")),
+
         /** The style property {@code webkitPaddingAfter}. */
         WEBKIT_PADDING_AFTER("webkitPaddingAfter", "webkit-padding-after", chrome("0px")),
 
@@ -3010,8 +3138,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitPerspective}. */
         WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", ff52up("none")),
 
+        /** The style property {@code webkitPerspective}. */
+        WEBKIT_PERSPECTIVE_("WebkitPerspective", "webkit-perspective", ff52up("none")),
+
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
+
+        /** The style property {@code webkitPerspectiveOrigin}. */
+        WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chrome("")),
@@ -3058,6 +3192,10 @@ public final class StyleAttributes {
         WEBKIT_TEXT_FILL_COLOR("webkitTextFillColor", "webkit-text-fill-color",
                 chrome("rgb(0, 0, 0)"), ff52up("rgb(0, 0, 0)")),
 
+        /** The style property {@code webkitTextFillColor}. */
+        WEBKIT_TEXT_FILL_COLOR_("WebkitTextFillColor", "webkit-text-fill-color",
+                ff52up("rgb(0, 0, 0)")),
+
         /** The style property {@code webkitTextOrientation}. */
         WEBKIT_TEXT_ORIENTATION("webkitTextOrientation", "webkit-text-orientation", chrome("vertical-right")),
 
@@ -3067,21 +3205,40 @@ public final class StyleAttributes {
         /** The style property {@code webkitTextSizeAdjust}. */
         WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("auto")),
 
+        /** The style property {@code webkitTextSizeAdjust}. */
+        WEBKIT_TEXT_SIZE_ADJUST_("WebkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("auto")),
+
         /** The style property {@code webkitTextStroke}. */
         WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chrome(""), ff52up("")),
+
+        /** The style property {@code webkitTextStroke}. */
+        WEBKIT_TEXT_STROKE_("WebkitTextStroke", "webkit-text-stroke", ff52up("")),
 
         /** The style property {@code webkitTextStrokeColor}. */
         WEBKIT_TEXT_STROKE_COLOR("webkitTextStrokeColor", "webkit-text-stroke-color",
                 chrome("rgb(0, 0, 0)"), ff52up("rgb(0, 0, 0)")),
 
+        /** The style property {@code webkitTextStrokeColor}. */
+        WEBKIT_TEXT_STROKE_COLOR_("WebkitTextStrokeColor", "webkit-text-stroke-color",
+                ff52up("rgb(0, 0, 0)")),
+
         /** The style property {@code webkitTextStrokeWidth}. */
         WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px"), ff52up("0px")),
+
+        /** The style property {@code webkitTextStrokeWidth}. */
+        WEBKIT_TEXT_STROKE_WIDTH_("WebkitTextStrokeWidth", "webkit-text-stroke-width", ff52up("0px")),
 
         /** The style property {@code webkitTransform}. */
         WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", ff52up("none")),
 
+        /** The style property {@code webkitTransform}. */
+        WEBKIT_TRANSFORM_("WebkitTransform", "webkit-transform", ff52up("none")),
+
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", ff52up("625px 172.5px")),
+
+        /** The style property {@code webkitTransformOrigin}. */
+        WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin", ff52up("625px 172.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chrome("")),
@@ -3095,20 +3252,39 @@ public final class StyleAttributes {
         /** The style property {@code webkitTransformStyle}. */
         WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", ff52up("flat")),
 
+        /** The style property {@code webkitTransformStyle}. */
+        WEBKIT_TRANSFORM_STYLE_("WebkitTransformStyle", "webkit-transform-style", ff52up("flat")),
+
         /** The style property {@code webkitTransition}. */
         WEBKIT_TRANSITION("webkitTransition", "webkit-transition", ff52up("")),
+
+        /** The style property {@code webkitTransition}. */
+        WEBKIT_TRANSITION_("WebkitTransition", "webkit-transition", ff52up("")),
 
         /** The style property {@code webkitTransitionDelay}. */
         WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
 
+        /** The style property {@code webkitTransitionDelay}. */
+        WEBKIT_TRANSITION_DELAY_("WebkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
+
         /** The style property {@code webkitTransitionDuration}. */
         WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
+
+        /** The style property {@code webkitTransitionDuration}. */
+        WEBKIT_TRANSITION_DURATION_("WebkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
 
         /** The style property {@code webkitTransitionProperty}. */
         WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", ff52up("all")),
 
+        /** The style property {@code webkitTransitionProperty}. */
+        WEBKIT_TRANSITION_PROPERTY_("WebkitTransitionProperty", "webkit-transition-property", ff52up("all")),
+
         /** The style property {@code webkitTransitionTimingFunction}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION("webkitTransitionTimingFunction", "webkit-transition-timing-function",
+                ff52up("ease")),
+
+        /** The style property {@code webkitTransitionTimingFunction}. */
+        WEBKIT_TRANSITION_TIMING_FUNCTION_("WebkitTransitionTimingFunction", "webkit-transition-timing-function",
                 ff52up("ease")),
 
         /** The style property {@code webkitUserDrag}. */
@@ -3119,6 +3295,9 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitUserSelect}. */
         WEBKIT_USER_SELECT("webkitUserSelect", "webkit-user-select", ff52up("auto")),
+
+        /** The style property {@code webkitUserSelect}. */
+        WEBKIT_USER_SELECT_("WebkitUserSelect", "webkit-user-select", ff52up("auto")),
 
         /** The style property {@code webkitWritingMode}. */
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chrome("horizontal-tb")),
