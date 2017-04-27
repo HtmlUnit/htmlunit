@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -90,15 +91,16 @@ public class StyleAttributesTest {
 
     /**
      * Test the name in the JavaDoc matches the definition name.
+     * @throws IOException if an error occurs
      */
     @Test
-    public void codeJavaDoc() throws Exception {
+    public void javaDoc() throws IOException {
         try (Stream<String> stream = Files.lines(Paths.get("src/main/java/"
-                + "com/gargoylesoftware/htmlunit/javascript/host/css/StyleAttributes.java"))) {
+                + getClass().getPackage().getName().replace('.', '/') + "/StyleAttributes.java"))) {
             final List<String> lines = stream.collect(Collectors.toList());
             final Pattern pattern = Pattern.compile("\\s+[A-Z_]+\\(\"(.*?)\",");
             for (int i = 1; i < lines.size(); i++) {
-                Matcher matcher = pattern.matcher(lines.get(i));
+                final Matcher matcher = pattern.matcher(lines.get(i));
                 if (matcher.find() && !lines.get(i - 1).contains("{@code " + matcher.group(1) + "}")) {
                     fail("StyleAttributes: not matching JavaDoc in line " + i);
                 }
