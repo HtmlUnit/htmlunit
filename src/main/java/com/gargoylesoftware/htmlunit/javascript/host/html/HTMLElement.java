@@ -233,7 +233,6 @@ public class HTMLElement extends Element {
 
     private final Set<String> behaviors_ = new HashSet<>();
     private String uniqueID_;
-    private CSSStyleDeclaration style_;
 
     static {
         COLORS_MAP_IE.put("AliceBlue", "#F0F8FF");
@@ -401,8 +400,6 @@ public class HTMLElement extends Element {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-
-        style_ = new CSSStyleDeclaration(this);
 
         final String name = domNode.getLocalName();
         if ("wbr".equalsIgnoreCase(name)
@@ -1301,7 +1298,7 @@ public class HTMLElement extends Element {
     /**
      * Remove focus from this element.
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxFunction
     public void blur() {
         getDomNodeOrDie().blur();
     }
@@ -2136,9 +2133,10 @@ public class HTMLElement extends Element {
      * Returns the style object for this element.
      * @return the style object for this element
      */
+    @Override
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
-        return style_;
+        return super.getStyle();
     }
 
     /**
@@ -2158,7 +2156,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(@WebBrowser(IE))
     public CSSStyleDeclaration getRuntimeStyle() {
-        return style_;
+        return super.getStyle();
     }
 
     /**

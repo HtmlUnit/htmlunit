@@ -1094,8 +1094,7 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * JS code was throwing an exception as of 2.12-SNAPSHOT from 21.01.2013 due to the incorrect signature
-     * of getComputedStyle.
+     * JS code was throwing an exception due to the incorrect signature of getComputedStyle.
      * @throws Exception if the test fails
      */
     @Test

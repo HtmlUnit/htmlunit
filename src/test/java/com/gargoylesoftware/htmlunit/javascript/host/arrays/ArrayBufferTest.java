@@ -43,12 +43,8 @@ public class ArrayBufferTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
-            + "    var buff = new ArrayBuffer(5);\n"
-            + "    alert(buff.byteLength);\n"
-            + "  } catch(e) {\n"
-            + "    alert('exception');\n"
-            + "  }\n"
+            + "  var buff = new ArrayBuffer(5);\n"
+            + "  alert(buff.byteLength);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -65,20 +61,16 @@ public class ArrayBufferTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
-            + "    var buffer = new ArrayBuffer(12);\n"
-            + "    var x = new Int32Array(buffer);\n"
-            + "    x[1] = 1234;\n"
-            + "    var slice = buffer.slice(4);\n"
-            + "    var y = new Int32Array(slice);\n"
-            + "    alert(x[1]);\n"
-            + "    alert(y[0]);\n"
-            + "    x[1] = 6789;\n"
-            + "    alert(x[1]);\n"
-            + "    alert(y[0]);\n"
-            + "  } catch(e) {\n"
-            + "    alert('exception');\n"
-            + "  }\n"
+            + "  var buffer = new ArrayBuffer(12);\n"
+            + "  var x = new Int32Array(buffer);\n"
+            + "  x[1] = 1234;\n"
+            + "  var slice = buffer.slice(4);\n"
+            + "  var y = new Int32Array(slice);\n"
+            + "  alert(x[1]);\n"
+            + "  alert(y[0]);\n"
+            + "  x[1] = 6789;\n"
+            + "  alert(x[1]);\n"
+            + "  alert(y[0]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -228,4 +220,23 @@ public class ArrayBufferTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void nullConstructor() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = new ArrayBuffer(null);\n"
+            + "  alert(array.byteLength);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

@@ -1280,6 +1280,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
+    /** Types arrays can be constructed with {@code null}. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_TYPED_ARRAYS_NULL,
+
     /** WeakMap supports the argument constructor. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
     JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,

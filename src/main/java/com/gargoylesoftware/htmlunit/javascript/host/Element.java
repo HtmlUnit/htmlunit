@@ -103,6 +103,7 @@ public class Element extends EventNode {
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
     private int scrollLeft_;
     private int scrollTop_;
+    private CSSStyleDeclaration style_;
 
     /**
      * Default constructor.
@@ -119,6 +120,8 @@ public class Element extends EventNode {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
+
+        style_ = new CSSStyleDeclaration(this);
 
         setParentScope(getWindow().getDocument());
 
@@ -1212,6 +1215,14 @@ public class Element extends EventNode {
     @JsxGetter
     public int getScrollWidth() {
         return getClientWidth();
+    }
+
+    /**
+     * Returns the style object for this element.
+     * @return the style object for this element
+     */
+    protected CSSStyleDeclaration getStyle() {
+        return style_;
     }
 
 }

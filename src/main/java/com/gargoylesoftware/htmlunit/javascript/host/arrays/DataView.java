@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -39,11 +40,14 @@ public class DataView extends ArrayBufferView {
      * @param length the length
      */
     @JsxConstructor
-    public void constructor(final ArrayBuffer array, final int byteOffset, Object length) {
-        if (length == Undefined.instance) {
-            length = array.getByteLength();
+    public void constructor(final Object array, final int byteOffset, Object length) {
+        if (!(array instanceof ArrayBuffer)) {
+            throw ScriptRuntime.typeError("First argument to DataView constructor must be an ArrayBuffer");
         }
-        super.constructor(array, byteOffset, ((Number) length).intValue());
+        if (length == Undefined.instance) {
+            length = ((ArrayBuffer) array).getByteLength();
+        }
+        super.constructor(((ArrayBuffer) array), byteOffset, ((Number) length).intValue());
     }
 
     /**

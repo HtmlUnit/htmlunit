@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TYPED_ARRAYS_NULL;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -66,8 +69,11 @@ public class ArrayBufferViewBase extends ArrayBufferView {
             }
             super.constructor(array, (int) dbByteOffset, (int) dbLength);
         }
+        else if (getBrowserVersion().hasFeature(JS_TYPED_ARRAYS_NULL)) {
+            constructor(0);
+        }
         else {
-            Context.reportRuntimeError("Invalid type " + object.getClass().getName());
+            throw ScriptRuntime.typeError("invalid arguments");
         }
     }
 
