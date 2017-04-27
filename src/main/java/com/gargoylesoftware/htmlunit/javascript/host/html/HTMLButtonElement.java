@@ -105,5 +105,5 @@ public class HTMLButtonElement extends FormField {
     @JsxFunction(@WebBrowser(IE))
     public TextRange createTextRange() {
         return super.createTextRange();
-    };
+    }
 }

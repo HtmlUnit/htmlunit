@@ -233,5 +233,5 @@ public class HTMLBodyElement extends HTMLElement {
     @JsxFunction(@WebBrowser(IE))
     public TextRange createTextRange() {
         return super.createTextRange();
-    };
+    }
 }

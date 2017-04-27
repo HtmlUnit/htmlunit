@@ -833,5 +833,5 @@ public class HTMLInputElement extends FormField {
     @JsxFunction(@WebBrowser(IE))
     public TextRange createTextRange() {
         return super.createTextRange();
-    };
+    }
 }

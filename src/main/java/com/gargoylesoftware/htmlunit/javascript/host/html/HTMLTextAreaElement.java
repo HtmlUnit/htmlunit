@@ -355,5 +355,5 @@ public class HTMLTextAreaElement extends FormField {
     @JsxFunction(@WebBrowser(IE))
     public TextRange createTextRange() {
         return super.createTextRange();
-    };
+    }
 }
