@@ -87,6 +87,7 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -173,7 +174,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * The HtmlUnitDriver.
      */
-    private WebDriver webDriver_;
+    private HtmlUnitDriver webDriver_;
 
     /**
      * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
@@ -1098,11 +1099,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
         super.releaseResources();
 
         if (!isWebClientCached()) {
+            boolean rhino = true;
             if (webDriver_ != null) {
+                try {
+                    rhino = getWebWindowOf(webDriver_).getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
                 webDriver_.quit();
                 webDriver_ = null;
             }
-            assertTrue("There are still JS threads running after the test", getJavaScriptThreads().isEmpty());
+            if (rhino) {
+                assertTrue("There are still JS threads running after the test", getJavaScriptThreads().isEmpty());
+            }
         }
 
         if (useRealBrowser()) {
