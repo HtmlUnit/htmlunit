@@ -1276,13 +1276,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
-    /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
-    JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
-
     /** Types arrays can be constructed with {@code null}. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_TYPED_ARRAYS_NULL,
+
+    /** Setting the property align to arbitrary values is allowed. */
+    @BrowserFeature({@WebBrowser(FF), @WebBrowser(CHROME)})
+    JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
     /** WeakMap supports the argument constructor. */
     @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(FF)})
