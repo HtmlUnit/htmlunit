@@ -254,7 +254,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     @Before
     public void before() {
-        if (webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
+        if (webClient_ != null && webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
             assertTrue(getJavaScriptThreads().isEmpty());
         }
     }
@@ -266,13 +266,15 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     @After
     public void releaseResources() {
         super.releaseResources();
+        boolean rhino = false;
         if (webClient_ != null) {
+            rhino = webClient_.getJavaScriptEngine() instanceof JavaScriptEngine;
             webClient_.close();
             webClient_.getCookieManager().clearCookies();
         }
         webClient_ = null;
 
-        if (webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
+        if (rhino) {
             final List<Thread> jsThreads = getJavaScriptThreads();
             assertEquals(0, jsThreads.size());
 
