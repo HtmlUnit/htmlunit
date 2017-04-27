@@ -103,6 +103,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
+import com.gargoylesoftware.js.nashorn.internal.runtime.JSType;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
@@ -510,8 +511,8 @@ public class HTMLDocument2 extends Document2 {
      * @param title the new title
      */
     @Setter
-    public void setTitle(final String title) {
-        getPage().setTitleText(title);
+    public void setTitle(final Object title) {
+        getPage().setTitleText(JSType.toString(title));
     }
 
     /**
