@@ -1225,4 +1225,14 @@ public class Element extends EventNode {
         return style_;
     }
 
+    /**
+     * Sets the styles for this element.
+     * @param style the style of the element
+     */
+    protected void setStyle(final String style) {
+        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            getStyle().setCssText(style);
+        }
+    }
+
 }

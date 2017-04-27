@@ -21,8 +21,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.svg.SvgElement;
 
 /**
@@ -51,4 +54,24 @@ public class SVGElement extends Element {
         rect.setPrototype(getPrototype(rect.getClass()));
         return rect;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter
+    public CSSStyleDeclaration getStyle() {
+        return super.getStyle();
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter
+    public void setStyle(final String style) {
+        super.setStyle(style);
+    }
+
 }
