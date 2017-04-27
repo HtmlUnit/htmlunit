@@ -303,6 +303,15 @@ public class Element extends EventNode {
     }
 
     /**
+     * Returns true when the current element has any attributes or not.
+     * @return true if an attribute is specified on this element
+     */
+    @JsxFunction
+    public boolean hasAttributes() {
+        return getDomNodeOrDie().hasAttributes();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -1234,5 +1243,20 @@ public class Element extends EventNode {
             getStyle().setCssText(style);
         }
     }
+
+    /**
+     * Implement the scrollIntoView() JavaScript function but don't actually do
+     * anything. The requirement
+     * is just to prevent scripts that call that method from failing
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
+    public void scrollIntoView() { /* do nothing at the moment */ }
+
+    /**
+     * Implement the {@code scrollIntoViewIfNeeded(){ JavaScript function but don't actually do
+     * anything.
+     */
+    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
+    public void scrollIntoViewIfNeeded() { /* do nothing at the moment */ }
 
 }

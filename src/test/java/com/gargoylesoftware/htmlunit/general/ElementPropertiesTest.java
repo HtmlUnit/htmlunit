@@ -3061,7 +3061,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "releaseCapture(),releaseEvents(),rootElement,scripts,security,styleSheets,title,uniqueID,"
                 + "updateSettings(),URL,URLUnencoded,visibilityState,vlinkColor,write(),writeln(),xmlEncoding,"
                 + "xmlStandalone,xmlVersion")
-    @NotYetImplemented
+//    @NotYetImplemented
     //IE expectations are bigger than real IE alert length, test should be changed to store value in textarea
     public void xmlDocument() throws Exception {
         testString("xmlDocument, document.createTextNode('some text')");

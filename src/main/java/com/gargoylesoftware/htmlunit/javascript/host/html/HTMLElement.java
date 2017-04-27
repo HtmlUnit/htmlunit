@@ -1258,11 +1258,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Implement the scrollIntoView() JavaScript function but don't actually do
-     * anything. The requirement
-     * is just to prevent scripts that call that method from failing
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
+    @JsxFunction(@WebBrowser(IE))
     public void scrollIntoView() { /* do nothing at the moment */ }
 
     /**

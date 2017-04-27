@@ -1154,10 +1154,10 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"function Element() {\n    [native code]\n}",
-                        "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
-            CHROME = {"function Element() { [native code] }", "[object Element]",
+    @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
+            FF = {"function Element() {\n    [native code]\n}",
+                        "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented({FF, IE})
     public void prototypConstructorStandards() throws Exception {
@@ -1165,17 +1165,13 @@ public class ElementTest extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    try {\n"
-            + "      process(Element);\n"
-            + "      process(Element.prototype);\n"
-            + "      process(Element.prototype.constructor);\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "    process(Element);\n"
+            + "    process(Element.prototype);\n"
+            + "    process(Element.prototype.constructor);\n"
             + "  }\n"
             + "  function process(obj) {\n"
-            + "    try {\n"
-            + "      alert(obj);\n"
-            + "    } catch (e) {alert('exception')}\n"
-            + "   }\n"
+            + "    alert(obj);\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -1250,4 +1246,27 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void hasAttributes() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.body.hasAttributes());\n"
+            + "    alert(document.body.childNodes.item(1).hasAttributes());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
