@@ -1936,4 +1936,12 @@ public class HTMLDocument extends Document {
 
         return super.createAttribute(name);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBaseURI() {
+        return getPage().getBaseURL().toString();
+    }
 }

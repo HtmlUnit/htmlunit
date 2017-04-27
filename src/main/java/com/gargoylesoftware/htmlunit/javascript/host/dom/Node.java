@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -740,13 +739,9 @@ public class Node extends EventTarget {
      */
     @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
     public String getBaseURI() {
-        final DomNode domNode = getDomNodeOrDie();
-        if (domNode instanceof HtmlPage) {
-            return ((HtmlPage) domNode).getBaseURL().toString();
-        }
         if ("Element".equals(getClass().getSimpleName()) && getBrowserVersion().hasFeature(JS_ELEMENT_BASE_URL_NULL)) {
             return null;
         }
-        return domNode.getPage().getUrl().toExternalForm();
+        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 }
