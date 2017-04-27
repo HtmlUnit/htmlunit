@@ -1100,6 +1100,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (!isWebClientCached()) {
             if (webDriver_ != null) {
                 webDriver_.quit();
+                webDriver_ = null;
             }
             assertTrue("There are still JS threads running after the test", getJavaScriptThreads().isEmpty());
         }
