@@ -544,6 +544,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -2954,6 +2956,115 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @NotYetImplemented(CHROME)
     public void slot() throws Exception {
         test("slot");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "alinkColor,all,bgColor,captureEvents(),clear(),fgColor,linkColor,releaseEvents(),vlinkColor",
+            FF = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,domain,"
+                + "embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,links,"
+                + "open(),plugins,queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),"
+                + "queryCommandSupported(),queryCommandValue(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
+            IE = "-")
+    @NotYetImplemented
+    public void document() throws Exception {
+        testString("document, xmlDocument");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Document}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "activeElement,adoptNode(),anchors,append(),applets,body,caretRangeFromPoint(),characterSet,"
+                + "charset,childElementCount,children,close(),compatMode,contentType,cookie,createAttribute(),"
+                + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),createElement(),"
+                + "createElementNS(),createEvent(),createExpression(),createNodeIterator(),createNSResolver(),"
+                + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),currentScript,"
+                + "defaultView,designMode,dir,doctype,documentElement,documentURI,domain,elementFromPoint(),"
+                + "elementsFromPoint(),embeds,evaluate(),execCommand(),exitPointerLock(),firstElementChild,fonts,forms,"
+                + "getElementById(),getElementsByClassName(),getElementsByName(),getElementsByTagName(),"
+                + "getElementsByTagNameNS(),getSelection(),hasFocus(),head,hidden,images,implementation,importNode(),"
+                + "inputEncoding,lastElementChild,lastModified,links,location,onabort,onauxclick,onbeforecopy,"
+                + "onbeforecut,onbeforepaste,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
+                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
+                + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
+                + "ongotpointercapture,oninput,oninvalid,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
+                + "onloadedmetadata,onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmousewheel,onpaste,onpause,onplay,onplaying,onpointercancel,"
+                + "onpointerdown,onpointerenter,onpointerleave,onpointerlockchange,onpointerlockerror,onpointermove,"
+                + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,onreset,onresize,"
+                + "onscroll,onsearch,onseeked,onseeking,onselect,onselectionchange,onselectstart,onshow,onstalled,"
+                + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange,"
+                + "onwebkitfullscreenerror,onwheel,open(),origin,plugins,pointerLockElement,preferredStylesheetSet,"
+                + "prepend(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
+                + "queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,registerElement(),"
+                + "rootElement,scripts,scrollingElement,selectedStylesheetSet,styleSheets,title,URL,visibilityState,"
+                + "webkitCancelFullScreen(),webkitCurrentFullScreenElement,webkitExitFullscreen(),"
+                + "webkitFullscreenElement,webkitFullscreenEnabled,webkitHidden,webkitIsFullScreen,"
+                + "webkitVisibilityState,write(),writeln(),xmlEncoding,xmlStandalone,xmlVersion",
+            FF = "activeElement,adoptNode(),append(),async,caretPositionFromPoint(),characterSet,charset,"
+                + "childElementCount,children,compatMode,contentType,createAttribute(),createAttributeNS(),"
+                + "createCDATASection(),createComment(),createDocumentFragment(),createElement(),createElementNS(),"
+                + "createEvent(),createExpression(),createNodeIterator(),createNSResolver(),"
+                + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),currentScript,"
+                + "defaultView,dir,doctype,documentElement,documentURI,elementFromPoint(),elementsFromPoint(),"
+                + "enableStyleSheetsForSet(),evaluate(),exitPointerLock(),firstElementChild,fonts,getElementById(),"
+                + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,"
+                + "implementation,importNode(),inputEncoding,lastElementChild,lastModified,lastStyleSheetSet,load(),"
+                + "location,mozCancelFullScreen(),mozFullScreen,mozFullScreenElement,mozFullScreenEnabled,"
+                + "mozSetImageElement(),onabort,onafterscriptexecute,onanimationend,onanimationiteration,"
+                + "onanimationstart,onauxclick,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
+                + "onclick,onclose,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
+                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
+                + "oninput,oninvalid,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadend,"
+                + "onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
+                + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointerlockchange,"
+                + "onpointerlockerror,onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
+                + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
+                + "onwebkittransitionend,onwheel,pointerLockElement,preferredStyleSheetSet,prepend(),querySelector(),"
+                + "querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,scrollingElement,"
+                + "selectedStyleSheetSet,styleSheets,styleSheetSets,title,URL,visibilityState",
+            IE = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),characterSet,"
+                + "charset,clear(),close(),compatible,compatMode,cookie,createAttribute(),createAttributeNS(),"
+                + "createCDATASection(),createComment(),createDocumentFragment(),createElement(),createElementNS(),"
+                + "createEvent(),createNodeIterator(),createProcessingInstruction(),createRange(),createTextNode(),"
+                + "createTreeWalker(),defaultCharset,defaultView,designMode,dir,doctype,documentElement,documentMode,"
+                + "domain,elementFromPoint(),embeds,execCommand(),execCommandShowHelp(),fgColor,fileCreatedDate,"
+                + "fileModifiedDate,fileUpdatedDate,focus(),forms,frames,getElementById(),getElementsByClassName(),"
+                + "getElementsByName(),getElementsByTagName(),getElementsByTagNameNS(),getSelection(),hasFocus(),head,"
+                + "hidden,images,implementation,importNode(),inputEncoding,lastModified,linkColor,links,location,media,"
+                + "mimeType,msCapsLockWarningOff,msCSSOMElementFloatMetrics,msElementsFromPoint(),msElementsFromRect(),"
+                + "msExitFullscreen(),msFullscreenElement,msFullscreenEnabled,msHidden,msVisibilityState,nameProp,"
+                + "onabort,onactivate,onbeforeactivate,onbeforedeactivate,onblur,oncanplay,oncanplaythrough,onchange,"
+                + "onclick,oncontextmenu,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
+                + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onfocusin,onfocusout,onhelp,"
+                + "oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsfullscreenchange,"
+                + "onmsfullscreenerror,onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,"
+                + "onmsgesturestart,onmsgesturetap,onmsinertiastart,onmsmanipulationstatechanged,onmspointercancel,"
+                + "onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,"
+                + "onmspointerup,onmssitemodejumplistitemremoved,onmsthumbnailclick,onpause,onplay,onplaying,"
+                + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
+                + "onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,onreset,onscroll,onseeked,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onstop,onstoragecommit,onsubmit,"
+                + "onsuspend,ontimeupdate,onvolumechange,onwaiting,open(),parentWindow,plugins,protocol,"
+                + "queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
+                + "queryCommandText(),queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,"
+                + "releaseCapture(),releaseEvents(),rootElement,scripts,security,styleSheets,title,uniqueID,"
+                + "updateSettings(),URL,URLUnencoded,visibilityState,vlinkColor,write(),writeln(),xmlEncoding,"
+                + "xmlStandalone,xmlVersion")
+    @NotYetImplemented
+    //IE expectations are bigger than real IE alert length, test should be changed to store value in textarea
+    public void xmlDocument() throws Exception {
+        testString("xmlDocument, document.createTextNode('some text')");
     }
 
 }
