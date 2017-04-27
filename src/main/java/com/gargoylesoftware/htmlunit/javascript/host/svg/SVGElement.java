@@ -64,7 +64,6 @@ public class SVGElement extends Element {
         return super.getStyle();
     }
 
-
     /**
      * {@inheritDoc}
      */
