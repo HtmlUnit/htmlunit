@@ -88,6 +88,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2;
@@ -718,25 +719,27 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
         final Global global = window2.getGlobal();
         final ComputedCSSStyleDeclaration2 style = new ComputedCSSStyleDeclaration2(global, original);
 
-        final StyleSheetList2 sheets = ((HTMLDocument2) element.getOwnerDocument()).getStyleSheets();
-        final boolean trace = LOG.isTraceEnabled();
-        for (int i = 0; i < (int) sheets.getLength(); i++) {
-            final CSSStyleSheet2 sheet = (CSSStyleSheet2) sheets.item(i);
-            if (sheet.isActive() && sheet.isEnabled()) {
-                if (trace) {
-                    LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
+        if (element.getOwnerDocument() instanceof HTMLDocument2) {
+            final StyleSheetList2 sheets = ((HTMLDocument2) element.getOwnerDocument()).getStyleSheets();
+            final boolean trace = LOG.isTraceEnabled();
+            for (int i = 0; i < (int) sheets.getLength(); i++) {
+                final CSSStyleSheet2 sheet = (CSSStyleSheet2) sheets.item(i);
+                if (sheet.isActive() && sheet.isEnabled()) {
+                    if (trace) {
+                        LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
+                    }
+                    sheet.modifyIfNecessary(style, element, pseudoElement);
                 }
-                sheet.modifyIfNecessary(style, element, pseudoElement);
             }
-        }
 
-        synchronized (window2.computedStyles_) {
-            Map<String, ComputedCSSStyleDeclaration2> elementMap = window2.computedStyles_.get(element);
-            if (elementMap == null) {
-                elementMap = new WeakHashMap<>();
-                window2.computedStyles_.put(element, elementMap);
+            synchronized (window2.computedStyles_) {
+                Map<String, ComputedCSSStyleDeclaration2> elementMap = window2.computedStyles_.get(element);
+                if (elementMap == null) {
+                    elementMap = new WeakHashMap<>();
+                    window2.computedStyles_.put(element, elementMap);
+                }
+                elementMap.put(pseudoElement, style);
             }
-            elementMap.put(pseudoElement, style);
         }
 
         return style;

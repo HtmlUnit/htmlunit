@@ -1604,27 +1604,28 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final CSSStyleDeclaration original = e.getStyle();
         final CSS2Properties style = new CSS2Properties(original);
 
-        final StyleSheetList sheets = ((HTMLDocument) e.getOwnerDocument()).getStyleSheets();
-        final boolean trace = LOG.isTraceEnabled();
-        for (int i = 0; i < sheets.getLength(); i++) {
-            final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-            if (sheet.isActive() && sheet.isEnabled()) {
-                if (trace) {
-                    LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
+        if (e.getOwnerDocument() instanceof HTMLDocument) {
+            final StyleSheetList sheets = ((HTMLDocument) e.getOwnerDocument()).getStyleSheets();
+            final boolean trace = LOG.isTraceEnabled();
+            for (int i = 0; i < sheets.getLength(); i++) {
+                final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
+                if (sheet.isActive() && sheet.isEnabled()) {
+                    if (trace) {
+                        LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
+                    }
+                    sheet.modifyIfNecessary(style, e, pseudoElement);
                 }
-                sheet.modifyIfNecessary(style, e, pseudoElement);
+            }
+
+            synchronized (computedStyles_) {
+                Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+                if (elementMap == null) {
+                    elementMap = new WeakHashMap<>();
+                    computedStyles_.put(e, elementMap);
+                }
+                elementMap.put(pseudoElement, style);
             }
         }
-
-        synchronized (computedStyles_) {
-            Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
-            if (elementMap == null) {
-                elementMap = new WeakHashMap<>();
-                computedStyles_.put(e, elementMap);
-            }
-            elementMap.put(pseudoElement, style);
-        }
-
         return style;
     }
 

@@ -180,7 +180,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
         ComparisonFailure failure = null;
         try {
-            System.out.println(html);
             loadPageWithAlerts2(html);
             actual = expected;
         }
