@@ -525,17 +525,6 @@ public class Element extends EventNode {
     }
 
     /**
-     * Remove focus from this element.
-     */
-    @JsxFunction(@WebBrowser(CHROME))
-    public void blur() {
-        final DomNode domNode = getDomNodeOrDie();
-        if (domNode instanceof HtmlElement) {
-            ((HtmlElement) domNode).blur();
-        }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

@@ -1301,10 +1301,9 @@ public class HTMLElement extends Element {
     /**
      * Remove focus from this element.
      */
-    @Override
     @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
     public void blur() {
-        super.blur();
+        getDomNodeOrDie().blur();
     }
 
     /**
@@ -2173,5 +2172,4 @@ public class HTMLElement extends Element {
         }
         return getWindow().getComputedStyle(this, null);
     }
-
 }
