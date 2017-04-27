@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -559,8 +560,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
                 + "setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,webkitMatchesSelector(),"
                 + "webkitRequestFullScreen(),webkitRequestFullscreen()",
-            FF = "animate(),append(),attributes,childElementCount,children,classList,className,clientHeight,clientLeft,"
-                + "clientTop,clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNames(),"
+            FF52 = "animate(),append(),attributes,childElementCount,children,classList,className,clientHeight,"
+                + "clientLeft,clientTop,clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -568,6 +569,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozRequestFullScreen(),namespaceURI,onwheel,outerHTML,prefix,prepend(),querySelector(),"
                 + "querySelectorAll(),releaseCapture(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "requestPointerLock(),scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollLeft,scrollLeftMax,"
+                + "scrollTo(),scrollTop,scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),"
+                + "setAttributeNodeNS(),setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
+            FF45 = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNames(),getAttributeNode(),"
+                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
+                + "hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentHTML(),lastElementChild,matches(),"
+                + "mozMatchesSelector(),mozRequestFullScreen(),mozRequestPointerLock(),onwheel,outerHTML,"
+                + "querySelector(),querySelectorAll(),releaseCapture(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollLeft,scrollLeftMax,"
                 + "scrollTo(),scrollTop,scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
             IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,firstElementChild,getAttribute(),"
@@ -2830,7 +2841,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-",
             CHROME = "getDistributedNodes(),select",
             FF45 = "getDistributedNodes(),select")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF45})
     public void content() throws Exception {
         test("content");
     }
