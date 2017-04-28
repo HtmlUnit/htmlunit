@@ -1561,10 +1561,20 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     /**
      * Does nothing special anymore.
      * @param type the type of events to capture
-     * @see Document#captureEvents(String)
+     * @see HTMLDocument#captureEvents(String)
      */
     @JsxFunction
     public void captureEvents(final String type) {
+        // Empty.
+    }
+
+    /**
+     * Does nothing special anymore.
+     * @param type the type of events to capture
+     * @see HTMLDocument#releaseEvents(String)
+     */
+    @JsxFunction
+    public void releaseEvents(final String type) {
         // Empty.
     }
 

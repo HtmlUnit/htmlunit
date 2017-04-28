@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
@@ -21,8 +23,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_S
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +46,10 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -63,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
@@ -200,7 +210,7 @@ public class Document extends EventNode {
      * Returns a value which indicates whether or not the document can be edited.
      * @return a value which indicates whether or not the document can be edited
      */
-    @JsxGetter
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE)})
     public String getDesignMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
@@ -217,7 +227,7 @@ public class Document extends EventNode {
      * Sets a value which indicates whether or not the document can be edited.
      * @param mode a value which indicates whether or not the document can be edited
      */
-    @JsxSetter
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
     public void setDesignMode(final String mode) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
@@ -343,17 +353,6 @@ public class Document extends EventNode {
             implementation_.setPrototype(getPrototype(implementation_.getClass()));
         }
         return implementation_;
-    }
-
-    /**
-     * Does nothing special anymore.
-     *
-     * @param type the type of events to capture
-     * @see Window#captureEvents(String)
-     */
-    @JsxFunction
-    public void captureEvents(final String type) {
-        // Empty.
     }
 
     /**
@@ -585,4 +584,104 @@ public class Document extends EventNode {
 
         return collection;
     }
+
+    /**
+     * Returns the value of the {@code activeElement} property.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
+     * @return the value of the {@code activeElement} property
+     */
+    @JsxGetter
+    public Object getActiveElement() {
+        return null;
+    }
+
+    /**
+     * Returns the character encoding of the current document.
+     * @return the character encoding of the current document
+     */
+    @JsxGetter
+    public String getCharacterSet() {
+        final Charset charset = getPage().getCharset();
+        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return charset.name().toLowerCase(Locale.ROOT);
+        }
+        return EncodingSniffer.translateEncodingLabel(charset);
+    }
+
+    /**
+     * Retrieves the character set used to encode the document.
+     * @return the character set used to encode the document
+     */
+    @JsxGetter
+    public String getCharset() {
+        final Charset charset = getPage().getCharset();
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return charset.name().toLowerCase(Locale.ROOT);
+        }
+        return EncodingSniffer.translateEncodingLabel(charset);
+    }
+
+    /**
+     * Gets the default character set from the current regional language settings.
+     * @return the default character set from the current regional language settings
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getDefaultCharset() {
+        return "windows-1252";
+    }
+
+    /**
+     * Returns the value of the JavaScript property {@code anchors}.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
+     * Gecko DOM reference</a>
+     * @return the value of this property
+     */
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    public Object getAnchors() {
+        return new HTMLCollection(getDomNodeOrDie(), true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (!(node instanceof HtmlAnchor)) {
+                    return false;
+                }
+                final HtmlAnchor anchor = (HtmlAnchor) node;
+                if (getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID)) {
+                    return anchor.hasAttribute("name") || anchor.hasAttribute("id");
+                }
+                return anchor.hasAttribute("name");
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final HtmlElement node = event.getHtmlElement();
+                if (!(node instanceof HtmlAnchor)) {
+                    return EffectOnCache.NONE;
+                }
+                if ("name".equals(event.getName()) || "id".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
+    }
+
+    /**
+     * Returns the value of the JavaScript property {@code applets}.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
+     * MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">
+     * Gecko DOM reference</a>
+     * @return the value of this property
+     */
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    public Object getApplets() {
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlApplet;
+            }
+        };
+    }
+
 }

@@ -27,7 +27,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
@@ -394,57 +393,21 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the JavaScript property {@code anchors}.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
-     * Gecko DOM reference</a>
-     * @return the value of this property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter(@WebBrowser(FF))
     public Object getAnchors() {
-        return new HTMLCollection(getDomNodeOrDie(), true) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                if (!(node instanceof HtmlAnchor)) {
-                    return false;
-                }
-                final HtmlAnchor anchor = (HtmlAnchor) node;
-                if (getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID)) {
-                    return anchor.hasAttribute("name") || anchor.hasAttribute("id");
-                }
-                return anchor.hasAttribute("name");
-            }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                final HtmlElement node = event.getHtmlElement();
-                if (!(node instanceof HtmlAnchor)) {
-                    return EffectOnCache.NONE;
-                }
-                if ("name".equals(event.getName()) || "id".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
-        };
+        return super.getAnchors();
     }
 
     /**
-     * Returns the value of the JavaScript property {@code applets}.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
-     * MSDN documentation</a>
-     * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">
-     * Gecko DOM reference</a>
-     * @return the value of this property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter(@WebBrowser(FF))
     public Object getApplets() {
-        return new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return node instanceof HtmlApplet;
-            }
-        };
+        return super.getApplets();
     }
 
     /**
@@ -867,41 +830,6 @@ public class HTMLDocument extends Document {
             return encoding.name();
         }
         return EncodingSniffer.translateEncodingLabel(encoding);
-    }
-
-    /**
-     * Returns the character encoding of the current document.
-     * @return the character encoding of the current document
-     */
-    @JsxGetter
-    public String getCharacterSet() {
-        final Charset charset = getPage().getCharset();
-        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return charset.name().toLowerCase(Locale.ROOT);
-        }
-        return EncodingSniffer.translateEncodingLabel(charset);
-    }
-
-    /**
-     * Retrieves the character set used to encode the document.
-     * @return the character set used to encode the document
-     */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(FF)})
-    public String getCharset() {
-        final Charset charset = getPage().getCharset();
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return charset.name().toLowerCase(Locale.ROOT);
-        }
-        return EncodingSniffer.translateEncodingLabel(charset);
-    }
-
-    /**
-     * Gets the default character set from the current regional language settings.
-     * @return the default character set from the current regional language settings
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public String getDefaultCharset() {
-        return "windows-1252";
     }
 
     /**
@@ -1728,11 +1656,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the {@code activeElement} property.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
-     * @return the value of the {@code activeElement} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
     public HTMLElement getActiveElement() {
         if (activeElement_ == null) {
             final HtmlElement body = getPage().getBody();
@@ -1943,5 +1869,45 @@ public class HTMLDocument extends Document {
     @Override
     public String getBaseURI() {
         return getPage().getBaseURL().toString();
+    }
+
+    /**
+     * Does nothing special anymore.
+     *
+     * @param type the type of events to capture
+     * @see Window#captureEvents(String)
+     */
+    @JsxFunction
+    public void captureEvents(final String type) {
+        // Empty.
+    }
+
+    /**
+     * Does nothing special anymore.
+     *
+     * @param type the type of events to capture
+     * @see Window#releaseEvents(String)
+     */
+    @JsxFunction
+    public void releaseEvents(final String type) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(@WebBrowser(CHROME))
+    public String getDesignMode() {
+        return super.getDesignMode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(@WebBrowser(CHROME))
+    public void setDesignMode(final String mode) {
+        super.setDesignMode(mode);
     }
 }
