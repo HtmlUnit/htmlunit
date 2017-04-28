@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF45;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;

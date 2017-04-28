@@ -150,7 +150,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {})
-    @NotYetImplemented({CHROME, FF})
     public void assignNull() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -172,7 +171,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {})
-    @NotYetImplemented({CHROME, FF})
     public void assignNull2() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -187,7 +185,6 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
-
 
     /**
      * @throws Exception if the test fails

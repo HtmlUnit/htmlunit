@@ -608,7 +608,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({IE})
+    @JsxFunction(IE)
     public HTMLCollection getElementsByClassName(final String className) {
         return super.getElementsByClassName(className);
     }
