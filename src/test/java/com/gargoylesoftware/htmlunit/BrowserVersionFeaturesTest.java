@@ -29,6 +29,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -90,7 +91,8 @@ public class BrowserVersionFeaturesTest  {
                 for (final WebBrowser annotatedBrowser : browserFeature.value()) {
                     boolean inUse = false;
                     for (BrowserVersion supportedBrowser : browsers) {
-                        if (expectedBrowserName(supportedBrowser) == annotatedBrowser) {
+                        if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowserName(supportedBrowser),
+                                annotatedBrowser)) {
                             inUse = true;
                             continue;
                         }
@@ -112,6 +114,9 @@ public class BrowserVersionFeaturesTest  {
         }
         if (browser == BrowserVersion.FIREFOX_45) {
             return WebBrowser.FF45;
+        }
+        if (browser == BrowserVersion.FIREFOX_52) {
+            return WebBrowser.FF52;
         }
 
         return WebBrowser.EDGE;

@@ -96,16 +96,16 @@ public abstract class AbstractJavaScriptConfiguration {
         final BrowserVersion browser) {
         if (browser != null) {
             final WebBrowser expectedBrowser;
-            if (browser == BrowserVersion.CHROME) {
+            if (browser.equals(BrowserVersion.CHROME)) {
                 expectedBrowser = WebBrowser.CHROME;
             }
-            else if (browser == BrowserVersion.INTERNET_EXPLORER) {
+            else if (browser.equals(BrowserVersion.INTERNET_EXPLORER)) {
                 expectedBrowser = WebBrowser.IE;
             }
-            else if (browser == BrowserVersion.FIREFOX_45) {
+            else if (browser.equals(BrowserVersion.FIREFOX_45)) {
                 expectedBrowser = WebBrowser.FF45;
             }
-            else if (browser == BrowserVersion.FIREFOX_52) {
+            else if (browser.equals(BrowserVersion.FIREFOX_52)) {
                 expectedBrowser = WebBrowser.FF52;
             }
             else {
