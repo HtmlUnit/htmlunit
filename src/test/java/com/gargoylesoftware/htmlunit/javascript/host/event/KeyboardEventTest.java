@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -25,6 +27,8 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -328,34 +332,52 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"keydown:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:65,65,65",
-                    "keyup:65,0,65",
-                    "keyup:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:97,97,97",
-                    "keyup:65,0,65",
-                    "keydown:190,0,190",
-                    "keypress:46,46,46",
-                    "keyup:190,0,190",
-                    "keydown:13,0,13",
-                    "keypress:13,13,13",
-                    "keyup:13,0,13"},
-            FF = {  "keydown:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:0,65,65",
-                    "keyup:65,0,65",
-                    "keyup:16,0,16",
-                    "keydown:65,0,65",
-                    "keypress:0,97,97",
-                    "keyup:65,0,65",
-                    "keydown:190,0,190",
-                    "keypress:0,46,46",
-                    "keyup:190,0,190",
-                    "keydown:13,0,13",
-                    "keypress:13,0,13",
-                    "keyup:13,0,13"})
+    @Alerts(DEFAULT = {"keydown:16,0,16,Shift,undefined,ShiftLeft",
+                    "keydown:65,0,65,A,undefined,KeyA",
+                    "keypress:65,65,65,A,undefined,KeyA",
+                    "keyup:65,0,65,A,undefined,KeyA",
+                    "keyup:16,0,16,Shift,undefined,ShiftLeft",
+                    "keydown:65,0,65,a,undefined,KeyA",
+                    "keypress:97,97,97,a,undefined,KeyA",
+                    "keyup:65,0,65,a,undefined,KeyA",
+                    "keydown:190,0,190,.,undefined,Period",
+                    "keypress:46,46,46,.,undefined,Period",
+                    "keyup:190,0,190,.,undefined,Period",
+                    "keydown:13,0,13,Enter,undefined,Enter",
+                    "keypress:13,13,13,Enter,undefined,Enter",
+                    "keyup:13,0,13,Enter,undefined,Enter"},
+            FF = {  "keydown:16,0,16,Shift,undefined,ShiftLeft",
+                    "keydown:65,0,65,A,undefined,KeyA",
+                    "keypress:0,65,65,A,undefined,KeyA",
+                    "keyup:65,0,65,A,undefined,KeyA",
+                    "keyup:16,0,16,Shift,undefined,ShiftLeft",
+                    "keydown:65,0,65,a,undefined,KeyA",
+                    "keypress:0,97,97,a,undefined,KeyA",
+                    "keyup:65,0,65,a,undefined,KeyA",
+                    "keydown:190,0,190,.,undefined,Period",
+                    "keypress:0,46,46,.,undefined,Period",
+                    "keyup:190,0,190,.,undefined,Period",
+                    "keydown:13,0,13,Enter,undefined,Enter",
+                    "keypress:13,0,13,Enter,undefined,Enter",
+                    "keyup:13,0,13,Enter,undefined,Enter"},
+            IE = {  "keydown:16,0,16,Shift,,undefined",
+                    "keydown:65,0,65,A,A,undefined",
+                    "keypress:65,65,65,A,A,undefined",
+                    "keyup:65,0,65,A,A,undefined",
+                    "keyup:16,0,16,Shift,,undefined",
+                    "keydown:65,0,65,a,a,undefined",
+                    "keypress:97,97,97,a,a,undefined",
+                    "keyup:65,0,65,a,a,undefined",
+                    "keydown:190,0,190,.,.,undefined",
+                    "keypress:46,46,46,.,.,undefined",
+                    "keyup:190,0,190,.,.,undefined",
+                    "keydown:13,0,13,Enter,\n,undefined",
+                    "keypress:13,13,13,Enter,\n,undefined",
+                    "keyup:13,0,13,Enter,\n,undefined"}
+            )
+    // https://github.com/SeleniumHQ/selenium/issues/2531
+    @BuggyWebDriver(IE)
+    @NotYetImplemented
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -364,7 +386,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "function handler(e) {\n"
             + "  e = e ? e : window.event;\n"
             + "  document.getElementById('myTextarea').value "
-            + "+= e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + '\\n';\n"
+            + "+= e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + ',' "
+            + "+ e.key + ',' + e.char + ',' + e.code + '\\n';\n"
             + "}\n"
             + "document.getElementById('keyId').onkeyup = handler;\n"
             + "document.getElementById('keyId').onkeydown = handler;\n"
@@ -372,6 +395,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "</script>\n"
             + "<textarea id='myTextarea' cols=80 rows=20></textarea>\n"
             + "</body></html>";
+
         final String keysToSend = "Aa." + Keys.RETURN;
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("keyId")).sendKeys(keysToSend);
