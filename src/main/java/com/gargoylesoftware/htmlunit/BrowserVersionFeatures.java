@@ -984,7 +984,7 @@ public enum BrowserVersionFeatures {
     JS_Iterator,
 
     /** Property form for label always returns null. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
     JS_LABEL_FORM_NULL,
 
     /** location.hash returns an encoded hash. */
