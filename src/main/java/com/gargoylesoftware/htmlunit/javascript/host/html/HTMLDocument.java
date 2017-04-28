@@ -204,7 +204,6 @@ public class HTMLDocument extends Document {
         additionalEventMap.put("PopStateEvent", PopStateEvent.class);
         additionalEventMap.put("ProgressEvent", ProgressEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
-
     }
 
     /**

@@ -641,7 +641,7 @@ public class CodeStyleTest {
         if (relativePath.replace('\\', '/').contains("src/main/java")
                 && !relativePath.contains("JavaScriptConfiguration")
                 && !relativePath.contains("BrowserVersionFeatures")
-                && !relativePath.contains("HTMLDocument")
+                && !relativePath.contains("Document")
                 && !relativePath.contains("HTMLParser")
                 && !relativePath.contains("DateTimeFormat")
                 && !relativePath.contains("NashornJavaScriptEngine")) {
